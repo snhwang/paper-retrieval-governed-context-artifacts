@@ -8,7 +8,7 @@ is coherent and governance is genuinely useful.
 
 Usage:
     python metatool_generate_query_tags.py \
-        --model claude-sonnet-4-5-20251101
+        --model claude-sonnet-4-6
 
 Output:
     data/external_benchmarks/metatool/query_tags.json
@@ -186,7 +186,7 @@ def load_queries() -> list[dict]:
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--model", default="claude-sonnet-4-5-20251101")
+    parser.add_argument("--model", default="claude-sonnet-4-6")
     parser.add_argument("--base-url", default="https://api.anthropic.com/v1")
     parser.add_argument("--output", default=None)
     parser.add_argument("--resume", action="store_true")

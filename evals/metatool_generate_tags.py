@@ -8,7 +8,7 @@ LLM-generated rather than human-authored.
 Usage:
     # Claude Sonnet (recommended)
     python metatool_generate_tags.py \
-        --model claude-sonnet-4-5-20251101
+        --model claude-sonnet-4-6
 
     # GPT-5.4 Mini
     python metatool_generate_tags.py \
@@ -168,7 +168,7 @@ def parse_tags(response: str, valid_tags: set[str]) -> list[str]:
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--model", default="claude-sonnet-4-5-20251101")
+    parser.add_argument("--model", default="claude-sonnet-4-6")
     parser.add_argument("--base-url", default="https://api.anthropic.com/v1",
                         help="Not needed for Anthropic; use for OpenAI or local")
     parser.add_argument("--output", default=None)

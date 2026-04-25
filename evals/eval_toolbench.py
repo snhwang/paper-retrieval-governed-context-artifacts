@@ -1059,7 +1059,7 @@ def main():
                 print(f"\n[SKIP] MetaTool+Tags: {e}")
         else:
             print(f"\n[SKIP] MetaTool+Tags: plugin_tags.json not found")
-            print("  Run: python metatool_generate_tags.py --model claude-sonnet-4-5-20251101")
+            print("  Run: python metatool_generate_tags.py --model claude-sonnet-4-6")
 
     # --- MetaTool+QueryTags (tags from query text — strongest test) ---
     if do_metatool and not metatool_base_only:
