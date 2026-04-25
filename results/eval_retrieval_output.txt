@@ -1,0 +1,32 @@
+Embedding model: hash
+
+Loaded corpus with 58 instructions
+
+Full BEAR ($\alpha=0.3$):
+  Strict:  P@10=0.751 [0.705, 0.796], R@10=0.963 [0.939, 0.983], F1@10=0.835 [0.800, 0.869]
+  Relaxed: P@10=0.906 [0.877, 0.934], R@10=0.885 [0.856, 0.912], F1@10=0.886 [0.867, 0.904]
+
+Pure Similarity ($\alpha=0$):
+  Strict:  P@10=0.769 [0.696, 0.836], R@10=0.377 [0.329, 0.425], F1@10=0.481 [0.430, 0.532]
+  Relaxed: P@10=0.774 [0.701, 0.842], R@10=0.300 [0.254, 0.346], F1@10=0.404 [0.353, 0.456]
+
+Priority-Heavy ($\alpha=0.7$):
+  Strict:  P@10=0.752 [0.707, 0.797], R@10=0.966 [0.944, 0.986], F1@10=0.837 [0.804, 0.870]
+  Relaxed: P@10=0.906 [0.877, 0.934], R@10=0.885 [0.856, 0.912], F1@10=0.886 [0.867, 0.904]
+
+
+% === LaTeX Table ===
+\begin{table}[t]
+\caption{Retrieval quality on Pet Sim corpus (60 queries, $k=10$, BAAI/bge-base-en-v1.5).
+Values show mean with 95\% bootstrap CI (10,000 iterations).}
+\label{tab:retrieval}
+\begin{tabular}{@{}lcc@{}}
+\toprule
+Configuration & Strict F1 & Relaxed F1 \\
+\midrule
+Full BEAR ($\alpha=0.3$) & $0.835\;[0.800,\;0.869]$ & $0.886\;[0.867,\;0.904]$ \\
+Pure Similarity ($\alpha=0$) & $0.481\;[0.430,\;0.532]$ & $0.404\;[0.353,\;0.456]$ \\
+Priority-Heavy ($\alpha=0.7$) & $0.837\;[0.804,\;0.870]$ & $0.886\;[0.867,\;0.904]$ \\
+\bottomrule
+\end{tabular}
+\end{table}

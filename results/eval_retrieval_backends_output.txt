@@ -1,0 +1,341 @@
+Skipping MLX backends (not macOS): bge-m3-mlx, qwen3-mlx, qwen3-4b-mlx
+Hardware: CUDA
+Loaded corpus with 58 instructions
+Backends to evaluate: bge, qwen3, qwen3-4b, bge-m3, nemotron-embed, hash, bm25, itr
+
+============================================================
+  BEAR + BGE-base v1.5
+============================================================
+  Index build time: 46.682s
+  Standard queries (60):
+    Strict  F1@10 = 0.780  [0.756, 0.806] 95% CI
+    Relaxed F1@10 = 0.866  [0.840, 0.892] 95% CI
+    Latency: avg=4.3ms, p95=4.8ms
+  Paraphrase queries (60):
+    F1@10 = 0.836  [0.811, 0.861] 95% CI
+  No-tag queries (54):
+    F1@10 = 0.701  [0.684, 0.718] 95% CI
+  Complex queries (60):
+    F1@10 = 0.797  [0.771, 0.824] 95% CI
+
+============================================================
+  BEAR + Qwen3-Embedding-0.6B
+============================================================
+  Index build time: 3.019s
+  Standard queries (60):
+    Strict  F1@10 = 0.754  [0.726, 0.782] 95% CI
+    Relaxed F1@10 = 0.858  [0.832, 0.882] 95% CI
+    Latency: avg=16.3ms, p95=17.3ms
+  Paraphrase queries (60):
+    F1@10 = 0.807  [0.787, 0.828] 95% CI
+  No-tag queries (54):
+    F1@10 = 0.718  [0.698, 0.739] 95% CI
+  Complex queries (60):
+    F1@10 = 0.788  [0.758, 0.815] 95% CI
+
+============================================================
+  BEAR + Qwen3-Embedding-4B
+============================================================
+  Index build time: 7.003s
+  Standard queries (60):
+    Strict  F1@10 = 0.786  [0.753, 0.818] 95% CI
+    Relaxed F1@10 = 0.873  [0.851, 0.894] 95% CI
+    Latency: avg=22.7ms, p95=23.8ms
+  Paraphrase queries (60):
+    F1@10 = 0.830  [0.805, 0.855] 95% CI
+  No-tag queries (54):
+    F1@10 = 0.739  [0.714, 0.764] 95% CI
+  Complex queries (60):
+    F1@10 = 0.801  [0.776, 0.826] 95% CI
+
+============================================================
+  BEAR + BGE-M3
+============================================================
+  Index build time: 3.967s
+  Standard queries (60):
+    Strict  F1@10 = 0.796  [0.766, 0.825] 95% CI
+    Relaxed F1@10 = 0.876  [0.854, 0.898] 95% CI
+    Latency: avg=7.2ms, p95=7.8ms
+  Paraphrase queries (60):
+    F1@10 = 0.860  [0.838, 0.882] 95% CI
+  No-tag queries (54):
+    F1@10 = 0.801  [0.777, 0.824] 95% CI
+  Complex queries (60):
+    F1@10 = 0.823  [0.793, 0.853] 95% CI
+
+============================================================
+  BEAR + Nemotron-Embed-8B
+============================================================
+  Index build time: 12.016s
+  Standard queries (60):
+    Strict  F1@10 = 0.737  [0.718, 0.756] 95% CI
+    Relaxed F1@10 = 0.829  [0.804, 0.854] 95% CI
+    Latency: avg=22.5ms, p95=23.7ms
+  Paraphrase queries (60):
+    F1@10 = 0.733  [0.720, 0.746] 95% CI
+  No-tag queries (54):
+    F1@10 = 0.704  [0.692, 0.716] 95% CI
+  Complex queries (60):
+    F1@10 = 0.761  [0.741, 0.780] 95% CI
+
+============================================================
+  BEAR + Hash
+============================================================
+  Index build time: 0.067s
+  Standard queries (60):
+    Strict  F1@10 = 0.835  [0.800, 0.869] 95% CI
+    Relaxed F1@10 = 0.886  [0.867, 0.904] 95% CI
+    Latency: avg=0.3ms, p95=0.3ms
+  Paraphrase queries (60):
+    F1@10 = 0.886  [0.865, 0.907] 95% CI
+  No-tag queries (54):
+    F1@10 = 0.837  [0.813, 0.862] 95% CI
+  Complex queries (60):
+    F1@10 = 0.892  [0.864, 0.920] 95% CI
+
+============================================================
+  BEAR + BM25
+============================================================
+  Index build time: 0.001s
+  Standard queries (60):
+    Strict  F1@10 = 0.872  [0.835, 0.906] 95% CI
+    Relaxed F1@10 = 0.921  [0.905, 0.937] 95% CI
+    Latency: avg=0.1ms, p95=0.2ms
+  Paraphrase queries (60):
+    F1@10 = 0.898  [0.875, 0.920] 95% CI
+  No-tag queries (54):
+    F1@10 = 0.718  [0.692, 0.745] 95% CI
+  Complex queries (60):
+    F1@10 = 0.870  [0.840, 0.901] 95% CI
+
+============================================================
+  BEAR + ITR (hybrid)
+============================================================
+  Index build time: 1.309s
+  Standard queries (60):
+    Strict  F1@10 = 0.756  [0.724, 0.790] 95% CI
+    Relaxed F1@10 = 0.837  [0.808, 0.865] 95% CI
+    Latency: avg=9.8ms, p95=5.8ms
+  Paraphrase queries (60):
+    F1@10 = 0.820  [0.794, 0.846] 95% CI
+  No-tag queries (54):
+    F1@10 = 0.664  [0.650, 0.677] 95% CI
+  Complex queries (60):
+    F1@10 = 0.789  [0.759, 0.820] 95% CI
+
+============================================================
+  ITR standalone (no governance)
+============================================================
+  Strict  F1@10 = 0.182  [0.162, 0.203]
+  Relaxed F1@10 = 0.320  [0.274, 0.369]
+  Para    F1@10 = 0.058  [0.039, 0.078]
+  No-tag  F1@10 = 0.153  [0.130, 0.178]
+  Complex F1@10 = 0.161  [0.132, 0.190]
+
+============================================================
+  Random-k baseline (k=10, 1000 trials)
+============================================================
+  Strict  F1@10 = 0.116  [0.114, 0.118]
+
+
+================================================================================
+  SUMMARY  (60 standard queries, 60 paraphrase queries, 10,000 bootstrap iterations)
+================================================================================
+
+  Standard Queries — Strict F1@10 (95% CI):
+    BGE-base             0.780 [0.756, 0.806]
+    Qwen3-0.6B           0.754 [0.726, 0.782]
+    Qwen3-4B             0.786 [0.753, 0.818]
+    BGE-M3               0.796 [0.766, 0.825]
+    Nemotron-8B          0.737 [0.718, 0.756]
+    Hash                 0.835 [0.800, 0.869]
+    BM25                 0.872 [0.835, 0.906]
+    ITR-hybrid           0.756 [0.724, 0.790]
+    ITR-standalone       0.182 [0.162, 0.203]
+    Random-k             0.116 [0.114, 0.118]
+
+  Standard Queries — Relaxed F1@10 (95% CI):
+    BGE-base             0.866 [0.840, 0.892]
+    Qwen3-0.6B           0.858 [0.832, 0.882]
+    Qwen3-4B             0.873 [0.851, 0.894]
+    BGE-M3               0.876 [0.854, 0.898]
+    Nemotron-8B          0.829 [0.804, 0.854]
+    Hash                 0.886 [0.867, 0.904]
+    BM25                 0.921 [0.905, 0.937]
+    ITR-hybrid           0.837 [0.808, 0.865]
+    ITR-standalone       0.320 [0.274, 0.369]
+    Random-k             0.140 [0.140, 0.134]
+
+  Paraphrase Queries (minimal tags, n=60) — F1@10 (95% CI):
+    BGE-base             0.836 [0.811, 0.861]
+    Qwen3-0.6B           0.807 [0.787, 0.828]
+    Qwen3-4B             0.830 [0.805, 0.855]
+    BGE-M3               0.860 [0.838, 0.882]
+    Nemotron-8B          0.733 [0.720, 0.746]
+    Hash                 0.886 [0.865, 0.907]
+    BM25                 0.898 [0.875, 0.920]
+    ITR-hybrid           0.820 [0.794, 0.846]
+    ITR-standalone       0.058 [0.039, 0.078]
+    Random-k             0.101 [0.101, 0.099]
+
+  No-Tag Queries (pure retrieval, n=54) — F1@10 (95% CI):
+    BGE-base             0.701 [0.684, 0.718]
+    Qwen3-0.6B           0.718 [0.698, 0.739]
+    Qwen3-4B             0.739 [0.714, 0.764]
+    BGE-M3               0.801 [0.777, 0.824]
+    Nemotron-8B          0.704 [0.692, 0.716]
+    Hash                 0.837 [0.813, 0.862]
+    BM25                 0.718 [0.692, 0.745]
+    ITR-hybrid           0.664 [0.650, 0.677]
+    ITR-standalone       0.153 [0.130, 0.178]
+    Random-k             0.097 [0.097, 0.095]
+
+  Complex Queries (multi-intent/temporal/indirect/adversarial, n=60) — F1@10 (95% CI):
+    BGE-base             0.797 [0.771, 0.824]
+    Qwen3-0.6B           0.788 [0.758, 0.815]
+    Qwen3-4B             0.801 [0.776, 0.826]
+    BGE-M3               0.823 [0.793, 0.853]
+    Nemotron-8B          0.761 [0.741, 0.780]
+    Hash                 0.892 [0.864, 0.920]
+    BM25                 0.870 [0.840, 0.901]
+    ITR-hybrid           0.789 [0.759, 0.820]
+    ITR-standalone       0.161 [0.132, 0.190]
+    Random-k             0.114 [0.114, 0.111]
+
+  Latency:
+    BGE-base             avg=4.3ms  p95=4.8ms
+    Qwen3-0.6B           avg=16.3ms  p95=17.3ms
+    Qwen3-4B             avg=22.7ms  p95=23.8ms
+    BGE-M3               avg=7.2ms  p95=7.8ms
+    Nemotron-8B          avg=22.5ms  p95=23.7ms
+    Hash                 avg=0.3ms  p95=0.3ms
+    BM25                 avg=0.1ms  p95=0.2ms
+    ITR-hybrid           avg=9.8ms  p95=5.8ms
+    ITR-standalone       avg=0.0ms  p95=0.0ms
+    Random-k             avg=0.0ms  p95=0.0ms
+
+  Paired Bootstrap Tests (p-values, H0: no difference):
+  Pair                                         Strict    Relaxed     Paraph     No-tag    Complex
+  ------------------------------------------------------------------------------------------
+  BGE-base vs Qwen3-0.6B                    0.0501     0.4344     0.0240*    0.1167     0.4590   
+  BGE-base vs Qwen3-4B                      0.7064     0.5726     0.5891     0.0029**   0.7545   
+  BGE-base vs BGE-M3                        0.1216     0.2217     0.0763     0.0000***  0.0167*  
+  BGE-base vs Nemotron-8B                   0.0000***  0.0005***  0.0000***  0.7104     0.0027** 
+  BGE-base vs Hash                          0.0008***  0.1761     0.0001***  0.0000***  0.0000***
+  BGE-base vs BM25                          0.0000***  0.0005***  0.0001***  0.2929     0.0000***
+  BGE-base vs ITR-hybrid                    0.0151*    0.0001***  0.1962     0.0000***  0.4438   
+  BGE-base vs ITR-standalone                0.0000***  0.0000***  0.0000***  0.0000***  0.0000***
+  BGE-base vs Random-k                      0.0000***  0.0000***  0.0000***  0.0000***  0.0000***
+  Qwen3-0.6B vs Qwen3-4B                    0.0008***  0.0684     0.0458*    0.0685     0.1539   
+  Qwen3-0.6B vs BGE-M3                      0.0000***  0.1125     0.0000***  0.0000***  0.0010** 
+  Qwen3-0.6B vs Nemotron-8B                 0.0834     0.0000***  0.0000***  0.1237     0.0095** 
+  Qwen3-0.6B vs Hash                        0.0000***  0.0612     0.0000***  0.0000***  0.0000***
+  Qwen3-0.6B vs BM25                        0.0000***  0.0000***  0.0000***  0.9756     0.0000***
+  Qwen3-0.6B vs ITR-hybrid                  0.8790     0.0262*    0.3562     0.0000***  0.9057   
+  Qwen3-0.6B vs ITR-standalone              0.0000***  0.0000***  0.0000***  0.0000***  0.0000***
+  Qwen3-0.6B vs Random-k                    0.0000***  0.0000***  0.0000***  0.0000***  0.0000***
+  Qwen3-4B vs BGE-M3                        0.3432     0.7571     0.0120*    0.0000***  0.0704   
+  Qwen3-4B vs Nemotron-8B                   0.0000***  0.0000***  0.0000***  0.0009***  0.0000***
+  Qwen3-4B vs Hash                          0.0002***  0.3402     0.0000***  0.0000***  0.0000***
+  Qwen3-4B vs BM25                          0.0000***  0.0007***  0.0000***  0.2684     0.0000***
+  Qwen3-4B vs ITR-hybrid                    0.0116*    0.0016**   0.4913     0.0000***  0.3582   
+  Qwen3-4B vs ITR-standalone                0.0000***  0.0000***  0.0000***  0.0000***  0.0000***
+  Qwen3-4B vs Random-k                      0.0000***  0.0000***  0.0000***  0.0000***  0.0000***
+  BGE-M3 vs Nemotron-8B                     0.0000***  0.0000***  0.0000***  0.0000***  0.0000***
+  BGE-M3 vs Hash                            0.0014**   0.4394     0.0891     0.0504     0.0001***
+  BGE-M3 vs BM25                            0.0000***  0.0002***  0.0301*    0.0000***  0.0002***
+  BGE-M3 vs ITR-hybrid                      0.0000***  0.0000***  0.0062**   0.0000***  0.0068** 
+  BGE-M3 vs ITR-standalone                  0.0000***  0.0000***  0.0000***  0.0000***  0.0000***
+  BGE-M3 vs Random-k                        0.0000***  0.0000***  0.0000***  0.0000***  0.0000***
+  Nemotron-8B vs Hash                       0.0000***  0.0000***  0.0000***  0.0000***  0.0000***
+  Nemotron-8B vs BM25                       0.0000***  0.0000***  0.0000***  0.3345     0.0000***
+  Nemotron-8B vs ITR-hybrid                 0.1185     0.3670     0.0000***  0.0000***  0.0306*  
+  Nemotron-8B vs ITR-standalone             0.0000***  0.0000***  0.0000***  0.0000***  0.0000***
+  Nemotron-8B vs Random-k                   0.0000***  0.0000***  0.0000***  0.0000***  0.0000***
+  Hash vs BM25                              0.0007***  0.0005***  0.4158     0.0000***  0.1609   
+  Hash vs ITR-hybrid                        0.0000***  0.0025**   0.0002***  0.0000***  0.0000***
+  Hash vs ITR-standalone                    0.0000***  0.0000***  0.0000***  0.0000***  0.0000***
+  Hash vs Random-k                          0.0000***  0.0000***  0.0000***  0.0000***  0.0000***
+  BM25 vs ITR-hybrid                        0.0000***  0.0000***  0.0000***  0.0000***  0.0000***
+  BM25 vs ITR-standalone                    0.0000***  0.0000***  0.0000***  0.0000***  0.0000***
+  BM25 vs Random-k                          0.0000***  0.0000***  0.0000***  0.0000***  0.0000***
+  ITR-hybrid vs ITR-standalone              0.0000***  0.0000***  0.0000***  0.0000***  0.0000***
+  ITR-hybrid vs Random-k                    0.0000***  0.0000***  0.0000***  0.0000***  0.0000***
+  ITR-standalone vs Random-k                0.0000***  0.0000***  0.0000***  0.0000***  0.0006***
+
+  Cohen's d Effect Sizes (positive = first backend higher):
+  Pair                                       Strict  Relaxed   Paraph   No-tag  Complex
+  --------------------------------------------------------------------------------
+  BGE-base vs Qwen3-0.6B                      0.250    0.102    0.292   -0.205    0.094
+  BGE-base vs Qwen3-4B                       -0.048   -0.074    0.069   -0.401   -0.039
+  BGE-base vs BGE-M3                         -0.201   -0.158   -0.228   -1.032   -0.310
+  BGE-base vs Nemotron-8B                     0.558    0.471    1.196   -0.050    0.389
+  BGE-base vs Hash                           -0.426   -0.172   -0.461   -1.165   -0.793
+  BGE-base vs BM25                           -0.681   -0.453   -0.483   -0.142   -0.650
+  BGE-base vs ITR-hybrid                      0.312    0.513    0.168    0.629    0.099
+  BGE-base vs ITR-standalone                  4.718    3.039    6.358    4.516    3.994
+  BGE-base vs Random-k                        6.558    7.967    7.392    9.719    6.328
+  Qwen3-0.6B vs Qwen3-4B                     -0.434   -0.230   -0.259   -0.243   -0.183
+  Qwen3-0.6B vs BGE-M3                       -0.480   -0.202   -0.545   -0.893   -0.405
+  Qwen3-0.6B vs Nemotron-8B                   0.222    0.589    0.969    0.207    0.340
+  Qwen3-0.6B vs Hash                         -0.746   -0.241   -0.674   -1.025   -0.907
+  Qwen3-0.6B vs BM25                         -1.214   -0.526   -0.723    0.004   -0.742
+  Qwen3-0.6B vs ITR-hybrid                   -0.019    0.279   -0.118    0.733   -0.015
+  Qwen3-0.6B vs ITR-standalone                4.105    2.824    5.946    4.488    3.972
+  Qwen3-0.6B vs Random-k                      5.751    8.156    8.599    8.375    6.146
+  Qwen3-4B vs BGE-M3                         -0.120   -0.040   -0.319   -0.533   -0.231
+  Qwen3-4B vs Nemotron-8B                     0.463    0.619    1.123    0.440    0.533
+  Qwen3-4B vs Hash                           -0.488   -0.122   -0.483   -0.701   -0.830
+  Qwen3-4B vs BM25                           -0.820   -0.430   -0.525    0.148   -0.706
+  Qwen3-4B vs ITR-hybrid                      0.319    0.415    0.089    0.797    0.116
+  Qwen3-4B vs ITR-standalone                  3.636    3.026    5.750    3.832    4.126
+  Qwen3-4B vs Random-k                        5.008    9.377    7.326    6.857    6.772
+  BGE-M3 vs Nemotron-8B                       0.585    0.613    1.478    1.087    0.625
+  BGE-M3 vs Hash                             -0.404   -0.098   -0.215   -0.267   -0.616
+  BGE-M3 vs BM25                             -0.793   -0.452   -0.277    0.667   -0.482
+  BGE-M3 vs ITR-hybrid                        0.520    0.530    0.346    1.697    0.350
+  BGE-M3 vs ITR-standalone                    4.026    3.262    7.362    5.214    4.025
+  BGE-M3 vs Random-k                          5.680    9.541    8.810    8.147    5.961
+  Nemotron-8B vs Hash                        -0.733   -0.498   -1.465   -1.224   -1.147
+  Nemotron-8B vs BM25                        -1.005   -0.796   -1.581   -0.129   -1.042
+  Nemotron-8B vs ITR-hybrid                  -0.200   -0.115   -0.912    0.962   -0.279
+  Nemotron-8B vs ITR-standalone               5.170    2.900    7.334    4.813    4.513
+  Nemotron-8B vs Random-k                     8.669    8.221   12.805   15.164    8.844
+  Hash vs BM25                               -0.438   -0.441   -0.105    0.958    0.181
+  Hash vs ITR-hybrid                          0.624    0.385    0.520    1.504    0.849
+  Hash vs ITR-standalone                      3.898    3.046    6.284    5.763    4.013
+  Hash vs Random-k                            5.023   10.135    9.102    7.842    6.643
+  BM25 vs ITR-hybrid                          0.893    0.638    0.696    0.529    0.902
+  BM25 vs ITR-standalone                      3.963    3.077    6.773    5.245    4.078
+  BM25 vs Random-k                            5.234   10.925    8.674    6.261    6.216
+  ITR-hybrid vs ITR-standalone                3.756    3.004    5.790    4.198    3.599
+  ITR-hybrid vs Random-k                      4.997    6.858    7.118   12.088    5.534
+  ITR-standalone vs Random-k                  0.838    1.041   -0.579    0.610    0.431
+
+
+% === LaTeX Table: Retrieval Backend Comparison ===
+\begin{table}[t]
+\caption{Retrieval quality by backend on Pet Simulation corpus (37 queries, $k=10$, $\alpha=0.3$).}
+\label{tab:backend-comparison}
+\centering
+\begin{tabular}{@{}l ccc ccc r@{}}
+\toprule
+& \multicolumn{3}{c}{Strict} & \multicolumn{3}{c}{Relaxed} & \\
+\cmidrule(lr){2-4} \cmidrule(lr){5-7}
+Backend & P@10 & R@10 & F1 & P@10 & R@10 & F1 & ms/q \\
+\midrule
+BGE-base & 0.652 & 0.997 & 0.780 & 0.828 & 0.941 & 0.866 & 4.3 \\
+Qwen3-0.6B & 0.625 & 0.972 & 0.754 & 0.812 & 0.937 & 0.858 & 16.3 \\
+Qwen3-4B & 0.674 & 0.972 & 0.786 & 0.852 & 0.925 & 0.873 & 22.7 \\
+BGE-M3 & 0.683 & 0.978 & 0.796 & 0.858 & 0.922 & 0.876 & 7.2 \\
+Nemotron-8B & 0.591 & 0.994 & 0.737 & 0.761 & 0.942 & 0.829 & 22.5 \\
+Hash & 0.751 & 0.963 & 0.835 & 0.906 & 0.885 & 0.886 & 0.3 \\
+BM25 & 0.807 & 0.967 & 0.872 & 0.969 & 0.887 & 0.921 & 0.1 \\
+ITR-hybrid & 0.634 & 0.975 & 0.756 & 0.804 & 0.919 & 0.837 & 9.8 \\
+ITR-standalone & --- & --- & 0.182 & --- & --- & 0.320 & --- \\
+Random-k & --- & --- & 0.116 & --- & --- & 0.140 & --- \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Results saved to /mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts/results/backend_comparison.json

@@ -1,0 +1,7 @@
+num_agents,total_instructions,num_queries,bear_persona_recall,bear_dept_recall,bear_safety_recall,bear_global_recall,bear_scope_violations,bear_cross_dept,bear_mean_tokens,bear_mean_latency_ms,cpa_persona_recall,cpa_dept_recall,cpa_safety_recall,cpa_global_recall,cpa_scope_violations,cpa_cross_dept,cpa_mean_tokens,cpa_mean_latency_ms,cpa_wiring_lines,bear_novel_recall,cpa_novel_recall,num_novel_queries,bear_unresolved_conflicts,cpa_unresolved_conflicts,static_tokens,bear_token_ratio,cpa_token_ratio,bear_semantic_recall,cpa_semantic_recall,num_semantic_queries
+10,28,30,1.0000,1.0000,1.0000,1.0000,0,0.00,952,4.41,1.0000,1.0000,1.0000,1.0000,0,0.00,952,0.01,14,0.9440,0.8880,19,0,0,1454,0.6546,0.6546,1.0000,0.0000,12
+25,51,30,1.0000,1.0000,1.0000,1.0000,0,0.00,996,3.95,1.0000,1.0000,1.0000,1.0000,0,0.00,952,0.01,33,0.9558,0.9116,24,0,0,2609,0.3818,0.3650,1.0000,0.0000,12
+50,84,30,1.0000,1.0000,1.0000,1.0000,0,0.00,985,3.99,1.0000,1.0000,1.0000,1.0000,0,0.00,950,0.01,62,0.9558,0.9116,24,0,0,4344,0.2267,0.2188,1.0000,0.0000,12
+100,155,30,1.0000,1.0000,1.0000,1.0000,0,0.00,995,4.02,1.0000,1.0000,1.0000,1.0000,0,0.00,952,0.01,123,1.0000,0.9116,24,0,0,8021,0.1241,0.1186,0.9167,0.0000,12
+200,285,30,1.0000,1.0000,1.0000,1.0000,0,0.00,967,4.18,1.0000,1.0000,1.0000,1.0000,0,0.00,946,0.01,233,1.0000,0.9116,24,0,0,14696,0.0658,0.0644,0.9167,0.0000,12
+500,675,30,1.0000,1.0000,1.0000,1.0000,0,0.00,953,6.57,1.0000,1.0000,1.0000,1.0000,0,0.00,944,0.02,563,1.0000,0.9116,24,0,0,34721,0.0274,0.0272,0.9167,0.0000,12

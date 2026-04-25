@@ -1,0 +1,105 @@
+instructions:
+  # --- Ball behaviors ---
+
+  - id: ball-pet-approaching
+    type: directive
+    priority: 70
+    content: |
+      A pet is approaching the ball. The ball gleams invitingly, catching
+      the light [!effect(sparkles)] [!thought(Come play with me!)] [!busy(2.0)].
+      It seems to beckon the curious pet closer with a subtle shimmer.
+    scope:
+      tags: [ball, stimulus, pet_nearby]
+      required_tags: [ball, pet_nearby]
+    tags: [ball, stimulus, approach]
+
+  - id: ball-pet-arrived
+    type: directive
+    priority: 80
+    content: |
+      A pet has reached the ball! The ball bounces slightly as if excited
+      to be found [!effect(exclamation)] [!thought(You found me!)] [!busy(1.5)].
+      It rolls just a tiny bit, ready to be picked up and played with.
+    scope:
+      tags: [ball, stimulus, pet_arrived]
+      required_tags: [ball, pet_arrived]
+    tags: [ball, stimulus, arrival]
+
+  - id: ball-idle-fresh
+    type: directive
+    priority: 40
+    content: |
+      The ball sits on the ground, freshly placed. It catches the ambient
+      light with a soft gleam [!effect(sparkles)] [!thought(A new ball!)]
+      [!busy(3.0)]. Its bright color stands out against the floor, waiting
+      to attract attention from a nearby pet.
+    scope:
+      tags: [ball, stimulus, idle]
+      required_tags: [ball]
+    tags: [ball, stimulus, idle]
+
+  - id: ball-aging
+    type: directive
+    priority: 50
+    content: |
+      The ball has been sitting for a while, losing its initial luster.
+      It seems to give off a faint, lonely aura [!effect(question_mark)]
+      [!thought(Anyone want to play?)] [!busy(4.0)]. The longer it sits
+      unattended, the more forlorn it seems.
+    scope:
+      tags: [ball, stimulus, aging]
+      required_tags: [ball, aging]
+    tags: [ball, stimulus, aging]
+
+  # --- Treat behaviors ---
+
+  - id: treat-pet-approaching
+    type: directive
+    priority: 70
+    content: |
+      A pet is approaching the treat. A delicious aroma wafts through the
+      air [!effect(musical_notes)] [!thought(Something smells tasty...)]
+      [!busy(2.0)]. The treat's scent grows stronger as the pet gets closer,
+      practically calling out to be eaten.
+    scope:
+      tags: [treat, stimulus, pet_nearby]
+      required_tags: [treat, pet_nearby]
+    tags: [treat, stimulus, approach]
+
+  - id: treat-pet-arrived
+    type: directive
+    priority: 80
+    content: |
+      A pet has reached the treat! The treat seems to crinkle invitingly
+      [!effect(sparkles)] [!thought(Bon appetit!)] [!busy(1.5)].
+      Its rich aroma fills the air right before the pet gobbles it up.
+    scope:
+      tags: [treat, stimulus, pet_arrived]
+      required_tags: [treat, pet_arrived]
+    tags: [treat, stimulus, arrival]
+
+  - id: treat-idle-fresh
+    type: directive
+    priority: 40
+    content: |
+      The treat sits on the ground, freshly placed. Its aroma slowly
+      spreads outward [!effect(musical_notes)] [!thought(Fresh treat here!)]
+      [!busy(3.0)]. The scent is strongest now, a beacon for any hungry
+      pet with a keen nose.
+    scope:
+      tags: [treat, stimulus, idle]
+      required_tags: [treat]
+    tags: [treat, stimulus, idle]
+
+  - id: treat-aging
+    type: directive
+    priority: 50
+    content: |
+      The treat has been sitting for a while, its aroma fading slightly
+      [!effect(zzz)] [!thought(Getting stale...)] [!busy(4.0)].
+      It's still edible but losing its initial appeal. A discerning pet
+      might hesitate before eating it now.
+    scope:
+      tags: [treat, stimulus, aging]
+      required_tags: [treat, aging]
+    tags: [treat, stimulus, aging]

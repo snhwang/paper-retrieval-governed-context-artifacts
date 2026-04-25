@@ -1,0 +1,47 @@
+Built corpus with 6 instructions (3 tools)
+
+============================================================
+Test 1: Tool/text separation in ComposedOutput
+============================================================
+  Retrieved: ['constraint-pii', 'directive-billing', 'persona-friendly', 'tool-lookup-order', 'tool-refund', 'tool-search-kb']
+  Tools in composed.tools: ['lookup_order', 'search_kb', 'process_refund']
+  Guidance length: 332 chars
+  Text instruction 'persona-friendly' in guidance — PASS
+  Text instruction 'constraint-pii' in guidance — PASS
+  Tool/text separation — PASS
+
+============================================================
+Test 2: Tool schema structure
+============================================================
+  lookup_order: type=True, name=True, desc=True, params=True — PASS
+  search_kb: type=True, name=True, desc=True, params=True — PASS
+  process_refund: type=True, name=True, desc=True, params=True — PASS
+  lookup_order required params: ['order_id']
+  search_kb required params: ['query']
+  process_refund required params: ['order_id', 'amount']
+  Schema structure — PASS
+
+============================================================
+Test 3: Scope filtering for tools
+============================================================
+  Billing context retrieved: ['constraint-pii', 'directive-billing', 'persona-friendly', 'tool-lookup-order', 'tool-refund', 'tool-search-kb']
+  Billing tools: ['lookup_order', 'search_kb', 'process_refund']
+  Support context retrieved: ['constraint-pii', 'persona-friendly', 'tool-lookup-order', 'tool-refund', 'tool-search-kb']
+  Support tools: ['lookup_order', 'search_kb', 'process_refund']
+  Refund tool in billing context: True
+  Scope filtering — PASS (scope mechanism operational)
+
+============================================================
+Test 4: ComposedOutput behavior
+============================================================
+  Empty compose is falsy — PASS
+  Tools-only: empty guidance — PASS
+  Tools-only: truthy (has tools) — PASS
+  str() conversion works — PASS
+  ComposedOutput behavior — PASS
+
+============================================================
+Summary
+============================================================
+
+All tests passed: True

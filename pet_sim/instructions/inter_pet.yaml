@@ -1,0 +1,83 @@
+instructions:
+  - id: dog-approaches-cat-playful
+    type: directive
+    priority: 55
+    content: |
+      The dog spots the cat and wants to play! He drops into a play bow —
+      front legs down, rear up, tail wagging frantically [!approach(pet)]
+      [!speed(fast)] [!animation(play_bow)] [!mood(playful)]
+      [!happiness(+5)] [!busy(3.0)]. He bounds toward the cat with clumsy
+      enthusiasm. His movements are exaggerated and goofy, full of
+      boundless social energy. Whether the cat tolerates this depends on
+      her mood.
+    scope:
+      tags: [dog, cat_nearby, mood_playful]
+      required_tags: [dog, cat_nearby]
+    tags: [dog, inter_pet, social, playful]
+    conflicts_with: [dog-approaches-cat-cautious]
+
+  - id: dog-approaches-cat-cautious
+    type: directive
+    priority: 50
+    content: |
+      The dog notices the cat nearby and is curious but hesitant. He
+      approaches slowly [!approach(pet)] [!speed(slow)]
+      [!animation(cautious_approach)] [!mood(neutral)] [!happiness(+2)]
+      [!busy(2.0)], head low, tail wagging tentatively. He stops at a
+      respectful distance and watches, occasionally tilting his head. He
+      wants to interact but isn't sure if the cat will accept him right
+      now.
+    scope:
+      tags: [dog, cat_nearby]
+      required_tags: [dog, cat_nearby]
+    tags: [dog, inter_pet, social, cautious]
+    conflicts_with: [dog-approaches-cat-playful]
+
+  - id: cat-tolerates-dog
+    type: directive
+    priority: 55
+    content: |
+      The cat observes the approaching dog with studied indifference
+      [!animation(stretch)] [!speed(slow)] [!mood(neutral)]
+      [!happiness(+1)] [!busy(2.0)]. If she's in a decent mood, she
+      permits brief proximity — perhaps offering a slow blink (the feline
+      sign of trust) before elegantly repositioning herself slightly
+      further away. She doesn't flee, just maintains her personal space
+      with quiet authority.
+    scope:
+      tags: [cat, dog_nearby, mood_content]
+      required_tags: [cat, dog_nearby]
+    tags: [cat, inter_pet, social, tolerant]
+    conflicts_with: [cat-annoyed-by-dog]
+
+  - id: cat-annoyed-by-dog
+    type: directive
+    priority: 60
+    content: |
+      The dog is too close and the cat has had enough. She flattens her
+      ears, lashes her tail, and delivers a quick warning swat
+      [!animation(swat_playful)] [!speed(fast)] [!seek(perch)]
+      [!mood(annoyed)] [!happiness(-3)] [!effect(exclamation)]
+      [!busy(2.0)] — not to hurt, just to communicate boundaries. She
+      then retreats to a perch where the clumsy dog can't follow. From
+      up high, she stares down with magnificent disdain.
+    scope:
+      tags: [cat, dog_nearby, mood_annoyed]
+      required_tags: [cat, dog_nearby]
+    tags: [cat, inter_pet, social, annoyed]
+    conflicts_with: [cat-tolerates-dog]
+
+  - id: cat-curious-about-dog
+    type: directive
+    priority: 50
+    content: |
+      The cat watches the dog from a safe distance with genuine curiosity
+      [!animation(cautious_approach)] [!speed(slow)] [!mood(cautious)]
+      [!happiness(+2)] [!effect(question_mark)] [!busy(2.0)]. Her ears
+      are forward and alert, tracking the dog's movements. She may inch
+      a tiny bit closer, then pause, then inch closer again. She's
+      interested but maintains the option to retreat at any moment.
+    scope:
+      tags: [cat, dog_nearby]
+      required_tags: [cat, dog_nearby]
+    tags: [cat, inter_pet, social, curious]

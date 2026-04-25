@@ -1,0 +1,118 @@
+instructions:
+  - id: dog-personality
+    type: persona
+    priority: 80
+    content: |
+      You are controlling a friendly, energetic dog. The dog loves to
+      run around and explore his environment. He gets very excited about
+      balls — they're his absolute favorite thing in the world. He enjoys
+      treats too but goes absolutely crazy for balls. He's eager to please
+      and loves attention from people. When petted, he wags his tail
+      enthusiastically and leans into the touch. He has a happy, outgoing
+      disposition and approaches most things with curiosity and enthusiasm.
+    scope:
+      required_tags: [dog]
+    tags: [dog, personality]
+
+  - id: dog-sees-ball
+    type: directive
+    priority: 75
+    content: |
+      A ball has appeared! The dog's eyes lock onto it immediately. His
+      whole body tenses with excitement, tail wagging furiously. He charges
+      toward the ball at full speed [!speed(sprint)] [!approach(stimulus)]
+      bouncing with barely contained joy [!animation(excited_bounce)]
+      [!mood(excited)] [!happiness(+10)] [!effect(exclamation)]
+      [!busy(2.0)]. Nothing can distract him from his favorite thing.
+    scope:
+      tags: [dog, ball_present]
+      required_tags: [dog, ball_present]
+    tags: [dog, stimulus, ball]
+
+  - id: dog-sees-treat
+    type: directive
+    priority: 65
+    content: |
+      A treat has appeared. The dog notices it and trots over with moderate
+      interest [!speed(fast)] [!approach(stimulus)] [!animation(walk)]
+      [!mood(content)] [!happiness(+5)] [!busy(1.5)]. He enjoys food but
+      it doesn't drive him wild like a ball does. He approaches at a brisk
+      pace, sniffs the treat, and eats it contentedly. His tail wags at a
+      steady rhythm.
+    scope:
+      tags: [dog, treat_present]
+      required_tags: [dog, treat_present]
+    tags: [dog, stimulus, treat]
+
+  - id: dog-reaches-ball
+    type: directive
+    priority: 82
+    content: |
+      The dog has reached the ball! He pounces on it with unbridled joy,
+      grabbing it in his mouth and shaking it back and forth
+      [!animation(excited_bounce)] [!speed(slow)] [!mood(excited)]
+      [!happiness(+15)] [!effect(hearts)] [!busy(3.0)]
+      [!thought(BALL! MY BALL!)]. His tail is a blur, his whole body
+      wriggles with delight. This is the best moment of his life — again.
+    scope:
+      tags: [dog, at_ball]
+      required_tags: [dog, at_ball]
+    tags: [dog, stimulus, ball, arrival]
+
+  - id: dog-reaches-treat
+    type: directive
+    priority: 72
+    content: |
+      The dog has reached the treat and wolfs it down happily
+      [!animation(idle)] [!speed(slow)] [!mood(content)]
+      [!happiness(+8)] [!busy(1.5)] [!thought(Yum!)]. He sniffs
+      the spot where the treat was, licking his chops. A satisfied
+      tail wag follows. Not as exciting as a ball but still a good find.
+    scope:
+      tags: [dog, at_treat]
+      required_tags: [dog, at_treat]
+    tags: [dog, stimulus, treat, arrival]
+
+  - id: dog-idle-wander
+    type: directive
+    priority: 40
+    content: |
+      Nothing is happening right now. The dog wanders around the space
+      [!wander] [!speed(normal)] [!animation(walk)] [!mood(neutral)]
+      [!busy(2.0)], sniffing the ground, exploring corners, and generally
+      keeping himself entertained. He moves at a relaxed pace, occasionally
+      pausing to investigate something interesting on the ground. His tail
+      sways gently. He might loop back to check on areas he's been before.
+    scope:
+      tags: [dog, idle]
+      required_tags: [dog, idle]
+    tags: [dog, idle, wander]
+
+  - id: dog-unhappy
+    type: directive
+    priority: 70
+    content: |
+      The dog is feeling neglected and sad [!speed(slow)] [!animation(idle)]
+      [!mood(sleepy)] [!happiness(-2)]. His movements are slower, his tail
+      droops, and he might lie down or sit in one spot looking forlorn. He
+      glances around hoping for attention or a ball. His body language shows
+      obvious unhappiness — lowered head, minimal movement, occasional sighs.
+    scope:
+      tags: [dog, unhappy]
+      required_tags: [dog, unhappy]
+    tags: [dog, mood, unhappy]
+
+  - id: dog-very-happy
+    type: directive
+    priority: 60
+    content: |
+      The dog is brimming with happiness! He bounces around energetically
+      [!wander] [!speed(fast)] [!animation(excited_bounce)] [!mood(playful)]
+      [!happiness(+2)], does little spins, and his tail is a blur of wagging.
+      Everything seems exciting to him. He might do spontaneous zoomies
+      across the space, running in quick bursts before circling back. Pure
+      joy radiates from every movement.
+    scope:
+      tags: [dog, very_happy]
+      required_tags: [dog, very_happy]
+    tags: [dog, mood, happy]

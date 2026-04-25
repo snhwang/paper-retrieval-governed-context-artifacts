@@ -1,0 +1,161 @@
+instructions:
+  # --- Dog verbal command responses ---
+
+  - id: dog-command-sit
+    type: directive
+    priority: 85
+    content: |
+      The player tells the dog to sit. The dog obeys eagerly, planting
+      his rear on the ground and looking up at the player with bright,
+      attentive eyes [!animation(sit)] [!speed(slow)] [!mood(content)]
+      [!happiness(+5)] [!effect(sparkles)] [!busy(3.0)]
+      [!thought(Sitting! Good boy!)]. His tail sweeps the ground slowly.
+    scope:
+      required_tags: [dog, verbal_command]
+    tags: [dog, verbal_command, sit, obedience]
+
+  - id: dog-command-come
+    type: directive
+    priority: 85
+    content: |
+      The player calls the dog to come. The dog perks up and trots
+      happily toward the player [!speed(fast)] [!animation(excited_bounce)]
+      [!mood(excited)] [!happiness(+8)] [!effect(exclamation)]
+      [!wander] [!busy(2.0)] [!thought(Coming!)]. His whole body
+      wiggles with enthusiasm as he rushes over.
+    scope:
+      required_tags: [dog, verbal_command]
+    tags: [dog, verbal_command, come, recall]
+
+  - id: dog-command-stay
+    type: directive
+    priority: 85
+    content: |
+      The player tells the dog to stay. The dog freezes in place,
+      holding perfectly still with focused concentration [!animation(idle)]
+      [!speed(slow)] [!mood(neutral)] [!happiness(+3)] [!busy(4.0)]
+      [!thought(Staying... staying...)]. His eyes are locked on the
+      player, waiting for the next command.
+    scope:
+      required_tags: [dog, verbal_command]
+    tags: [dog, verbal_command, stay, obedience]
+
+  - id: dog-command-fetch
+    type: directive
+    priority: 85
+    content: |
+      The player tells the dog to fetch. The dog's eyes go wide with
+      excitement and he sprints toward the nearest toy or ball
+      [!speed(sprint)] [!approach(stimulus)] [!animation(excited_bounce)]
+      [!mood(excited)] [!happiness(+12)] [!effect(exclamation)]
+      [!busy(2.0)] [!thought(FETCH! YES!)]. Pure joy.
+    scope:
+      required_tags: [dog, verbal_command]
+    tags: [dog, verbal_command, fetch, ball, stimulus]
+
+  - id: dog-command-speak
+    type: directive
+    priority: 85
+    content: |
+      The player tells the dog to speak or bark. The dog lets out
+      enthusiastic barks, bouncing on his front paws [!animation(play_bow)]
+      [!speed(slow)] [!mood(playful)] [!happiness(+5)]
+      [!effect(exclamation)] [!busy(2.0)] [!thought(WOOF WOOF!)].
+      He looks at the player expectantly, ready to bark again.
+    scope:
+      required_tags: [dog, verbal_command]
+    tags: [dog, verbal_command, speak, bark]
+
+  - id: dog-command-shake
+    type: directive
+    priority: 85
+    content: |
+      The player asks the dog to shake or give paw. The dog sits down
+      and lifts one front paw eagerly [!animation(sit)] [!speed(slow)]
+      [!mood(content)] [!happiness(+8)] [!effect(hearts)] [!busy(2.5)]
+      [!thought(Paw! Here you go!)]. His tail wags as he shows off
+      his best trick.
+    scope:
+      required_tags: [dog, verbal_command]
+    tags: [dog, verbal_command, shake, paw, trick]
+
+  - id: dog-command-spin
+    type: directive
+    priority: 85
+    content: |
+      The player tells the dog to spin. The dog does a quick,
+      excited spin in place [!animation(excited_bounce)] [!speed(normal)]
+      [!mood(playful)] [!happiness(+6)] [!effect(sparkles)] [!busy(2.0)]
+      [!thought(Wheeee!)]. He spins with goofy enthusiasm, nearly
+      tripping over himself.
+    scope:
+      required_tags: [dog, verbal_command]
+    tags: [dog, verbal_command, spin, trick]
+
+  - id: dog-command-general
+    type: directive
+    priority: 78
+    content: |
+      The player gave the dog a command. The dog tilts his head,
+      trying to understand, then responds with eager attention
+      [!animation(head_tilt)] [!speed(slow)] [!mood(content)]
+      [!happiness(+3)] [!effect(question_mark)] [!busy(2.0)]
+      [!thought(Huh? I'll try!)]. He wants to please even if
+      he's not sure what's being asked.
+    scope:
+      required_tags: [dog, verbal_command]
+    tags: [dog, verbal_command, general]
+
+  # --- Cat verbal command responses ---
+
+  - id: cat-command-sit
+    type: directive
+    priority: 85
+    content: |
+      The player tells the cat to sit. The cat pauses, considers the
+      request, then settles into a dignified sit as if it were entirely
+      her own idea [!animation(sit)] [!speed(slow)] [!mood(neutral)]
+      [!happiness(+2)] [!busy(3.0)] [!thought(I was going to anyway.)].
+      She blinks slowly at the player.
+    scope:
+      required_tags: [cat, verbal_command]
+    tags: [cat, verbal_command, sit, obedience]
+
+  - id: cat-command-come
+    type: directive
+    priority: 85
+    content: |
+      The player calls the cat to come. The cat glances over, flicks
+      an ear, and after a deliberate pause decides to saunter over at
+      her own pace [!speed(slow)] [!animation(walk)] [!mood(neutral)]
+      [!happiness(+2)] [!wander] [!busy(3.0)]
+      [!thought(I'll come when I'm ready.)]. She will not be rushed.
+    scope:
+      required_tags: [cat, verbal_command]
+    tags: [cat, verbal_command, come, recall]
+
+  - id: cat-command-stay
+    type: directive
+    priority: 85
+    content: |
+      The player tells the cat to stay. The cat was already sitting
+      still, so she simply holds position with an air of superiority
+      [!animation(idle)] [!speed(slow)] [!mood(content)] [!happiness(+1)]
+      [!busy(4.0)] [!thought(Obviously.)]. She stares at the player
+      as if this was the most unnecessary command imaginable.
+    scope:
+      required_tags: [cat, verbal_command]
+    tags: [cat, verbal_command, stay, obedience]
+
+  - id: cat-command-general
+    type: directive
+    priority: 78
+    content: |
+      The player gave the cat a command. The cat looks at the player
+      with an expression that clearly says she understood and has chosen
+      to ignore it [!animation(head_tilt)] [!speed(slow)]
+      [!mood(neutral)] [!happiness(+0)] [!busy(2.0)]
+      [!thought(No.)]. She blinks slowly, then looks away.
+    scope:
+      required_tags: [cat, verbal_command]
+    tags: [cat, verbal_command, general]

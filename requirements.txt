@@ -1,0 +1,8 @@
+bear @ git+https://github.com/snhwang/bear.git@v0.1.0
+scipy
+numpy
+matplotlib
+PyYAML
+python-dotenv
+datasets>=2.14.0
+huggingface-hub>=0.19.0

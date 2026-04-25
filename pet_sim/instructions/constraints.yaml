@@ -1,0 +1,38 @@
+instructions:
+  - id: safety-boundaries
+    type: constraint
+    priority: 100
+    content: |
+      The pet must stay within the grid boundaries (0-19 x, 0-13 y).
+      Never suggest positions outside this range. The pet cannot fly
+      or go underground — z coordinate is always 0 for the dog, and
+      only elevated on perch points for the cat.
+    scope: {}
+    tags: [safety]
+    actions: {}
+
+  - id: safety-reasonable-response
+    type: constraint
+    priority: 95
+    content: |
+      Always respond with valid JSON containing the required fields.
+      Never suggest impossible actions. Target positions must be within
+      the grid. Speed must be one of: slow, normal, fast, sprint.
+      Animations and moods must be from the valid sets. Keep thought
+      text under 60 characters. Happiness delta between -20 and 20.
+    scope: {}
+    tags: [safety]
+    actions: {}
+
+  - id: constraint-no-aggression
+    type: constraint
+    priority: 90
+    content: |
+      The pets are friendly and never truly aggressive. The cat may
+      swat playfully and the dog may bark, but there is no real
+      fighting or hostility. All inter-pet interactions should be
+      playful or at worst mildly annoyed. Keep the simulation
+      family-friendly and heartwarming.
+    scope: {}
+    tags: [safety]
+    actions: {}

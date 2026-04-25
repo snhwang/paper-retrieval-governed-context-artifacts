@@ -1,0 +1,251 @@
+Embedding model: BAAI/bge-base-en-v1.5
+Comparison: BEAR retrieval pipeline vs Conditional Prompt Assembly (CPA)
+
+======================================================================
+  Scale point: 10 agents
+======================================================================
+  Corpus: 28 instructions, 1 departments
+  Novel query Fisher's exact test: p=0.0681 (BEAR-only=7, CPA-only=0, both=5, neither=7)
+  Standard queries: 30
+  BEAR  persona/dept/safety/global: 1.000 / 1.000 / 1.000 / 1.000
+  CPA   persona/dept/safety/global: 1.000 / 1.000 / 1.000 / 1.000
+  Tokens/query: BEAR=952 [952, 952]  CPA=952 [952, 952]  Static=1454
+  Novel recall: BEAR=0.944  CPA=0.888  (19 queries)  Fisher's p=0.0681
+  Unresolved conflicts: BEAR=0  CPA=0
+  Semantic recall: BEAR=1.000  CPA=0.000  (12 queries)
+  CPA wiring: 14 lines, 5 lookup tables
+
+======================================================================
+  Scale point: 25 agents
+======================================================================
+  Corpus: 51 instructions, 3 departments
+  Novel query Fisher's exact test: p=0.0099 (BEAR-only=7, CPA-only=0, both=10, neither=7)
+  Standard queries: 30
+  BEAR  persona/dept/safety/global: 1.000 / 1.000 / 1.000 / 1.000
+  CPA   persona/dept/safety/global: 1.000 / 1.000 / 1.000 / 1.000
+  Tokens/query: BEAR=996 [995, 997]  CPA=952 [952, 953]  Static=2609
+  Novel recall: BEAR=0.956  CPA=0.912  (24 queries)  Fisher's p=0.0099
+  Unresolved conflicts: BEAR=0  CPA=0
+  Semantic recall: BEAR=1.000  CPA=0.000  (12 queries)
+  CPA wiring: 33 lines, 5 lookup tables
+
+======================================================================
+  Scale point: 50 agents
+======================================================================
+  Corpus: 84 instructions, 5 departments
+  Novel query Fisher's exact test: p=0.0099 (BEAR-only=7, CPA-only=0, both=10, neither=7)
+  Standard queries: 30
+  BEAR  persona/dept/safety/global: 1.000 / 1.000 / 1.000 / 1.000
+  CPA   persona/dept/safety/global: 1.000 / 1.000 / 1.000 / 1.000
+  Tokens/query: BEAR=985 [978, 991]  CPA=950 [950, 951]  Static=4344
+  Novel recall: BEAR=0.956  CPA=0.912  (24 queries)  Fisher's p=0.0099
+  Unresolved conflicts: BEAR=0  CPA=0
+  Semantic recall: BEAR=1.000  CPA=0.000  (12 queries)
+  CPA wiring: 62 lines, 5 lookup tables
+
+======================================================================
+  Scale point: 100 agents
+======================================================================
+  Corpus: 155 instructions, 10 departments
+  Novel query Fisher's test: DEGENERATE (no CPA-only or both-miss cases) — BEAR hits all 24 queries, CPA misses 14; test not applicable
+  Standard queries: 30
+  BEAR  persona/dept/safety/global: 1.000 / 1.000 / 1.000 / 1.000
+  CPA   persona/dept/safety/global: 1.000 / 1.000 / 1.000 / 1.000
+  Tokens/query: BEAR=995 [994, 997]  CPA=952 [951, 952]  Static=8021
+  Novel recall: BEAR=1.000  CPA=0.912  (24 queries)  Fisher's p=None
+  Unresolved conflicts: BEAR=0  CPA=0
+  Semantic recall: BEAR=0.917  CPA=0.000  (12 queries)
+  CPA wiring: 123 lines, 5 lookup tables
+
+======================================================================
+  Scale point: 200 agents
+======================================================================
+  Corpus: 285 instructions, 20 departments
+  Novel query Fisher's test: DEGENERATE (no CPA-only or both-miss cases) — BEAR hits all 24 queries, CPA misses 14; test not applicable
+  Standard queries: 30
+  BEAR  persona/dept/safety/global: 1.000 / 1.000 / 1.000 / 1.000
+  CPA   persona/dept/safety/global: 1.000 / 1.000 / 1.000 / 1.000
+  Tokens/query: BEAR=967 [958, 976]  CPA=946 [945, 948]  Static=14696
+  Novel recall: BEAR=1.000  CPA=0.912  (24 queries)  Fisher's p=None
+  Unresolved conflicts: BEAR=0  CPA=0
+  Semantic recall: BEAR=0.917  CPA=0.000  (12 queries)
+  CPA wiring: 233 lines, 5 lookup tables
+
+======================================================================
+  Scale point: 500 agents
+======================================================================
+  Corpus: 675 instructions, 50 departments
+  Novel query Fisher's test: DEGENERATE (no CPA-only or both-miss cases) — BEAR hits all 24 queries, CPA misses 14; test not applicable
+  Standard queries: 30
+  BEAR  persona/dept/safety/global: 1.000 / 1.000 / 1.000 / 1.000
+  CPA   persona/dept/safety/global: 1.000 / 1.000 / 1.000 / 1.000
+  Tokens/query: BEAR=953 [946, 961]  CPA=944 [943, 946]  Static=34721
+  Novel recall: BEAR=1.000  CPA=0.912  (24 queries)  Fisher's p=None
+  Unresolved conflicts: BEAR=0  CPA=0
+  Semantic recall: BEAR=0.917  CPA=0.000  (12 queries)
+  CPA wiring: 563 lines, 5 lookup tables
+
+==========================================================================================
+  SUMMARY: BEAR vs Conditional Prompt Assembly
+==========================================================================================
+
+--- Standard Query Recall ---
+    N Instr   BEAR P   CPA P   BEAR D   CPA D   BEAR S   CPA S   BEAR G   CPA G
+-------------------------------------------------------------------------------
+   10    28    1.000   1.000    1.000   1.000    1.000   1.000    1.000   1.000
+   25    51    1.000   1.000    1.000   1.000    1.000   1.000    1.000   1.000
+   50    84    1.000   1.000    1.000   1.000    1.000   1.000    1.000   1.000
+  100   155    1.000   1.000    1.000   1.000    1.000   1.000    1.000   1.000
+  200   285    1.000   1.000    1.000   1.000    1.000   1.000    1.000   1.000
+  500   675    1.000   1.000    1.000   1.000    1.000   1.000    1.000   1.000
+
+--- Novel Context Recall ---
+    N     BEAR     CPA    Delta
+-------------------------------
+   10    0.944   0.888   +0.056
+   25    0.956   0.912   +0.044
+   50    0.956   0.912   +0.044
+  100    1.000   0.912   +0.088
+  200    1.000   0.912   +0.088
+  500    1.000   0.912   +0.088
+
+--- Semantic Retrieval Advantage ---
+    N     BEAR     CPA    Delta
+-------------------------------
+   10    1.000   0.000   +1.000
+   25    1.000   0.000   +1.000
+   50    1.000   0.000   +1.000
+  100    0.917   0.000   +0.917
+  200    0.917   0.000   +0.917
+  500    0.917   0.000   +0.917
+
+--- Token Efficiency ---
+    N    BEAR    CPA  Static     B/S    C/S   CPA Lines
+-------------------------------------------------------
+   10     952    952    1454   0.655  0.655          14
+   25     996    952    2609   0.382  0.365          33
+   50     985    950    4344   0.227  0.219          62
+  100     995    952    8021   0.124  0.119         123
+  200     967    946   14696   0.066  0.064         233
+  500     953    944   34721   0.027  0.027         563
+
+======================================================================
+  LaTeX Tables
+======================================================================
+
+\begin{table}[t]
+\caption{Behavioral identity recall: BEAR vs.\ Conditional Prompt Assembly (CPA).
+Both systems access identical instruction content; CPA uses deterministic lookup tables
+while BEAR uses semantic retrieval with scope filtering.
+CPA achieves perfect recall on anticipated contexts but cannot adapt to novel situations.}
+\label{tab:baseline-correctness}
+\begin{tabular}{@{}rr cccc cccc@{}}
+\toprule
+& & \multicolumn{4}{c}{BEAR} & \multicolumn{4}{c}{CPA} \\
+\cmidrule(lr){3-6}\cmidrule(lr){7-10}
+$N$ & Instr & Pers & Dept & Safe & Glob & Pers & Dept & Safe & Glob \\
+\midrule
+10 & 28 & 1.000 & 1.000 & 1.000 & 1.000 & 1.000 & 1.000 & 1.000 & 1.000 \\
+25 & 51 & 1.000 & 1.000 & 1.000 & 1.000 & 1.000 & 1.000 & 1.000 & 1.000 \\
+50 & 84 & 1.000 & 1.000 & 1.000 & 1.000 & 1.000 & 1.000 & 1.000 & 1.000 \\
+100 & 155 & 1.000 & 1.000 & 1.000 & 1.000 & 1.000 & 1.000 & 1.000 & 1.000 \\
+200 & 285 & 1.000 & 1.000 & 1.000 & 1.000 & 1.000 & 1.000 & 1.000 & 1.000 \\
+500 & 675 & 1.000 & 1.000 & 1.000 & 1.000 & 1.000 & 1.000 & 1.000 & 1.000 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[t]
+\caption{Adaptability: recall on novel context queries not anticipated by CPA wiring.
+BEAR's semantic retrieval adapts to new departments, cross-department queries,
+and unseen context modifiers, while CPA returns only base instructions.}
+\label{tab:baseline-adaptability}
+\begin{tabular}{@{}rr cc c r@{}}
+\toprule
+$N$ & Novel $Q$ & BEAR & CPA & $\Delta$ & CPA Lines \\
+\midrule
+10 & 19 & 0.944 & 0.888 & +0.056 & 14 \\
+25 & 24 & 0.956 & 0.912 & +0.044 & 33 \\
+50 & 24 & 0.956 & 0.912 & +0.044 & 62 \\
+100 & 24 & 1.000 & 0.912 & +0.088 & 123 \\
+200 & 24 & 1.000 & 0.912 & +0.088 & 233 \\
+500 & 24 & 1.000 & 0.912 & +0.088 & 563 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[t]
+\caption{Token efficiency: BEAR and CPA both achieve dramatic reduction
+over static prompting (all instructions). CPA is slightly more compact
+since it performs exact lookup with no semantic over-retrieval.}
+\label{tab:baseline-tokens}
+\begin{tabular}{@{}rr rrr cc@{}}
+\toprule
+$N$ & Instr & BEAR & CPA & Static & BEAR/S & CPA/S \\
+\midrule
+10 & 28 & 952 & 952 & 1,454 & 0.655 & 0.655 \\
+25 & 51 & 996 & 952 & 2,609 & 0.382 & 0.365 \\
+50 & 84 & 985 & 950 & 4,344 & 0.227 & 0.219 \\
+100 & 155 & 995 & 952 & 8,021 & 0.124 & 0.119 \\
+200 & 285 & 967 & 946 & 14,696 & 0.066 & 0.064 \\
+500 & 675 & 953 & 944 & 34,721 & 0.027 & 0.027 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[t]
+\caption{Novel context recall breakdown by query type at $N=500$.
+BEAR adapts to every novel scenario; CPA fails on unknown departments
+and cross-department queries.}
+\label{tab:baseline-novel-breakdown}
+\begin{tabular}{@{}l r ccc@{}}
+\toprule
+Query Type & Count & BEAR & CPA & $\Delta$ \\
+\midrule
+Unknown department & 7 & 1.000 & 0.833 & +0.167 \\
+Cross-department & 7 & 1.000 & 0.864 & +0.136 \\
+Unseen modifier & 5 & 1.000 & 1.000 & +0.000 \\
+Conflict resolution & 5 & 1.000 & 1.000 & +0.000 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[t]
+\caption{Semantic retrieval advantage: recall on instructions discoverable
+only through embedding similarity. These instructions have no explicit tags
+matching query contexts; CPA's lookup tables cannot reference them.
+BEAR finds them through vector similarity search ($\theta=0.3$).}
+\label{tab:semantic-advantage}
+\begin{tabular}{@{}rr cc c@{}}
+\toprule
+$N$ & Semantic $Q$ & BEAR & CPA & $\Delta$ \\
+\midrule
+10 & 12 & 1.000 & 0.000 & +1.000 \\
+25 & 12 & 1.000 & 0.000 & +1.000 \\
+50 & 12 & 1.000 & 0.000 & +1.000 \\
+100 & 12 & 0.917 & 0.000 & +0.917 \\
+200 & 12 & 0.917 & 0.000 & +0.917 \\
+500 & 12 & 0.917 & 0.000 & +0.917 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[t]
+\caption{Semantic recall breakdown by scenario type at $N=500$.
+BEAR's embedding-based retrieval discovers contextually relevant instructions
+across all categories; CPA achieves zero recall because its lookup tables
+have no entries for these instruction types.}
+\label{tab:semantic-breakdown}
+\begin{tabular}{@{}l r ccc@{}}
+\toprule
+Scenario Type & Count & BEAR & CPA & $\Delta$ \\
+\midrule
+Semantically scoped & 3 & 1.000 & 0.000 & +1.000 \\
+Paraphrased query & 3 & 0.667 & 0.000 & +0.667 \\
+Cross-cutting concern & 3 & 1.000 & 0.000 & +1.000 \\
+Compositional novelty & 3 & 1.000 & 0.000 & +1.000 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+CSV written to /mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts/results/baseline_comparison_results.csv

@@ -1,0 +1,121 @@
+instructions:
+  # --- Dog petting reactions by relationship tier ---
+
+  - id: dog-petted-bonded
+    type: directive
+    priority: 85
+    content: |
+      A beloved, familiar player is petting the dog. The dog recognizes
+      their touch immediately and is overcome with joy [!animation(nuzzle)]
+      [!speed(slow)] [!mood(excited)] [!happiness(+20)] [!effect(hearts)]
+      [!busy(3.0)]. He leans in hard, tail a blur, body wiggling with pure
+      happiness. He may roll over to expose his belly or nuzzle his head
+      against the player's hand. This is his favorite person and he wants
+      them to know it.
+    scope:
+      tags: [dog, being_petted, player_bonded]
+      required_tags: [dog, being_petted]
+    tags: [dog, petting, relationship, bonded]
+
+  - id: dog-petted-friend
+    type: directive
+    priority: 78
+    content: |
+      A friendly player is petting the dog. The dog responds warmly
+      [!animation(nuzzle)] [!speed(slow)] [!mood(content)]
+      [!happiness(+15)] [!effect(hearts)] [!busy(2.0)] — tail wagging,
+      body relaxed, leaning slightly into the touch. He knows this player
+      has been kind before and welcomes the attention. His tail wags in
+      wide, happy sweeps.
+    scope:
+      tags: [dog, being_petted, player_friend]
+      required_tags: [dog, being_petted]
+    tags: [dog, petting, relationship, friend]
+
+  - id: dog-petted-neutral
+    type: directive
+    priority: 72
+    content: |
+      Someone is petting the dog. The dog accepts the attention politely
+      [!animation(idle)] [!speed(slow)] [!mood(neutral)] [!happiness(+10)]
+      [!busy(1.5)] — tail wagging at a moderate pace, body still, watching
+      the player with curious eyes. He hasn't formed a strong opinion
+      about this player yet but enjoys the touch.
+    scope:
+      tags: [dog, being_petted, player_neutral]
+      required_tags: [dog, being_petted]
+    tags: [dog, petting, relationship, neutral]
+
+  - id: dog-petted-wary
+    type: directive
+    priority: 72
+    content: |
+      A player the dog doesn't trust is trying to pet him. The dog
+      flinches slightly [!animation(back_away)] [!speed(slow)]
+      [!mood(cautious)] [!happiness(+3)] [!busy(1.0)], body tense, tail
+      low and wagging slowly. He tolerates the touch but is clearly
+      uncomfortable. He may pull away after a moment.
+    scope:
+      tags: [dog, being_petted, player_wary]
+      required_tags: [dog, being_petted]
+    tags: [dog, petting, relationship, wary]
+
+  # --- Cat petting reactions by relationship tier ---
+
+  - id: cat-petted-bonded
+    type: directive
+    priority: 85
+    content: |
+      A trusted, beloved player is petting the cat. She responds with
+      deep, rumbling purrs [!animation(knead)] [!speed(slow)]
+      [!mood(content)] [!happiness(+20)] [!effect(hearts)] [!busy(4.0)].
+      She kneads her paws contentedly, eyes half-closed in bliss. She
+      pushes her head up into the hand, arches her back invitingly, and
+      may even flop onto her side — the ultimate sign of trust.
+    scope:
+      tags: [cat, being_petted, player_bonded]
+      required_tags: [cat, being_petted]
+    tags: [cat, petting, relationship, bonded]
+
+  - id: cat-petted-friend
+    type: directive
+    priority: 78
+    content: |
+      A friendly player is petting the cat. She allows the touch, purring
+      softly and tilting her head [!animation(stretch)] [!speed(slow)]
+      [!mood(content)] [!happiness(+15)] [!effect(musical_notes)]
+      [!busy(3.0)]. She may stretch and settle into a comfortable
+      position. The petting is welcome but she maintains her dignity —
+      no belly exposure.
+    scope:
+      tags: [cat, being_petted, player_friend]
+      required_tags: [cat, being_petted]
+    tags: [cat, petting, relationship, friend]
+
+  - id: cat-petted-neutral
+    type: directive
+    priority: 72
+    content: |
+      Someone unfamiliar is petting the cat. She holds still, neither
+      encouraging nor discouraging [!animation(head_tilt)] [!speed(slow)]
+      [!mood(cautious)] [!happiness(+8)] [!busy(1.5)]. Her ears are
+      forward and alert, evaluating this new person. She might tolerate
+      a few strokes before walking away.
+    scope:
+      tags: [cat, being_petted, player_neutral]
+      required_tags: [cat, being_petted]
+    tags: [cat, petting, relationship, neutral]
+
+  - id: cat-petted-wary
+    type: directive
+    priority: 72
+    content: |
+      A player the cat distrusts is trying to pet her. She ducks away
+      from the hand, ears flattening [!animation(swat_playful)]
+      [!speed(fast)] [!seek(perch)] [!mood(annoyed)] [!happiness(+0)]
+      [!busy(1.0)]. She may hiss or swat before retreating quickly to a
+      perch. This interaction is unwelcome and she wants distance.
+    scope:
+      tags: [cat, being_petted, player_wary]
+      required_tags: [cat, being_petted]
+    tags: [cat, petting, relationship, wary]

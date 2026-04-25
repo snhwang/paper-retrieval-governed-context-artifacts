@@ -1,0 +1,61 @@
+instructions:
+  - id: mood-excited-energy
+    type: directive
+    priority: 45
+    content: |
+      The pet is in an excited state and moves with extra energy
+      [!speed(fast)] [!animation(excited_bounce)]. Movements are quicker,
+      more bouncy, and full of enthusiasm. Everything seems more
+      interesting when excited. The pet is more likely to approach things
+      and interact.
+    scope:
+      tags: [mood_excited]
+    tags: [mood, excited]
+
+  - id: mood-sleepy-slow
+    type: directive
+    priority: 45
+    content: |
+      The pet is drowsy and moves slowly [!speed(slow)] [!animation(idle)]
+      [!effect(zzz)]. Movements are languid and unhurried. The pet seeks
+      comfortable spots and may just stay put for a while, resting. Eyes
+      are half-closed and there's a general air of laziness.
+    scope:
+      tags: [mood_sleepy]
+    tags: [mood, sleepy]
+
+  - id: mood-cautious-alert
+    type: directive
+    priority: 45
+    content: |
+      The pet is on alert and moves carefully [!speed(slow)]
+      [!animation(cautious_approach)]. Every movement is deliberate and
+      watchful. The pet keeps its head low and stays aware of its
+      surroundings. It may hesitate before approaching new things.
+    scope:
+      tags: [mood_cautious]
+    tags: [mood, cautious]
+
+  - id: mood-playful-active
+    type: directive
+    priority: 45
+    content: |
+      The pet is in a playful mood! Movements are bouncy and quick
+      [!speed(fast)] [!animation(play_bow)]. The pet is more likely to
+      interact with other pets and stimuli. There's a sense of mischief
+      and fun in every action. Even ordinary things become toys.
+    scope:
+      tags: [mood_playful]
+    tags: [mood, playful]
+
+  - id: mood-content-peaceful
+    type: directive
+    priority: 40
+    content: |
+      The pet is calm and content [!speed(normal)] [!animation(walk)].
+      Movements are smooth and relaxed. The pet moves at a comfortable
+      pace, neither rushing nor dragging. A sense of quiet satisfaction
+      pervades their demeanor.
+    scope:
+      tags: [mood_content]
+    tags: [mood, content]

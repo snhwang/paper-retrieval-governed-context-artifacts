@@ -1,0 +1,171 @@
+Embedding model: BAAI/bge-base-en-v1.5
+
+============================================================
+  Scale point: 10 agents
+============================================================
+  Corpus: 28 instructions, 1 departments
+  Queries:           30
+  Persona recall:    1.000
+  Dept recall:       1.000
+  Safety recall:     1.000
+  Global recall:     1.000
+  Scope violations:  0
+  Cross-dept avg:    0.0
+  BEAR tokens/query: 952 [952, 952]
+  Static tokens:     1454
+  Token ratio:       0.6546
+  Build time:        59809.4 ms
+  Retrieval:         4.55 [3.91, 5.77] ms (95% CI)
+
+============================================================
+  Scale point: 25 agents
+============================================================
+  Corpus: 51 instructions, 3 departments
+  Queries:           30
+  Persona recall:    1.000
+  Dept recall:       1.000
+  Safety recall:     1.000
+  Global recall:     1.000
+  Scope violations:  0
+  Cross-dept avg:    0.0
+  BEAR tokens/query: 996 [995, 997]
+  Static tokens:     2609
+  Token ratio:       0.3818
+  Build time:        1015.4 ms
+  Retrieval:         18.44 [14.36, 22.33] ms (95% CI)
+
+============================================================
+  Scale point: 50 agents
+============================================================
+  Corpus: 84 instructions, 5 departments
+  Queries:           30
+  Persona recall:    1.000
+  Dept recall:       1.000
+  Safety recall:     1.000
+  Global recall:     1.000
+  Scope violations:  0
+  Cross-dept avg:    0.0
+  BEAR tokens/query: 985 [978, 991]
+  Static tokens:     4344
+  Token ratio:       0.2267
+  Build time:        1010.6 ms
+  Retrieval:         8.09 [5.41, 11.30] ms (95% CI)
+
+============================================================
+  Scale point: 100 agents
+============================================================
+  Corpus: 155 instructions, 10 departments
+  Queries:           30
+  Persona recall:    1.000
+  Dept recall:       1.000
+  Safety recall:     1.000
+  Global recall:     1.000
+  Scope violations:  0
+  Cross-dept avg:    0.0
+  BEAR tokens/query: 995 [994, 997]
+  Static tokens:     8021
+  Token ratio:       0.1241
+  Build time:        911.9 ms
+  Retrieval:         4.11 [4.03, 4.21] ms (95% CI)
+
+============================================================
+  Scale point: 200 agents
+============================================================
+  Corpus: 285 instructions, 20 departments
+  Queries:           30
+  Persona recall:    1.000
+  Dept recall:       1.000
+  Safety recall:     1.000
+  Global recall:     1.000
+  Scope violations:  0
+  Cross-dept avg:    0.0
+  BEAR tokens/query: 967 [958, 976]
+  Static tokens:     14696
+  Token ratio:       0.0658
+  Build time:        1200.2 ms
+  Retrieval:         4.12 [4.03, 4.23] ms (95% CI)
+
+============================================================
+  Scale point: 500 agents
+============================================================
+  Corpus: 675 instructions, 50 departments
+  Queries:           30
+  Persona recall:    1.000
+  Dept recall:       1.000
+  Safety recall:     1.000
+  Global recall:     1.000
+  Scope violations:  0
+  Cross-dept avg:    0.0
+  BEAR tokens/query: 953 [946, 961]
+  Static tokens:     34721
+  Token ratio:       0.0274
+  Build time:        1159.3 ms
+  Retrieval:         6.95 [5.95, 8.39] ms (95% CI)
+
+========================================================================================================================
+  SUMMARY
+========================================================================================================================
+Agents |  Instr | Persona |  Dept | Safety | Global | Viol | XDept | BEAR Tok | Static Tok |  Ratio | Lat ms
+------------------------------------------------------------------------------------------------------------
+    10 |     28 |   1.000 | 1.000 |  1.000 |  1.000 |    0 |   0.0 |      952 |       1454 | 0.6546 |   4.55
+    25 |     51 |   1.000 | 1.000 |  1.000 |  1.000 |    0 |   0.0 |      996 |       2609 | 0.3818 |  18.44
+    50 |     84 |   1.000 | 1.000 |  1.000 |  1.000 |    0 |   0.0 |      985 |       4344 | 0.2267 |   8.09
+   100 |    155 |   1.000 | 1.000 |  1.000 |  1.000 |    0 |   0.0 |      995 |       8021 | 0.1241 |   4.11
+   200 |    285 |   1.000 | 1.000 |  1.000 |  1.000 |    0 |   0.0 |      967 |      14696 | 0.0658 |   4.12
+   500 |    675 |   1.000 | 1.000 |  1.000 |  1.000 |    0 |   0.0 |      953 |      34721 | 0.0274 |   6.95
+
+% === LaTeX Table 1: Behavioral Identity Recall ===
+\begin{table}[t]
+\caption{Behavioral identity recall as agent population scales. Each column measures the fraction of a specific instruction category correctly retrieved for each agent. ($\alpha=0.3$, $\theta=0.3$, $k=25$).}
+\label{tab:scalability-recall}
+\begin{tabular}{@{}rrcccc@{}}
+\toprule
+$N$ & Instructions & Persona & Dept & Safety & Global \\
+\midrule
+10 & 28 & 1.000 & 1.000 & 1.000 & 1.000 \\
+25 & 51 & 1.000 & 1.000 & 1.000 & 1.000 \\
+50 & 84 & 1.000 & 1.000 & 1.000 & 1.000 \\
+100 & 155 & 1.000 & 1.000 & 1.000 & 1.000 \\
+200 & 285 & 1.000 & 1.000 & 1.000 & 1.000 \\
+500 & 675 & 1.000 & 1.000 & 1.000 & 1.000 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% === LaTeX Table 2: Scope Isolation & Token Efficiency ===
+\begin{table}[t]
+\caption{Scope isolation and token efficiency. Scope violations (wrong-agent persona retrieved) remain zero at all scale points; composed prompt size stays constant while the static-prompt equivalent grows linearly.}
+\label{tab:scalability-efficiency}
+\begin{tabular}{@{}rrcccrc@{}}
+\toprule
+$N$ & Instructions & Persona Viol. & Cross-Dept & BEAR Tokens & Static Tokens & Ratio \\
+\midrule
+10 & 28 & 0 & 0.0 & 952 & 1454 & 0.6546 \\
+25 & 51 & 0 & 0.0 & 996 & 2609 & 0.3818 \\
+50 & 84 & 0 & 0.0 & 985 & 4344 & 0.2267 \\
+100 & 155 & 0 & 0.0 & 995 & 8021 & 0.1241 \\
+200 & 285 & 0 & 0.0 & 967 & 14696 & 0.0658 \\
+500 & 675 & 0 & 0.0 & 953 & 34721 & 0.0274 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% === LaTeX Table 3: Latency ===
+\begin{table}[t]
+\caption{Index build time and per-query retrieval latency as corpus scales.}
+\label{tab:scalability-latency}
+\begin{tabular}{@{}rrcc@{}}
+\toprule
+$N$ & Instructions & Build (ms) & Retrieval (ms) \\
+\midrule
+10 & 28 & 59809.4 & 4.55 \\
+25 & 51 & 1015.4 & 18.44 \\
+50 & 84 & 1010.6 & 8.09 \\
+100 & 155 & 911.9 & 4.11 \\
+200 & 285 & 1200.2 & 4.12 \\
+500 & 675 & 1159.3 & 6.95 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+CSV written to /mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts/results/scalability_results.csv
