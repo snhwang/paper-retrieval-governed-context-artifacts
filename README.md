@@ -20,7 +20,8 @@ evals/                    # evaluation scripts
   eval_scalability.py       # Procedural: token efficiency (Table 9)
   eval_tool_scaling.py      # Procedural: tool scaling + leakage (Tables 7, 8)
   eval_tool_composition.py  # Composer validation
-  eval_toolbench.py         # ToolBench + MetaTool + e2e (Tables 2, 3, 4, 5)
+  eval_toolbench.py         # ToolBench retrieval + MetaTool variants (Tables 2, 3, 4)
+  eval_toolbench_e2e.py     # End-to-end ToolBench: retrieval -> LLM (Table 5)
   toolbench_setup.py        # Download ToolBench and MetaTool data
   stat_utils.py             # Bootstrap CI / statistical helpers
 
@@ -44,8 +45,15 @@ python evals/toolbench_setup.py
 # Run all deterministic evals (no LLM required)
 ./run_evals.sh
 
-# Run ToolBench + MetaTool evals
+# Run ToolBench + MetaTool retrieval evals (Tables 2, 3, 4)
 python evals/eval_toolbench.py --latex
+
+# Optional: end-to-end ToolBench with an LLM (Table 5).
+# Paper used mistralai/Mistral-Nemo-Instruct-2407 12B via vLLM.
+# Point at any OpenAI-compatible endpoint (LM Studio default: 127.0.0.1:1234).
+python evals/eval_toolbench_e2e.py --model mistralai/Mistral-Nemo-Instruct-2407
+# or via the runner:
+./run_evals.sh --all --model mistralai/Mistral-Nemo-Instruct-2407 --base-url http://127.0.0.1:8000/v1
 ```
 
 ## Evaluation Coverage
@@ -67,9 +75,15 @@ These evals use `pet_sim/instructions/` and require no LLM or external data.
 
 | Script | Paper table | Benchmark |
 |--------|-------------|-----------|
-| `eval_toolbench.py` | Tables 2, 3, 4, 5 | ToolBench retrieval + MetaTool + MetaTool-with-tags + end-to-end ToolBench |
+| `eval_toolbench.py` | Tables 2, 3, 4 | ToolBench retrieval + MetaTool + MetaTool-with-tags |
+| `eval_toolbench_e2e.py` | Table 5 | End-to-end ToolBench: retrieval → LLM tool selection (LLM required) |
 
 Run `toolbench_setup.py` first to download data from HuggingFace.
+
+`eval_toolbench_e2e.py` requires an OpenAI-compatible LLM endpoint. The paper
+used `mistralai/Mistral-Nemo-Instruct-2407` (12B) served via vLLM. Any
+compatible endpoint works (LM Studio, vLLM, Ollama). Pass `--model` and
+`--base-url` to override the defaults.
 
 ## Embedding Models
 
