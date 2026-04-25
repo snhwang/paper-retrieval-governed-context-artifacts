@@ -29,7 +29,8 @@ pet_sim/instructions/     # frozen Pet Simulation corpus (8 YAML files)
                           # DO NOT MODIFY — these are exactly what the paper
                           # measured against
 results/                  # pre-computed result files referenced in the paper
-run_evals.sh              # runner reproducing all deterministic evals
+run_evals.sh              # runner reproducing all paper tables
+serve_mistral_nemo.sh     # vLLM server matching paper Table 5 deployment
 requirements.txt          # all dependencies including datasets for ToolBench
 ```
 
@@ -45,13 +46,18 @@ python evals/toolbench_setup.py
 # Reproduce all deterministic paper tables (Tables 2, 3, 4, 6-12)
 ./run_evals.sh
 
-# Add Table 5 (end-to-end ToolBench with LLM)
-# Paper used mistralai/Mistral-Nemo-Instruct-2407 12B via vLLM.
-# Point at any OpenAI-compatible endpoint (LM Studio default: 127.0.0.1:1234).
-./run_evals.sh --all --model mistralai/Mistral-Nemo-Instruct-2407
-# Override the endpoint:
-./run_evals.sh --all --model mistralai/Mistral-Nemo-Instruct-2407 --base-url http://127.0.0.1:8000/v1
+# Add Table 5 (end-to-end ToolBench with LLM).
+# Paper-exact reproduction: Mistral-Nemo-Instruct-2407 (12B) via vLLM.
+# In one shell, start the server (requires CUDA GPU with ~24GB VRAM):
+./serve_mistral_nemo.sh
+# In another shell, run the eval against it:
+./run_evals.sh --all --base-url http://127.0.0.1:8000/v1
 ```
+
+Any OpenAI-compatible endpoint works (vLLM, LM Studio, Ollama). If you don't
+need paper-exact reproduction, point `--base-url` at whatever you have running.
+LM Studio's default endpoint (`http://127.0.0.1:1234/v1`) works without
+overriding `--base-url`.
 
 ## Evaluation Coverage
 
