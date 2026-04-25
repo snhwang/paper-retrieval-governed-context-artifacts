@@ -23,7 +23,6 @@ evals/                    # evaluation scripts
   eval_tool_composition.py  # Composer validation
   eval_toolbench.py         # ToolBench + MetaTool: retrieval + ablation (Tables 2,3)
   toolbench_setup.py        # Download ToolBench and MetaTool data
-  eval_behavioral_divergence.py  # LLM behavioral divergence (demo only)
   stat_utils.py             # Bootstrap CI / statistical helpers
 
 pet_sim/instructions/     # frozen Pet Simulation corpus (8 YAML files)
@@ -72,24 +71,6 @@ These evals use `pet_sim/instructions/` and require no LLM or external data.
 | `eval_toolbench.py` | Tables 2, 3 | ToolBench (3,225 APIs) + MetaTool (199 tools) |
 
 Run `toolbench_setup.py` first to download data from HuggingFace.
-
-### LLM-dependent (optional)
-
-`eval_behavioral_divergence.py` runs BEAR vs Role vs Static output divergence
-across models and temperatures. Requires `OPENAI_API_KEY` or `ANTHROPIC_API_KEY`
-in a `.env` file at the repo root. Results are not reported in the paper but
-are included for completeness.
-
-```bash
-# GPT-5.4 Mini
-python evals/eval_behavioral_divergence.py \
-  --base-url https://api.openai.com/v1 \
-  --model gpt-5.4-mini-2026-03-17 --temperature 0.0
-
-# Claude Haiku
-python evals/eval_behavioral_divergence.py \
-  --model claude-haiku-4-5-20251001 --temperature 0.0
-```
 
 ## Embedding Models
 
