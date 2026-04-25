@@ -16,7 +16,7 @@ evals/                    # evaluation scripts
   eval_retrieval_backends.py# Pet Sim: backend comparison (Table 12)
   eval_governance_ablation.py# Pet Sim: governance ablation panels (Table 12)
   eval_ablation.py          # Pet Sim: alpha weight ablation
-  eval_baseline_comparison.py# Pet Sim: CPA comparison, semantic recall (Table 10)
+  eval_baseline_comparison.py# Pet Sim: CPA semantic recall + token efficiency (Tables 10, 11)
   eval_scalability.py       # Procedural: token efficiency (Table 9)
   eval_tool_scaling.py      # Procedural: tool scaling + leakage (Tables 7, 8)
   eval_tool_composition.py  # Composer validation
@@ -59,13 +59,9 @@ These evals use `pet_sim/instructions/` and require no LLM or external data.
 | `eval_retrieval.py` | Table 6 | F1 across query types, alpha ablation |
 | `eval_retrieval_backends.py` | Table 12 | Governance ablation across 7 backends |
 | `eval_governance_ablation.py` | Table 12 | Full / mandatory-only / no governance |
-| `eval_baseline_comparison.py` | Table 10 | CPA vs BEAR semantic recall |
+| `eval_baseline_comparison.py` | Tables 10, 11 | CPA vs BEAR semantic recall + Pet Sim token efficiency |
 | `eval_scalability.py` | Table 9 | Token efficiency as agent count scales |
 | `eval_tool_scaling.py` | Tables 7, 8 | Tool retrieval scaling + token savings |
-
-> TODO: confirm which script produces Table 11 (`tab:token-compare`, Pet Sim
-> token efficiency comparison) — likely `eval_baseline_comparison.py` or
-> `eval_retrieval_backends.py`.
 
 ### External benchmarks
 
