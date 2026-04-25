@@ -42,17 +42,14 @@ pip install -r requirements.txt
 # Download external benchmark data (ToolBench + MetaTool)
 python evals/toolbench_setup.py
 
-# Run all deterministic evals (no LLM required)
+# Reproduce all deterministic paper tables (Tables 2, 3, 4, 6-12)
 ./run_evals.sh
 
-# Run ToolBench + MetaTool retrieval evals (Tables 2, 3, 4)
-python evals/eval_toolbench.py --latex
-
-# Optional: end-to-end ToolBench with an LLM (Table 5).
+# Add Table 5 (end-to-end ToolBench with LLM)
 # Paper used mistralai/Mistral-Nemo-Instruct-2407 12B via vLLM.
 # Point at any OpenAI-compatible endpoint (LM Studio default: 127.0.0.1:1234).
-python evals/eval_toolbench_e2e.py --model mistralai/Mistral-Nemo-Instruct-2407
-# or via the runner:
+./run_evals.sh --all --model mistralai/Mistral-Nemo-Instruct-2407
+# Override the endpoint:
 ./run_evals.sh --all --model mistralai/Mistral-Nemo-Instruct-2407 --base-url http://127.0.0.1:8000/v1
 ```
 
@@ -84,6 +81,31 @@ Run `toolbench_setup.py` first to download data from HuggingFace.
 used `mistralai/Mistral-Nemo-Instruct-2407` (12B) served via vLLM. Any
 compatible endpoint works (LM Studio, vLLM, Ollama). Pass `--model` and
 `--base-url` to override the defaults.
+
+## Running individual evals
+
+`./run_evals.sh` invokes every script with the flags used to produce the
+paper's result files. To reproduce a single table or experiment, run that
+script directly:
+
+```bash
+# Pet Simulation (deterministic, no LLM)
+python evals/eval_retrieval.py                   # Table 6 (lexical)
+python evals/eval_retrieval.py --semantic        # Table 6 (semantic)
+python evals/eval_retrieval_backends.py --all    # Table 12 (backend comparison)
+python evals/eval_governance_ablation.py         # Table 12 (governance ablation)
+python evals/eval_baseline_comparison.py         # Tables 10, 11
+python evals/eval_scalability.py                 # Table 9
+python evals/eval_tool_scaling.py                # Tables 7, 8
+python evals/eval_tool_composition.py            # Composer validation
+python evals/eval_ablation.py                    # Parameter sensitivity (lexical)
+python evals/eval_ablation.py --semantic         # Parameter sensitivity (semantic)
+
+# External benchmarks (requires toolbench_setup.py first)
+python evals/eval_toolbench.py --latex           # Tables 2, 3, 4
+python evals/eval_toolbench_e2e.py \              # Table 5 (LLM required)
+    --model mistralai/Mistral-Nemo-Instruct-2407
+```
 
 ## Embedding Models
 

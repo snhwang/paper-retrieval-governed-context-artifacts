@@ -115,6 +115,12 @@ echo "--- §4.6 Governance Ablation ---"
 python3 "$EVAL_DIR/eval_governance_ablation.py" | tee "$RESULTS_DIR/eval_governance_ablation_output.txt"
 echo ""
 
+# ----- ToolBench + MetaTool retrieval (Tables 2, 3, 4) -----
+# Requires data downloaded via toolbench_setup.py
+echo "--- ToolBench + MetaTool retrieval ---"
+python3 "$EVAL_DIR/eval_toolbench.py" --latex | tee "$RESULTS_DIR/eval_toolbench_output.txt"
+echo ""
+
 # ----- End-to-end ToolBench (REQUIRES LLM) -----
 # Paper Table 5 used mistralai/Mistral-Nemo-Instruct-2407 12B via vLLM.
 # Override via --model and --base-url (any OpenAI-compatible endpoint).
