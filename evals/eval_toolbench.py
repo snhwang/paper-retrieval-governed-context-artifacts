@@ -547,14 +547,6 @@ BACKEND_SPECS = {
         "query_prefix": "Instruct: Retrieve behavioral instructions relevant to this query\nQuery: ",
         "trust_remote_code": True,
     },
-    "nemotron-8b": {
-        "model": "nvidia/llama-embed-nemotron-8b",
-        "dim": 4096,
-        "query_prefix": "Instruct: Retrieve behavioral instructions relevant to this query\nQuery: ",
-        "trust_remote_code": True,
-        "model_kwargs": {"attn_implementation": "flash_attention_2" if __import__("torch").cuda.is_available() else "eager", "torch_dtype": "bfloat16"},
-        "tokenizer_kwargs": {"padding_side": "left"},
-    },
 }
 
 
@@ -566,8 +558,8 @@ def build_retriever(
 ) -> Retriever:
     """Build a BEAR retriever for a given corpus and configuration.
 
-    backend: "bge", "bge-m3", "qwen3-0.6b", "qwen3-4b", "nemotron-8b",
-             "bm25", "hash", or "itr"
+    backend: "bge", "bge-m3", "qwen3-0.6b", "qwen3-4b",
+             "bm25", or "hash"
     """
     if backend == "bm25":
         config = Config(
@@ -585,18 +577,6 @@ def build_retriever(
         config = Config(
             embedding_model="hash",
             embedding_backend=EmbeddingBackend.NUMPY,
-            embedding_dim=768,
-            embedding_query_prefix="",
-            embedding_passage_prefix="",
-            priority_weight=PRIORITY_WEIGHT if governance else 0.0,
-            default_threshold=THRESHOLD,
-            default_top_k=DEFAULT_TOP_K,
-            mandatory_tags=mandatory_tags or [],
-        )
-    elif backend == "itr":
-        config = Config(
-            embedding_model="hash",
-            embedding_backend=EmbeddingBackend.ITR,
             embedding_dim=768,
             embedding_query_prefix="",
             embedding_passage_prefix="",
@@ -625,14 +605,6 @@ def build_retriever(
         raise ValueError(f"Unknown backend: {backend}")
 
     retriever = Retriever(corpus, config=config)
-
-    if backend == "itr":
-        from bear.backends.embeddings.itr_backend import ITRBackend
-        retriever._backend = ITRBackend(
-            dense_weight=0.7,
-            sparse_weight=0.3,
-            embedding_model=EMBEDDING_MODEL,
-        )
 
     retriever.build_index()
     return retriever
@@ -704,7 +676,6 @@ EXPERIMENTS = [
     {"name": "BEAR+Qwen3-4B (gov)", "backend": "qwen3-4b", "governance": True, "use_tags": True, "strip_scope": False},
     {"name": "BEAR+BM25 (gov)", "backend": "bm25", "governance": True, "use_tags": True, "strip_scope": False},
     {"name": "BEAR+Hash (gov)", "backend": "hash", "governance": True, "use_tags": True, "strip_scope": False},
-    {"name": "BEAR+ITR (gov)", "backend": "itr", "governance": True, "use_tags": True, "strip_scope": False},
     # --- Mandatory-only ablation (required_tags removed, mandatory injection kept) ---
     {"name": "BEAR+BGE (mand-only)", "backend": "bge", "governance": True, "use_tags": False, "strip_scope": False},
     {"name": "BEAR+BGE-M3 (mand-only)", "backend": "bge-m3", "governance": True, "use_tags": False, "strip_scope": False},
@@ -718,7 +689,6 @@ EXPERIMENTS = [
     {"name": "Qwen3-0.6B (no gov)", "backend": "qwen3-0.6b", "governance": False, "use_tags": False, "strip_scope": True},
     {"name": "Qwen3-4B (no gov)", "backend": "qwen3-4b", "governance": False, "use_tags": False, "strip_scope": True},
     {"name": "Hash (no gov)", "backend": "hash", "governance": False, "use_tags": False, "strip_scope": True},
-    {"name": "ITR (no gov)", "backend": "itr", "governance": False, "use_tags": False, "strip_scope": True},
     {"name": "BM25 (no gov)", "backend": "bm25", "governance": False, "use_tags": False, "strip_scope": True},
 ]
 
@@ -860,21 +830,16 @@ def run_benchmark(
     _compare("BEAR+BGE-M3 (gov)", "BGE-M3 (no gov)")
     _compare("BEAR+Qwen3-0.6B (gov)", "Qwen3-0.6B (no gov)")
     _compare("BEAR+Qwen3-4B (gov)", "Qwen3-4B (no gov)")
-    _compare("BEAR+Nemotron-8B (gov)", "Nemotron-8B (no gov)")
     _compare("BEAR+Hash (gov)", "Hash (no gov)")
-    _compare("BEAR+ITR (gov)", "ITR (no gov)")
     _compare("BEAR+BM25 (gov)", "BM25 (no gov)")
     # Cross-backend with governance
     _compare("BEAR+BGE (gov)", "BEAR+BGE-M3 (gov)")
     _compare("BEAR+BGE (gov)", "BEAR+Qwen3-0.6B (gov)")
     _compare("BEAR+BGE (gov)", "BEAR+Qwen3-4B (gov)")
-    _compare("BEAR+BGE (gov)", "BEAR+Nemotron-8B (gov)")
     _compare("BEAR+BGE (gov)", "BEAR+BM25 (gov)")
     _compare("BEAR+BGE (gov)", "BEAR+Hash (gov)")
-    _compare("BEAR+BGE (gov)", "BEAR+ITR (gov)")
     # Governed vs ungoverned (different backends)
     _compare("BEAR+BM25 (gov)", "BGE (no gov)")
-    _compare("BEAR+ITR (gov)", "BGE (no gov)")
 
     return results
 

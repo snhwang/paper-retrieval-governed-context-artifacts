@@ -17,8 +17,8 @@ Metrics:
   - Per-condition bootstrap 95% CIs and paired statistical tests
 
 Backends tested (configurable via --backends):
-  Governed: BGE-base, BGE-M3, Qwen3-0.6B, Qwen3-4B, Nemotron-8B, BM25, ITR
-  Ungoverned: BGE (no gov), ITR (no gov)
+  Governed: BGE-base, BGE-M3, Qwen3-0.6B, Qwen3-4B, BM25
+  Ungoverned: BGE (no gov)
   Baseline: Monolithic (all tools injected)
 
 LLM Requirements:
@@ -29,7 +29,7 @@ LLM Requirements:
 Usage:
     python eval_toolbench_e2e.py                          # default: BGE gov + no-gov + monolithic
     python eval_toolbench_e2e.py --all                    # all backends
-    python eval_toolbench_e2e.py --backends bge bm25 itr  # specific backends
+    python eval_toolbench_e2e.py --backends bge bm25      # specific backends
     python eval_toolbench_e2e.py --max-queries 100        # quick test
     python eval_toolbench_e2e.py --model mistral-nemo-instruct-2407
 """
@@ -80,7 +80,7 @@ try:
 except ImportError:
     DEFAULT_LLM_URL = "http://127.0.0.1:1234/v1"
 
-DEFAULT_LLM_MODEL = "nvidia/nemotron-3-super"
+DEFAULT_LLM_MODEL = "mistralai/Mistral-Nemo-Instruct-2407"
 
 
 def call_llm_with_tools(
@@ -575,16 +575,12 @@ ALL_BACKENDS = [
     {"name": "BEAR+BGE-M3 (gov)", "backend": "bge-m3", "governance": True, "use_tags": True},
     {"name": "BEAR+Qwen3-0.6B (gov)", "backend": "qwen3-0.6b", "governance": True, "use_tags": True},
     {"name": "BEAR+Qwen3-4B (gov)", "backend": "qwen3-4b", "governance": True, "use_tags": True},
-    {"name": "BEAR+Nemotron-8B (gov)", "backend": "nemotron-8b", "governance": True, "use_tags": True},
     {"name": "BEAR+BM25 (gov)", "backend": "bm25", "governance": True, "use_tags": True},
-    {"name": "BEAR+ITR (gov)", "backend": "itr", "governance": True, "use_tags": True},
     {"name": "BEAR+Hash (gov)", "backend": "hash", "governance": True, "use_tags": True},
     {"name": "BGE (no gov)", "backend": "bge", "governance": False, "use_tags": False},
     {"name": "BGE-M3 (no gov)", "backend": "bge-m3", "governance": False, "use_tags": False},
     {"name": "Qwen3-0.6B (no gov)", "backend": "qwen3-0.6b", "governance": False, "use_tags": False},
     {"name": "Qwen3-4B (no gov)", "backend": "qwen3-4b", "governance": False, "use_tags": False},
-    {"name": "Nemotron-8B (no gov)", "backend": "nemotron-8b", "governance": False, "use_tags": False},
-    {"name": "ITR (no gov)", "backend": "itr", "governance": False, "use_tags": False},
     {"name": "BM25 (no gov)", "backend": "bm25", "governance": False, "use_tags": False},
 ]
 
