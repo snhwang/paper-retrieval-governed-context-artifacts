@@ -48,14 +48,35 @@ echo "  Endpoint: http://127.0.0.1:$PORT/v1"
 echo "  Context:  $MAX_MODEL_LEN tokens"
 echo "  GPU mem:  $GPU_MEM_UTIL"
 echo ""
-echo "Once the server prints 'Application startup complete', run in another shell:"
-echo "  ./run_evals.sh --all --base-url http://127.0.0.1:$PORT/v1"
-echo ""
+echo "vLLM will load the model (multi-minute first time, faster subsequently)."
+echo "This script will print a READY banner when /v1/models responds."
 echo "Stop with Ctrl+C."
 echo "========================================"
 echo ""
 
-exec vllm serve "$MODEL" \
+# Background readiness poller. Prints a banner once /v1/models responds, so
+# you don't have to scrape vLLM's own log for "Application startup complete".
+# Self-terminates after 30 min if the model never loads.
+(
+    sleep 10
+    for _ in $(seq 1 360); do  # 360 * 5s = 30 min cap
+        if curl -sf -m 2 "http://127.0.0.1:$PORT/v1/models" >/dev/null 2>&1; then
+            echo ""
+            echo "========================================"
+            echo "  vLLM READY at http://127.0.0.1:$PORT/v1"
+            echo "  Run in another shell:"
+            echo "    ./run_evals.sh --all --base-url http://127.0.0.1:$PORT/v1"
+            echo "========================================"
+            echo ""
+            exit 0
+        fi
+        sleep 5
+    done
+) &
+POLLER_PID=$!
+trap "kill $POLLER_PID 2>/dev/null" EXIT
+
+vllm serve "$MODEL" \
     --port "$PORT" \
     --max-model-len "$MAX_MODEL_LEN" \
     --gpu-memory-utilization "$GPU_MEM_UTIL"
