@@ -12,23 +12,21 @@
 #   - First run downloads ~24GB from Hugging Face
 #
 # Usage:
-#   ./serve_mistral_nemo.sh                    # defaults: port 8000
+#   ./serve_mistral_nemo.sh                    # defaults; auto-detects WSL
 #   PORT=8001 ./serve_mistral_nemo.sh          # custom port
 #   MAX_MODEL_LEN=4096 ./serve_mistral_nemo.sh # smaller context window
-#   EAGER=1 ./serve_mistral_nemo.sh            # disable CUDA graphs (WSL workaround)
+#   EAGER=0 ./serve_mistral_nemo.sh            # force CUDA graphs even on WSL
+#   EAGER=1 ./serve_mistral_nemo.sh            # force eager even on bare Linux
+#
+# The script auto-handles known issues:
+#   - WSL detection -> --enforce-eager (avoids CUDA graph capture segfault)
+#   - HF cache permission check -> auto-fix via chown if writable, else instruct
+#   - HF_TOKEN check -> warn if missing (non-fatal but slower downloads)
 #
 # Once the server is ready, in another shell:
 #   ./run_evals.sh --all --base-url http://127.0.0.1:8000/v1
 #
 # To stop: Ctrl+C
-#
-# Troubleshooting:
-#   - Segfault during 'Profiling CUDA graph memory' (common on WSL):
-#       EAGER=1 ./serve_mistral_nemo.sh
-#     Disables CUDA graph capture. Slower runtime but stable.
-#   - Permission denied in ~/.cache/huggingface (after running as sudo before):
-#       sudo chown -R "$(whoami)" ~/.cache/huggingface
-#   - HF Hub rate limits: export HF_TOKEN=hf_xxxxxxx
 # =============================================================================
 
 set -e
@@ -37,13 +35,23 @@ MODEL="${MODEL:-mistralai/Mistral-Nemo-Instruct-2407}"
 PORT="${PORT:-8000}"
 MAX_MODEL_LEN="${MAX_MODEL_LEN:-8192}"
 GPU_MEM_UTIL="${GPU_MEM_UTIL:-0.85}"
-EAGER="${EAGER:-0}"
 
-EXTRA_ARGS=()
-if [[ "$EAGER" == "1" ]]; then
-    EXTRA_ARGS+=(--enforce-eager)
+# --- Auto-detect WSL and default to eager mode ----------------------------
+# vLLM's CUDA graph capture (Profiling CUDA graph memory step) segfaults on
+# many WSL configurations during reshape_and_cache_flash. --enforce-eager
+# disables graph capture; runtime is ~10-30% slower but stable.
+if [[ -z "${EAGER:-}" ]]; then
+    if grep -qi microsoft /proc/version 2>/dev/null; then
+        EAGER=1
+    else
+        EAGER=0
+    fi
 fi
 
+EXTRA_ARGS=()
+[[ "$EAGER" == "1" ]] && EXTRA_ARGS+=(--enforce-eager)
+
+# --- Pre-flight: vLLM installed -------------------------------------------
 if ! python -c "import vllm" 2>/dev/null; then
     echo "ERROR: vLLM is not installed."
     echo ""
@@ -54,6 +62,36 @@ if ! python -c "import vllm" 2>/dev/null; then
     exit 1
 fi
 
+# --- Pre-flight: HF cache writable ----------------------------------------
+# Permission errors here mean the cache was created by a different user
+# (typically a previous sudo invocation). Fix or instruct.
+HF_CACHE="${HF_HOME:-$HOME/.cache/huggingface}"
+if [[ -d "$HF_CACHE" ]] && [[ ! -w "$HF_CACHE" || $(find "$HF_CACHE" -not -writable -print -quit 2>/dev/null) ]]; then
+    if [[ "$EUID" -eq 0 ]]; then
+        echo "Fixing $HF_CACHE ownership..."
+        chown -R "$(logname 2>/dev/null || echo "$SUDO_USER")" "$HF_CACHE"
+    elif sudo -n true 2>/dev/null; then
+        echo "Fixing $HF_CACHE ownership (passwordless sudo available)..."
+        sudo chown -R "$(whoami)" "$HF_CACHE"
+    else
+        echo "WARNING: $HF_CACHE has files not writable by $(whoami)."
+        echo "         vLLM will continue but with cache write failures."
+        echo "         Fix with:  sudo chown -R \"\$(whoami)\" \"$HF_CACHE\""
+        echo ""
+    fi
+fi
+
+# --- Pre-flight: HF_TOKEN -------------------------------------------------
+# Anonymous downloads from HF Hub are rate-limited. For first-run download
+# of a 24GB model, this matters.
+if [[ -z "${HF_TOKEN:-}" ]] && [[ ! -d "$HF_CACHE/hub/models--mistralai--Mistral-Nemo-Instruct-2407" ]]; then
+    echo "NOTE: HF_TOKEN not set and Mistral-Nemo not in cache."
+    echo "      First-run download (~24GB) will be rate-limited."
+    echo "      To skip the rate limit: export HF_TOKEN=hf_xxxxxxx"
+    echo "      Get a token: https://huggingface.co/settings/tokens"
+    echo ""
+fi
+
 echo "========================================"
 echo "  vLLM: serving paper Table 5 model"
 echo "========================================"
@@ -62,7 +100,13 @@ echo "  Port:     $PORT"
 echo "  Endpoint: http://127.0.0.1:$PORT/v1"
 echo "  Context:  $MAX_MODEL_LEN tokens"
 echo "  GPU mem:  $GPU_MEM_UTIL"
-[[ "$EAGER" == "1" ]] && echo "  Mode:     eager (CUDA graphs disabled)"
+if [[ "$EAGER" == "1" ]]; then
+    if grep -qi microsoft /proc/version 2>/dev/null; then
+        echo "  Mode:     eager (CUDA graphs disabled — WSL detected)"
+    else
+        echo "  Mode:     eager (CUDA graphs disabled)"
+    fi
+fi
 echo ""
 echo "vLLM will load the model (multi-minute first time, faster subsequently)."
 echo "This script will print a READY banner when /v1/models responds."
