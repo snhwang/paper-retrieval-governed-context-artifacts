@@ -15,11 +15,20 @@
 #   ./serve_mistral_nemo.sh                    # defaults: port 8000
 #   PORT=8001 ./serve_mistral_nemo.sh          # custom port
 #   MAX_MODEL_LEN=4096 ./serve_mistral_nemo.sh # smaller context window
+#   EAGER=1 ./serve_mistral_nemo.sh            # disable CUDA graphs (WSL workaround)
 #
 # Once the server is ready, in another shell:
 #   ./run_evals.sh --all --base-url http://127.0.0.1:8000/v1
 #
 # To stop: Ctrl+C
+#
+# Troubleshooting:
+#   - Segfault during 'Profiling CUDA graph memory' (common on WSL):
+#       EAGER=1 ./serve_mistral_nemo.sh
+#     Disables CUDA graph capture. Slower runtime but stable.
+#   - Permission denied in ~/.cache/huggingface (after running as sudo before):
+#       sudo chown -R "$(whoami)" ~/.cache/huggingface
+#   - HF Hub rate limits: export HF_TOKEN=hf_xxxxxxx
 # =============================================================================
 
 set -e
@@ -28,6 +37,12 @@ MODEL="${MODEL:-mistralai/Mistral-Nemo-Instruct-2407}"
 PORT="${PORT:-8000}"
 MAX_MODEL_LEN="${MAX_MODEL_LEN:-8192}"
 GPU_MEM_UTIL="${GPU_MEM_UTIL:-0.85}"
+EAGER="${EAGER:-0}"
+
+EXTRA_ARGS=()
+if [[ "$EAGER" == "1" ]]; then
+    EXTRA_ARGS+=(--enforce-eager)
+fi
 
 if ! python -c "import vllm" 2>/dev/null; then
     echo "ERROR: vLLM is not installed."
@@ -47,6 +62,7 @@ echo "  Port:     $PORT"
 echo "  Endpoint: http://127.0.0.1:$PORT/v1"
 echo "  Context:  $MAX_MODEL_LEN tokens"
 echo "  GPU mem:  $GPU_MEM_UTIL"
+[[ "$EAGER" == "1" ]] && echo "  Mode:     eager (CUDA graphs disabled)"
 echo ""
 echo "vLLM will load the model (multi-minute first time, faster subsequently)."
 echo "This script will print a READY banner when /v1/models responds."
@@ -79,4 +95,5 @@ trap "kill $POLLER_PID 2>/dev/null" EXIT
 vllm serve "$MODEL" \
     --port "$PORT" \
     --max-model-len "$MAX_MODEL_LEN" \
-    --gpu-memory-utilization "$GPU_MEM_UTIL"
+    --gpu-memory-utilization "$GPU_MEM_UTIL" \
+    "${EXTRA_ARGS[@]}"
