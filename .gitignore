@@ -5,3 +5,4 @@ venv/
 .env
 .DS_Store
 pet_sim/instructions/.cache/
+.claude/
