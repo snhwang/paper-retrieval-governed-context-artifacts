@@ -1,5 +1,10 @@
 # Retrieval-Governed Context — Paper Artifacts
 
+**Provisional Patent Pending (filed April 15, 2026)** | Copyright (c) 2024-2026 The Pennsylvania State University. All rights reserved.
+Inventor: Scott N. Hwang
+
+Licensed under the [Open Core Ventures Source Available License (OCVSAL) v1.0](LICENSE). Production use requires a commercial agreement. For commercial licensing, contact the Penn State Office of Technology Transfer at ottinfo@psu.edu.
+
 Evaluation scripts, frozen corpus, and result files for:
 
 > "Retrieval-Governed Context: Scope-Gated Selection of Instructions and Tools for LLMs and Intelligent Agents"
