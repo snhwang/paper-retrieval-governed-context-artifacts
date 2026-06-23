@@ -1,0 +1,547 @@
+{
+  "bge": {
+    "backend": "bge",
+    "n_standard_queries": 60,
+    "top_k": 10,
+    "bootstrap_iters": 10000,
+    "priority_weight_default": 0.3,
+    "threshold_default": 0.3,
+    "mandatory_tags_default": [
+      "safety"
+    ],
+    "rows": [
+      {
+        "condition": "full",
+        "label": "Full governance",
+        "n": 60,
+        "mean_f1": 0.78,
+        "ci_lo": 0.756,
+        "ci_hi": 0.806,
+        "delta_vs_full": 0.0,
+        "cohen_d_vs_full": 0.0,
+        "p_vs_full": null,
+        "notes": ""
+      },
+      {
+        "condition": "no_required_tags",
+        "label": "- required_tags",
+        "n": 60,
+        "mean_f1": 0.522,
+        "ci_lo": 0.501,
+        "ci_hi": 0.541,
+        "delta_vs_full": -0.258,
+        "cohen_d_vs_full": 1.91,
+        "p_vs_full": 0.0,
+        "notes": ""
+      },
+      {
+        "condition": "no_priority",
+        "label": "- priority weighting",
+        "n": 60,
+        "mean_f1": 0.778,
+        "ci_lo": 0.753,
+        "ci_hi": 0.804,
+        "delta_vs_full": -0.002,
+        "cohen_d_vs_full": 0.13,
+        "p_vs_full": 0.6335,
+        "notes": ""
+      },
+      {
+        "condition": "no_conflicts",
+        "label": "- conflict resolution",
+        "n": 60,
+        "mean_f1": 0.774,
+        "ci_lo": 0.75,
+        "ci_hi": 0.799,
+        "delta_vs_full": -0.006,
+        "cohen_d_vs_full": 0.32,
+        "p_vs_full": 0.0135,
+        "notes": ""
+      },
+      {
+        "condition": "no_mandatory",
+        "label": "- mandatory injection",
+        "n": 60,
+        "mean_f1": 0.418,
+        "ci_lo": 0.388,
+        "ci_hi": 0.45,
+        "delta_vs_full": -0.362,
+        "cohen_d_vs_full": 4.53,
+        "p_vs_full": 0.0,
+        "notes": ""
+      },
+      {
+        "condition": "no_governance",
+        "label": "No governance",
+        "n": 60,
+        "mean_f1": 0.162,
+        "ci_lo": 0.149,
+        "ci_hi": 0.177,
+        "delta_vs_full": -0.618,
+        "cohen_d_vs_full": 5.8,
+        "p_vs_full": 0.0,
+        "notes": ""
+      },
+      {
+        "condition": "itr_offshelf",
+        "label": "ITR library (off-the-shelf)",
+        "n": 60,
+        "mean_f1": 0.182,
+        "ci_lo": 0.162,
+        "ci_hi": 0.203,
+        "delta_vs_full": -0.598,
+        "cohen_d_vs_full": 4.72,
+        "p_vs_full": 0.0,
+        "notes": "Off-the-shelf `instruction-tool-retrieval` library. NOT a faithful re-implementation of the ITR paper's full pipeline."
+      }
+    ],
+    "adversarial_safety": {
+      "n_queries": 12,
+      "safety_ids": [
+        "constraint-no-aggression",
+        "safety-boundaries",
+        "safety-reasonable-response"
+      ],
+      "mandatory_on_recall": 1.0,
+      "mandatory_off_recall": 0.111,
+      "delta": 0.889
+    },
+    "_provenance": "Reconstructed from terminal output of full run on 2026-06-23 (10000 bootstrap iters; backend BGE smoke run identical at 0.780 full F1). Per-query arrays not stored in this reconstruction; re-run the script locally to regenerate per-query data."
+  },
+  "bge-m3": {
+    "backend": "bge-m3",
+    "n_standard_queries": 60,
+    "top_k": 10,
+    "bootstrap_iters": 10000,
+    "priority_weight_default": 0.3,
+    "threshold_default": 0.3,
+    "mandatory_tags_default": [
+      "safety"
+    ],
+    "rows": [
+      {
+        "condition": "full",
+        "label": "Full governance",
+        "n": 60,
+        "mean_f1": 0.796,
+        "ci_lo": 0.766,
+        "ci_hi": 0.825,
+        "delta_vs_full": 0.0,
+        "cohen_d_vs_full": 0.0,
+        "p_vs_full": null,
+        "notes": ""
+      },
+      {
+        "condition": "no_required_tags",
+        "label": "- required_tags",
+        "n": 60,
+        "mean_f1": 0.538,
+        "ci_lo": 0.521,
+        "ci_hi": 0.555,
+        "delta_vs_full": -0.258,
+        "cohen_d_vs_full": 1.91,
+        "p_vs_full": 0.0,
+        "notes": ""
+      },
+      {
+        "condition": "no_priority",
+        "label": "- priority weighting",
+        "n": 60,
+        "mean_f1": 0.798,
+        "ci_lo": 0.77,
+        "ci_hi": 0.826,
+        "delta_vs_full": 0.002,
+        "cohen_d_vs_full": -0.13,
+        "p_vs_full": 0.6317,
+        "notes": ""
+      },
+      {
+        "condition": "no_conflicts",
+        "label": "- conflict resolution",
+        "n": 60,
+        "mean_f1": 0.79,
+        "ci_lo": 0.761,
+        "ci_hi": 0.819,
+        "delta_vs_full": -0.005,
+        "cohen_d_vs_full": 0.22,
+        "p_vs_full": 0.0783,
+        "notes": ""
+      },
+      {
+        "condition": "no_mandatory",
+        "label": "- mandatory injection",
+        "n": 60,
+        "mean_f1": 0.42,
+        "ci_lo": 0.397,
+        "ci_hi": 0.444,
+        "delta_vs_full": -0.375,
+        "cohen_d_vs_full": 4.6,
+        "p_vs_full": 0.0,
+        "notes": ""
+      },
+      {
+        "condition": "no_governance",
+        "label": "No governance",
+        "n": 60,
+        "mean_f1": 0.171,
+        "ci_lo": 0.155,
+        "ci_hi": 0.187,
+        "delta_vs_full": -0.625,
+        "cohen_d_vs_full": 4.3,
+        "p_vs_full": 0.0,
+        "notes": ""
+      },
+      {
+        "condition": "itr_offshelf",
+        "label": "ITR library (off-the-shelf)",
+        "n": 60,
+        "mean_f1": 0.182,
+        "ci_lo": 0.162,
+        "ci_hi": 0.203,
+        "delta_vs_full": -0.614,
+        "cohen_d_vs_full": 4.03,
+        "p_vs_full": 0.0,
+        "notes": "Off-the-shelf `instruction-tool-retrieval` library. NOT a faithful re-implementation of the ITR paper's full pipeline."
+      }
+    ],
+    "adversarial_safety": {
+      "n_queries": 12,
+      "safety_ids": [
+        "constraint-no-aggression",
+        "safety-boundaries",
+        "safety-reasonable-response"
+      ],
+      "mandatory_on_recall": 1.0,
+      "mandatory_off_recall": 0.0,
+      "delta": 1.0
+    },
+    "_provenance": "Reconstructed from terminal output of full run on 2026-06-23 (10000 bootstrap iters; backend BGE smoke run identical at 0.780 full F1). Per-query arrays not stored in this reconstruction; re-run the script locally to regenerate per-query data."
+  },
+  "qwen3": {
+    "backend": "qwen3",
+    "n_standard_queries": 60,
+    "top_k": 10,
+    "bootstrap_iters": 10000,
+    "priority_weight_default": 0.3,
+    "threshold_default": 0.3,
+    "mandatory_tags_default": [
+      "safety"
+    ],
+    "rows": [
+      {
+        "condition": "full",
+        "label": "Full governance",
+        "n": 60,
+        "mean_f1": 0.754,
+        "ci_lo": 0.726,
+        "ci_hi": 0.782,
+        "delta_vs_full": 0.0,
+        "cohen_d_vs_full": 0.0,
+        "p_vs_full": null,
+        "notes": ""
+      },
+      {
+        "condition": "no_required_tags",
+        "label": "- required_tags",
+        "n": 60,
+        "mean_f1": 0.518,
+        "ci_lo": 0.495,
+        "ci_hi": 0.54,
+        "delta_vs_full": -0.236,
+        "cohen_d_vs_full": 1.5,
+        "p_vs_full": 0.0,
+        "notes": ""
+      },
+      {
+        "condition": "no_priority",
+        "label": "- priority weighting",
+        "n": 60,
+        "mean_f1": 0.754,
+        "ci_lo": 0.727,
+        "ci_hi": 0.781,
+        "delta_vs_full": 0.0,
+        "cohen_d_vs_full": -0.0,
+        "p_vs_full": 1.0,
+        "notes": ""
+      },
+      {
+        "condition": "no_conflicts",
+        "label": "- conflict resolution",
+        "n": 60,
+        "mean_f1": 0.749,
+        "ci_lo": 0.722,
+        "ci_hi": 0.775,
+        "delta_vs_full": -0.005,
+        "cohen_d_vs_full": 0.22,
+        "p_vs_full": 0.0812,
+        "notes": ""
+      },
+      {
+        "condition": "no_mandatory",
+        "label": "- mandatory injection",
+        "n": 60,
+        "mean_f1": 0.461,
+        "ci_lo": 0.431,
+        "ci_hi": 0.492,
+        "delta_vs_full": -0.293,
+        "cohen_d_vs_full": 2.69,
+        "p_vs_full": 0.0,
+        "notes": ""
+      },
+      {
+        "condition": "no_governance",
+        "label": "No governance",
+        "n": 60,
+        "mean_f1": 0.199,
+        "ci_lo": 0.182,
+        "ci_hi": 0.217,
+        "delta_vs_full": -0.555,
+        "cohen_d_vs_full": 3.96,
+        "p_vs_full": 0.0,
+        "notes": ""
+      },
+      {
+        "condition": "itr_offshelf",
+        "label": "ITR library (off-the-shelf)",
+        "n": 60,
+        "mean_f1": 0.182,
+        "ci_lo": 0.162,
+        "ci_hi": 0.203,
+        "delta_vs_full": -0.572,
+        "cohen_d_vs_full": 4.1,
+        "p_vs_full": 0.0,
+        "notes": "Off-the-shelf `instruction-tool-retrieval` library. NOT a faithful re-implementation of the ITR paper's full pipeline."
+      }
+    ],
+    "adversarial_safety": {
+      "n_queries": 12,
+      "safety_ids": [
+        "constraint-no-aggression",
+        "safety-boundaries",
+        "safety-reasonable-response"
+      ],
+      "mandatory_on_recall": 1.0,
+      "mandatory_off_recall": 0.528,
+      "delta": 0.472
+    },
+    "_provenance": "Reconstructed from terminal output of full run on 2026-06-23 (10000 bootstrap iters; backend BGE smoke run identical at 0.780 full F1). Per-query arrays not stored in this reconstruction; re-run the script locally to regenerate per-query data."
+  },
+  "qwen3-4b": {
+    "backend": "qwen3-4b",
+    "n_standard_queries": 60,
+    "top_k": 10,
+    "bootstrap_iters": 10000,
+    "priority_weight_default": 0.3,
+    "threshold_default": 0.3,
+    "mandatory_tags_default": [
+      "safety"
+    ],
+    "rows": [
+      {
+        "condition": "full",
+        "label": "Full governance",
+        "n": 60,
+        "mean_f1": 0.786,
+        "ci_lo": 0.753,
+        "ci_hi": 0.818,
+        "delta_vs_full": 0.0,
+        "cohen_d_vs_full": 0.0,
+        "p_vs_full": null,
+        "notes": ""
+      },
+      {
+        "condition": "no_required_tags",
+        "label": "- required_tags",
+        "n": 60,
+        "mean_f1": 0.54,
+        "ci_lo": 0.518,
+        "ci_hi": 0.561,
+        "delta_vs_full": -0.246,
+        "cohen_d_vs_full": 1.56,
+        "p_vs_full": 0.0,
+        "notes": ""
+      },
+      {
+        "condition": "no_priority",
+        "label": "- priority weighting",
+        "n": 60,
+        "mean_f1": 0.783,
+        "ci_lo": 0.749,
+        "ci_hi": 0.817,
+        "delta_vs_full": -0.002,
+        "cohen_d_vs_full": 0.13,
+        "p_vs_full": 0.0807,
+        "notes": ""
+      },
+      {
+        "condition": "no_conflicts",
+        "label": "- conflict resolution",
+        "n": 60,
+        "mean_f1": 0.78,
+        "ci_lo": 0.748,
+        "ci_hi": 0.812,
+        "delta_vs_full": -0.005,
+        "cohen_d_vs_full": 0.22,
+        "p_vs_full": 0.091,
+        "notes": ""
+      },
+      {
+        "condition": "no_mandatory",
+        "label": "- mandatory injection",
+        "n": 60,
+        "mean_f1": 0.49,
+        "ci_lo": 0.457,
+        "ci_hi": 0.523,
+        "delta_vs_full": -0.296,
+        "cohen_d_vs_full": 2.28,
+        "p_vs_full": 0.0,
+        "notes": ""
+      },
+      {
+        "condition": "no_governance",
+        "label": "No governance",
+        "n": 60,
+        "mean_f1": 0.219,
+        "ci_lo": 0.203,
+        "ci_hi": 0.235,
+        "delta_vs_full": -0.566,
+        "cohen_d_vs_full": 3.73,
+        "p_vs_full": 0.0,
+        "notes": ""
+      },
+      {
+        "condition": "itr_offshelf",
+        "label": "ITR library (off-the-shelf)",
+        "n": 60,
+        "mean_f1": 0.182,
+        "ci_lo": 0.162,
+        "ci_hi": 0.203,
+        "delta_vs_full": -0.604,
+        "cohen_d_vs_full": 3.64,
+        "p_vs_full": 0.0,
+        "notes": "Off-the-shelf `instruction-tool-retrieval` library. NOT a faithful re-implementation of the ITR paper's full pipeline."
+      }
+    ],
+    "adversarial_safety": {
+      "n_queries": 12,
+      "safety_ids": [
+        "constraint-no-aggression",
+        "safety-boundaries",
+        "safety-reasonable-response"
+      ],
+      "mandatory_on_recall": 1.0,
+      "mandatory_off_recall": 0.333,
+      "delta": 0.667
+    },
+    "_provenance": "Reconstructed from terminal output of full run on 2026-06-23 (10000 bootstrap iters; backend BGE smoke run identical at 0.780 full F1). Per-query arrays not stored in this reconstruction; re-run the script locally to regenerate per-query data."
+  },
+  "bm25": {
+    "backend": "bm25",
+    "n_standard_queries": 60,
+    "top_k": 10,
+    "bootstrap_iters": 10000,
+    "priority_weight_default": 0.3,
+    "threshold_default": 0.3,
+    "mandatory_tags_default": [
+      "safety"
+    ],
+    "rows": [
+      {
+        "condition": "full",
+        "label": "Full governance",
+        "n": 60,
+        "mean_f1": 0.872,
+        "ci_lo": 0.835,
+        "ci_hi": 0.906,
+        "delta_vs_full": 0.0,
+        "cohen_d_vs_full": 0.0,
+        "p_vs_full": null,
+        "notes": ""
+      },
+      {
+        "condition": "no_required_tags",
+        "label": "- required_tags",
+        "n": 60,
+        "mean_f1": 0.478,
+        "ci_lo": 0.451,
+        "ci_hi": 0.504,
+        "delta_vs_full": -0.394,
+        "cohen_d_vs_full": 2.24,
+        "p_vs_full": 0.0,
+        "notes": ""
+      },
+      {
+        "condition": "no_priority",
+        "label": "- priority weighting",
+        "n": 60,
+        "mean_f1": 0.876,
+        "ci_lo": 0.842,
+        "ci_hi": 0.908,
+        "delta_vs_full": 0.004,
+        "cohen_d_vs_full": -0.18,
+        "p_vs_full": 0.2776,
+        "notes": ""
+      },
+      {
+        "condition": "no_conflicts",
+        "label": "- conflict resolution",
+        "n": 60,
+        "mean_f1": 0.865,
+        "ci_lo": 0.83,
+        "ci_hi": 0.899,
+        "delta_vs_full": -0.006,
+        "cohen_d_vs_full": 0.23,
+        "p_vs_full": 0.0684,
+        "notes": ""
+      },
+      {
+        "condition": "no_mandatory",
+        "label": "- mandatory injection",
+        "n": 60,
+        "mean_f1": 0.641,
+        "ci_lo": 0.597,
+        "ci_hi": 0.684,
+        "delta_vs_full": -0.231,
+        "cohen_d_vs_full": 1.93,
+        "p_vs_full": 0.0,
+        "notes": ""
+      },
+      {
+        "condition": "no_governance",
+        "label": "No governance",
+        "n": 60,
+        "mean_f1": 0.204,
+        "ci_lo": 0.186,
+        "ci_hi": 0.224,
+        "delta_vs_full": -0.667,
+        "cohen_d_vs_full": 3.85,
+        "p_vs_full": 0.0,
+        "notes": ""
+      },
+      {
+        "condition": "itr_offshelf",
+        "label": "ITR library (off-the-shelf)",
+        "n": 60,
+        "mean_f1": 0.182,
+        "ci_lo": 0.162,
+        "ci_hi": 0.203,
+        "delta_vs_full": -0.69,
+        "cohen_d_vs_full": 3.96,
+        "p_vs_full": 0.0,
+        "notes": "Off-the-shelf `instruction-tool-retrieval` library. NOT a faithful re-implementation of the ITR paper's full pipeline."
+      }
+    ],
+    "adversarial_safety": {
+      "n_queries": 12,
+      "safety_ids": [
+        "constraint-no-aggression",
+        "safety-boundaries",
+        "safety-reasonable-response"
+      ],
+      "mandatory_on_recall": 1.0,
+      "mandatory_off_recall": 0.472,
+      "delta": 0.528
+    },
+    "_provenance": "Reconstructed from terminal output of full run on 2026-06-23 (10000 bootstrap iters; backend BGE smoke run identical at 0.780 full F1). Per-query arrays not stored in this reconstruction; re-run the script locally to regenerate per-query data."
+  }
+}

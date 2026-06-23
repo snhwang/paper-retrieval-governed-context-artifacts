@@ -1,0 +1,47 @@
+% Combined cross-backend decomposed governance ablation table.
+% Generated 2026-06-23 from results/governance_decomposed_all.json.
+% Source: evals/eval_governance_decomposed.py (commit ec659df).
+
+\begin{table}[t]
+  \caption{Decomposed governance ablation across backends (Pet Simulation,
+  60 standard queries, $k=10$, 95\% bootstrap CIs). Each row switches
+  off a single mechanism while the others remain active. Cohen's $d$
+  and paired $p$-values vs.\ Full governance are reported in the
+  per-backend JSON outputs.}
+  \label{tab:decomposed-ablation-multi}
+  \centering
+  \small
+  \setlength{\tabcolsep}{4pt}
+  \begin{tabular}{@{}l c c c c c @{}}
+    \toprule
+    Condition & bge & bge-m3 & qwen3 & qwen3-4b & bm25 \\
+    \midrule
+    Full governance & 0.780 [0.756,0.806] & 0.796 [0.766,0.825] & 0.754 [0.726,0.782] & 0.786 [0.753,0.818] & 0.872 [0.835,0.906] \\
+    - required\_tags & 0.522 [0.501,0.541] & 0.538 [0.521,0.555] & 0.518 [0.495,0.540] & 0.540 [0.518,0.561] & 0.478 [0.451,0.504] \\
+    - priority weighting & 0.778 [0.753,0.804] & 0.798 [0.770,0.826] & 0.754 [0.727,0.781] & 0.783 [0.749,0.817] & 0.876 [0.842,0.908] \\
+    - conflict resolution & 0.774 [0.750,0.799] & 0.790 [0.761,0.819] & 0.749 [0.722,0.775] & 0.780 [0.748,0.812] & 0.865 [0.830,0.899] \\
+    - mandatory injection & 0.418 [0.388,0.450] & 0.420 [0.397,0.444] & 0.461 [0.431,0.492] & 0.490 [0.457,0.523] & 0.641 [0.597,0.684] \\
+    No governance & 0.162 [0.149,0.177] & 0.171 [0.155,0.187] & 0.199 [0.182,0.217] & 0.219 [0.203,0.235] & 0.204 [0.186,0.224] \\
+    ITR library (off-the-shelf) & 0.182 [0.162,0.203] & 0.182 [0.162,0.203] & 0.182 [0.162,0.203] & 0.182 [0.162,0.203] & 0.182 [0.162,0.203] \\
+    \midrule
+    \multicolumn{6}{@{}l}{\emph{Adversarial-safety subset (n=12 queries)}} \\
+    Mandatory injection ON & 1.000 & 1.000 & 1.000 & 1.000 & 1.000 \\
+    Mandatory injection OFF & 0.111 & 0.000 & 0.528 & 0.333 & 0.472 \\
+    \bottomrule
+  \end{tabular}
+  \par\vspace{2pt}
+  \footnotesize\raggedright
+  \textit{Note on ITR row.} The ITR row uses the off-the-shelf
+  \texttt{instruction-tool-retrieval} library with default settings.
+  It is included as a reference point for what a practitioner obtains
+  from the released library, not as a faithful re-implementation of
+  the ITR paper's full pipeline, which includes confidence-gated
+  fallbacks, structured fragment types, and possibly fine-tuned
+  retrievers that we do not exercise. The ITR paper's own reported
+  numbers (95\% per-step context-token reduction, $+$32\% relative
+  tool-routing accuracy on the authors' internal controlled
+  benchmark~\citep{franko2025itr}) are not directly comparable to F1
+  on Pet Sim and are cited in the text. The ITR row is identical
+  across backend columns because ITR uses its own BGE-base encoder
+  regardless of the BEAR backend it is compared against.
+\end{table}
