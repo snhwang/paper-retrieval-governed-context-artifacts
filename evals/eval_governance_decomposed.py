@@ -494,27 +494,171 @@ def run_all(backend_key: str, output_path: Path | None) -> dict:
     return result
 
 
+# Default multi-backend list matching the manuscript's Table 12. MLX-only
+# variants (bge-m3-mlx, qwen3-mlx, qwen3-4b-mlx) are excluded by default
+# because they require Apple Silicon. The 'hash' backend is excluded by
+# default because it carries no semantic signal and is uninformative for
+# this ablation.
+DEFAULT_BACKENDS = ["bge", "bge-m3", "qwen3", "qwen3-4b", "bm25"]
+
+
+def render_combined_latex(per_backend: dict[str, dict]) -> str:
+    """Render a single LaTeX table comparing all backends side-by-side.
+
+    Rows = conditions; columns = backends. Reports Strict F1 with 95% CI.
+    """
+    backends = list(per_backend.keys())
+    if not backends:
+        return ""
+    first_rows = per_backend[backends[0]]["rows"]
+    condition_labels = [(r["condition"], r["label"]) for r in first_rows]
+
+    lines: list[str] = []
+    lines.append(r"\begin{table}[t]")
+    lines.append(
+        r"  \caption{Decomposed governance ablation across backends "
+        r"(Pet Simulation, 60 standard queries, $k=10$, 95\% bootstrap CIs). "
+        r"Each row switches off a single mechanism while the others remain active. "
+        r"Cohen's $d$ and paired $p$-values vs.\ Full governance are reported "
+        r"in the per-backend JSON outputs.}"
+    )
+    lines.append(r"  \label{tab:decomposed-ablation-multi}")
+    lines.append(r"  \centering")
+    lines.append(r"  \small")
+    lines.append(r"  \setlength{\tabcolsep}{4pt}")
+    col_spec = "l " + "c " * len(backends)
+    lines.append(r"  \begin{tabular}{@{}" + col_spec + r"@{}}")
+    lines.append(r"    \toprule")
+    header = "    Condition"
+    for b in backends:
+        header += f" & {b}"
+    header += r" \\"
+    lines.append(header)
+    lines.append(r"    \midrule")
+
+    for cond_key, cond_label in condition_labels:
+        cells = [cond_label.replace("_", r"\_")]
+        for b in backends:
+            rows = per_backend[b]["rows"]
+            row = next((r for r in rows if r["condition"] == cond_key), None)
+            if row is None:
+                cells.append("---")
+            else:
+                ci = f"{row['mean_f1']:.3f} [{row['ci_lo']:.3f},{row['ci_hi']:.3f}]"
+                cells.append(ci)
+        lines.append("    " + " & ".join(cells) + r" \\")
+
+    adv_rows = []
+    for b in backends:
+        adv = per_backend[b].get("adversarial_safety")
+        if adv is None or adv.get("n_queries", 0) == 0:
+            adv_rows.append(("---", "---"))
+        else:
+            adv_rows.append((
+                f"{adv['mandatory_on_recall']:.3f}",
+                f"{adv['mandatory_off_recall']:.3f}",
+            ))
+    if any(on != "---" for on, _ in adv_rows):
+        lines.append(r"    \midrule")
+        lines.append(
+            r"    \multicolumn{" + str(len(backends) + 1) +
+            r"}{@{}l}{\emph{Adversarial-safety subset (n=12 queries)}} \\"
+        )
+        on_cells = ["Mandatory injection ON"] + [on for on, _ in adv_rows]
+        off_cells = ["Mandatory injection OFF"] + [off for _, off in adv_rows]
+        lines.append("    " + " & ".join(on_cells) + r" \\")
+        lines.append("    " + " & ".join(off_cells) + r" \\")
+
+    lines.append(r"    \bottomrule")
+    lines.append(r"  \end{tabular}")
+    lines.append(r"  \par\vspace{2pt}")
+    lines.append(r"  \footnotesize\raggedright")
+    lines.append(
+        r"  \textit{Note on ITR row.} The ITR row uses the off-the-shelf "
+        r"\texttt{instruction-tool-retrieval} library with default settings. "
+        r"It is included as a reference point for what a practitioner obtains "
+        r"from the released library, not as a faithful re-implementation of "
+        r"the ITR paper's full pipeline, which includes confidence-gated "
+        r"fallbacks, structured fragment types, and possibly fine-tuned "
+        r"retrievers that we do not exercise. The ITR paper's own reported "
+        r"numbers (95\% per-step context-token reduction, $+$32\% relative "
+        r"tool-routing accuracy on the authors' internal controlled "
+        r"benchmark~\citep{franko2025itr}) are not directly comparable to F1 "
+        r"on Pet Sim and are cited in the text."
+    )
+    lines.append(r"\end{table}")
+    return "\n".join(lines)
+
+
 def parse_args() -> argparse.Namespace:
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument(
         "--backend",
-        default="bge",
+        default=None,
         choices=list(BACKEND_CONFIGS.keys()),
-        help="Embedding backend key from BACKEND_CONFIGS (default: bge).",
+        help=(
+            "Single embedding backend key. If omitted, --backends is used; "
+            "if both are omitted, runs the paper's default multi-backend set."
+        ),
+    )
+    p.add_argument(
+        "--backends",
+        nargs="+",
+        default=None,
+        choices=list(BACKEND_CONFIGS.keys()),
+        help=(
+            "List of backends to run. Defaults to the paper's main set: "
+            f"{' '.join(DEFAULT_BACKENDS)}."
+        ),
     )
     p.add_argument(
         "--output",
         type=Path,
-        default=Path("results/governance_decomposed.json"),
-        help="Output JSON path (default: results/governance_decomposed.json).",
+        default=None,
+        help=(
+            "Output JSON path. Single-backend default: "
+            "results/governance_decomposed.json. Multi-backend writes one "
+            "results/governance_decomposed_<backend>.json per backend, plus "
+            "a combined results/governance_decomposed_all.json."
+        ),
     )
     return p.parse_args()
 
 
 def main() -> None:
     args = parse_args()
+
+    if args.backend is not None:
+        backends = [args.backend]
+    elif args.backends is not None:
+        backends = args.backends
+    else:
+        backends = DEFAULT_BACKENDS
+
     t0 = time.time()
-    run_all(args.backend, args.output)
+    per_backend: dict[str, dict] = {}
+    for i, bk in enumerate(backends, 1):
+        print(f"\n{'#' * 70}")
+        print(f"#  Backend {i}/{len(backends)}: {bk}")
+        print(f"{'#' * 70}")
+        if len(backends) == 1 and args.output is not None:
+            out_path = args.output
+        else:
+            out_path = Path(f"results/governance_decomposed_{bk}.json")
+        result = run_all(bk, out_path)
+        per_backend[bk] = result
+
+    if len(backends) > 1:
+        combined_path = Path("results/governance_decomposed_all.json")
+        combined_path.parent.mkdir(parents=True, exist_ok=True)
+        with combined_path.open("w") as f:
+            json.dump(per_backend, f, indent=2)
+        print(f"\n=== Combined JSON written to {combined_path} ===\n")
+
+        print("\n=== COMBINED LaTeX TABLE (paste into manuscript) ===\n")
+        print(render_combined_latex(per_backend))
+        print()
+
     print(f"\nElapsed: {time.time() - t0:.1f}s")
 
 

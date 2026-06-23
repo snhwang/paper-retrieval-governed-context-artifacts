@@ -43,25 +43,33 @@ If `instruction-tool-retrieval` is not installed, the script prints a warning an
 
 ## How to run
 
-The default invocation uses BGE-base (`BAAI/bge-base-en-v1.5`), which is the default backend in the rest of the paper:
+**Default (multi-backend, recommended for the revision):**
 
 ```bash
 cd /path/to/paper-retrieval-governed-context-artifacts
 python evals/eval_governance_decomposed.py
 ```
 
-To reproduce with a different backend (any key from `BACKEND_CONFIGS` in `eval_retrieval_backends.py`):
+Runs the same five backends used elsewhere in the paper: `bge`, `bge-m3`, `qwen3` (0.6B), `qwen3-4b`, `bm25`. Writes one JSON per backend plus a combined `results/governance_decomposed_all.json`, and prints a single combined LaTeX table at the end suitable for paste into the manuscript.
+
+**Single backend (faster, for iteration):**
 
 ```bash
+python evals/eval_governance_decomposed.py --backend bge
 python evals/eval_governance_decomposed.py --backend bm25
 python evals/eval_governance_decomposed.py --backend qwen3-4b
-python evals/eval_governance_decomposed.py --backend bge-m3
 ```
 
-To write the JSON results elsewhere:
+**Custom backend list:**
 
 ```bash
-python evals/eval_governance_decomposed.py --output results/governance_decomposed_bge.json
+python evals/eval_governance_decomposed.py --backends bge bm25
+```
+
+**Custom output path (single-backend only):**
+
+```bash
+python evals/eval_governance_decomposed.py --backend bge --output results/governance_decomposed_bge.json
 ```
 
 ## What it prints
@@ -73,32 +81,44 @@ python evals/eval_governance_decomposed.py --output results/governance_decompose
 5. A ready-to-paste LaTeX `table` block — copy this into the manuscript at the location indicated in `revision-plan.md` Section E.9 (Section 4.8 "Decomposed Governance Ablation").
 6. JSON output written to `results/governance_decomposed.json` (or wherever you point `--output`).
 
-## Expected runtime
+## Expected runtime (per backend)
 
-- BGE-base: ~3 minutes (downloads BGE if first run)
-- BM25: ~30 seconds
+- BGE-base: ~2 minutes (downloads BGE if first run)
+- BGE-M3: ~3–4 minutes
+- Qwen3-0.6B: ~3 minutes
 - Qwen3-4B: ~6–10 minutes (largest model)
-- ITR row adds ~30 seconds on top of any of the above
+- BM25: ~30 seconds
+- ITR off-the-shelf row: adds ~30 seconds per backend run
 
-No GPU is required, but BGE/Qwen3 will use CUDA if available.
+**Default multi-backend run: ~15–20 minutes total.** No GPU is required, but BGE/Qwen3 will use CUDA if available.
 
 ## What you need to enter
 
-Nothing interactive — the script runs end-to-end. The only choice is `--backend`. For the manuscript table I recommend running BGE first (matches the rest of the paper) and including that as Table 14. If you want a sensitivity check that the conclusions are not backend-specific, also run BM25 and one Qwen3 variant and add a one-sentence note ("the same ordering of components holds for BM25 and Qwen3-4B").
+Nothing interactive — the script runs end-to-end. The default invocation runs all five backends in sequence and emits a combined LaTeX table at the end.
 
-## Sanity-check expectations
+If you'd rather see one backend's result quickly first, run `--backend bge` for a ~2-minute sanity check, then run the multi-backend default once you're confident it works.
 
-You should see roughly:
+## Sanity-check expectations (from the June 23 BGE run)
 
-- **Full governance:** F1 in the 0.75–0.85 range (matches the existing eval_retrieval_backends.py output for BGE).
-- **− required_tags:** large drop (Δ ≈ −0.25 to −0.40); should be the largest single decrement.
-- **− priority weighting:** small drop (Δ ≈ −0.03); the existing α-ablation in `eval_retrieval.py` shows the system is robust to α in [0.3, 0.7].
-- **− conflict resolution:** very small drop (Δ < 0.05); Pet Sim has few conflict_with edges.
-- **− mandatory injection:** very small drop on standard queries (Δ < 0.05) — this is the expected null result. The adversarial subset is where the mandatory effect shows up; expect safety-recall to drop from ~1.00 to ~0.10–0.25 when mandatory is off.
-- **No governance:** F1 should drop to ~0.10–0.20, matching panel (c) of the existing Table 12.
-- **ITR (off-the-shelf):** F1 in the 0.65–0.80 range based on the prior `eval_retrieval_backends.py` output.
+For the BGE backend on Pet Sim standard queries, the actual measured values are:
 
-If any of these are wildly off (e.g., full governance F1 < 0.5), something is wrong — most likely the Pet Sim corpus didn't load, the safety-id discovery failed, or a backend model didn't download. Inspect the startup output for clues.
+| Condition | F1 [95% CI] | Δ vs. full | Cohen's d | p |
+|---|---|---|---|---|
+| Full governance | 0.780 [0.756, 0.806] | — | — | — |
+| − required_tags | 0.522 [0.501, 0.541] | −0.258 | +1.91 | <0.0001 |
+| − priority weighting | 0.778 [0.753, 0.804] | −0.002 | +0.13 | 0.63 (n.s.) |
+| − conflict resolution | 0.774 [0.750, 0.799] | −0.006 | +0.32 | 0.01 |
+| − mandatory injection | **0.418** [0.388, 0.450] | **−0.362** | +4.53 | <0.0001 |
+| No governance | 0.162 [0.149, 0.177] | −0.618 | +5.80 | <0.0001 |
+| ITR (off-the-shelf) | 0.182 [0.162, 0.203] | −0.598 | +4.72 | <0.0001 |
+
+Key findings the multi-backend run is checking for robustness:
+
+1. **`required_tags` and mandatory injection are the two dominant mechanisms** — together they account for the entire governance effect.
+2. **Priority weighting and conflict resolution have minimal effect** on Pet Sim (likely because the corpus has few conflict edges and the default α=0.3 is close to the optimum).
+3. **ITR off-the-shelf ≈ no-governance BGE** — confirms that retrieval-without-governance is the right comparison point.
+
+If the BGE results above don't reproduce (e.g., full-governance F1 < 0.5), something is wrong — most likely the Pet Sim corpus didn't load, the safety-id discovery failed, or a backend model didn't download. Inspect the startup output for clues.
 
 ## How to share results
 
