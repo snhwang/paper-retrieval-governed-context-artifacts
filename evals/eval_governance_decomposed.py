@@ -56,7 +56,7 @@ from bear import (
     EmbeddingBackend,
 )
 from bear.models import ScopeCondition
-from eval_retrieval import TEST_QUERIES, compute_metrics, load_pet_sim_corpus
+from eval_retrieval import TEST_QUERIES, compute_metrics
 from eval_retrieval_backends import (
     BACKEND_CONFIGS,
     bootstrap_ci,
@@ -226,6 +226,21 @@ def discover_safety_ids(corpus: Corpus) -> set[str]:
 # ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
+
+
+def load_pet_sim_corpus() -> Corpus:
+    """Load the frozen Pet Sim corpus from the artifacts repo.
+
+    Matches the loading pattern used inline in eval_retrieval.py and
+    eval_governance_ablation.py: read every YAML file in
+    pet_sim/instructions/ via Corpus.from_directory.
+    """
+    instructions_dir = project_root / "pet_sim" / "instructions"
+    if not instructions_dir.exists():
+        raise FileNotFoundError(
+            f"Pet Sim instructions directory not found: {instructions_dir}"
+        )
+    return Corpus.from_directory(str(instructions_dir))
 
 
 def run_all(backend_key: str, output_path: Path | None) -> dict:
