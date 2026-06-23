@@ -215,10 +215,19 @@ def fmt_ci(mean: float, lo: float, hi: float) -> str:
 
 
 def discover_safety_ids(corpus: Corpus) -> set[str]:
-    """Find every instruction whose tags contain 'safety'."""
+    """Find every instruction whose tags contain 'safety'.
+
+    The Instruction model exposes two tag fields: a top-level ``tags``
+    list (set from the YAML's ``tags:`` key directly under the instruction)
+    and a nested ``scope.tags`` list (set from a ``scope: { tags: ... }``
+    block). Check both so this works regardless of which convention
+    the corpus uses.
+    """
     out = set()
     for inst in corpus:
-        if "safety" in inst.scope.tags:
+        top = list(getattr(inst, "tags", []) or [])
+        nested = list(getattr(getattr(inst, "scope", None), "tags", []) or [])
+        if "safety" in top or "safety" in nested:
             out.add(inst.id)
     return out
 
