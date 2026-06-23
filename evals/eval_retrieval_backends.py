@@ -136,7 +136,6 @@ BACKEND_CONFIGS = {
         "embedding_query_prefix": "Represent this sentence for retrieving relevant documents: ",
         "embedding_passage_prefix": "",
     },
-    },
     "hash": {
         "label": "BEAR + Hash",
         "short": "Hash",
