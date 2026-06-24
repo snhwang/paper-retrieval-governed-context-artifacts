@@ -1,17 +1,58 @@
 === ToolBench with LLM-inferred categories ===
 
 Loading ToolBench corpus and queries ...
-Corpus: 3225 APIs, 50 queries
+Corpus: 3225 APIs, 1100 queries
 Closed category vocabulary: 47 categories
 
-LLM cache: 1099 pre-computed classifications
+LLM cache: 75 pre-computed classifications
 
-Classifying 50 queries with anthropic claude-sonnet-4-6 ...
-  0 new LLM calls; 50 served from cache
-  Classification time: 0.0s
+Classifying 1100 queries with anthropic claude-sonnet-4-6 ...
+  Classified 25 new queries; cache saved
+  Classified 50 new queries; cache saved
+  Classified 75 new queries; cache saved
+  Classified 100 new queries; cache saved
+  Classified 125 new queries; cache saved
+  Classified 150 new queries; cache saved
+  Classified 175 new queries; cache saved
+  Classified 200 new queries; cache saved
+  Classified 225 new queries; cache saved
+  Classified 250 new queries; cache saved
+  Classified 275 new queries; cache saved
+  Classified 300 new queries; cache saved
+  Classified 325 new queries; cache saved
+  Classified 350 new queries; cache saved
+  Classified 375 new queries; cache saved
+  Classified 400 new queries; cache saved
+  Classified 425 new queries; cache saved
+  Classified 450 new queries; cache saved
+  Classified 475 new queries; cache saved
+  Classified 500 new queries; cache saved
+  Classified 525 new queries; cache saved
+  Classified 550 new queries; cache saved
+  Classified 575 new queries; cache saved
+  Classified 600 new queries; cache saved
+  Classified 625 new queries; cache saved
+  Classified 650 new queries; cache saved
+  Classified 675 new queries; cache saved
+  Classified 700 new queries; cache saved
+  Classified 725 new queries; cache saved
+  Classified 750 new queries; cache saved
+  Classified 775 new queries; cache saved
+  Classified 800 new queries; cache saved
+  Classified 825 new queries; cache saved
+  Classified 850 new queries; cache saved
+  Classified 875 new queries; cache saved
+  Classified 900 new queries; cache saved
+  Classified 925 new queries; cache saved
+  Classified 950 new queries; cache saved
+  Classified 975 new queries; cache saved
+  Classified 1000 new queries; cache saved
+  1024 new LLM calls; 76 served from cache
+  Classification time: 1322.6s
 
-Classifier top-1 accuracy vs. benchmark gold category: 0.600
+Classifier top-1 accuracy vs. benchmark gold category: 0.465
 
+  OOV classifications (no required_tags applied): 6
 
 Building retrievers and evaluating Recall@5 ...
   [1/3] BEAR + oracle categories (the manuscript number) ...
@@ -22,14 +63,14 @@ Building retrievers and evaluating Recall@5 ...
 
 Condition                           Recall@k                NDCG@k                  F1@k
 ----------------------------------------------------------------------------------------
-oracle                  0.593 [0.49,0.69]  0.567 [0.47,0.66]  0.357 [0.30,0.42]
-inferred                0.357 [0.25,0.47]  0.339 [0.23,0.45]  0.220 [0.15,0.29]
-no_governance           0.518 [0.41,0.62]  0.487 [0.38,0.58]  0.318 [0.26,0.38]
+oracle                  0.679 [0.66,0.70]  0.644 [0.62,0.66]  0.416 [0.40,0.43]
+inferred                0.335 [0.31,0.36]  0.321 [0.30,0.34]  0.205 [0.19,0.22]
+no_governance           0.574 [0.55,0.60]  0.545 [0.52,0.57]  0.351 [0.34,0.36]
 
 --- LaTeX table (paste into manuscript) ---
 
 \begin{table}[t]
-  \caption{ToolBench retrieval under three category-tag conditions (BGE-base backend, 50 queries, $k = 5$, 95\% bootstrap CIs). The ``oracle'' condition uses the benchmark's ground-truth category labels as \texttt{required\_tags} (the original manuscript condition). The ``inferred'' condition uses an LLM classifier (claude-sonnet-4-6) to infer the category from query text alone with no access to ground-truth labels (top-1 classifier accuracy = 0.600). The ``no governance'' condition strips all scope metadata.}
+  \caption{ToolBench retrieval under three category-tag conditions (BGE-base backend, 1100 queries, $k = 5$, 95\% bootstrap CIs). The ``oracle'' condition uses the benchmark's ground-truth category labels as \texttt{required\_tags} (the original manuscript condition). The ``inferred'' condition uses an LLM classifier (claude-sonnet-4-6) to infer the category from query text alone with no access to ground-truth labels (top-1 classifier accuracy = 0.465). The ``no governance'' condition strips all scope metadata.}
   \label{tab:toolbench-inferred}
   \centering
   \small
@@ -37,9 +78,9 @@ no_governance           0.518 [0.41,0.62]  0.487 [0.38,0.58]  0.318 [0.26,0.38]
     \toprule
     Condition & Recall@5 & NDCG@5 & F1@5 \\
     \midrule
-    Oracle categories & 0.593 [0.49,0.69] & 0.567 [0.47,0.66] & 0.357 [0.30,0.42] \\
-    LLM-inferred categories & 0.357 [0.25,0.47] & 0.339 [0.23,0.45] & 0.220 [0.15,0.29] \\
-    No governance & 0.518 [0.41,0.62] & 0.487 [0.38,0.58] & 0.318 [0.26,0.38] \\
+    Oracle categories & 0.679 [0.66,0.70] & 0.644 [0.62,0.66] & 0.416 [0.40,0.43] \\
+    LLM-inferred categories & 0.335 [0.31,0.36] & 0.321 [0.30,0.34] & 0.205 [0.19,0.22] \\
+    No governance & 0.574 [0.55,0.60] & 0.545 [0.52,0.57] & 0.351 [0.34,0.36] \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -48,25 +89,25 @@ Wrote /mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifac
 Wrote /mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts/results/toolbench_inferred_output.txt
 Cache: /mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts/results/toolbench_inferred_categories.json
 
-Elapsed: 77.5s
+Elapsed: 1459.4s
 
 === Reproducibility ===
-Timestamp (UTC): 2026-06-24T05:32:32Z
-Command line:    evals/eval_toolbench_inferred_categories.py --max-queries 50
+Timestamp (UTC): 2026-06-24T04:51:36Z
+Command line:    evals/eval_toolbench_inferred_categories.py
 Python:          3.12.3 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
-numpy:           2.2.6
+numpy:           2.3.5
 scipy:           1.17.1
 bear:            0.1.0
-git commit:      de422753ce3ceeaae2064110e3d81e6767799018
-git status:      DIRTY (6 files modified)
+git commit:      d14f1e8a405def270b1b9379c3003a00cb46e4b2
+git status:      DIRTY (4 files modified)
 git branch:      main
 
   provider: anthropic
   model: claude-sonnet-4-6
   top_k: 5
-  n_queries: 50
-  classifier_top1_accuracy: 0.6
-  n_new_llm_calls: 0
+  n_queries: 1100
+  classifier_top1_accuracy: 0.46545454545454545
+  n_new_llm_calls: 1024
 ===
 
 To commit these results to the artifacts repo:
