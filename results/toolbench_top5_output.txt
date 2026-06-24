@@ -1,0 +1,121 @@
+=== ToolBench with LLM-inferred categories ===
+
+Loading ToolBench corpus and queries ...
+Corpus: 3225 APIs, 1100 queries
+Closed category vocabulary: 47 categories
+
+LLM cache: 0 pre-computed classifications
+
+Classifying 1100 queries with anthropic claude-sonnet-4-6 ...
+  Classified 25 new queries; cache saved
+  Classified 50 new queries; cache saved
+  Classified 75 new queries; cache saved
+  Classified 100 new queries; cache saved
+  Classified 125 new queries; cache saved
+  Classified 150 new queries; cache saved
+  Classified 175 new queries; cache saved
+  Classified 200 new queries; cache saved
+  Classified 225 new queries; cache saved
+  Classified 250 new queries; cache saved
+  Classified 275 new queries; cache saved
+  Classified 300 new queries; cache saved
+  Classified 325 new queries; cache saved
+  Classified 350 new queries; cache saved
+  Classified 375 new queries; cache saved
+  Classified 400 new queries; cache saved
+  Classified 425 new queries; cache saved
+  Classified 450 new queries; cache saved
+  Classified 475 new queries; cache saved
+  Classified 500 new queries; cache saved
+  Classified 525 new queries; cache saved
+  Classified 550 new queries; cache saved
+  Classified 575 new queries; cache saved
+  Classified 600 new queries; cache saved
+  Classified 625 new queries; cache saved
+  Classified 650 new queries; cache saved
+  Classified 675 new queries; cache saved
+  Classified 700 new queries; cache saved
+  Classified 725 new queries; cache saved
+  Classified 750 new queries; cache saved
+  Classified 775 new queries; cache saved
+  Classified 800 new queries; cache saved
+  Classified 825 new queries; cache saved
+  Classified 850 new queries; cache saved
+  Classified 875 new queries; cache saved
+  Classified 900 new queries; cache saved
+  Classified 925 new queries; cache saved
+  Classified 950 new queries; cache saved
+  Classified 975 new queries; cache saved
+  Classified 1000 new queries; cache saved
+  Classified 1025 new queries; cache saved
+  Classified 1050 new queries; cache saved
+  Classified 1075 new queries; cache saved
+  1099 new LLM calls; 1 served from cache
+  Classification time: 1818.5s
+
+  OOV vocabulary items dropped during parsing: 98
+Classifier set-level accuracy (ground-truth in predicted set): 0.848
+Mean predicted-set size: 5.00 tags/query
+
+
+Building retrievers and evaluating Recall@5 ...
+  [1/3] BEAR + oracle categories (the manuscript number) ...
+  [2/3] BEAR + LLM-inferred categories (the new condition) ...
+  [3/3] BEAR with no governance (lower bound) ...
+
+--- Recall@5, NDCG@5, F1@5 ---
+
+Condition                           Recall@k                NDCG@k                  F1@k
+----------------------------------------------------------------------------------------
+oracle                  0.679 [0.66,0.70]  0.644 [0.62,0.66]  0.416 [0.40,0.43]
+inferred_top5           0.502 [0.48,0.53]  0.473 [0.45,0.50]  0.306 [0.29,0.32]
+no_governance           0.574 [0.55,0.60]  0.545 [0.52,0.57]  0.351 [0.34,0.36]
+
+--- LaTeX table (paste into manuscript) ---
+
+\begin{table}[t]
+  \caption{ToolBench retrieval under three category-tag conditions (BGE-base backend, 1100 queries, $k = 5$, 95\% bootstrap CIs). The ``oracle'' condition uses the benchmark's ground-truth category labels as \texttt{required\_tags} (the original manuscript condition). The ``LLM-inferred (top-5)'' condition asks claude-sonnet-4-6 to return the top 5 ranked categories from the closed vocabulary, with no access to ground-truth labels (set-level accuracy = 0.848, mean set size = 5.00 after dedup, hard-capped at 5). The ``no governance'' condition strips all scope metadata.}
+  \label{tab:toolbench-inferred-top5}
+  \centering
+  \small
+  \begin{tabular}{@{}l c c c@{}}
+    \toprule
+    Condition & Recall@5 & NDCG@5 & F1@5 \\
+    \midrule
+    Oracle categories & 0.679 [0.66,0.70] & 0.644 [0.62,0.66] & 0.416 [0.40,0.43] \\
+    LLM-inferred (top-5) & 0.502 [0.48,0.53] & 0.473 [0.45,0.50] & 0.306 [0.29,0.32] \\
+    No governance & 0.574 [0.55,0.60] & 0.545 [0.52,0.57] & 0.351 [0.34,0.36] \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Wrote /mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts/results/toolbench_top5_metrics.json
+Wrote /mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts/results/toolbench_top5_output.txt
+Cache: /mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts/results/toolbench_top5_categories.json
+
+Elapsed: 1950.9s
+
+=== Reproducibility ===
+Timestamp (UTC): 2026-06-24T06:53:48Z
+Command line:    evals/eval_toolbench_top5_categories.py
+Python:          3.12.3 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
+numpy:           2.2.6
+scipy:           1.17.1
+bear:            0.1.0
+git commit:      b252159a5c631745129c7f41c40ff0a297d6b676
+git status:      DIRTY (12 files modified)
+git branch:      main
+
+  provider: anthropic
+  model: claude-sonnet-4-6
+  top_k: 5
+  n_queries: 1100
+  classifier_setlevel_accuracy: 0.8481818181818181
+  mean_predicted_set_size: 4.999090909090909
+  n_new_llm_calls: 1099
+===
+
+To commit these results to the artifacts repo:
+  git add results/toolbench_top5_metrics.json \
+          results/toolbench_top5_output.txt \
+          results/toolbench_top5_categories.json

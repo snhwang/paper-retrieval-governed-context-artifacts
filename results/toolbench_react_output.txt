@@ -1,0 +1,9 @@
+=== ToolBench end-to-end with ReAct-style prompting ===
+
+Model: mistralai/Mistral-Nemo-Instruct-2407
+Base URL: http://127.0.0.1:8000/v1
+BEAR top-k: 5
+Monolithic cap: 200
+
+Loading ToolBench data ...
+Corpus: 3225 APIs, evaluating 1100 queries

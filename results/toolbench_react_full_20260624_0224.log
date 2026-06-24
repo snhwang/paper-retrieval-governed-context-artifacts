@@ -1,0 +1,98 @@
+=== ToolBench end-to-end with ReAct-style prompting ===
+
+Model: mistralai/Mistral-Nemo-Instruct-2407
+Base URL: http://127.0.0.1:8000/v1
+BEAR top-k: 5
+Monolithic cap: 200
+
+Loading ToolBench data ...
+Corpus: 3225 APIs, evaluating 1100 queries
+Batches:   0%|          | 0/101 [00:00<?, ?it/s]Batches:   1%|          | 1/101 [00:00<00:13,  7.23it/s]Batches:   2%|▏         | 2/101 [00:00<00:11,  8.54it/s]Batches:   4%|▍         | 4/101 [00:00<00:09, 10.05it/s]Batches:   6%|▌         | 6/101 [00:00<00:07, 11.92it/s]Batches:   8%|▊         | 8/101 [00:00<00:06, 13.80it/s]Batches:  11%|█         | 11/101 [00:00<00:05, 17.66it/s]Batches:  14%|█▍        | 14/101 [00:00<00:04, 20.62it/s]Batches:  17%|█▋        | 17/101 [00:01<00:03, 21.88it/s]Batches:  20%|█▉        | 20/101 [00:01<00:03, 24.04it/s]Batches:  24%|██▍       | 24/101 [00:01<00:02, 26.10it/s]Batches:  28%|██▊       | 28/101 [00:01<00:02, 29.00it/s]Batches:  32%|███▏      | 32/101 [00:01<00:02, 31.27it/s]Batches:  36%|███▌      | 36/101 [00:01<00:01, 33.23it/s]Batches:  41%|████      | 41/101 [00:01<00:01, 35.57it/s]Batches:  46%|████▌     | 46/101 [00:01<00:01, 37.21it/s]Batches:  50%|█████     | 51/101 [00:01<00:01, 40.13it/s]Batches:  55%|█████▌    | 56/101 [00:02<00:01, 42.14it/s]Batches:  60%|██████    | 61/101 [00:02<00:00, 44.05it/s]Batches:  65%|██████▌   | 66/101 [00:02<00:00, 44.61it/s]Batches:  71%|███████▏  | 72/101 [00:02<00:00, 46.64it/s]Batches:  77%|███████▋  | 78/101 [00:02<00:00, 49.54it/s]Batches:  83%|████████▎ | 84/101 [00:02<00:00, 50.57it/s]Batches:  90%|█████████ | 91/101 [00:02<00:00, 53.85it/s]Batches:  97%|█████████▋| 98/101 [00:02<00:00, 56.73it/s]Batches: 100%|██████████| 101/101 [00:02<00:00, 35.51it/s]
+Batches:   0%|          | 0/101 [00:00<?, ?it/s]Batches:   1%|          | 1/101 [00:00<00:10,  9.20it/s]Batches:   2%|▏         | 2/101 [00:00<00:10,  9.49it/s]Batches:   4%|▍         | 4/101 [00:00<00:08, 10.84it/s]Batches:   6%|▌         | 6/101 [00:00<00:07, 12.51it/s]Batches:   8%|▊         | 8/101 [00:00<00:06, 14.46it/s]Batches:  11%|█         | 11/101 [00:00<00:04, 18.18it/s]Batches:  14%|█▍        | 14/101 [00:00<00:04, 21.04it/s]Batches:  17%|█▋        | 17/101 [00:00<00:03, 22.13it/s]Batches:  20%|█▉        | 20/101 [00:01<00:03, 24.12it/s]Batches:  23%|██▎       | 23/101 [00:01<00:03, 25.66it/s]Batches:  27%|██▋       | 27/101 [00:01<00:02, 28.51it/s]Batches:  31%|███       | 31/101 [00:01<00:02, 31.42it/s]Batches:  35%|███▍      | 35/101 [00:01<00:01, 33.21it/s]Batches:  39%|███▊      | 39/101 [00:01<00:01, 34.91it/s]Batches:  44%|████▎     | 44/101 [00:01<00:01, 37.22it/s]Batches:  49%|████▊     | 49/101 [00:01<00:01, 40.68it/s]Batches:  53%|█████▎    | 54/101 [00:01<00:01, 42.05it/s]Batches:  58%|█████▊    | 59/101 [00:02<00:00, 43.92it/s]Batches:  63%|██████▎   | 64/101 [00:02<00:00, 44.33it/s]Batches:  69%|██████▉   | 70/101 [00:02<00:00, 46.34it/s]Batches:  75%|███████▌  | 76/101 [00:02<00:00, 48.11it/s]Batches:  81%|████████  | 82/101 [00:02<00:00, 50.16it/s]Batches:  88%|████████▊ | 89/101 [00:02<00:00, 53.43it/s]Batches:  95%|█████████▌| 96/101 [00:02<00:00, 55.71it/s]Batches: 100%|██████████| 101/101 [00:02<00:00, 36.10it/s]
+
+[Monolithic + ReAct] running 1100 queries ...
+  50/1100 done; acc-so-far = 0.000; ETA 0.0 min
+  100/1100 done; acc-so-far = 0.000; ETA 0.0 min
+  150/1100 done; acc-so-far = 0.000; ETA 0.0 min
+  200/1100 done; acc-so-far = 0.000; ETA 0.0 min
+  250/1100 done; acc-so-far = 0.000; ETA 0.0 min
+  300/1100 done; acc-so-far = 0.000; ETA 0.0 min
+  350/1100 done; acc-so-far = 0.000; ETA 0.0 min
+  400/1100 done; acc-so-far = 0.000; ETA 0.0 min
+  450/1100 done; acc-so-far = 0.000; ETA 0.0 min
+  500/1100 done; acc-so-far = 0.000; ETA 0.0 min
+  550/1100 done; acc-so-far = 0.000; ETA 0.0 min
+  600/1100 done; acc-so-far = 0.000; ETA 0.0 min
+  650/1100 done; acc-so-far = 0.000; ETA 0.0 min
+  700/1100 done; acc-so-far = 0.000; ETA 0.0 min
+  750/1100 done; acc-so-far = 0.000; ETA 0.0 min
+  800/1100 done; acc-so-far = 0.000; ETA 0.0 min
+  850/1100 done; acc-so-far = 0.000; ETA 0.0 min
+  900/1100 done; acc-so-far = 0.000; ETA 0.0 min
+  950/1100 done; acc-so-far = 0.000; ETA 0.0 min
+  1000/1100 done; acc-so-far = 0.000; ETA 0.0 min
+  1050/1100 done; acc-so-far = 0.000; ETA 0.0 min
+  1100/1100 done; acc-so-far = 0.000; ETA 0.0 min
+[Monolithic + ReAct] done; tool-acc = 0.000; elapsed 0.0 min
+
+[BEAR retrieval + ReAct] running 1100 queries ...
+  50/1100 done; acc-so-far = 0.000; ETA 0.2 min
+  100/1100 done; acc-so-far = 0.000; ETA 0.2 min
+  150/1100 done; acc-so-far = 0.000; ETA 0.2 min
+  200/1100 done; acc-so-far = 0.000; ETA 0.1 min
+  250/1100 done; acc-so-far = 0.000; ETA 0.1 min
+  300/1100 done; acc-so-far = 0.000; ETA 0.1 min
+  350/1100 done; acc-so-far = 0.000; ETA 0.1 min
+  400/1100 done; acc-so-far = 0.000; ETA 0.1 min
+  450/1100 done; acc-so-far = 0.000; ETA 0.1 min
+  500/1100 done; acc-so-far = 0.000; ETA 0.1 min
+  550/1100 done; acc-so-far = 0.000; ETA 0.1 min
+  600/1100 done; acc-so-far = 0.000; ETA 0.1 min
+  650/1100 done; acc-so-far = 0.000; ETA 0.1 min
+  700/1100 done; acc-so-far = 0.000; ETA 0.1 min
+  750/1100 done; acc-so-far = 0.000; ETA 0.1 min
+  800/1100 done; acc-so-far = 0.000; ETA 0.0 min
+  850/1100 done; acc-so-far = 0.000; ETA 0.0 min
+  900/1100 done; acc-so-far = 0.000; ETA 0.0 min
+  950/1100 done; acc-so-far = 0.000; ETA 0.0 min
+  1000/1100 done; acc-so-far = 0.000; ETA 0.0 min
+  1050/1100 done; acc-so-far = 0.000; ETA 0.0 min
+  1100/1100 done; acc-so-far = 0.000; ETA 0.0 min
+[BEAR retrieval + ReAct] done; tool-acc = 0.000; elapsed 0.2 min
+
+[BEAR retrieval + single-turn (reference)] running 1100 queries ...
+  50/1100 done; acc-so-far = 0.000; ETA 0.1 min
+  100/1100 done; acc-so-far = 0.000; ETA 0.1 min
+  150/1100 done; acc-so-far = 0.000; ETA 0.1 min
+  200/1100 done; acc-so-far = 0.000; ETA 0.1 min
+  250/1100 done; acc-so-far = 0.000; ETA 0.1 min
+  300/1100 done; acc-so-far = 0.000; ETA 0.1 min
+  350/1100 done; acc-so-far = 0.000; ETA 0.1 min
+  400/1100 done; acc-so-far = 0.000; ETA 0.1 min
+  450/1100 done; acc-so-far = 0.000; ETA 0.1 min
+  500/1100 done; acc-so-far = 0.000; ETA 0.1 min
+  550/1100 done; acc-so-far = 0.000; ETA 0.1 min
+  600/1100 done; acc-so-far = 0.000; ETA 0.1 min
+  650/1100 done; acc-so-far = 0.000; ETA 0.1 min
+  700/1100 done; acc-so-far = 0.000; ETA 0.1 min
+  750/1100 done; acc-so-far = 0.000; ETA 0.0 min
+  800/1100 done; acc-so-far = 0.000; ETA 0.0 min
+  850/1100 done; acc-so-far = 0.000; ETA 0.0 min
+  900/1100 done; acc-so-far = 0.000; ETA 0.0 min
+  950/1100 done; acc-so-far = 0.000; ETA 0.0 min
+  1000/1100 done; acc-so-far = 0.000; ETA 0.0 min
+  1050/1100 done; acc-so-far = 0.000; ETA 0.0 min
+  1100/1100 done; acc-so-far = 0.000; ETA 0.0 min
+[BEAR retrieval + single-turn (reference)] done; tool-acc = 0.000; elapsed 0.2 min
+
+--- Tool selection accuracy (1 if predicted tool matches any expected api_id) ---
+
+Condition                                 Tool Acc [95% CI]              n
+--------------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts/evals/eval_toolbench_react.py", line 534, in <module>
+    main()
+  File "/mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts/evals/eval_toolbench_react.py", line 459, in main
+    mean, lo, hi = bootstrap_ci(arr.astype(float), BOOTSTRAP_ITERS)
+    ^^^^^^^^^^^^
+ValueError: too many values to unpack (expected 3)

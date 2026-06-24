@@ -1,0 +1,18 @@
+=== ToolBench end-to-end with ReAct-style prompting ===
+
+Model: mistralai/Mistral-Nemo-Instruct-2407
+Base URL: http://127.0.0.1:8000/v1
+BEAR top-k: 5
+Monolithic cap: 200
+
+Loading ToolBench data ...
+Corpus: 3225 APIs, evaluating 1100 queries
+Traceback (most recent call last):
+  File "/mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts/evals/eval_toolbench_react.py", line 530, in <module>
+    main()
+  File "/mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts/evals/eval_toolbench_react.py", line 410, in main
+    retr_gov = build_retriever(corpus, backend="dense")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts/evals/eval_toolbench.py", line 605, in build_retriever
+    raise ValueError(f"Unknown backend: {backend}")
+ValueError: Unknown backend: dense
