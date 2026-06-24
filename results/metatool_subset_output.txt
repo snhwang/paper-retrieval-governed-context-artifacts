@@ -1,0 +1,65 @@
+=== MetaTool retained vs. excluded subset analysis ===
+
+Loaded 390 tools, 388 tag entries, 20614 queries
+Tools with empty tag list: 1
+Tools in plugin_info but missing from plugin_tags: 0
+
+Retained queries (target tool has non-empty tags): 10051
+Excluded queries (target tool has empty or missing tags): 10563
+
+Distinct ground-truth tools represented:
+  retained: 153
+  excluded: 46
+
+=== Per-property comparison (retained vs. excluded) ===
+
+Property                                                       retained mean   excluded mean     Welch p        MW p    Cohen d
+-------------------------------------------------------------------------------------------------------------------------------
+Query length (characters)                                            115.953         124.242     <0.0001     <0.0001     -0.110
+Query length (whitespace tokens)                                      19.573          20.315     <0.0001     <0.0001     -0.069
+Query-name lexical overlap (fraction of tool subtokens in query)           0.171           0.125     <0.0001     <0.0001     +0.170
+Ground-truth tool description length (characters)                    553.041           0.000     <0.0001     <0.0001     +0.728
+
+=== LaTeX table (paste into manuscript appendix) ===
+
+\begin{table}[t]
+  \caption{MetaTool retained vs.\ excluded subset comparison (retained: 10{,}051 queries whose ground-truth target tool received a non-empty LLM-generated tag list; excluded: 11{,}060 queries whose target tool had an empty or missing tag list). Welch's two-sample $t$-test and Mann-Whitney $U$ test reported. Cohen's $d$ is the standardized mean difference (retained $-$ excluded).}
+  \label{tab:metatool-subset}
+  \centering
+  \small
+  \setlength{\tabcolsep}{4pt}
+  \begin{tabular}{@{}l c c c c c@{}}
+    \toprule
+    Property & Retained mean & Excluded mean & Welch $p$ & MW $p$ & Cohen $d$ \\
+    \midrule
+    Query length (chars) & 115.953 & 124.242 & $<$0.0001 & $<$0.0001 & -0.110 \\
+    Query length (tokens) & 19.573 & 20.315 & $<$0.0001 & $<$0.0001 & -0.069 \\
+    Query--name lexical overlap & 0.171 & 0.125 & $<$0.0001 & $<$0.0001 & +0.170 \\
+    GT tool description length (chars) & 553.041 & 0.000 & $<$0.0001 & $<$0.0001 & +0.728 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Wrote /mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts/results/metatool_subset_analysis.json
+Wrote /mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts/results/metatool_subset_output.txt
+
+Elapsed: 0.2s
+
+=== Reproducibility ===
+Timestamp (UTC): 2026-06-24T03:48:09Z
+Command line:    evals/eval_metatool_subset_analysis.py
+Python:          3.12.3 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
+numpy:           2.3.5
+scipy:           1.17.1
+bear:            0.1.0
+git commit:      bd76018fbcfa26f1d8ca9858460ee50de04ba96c
+git status:      DIRTY (2 files modified)
+git branch:      main
+
+  n_retained_queries: 10051
+  n_excluded_queries: 10563
+===
+
+To commit these results:
+  git add results/metatool_subset_analysis.json \
+          results/metatool_subset_output.txt

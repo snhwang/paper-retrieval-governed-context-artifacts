@@ -1,0 +1,91 @@
+{
+  "n_retained_queries": 10051,
+  "n_excluded_queries": 10563,
+  "n_distinct_retained_tools": 153,
+  "n_distinct_excluded_tools": 46,
+  "n_total_tools": 390,
+  "n_tools_with_empty_tags": 1,
+  "n_tools_missing_from_tag_file": 0,
+  "comparisons": [
+    {
+      "property": "Query length (characters)",
+      "retained": {
+        "n": 10051,
+        "mean": 115.95264152820614,
+        "std": 72.94354489621826,
+        "median": 96.0
+      },
+      "excluded": {
+        "n": 10563,
+        "mean": 124.24235539146076,
+        "std": 77.3442981932038,
+        "median": 103.0
+      },
+      "welch_t": -7.919404611652689,
+      "welch_p": 2.506666369749918e-15,
+      "mannwhitney_u": 49601567.0,
+      "mannwhitney_p": 3.485162455876182e-16,
+      "cohen_d": -0.11019050692220976
+    },
+    {
+      "property": "Query length (whitespace tokens)",
+      "retained": {
+        "n": 10051,
+        "mean": 19.572679335389513,
+        "std": 10.608180724475528,
+        "median": 17.0
+      },
+      "excluded": {
+        "n": 10563,
+        "mean": 20.31458865852504,
+        "std": 11.006434665305218,
+        "median": 18.0
+      },
+      "welch_t": -4.928054686729642,
+      "welch_p": 8.369676408453298e-07,
+      "mannwhitney_u": 51015829.0,
+      "mannwhitney_p": 1.2535903493456788e-06,
+      "cohen_d": -0.06860582574487965
+    },
+    {
+      "property": "Query-name lexical overlap (fraction of tool subtokens in query)",
+      "retained": {
+        "n": 10051,
+        "mean": 0.1709585873947629,
+        "std": 0.31556434457976185,
+        "median": 0.0
+      },
+      "excluded": {
+        "n": 10563,
+        "mean": 0.12507494714254155,
+        "std": 0.21586651909932583,
+        "median": 0.0
+      },
+      "welch_t": 12.12554078928369,
+      "welch_p": 1.0529537262100284e-33,
+      "mannwhitney_u": 54575226.5,
+      "mannwhitney_p": 6.355535555938521e-06,
+      "cohen_d": 0.17048804555180755
+    },
+    {
+      "property": "Ground-truth tool description length (characters)",
+      "retained": {
+        "n": 10051,
+        "mean": 553.0410904387624,
+        "std": 1088.3262067694861,
+        "median": 157.0
+      },
+      "excluded": {
+        "n": 10563,
+        "mean": 0.0,
+        "std": 0.0,
+        "median": 0.0
+      },
+      "welch_t": 50.94516223778661,
+      "welch_p": 0.0,
+      "mannwhitney_u": 106168713.0,
+      "mannwhitney_p": 0.0,
+      "cohen_d": 0.7277384964106296
+    }
+  ]
+}
