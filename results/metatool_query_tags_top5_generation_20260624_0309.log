@@ -187,3 +187,96 @@ Total queries to tag: 21111
   [15400/21111] I need to find a software package for graphic design, can yo → ['image', 'shopping', 'developer', 'productivity', 'search']
   [15500/21111] Are there any nonprofits that I can support in my community? → ['location', 'search', 'knowledge', 'business', 'communication']
   Saved 15500 queries
+  [15600/21111] I want to buy a startup that specializes in artificial intel → ['business', 'finance', 'shopping', 'search', 'knowledge']
+  [15700/21111] I need a summary of a YouTube video. Can you generate that f → ['entertainment', 'productivity', 'knowledge', 'education', 'communication']
+  [15800/21111] Can you tell me the ticket prices for the upcoming basketbal → ['entertainment', 'shopping', 'location', 'search', 'data']
+  [15900/21111] Can you review my website's structure and suggest any improv → ['developer', 'business', 'data', 'knowledge', 'productivity']
+  [16000/21111] I need a professional, user-friendly and visually appealing  → ['business', 'image', 'productivity', 'communication', 'developer']
+  Saved 16000 queries
+  [16100/21111] This YouTube video is just dragging on and on. I need a quic → ['entertainment', 'productivity', 'knowledge', 'education', 'communication']
+  [16200/21111] I can't believe my boss just fired me. What does my horoscop → ['knowledge', 'health', 'news', 'communication', 'education']
+  [16300/21111] I'm planning to buy a new laptop. Can you find any coupon co → ['shopping', 'search', 'finance', 'productivity', 'developer']
+  [16400/21111] Can you help me find out if any lawmakers have been involved → ['news', 'knowledge', 'business', 'data', 'search']
+  [16500/21111] I want to know the risk metrics of the S&P 500 ETF. → ['finance', 'data', 'knowledge', 'business', 'search']
+  Saved 16500 queries
+  [16600/21111] I'm planning to travel to a foreign country and I need to le → ['education', 'travel', 'communication', 'knowledge', 'search']
+  [16700/21111] Can you help me create a curriculum for learning Python prog → ['education', 'developer', 'knowledge', 'productivity', 'data']
+  [16800/21111] I'm actively searching for job openings in various countries → ['business', 'search', 'location', 'communication', 'productivity']
+  [16900/21111] Woohoo! I'm ready to kickstart my career as a graphic design → ['business', 'location', 'image', 'search', 'communication']
+  [17000/21111] Could you suggest some affordable gift options, preferably u → ['shopping', 'business', 'finance', 'knowledge', 'entertainment']
+  Saved 17000 queries
+  [17100/21111] Can you show me the famous "Pillars of Creation" image taken → ['image', 'science', 'knowledge', 'search', 'education']
+  [17200/21111] I need a spacious and fully furnished holiday rental accommo → ['travel', 'location', 'search', 'food', 'entertainment']
+  [17300/21111] I'm looking for a way to generate a highly realistic and vis → ['image', 'science', 'knowledge', 'education', 'entertainment']
+  [17400/21111] I'm currently browsing and actively searching for new apartm → ['business', 'location', 'search', 'shopping', 'travel']
+  [17500/21111] I'm starting a new online magazine and need a domain. Check  → ['business', 'shopping', 'developer', 'search', 'communication']
+  Saved 17500 queries
+  [17600/21111] Can you tell me what are the topics discussed in this ML pap → ['science', 'knowledge', 'education', 'data', 'search']
+  [17700/21111] Could you elaborate on how blockchain technology operates be → ['finance', 'knowledge', 'developer', 'education', 'science']
+  [17800/21111] How do I communicate with someone who speaks a different lan → ['communication', 'education', 'knowledge', 'travel', 'search']
+  [17900/21111] I'm looking for research papers that explain the effects of  → ['science', 'health', 'education', 'knowledge', 'search']
+  [18000/21111] I can't find the product I'm looking for, can you help me wi → ['shopping', 'search', 'location', 'communication', 'productivity']
+  Saved 18000 queries
+  [18100/21111] I want to analyze the dividend yield and price-to-earnings r → ['finance', 'data', 'business', 'knowledge', 'search']
+  [18200/21111] Could you fetch the content of an article from The Guardian  → ['news', 'search', 'knowledge', 'communication', 'education']
+  [18300/21111] Please provide me with the specific names of "Game X" and "G → ['entertainment', 'data', 'shopping', 'knowledge', 'search']
+  [18400/21111] This is so frustrating! I was looking forward to the comedy  → ['entertainment', 'shopping', 'search', 'location', 'travel']
+  [18500/21111] How can I search for code snippets for implementing a binary → ['developer', 'education', 'knowledge', 'search', 'data']
+  Saved 18500 queries
+  [18600/21111] My team is not scoring enough points! Can you suggest some c → ['entertainment', 'data', 'business', 'productivity', 'knowledge']
+  [18700/21111] Please help me craft the perfect prompt. → ['productivity', 'education', 'developer', 'communication', 'knowledge']
+  [18800/21111] I'm curious about the halftime scores of all the matches inv → ['entertainment', 'data', 'news', 'knowledge', 'search']
+  [18900/21111] What is the diversity score of stock ABC? → ['finance', 'data', 'business', 'knowledge', 'search']
+  [19000/21111] I need some recommendations for a good TV show to watch toni → ['entertainment', 'search', 'knowledge', 'communication', 'education']
+  Saved 19000 queries
+  [19100/21111] Can you suggest a comprehensive and beginner-friendly online → ['education', 'knowledge', 'image', 'productivity', 'business']
+  [19200/21111] Hi there! I'm curious to know the current health risk levels → ['health', 'business', 'news', 'knowledge', 'data']
+  [19300/21111] Hi there! I want to explore job openings for data scientists → ['business', 'data', 'location', 'search', 'knowledge']
+  [19400/21111] Please set a reminder for my doctor's appointment next Monda → ['productivity', 'health', 'communication', 'education', 'business']
+  [19500/21111] Will it rain in Tokyo next Tuesday? → ['weather', 'travel', 'location', 'knowledge', 'search']
+  Saved 19500 queries
+  [19600/21111] I'm angry! The online classes I've found so far are not up t → ['education', 'search', 'knowledge', 'communication', 'productivity']
+  [19700/21111] Is it possible to create a website in 60 seconds using AI? → ['developer', 'knowledge', 'education', 'productivity', 'business']
+  [19800/21111] Can this tool help me in generating a creative visual advert → []
+  [19900/21111] Can you help me come up with a creative car sales ad targeti → ['business', 'shopping', 'communication', 'travel', 'location']
+  [20000/21111] Is there any advice in Hadith for those dealing with hardshi → ['knowledge', 'education', 'health', 'search', 'communication']
+  Saved 20000 queries
+  [20100/21111] What was the most debated proposed legislation involving env → ['news', 'knowledge', 'science', 'data', 'search']
+  [20200/21111] What metadata can I get from videos from Daily Motion? → ['developer', 'data', 'entertainment', 'knowledge', 'search']
+  [20300/21111] I am unsure of the result. Can I use your cribbage scoring t → ['entertainment', 'knowledge', 'education', 'data', 'productivity']
+  [20400/21111] Can you suggest some easy dinner recipes? → ['food', 'education', 'health', 'shopping', 'search']
+  [20500/21111] HeyGen, could you generate a video with an avatar presenting → ['image', 'business', 'communication', 'productivity', 'entertainment']
+  Saved 20500 queries
+  [20600/21111] I'm frustrated with the job search in Germany. → ['business', 'location', 'knowledge', 'communication', 'education']
+  [20700/21111] I need information on the latest research in artificial inte → ['science', 'knowledge', 'education', 'news', 'search']
+  [20800/21111] I'm interested in the history of Samsung, can you provide so → ['knowledge', 'business', 'search', 'news', 'education']
+  [20900/21111] I need help finding a strategy game that is suitable for beg → ['entertainment', 'shopping', 'knowledge', 'search', 'education']
+  [21000/21111] Can you tell me who was my last CLINQ call with? → ['communication', 'productivity', 'business', 'data', 'search']
+  Saved 21000 queries
+  [21100/21111] This is ridiculous! I need to find a clinical trial ASAP and → ['health', 'science', 'search', 'knowledge', 'data']
+
+Done: 20596/21111 queries tagged
+Errors: 2
+Output: /mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts/evals/data/external_benchmarks/metatool/query_tags_top5.json
+
+Query tag distribution:
+  knowledge: 14659
+  search: 11834
+  education: 8644
+  data: 8268
+  business: 7772
+  productivity: 6731
+  communication: 5827
+  entertainment: 5212
+  location: 4574
+  developer: 4266
+  shopping: 4179
+  news: 3817
+  finance: 3306
+  travel: 3152
+  science: 2700
+  image: 2629
+  health: 2149
+  food: 1602
+  weather: 988
+  security: 638
