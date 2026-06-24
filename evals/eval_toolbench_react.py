@@ -234,49 +234,85 @@ def _derive_function_name(raw_name: str, used: dict) -> str:
     return s
 
 
+def _extract_function_schema(inst_or_scored):
+    """Return the OpenAI function-schema dict from an instruction, or None.
+
+    ToolBench corpora come in two action shapes depending on the loader.
+
+      (a) toolbench_setup.py:
+          actions = {'function': {'name': ..., 'description': ...,
+                                  'parameters': ...}}
+
+      (b) eval_toolbench_e2e.py's older loader:
+          actions = {func_name: {'name': func_name, 'description': ...,
+                                  'parameters': ...}}
+
+    We handle both. Returns None when the instruction carries no schema.
+    """
+    actions = getattr(inst_or_scored, "actions", None) or {}
+    if not actions:
+        return None
+    schema = actions.get("function")
+    if isinstance(schema, dict):
+        return schema
+    first = next(iter(actions.values()), None)
+    if isinstance(first, dict):
+        return first
+    return None
+
+
+def _schema_to_openai_tool(schema, fallback_name, name_map):
+    """Convert an extracted function-schema dict to an OpenAI tool entry.
+
+    Sanitises the name to satisfy Mistral's validator. fallback_name is
+    used when the schema lacks a name field.
+    """
+    raw_name = schema.get("name") or fallback_name
+    name = _derive_function_name(raw_name, name_map)
+    desc = schema.get("description") or ""
+    params = schema.get("parameters") or {
+        "type": "object",
+        "properties": {
+            "query": {"type": "string", "description": "Query string"}
+        },
+        "required": [],
+    }
+    return {"name": name, "description": desc, "parameters": params}
+
+
 def build_tool_schemas_for_query(
     retrieved: list,
     name_map: dict,
 ) -> list[dict]:
-    """Build OpenAI-compatible function schemas from BEAR retrieval results."""
+    """Build OpenAI-compatible function schemas from BEAR retrieval results.
+
+    Instructions without an OpenAI schema are skipped.
+    """
     out = []
     for r in retrieved:
-        actions = getattr(r, "actions", None) or {}
-        raw_name = actions.get("function") or r.id
-        name = _derive_function_name(raw_name, name_map)
-        desc = actions.get("description") or ""
-        # Use a permissive parameters block (matches eval_toolbench_e2e)
-        params = actions.get("parameters") or {
-            "type": "object",
-            "properties": {
-                "query": {"type": "string", "description": "Query string"}
-            },
-            "required": [],
-        }
-        out.append({"name": name, "description": desc, "parameters": params})
+        schema = _extract_function_schema(r)
+        if schema is None:
+            continue
+        out.append(_schema_to_openai_tool(schema, r.id, name_map))
     return out
 
 
 def build_monolithic_schemas(
     corpus, max_tools: int, name_map: dict
 ) -> list[dict]:
-    """Build the monolithic tool list (no retrieval)."""
+    """Build the monolithic tool list (no retrieval).
+
+    Skips instructions without an OpenAI schema. The cap reflects valid
+    tools emitted, not positions walked in the corpus.
+    """
     schemas = []
     for inst in corpus:
         if len(schemas) >= max_tools:
             break
-        actions = getattr(inst, "actions", None) or {}
-        raw_name = actions.get("function") or inst.id
-        name = _derive_function_name(raw_name, name_map)
-        desc = actions.get("description") or ""
-        params = actions.get("parameters") or {
-            "type": "object",
-            "properties": {
-                "query": {"type": "string", "description": "Query string"}
-            },
-            "required": [],
-        }
-        schemas.append({"name": name, "description": desc, "parameters": params})
+        schema = _extract_function_schema(inst)
+        if schema is None:
+            continue
+        schemas.append(_schema_to_openai_tool(schema, inst.id, name_map))
     return schemas
 
 
@@ -301,11 +337,18 @@ def tool_correct(
 
 
 def build_id_to_function(corpus, name_map: dict) -> dict[str, str]:
-    """Map api_id -> sanitized function name (mirrors how schemas are built)."""
+    """Map api_id -> sanitized function name (mirrors how schemas are built).
+
+    Walks the corpus the same way build_*_schemas() does, so the sanitized
+    names produced here exactly match the names the LLM sees. Instructions
+    without a schema are mapped to the sanitized form of their api_id; this
+    keeps tool_correct() safe when the model emits the raw id even though
+    no schema was offered.
+    """
     out = {}
     for inst in corpus:
-        actions = getattr(inst, "actions", None) or {}
-        raw_name = actions.get("function") or inst.id
+        schema = _extract_function_schema(inst)
+        raw_name = (schema.get("name") if schema else None) or inst.id
         out[inst.id] = _derive_function_name(raw_name, name_map)
     return out
 
@@ -323,28 +366,62 @@ def run_condition(
     base_url: str,
     use_react: bool,
     id_to_function: dict[str, str],
-) -> np.ndarray:
+    debug_dump_n: int = 0,
+    debug_dump_path = None,
+):
     """Run one condition end-to-end. ``schemas_per_query_fn`` is a callable
     returning the tool schemas to pass for each query.
+
+    When ``debug_dump_n > 0``, saves the first N (qtext, schemas, raw,
+    pred, expected) tuples to ``debug_dump_path`` so failures can be
+    inspected without rerunning the full eval. Returns (correct, dump_rows).
     """
     print(f"\n[{name}] running {len(queries)} queries ...")
     correct = np.zeros(len(queries), dtype=int)
+    dump_rows = []
     t0 = time.time()
     for i, (qtext, _ctx_tags, expected, _api_details) in enumerate(queries):
         schemas = schemas_per_query_fn(qtext, expected)
         if use_react:
-            pred, _raw = call_llm_react(qtext, schemas, model, base_url)
+            pred, raw = call_llm_react(qtext, schemas, model, base_url)
         else:
-            # Lazy import to avoid a hard dependency
             from eval_toolbench_e2e import call_llm_with_tools
             tc = call_llm_with_tools(qtext, schemas, model, base_url)
             pred = tc["name"] if tc else None
+            raw = json.dumps(tc) if tc else "<no tool call>"
         correct[i] = tool_correct(pred, expected, id_to_function)
+        if i < debug_dump_n:
+            dump_rows.append({
+                "condition": name,
+                "index": i,
+                "query": qtext,
+                "n_schemas_offered": len(schemas),
+                "first_few_schema_names": [s["name"] for s in schemas[:5]],
+                "raw_response": (raw or "")[:2000],
+                "predicted_name": pred,
+                "expected_ids": sorted(expected),
+                "expected_function_names": sorted(
+                    {id_to_function.get(eid, "<missing>") for eid in expected}
+                ),
+                "correct": int(correct[i]),
+            })
         if (i + 1) % 50 == 0:
             elapsed = time.time() - t0
             eta = elapsed / (i + 1) * (len(queries) - i - 1)
             print(f"  {i+1}/{len(queries)} done; acc-so-far = {correct[:i+1].mean():.3f}; ETA {eta/60:.1f} min")
     print(f"[{name}] done; tool-acc = {correct.mean():.3f}; elapsed {(time.time()-t0)/60:.1f} min")
+    if dump_rows and debug_dump_path is not None:
+        # Append-only so repeated conditions accumulate into one file
+        existing = []
+        if debug_dump_path.exists():
+            try:
+                existing = json.loads(debug_dump_path.read_text())
+            except Exception:
+                existing = []
+        debug_dump_path.write_text(
+            json.dumps(existing + dump_rows, indent=2)
+        )
+        print(f"  Debug dump appended: {debug_dump_path} (+{len(dump_rows)} rows)")
     return correct
 
 
@@ -391,6 +468,15 @@ def parse_args() -> argparse.Namespace:
         default=[],
         choices=["mono-react", "bear-react", "bear-single"],
         help="Skip selected conditions (useful for resuming partial runs).",
+    )
+    p.add_argument(
+        "--debug-dump-n",
+        type=int,
+        default=0,
+        help="If >0, save the first N (query, schemas, raw, pred, expected) "
+        "tuples per condition to results/toolbench_react_debug.json for "
+        "inspecting what the model and the eval are actually doing. Set to "
+        "5 or 10 when running --max-queries 20 for a quick correctness check.",
     )
     return p.parse_args()
 
@@ -466,6 +552,20 @@ def main() -> None:
         name_map: dict = {}
         id_to_function = build_id_to_function(corpus, name_map)
 
+        # Sanity: how many instructions in the corpus carry a real OpenAI
+        # function schema. The eval can only score correctly when the
+        # number is close to the corpus size; a large gap means many
+        # instructions had no req/opt parameters and were created with
+        # actions={} by toolbench_setup.py.
+        n_with_schema = sum(
+            1 for inst in corpus if _extract_function_schema(inst) is not None
+        )
+        print(
+            f"Corpus schema coverage: {n_with_schema}/{len(corpus)} "
+            f"({100.0 * n_with_schema / max(len(corpus), 1):.1f}%) "
+            f"instructions have an OpenAI function schema."
+        )
+
         # Schema providers
         def mono_schemas(_qtext, _expected):
             return build_monolithic_schemas(
@@ -480,11 +580,19 @@ def main() -> None:
         # Run conditions
         results: dict[str, np.ndarray] = {}
 
+        # Optional debug dump (first N queries per condition)
+        debug_dump_path = RESULTS_DIR / "toolbench_react_debug.json" if args.debug_dump_n > 0 else None
+        if debug_dump_path is not None and debug_dump_path.exists():
+            # Start fresh so dumps from old runs don't pile up.
+            debug_dump_path.unlink()
+
         if "mono-react" not in args.skip:
             results["mono_react"] = run_condition(
                 "Monolithic + ReAct",
                 mono_schemas, queries, args.model, args.base_url,
                 use_react=True, id_to_function=id_to_function,
+                debug_dump_n=args.debug_dump_n,
+                debug_dump_path=debug_dump_path,
             )
 
         if "bear-react" not in args.skip:
@@ -492,6 +600,8 @@ def main() -> None:
                 "BEAR retrieval + ReAct",
                 bear_schemas, queries, args.model, args.base_url,
                 use_react=True, id_to_function=id_to_function,
+                debug_dump_n=args.debug_dump_n,
+                debug_dump_path=debug_dump_path,
             )
 
         if "bear-single" not in args.skip:
@@ -499,6 +609,8 @@ def main() -> None:
                 "BEAR retrieval + single-turn (reference)",
                 bear_schemas, queries, args.model, args.base_url,
                 use_react=False, id_to_function=id_to_function,
+                debug_dump_n=args.debug_dump_n,
+                debug_dump_path=debug_dump_path,
             )
 
         # Summary
