@@ -380,8 +380,8 @@ def run_condition(
     correct = np.zeros(len(queries), dtype=int)
     dump_rows = []
     t0 = time.time()
-    for i, (qtext, _ctx_tags, expected, _api_details) in enumerate(queries):
-        schemas = schemas_per_query_fn(qtext, expected)
+    for i, (qtext, ctx_tags, expected, _api_details) in enumerate(queries):
+        schemas = schemas_per_query_fn(qtext, ctx_tags, expected)
         if use_react:
             pred, raw = call_llm_react(qtext, schemas, model, base_url)
         else:
@@ -566,14 +566,19 @@ def main() -> None:
             f"instructions have an OpenAI function schema."
         )
 
-        # Schema providers
-        def mono_schemas(_qtext, _expected):
+        # Schema providers. The BEAR provider passes the query's
+        # ground-truth category tags as Context.tags, matching the
+        # Table 5 (Section 5.3) deployment in eval_toolbench.py:
+        # ToolBench tools carry required_tags=[cat_tag], so an empty
+        # context-tag set would exclude every tool. The monolithic
+        # provider is tag-agnostic by design.
+        def mono_schemas(_qtext, _ctx_tags, _expected):
             return build_monolithic_schemas(
                 corpus, args.monolithic_cap, name_map
             )
 
-        def bear_schemas(qtext, _expected):
-            ctx = Context(tags=[])
+        def bear_schemas(qtext, ctx_tags, _expected):
+            ctx = Context(tags=list(ctx_tags) if ctx_tags else [])
             res = retr_gov.retrieve(qtext, ctx, top_k=args.top_k)
             return build_tool_schemas_for_query(res, name_map)
 
