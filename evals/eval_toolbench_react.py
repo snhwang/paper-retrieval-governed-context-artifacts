@@ -406,9 +406,13 @@ def main() -> None:
             queries = queries[: args.max_queries]
         print(f"Corpus: {len(corpus)} APIs, evaluating {len(queries)} queries")
 
-        # Retrievers
-        retr_gov = build_retriever(corpus, backend="dense")
-        retr_no_gov = build_retriever(strip_governance(corpus), backend="dense")
+        # Retrievers. build_retriever applies PRIORITY_WEIGHT internally when
+        # governance=True and zero when governance=False. The bge backend
+        # matches the manuscript ToolBench condition (BGE-base).
+        retr_gov = build_retriever(corpus, backend="bge", governance=True)
+        retr_no_gov = build_retriever(
+            strip_governance(corpus), backend="bge", governance=False
+        )
 
         id_to_function = build_id_to_function(corpus)
 
