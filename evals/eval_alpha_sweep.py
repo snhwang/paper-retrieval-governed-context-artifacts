@@ -93,10 +93,11 @@ BOOTSTRAP_ITERS = 10_000
 # to bracket the limiting behaviour.
 DEFAULT_ALPHA_GRID = [0.0, 0.1, 0.2, 0.3, 0.5, 0.7, 0.9, 1.0]
 
-# Default backend list. BGE is the headline because the decomposed
-# ablation showed it has the strongest mandatory-injection effect, so any
-# alpha interaction is most likely to appear there.
-DEFAULT_BACKENDS = ["bge"]
+# Default backend list mirrors the decomposed ablation so the full alpha
+# sweep can be reproduced with a single invocation matching the
+# manuscript's Table 12 backend set. To run only BGE (faster, ~100s),
+# pass --backend bge explicitly.
+DEFAULT_BACKENDS = ["bge", "bge-m3", "qwen3", "qwen3-4b", "bm25"]
 
 
 # ---------------------------------------------------------------------------
@@ -161,46 +162,84 @@ def fmt_ci(mean: float, lo: float, hi: float) -> str:
 # ---------------------------------------------------------------------------
 
 
-def classify_curve(alphas: list[float], means: list[float]) -> str:
+def classify_curve(
+    alphas: list[float],
+    means: list[float],
+    flat_tol: float = 0.005,
+    decline_tol: float = 0.005,
+) -> str:
     """Return a short qualitative label for the shape of the F1(alpha) curve.
 
-    Categories:
-      - 'flat'         : max-min range < 0.02 across alpha in [0, 0.9]
-      - 'collapse@1'   : F1 at alpha=1.0 is at least 0.05 below max
-      - 'peaked'       : interior alpha attains the max, drops at both ends
-      - 'monotone-inc' : F1 strictly increases with alpha
-      - 'monotone-dec' : F1 strictly decreases with alpha
-      - 'mixed'        : none of the above
+    Diagnostics, checked in order:
+
+      1. ``flat`` :
+         The overall max-min is below ``flat_tol``.
+      2. ``plateau-then-decline (plateau alpha <= X, decline starts at Y)`` :
+         There is a contiguous prefix [0, X] on which max-min < flat_tol
+         (the plateau), and the next alpha Y falls at least ``decline_tol``
+         below the plateau mean.
+      3. Same as (2) plus ``; collapse at alpha=1 (drop ...)`` when the mean
+         at alpha=1 is at least 0.05 below the plateau mean.
+      4. ``monotone increasing`` / ``monotone decreasing``.
+      5. ``peaked at alpha=X``.
+      6. ``mixed`` otherwise.
+
+    Defaults are calibrated so the June 23 BGE sweep is labelled
+    'plateau-then-decline (plateau alpha <= 0.30, decline starts at 0.50)'.
     """
-    pts = list(zip(alphas, means))
-    pts.sort(key=lambda x: x[0])
+    pts = sorted(zip(alphas, means), key=lambda x: x[0])
     a_arr = [a for a, _ in pts]
     m_arr = [m for _, m in pts]
+    n = len(pts)
 
-    # Restrict to alpha < 1 for the "flat" diagnosis
-    sub = [m for a, m in pts if a < 1.0 - 1e-9]
-    flat_range = max(sub) - min(sub) if sub else 0.0
     overall_max = max(m_arr)
-    alpha_1_idx = next((i for i, a in enumerate(a_arr) if a >= 1.0 - 1e-9), None)
-    alpha_1_val = m_arr[alpha_1_idx] if alpha_1_idx is not None else None
+    overall_min = min(m_arr)
 
-    if alpha_1_val is not None and alpha_1_val < overall_max - 0.05:
-        if flat_range < 0.02:
-            return "flat-in-range; collapse at alpha=1"
-        # Could still be flat-then-collapse or curved-then-collapse
-    if flat_range < 0.02:
-        return "flat (max-min < 0.02 across alpha < 1)"
+    if overall_max - overall_min < flat_tol:
+        return f"flat (max-min < {flat_tol})"
 
-    # Monotonicity
-    diffs = [m_arr[i + 1] - m_arr[i] for i in range(len(m_arr) - 1)]
+    best_plateau_k = -1
+    for k in range(n - 1):
+        prefix = m_arr[: k + 1]
+        if max(prefix) - min(prefix) >= flat_tol:
+            break
+        plateau_mean = sum(prefix) / len(prefix)
+        if m_arr[k + 1] <= plateau_mean - decline_tol:
+            best_plateau_k = k
+    if best_plateau_k >= 0:
+        plateau_alpha = a_arr[best_plateau_k]
+        decline_alpha = a_arr[best_plateau_k + 1]
+        plateau_mean = sum(m_arr[: best_plateau_k + 1]) / (best_plateau_k + 1)
+        alpha_1_idx = next(
+            (i for i, a in enumerate(a_arr) if a >= 1.0 - 1e-9), None
+        )
+        if (
+            alpha_1_idx is not None
+            and m_arr[alpha_1_idx] <= plateau_mean - 0.05
+        ):
+            drop = plateau_mean - m_arr[alpha_1_idx]
+            return (
+                f"plateau-then-decline (plateau alpha <= {plateau_alpha:.2f}, "
+                f"decline starts at {decline_alpha:.2f}); "
+                f"collapse at alpha=1 (drop {drop:+.3f})"
+            )
+        return (
+            f"plateau-then-decline (plateau alpha <= {plateau_alpha:.2f}, "
+            f"decline starts at {decline_alpha:.2f})"
+        )
+
+    diffs = [m_arr[i + 1] - m_arr[i] for i in range(n - 1)]
     if all(d >= -1e-4 for d in diffs):
         return "monotone increasing"
     if all(d <= 1e-4 for d in diffs):
         return "monotone decreasing"
 
-    # Peaked?
     argmax = m_arr.index(overall_max)
-    if 0 < argmax < len(m_arr) - 1 and m_arr[0] < overall_max - 0.01 and m_arr[-1] < overall_max - 0.01:
+    if (
+        0 < argmax < n - 1
+        and m_arr[0] <= overall_max - decline_tol
+        and m_arr[-1] <= overall_max - decline_tol
+    ):
         return f"peaked at alpha={a_arr[argmax]:.2f}"
 
     return "mixed"
@@ -443,7 +482,32 @@ def parse_args() -> argparse.Namespace:
         default=Path("results"),
         help="Directory to write per-backend JSON outputs.",
     )
+    p.add_argument(
+        "--log-file",
+        type=Path,
+        default=Path("results/alpha_sweep_output.txt"),
+        help=(
+            "Tee printed output (tables + LaTeX) to this file in addition "
+            "to stdout. Pass an empty string to disable."
+        ),
+    )
     return p.parse_args()
+
+
+class _Tee:
+    """Minimal stdout tee that mirrors writes into a list of streams."""
+
+    def __init__(self, *streams):
+        self._streams = streams
+
+    def write(self, data: str) -> int:  # type: ignore[override]
+        for s in self._streams:
+            s.write(data)
+        return len(data)
+
+    def flush(self) -> None:
+        for s in self._streams:
+            s.flush()
 
 
 def main() -> None:
@@ -456,30 +520,43 @@ def main() -> None:
         backends = DEFAULT_BACKENDS
     alphas = args.alphas if args.alphas is not None else DEFAULT_ALPHA_GRID
 
-    t0 = time.time()
-    per_backend: dict[str, dict] = {}
-    for i, bk in enumerate(backends, 1):
-        print(f"\n{'#' * 70}")
-        print(f"#  Backend {i}/{len(backends)}: {bk}")
-        print(f"{'#' * 70}")
-        out_path = args.output_dir / f"alpha_sweep_{bk}.json"
-        result = sweep_one_backend(bk, alphas, out_path)
-        per_backend[bk] = result
+    log_handle = None
+    original_stdout = sys.stdout
+    if args.log_file and str(args.log_file).strip():
+        args.log_file.parent.mkdir(parents=True, exist_ok=True)
+        log_handle = args.log_file.open("w", encoding="utf-8")
+        sys.stdout = _Tee(original_stdout, log_handle)  # type: ignore[assignment]
 
-    # Always print at least one LaTeX table.
-    if len(backends) == 1:
-        print("\n--- LaTeX table (paste into manuscript) ---\n")
-        print(render_single_backend_latex(per_backend[backends[0]]))
-    else:
-        combined_path = args.output_dir / "alpha_sweep_all.json"
-        combined_path.parent.mkdir(parents=True, exist_ok=True)
-        with combined_path.open("w") as f:
-            json.dump(per_backend, f, indent=2)
-        print(f"\nWrote {combined_path}")
-        print("\n--- COMBINED LaTeX table (paste into manuscript) ---\n")
-        print(render_combined_latex(per_backend))
+    try:
+        t0 = time.time()
+        per_backend: dict[str, dict] = {}
+        for i, bk in enumerate(backends, 1):
+            print(f"\n{'#' * 70}")
+            print(f"#  Backend {i}/{len(backends)}: {bk}")
+            print(f"{'#' * 70}")
+            out_path = args.output_dir / f"alpha_sweep_{bk}.json"
+            result = sweep_one_backend(bk, alphas, out_path)
+            per_backend[bk] = result
 
-    print(f"\nElapsed: {time.time() - t0:.1f}s")
+        if len(backends) == 1:
+            print("\n--- LaTeX table (paste into manuscript) ---\n")
+            print(render_single_backend_latex(per_backend[backends[0]]))
+        else:
+            combined_path = args.output_dir / "alpha_sweep_all.json"
+            combined_path.parent.mkdir(parents=True, exist_ok=True)
+            with combined_path.open("w") as f:
+                json.dump(per_backend, f, indent=2)
+            print(f"\nWrote {combined_path}")
+            print("\n--- COMBINED LaTeX table (paste into manuscript) ---\n")
+            print(render_combined_latex(per_backend))
+
+        print(f"\nElapsed: {time.time() - t0:.1f}s")
+        if log_handle is not None:
+            print(f"Full log written to {args.log_file}")
+    finally:
+        if log_handle is not None:
+            sys.stdout = original_stdout
+            log_handle.close()
 
 
 if __name__ == "__main__":
