@@ -273,7 +273,9 @@ def gather_categories(
     # original human-readable labels at hand, so we reverse-engineer them
     # from the tag form by humanizing each tag once.
     all_tags: set[str] = set()
-    for _, tags, _ in queries:
+    for q in queries:
+        # Queries may be 3- or 4-tuples
+        tags = q[1]
         for t in tags:
             all_tags.add(t)
     for tag in category_map.values():
@@ -323,7 +325,8 @@ def infer_categories(
     inferred_tags: list[str] = []
     n_new = 0
     t_lookup = {lab.lower(): lab for lab in category_labels}
-    for i, (q, _, _) in enumerate(queries):
+    for i, qtuple in enumerate(queries):
+        q = qtuple[0]
         if q in cache:
             label = cache[q]
         else:
@@ -363,7 +366,8 @@ def classifier_accuracy(
 ) -> float:
     """How often does the inferred tag equal the ground-truth tag?"""
     correct = 0
-    for (_, gt_tags, _), inf in zip(queries, inferred_tags):
+    for qtuple, inf in zip(queries, inferred_tags):
+        gt_tags = qtuple[1]
         if not gt_tags:
             continue
         gt = gt_tags[0]  # primary category
@@ -501,10 +505,13 @@ def main() -> None:
         clf_acc = classifier_accuracy(queries, inferred_tags)
         print(f"Classifier top-1 accuracy vs. benchmark gold category: {clf_acc:.3f}\n")
 
-        # Build inferred-category queries
+        # Build inferred-category queries (3-tuple shape, which the patched
+        # evaluate_retriever accepts alongside the original 4-tuple shape).
         inferred_queries = []
         n_oov = 0
-        for (q, _, expected), inf in zip(queries, inferred_tags):
+        for qtuple, inf in zip(queries, inferred_tags):
+            q = qtuple[0]
+            expected = qtuple[2]
             if inf:
                 inferred_queries.append((q, [inf], expected))
             else:

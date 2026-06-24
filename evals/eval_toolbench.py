@@ -643,7 +643,10 @@ def evaluate_retriever(
     """
     recalls, precisions, f1s, ndcgs = [], [], [], []
 
-    for query_text, tags, expected in queries:
+    # Queries may be 3-tuples (text, tags, expected) or 4-tuples
+    # (text, tags, expected, split_name). Accept either shape.
+    for q in queries:
+        query_text, tags, expected = q[0], q[1], q[2]
         ctx = Context(tags=tags if use_tags else [])
         results = retriever.retrieve(query_text, ctx, top_k=top_k)
 
