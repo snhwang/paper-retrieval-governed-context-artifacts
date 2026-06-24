@@ -238,11 +238,22 @@ def main():
     # Resume
     existing: list[dict] = []
     existing_set: set[str] = set()
+    # Map: query -> existing entry (None if not previously processed).
+    # In resume mode, queries whose existing entry has non-empty tags are
+    # skipped; queries with empty tags (timeouts, parse failures, or the
+    # degenerate single-'search' rejection from the previous run) are
+    # retried so the resumed file ends up with maximal coverage.
+    existing_by_query: dict = {}
     if args.resume and output_path.exists():
         with open(output_path) as f:
             existing = json.load(f)
-        existing_set = {e["query"] for e in existing}
-        print(f"Resuming: {len(existing)} already tagged")
+        existing_by_query = {e["query"]: e for e in existing}
+        n_tagged = sum(1 for e in existing if e.get("context_tags"))
+        n_empty = len(existing) - n_tagged
+        print(
+            f"Resuming: {n_tagged} already tagged, {n_empty} empty will be retried"
+        )
+    existing_set = set(existing_by_query)  # for backward compat reads below
 
     valid_tags = {
         "travel", "weather", "finance", "food", "shopping", "health",
@@ -258,12 +269,15 @@ def main():
             print(f"    tools: {q['tools']}")
         return
 
-    results = list(existing)
+    # Carry over only the entries with non-empty tags. Empty entries are
+    # dropped here and re-tagged below.
+    results = [e for e in existing if e.get("context_tags")]
     errors = 0
 
     for i, q in enumerate(queries):
         query_text = q["query"]
-        if query_text in existing_set:
+        prior = existing_by_query.get(query_text)
+        if prior is not None and prior.get("context_tags"):
             continue
 
         prompt = PROMPT_TEMPLATE.format(
