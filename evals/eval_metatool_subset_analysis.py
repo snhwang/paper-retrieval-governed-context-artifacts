@@ -49,6 +49,11 @@ import numpy as np
 from scipy import stats
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
+# Put the evals directory on sys.path so we can import the shared
+# reproducibility footer helper.
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from repro_footer import print_repro_footer  # noqa: E402
+
 DATA_DIR = REPO_ROOT / "evals" / "data" / "external_benchmarks" / "metatool"
 RESULTS_DIR = REPO_ROOT / "results"
 
