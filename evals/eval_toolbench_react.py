@@ -195,14 +195,55 @@ def call_llm_react(
 # ---------------------------------------------------------------------------
 
 
+# Mistral's tool-call validator restricts function names to
+# ^[A-Za-z0-9_-]{1,64}$ (see mistral_common.protocol.instruct.validator.
+# _validate_function). ToolBench api_ids look like
+# 'toolbench/data/ASIN Data/Category', which contain slashes, spaces, and
+# frequently exceed 64 characters. Without sanitization vLLM rejects every
+# chat-completion request with InvalidToolException and the eval scores 0.
+#
+# We sanitize once and cache the mapping so the same instruction always
+# yields the same function name. The scoring step requires this stability
+# so the predicted function name can be compared against the expected
+# api_id's sanitized form.
+_MISTRAL_NAME_RE = re.compile(r"[^A-Za-z0-9_-]+")
+_MISTRAL_MAX_NAME_LEN = 64
+
+
+def _derive_function_name(raw_name: str, used: dict) -> str:
+    """Sanitize raw_name to fit Mistral's tool-name regex.
+
+    Maintains a stable raw -> sanitized mapping in ``used`` so the same
+    input always produces the same output and disambiguates collisions.
+    """
+    if raw_name in used:
+        return used[raw_name]
+    s = _MISTRAL_NAME_RE.sub("_", raw_name).strip("_")
+    s = re.sub(r"_+", "_", s) or "tool"
+    if len(s) > _MISTRAL_MAX_NAME_LEN:
+        s = s[:_MISTRAL_MAX_NAME_LEN]
+    # Disambiguate if this sanitized form is already taken by a different raw
+    existing_values = set(used.values())
+    if s in existing_values:
+        base = s[: _MISTRAL_MAX_NAME_LEN - 5]
+        i = 1
+        while f"{base}_{i}" in existing_values:
+            i += 1
+        s = f"{base}_{i}"
+    used[raw_name] = s
+    return s
+
+
 def build_tool_schemas_for_query(
     retrieved: list,
+    name_map: dict,
 ) -> list[dict]:
     """Build OpenAI-compatible function schemas from BEAR retrieval results."""
     out = []
     for r in retrieved:
         actions = getattr(r, "actions", None) or {}
-        name = actions.get("function") or r.id
+        raw_name = actions.get("function") or r.id
+        name = _derive_function_name(raw_name, name_map)
         desc = actions.get("description") or ""
         # Use a permissive parameters block (matches eval_toolbench_e2e)
         params = actions.get("parameters") or {
@@ -216,14 +257,17 @@ def build_tool_schemas_for_query(
     return out
 
 
-def build_monolithic_schemas(corpus, max_tools: int) -> list[dict]:
+def build_monolithic_schemas(
+    corpus, max_tools: int, name_map: dict
+) -> list[dict]:
     """Build the monolithic tool list (no retrieval)."""
     schemas = []
     for inst in corpus:
         if len(schemas) >= max_tools:
             break
         actions = getattr(inst, "actions", None) or {}
-        name = actions.get("function") or inst.id
+        raw_name = actions.get("function") or inst.id
+        name = _derive_function_name(raw_name, name_map)
         desc = actions.get("description") or ""
         params = actions.get("parameters") or {
             "type": "object",
@@ -256,13 +300,13 @@ def tool_correct(
     return 0
 
 
-def build_id_to_function(corpus) -> dict[str, str]:
-    """Map api_id -> function name (mirrors how schemas are built)."""
+def build_id_to_function(corpus, name_map: dict) -> dict[str, str]:
+    """Map api_id -> sanitized function name (mirrors how schemas are built)."""
     out = {}
     for inst in corpus:
         actions = getattr(inst, "actions", None) or {}
-        fn = actions.get("function") or inst.id
-        out[inst.id] = fn
+        raw_name = actions.get("function") or inst.id
+        out[inst.id] = _derive_function_name(raw_name, name_map)
     return out
 
 
@@ -414,16 +458,24 @@ def main() -> None:
             strip_governance(corpus), backend="bge", governance=False
         )
 
-        id_to_function = build_id_to_function(corpus)
+        # Shared name_map. _derive_function_name() updates it lazily as
+        # schemas are built. Pre-seeding by passing the whole corpus through
+        # build_id_to_function ensures the id->name mapping is complete
+        # before any condition runs and that scoring agrees with what the
+        # LLM sees.
+        name_map: dict = {}
+        id_to_function = build_id_to_function(corpus, name_map)
 
         # Schema providers
         def mono_schemas(_qtext, _expected):
-            return build_monolithic_schemas(corpus, args.monolithic_cap)
+            return build_monolithic_schemas(
+                corpus, args.monolithic_cap, name_map
+            )
 
         def bear_schemas(qtext, _expected):
             ctx = Context(tags=[])
             res = retr_gov.retrieve(qtext, ctx, top_k=args.top_k)
-            return build_tool_schemas_for_query(res)
+            return build_tool_schemas_for_query(res, name_map)
 
         # Run conditions
         results: dict[str, np.ndarray] = {}
