@@ -495,10 +495,22 @@ def parse_args() -> argparse.Namespace:
 
 
 class _Tee:
-    """Minimal stdout tee that mirrors writes into a list of streams."""
+    """Minimal stdout tee that mirrors writes into a list of streams.
+
+    Forwards common attributes that downstream libraries (tqdm,
+    transformers, sentence-transformers, etc.) probe on ``sys.stdout``
+    — ``isatty``, ``fileno``, ``encoding``, ``closed``, ``buffer``,
+    and so on — to the *primary* stream (the original stdout). This
+    avoids ``AttributeError: '_Tee' object has no attribute 'isatty'``
+    when libraries inspect stdout while building progress bars.
+    """
 
     def __init__(self, *streams):
+        # The first stream is treated as primary for attribute fall-back.
+        if not streams:
+            raise ValueError("_Tee needs at least one stream")
         self._streams = streams
+        self._primary = streams[0]
 
     def write(self, data: str) -> int:  # type: ignore[override]
         for s in self._streams:
@@ -507,7 +519,50 @@ class _Tee:
 
     def flush(self) -> None:
         for s in self._streams:
-            s.flush()
+            try:
+                s.flush()
+            except Exception:  # noqa: BLE001
+                pass
+
+    def isatty(self) -> bool:  # noqa: D401
+        """Defer to the primary stream so tty-detecting code sees stdout."""
+        try:
+            return bool(self._primary.isatty())
+        except Exception:  # noqa: BLE001
+            return False
+
+    def fileno(self) -> int:
+        return self._primary.fileno()
+
+    @property
+    def encoding(self) -> str:
+        return getattr(self._primary, "encoding", "utf-8")
+
+    @property
+    def errors(self):
+        return getattr(self._primary, "errors", None)
+
+    @property
+    def closed(self) -> bool:
+        return getattr(self._primary, "closed", False)
+
+    @property
+    def buffer(self):
+        return getattr(self._primary, "buffer")
+
+    def writable(self) -> bool:
+        return True
+
+    def readable(self) -> bool:
+        return False
+
+    def seekable(self) -> bool:
+        return False
+
+    def __getattr__(self, name: str):
+        # Final fallback: delegate any remaining unknown attribute to the
+        # primary stream so this object is a faithful stdout-like.
+        return getattr(self._primary, name)
 
 
 def main() -> None:
