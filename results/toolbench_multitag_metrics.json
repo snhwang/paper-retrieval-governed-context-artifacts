@@ -1,0 +1,66 @@
+{
+  "model": "claude-sonnet-4-6",
+  "provider": "anthropic",
+  "top_k": 5,
+  "n_queries": 50,
+  "classifier_setlevel_accuracy": 0.92,
+  "mean_predicted_set_size": 4.28,
+  "n_oov_vocab_items": 9,
+  "n_empty_predicted_sets": 0,
+  "rows": [
+    {
+      "condition": "oracle",
+      "recall": {
+        "mean": 0.13166666666666668,
+        "ci_lo": 0.05,
+        "ci_hi": 0.22666666666666666
+      },
+      "ndcg": {
+        "mean": 0.10197204153307293,
+        "ci_lo": 0.03790685240508498,
+        "ci_hi": 0.1766792295432372
+      },
+      "f1": {
+        "mean": 0.08,
+        "ci_lo": 0.030476190476190476,
+        "ci_hi": 0.13976785714285708
+      }
+    },
+    {
+      "condition": "inferred_multi",
+      "recall": {
+        "mean": 0.026666666666666665,
+        "ci_lo": 0.0,
+        "ci_hi": 0.07333333333333333
+      },
+      "ndcg": {
+        "mean": 0.01938557452045513,
+        "ci_lo": 0.0,
+        "ci_hi": 0.04877114904091026
+      },
+      "f1": {
+        "mean": 0.011666666666666667,
+        "ci_lo": 0.0,
+        "ci_hi": 0.03
+      }
+    },
+    {
+      "condition": "no_governance",
+      "recall": {
+        "mean": 0.03,
+        "ci_lo": 0.0,
+        "ci_hi": 0.08
+      },
+      "ndcg": {
+        "mean": 0.013357485416853785,
+        "ci_lo": 0.0,
+        "ci_hi": 0.03532850199517543
+      },
+      "f1": {
+        "mean": 0.012380952380952381,
+        "ci_lo": 0.0,
+        "ci_hi": 0.03142857142857143
+      }
+    }
+  ]
+}

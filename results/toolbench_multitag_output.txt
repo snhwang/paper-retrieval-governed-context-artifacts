@@ -1,0 +1,80 @@
+=== ToolBench with LLM-inferred categories ===
+
+Loading ToolBench corpus and queries ...
+Corpus: 3225 APIs, 50 queries
+Closed category vocabulary: 47 categories
+
+LLM cache: 0 pre-computed classifications
+
+Classifying 50 queries with anthropic claude-sonnet-4-6 ...
+  Classified 25 new queries; cache saved
+  Classified 50 new queries; cache saved
+  50 new LLM calls; 0 served from cache
+  Classification time: 78.3s
+
+  OOV vocabulary items dropped during parsing: 9
+Classifier set-level accuracy (ground-truth in predicted set): 0.920
+Mean predicted-set size: 4.28 tags/query
+
+
+Building retrievers and evaluating Recall@5 ...
+  [1/3] BEAR + oracle categories (the manuscript number) ...
+  [2/3] BEAR + LLM-inferred categories (the new condition) ...
+  [3/3] BEAR with no governance (lower bound) ...
+
+--- Recall@5, NDCG@5, F1@5 ---
+
+Condition                           Recall@k                NDCG@k                  F1@k
+----------------------------------------------------------------------------------------
+oracle                  0.132 [0.05,0.23]  0.102 [0.04,0.18]  0.080 [0.03,0.14]
+inferred_multi          0.027 [0.00,0.07]  0.019 [0.00,0.05]  0.012 [0.00,0.03]
+no_governance           0.030 [0.00,0.08]  0.013 [0.00,0.04]  0.012 [0.00,0.03]
+
+--- LaTeX table (paste into manuscript) ---
+
+\begin{table}[t]
+  \caption{ToolBench retrieval under three category-tag conditions (BGE-base backend, 50 queries, $k = 5$, 95\% bootstrap CIs). The ``oracle'' condition uses the benchmark's ground-truth category labels as \texttt{required\_tags} (the original manuscript condition). The ``LLM-inferred (multi-tag)'' condition asks claude-sonnet-4-6 to return ALL plausibly-relevant categories from the closed vocabulary, with no access to ground-truth labels (set-level accuracy = 0.920, mean set size = 4.28). The ``no governance'' condition strips all scope metadata.}
+  \label{tab:toolbench-inferred-multi}
+  \centering
+  \small
+  \begin{tabular}{@{}l c c c@{}}
+    \toprule
+    Condition & Recall@5 & NDCG@5 & F1@5 \\
+    \midrule
+    Oracle categories & 0.132 [0.05,0.23] & 0.102 [0.04,0.18] & 0.080 [0.03,0.14] \\
+    LLM-inferred (multi-tag) & 0.027 [0.00,0.07] & 0.019 [0.00,0.05] & 0.012 [0.00,0.03] \\
+    No governance & 0.030 [0.00,0.08] & 0.013 [0.00,0.04] & 0.012 [0.00,0.03] \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Wrote /mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts/results/toolbench_multitag_metrics.json
+Wrote /mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts/results/toolbench_multitag_output.txt
+Cache: /mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts/results/toolbench_multitag_categories.json
+
+Elapsed: 180.3s
+
+=== Reproducibility ===
+Timestamp (UTC): 2026-06-24T05:15:49Z
+Command line:    evals/eval_toolbench_multitag_categories.py --max-queries 50
+Python:          3.12.3 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
+numpy:           2.3.5
+scipy:           1.17.1
+bear:            0.1.0
+git commit:      de422753ce3ceeaae2064110e3d81e6767799018
+git status:      DIRTY (4 files modified)
+git branch:      main
+
+  provider: anthropic
+  model: claude-sonnet-4-6
+  top_k: 5
+  n_queries: 50
+  classifier_setlevel_accuracy: 0.92
+  mean_predicted_set_size: 4.28
+  n_new_llm_calls: 50
+===
+
+To commit these results to the artifacts repo:
+  git add results/toolbench_multitag_metrics.json \
+          results/toolbench_multitag_output.txt \
+          results/toolbench_multitag_categories.json
