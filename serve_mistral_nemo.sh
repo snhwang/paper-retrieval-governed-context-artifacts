@@ -33,7 +33,13 @@ set -e
 
 MODEL="${MODEL:-mistralai/Mistral-Nemo-Instruct-2407}"
 PORT="${PORT:-8000}"
-MAX_MODEL_LEN="${MAX_MODEL_LEN:-8192}"
+# Default to 32768. The monolithic-200 ReAct condition in
+# eval_toolbench_react.py produces ~13.5k-token prompts and would crash on
+# the original 8192 default with VLLMValidationError. 32k fits comfortably
+# and leaves room for the 768-token output budget. Mistral-Nemo supports
+# up to 128k natively; bump higher if your VRAM allows and you want a
+# bigger KV-cache concurrency window.
+MAX_MODEL_LEN="${MAX_MODEL_LEN:-32768}"
 GPU_MEM_UTIL="${GPU_MEM_UTIL:-0.85}"
 
 # --- Auto-detect WSL and default to eager mode ----------------------------
