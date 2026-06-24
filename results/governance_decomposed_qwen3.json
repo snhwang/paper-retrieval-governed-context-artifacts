@@ -1,0 +1,135 @@
+{
+  "backend": "qwen3",
+  "n_standard_queries": 60,
+  "top_k": 10,
+  "bootstrap_iters": 10000,
+  "priority_weight_default": 0.3,
+  "threshold_default": 0.3,
+  "mandatory_tags_default": [
+    "safety"
+  ],
+  "rows": [
+    {
+      "condition": "full",
+      "label": "Full governance",
+      "n": 60,
+      "mean_f1": 0.7544151681651681,
+      "ci_lo": 0.7261187701187699,
+      "ci_hi": 0.7815855047730046,
+      "delta_vs_full": 0.0,
+      "cohen_d_vs_full": 0.0,
+      "p_vs_full": null
+    },
+    {
+      "condition": "no_required_tags",
+      "label": "- required_tags",
+      "n": 60,
+      "mean_f1": 0.5182738095238096,
+      "ci_lo": 0.49525793650793654,
+      "ci_hi": 0.5404970238095238,
+      "delta_vs_full": -0.23614135864135843,
+      "cohen_d_vs_full": 1.4959219382435358,
+      "p_vs_full": 0.0,
+      "notes": ""
+    },
+    {
+      "condition": "no_priority",
+      "label": "- priority weighting",
+      "n": 60,
+      "mean_f1": 0.7544151681651681,
+      "ci_lo": 0.7269912205849705,
+      "ci_hi": 0.7811655982905983,
+      "delta_vs_full": 0.0,
+      "cohen_d_vs_full": -8.0400726751863e-17,
+      "p_vs_full": 1.0,
+      "notes": ""
+    },
+    {
+      "condition": "no_conflicts",
+      "label": "- conflict resolution",
+      "n": 60,
+      "mean_f1": 0.7493358030858028,
+      "ci_lo": 0.7220226960539459,
+      "ci_hi": 0.7754069298756797,
+      "delta_vs_full": -0.005079365079365239,
+      "cohen_d_vs_full": 0.22011337131589337,
+      "p_vs_full": 0.0812,
+      "notes": ""
+    },
+    {
+      "condition": "no_mandatory",
+      "label": "- mandatory injection",
+      "n": 60,
+      "mean_f1": 0.46135785510785515,
+      "ci_lo": 0.4313246013246013,
+      "ci_hi": 0.4920565904003404,
+      "delta_vs_full": -0.2930573130573129,
+      "cohen_d_vs_full": 2.688852504413836,
+      "p_vs_full": 0.0,
+      "notes": ""
+    },
+    {
+      "condition": "no_governance",
+      "label": "No governance",
+      "n": 60,
+      "mean_f1": 0.1993253968253968,
+      "ci_lo": 0.1822619047619048,
+      "ci_hi": 0.2171626984126984,
+      "delta_vs_full": -0.5550897713397713,
+      "cohen_d_vs_full": 3.9589513401386176,
+      "p_vs_full": 0.0,
+      "notes": ""
+    },
+    {
+      "condition": "itr_offshelf",
+      "label": "ITR library (off-the-shelf)",
+      "n": 60,
+      "mean_f1": 0.18196428571428572,
+      "ci_lo": 0.16176537698412694,
+      "ci_hi": 0.2029970238095238,
+      "delta_vs_full": -0.5724508824508824,
+      "cohen_d_vs_full": 4.104844049207344,
+      "p_vs_full": 0.0,
+      "notes": "Off-the-shelf `instruction-tool-retrieval` library. NOT a faithful re-implementation of the ITR paper's full pipeline."
+    }
+  ],
+  "adversarial_safety": {
+    "n_queries": 12,
+    "safety_ids": [
+      "constraint-no-aggression",
+      "safety-boundaries",
+      "safety-reasonable-response"
+    ],
+    "mandatory_on_recall": 1.0,
+    "mandatory_off_recall": 0.5277777777777778,
+    "delta": 0.4722222222222222,
+    "per_query_on": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "per_query_off": [
+      0.0,
+      0.3333333333333333,
+      0.6666666666666666,
+      0.0,
+      1.0,
+      0.6666666666666666,
+      0.6666666666666666,
+      0.6666666666666666,
+      0.6666666666666666,
+      0.3333333333333333,
+      1.0,
+      0.3333333333333333
+    ]
+  }
+}
