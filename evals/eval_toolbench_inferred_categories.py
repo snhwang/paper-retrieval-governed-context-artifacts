@@ -547,7 +547,14 @@ def main() -> None:
         ]:
             ci = {}
             for k in ("recall", "ndcg", "f1"):
-                mean, lo, hi = bootstrap_ci(m[k], BOOTSTRAP_ITERS)
+                out = bootstrap_ci(m[k], BOOTSTRAP_ITERS)
+                # stat_utils.bootstrap_ci returns a dict with point_estimate /
+                # ci_lower / ci_upper. The fallback in eval_retrieval_backends.py
+                # returns (mean, lo, hi). Accept either.
+                if isinstance(out, dict):
+                    mean, lo, hi = out["point_estimate"], out["ci_lower"], out["ci_upper"]
+                else:
+                    mean, lo, hi = out
                 ci[k] = {"mean": float(mean), "ci_lo": float(lo), "ci_hi": float(hi)}
             rows.append({"condition": name, **ci})
 
