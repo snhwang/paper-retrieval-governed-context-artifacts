@@ -55,8 +55,18 @@ EXTRA_ARGS=()
 # vLLM 0.20 routes rms_norm to its custom CUDA kernel ('vllm_c') by default,
 # which segfaults inside the bound C++ function on several WSL2 + CUDA driver
 # combinations even with --enforce-eager. The fix is to flip the IR op
-# priority so vLLM picks the native PyTorch implementation. Set NATIVE_RMS=0
-# to suppress this workaround if your environment doesn't need it.
+# priority so vLLM picks the native PyTorch implementation.
+#
+# Only the rms_norm priority is set here. fused_add_rms_norm is not always
+# exposed as a separate CLI field in 0.20.x patch releases (Pydantic rejects
+# it), so we leave that op alone. In practice disabling the vllm_c rms_norm
+# kernel alone is sufficient for the WSL segfault path.
+#
+# Override with NATIVE_RMS=0 if a future driver/vLLM release fixes the
+# underlying kernel issue. If even rms_norm=native is rejected by your
+# build, swap the EXTRA_ARGS line below for the broader compilation-config
+# form, which works on older 0.20.x:
+#   EXTRA_ARGS+=(--compilation-config '{"custom_ops": ["all", "-rms_norm"]}')
 if [[ -z "${NATIVE_RMS:-}" ]]; then
     if grep -qi microsoft /proc/version 2>/dev/null; then
         NATIVE_RMS=1
@@ -66,7 +76,6 @@ if [[ -z "${NATIVE_RMS:-}" ]]; then
 fi
 if [[ "$NATIVE_RMS" == "1" ]]; then
     EXTRA_ARGS+=(--ir-op-priority.rms_norm=native)
-    EXTRA_ARGS+=(--ir-op-priority.fused_add_rms_norm=native)
 fi
 
 # --- Pre-flight: vLLM installed -------------------------------------------
