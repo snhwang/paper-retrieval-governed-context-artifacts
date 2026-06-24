@@ -51,6 +51,24 @@ fi
 EXTRA_ARGS=()
 [[ "$EAGER" == "1" ]] && EXTRA_ARGS+=(--enforce-eager)
 
+# --- WSL: force native rms_norm kernel ------------------------------------
+# vLLM 0.20 routes rms_norm to its custom CUDA kernel ('vllm_c') by default,
+# which segfaults inside the bound C++ function on several WSL2 + CUDA driver
+# combinations even with --enforce-eager. The fix is to flip the IR op
+# priority so vLLM picks the native PyTorch implementation. Set NATIVE_RMS=0
+# to suppress this workaround if your environment doesn't need it.
+if [[ -z "${NATIVE_RMS:-}" ]]; then
+    if grep -qi microsoft /proc/version 2>/dev/null; then
+        NATIVE_RMS=1
+    else
+        NATIVE_RMS=0
+    fi
+fi
+if [[ "$NATIVE_RMS" == "1" ]]; then
+    EXTRA_ARGS+=(--ir-op-priority.rms_norm=native)
+    EXTRA_ARGS+=(--ir-op-priority.fused_add_rms_norm=native)
+fi
+
 # --- Pre-flight: vLLM installed -------------------------------------------
 if ! python -c "import vllm" 2>/dev/null; then
     echo "ERROR: vLLM is not installed."
@@ -102,10 +120,13 @@ echo "  Context:  $MAX_MODEL_LEN tokens"
 echo "  GPU mem:  $GPU_MEM_UTIL"
 if [[ "$EAGER" == "1" ]]; then
     if grep -qi microsoft /proc/version 2>/dev/null; then
-        echo "  Mode:     eager (CUDA graphs disabled — WSL detected)"
+        echo "  Mode:     eager (CUDA graphs disabled, WSL detected)"
     else
         echo "  Mode:     eager (CUDA graphs disabled)"
     fi
+fi
+if [[ "$NATIVE_RMS" == "1" ]]; then
+    echo "  rms_norm: native (vllm_c custom kernel disabled for WSL)"
 fi
 echo ""
 echo "vLLM will load the model (multi-minute first time, faster subsequently)."
