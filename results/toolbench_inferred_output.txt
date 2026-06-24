@@ -1,0 +1,75 @@
+=== ToolBench with LLM-inferred categories ===
+
+Loading ToolBench corpus and queries ...
+Corpus: 3225 APIs, 50 queries
+Closed category vocabulary: 47 categories
+
+LLM cache: 50 pre-computed classifications
+
+Classifying 50 queries with anthropic claude-sonnet-4-6 ...
+  0 new LLM calls; 50 served from cache
+  Classification time: 0.0s
+
+Classifier top-1 accuracy vs. benchmark gold category: 0.600
+
+
+Building retrievers and evaluating Recall@5 ...
+  [1/3] BEAR + oracle categories (the manuscript number) ...
+  [2/3] BEAR + LLM-inferred categories (the new condition) ...
+  [3/3] BEAR with no governance (lower bound) ...
+
+--- Recall@5, NDCG@5, F1@5 ---
+
+Condition                           Recall@k                NDCG@k                  F1@k
+----------------------------------------------------------------------------------------
+oracle                  0.593 [0.49,0.69]  0.567 [0.47,0.66]  0.357 [0.30,0.42]
+inferred                0.357 [0.25,0.47]  0.339 [0.23,0.45]  0.220 [0.15,0.29]
+no_governance           0.518 [0.41,0.62]  0.487 [0.38,0.58]  0.318 [0.26,0.38]
+
+--- LaTeX table (paste into manuscript) ---
+
+\begin{table}[t]
+  \caption{ToolBench retrieval under three category-tag conditions (BGE-base backend, 50 queries, $k = 5$, 95\% bootstrap CIs). The ``oracle'' condition uses the benchmark's ground-truth category labels as \texttt{required\_tags} (the original manuscript condition). The ``inferred'' condition uses an LLM classifier (claude-sonnet-4-6) to infer the category from query text alone with no access to ground-truth labels (top-1 classifier accuracy = 0.600). The ``no governance'' condition strips all scope metadata.}
+  \label{tab:toolbench-inferred}
+  \centering
+  \small
+  \begin{tabular}{@{}l c c c@{}}
+    \toprule
+    Condition & Recall@5 & NDCG@5 & F1@5 \\
+    \midrule
+    Oracle categories & 0.593 [0.49,0.69] & 0.567 [0.47,0.66] & 0.357 [0.30,0.42] \\
+    LLM-inferred categories & 0.357 [0.25,0.47] & 0.339 [0.23,0.45] & 0.220 [0.15,0.29] \\
+    No governance & 0.518 [0.41,0.62] & 0.487 [0.38,0.58] & 0.318 [0.26,0.38] \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Wrote /mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts/results/toolbench_inferred_metrics.json
+Wrote /mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts/results/toolbench_inferred_output.txt
+Cache: /mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts/results/toolbench_inferred_categories.json
+
+Elapsed: 111.5s
+
+=== Reproducibility ===
+Timestamp (UTC): 2026-06-24T04:21:13Z
+Command line:    evals/eval_toolbench_inferred_categories.py --max-queries 50
+Python:          3.12.3 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
+numpy:           2.3.5
+scipy:           1.17.1
+bear:            0.1.0
+git commit:      85411eaba38e422cec4c1ff5da6f785400f5eec3
+git status:      DIRTY (3 files modified)
+git branch:      main
+
+  provider: anthropic
+  model: claude-sonnet-4-6
+  top_k: 5
+  n_queries: 50
+  classifier_top1_accuracy: 0.6
+  n_new_llm_calls: 0
+===
+
+To commit these results to the artifacts repo:
+  git add results/toolbench_inferred_metrics.json \
+          results/toolbench_inferred_output.txt \
+          results/toolbench_inferred_categories.json
