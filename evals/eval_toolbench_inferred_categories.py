@@ -522,11 +522,14 @@ def main() -> None:
 
         # Conditions to evaluate
         print(f"\nBuilding retrievers and evaluating Recall@{args.top_k} ...")
+        # build_retriever applies PRIORITY_WEIGHT internally when governance=True
+        # and zero when governance=False. The bge backend matches the
+        # manuscript ToolBench condition (BGE-base).
         retriever_gov = build_retriever(
-            corpus, backend="dense", priority_weight=PRIORITY_WEIGHT
+            corpus, backend="bge", governance=True
         )
         retriever_no_gov = build_retriever(
-            strip_governance(corpus), backend="dense", priority_weight=PRIORITY_WEIGHT
+            strip_governance(corpus), backend="bge", governance=False
         )
 
         print("  [1/3] BEAR + oracle categories (the manuscript number) ...")
