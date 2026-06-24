@@ -6,3 +6,17 @@ PyYAML
 python-dotenv
 datasets>=2.14.0
 huggingface-hub>=0.19.0
+
+# ---------------------------------------------------------------------------
+# Optional: only required for the ReAct end-to-end ToolBench experiment
+# (eval_toolbench_react.py). All other evaluations run without vLLM.
+#
+# Pinned to 0.17.1 to match the version shipped inside the vllm/vllm-openai
+# Docker image used for the paper's Table 5 results. Later 0.x releases
+# (notably 0.20.0) have shipped custom CUDA kernels that segfault on some
+# WSL2 + driver combinations.
+#
+# Install only if you intend to run eval_toolbench_react.py:
+#   pip install vllm==0.17.1
+# ---------------------------------------------------------------------------
+# vllm==0.17.1
