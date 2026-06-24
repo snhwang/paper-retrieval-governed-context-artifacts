@@ -14,17 +14,17 @@
       "condition": "bear_react",
       "label": "BEAR retrieval + ReAct",
       "n": 20,
-      "tool_acc": 0.0,
-      "ci_lo": 0.0,
-      "ci_hi": 0.0
+      "tool_acc": 0.75,
+      "ci_lo": 0.55,
+      "ci_hi": 0.95
     },
     {
       "condition": "bear_single",
       "label": "BEAR retrieval + single-turn",
       "n": 20,
-      "tool_acc": 0.0,
-      "ci_lo": 0.0,
-      "ci_hi": 0.0
+      "tool_acc": 0.7,
+      "ci_lo": 0.5,
+      "ci_hi": 0.9
     }
   ]
 }

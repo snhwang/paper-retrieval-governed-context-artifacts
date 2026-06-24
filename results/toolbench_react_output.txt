@@ -14,11 +14,11 @@ Corpus schema coverage: 3225/3225 (100.0%) instructions have an OpenAI function 
   Debug dump appended: /mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts/results/toolbench_react_debug.json (+5 rows)
 
 [BEAR retrieval + ReAct] running 20 queries ...
-[BEAR retrieval + ReAct] done; tool-acc = 0.000; elapsed 0.4 min
+[BEAR retrieval + ReAct] done; tool-acc = 0.750; elapsed 0.5 min
   Debug dump appended: /mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts/results/toolbench_react_debug.json (+5 rows)
 
 [BEAR retrieval + single-turn (reference)] running 20 queries ...
-[BEAR retrieval + single-turn (reference)] done; tool-acc = 0.000; elapsed 1.8 min
+[BEAR retrieval + single-turn (reference)] done; tool-acc = 0.700; elapsed 0.5 min
   Debug dump appended: /mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts/results/toolbench_react_debug.json (+5 rows)
 
 --- Tool selection accuracy (1 if predicted tool matches any expected api_id) ---
@@ -26,8 +26,8 @@ Corpus schema coverage: 3225/3225 (100.0%) instructions have an OpenAI function 
 Condition                                 Tool Acc [95% CI]              n
 --------------------------------------------------------------------------
 Monolithic + ReAct                        0.750 [0.550,0.900]       20
-BEAR retrieval + ReAct                    0.000 [0.000,0.000]       20
-BEAR retrieval + single-turn              0.000 [0.000,0.000]       20
+BEAR retrieval + ReAct                    0.750 [0.550,0.950]       20
+BEAR retrieval + single-turn              0.700 [0.500,0.900]       20
 
 --- LaTeX table (paste into manuscript as Table 5b) ---
 
@@ -41,8 +41,8 @@ BEAR retrieval + single-turn              0.000 [0.000,0.000]       20
     Condition & Tool accuracy [95\% CI] & $n$ \\
     \midrule
     Monolithic + ReAct & 0.750 [0.550,0.900] & 20 \\
-    BEAR retrieval + ReAct & 0.000 [0.000,0.000] & 20 \\
-    BEAR retrieval + single-turn & 0.000 [0.000,0.000] & 20 \\
+    BEAR retrieval + ReAct & 0.750 [0.550,0.950] & 20 \\
+    BEAR retrieval + single-turn & 0.700 [0.500,0.900] & 20 \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -50,16 +50,16 @@ BEAR retrieval + single-turn              0.000 [0.000,0.000]       20
 Wrote /mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts/results/toolbench_react_metrics.json
 Wrote /mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts/results/toolbench_react_output.txt
 
-Elapsed: 3.9 min
+Elapsed: 2.7 min
 
 === Reproducibility ===
-Timestamp (UTC): 2026-06-24T11:06:56Z
+Timestamp (UTC): 2026-06-24T11:50:56Z
 Command line:    evals/eval_toolbench_react.py --max-queries 20 --debug-dump-n 5
 Python:          3.12.3 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
 numpy:           2.2.6
 scipy:           1.17.1
 bear:            0.1.0
-git commit:      9dca0a043c993fe53cb40f89cb3ea85307b76549
+git commit:      7a09616ded1b19ab442a950513de311c349386f2
 git status:      DIRTY (5 files modified)
 git branch:      main
 

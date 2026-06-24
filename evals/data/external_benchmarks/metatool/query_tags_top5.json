@@ -124853,5 +124853,6904 @@
       "jini"
     ],
     "type": "single"
+  },
+  {
+    "query": "Can you provide me with the latest research on renewable energy stocks?",
+    "context_tags": [
+      "finance",
+      "news",
+      "science",
+      "data",
+      "business"
+    ],
+    "tools": [
+      "FinanceTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I'm looking for some mouth-watering recipes. Could you suggest some?",
+    "context_tags": [
+      "food",
+      "education",
+      "knowledge",
+      "search",
+      "health"
+    ],
+    "tools": [
+      "lsongai"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I've heard a lot about diversification in investment portfolios. Could you help me understand how to best diversify my portfolio?",
+    "context_tags": [
+      "finance",
+      "education",
+      "knowledge",
+      "data",
+      "business"
+    ],
+    "tools": [
+      "portfoliopilot"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you tell me about Boris Johnson's voting record on climate change issues?",
+    "context_tags": [
+      "knowledge",
+      "news",
+      "data",
+      "science",
+      "search"
+    ],
+    "tools": [
+      "uk_politics"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "How much would 500 USDT (Tether) be worth in Japanese Yen?",
+    "context_tags": [
+      "finance",
+      "data",
+      "knowledge",
+      "search",
+      "business"
+    ],
+    "tools": [
+      "FinanceTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Could you please provide the METAR (Meteorological Aerodrome Report) and TAF (Terminal Aerodrome Forecast) weather reports for Miami International Airport (MIA) and LaGuardia Airport (LGA)?",
+    "context_tags": [
+      "weather",
+      "travel",
+      "data",
+      "location",
+      "knowledge"
+    ],
+    "tools": [
+      "C3_Glide"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I've been feeling a bit lost recently. Can your tarot card novelty entertainment & analysis plugin help me gain some insight into my present situation?",
+    "context_tags": [
+      "entertainment",
+      "health",
+      "knowledge",
+      "education",
+      "communication"
+    ],
+    "tools": [
+      "Dr_Thoths_Tarot"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I am looking for a highly-rated recipe, preferably with step-by-step instructions, that will guide me in making delicious chocolate chip cookies.",
+    "context_tags": [
+      "food",
+      "education",
+      "knowledge",
+      "search",
+      "shopping"
+    ],
+    "tools": [
+      "jini"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "What move should I make next on the Tic Tac Toe board? I need help in determining the most optimal move based on the current state of the game and the strategies available to gain an advantage over my opponent.",
+    "context_tags": [
+      "entertainment",
+      "knowledge",
+      "education",
+      "data",
+      "developer"
+    ],
+    "tools": [
+      "TicTacToe"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I am looking for high-resolution pictures of the solar system including images of planets, moons, and other celestial bodies. Could you kindly provide me with a collection of such pictures for my reference?",
+    "context_tags": [
+      "image",
+      "science",
+      "knowledge",
+      "education",
+      "search"
+    ],
+    "tools": [
+      "NASATool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Hey Chatbot, I've got a great meme idea! I want to combine a picture of a penguin holding a cup of coffee and the text 'When you need caffeine to tackle the day'. Can you work your magic on that?",
+    "context_tags": [
+      "image",
+      "entertainment",
+      "communication",
+      "knowledge",
+      "education"
+    ],
+    "tools": [
+      "MemeTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I'm not sure how to score my cribbage hand, can you assist me?",
+    "context_tags": [
+      "entertainment",
+      "knowledge",
+      "education",
+      "search",
+      "communication"
+    ],
+    "tools": [
+      "CribbageScorer"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I want to know the current weather forecast for London including temperature, precipitation, wind speed, and humidity.",
+    "context_tags": [
+      "weather",
+      "location",
+      "data",
+      "travel",
+      "knowledge"
+    ],
+    "tools": [
+      "web_scraper"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "What are the latest tweets about [topic]?",
+    "context_tags": [
+      "communication",
+      "news",
+      "search",
+      "data",
+      "entertainment"
+    ],
+    "tools": [
+      "socialsearch"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I heard about a new cryptocurrency called Ethereum. Can you give me some information about it and its current price?",
+    "context_tags": [
+      "finance",
+      "knowledge",
+      "data",
+      "news",
+      "search"
+    ],
+    "tools": [
+      "FinanceTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Could you please give me the annual population growth rate, expressed as a percentage, specifically for the country of Georgia?",
+    "context_tags": [
+      "data",
+      "knowledge",
+      "science",
+      "education",
+      "search"
+    ],
+    "tools": [
+      "blockatlas"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you help me find a gift for my best friend who is into fitness and yoga?",
+    "context_tags": [
+      "shopping",
+      "health",
+      "search",
+      "food",
+      "entertainment"
+    ],
+    "tools": [
+      "GiftTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I'm planning to trade options. Can you give me the market data and news for Apple options?",
+    "context_tags": [
+      "finance",
+      "news",
+      "data",
+      "business",
+      "knowledge"
+    ],
+    "tools": [
+      "FinanceTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "\"I need some new music recommendations. Can you suggest songs that go well with a rainy day? Also, tell me the weather forecast for tomorrow.\"",
+    "context_tags": [],
+    "tools": [
+      "MusicTool",
+      "WeatherTool"
+    ],
+    "type": "multi"
+  },
+  {
+    "query": "I am hosting a party this evening. I need some interesting games for entertainment.",
+    "context_tags": [
+      "entertainment",
+      "food",
+      "shopping",
+      "knowledge",
+      "search"
+    ],
+    "tools": [
+      "crafty_clues"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you accurately and professionally translate this email, which I received, written in Italian, into English?",
+    "context_tags": [
+      "communication",
+      "productivity",
+      "business",
+      "education",
+      "knowledge"
+    ],
+    "tools": [
+      "MixerBox_Translate_AI_language_tutor"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you show me how to track my order once I have made a purchase on GoFynd?",
+    "context_tags": [],
+    "tools": [
+      "ProductSearch"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I stumbled upon an interesting research paper about artificial intelligence. Can you give me a summary of it? I'm really excited to know the key findings. [Link to the research paper]",
+    "context_tags": [
+      "knowledge",
+      "science",
+      "education",
+      "search",
+      "news"
+    ],
+    "tools": [
+      "SummarizeAnything_pr"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you create a QR code for a location address?",
+    "context_tags": [
+      "location",
+      "developer",
+      "productivity",
+      "business",
+      "image"
+    ],
+    "tools": [
+      "create_qr_code"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Hello! I'm a bit concerned about the security of my email accounts. Can you please let me know if any of my credentials have been compromised in any data breaches or hacks?",
+    "context_tags": [],
+    "tools": [
+      "hacktrack"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you suggest a reliable car rental in Orlando, Florida?",
+    "context_tags": [
+      "travel",
+      "location",
+      "shopping",
+      "search",
+      "business"
+    ],
+    "tools": [
+      "TripTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I need assistance in finding a particular skincare brand, can you help?",
+    "context_tags": [],
+    "tools": [
+      "tira"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I'm interested in acquiring a healthcare startup. Can you recommend some options that are available for purchase?",
+    "context_tags": [
+      "business",
+      "health",
+      "finance",
+      "shopping",
+      "search"
+    ],
+    "tools": [
+      "ProductSearch"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Could you create a playlist of popular songs from the 90s?",
+    "context_tags": [
+      "entertainment",
+      "knowledge",
+      "education",
+      "communication",
+      "search"
+    ],
+    "tools": [
+      "MusicTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Could you create a meme that describes the life of a programmer using JavaScript?",
+    "context_tags": [
+      "image",
+      "developer",
+      "entertainment",
+      "communication",
+      "knowledge"
+    ],
+    "tools": [
+      "MemeTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you please provide me with a variety of high-quality, captivating and delightful images showcasing an assortment of cute animals such as kittens, puppies, baby pandas, playful squirrels, charming bunnies and any other adorable creatures that would brighten up my day?",
+    "context_tags": [
+      "image",
+      "search",
+      "entertainment",
+      "knowledge",
+      "education"
+    ],
+    "tools": [
+      "lsongai"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I'm currently visiting the vibrant city of Rome, renowned for its rich cultural heritage and culinary delights, and I'm eagerly seeking recommendations for a truly authentic Italian pizza experience.",
+    "context_tags": [
+      "food",
+      "location",
+      "travel",
+      "search",
+      "knowledge"
+    ],
+    "tools": [
+      "HouseRentingTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I'm struggling to write persuasive sales copy that effectively promotes the unique features, benefits, and value of this new ebook to potential customers, igniting their interest and driving them towards making a purchase.",
+    "context_tags": [
+      "business",
+      "productivity",
+      "education",
+      "communication",
+      "shopping"
+    ],
+    "tools": [
+      "copywriter"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you show me a radar image of Los Angeles?",
+    "context_tags": [
+      "weather",
+      "location",
+      "image",
+      "data",
+      "science"
+    ],
+    "tools": [
+      "WeatherTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Greetings! I want to explore the beautiful beaches of Bali. Can you give me some recommendations for accommodations and things to do there?",
+    "context_tags": [
+      "travel",
+      "location",
+      "food",
+      "entertainment",
+      "weather"
+    ],
+    "tools": [
+      "TripTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "What can you tell me about the Mayan civilization and their achievements?",
+    "context_tags": [
+      "knowledge",
+      "education",
+      "science",
+      "search",
+      "news"
+    ],
+    "tools": [
+      "timeport"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Sure! Could you please provide the specific company name for which you need a comprehensive list of competitors?",
+    "context_tags": [
+      "business",
+      "data",
+      "search",
+      "knowledge",
+      "finance"
+    ],
+    "tools": [
+      "clearbit_integration"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "What are the most recent research documents related to the UK equities market for Technology companies?",
+    "context_tags": [
+      "finance",
+      "data",
+      "business",
+      "news",
+      "knowledge"
+    ],
+    "tools": [
+      "ph_ai_news_query"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I need detailed insights and analysis specifically focused on the performance of my advertisements.",
+    "context_tags": [
+      "data",
+      "business",
+      "finance",
+      "productivity",
+      "shopping"
+    ],
+    "tools": [
+      "SEOTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you tell me if the 'eggshell skull' rule applies in cases involving emotional distress? DEF Inc., 456 F.2d 789",
+    "context_tags": [
+      "knowledge",
+      "business",
+      "education",
+      "search",
+      "news"
+    ],
+    "tools": [
+      "LawTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I want to buy a new apartment in Brisbane within a budget of $500, Can you show me available options?",
+    "context_tags": [
+      "business",
+      "location",
+      "finance",
+      "shopping",
+      "search"
+    ],
+    "tools": [
+      "HousePurchasingTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Compare the annual revenue of top tech companies using a bar chart.",
+    "context_tags": [
+      "data",
+      "finance",
+      "business",
+      "knowledge",
+      "developer"
+    ],
+    "tools": [
+      "ChartTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I need a Reflect note outlining the decisions made during the project kickoff meeting.",
+    "context_tags": [
+      "productivity",
+      "business",
+      "communication",
+      "knowledge",
+      "education"
+    ],
+    "tools": [
+      "reflect_notes"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I'm planning a trip to Gold Coast. Can you tell me how the surf conditions are at Main Beach?",
+    "context_tags": [
+      "travel",
+      "weather",
+      "location",
+      "data",
+      "knowledge"
+    ],
+    "tools": [
+      "AusSurfReport"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you provide detailed information on various hybrid cars, such as their make, model, features, pricing, and fuel efficiency ratings?",
+    "context_tags": [
+      "shopping",
+      "knowledge",
+      "data",
+      "finance",
+      "science"
+    ],
+    "tools": [
+      "copilot"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Provide a hadith about the importance of kindness.",
+    "context_tags": [
+      "knowledge",
+      "education",
+      "search",
+      "communication",
+      "news"
+    ],
+    "tools": [
+      "hadith"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I'm looking for a restaurant that serves sushi in Osaka.",
+    "context_tags": [
+      "food",
+      "location",
+      "travel",
+      "search",
+      "shopping"
+    ],
+    "tools": [
+      "RestaurantBookingTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Hi! I have a huge PDF file about quantum physics that I want to dive into, but it's overwhelming. Can you help me by searching specific concepts and explaining them to me in a simpler manner?",
+    "context_tags": [
+      "education",
+      "science",
+      "knowledge",
+      "search",
+      "productivity"
+    ],
+    "tools": [
+      "PDF&URLTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "This article is so confusing! I need more details. Could you open this URL: [URL]?",
+    "context_tags": [
+      "knowledge",
+      "search",
+      "news",
+      "education",
+      "communication"
+    ],
+    "tools": [
+      "PDF&URLTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "What is the current time?",
+    "context_tags": [
+      "knowledge",
+      "productivity",
+      "location",
+      "travel",
+      "communication"
+    ],
+    "tools": [
+      "timemachine"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I want to make a chocolate chip cookie. What ingredients do I need?",
+    "context_tags": [
+      "food",
+      "knowledge",
+      "shopping",
+      "education",
+      "search"
+    ],
+    "tools": [
+      "DietTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Parse through this TED Talk video and extract the speaker's main thesis and supporting arguments.",
+    "context_tags": [
+      "education",
+      "knowledge",
+      "productivity",
+      "entertainment",
+      "data"
+    ],
+    "tools": [
+      "VideoSummarizeTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I want to start a home gym, any workout equipment recommendations from Amazon?",
+    "context_tags": [],
+    "tools": [
+      "ProductSearch"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Who are the top dealers for used luxury cars in my town?",
+    "context_tags": [
+      "shopping",
+      "location",
+      "business",
+      "search",
+      "travel"
+    ],
+    "tools": [
+      "copilot"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I want to know the details about the recent SEC filing by Google regarding their acquisition plans.",
+    "context_tags": [
+      "finance",
+      "business",
+      "news",
+      "knowledge",
+      "search"
+    ],
+    "tools": [
+      "FinanceTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I need a rental car in Sydney, can you assist?",
+    "context_tags": [
+      "travel",
+      "location",
+      "shopping",
+      "search",
+      "business"
+    ],
+    "tools": [
+      "TripAdviceTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you give me a 5-day forecast for London, UK?",
+    "context_tags": [
+      "weather",
+      "travel",
+      "location",
+      "knowledge",
+      "search"
+    ],
+    "tools": [
+      "WeatherTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "What are the functions of JavaScript in writing webhooks?",
+    "context_tags": [
+      "developer",
+      "knowledge",
+      "education",
+      "communication",
+      "productivity"
+    ],
+    "tools": [
+      "webhooks"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I'm currently contemplating investing in stocks and seeking guidance on identifying specific companies that have a high potential for growth.",
+    "context_tags": [
+      "finance",
+      "data",
+      "business",
+      "knowledge",
+      "news"
+    ],
+    "tools": [
+      "ai_council"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I've had enough with unreliable suppliers for electronic components. How can I find trustworthy sources with good inventory?",
+    "context_tags": [
+      "shopping",
+      "business",
+      "developer",
+      "search",
+      "data"
+    ],
+    "tools": [
+      "ProductSearch"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I'm currently in the process of planning my upcoming travel accommodations and I am interested in utilizing the services of Expedia to book a hotel for my stay.",
+    "context_tags": [
+      "travel",
+      "shopping",
+      "location",
+      "productivity",
+      "search"
+    ],
+    "tools": [
+      "Discount"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "We need an avatar video for our website's landing page. It should grab visitors' attention and explain our unique selling proposition.",
+    "context_tags": [
+      "image",
+      "business",
+      "communication",
+      "productivity",
+      "entertainment"
+    ],
+    "tools": [
+      "heygen"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you please provide me with the details about any mobile speed cameras or roadworks specifically on Anzac Highway this morning?",
+    "context_tags": [
+      "travel",
+      "location",
+      "news",
+      "data",
+      "weather"
+    ],
+    "tools": [
+      "SASpeedCameras"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "How can I generate photorealistic prompts for Midjourney?",
+    "context_tags": [
+      "image",
+      "education",
+      "knowledge",
+      "developer",
+      "productivity"
+    ],
+    "tools": [
+      "photorealistic"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I want to listen to some electronic dance music that has a fast tempo, energetic beats, catchy melodies, and a dynamic combination of synthesizers, drum machines, and computer-generated music production.",
+    "context_tags": [],
+    "tools": [
+      "MusicTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "What's the METAR weather report for Denver International Airport? I'm curious about the conditions there.",
+    "context_tags": [
+      "weather",
+      "travel",
+      "data",
+      "location",
+      "knowledge"
+    ],
+    "tools": [
+      "WeatherTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "What is the horoscope for Sagittarius?",
+    "context_tags": [
+      "knowledge",
+      "entertainment",
+      "search",
+      "news",
+      "education"
+    ],
+    "tools": [
+      "StrologyTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you please provide me with detailed information about any open houses happening in Seattle this weekend, including the dates, times, locations, and any additional relevant details?",
+    "context_tags": [
+      "location",
+      "business",
+      "travel",
+      "search",
+      "data"
+    ],
+    "tools": [
+      "HousePurchasingTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Tell me the current trending topics worldwide.",
+    "context_tags": [
+      "news",
+      "communication",
+      "data",
+      "search",
+      "entertainment"
+    ],
+    "tools": [
+      "Now"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Explain how a car works using a visual diagram.",
+    "context_tags": [
+      "knowledge",
+      "image",
+      "education",
+      "science",
+      "search"
+    ],
+    "tools": [
+      "ChartTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Which format should I use to generate a QR code for a Wi-Fi network?",
+    "context_tags": [
+      "developer",
+      "knowledge",
+      "communication",
+      "productivity",
+      "security"
+    ],
+    "tools": [
+      "qreator"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Is there an earthquake alert system for the Philippines that I can subscribe to?",
+    "context_tags": [
+      "weather",
+      "location",
+      "knowledge",
+      "news",
+      "search"
+    ],
+    "tools": [
+      "EarthquakeTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you help me by using your expertise to promptly find a 1-bedroom condo located in the bustling city of New York? I am specifically looking for a place that offers the convenience of a doorman and a fitness center within the building.",
+    "context_tags": [
+      "travel",
+      "location",
+      "business",
+      "shopping",
+      "search"
+    ],
+    "tools": [
+      "HouseRentingTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Do you have any activity recommendations for me?",
+    "context_tags": [
+      "travel",
+      "entertainment",
+      "location",
+      "food",
+      "health"
+    ],
+    "tools": [
+      "TripAdviceTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "This whole cryptocurrency thing is a mess! Can you at least give me some insights on what the experts say?",
+    "context_tags": [
+      "finance",
+      "news",
+      "knowledge",
+      "data",
+      "search"
+    ],
+    "tools": [
+      "FinanceTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I'm looking for information on non-profits in the United States.",
+    "context_tags": [
+      "business",
+      "knowledge",
+      "data",
+      "search",
+      "news"
+    ],
+    "tools": [
+      "CharityTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I need information on the latest fashion trends, including clothes, accessories, and makeup. Additionally, can you show me any product recommendations related to these trends?",
+    "context_tags": [
+      "shopping",
+      "image",
+      "news",
+      "entertainment",
+      "search"
+    ],
+    "tools": [
+      "NewsTool",
+      "ProductSearch"
+    ],
+    "type": "multi"
+  },
+  {
+    "query": "How can I easily count the calories in the food I eat?",
+    "context_tags": [
+      "health",
+      "food",
+      "data",
+      "education",
+      "productivity"
+    ],
+    "tools": [
+      "DietTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I'm frustrated with the difficulty of finding startups to purchase. Can you assist me in locating startups that are currently on offer?",
+    "context_tags": [
+      "business",
+      "finance",
+      "shopping",
+      "search",
+      "data"
+    ],
+    "tools": [
+      "ProductSearch"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Please provide me with a list of budget-friendly hotels in Kyoto that are suitable for my stay.",
+    "context_tags": [
+      "travel",
+      "location",
+      "shopping",
+      "search",
+      "food"
+    ],
+    "tools": [
+      "TripTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Hello! I'm interested in renting a property in Japan. I'm specifically looking for a place near a train station.",
+    "context_tags": [
+      "travel",
+      "location",
+      "business",
+      "search",
+      "knowledge"
+    ],
+    "tools": [
+      "HouseRentingTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I'm planning a road trip across the USA. Can you help me with some recommended routes, scenic places to stop by, and convenient accommodations?",
+    "context_tags": [
+      "travel",
+      "location",
+      "food",
+      "entertainment",
+      "knowledge"
+    ],
+    "tools": [
+      "TripAdviceTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Hi there! Can we play a word guessing game?",
+    "context_tags": [
+      "entertainment",
+      "education",
+      "knowledge",
+      "communication",
+      "productivity"
+    ],
+    "tools": [
+      "crafty_clues"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I am so frustrated with my current job. Can you help me find a better one?",
+    "context_tags": [
+      "business",
+      "productivity",
+      "search",
+      "communication",
+      "knowledge"
+    ],
+    "tools": [
+      "JobTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you please check if the paper with Arxiv ID 2012.98765 has been cited by other research papers and provide me with the precise number of times it has been cited?",
+    "context_tags": [
+      "science",
+      "knowledge",
+      "data",
+      "education",
+      "search"
+    ],
+    "tools": [
+      "ResearchHelper"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "What are the latest advancements in computer vision techniques and is there a GitHub repository with related code?",
+    "context_tags": [
+      "science",
+      "developer",
+      "knowledge",
+      "education",
+      "search"
+    ],
+    "tools": [
+      "ResearchHelper",
+      "RepoTool"
+    ],
+    "type": "multi"
+  },
+  {
+    "query": "Hey, I'm interested in the current price to earnings ratio of Rumble Kong League, which is a financial metric used to assess the relative value of the league's stock by comparing its market price per share to its earnings per share.",
+    "context_tags": [
+      "finance",
+      "data",
+      "entertainment",
+      "business",
+      "knowledge"
+    ],
+    "tools": [
+      "FinanceTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you help me analyze the content of this PDF?",
+    "context_tags": [
+      "productivity",
+      "developer",
+      "data",
+      "business",
+      "knowledge"
+    ],
+    "tools": [
+      "PDF&URLTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you recommend a reliable budgeting app for managing finances?",
+    "context_tags": [
+      "finance",
+      "productivity",
+      "shopping",
+      "business",
+      "data"
+    ],
+    "tools": [
+      "metaphor_search_api"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I'm searching for detailed information about the latest advancements in artificial intelligence (AI) development specifically discussed in the 'Future Forward' podcast.",
+    "context_tags": [
+      "knowledge",
+      "entertainment",
+      "news",
+      "science",
+      "search"
+    ],
+    "tools": [
+      "PodcastTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "The holiday season is coming. I need to find a unique gift for my boss.",
+    "context_tags": [
+      "shopping",
+      "business",
+      "search",
+      "knowledge",
+      "entertainment"
+    ],
+    "tools": [
+      "GiftTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you provide me with the important details of the latest CryptoPunks NFT collection?",
+    "context_tags": [
+      "finance",
+      "data",
+      "news",
+      "knowledge",
+      "shopping"
+    ],
+    "tools": [
+      "FinanceTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I need some research papers about natural language processing. Could you fetch a few for me?",
+    "context_tags": [
+      "science",
+      "education",
+      "knowledge",
+      "search",
+      "developer"
+    ],
+    "tools": [
+      "ResearchFinder"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you help me find open jobs in marketing in the San Francisco area specifically related to branding and digital marketing strategy for tech companies?",
+    "context_tags": [
+      "business",
+      "location",
+      "search",
+      "communication",
+      "data"
+    ],
+    "tools": [
+      "JobTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I'm interested in participating in a clinical trial for depression. Can you help me find one?",
+    "context_tags": [
+      "health",
+      "science",
+      "search",
+      "knowledge",
+      "education"
+    ],
+    "tools": [
+      "clinical_trial_radar"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Show me the sentiment analysis for the USD/CAD currency pair since January using one-minute candles, including both bid and ask prices, and excluding volume information.",
+    "context_tags": [
+      "finance",
+      "data",
+      "developer",
+      "knowledge",
+      "business"
+    ],
+    "tools": [
+      "ExchangeTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you find the most expensive product in the 'toys' category?",
+    "context_tags": [
+      "shopping",
+      "data",
+      "search",
+      "business",
+      "knowledge"
+    ],
+    "tools": [
+      "AI2sql"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I can't stand reading countless Amazon reviews, can you help me decide which TV to buy?",
+    "context_tags": [
+      "shopping",
+      "knowledge",
+      "data",
+      "entertainment",
+      "search"
+    ],
+    "tools": [
+      "Review"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I want to know more about the best hiking trails in California.",
+    "context_tags": [
+      "travel",
+      "location",
+      "knowledge",
+      "weather",
+      "search"
+    ],
+    "tools": [
+      "metaphor_search_api"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I need a summary of this research paper, can you help? [Link to a research paper]",
+    "context_tags": [
+      "knowledge",
+      "education",
+      "science",
+      "productivity",
+      "search"
+    ],
+    "tools": [
+      "PDF&URLTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I'd like to know the key information about the Magical Creatures NFT collection.",
+    "context_tags": [
+      "finance",
+      "knowledge",
+      "shopping",
+      "data",
+      "entertainment"
+    ],
+    "tools": [
+      "FinanceTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Please parse through this specific video, which is a comprehensive explanation of quantum mechanics, and meticulously analyze the content to extract relevant information. Subsequently, kindly provide a meticulously-written summary that encapsulates the key concepts and findings discussed in the video.",
+    "context_tags": [
+      "education",
+      "science",
+      "knowledge",
+      "entertainment",
+      "data"
+    ],
+    "tools": [
+      "VideoSummarizeTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I'm looking for a unique and thrilling gift for my husband who absolutely adores venturing into exhilarating experiences and exploring the unknown.",
+    "context_tags": [
+      "shopping",
+      "entertainment",
+      "travel",
+      "location",
+      "search"
+    ],
+    "tools": [
+      "GiftTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Could you summarize this YouTube video for me?",
+    "context_tags": [
+      "entertainment",
+      "knowledge",
+      "education",
+      "productivity",
+      "communication"
+    ],
+    "tools": [
+      "VideoSummarizeTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Hi, I'm looking for coupon codes for a specific store. Can you help me?",
+    "context_tags": [
+      "shopping",
+      "search",
+      "finance",
+      "business",
+      "food"
+    ],
+    "tools": [
+      "Discount"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Could you fetch the latest PPC ads from my competitor's website and show them to me? I want to see if there's something I can learn from their approach.",
+    "context_tags": [
+      "business",
+      "data",
+      "search",
+      "shopping",
+      "knowledge"
+    ],
+    "tools": [
+      "competitorppcads"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I'd like to make a gym-related meme for my fitness group. Can you assist me?",
+    "context_tags": [
+      "image",
+      "health",
+      "entertainment",
+      "communication",
+      "education"
+    ],
+    "tools": [
+      "MemeTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you help me find startups that are for sale in the tech industry?",
+    "context_tags": [
+      "business",
+      "shopping",
+      "finance",
+      "search",
+      "data"
+    ],
+    "tools": [
+      "ProductSearch"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you please provide me with specific details about the current condition of your property, such as the overall state of the house, its structural integrity, and any potential maintenance issues? Additionally, I would appreciate some information regarding any recent upgrades or renovations that have been undertaken on the property to get a better understanding of its overall value and desirability.",
+    "context_tags": [
+      "business",
+      "knowledge",
+      "data",
+      "finance",
+      "location"
+    ],
+    "tools": [
+      "HouseRentingTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you recommend some lifestyle articles on health and wellness?",
+    "context_tags": [
+      "health",
+      "news",
+      "education",
+      "knowledge",
+      "search"
+    ],
+    "tools": [
+      "NewsTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you generate an article based on these URLs?",
+    "context_tags": [
+      "productivity",
+      "knowledge",
+      "education",
+      "communication",
+      "search"
+    ],
+    "tools": [
+      "PDF&URLTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can I find the best apps for my device?",
+    "context_tags": [
+      "shopping",
+      "search",
+      "developer",
+      "productivity",
+      "knowledge"
+    ],
+    "tools": [
+      "total_query_meta_search_engine"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "The news is so frustrating these days, what are the top stories in the United States?",
+    "context_tags": [
+      "news",
+      "search",
+      "communication",
+      "knowledge",
+      "entertainment"
+    ],
+    "tools": [
+      "NewsTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I'm planning to visit my friend in Jurong East. Can you tell me if there are any empty car park lots at the HDB car park there?",
+    "context_tags": [
+      "location",
+      "travel",
+      "data",
+      "search",
+      "knowledge"
+    ],
+    "tools": [
+      "hdbcarpark"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I want to listen to K-pop songs from the 90s. Do you have any playlists that feature old-school K-pop?",
+    "context_tags": [],
+    "tools": [
+      "MusicTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you extract content from a website?",
+    "context_tags": [
+      "developer",
+      "data",
+      "knowledge",
+      "search",
+      "productivity"
+    ],
+    "tools": [
+      "web_scraper"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "What are the coordinates of the ISS?",
+    "context_tags": [
+      "location",
+      "science",
+      "data",
+      "knowledge",
+      "search"
+    ],
+    "tools": [
+      "locator"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can I visualize my concept?",
+    "context_tags": [
+      "image",
+      "data",
+      "productivity",
+      "education",
+      "knowledge"
+    ],
+    "tools": [
+      "ChartTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Please generate a hilarious and creative meme specifically related to cats that will guarantee laughs and entertainment.",
+    "context_tags": [
+      "image",
+      "entertainment",
+      "communication",
+      "knowledge",
+      "education"
+    ],
+    "tools": [
+      "MemeTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Do you have any suggestions for popular and reliable websites that cater specifically to providing a wide range of coupon codes and exclusive discounts for online shopping across various categories and brands, ensuring optimal savings for users?",
+    "context_tags": [
+      "shopping",
+      "search",
+      "finance",
+      "food",
+      "travel"
+    ],
+    "tools": [
+      "Discount"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Is it possible for you to generate an iOS app based on my provided text input?",
+    "context_tags": [
+      "developer",
+      "productivity",
+      "education",
+      "business",
+      "knowledge"
+    ],
+    "tools": [
+      "AppyPieAIAppBuilder"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you please provide me with comprehensive information and a list of funding opportunities available specifically for medical research in the United Kingdom?",
+    "context_tags": [
+      "health",
+      "science",
+      "finance",
+      "knowledge",
+      "education"
+    ],
+    "tools": [
+      "fundsdbsearch"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I want to know the real-time price and any news updates for Bitcoin.",
+    "context_tags": [
+      "finance",
+      "news",
+      "data",
+      "search",
+      "knowledge"
+    ],
+    "tools": [
+      "FinanceTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Your clues are so obvious, it's not even a challenge!",
+    "context_tags": [
+      "entertainment",
+      "education",
+      "knowledge",
+      "communication",
+      "productivity"
+    ],
+    "tools": [
+      "crafty_clues"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I need a new phone with a focus on performance and camera quality; therefore, I am looking for recommendations on the best phone currently available in the market that excels in both these aspects.",
+    "context_tags": [],
+    "tools": [
+      "ProductSearch"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Hey! I'm eager to know what the universe has planned for me today. Can you please share my daily astrological predictions according to my sun sign?",
+    "context_tags": [
+      "knowledge",
+      "education",
+      "entertainment",
+      "communication",
+      "search"
+    ],
+    "tools": [
+      "StrologyTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you provide information about a specific ETF?",
+    "context_tags": [
+      "finance",
+      "data",
+      "knowledge",
+      "business",
+      "search"
+    ],
+    "tools": [
+      "portfoliopilot"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "ChatGPT, I need a QR code for my online store, can you help me with that?",
+    "context_tags": [
+      "shopping",
+      "business",
+      "developer",
+      "productivity",
+      "image"
+    ],
+    "tools": [
+      "qreator"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "What are some fun activities to do during the weekend?",
+    "context_tags": [
+      "entertainment",
+      "location",
+      "travel",
+      "food",
+      "search"
+    ],
+    "tools": [
+      "word_sneak"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I am starting an online business. How can I identify top-performing ads from similar companies in my niche?",
+    "context_tags": [
+      "business",
+      "data",
+      "search",
+      "shopping",
+      "communication"
+    ],
+    "tools": [
+      "competitorppcads"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Planning a road trip to San Diego! I'll be there from October 8th to October 12th. Can you find me the perfect car for my trip?",
+    "context_tags": [
+      "travel",
+      "shopping",
+      "location",
+      "weather",
+      "finance"
+    ],
+    "tools": [
+      "TripTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you help me find a dealer that sells the car I'm looking for?",
+    "context_tags": [
+      "shopping",
+      "location",
+      "search",
+      "business",
+      "travel"
+    ],
+    "tools": [
+      "copilot"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "ChatGPT, I want to be in the know about what's happening in the United States. Tell me about the trending news topics today!",
+    "context_tags": [
+      "news",
+      "knowledge",
+      "communication",
+      "search",
+      "data"
+    ],
+    "tools": [
+      "NewsTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I want to challenge you to a game of Tic Tac Toe on a 4x4 board.",
+    "context_tags": [
+      "entertainment",
+      "knowledge",
+      "education",
+      "communication",
+      "productivity"
+    ],
+    "tools": [
+      "TicTacToe"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "What's the point of using you if you don't provide updates on the earthquakes in the Philippines?",
+    "context_tags": [
+      "news",
+      "science",
+      "knowledge",
+      "data",
+      "location"
+    ],
+    "tools": [
+      "EarthquakeTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "My 4-year-old refuses to sit still and learn. How can I make learning fun for her?",
+    "context_tags": [
+      "education",
+      "health",
+      "knowledge",
+      "entertainment",
+      "communication"
+    ],
+    "tools": [
+      "ABCmouse"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I need high-resolution images with vibrant colors that showcase breathtakingly beautiful landscapes from around the world, such as mountains, beaches, forests, and cityscapes, to decorate and enhance the overall aesthetic appeal of my website.",
+    "context_tags": [
+      "image",
+      "travel",
+      "shopping",
+      "location",
+      "search"
+    ],
+    "tools": [
+      "ImageSearch"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I'm looking for scientific articles specifically published within the last five years, related to quantum computing that discuss recent advancements and practical applications in the field, with a focus on algorithms and hardware implementations.",
+    "context_tags": [
+      "science",
+      "education",
+      "knowledge",
+      "search",
+      "data"
+    ],
+    "tools": [
+      "ResearchFinder"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I'm researching the impact of social media on mental well-being by analyzing users' requests for information and examining the correlation between social media usage patterns and psychological distress levels.",
+    "context_tags": [
+      "health",
+      "data",
+      "science",
+      "communication",
+      "education"
+    ],
+    "tools": [
+      "ResearchFinder"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I want to find a podcast that covers current news and provides up-to-date information on various topics including politics, technology, entertainment, sports, and international affairs.",
+    "context_tags": [
+      "news",
+      "entertainment",
+      "knowledge",
+      "search",
+      "communication"
+    ],
+    "tools": [
+      "PodcastTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I need to export this conversation into a PDF document. Can you show me how?",
+    "context_tags": [
+      "productivity",
+      "developer",
+      "communication",
+      "business",
+      "knowledge"
+    ],
+    "tools": [
+      "PDF_Exporter"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "\"I'm in the mood to listen to some music from the 90s. Can you suggest popular songs from that era and also let me know if there are any discounts available for purchasing or streaming them?\"",
+    "context_tags": [],
+    "tools": [
+      "MusicTool",
+      "Discount"
+    ],
+    "type": "multi"
+  },
+  {
+    "query": "I want to see how my favorite quote looks like in ASCII. Can you convert it for me?",
+    "context_tags": [
+      "image",
+      "developer",
+      "productivity",
+      "knowledge",
+      "education"
+    ],
+    "tools": [
+      "Figlet"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I want to go hiking in the Swiss Alps, preferably in a picturesque location, surrounded by breathtaking mountain views. Can you recommend any mountain lodges that offer comfortable accommodations and convenient access to hiking trails?",
+    "context_tags": [
+      "travel",
+      "location",
+      "food",
+      "weather",
+      "knowledge"
+    ],
+    "tools": [
+      "TripAdviceTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you help me find recent research on climate change?",
+    "context_tags": [
+      "science",
+      "search",
+      "news",
+      "knowledge",
+      "data"
+    ],
+    "tools": [
+      "ResearchHelper"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I would like to create personalized matching couple T-shirts for my partner and I, with a unique design or logo that symbolizes our relationship.",
+    "context_tags": [
+      "image",
+      "shopping",
+      "business",
+      "education",
+      "communication"
+    ],
+    "tools": [
+      "Bohita"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you please generate a PDF document of our entire chat conversation, including all messages, timestamps, and any attachments or images shared during the conversation?",
+    "context_tags": [
+      "productivity",
+      "communication",
+      "image",
+      "data",
+      "developer"
+    ],
+    "tools": [
+      "PDF_Exporter"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I'm interested in learning more about ancient civilizations, major historical events, influential figures, cultural movements, and the impact of historical events on modern society.",
+    "context_tags": [
+      "knowledge",
+      "education",
+      "science",
+      "news",
+      "entertainment"
+    ],
+    "tools": [
+      "PodcastTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I want to stay updated on the latest technological innovations. Find me news articles about emerging technologies and recommend any relevant research findings.",
+    "context_tags": [
+      "news",
+      "science",
+      "knowledge",
+      "education",
+      "search"
+    ],
+    "tools": [
+      "NewsTool",
+      "ResearchFinder"
+    ],
+    "type": "multi"
+  },
+  {
+    "query": "How can I delete a task from my project?",
+    "context_tags": [
+      "productivity",
+      "developer",
+      "business",
+      "education",
+      "communication"
+    ],
+    "tools": [
+      "dart"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I want to write a short story with stunning illustrations. Could you guide me in the process?",
+    "context_tags": [
+      "image",
+      "education",
+      "productivity",
+      "knowledge",
+      "entertainment"
+    ],
+    "tools": [
+      "storybird_stories"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Could you tell me about the development of language skills in early childhood according to Piaget's theory?",
+    "context_tags": [
+      "education",
+      "knowledge",
+      "science",
+      "health",
+      "search"
+    ],
+    "tools": [
+      "MyWritingCompanion"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I'm in the mood for some authentic Italian cuisine tonight.",
+    "context_tags": [
+      "food",
+      "location",
+      "search",
+      "travel",
+      "entertainment"
+    ],
+    "tools": [
+      "ProductSearch"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "What are the most recent Hubble telescope images?",
+    "context_tags": [
+      "science",
+      "image",
+      "knowledge",
+      "news",
+      "search"
+    ],
+    "tools": [
+      "stellarexplorer"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Finding a car rental",
+    "context_tags": [
+      "travel",
+      "location",
+      "shopping",
+      "search",
+      "business"
+    ],
+    "tools": [
+      "TripTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I want to find a job in Germany. Where should I start looking?",
+    "context_tags": [
+      "business",
+      "search",
+      "knowledge",
+      "location",
+      "education"
+    ],
+    "tools": [
+      "JobTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Hey there, can you find out which map is currently being used for Apex Legends Ranked matches?",
+    "context_tags": [
+      "entertainment",
+      "knowledge",
+      "search",
+      "news",
+      "data"
+    ],
+    "tools": [
+      "ApexMap"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "My ecommerce website is not getting enough traffic, can you assist me with creating engaging social media content?",
+    "context_tags": [
+      "business",
+      "communication",
+      "shopping",
+      "image",
+      "productivity"
+    ],
+    "tools": [
+      "SEOTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I need some sample questions for IELTS Speaking. Can you provide them?",
+    "context_tags": [
+      "education",
+      "knowledge",
+      "communication",
+      "search",
+      "productivity"
+    ],
+    "tools": [
+      "Talkface_IELTS_Prep"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I made a mistake in my Sudoku solution, can you check it for me?",
+    "context_tags": [
+      "entertainment",
+      "knowledge",
+      "education",
+      "productivity",
+      "data"
+    ],
+    "tools": [
+      "Sudoku"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I'm looking for houses for sale in Los Angeles, preferably located within a desirable neighborhood, that offer at least 3 spacious bedrooms and should not exceed a maximum price limit of $1 million.",
+    "context_tags": [
+      "business",
+      "location",
+      "shopping",
+      "finance",
+      "search"
+    ],
+    "tools": [
+      "HousePurchasingTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Could you help me calculate how much interest I would save if I started making bi-weekly instead of monthly mortgage payments?",
+    "context_tags": [
+      "finance",
+      "data",
+      "knowledge",
+      "productivity",
+      "business"
+    ],
+    "tools": [
+      "CreditYelp"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I want to search for an email from last week. How can I filter the search results?",
+    "context_tags": [
+      "productivity",
+      "communication",
+      "search",
+      "business",
+      "knowledge"
+    ],
+    "tools": [
+      "EmailByNylas"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Could you please let me know if there are any vacant parking lots at the car park near Block 789 Clementi Avenue 2?",
+    "context_tags": [
+      "location",
+      "data",
+      "travel",
+      "search",
+      "knowledge"
+    ],
+    "tools": [
+      "hdbcarpark"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Please provide the overall sentiment for EUR/USD using ten-minute candles for the past six hours, taking into account factors such as price movement, trading volume, and any relevant news or events impacting the currency pair.",
+    "context_tags": [
+      "finance",
+      "data",
+      "news",
+      "knowledge",
+      "science"
+    ],
+    "tools": [
+      "ExchangeTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you identify the major competitors of Apple in the technology sector?",
+    "context_tags": [
+      "business",
+      "knowledge",
+      "data",
+      "news",
+      "search"
+    ],
+    "tools": [
+      "clearbit_integration"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Could you guide me on how to write a JavaScript script for a webhook that sends me weather updates every morning?",
+    "context_tags": [
+      "developer",
+      "weather",
+      "productivity",
+      "communication",
+      "knowledge"
+    ],
+    "tools": [
+      "webhooks"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I'm looking for a recipe for a gluten-free chocolate cake. Can you help me out?",
+    "context_tags": [
+      "food",
+      "health",
+      "shopping",
+      "knowledge",
+      "education"
+    ],
+    "tools": [
+      "aiAgents"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Where can I watch the show X?",
+    "context_tags": [
+      "entertainment",
+      "search",
+      "knowledge",
+      "communication",
+      "shopping"
+    ],
+    "tools": [
+      "what_to_watch"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I'm looking for educational activities for my children aged 2-8,",
+    "context_tags": [
+      "education",
+      "entertainment",
+      "knowledge",
+      "health",
+      "search"
+    ],
+    "tools": [
+      "ABCmouse"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you help me organize the hiring process for remote writers?",
+    "context_tags": [
+      "business",
+      "productivity",
+      "communication",
+      "education",
+      "knowledge"
+    ],
+    "tools": [
+      "MyWritingCompanion"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I need the current weather in Paris, France.",
+    "context_tags": [
+      "weather",
+      "location",
+      "travel",
+      "search",
+      "knowledge"
+    ],
+    "tools": [
+      "WeatherTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you provide me with a research paper on climate change and its impact on agriculture, along with its corresponding PDF link?",
+    "context_tags": [
+      "science",
+      "education",
+      "knowledge",
+      "search",
+      "data"
+    ],
+    "tools": [
+      "PDF&URLTool",
+      "ResearchHelper"
+    ],
+    "type": "multi"
+  },
+  {
+    "query": "How can I manage a team of remote writers effectively?",
+    "context_tags": [
+      "business",
+      "productivity",
+      "communication",
+      "education",
+      "knowledge"
+    ],
+    "tools": [
+      "MyWritingCompanion"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Hi there! I'm a Pisces. Could you please provide me with my weekly horoscope?",
+    "context_tags": [
+      "knowledge",
+      "entertainment",
+      "education",
+      "search",
+      "news"
+    ],
+    "tools": [
+      "Horoscopes_by_Inner_Self"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you provide me with a list of popular hiking trails in the Pacific Northwest?",
+    "context_tags": [
+      "travel",
+      "location",
+      "knowledge",
+      "search",
+      "weather"
+    ],
+    "tools": [
+      "metaphor_search_api"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "What temperature should I expect today?",
+    "context_tags": [
+      "weather",
+      "location",
+      "knowledge",
+      "search",
+      "data"
+    ],
+    "tools": [
+      "WeatherTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "What are some best practices for effectively and efficiently onboarding and training remote writers while ensuring clear communication, seamless collaboration, and productivity?",
+    "context_tags": [
+      "business",
+      "productivity",
+      "communication",
+      "education",
+      "knowledge"
+    ],
+    "tools": [
+      "MyWritingCompanion"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you help me with a Personality Test?",
+    "context_tags": [
+      "education",
+      "health",
+      "knowledge",
+      "productivity",
+      "science"
+    ],
+    "tools": [
+      "mbti"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I've got this mind-blowing image that seems to hold so much meaning. Are you able to interpret the hidden story within it?",
+    "context_tags": [
+      "image",
+      "knowledge",
+      "education",
+      "communication",
+      "entertainment"
+    ],
+    "tools": [
+      "SceneXplain"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "What are the top trending books right now?\"",
+    "context_tags": [
+      "entertainment",
+      "knowledge",
+      "news",
+      "search",
+      "shopping"
+    ],
+    "tools": [
+      "MediaTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Please provide me with insights based on the data of the Whimsical Pets NFT collection.",
+    "context_tags": [
+      "finance",
+      "data",
+      "knowledge",
+      "business",
+      "search"
+    ],
+    "tools": [
+      "FinanceTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I've been having health issues, and I would like to request specific advice or recommendations regarding my symptoms and potential treatment options.",
+    "context_tags": [
+      "health",
+      "knowledge",
+      "education",
+      "search",
+      "communication"
+    ],
+    "tools": [
+      "Dr_Thoths_Tarot"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Please check if google.com and facebook.com are available.",
+    "context_tags": [
+      "developer",
+      "security",
+      "data",
+      "business",
+      "productivity"
+    ],
+    "tools": [
+      "URLTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I'm interested in understanding the latest advancements in quantum computing. Can you provide me with research papers or articles on this topic, along with PDF links for further reading?",
+    "context_tags": [
+      "science",
+      "knowledge",
+      "education",
+      "search",
+      "news"
+    ],
+    "tools": [
+      "PDF&URLTool",
+      "ResearchHelper"
+    ],
+    "type": "multi"
+  },
+  {
+    "query": "Can you tell me some tips on how to play Annie mid?",
+    "context_tags": [
+      "entertainment",
+      "knowledge",
+      "education",
+      "search",
+      "communication"
+    ],
+    "tools": [
+      "champdex"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Could you give me information on the people in charge at Sainsbury's and their address?",
+    "context_tags": [
+      "business",
+      "shopping",
+      "knowledge",
+      "location",
+      "search"
+    ],
+    "tools": [
+      "CompanyInfoTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you explain the energetic implications of drawing the High Priestess tarot card?",
+    "context_tags": [
+      "knowledge",
+      "education",
+      "health",
+      "science",
+      "entertainment"
+    ],
+    "tools": [
+      "Dr_Thoths_Tarot"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you provide me with AI-powered content?",
+    "context_tags": [
+      "knowledge",
+      "education",
+      "productivity",
+      "communication",
+      "search"
+    ],
+    "tools": [
+      "lsongai"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "There seems to be an issue with my Apache web server, can you take a look?",
+    "context_tags": [
+      "developer",
+      "security",
+      "knowledge",
+      "productivity",
+      "business"
+    ],
+    "tools": [
+      "SSH"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you generate a booklet design from my existing template?",
+    "context_tags": [
+      "image",
+      "productivity",
+      "business",
+      "education",
+      "communication"
+    ],
+    "tools": [
+      "placid"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I'm interested in knowing about any proposed federal legislation specifically targeting the pharmaceutical industry with the objective of regulating drug prices, ensuring drug safety standards, promoting transparency within the industry, and monitoring pharmaceutical marketing practices.",
+    "context_tags": [
+      "news",
+      "health",
+      "business",
+      "knowledge",
+      "data"
+    ],
+    "tools": [
+      "QuiverQuantitative"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "What specific tasks or activities can I engage in or accomplish using the inventory items originating from the Middle Ages?",
+    "context_tags": [
+      "knowledge",
+      "education",
+      "entertainment",
+      "science",
+      "search"
+    ],
+    "tools": [
+      "timeport"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I struggle with drinking enough water during the day. What can be done to drink more water each day?",
+    "context_tags": [
+      "health",
+      "productivity",
+      "education",
+      "knowledge",
+      "search"
+    ],
+    "tools": [
+      "mini_habits"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I'm looking for a recipe for a decadent, moist, and rich gluten-free chocolate cake that uses high-quality dark chocolate and incorporates a blend of alternative flours such as almond and tapioca, ensuring a delightful texture and taste for those with dietary restrictions.",
+    "context_tags": [
+      "food",
+      "health",
+      "knowledge",
+      "shopping",
+      "education"
+    ],
+    "tools": [
+      "aiAgents"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you find out if there are any used Volkswagen Golfs available for sale near me?",
+    "context_tags": [
+      "shopping",
+      "location",
+      "search",
+      "business",
+      "travel"
+    ],
+    "tools": [
+      "copilot"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you provide me with funding opportunities for medical research in the UK?",
+    "context_tags": [
+      "science",
+      "health",
+      "finance",
+      "business",
+      "education"
+    ],
+    "tools": [
+      "fundsdbsearch"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I'm starting a personal finance blog where users can request information, tips, and advice on managing their finances effectively and achieving their financial goals.",
+    "context_tags": [
+      "finance",
+      "business",
+      "education",
+      "productivity",
+      "knowledge"
+    ],
+    "tools": [
+      "SEOTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Hi! I'm in need of some inspiration for Father's Day presents. Got any ideas?",
+    "context_tags": [
+      "shopping",
+      "knowledge",
+      "search",
+      "entertainment",
+      "food"
+    ],
+    "tools": [
+      "shimmer_daily"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Please find and provide me with a comprehensive summary of the most important highlights from episode 5 of the 'Serial' podcast.",
+    "context_tags": [
+      "entertainment",
+      "search",
+      "knowledge",
+      "education",
+      "communication"
+    ],
+    "tools": [
+      "PodcastTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I want to see a diverse range of fascinating art pieces created by talented female artists, specifically from The Metropolitan Museum of Art, widely known for its prestigious collection.",
+    "context_tags": [
+      "image",
+      "entertainment",
+      "knowledge",
+      "education",
+      "search"
+    ],
+    "tools": [
+      "ArtCollection"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I came across a research paper with Arxiv ID 1901.09876, can you give me a summary of its key points?",
+    "context_tags": [
+      "science",
+      "knowledge",
+      "education",
+      "search",
+      "data"
+    ],
+    "tools": [
+      "ResearchHelper"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Hi, I'm looking for some Father's Day gift ideas. Can you help me out?",
+    "context_tags": [
+      "shopping",
+      "entertainment",
+      "food",
+      "search",
+      "knowledge"
+    ],
+    "tools": [
+      "shimmer_daily"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you provide a 5-day forecast for San Francisco?",
+    "context_tags": [
+      "weather",
+      "location",
+      "travel",
+      "data",
+      "knowledge"
+    ],
+    "tools": [
+      "WeatherTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Show me some affordable home theater systems available on haffprice.com.",
+    "context_tags": [
+      "shopping",
+      "entertainment",
+      "search",
+      "finance",
+      "knowledge"
+    ],
+    "tools": [
+      "ProductSearch"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Which marketing agencies in Los Angeles offer social media management services?",
+    "context_tags": [
+      "business",
+      "location",
+      "communication",
+      "search",
+      "data"
+    ],
+    "tools": [
+      "find_agency"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I'm interested in reading the profiles of candidates running for the upcoming general election. Can you assist me with that?",
+    "context_tags": [
+      "news",
+      "knowledge",
+      "search",
+      "data",
+      "education"
+    ],
+    "tools": [
+      "uk_politics"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "What is the surf report for Bondi Beach?",
+    "context_tags": [
+      "weather",
+      "location",
+      "travel",
+      "data",
+      "search"
+    ],
+    "tools": [
+      "AusSurfReport"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I need gift ideas for my sister's birthday. She is turning 30 and loves reading mystery novels. What should I get her?",
+    "context_tags": [
+      "shopping",
+      "entertainment",
+      "knowledge",
+      "education",
+      "search"
+    ],
+    "tools": [
+      "GiftTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "How can I improve my writing skills?",
+    "context_tags": [
+      "education",
+      "knowledge",
+      "productivity",
+      "communication",
+      "search"
+    ],
+    "tools": [
+      "PolishTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you help me find potential customers for my business?",
+    "context_tags": [
+      "business",
+      "data",
+      "communication",
+      "search",
+      "productivity"
+    ],
+    "tools": [
+      "KalendarAI"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I need a QR code for my social media profile, can you generate it for me?",
+    "context_tags": [
+      "communication",
+      "image",
+      "productivity",
+      "business",
+      "developer"
+    ],
+    "tools": [
+      "qreator"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I want to learn more about different aspects of finance such as personal finance management, corporate finance, stock market investing, real estate investing, mutual funds, and retirement planning.",
+    "context_tags": [
+      "finance",
+      "education",
+      "knowledge",
+      "business",
+      "data"
+    ],
+    "tools": [
+      "PodcastTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I need a beginner-friendly electric guitar that is easy to play, suitable for newcomers to the instrument, and provides excellent sound quality for a satisfying playing experience.",
+    "context_tags": [],
+    "tools": [
+      "Review"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you help me decide between the Canon EOS R6 and the Nikon Z6 II? I need advice on which one is a better buy.",
+    "context_tags": [
+      "shopping",
+      "knowledge",
+      "image",
+      "data",
+      "education"
+    ],
+    "tools": [
+      "ProductComparison"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I'm looking for information about the Healthcare & Life Sciences sector. Can you retrieve any relevant documents?",
+    "context_tags": [
+      "health",
+      "science",
+      "business",
+      "knowledge",
+      "data"
+    ],
+    "tools": [
+      "ph_ai_news_query"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Which Sake brands, specifically in the context of Japanese rice wine, are widely recognized for their robust and invigorating aromas, often described as fragrant and captivating by enthusiasts and connoisseurs alike?",
+    "context_tags": [
+      "food",
+      "knowledge",
+      "shopping",
+      "search",
+      "entertainment"
+    ],
+    "tools": [
+      "sakenowa"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I'm trying to find the registered office address of STU Corporation. Can you assist me with that?",
+    "context_tags": [
+      "business",
+      "location",
+      "search",
+      "knowledge",
+      "data"
+    ],
+    "tools": [
+      "CompanyInfoTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I need a comprehensive research paper that extensively discusses state-of-the-art machine learning techniques specifically utilized for anomaly detection in network traffic analysis.",
+    "context_tags": [
+      "science",
+      "developer",
+      "security",
+      "data",
+      "education"
+    ],
+    "tools": [
+      "ResearchFinder"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you help me find a nearby pet store where I can buy supplies for my dog, such as food, toys, and grooming products?",
+    "context_tags": [
+      "location",
+      "shopping",
+      "food",
+      "search",
+      "health"
+    ],
+    "tools": [
+      "HousePurchasingTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I need information on the latest global warming studies from top environmental websites. Can you collate this for me?",
+    "context_tags": [
+      "science",
+      "news",
+      "search",
+      "knowledge",
+      "data"
+    ],
+    "tools": [
+      "universal"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "There are several common factors that significantly impact the fluctuations and condition of the real estate market, including economic conditions, interest rates, government policies, demographic trends, supply and demand dynamics, and overall market sentiment.",
+    "context_tags": [
+      "business",
+      "finance",
+      "data",
+      "knowledge",
+      "news"
+    ],
+    "tools": [
+      "HousePurchasingTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I want to download a new app for photo editing.",
+    "context_tags": [
+      "image",
+      "shopping",
+      "search",
+      "entertainment",
+      "productivity"
+    ],
+    "tools": [
+      "total_query_meta_search_engine"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I'm curious about the average daily petrol price in Queensland. Can you provide that information?",
+    "context_tags": [
+      "finance",
+      "data",
+      "location",
+      "shopping",
+      "search"
+    ],
+    "tools": [
+      "AusPetrolPrices"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you recommend a good book on vegan cooking that includes various plant-based recipes, tips for beginners, and nutritional information to cater to different dietary needs and preferences?",
+    "context_tags": [
+      "food",
+      "education",
+      "health",
+      "shopping",
+      "knowledge"
+    ],
+    "tools": [
+      "metaphor_search_api"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I'm working on my website's homepage and I want to improve its search engine ranking. Can you generate some SEO keywords that I can incorporate into my website's content?",
+    "context_tags": [
+      "business",
+      "developer",
+      "productivity",
+      "knowledge",
+      "data"
+    ],
+    "tools": [
+      "SEOTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "How can I check the CPU load on the server?",
+    "context_tags": [
+      "developer",
+      "data",
+      "security",
+      "productivity",
+      "knowledge"
+    ],
+    "tools": [
+      "AutoInfra1"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Are there any per diem job openings for medical assistants in Chicago?",
+    "context_tags": [
+      "health",
+      "business",
+      "location",
+      "search",
+      "knowledge"
+    ],
+    "tools": [
+      "JobTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I'm interested in seeing the most hilarious images related to office life.",
+    "context_tags": [
+      "image",
+      "entertainment",
+      "search",
+      "communication",
+      "productivity"
+    ],
+    "tools": [
+      "lsongai"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you assist me in finding a laptop within my specific budget range while also ensuring it has positive reviews from previous users?",
+    "context_tags": [
+      "shopping",
+      "search",
+      "data",
+      "knowledge",
+      "productivity"
+    ],
+    "tools": [
+      "ProductSearch"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I need to create an app for my business, but I have no coding skills. Can you assist me in building it?",
+    "context_tags": [
+      "business",
+      "developer",
+      "productivity",
+      "education",
+      "knowledge"
+    ],
+    "tools": [
+      "AppyPieAIAppBuilder"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "What are some outdoor activities that I can do near the beach in Miami, and can you tell me if it's going to rain there tomorrow?",
+    "context_tags": [
+      "weather",
+      "travel",
+      "location",
+      "entertainment",
+      "search"
+    ],
+    "tools": [
+      "TripTool",
+      "WeatherTool"
+    ],
+    "type": "multi"
+  },
+  {
+    "query": "Can you help me decide what to wear today?",
+    "context_tags": [
+      "weather",
+      "shopping",
+      "health",
+      "knowledge",
+      "search"
+    ],
+    "tools": [
+      "AbleStyle"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I'm driving my Chevy Bolt through Europe. Can you provide me with a list of non-Tesla superchargers in Amsterdam, Netherlands?",
+    "context_tags": [
+      "location",
+      "travel",
+      "search",
+      "knowledge",
+      "data"
+    ],
+    "tools": [
+      "SuperchargeMyEV"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I need to know if mywebsite.com and anotherwebsite.net are available or not.",
+    "context_tags": [
+      "developer",
+      "business",
+      "search",
+      "knowledge",
+      "productivity"
+    ],
+    "tools": [
+      "URLTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "This is ridiculous! I need a tool to generate word clouds ASAP!",
+    "context_tags": [
+      "data",
+      "image",
+      "productivity",
+      "education",
+      "business"
+    ],
+    "tools": [
+      "WordCloud"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you help me navigate to the website Kakaku.com and assist me in finding a refrigerator that has a capacity of more than 300 liters?",
+    "context_tags": [
+      "shopping",
+      "location",
+      "search",
+      "knowledge",
+      "food"
+    ],
+    "tools": [
+      "ProductSearch"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Is it possible for a user to subscribe to a service where they receive a variety of delicious and healthy vegan recipes on a daily basis, with the added convenience of having these recipes sent directly to their phone every afternoon?",
+    "context_tags": [
+      "food",
+      "health",
+      "communication",
+      "productivity",
+      "shopping"
+    ],
+    "tools": [
+      "Glowing"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Are there any code snippets in my project that use a for loop to iterate over a dictionary?",
+    "context_tags": [
+      "developer",
+      "productivity",
+      "knowledge",
+      "search",
+      "data"
+    ],
+    "tools": [
+      "RepoTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I need a tutor who specializes specifically in business English and can cater to my unique learning needs and goals in effectively improving my communication skills in the corporate world.",
+    "context_tags": [
+      "education",
+      "business",
+      "communication",
+      "knowledge",
+      "productivity"
+    ],
+    "tools": [
+      "CourseTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I need a picture to depict the bond between humans and nature for my blog post. Can you suggest one?",
+    "context_tags": [
+      "image",
+      "search",
+      "knowledge",
+      "education",
+      "science"
+    ],
+    "tools": [
+      "ImageSearch"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Please provide me with the current weather conditions and forecast for Paris, France, including temperature, humidity, wind speed, and any precipitation information.",
+    "context_tags": [
+      "weather",
+      "location",
+      "travel",
+      "data",
+      "knowledge"
+    ],
+    "tools": [
+      "WeatherTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I need assistance with my job search in Germany. Can you guide me?",
+    "context_tags": [
+      "business",
+      "location",
+      "knowledge",
+      "communication",
+      "search"
+    ],
+    "tools": [
+      "JobTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Hello! I'm on the hunt for good deals on Father's Day gifts, such as discounted prices or promotional offers, to ensure that I can find affordable and thoughtful presents for my dad to celebrate and show my appreciation on this special occasion.",
+    "context_tags": [
+      "shopping",
+      "food",
+      "entertainment",
+      "finance",
+      "location"
+    ],
+    "tools": [
+      "shimmer_daily"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "What are the specifications for pump model CXV987? I lost the catalogue and can't recall.",
+    "context_tags": [
+      "knowledge",
+      "shopping",
+      "business",
+      "search",
+      "data"
+    ],
+    "tools": [
+      "CranePumpsManuals"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I need the METAR report for Chicago O'Hare International Airport. Can you fetch that?",
+    "context_tags": [
+      "weather",
+      "travel",
+      "data",
+      "location",
+      "knowledge"
+    ],
+    "tools": [
+      "WeatherTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I want to roll a d20 to attack the enemy.",
+    "context_tags": [
+      "entertainment",
+      "knowledge",
+      "education",
+      "search",
+      "communication"
+    ],
+    "tools": [
+      "diceroller"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Hey there! I'm looking to purchase a new smartphone. Can you recommend the top-rated smartphones on Amazon and give me a summary of their reviews?",
+    "context_tags": [
+      "shopping",
+      "search",
+      "knowledge",
+      "data",
+      "communication"
+    ],
+    "tools": [
+      "Review"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I'm planning a vacation in Paris next month. Can you help me find the best hotel deal in the city?",
+    "context_tags": [
+      "travel",
+      "shopping",
+      "location",
+      "food",
+      "entertainment"
+    ],
+    "tools": [
+      "TripTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I want to discover new music and curate a playlist with Playlist Follow. Can you guide me through the process?",
+    "context_tags": [
+      "entertainment",
+      "education",
+      "productivity",
+      "communication",
+      "search"
+    ],
+    "tools": [
+      "MusicTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "\"I'm trying to organize my music library. Can you suggest a discount on a tool that can help me categorize and tag my songs?\"",
+    "context_tags": [],
+    "tools": [
+      "Discount",
+      "MusicTool"
+    ],
+    "type": "multi"
+  },
+  {
+    "query": "Can you help me understand how this function works?",
+    "context_tags": [
+      "developer",
+      "knowledge",
+      "education",
+      "productivity",
+      "search"
+    ],
+    "tools": [
+      "RepoTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I'm looking for a high-quality camera, but none of these options are good enough!",
+    "context_tags": [
+      "shopping",
+      "image",
+      "search",
+      "knowledge",
+      "data"
+    ],
+    "tools": [
+      "ProductSearch"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you calculate the area of a circle with a radius of 8 using the formula pi*r^2?",
+    "context_tags": [
+      "knowledge",
+      "education",
+      "science",
+      "data",
+      "developer"
+    ],
+    "tools": [
+      "calculator"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Here's a cool shot of a rock concert I attended. Suggest me some rocking hashtags and soundtracks.",
+    "context_tags": [],
+    "tools": [
+      "social_media_muse"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Hey, Chatbot! I'm attending a wedding next month and I'm in charge of creating the perfect playlist for the reception. Can you tell me how WhizList can assist me in curating a playlist that will get the guests dancing and having a great time?",
+    "context_tags": [
+      "entertainment",
+      "productivity",
+      "communication",
+      "education",
+      "search"
+    ],
+    "tools": [
+      "MusicTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "How can I generate a Markdown tabular output for my research prompts and bibliographies?",
+    "context_tags": [
+      "productivity",
+      "developer",
+      "education",
+      "knowledge",
+      "data"
+    ],
+    "tools": [
+      "ResearchHelper"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "As someone with a strong technical background, I possess an in-depth understanding of various technical concepts and processes. However, my career aspirations have led me to seek a transition into a management role, where I can utilize my technical expertise while also taking on leadership responsibilities, coordinating teams, and driving strategic decision-making processes.",
+    "context_tags": [
+      "business",
+      "education",
+      "productivity",
+      "knowledge",
+      "communication"
+    ],
+    "tools": [
+      "ResumeTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Could you tell me where you got the information from?",
+    "context_tags": [
+      "knowledge",
+      "search",
+      "data",
+      "education",
+      "news"
+    ],
+    "tools": [
+      "ResearchFinder"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you help me find information about the history of ancient Egypt from this webpage? [URL]",
+    "context_tags": [
+      "knowledge",
+      "education",
+      "search",
+      "science",
+      "news"
+    ],
+    "tools": [
+      "PDF&URLTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you provide me with the current price of Ethereum (ETH), including the price in multiple currencies such as USD, EUR, and GBP? Additionally, could you also share any recent news or events that have had a significant impact on Ethereum's price movements?",
+    "context_tags": [
+      "finance",
+      "news",
+      "data",
+      "knowledge",
+      "search"
+    ],
+    "tools": [
+      "FinanceTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you find out if there's a mobile speed camera on the Southern Expressway today?",
+    "context_tags": [
+      "travel",
+      "location",
+      "news",
+      "data",
+      "weather"
+    ],
+    "tools": [
+      "SASpeedCameras"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Sure! Could you please generate a high-resolution map image of New York City, specifically showcasing its streets, landmarks, and major attractions, using a light style?",
+    "context_tags": [
+      "location",
+      "image",
+      "travel",
+      "knowledge",
+      "entertainment"
+    ],
+    "tools": [
+      "MapTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I need assistance with conducting market research for my startup idea.",
+    "context_tags": [
+      "business",
+      "data",
+      "knowledge",
+      "search",
+      "news"
+    ],
+    "tools": [
+      "chatspot"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Tell me about any recent breakthroughs in space exploration.",
+    "context_tags": [
+      "science",
+      "news",
+      "knowledge",
+      "search",
+      "education"
+    ],
+    "tools": [
+      "NewsTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I'm sick and tired of my current work environment. Can you guide me in finding a better job?",
+    "context_tags": [
+      "business",
+      "productivity",
+      "communication",
+      "education",
+      "search"
+    ],
+    "tools": [
+      "JobTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Chess has always fascinated me, and I want to improve my skills. Let's play chess and see how far I can go!",
+    "context_tags": [
+      "entertainment",
+      "education",
+      "knowledge",
+      "productivity",
+      "data"
+    ],
+    "tools": [
+      "Chess"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you please retrieve the complete email conversation, including all attachments, between our company and the vendor, specifically discussing the details and updates related to the upcoming new product launch?",
+    "context_tags": [
+      "communication",
+      "productivity",
+      "business",
+      "search",
+      "news"
+    ],
+    "tools": [
+      "DataRetrievalTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you help me locate a reputable online store that offers a wide range of art supplies at affordable prices? I'm specifically looking for a website that specializes in selling art materials.",
+    "context_tags": [
+      "shopping",
+      "image",
+      "search",
+      "education",
+      "business"
+    ],
+    "tools": [
+      "PDF&URLTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I'm struggling to understand how to optimize my website's content for better SEO. Can you guide me and provide recommendations?",
+    "context_tags": [
+      "business",
+      "developer",
+      "knowledge",
+      "education",
+      "productivity"
+    ],
+    "tools": [
+      "seoanalysis"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I need to know the historical trading volume on the Ethereum blockchain, including specific information about each transaction such as the date, time, and amount traded.",
+    "context_tags": [
+      "finance",
+      "data",
+      "developer",
+      "knowledge",
+      "science"
+    ],
+    "tools": [
+      "FinanceTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you help me set up a Google Ads campaign for my online store?",
+    "context_tags": [
+      "business",
+      "shopping",
+      "data",
+      "productivity",
+      "communication"
+    ],
+    "tools": [
+      "Google_Ads_Shopping_Microsoft_Ads_pay_per_click"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "To obtain detailed information regarding the tokens held in a particular Ethereum smart contract, users have several options available by utilizing blockchain explorers or interacting with the smart contract directly through supported interfaces such as web browsers or developer tools.",
+    "context_tags": [
+      "developer",
+      "finance",
+      "data",
+      "knowledge",
+      "security"
+    ],
+    "tools": [
+      "FinanceTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I would like to have the background of this specific image blurred to create a more visually appealing effect. Could you kindly assist me with achieving this?",
+    "context_tags": [
+      "image",
+      "productivity",
+      "education",
+      "knowledge",
+      "search"
+    ],
+    "tools": [
+      "MediaModifyTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I need recommendations for a good sci-fi movie to watch tonight.",
+    "context_tags": [
+      "entertainment",
+      "knowledge",
+      "search",
+      "communication",
+      "education"
+    ],
+    "tools": [
+      "lsongai"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you provide a detailed overview of the major stock market trends, including both the bullish and bearish movements, as well as the key factors influencing the market, over the course of the past month?",
+    "context_tags": [
+      "finance",
+      "data",
+      "news",
+      "business",
+      "knowledge"
+    ],
+    "tools": [
+      "aiAgents"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "\"I'll be in a different city every week for the next month. Can you suggest popular tourist attractions and also provide me with local music recommendations for each place?\"",
+    "context_tags": [],
+    "tools": [
+      "MusicTool",
+      "TripTool"
+    ],
+    "type": "multi"
+  },
+  {
+    "query": "What are the most common security vulnerabilities found in Ethereum smart contracts, and what are the best practices to mitigate them in order to prevent potential attacks and ensure the integrity of the blockchain network, taking into account factors such as potential coding errors, improper input validation, reentrancy issues, susceptibility to Denial of Service (DoS) attacks, and other relevant risk factors that may compromise the overall security and functionality of Ethereum smart contracts?",
+    "context_tags": [
+      "security",
+      "developer",
+      "finance",
+      "knowledge",
+      "education"
+    ],
+    "tools": [
+      "FinanceTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I need a recommendation for a good pair of wireless earphones on Amazon.",
+    "context_tags": [
+      "shopping",
+      "search",
+      "entertainment",
+      "communication",
+      "knowledge"
+    ],
+    "tools": [
+      "Review"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I'm interested in a career change. Can you suggest any relevant job opportunities that align with my background in computer science and the skills I acquired through an online course?",
+    "context_tags": [
+      "business",
+      "education",
+      "developer",
+      "productivity",
+      "knowledge"
+    ],
+    "tools": [
+      "CourseTool",
+      "JobTool"
+    ],
+    "type": "multi"
+  },
+  {
+    "query": "Can you recommend any interactive workshops to improve my design skills?",
+    "context_tags": [
+      "education",
+      "image",
+      "knowledge",
+      "search",
+      "productivity"
+    ],
+    "tools": [
+      "search"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you suggest some destinations where I can travel on a $500 budget?",
+    "context_tags": [
+      "travel",
+      "finance",
+      "location",
+      "knowledge",
+      "search"
+    ],
+    "tools": [
+      "TripTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I'm trying to make a tough decision, and I want to keep a record of my thoughts and progress. How can I do that?",
+    "context_tags": [
+      "productivity",
+      "health",
+      "education",
+      "communication",
+      "knowledge"
+    ],
+    "tools": [
+      "decision_journal"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "What are the main highlights, important points, or key conclusions that can be derived from watching this comprehensive video reviewing the product?",
+    "context_tags": [
+      "knowledge",
+      "shopping",
+      "entertainment",
+      "education",
+      "productivity"
+    ],
+    "tools": [
+      "VideoSummarizeTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I want to know if there are any NOTAMs for airspace and navigation beacons.",
+    "context_tags": [
+      "travel",
+      "knowledge",
+      "data",
+      "weather",
+      "location"
+    ],
+    "tools": [
+      "C3_Glide"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Hey! I've been working on my resume, but it needs some sprucing up. Can you help me perfect it and ensure that it stands out to recruiters in the competitive job market?",
+    "context_tags": [
+      "business",
+      "productivity",
+      "education",
+      "communication",
+      "knowledge"
+    ],
+    "tools": [
+      "ResumeTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I'm planning a road trip across Perth. It would be great if you could provide the average daily petrol prices for this state.",
+    "context_tags": [
+      "travel",
+      "finance",
+      "location",
+      "data",
+      "search"
+    ],
+    "tools": [
+      "AusPetrolPrices"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "\"I found a German quote that I really like, but, unfortunately, I don't speak German. Are you able to translate it into English for me?\"",
+    "context_tags": [
+      "communication",
+      "education",
+      "knowledge",
+      "search",
+      "productivity"
+    ],
+    "tools": [
+      "MixerBox_Translate_AI_language_tutor"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I can provide you with the word count and character count (excluding spaces) of this article.",
+    "context_tags": [
+      "data",
+      "productivity",
+      "knowledge",
+      "education",
+      "developer"
+    ],
+    "tools": [
+      "word_counter"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you show me some funny memes?",
+    "context_tags": [
+      "entertainment",
+      "image",
+      "communication",
+      "search",
+      "knowledge"
+    ],
+    "tools": [
+      "lsongai"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you summarize this YouTube video for me?",
+    "context_tags": [
+      "entertainment",
+      "knowledge",
+      "education",
+      "productivity",
+      "communication"
+    ],
+    "tools": [
+      "SummarizeAnything_pr"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you give me the latest live standings, results, and keyplays of the Premier League matches?",
+    "context_tags": [
+      "entertainment",
+      "data",
+      "news",
+      "search",
+      "knowledge"
+    ],
+    "tools": [
+      "keyplays_football"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Could you find me a Monet painting in The Metropolitan Museum of Art?",
+    "context_tags": [
+      "knowledge",
+      "image",
+      "search",
+      "location",
+      "education"
+    ],
+    "tools": [
+      "ArtCollection"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I'm looking for a lesson plan on cybersecurity for middle school students. Can you help?",
+    "context_tags": [
+      "education",
+      "security",
+      "knowledge",
+      "productivity",
+      "search"
+    ],
+    "tools": [
+      "CourseTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Which state has the highest percentage of college graduates?",
+    "context_tags": [
+      "knowledge",
+      "data",
+      "education",
+      "science",
+      "search"
+    ],
+    "tools": [
+      "blockatlas"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Are there any ongoing studies on new biomarkers for lung cancer?",
+    "context_tags": [
+      "science",
+      "health",
+      "knowledge",
+      "education",
+      "search"
+    ],
+    "tools": [
+      "clinical_trial_radar"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I want to watch a live sports event. Can you help me find one?",
+    "context_tags": [
+      "entertainment",
+      "location",
+      "search",
+      "travel",
+      "news"
+    ],
+    "tools": [
+      "MediaTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Could you tell me when is the next match for the Denver Broncos in the NFL?",
+    "context_tags": [
+      "entertainment",
+      "knowledge",
+      "search",
+      "news",
+      "data"
+    ],
+    "tools": [
+      "ndricks_sports_api"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "What is the time in the 'iso8601' format?",
+    "context_tags": [
+      "productivity",
+      "developer",
+      "knowledge",
+      "data",
+      "business"
+    ],
+    "tools": [
+      "timemachine"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Are there any day trips I can take from London?",
+    "context_tags": [
+      "travel",
+      "location",
+      "knowledge",
+      "search",
+      "entertainment"
+    ],
+    "tools": [
+      "TripAdviceTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you recommend beginner-friendly articles, specifically targeted towards individuals who are new to the field, that cover a wide range of topics in data science and analytics, providing a comprehensive understanding of the subject matter?",
+    "context_tags": [
+      "data",
+      "education",
+      "knowledge",
+      "science",
+      "search"
+    ],
+    "tools": [
+      "dev"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you assist me in locating the catalog and manual for the pump model MNO123 specifically related to its installation, operation, and maintenance procedures, as well as performance specifications and troubleshooting guidelines?",
+    "context_tags": [
+      "knowledge",
+      "business",
+      "search",
+      "developer",
+      "education"
+    ],
+    "tools": [
+      "CranePumpsManuals"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I need to purchase new sports equipment. Can you recommend a reliable online sports store and share a link to it?",
+    "context_tags": [
+      "shopping",
+      "entertainment",
+      "search",
+      "location",
+      "health"
+    ],
+    "tools": [
+      "ad4mat"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you please provide any specific preferences or criteria such as the type of 3D assets (e.g., models, textures, animations), format compatibility (e.g., FBX, OBJ), licensing requirements, or any particular genre/style to narrow down the recommendations for browsing 3D assets?",
+    "context_tags": [
+      "shopping",
+      "image",
+      "developer",
+      "entertainment",
+      "search"
+    ],
+    "tools": [
+      "assetOvi"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "How do I connect my HubSpot CRM to automatically add new contacts?",
+    "context_tags": [
+      "business",
+      "productivity",
+      "developer",
+      "communication",
+      "data"
+    ],
+    "tools": [
+      "Zapier"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "What are some of the most commonly used and sought-after 3D assets, such as character models, environments, props, and special effects, that hold significant popularity and extensive utilization within the thriving gaming industry?",
+    "context_tags": [
+      "entertainment",
+      "knowledge",
+      "image",
+      "shopping",
+      "developer"
+    ],
+    "tools": [
+      "assetOvi"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you provide more context to my request?",
+    "context_tags": [
+      "knowledge",
+      "productivity",
+      "communication",
+      "search",
+      "education"
+    ],
+    "tools": [
+      "rephrase"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I'm interested in attending a Broadway show. Any recommendations?",
+    "context_tags": [
+      "entertainment",
+      "location",
+      "travel",
+      "search",
+      "knowledge"
+    ],
+    "tools": [
+      "smarttsicketsai"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Please fetch the 7-day price chart of Bitcoin Cash for me.",
+    "context_tags": [
+      "finance",
+      "data",
+      "search",
+      "knowledge",
+      "news"
+    ],
+    "tools": [
+      "FinanceTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I can't believe the restaurant I went to didn't have any COVID-19 safety guidelines in place. This is so dangerous!",
+    "context_tags": [
+      "health",
+      "food",
+      "news",
+      "knowledge",
+      "communication"
+    ],
+    "tools": [
+      "hubbubworld_hubbub_1"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "What is the average daily petrol price in each state of Australia?",
+    "context_tags": [
+      "finance",
+      "data",
+      "location",
+      "knowledge",
+      "search"
+    ],
+    "tools": [
+      "AusPetrolPrices"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "\"What is the ideal target audience for my vegan food brand?\"",
+    "context_tags": [
+      "business",
+      "food",
+      "data",
+      "shopping",
+      "knowledge"
+    ],
+    "tools": [
+      "RoboAd"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "What is Magnetis?",
+    "context_tags": [
+      "finance",
+      "knowledge",
+      "business",
+      "search",
+      "data"
+    ],
+    "tools": [
+      "Magnetis"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you analyze a smart contract for me?",
+    "context_tags": [
+      "developer",
+      "security",
+      "finance",
+      "business",
+      "knowledge"
+    ],
+    "tools": [
+      "FinanceTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "\"I want to learn about machine learning algorithms and their implementation. Do you have any online courses that include practical examples from GitHub repositories?\"",
+    "context_tags": [
+      "education",
+      "developer",
+      "knowledge",
+      "data",
+      "science"
+    ],
+    "tools": [
+      "RepoTool",
+      "CourseTool"
+    ],
+    "type": "multi"
+  },
+  {
+    "query": "What is the sentiment of the Bitcoin market?",
+    "context_tags": [
+      "finance",
+      "data",
+      "news",
+      "knowledge",
+      "search"
+    ],
+    "tools": [
+      "FinanceTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Ah, the crystal-clear waters are calling me! I need to find ferry schedules and ticket prices for island hopping in Greece. Can you assist?",
+    "context_tags": [
+      "travel",
+      "location",
+      "search",
+      "finance",
+      "weather"
+    ],
+    "tools": [
+      "TripTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I would like to request a detailed summary of the most recent and relevant political news, accomplishments, and developments in Canada.",
+    "context_tags": [
+      "news",
+      "knowledge",
+      "data",
+      "communication",
+      "education"
+    ],
+    "tools": [
+      "NewsTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you please provide me with a high-resolution screenshot of the official Apple website at the exact moment when they initially released the first iPhone, including the homepage and any relevant information or images related to the launch?",
+    "context_tags": [
+      "knowledge",
+      "image",
+      "news",
+      "entertainment",
+      "search"
+    ],
+    "tools": [
+      "WebRewind"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I don't trust the security of my website, there must be some hidden threats that I need to detect.",
+    "context_tags": [
+      "security",
+      "developer",
+      "business",
+      "data",
+      "knowledge"
+    ],
+    "tools": [
+      "hackit_web_scanner"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you extract insights from this PDF?",
+    "context_tags": [
+      "productivity",
+      "data",
+      "business",
+      "knowledge",
+      "developer"
+    ],
+    "tools": [
+      "PDF&URLTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you provide me with scientific papers on the impact of pollution on human health?",
+    "context_tags": [
+      "science",
+      "health",
+      "education",
+      "search",
+      "knowledge"
+    ],
+    "tools": [
+      "ResearchHelper"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Are there any recent articles on software testing that specifically cover topics such as automated testing frameworks, agile testing methodologies, and security testing best practices that you can recommend based on their thorough research and practical application in real-world scenarios?",
+    "context_tags": [
+      "developer",
+      "news",
+      "education",
+      "security",
+      "knowledge"
+    ],
+    "tools": [
+      "dev"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "What were the results of all the Chelsea matches in the Premier League in the 2017-2018 season?",
+    "context_tags": [
+      "entertainment",
+      "data",
+      "knowledge",
+      "news",
+      "search"
+    ],
+    "tools": [
+      "Agones"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I'm trying to have a smoother online shopping experience by utilizing a QR code. Can your tool provide that?",
+    "context_tags": [
+      "shopping",
+      "productivity",
+      "business",
+      "communication",
+      "image"
+    ],
+    "tools": [
+      "ShoppingAssistant"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I'm planning a beach vacation and I need tips on what to pack. Additionally, can you suggest some hotels with good ratings and provide me with URLs to book them?",
+    "context_tags": [
+      "travel",
+      "shopping",
+      "location",
+      "knowledge",
+      "weather"
+    ],
+    "tools": [
+      "TripAdviceTool",
+      "PDF&URLTool"
+    ],
+    "type": "multi"
+  },
+  {
+    "query": "I'm interested in buying a house in Ontario and I would like to know more about the available options, including the price range, location, and features of the properties. Additionally, I would appreciate any information about the home-buying process in Ontario such as mortgage options, legal requirements, and potential assistance programs for first-time buyers.",
+    "context_tags": [
+      "business",
+      "finance",
+      "location",
+      "knowledge",
+      "shopping"
+    ],
+    "tools": [
+      "HousePurchasingTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "\"I need information on the average house prices in different neighborhoods and also any relevant studies on housing affordability in those areas.\"",
+    "context_tags": [
+      "finance",
+      "data",
+      "business",
+      "knowledge",
+      "science"
+    ],
+    "tools": [
+      "HousePurchasingTool",
+      "ResearchFinder"
+    ],
+    "type": "multi"
+  },
+  {
+    "query": "Please provide me with more details about your specific needs and preferences regarding the defender you are considering transferring out this week.",
+    "context_tags": [
+      "entertainment",
+      "data",
+      "productivity",
+      "communication",
+      "business"
+    ],
+    "tools": [
+      "talkfpl"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I want to build an ERP system that integrates all our financial operations, including billing, invoicing, and expense tracking. Can you provide assistance?",
+    "context_tags": [
+      "business",
+      "finance",
+      "developer",
+      "productivity",
+      "data"
+    ],
+    "tools": [
+      "tailor_erp"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Are there any ongoing clinical trials specifically targeting rare diseases such as Huntington's disease, which is a hereditary and neurodegenerative disorder characterized by progressive movement, cognitive, and psychiatric problems?",
+    "context_tags": [
+      "health",
+      "science",
+      "knowledge",
+      "education",
+      "search"
+    ],
+    "tools": [
+      "clinical_trial_radar"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I can't believe my team lost again! I need advice on what strategy to follow for the next match.",
+    "context_tags": [
+      "entertainment",
+      "knowledge",
+      "education",
+      "data",
+      "communication"
+    ],
+    "tools": [
+      "talkfpl"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I\u2019m trying to choose a mattress. Can you compare the Purple mattress with Casper for me?",
+    "context_tags": [
+      "shopping",
+      "health",
+      "knowledge",
+      "search",
+      "data"
+    ],
+    "tools": [
+      "ProductComparison"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you please provide me with the most recent and up-to-date information on earthquakes that have occurred worldwide?",
+    "context_tags": [
+      "science",
+      "news",
+      "data",
+      "knowledge",
+      "search"
+    ],
+    "tools": [
+      "EarthquakeTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Greetings! I want to know more about the Sake brands that are known for their elegant and fragrant characteristics. Could you provide me with some details?",
+    "context_tags": [
+      "food",
+      "knowledge",
+      "shopping",
+      "education",
+      "entertainment"
+    ],
+    "tools": [
+      "sakenowa"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I just had a 1:1 with my manager and we talked about my performance, can you provide a summary of our conversation?",
+    "context_tags": [
+      "productivity",
+      "business",
+      "communication",
+      "education",
+      "knowledge"
+    ],
+    "tools": [
+      "buildbetter"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you provide me with research papers discussing the effects of social media on mental health, as well as any recent news articles covering this topic?",
+    "context_tags": [
+      "science",
+      "health",
+      "news",
+      "education",
+      "communication"
+    ],
+    "tools": [
+      "ResearchFinder",
+      "NewsTool"
+    ],
+    "type": "multi"
+  },
+  {
+    "query": "I'm looking for repositories that specifically focus on a diverse range of deep learning algorithms implemented in TensorFlow, a popular open-sourced machine learning framework.",
+    "context_tags": [
+      "developer",
+      "science",
+      "education",
+      "knowledge",
+      "data"
+    ],
+    "tools": [
+      "RepoTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I'm attending a wedding tomorrow. Any recommendations on what to wear?",
+    "context_tags": [
+      "shopping",
+      "knowledge",
+      "search",
+      "communication",
+      "entertainment"
+    ],
+    "tools": [
+      "AbleStyle"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Could you provide me with a comprehensive range of scientific, societal, and environmental perspectives on the long-term impacts of climate change, including both global and regional effects? Additionally, I would greatly appreciate an extensive analysis of various mitigation strategies, such as policy measures, technological advancements, and sustainable practices aimed at reducing greenhouse gas emissions and promoting resilience in light of climate change challenges.",
+    "context_tags": [
+      "science",
+      "knowledge",
+      "data",
+      "news",
+      "education"
+    ],
+    "tools": [
+      "ai_council"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Hey there! I'm looking for a way to quickly summarize a YouTube video. Any suggestions?",
+    "context_tags": [
+      "entertainment",
+      "productivity",
+      "knowledge",
+      "education",
+      "developer"
+    ],
+    "tools": [
+      "VideoSummarizeTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I'm interested in upskilling in data analysis. Can you create a step-by-step guide for me?",
+    "context_tags": [
+      "education",
+      "data",
+      "knowledge",
+      "developer",
+      "productivity"
+    ],
+    "tools": [
+      "CourseTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "How can I create compelling text ads that drive more traffic to my website?",
+    "context_tags": [
+      "business",
+      "communication",
+      "productivity",
+      "education",
+      "knowledge"
+    ],
+    "tools": [
+      "RoboAd"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "As the event host, I kindly request your assistance in generating a personalized invitation based on my specific preferences for the upcoming event I will be hosting.",
+    "context_tags": [
+      "productivity",
+      "business",
+      "communication",
+      "education",
+      "image"
+    ],
+    "tools": [
+      "placid"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Could you please provide me with an up-to-date overview of Bitcoin's current price, including the latest price movement and any relevant factors influencing it? Additionally, I would appreciate information on how the news media is currently portraying Bitcoin, specifically in terms of sentiment and coverage.",
+    "context_tags": [
+      "finance",
+      "news",
+      "data",
+      "knowledge",
+      "communication"
+    ],
+    "tools": [
+      "FinanceTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you help me find any research papers related to AI?",
+    "context_tags": [
+      "science",
+      "education",
+      "knowledge",
+      "search",
+      "developer"
+    ],
+    "tools": [
+      "ResearchFinder"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I'm writing a research paper on the evolution of e-commerce. Can you find a picture of eBay's website in the late 1990s?",
+    "context_tags": [
+      "image",
+      "knowledge",
+      "shopping",
+      "education",
+      "search"
+    ],
+    "tools": [
+      "WebRewind"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "What are the key takeaways from this product review video?",
+    "context_tags": [
+      "shopping",
+      "entertainment",
+      "knowledge",
+      "search",
+      "communication"
+    ],
+    "tools": [
+      "VideoSummarizeTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you help me schedule and send daily motivational quotes to my mobile number?",
+    "context_tags": [
+      "productivity",
+      "communication",
+      "health",
+      "education",
+      "entertainment"
+    ],
+    "tools": [
+      "Glowing"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I'm furious! I need some amazing discounts right now! Where can I find them?",
+    "context_tags": [
+      "shopping",
+      "search",
+      "finance",
+      "food",
+      "travel"
+    ],
+    "tools": [
+      "Discount"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "This is so frustrating! None of the domain names I want are available! Can you check for me?",
+    "context_tags": [
+      "developer",
+      "business",
+      "search",
+      "productivity",
+      "communication"
+    ],
+    "tools": [
+      "URLTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you please provide a detailed explanation of the key concepts covered in this PowerPoint presentation, including relevant examples, supporting evidence, and any additional information that will help us better understand the subject matter?",
+    "context_tags": [
+      "education",
+      "knowledge",
+      "productivity",
+      "communication",
+      "data"
+    ],
+    "tools": [
+      "PDF&URLTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "What is the US Census API?",
+    "context_tags": [
+      "data",
+      "knowledge",
+      "developer",
+      "science",
+      "search"
+    ],
+    "tools": [
+      "blockatlas"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you conduct a comprehensive on-page SEO analysis specifically for my company's services page located at www.example.com/services, with a focus on optimizing it for the keyword \"digital advertising\"?",
+    "context_tags": [
+      "business",
+      "developer",
+      "data",
+      "search",
+      "knowledge"
+    ],
+    "tools": [
+      "SEOTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "The company I work for is not providing any protection against the flu. This is unacceptable!",
+    "context_tags": [
+      "health",
+      "business",
+      "news",
+      "knowledge",
+      "communication"
+    ],
+    "tools": [
+      "hubbubworld_hubbub_1"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you tell me how long it takes to get from Seoul Station to Gyeongbokgung Station?",
+    "context_tags": [
+      "travel",
+      "location",
+      "knowledge",
+      "search",
+      "data"
+    ],
+    "tools": [
+      "korea_subway"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "What are some best practices for onboarding and training remote writers?",
+    "context_tags": [
+      "business",
+      "education",
+      "productivity",
+      "communication",
+      "knowledge"
+    ],
+    "tools": [
+      "MyWritingCompanion"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I want to know if there are any Notices to Airmen (NOTAMs) currently issued regarding airspace restrictions, such as temporary flight restrictions (TFRs) or special use airspace, as well as any updates or advisories concerning navigation facilities within the specified airspace.",
+    "context_tags": [
+      "travel",
+      "weather",
+      "location",
+      "data",
+      "news"
+    ],
+    "tools": [
+      "C3_Glide"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I want to edit my selfie using photo editing software to make my skin look smoother, but I still want it to retain a natural and realistic appearance.",
+    "context_tags": [
+      "image",
+      "health",
+      "education",
+      "shopping",
+      "knowledge"
+    ],
+    "tools": [
+      "MediaModifyTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I want to find the best time to buy a house in Canada.",
+    "context_tags": [
+      "finance",
+      "business",
+      "data",
+      "knowledge",
+      "location"
+    ],
+    "tools": [
+      "HousePurchasingTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you create a playlist of acoustic guitar songs, including popular classics such as \"Blackbird\" by The Beatles, \"Wonderwall\" by Oasis, and \"Babe I'm Gonna Leave You\" by Led Zeppelin, as well as contemporary hits like \"Riptide\" by Vance Joy and \"Ho Hey\" by The Lumineers?",
+    "context_tags": [],
+    "tools": [
+      "MusicTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you help me locate a webpage from a given URL?",
+    "context_tags": [
+      "developer",
+      "search",
+      "knowledge",
+      "productivity",
+      "data"
+    ],
+    "tools": [
+      "PDF&URLTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "\"What are the best neighborhoods to buy a house in right now? Also, can you show me recent news articles about these neighborhoods?\"",
+    "context_tags": [
+      "business",
+      "location",
+      "news",
+      "finance",
+      "search"
+    ],
+    "tools": [
+      "HousePurchasingTool",
+      "NewsTool"
+    ],
+    "type": "multi"
+  },
+  {
+    "query": "Wow, I learned so much about astrophysics today!",
+    "context_tags": [
+      "science",
+      "education",
+      "knowledge",
+      "entertainment",
+      "news"
+    ],
+    "tools": [
+      "MemoryTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you convert this ABC notation into both a MIDI file and a PostScript file?",
+    "context_tags": [
+      "developer",
+      "entertainment",
+      "productivity",
+      "image",
+      "knowledge"
+    ],
+    "tools": [
+      "abc_to_audio"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "How can I access markdown tables?",
+    "context_tags": [
+      "developer",
+      "productivity",
+      "data",
+      "knowledge",
+      "education"
+    ],
+    "tools": [
+      "FinanceTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "How can Chatbot help me with my emails?",
+    "context_tags": [
+      "communication",
+      "productivity",
+      "business",
+      "education",
+      "knowledge"
+    ],
+    "tools": [
+      "EmailByNylas"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you provide me with detailed information, including the qualifications required and job responsibilities, about the current available sales positions in Fukuoka?",
+    "context_tags": [
+      "business",
+      "location",
+      "search",
+      "knowledge",
+      "communication"
+    ],
+    "tools": [
+      "JobTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I'm planning a romantic getaway. What destinations would you suggest?",
+    "context_tags": [
+      "travel",
+      "location",
+      "food",
+      "entertainment",
+      "search"
+    ],
+    "tools": [
+      "TripAdviceTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you find a versatile blender for making smoothies and soups?",
+    "context_tags": [
+      "shopping",
+      "food",
+      "search",
+      "knowledge",
+      "health"
+    ],
+    "tools": [
+      "Review"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I want to know which map is being used in ranked mode in APEX Legends.",
+    "context_tags": [
+      "entertainment",
+      "knowledge",
+      "search",
+      "news",
+      "data"
+    ],
+    "tools": [
+      "ApexMap"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Our educational institution requires a personalized ERP system that can handle student management, timetable scheduling, and performance tracking. Can you assist us with that?",
+    "context_tags": [
+      "education",
+      "business",
+      "productivity",
+      "data",
+      "developer"
+    ],
+    "tools": [
+      "tailor_erp"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you recommend a nutritious and diverse vegetarian meal plan, including breakfast, lunch, dinner, and snacks, for a week that accommodates specific dietary restrictions or preferences?",
+    "context_tags": [
+      "food",
+      "health",
+      "education",
+      "knowledge",
+      "shopping"
+    ],
+    "tools": [
+      "recipe_retrieval"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you suggest any specific nonprofits that are actively working towards a cause in the fields of education, poverty alleviation, healthcare, environmental conservation, human rights, or any other areas of social impact?",
+    "context_tags": [
+      "knowledge",
+      "education",
+      "health",
+      "science",
+      "news"
+    ],
+    "tools": [
+      "CharityTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you provide the list of tasks I set for today?",
+    "context_tags": [
+      "productivity",
+      "communication",
+      "business",
+      "education",
+      "data"
+    ],
+    "tools": [
+      "NotesTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "The databases on my GCP seem to be acting up, something is off with the server. Can you check it for me?",
+    "context_tags": [
+      "developer",
+      "data",
+      "security",
+      "business",
+      "productivity"
+    ],
+    "tools": [
+      "AutoInfra1"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I need the specific guitar chord positions, including finger placements and strings to be played, for an A minor chord.",
+    "context_tags": [
+      "education",
+      "entertainment",
+      "knowledge",
+      "search",
+      "communication"
+    ],
+    "tools": [
+      "uberchord"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Hi there! I'm currently shopping for a range of home appliances, including kitchen appliances like refrigerators, stoves, and microwaves, as well as essential household appliances like washing machines and vacuum cleaners.",
+    "context_tags": [
+      "shopping",
+      "knowledge",
+      "search",
+      "food",
+      "business"
+    ],
+    "tools": [
+      "ProductSearch"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "The AI-generated text I'm using sounds too formal for my audience. Can you help me paraphrase it to make it more casual and approachable?",
+    "context_tags": [
+      "communication",
+      "productivity",
+      "education",
+      "knowledge",
+      "business"
+    ],
+    "tools": [
+      "PolishTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you show me how to set up a cron job on my server?",
+    "context_tags": [
+      "developer",
+      "productivity",
+      "knowledge",
+      "education",
+      "security"
+    ],
+    "tools": [
+      "SSH"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Is there a way to make a spokesperson video?",
+    "context_tags": [
+      "image",
+      "entertainment",
+      "business",
+      "communication",
+      "productivity"
+    ],
+    "tools": [
+      "heygen"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "If I\u2019m buying a laptop for $1200 in Miami, Florida, how much sales tax will I have to pay?",
+    "context_tags": [
+      "finance",
+      "shopping",
+      "location",
+      "knowledge",
+      "data"
+    ],
+    "tools": [
+      "Tax_Calculator"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I need to find recent scientific papers, published within the last five years, on the topic of gene editing that specifically focus on its applications in human health and potential ethical considerations.",
+    "context_tags": [
+      "science",
+      "health",
+      "knowledge",
+      "education",
+      "search"
+    ],
+    "tools": [
+      "ResearchFinder"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you please provide me with the latest top headlines in technology today?",
+    "context_tags": [
+      "news",
+      "search",
+      "knowledge",
+      "communication",
+      "data"
+    ],
+    "tools": [
+      "ResearchHelper"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "How can I create a Quick Response code?",
+    "context_tags": [
+      "developer",
+      "productivity",
+      "business",
+      "image",
+      "knowledge"
+    ],
+    "tools": [
+      "create_qr_code"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "We need an avatar video that visually represents our company's mission and values. Can you create one?",
+    "context_tags": [
+      "image",
+      "business",
+      "communication",
+      "entertainment",
+      "productivity"
+    ],
+    "tools": [
+      "heygen"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you find out what the result was for the Manchester United vs Arsenal match held on 20th November 2014?",
+    "context_tags": [
+      "entertainment",
+      "search",
+      "news",
+      "knowledge",
+      "data"
+    ],
+    "tools": [
+      "Agones"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you provide me with the risk data for Google stock? I want to assess its risk profile.",
+    "context_tags": [
+      "finance",
+      "data",
+      "business",
+      "knowledge",
+      "search"
+    ],
+    "tools": [
+      "FinanceTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I need to buy some office supplies for my home office. Can you find me any coupons to help me save money?",
+    "context_tags": [
+      "shopping",
+      "business",
+      "productivity",
+      "finance",
+      "search"
+    ],
+    "tools": [
+      "Discount"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you find any artworks by Vincent van Gogh at The Metropolitan Museum of Art?",
+    "context_tags": [
+      "knowledge",
+      "image",
+      "search",
+      "education",
+      "entertainment"
+    ],
+    "tools": [
+      "ArtCollection"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you assist me by providing recommendations and options for a fitness tracker that includes heart rate monitoring features, ensuring it comes at a reasonable price point?",
+    "context_tags": [
+      "shopping",
+      "health",
+      "search",
+      "data",
+      "knowledge"
+    ],
+    "tools": [
+      "ProductSearch"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you recommend a good whiskey or cocktail drink to try?",
+    "context_tags": [
+      "food",
+      "knowledge",
+      "entertainment",
+      "shopping",
+      "search"
+    ],
+    "tools": [
+      "Man_of_Many"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you please provide me with any valid coupons or promotional codes that I can use for discounts on products or services at Sephora?",
+    "context_tags": [],
+    "tools": [
+      "Discount"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "What are some budget-friendly accommodation options in Singapore?10036",
+    "context_tags": [
+      "travel",
+      "location",
+      "shopping",
+      "food",
+      "search"
+    ],
+    "tools": [
+      "TripAdviceTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you provide me with the specific information about the map that is currently in rotation for Apex Legends Ranked mode?",
+    "context_tags": [
+      "entertainment",
+      "knowledge",
+      "search",
+      "data",
+      "location"
+    ],
+    "tools": [
+      "ApexMap"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you assist me in delegating a specific task to a particular team member who has the necessary skills and expertise required for its successful completion?",
+    "context_tags": [
+      "productivity",
+      "business",
+      "communication",
+      "education",
+      "data"
+    ],
+    "tools": [
+      "dart"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I'm looking for some new and interesting stories. Can you fetch the latest ones from HackerNews?",
+    "context_tags": [
+      "news",
+      "developer",
+      "knowledge",
+      "entertainment",
+      "search"
+    ],
+    "tools": [
+      "NewsTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I'm about to give up on this crossword generator. It's a total waste of time, and I can't get it to work. Help me out!",
+    "context_tags": [
+      "developer",
+      "education",
+      "productivity",
+      "knowledge",
+      "entertainment"
+    ],
+    "tools": [
+      "Puzzle_Constructor"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I need assistance in changing my shipping address on Uniket, where can I do that?",
+    "context_tags": [
+      "shopping",
+      "business",
+      "productivity",
+      "communication",
+      "location"
+    ],
+    "tools": [
+      "ShoppingAssistant"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I'm planning a trip to Universal Studios Orlando next week and I would like to know the best time to visit, the must-see attractions, and any tips on getting the most out of my experience.",
+    "context_tags": [
+      "travel",
+      "entertainment",
+      "location",
+      "knowledge",
+      "weather"
+    ],
+    "tools": [
+      "themeparkhipster"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Hello! I'm in need of some assistance with my marketing visuals. Can you help me generate images, PDFs, and videos from my templates?",
+    "context_tags": [
+      "image",
+      "business",
+      "productivity",
+      "communication",
+      "education"
+    ],
+    "tools": [
+      "placid"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I'm curious about the legal rights of tenants with respect to repairs and maintenance. Can you provide any information?",
+    "context_tags": [
+      "business",
+      "knowledge",
+      "education",
+      "search",
+      "news"
+    ],
+    "tools": [
+      "LawTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "What is the current market outlook?",
+    "context_tags": [
+      "finance",
+      "data",
+      "business",
+      "news",
+      "knowledge"
+    ],
+    "tools": [
+      "FinanceTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Why is it so hard for me to understand my own thoughts and feelings?",
+    "context_tags": [
+      "health",
+      "education",
+      "knowledge",
+      "science",
+      "communication"
+    ],
+    "tools": [
+      "mbti"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I can't believe how difficult it is to keep track of what I eat throughout the day!",
+    "context_tags": [
+      "health",
+      "food",
+      "productivity",
+      "data",
+      "education"
+    ],
+    "tools": [
+      "DietTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "It's so frustrating to navigate through countless websites and journals to find the most recent studies on climate change.",
+    "context_tags": [
+      "science",
+      "search",
+      "knowledge",
+      "news",
+      "data"
+    ],
+    "tools": [
+      "ResearchFinder"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Show me the radar image for Los Angeles.",
+    "context_tags": [
+      "weather",
+      "location",
+      "image",
+      "data",
+      "search"
+    ],
+    "tools": [
+      "WeatherTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I am a student trying to launch a web based school project, but I'm clueless on how to go about it. Can you assist?",
+    "context_tags": [
+      "developer",
+      "education",
+      "knowledge",
+      "productivity",
+      "business"
+    ],
+    "tools": [
+      "deployscript"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "What are the physical, mental, and emotional benefits that individuals can experience as a result of regularly engaging in the practice of mindfulness meditation?",
+    "context_tags": [
+      "health",
+      "education",
+      "knowledge",
+      "science",
+      "productivity"
+    ],
+    "tools": [
+      "PolishTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I need to add a new feature to my project, where should I start?",
+    "context_tags": [
+      "developer",
+      "productivity",
+      "knowledge",
+      "education",
+      "business"
+    ],
+    "tools": [
+      "RepoTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I'm currently residing in California and I am highly interested in venturing into the cannabis industry by setting up a legal business specifically related to cannabis production, distribution, or retail.",
+    "context_tags": [
+      "business",
+      "knowledge",
+      "finance",
+      "location",
+      "news"
+    ],
+    "tools": [
+      "LawTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Are there any updates on the Covid-19 situation in Brazil?",
+    "context_tags": [
+      "news",
+      "health",
+      "knowledge",
+      "data",
+      "science"
+    ],
+    "tools": [
+      "NewsTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Where can I find a course on history?",
+    "context_tags": [
+      "education",
+      "knowledge",
+      "search",
+      "news",
+      "entertainment"
+    ],
+    "tools": [
+      "CourseTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I heard about a new NFT collection called \"ArtBlocks Curated,\" can you give me some insights about it?",
+    "context_tags": [
+      "finance",
+      "knowledge",
+      "news",
+      "entertainment",
+      "data"
+    ],
+    "tools": [
+      "FinanceTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you help me in building a comprehensive and integrated ERP (Enterprise Resource Planning) solution specifically tailored for my retail business? We are looking to incorporate essential functionalities such as robust point of sale system, efficient inventory tracking capabilities, and effective customer relationship management tools.",
+    "context_tags": [
+      "business",
+      "shopping",
+      "productivity",
+      "finance",
+      "data"
+    ],
+    "tools": [
+      "tailor_erp"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you please assist me by finding the most up-to-date news articles specifically related to innovations and advancements in technology-based startup companies?",
+    "context_tags": [
+      "news",
+      "business",
+      "knowledge",
+      "search",
+      "data"
+    ],
+    "tools": [
+      "aiAgents"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I'd like to explore buying a startup within the food and beverage industry. Could you provide me with potential options?",
+    "context_tags": [
+      "business",
+      "food",
+      "finance",
+      "shopping",
+      "search"
+    ],
+    "tools": [
+      "ProductSearch"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I'm a teacher and desire to create a website where I can share educational resources with my students. Can you assist me in deploying it to Netlify for easy access?",
+    "context_tags": [
+      "developer",
+      "education",
+      "productivity",
+      "business",
+      "knowledge"
+    ],
+    "tools": [
+      "WebsiteTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I'm looking for reviews and ratings of the new iPhone model.",
+    "context_tags": [
+      "shopping",
+      "search",
+      "knowledge",
+      "news",
+      "entertainment"
+    ],
+    "tools": [
+      "internetSearch"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Hi, can you help me extract text from a scanned PDF that contains handwritten notes and images, and preserve the formatting and layout of the original document?",
+    "context_tags": [
+      "productivity",
+      "image",
+      "developer",
+      "knowledge",
+      "data"
+    ],
+    "tools": [
+      "ChatOCR"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I'm looking for popular K-pop tracks. Can you assist me?",
+    "context_tags": [],
+    "tools": [
+      "MusicTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Hey, assistant! As a Cancer, I'm feeling a bit lost in my career. Can you give me some career advice through my horoscope today?",
+    "context_tags": [
+      "knowledge",
+      "education",
+      "business",
+      "productivity",
+      "communication"
+    ],
+    "tools": [
+      "Horoscopes_by_Inner_Self"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you provide me with a curated list of today's NFT news headlines in a format where I can click on them?",
+    "context_tags": [
+      "finance",
+      "news",
+      "entertainment",
+      "data",
+      "search"
+    ],
+    "tools": [
+      "FinanceTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Is it possible to convert ABC music notation into both a WAV file and a PostScript file?",
+    "context_tags": [
+      "developer",
+      "knowledge",
+      "education",
+      "data",
+      "productivity"
+    ],
+    "tools": [
+      "abc_to_audio"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I would like to generate a story from a prompt, can you assist me with that?",
+    "context_tags": [
+      "education",
+      "knowledge",
+      "entertainment",
+      "productivity",
+      "communication"
+    ],
+    "tools": [
+      "storybird_stories"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Could you quickly and accurately decode the technical analysis ideas, involving various chart patterns, indicators, and trend predictions, for stocks from different sectors such as finance, healthcare, and technology, allowing me to gain valuable insights into market trends and potential investment opportunities?",
+    "context_tags": [
+      "finance",
+      "data",
+      "knowledge",
+      "business",
+      "news"
+    ],
+    "tools": [
+      "FinanceTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Please display a list of tweets specifically from celebrities that contain the hashtag #MondayMotivation.",
+    "context_tags": [
+      "communication",
+      "search",
+      "news",
+      "entertainment",
+      "data"
+    ],
+    "tools": [
+      "socialsearch"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I need to catch up on the latest shows, what are some popular ones right now?",
+    "context_tags": [
+      "entertainment",
+      "search",
+      "news",
+      "communication",
+      "knowledge"
+    ],
+    "tools": [
+      "what_to_watch"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you find a funny gif for me?",
+    "context_tags": [
+      "entertainment",
+      "image",
+      "communication",
+      "search",
+      "knowledge"
+    ],
+    "tools": [
+      "GifApi"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you provide a comprehensive overview of my website's SEO performance by conducting a thorough keyword analysis and subsequently suggest specific improvements to enhance its performance?",
+    "context_tags": [
+      "business",
+      "data",
+      "developer",
+      "knowledge",
+      "productivity"
+    ],
+    "tools": [
+      "bramework"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I need information about the average annual returns of various investment options, and also show me any PDFs or online resources that explain the concept of compound interest in a simple way.",
+    "context_tags": [
+      "finance",
+      "education",
+      "knowledge",
+      "search",
+      "data"
+    ],
+    "tools": [
+      "FinanceTool",
+      "PDF&URLTool"
+    ],
+    "type": "multi"
+  },
+  {
+    "query": "I would appreciate it if you could provide me with a collection of current popular French songs from various genres, including artists such as Stromae, Christine and the Queens, and Indila, that I can listen to for entertainment and language practice purposes.",
+    "context_tags": [],
+    "tools": [
+      "MusicTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "This stupid tarot card app keeps giving me vague and meaningless responses!",
+    "context_tags": [
+      "entertainment",
+      "knowledge",
+      "communication",
+      "search",
+      "education"
+    ],
+    "tools": [
+      "Dr_Thoths_Tarot"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Is it possible to utilize a reliable online service or platform to determine, with utmost certainty, whether or not my personal and confidential email account has been subjected to any detrimental security breaches and unauthorized access by malevolent external entities?",
+    "context_tags": [
+      "security",
+      "communication",
+      "health",
+      "data",
+      "search"
+    ],
+    "tools": [
+      "hacktrack"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Currently, I urgently require a new pair of running shoes in order to pursue my athletic activities efficiently.",
+    "context_tags": [
+      "shopping",
+      "health",
+      "location",
+      "search",
+      "entertainment"
+    ],
+    "tools": [
+      "ProductSearch"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I'm considering traveling, specifically within the United States, and I would like you to provide me with comprehensive information regarding the local health risk and safety guidance for different states.",
+    "context_tags": [
+      "travel",
+      "health",
+      "location",
+      "news",
+      "knowledge"
+    ],
+    "tools": [
+      "hubbubworld_hubbub_1"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "This is ridiculous! I've been planning to watch this play for months and now there are no more tickets. Can you find any available?",
+    "context_tags": [
+      "entertainment",
+      "shopping",
+      "search",
+      "location",
+      "travel"
+    ],
+    "tools": [
+      "smarttsicketsai"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you browse through various online databases, such as NASA's official website or space exploration forums, to locate and retrieve high-resolution images of the awe-inspiring International Space Station (ISS), showcasing its intricacies, exteriors, interiors, and incredible views of Earth and the surrounding space?",
+    "context_tags": [
+      "image",
+      "science",
+      "search",
+      "knowledge",
+      "education"
+    ],
+    "tools": [
+      "NASATool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "What is Got2Go?",
+    "context_tags": [
+      "knowledge",
+      "search",
+      "travel",
+      "location",
+      "entertainment"
+    ],
+    "tools": [
+      "TripTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I need a website for my consultancy firm. Can you provide assistance in creating one?",
+    "context_tags": [
+      "business",
+      "developer",
+      "productivity",
+      "image",
+      "communication"
+    ],
+    "tools": [
+      "WebsiteTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I'm planning a trip to Tasmania and would like specific recommendations for popular tourist attractions, accommodations, transportation options, and local dining experiences.",
+    "context_tags": [
+      "travel",
+      "food",
+      "location",
+      "entertainment",
+      "knowledge"
+    ],
+    "tools": [
+      "AusPetrolPrices"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you help me with the pronunciation of this Dutch word? It's \"gezellig\".",
+    "context_tags": [],
+    "tools": [
+      "MixerBox_Translate_AI_language_tutor"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Was there an earthquake in Iran this week? I couldn't find the latest updates anywhere.",
+    "context_tags": [
+      "news",
+      "science",
+      "search",
+      "knowledge",
+      "location"
+    ],
+    "tools": [
+      "EarthquakeTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I want to know more about the reputation of a developer named \"ABC Developers\". Can I find that information on your platform?",
+    "context_tags": [
+      "business",
+      "developer",
+      "knowledge",
+      "search",
+      "data"
+    ],
+    "tools": [
+      "HousePurchasingTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you provide me with the cash flow statement of Microsoft Corporation for the past year?",
+    "context_tags": [
+      "finance",
+      "data",
+      "business",
+      "knowledge",
+      "search"
+    ],
+    "tools": [
+      "FinanceTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "What are the most effective and up-to-date methods and strategies for optimizing a website in order to improve its search engine ranking and visibility, ultimately driving more organic traffic and user engagement?",
+    "context_tags": [
+      "developer",
+      "business",
+      "data",
+      "knowledge",
+      "education"
+    ],
+    "tools": [
+      "internetSearch"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "The video title and description you came up with are so boring. We need something that stands out and makes people want to click.",
+    "context_tags": [
+      "communication",
+      "business",
+      "productivity",
+      "entertainment",
+      "image"
+    ],
+    "tools": [
+      "Visla"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "This store doesn't have any fashionable clothes, can you find me some?",
+    "context_tags": [
+      "shopping",
+      "search",
+      "location",
+      "image",
+      "communication"
+    ],
+    "tools": [
+      "ProductSearch"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I'm interested in podcasts about science and technology. Any recommendations?",
+    "context_tags": [
+      "entertainment",
+      "science",
+      "education",
+      "knowledge",
+      "search"
+    ],
+    "tools": [
+      "PodcastTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Please show me the image selected by NASA today as the Astronomy Picture of the Day, including any accompanying information or descriptions provided by NASA for the selected image.",
+    "context_tags": [
+      "science",
+      "image",
+      "knowledge",
+      "education",
+      "search"
+    ],
+    "tools": [
+      "NASATool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Is my email data secure when connected to Chatbot?",
+    "context_tags": [
+      "security",
+      "communication",
+      "productivity",
+      "data",
+      "business"
+    ],
+    "tools": [
+      "EmailByNylas"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you find me any information regarding Tesla's upcoming product launches?",
+    "context_tags": [
+      "news",
+      "business",
+      "finance",
+      "shopping",
+      "search"
+    ],
+    "tools": [
+      "FinanceTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Display a UML diagram demonstrating the relationships between different classes in a software system.",
+    "context_tags": [
+      "developer",
+      "image",
+      "education",
+      "knowledge",
+      "productivity"
+    ],
+    "tools": [
+      "ChartTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you specifically scrape reviews of the latest smartphone model from a popular and reputable technology blog?",
+    "context_tags": [
+      "shopping",
+      "search",
+      "data",
+      "knowledge",
+      "developer"
+    ],
+    "tools": [
+      "web_scraper"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you provide details about the fees associated with using Magnetis?",
+    "context_tags": [
+      "finance",
+      "business",
+      "knowledge",
+      "data",
+      "search"
+    ],
+    "tools": [
+      "Magnetis"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I am furious! I need to find the best smartphone with a long battery life and a good camera on Kakaku.com. Can you help me with that?",
+    "context_tags": [
+      "shopping",
+      "search",
+      "knowledge",
+      "data",
+      "communication"
+    ],
+    "tools": [
+      "ProductSearch"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you provide me with the current weather data, including temperature, wind speed, humidity, and precipitation, for Los Angeles International Airport?",
+    "context_tags": [
+      "weather",
+      "data",
+      "location",
+      "travel",
+      "science"
+    ],
+    "tools": [
+      "WeatherTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you provide me with a detailed activity matrix filled with a wide range of engaging and interactive exercises to facilitate the teaching of English grammar?",
+    "context_tags": [
+      "education",
+      "knowledge",
+      "productivity",
+      "communication",
+      "data"
+    ],
+    "tools": [
+      "CourseTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I am currently seeking specific 3D assets such as character models, objects, textures, and environments in order to effectively develop and enhance a captivating virtual reality game.",
+    "context_tags": [
+      "developer",
+      "shopping",
+      "image",
+      "entertainment",
+      "search"
+    ],
+    "tools": [
+      "assetOvi"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you convert this long written article into an audio file for me to listen to while commuting?",
+    "context_tags": [
+      "productivity",
+      "education",
+      "entertainment",
+      "communication",
+      "travel"
+    ],
+    "tools": [
+      "speechki_tts_plugin"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you give me information on the mission and key people of the non-profit organization \"American Red Cross\"?",
+    "context_tags": [
+      "knowledge",
+      "business",
+      "news",
+      "search",
+      "education"
+    ],
+    "tools": [
+      "CharityTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I need a new blender. Can you suggest a high-quality one from a well-known brand?",
+    "context_tags": [
+      "shopping",
+      "food",
+      "search",
+      "knowledge",
+      "data"
+    ],
+    "tools": [
+      "ProductSearch"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "What are the best practices for setting up a Google Remarketing campaign?",
+    "context_tags": [
+      "business",
+      "education",
+      "knowledge",
+      "data",
+      "shopping"
+    ],
+    "tools": [
+      "Google_Ads_Shopping_Microsoft_Ads_pay_per_click"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you provide me with associated data, such as keywords, traffic analysis, backlink analysis, and ranking performance, for analyzing the search engine optimization (SEO) of a particular web page?",
+    "context_tags": [
+      "data",
+      "developer",
+      "business",
+      "search",
+      "knowledge"
+    ],
+    "tools": [
+      "seoanalysis"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Sure, could you please calculate the result of 4.8173**2.3094 and provide it to me?",
+    "context_tags": [
+      "knowledge",
+      "data",
+      "education",
+      "developer",
+      "productivity"
+    ],
+    "tools": [
+      "calculator"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I need to set a call reminder for tomorrow at 10 am, can you manage it on my CLINQ account for me?",
+    "context_tags": [],
+    "tools": [
+      "clinq"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I am looking for a lawyer who can guide me through the process of setting up a company in Sapporo. Can you assist me?",
+    "context_tags": [
+      "business",
+      "location",
+      "knowledge",
+      "search",
+      "communication"
+    ],
+    "tools": [
+      "LawTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "What will be the total cost of my home loan if I shorten the term from 30 years to 20 years?",
+    "context_tags": [
+      "finance",
+      "data",
+      "knowledge",
+      "business",
+      "education"
+    ],
+    "tools": [
+      "CreditYelp"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I want to understand the current state of research on cancer immunotherapy, including the latest advancements in treatment methods, ongoing clinical trials, potential side effects, success rates, and the impact of immunotherapy on different types of cancer patients.",
+    "context_tags": [
+      "health",
+      "science",
+      "knowledge",
+      "education",
+      "news"
+    ],
+    "tools": [
+      "ResearchFinder"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "My child is struggling with bullying and I am seeking advice on how to support them and address this issue.",
+    "context_tags": [
+      "health",
+      "education",
+      "knowledge",
+      "communication",
+      "search"
+    ],
+    "tools": [
+      "BookTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Search for audio files on PodcastIndex.org.",
+    "context_tags": [
+      "entertainment",
+      "search",
+      "knowledge",
+      "communication",
+      "education"
+    ],
+    "tools": [
+      "PodcastTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "What's the surf like at Bells Beach in Victoria today?",
+    "context_tags": [
+      "weather",
+      "location",
+      "travel",
+      "data",
+      "search"
+    ],
+    "tools": [
+      "AusSurfReport"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I'm in the mood for some good old-fashioned horror movies that are filled with mysterious supernatural creatures, suspenseful plot twists, and spine-chilling jump scares that will leave me on the edge of my seat with fright.",
+    "context_tags": [
+      "entertainment",
+      "search",
+      "knowledge",
+      "education",
+      "communication"
+    ],
+    "tools": [
+      "MediaTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Please check if \"bestdealsonline.com\" is a taken domain name.",
+    "context_tags": [
+      "developer",
+      "business",
+      "security",
+      "search",
+      "data"
+    ],
+    "tools": [
+      "URLTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I can't find any good restaurants near me.",
+    "context_tags": [
+      "food",
+      "location",
+      "search",
+      "shopping",
+      "travel"
+    ],
+    "tools": [
+      "MapTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Certainly! Can you please provide me with the date and time of your arrival at Rome airport, as well as the number of passengers and any specific requirements or preferences you have for the airport transfer service?",
+    "context_tags": [
+      "travel",
+      "location",
+      "productivity",
+      "communication",
+      "business"
+    ],
+    "tools": [
+      "TripTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I heard about a big earthquake in South America. Can you provide more details?",
+    "context_tags": [
+      "news",
+      "knowledge",
+      "science",
+      "search",
+      "location"
+    ],
+    "tools": [
+      "EarthquakeTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you assist me by using Optical Character Recognition (OCR) software to convert the text from this handwritten note into a digital document file, such as a Word document or a PDF?",
+    "context_tags": [
+      "image",
+      "productivity",
+      "developer",
+      "education",
+      "knowledge"
+    ],
+    "tools": [
+      "ChatOCR"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I heard there's an important news story in the UK, specifically in London, related to a political scandal involving high-ranking officials and allegations of corruption. Can you provide more detailed information about this news story, including key individuals involved and any significant developments or ramifications that have emerged so far?",
+    "context_tags": [
+      "news",
+      "knowledge",
+      "location",
+      "business",
+      "communication"
+    ],
+    "tools": [
+      "NewsTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Is there any unusual Internet activity happening right now?",
+    "context_tags": [
+      "security",
+      "data",
+      "news",
+      "knowledge",
+      "search"
+    ],
+    "tools": [
+      "cloudflare_radar"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Could you provide me with news articles on renewable energy sources and any research papers exploring their effectiveness?",
+    "context_tags": [
+      "news",
+      "science",
+      "knowledge",
+      "education",
+      "search"
+    ],
+    "tools": [
+      "NewsTool",
+      "ResearchHelper"
+    ],
+    "type": "multi"
+  },
+  {
+    "query": "Can you find me a step-by-step tutorial with clear instructions, including the exact measurements and ingredients required, on how to bake a moist and decadent chocolate cake that is suitable for beginners, available on YouTube?",
+    "context_tags": [
+      "food",
+      "education",
+      "entertainment",
+      "search",
+      "knowledge"
+    ],
+    "tools": [
+      "video_highlight"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "What is the current stock price for Apple?",
+    "context_tags": [
+      "finance",
+      "data",
+      "search",
+      "news",
+      "business"
+    ],
+    "tools": [
+      "jini"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I want to see how Amazon's website appeared during its prime day event in  Can you fetch that for me?",
+    "context_tags": [
+      "shopping",
+      "knowledge",
+      "search",
+      "news",
+      "data"
+    ],
+    "tools": [
+      "WebRewind"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you show me available houses within my budget and provide me with a discount estimate?",
+    "context_tags": [
+      "business",
+      "shopping",
+      "finance",
+      "location",
+      "data"
+    ],
+    "tools": [
+      "Discount",
+      "HousePurchasingTool"
+    ],
+    "type": "multi"
+  },
+  {
+    "query": "I want to challenge my logic skills by solving complex puzzles and riddles that require critical thinking and problem-solving abilities.",
+    "context_tags": [
+      "education",
+      "entertainment",
+      "knowledge",
+      "health",
+      "productivity"
+    ],
+    "tools": [
+      "Sudoku"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I'm planning a road trip with my Nissan Leaf to explore various scenic routes, visit picturesque towns, and discover hidden gems along the way.",
+    "context_tags": [
+      "travel",
+      "location",
+      "weather",
+      "knowledge",
+      "entertainment"
+    ],
+    "tools": [
+      "SuperchargeMyEV"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "What types of crypto currencies can I explore?",
+    "context_tags": [
+      "finance",
+      "knowledge",
+      "data",
+      "education",
+      "search"
+    ],
+    "tools": [
+      "FinanceTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Certainly! Could you please provide me with more details such as your sister's age, her interests or hobbies, and your budget for the gift? This will help me suggest a more personalized and suitable unique gift for her birthday.",
+    "context_tags": [
+      "shopping",
+      "knowledge",
+      "communication",
+      "education",
+      "productivity"
+    ],
+    "tools": [
+      "GiftTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you please help me assess my investment portfolio by reviewing the performance of all my current holdings, analyzing the risk exposure, evaluating the diversification, scrutinizing the asset allocation, and providing personalized recommendations for optimizing the portfolio based on my financial goals and risk tolerance?",
+    "context_tags": [
+      "finance",
+      "data",
+      "business",
+      "knowledge",
+      "productivity"
+    ],
+    "tools": [
+      "portfoliopilot"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you find me information about the revenue projections mentioned in the latest Earnings Call Transcript of Microsoft?",
+    "context_tags": [
+      "finance",
+      "business",
+      "data",
+      "news",
+      "knowledge"
+    ],
+    "tools": [
+      "FinanceTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Could you please provide me with more details about the specific features or aspects of the Sudoku game that you would like me to evaluate in terms of difficulty level?",
+    "context_tags": [
+      "entertainment",
+      "knowledge",
+      "education",
+      "data",
+      "search"
+    ],
+    "tools": [
+      "Sudoku"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can I extract text from an image?",
+    "context_tags": [
+      "image",
+      "developer",
+      "productivity",
+      "knowledge",
+      "data"
+    ],
+    "tools": [
+      "ChatOCR"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "Can you create a funny meme about cats?",
+    "context_tags": [
+      "image",
+      "entertainment",
+      "communication",
+      "knowledge",
+      "education"
+    ],
+    "tools": [
+      "MemeTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I would like to discover some new artists, preferably emerging indie musicians, and I kindly request you to create a playlist incorporating such talents for me.",
+    "context_tags": [],
+    "tools": [
+      "MusicTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I want to see a satellite-streets map of Los Angeles to explore the city's neighborhoods.",
+    "context_tags": [
+      "location",
+      "travel",
+      "image",
+      "knowledge",
+      "data"
+    ],
+    "tools": [
+      "MapTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "How can I transfer funds using crypto?",
+    "context_tags": [
+      "finance",
+      "security",
+      "knowledge",
+      "business",
+      "developer"
+    ],
+    "tools": [
+      "FinanceTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I need detailed information on rental property listings such as available apartments, houses, and condos, along with comprehensive information regarding the neighborhoods in Japan, including amenities, safety ratings, transportation options, and local attractions.",
+    "context_tags": [
+      "business",
+      "location",
+      "travel",
+      "knowledge",
+      "data"
+    ],
+    "tools": [
+      "HouseRentingTool"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I need help with optimizing my blog posts. Can you provide me with relevant keywords to increase my reach?",
+    "context_tags": [
+      "business",
+      "productivity",
+      "data",
+      "search",
+      "communication"
+    ],
+    "tools": [
+      "keywordexplorer"
+    ],
+    "type": "single"
+  },
+  {
+    "query": "I need a design assistant to create personalized event invitation cards using my templates.",
+    "context_tags": [
+      "image",
+      "productivity",
+      "business",
+      "communication",
+      "education"
+    ],
+    "tools": [
+      "placid"
+    ],
+    "type": "single"
   }
 ]

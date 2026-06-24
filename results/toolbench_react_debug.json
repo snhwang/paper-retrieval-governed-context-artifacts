@@ -83,7 +83,7 @@
       "ASIN_Data_Search",
       "ASIN_Data_Product"
     ],
-    "raw_response": "Thought: To find popular sites and main keywords for the search query 'birthday party ideas', I will use the Keyword Analysis API.\nAction: Keyword_Analysis_PopularSitesForQuery",
+    "raw_response": "Thought: To find popular sites and main keywords for the search query 'birthday party ideas', I'll use the Keyword Analysis API.\n\nAction: Keyword_Analysis_PopularSitesForQuery",
     "predicted_name": "Keyword_Analysis_PopularSitesForQuery",
     "expected_ids": [
       "toolbench/data/Keyword Analysis/PopularSitesForQuery",
@@ -123,10 +123,16 @@
     "condition": "BEAR retrieval + ReAct",
     "index": 0,
     "query": "I am a fitness enthusiast and I want to buy a fitness tracker. Can you suggest some top-rated fitness trackers available on Amazon along with their features and prices?",
-    "n_schemas_offered": 0,
-    "first_few_schema_names": [],
-    "raw_response": "Thought: The user is looking for fitness trackers, so the best tool to use is the \"Amazon Search\" tool to find top-rated products.\nAction: Amazon Search",
-    "predicted_name": null,
+    "n_schemas_offered": 5,
+    "first_few_schema_names": [
+      "ASIN_Data_Search",
+      "ASIN_Data_Reviews",
+      "ASIN_Data_Category",
+      "ASIN_Data_Offers",
+      "ASIN_Data_Product"
+    ],
+    "raw_response": "",
+    "predicted_name": "ASIN_Data_Search",
     "expected_ids": [
       "toolbench/data/ASIN Data/Product",
       "toolbench/data/ASIN Data/Search"
@@ -135,16 +141,22 @@
       "ASIN_Data_Product",
       "ASIN_Data_Search"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "condition": "BEAR retrieval + ReAct",
     "index": 1,
     "query": "I'm a football enthusiast and I want to know more about Lionel Messi's career. Can you provide me with information about Messi's clubs, managers, teammates, and referees? I'm also curious about any notable transfers he has made.",
-    "n_schemas_offered": 0,
-    "first_few_schema_names": [],
-    "raw_response": "Thought: The user is asking for detailed information about Lionel Messi's career, including clubs, managers, teammates, referees, and notable transfers. The best tool to use for this is the \"Wikipedia Article Generator\" as it can provide comprehensive information about a topic.\nAction: Wikipedia Article Generator",
-    "predicted_name": null,
+    "n_schemas_offered": 5,
+    "first_few_schema_names": [
+      "ASIN_Data_Category",
+      "ASIN_Data_Offers",
+      "ASIN_Data_Reviews",
+      "ASIN_Data_Search",
+      "ASIN_Data_Product"
+    ],
+    "raw_response": "Thought: The user is looking for information about Lionel Messi's career, including his clubs, managers, teammates, referees, and notable transfers. The ASIN Data Search tool can be used to find products related to Messi, which may include books or documentaries that could provide this information.\n\nAction: ASIN_Data_Search",
+    "predicted_name": "ASIN_Data_Search",
     "expected_ids": [
       "toolbench/data/TheClique/Transfermarkt details",
       "toolbench/data/TheClique/Transfermarkt search"
@@ -159,10 +171,16 @@
     "condition": "BEAR retrieval + ReAct",
     "index": 2,
     "query": "I'm a fan of the streamer 'gmhikaru' on Kick.com and I want to explore their channel. Can you provide me with the channel clips and the channel details? I'm eager to learn more about their content.",
-    "n_schemas_offered": 0,
-    "first_few_schema_names": [],
-    "raw_response": "Thought: The user wants to explore a specific streamer's channel, so I'll use the 'Get Channel Details' tool to fetch the channel details and the 'Get Channel Clips' tool to fetch the clips.\nAction: Get Channel Details",
-    "predicted_name": null,
+    "n_schemas_offered": 5,
+    "first_few_schema_names": [
+      "Kick_com_API_Kick_API_Get_Channel_Clips",
+      "Kick_com_API_Kick_API_Get_Channel_Livestream_Info",
+      "Kick_com_API_Kick_API_Get_Channel_Emotes",
+      "Kick_com_API_Kick_API_Get_Channel_Links",
+      "Kick_com_API_Kick_API_Get_Channel_Details"
+    ],
+    "raw_response": "",
+    "predicted_name": "Kick_com_API_Kick_API_Get_Channel_Clips",
     "expected_ids": [
       "toolbench/data/Kick.com API | Kick API/Get Channel Clips",
       "toolbench/data/Kick.com API | Kick API/Get Channel Details"
@@ -171,16 +189,22 @@
       "Kick_com_API_Kick_API_Get_Channel_Clips",
       "Kick_com_API_Kick_API_Get_Channel_Details"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "condition": "BEAR retrieval + ReAct",
     "index": 3,
     "query": "I want to plan a surprise birthday party for my friend. Can you suggest popular sites and main keywords for the search query 'birthday party ideas'? I want to gather inspiration and plan a memorable event.",
-    "n_schemas_offered": 0,
-    "first_few_schema_names": [],
-    "raw_response": "Thought: To find popular sites and main keywords for 'birthday party ideas', a search engine would be most suitable.\nAction: SearchEngine",
-    "predicted_name": "SearchEngine",
+    "n_schemas_offered": 5,
+    "first_few_schema_names": [
+      "Fake_Data_Generator_random_post_by_id",
+      "Fake_Data_Generator_random_credit_card_by_id",
+      "Fake_Data_Generator_random_address_by_id",
+      "Fake_Data_Generator_random_profile_by_id",
+      "Fake_Data_Generator_random_bank_by_id"
+    ],
+    "raw_response": "",
+    "predicted_name": "Fake_Data_Generator_random_post_by_id",
     "expected_ids": [
       "toolbench/data/Keyword Analysis/PopularSitesForQuery",
       "toolbench/data/Keyword Analysis/QueryKeywords"
@@ -195,10 +219,16 @@
     "condition": "BEAR retrieval + ReAct",
     "index": 4,
     "query": "I'm curious about the credibility and popularity of different media sources. Can you fetch me the statistics on media sources? Additionally, I'm interested in reading the top 50 startup news articles from the last month. Thank you for your help!",
-    "n_schemas_offered": 0,
-    "first_few_schema_names": [],
-    "raw_response": "Thought: To fetch statistics on media sources, the best tool would be 'Media Source Statistics'. For the top 50 startup news articles, 'News Article Retrieval' is the most suitable tool.\nAction: Media Source Statistics",
-    "predicted_name": null,
+    "n_schemas_offered": 5,
+    "first_few_schema_names": [
+      "public-url-share_Top_50_startups_news_from_the_last_month",
+      "public-url-share_Media_sources_statistics",
+      "Cheap_YouTube_API_Popular",
+      "News_In_Bay_Get_All_News",
+      "Shazam_Artist_Top_Tracks"
+    ],
+    "raw_response": "",
+    "predicted_name": "public-url-share_Media_sources_statistics",
     "expected_ids": [
       "toolbench/media/public-url-share/Media sources statistics",
       "toolbench/media/public-url-share/Top 50 startups news from the last month"
@@ -207,16 +237,22 @@
       "public-url-share_Media_sources_statistics",
       "public-url-share_Top_50_startups_news_from_the_last_month"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "condition": "BEAR retrieval + single-turn (reference)",
     "index": 0,
     "query": "I am a fitness enthusiast and I want to buy a fitness tracker. Can you suggest some top-rated fitness trackers available on Amazon along with their features and prices?",
-    "n_schemas_offered": 0,
-    "first_few_schema_names": [],
-    "raw_response": "<no tool call>",
-    "predicted_name": null,
+    "n_schemas_offered": 5,
+    "first_few_schema_names": [
+      "ASIN_Data_Search",
+      "ASIN_Data_Reviews",
+      "ASIN_Data_Category",
+      "ASIN_Data_Offers",
+      "ASIN_Data_Product"
+    ],
+    "raw_response": "{\"name\": \"ASIN_Data_Search\", \"arguments\": \"{\\\"type\\\": \\\"search\\\", \\\"search_term\\\": \\\"fitness tracker\\\", \\\"sort_by\\\": \\\"average_review\\\", \\\"page\\\": 1, \\\"exclude_sponsored\\\": true, \\\"amazon_domain\\\": \\\"amazon.com\\\"}\"}",
+    "predicted_name": "ASIN_Data_Search",
     "expected_ids": [
       "toolbench/data/ASIN Data/Product",
       "toolbench/data/ASIN Data/Search"
@@ -225,16 +261,22 @@
       "ASIN_Data_Product",
       "ASIN_Data_Search"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "condition": "BEAR retrieval + single-turn (reference)",
     "index": 1,
     "query": "I'm a football enthusiast and I want to know more about Lionel Messi's career. Can you provide me with information about Messi's clubs, managers, teammates, and referees? I'm also curious about any notable transfers he has made.",
-    "n_schemas_offered": 0,
-    "first_few_schema_names": [],
-    "raw_response": "<no tool call>",
-    "predicted_name": null,
+    "n_schemas_offered": 5,
+    "first_few_schema_names": [
+      "ASIN_Data_Category",
+      "ASIN_Data_Offers",
+      "ASIN_Data_Reviews",
+      "ASIN_Data_Search",
+      "ASIN_Data_Product"
+    ],
+    "raw_response": "{\"name\": \"ASIN_Data_Product\", \"arguments\": \"{\\\"type\\\": \\\"product\\\", \\\"asin\\\": \\\"B08N5WRWNW\\\", \\\"amazon_domain\\\": \\\"amazon.com\\\"}\"}",
+    "predicted_name": "ASIN_Data_Product",
     "expected_ids": [
       "toolbench/data/TheClique/Transfermarkt details",
       "toolbench/data/TheClique/Transfermarkt search"
@@ -249,10 +291,16 @@
     "condition": "BEAR retrieval + single-turn (reference)",
     "index": 2,
     "query": "I'm a fan of the streamer 'gmhikaru' on Kick.com and I want to explore their channel. Can you provide me with the channel clips and the channel details? I'm eager to learn more about their content.",
-    "n_schemas_offered": 0,
-    "first_few_schema_names": [],
-    "raw_response": "<no tool call>",
-    "predicted_name": null,
+    "n_schemas_offered": 5,
+    "first_few_schema_names": [
+      "Kick_com_API_Kick_API_Get_Channel_Clips",
+      "Kick_com_API_Kick_API_Get_Channel_Livestream_Info",
+      "Kick_com_API_Kick_API_Get_Channel_Emotes",
+      "Kick_com_API_Kick_API_Get_Channel_Links",
+      "Kick_com_API_Kick_API_Get_Channel_Details"
+    ],
+    "raw_response": "{\"name\": \"Kick_com_API_Kick_API_Get_Channel_Clips\", \"arguments\": \"{\\\"cursor\\\": \\\"null\\\", \\\"channel_name\\\": \\\"gmhikaru\\\"}\"}",
+    "predicted_name": "Kick_com_API_Kick_API_Get_Channel_Clips",
     "expected_ids": [
       "toolbench/data/Kick.com API | Kick API/Get Channel Clips",
       "toolbench/data/Kick.com API | Kick API/Get Channel Details"
@@ -261,16 +309,22 @@
       "Kick_com_API_Kick_API_Get_Channel_Clips",
       "Kick_com_API_Kick_API_Get_Channel_Details"
     ],
-    "correct": 0
+    "correct": 1
   },
   {
     "condition": "BEAR retrieval + single-turn (reference)",
     "index": 3,
     "query": "I want to plan a surprise birthday party for my friend. Can you suggest popular sites and main keywords for the search query 'birthday party ideas'? I want to gather inspiration and plan a memorable event.",
-    "n_schemas_offered": 0,
-    "first_few_schema_names": [],
-    "raw_response": "<no tool call>",
-    "predicted_name": null,
+    "n_schemas_offered": 5,
+    "first_few_schema_names": [
+      "Fake_Data_Generator_random_post_by_id",
+      "Fake_Data_Generator_random_credit_card_by_id",
+      "Fake_Data_Generator_random_address_by_id",
+      "Fake_Data_Generator_random_profile_by_id",
+      "Fake_Data_Generator_random_bank_by_id"
+    ],
+    "raw_response": "{\"name\": \"Fake_Data_Generator_random_post_by_id\", \"arguments\": \"{\\\"id\\\": 1}\"}",
+    "predicted_name": "Fake_Data_Generator_random_post_by_id",
     "expected_ids": [
       "toolbench/data/Keyword Analysis/PopularSitesForQuery",
       "toolbench/data/Keyword Analysis/QueryKeywords"
@@ -285,10 +339,16 @@
     "condition": "BEAR retrieval + single-turn (reference)",
     "index": 4,
     "query": "I'm curious about the credibility and popularity of different media sources. Can you fetch me the statistics on media sources? Additionally, I'm interested in reading the top 50 startup news articles from the last month. Thank you for your help!",
-    "n_schemas_offered": 0,
-    "first_few_schema_names": [],
-    "raw_response": "<no tool call>",
-    "predicted_name": null,
+    "n_schemas_offered": 5,
+    "first_few_schema_names": [
+      "public-url-share_Top_50_startups_news_from_the_last_month",
+      "public-url-share_Media_sources_statistics",
+      "Cheap_YouTube_API_Popular",
+      "News_In_Bay_Get_All_News",
+      "Shazam_Artist_Top_Tracks"
+    ],
+    "raw_response": "{\"name\": \"public-url-share_Media_sources_statistics\", \"arguments\": \"{}\"}",
+    "predicted_name": "public-url-share_Media_sources_statistics",
     "expected_ids": [
       "toolbench/media/public-url-share/Media sources statistics",
       "toolbench/media/public-url-share/Top 50 startups news from the last month"
@@ -297,6 +357,6 @@
       "public-url-share_Media_sources_statistics",
       "public-url-share_Top_50_startups_news_from_the_last_month"
     ],
-    "correct": 0
+    "correct": 1
   }
 ]
