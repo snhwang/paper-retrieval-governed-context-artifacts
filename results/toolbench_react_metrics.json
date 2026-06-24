@@ -1,0 +1,30 @@
+{
+  "model": "mistralai/Mistral-Nemo-Instruct-2407",
+  "top_k": 5,
+  "rows": [
+    {
+      "condition": "mono_react",
+      "label": "Monolithic + ReAct",
+      "n": 1100,
+      "tool_acc": 0.023636363636363636,
+      "ci_lo": 0.015454545454545455,
+      "ci_hi": 0.03272727272727273
+    },
+    {
+      "condition": "bear_react",
+      "label": "BEAR retrieval + ReAct",
+      "n": 1100,
+      "tool_acc": 0.0,
+      "ci_lo": 0.0,
+      "ci_hi": 0.0
+    },
+    {
+      "condition": "bear_single",
+      "label": "BEAR retrieval + single-turn",
+      "n": 1100,
+      "tool_acc": 0.0,
+      "ci_lo": 0.0,
+      "ci_hi": 0.0
+    }
+  ]
+}
