@@ -6,28 +6,91 @@ BEAR top-k: 5
 Monolithic cap: 200
 
 Loading ToolBench data ...
-Corpus: 3225 APIs, evaluating 20 queries
+Corpus: 3225 APIs, evaluating 1100 queries
 Corpus schema coverage: 3225/3225 (100.0%) instructions have an OpenAI function schema.
 
-[Monolithic + ReAct] running 20 queries ...
-[Monolithic + ReAct] done; tool-acc = 0.750; elapsed 0.4 min
-  Debug dump appended: /mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts/results/toolbench_react_debug.json (+5 rows)
+[Monolithic + ReAct] running 1100 queries ...
+  50/1100 done; acc-so-far = 0.540; ETA 16.4 min
+  100/1100 done; acc-so-far = 0.270; ETA 15.9 min
+  150/1100 done; acc-so-far = 0.187; ETA 14.5 min
+  200/1100 done; acc-so-far = 0.145; ETA 13.4 min
+  250/1100 done; acc-so-far = 0.116; ETA 12.0 min
+  300/1100 done; acc-so-far = 0.097; ETA 11.0 min
+  350/1100 done; acc-so-far = 0.083; ETA 10.3 min
+  400/1100 done; acc-so-far = 0.072; ETA 9.3 min
+  450/1100 done; acc-so-far = 0.064; ETA 8.6 min
+  500/1100 done; acc-so-far = 0.058; ETA 8.0 min
+  550/1100 done; acc-so-far = 0.053; ETA 7.4 min
+  600/1100 done; acc-so-far = 0.048; ETA 6.8 min
+  650/1100 done; acc-so-far = 0.045; ETA 6.2 min
+  700/1100 done; acc-so-far = 0.043; ETA 5.7 min
+  750/1100 done; acc-so-far = 0.040; ETA 5.1 min
+  800/1100 done; acc-so-far = 0.039; ETA 4.4 min
+  850/1100 done; acc-so-far = 0.036; ETA 3.7 min
+  900/1100 done; acc-so-far = 0.034; ETA 3.0 min
+  950/1100 done; acc-so-far = 0.033; ETA 2.3 min
+  1000/1100 done; acc-so-far = 0.031; ETA 1.5 min
+  1050/1100 done; acc-so-far = 0.030; ETA 0.8 min
+  1100/1100 done; acc-so-far = 0.028; ETA 0.0 min
+[Monolithic + ReAct] done; tool-acc = 0.028; elapsed 16.9 min
 
-[BEAR retrieval + ReAct] running 20 queries ...
-[BEAR retrieval + ReAct] done; tool-acc = 0.750; elapsed 0.5 min
-  Debug dump appended: /mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts/results/toolbench_react_debug.json (+5 rows)
+[BEAR retrieval + ReAct] running 1100 queries ...
+  50/1100 done; acc-so-far = 0.680; ETA 27.7 min
+  100/1100 done; acc-so-far = 0.750; ETA 30.4 min
+  150/1100 done; acc-so-far = 0.747; ETA 29.4 min
+  200/1100 done; acc-so-far = 0.775; ETA 26.9 min
+  250/1100 done; acc-so-far = 0.772; ETA 24.4 min
+  300/1100 done; acc-so-far = 0.787; ETA 22.2 min
+  350/1100 done; acc-so-far = 0.789; ETA 20.7 min
+  400/1100 done; acc-so-far = 0.787; ETA 19.0 min
+  450/1100 done; acc-so-far = 0.780; ETA 17.8 min
+  500/1100 done; acc-so-far = 0.770; ETA 16.7 min
+  550/1100 done; acc-so-far = 0.753; ETA 15.4 min
+  600/1100 done; acc-so-far = 0.752; ETA 14.2 min
+  650/1100 done; acc-so-far = 0.746; ETA 12.8 min
+  700/1100 done; acc-so-far = 0.739; ETA 11.5 min
+  750/1100 done; acc-so-far = 0.737; ETA 10.1 min
+  800/1100 done; acc-so-far = 0.733; ETA 8.8 min
+  850/1100 done; acc-so-far = 0.724; ETA 7.2 min
+  900/1100 done; acc-so-far = 0.711; ETA 5.9 min
+  950/1100 done; acc-so-far = 0.711; ETA 4.4 min
+  1000/1100 done; acc-so-far = 0.701; ETA 3.0 min
+  1050/1100 done; acc-so-far = 0.695; ETA 1.5 min
+  1100/1100 done; acc-so-far = 0.677; ETA 0.0 min
+[BEAR retrieval + ReAct] done; tool-acc = 0.677; elapsed 33.3 min
 
-[BEAR retrieval + single-turn (reference)] running 20 queries ...
-[BEAR retrieval + single-turn (reference)] done; tool-acc = 0.700; elapsed 0.5 min
-  Debug dump appended: /mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts/results/toolbench_react_debug.json (+5 rows)
+[BEAR retrieval + single-turn (reference)] running 1100 queries ...
+  50/1100 done; acc-so-far = 0.700; ETA 26.1 min
+  100/1100 done; acc-so-far = 0.740; ETA 26.6 min
+  150/1100 done; acc-so-far = 0.753; ETA 25.5 min
+  200/1100 done; acc-so-far = 0.780; ETA 25.3 min
+  250/1100 done; acc-so-far = 0.768; ETA 25.2 min
+  300/1100 done; acc-so-far = 0.780; ETA 23.8 min
+  350/1100 done; acc-so-far = 0.791; ETA 22.4 min
+  400/1100 done; acc-so-far = 0.795; ETA 20.4 min
+  450/1100 done; acc-so-far = 0.787; ETA 19.2 min
+  500/1100 done; acc-so-far = 0.778; ETA 18.0 min
+  550/1100 done; acc-so-far = 0.762; ETA 16.3 min
+  600/1100 done; acc-so-far = 0.757; ETA 14.9 min
+  650/1100 done; acc-so-far = 0.752; ETA 13.5 min
+  700/1100 done; acc-so-far = 0.747; ETA 12.0 min
+  750/1100 done; acc-so-far = 0.747; ETA 10.4 min
+  800/1100 done; acc-so-far = 0.743; ETA 9.1 min
+  850/1100 done; acc-so-far = 0.732; ETA 7.5 min
+  900/1100 done; acc-so-far = 0.714; ETA 6.0 min
+  950/1100 done; acc-so-far = 0.715; ETA 4.6 min
+  1000/1100 done; acc-so-far = 0.706; ETA 3.1 min
+  1050/1100 done; acc-so-far = 0.699; ETA 1.5 min
+  1100/1100 done; acc-so-far = 0.683; ETA 0.0 min
+[BEAR retrieval + single-turn (reference)] done; tool-acc = 0.683; elapsed 33.9 min
 
 --- Tool selection accuracy (1 if predicted tool matches any expected api_id) ---
 
 Condition                                 Tool Acc [95% CI]              n
 --------------------------------------------------------------------------
-Monolithic + ReAct                        0.750 [0.550,0.900]       20
-BEAR retrieval + ReAct                    0.750 [0.550,0.950]       20
-BEAR retrieval + single-turn              0.700 [0.500,0.900]       20
+Monolithic + ReAct                        0.028 [0.019,0.038]     1100
+BEAR retrieval + ReAct                    0.677 [0.649,0.705]     1100
+BEAR retrieval + single-turn              0.683 [0.655,0.710]     1100
 
 --- LaTeX table (paste into manuscript as Table 5b) ---
 
@@ -40,9 +103,9 @@ BEAR retrieval + single-turn              0.700 [0.500,0.900]       20
     \toprule
     Condition & Tool accuracy [95\% CI] & $n$ \\
     \midrule
-    Monolithic + ReAct & 0.750 [0.550,0.900] & 20 \\
-    BEAR retrieval + ReAct & 0.750 [0.550,0.950] & 20 \\
-    BEAR retrieval + single-turn & 0.700 [0.500,0.900] & 20 \\
+    Monolithic + ReAct & 0.028 [0.019,0.038] & 1100 \\
+    BEAR retrieval + ReAct & 0.677 [0.649,0.705] & 1100 \\
+    BEAR retrieval + single-turn & 0.683 [0.655,0.710] & 1100 \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -50,16 +113,16 @@ BEAR retrieval + single-turn              0.700 [0.500,0.900]       20
 Wrote /mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts/results/toolbench_react_metrics.json
 Wrote /mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts/results/toolbench_react_output.txt
 
-Elapsed: 2.7 min
+Elapsed: 85.4 min
 
 === Reproducibility ===
-Timestamp (UTC): 2026-06-24T11:50:56Z
-Command line:    evals/eval_toolbench_react.py --max-queries 20 --debug-dump-n 5
+Timestamp (UTC): 2026-06-24T13:21:28Z
+Command line:    evals/eval_toolbench_react.py
 Python:          3.12.3 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
 numpy:           2.2.6
 scipy:           1.17.1
 bear:            0.1.0
-git commit:      7a09616ded1b19ab442a950513de311c349386f2
+git commit:      6487e99c76d85b5f3462df6df2e1476e80c536a1
 git status:      DIRTY (5 files modified)
 git branch:      main
 
@@ -67,7 +130,7 @@ git branch:      main
   base_url: http://127.0.0.1:8000/v1
   top_k: 5
   monolithic_cap: 200
-  max_queries: 20
+  max_queries: None
   conditions_run: ['mono_react', 'bear_react', 'bear_single']
 ===
 

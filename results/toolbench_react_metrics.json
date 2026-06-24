@@ -5,26 +5,26 @@
     {
       "condition": "mono_react",
       "label": "Monolithic + ReAct",
-      "n": 20,
-      "tool_acc": 0.75,
-      "ci_lo": 0.55,
-      "ci_hi": 0.9
+      "n": 1100,
+      "tool_acc": 0.028181818181818183,
+      "ci_lo": 0.019090909090909092,
+      "ci_hi": 0.038181818181818185
     },
     {
       "condition": "bear_react",
       "label": "BEAR retrieval + ReAct",
-      "n": 20,
-      "tool_acc": 0.75,
-      "ci_lo": 0.55,
-      "ci_hi": 0.95
+      "n": 1100,
+      "tool_acc": 0.6772727272727272,
+      "ci_lo": 0.649090909090909,
+      "ci_hi": 0.7045454545454546
     },
     {
       "condition": "bear_single",
       "label": "BEAR retrieval + single-turn",
-      "n": 20,
-      "tool_acc": 0.7,
-      "ci_lo": 0.5,
-      "ci_hi": 0.9
+      "n": 1100,
+      "tool_acc": 0.6827272727272727,
+      "ci_lo": 0.6554545454545454,
+      "ci_hi": 0.71
     }
   ]
 }
