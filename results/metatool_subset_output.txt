@@ -4,8 +4,12 @@ Loaded 390 tools, 388 tag entries, 20614 queries
 Tools with empty tag list: 1
 Tools in plugin_info but missing from plugin_tags: 0
 
-Retained queries (target tool has non-empty tags): 10051
-Excluded queries (target tool has empty or missing tags): 10563
+Retained queries (target tool has non-empty tags):        10051
+Excluded queries TOTAL:                                   10563
+  ... excluded because tool IS in plugin_info but tags
+      were empty under closed-vocab post-processing:          0
+  ... excluded because tool is NOT in plugin_info at all
+      (no description or tag data in the released set):   10563
 
 Distinct ground-truth tools represented:
   retained: 153
@@ -18,12 +22,11 @@ Property                                                       retained mean   e
 Query length (characters)                                            115.953         124.242     <0.0001     <0.0001     -0.110
 Query length (whitespace tokens)                                      19.573          20.315     <0.0001     <0.0001     -0.069
 Query-name lexical overlap (fraction of tool subtokens in query)           0.171           0.125     <0.0001     <0.0001     +0.170
-Ground-truth tool description length (characters)                    553.041           0.000     <0.0001     <0.0001     +0.728
 
 === LaTeX table (paste into manuscript appendix) ===
 
 \begin{table}[t]
-  \caption{MetaTool retained vs.\ excluded subset comparison (retained: 10{,}051 queries whose ground-truth target tool received a non-empty LLM-generated tag list; excluded: 11{,}060 queries whose target tool had an empty or missing tag list). Welch's two-sample $t$-test and Mann-Whitney $U$ test reported. Cohen's $d$ is the standardized mean difference (retained $-$ excluded).}
+  \caption{MetaTool retained vs.\ excluded subset comparison (retained: 10,051 queries; excluded: 10,563 queries, of which 10,563 point to 46 distinct tools that are absent from MetaTool's released \texttt{plugin\_info.json} file). Welch's two-sample $t$-test and Mann-Whitney $U$ test are reported. Cohen's $d$ is the standardized mean difference (retained $-$ excluded). All effect sizes are below the small-effect threshold ($|d| < 0.2$).}
   \label{tab:metatool-subset}
   \centering
   \small
@@ -35,29 +38,47 @@ Ground-truth tool description length (characters)                    553.041    
     Query length (chars) & 115.953 & 124.242 & $<$0.0001 & $<$0.0001 & -0.110 \\
     Query length (tokens) & 19.573 & 20.315 & $<$0.0001 & $<$0.0001 & -0.069 \\
     Query--name lexical overlap & 0.171 & 0.125 & $<$0.0001 & $<$0.0001 & +0.170 \\
-    GT tool description length (chars) & 553.041 & 0.000 & $<$0.0001 & $<$0.0001 & +0.728 \\
     \bottomrule
   \end{tabular}
 \end{table}
+
+Supplementary: zero queries are excluded with tool IN plugin_info; all exclusions are 'no_info'.
 
 Wrote /mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts/results/metatool_subset_analysis.json
 Wrote /mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts/results/metatool_subset_output.txt
 
 Elapsed: 0.2s
 
+=== Headline finding for the manuscript ===
+
+Retained vs. excluded subsets are statistically distinguishable on every
+query-side property (Welch p < 0.0001 throughout) but practically very
+similar: every Cohen's d is below 0.20 (small-effect threshold).
+
+The excluded subset has TWO components:
+  (0 queries) tool IS in plugin_info but tag list was empty
+      under the closed-vocabulary post-processing.
+  (10563 queries) tool is NOT in MetaTool's released
+      plugin_info file at all (46 distinct tools missing source data).
+
+In other words, the exclusion is driven primarily by gaps in MetaTool's
+released metadata rather than by tag-generation quality.
+
 === Reproducibility ===
-Timestamp (UTC): 2026-06-24T03:48:09Z
+Timestamp (UTC): 2026-06-24T03:54:31Z
 Command line:    evals/eval_metatool_subset_analysis.py
 Python:          3.12.3 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
 numpy:           2.3.5
 scipy:           1.17.1
 bear:            0.1.0
-git commit:      bd76018fbcfa26f1d8ca9858460ee50de04ba96c
+git commit:      76b75784d9dfd4f203953839784f8af74c470219
 git status:      DIRTY (2 files modified)
 git branch:      main
 
   n_retained_queries: 10051
-  n_excluded_queries: 10563
+  n_excluded_queries_total: 10563
+  n_excluded_in_info: 0
+  n_excluded_no_info: 10563
 ===
 
 To commit these results:

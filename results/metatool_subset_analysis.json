@@ -1,9 +1,11 @@
 {
   "n_retained_queries": 10051,
-  "n_excluded_queries": 10563,
+  "n_excluded_queries_total": 10563,
+  "n_excluded_in_info": 0,
+  "n_excluded_no_info": 10563,
   "n_distinct_retained_tools": 153,
   "n_distinct_excluded_tools": 46,
-  "n_total_tools": 390,
+  "n_total_tools_in_info": 390,
   "n_tools_with_empty_tags": 1,
   "n_tools_missing_from_tag_file": 0,
   "comparisons": [
@@ -66,26 +68,7 @@
       "mannwhitney_u": 54575226.5,
       "mannwhitney_p": 6.355535555938521e-06,
       "cohen_d": 0.17048804555180755
-    },
-    {
-      "property": "Ground-truth tool description length (characters)",
-      "retained": {
-        "n": 10051,
-        "mean": 553.0410904387624,
-        "std": 1088.3262067694861,
-        "median": 157.0
-      },
-      "excluded": {
-        "n": 10563,
-        "mean": 0.0,
-        "std": 0.0,
-        "median": 0.0
-      },
-      "welch_t": 50.94516223778661,
-      "welch_p": 0.0,
-      "mannwhitney_u": 106168713.0,
-      "mannwhitney_p": 0.0,
-      "cohen_d": 0.7277384964106296
     }
-  ]
+  ],
+  "gt_description_length_excluded_in_info_only": null
 }
