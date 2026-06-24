@@ -63,6 +63,7 @@ from eval_retrieval_backends import (
     paired_bootstrap_test,
 )
 from eval_governance_ablation import evaluate_itr
+from repro_footer import print_repro_footer
 
 
 # ---------------------------------------------------------------------------
@@ -622,7 +623,71 @@ def parse_args() -> argparse.Namespace:
             "a combined results/governance_decomposed_all.json."
         ),
     )
+    p.add_argument(
+        "--log-file",
+        type=Path,
+        default=Path("results/governance_decomposed_output.txt"),
+        help=(
+            "Tee printed output (tables + LaTeX) to this file in addition "
+            "to stdout. Pass an empty string to disable."
+        ),
+    )
     return p.parse_args()
+
+
+class _Tee:
+    """Minimal stdout tee that forwards isatty/fileno/encoding/closed to primary."""
+
+    def __init__(self, *streams):
+        if not streams:
+            raise ValueError("_Tee needs at least one stream")
+        self._streams = streams
+        self._primary = streams[0]
+
+    def write(self, data):
+        for s in self._streams:
+            s.write(data)
+        return len(data)
+
+    def flush(self):
+        for s in self._streams:
+            try:
+                s.flush()
+            except Exception:
+                pass
+
+    def isatty(self):
+        try:
+            return bool(self._primary.isatty())
+        except Exception:
+            return False
+
+    def fileno(self):
+        return self._primary.fileno()
+
+    @property
+    def encoding(self):
+        return getattr(self._primary, "encoding", "utf-8")
+
+    @property
+    def closed(self):
+        return getattr(self._primary, "closed", False)
+
+    @property
+    def buffer(self):
+        return getattr(self._primary, "buffer")
+
+    def writable(self):
+        return True
+
+    def readable(self):
+        return False
+
+    def seekable(self):
+        return False
+
+    def __getattr__(self, name):
+        return getattr(self._primary, name)
 
 
 def main() -> None:
@@ -635,31 +700,48 @@ def main() -> None:
     else:
         backends = DEFAULT_BACKENDS
 
-    t0 = time.time()
-    per_backend: dict[str, dict] = {}
-    for i, bk in enumerate(backends, 1):
-        print(f"\n{'#' * 70}")
-        print(f"#  Backend {i}/{len(backends)}: {bk}")
-        print(f"{'#' * 70}")
-        if len(backends) == 1 and args.output is not None:
-            out_path = args.output
-        else:
-            out_path = Path(f"results/governance_decomposed_{bk}.json")
-        result = run_all(bk, out_path)
-        per_backend[bk] = result
+    log_handle = None
+    original_stdout = sys.stdout
+    if args.log_file and str(args.log_file).strip():
+        args.log_file.parent.mkdir(parents=True, exist_ok=True)
+        log_handle = args.log_file.open("w", encoding="utf-8")
+        sys.stdout = _Tee(original_stdout, log_handle)  # type: ignore[assignment]
 
-    if len(backends) > 1:
-        combined_path = Path("results/governance_decomposed_all.json")
-        combined_path.parent.mkdir(parents=True, exist_ok=True)
-        with combined_path.open("w") as f:
-            json.dump(per_backend, f, indent=2)
-        print(f"\n=== Combined JSON written to {combined_path} ===\n")
+    try:
+        t0 = time.time()
+        per_backend: dict[str, dict] = {}
+        for i, bk in enumerate(backends, 1):
+            print(f"\n{'#' * 70}")
+            print(f"#  Backend {i}/{len(backends)}: {bk}")
+            print(f"{'#' * 70}")
+            if len(backends) == 1 and args.output is not None:
+                out_path = args.output
+            else:
+                out_path = Path(f"results/governance_decomposed_{bk}.json")
+            result = run_all(bk, out_path)
+            per_backend[bk] = result
 
-        print("\n=== COMBINED LaTeX TABLE (paste into manuscript) ===\n")
-        print(render_combined_latex(per_backend))
-        print()
+        if len(backends) > 1:
+            combined_path = Path("results/governance_decomposed_all.json")
+            combined_path.parent.mkdir(parents=True, exist_ok=True)
+            with combined_path.open("w") as f:
+                json.dump(per_backend, f, indent=2)
+            print(f"\n=== Combined JSON written to {combined_path} ===\n")
 
-    print(f"\nElapsed: {time.time() - t0:.1f}s")
+            print("\n=== COMBINED LaTeX TABLE (paste into manuscript) ===\n")
+            print(render_combined_latex(per_backend))
+            print()
+
+        print(f"\nElapsed: {time.time() - t0:.1f}s")
+        if log_handle is not None:
+            print(f"Full log written to {args.log_file}")
+
+        # Reproducibility footer (captured by the tee if active)
+        print_repro_footer(extra={"backends": backends})
+    finally:
+        if log_handle is not None:
+            sys.stdout = original_stdout
+            log_handle.close()
 
 
 if __name__ == "__main__":

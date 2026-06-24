@@ -78,6 +78,7 @@ from eval_retrieval_backends import (
     bootstrap_ci,
     paired_bootstrap_test,
 )
+from repro_footer import print_repro_footer
 
 
 # ---------------------------------------------------------------------------
@@ -608,6 +609,15 @@ def main() -> None:
         print(f"\nElapsed: {time.time() - t0:.1f}s")
         if log_handle is not None:
             print(f"Full log written to {args.log_file}")
+
+        # Reproducibility footer (captured by the tee if active)
+        print_repro_footer(
+            extra={
+                "backends": backends,
+                "alphas": alphas,
+                "output_dir": str(args.output_dir),
+            }
+        )
     finally:
         if log_handle is not None:
             sys.stdout = original_stdout

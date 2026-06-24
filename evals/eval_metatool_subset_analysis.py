@@ -308,6 +308,28 @@ def main() -> None:
         out(f"\nWrote {json_path}")
         out(f"Wrote {log_path}")
         out(f"\nElapsed: {time.time() - t0:.1f}s")
+
+        # Reproducibility footer pipes through out() so it lands in the log.
+        import io
+        buf = io.StringIO()
+        _orig_stdout = sys.stdout
+        sys.stdout = buf
+        try:
+            print_repro_footer(
+                extra={
+                    "n_retained_queries": int(full_result["n_retained_queries"]),
+                    "n_excluded_queries": int(full_result["n_excluded_queries"]),
+                }
+            )
+        finally:
+            sys.stdout = _orig_stdout
+        for line in buf.getvalue().rstrip("\n").splitlines():
+            out(line)
+
+        out("")
+        out("To commit these results:")
+        out(f"  git add {json_path.relative_to(REPO_ROOT)} \\")
+        out(f"          {log_path.relative_to(REPO_ROOT)}")
     finally:
         log_handle.close()
 

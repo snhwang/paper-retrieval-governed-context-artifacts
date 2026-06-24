@@ -85,6 +85,7 @@ from eval_toolbench_e2e import (  # noqa: E402
     BOOTSTRAP_ITERS,
 )
 from bear import Composer, CompositionStrategy, Context  # noqa: E402
+from repro_footer import print_repro_footer  # noqa: E402
 
 try:
     from stat_utils import bootstrap_ci
@@ -501,6 +502,22 @@ def main() -> None:
         print(f"\nWrote {out_path}")
         print(f"Wrote {log_path}")
         print(f"\nElapsed: {(time.time() - t0)/60:.1f} min")
+
+        # Reproducibility footer (captured by the tee into log_path)
+        print_repro_footer(
+            extra={
+                "model": args.model,
+                "base_url": args.base_url,
+                "top_k": args.top_k,
+                "monolithic_cap": args.monolithic_cap,
+                "max_queries": args.max_queries,
+                "conditions_run": list(results.keys()),
+            }
+        )
+
+        print("\nTo commit these results to the artifacts repo:")
+        print(f"  git add {out_path.relative_to(REPO_ROOT)} \\")
+        print(f"          {log_path.relative_to(REPO_ROOT)}")
     finally:
         sys.stdout = original_stdout
         log_handle.close()

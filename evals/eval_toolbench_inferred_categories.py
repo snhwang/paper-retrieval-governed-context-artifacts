@@ -108,6 +108,7 @@ except ImportError:
     pass
 
 from bear import Corpus, Context  # noqa: E402
+from repro_footer import print_repro_footer  # noqa: E402
 
 # Reuse the existing ToolBench harness
 from eval_toolbench import (  # noqa: E402
@@ -605,6 +606,23 @@ def main() -> None:
         print(f"Wrote {log_path}")
         print(f"Cache: {CACHE_PATH}")
         print(f"\nElapsed: {time.time() - t0:.1f}s")
+
+        # Reproducibility footer (captured by the tee into log_path)
+        print_repro_footer(
+            extra={
+                "provider": args.provider,
+                "model": args.model,
+                "top_k": args.top_k,
+                "n_queries": len(queries),
+                "classifier_top1_accuracy": float(clf_acc),
+                "n_new_llm_calls": int(n_new),
+            }
+        )
+
+        print("\nTo commit these results to the artifacts repo:")
+        print(f"  git add {out_path.relative_to(REPO_ROOT)} \\")
+        print(f"          {log_path.relative_to(REPO_ROOT)} \\")
+        print(f"          {CACHE_PATH.relative_to(REPO_ROOT)}")
     finally:
         sys.stdout = original_stdout
         log_handle.close()
