@@ -980,6 +980,14 @@ def main():
                         help="Only run MetaTool+QueryTags condition (fastest MetaTool eval).")
     parser.add_argument("--metatool-base-only", action="store_true",
                         help="Only run base MetaTool (no tags) condition.")
+    parser.add_argument("--metatool-query-tags-file", type=str, default=None,
+                        help="Path to a custom MetaTool query-tags JSON. "
+                        "Default: data/external_benchmarks/metatool/query_tags.json. "
+                        "Use this to run the MetaTool+QueryTags condition against "
+                        "a variant tag file (e.g., query_tags_top5.json) without "
+                        "renaming files. The result key in the output JSON becomes "
+                        "MetaTool+QueryTags-<stem> so multiple variants can be "
+                        "compared side by side.")
     args = parser.parse_args()
 
     do_metatool = not args.toolbench_only
@@ -1031,7 +1039,20 @@ def main():
 
     # --- MetaTool+QueryTags (tags from query text — strongest test) ---
     if do_metatool and not metatool_base_only:
-        query_tags_file = METATOOL_DIR / "query_tags.json"
+        # Allow an override so the top-5 query-tag variant (or any future
+        # variant) can be run without renaming files. The default still
+        # points at query_tags.json for backwards compatibility.
+        if args.metatool_query_tags_file:
+            query_tags_file = Path(args.metatool_query_tags_file)
+        else:
+            query_tags_file = METATOOL_DIR / "query_tags.json"
+        # Derive a result-key suffix from the file stem so multiple variants
+        # do not overwrite each other in the output JSON. The default file
+        # 'query_tags.json' keeps the original label.
+        if query_tags_file.stem == "query_tags":
+            qt_label = "MetaTool+QueryTags"
+        else:
+            qt_label = f"MetaTool+QueryTags-{query_tags_file.stem.replace('query_tags_', '')}"
         tool_tags_file = METATOOL_DIR / "plugin_tags.json"
         if query_tags_file.exists() and tool_tags_file.exists():
             try:
@@ -1040,23 +1061,27 @@ def main():
                     query_tags_file, max_queries=args.max_queries
                 )
                 tagged_count = sum(1 for _, ctx, _ in queries_qt if ctx)
-                print(f"\nMetaTool+QueryTags loaded: {len(corpus_qt)} tools, {len(queries_qt)} queries")
+                print(f"\n{qt_label} loaded: {len(corpus_qt)} tools, {len(queries_qt)} queries")
+                print(f"  Source file: {query_tags_file}")
                 print(f"  Queries with context tags: {tagged_count}/{len(queries_qt)}")
                 if queries_qt:
                     results_qt = run_benchmark(
-                        "MetaTool+QueryTags", corpus_qt, queries_qt,
+                        qt_label, corpus_qt, queries_qt,
                         top_k=args.top_k, experiment_names=exp_names
                     )
-                    all_results["MetaTool+QueryTags"] = results_qt
+                    all_results[qt_label] = results_qt
             except Exception as e:
-                print(f"\n[SKIP] MetaTool+QueryTags: {e}")
+                print(f"\n[SKIP] {qt_label}: {e}")
         else:
             missing = []
             if not tool_tags_file.exists():
                 missing.append("plugin_tags.json (run metatool_generate_tags.py)")
             if not query_tags_file.exists():
-                missing.append("query_tags.json (run metatool_generate_query_tags.py)")
-            print(f"\n[SKIP] MetaTool+QueryTags: missing {', '.join(missing)}")
+                missing.append(
+                    f"{query_tags_file.name} (run metatool_generate_query_tags.py "
+                    f"or metatool_generate_query_tags_top5.py)"
+                )
+            print(f"\n[SKIP] {qt_label}: missing {', '.join(missing)}")
 
     # --- ToolBench ---
     if do_toolbench:
