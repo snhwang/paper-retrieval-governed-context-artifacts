@@ -1,22 +1,74 @@
-bear @ git+https://github.com/snhwang/bear.git@v0.1.0
-scipy
-numpy
-matplotlib
-PyYAML
-python-dotenv
-datasets>=2.14.0
-huggingface-hub>=0.19.0
+# =============================================================================
+# Paper artifacts: pinned dependency set
+#
+# These versions are the ones used to produce the revision results. Each pin
+# below was verified together on a single machine. Loosening any pin may work
+# but is not validated by the authors.
+#
+# Tested platform:
+#   - Linux x86_64 / WSL2 on Windows 11
+#   - Python 3.12
+#   - CUDA 12.8 (compatible with torch 2.10 cu12x wheels)
+#   - NVIDIA GPU with >= 24 GB VRAM (only required for eval_toolbench_react.py)
+#
+# Install:
+#   pip install -r requirements.txt
+#
+# The vLLM stack at the bottom is required only for the end-to-end ReAct
+# experiment. All other evaluations run without vLLM. If you do not intend
+# to reproduce the ReAct experiment you may comment out the vLLM-stack block.
+# =============================================================================
 
-# ---------------------------------------------------------------------------
-# Optional: only required for the ReAct end-to-end ToolBench experiment
-# (eval_toolbench_react.py). All other evaluations run without vLLM.
+# ----- BEAR (this paper's library) -------------------------------------------
+bear @ git+https://github.com/snhwang/bear.git@v0.1.0
+
+# ----- Core numerics and IO --------------------------------------------------
+numpy==2.2.6
+scipy==1.17.1
+PyYAML==6.0.1
+python-dotenv==1.2.2
+matplotlib==3.10.8
+
+# ----- Embedding stack -------------------------------------------------------
+# BEAR's retriever uses sentence-transformers, which transitively pulls in
+# torch, transformers, tokenizers, and huggingface-hub. All retrieval evals
+# (Tables 3, 4, 5-retrieval, 14, 15) depend on this stack.
+torch==2.10.0
+transformers==4.57.6
+sentence-transformers==5.4.1
+tokenizers==0.22.2
+huggingface-hub==0.36.2
+
+# ----- HuggingFace datasets --------------------------------------------------
+# Required by toolbench_setup.py for downloading benchmark splits.
+datasets==4.8.4
+
+# ----- Tokenization for context-window accounting ----------------------------
+# Used by the ReAct eval to count tokens against the model's context window.
+tiktoken==0.13.0
+
+# ----- LLM API clients -------------------------------------------------------
+# The MetaTool tag-generation and ToolBench inferred-categories scripts call
+# the Anthropic and (optionally) OpenAI APIs via urllib directly. These SDKs
+# are pinned for environments that prefer to use them instead.
+anthropic==0.111.0
+openai==2.24.0
+
+# =============================================================================
+# Optional: required only for the ReAct end-to-end ToolBench experiment
+# (eval_toolbench_react.py). Skip this block if you do not intend to run it.
 #
-# Pinned to 0.17.1 to match the version shipped inside the vllm/vllm-openai
-# Docker image used for the paper's Table 5 results. Later 0.x releases
-# (notably 0.20.0) have shipped custom CUDA kernels that segfault on some
-# WSL2 + driver combinations.
+# vLLM 0.17.1 is the version under which the revision Table 5 numbers were
+# produced. Later vLLM 0.20.x releases ship custom CUDA kernels that segfault
+# on some WSL2 + driver combinations. The artifact launcher
+# serve_mistral_nemo.sh routes around the WSL issue by setting
+# --enforce-eager and --compilation-config custom_ops=none, which works on
+# 0.20.x too, but the paper's numbers were measured on 0.17.1.
 #
-# Install only if you intend to run eval_toolbench_react.py:
-#   pip install vllm==0.17.1
-# ---------------------------------------------------------------------------
-# vllm==0.17.1
+# flashinfer-cubin must match flashinfer-python exactly. Older venvs that
+# previously had vllm 0.20.x installed may have a mismatched flashinfer-cubin
+# and need the explicit pin below.
+# =============================================================================
+vllm==0.17.1
+flashinfer-python==0.6.4
+flashinfer-cubin==0.6.4
