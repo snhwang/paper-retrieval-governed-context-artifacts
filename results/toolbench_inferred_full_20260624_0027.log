@@ -55,6 +55,24 @@ Classifier top-1 accuracy vs. benchmark gold category: 0.465
   OOV classifications (no required_tags applied): 6
 
 Building retrievers and evaluating Recall@5 ...
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights:  50%|█████     | 100/199 [00:00<00:00, 993.41it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 1328.42it/s]
+[1mBertModel LOAD REPORT[0m from: BAAI/bge-base-en-v1.5
+Key                     | Status     |  | 
+------------------------+------------+--+-
+embeddings.position_ids | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+Batches:   0%|          | 0/101 [00:00<?, ?it/s]Batches:   1%|          | 1/101 [00:00<00:10,  9.27it/s]Batches:   2%|▏         | 2/101 [00:00<00:14,  6.65it/s]Batches:   4%|▍         | 4/101 [00:00<00:10,  8.89it/s]Batches:   6%|▌         | 6/101 [00:00<00:08, 11.23it/s]Batches:   8%|▊         | 8/101 [00:00<00:07, 13.14it/s]Batches:  11%|█         | 11/101 [00:00<00:05, 16.67it/s]Batches:  14%|█▍        | 14/101 [00:00<00:04, 20.07it/s]Batches:  17%|█▋        | 17/101 [00:01<00:03, 22.02it/s]Batches:  21%|██        | 21/101 [00:01<00:03, 25.06it/s]Batches:  25%|██▍       | 25/101 [00:01<00:02, 27.34it/s]Batches:  29%|██▊       | 29/101 [00:01<00:02, 30.06it/s]Batches:  33%|███▎      | 33/101 [00:01<00:02, 32.47it/s]Batches:  37%|███▋      | 37/101 [00:01<00:01, 34.38it/s]Batches:  41%|████      | 41/101 [00:01<00:01, 35.71it/s]Batches:  46%|████▌     | 46/101 [00:01<00:01, 37.71it/s]Batches:  50%|█████     | 51/101 [00:01<00:01, 38.91it/s]Batches:  55%|█████▌    | 56/101 [00:02<00:01, 40.81it/s]Batches:  60%|██████    | 61/101 [00:02<00:00, 42.57it/s]Batches:  65%|██████▌   | 66/101 [00:02<00:00, 44.14it/s]Batches:  71%|███████▏  | 72/101 [00:02<00:00, 46.72it/s]Batches:  77%|███████▋  | 78/101 [00:02<00:00, 49.02it/s]Batches:  83%|████████▎ | 84/101 [00:02<00:00, 50.74it/s]Batches:  89%|████████▉ | 90/101 [00:02<00:00, 51.88it/s]Batches:  95%|█████████▌| 96/101 [00:02<00:00, 52.64it/s]Batches: 100%|██████████| 101/101 [00:02<00:00, 34.76it/s]
+Loading weights:   0%|          | 0/199 [00:00<?, ?it/s]Loading weights:  71%|███████▏  | 142/199 [00:00<00:00, 1411.05it/s]Loading weights: 100%|██████████| 199/199 [00:00<00:00, 1718.80it/s]
+[1mBertModel LOAD REPORT[0m from: BAAI/bge-base-en-v1.5
+Key                     | Status     |  | 
+------------------------+------------+--+-
+embeddings.position_ids | UNEXPECTED |  | 
+
+Notes:
+- UNEXPECTED:	can be ignored when loading from different task/architecture; not ok if you expect identical arch.
+Batches:   0%|          | 0/101 [00:00<?, ?it/s]Batches:   2%|▏         | 2/101 [00:00<00:09, 10.66it/s]Batches:   4%|▍         | 4/101 [00:00<00:08, 10.90it/s]Batches:   6%|▌         | 6/101 [00:00<00:07, 13.05it/s]Batches:   8%|▊         | 8/101 [00:00<00:06, 14.62it/s]Batches:  11%|█         | 11/101 [00:00<00:04, 18.73it/s]Batches:  15%|█▍        | 15/101 [00:00<00:03, 23.04it/s]Batches:  18%|█▊        | 18/101 [00:00<00:03, 24.85it/s]Batches:  22%|██▏       | 22/101 [00:01<00:02, 27.05it/s]Batches:  26%|██▌       | 26/101 [00:01<00:02, 29.39it/s]Batches:  30%|██▉       | 30/101 [00:01<00:02, 32.12it/s]Batches:  35%|███▍      | 35/101 [00:01<00:01, 35.63it/s]Batches:  40%|███▉      | 40/101 [00:01<00:01, 37.80it/s]Batches:  46%|████▌     | 46/101 [00:01<00:01, 41.17it/s]Batches:  51%|█████▏    | 52/101 [00:01<00:01, 45.19it/s]Batches:  57%|█████▋    | 58/101 [00:01<00:00, 47.09it/s]Batches:  63%|██████▎   | 64/101 [00:01<00:00, 49.24it/s]Batches:  69%|██████▉   | 70/101 [00:02<00:00, 51.25it/s]Batches:  76%|███████▌  | 77/101 [00:02<00:00, 54.71it/s]Batches:  83%|████████▎ | 84/101 [00:02<00:00, 57.11it/s]Batches:  90%|█████████ | 91/101 [00:02<00:00, 59.29it/s]Batches:  97%|█████████▋| 98/101 [00:02<00:00, 61.06it/s]Batches: 100%|██████████| 101/101 [00:02<00:00, 39.45it/s]
   [1/3] BEAR + oracle categories (the manuscript number) ...
   [2/3] BEAR + LLM-inferred categories (the new condition) ...
   [3/3] BEAR with no governance (lower bound) ...
