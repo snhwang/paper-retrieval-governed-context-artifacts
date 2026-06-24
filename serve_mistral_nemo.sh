@@ -164,8 +164,14 @@ echo ""
 POLLER_PID=$!
 trap "kill $POLLER_PID 2>/dev/null" EXIT
 
+# Tool-calling support is REQUIRED by the ReAct end-to-end ToolBench eval
+# (eval_toolbench_react.py), which sends OpenAI-compatible tools= and
+# tool_choice=auto. Without these flags, vLLM silently drops the tool block
+# and the eval scores 0 across the board.
 vllm serve "$MODEL" \
     --port "$PORT" \
     --max-model-len "$MAX_MODEL_LEN" \
     --gpu-memory-utilization "$GPU_MEM_UTIL" \
+    --enable-auto-tool-choice \
+    --tool-call-parser mistral \
     "${EXTRA_ARGS[@]}"

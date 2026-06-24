@@ -456,7 +456,13 @@ def main() -> None:
         print("-" * len(header))
         rows = []
         for name, arr in results.items():
-            mean, lo, hi = bootstrap_ci(arr.astype(float), BOOTSTRAP_ITERS)
+            out = bootstrap_ci(arr.astype(float), BOOTSTRAP_ITERS)
+            # stat_utils.bootstrap_ci returns a dict; eval_retrieval_backends
+            # fallback returns a 3-tuple. Accept either shape.
+            if isinstance(out, dict):
+                mean, lo, hi = out["point_estimate"], out["ci_lower"], out["ci_upper"]
+            else:
+                mean, lo, hi = out
             label = {
                 "mono_react": "Monolithic + ReAct",
                 "bear_react": "BEAR retrieval + ReAct",
