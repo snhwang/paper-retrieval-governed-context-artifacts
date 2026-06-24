@@ -76,7 +76,6 @@ sys.path.insert(0, str(EVALS_DIR))
 
 # Reuse the existing e2e infrastructure
 from eval_toolbench_e2e import (  # noqa: E402
-    DEFAULT_LLM_URL,
     DEFAULT_LLM_MODEL,
     build_retriever,
     strip_governance,
@@ -84,6 +83,10 @@ from eval_toolbench_e2e import (  # noqa: E402
     DEFAULT_TOP_K,
     BOOTSTRAP_ITERS,
 )
+
+# Default to port 8000 to match serve_mistral_nemo.sh and the paper's
+# Table 5 deployment. The user can still override with --base-url.
+DEFAULT_LLM_URL = "http://127.0.0.1:8000/v1"
 from bear import Composer, CompositionStrategy, Context  # noqa: E402
 from repro_footer import print_repro_footer  # noqa: E402
 

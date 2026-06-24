@@ -104,13 +104,27 @@ The cache file is worth committing because future readers can re-run the downstr
 
 ### Prerequisites
 
-- An OpenAI-compatible local LLM endpoint (LM Studio, vLLM, Ollama). The paper used `mistralai/Mistral-Nemo-Instruct-2407` 12B via vLLM. Pass `--model` and `--base-url` to override.
+The paper used `mistralai/Mistral-Nemo-Instruct-2407` 12B via vLLM, served on port 8000. The artifacts repo includes `serve_mistral_nemo.sh` which starts the exact configuration.
+
+**Terminal 1 (vLLM server):**
+
+```bash
+cd /path/to/paper-retrieval-governed-context-artifacts
+./serve_mistral_nemo.sh
+# Wait for the 'vLLM READY at http://127.0.0.1:8000/v1' banner.
+```
+
+The script auto-detects WSL and adds `--enforce-eager` to avoid the CUDA graph segfault. First-run model download is ~24 GB from Hugging Face.
 
 ### Quick smoke test (50 queries, ~5 minutes)
+
+**Terminal 2:**
 
 ```bash
 python evals/eval_toolbench_react.py --max-queries 50
 ```
+
+The script defaults to `http://127.0.0.1:8000/v1` to match `serve_mistral_nemo.sh`. Pass `--base-url` to override if you serve on a different port.
 
 ### Full run (~1,100 queries, ~3 hours on a single GPU)
 
