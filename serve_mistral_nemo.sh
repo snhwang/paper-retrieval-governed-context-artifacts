@@ -51,31 +51,29 @@ fi
 EXTRA_ARGS=()
 [[ "$EAGER" == "1" ]] && EXTRA_ARGS+=(--enforce-eager)
 
-# --- WSL: force native rms_norm kernel ------------------------------------
-# vLLM 0.20 routes rms_norm to its custom CUDA kernel ('vllm_c') by default,
-# which segfaults inside the bound C++ function on several WSL2 + CUDA driver
-# combinations even with --enforce-eager. The fix is to flip the IR op
-# priority so vLLM picks the native PyTorch implementation.
+# --- WSL: disable ALL custom CUDA kernels ---------------------------------
+# vLLM 0.20 ships custom CUDA kernels for rms_norm, rotary_embedding,
+# silu_and_mul, fused_add_rms_norm, etc. On several WSL2 + CUDA driver
+# combinations these kernels segfault inside the bound C++ function
+# immediately after the model finishes loading, even with --enforce-eager.
+# Peeling them off one at a time becomes a whack-a-mole: fixing rms_norm
+# just moves the crash to rotary_embedding, etc.
 #
-# Only the rms_norm priority is set here. fused_add_rms_norm is not always
-# exposed as a separate CLI field in 0.20.x patch releases (Pydantic rejects
-# it), so we leave that op alone. In practice disabling the vllm_c rms_norm
-# kernel alone is sufficient for the WSL segfault path.
+# The robust fix is to disable the entire custom-op registry and fall back
+# to the native PyTorch implementation of every CustomOp. Each affected op
+# has a tested native fallback. Runtime cost is typically 10-30%.
 #
-# Override with NATIVE_RMS=0 if a future driver/vLLM release fixes the
-# underlying kernel issue. If even rms_norm=native is rejected by your
-# build, swap the EXTRA_ARGS line below for the broader compilation-config
-# form, which works on older 0.20.x:
-#   EXTRA_ARGS+=(--compilation-config '{"custom_ops": ["all", "-rms_norm"]}')
-if [[ -z "${NATIVE_RMS:-}" ]]; then
+# Override with NATIVE_OPS=0 if a future driver/vLLM release fixes the
+# underlying kernel issue.
+if [[ -z "${NATIVE_OPS:-}" ]]; then
     if grep -qi microsoft /proc/version 2>/dev/null; then
-        NATIVE_RMS=1
+        NATIVE_OPS=1
     else
-        NATIVE_RMS=0
+        NATIVE_OPS=0
     fi
 fi
-if [[ "$NATIVE_RMS" == "1" ]]; then
-    EXTRA_ARGS+=(--ir-op-priority.rms_norm=native)
+if [[ "$NATIVE_OPS" == "1" ]]; then
+    EXTRA_ARGS+=(--compilation-config '{"custom_ops": ["none"]}')
 fi
 
 # --- Pre-flight: vLLM installed -------------------------------------------
@@ -134,8 +132,8 @@ if [[ "$EAGER" == "1" ]]; then
         echo "  Mode:     eager (CUDA graphs disabled)"
     fi
 fi
-if [[ "$NATIVE_RMS" == "1" ]]; then
-    echo "  rms_norm: native (vllm_c custom kernel disabled for WSL)"
+if [[ "$NATIVE_OPS" == "1" ]]; then
+    echo "  CustomOp: all native (vLLM custom CUDA kernels disabled for WSL)"
 fi
 echo ""
 echo "vLLM will load the model (multi-minute first time, faster subsequently)."
