@@ -400,7 +400,9 @@ def main() -> None:
             print_repro_footer(
                 extra={
                     "n_retained_queries": int(full_result["n_retained_queries"]),
-                    "n_excluded_queries": int(full_result["n_excluded_queries"]),
+                    "n_excluded_queries_total": int(full_result["n_excluded_queries_total"]),
+                    "n_excluded_in_info": int(full_result["n_excluded_in_info"]),
+                    "n_excluded_no_info": int(full_result["n_excluded_no_info"]),
                 }
             )
         finally:
