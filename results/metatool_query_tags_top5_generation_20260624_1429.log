@@ -1,0 +1,28 @@
+Total queries to tag: 21111
+Resuming: 21111 already tagged
+
+Done: 20596/21111 queries tagged
+Errors: 0
+Output: /mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts/evals/data/external_benchmarks/metatool/query_tags_top5.json
+
+Query tag distribution:
+  knowledge: 14659
+  search: 11834
+  education: 8644
+  data: 8268
+  business: 7772
+  productivity: 6731
+  communication: 5827
+  entertainment: 5212
+  location: 4574
+  developer: 4266
+  shopping: 4179
+  news: 3817
+  finance: 3306
+  travel: 3152
+  science: 2700
+  image: 2629
+  health: 2149
+  food: 1602
+  weather: 988
+  security: 638

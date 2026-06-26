@@ -1,0 +1,77 @@
+
+MetaTool+QueryTags-top5 loaded: 199 tools, 21111 queries
+  Source file: evals/data/external_benchmarks/metatool/query_tags_top5.json
+  Queries with context tags: 20675/21111
+
+========================================================================
+  MetaTool+QueryTags-top5
+  Corpus: 199 instructions, Queries: 21111, k=5
+  Experiments: 18
+========================================================================
+
+  BEAR+BGE (gov)...
+Batches:   0%|          | 0/7 [00:00<?, ?it/s]Batches:  14%|█▍        | 1/7 [00:00<00:00,  6.92it/s]Batches:  57%|█████▋    | 4/7 [00:00<00:00, 17.72it/s]Batches: 100%|██████████| 7/7 [00:00<00:00, 21.50it/s]
+        recall@5: 0.535 [0.529, 0.542]
+          ndcg@5: 0.431 [0.426, 0.437]
+            f1@5: 0.183 [0.181, 0.186]
+          time:   182.4s
+
+  BEAR+BGE-M3 (gov)...
+Batches:   0%|          | 0/7 [00:00<?, ?it/s]Batches:  14%|█▍        | 1/7 [00:02<00:14,  2.34s/it]Batches:  29%|██▊       | 2/7 [00:02<00:05,  1.03s/it]Batches:  57%|█████▋    | 4/7 [00:02<00:01,  2.37it/s]Batches: 100%|██████████| 7/7 [00:02<00:00,  2.63it/s]
+        recall@5: 0.682 [0.676, 0.688]
+          ndcg@5: 0.591 [0.585, 0.596]
+            f1@5: 0.234 [0.231, 0.236]
+          time:   207.2s
+
+  BEAR+Qwen3-0.6B (gov)...
+Batches:   0%|          | 0/7 [00:00<?, ?it/s]Batches:  14%|█▍        | 1/7 [00:06<00:36,  6.11s/it]Batches:  29%|██▊       | 2/7 [00:06<00:12,  2.60s/it]Batches:  57%|█████▋    | 4/7 [00:06<00:03,  1.02s/it]Batches:  86%|████████▌ | 6/7 [00:06<00:00,  1.78it/s]Batches: 100%|██████████| 7/7 [00:06<00:00,  1.07it/s]
+        recall@5: 0.489 [0.482, 0.496]
+          ndcg@5: 0.459 [0.453, 0.466]
+            f1@5: 0.166 [0.163, 0.168]
+          time:   504.9s
+
+  BEAR+Qwen3-4B (gov)...
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:04<00:04,  4.03s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:07<00:00,  3.81s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:07<00:00,  3.84s/it]
+Batches:   0%|          | 0/7 [00:00<?, ?it/s]Batches:  14%|█▍        | 1/7 [00:24<02:25, 24.25s/it]Batches:  29%|██▊       | 2/7 [00:25<00:52, 10.59s/it]Batches:  43%|████▎     | 3/7 [00:25<00:24,  6.00s/it]Batches:  57%|█████▋    | 4/7 [00:26<00:11,  3.82s/it]Batches:  71%|███████▏  | 5/7 [00:26<00:05,  2.57s/it]Batches:  86%|████████▌ | 6/7 [00:26<00:01,  1.78s/it]Batches: 100%|██████████| 7/7 [00:26<00:00,  3.85s/it]
+Hash embeddings selected. Similarity scores are based on character n-gram overlap and carry no semantic signal — retrieval ranking is effectively arbitrary. Use a sentence-transformers model (e.g. 'BAAI/bge-base-en-v1.5') for meaningful semantic retrieval.
+        recall@5: 0.539 [0.532, 0.545]
+          ndcg@5: 0.508 [0.501, 0.515]
+            f1@5: 0.182 [0.180, 0.185]
+          time:   1001.9s
+
+  BEAR+BM25 (gov)...
+        recall@5: 0.398 [0.391, 0.405]
+          ndcg@5: 0.340 [0.334, 0.346]
+            f1@5: 0.135 [0.133, 0.137]
+          time:   10.5s
+
+  BEAR+Hash (gov)...
+        recall@5: 0.096 [0.092, 0.100]
+          ndcg@5: 0.063 [0.061, 0.066]
+            f1@5: 0.032 [0.031, 0.034]
+          time:   16.8s
+
+  BEAR+BGE (mand-only)...
+Batches:   0%|          | 0/7 [00:00<?, ?it/s]Batches:  29%|██▊       | 2/7 [00:00<00:00, 15.02it/s]Batches: 100%|██████████| 7/7 [00:00<00:00, 31.14it/s]
+        recall@5: 0.392 [0.386, 0.399]
+          ndcg@5: 0.364 [0.358, 0.370]
+            f1@5: 0.274 [0.269, 0.279]
+          time:   101.7s
+
+  BEAR+BGE-M3 (mand-only)...
+Batches:   0%|          | 0/7 [00:00<?, ?it/s]Batches:  14%|█▍        | 1/7 [00:01<00:06,  1.11s/it]Batches:  29%|██▊       | 2/7 [00:01<00:02,  1.90it/s]Batches:  57%|█████▋    | 4/7 [00:01<00:00,  4.27it/s]Batches: 100%|██████████| 7/7 [00:01<00:00,  4.89it/s]
+        recall@5: 0.406 [0.399, 0.412]
+          ndcg@5: 0.374 [0.368, 0.381]
+            f1@5: 0.249 [0.244, 0.253]
+          time:   180.0s
+
+  BEAR+Qwen3-0.6B (mand-only)...
+Batches:   0%|          | 0/7 [00:00<?, ?it/s]Batches:  14%|█▍        | 1/7 [00:01<00:11,  1.88s/it]Batches:  29%|██▊       | 2/7 [00:02<00:04,  1.17it/s]Batches:  57%|█████▋    | 4/7 [00:02<00:01,  2.71it/s]Batches:  86%|████████▌ | 6/7 [00:02<00:00,  4.51it/s]Batches: 100%|██████████| 7/7 [00:02<00:00,  3.02it/s]
+        recall@5: 0.488 [0.481, 0.495]
+          ndcg@5: 0.452 [0.446, 0.459]
+            f1@5: 0.222 [0.219, 0.226]
+          time:   520.2s
+
+  BEAR+Qwen3-4B (mand-only)...
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:03<00:03,  3.06s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:05<00:00,  2.51s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:05<00:00,  2.59s/it]
+Batches:   0%|          | 0/7 [00:00<?, ?it/s]Batches:  14%|█▍        | 1/7 [00:16<01:39, 16.66s/it]Batches:  29%|██▊       | 2/7 [00:17<00:37,  7.47s/it]Batches:  43%|████▎     | 3/7 [00:18<00:17,  4.31s/it]Batches:  57%|█████▋    | 4/7 [00:18<00:08,  2.80s/it]Batches:  71%|███████▏  | 5/7 [00:19<00:03,  1.92s/it]Batches:  86%|████████▌ | 6/7 [00:19<00:01,  1.36s/it]Batches: 100%|██████████| 7/7 [00:19<00:00,  2.77s/it]
