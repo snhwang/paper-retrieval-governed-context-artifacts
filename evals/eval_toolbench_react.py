@@ -163,31 +163,52 @@ def call_llm_react(
     try:
         with urllib.request.urlopen(req, timeout=timeout) as resp:
             data = json.loads(resp.read())
-        msg = data["choices"][0]["message"]
-        raw_content = msg.get("content", "") or ""
-
-        # 1. Structured tool_call (preferred)
-        tcs = msg.get("tool_calls") or []
-        if tcs:
-            name = tcs[0]["function"]["name"]
-            return name, raw_content
-
-        # 2. Parse Action: <name> from the content
-        m = re.search(
-            r"^\s*Action\s*:\s*([A-Za-z0-9_./-]+)\s*$",
-            raw_content,
-            flags=re.MULTILINE,
-        )
-        if m:
-            return m.group(1), raw_content
-
-        # 3. Last-ditch: any tool name that appears as a standalone word
-        for s in tool_schemas:
-            if re.search(rf"\b{re.escape(s['name'])}\b", raw_content):
-                return s["name"], raw_content
-        return None, raw_content
     except Exception as e:  # noqa: BLE001
+        # Surface transport-level failures so a misconfigured endpoint does
+        # not silently produce an all-zero run. Counters track per-process.
+        call_llm_react._fail_count = getattr(call_llm_react, "_fail_count", 0) + 1
+        n = call_llm_react._fail_count
+        if n <= 5 or n % 50 == 0:
+            print(
+                f"  LLM call failed (#{n}) at {base_url}: {type(e).__name__}: {e}",
+                file=sys.stderr,
+            )
+        if n == 20 and getattr(call_llm_react, "_success_count", 0) == 0:
+            print(
+                f"\nFATAL: 20 consecutive LLM calls failed with zero successes.\n"
+                f"  Base URL: {base_url}\n"
+                f"  Model:    {model}\n"
+                f"  Aborting to prevent an all-zero result. Check the vLLM\n"
+                f"  server URL and --base-url flag.",
+                file=sys.stderr,
+            )
+            sys.exit(1)
         return None, f"<error: {e!r}>"
+
+    call_llm_react._success_count = getattr(call_llm_react, "_success_count", 0) + 1
+    msg = data["choices"][0]["message"]
+    raw_content = msg.get("content", "") or ""
+
+    # 1. Structured tool_call (preferred)
+    tcs = msg.get("tool_calls") or []
+    if tcs:
+        name = tcs[0]["function"]["name"]
+        return name, raw_content
+
+    # 2. Parse Action: <name> from the content
+    m = re.search(
+        r"^\s*Action\s*:\s*([A-Za-z0-9_./-]+)\s*$",
+        raw_content,
+        flags=re.MULTILINE,
+    )
+    if m:
+        return m.group(1), raw_content
+
+    # 3. Last-ditch: any tool name that appears as a standalone word
+    for s in tool_schemas:
+        if re.search(rf"\b{re.escape(s['name'])}\b", raw_content):
+            return s["name"], raw_content
+    return None, raw_content
 
 
 # ---------------------------------------------------------------------------

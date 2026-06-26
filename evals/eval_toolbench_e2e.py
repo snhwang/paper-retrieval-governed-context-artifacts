@@ -124,28 +124,53 @@ def call_llm_with_tools(
     try:
         with urllib.request.urlopen(req, timeout=120) as resp:
             data = json.loads(resp.read())
-
-        msg = data["choices"][0]["message"]
-        tool_calls = msg.get("tool_calls", [])
-        if tool_calls:
-            tc = tool_calls[0]
-            return {
-                "name": tc["function"]["name"],
-                "arguments": tc["function"].get("arguments", "{}"),
-            }
-        # Some models return the tool call in content
-        content = msg.get("content", "").strip()
-        if content:
-            # Try to parse as JSON tool call
-            try:
-                parsed = json.loads(content)
-                if "name" in parsed:
-                    return {"name": parsed["name"], "arguments": json.dumps(parsed.get("arguments", {}))}
-            except (json.JSONDecodeError, TypeError):
-                pass
-        return None
     except Exception as e:
+        # Surface the first few transport-level failures so a misconfigured
+        # endpoint or model name does not silently produce an all-zero run.
+        # The counters are tracked on the function object so they persist
+        # across calls within a single process.
+        call_llm_with_tools._fail_count = getattr(call_llm_with_tools, "_fail_count", 0) + 1
+        n = call_llm_with_tools._fail_count
+        if n <= 5 or n % 50 == 0:
+            print(
+                f"  LLM call failed (#{n}) at {base_url}: {type(e).__name__}: {e}",
+                file=sys.stderr,
+            )
+        # Abort early on a clear all-fail pattern so we do not waste 1100
+        # attempts when the server is unreachable or the model name is wrong.
+        if n == 20 and getattr(call_llm_with_tools, "_success_count", 0) == 0:
+            print(
+                f"\nFATAL: 20 consecutive LLM calls failed with zero successes.\n"
+                f"  Base URL: {base_url}\n"
+                f"  Model:    {model}\n"
+                f"  Aborting to prevent an all-zero result. Check the vLLM\n"
+                f"  server URL and --base-url flag.",
+                file=sys.stderr,
+            )
+            sys.exit(1)
         return None
+
+    call_llm_with_tools._success_count = getattr(call_llm_with_tools, "_success_count", 0) + 1
+
+    msg = data["choices"][0]["message"]
+    tool_calls = msg.get("tool_calls", [])
+    if tool_calls:
+        tc = tool_calls[0]
+        return {
+            "name": tc["function"]["name"],
+            "arguments": tc["function"].get("arguments", "{}"),
+        }
+    # Some models return the tool call in content
+    content = msg.get("content", "").strip()
+    if content:
+        # Try to parse as JSON tool call
+        try:
+            parsed = json.loads(content)
+            if "name" in parsed:
+                return {"name": parsed["name"], "arguments": json.dumps(parsed.get("arguments", {}))}
+        except (json.JSONDecodeError, TypeError):
+            pass
+    return None
 
 
 # ---------------------------------------------------------------------------
