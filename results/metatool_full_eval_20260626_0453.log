@@ -1,0 +1,657 @@
+
+MetaTool (no tags) loaded: 199 tools, 21111 queries
+
+========================================================================
+  MetaTool
+  Corpus: 199 instructions, Queries: 21111, k=5
+  Experiments: 18
+========================================================================
+
+  BEAR+BGE (gov)...
+Batches:   0%|          | 0/7 [00:00<?, ?it/s]Batches:  14%|█▍        | 1/7 [00:00<00:00,  8.44it/s]Batches:  71%|███████▏  | 5/7 [00:00<00:00, 24.12it/s]Batches: 100%|██████████| 7/7 [00:00<00:00, 26.90it/s]
+        recall@5: 0.721 [0.715, 0.727]
+          ndcg@5: 0.601 [0.595, 0.606]
+            f1@5: 0.243 [0.241, 0.245]
+          time:   161.0s
+
+  BEAR+BGE-M3 (gov)...
+Batches:   0%|          | 0/7 [00:00<?, ?it/s]Batches: 100%|██████████| 7/7 [-00:00<00:00, -30.01it/s]
+        recall@5: 0.737 [0.731, 0.743]
+          ndcg@5: 0.622 [0.617, 0.628]
+            f1@5: 0.249 [0.247, 0.251]
+          time:   157.4s
+
+  BEAR+Qwen3-0.6B (gov)...
+Batches:   0%|          | 0/7 [00:00<?, ?it/s]Batches:  14%|█▍        | 1/7 [00:04<00:27,  4.59s/it]Batches:  29%|██▊       | 2/7 [00:04<00:09,  1.98s/it]Batches:  57%|█████▋    | 4/7 [00:04<00:02,  1.25it/s]Batches:  86%|████████▌ | 6/7 [00:05<00:00,  2.21it/s]Batches: 100%|██████████| 7/7 [00:05<00:00,  1.37it/s]
+        recall@5: 0.869 [0.865, 0.874]
+          ndcg@5: 0.775 [0.770, 0.780]
+            f1@5: 0.294 [0.293, 0.296]
+          time:   421.7s
+
+  BEAR+Qwen3-4B (gov)...
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:02<00:02,  2.23s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:04<00:00,  2.31s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:04<00:00,  2.30s/it]
+Batches:   0%|          | 0/7 [00:00<?, ?it/s]Batches:  14%|█▍        | 1/7 [00:15<01:30, 15.10s/it]Batches:  29%|██▊       | 2/7 [00:16<00:33,  6.77s/it]Batches:  43%|████▎     | 3/7 [00:16<00:15,  3.90s/it]Batches:  57%|█████▋    | 4/7 [00:16<00:07,  2.53s/it]Batches:  71%|███████▏  | 5/7 [00:17<00:03,  1.73s/it]Batches:  86%|████████▌ | 6/7 [00:17<00:01,  1.23s/it]Batches: 100%|██████████| 7/7 [00:17<00:00,  2.51s/it]
+Hash embeddings selected. Similarity scores are based on character n-gram overlap and carry no semantic signal — retrieval ranking is effectively arbitrary. Use a sentence-transformers model (e.g. 'BAAI/bge-base-en-v1.5') for meaningful semantic retrieval.
+        recall@5: 0.905 [0.901, 0.908]
+          ndcg@5: 0.821 [0.817, 0.825]
+            f1@5: 0.308 [0.307, 0.309]
+          time:   856.8s
+
+  BEAR+BM25 (gov)...
+        recall@5: 0.400 [0.393, 0.406]
+          ndcg@5: 0.337 [0.331, 0.343]
+            f1@5: 0.134 [0.132, 0.136]
+          time:   7.3s
+
+  BEAR+Hash (gov)...
+        recall@5: 0.076 [0.073, 0.080]
+          ndcg@5: 0.048 [0.046, 0.051]
+            f1@5: 0.026 [0.024, 0.027]
+          time:   11.9s
+
+  BEAR+BGE (mand-only)...
+Batches:   0%|          | 0/7 [00:00<?, ?it/s]Batches:  14%|█▍        | 1/7 [00:00<00:00,  9.95it/s]Batches:  71%|███████▏  | 5/7 [00:00<00:00, 26.76it/s]Batches: 100%|██████████| 7/7 [00:00<00:00, 30.54it/s]
+        recall@5: 0.721 [0.715, 0.727]
+          ndcg@5: 0.601 [0.595, 0.606]
+            f1@5: 0.243 [0.241, 0.245]
+          time:   89.4s
+
+  BEAR+BGE-M3 (mand-only)...
+Batches:   0%|          | 0/7 [00:00<?, ?it/s]Batches:  14%|█▍        | 1/7 [00:01<00:06,  1.07s/it]Batches:  29%|██▊       | 2/7 [00:01<00:02,  1.97it/s]Batches:  57%|█████▋    | 4/7 [00:01<00:00,  4.42it/s]Batches: 100%|██████████| 7/7 [00:01<00:00,  5.05it/s]
+        recall@5: 0.737 [0.731, 0.743]
+          ndcg@5: 0.622 [0.617, 0.628]
+            f1@5: 0.249 [0.247, 0.251]
+          time:   165.8s
+
+  BEAR+Qwen3-0.6B (mand-only)...
+Batches:   0%|          | 0/7 [00:00<?, ?it/s]Batches:  14%|█▍        | 1/7 [00:01<00:10,  1.76s/it]Batches:  29%|██▊       | 2/7 [00:01<00:04,  1.25it/s]Batches:  57%|█████▋    | 4/7 [00:02<00:01,  2.88it/s]Batches:  86%|████████▌ | 6/7 [00:02<00:00,  4.79it/s]Batches: 100%|██████████| 7/7 [00:02<00:00,  3.21it/s]
+        recall@5: 0.869 [0.865, 0.874]
+          ndcg@5: 0.775 [0.770, 0.780]
+            f1@5: 0.294 [0.293, 0.296]
+          time:   417.4s
+
+  BEAR+Qwen3-4B (mand-only)...
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:02<00:02,  2.11s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:05<00:00,  2.92s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:05<00:00,  2.80s/it]
+Batches:   0%|          | 0/7 [00:00<?, ?it/s]Batches:  14%|█▍        | 1/7 [00:14<01:26, 14.41s/it]Batches:  29%|██▊       | 2/7 [00:15<00:32,  6.48s/it]Batches:  43%|████▎     | 3/7 [00:15<00:15,  3.75s/it]Batches:  57%|█████▋    | 4/7 [00:16<00:07,  2.46s/it]Batches:  71%|███████▏  | 5/7 [00:16<00:03,  1.69s/it]Batches:  86%|████████▌ | 6/7 [00:16<00:01,  1.21s/it]Batches: 100%|██████████| 7/7 [00:16<00:00,  2.43s/it]
+Hash embeddings selected. Similarity scores are based on character n-gram overlap and carry no semantic signal — retrieval ranking is effectively arbitrary. Use a sentence-transformers model (e.g. 'BAAI/bge-base-en-v1.5') for meaningful semantic retrieval.
+        recall@5: 0.905 [0.901, 0.908]
+          ndcg@5: 0.821 [0.817, 0.825]
+            f1@5: 0.308 [0.307, 0.309]
+          time:   838.1s
+
+  BEAR+BM25 (mand-only)...
+        recall@5: 0.400 [0.393, 0.406]
+          ndcg@5: 0.337 [0.331, 0.343]
+            f1@5: 0.134 [0.132, 0.136]
+          time:   7.3s
+
+  BEAR+Hash (mand-only)...
+        recall@5: 0.076 [0.073, 0.080]
+          ndcg@5: 0.048 [0.046, 0.051]
+            f1@5: 0.026 [0.024, 0.027]
+          time:   11.8s
+
+  BGE (no gov)...
+Batches:   0%|          | 0/7 [00:00<?, ?it/s]Batches:  29%|██▊       | 2/7 [00:00<00:00, 15.68it/s]Batches: 100%|██████████| 7/7 [00:00<00:00, 33.96it/s]
+        recall@5: 0.723 [0.717, 0.729]
+          ndcg@5: 0.603 [0.598, 0.609]
+            f1@5: 0.244 [0.242, 0.246]
+          time:   90.7s
+
+  BGE-M3 (no gov)...
+Batches:   0%|          | 0/7 [00:00<?, ?it/s]Batches:  14%|█▍        | 1/7 [00:01<00:06,  1.05s/it]Batches:  29%|██▊       | 2/7 [00:01<00:02,  2.02it/s]Batches:  57%|█████▋    | 4/7 [00:01<00:00,  4.63it/s]Batches: 100%|██████████| 7/7 [00:01<00:00,  5.22it/s]
+        recall@5: 0.728 [0.722, 0.734]
+          ndcg@5: 0.614 [0.608, 0.619]
+            f1@5: 0.246 [0.244, 0.248]
+          time:   155.1s
+
+  Qwen3-0.6B (no gov)...
+Batches:   0%|          | 0/7 [00:00<?, ?it/s]Batches:  14%|█▍        | 1/7 [00:01<00:10,  1.70s/it]Batches:  29%|██▊       | 2/7 [00:01<00:03,  1.29it/s]Batches:  57%|█████▋    | 4/7 [00:01<00:00,  3.03it/s]Batches: 100%|██████████| 7/7 [00:02<00:00,  6.10it/s]Batches: 100%|██████████| 7/7 [00:02<00:00,  3.36it/s]
+        recall@5: 0.871 [0.866, 0.875]
+          ndcg@5: 0.774 [0.770, 0.779]
+            f1@5: 0.294 [0.293, 0.296]
+          time:   400.7s
+
+  Qwen3-4B (no gov)...
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:01<00:01,  1.22s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:02<00:00,  1.22s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:02<00:00,  1.22s/it]
+Batches:   0%|          | 0/7 [00:00<?, ?it/s]Batches:  14%|█▍        | 1/7 [00:13<01:18, 13.07s/it]Batches:  29%|██▊       | 2/7 [00:13<00:29,  5.90s/it]Batches:  43%|████▎     | 3/7 [00:14<00:13,  3.41s/it]Batches:  57%|█████▋    | 4/7 [00:14<00:06,  2.23s/it]Batches:  71%|███████▏  | 5/7 [00:15<00:03,  1.53s/it]Batches:  86%|████████▌ | 6/7 [00:15<00:01,  1.09s/it]Batches: 100%|██████████| 7/7 [00:15<00:00,  2.20s/it]
+Hash embeddings selected. Similarity scores are based on character n-gram overlap and carry no semantic signal — retrieval ranking is effectively arbitrary. Use a sentence-transformers model (e.g. 'BAAI/bge-base-en-v1.5') for meaningful semantic retrieval.
+        recall@5: 0.906 [0.902, 0.909]
+          ndcg@5: 0.821 [0.817, 0.825]
+            f1@5: 0.306 [0.305, 0.308]
+          time:   857.3s
+
+  Hash (no gov)...
+        recall@5: 0.078 [0.074, 0.081]
+          ndcg@5: 0.050 [0.047, 0.052]
+            f1@5: 0.026 [0.025, 0.027]
+          time:   12.0s
+
+  BM25 (no gov)...
+        recall@5: 0.404 [0.397, 0.410]
+          ndcg@5: 0.341 [0.335, 0.347]
+            f1@5: 0.135 [0.133, 0.137]
+          time:   5.5s
+
+  --- Statistical Tests (paired t-test, Wilcoxon, Cohen's d) ---
+
+    BEAR+BGE (gov)  vs  BGE (no gov):
+          recall: paired-t=-1.529, p=0.1264 n.s., d=-0.011; W=184720, p=0.0505
+            ndcg: paired-t=-2.985, p=0.0028 **, d=-0.021; W=2616419, p=0.0032
+              f1: paired-t=-1.154, p=0.2486 n.s., d=-0.008; W=184720, p=0.0505
+
+    BEAR+BGE-M3 (gov)  vs  BGE-M3 (no gov):
+          recall: paired-t=9.265, p=0.0000 ***, d=0.064; W=34082, p=0.0000
+            ndcg: paired-t=13.988, p=0.0000 ***, d=0.096; W=814997, p=0.0000
+              f1: paired-t=9.434, p=0.0000 ***, d=0.065; W=34082, p=0.0000
+
+    BEAR+Qwen3-0.6B (gov)  vs  Qwen3-0.6B (no gov):
+          recall: paired-t=-2.559, p=0.0105 *, d=-0.018; W=3498, p=0.0050
+            ndcg: paired-t=1.290, p=0.1969 n.s., d=0.009; W=177746, p=0.3374
+              f1: paired-t=-0.704, p=0.4814 n.s., d=-0.005; W=5429, p=0.0666
+
+    BEAR+Qwen3-4B (gov)  vs  Qwen3-4B (no gov):
+          recall: paired-t=-1.668, p=0.0953 n.s., d=-0.011; W=6551, p=0.1342
+            ndcg: paired-t=0.515, p=0.6064 n.s., d=0.004; W=193768, p=0.4832
+              f1: paired-t=5.701, p=0.0000 ***, d=0.039; W=21333, p=0.0001
+
+    BEAR+Hash (gov)  vs  Hash (no gov):
+          recall: paired-t=-1.897, p=0.0579 n.s., d=-0.013; W=26969, p=0.0397
+            ndcg: paired-t=-3.176, p=0.0015 **, d=-0.022; W=169566, p=0.0013
+              f1: paired-t=-1.293, p=0.1960 n.s., d=-0.009; W=29296, p=0.0457
+
+    BEAR+BM25 (gov)  vs  BM25 (no gov):
+          recall: paired-t=-6.450, p=0.0000 ***, d=-0.044; W=3596, p=0.0000
+            ndcg: paired-t=-12.069, p=0.0000 ***, d=-0.083; W=53542, p=0.0000
+              f1: paired-t=-6.464, p=0.0000 ***, d=-0.044; W=3596, p=0.0000
+
+    BEAR+BGE (gov)  vs  BEAR+BGE-M3 (gov):
+          recall: paired-t=-5.992, p=0.0000 ***, d=-0.041; W=2624900, p=0.0000
+            ndcg: paired-t=-9.849, p=0.0000 ***, d=-0.068; W=15663721, p=0.0000
+              f1: paired-t=-6.153, p=0.0000 ***, d=-0.042; W=2624256, p=0.0000
+
+    BEAR+BGE (gov)  vs  BEAR+Qwen3-0.6B (gov):
+          recall: paired-t=-52.748, p=0.0000 ***, d=-0.363; W=982311, p=0.0000
+            ndcg: paired-t=-72.782, p=0.0000 ***, d=-0.501; W=5130246, p=0.0000
+              f1: paired-t=-53.134, p=0.0000 ***, d=-0.366; W=985036, p=0.0000
+
+    BEAR+BGE (gov)  vs  BEAR+Qwen3-4B (gov):
+          recall: paired-t=-64.095, p=0.0000 ***, d=-0.441; W=641068, p=0.0000
+            ndcg: paired-t=-88.512, p=0.0000 ***, d=-0.609; W=3452740, p=0.0000
+              f1: paired-t=-64.864, p=0.0000 ***, d=-0.446; W=659078, p=0.0000
+
+    BEAR+BGE (gov)  vs  BEAR+BM25 (gov):
+          recall: paired-t=88.142, p=0.0000 ***, d=0.607; W=2912814, p=0.0000
+            ndcg: paired-t=88.526, p=0.0000 ***, d=0.609; W=5945928, p=0.0000
+              f1: paired-t=88.567, p=0.0000 ***, d=0.610; W=2880900, p=0.0000
+
+    BEAR+BGE (gov)  vs  BEAR+Hash (gov):
+          recall: paired-t=189.474, p=0.0000 ***, d=1.304; W=1414721, p=0.0000
+            ndcg: paired-t=184.110, p=0.0000 ***, d=1.267; W=1065670, p=0.0000
+              f1: paired-t=189.278, p=0.0000 ***, d=1.303; W=1407356, p=0.0000
+
+    BEAR+BM25 (gov)  vs  BGE (no gov):
+          recall: paired-t=-88.281, p=0.0000 ***, d=-0.608; W=3037119, p=0.0000
+            ndcg: paired-t=-88.884, p=0.0000 ***, d=-0.612; W=6036474, p=0.0000
+              f1: paired-t=-88.727, p=0.0000 ***, d=-0.611; W=3009469, p=0.0000
+
+MetaTool+Tags loaded: 199 tools, 21111 queries
+  Queries with context tags: 10051/21111
+
+========================================================================
+  MetaTool+Tags
+  Corpus: 199 instructions, Queries: 21111, k=5
+  Experiments: 18
+========================================================================
+
+  BEAR+BGE (gov)...
+Batches:   0%|          | 0/7 [00:00<?, ?it/s]Batches:  29%|██▊       | 2/7 [00:00<00:00, 15.55it/s]Batches: 100%|██████████| 7/7 [00:00<00:00, 32.04it/s]
+        recall@5: 0.861 [0.856, 0.865]
+          ndcg@5: 0.803 [0.798, 0.808]
+            f1@5: 0.460 [0.457, 0.464]
+          time:   94.9s
+
+  BEAR+BGE-M3 (gov)...
+Batches:   0%|          | 0/7 [00:00<?, ?it/s]Batches:  14%|█▍        | 1/7 [00:01<00:06,  1.07s/it]Batches:  29%|██▊       | 2/7 [00:01<00:02,  1.97it/s]Batches:  57%|█████▋    | 4/7 [00:01<00:00,  4.42it/s]Batches: 100%|██████████| 7/7 [00:01<00:00,  5.06it/s]
+        recall@5: 0.840 [0.835, 0.845]
+          ndcg@5: 0.776 [0.771, 0.781]
+            f1@5: 0.400 [0.396, 0.403]
+          time:   176.5s
+
+  BEAR+Qwen3-0.6B (gov)...
+Batches:   0%|          | 0/7 [00:00<?, ?it/s]Batches:  14%|█▍        | 1/7 [00:01<00:10,  1.76s/it]Batches:  29%|██▊       | 2/7 [00:01<00:04,  1.24it/s]Batches:  57%|█████▋    | 4/7 [00:02<00:01,  2.88it/s]Batches:  86%|████████▌ | 6/7 [00:02<00:00,  4.79it/s]Batches: 100%|██████████| 7/7 [00:02<00:00,  3.21it/s]
+        recall@5: 0.899 [0.895, 0.903]
+          ndcg@5: 0.826 [0.822, 0.830]
+            f1@5: 0.363 [0.361, 0.365]
+          time:   429.2s
+
+  BEAR+Qwen3-4B (gov)...
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:02<00:02,  2.52s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:06<00:00,  3.24s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:06<00:00,  3.13s/it]
+Batches:   0%|          | 0/7 [00:00<?, ?it/s]Batches:  14%|█▍        | 1/7 [00:15<01:35, 15.96s/it]Batches:  29%|██▊       | 2/7 [00:17<00:36,  7.26s/it]Batches:  43%|████▎     | 3/7 [00:17<00:16,  4.24s/it]Batches:  57%|█████▋    | 4/7 [00:18<00:08,  2.78s/it]Batches:  71%|███████▏  | 5/7 [00:18<00:03,  1.98s/it]Batches:  86%|████████▌ | 6/7 [00:19<00:01,  1.42s/it]Batches: 100%|██████████| 7/7 [00:19<00:00,  2.76s/it]
+Hash embeddings selected. Similarity scores are based on character n-gram overlap and carry no semantic signal — retrieval ranking is effectively arbitrary. Use a sentence-transformers model (e.g. 'BAAI/bge-base-en-v1.5') for meaningful semantic retrieval.
+        recall@5: 0.915 [0.911, 0.918]
+          ndcg@5: 0.840 [0.836, 0.844]
+            f1@5: 0.366 [0.364, 0.368]
+          time:   1000.9s
+
+  BEAR+BM25 (gov)...
+        recall@5: 0.603 [0.597, 0.610]
+          ndcg@5: 0.562 [0.556, 0.568]
+            f1@5: 0.310 [0.306, 0.315]
+          time:   4.4s
+
+  BEAR+Hash (gov)...
+        recall@5: 0.370 [0.364, 0.377]
+          ndcg@5: 0.259 [0.254, 0.263]
+            f1@5: 0.157 [0.153, 0.160]
+          time:   12.9s
+
+  BEAR+BGE (mand-only)...
+Batches:   0%|          | 0/7 [00:00<?, ?it/s]Batches:  14%|█▍        | 1/7 [00:00<00:01,  5.50it/s]Batches:  57%|█████▋    | 4/7 [00:00<00:00, 15.58it/s]Batches: 100%|██████████| 7/7 [00:00<00:00, 20.59it/s]
+        recall@5: 0.392 [0.386, 0.399]
+          ndcg@5: 0.364 [0.358, 0.370]
+            f1@5: 0.274 [0.269, 0.279]
+          time:   91.9s
+
+  BEAR+BGE-M3 (mand-only)...
+Batches:   0%|          | 0/7 [00:00<?, ?it/s]Batches:  14%|█▍        | 1/7 [00:03<00:21,  3.52s/it]Batches:  29%|██▊       | 2/7 [00:03<00:07,  1.55s/it]Batches:  57%|█████▋    | 4/7 [00:03<00:01,  1.58it/s]Batches: 100%|██████████| 7/7 [00:03<00:00,  3.46it/s]Batches: 100%|██████████| 7/7 [00:03<00:00,  1.77it/s]
+        recall@5: 0.406 [0.399, 0.413]
+          ndcg@5: 0.374 [0.368, 0.381]
+            f1@5: 0.249 [0.244, 0.253]
+          time:   173.9s
+
+  BEAR+Qwen3-0.6B (mand-only)...
+Batches:   0%|          | 0/7 [00:00<?, ?it/s]Batches:  14%|█▍        | 1/7 [00:02<00:13,  2.31s/it]Batches:  29%|██▊       | 2/7 [00:02<00:05,  1.04s/it]Batches:  57%|█████▋    | 4/7 [00:02<00:01,  2.25it/s]Batches:  86%|████████▌ | 6/7 [00:02<00:00,  3.81it/s]Batches: 100%|██████████| 7/7 [00:02<00:00,  2.51it/s]
+        recall@5: 0.488 [0.482, 0.495]
+          ndcg@5: 0.452 [0.446, 0.459]
+            f1@5: 0.222 [0.219, 0.226]
+          time:   432.8s
+
+  BEAR+Qwen3-4B (mand-only)...
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:01<00:01,  1.73s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:03<00:00,  1.53s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:03<00:00,  1.56s/it]
+Batches:   0%|          | 0/7 [00:00<?, ?it/s]Batches:  14%|█▍        | 1/7 [00:16<01:37, 16.29s/it]Batches:  29%|██▊       | 2/7 [00:17<00:38,  7.65s/it]Batches:  43%|████▎     | 3/7 [00:18<00:18,  4.51s/it]Batches:  57%|█████▋    | 4/7 [00:19<00:09,  3.02s/it]Batches:  71%|███████▏  | 5/7 [00:19<00:04,  2.10s/it]Batches:  86%|████████▌ | 6/7 [00:20<00:01,  1.50s/it]Batches: 100%|██████████| 7/7 [00:20<00:00,  2.90s/it]
+Hash embeddings selected. Similarity scores are based on character n-gram overlap and carry no semantic signal — retrieval ranking is effectively arbitrary. Use a sentence-transformers model (e.g. 'BAAI/bge-base-en-v1.5') for meaningful semantic retrieval.
+        recall@5: 0.500 [0.494, 0.507]
+          ndcg@5: 0.465 [0.459, 0.471]
+            f1@5: 0.225 [0.222, 0.228]
+          time:   961.0s
+
+  BEAR+BM25 (mand-only)...
+        recall@5: 0.145 [0.140, 0.149]
+          ndcg@5: 0.138 [0.133, 0.142]
+            f1@5: 0.122 [0.118, 0.126]
+          time:   7.0s
+
+  BEAR+Hash (mand-only)...
+        recall@5: 0.051 [0.048, 0.054]
+          ndcg@5: 0.040 [0.038, 0.042]
+            f1@5: 0.030 [0.029, 0.032]
+          time:   9.7s
+
+  BGE (no gov)...
+Batches:   0%|          | 0/7 [00:00<?, ?it/s]Batches:  14%|█▍        | 1/7 [00:00<00:01,  5.37it/s]Batches:  71%|███████▏  | 5/7 [00:00<00:00, 18.96it/s]Batches: 100%|██████████| 7/7 [00:00<00:00, 21.46it/s]
+        recall@5: 0.678 [0.671, 0.684]
+          ndcg@5: 0.561 [0.556, 0.567]
+            f1@5: 0.228 [0.226, 0.230]
+          time:   93.7s
+
+  BGE-M3 (no gov)...
+Batches:   0%|          | 0/7 [00:00<?, ?it/s]Batches:  14%|█▍        | 1/7 [00:05<00:33,  5.52s/it]Batches:  29%|██▊       | 2/7 [00:05<00:11,  2.37s/it]Batches:  57%|█████▋    | 4/7 [00:05<00:02,  1.08it/s]Batches:  86%|████████▌ | 6/7 [00:06<00:00,  1.84it/s]Batches: 100%|██████████| 7/7 [00:06<00:00,  1.15it/s]
+        recall@5: 0.723 [0.717, 0.729]
+          ndcg@5: 0.611 [0.605, 0.617]
+            f1@5: 0.244 [0.242, 0.246]
+          time:   168.5s
+
+  Qwen3-0.6B (no gov)...
+Batches:   0%|          | 0/7 [00:00<?, ?it/s]Batches:  14%|█▍        | 1/7 [00:02<00:15,  2.63s/it]Batches:  29%|██▊       | 2/7 [00:02<00:05,  1.16s/it]Batches:  57%|█████▋    | 4/7 [00:02<00:01,  2.09it/s]Batches:  86%|████████▌ | 6/7 [00:03<00:00,  3.62it/s]Batches: 100%|██████████| 7/7 [00:03<00:00,  2.31it/s]
+        recall@5: 0.873 [0.868, 0.877]
+          ndcg@5: 0.775 [0.770, 0.780]
+            f1@5: 0.295 [0.294, 0.297]
+          time:   427.0s
+
+  Qwen3-4B (no gov)...
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:01<00:01,  1.57s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:03<00:00,  1.95s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:03<00:00,  1.90s/it]
+Batches:   0%|          | 0/7 [00:00<?, ?it/s]Batches:  14%|█▍        | 1/7 [00:14<01:24, 14.11s/it]Batches:  29%|██▊       | 2/7 [00:15<00:33,  6.61s/it]Batches:  43%|████▎     | 3/7 [00:16<00:15,  3.84s/it]Batches:  57%|█████▋    | 4/7 [00:16<00:07,  2.51s/it]Batches:  71%|███████▏  | 5/7 [00:16<00:03,  1.75s/it]Batches:  86%|████████▌ | 6/7 [00:17<00:01,  1.26s/it]Batches: 100%|██████████| 7/7 [00:17<00:00,  2.47s/it]
+Hash embeddings selected. Similarity scores are based on character n-gram overlap and carry no semantic signal — retrieval ranking is effectively arbitrary. Use a sentence-transformers model (e.g. 'BAAI/bge-base-en-v1.5') for meaningful semantic retrieval.
+        recall@5: 0.905 [0.901, 0.909]
+          ndcg@5: 0.819 [0.815, 0.823]
+            f1@5: 0.306 [0.305, 0.307]
+          time:   998.6s
+
+  Hash (no gov)...
+        recall@5: 0.069 [0.066, 0.073]
+          ndcg@5: 0.044 [0.041, 0.046]
+            f1@5: 0.023 [0.022, 0.024]
+          time:   12.0s
+
+  BM25 (no gov)...
+        recall@5: 0.402 [0.396, 0.409]
+          ndcg@5: 0.340 [0.334, 0.346]
+            f1@5: 0.135 [0.132, 0.137]
+          time:   7.6s
+
+  --- Statistical Tests (paired t-test, Wilcoxon, Cohen's d) ---
+
+    BEAR+BGE (gov)  vs  BGE (no gov):
+          recall: paired-t=69.269, p=0.0000 ***, d=0.477; W=2069, p=0.0000
+            ndcg: paired-t=105.936, p=0.0000 ***, d=0.729; W=180582, p=0.0000
+              f1: paired-t=122.470, p=0.0000 ***, d=0.843; W=6522, p=0.0000
+
+    BEAR+BGE-M3 (gov)  vs  BGE-M3 (no gov):
+          recall: paired-t=47.932, p=0.0000 ***, d=0.330; W=403106, p=0.0000
+            ndcg: paired-t=79.471, p=0.0000 ***, d=0.547; W=2049648, p=0.0000
+              f1: paired-t=91.991, p=0.0000 ***, d=0.633; W=1500729, p=0.0000
+
+    BEAR+Qwen3-0.6B (gov)  vs  Qwen3-0.6B (no gov):
+          recall: paired-t=11.981, p=0.0000 ***, d=0.082; W=953649, p=0.0000
+            ndcg: paired-t=25.590, p=0.0000 ***, d=0.176; W=6761906, p=0.0000
+              f1: paired-t=60.049, p=0.0000 ***, d=0.413; W=5630838, p=0.0000
+
+    BEAR+Qwen3-4B (gov)  vs  Qwen3-4B (no gov):
+          recall: paired-t=4.658, p=0.0000 ***, d=0.032; W=930182, p=0.0005
+            ndcg: paired-t=10.716, p=0.0000 ***, d=0.074; W=7393593, p=0.0000
+              f1: paired-t=54.057, p=0.0000 ***, d=0.372; W=5813307, p=0.0000
+
+    BEAR+Hash (gov)  vs  Hash (no gov):
+          recall: paired-t=90.558, p=0.0000 ***, d=0.623; W=842288, p=0.0000
+            ndcg: paired-t=88.796, p=0.0000 ***, d=0.611; W=981188, p=0.0000
+              f1: paired-t=87.431, p=0.0000 ***, d=0.602; W=645990, p=0.0000
+
+    BEAR+BM25 (gov)  vs  BM25 (no gov):
+          recall: paired-t=73.148, p=0.0000 ***, d=0.503; W=4409, p=0.0000
+            ndcg: paired-t=92.038, p=0.0000 ***, d=0.633; W=34239, p=0.0000
+              f1: paired-t=93.496, p=0.0000 ***, d=0.643; W=6971, p=0.0000
+
+    BEAR+BGE (gov)  vs  BEAR+BGE-M3 (gov):
+          recall: paired-t=8.155, p=0.0000 ***, d=0.056; W=1940446, p=0.0000
+            ndcg: paired-t=11.377, p=0.0000 ***, d=0.078; W=8192994, p=0.0000
+              f1: paired-t=31.484, p=0.0000 ***, d=0.217; W=17766132, p=0.0000
+
+    BEAR+BGE (gov)  vs  BEAR+Qwen3-0.6B (gov):
+          recall: paired-t=-13.603, p=0.0000 ***, d=-0.094; W=2777712, p=0.0000
+            ndcg: paired-t=-8.384, p=0.0000 ***, d=-0.058; W=12075672, p=0.0000
+              f1: paired-t=50.810, p=0.0000 ***, d=0.350; W=24256118, p=0.0000
+
+    BEAR+BGE (gov)  vs  BEAR+Qwen3-4B (gov):
+          recall: paired-t=-19.204, p=0.0000 ***, d=-0.132; W=2477226, p=0.0000
+            ndcg: paired-t=-13.396, p=0.0000 ***, d=-0.092; W=12381002, p=0.0000
+              f1: paired-t=48.404, p=0.0000 ***, d=0.333; W=26400326, p=0.0000
+
+    BEAR+BGE (gov)  vs  BEAR+BM25 (gov):
+          recall: paired-t=78.246, p=0.0000 ***, d=0.539; W=1376968, p=0.0000
+            ndcg: paired-t=76.335, p=0.0000 ***, d=0.525; W=3814892, p=0.0000
+              f1: paired-t=57.220, p=0.0000 ***, d=0.394; W=8614822, p=0.0000
+
+    BEAR+BGE (gov)  vs  BEAR+Hash (gov):
+          recall: paired-t=136.384, p=0.0000 ***, d=0.939; W=1540620, p=0.0000
+            ndcg: paired-t=174.797, p=0.0000 ***, d=1.203; W=2780562, p=0.0000
+              f1: paired-t=123.892, p=0.0000 ***, d=0.853; W=4127733, p=0.0000
+
+    BEAR+BM25 (gov)  vs  BGE (no gov):
+          recall: paired-t=-20.105, p=0.0000 ***, d=-0.138; W=7587272, p=0.0000
+            ndcg: paired-t=0.179, p=0.8583 n.s., d=0.001; W=22186344, p=0.1498
+              f1: paired-t=38.532, p=0.0000 ***, d=0.265; W=22640602, p=0.0000
+
+MetaTool+QueryTags loaded: 199 tools, 21111 queries
+  Source file: /mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts/evals/data/external_benchmarks/metatool/query_tags.json
+  Queries with context tags: 21035/21111
+
+========================================================================
+  MetaTool+QueryTags
+  Corpus: 199 instructions, Queries: 21111, k=5
+  Experiments: 18
+========================================================================
+
+  BEAR+BGE (gov)...
+Batches:   0%|          | 0/7 [00:00<?, ?it/s]Batches:  14%|█▍        | 1/7 [00:00<00:01,  5.46it/s]Batches:  57%|█████▋    | 4/7 [00:00<00:00, 14.55it/s]Batches: 100%|██████████| 7/7 [00:00<00:00, 19.47it/s]
+        recall@5: 0.516 [0.510, 0.523]
+          ndcg@5: 0.411 [0.405, 0.416]
+            f1@5: 0.217 [0.214, 0.220]
+          time:   99.0s
+
+  BEAR+BGE-M3 (gov)...
+Batches:   0%|          | 0/7 [00:00<?, ?it/s]Batches:  14%|█▍        | 1/7 [00:05<00:34,  5.73s/it]Batches:  29%|██▊       | 2/7 [00:05<00:12,  2.46s/it]Batches:  57%|█████▋    | 4/7 [00:06<00:02,  1.04it/s]Batches: 100%|██████████| 7/7 [00:06<00:00,  2.33it/s]Batches: 100%|██████████| 7/7 [00:06<00:00,  1.14it/s]
+        recall@5: 0.609 [0.602, 0.615]
+          ndcg@5: 0.517 [0.511, 0.523]
+            f1@5: 0.219 [0.216, 0.221]
+          time:   186.3s
+
+  BEAR+Qwen3-0.6B (gov)...
+Batches:   0%|          | 0/7 [00:00<?, ?it/s]Batches:  14%|█▍        | 1/7 [00:00<00:02,  2.53it/s]Batches:  29%|██▊       | 2/7 [00:00<00:01,  4.10it/s]Batches:  57%|█████▋    | 4/7 [00:00<00:00,  7.11it/s]Batches:  86%|████████▌ | 6/7 [00:00<00:00,  9.70it/s]Batches: 100%|██████████| 7/7 [00:00<00:00,  8.33it/s]
+        recall@5: 0.599 [0.593, 0.606]
+          ndcg@5: 0.498 [0.492, 0.504]
+            f1@5: 0.211 [0.209, 0.214]
+          time:   439.6s
+
+  BEAR+Qwen3-4B (gov)...
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:01<00:01,  1.02s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:03<00:00,  1.65s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:03<00:00,  1.56s/it]
+Batches:   0%|          | 0/7 [00:00<?, ?it/s]Batches:  14%|█▍        | 1/7 [00:11<01:10, 11.75s/it]Batches:  29%|██▊       | 2/7 [00:12<00:26,  5.39s/it]Batches:  43%|████▎     | 3/7 [00:13<00:12,  3.15s/it]Batches:  57%|█████▋    | 4/7 [00:13<00:06,  2.08s/it]Batches:  71%|███████▏  | 5/7 [00:13<00:02,  1.45s/it]Batches:  86%|████████▌ | 6/7 [00:14<00:01,  1.04s/it]Batches: 100%|██████████| 7/7 [00:14<00:00,  2.03s/it]
+Hash embeddings selected. Similarity scores are based on character n-gram overlap and carry no semantic signal — retrieval ranking is effectively arbitrary. Use a sentence-transformers model (e.g. 'BAAI/bge-base-en-v1.5') for meaningful semantic retrieval.
+        recall@5: 0.614 [0.608, 0.621]
+          ndcg@5: 0.507 [0.501, 0.513]
+            f1@5: 0.215 [0.213, 0.218]
+          time:   1002.8s
+
+  BEAR+BM25 (gov)...
+        recall@5: 0.340 [0.334, 0.346]
+          ndcg@5: 0.296 [0.290, 0.302]
+            f1@5: 0.146 [0.143, 0.149]
+          time:   8.0s
+
+  BEAR+Hash (gov)...
+        recall@5: 0.180 [0.175, 0.185]
+          ndcg@5: 0.117 [0.113, 0.121]
+            f1@5: 0.071 [0.069, 0.073]
+          time:   14.8s
+
+  BEAR+BGE (mand-only)...
+Batches:   0%|          | 0/7 [00:00<?, ?it/s]Batches:  14%|█▍        | 1/7 [00:00<00:02,  2.55it/s]Batches:  43%|████▎     | 3/7 [00:00<00:00,  6.44it/s]Batches:  86%|████████▌ | 6/7 [00:00<00:00, 11.99it/s]Batches: 100%|██████████| 7/7 [00:00<00:00, 10.63it/s]
+        recall@5: 0.392 [0.386, 0.399]
+          ndcg@5: 0.364 [0.357, 0.370]
+            f1@5: 0.274 [0.269, 0.278]
+          time:   96.4s
+
+  BEAR+BGE-M3 (mand-only)...
+Batches:   0%|          | 0/7 [00:00<?, ?it/s]Batches:  14%|█▍        | 1/7 [00:11<01:07, 11.22s/it]Batches:  29%|██▊       | 2/7 [00:11<00:24,  4.82s/it]Batches:  43%|████▎     | 3/7 [00:11<00:10,  2.69s/it]Batches:  57%|█████▋    | 4/7 [00:11<00:05,  1.68s/it]Batches:  71%|███████▏  | 5/7 [00:11<00:02,  1.12s/it]Batches:  86%|████████▌ | 6/7 [00:12<00:00,  1.30it/s]Batches: 100%|██████████| 7/7 [00:12<00:00,  1.73s/it]
+        recall@5: 0.406 [0.399, 0.412]
+          ndcg@5: 0.374 [0.368, 0.381]
+            f1@5: 0.249 [0.244, 0.253]
+          time:   184.8s
+
+  BEAR+Qwen3-0.6B (mand-only)...
+Batches:   0%|          | 0/7 [00:00<?, ?it/s]Batches:  14%|█▍        | 1/7 [00:01<00:11,  1.97s/it]Batches:  29%|██▊       | 2/7 [00:02<00:04,  1.11it/s]Batches:  57%|█████▋    | 4/7 [00:02<00:01,  2.56it/s]Batches:  86%|████████▌ | 6/7 [00:02<00:00,  4.29it/s]Batches: 100%|██████████| 7/7 [00:02<00:00,  2.87it/s]
+        recall@5: 0.488 [0.481, 0.495]
+          ndcg@5: 0.452 [0.446, 0.459]
+            f1@5: 0.222 [0.219, 0.226]
+          time:   429.8s
+
+  BEAR+Qwen3-4B (mand-only)...
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:01<00:01,  1.52s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:04<00:00,  2.25s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:04<00:00,  2.14s/it]
+Batches:   0%|          | 0/7 [00:00<?, ?it/s]Batches:  14%|█▍        | 1/7 [00:10<01:03, 10.66s/it]Batches:  29%|██▊       | 2/7 [00:11<00:24,  4.99s/it]Batches:  43%|████▎     | 3/7 [00:12<00:11,  2.96s/it]Batches:  57%|█████▋    | 4/7 [00:12<00:05,  1.97s/it]Batches: 100%|██████████| 7/7 [00:11<00:00,  1.61s/it]
+Hash embeddings selected. Similarity scores are based on character n-gram overlap and carry no semantic signal — retrieval ranking is effectively arbitrary. Use a sentence-transformers model (e.g. 'BAAI/bge-base-en-v1.5') for meaningful semantic retrieval.
+        recall@5: 0.500 [0.493, 0.507]
+          ndcg@5: 0.465 [0.458, 0.471]
+            f1@5: 0.225 [0.222, 0.228]
+          time:   906.4s
+
+  BEAR+BM25 (mand-only)...
+        recall@5: 0.145 [0.140, 0.149]
+          ndcg@5: 0.138 [0.133, 0.142]
+            f1@5: 0.122 [0.118, 0.126]
+          time:   6.9s
+
+  BEAR+Hash (mand-only)...
+        recall@5: 0.051 [0.048, 0.054]
+          ndcg@5: 0.040 [0.038, 0.042]
+            f1@5: 0.030 [0.029, 0.032]
+          time:   9.7s
+
+  BGE (no gov)...
+Batches:   0%|          | 0/7 [00:00<?, ?it/s]Batches:  14%|█▍        | 1/7 [00:00<00:01,  3.83it/s]Batches:  71%|███████▏  | 5/7 [00:00<00:00, 15.69it/s]Batches: 100%|██████████| 7/7 [00:00<00:00, 17.29it/s]
+        recall@5: 0.678 [0.671, 0.684]
+          ndcg@5: 0.561 [0.556, 0.567]
+            f1@5: 0.228 [0.226, 0.230]
+          time:   94.1s
+
+  BGE-M3 (no gov)...
+Batches:   0%|          | 0/7 [00:00<?, ?it/s]Batches:  14%|█▍        | 1/7 [00:03<00:22,  3.71s/it]Batches:  29%|██▊       | 2/7 [00:03<00:08,  1.61s/it]Batches:  57%|█████▋    | 4/7 [00:03<00:01,  1.56it/s]Batches: 100%|██████████| 7/7 [00:04<00:00,  1.72it/s]
+        recall@5: 0.723 [0.717, 0.729]
+          ndcg@5: 0.611 [0.605, 0.617]
+            f1@5: 0.244 [0.242, 0.246]
+          time:   175.1s
+
+  Qwen3-0.6B (no gov)...
+Batches:   0%|          | 0/7 [00:00<?, ?it/s]Batches:  14%|█▍        | 1/7 [00:04<00:29,  4.89s/it]Batches:  29%|██▊       | 2/7 [00:05<00:10,  2.14s/it]Batches:  43%|████▎     | 3/7 [00:05<00:05,  1.25s/it]Batches:  57%|█████▋    | 4/7 [00:05<00:02,  1.25it/s]Batches:  86%|████████▌ | 6/7 [00:05<00:00,  2.49it/s]Batches: 100%|██████████| 7/7 [00:05<00:00,  1.26it/s]
+        recall@5: 0.873 [0.869, 0.877]
+          ndcg@5: 0.775 [0.770, 0.780]
+            f1@5: 0.295 [0.294, 0.297]
+          time:   442.7s
+
+  Qwen3-4B (no gov)...
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:02<00:00,  1.16s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:02<00:00,  1.16s/it]
+Batches:   0%|          | 0/7 [00:00<?, ?it/s]Batches:  14%|█▍        | 1/7 [00:13<01:23, 13.87s/it]Batches:  29%|██▊       | 2/7 [00:14<00:31,  6.37s/it]Batches:  43%|████▎     | 3/7 [00:15<00:14,  3.72s/it]Batches:  57%|█████▋    | 4/7 [00:16<00:07,  2.44s/it]Batches:  71%|███████▏  | 5/7 [00:16<00:03,  1.69s/it]Batches:  86%|████████▌ | 6/7 [00:16<00:01,  1.20s/it]Batches: 100%|██████████| 7/7 [00:16<00:00,  2.38s/it]
+Hash embeddings selected. Similarity scores are based on character n-gram overlap and carry no semantic signal — retrieval ranking is effectively arbitrary. Use a sentence-transformers model (e.g. 'BAAI/bge-base-en-v1.5') for meaningful semantic retrieval.
+        recall@5: 0.905 [0.901, 0.909]
+          ndcg@5: 0.819 [0.815, 0.823]
+            f1@5: 0.306 [0.305, 0.307]
+          time:   942.1s
+
+  Hash (no gov)...
+        recall@5: 0.069 [0.066, 0.073]
+          ndcg@5: 0.044 [0.041, 0.046]
+            f1@5: 0.023 [0.022, 0.024]
+          time:   10.2s
+
+  BM25 (no gov)...
+        recall@5: 0.402 [0.396, 0.409]
+          ndcg@5: 0.340 [0.334, 0.346]
+            f1@5: 0.135 [0.132, 0.137]
+          time:   7.8s
+
+  --- Statistical Tests (paired t-test, Wilcoxon, Cohen's d) ---
+
+    BEAR+BGE (gov)  vs  BGE (no gov):
+          recall: paired-t=-43.763, p=0.0000 ***, d=-0.301; W=5366340, p=0.0000
+            ndcg: paired-t=-48.591, p=0.0000 ***, d=-0.334; W=13430588, p=0.0000
+              f1: paired-t=-6.661, p=0.0000 ***, d=-0.046; W=21074814, p=0.0000
+
+    BEAR+BGE-M3 (gov)  vs  BGE-M3 (no gov):
+          recall: paired-t=-30.260, p=0.0000 ***, d=-0.208; W=7215756, p=0.0000
+            ndcg: paired-t=-28.729, p=0.0000 ***, d=-0.198; W=18072302, p=0.0000
+              f1: paired-t=-18.468, p=0.0000 ***, d=-0.127; W=11773640, p=0.0000
+
+    BEAR+Qwen3-0.6B (gov)  vs  Qwen3-0.6B (no gov):
+          recall: paired-t=-80.243, p=0.0000 ***, d=-0.552; W=1715622, p=0.0000
+            ndcg: paired-t=-90.049, p=0.0000 ***, d=-0.620; W=4400544, p=0.0000
+              f1: paired-t=-68.387, p=0.0000 ***, d=-0.471; W=3516820, p=0.0000
+
+    BEAR+Qwen3-4B (gov)  vs  Qwen3-4B (no gov):
+          recall: paired-t=-85.911, p=0.0000 ***, d=-0.591; W=1325848, p=0.0000
+            ndcg: paired-t=-102.562, p=0.0000 ***, d=-0.706; W=2915458, p=0.0000
+              f1: paired-t=-74.923, p=0.0000 ***, d=-0.516; W=2681130, p=0.0000
+
+    BEAR+Hash (gov)  vs  Hash (no gov):
+          recall: paired-t=38.766, p=0.0000 ***, d=0.267; W=1530835, p=0.0000
+            ndcg: paired-t=37.659, p=0.0000 ***, d=0.259; W=1888164, p=0.0000
+              f1: paired-t=41.330, p=0.0000 ***, d=0.284; W=1302461, p=0.0000
+
+    BEAR+BM25 (gov)  vs  BM25 (no gov):
+          recall: paired-t=-18.184, p=0.0000 ***, d=-0.125; W=5311976, p=0.0000
+            ndcg: paired-t=-14.784, p=0.0000 ***, d=-0.102; W=9537924, p=0.0000
+              f1: paired-t=7.446, p=0.0000 ***, d=0.051; W=12856719, p=0.4353
+
+    BEAR+BGE (gov)  vs  BEAR+BGE-M3 (gov):
+          recall: paired-t=-34.609, p=0.0000 ***, d=-0.238; W=1353802, p=0.0000
+            ndcg: paired-t=-47.344, p=0.0000 ***, d=-0.326; W=6565276, p=0.0000
+              f1: paired-t=-1.211, p=0.2258 n.s., d=-0.008; W=11885362, p=0.0000
+
+    BEAR+BGE (gov)  vs  BEAR+Qwen3-0.6B (gov):
+          recall: paired-t=-28.381, p=0.0000 ***, d=-0.195; W=2353515, p=0.0000
+            ndcg: paired-t=-35.441, p=0.0000 ***, d=-0.244; W=10632731, p=0.0000
+              f1: paired-t=4.664, p=0.0000 ***, d=0.032; W=15918499, p=0.0655
+
+    BEAR+BGE (gov)  vs  BEAR+Qwen3-4B (gov):
+          recall: paired-t=-33.056, p=0.0000 ***, d=-0.228; W=2296118, p=0.0000
+            ndcg: paired-t=-37.982, p=0.0000 ***, d=-0.261; W=11296864, p=0.0000
+              f1: paired-t=1.430, p=0.1527 n.s., d=0.010; W=15699572, p=0.0000
+
+    BEAR+BGE (gov)  vs  BEAR+BM25 (gov):
+          recall: paired-t=56.065, p=0.0000 ***, d=0.386; W=1849338, p=0.0000
+            ndcg: paired-t=47.017, p=0.0000 ***, d=0.324; W=5193774, p=0.0000
+              f1: paired-t=50.080, p=0.0000 ***, d=0.345; W=3178516, p=0.0000
+
+    BEAR+BGE (gov)  vs  BEAR+Hash (gov):
+          recall: paired-t=100.427, p=0.0000 ***, d=0.691; W=678100, p=0.0000
+            ndcg: paired-t=111.217, p=0.0000 ***, d=0.765; W=1126968, p=0.0000
+              f1: paired-t=95.749, p=0.0000 ***, d=0.659; W=1152610, p=0.0000
+
+    BEAR+BM25 (gov)  vs  BGE (no gov):
+          recall: paired-t=-87.871, p=0.0000 ***, d=-0.605; W=4346519, p=0.0000
+            ndcg: paired-t=-80.168, p=0.0000 ***, d=-0.552; W=8090288, p=0.0000
+              f1: paired-t=-50.569, p=0.0000 ***, d=-0.348; W=13794444, p=0.0000
+
+Results saved to evals/results/metatool_full_eval.json
+
+========================================================================
+  Summary
+========================================================================
+
+  MetaTool:
+    BEAR+BGE (gov)                      R@5=0.721 [0.715, 0.727]  NDCG@5=0.601 [0.595, 0.606]
+    BEAR+BGE-M3 (gov)                   R@5=0.737 [0.731, 0.743]  NDCG@5=0.622 [0.617, 0.628]
+    BEAR+Qwen3-0.6B (gov)               R@5=0.869 [0.865, 0.874]  NDCG@5=0.775 [0.770, 0.780]
+    BEAR+Qwen3-4B (gov)                 R@5=0.905 [0.901, 0.908]  NDCG@5=0.821 [0.817, 0.825]
+    BEAR+BM25 (gov)                     R@5=0.400 [0.393, 0.406]  NDCG@5=0.337 [0.331, 0.343]
+    BEAR+Hash (gov)                     R@5=0.076 [0.073, 0.080]  NDCG@5=0.048 [0.046, 0.051]
+    BEAR+BGE (mand-only)                R@5=0.721 [0.715, 0.727]  NDCG@5=0.601 [0.595, 0.606]
+    BEAR+BGE-M3 (mand-only)             R@5=0.737 [0.731, 0.743]  NDCG@5=0.622 [0.617, 0.628]
+    BEAR+Qwen3-0.6B (mand-only)         R@5=0.869 [0.865, 0.874]  NDCG@5=0.775 [0.770, 0.780]
+    BEAR+Qwen3-4B (mand-only)           R@5=0.905 [0.901, 0.908]  NDCG@5=0.821 [0.817, 0.825]
+    BEAR+BM25 (mand-only)               R@5=0.400 [0.393, 0.406]  NDCG@5=0.337 [0.331, 0.343]
+    BEAR+Hash (mand-only)               R@5=0.076 [0.073, 0.080]  NDCG@5=0.048 [0.046, 0.051]
+    BGE (no gov)                        R@5=0.723 [0.717, 0.729]  NDCG@5=0.603 [0.598, 0.609]
+    BGE-M3 (no gov)                     R@5=0.728 [0.722, 0.734]  NDCG@5=0.614 [0.608, 0.619]
+    Qwen3-0.6B (no gov)                 R@5=0.871 [0.866, 0.875]  NDCG@5=0.774 [0.770, 0.779]
+    Qwen3-4B (no gov)                   R@5=0.906 [0.902, 0.909]  NDCG@5=0.821 [0.817, 0.825]
+    Hash (no gov)                       R@5=0.078 [0.074, 0.081]  NDCG@5=0.050 [0.047, 0.052]
+    BM25 (no gov)                       R@5=0.404 [0.397, 0.410]  NDCG@5=0.341 [0.335, 0.347]
+
+  MetaTool+Tags:
+    BEAR+BGE (gov)                      R@5=0.861 [0.856, 0.865]  NDCG@5=0.803 [0.798, 0.808]
+    BEAR+BGE-M3 (gov)                   R@5=0.840 [0.835, 0.845]  NDCG@5=0.776 [0.771, 0.781]
+    BEAR+Qwen3-0.6B (gov)               R@5=0.899 [0.895, 0.903]  NDCG@5=0.826 [0.822, 0.830]
+    BEAR+Qwen3-4B (gov)                 R@5=0.915 [0.911, 0.918]  NDCG@5=0.840 [0.836, 0.844]
+    BEAR+BM25 (gov)                     R@5=0.603 [0.597, 0.610]  NDCG@5=0.562 [0.556, 0.568]
+    BEAR+Hash (gov)                     R@5=0.370 [0.364, 0.377]  NDCG@5=0.259 [0.254, 0.263]
+    BEAR+BGE (mand-only)                R@5=0.392 [0.386, 0.399]  NDCG@5=0.364 [0.358, 0.370]
+    BEAR+BGE-M3 (mand-only)             R@5=0.406 [0.399, 0.413]  NDCG@5=0.374 [0.368, 0.381]
+    BEAR+Qwen3-0.6B (mand-only)         R@5=0.488 [0.482, 0.495]  NDCG@5=0.452 [0.446, 0.459]
+    BEAR+Qwen3-4B (mand-only)           R@5=0.500 [0.494, 0.507]  NDCG@5=0.465 [0.459, 0.471]
+    BEAR+BM25 (mand-only)               R@5=0.145 [0.140, 0.149]  NDCG@5=0.138 [0.133, 0.142]
+    BEAR+Hash (mand-only)               R@5=0.051 [0.048, 0.054]  NDCG@5=0.040 [0.038, 0.042]
+    BGE (no gov)                        R@5=0.678 [0.671, 0.684]  NDCG@5=0.561 [0.556, 0.567]
+    BGE-M3 (no gov)                     R@5=0.723 [0.717, 0.729]  NDCG@5=0.611 [0.605, 0.617]
+    Qwen3-0.6B (no gov)                 R@5=0.873 [0.868, 0.877]  NDCG@5=0.775 [0.770, 0.780]
+    Qwen3-4B (no gov)                   R@5=0.905 [0.901, 0.909]  NDCG@5=0.819 [0.815, 0.823]
+    Hash (no gov)                       R@5=0.069 [0.066, 0.073]  NDCG@5=0.044 [0.041, 0.046]
+    BM25 (no gov)                       R@5=0.402 [0.396, 0.409]  NDCG@5=0.340 [0.334, 0.346]
+
+  MetaTool+QueryTags:
+    BEAR+BGE (gov)                      R@5=0.516 [0.510, 0.523]  NDCG@5=0.411 [0.405, 0.416]
+    BEAR+BGE-M3 (gov)                   R@5=0.609 [0.602, 0.615]  NDCG@5=0.517 [0.511, 0.523]
+    BEAR+Qwen3-0.6B (gov)               R@5=0.599 [0.593, 0.606]  NDCG@5=0.498 [0.492, 0.504]
+    BEAR+Qwen3-4B (gov)                 R@5=0.614 [0.608, 0.621]  NDCG@5=0.507 [0.501, 0.513]
+    BEAR+BM25 (gov)                     R@5=0.340 [0.334, 0.346]  NDCG@5=0.296 [0.290, 0.302]
+    BEAR+Hash (gov)                     R@5=0.180 [0.175, 0.185]  NDCG@5=0.117 [0.113, 0.121]
+    BEAR+BGE (mand-only)                R@5=0.392 [0.386, 0.399]  NDCG@5=0.364 [0.357, 0.370]
+    BEAR+BGE-M3 (mand-only)             R@5=0.406 [0.399, 0.412]  NDCG@5=0.374 [0.368, 0.381]
+    BEAR+Qwen3-0.6B (mand-only)         R@5=0.488 [0.481, 0.495]  NDCG@5=0.452 [0.446, 0.459]
+    BEAR+Qwen3-4B (mand-only)           R@5=0.500 [0.493, 0.507]  NDCG@5=0.465 [0.458, 0.471]
+    BEAR+BM25 (mand-only)               R@5=0.145 [0.140, 0.149]  NDCG@5=0.138 [0.133, 0.142]
+    BEAR+Hash (mand-only)               R@5=0.051 [0.048, 0.054]  NDCG@5=0.040 [0.038, 0.042]
+    BGE (no gov)                        R@5=0.678 [0.671, 0.684]  NDCG@5=0.561 [0.556, 0.567]
+    BGE-M3 (no gov)                     R@5=0.723 [0.717, 0.729]  NDCG@5=0.611 [0.605, 0.617]
+    Qwen3-0.6B (no gov)                 R@5=0.873 [0.869, 0.877]  NDCG@5=0.775 [0.770, 0.780]
+    Qwen3-4B (no gov)                   R@5=0.905 [0.901, 0.909]  NDCG@5=0.819 [0.815, 0.823]
+    Hash (no gov)                       R@5=0.069 [0.066, 0.073]  NDCG@5=0.044 [0.041, 0.046]
+    BM25 (no gov)                       R@5=0.402 [0.396, 0.409]  NDCG@5=0.340 [0.334, 0.346]
