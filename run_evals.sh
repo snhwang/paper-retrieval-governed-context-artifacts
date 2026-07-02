@@ -1,31 +1,47 @@
 #!/usr/bin/env bash
 # =============================================================================
-# run_evals.sh — Retrieval-Governed Prompting (BEAR paper)
+# run_evals.sh — Retrieval-Governed Context (BEAR paper)
 #
-# Reproduces the evaluations reported in the retrieval-governed-context paper.
-# Evaluates retrieval quality, tool scaling, CPA comparison, token efficiency,
-# and backend/governance ablation on the pet_sim corpus, plus end-to-end
-# ToolBench tool selection (with --all).
+# Reproduces every numeric table in the paper. The default run is fully
+# deterministic and requires no LLM. Passing --all also runs the end-to-end
+# tool-selection experiments (Tables 7 and 8), which require an
+# OpenAI-compatible LLM endpoint.
 #
-# LLM REQUIREMENTS:
-#   - Default run is deterministic (no LLM needed)
-#   - With --all: eval_toolbench_e2e.py runs end-to-end ToolBench tool
-#     selection (paper Table 5). Requires an OpenAI-compatible endpoint;
-#     paper used mistralai/Mistral-Nemo-Instruct-2407 12B via vLLM.
-#     Override defaults with --model and --base-url.
-#   - eval_tool_scaling.py end-to-end dispatch (optional) tries:
-#       LM Studio with mistral-nemo-instruct-2407 at http://127.0.0.1:1234/v1
-#       (skips gracefully if unavailable)
+# TABLE COVERAGE (see README.md for the full paper-to-script mapping):
+#
+#   Deterministic (default run):
+#     Table 3     ToolBench retrieval                    eval_toolbench.py
+#     Table 4     LLM-inferred categories (3 variants)   eval_toolbench_inferred_categories.py
+#                                                        eval_toolbench_multitag_categories.py
+#                                                        eval_toolbench_top5_categories.py
+#     Table 5     MetaTool retrieval                     eval_toolbench.py (MetaTool mode)
+#     Table 6     MetaTool + LLM-generated tags          eval_toolbench.py (with pre-generated tags)
+#     Table 9     Pet Sim retrieval                      eval_retrieval.py
+#     Tables 10,11 Tool scaling + token savings          eval_tool_scaling.py
+#     Table 12    Token efficiency (10-500 agents)       eval_scalability.py
+#     Tables 13,14 CPA vs BEAR                            eval_baseline_comparison.py
+#     Table 15    Governance ablation                    eval_governance_ablation.py
+#     Table 16    Decomposed governance ablation         eval_governance_decomposed.py
+#     Table 17    Alpha weight sweep                     eval_alpha_sweep.py
+#     Table 19    MetaTool retained-vs-excluded (App. B) eval_metatool_subset_analysis.py
+#
+#   LLM-required (add --all):
+#     Table 7     End-to-end ToolBench                   eval_toolbench_e2e.py
+#     Table 8     End-to-end ToolBench (ReAct)           eval_toolbench_react.py
+#
+# LLM ENDPOINT:
+#   The paper used mistralai/Mistral-Nemo-Instruct-2407 (12B) served via
+#   vLLM 0.17.1 (see serve_mistral_nemo.sh). Any OpenAI-compatible endpoint
+#   works. Override defaults with --model and --base-url.
 #
 # EMBEDDING MODELS (downloaded automatically on first use):
-#   - BAAI/bge-base-en-v1.5 (768-dim) — primary
-#   - Qwen/Qwen3-Embedding-0.6B, Qwen/Qwen3-Embedding-4B — backend comparison
-#   - mlx-community variants if on Apple Silicon
+#   BAAI/bge-base-en-v1.5 (primary), BAAI/bge-m3, Qwen/Qwen3-Embedding-0.6B,
+#   Qwen/Qwen3-Embedding-4B
 #
-# Usage:
-#   ./run_evals.sh                                       # deterministic only
-#   ./run_evals.sh --all                                 # + end-to-end ToolBench (LLM)
-#   ./run_evals.sh --all --model mistral-nemo-instruct-2407
+# USAGE:
+#   ./run_evals.sh                                    # deterministic tables only
+#   ./run_evals.sh --all                              # + LLM tables (7, 8)
+#   ./run_evals.sh --all --model my-model
 #   ./run_evals.sh --all --base-url http://127.0.0.1:8000/v1
 # =============================================================================
 
@@ -61,78 +77,106 @@ RESULTS_DIR="results"
 mkdir -p "$RESULTS_DIR"
 
 echo "========================================"
-echo "  Retrieval-Governed Prompting (paper)"
+echo "  Retrieval-Governed Context (paper)"
 echo "========================================"
 echo ""
 
-# ----- §4.1 Retrieval Quality -----
-echo "--- §4.1 Retrieval Quality ---"
+# =========================
+# Pet Simulation corpus
+# =========================
+
+echo "--- Table 9: Pet Sim retrieval (lexical) ---"
 python3 "$EVAL_DIR/eval_retrieval.py" | tee "$RESULTS_DIR/eval_retrieval_output.txt"
 echo ""
 
-# ----- §4.1 Retrieval Quality (semantic embeddings) -----
-echo "--- §4.1 Retrieval Quality (semantic) ---"
+echo "--- Table 9: Pet Sim retrieval (semantic) ---"
 python3 "$EVAL_DIR/eval_retrieval.py" --semantic | tee "$RESULTS_DIR/eval_retrieval_semantic_output.txt"
 echo ""
 
-# ----- §4.2 Tool Scaling -----
-# Note: end-to-end dispatch step tries LM Studio (nemotron-3-super); skips if unavailable
-echo "--- §4.2 Tool Scaling ---"
-python3 "$EVAL_DIR/eval_tool_scaling.py" | tee "$RESULTS_DIR/eval_tool_scaling_output.txt"
-echo ""
-
-# ----- §4.2 Tool Composition -----
-echo "--- §4.2 Tool Composition ---"
-python3 "$EVAL_DIR/eval_tool_composition.py" | tee "$RESULTS_DIR/eval_tool_composition_output.txt"
-echo ""
-
-# ----- §4.3 CPA Comparison -----
-echo "--- §4.3 BEAR vs CPA Baseline ---"
-python3 "$EVAL_DIR/eval_baseline_comparison.py" | tee "$RESULTS_DIR/eval_baseline_output.txt"
-echo ""
-
-# ----- §4.4 Token Efficiency & Scaling -----
-echo "--- §4.4 Scalability (10-500 agents) ---"
-python3 "$EVAL_DIR/eval_scalability.py" | tee "$RESULTS_DIR/eval_scalability_output.txt"
-echo ""
-
-# ----- Parameter sensitivity (supports §4.1, §4.4) -----
-echo "--- Parameter Sensitivity (alpha, theta, K) ---"
-python3 "$EVAL_DIR/eval_ablation.py" | tee "$RESULTS_DIR/eval_ablation_output.txt"
-echo ""
-
-echo "--- Parameter Sensitivity (semantic) ---"
-python3 "$EVAL_DIR/eval_ablation.py" --semantic | tee "$RESULTS_DIR/eval_ablation_semantic_output.txt"
-echo ""
-
-# ----- §4.6 Backend Comparison & Governance Ablation -----
-# These require downloading embedding models (BGE-M3, Qwen3) on first run
-echo "--- §4.6 Retrieval Backend Comparison ---"
+echo "--- Retrieval backend comparison (BGE-M3, Qwen3) ---"
 python3 "$EVAL_DIR/eval_retrieval_backends.py" --all | tee "$RESULTS_DIR/eval_retrieval_backends_output.txt"
 echo ""
 
-echo "--- §4.6 Governance Ablation ---"
+echo "--- Table 15: Governance ablation ---"
 python3 "$EVAL_DIR/eval_governance_ablation.py" | tee "$RESULTS_DIR/eval_governance_ablation_output.txt"
 echo ""
 
-# ----- ToolBench + MetaTool retrieval (Tables 2, 3, 4) -----
-# Requires data downloaded via toolbench_setup.py
-echo "--- ToolBench + MetaTool retrieval ---"
+echo "--- Table 16: Decomposed governance ablation (5 backends + ITR) ---"
+python3 "$EVAL_DIR/eval_governance_decomposed.py" | tee "$RESULTS_DIR/eval_governance_decomposed_output.txt"
+echo ""
+
+echo "--- Table 17: Alpha weight sweep ---"
+python3 "$EVAL_DIR/eval_alpha_sweep.py" | tee "$RESULTS_DIR/eval_alpha_sweep_output.txt"
+echo ""
+
+echo "--- Tables 13, 14: BEAR vs CPA baseline ---"
+python3 "$EVAL_DIR/eval_baseline_comparison.py" | tee "$RESULTS_DIR/eval_baseline_output.txt"
+echo ""
+
+echo "--- Table 12: Scalability (10-500 agents) ---"
+python3 "$EVAL_DIR/eval_scalability.py" | tee "$RESULTS_DIR/eval_scalability_output.txt"
+echo ""
+
+echo "--- Tables 10, 11: Tool scaling + token savings ---"
+python3 "$EVAL_DIR/eval_tool_scaling.py" | tee "$RESULTS_DIR/eval_tool_scaling_output.txt"
+echo ""
+
+echo "--- Tool composition (Composer validation) ---"
+python3 "$EVAL_DIR/eval_tool_composition.py" | tee "$RESULTS_DIR/eval_tool_composition_output.txt"
+echo ""
+
+echo "--- Parameter sensitivity (alpha, theta, K; lexical) ---"
+python3 "$EVAL_DIR/eval_ablation.py" | tee "$RESULTS_DIR/eval_ablation_output.txt"
+echo ""
+
+echo "--- Parameter sensitivity (semantic) ---"
+python3 "$EVAL_DIR/eval_ablation.py" --semantic | tee "$RESULTS_DIR/eval_ablation_semantic_output.txt"
+echo ""
+
+# =========================
+# ToolBench + MetaTool retrieval (deterministic; needs toolbench_setup.py first)
+# =========================
+
+echo "--- Tables 3, 5, 6: ToolBench + MetaTool retrieval ---"
 python3 "$EVAL_DIR/eval_toolbench.py" --latex | tee "$RESULTS_DIR/eval_toolbench_output.txt"
 echo ""
 
-# ----- End-to-end ToolBench (REQUIRES LLM) -----
-# Paper Table 5 used mistralai/Mistral-Nemo-Instruct-2407 12B via vLLM.
-# Override via --model and --base-url (any OpenAI-compatible endpoint).
+echo "--- Table 4: ToolBench with LLM-inferred categories (top-1) ---"
+python3 "$EVAL_DIR/eval_toolbench_inferred_categories.py" | tee "$RESULTS_DIR/eval_toolbench_inferred_categories_output.txt"
+echo ""
+
+echo "--- Table 4: ToolBench with LLM-inferred categories (multi-tag) ---"
+python3 "$EVAL_DIR/eval_toolbench_multitag_categories.py" | tee "$RESULTS_DIR/eval_toolbench_multitag_categories_output.txt"
+echo ""
+
+echo "--- Table 4: ToolBench with LLM-inferred categories (top-5) ---"
+python3 "$EVAL_DIR/eval_toolbench_top5_categories.py" | tee "$RESULTS_DIR/eval_toolbench_top5_categories_output.txt"
+echo ""
+
+echo "--- Table 19 (Appendix B): MetaTool retained-vs-excluded subset ---"
+python3 "$EVAL_DIR/eval_metatool_subset_analysis.py" | tee "$RESULTS_DIR/eval_metatool_subset_output.txt"
+echo ""
+
+# =========================
+# End-to-end tool selection (REQUIRES LLM)
+# =========================
+
 if [[ "$ALL" == true ]]; then
-    echo "--- End-to-end ToolBench (LLM required) ---"
+    echo "--- Table 7: End-to-end ToolBench (single-turn, LLM required) ---"
     python3 "$EVAL_DIR/eval_toolbench_e2e.py" $E2E_ARGS \
         | tee "$RESULTS_DIR/eval_toolbench_e2e_output.txt" \
         || echo "  [e2e ToolBench failed: see error above; continuing]"
     echo ""
+
+    echo "--- Table 8: End-to-end ToolBench (ReAct, LLM required) ---"
+    python3 "$EVAL_DIR/eval_toolbench_react.py" $E2E_ARGS \
+        | tee "$RESULTS_DIR/eval_toolbench_react_output.txt" \
+        || echo "  [e2e ReAct ToolBench failed: see error above; continuing]"
+    echo ""
 else
-    echo "--- Skipping end-to-end ToolBench (use --all to include) ---"
-    echo "  eval_toolbench_e2e.py  (paper Table 5; needs OpenAI-compatible LLM endpoint)"
+    echo "--- Skipping end-to-end LLM experiments (use --all to include) ---"
+    echo "  Table 7: eval_toolbench_e2e.py     (needs OpenAI-compatible endpoint)"
+    echo "  Table 8: eval_toolbench_react.py   (needs OpenAI-compatible endpoint)"
     echo ""
 fi
 
