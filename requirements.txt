@@ -20,7 +20,7 @@
 # =============================================================================
 
 # ----- BEAR (this paper's library) -------------------------------------------
-bear @ git+https://github.com/snhwang/bear.git@v0.1.0
+bear @ git+https://github.com/snhwang/bear.git@v0.1.9
 
 # ----- Core numerics and IO --------------------------------------------------
 numpy==2.2.6
