@@ -59,16 +59,22 @@ DEFAULT_TOP_K = 5
 BOOTSTRAP_ITERS = 10_000
 
 
-def build_plain_retriever(corpus, model: str, top_k: int) -> Retriever:
-    """Pure dense-embedding retriever (no governance, no priority weighting)."""
+def build_retriever(corpus, model: str, top_k: int, governed: bool) -> Retriever:
+    """Dense retriever with ToolBench-IR embeddings.
+
+    governed=False: pure similarity (no priority weighting; corpus is scope-
+    stripped by the caller so nothing is hard-gated).
+    governed=True: BEAR governance on top of the same embeddings (required_tags
+    hard gate from the corpus, priority weighting, threshold).
+    """
     config = Config(
         embedding_model=model,
         embedding_backend=EmbeddingBackend.NUMPY,
         embedding_dim=768,
         embedding_query_prefix="",
         embedding_passage_prefix="",
-        priority_weight=0.0,
-        default_threshold=0.0,
+        priority_weight=0.3 if governed else 0.0,
+        default_threshold=0.15 if governed else 0.0,
         default_top_k=top_k,
         mandatory_tags=[],
     )
@@ -77,12 +83,12 @@ def build_plain_retriever(corpus, model: str, top_k: int) -> Retriever:
     return r
 
 
-def evaluate(retriever: Retriever, queries, top_k: int) -> dict[str, np.ndarray]:
+def evaluate(retriever: Retriever, queries, top_k: int, use_tags: bool) -> dict[str, np.ndarray]:
     recalls, precisions, f1s, ndcgs = [], [], [], []
     for q in queries:
-        query_text, _tags, expected = q[0], q[1], q[2]
-        # No governance: empty context, pure similarity retrieval.
-        results = retriever.retrieve(query_text, Context(tags=[]), top_k=top_k)
+        query_text, tags, expected = q[0], q[1], q[2]
+        ctx = Context(tags=tags if use_tags else [])
+        results = retriever.retrieve(query_text, ctx, top_k=top_k)
         ordered = [r.id for r in results]
         s = set(ordered)
         recalls.append(recall_at_k(s, expected, top_k))
@@ -97,6 +103,22 @@ def evaluate(retriever: Retriever, queries, top_k: int) -> dict[str, np.ndarray]
     }
 
 
+def run_condition(label, corpus, queries, model, top_k, governed) -> dict:
+    print(f"  building [{label}] and indexing ...")
+    t0 = time.time()
+    r = build_retriever(corpus, model, top_k, governed)
+    m = evaluate(r, queries, top_k, use_tags=governed)
+    res = {"label": label, "governance": governed, "metrics": {}}
+    print(f"=== {label}  (n={len(queries)}, k={top_k}, {time.time()-t0:.0f}s) ===")
+    for name in ("recall", "precision", "f1", "ndcg"):
+        ci = bootstrap_ci(m[name], BOOTSTRAP_ITERS)
+        mean, lo, hi = ci["point_estimate"], ci["ci_lower"], ci["ci_upper"]
+        res["metrics"][name] = {"mean": float(mean), "ci": [float(lo), float(hi)],
+                                "n": int(len(m[name]))}
+        print(f"  {name.upper():10s} {mean:.3f} [{lo:.3f}, {hi:.3f}]")
+    return res
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--model", default=DEFAULT_MODEL,
@@ -104,43 +126,40 @@ def main():
     ap.add_argument("--top-k", type=int, default=DEFAULT_TOP_K)
     ap.add_argument("--max-queries", type=int, default=None,
                     help="Limit number of queries (smoke test).")
+    ap.add_argument("--mode", choices=["both", "alone", "governed"], default="both",
+                    help="Which conditions to run (default both).")
     ap.add_argument("--output", type=str, default=None)
     args = ap.parse_args()
 
-    print(f"[1/3] Loading ToolBench corpus + queries ...")
+    print("[1/2] Loading ToolBench corpus + queries ...")
     corpus, queries, _category_map = load_toolbench_corpus_and_queries()
     if args.max_queries:
         queries = queries[: args.max_queries]
     print(f"      corpus: {len(list(corpus))} APIs   queries: {len(queries)}")
 
-    # No governance: strip scope so nothing is hard-gated (matches the paper's
-    # no-governance / embedding-only baseline construction).
-    corpus_ng = strip_governance(corpus)
-
-    print(f"[2/3] Building ToolLLM retriever ({args.model}) and indexing ...")
-    t0 = time.time()
-    retriever = build_plain_retriever(corpus_ng, args.model, args.top_k)
-    print(f"      indexed in {time.time() - t0:.1f}s")
-
-    print(f"[3/3] Evaluating {len(queries)} queries at k={args.top_k} ...")
-    m = evaluate(retriever, queries, args.top_k)
-
-    out = {"model": args.model, "top_k": args.top_k, "n_queries": len(queries),
-           "governance": False, "metrics": {}}
-    print(f"\n=== ToolLLM retriever (no governance) on ToolBench "
-          f"(n={len(queries)}, k={args.top_k}) ===")
-    for name in ("recall", "precision", "f1", "ndcg"):
-        ci = bootstrap_ci(m[name], BOOTSTRAP_ITERS)
-        mean, lo, hi = ci["point_estimate"], ci["ci_lower"], ci["ci_upper"]
-        out["metrics"][name] = {"mean": float(mean), "ci": [float(lo), float(hi)],
-                                "n": int(len(m[name]))}
-        print(f"  {name.upper():10s} {mean:.3f} [{lo:.3f}, {hi:.3f}]")
+    print(f"[2/2] Running ToolBench-IR conditions ({args.mode}) ...\n")
+    conditions = []
+    if args.mode in ("both", "alone"):
+        # No governance: strip scope so nothing is hard-gated (matches the
+        # paper's no-governance / embedding-only baseline construction).
+        conditions.append(run_condition(
+            "ToolBench-IR alone (no governance)",
+            strip_governance(corpus), queries, args.model, args.top_k, governed=False))
+    if args.mode in ("both", "governed"):
+        # BEAR governance on top of ToolBench-IR embeddings. Query context tags
+        # are the benchmark categories (oracle for the category dimension, same
+        # caveat as all governed ToolBench rows).
+        conditions.append(run_condition(
+            "BEAR governance + ToolBench-IR (oracle categories)",
+            corpus, queries, args.model, args.top_k, governed=True))
 
     print("\nReference points (from the manuscript, same split/metric):")
     print("  BEAR+BGE oracle categories   Recall@5 = 0.679")
     print("  BEAR+BGE no governance       Recall@5 = 0.574")
     print("  BEAR+BGE inferred (best)     Recall@5 = 0.502")
 
+    out = {"model": args.model, "top_k": args.top_k, "n_queries": len(queries),
+           "conditions": conditions}
     out_path = Path(args.output) if args.output else (
         project_root / "results" / "toolbench_toolllm.json")
     out_path.parent.mkdir(parents=True, exist_ok=True)
