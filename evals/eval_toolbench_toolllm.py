@@ -130,7 +130,8 @@ def main():
     print(f"\n=== ToolLLM retriever (no governance) on ToolBench "
           f"(n={len(queries)}, k={args.top_k}) ===")
     for name in ("recall", "precision", "f1", "ndcg"):
-        mean, lo, hi = bootstrap_ci(m[name], BOOTSTRAP_ITERS)
+        ci = bootstrap_ci(m[name], BOOTSTRAP_ITERS)
+        mean, lo, hi = ci["point_estimate"], ci["ci_lower"], ci["ci_upper"]
         out["metrics"][name] = {"mean": float(mean), "ci": [float(lo), float(hi)],
                                 "n": int(len(m[name]))}
         print(f"  {name.upper():10s} {mean:.3f} [{lo:.3f}, {hi:.3f}]")
