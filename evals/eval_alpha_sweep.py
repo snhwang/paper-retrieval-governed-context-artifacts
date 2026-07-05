@@ -18,12 +18,14 @@ doesn't matter'': two competing hypotheses remain consistent with it,
 We sweep alpha over a denser grid spanning the full feasible range to
 disambiguate.
 
-Score function (from the manuscript, with default min-max normalisation):
+Score function (as implemented by the BEAR retriever, raw cosine, no
+normalisation):
 
-    score(q, d) = (1 - alpha) * sim_tilde(q, d) + alpha * priority(d) / 100
+    score(q, d) = (1 - alpha) * sim(q, d) + alpha * priority(d) / 100
 
-so alpha = 0 -> similarity-only ranking, alpha = 1 -> priority-only
-ranking (similarity entirely ignored).
+where sim(q, d) is the raw cosine similarity in [-1, 1]. So alpha = 0 ->
+similarity-only ranking, alpha = 1 -> priority-only ranking (similarity
+entirely ignored).
 
 What this script does
 ---------------------
