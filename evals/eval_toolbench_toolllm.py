@@ -59,13 +59,17 @@ DEFAULT_TOP_K = 5
 BOOTSTRAP_ITERS = 10_000
 
 
-def build_retriever(corpus, model: str, top_k: int, governed: bool) -> Retriever:
+def build_retriever(corpus, model: str, top_k: int, governed: bool,
+                    threshold: float = 0.15) -> Retriever:
     """Dense retriever with ToolBench-IR embeddings.
 
     governed=False: pure similarity (no priority weighting; corpus is scope-
     stripped by the caller so nothing is hard-gated).
     governed=True: BEAR governance on top of the same embeddings (required_tags
-    hard gate from the corpus, priority weighting, threshold).
+    hard gate from the corpus, priority weighting, similarity threshold). Set
+    threshold=0.0 to isolate the scale-free hard gate from the similarity floor
+    (raw-cosine scales differ across encoders, so a fixed floor is not
+    comparable between BGE and ToolBench-IR).
     """
     config = Config(
         embedding_model=model,
@@ -74,7 +78,7 @@ def build_retriever(corpus, model: str, top_k: int, governed: bool) -> Retriever
         embedding_query_prefix="",
         embedding_passage_prefix="",
         priority_weight=0.3 if governed else 0.0,
-        default_threshold=0.15 if governed else 0.0,
+        default_threshold=threshold if governed else 0.0,
         default_top_k=top_k,
         mandatory_tags=[],
     )
@@ -103,10 +107,10 @@ def evaluate(retriever: Retriever, queries, top_k: int, use_tags: bool) -> dict[
     }
 
 
-def run_condition(label, corpus, queries, model, top_k, governed) -> dict:
+def run_condition(label, corpus, queries, model, top_k, governed, threshold=0.15) -> dict:
     print(f"  building [{label}] and indexing ...")
     t0 = time.time()
-    r = build_retriever(corpus, model, top_k, governed)
+    r = build_retriever(corpus, model, top_k, governed, threshold)
     m = evaluate(r, queries, top_k, use_tags=governed)
     res = {"label": label, "governance": governed, "metrics": {}}
     print(f"=== {label}  (n={len(queries)}, k={top_k}, {time.time()-t0:.0f}s) ===")
@@ -128,6 +132,9 @@ def main():
                     help="Limit number of queries (smoke test).")
     ap.add_argument("--mode", choices=["both", "alone", "governed"], default="both",
                     help="Which conditions to run (default both).")
+    ap.add_argument("--threshold", type=float, default=0.15,
+                    help="Similarity floor for the governed condition. Set 0.0 "
+                         "to isolate the scale-free required_tags hard gate.")
     ap.add_argument("--output", type=str, default=None)
     args = ap.parse_args()
 
@@ -149,9 +156,11 @@ def main():
         # BEAR governance on top of ToolBench-IR embeddings. Query context tags
         # are the benchmark categories (oracle for the category dimension, same
         # caveat as all governed ToolBench rows).
+        label = ("BEAR governance + ToolBench-IR (oracle categories"
+                 + (", hard gate only)" if args.threshold == 0.0 else ")"))
         conditions.append(run_condition(
-            "BEAR governance + ToolBench-IR (oracle categories)",
-            corpus, queries, args.model, args.top_k, governed=True))
+            label, corpus, queries, args.model, args.top_k, governed=True,
+            threshold=args.threshold))
 
     print("\nReference points (from the manuscript, same split/metric):")
     print("  BEAR+BGE oracle categories   Recall@5 = 0.679")
