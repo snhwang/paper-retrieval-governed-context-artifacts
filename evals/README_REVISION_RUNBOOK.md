@@ -182,3 +182,25 @@ When all five scripts have been run and their results committed, the artifacts r
 - 1 ITR-library classification cache (`results/toolbench_inferred_categories.json`)
 
 This is the complete reproducibility package for the TIST revision.
+
+## ToolLLM retriever baseline on ToolBench (R1.4 / R3.5 / R3.7)
+
+Runs ToolLLM's publicly released fine-tuned ToolBench retriever as a plain
+no-governance backend on the identical ToolBench eval (same 3,225-API split,
+same 1,100 queries, same Recall@5 / NDCG@5 / F1@5). Gives the same-metric,
+same-split learned-retriever reference point the reviewers asked for.
+
+    # downloads the ToolBench IR encoder on first run
+    python evals/eval_toolbench_toolllm.py \
+        --model ToolBench/ToolBench_IR_bert_based_uncased \
+        --top-k 5 --output results/toolbench_toolllm.json
+
+    # quick wiring check (no full corpus embed):
+    python evals/eval_toolbench_toolllm.py --max-queries 50
+
+Compare the reported Recall@5 against (same split/metric, already in the paper):
+  BEAR+BGE oracle categories   0.679   (Table 3)
+  BEAR+BGE inferred (best)     0.502   (Table 4)
+  BEAR+BGE no governance       0.574   (floor)
+Note: confirm the exact HF model id / access before the full run; override with
+--model if ToolBench publishes under a different name or you use a local path.
