@@ -1,0 +1,45 @@
+{
+  "model": "ToolBench/ToolBench_IR_bert_based_uncased",
+  "top_k": 5,
+  "n_queries": 1100,
+  "conditions": [
+    {
+      "label": "BEAR governance + ToolBench-IR (oracle categories, hard gate only)",
+      "governance": true,
+      "metrics": {
+        "recall": {
+          "mean": 0.8200454545454545,
+          "ci": [
+            0.803348106060606,
+            0.8368333333333333
+          ],
+          "n": 1100
+        },
+        "precision": {
+          "mean": 0.37963636363636366,
+          "ci": [
+            0.3705454545454545,
+            0.3889090909090909
+          ],
+          "n": 1100
+        },
+        "f1": {
+          "mean": 0.5095568017840746,
+          "ci": [
+            0.4987226616817526,
+            0.5204188967598058
+          ],
+          "n": 1100
+        },
+        "ndcg": {
+          "mean": 0.7750090508075437,
+          "ci": [
+            0.7585881350398849,
+            0.7915525264886575
+          ],
+          "n": 1100
+        }
+      }
+    }
+  ]
+}

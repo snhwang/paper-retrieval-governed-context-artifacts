@@ -204,3 +204,73 @@ Compare the reported Recall@5 against (same split/metric, already in the paper):
   BEAR+BGE no governance       0.574   (floor)
 Note: confirm the exact HF model id / access before the full run; override with
 --model if ToolBench publishes under a different name or you use a local path.
+
+### ToolBench-IR governance-composition follow-up (BEAR 0.1.10)
+
+The baseline script also runs BEAR governance *on top of* the ToolBench-IR
+encoder, to test whether the scope gate composes with a fine-tuned in-domain
+retriever:
+
+    python evals/eval_toolbench_toolllm.py \
+        --model ToolBench/ToolBench_IR_bert_based_uncased \
+        --top-k 5 --mode both \
+        --output results/toolbench_toolllm_fixed.json
+
+    # isolate the scale-free hard gate from the similarity floor:
+    python evals/eval_toolbench_toolllm.py --mode governed --threshold 0.0
+
+Result (BEAR 0.1.10): ToolBench-IR alone Recall@5 = 0.847 [0.832, 0.862];
+BEAR governance + ToolBench-IR = 0.842 [0.826, 0.858] -- statistically
+indistinguishable (overlapping CIs), and the gate excludes 0 of 2,629
+ground-truth APIs (see diag_gate_coverage.py). Governance is recall-neutral on
+a strong in-domain retriever and gates out zero correct tools.
+
+    # verifies the hard gate admits every ground-truth API (no model needed):
+    python evals/diag_gate_coverage.py
+
+## Retrieval re-run on BEAR 0.1.10 (over-fetch fix) -- 2026-07-06
+
+Background. While building the ToolBench-IR composition run we found that BEAR's
+retriever depressed retrieval quality under a hard gate on large corpora. The
+gate prunes the candidate pool in Step 3; with the fixed top_k*3 over-fetch, an
+admissible item ranked just outside that window was recovered only by the
+flat-priority backfill in Step 3.5 (final_score = priority/100 = 0.5), which on
+a large single-category corpus outranked genuinely-similar matches whose cosine
+was below ~0.5 and displaced them from the top-k. Fixed in bear 0.1.10
+(retriever widens the over-fetch to the full corpus when a gate is active, so
+the admissible set is ranked by real similarity; the backfill becomes a no-op).
+See bear-dev commit "retriever: widen over-fetch when hard-gated".
+
+Scope of the change. Only the (gov) conditions -- use_tags=True with scope
+intact -- are affected, and only on tag-passing benchmarks (ToolBench,
+MetaTool+Tags, MetaTool+QueryTags). The (no gov) rows (scope stripped) and the
+(mand-only) rows (no context tags) engage neither the gate nor the injection and
+are unchanged. Direction is one-way: gov rows can only rise or stay.
+
+Install the fixed build into the eval env (deps already satisfied):
+
+    uv pip install -e /path/to/bear-dev --no-deps
+    python -c "import bear; print(bear.__version__)"   # expect 0.1.10
+
+Full clean re-run (writes a new file so the pre-fix JSON is preserved for
+diffing):
+
+    python evals/eval_toolbench.py --top-k 5 --latex \
+        --output results/toolbench_eval_v0110.json
+
+Faster gov-only re-run (skips the unchanged no-gov / mand-only rows):
+
+    python evals/eval_toolbench.py --top-k 5 \
+        --backends "BEAR+BGE (gov)" "BEAR+BGE-M3 (gov)" \
+                   "BEAR+Qwen3-0.6B (gov)" "BEAR+Qwen3-4B (gov)" \
+        --output results/toolbench_eval_gov_v0110.json
+
+Verification. Diff results/toolbench_eval_v0110.json against the pre-fix
+results/toolbench_eval.json: every (no gov) and (mand-only) row must be
+identical; only (gov) rows should move (upward or unchanged). Any movement in a
+non-gov row indicates an unintended side effect and should be investigated
+before updating the manuscript.
+
+Note. The public bear release must be advanced to 0.1.10 (propagate the fix to
+bear-public-prep, tag v0.1.10) and requirements.txt repinned to @v0.1.10 before
+the artifacts are published, so a fresh clone reproduces these numbers.
