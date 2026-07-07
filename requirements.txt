@@ -51,6 +51,14 @@ tiktoken==0.13.0
 # The MetaTool tag-generation and ToolBench inferred-categories scripts call
 # the Anthropic and (optionally) OpenAI APIs via urllib directly. These SDKs
 # are pinned for environments that prefer to use them instead.
+#
+# The StableToolBench multi-step eval (eval_stabletoolbench_react.py) also uses
+# these: `openai` for the vLLM-served agent LLM (OpenAI-compatible endpoint) and
+# `anthropic` for the Claude Sonnet 5 simulator + ToolEval judge. That eval
+# additionally requires the external StableToolBench repo and its cached
+# API-response data (not pip-installable from here; see
+# evals/README_REVISION_RUNBOOK.md). Verify the pinned anthropic SDK supports the
+# claude-sonnet-5 model id and the `thinking` parameter; bump it if not.
 anthropic==0.111.0
 openai==2.24.0
 

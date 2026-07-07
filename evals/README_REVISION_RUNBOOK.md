@@ -347,3 +347,53 @@ normalization compresses cosine and thus shifts what alpha *means*. Takeaway:
 the decomposed ablation (alpha=0.30) needs no change; the alpha-sweep's peak F1
 is scale-invariant but the best-alpha coordinate is a convention of the raw
 cosine scale. Keep raw cosine, document the choice.
+
+## Multi-step ReAct on StableToolBench (Tier 1) -- setup
+
+Purpose. A genuine multi-step reason-act-observe evaluation (unlike the
+single-step tab:e2e-react), to test whether governance's advantage compounds
+end to end: governed vs ungoverned BEAR retrieval feeding a ReAct agent on
+ToolBench I2/I3 multi-tool tasks, scored by pass rate. Gated on the Tier-0
+retrieval-level result (eval_compounding_coverage.py). See
+PLAN_governance_compounding.md for the full plan. Scaffold:
+evals/eval_stabletoolbench_react.py (four TODOs to fill against the sim server).
+
+Machine layout.
+  * agent LLM  : Mistral-Nemo via vLLM on the x86 main box (serve_mistral_nemo.sh)
+  * sim server : StableToolBench simulated API server (on a Spark)
+  * simulator  : Claude Sonnet 5 (Anthropic) for cache-miss API responses
+  * judge      : Claude Sonnet 5 (Anthropic) for ToolEval SoPR/SoWR
+  * retrieval  : BEAR governed vs ungoverned (this repo)
+
+Dependencies.
+  * Python (already in requirements.txt): anthropic, openai, python-dotenv.
+    IMPORTANT: verify the installed anthropic SDK supports the claude-sonnet-5
+    model id and the `thinking` parameter (adaptive thinking is on by default on
+    Sonnet 5; the scaffold disables it for the simulator and leaves it on for the
+    judge). Bump the SDK if a call rejects `thinking` or the model id.
+  * External (NOT pip-installable from here): clone StableToolBench
+    (github THUNLP-MT/StableToolBench), install ITS requirements, and download
+    its cached API-response data artifact. The sim server and its config live in
+    that repo; point its simulator client at Anthropic/Sonnet 5 rather than the
+    default GPT-4.
+
+.env (artifacts-repo .env, which the scaffold loads via load_dotenv):
+    ANTHROPIC_API_KEY=...            # already present
+    AGENT_BASE_URL=http://<main-box-ip>:8000/v1
+    SIM_SERVER_URL=http://127.0.0.1:8080   # match the sim server's port
+
+Setup order.
+  1. Main box: bash serve_mistral_nemo.sh  (agent LLM).
+  2. Spark: clone StableToolBench, install its requirements, download cached data.
+  3. Configure + start its sim server with Sonnet 5 as the cache-miss simulator.
+  4. MILESTONE: verify the server answers one sample API call. Everything
+     downstream is blocked on this.
+  5. Fill the scaffold TODOs (task loading, execute_tool, react loop, judge)
+     against the live server, then prototype:
+         python evals/eval_stabletoolbench_react.py --max-tasks 20
+  6. Scale to the full I2/I3 set only after the 20-task prototype is clean.
+
+Methodology caveat to disclose in the paper. Simulator and judge are Sonnet 5,
+not GPT-4, so absolute pass rates are not comparable to the StableToolBench
+leaderboard. The controlled comparison is governed vs ungoverned under the SAME
+simulator and judge, so that choice cancels out.
