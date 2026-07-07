@@ -14,17 +14,17 @@
       "condition": "bear_react",
       "label": "BEAR retrieval + ReAct",
       "n": 1100,
-      "tool_acc": 0.6772727272727272,
-      "ci_lo": 0.649090909090909,
-      "ci_hi": 0.7045454545454546
+      "tool_acc": 0.6872727272727273,
+      "ci_lo": 0.6590909090909091,
+      "ci_hi": 0.7145454545454546
     },
     {
       "condition": "bear_single",
       "label": "BEAR retrieval + single-turn",
       "n": 1100,
-      "tool_acc": 0.6827272727272727,
-      "ci_lo": 0.6554545454545454,
-      "ci_hi": 0.71
+      "tool_acc": 0.6872727272727273,
+      "ci_lo": 0.66,
+      "ci_hi": 0.7145454545454546
     }
   ]
 }
