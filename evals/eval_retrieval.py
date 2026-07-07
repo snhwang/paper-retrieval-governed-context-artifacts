@@ -564,16 +564,21 @@ def run_evaluation(use_semantic: bool = False):
     print("\\begin{table}[t]")
     print("\\caption{Retrieval quality on Pet Sim corpus "
           f"({len(TEST_QUERIES)} queries, $k=10$, BAAI/bge-base-en-v1.5).")
-    print("Values show mean with 95\\% bootstrap CI (10,000 iterations).}")
+    print("Values show mean with 95\\% bootstrap CI (10,000 iterations). "
+          "Each query has about five relevant instructions, so with $k{=}10$ "
+          "precision is bounded near $0.5$ and F1 near $0.68$; recall is the "
+          "less-capped measure of whether the relevant instructions are found.}")
     print("\\label{tab:retrieval}")
-    print("\\begin{tabular}{@{}lcc@{}}")
+    print("\\begin{tabular}{@{}lcccc@{}}")
     print("\\toprule")
-    print("Configuration & Strict F1 & Relaxed F1 \\\\")
+    print("Configuration & Strict R@10 & Strict F1 & Relaxed R@10 & Relaxed F1 \\\\")
     print("\\midrule")
     for name, data in results.items():
+        sr = format_ci_latex(data["strict"]["ci_r"])
         sf1 = format_ci_latex(data["strict"]["ci_f1"])
+        rr = format_ci_latex(data["relaxed"]["ci_r"])
         rf1 = format_ci_latex(data["relaxed"]["ci_f1"])
-        print(f"{name} & ${sf1}$ & ${rf1}$ \\\\")
+        print(f"{name} & ${sr}$ & ${sf1}$ & ${rr}$ & ${rf1}$ \\\\")
     print("\\bottomrule")
     print("\\end{tabular}")
     print("\\end{table}")
