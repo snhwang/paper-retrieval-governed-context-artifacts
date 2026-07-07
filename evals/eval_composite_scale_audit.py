@@ -28,6 +28,7 @@ Pet Sim corpus, no LLM. Run from the repo root:
     python evals/eval_composite_scale_audit.py --backends bge bge-m3 qwen3 qwen3-4b bm25
 """
 import argparse
+import json
 import sys
 from pathlib import Path
 
@@ -95,6 +96,8 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--backends", nargs="+", default=["bge"],
                     help=f"Backends to audit. Default bge. Options: {' '.join(DEFAULT_BACKENDS)}")
+    ap.add_argument("--output", default=str(REPO_ROOT / "results" / "composite_scale_audit.json"),
+                    help="JSON output path.")
     args = ap.parse_args()
 
     corpus = load_pet_sim_corpus()
@@ -102,11 +105,15 @@ def main():
     print(f"Pet Sim: {len(list(corpus))} instructions, priorities present: {prios}")
     print(f"Queries: {len(TEST_QUERIES)} standard, k={TOP_K}\n")
 
+    out = {"corpus": "pet_sim", "n_instructions": len(list(corpus)),
+           "priorities": prios, "n_queries": len(TEST_QUERIES), "top_k": TOP_K,
+           "alphas": ALPHAS, "decomposed_alpha": 0.30, "backends": {}}
     worst_default = 0.0   # at alpha=0.30, the decomposed ablation's operating point
     worst_any = 0.0       # across the whole swept range (alpha-sweep relevance)
     for bk in args.backends:
         r = make_retriever(corpus, bk, mandatory_tags=[])  # isolate the composite
         res = audit_backend(r, TEST_QUERIES, TOP_K)
+        out["backends"][bk] = {}
         print(f"=== {bk} ===")
         print(f"  {'alpha':>5} {'F1 raw':>8} {'F1 norm':>8} {'delta':>8} {'reorder%':>9}")
         for a in ALPHAS:
@@ -114,8 +121,21 @@ def main():
             worst_any = max(worst_any, abs(fr - fn))
             if abs(a - 0.30) < 1e-9:
                 worst_default = max(worst_default, abs(fr - fn))
+            out["backends"][bk][f"{a:.2f}"] = {
+                "f1_raw": fr, "f1_norm": fn, "delta": fr - fn, "reorder_frac": ro}
             print(f"  {a:>5.2f} {fr:>8.4f} {fn:>8.4f} {fr - fn:>+8.4f} {100 * ro:>8.1f}%")
         print()
+
+    out["summary"] = {
+        "max_abs_delta_at_alpha_030": worst_default,
+        "max_abs_delta_any_alpha": worst_any,
+        "decomposed_robust": worst_default < 0.005,
+    }
+    out_path = Path(args.output)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    with open(out_path, "w", encoding="utf-8") as f:
+        json.dump(out, f, indent=2)
+    print(f"Saved to {out_path}\n")
 
     print(f"|F1 raw - F1 norm| at alpha=0.30 (decomposed default): {worst_default:.4f}")
     print(f"|F1 raw - F1 norm| worst across swept alphas:          {worst_any:.4f}\n")
