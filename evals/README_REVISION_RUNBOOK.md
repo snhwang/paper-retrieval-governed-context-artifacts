@@ -306,3 +306,24 @@ OFF = 0.0 (the scope gate excludes the rule from retrieval, independent of
 corpus size or over-fetch width); scoped ON = 1.0 (only mandatory injection
 surfaces it). The scoped column is the architectural guarantee in isolation.
 No LLM; writes results/mandatory_injection.json with a reproducibility footer.
+
+## Out-of-domain transfer of the ToolBench-fine-tuned retriever
+
+Why. ToolBench-IR (ToolLLM's retriever) reaches Recall@5 = 0.847 on ToolBench
+because it was fine-tuned there. This measures how it transfers to a corpus it
+was NOT optimized for (MetaTool), against off-the-shelf encoders, to test the
+claim that fine-tuned retrievers are corpus-specific (strong in-domain, weak
+out-of-domain, needing per-corpus retraining) while off-the-shelf encoders +
+governance generalize. No governance -- isolates retriever quality.
+
+    # out-of-domain: the fine-tuned retriever on MetaTool
+    python evals/eval_backend_transfer.py --corpus metatool
+
+    # in-domain reference (should reproduce ~0.847)
+    python evals/eval_backend_transfer.py --corpus toolbench
+
+The script prints the off-the-shelf no-governance Recall@5 references inline
+(MetaTool: BGE 0.723, BGE-M3 0.728, Qwen3-0.6B 0.871, Qwen3-4B 0.906). If
+ToolBench-IR lands near or below the off-the-shelf encoders on MetaTool, that is
+the generalization gap: fine-tuning does not transfer, whereas off-the-shelf +
+governance does. Hypothesis, to be confirmed by the run -- not yet measured.
