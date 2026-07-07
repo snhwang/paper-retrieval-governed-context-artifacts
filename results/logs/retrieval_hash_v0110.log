@@ -1,0 +1,35 @@
+Hash embeddings selected. Similarity scores are based on character n-gram overlap and carry no semantic signal — retrieval ranking is effectively arbitrary. Use a sentence-transformers model (e.g. 'BAAI/bge-base-en-v1.5') for meaningful semantic retrieval.
+Hash embeddings selected. Similarity scores are based on character n-gram overlap and carry no semantic signal — retrieval ranking is effectively arbitrary. Use a sentence-transformers model (e.g. 'BAAI/bge-base-en-v1.5') for meaningful semantic retrieval.
+Hash embeddings selected. Similarity scores are based on character n-gram overlap and carry no semantic signal — retrieval ranking is effectively arbitrary. Use a sentence-transformers model (e.g. 'BAAI/bge-base-en-v1.5') for meaningful semantic retrieval.
+Embedding model: hash
+
+Loaded corpus with 58 instructions
+
+Full BEAR ($\alpha=0.3$):
+  Strict:  P@10=0.754 [0.708, 0.799], R@10=0.972 [0.950, 0.992], F1@10=0.841 [0.806, 0.873]
+  Relaxed: P@10=0.907 [0.878, 0.934], R@10=0.890 [0.861, 0.917], F1@10=0.889 [0.871, 0.906]
+
+Pure Similarity ($\alpha=0$):
+  Strict:  P@10=0.769 [0.696, 0.836], R@10=0.377 [0.329, 0.425], F1@10=0.481 [0.430, 0.532]
+  Relaxed: P@10=0.774 [0.701, 0.842], R@10=0.300 [0.254, 0.346], F1@10=0.404 [0.353, 0.456]
+
+Priority-Heavy ($\alpha=0.7$):
+  Strict:  P@10=0.755 [0.711, 0.800], R@10=0.975 [0.956, 0.992], F1@10=0.843 [0.810, 0.874]
+  Relaxed: P@10=0.907 [0.878, 0.934], R@10=0.890 [0.861, 0.917], F1@10=0.889 [0.871, 0.906]
+
+
+% === LaTeX Table ===
+\begin{table}[t]
+\caption{Retrieval quality on Pet Sim corpus (60 queries, $k=10$, BAAI/bge-base-en-v1.5).
+Values show mean with 95\% bootstrap CI (10,000 iterations). Each query has about five relevant instructions, so with $k{=}10$ precision is bounded near $0.5$ and F1 near $0.68$; recall is the less-capped measure of whether the relevant instructions are found.}
+\label{tab:retrieval}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+Configuration & Strict R@10 & Strict F1 & Relaxed R@10 & Relaxed F1 \\
+\midrule
+Full BEAR ($\alpha=0.3$) & $0.972\;[0.950,\;0.992]$ & $0.841\;[0.806,\;0.873]$ & $0.890\;[0.861,\;0.917]$ & $0.889\;[0.871,\;0.906]$ \\
+Pure Similarity ($\alpha=0$) & $0.377\;[0.329,\;0.425]$ & $0.481\;[0.430,\;0.532]$ & $0.300\;[0.254,\;0.346]$ & $0.404\;[0.353,\;0.456]$ \\
+Priority-Heavy ($\alpha=0.7$) & $0.975\;[0.956,\;0.992]$ & $0.843\;[0.810,\;0.874]$ & $0.890\;[0.861,\;0.917]$ & $0.889\;[0.871,\;0.906]$ \\
+\bottomrule
+\end{tabular}
+\end{table}

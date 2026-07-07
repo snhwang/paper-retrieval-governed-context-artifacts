@@ -1,0 +1,38 @@
+{
+  "corpus": "toolbench",
+  "model": "ToolBench/ToolBench_IR_bert_based_uncased",
+  "top_k": 5,
+  "in_domain": true,
+  "n_items": 3225,
+  "n_queries": 1100,
+  "governance": false,
+  "metrics": {
+    "recall": {
+      "mean": 0.8470000000000001,
+      "ci": [
+        0.8319545454545455,
+        0.8622882575757576
+      ]
+    },
+    "ndcg": {
+      "mean": 0.7927398774431946,
+      "ci": [
+        0.7776108128059773,
+        0.8081199967842033
+      ]
+    },
+    "f1": {
+      "mean": 0.5278497310770038,
+      "ci": [
+        0.5174799865538502,
+        0.5379331496786043
+      ]
+    }
+  },
+  "offshelf_reference_recall": {
+    "BGE": 0.574,
+    "BGE-M3": 0.601,
+    "Qwen3-0.6B": 0.694,
+    "Qwen3-4B": 0.681
+  }
+}

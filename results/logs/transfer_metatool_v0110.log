@@ -1,0 +1,33 @@
+corpus=metatool  199 items  21111 queries
+model=ToolBench/ToolBench_IR_bert_based_uncased  (OUT-of-domain (ToolBench-IR was not trained on MetaTool))
+Batches:   0%|          | 0/7 [00:00<?, ?it/s]Batches:  29%|██▊       | 2/7 [00:00<00:00, 18.53it/s]Batches: 100%|██████████| 7/7 [00:00<00:00, 35.56it/s]
+indexed + evaluated in 162s
+
+=== ToolBench/ToolBench_IR_bert_based_uncased on metatool (no governance, k=5) ===
+  RECALL   0.648 [0.642, 0.655]
+  NDCG     0.553 [0.547, 0.559]
+  F1       0.219 [0.217, 0.221]
+
+Off-the-shelf no-governance references on metatool (Recall@5, BEAR 0.1.10):
+  BGE          0.723
+  BGE-M3       0.728
+  Qwen3-0.6B   0.871
+  Qwen3-4B     0.906
+
+Saved to /mnt/c/users/scott/documents/work/paper-retrieval-governed-context-artifacts/results/backend_transfer_metatool_toolbench_ir_bert_based_uncased.json
+
+Read: on ToolBench the fine-tuned retriever should dominate (~0.847);
+on MetaTool, if it falls near or below the off-the-shelf encoders, that
+is the generalization gap -- fine-tuning is corpus-specific.
+
+=== Reproducibility ===
+Timestamp (UTC): 2026-07-07T07:10:19Z
+Command line:    evals/eval_backend_transfer.py --corpus metatool
+Python:          3.12.3 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
+numpy:           2.2.6
+scipy:           1.17.1
+bear:            0.1.10
+git commit:      62516a931afd95dc1b14b804a77cf54fa514997f
+git status:      DIRTY (18 files modified)
+git branch:      main
+===

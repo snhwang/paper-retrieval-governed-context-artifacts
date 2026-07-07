@@ -1,0 +1,33 @@
+corpus=toolbench  3225 items  1100 queries
+model=ToolBench/ToolBench_IR_bert_based_uncased  (IN-domain (ToolBench-IR was fine-tuned on ToolBench))
+Batches:   0%|          | 0/101 [00:00<?, ?it/s]Batches:   2%|▏         | 2/101 [00:00<00:05, 17.51it/s]Batches:   5%|▍         | 5/101 [00:00<00:04, 20.02it/s]Batches:   8%|▊         | 8/101 [00:00<00:04, 20.07it/s]Batches:  11%|█         | 11/101 [00:00<00:03, 23.09it/s]Batches:  15%|█▍        | 15/101 [00:00<00:03, 26.50it/s]Batches:  19%|█▉        | 19/101 [00:00<00:02, 28.58it/s]Batches:  23%|██▎       | 23/101 [00:00<00:02, 30.29it/s]Batches:  27%|██▋       | 27/101 [00:00<00:02, 32.87it/s]Batches:  32%|███▏      | 32/101 [00:01<00:01, 36.07it/s]Batches:  37%|███▋      | 37/101 [00:01<00:01, 38.99it/s]Batches:  42%|████▏     | 42/101 [00:01<00:01, 41.25it/s]Batches:  48%|████▊     | 48/101 [00:01<00:01, 44.45it/s]Batches:  53%|█████▎    | 54/101 [00:01<00:00, 48.41it/s]Batches:  59%|█████▉    | 60/101 [00:01<00:00, 50.53it/s]Batches:  66%|██████▋   | 67/101 [00:01<00:00, 53.76it/s]Batches:  73%|███████▎  | 74/101 [00:01<00:00, 56.64it/s]Batches:  80%|████████  | 81/101 [00:01<00:00, 60.36it/s]Batches:  88%|████████▊ | 89/101 [00:02<00:00, 63.57it/s]Batches:  96%|█████████▌| 97/101 [00:02<00:00, 66.01it/s]Batches: 100%|██████████| 101/101 [00:02<00:00, 45.24it/s]
+indexed + evaluated in 82s
+
+=== ToolBench/ToolBench_IR_bert_based_uncased on toolbench (no governance, k=5) ===
+  RECALL   0.847 [0.832, 0.862]
+  NDCG     0.793 [0.778, 0.808]
+  F1       0.528 [0.517, 0.538]
+
+Off-the-shelf no-governance references on toolbench (Recall@5, BEAR 0.1.10):
+  BGE          0.574
+  BGE-M3       0.601
+  Qwen3-0.6B   0.694
+  Qwen3-4B     0.681
+
+Saved to /mnt/c/users/scott/documents/work/paper-retrieval-governed-context-artifacts/results/backend_transfer_toolbench_toolbench_ir_bert_based_uncased.json
+
+Read: on ToolBench the fine-tuned retriever should dominate (~0.847);
+on MetaTool, if it falls near or below the off-the-shelf encoders, that
+is the generalization gap -- fine-tuning is corpus-specific.
+
+=== Reproducibility ===
+Timestamp (UTC): 2026-07-07T07:11:45Z
+Command line:    evals/eval_backend_transfer.py --corpus toolbench
+Python:          3.12.3 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
+numpy:           2.2.6
+scipy:           1.17.1
+bear:            0.1.10
+git commit:      62516a931afd95dc1b14b804a77cf54fa514997f
+git status:      DIRTY (20 files modified)
+git branch:      main
+===

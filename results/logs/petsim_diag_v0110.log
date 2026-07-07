@@ -1,0 +1,81 @@
+Pet Sim: 58 instructions, 60 queries, k=10
+
+=== bge ===
+  condition               strict F1  relaxed F1
+  governance (post-fix)      0.6530      0.7921
+  governance (pre-fix)       0.7802      0.8662
+  pure similarity            0.1684      0.3085
+  strict drop pre->post: +0.1273   relaxed drop pre->post: +0.0741
+  items the fix DROPPED (pre-fix only): n=14, mean sim=0.4986026350940977, mean priority=87.5
+  items the fix ADDED   (post-fix only): n=114, mean sim=0.5775256583042312, mean priority=48.94736842105263
+  items KEPT by both:                    n=474, mean sim=0.6398428681027537, mean priority=74.29746835443038
+  dropped items in strict GT / relaxed-only / neither: 14 / 0 / 0
+
+=== bge-m3 ===
+  condition               strict F1  relaxed F1
+  governance (post-fix)      0.6530      0.7904
+  governance (pre-fix)       0.7861      0.8720
+  pure similarity            0.1686      0.3044
+  strict drop pre->post: +0.1332   relaxed drop pre->post: +0.0816
+  items the fix DROPPED (pre-fix only): n=14, mean sim=0.46132686521325794, mean priority=92.5
+  items the fix ADDED   (post-fix only): n=134, mean sim=0.5314771161595387, mean priority=48.04477611940298
+  items KEPT by both:                    n=454, mean sim=0.5814563316264342, mean priority=75.51541850220265
+  dropped items in strict GT / relaxed-only / neither: 14 / 0 / 0
+
+=== qwen3 ===
+  condition               strict F1  relaxed F1
+  governance (post-fix)      0.6530      0.7921
+  governance (pre-fix)       0.7552      0.8584
+  pure similarity            0.2060      0.3448
+  strict drop pre->post: +0.1023   relaxed drop pre->post: +0.0663
+  items the fix DROPPED (pre-fix only): n=13, mean sim=0.441468738592588, mean priority=92.6923076923077
+  items the fix ADDED   (post-fix only): n=111, mean sim=0.47674692616806374, mean priority=48.630630630630634
+  items KEPT by both:                    n=477, mean sim=0.5765952487286782, mean priority=74.02306079664571
+  dropped items in strict GT / relaxed-only / neither: 13 / 0 / 0
+
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:01<00:01,  1.16s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:02<00:00,  1.23s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:02<00:00,  1.22s/it]
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:00<00:00,  1.64it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:01<00:00,  1.11it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:01<00:00,  1.17it/s]
+=== qwen3-4b ===
+  condition               strict F1  relaxed F1
+  governance (post-fix)      0.6530      0.7904
+  governance (pre-fix)       0.7868      0.8741
+  pure similarity            0.2171      0.3495
+  strict drop pre->post: +0.1339   relaxed drop pre->post: +0.0837
+  items the fix DROPPED (pre-fix only): n=14, mean sim=0.5001796867166247, mean priority=88.92857142857143
+  items the fix ADDED   (post-fix only): n=137, mean sim=0.5061140643419141, mean priority=47.846715328467155
+  items KEPT by both:                    n=451, mean sim=0.5959695564405353, mean priority=75.70288248337029
+  dropped items in strict GT / relaxed-only / neither: 13 / 0 / 1
+
+=== bm25 ===
+  condition               strict F1  relaxed F1
+  governance (post-fix)      0.8648      0.9223
+  governance (pre-fix)       0.8716      0.9210
+  pure similarity            0.2063      0.3242
+  strict drop pre->post: +0.0068   relaxed drop pre->post: -0.0013
+  items the fix DROPPED (pre-fix only): n=14, mean sim=0.055654870363562765, mean priority=92.5
+  items the fix ADDED   (post-fix only): n=15, mean sim=0.32389653299132265, mean priority=79.73333333333333
+  items KEPT by both:                    n=374, mean sim=0.42967572459324654, mean priority=82.22192513368984
+  dropped items in strict GT / relaxed-only / neither: 14 / 0 / 0
+
+How to read this:
+  * If governance (post-fix) still beats pure similarity on BOTH strict
+    and relaxed F1, the core claim survives.
+  * If the pre->post drop is smaller under relaxed than strict, the drop
+    is concentrated in the circular strict metric (an artifact).
+  * If DROPPED items have LOW similarity and HIGH priority vs ADDED/KEPT,
+    the fix removed high-priority low-similarity filler that the
+    flat-injection had promoted -- more correct retrieval, not worse.
+
+Saved to /mnt/c/users/scott/documents/work/paper-retrieval-governed-context-artifacts/results/petsim_fix_diagnosis.json
+
+=== Reproducibility ===
+Timestamp (UTC): 2026-07-07T07:07:30Z
+Command line:    evals/eval_petsim_fix_diagnosis.py --backends bge bge-m3 qwen3 qwen3-4b bm25
+Python:          3.12.3 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
+numpy:           2.2.6
+scipy:           1.17.1
+bear:            0.1.10
+git commit:      62516a931afd95dc1b14b804a77cf54fa514997f
+git status:      DIRTY (16 files modified)
+git branch:      main
+===

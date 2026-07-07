@@ -1,0 +1,66 @@
+Pet Sim: 58 instructions, priorities present: [40, 45, 50, 55, 58, 60, 65, 70, 72, 75, 78, 80, 82, 85, 90, 95, 100]
+Queries: 60 standard, k=10
+
+=== bge ===
+  alpha   F1 raw  F1 norm    delta  reorder%
+   0.00   0.5627   0.5627  +0.0000      0.0%
+   0.10   0.5885   0.6245  -0.0360     23.3%
+   0.30   0.6530   0.6488  +0.0042      3.3%
+   0.50   0.6488   0.6488  +0.0000     10.0%
+
+=== bge-m3 ===
+  alpha   F1 raw  F1 norm    delta  reorder%
+   0.00   0.5688   0.5688  +0.0000      0.0%
+   0.10   0.5859   0.6266  -0.0407     31.7%
+   0.30   0.6530   0.6530  +0.0000     10.0%
+   0.50   0.6530   0.6509  +0.0021     13.3%
+
+=== qwen3 ===
+  alpha   F1 raw  F1 norm    delta  reorder%
+   0.00   0.5796   0.5796  +0.0000      0.0%
+   0.10   0.6121   0.6356  -0.0235     18.3%
+   0.30   0.6530   0.6530  +0.0000      8.3%
+   0.50   0.6530   0.6530  +0.0000     15.0%
+
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:01<00:01,  1.21s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:02<00:00,  1.12s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:02<00:00,  1.13s/it]
+=== qwen3-4b ===
+  alpha   F1 raw  F1 norm    delta  reorder%
+   0.00   0.5993   0.5993  +0.0000      0.0%
+   0.10   0.6141   0.6486  -0.0346     26.7%
+   0.30   0.6530   0.6530  +0.0000     16.7%
+   0.50   0.6530   0.6488  +0.0042     13.3%
+
+=== bm25 ===
+  alpha   F1 raw  F1 norm    delta  reorder%
+   0.00   0.6182   0.6182  +0.0000      0.0%
+   0.10   0.6463   0.6530  -0.0067      5.0%
+   0.30   0.6530   0.6530  +0.0000      8.3%
+   0.50   0.6530   0.6530  +0.0000      5.0%
+
+Saved to /mnt/c/users/scott/documents/work/paper-retrieval-governed-context-artifacts/results/composite_scale_audit.json
+
+|F1 raw - F1 norm| at alpha=0.30 (decomposed default): 0.0042
+|F1 raw - F1 norm| worst across swept alphas:          0.0407
+
+DECOMPOSED (alpha=0.30): robust to cosine scaling -- the headline
+ablation numbers do not depend on the raw-vs-normalized choice; no
+change and no re-run needed there.
+
+ALPHA SWEEP: normalizing cosine compresses its range, which shifts
+what a given alpha *means* (it makes priority relatively more
+influential at the same alpha). So the best-alpha COORDINATE can move
+even when the achievable peak F1 is comparable. The substantive
+plateau/tradeoff finding is scale-invariant; the specific alpha values
+are a convention of the raw-cosine scale used throughout the paper.
+
+=== Reproducibility ===
+Timestamp (UTC): 2026-07-07T07:05:24Z
+Command line:    evals/eval_composite_scale_audit.py --backends bge bge-m3 qwen3 qwen3-4b bm25
+Python:          3.12.3 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
+numpy:           2.2.6
+scipy:           1.17.1
+bear:            0.1.10
+git commit:      62516a931afd95dc1b14b804a77cf54fa514997f
+git status:      DIRTY (15 files modified)
+git branch:      main
+===

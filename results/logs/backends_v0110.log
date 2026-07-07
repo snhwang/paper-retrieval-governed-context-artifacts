@@ -1,0 +1,229 @@
+Hardware: CUDA
+Loaded corpus with 58 instructions
+Backends to evaluate: bge, bge-m3, qwen3, qwen3-4b, bm25
+
+============================================================
+  BEAR + BGE-base v1.5
+============================================================
+  Index build time: 60.392s
+  Standard queries (60):
+    Strict  F1@10 = 0.653  [0.634, 0.671] 95% CI
+    Relaxed F1@10 = 0.792  [0.764, 0.820] 95% CI
+    Latency: avg=5.6ms, p95=8.1ms
+  Paraphrase queries (60):
+    F1@10 = 0.637  [0.627, 0.648] 95% CI
+  No-tag queries (54):
+    F1@10 = 0.701  [0.684, 0.718] 95% CI
+  Complex queries (60):
+    F1@10 = 0.664  [0.642, 0.684] 95% CI
+
+============================================================
+  BEAR + BGE-M3
+============================================================
+  Index build time: 4.040s
+  Standard queries (60):
+    Strict  F1@10 = 0.653  [0.634, 0.671] 95% CI
+    Relaxed F1@10 = 0.790  [0.763, 0.817] 95% CI
+    Latency: avg=7.7ms, p95=8.7ms
+  Paraphrase queries (60):
+    F1@10 = 0.637  [0.627, 0.648] 95% CI
+  No-tag queries (54):
+    F1@10 = 0.789  [0.764, 0.813] 95% CI
+  Complex queries (60):
+    F1@10 = 0.662  [0.640, 0.682] 95% CI
+
+============================================================
+  BEAR + Qwen3-Embedding-0.6B
+============================================================
+  Index build time: 2.932s
+  Standard queries (60):
+    Strict  F1@10 = 0.653  [0.634, 0.671] 95% CI
+    Relaxed F1@10 = 0.792  [0.764, 0.820] 95% CI
+    Latency: avg=20.9ms, p95=23.1ms
+  Paraphrase queries (60):
+    F1@10 = 0.637  [0.627, 0.648] 95% CI
+  No-tag queries (54):
+    F1@10 = 0.715  [0.696, 0.736] 95% CI
+  Complex queries (60):
+    F1@10 = 0.662  [0.640, 0.682] 95% CI
+
+============================================================
+  BEAR + Qwen3-Embedding-4B
+============================================================
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:02<00:02,  2.73s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:04<00:00,  2.27s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:04<00:00,  2.34s/it]
+/mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts/.venv/lib/python3.12/site-packages/itr/indexing/embedder.py:21: FutureWarning: The `get_sentence_embedding_dimension` method has been renamed to `get_embedding_dimension`.
+  self.embedding_dim = self.model.get_sentence_embedding_dimension()
+  Index build time: 9.027s
+  Standard queries (60):
+    Strict  F1@10 = 0.653  [0.634, 0.671] 95% CI
+    Relaxed F1@10 = 0.790  [0.763, 0.817] 95% CI
+    Latency: avg=32.9ms, p95=36.8ms
+  Paraphrase queries (60):
+    F1@10 = 0.637  [0.627, 0.648] 95% CI
+  No-tag queries (54):
+    F1@10 = 0.743  [0.718, 0.767] 95% CI
+  Complex queries (60):
+    F1@10 = 0.664  [0.642, 0.684] 95% CI
+
+============================================================
+  BEAR + BM25
+============================================================
+  Index build time: 0.001s
+  Standard queries (60):
+    Strict  F1@10 = 0.865  [0.824, 0.902] 95% CI
+    Relaxed F1@10 = 0.922  [0.906, 0.938] 95% CI
+    Latency: avg=0.2ms, p95=0.3ms
+  Paraphrase queries (60):
+    F1@10 = 0.890  [0.867, 0.912] 95% CI
+  No-tag queries (54):
+    F1@10 = 0.718  [0.692, 0.745] 95% CI
+  Complex queries (60):
+    F1@10 = 0.856  [0.820, 0.890] 95% CI
+
+============================================================
+  ITR standalone (no governance)
+============================================================
+  Strict  F1@10 = 0.182  [0.162, 0.203]
+  Relaxed F1@10 = 0.320  [0.274, 0.369]
+  Para    F1@10 = 0.058  [0.039, 0.078]
+  No-tag  F1@10 = 0.153  [0.130, 0.178]
+  Complex F1@10 = 0.161  [0.132, 0.190]
+
+============================================================
+  Random-k baseline (k=10, 1000 trials)
+============================================================
+  Strict  F1@10 = 0.116  [0.114, 0.118]
+
+
+================================================================================
+  SUMMARY  (60 standard queries, 60 paraphrase queries, 10,000 bootstrap iterations)
+================================================================================
+
+  Standard Queries — Strict F1@10 (95% CI):
+    BGE-base             0.653 [0.634, 0.671]
+    BGE-M3               0.653 [0.634, 0.671]
+    Qwen3-0.6B           0.653 [0.634, 0.671]
+    Qwen3-4B             0.653 [0.634, 0.671]
+    BM25                 0.865 [0.824, 0.902]
+    ITR-standalone       0.182 [0.162, 0.203]
+    Random-k             0.116 [0.114, 0.118]
+
+  Standard Queries — Relaxed F1@10 (95% CI):
+    BGE-base             0.792 [0.764, 0.820]
+    BGE-M3               0.790 [0.763, 0.817]
+    Qwen3-0.6B           0.792 [0.764, 0.820]
+    Qwen3-4B             0.790 [0.763, 0.817]
+    BM25                 0.922 [0.906, 0.938]
+    ITR-standalone       0.320 [0.274, 0.369]
+    Random-k             0.140 [0.140, 0.134]
+
+  Paraphrase Queries (minimal tags, n=60) — F1@10 (95% CI):
+    BGE-base             0.637 [0.627, 0.648]
+    BGE-M3               0.637 [0.627, 0.648]
+    Qwen3-0.6B           0.637 [0.627, 0.648]
+    Qwen3-4B             0.637 [0.627, 0.648]
+    BM25                 0.890 [0.867, 0.912]
+    ITR-standalone       0.058 [0.039, 0.078]
+    Random-k             0.101 [0.101, 0.099]
+
+  No-Tag Queries (pure retrieval, n=54) — F1@10 (95% CI):
+    BGE-base             0.701 [0.684, 0.718]
+    BGE-M3               0.789 [0.764, 0.813]
+    Qwen3-0.6B           0.715 [0.696, 0.736]
+    Qwen3-4B             0.743 [0.718, 0.767]
+    BM25                 0.718 [0.692, 0.745]
+    ITR-standalone       0.153 [0.130, 0.178]
+    Random-k             0.097 [0.097, 0.095]
+
+  Complex Queries (multi-intent/temporal/indirect/adversarial, n=60) — F1@10 (95% CI):
+    BGE-base             0.664 [0.642, 0.684]
+    BGE-M3               0.662 [0.640, 0.682]
+    Qwen3-0.6B           0.662 [0.640, 0.682]
+    Qwen3-4B             0.664 [0.642, 0.684]
+    BM25                 0.856 [0.820, 0.890]
+    ITR-standalone       0.161 [0.132, 0.190]
+    Random-k             0.114 [0.114, 0.111]
+
+  Latency:
+    BGE-base             avg=5.6ms  p95=8.1ms
+    BGE-M3               avg=7.7ms  p95=8.7ms
+    Qwen3-0.6B           avg=20.9ms  p95=23.1ms
+    Qwen3-4B             avg=32.9ms  p95=36.8ms
+    BM25                 avg=0.2ms  p95=0.3ms
+    ITR-standalone       avg=0.0ms  p95=0.0ms
+    Random-k             avg=0.0ms  p95=0.0ms
+
+  Paired Bootstrap Tests (p-values, H0: no difference):
+  Pair                                         Strict    Relaxed     Paraph     No-tag    Complex
+  ------------------------------------------------------------------------------------------
+  BGE-base vs BGE-M3                        1.0000     0.0760     1.0000     0.0000***  0.6282   
+  BGE-base vs Qwen3-0.6B                    1.0000     1.0000     1.0000     0.1907     0.6239   
+  BGE-base vs Qwen3-4B                      1.0000     0.0760     1.0000     0.0011**   1.0000   
+  BGE-base vs BM25                          0.0000***  0.0000***  0.0000***  0.2929     0.0000***
+  BGE-base vs ITR-standalone                0.0000***  0.0000***  0.0000***  0.0000***  0.0000***
+  BGE-base vs Random-k                      0.0000***  0.0000***  0.0000***  0.0000***  0.0000***
+  BGE-M3 vs Qwen3-0.6B                      1.0000     0.0760     1.0000     0.0000***  1.0000   
+  BGE-M3 vs Qwen3-4B                        1.0000     1.0000     1.0000     0.0039**   0.6282   
+  BGE-M3 vs BM25                            0.0000***  0.0000***  0.0000***  0.0001***  0.0000***
+  BGE-M3 vs ITR-standalone                  0.0000***  0.0000***  0.0000***  0.0000***  0.0000***
+  BGE-M3 vs Random-k                        0.0000***  0.0000***  0.0000***  0.0000***  0.0000***
+  Qwen3-0.6B vs Qwen3-4B                    1.0000     0.0760     1.0000     0.0133*    0.6239   
+  Qwen3-0.6B vs BM25                        0.0000***  0.0000***  0.0000***  0.8734     0.0000***
+  Qwen3-0.6B vs ITR-standalone              0.0000***  0.0000***  0.0000***  0.0000***  0.0000***
+  Qwen3-0.6B vs Random-k                    0.0000***  0.0000***  0.0000***  0.0000***  0.0000***
+  Qwen3-4B vs BM25                          0.0000***  0.0000***  0.0000***  0.1913     0.0000***
+  Qwen3-4B vs ITR-standalone                0.0000***  0.0000***  0.0000***  0.0000***  0.0000***
+  Qwen3-4B vs Random-k                      0.0000***  0.0000***  0.0000***  0.0000***  0.0000***
+  BM25 vs ITR-standalone                    0.0000***  0.0000***  0.0000***  0.0000***  0.0000***
+  BM25 vs Random-k                          0.0000***  0.0000***  0.0000***  0.0000***  0.0000***
+  ITR-standalone vs Random-k                0.0000***  0.0000***  0.0000***  0.0000***  0.0006***
+
+  Cohen's d Effect Sizes (positive = first backend higher):
+  Pair                                       Strict  Relaxed   Paraph   No-tag  Complex
+  --------------------------------------------------------------------------------
+  BGE-base vs BGE-M3                            inf    0.129      inf   -0.835    0.129
+  BGE-base vs Qwen3-0.6B                        inf      inf      inf   -0.173    0.129
+  BGE-base vs Qwen3-4B                          inf    0.129      inf   -0.441      inf
+  BGE-base vs BM25                           -1.794   -1.026   -2.313   -0.142   -1.610
+  BGE-base vs ITR-standalone                  4.445    2.931    7.919    4.516    3.983
+  BGE-base vs Random-k                        7.389    6.972   15.803    9.719    6.968
+  BGE-M3 vs Qwen3-0.6B                          inf   -0.129      inf    0.723    0.000
+  BGE-M3 vs Qwen3-4B                            inf      inf      inf    0.385   -0.129
+  BGE-M3 vs BM25                             -1.794   -1.060   -2.313    0.547   -1.648
+  BGE-M3 vs ITR-standalone                    4.445    2.917    7.919    4.968    3.933
+  BGE-M3 vs Random-k                          7.389    7.124   15.803    7.656    6.961
+  Qwen3-0.6B vs Qwen3-4B                        inf    0.129      inf   -0.331   -0.129
+  Qwen3-0.6B vs BM25                         -1.794   -1.026   -2.313   -0.020   -1.661
+  Qwen3-0.6B vs ITR-standalone                4.445    2.931    7.919    4.393    3.933
+  Qwen3-0.6B vs Random-k                      7.389    6.972   15.803    8.511    6.968
+  Qwen3-4B vs BM25                           -1.794   -1.060   -2.313    0.175   -1.610
+  Qwen3-4B vs ITR-standalone                  4.445    2.917    7.919    3.938    3.983
+  Qwen3-4B vs Random-k                        7.389    7.124   15.803    7.033    6.968
+  BM25 vs ITR-standalone                      3.630    3.083    6.690    5.245    3.585
+  BM25 vs Random-k                            4.624   10.837    8.479    6.261    5.225
+  ITR-standalone vs Random-k                  0.838    1.041   -0.579    0.610    0.431
+
+
+% === LaTeX Table: Retrieval Backend Comparison ===
+\begin{table}[t]
+\caption{Retrieval quality by backend on Pet Simulation corpus (37 queries, $k=10$, $\alpha=0.3$).}
+\label{tab:backend-comparison}
+\centering
+\begin{tabular}{@{}l ccc ccc r@{}}
+\toprule
+& \multicolumn{3}{c}{Strict} & \multicolumn{3}{c}{Relaxed} & \\
+\cmidrule(lr){2-4} \cmidrule(lr){5-7}
+Backend & P@10 & R@10 & F1 & P@10 & R@10 & F1 & ms/q \\
+\midrule
+BGE-base & 0.497 & 0.958 & 0.653 & 0.694 & 0.963 & 0.792 & 5.6 \\
+BGE-M3 & 0.497 & 0.958 & 0.653 & 0.692 & 0.961 & 0.790 & 7.7 \\
+Qwen3-0.6B & 0.497 & 0.958 & 0.653 & 0.694 & 0.963 & 0.792 & 20.9 \\
+Qwen3-4B & 0.497 & 0.958 & 0.653 & 0.692 & 0.961 & 0.790 & 32.9 \\
+BM25 & 0.801 & 0.958 & 0.865 & 0.969 & 0.890 & 0.922 & 0.2 \\
+ITR-standalone & --- & --- & 0.182 & --- & --- & 0.320 & --- \\
+Random-k & --- & --- & 0.116 & --- & --- & 0.140 & --- \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Results saved to results/backend_comparison.json

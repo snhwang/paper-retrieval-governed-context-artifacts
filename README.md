@@ -33,6 +33,32 @@ python evals/toolbench_setup.py
 
 Any OpenAI-compatible endpoint works (vLLM, LM Studio, Ollama). If you do not need paper-exact reproduction, point `--base-url` at whatever endpoint you have running. LM Studio's default endpoint (`http://127.0.0.1:1234/v1`) works without overriding `--base-url`.
 
+## Environment Setup
+
+Most paper tables are deterministic and require **no API keys**. Keys are only
+needed to (a) regenerate the LLM-inferred metadata for Tables 4 and 6, or (b)
+run the end-to-end experiments (Tables 7 and 8).
+
+Copy the template and fill in only the values you need:
+
+```bash
+cp .env.example .env
+```
+
+The eval scripts auto-load a `.env` from the repo root (via `python-dotenv`), so
+exporting the variables in your shell is optional. The `.env` file is
+git-ignored — never commit real keys.
+
+| Variable | Needed for | Notes |
+|:--|:--|:--|
+| `ANTHROPIC_API_KEY` | Regenerating Table 4 / Table 6 metadata | Default provider for `metatool_generate_*.py` and the `*_categories.py` evals. |
+| `OPENAI_API_KEY` | Same scripts with an OpenAI `--model` | Also used as a fallback by the `metatool_generate_*` scripts. |
+| `OLLAMA_API_KEY` | Metadata generation against a non-OpenAI, OpenAI-compatible host | Only for the `metatool_generate_*` scripts. |
+
+The end-to-end evals (`eval_toolbench_e2e.py`, `eval_toolbench_react.py`) do not
+read a key from the environment; they talk to a local OpenAI-compatible endpoint
+selected with `--base-url` / `--model`.
+
 ## Table-to-Script Mapping
 
 Every numeric table in the paper is produced by a Python script in `evals/`. Static tables (schema cheatsheet, provenance rubric, summary comparison) and figures (pipeline diagram, YAML example) have no backing script.
