@@ -4,51 +4,11 @@ Loading ToolBench corpus and queries ...
 Corpus: 3225 APIs, 1100 queries
 Closed category vocabulary: 47 categories
 
-LLM cache: 75 pre-computed classifications
+LLM cache: 1099 pre-computed classifications
 
 Classifying 1100 queries with anthropic claude-sonnet-4-6 ...
-  Classified 25 new queries; cache saved
-  Classified 50 new queries; cache saved
-  Classified 75 new queries; cache saved
-  Classified 100 new queries; cache saved
-  Classified 125 new queries; cache saved
-  Classified 150 new queries; cache saved
-  Classified 175 new queries; cache saved
-  Classified 200 new queries; cache saved
-  Classified 225 new queries; cache saved
-  Classified 250 new queries; cache saved
-  Classified 275 new queries; cache saved
-  Classified 300 new queries; cache saved
-  Classified 325 new queries; cache saved
-  Classified 350 new queries; cache saved
-  Classified 375 new queries; cache saved
-  Classified 400 new queries; cache saved
-  Classified 425 new queries; cache saved
-  Classified 450 new queries; cache saved
-  Classified 475 new queries; cache saved
-  Classified 500 new queries; cache saved
-  Classified 525 new queries; cache saved
-  Classified 550 new queries; cache saved
-  Classified 575 new queries; cache saved
-  Classified 600 new queries; cache saved
-  Classified 625 new queries; cache saved
-  Classified 650 new queries; cache saved
-  Classified 675 new queries; cache saved
-  Classified 700 new queries; cache saved
-  Classified 725 new queries; cache saved
-  Classified 750 new queries; cache saved
-  Classified 775 new queries; cache saved
-  Classified 800 new queries; cache saved
-  Classified 825 new queries; cache saved
-  Classified 850 new queries; cache saved
-  Classified 875 new queries; cache saved
-  Classified 900 new queries; cache saved
-  Classified 925 new queries; cache saved
-  Classified 950 new queries; cache saved
-  Classified 975 new queries; cache saved
-  Classified 1000 new queries; cache saved
-  1024 new LLM calls; 76 served from cache
-  Classification time: 1322.6s
+  0 new LLM calls; 1100 served from cache
+  Classification time: 0.0s
 
 Classifier top-1 accuracy vs. benchmark gold category: 0.465
 
@@ -63,8 +23,8 @@ Building retrievers and evaluating Recall@5 ...
 
 Condition                           Recall@k                NDCG@k                  F1@k
 ----------------------------------------------------------------------------------------
-oracle                  0.679 [0.66,0.70]  0.644 [0.62,0.66]  0.416 [0.40,0.43]
-inferred                0.335 [0.31,0.36]  0.321 [0.30,0.34]  0.205 [0.19,0.22]
+oracle                  0.688 [0.67,0.71]  0.651 [0.63,0.67]  0.422 [0.41,0.43]
+inferred                0.336 [0.31,0.36]  0.322 [0.30,0.35]  0.206 [0.19,0.22]
 no_governance           0.574 [0.55,0.60]  0.545 [0.52,0.57]  0.351 [0.34,0.36]
 
 --- LaTeX table (paste into manuscript) ---
@@ -78,28 +38,28 @@ no_governance           0.574 [0.55,0.60]  0.545 [0.52,0.57]  0.351 [0.34,0.36]
     \toprule
     Condition & Recall@5 & NDCG@5 & F1@5 \\
     \midrule
-    Oracle categories & 0.679 [0.66,0.70] & 0.644 [0.62,0.66] & 0.416 [0.40,0.43] \\
-    LLM-inferred categories & 0.335 [0.31,0.36] & 0.321 [0.30,0.34] & 0.205 [0.19,0.22] \\
+    Oracle categories & 0.688 [0.67,0.71] & 0.651 [0.63,0.67] & 0.422 [0.41,0.43] \\
+    LLM-inferred categories & 0.336 [0.31,0.36] & 0.322 [0.30,0.35] & 0.206 [0.19,0.22] \\
     No governance & 0.574 [0.55,0.60] & 0.545 [0.52,0.57] & 0.351 [0.34,0.36] \\
     \bottomrule
   \end{tabular}
 \end{table}
 
-Wrote /mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts/results/toolbench_inferred_metrics.json
-Wrote /mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts/results/toolbench_inferred_output.txt
-Cache: /mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts/results/toolbench_inferred_categories.json
+Wrote /mnt/c/users/scott/documents/work/paper-retrieval-governed-context-artifacts/results/toolbench_inferred_metrics.json
+Wrote /mnt/c/users/scott/documents/work/paper-retrieval-governed-context-artifacts/results/toolbench_inferred_output.txt
+Cache: /mnt/c/users/scott/documents/work/paper-retrieval-governed-context-artifacts/results/toolbench_inferred_categories.json
 
-Elapsed: 1459.4s
+Elapsed: 105.5s
 
 === Reproducibility ===
-Timestamp (UTC): 2026-06-24T04:51:36Z
+Timestamp (UTC): 2026-07-06T13:40:11Z
 Command line:    evals/eval_toolbench_inferred_categories.py
 Python:          3.12.3 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
-numpy:           2.3.5
+numpy:           2.2.6
 scipy:           1.17.1
-bear:            0.1.0
-git commit:      d14f1e8a405def270b1b9379c3003a00cb46e4b2
-git status:      DIRTY (4 files modified)
+bear:            0.1.10
+git commit:      d5c3a8fd1c7b1c22f6eb09a6f0434b0a44b7db5d
+git status:      DIRTY (5 files modified)
 git branch:      main
 
   provider: anthropic
@@ -107,7 +67,7 @@ git branch:      main
   top_k: 5
   n_queries: 1100
   classifier_top1_accuracy: 0.46545454545454545
-  n_new_llm_calls: 1024
+  n_new_llm_calls: 0
 ===
 
 To commit these results to the artifacts repo:

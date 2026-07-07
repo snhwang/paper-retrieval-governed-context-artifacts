@@ -1,0 +1,78 @@
+=== ToolBench with LLM-inferred categories ===
+
+Loading ToolBench corpus and queries ...
+Corpus: 3225 APIs, 1100 queries
+Closed category vocabulary: 47 categories
+
+LLM cache: 1099 pre-computed classifications
+
+Classifying 1100 queries with anthropic claude-sonnet-4-6 ...
+  0 new LLM calls; 1100 served from cache
+  Classification time: 0.0s
+
+Classifier top-1 accuracy vs. benchmark gold category: 0.465
+
+  OOV classifications (no required_tags applied): 6
+
+Building retrievers and evaluating Recall@5 ...
+Batches:   0%|          | 0/101 [00:00<?, ?it/s]Batches:   1%|          | 1/101 [00:00<00:12,  7.93it/s]Batches:   3%|▎         | 3/101 [00:00<00:09, 10.05it/s]Batches:   5%|▍         | 5/101 [00:00<00:08, 11.06it/s]Batches:   7%|▋         | 7/101 [00:00<00:07, 13.04it/s]Batches:   9%|▉         | 9/101 [00:00<00:06, 14.92it/s]Batches:  12%|█▏        | 12/101 [00:00<00:04, 18.98it/s]Batches:  16%|█▌        | 16/101 [00:00<00:03, 22.35it/s]Batches:  20%|█▉        | 20/101 [00:01<00:03, 25.55it/s]Batches:  24%|██▍       | 24/101 [00:01<00:02, 27.86it/s]Batches:  28%|██▊       | 28/101 [00:01<00:02, 30.37it/s]Batches:  33%|███▎      | 33/101 [00:01<00:02, 33.58it/s]Batches:  38%|███▊      | 38/101 [00:01<00:01, 35.64it/s]Batches:  43%|████▎     | 43/101 [00:01<00:01, 37.18it/s]Batches:  48%|████▊     | 48/101 [00:01<00:01, 38.58it/s]Batches:  52%|█████▏    | 53/101 [00:01<00:01, 40.68it/s]Batches:  57%|█████▋    | 58/101 [00:01<00:01, 42.13it/s]Batches:  62%|██████▏   | 63/101 [00:02<00:00, 43.72it/s]Batches:  68%|██████▊   | 69/101 [00:02<00:00, 46.10it/s]Batches:  74%|███████▍  | 75/101 [00:02<00:00, 48.32it/s]Batches:  80%|████████  | 81/101 [00:02<00:00, 50.67it/s]Batches:  86%|████████▌ | 87/101 [00:02<00:00, 52.10it/s]Batches:  92%|█████████▏| 93/101 [00:02<00:00, 53.92it/s]Batches:  99%|█████████▉| 100/101 [00:02<00:00, 56.56it/s]Batches: 100%|██████████| 101/101 [00:02<00:00, 36.48it/s]
+Batches:   0%|          | 0/101 [00:00<?, ?it/s]Batches:   2%|▏         | 2/101 [00:00<00:09, 10.95it/s]Batches:   4%|▍         | 4/101 [00:00<00:08, 11.15it/s]Batches:   6%|▌         | 6/101 [00:00<00:07, 13.45it/s]Batches:   8%|▊         | 8/101 [00:00<00:06, 15.09it/s]Batches:  11%|█         | 11/101 [00:00<00:04, 19.42it/s]Batches:  15%|█▍        | 15/101 [00:00<00:03, 23.86it/s]Batches:  19%|█▉        | 19/101 [00:00<00:03, 26.50it/s]Batches:  23%|██▎       | 23/101 [00:01<00:02, 28.73it/s]Batches:  27%|██▋       | 27/101 [00:01<00:02, 31.37it/s]Batches:  32%|███▏      | 32/101 [00:01<00:01, 34.68it/s]Batches:  37%|███▋      | 37/101 [00:01<00:01, 38.05it/s]Batches:  42%|████▏     | 42/101 [00:01<00:01, 40.05it/s]Batches:  48%|████▊     | 48/101 [00:01<00:01, 43.71it/s]Batches:  53%|█████▎    | 54/101 [00:01<00:00, 47.16it/s]Batches:  59%|█████▉    | 60/101 [00:01<00:00, 48.86it/s]Batches:  66%|██████▋   | 67/101 [00:01<00:00, 52.39it/s]Batches:  73%|███████▎  | 74/101 [00:02<00:00, 54.95it/s]Batches:  80%|████████  | 81/101 [00:02<00:00, 57.90it/s]Batches:  87%|████████▋ | 88/101 [00:02<00:00, 60.65it/s]Batches:  94%|█████████▍| 95/101 [00:02<00:00, 62.96it/s]Batches: 100%|██████████| 101/101 [00:02<00:00, 41.06it/s]
+  [1/3] BEAR + oracle categories (the manuscript number) ...
+  [2/3] BEAR + LLM-inferred categories (the new condition) ...
+  [3/3] BEAR with no governance (lower bound) ...
+
+--- Recall@5, NDCG@5, F1@5 ---
+
+Condition                           Recall@k                NDCG@k                  F1@k
+----------------------------------------------------------------------------------------
+oracle                  0.688 [0.67,0.71]  0.651 [0.63,0.67]  0.422 [0.41,0.43]
+inferred                0.336 [0.31,0.36]  0.322 [0.30,0.35]  0.206 [0.19,0.22]
+no_governance           0.574 [0.55,0.60]  0.545 [0.52,0.57]  0.351 [0.34,0.36]
+
+--- LaTeX table (paste into manuscript) ---
+
+\begin{table}[t]
+  \caption{ToolBench retrieval under three category-tag conditions (BGE-base backend, 1100 queries, $k = 5$, 95\% bootstrap CIs). The ``oracle'' condition uses the benchmark's ground-truth category labels as \texttt{required\_tags} (the original manuscript condition). The ``inferred'' condition uses an LLM classifier (claude-sonnet-4-6) to infer the category from query text alone with no access to ground-truth labels (top-1 classifier accuracy = 0.465). The ``no governance'' condition strips all scope metadata.}
+  \label{tab:toolbench-inferred}
+  \centering
+  \small
+  \begin{tabular}{@{}l c c c@{}}
+    \toprule
+    Condition & Recall@5 & NDCG@5 & F1@5 \\
+    \midrule
+    Oracle categories & 0.688 [0.67,0.71] & 0.651 [0.63,0.67] & 0.422 [0.41,0.43] \\
+    LLM-inferred categories & 0.336 [0.31,0.36] & 0.322 [0.30,0.35] & 0.206 [0.19,0.22] \\
+    No governance & 0.574 [0.55,0.60] & 0.545 [0.52,0.57] & 0.351 [0.34,0.36] \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Wrote /mnt/c/users/scott/documents/work/paper-retrieval-governed-context-artifacts/results/toolbench_inferred_metrics.json
+Wrote /mnt/c/users/scott/documents/work/paper-retrieval-governed-context-artifacts/results/toolbench_inferred_output.txt
+Cache: /mnt/c/users/scott/documents/work/paper-retrieval-governed-context-artifacts/results/toolbench_inferred_categories.json
+
+Elapsed: 105.5s
+
+=== Reproducibility ===
+Timestamp (UTC): 2026-07-06T13:40:11Z
+Command line:    evals/eval_toolbench_inferred_categories.py
+Python:          3.12.3 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
+numpy:           2.2.6
+scipy:           1.17.1
+bear:            0.1.10
+git commit:      d5c3a8fd1c7b1c22f6eb09a6f0434b0a44b7db5d
+git status:      DIRTY (5 files modified)
+git branch:      main
+
+  provider: anthropic
+  model: claude-sonnet-4-6
+  top_k: 5
+  n_queries: 1100
+  classifier_top1_accuracy: 0.46545454545454545
+  n_new_llm_calls: 0
+===
+
+To commit these results to the artifacts repo:
+  git add results/toolbench_inferred_metrics.json \
+          results/toolbench_inferred_output.txt \
+          results/toolbench_inferred_categories.json

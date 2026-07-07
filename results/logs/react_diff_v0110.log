@@ -1,0 +1,53 @@
+corpus 3225 APIs, 1100 queries, k=5, backend=bge
+Batches:   0%|          | 0/101 [00:00<?, ?it/s]Batches:   1%|          | 1/101 [00:00<00:12,  7.74it/s]Batches:   3%|▎         | 3/101 [00:00<00:09,  9.99it/s]Batches:   5%|▍         | 5/101 [00:00<00:07, 12.09it/s]Batches:   7%|▋         | 7/101 [00:00<00:06, 14.03it/s]Batches:  10%|▉         | 10/101 [00:00<00:05, 17.63it/s]Batches:  13%|█▎        | 13/101 [00:00<00:04, 21.04it/s]Batches:  17%|█▋        | 17/101 [00:00<00:03, 23.77it/s]Batches:  21%|██        | 21/101 [00:01<00:03, 26.65it/s]Batches:  25%|██▍       | 25/101 [00:01<00:02, 28.89it/s]Batches:  30%|██▉       | 30/101 [00:01<00:02, 32.38it/s]Batches:  35%|███▍      | 35/101 [00:01<00:01, 35.12it/s]Batches:  40%|███▉      | 40/101 [00:01<00:01, 37.71it/s]Batches:  45%|████▍     | 45/101 [00:01<00:01, 40.10it/s]Batches:  50%|█████     | 51/101 [00:01<00:01, 43.55it/s]Batches:  56%|█████▋    | 57/101 [00:01<00:00, 46.69it/s]Batches:  62%|██████▏   | 63/101 [00:01<00:00, 48.09it/s]Batches:  68%|██████▊   | 69/101 [00:02<00:00, 50.25it/s]Batches:  74%|███████▍  | 75/101 [00:02<00:00, 52.61it/s]Batches:  81%|████████  | 82/101 [00:02<00:00, 55.52it/s]Batches:  88%|████████▊ | 89/101 [00:02<00:00, 59.15it/s]Batches:  95%|█████████▌| 96/101 [00:02<00:00, 61.00it/s]Batches: 100%|██████████| 101/101 [00:02<00:00, 39.29it/s]
+
+queries:                              1100
+queries whose top-5 tool set CHANGED:   158 (14.4%)
+mean Jaccard(new, old) over top-5:      0.9127
+gold-in-top-5 (recall proxy):           old=0.6463  new=0.6603
+
+VERDICT: 158 queries change their tool set; gold coverage improved. If the change is small and gold coverage did not decrease, the end-to-end ReAct metric is very unlikely to move; inspect the samples below before deciding on a re-run.
+
+Sample changes (query | dropped | added):
+  'I am a fitness enthusiast and I want to buy a fitness tracker. Can you'
+     - ['toolbench/data/ASIN Data/Category']
+     + ['toolbench/data/Diablo4 Smartable/GetPeople']
+  "I'm a football enthusiast and I want to know more about Lionel Messi's"
+     - ['toolbench/data/ASIN Data/Category', 'toolbench/data/ASIN Data/Offers', 'toolbench/data/ASIN Data/Product', 'toolbench/data/ASIN Data/Reviews', 'toolbench/data/ASIN Data/Search']
+     + ['toolbench/data/Diablo4 Smartable/GetPeople', 'toolbench/data/Geography/Get Country By FIFA Code', 'toolbench/data/Kick.com API | Kick API/Get Chat User (like user from chat)', 'toolbench/data/TheClique/Transfermarkt details', 'toolbench/data/TheClique/Transfermarkt search']
+  "I'm curious about the credibility and popularity of different media so"
+     - ['toolbench/media/Shazam/Artist Top Tracks']
+     + ['toolbench/media/News In Bay/Get San Francisco Chronicle news']
+  'My friends and I are interested in understanding the relationship betw'
+     - ['toolbench/energy/Regionalkonzept Strom Herkunft/erzeugung']
+     + ['toolbench/energy/Regionalkonzept Strom Herkunft/entnahme']
+  'I want to check if the phone number +4915123577723 is valid and get th'
+     - ['toolbench/communication/Melrose Labs Voice API/Retrieve text']
+     + ['toolbench/communication/Phone Formatter/simple']
+  "I'm a developer working on a news aggregator app. Can you provide me w"
+     - ['toolbench/data/ASIN Data/Category']
+     + ['toolbench/data/Twitter Data/search']
+  'For my advertising project, I need to fetch user data from the Reqres '
+     - ['toolbench/advertising/asdfadsf/Get Products in Category']
+     + ['toolbench/advertising/Reqres - dont change!/Users']
+  'My friend wants to retrieve the list of NFTs owned by their wallet. Ca'
+     - ['toolbench/database/House Plants/Get By Climate', 'toolbench/database/House Plants/Get By Origin']
+     + ['toolbench/database/AirplanesDB/Airplanes by Brand', 'toolbench/database/expense data//read_expenses']
+  'I want to excel in the real estate exam and need some assistance. Coul'
+     - ['toolbench/education/Learning Engine//memre_api/v1/readiness']
+     + ['toolbench/education/SevenTraderAPI/Get - Countries']
+  'My friends and I are planning a hiking trip and need to know the avera'
+     - ['toolbench/energy/Regionalkonzept Strom Herkunft/erzeugung']
+     + ['toolbench/energy/Regionalkonzept Strom Herkunft/entnahme']
+
+=== Reproducibility ===
+Timestamp (UTC): 2026-07-06T14:00:05Z
+Command line:    evals/diag_react_retrieval_diff.py --top-k 5
+Python:          3.12.3 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
+numpy:           2.2.6
+scipy:           1.17.1
+bear:            0.1.10
+git commit:      d5c3a8fd1c7b1c22f6eb09a6f0434b0a44b7db5d
+git status:      DIRTY (16 files modified)
+git branch:      main
+===
