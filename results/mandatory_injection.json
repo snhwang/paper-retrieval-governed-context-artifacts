@@ -1,0 +1,41 @@
+{
+  "top_k": 10,
+  "n_queries": 12,
+  "safety_ids": [
+    "constraint-no-aggression",
+    "safety-boundaries",
+    "safety-reasonable-response"
+  ],
+  "backends": {
+    "bge": {
+      "unscoped": {
+        "mandatory_off": 1.0,
+        "mandatory_on": 1.0
+      },
+      "scoped": {
+        "mandatory_off": 0.0,
+        "mandatory_on": 1.0
+      }
+    },
+    "bge-m3": {
+      "unscoped": {
+        "mandatory_off": 1.0,
+        "mandatory_on": 1.0
+      },
+      "scoped": {
+        "mandatory_off": 0.0,
+        "mandatory_on": 1.0
+      }
+    },
+    "bm25": {
+      "unscoped": {
+        "mandatory_off": 1.0,
+        "mandatory_on": 1.0
+      },
+      "scoped": {
+        "mandatory_off": 0.0,
+        "mandatory_on": 1.0
+      }
+    }
+  }
+}
