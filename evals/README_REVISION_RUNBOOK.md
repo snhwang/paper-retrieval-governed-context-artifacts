@@ -274,3 +274,35 @@ before updating the manuscript.
 Note. The public bear release must be advanced to 0.1.10 (propagate the fix to
 bear-public-prep, tag v0.1.10) and requirements.txt repinned to @v0.1.10 before
 the artifacts are published, so a fresh clone reproduces these numbers.
+
+## Mandatory-injection guarantee (isolated demonstration) -- BEAR 0.1.10
+
+Why. Under BEAR 0.1.10 the widened gated over-fetch surfaces every
+gate-eligible safety rule on the small Pet-Sim corpus, so the decomposed
+ablation's mandatory-injection pathway no longer shows an effect (redundant
+there). Mandatory injection is a guarantee, so it only shows an effect when
+ordinary retrieval would otherwise MISS the instruction. This script isolates
+that case with a scope-excluded safety rule (a required_tags gate the
+adversarial queries never provide): ordinary retrieval cannot reach it at any
+corpus size, and only mandatory injection surfaces it.
+
+    # default: bge only
+    python evals/eval_mandatory_injection.py
+
+    # all five backends (Pet-Sim is tiny; still fast even for qwen3-4b):
+    python evals/eval_mandatory_injection.py \
+        --backends bge bge-m3 qwen3 qwen3-4b bm25
+
+Expected (deterministic, backend-independent for the scoped columns):
+
+    backend    | unscoped OFF unscoped ON | scoped OFF scoped ON
+    bge        |        1.000       1.000 |      0.000     1.000
+    bge-m3     |        1.000       1.000 |      0.000     1.000
+    bm25       |        1.000       1.000 |      0.000     1.000
+
+Reading. unscoped OFF ~= 1.0 (small corpus + no scope gate: ordinary retrieval
+already finds the safety rule, so force-inclusion is redundant here). scoped
+OFF = 0.0 (the scope gate excludes the rule from retrieval, independent of
+corpus size or over-fetch width); scoped ON = 1.0 (only mandatory injection
+surfaces it). The scoped column is the architectural guarantee in isolation.
+No LLM; writes results/mandatory_injection.json with a reproducibility footer.
