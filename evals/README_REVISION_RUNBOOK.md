@@ -327,3 +327,23 @@ The script prints the off-the-shelf no-governance Recall@5 references inline
 ToolBench-IR lands near or below the off-the-shelf encoders on MetaTool, that is
 the generalization gap: fine-tuning does not transfer, whereas off-the-shelf +
 governance does. Hypothesis, to be confirmed by the run -- not yet measured.
+
+## Composite-score scale audit (Pet Simulation)
+
+Why. BEAR ranks by score = (1-a)*cosine + a*(priority/100). cosine is raw
+(~[-1,1]); priority/100 is [0,1]. On varying-priority corpora (Pet Sim) this
+scale mix could let priority matter more than the nominal weight a implies.
+External tables are immune (uniform priority => monotonic in cosine). This audit
+re-ranks each query two ways -- raw cosine vs cosine rescaled to [0,1] -- and
+reports whether F1 moves. Scores are recomputed externally; no bear change.
+
+    python evals/eval_composite_scale_audit.py \
+        --backends bge bge-m3 qwen3 qwen3-4b bm25
+
+Preview (bge, indicative): at alpha=0.30 (the decomposed ablation's operating
+point) raw vs normalized differ by ~0.004 F1 -- negligible, so the decomposed
+numbers are robust. At alpha=0.10 they differ ~0.028 with ~23% reorder, because
+normalization compresses cosine and thus shifts what alpha *means*. Takeaway:
+the decomposed ablation (alpha=0.30) needs no change; the alpha-sweep's peak F1
+is scale-invariant but the best-alpha coordinate is a convention of the raw
+cosine scale. Keep raw cosine, document the choice.
