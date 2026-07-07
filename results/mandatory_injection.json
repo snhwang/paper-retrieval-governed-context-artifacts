@@ -27,6 +27,26 @@
         "mandatory_on": 1.0
       }
     },
+    "qwen3": {
+      "unscoped": {
+        "mandatory_off": 1.0,
+        "mandatory_on": 1.0
+      },
+      "scoped": {
+        "mandatory_off": 0.0,
+        "mandatory_on": 1.0
+      }
+    },
+    "qwen3-4b": {
+      "unscoped": {
+        "mandatory_off": 1.0,
+        "mandatory_on": 1.0
+      },
+      "scoped": {
+        "mandatory_off": 0.0,
+        "mandatory_on": 1.0
+      }
+    },
     "bm25": {
       "unscoped": {
         "mandatory_off": 1.0,
