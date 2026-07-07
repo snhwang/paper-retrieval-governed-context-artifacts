@@ -37,6 +37,15 @@ from eval_toolbench import (  # noqa: E402
 )
 from bear.models import Context  # noqa: E402
 
+# Load .env so ANTHROPIC_API_KEY, AGENT_BASE_URL, and SIM_SERVER_URL can all be
+# set there instead of exported each session. Uses the artifacts-repo .env (the
+# one that already holds the Anthropic key).
+try:
+    from dotenv import load_dotenv
+    load_dotenv(REPO_ROOT / ".env")
+except ImportError:
+    pass
+
 # --- Endpoints (override via env or flags) ----------------------------------
 AGENT_BASE_URL = os.environ.get("AGENT_BASE_URL", "http://<MAIN-BOX-IP>:8000/v1")
 AGENT_MODEL = os.environ.get("AGENT_MODEL", "mistralai/Mistral-Nemo-Instruct-2407")
