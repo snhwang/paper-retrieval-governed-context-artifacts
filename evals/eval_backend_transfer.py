@@ -25,6 +25,7 @@ Run from the repo root (needs the ToolBench-IR model; downloaded on first use):
         --query-prefix "Represent this sentence for retrieving relevant documents: "
 """
 import argparse
+import json
 import sys
 import time
 from pathlib import Path
@@ -83,6 +84,9 @@ def main():
     ap.add_argument("--query-prefix", default="")
     ap.add_argument("--top-k", type=int, default=5)
     ap.add_argument("--max-queries", type=int, default=None)
+    ap.add_argument("--output", default=None,
+                    help="JSON output path (default "
+                         "results/backend_transfer_<corpus>_<model>.json)")
     args = ap.parse_args()
 
     if args.corpus == "metatool":
@@ -102,15 +106,32 @@ def main():
     m = evaluate_retriever(r, queries, top_k=args.top_k, use_tags=False)
     print(f"indexed + evaluated in {time.time() - t0:.0f}s\n")
 
+    out = {"corpus": args.corpus, "model": args.model, "top_k": args.top_k,
+           "in_domain": args.corpus == "toolbench",
+           "n_items": len(list(corpus)), "n_queries": len(queries),
+           "governance": False, "metrics": {},
+           "offshelf_reference_recall": REFERENCE[args.corpus]}
     print(f"=== {args.model} on {args.corpus} (no governance, k={args.top_k}) ===")
     for metric in ("recall", "ndcg", "f1"):
         ci = bootstrap_ci(m[metric], 10000)
         mean, lo, hi = ci["point_estimate"], ci["ci_lower"], ci["ci_upper"]
+        out["metrics"][metric] = {"mean": float(mean), "ci": [float(lo), float(hi)]}
         print(f"  {metric.upper():8s} {mean:.3f} [{lo:.3f}, {hi:.3f}]")
 
     print(f"\nOff-the-shelf no-governance references on {args.corpus} (Recall@5, BEAR 0.1.10):")
     for name, val in REFERENCE[args.corpus].items():
         print(f"  {name:12s} {val:.3f}")
+
+    if args.output:
+        out_path = Path(args.output)
+    else:
+        slug = args.model.split("/")[-1].lower()
+        out_path = REPO_ROOT / "results" / f"backend_transfer_{args.corpus}_{slug}.json"
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    with open(out_path, "w", encoding="utf-8") as f:
+        json.dump(out, f, indent=2)
+    print(f"\nSaved to {out_path}")
+
     print("\nRead: on ToolBench the fine-tuned retriever should dominate (~0.847);")
     print("on MetaTool, if it falls near or below the off-the-shelf encoders, that")
     print("is the generalization gap -- fine-tuning is corpus-specific.")
