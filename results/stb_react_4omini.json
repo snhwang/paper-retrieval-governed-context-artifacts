@@ -1,0 +1,1158 @@
+{
+  "config": {
+    "agent_model": "gpt-4o-mini-2024-07-18",
+    "judge_model": "gpt-5.5-2026-04-23",
+    "simulator": "gpt-4o-mini (in sim server)",
+    "backend": "bge",
+    "top_k": 5,
+    "max_steps": 8,
+    "splits": [
+      "g2_instruction",
+      "g2_category",
+      "g3_instruction"
+    ],
+    "n_tasks": 20
+  },
+  "SoPR": {
+    "governed": 0.05,
+    "ungoverned": 0.0,
+    "delta": 0.05,
+    "governed_ci95": [
+      0.0,
+      0.15
+    ],
+    "ungoverned_ci95": [
+      0.0,
+      0.0
+    ]
+  },
+  "SoWR": {
+    "governed_win_rate": 0.45,
+    "governed_wins": 9,
+    "ungoverned_wins": 6,
+    "ties": 5
+  },
+  "per_task": {
+    "governed": [
+      {
+        "query_id": "1643",
+        "query": "Help me find a 7-letter word that starts with 'fru' to use as a unique password for my online account. Additionally, fetch the income data for the ZIP code 98765 to compare it with other areas.",
+        "split": "g2_instruction",
+        "solved": true,
+        "steps": 3,
+        "num_tools": 5,
+        "answer": {
+          "password": "fructed",
+          "incomeData": {
+            "houseHoldMedianIncome": 95000,
+            "houseHoldMeanIncome": 120000,
+            "familyMedianIncome": 80000,
+            "familyMeanIncome": 110000,
+            "numHouseholds": 5000,
+            "nonFamilyHouseholdMedianIncome": 45000,
+            "nonFamilyHouseholdMeanIncome": 60000,
+            "familyPercentPoverty": 10.5
+          }
+        },
+        "reason": "The agent used the word tool to find a 7-letter word starting with 'fru' ('fructed') and used the ZIP code tool to fetch income data for 98765, then returned both based on the observations."
+      },
+      {
+        "query_id": "7",
+        "query": "I'm planning a trip to Turkey and need information about postal codes in Istanbul. Can you provide me with the postal code and district for Istanbul province with plate number 34? Additionally, I would like to know if there are any transit agencies available in Istanbul. Please fetch their names and contact numbers.",
+        "split": "g2_category",
+        "solved": false,
+        "steps": 7,
+        "num_tools": 5,
+        "answer": {
+          "postal_codes": [
+            {
+              "postal_code": "34353",
+              "district": "Be\u015fikta\u015f"
+            }
+          ],
+          "transit_agencies": [
+            {
+              "name": "Sucursal OCA SAN MARTIN",
+              "address": "AV. SAN MARTIN 1234",
+              "hours": "LUN A VIE 9:00 A 17:00 HS."
+            },
+            {
+              "name": "Agente Oficial KIOSCO EL SOL",
+              "address": "CALLE FALCON 567",
+              "hours": "A Confirmar"
+            }
+          ]
+        },
+        "reason": "The postal code portion is only partially addressed (one Istanbul neighborhood/district from the plate 34 data), but the transit agency information is incorrect: the agent used an Argentina courier office tool, returned OCA offices in San Martin, not Istanbul transit agencies, and did not provide contact numbers as requested."
+      },
+      {
+        "query_id": "455",
+        "query": "I'm organizing a film festival and I need assistance in finding the best films. Can you search for videos related to 'documentary' on Vimeo? Additionally, fetch the related people in the 'cinema' category to invite them as guest speakers. Finally, provide me with a streaming link for a YouTube video with the ID 'UxxajLWwzqY'.",
+        "split": "g3_instruction",
+        "solved": false,
+        "steps": 4,
+        "num_tools": 5,
+        "answer": {
+          "documentaries": [
+            {
+              "title": "The Last Documentary",
+              "url": "https://vimeo.com/123456789"
+            },
+            {
+              "title": "Nature's Wonders",
+              "url": "https://vimeo.com/987654321"
+            }
+          ],
+          "guest_speakers": [
+            {
+              "name": "Christopher Nolan",
+              "role": "Director"
+            },
+            {
+              "name": "Quentin Tarantino",
+              "role": "Director"
+            },
+            {
+              "name": "Meryl Streep",
+              "role": "Actress"
+            },
+            {
+              "name": "Leonardo DiCaprio",
+              "role": "Actor"
+            }
+          ],
+          "youtube_video_link": "https://www.youtube.com/watch?v=UxxajLWwzqY"
+        },
+        "reason": "The Vimeo search and related people lookup were supported by tool observations, but the agent did not fetch a streaming link for the YouTube video ID. It used a user-videos tool with the video ID as a user_id, and the final YouTube link was not obtained from a tool observation."
+      },
+      {
+        "query_id": "1844",
+        "query": "I'm a cryptocurrency trader and I want to analyze the historical prices and market caps of popular cryptocurrencies like Bitcoin, Ethereum, and Stellar. Can you fetch this information for me using the Crypto Prices API? Additionally, I'm planning a trip to North America and I would like to know the subregions in North America using the Geography API.",
+        "split": "g2_instruction",
+        "solved": false,
+        "steps": 8,
+        "num_tools": 5,
+        "answer": {
+          "cryptocurrency_sources": [
+            "coinmarketcap.com",
+            "coingecko.com",
+            "cryptocompare.com",
+            "investopedia.com",
+            "blockchain.com",
+            "bitfinex.com",
+            "binance.com",
+            "kraken.com",
+            "bitstamp.net",
+            "cryptoticker.io"
+          ],
+          "note": "These sites can be used to analyze historical prices and market caps of Bitcoin, Ethereum, and Stellar.",
+          "subregions_info": "Unfortunately, I was unable to retrieve specific subregions in North America."
+        },
+        "reason": "The agent did not fetch historical prices or market caps for Bitcoin, Ethereum, and Stellar using the Crypto Prices API, and did not retrieve North America subregions using the Geography API. The final answer only lists generic crypto websites and states subregions could not be retrieved."
+      },
+      {
+        "query_id": "43",
+        "query": "My friends and I are eagerly awaiting the delivery of a package. Can you please track the package with the Pack & Send reference number 'ReferenceNumberHere'? Additionally, I'm interested in the latest status of the package with colis ID 'CA107308006SI'.",
+        "split": "g2_category",
+        "solved": false,
+        "steps": 4,
+        "num_tools": 5,
+        "answer": "The tracking information for your shipment with the Pack & Send reference number is currently being processed. Meanwhile, the latest status of the package with colis ID 'CA107308006SI' is as follows: It is currently 'In Transit' and was last updated on 2023-10-15. The package is out for delivery and is expected to be delivered by 2023-10-17. Here are the tracking details: 1. 2023-10-10: Package dispatched from origin facility in Toronto, Canada. 2. 2023-10-12: Package arrived at international hub in Vancouver, Canada. 3. 2023-10-14: Package cleared customs in Los Angeles, USA. 4. 2023-10-15: Out for delivery in San Francisco, USA.",
+        "reason": "The agent reported the Pack & Send result and colis status, but it added an estimated delivery date of 2023-10-17 that is not present in the shown tool observations, making the final answer partially hallucinated."
+      },
+      {
+        "query_id": "456",
+        "query": "I'm a film enthusiast and I want to explore new genres. Can you search for videos related to 'horror' on Vimeo? Additionally, fetch the related people in the 'entertainment' category to discover new talents. Finally, provide me with a streaming link for a YouTube video with the ID 'UxxajLWwzqY'.",
+        "split": "g3_instruction",
+        "solved": false,
+        "steps": 4,
+        "num_tools": 5,
+        "answer": "{\"vimeo_videos\": [{\"title\": \"The Haunting of Hill House\", \"url\": \"https://vimeo.com/123456789\"}, {\"title\": \"Horror Short Film: The Last Door\", \"url\": \"https://vimeo.com/987654321\"}], \"related_people\": [{\"name\": \"John Doe\", \"role\": \"Filmmaker\", \"profile_url\": \"https://vimeo.com/johndoe\"}, {\"name\": \"Jane Smith\", \"role\": \"Actor\", \"profile_url\": \"https://vimeo.com/janesmith\"}, {\"name\": \"Alice Johnson\", \"role\": \"Producer\", \"profile_url\": \"https://vimeo.com/alicejohnson\"}], \"youtube_video_link\": \"https://www.youtube.com/watch?v=UxxajLWwzqY\"}",
+        "reason": "The Vimeo search and related people results came from tool observations, but the agent used the wrong tool for the YouTube request (fetched comments) and then fabricated/provided a generic watch URL instead of a streaming link from a tool observation."
+      },
+      {
+        "query_id": "4746",
+        "query": "I'm starting a new business and I need to manage my finances effectively. Can you assist me in retrieving the current NAV for mutual funds with IDs 'STU321' and 'VWX654'? Additionally, I want to explore the world of cryptocurrencies. Please provide the latest crypto symbols and their corresponding timestamp.",
+        "split": "g2_instruction",
+        "solved": false,
+        "steps": 5,
+        "num_tools": 5,
+        "answer": {
+          "mutual_funds": [
+            {
+              "id": "STU321",
+              "current_nav": 150.75,
+              "currency": "USD",
+              "date": "2023-10-01"
+            },
+            {
+              "id": "VWX654",
+              "current_nav": 123.45,
+              "currency": "USD",
+              "date": "2023-10-01"
+            }
+          ],
+          "cryptocurrency": {
+            "symbols": [
+              "1INCHUSD",
+              "AAVEUSD",
+              "ADAUSD",
+              "ALGOUSD",
+              "BTCUSD"
+            ],
+            "timestamp": 1689009112
+          }
+        },
+        "reason": "The NAVs for STU321 and VWX654 were retrieved correctly, but the crypto portion was not fulfilled: the agent returned only a small subset of symbols rather than the latest full symbol list, and the timestamp came from a BTCUSD price lookup rather than being a timestamp corresponding to the crypto symbols response."
+      },
+      {
+        "query_id": "53",
+        "query": "I recently moved to a new address and I need to update my information. Can you retrieve my address details using the postal code 75094080? Additionally, I would like to know the companies that offer shipping services.",
+        "split": "g2_category",
+        "solved": false,
+        "steps": 6,
+        "num_tools": 5,
+        "answer": "The shipping companies that offer services in your area are: FedEx, UPS, and DHL Express. Unfortunately, I was unable to retrieve the address details for postal code 75094080.",
+        "reason": "The agent did not retrieve address details for postal code 75094080, and the listed companies came from misusing a tracking-number carrier detection tool rather than a valid shipping-services lookup."
+      },
+      {
+        "query_id": "457",
+        "query": "I'm hosting a virtual movie night with my friends and I need some suggestions. Can you search for videos related to 'action' on Vimeo? Also, fetch the related people in the 'movies' category to get recommendations from experts. Lastly, provide me with a streaming link for a YouTube video with the ID 'UxxajLWwzqY'.",
+        "split": "g3_instruction",
+        "solved": false,
+        "steps": 4,
+        "num_tools": 5,
+        "answer": {
+          "vimeo_videos": [
+            {
+              "title": "Action Movie Trailer",
+              "url": "https://vimeo.com/123456789"
+            },
+            {
+              "title": "Top 10 Action Movies",
+              "url": "https://vimeo.com/987654321"
+            }
+          ],
+          "related_people": [
+            {
+              "title": "Epic Movie Trailer",
+              "url": "https://vimeo.com/123456789"
+            },
+            {
+              "title": "Behind the Scenes",
+              "url": "https://vimeo.com/987654321"
+            }
+          ],
+          "youtube_video_link": "https://www.youtube.com/watch?v=UxxajLWwzqY"
+        },
+        "reason": "The Vimeo action video search was performed, but the agent did not fetch related people in the movies category; it fetched channel videos and mislabeled them as people. It also did not use a tool to retrieve a streaming link for the YouTube video ID, instead fabricating a standard watch URL after using an unrelated user-video tool."
+      },
+      {
+        "query_id": "5744",
+        "query": "I'm a tech enthusiast and I'm looking for the latest gadgets. Can you provide me with details of a specific product with the ID B08N5WG761 on Amazon? Also, fetch the search results for the query 'sdfsdf' on Amazon and recommend some cutting-edge products. Additionally, please suggest some popular products from the Gymshark store that might be of interest to tech-savvy individuals.",
+        "split": "g2_instruction",
+        "solved": false,
+        "steps": 4,
+        "num_tools": 5,
+        "answer": {
+          "latestGadget": {
+            "productName": "Apple MacBook Air with M1 Chip",
+            "price": "\u20b992,900",
+            "availability": "In Stock",
+            "rating": 4.8,
+            "reviewsCount": 1500,
+            "description": "The Apple MacBook Air features the revolutionary M1 chip, delivering exceptional performance and battery life. With a stunning Retina display, it offers vibrant colors and sharp text. Ideal for both professionals and students, this lightweight laptop is perfect for everyday tasks and creative projects.",
+            "features": [
+              "M1 chip for high performance",
+              "13-inch Retina display",
+              "256GB SSD storage",
+              "8GB RAM",
+              "Up to 18 hours of battery life"
+            ],
+            "imageUrl": "https://m.media-amazon.com/images/I/81m1g1g1g1L._SL1500_.jpg"
+          },
+          "gymsharkProducts": [
+            {
+              "productName": "Gymshark Flex Leggings",
+              "price": "$49.99",
+              "offers": "20% off on first order",
+              "salesRank": "#1 in Women's Activewear",
+              "reviews": "4.9 out of 5 stars",
+              "productLink": "https://www.amazon.com/dp/B08FJ3K5Z9"
+            },
+            {
+              "productName": "Gymshark Vital Seamless Sports Bra",
+              "price": "$34.99",
+              "offers": "Buy 2, get 10% off",
+              "salesRank": "#3 in Sports Bras",
+              "reviews": "4.8 out of 5 stars",
+              "productLink": "https://www.amazon.com/dp/B08FJ3K5Z8"
+            },
+            {
+              "productName": "Gymshark Training Shorts",
+              "price": "$39.99",
+              "offers": "Free shipping on orders over $50",
+              "salesRank": "#5 in Men's Activewear",
+              "reviews": "4.7 out of 5 stars",
+              "productLink": "https://www.amazon.com/dp/B08FJ3K5Z7"
+            }
+          ]
+        },
+        "reason": "The agent provided product details for B08N5WG761 and some Gymshark search results, but it omitted the Amazon search results for the query 'sdfsdf' from the final answer and did not recommend any cutting-edge products or explain that no results were found for that query. The Gymshark suggestions also were not tailored to tech-savvy individuals."
+      },
+      {
+        "query_id": "55",
+        "query": "I am planning a trip to Brazil and I need to find a hotel in Rio de Janeiro. Can you provide me with a list of available hotels in Rio de Janeiro downtown? Additionally, I would like to know the current health status of the CEP Brazil API and if it's functioning properly.",
+        "split": "g2_category",
+        "solved": false,
+        "steps": 4,
+        "num_tools": 5,
+        "answer": "The CEP Brazil API is functioning properly. However, I was unable to retrieve a list of hotels in Rio de Janeiro downtown due to limitations in the available tools.",
+        "reason": "The agent did not provide a list of available hotels in downtown Rio de Janeiro, and the claimed API health status was inferred from an unrelated endpoint rather than a proper health check. The tool observations also indicate the available API did not support hotel searches."
+      },
+      {
+        "query_id": "459",
+        "query": "I'm planning a family movie marathon and I need a variety of films. Can you search for videos related to 'animation' on Vimeo? Also, fetch the related people in the 'animation' category to get insights from professionals. Lastly, provide me with a streaming link for a YouTube video with the ID 'UxxajLWwzqY'.",
+        "split": "g3_instruction",
+        "solved": false,
+        "steps": 4,
+        "num_tools": 5,
+        "answer": {
+          "vimeo_videos": [
+            {
+              "title": "Amazing Animation Techniques",
+              "description": "A comprehensive guide to various animation techniques used in modern filmmaking.",
+              "url": "https://vimeo.com/123456789"
+            },
+            {
+              "title": "The Art of Animation",
+              "description": "Explore the artistic side of animation and how it influences storytelling.",
+              "url": "https://vimeo.com/987654321"
+            }
+          ],
+          "related_people": [
+            {
+              "name": "John Doe",
+              "profile_url": "https://vimeo.com/johndoe",
+              "bio": "An animator known for his innovative storytelling techniques."
+            },
+            {
+              "name": "Jane Smith",
+              "profile_url": "https://vimeo.com/janesmith",
+              "bio": "A talented animator and director with a passion for character design."
+            },
+            {
+              "name": "Alice Johnson",
+              "profile_url": "https://vimeo.com/alicejohnson",
+              "bio": "Specializes in 2D animation and has worked on various award-winning projects."
+            }
+          ],
+          "youtube_video_link": "https://www.youtube.com/watch?v=UxxajLWwzqY"
+        },
+        "reason": "The Vimeo search and related people steps were completed from tool observations, but the agent did not fetch a YouTube streaming link. It used a comments tool and then fabricated/constructed a standard YouTube watch URL instead of using an appropriate tool observation for the requested streaming link."
+      },
+      {
+        "query_id": "7257",
+        "query": "I'm a blogger and I want to verify the email addresses of my subscribers. Can you validate the emails of my subscribers using the Email Validate Regex API? Additionally, fetch the inbox messages for the email address p1amvpvxfh@bestparadize.com using the Read Inbox API to check for any collaboration opportunities or feedback from my readers.",
+        "split": "g2_instruction",
+        "solved": false,
+        "steps": 8,
+        "num_tools": 5,
+        "answer": "The validation results are as follows: \n- 'subscriber1@example.com': Valid \n- 'subscriber2@example.com': Invalid (MX record not found) \n- 'subscriber3@example.com': Invalid (MX record not found) \n- 'subscriber4@example.com': Invalid (MX record not found) \n- 'subscriber5@example.com': Invalid (MX record not found) \n- 'p1amvpvxfh@bestparadize.com': Invalid (MX record not found)",
+        "reason": "The agent fabricated subscriber email addresses instead of using a provided list, and it failed to fetch inbox messages because the requested Read Inbox API tool was unavailable. The final answer does not fulfill the user's request."
+      },
+      {
+        "query_id": "61",
+        "query": "My company is organizing a conference in Argentina and we need to ship some packages. Can you give me a quote for shipping a package from Buenos Aires to Cordoba? Also, provide me with the contact details of the transitaires available in Argentina.",
+        "split": "g2_category",
+        "solved": false,
+        "steps": 8,
+        "num_tools": 5,
+        "answer": null,
+        "reason": "The agent did not obtain a valid shipping quote, repeatedly called tools with incorrect paths, did not retrieve any transitaire contact details, and produced no final answer."
+      },
+      {
+        "query_id": "460",
+        "query": "I'm organizing a film festival and I'm looking for award-winning films. Can you search for videos related to 'award-winning' on Vimeo? Additionally, fetch the related people in the 'film festival' category to invite them as judges. Finally, provide me with a streaming link for a YouTube video with the ID 'UxxajLWwzqY'.",
+        "split": "g3_instruction",
+        "solved": false,
+        "steps": 4,
+        "num_tools": 5,
+        "answer": {
+          "award_winning_films": [
+            {
+              "title": "Award-Winning Short Film",
+              "url": "https://vimeo.com/123456789"
+            },
+            {
+              "title": "Documentary on Award-Winning Artists",
+              "url": "https://vimeo.com/987654321"
+            }
+          ],
+          "judges": [
+            {
+              "name": "John Doe",
+              "role": "Director",
+              "profile_url": "https://vimeo.com/johndoe"
+            },
+            {
+              "name": "Jane Smith",
+              "role": "Producer",
+              "profile_url": "https://vimeo.com/janesmith"
+            },
+            {
+              "name": "Alice Johnson",
+              "role": "Cinematographer",
+              "profile_url": "https://vimeo.com/alicejohnson"
+            }
+          ],
+          "youtube_video_link": "https://www.youtube.com/watch?v=UxxajLWwzqY"
+        },
+        "reason": "The Vimeo search and related people steps were supported by tool observations, but the agent did not fetch a streaming link for the YouTube video ID. It used an unrelated user-video tool with the ID as a user_id, and the final YouTube link was constructed/fabricated rather than obtained from a relevant tool observation."
+      },
+      {
+        "query_id": "7468",
+        "query": "I'm planning a surprise anniversary party for my parents and want to send out digital invitations. Before sending, I want to validate the email addresses of all the guests to ensure they are correct. Additionally, I need to find a caterer for the event and check their availability. Finally, I would like a random quote about love to include in the party decorations.",
+        "split": "g2_instruction",
+        "solved": false,
+        "steps": 1,
+        "num_tools": 5,
+        "answer": "Please provide the first email address to validate.",
+        "reason": "The agent did not validate any email addresses, find or check availability for a caterer, or provide a random love quote; it merely asked the user for an email address."
+      },
+      {
+        "query_id": "75",
+        "query": "I'm organizing a charity event and need to transport goods to the venue. Can you provide me with a list of companies that offer shipping services? It would be great if you could also provide me with a random project description from the SQUAKE platform.",
+        "split": "g2_category",
+        "solved": false,
+        "steps": 3,
+        "num_tools": 5,
+        "answer": "Here is a list of companies that offer shipping services:\n- Aras Kargo\n- Yurti\u00e7i Kargo\n- S\u00fcrat Kargo\n- PTT Kargo\n- MNG Kargo\n- DHL\n- FedEx\n- UPS\n\nUnfortunately, I was unable to retrieve a project description from the SQUAKE platform.",
+        "reason": "The agent provided a list of shipping companies based on the tool observation, but failed to provide a random SQUAKE project description; the Projects tool returned an empty response and the final answer states it could not retrieve one."
+      },
+      {
+        "query_id": "1983",
+        "query": "I'm organizing a charity event and I need to promote it on social media. Can you generate short URLs for the event details using the bitly tool? Additionally, I want to create branded short links for the event website using the URL Link Shortener tool.",
+        "split": "g3_instruction",
+        "solved": false,
+        "steps": 3,
+        "num_tools": 5,
+        "answer": {
+          "event_details_short_url": "https://bit.ly/3xyz123",
+          "event_website_branded_short_url": "https://your_custom_domain_id/charityevent"
+        },
+        "reason": "The agent fabricated/assumed the event URLs and custom domain ID instead of obtaining them from the user, so the generated links do not actually correspond to the user's charity event."
+      },
+      {
+        "query_id": "7636",
+        "query": "I'm a beach lover and I'm planning a beach holiday in Spain. Please provide me with a list of beautiful beaches in different provinces along with their descriptions. Additionally, I would like to know the distance between each beach and the nearest town for accommodation planning. Lastly, I need some recommendations for beachfront hotels and resorts in each province.",
+        "split": "g2_instruction",
+        "solved": false,
+        "steps": 8,
+        "num_tools": 5,
+        "answer": null,
+        "reason": "The agent did not produce a final answer within the step budget and failed to provide beaches, descriptions, distances to nearest towns, or beachfront hotel/resort recommendations. It also misinterpreted tool results and repeatedly queried incorrect province IDs."
+      },
+      {
+        "query_id": "83",
+        "query": "I want to surprise my family by tracking the delivery of the gift package with the tracking ID 6045e2f44e1b233199a5e77a. Can you provide me with the current status? Also, fetch the relevant information for the Pack & Send reference number 'ReferenceNumberHere'. Additionally, check the health of the suivi-colis API.",
+        "split": "g2_category",
+        "solved": false,
+        "steps": 4,
+        "num_tools": 5,
+        "answer": {
+          "tracking_info": {
+            "trackingNumber": "6045e2f44e1b233199a5e77a",
+            "status": "In Transit",
+            "statusInfo": "Your package is currently in transit and is expected to arrive at the destination within the next 3-5 business days.",
+            "estimatedDelivery": "2023-10-05",
+            "trackInfo": [
+              {
+                "date": "2023-10-01",
+                "location": "New York, NY",
+                "event": "Package picked up by courier."
+              },
+              {
+                "date": "2023-10-02",
+                "location": "Chicago, IL",
+                "event": "Package arrived at sorting facility."
+              },
+              {
+                "date": "2023-10-03",
+                "location": "Chicago, IL",
+                "event": "Package departed sorting facility."
+              }
+            ]
+          },
+          "pack_send_info": {
+            "status": "In Transit",
+            "estimated_delivery": "2023-10-15",
+            "current_location": "Distribution Center, City Name",
+            "tracking_history": [
+              {
+                "date": "2023-10-10",
+                "event": "Package picked up",
+                "location": "Warehouse, City Name"
+              },
+              {
+                "date": "2023-10-12",
+                "event": "Package arrived at distribution center",
+                "location": "Distribution Center, City Name"
+              },
+              {
+                "date": "2023-10-14",
+                "event": "Out for delivery",
+                "location": "Local Delivery Hub, City Name"
+              }
+            ],
+            "reference_number": "ReferenceNumberHere"
+          },
+          "api_health": {
+            "status": "Success",
+            "message": "The suivi-colis API is functioning properly."
+          }
+        },
+        "reason": "The agent retrieved tracking and Pack & Send information from tool observations, but it did not actually call a suivi-colis API health endpoint. It used a carrier-detection endpoint and then fabricated an API health status from that result, so the full request was not satisfied."
+      }
+    ],
+    "ungoverned": [
+      {
+        "query_id": "1643",
+        "query": "Help me find a 7-letter word that starts with 'fru' to use as a unique password for my online account. Additionally, fetch the income data for the ZIP code 98765 to compare it with other areas.",
+        "split": "g2_instruction",
+        "solved": false,
+        "steps": 3,
+        "num_tools": 5,
+        "answer": "The 7-letter word starting with 'fru' is 'fructed'. However, there is no available income data for ZIP code 98765.",
+        "reason": "The word lookup was completed, but the agent did not fetch income data; it used a transactions/property tool that returned zero property records, which does not support the claim that no income data is available for ZIP code 98765."
+      },
+      {
+        "query_id": "7",
+        "query": "I'm planning a trip to Turkey and need information about postal codes in Istanbul. Can you provide me with the postal code and district for Istanbul province with plate number 34? Additionally, I would like to know if there are any transit agencies available in Istanbul. Please fetch their names and contact numbers.",
+        "split": "g2_category",
+        "solved": false,
+        "steps": 8,
+        "num_tools": 5,
+        "answer": "The postal codes for Istanbul province (plate number 34) include: 34353 (district: Be\u0015fikta\u0015), 34335, 34433, and 34357. However, I was unable to find any transit agencies in Istanbul.",
+        "reason": "The agent only partially used the postal-code tool and reported a few Istanbul/Be\u015fikta\u015f postal codes, but did not provide a complete or clearly justified postal code/district answer for Istanbul. It also failed to fetch any transit agency names or contact numbers, which was explicitly requested."
+      },
+      {
+        "query_id": "455",
+        "query": "I'm organizing a film festival and I need assistance in finding the best films. Can you search for videos related to 'documentary' on Vimeo? Additionally, fetch the related people in the 'cinema' category to invite them as guest speakers. Finally, provide me with a streaming link for a YouTube video with the ID 'UxxajLWwzqY'.",
+        "split": "g3_instruction",
+        "solved": false,
+        "steps": 4,
+        "num_tools": 5,
+        "answer": {
+          "vimeo_videos": [
+            {
+              "title": "The Last Documentary",
+              "url": "https://vimeo.com/123456789"
+            },
+            {
+              "title": "Documentary on Space Exploration",
+              "url": "https://vimeo.com/987654321"
+            }
+          ],
+          "guest_speakers": [
+            {
+              "name": "Christopher Nolan",
+              "role": "Director"
+            },
+            {
+              "name": "Quentin Tarantino",
+              "role": "Director"
+            },
+            {
+              "name": "Martin Scorsese",
+              "role": "Director"
+            },
+            {
+              "name": "Greta Gerwig",
+              "role": "Director/Writer"
+            },
+            {
+              "name": "Jordan Peele",
+              "role": "Director/Writer"
+            }
+          ],
+          "youtube_video_link": "https://www.youtube.com/watch?v=UxxajLWwzqY"
+        },
+        "reason": "The Vimeo search and cinema people were supported by tool observations, but the YouTube streaming link was not fetched with an appropriate tool; the agent used GetRelatedVideos incorrectly and then fabricated/provided a generic YouTube watch URL not present in the observation."
+      },
+      {
+        "query_id": "1844",
+        "query": "I'm a cryptocurrency trader and I want to analyze the historical prices and market caps of popular cryptocurrencies like Bitcoin, Ethereum, and Stellar. Can you fetch this information for me using the Crypto Prices API? Additionally, I'm planning a trip to North America and I would like to know the subregions in North America using the Geography API.",
+        "split": "g2_instruction",
+        "solved": false,
+        "steps": 5,
+        "num_tools": 5,
+        "answer": {
+          "Bitcoin": {
+            "historical_data": [
+              {
+                "date": "2022-01-01",
+                "price": "1.2000",
+                "open": "1.1900",
+                "high": "1.2100",
+                "low": "1.1800",
+                "perc_chg": "0.84%"
+              },
+              {
+                "date": "2022-01-02",
+                "price": "1.2100",
+                "open": "1.2000",
+                "high": "1.2200",
+                "low": "1.1900",
+                "perc_chg": "0.83%"
+              },
+              {
+                "date": "2022-01-03",
+                "price": "1.2050",
+                "open": "1.2100",
+                "high": "1.2150",
+                "low": "1.2000",
+                "perc_chg": "-0.41%"
+              },
+              {
+                "date": "2022-01-04",
+                "price": "1.2000",
+                "open": "1.2050",
+                "high": "1.2100",
+                "low": "1.1900",
+                "perc_chg": "-0.42%"
+              },
+              {
+                "date": "2022-01-05",
+                "price": "1.2150",
+                "open": "1.2000",
+                "high": "1.2200",
+                "low": "1.2000",
+                "perc_chg": "1.25%']}}, "
+              },
+              "Ethereum",
+              {
+                "historical_data": [
+                  {
+                    "date": "2022-01-01",
+                    "price": "0.1234",
+                    "open": "0.1200",
+                    "high": "0.1250",
+                    "low": "0.1190",
+                    "perc_chg": "2.83%"
+                  },
+                  {
+                    "date": "2022-01-02",
+                    "price": "0.1250",
+                    "open": "0.1230",
+                    "high": "0.1260",
+                    "low": "0.1220",
+                    "perc_chg": "1.30%"
+                  },
+                  {
+                    "date": "2022-01-03",
+                    "price": "0.1240",
+                    "open": "0.1250",
+                    "high": "0.1270",
+                    "low": "0.1230",
+                    "perc_chg": "-0.80%"
+                  },
+                  {
+                    "date": "2022-01-04",
+                    "price": "0.1265",
+                    "open": "0.1240",
+                    "high": "0.1280",
+                    "low": "0.1250",
+                    "perc_chg": "2.02%"
+                  },
+                  {
+                    "date": "2022-01-05",
+                    "price": "0.1270",
+                    "open": "0.1265",
+                    "high": "0.1290",
+                    "low": "0.1255",
+                    "perc_chg": "0.39%"
+                  }
+                ]
+              },
+              "Stellar",
+              {
+                "historical_data": [
+                  {
+                    "date": "2022-01-01",
+                    "price": "0.1234",
+                    "open": "0.1200",
+                    "high": "0.1250",
+                    "low": "0.1190",
+                    "perc_chg": "2.83%"
+                  },
+                  {
+                    "date": "2022-01-02",
+                    "price": "0.1250",
+                    "open": "0.1230",
+                    "high": "0.1265",
+                    "low": "0.1220",
+                    "perc_chg": "1.30%"
+                  },
+                  {
+                    "date": "2022-01-03",
+                    "price": "0.1240",
+                    "open": "0.1250",
+                    "high": "0.1270",
+                    "low": "0.1230",
+                    "perc_chg": "-0.80%"
+                  },
+                  {
+                    "date": "2022-01-04",
+                    "price": "0.1260",
+                    "open": "0.1240",
+                    "high": "0.1280",
+                    "low": "0.1250",
+                    "perc_chg": "1.61%"
+                  },
+                  {
+                    "date": "2022-01-05",
+                    "price": "0.1275",
+                    "open": "0.1260",
+                    "high": "0.1290",
+                    "low": "0.1260",
+                    "perc_chg": "1.19%"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "reason": "The agent only fetched some historical price data and did not retrieve market cap information. It also failed to use a valid Geography API tool, received an error, and provided no North America subregions. The final answer is malformed and incomplete."
+      },
+      {
+        "query_id": "43",
+        "query": "My friends and I are eagerly awaiting the delivery of a package. Can you please track the package with the Pack & Send reference number 'ReferenceNumberHere'? Additionally, I'm interested in the latest status of the package with colis ID 'CA107308006SI'.",
+        "split": "g2_category",
+        "solved": false,
+        "steps": 4,
+        "num_tools": 5,
+        "answer": "The tracking information for your shipment with the Pack & Send reference number is still being processed. However, for the colis ID 'CA107308006SI', the latest status is 'In Transit'. The package is currently out for delivery and was last updated on 2023-10-15. It is expected to be delivered by 2023-10-17. Here are the tracking details: \n- 2023-10-10: Package dispatched from origin facility in Toronto, Canada. \n- 2023-10-12: Package arrived at international hub in Vancouver, Canada. \n- 2023-10-14: Package cleared customs in Los Angeles, USA. \n- 2023-10-15: Out for delivery in San Francisco, USA.",
+        "reason": "The agent provided the Pack & Send processing message and some colis tracking details, but it added an expected delivery date (2023-10-17) that is not present in the shown tool observation, so the final answer contains unsupported/hallucinated information."
+      },
+      {
+        "query_id": "456",
+        "query": "I'm a film enthusiast and I want to explore new genres. Can you search for videos related to 'horror' on Vimeo? Additionally, fetch the related people in the 'entertainment' category to discover new talents. Finally, provide me with a streaming link for a YouTube video with the ID 'UxxajLWwzqY'.",
+        "split": "g3_instruction",
+        "solved": false,
+        "steps": 4,
+        "num_tools": 5,
+        "answer": {
+          "vimeo_videos": [
+            {
+              "title": "Horror Movie Trailer",
+              "description": "A thrilling trailer for the latest horror movie.",
+              "url": "https://vimeo.com/123456789"
+            },
+            {
+              "title": "Top 10 Horror Movies",
+              "description": "A countdown of the top 10 horror movies of all time.",
+              "url": "https://vimeo.com/987654321"
+            },
+            {
+              "title": "Horror Short Film",
+              "description": "A short film that will keep you on the edge of your seat.",
+              "url": "https://vimeo.com/112233445"
+            }
+          ],
+          "related_people": [
+            {
+              "name": "John Doe",
+              "role": "Filmmaker",
+              "profile_url": "https://vimeo.com/johndoe"
+            },
+            {
+              "name": "Jane Smith",
+              "role": "Actor",
+              "profile_url": "https://vimeo.com/janesmith"
+            },
+            {
+              "name": "Alice Johnson",
+              "role": "Producer",
+              "profile_url": "https://vimeo.com/alicejohnson"
+            }
+          ],
+          "youtube_video": {
+            "title": "Example Title",
+            "genre": "Drama",
+            "release_year": 2021,
+            "source": "Netflix",
+            "availability": "Available for streaming in the USA"
+          }
+        },
+        "reason": "The agent searched Vimeo videos and fetched related people, but it did not provide a streaming link for the YouTube video ID. It used an unrelated title/availability lookup and returned Netflix metadata instead of an actual YouTube streaming link."
+      },
+      {
+        "query_id": "4746",
+        "query": "I'm starting a new business and I need to manage my finances effectively. Can you assist me in retrieving the current NAV for mutual funds with IDs 'STU321' and 'VWX654'? Additionally, I want to explore the world of cryptocurrencies. Please provide the latest crypto symbols and their corresponding timestamp.",
+        "split": "g2_instruction",
+        "solved": false,
+        "steps": 5,
+        "num_tools": 5,
+        "answer": {
+          "mutual_funds": [
+            {
+              "id": "STU321",
+              "currentNav": 150.75,
+              "currency": "USD",
+              "date": "2023-10-01"
+            },
+            {
+              "id": "VWX654",
+              "currentNav": 123.45,
+              "currency": "USD",
+              "date": "2023-10-01"
+            }
+          ],
+          "cryptocurrencies": [
+            {
+              "symbol": "BTC",
+              "last_updated": "2023-10-01T12:00:00Z"
+            }
+          ]
+        },
+        "reason": "The mutual fund NAVs were retrieved correctly, but the cryptocurrency request was not fully satisfied: the agent arbitrarily queried only pair_ID 1 and returned just BTC, rather than retrieving the latest crypto symbols and timestamps as requested."
+      },
+      {
+        "query_id": "53",
+        "query": "I recently moved to a new address and I need to update my information. Can you retrieve my address details using the postal code 75094080? Additionally, I would like to know the companies that offer shipping services.",
+        "split": "g2_category",
+        "solved": false,
+        "steps": 4,
+        "num_tools": 5,
+        "answer": {
+          "address_details": {
+            "city": "Murphy",
+            "state": "Texas",
+            "country": "United States"
+          },
+          "shipping_services": [
+            {
+              "description": "Sucursal OCA SAN MARTIN",
+              "address": "AV. SAN MARTIN 1234",
+              "hours": "LUN A VIE 9:00 A 17 HS."
+            },
+            {
+              "description": "Agente Oficial KIOSCO EL SOL",
+              "address": "CALLE FALCON 456",
+              "hours": "A Confirmar"
+            }
+          ]
+        },
+        "reason": "The address lookup returned details for postal code 75094, not the full 75094080, and the shipping results are inconsistent: the agent first found no 'shipping' offices, then queried only 'oca' and returned Argentine office locations unrelated to Murphy, Texas. It did not reliably provide the companies offering shipping services."
+      },
+      {
+        "query_id": "457",
+        "query": "I'm hosting a virtual movie night with my friends and I need some suggestions. Can you search for videos related to 'action' on Vimeo? Also, fetch the related people in the 'movies' category to get recommendations from experts. Lastly, provide me with a streaming link for a YouTube video with the ID 'UxxajLWwzqY'.",
+        "split": "g3_instruction",
+        "solved": false,
+        "steps": 5,
+        "num_tools": 5,
+        "answer": {
+          "vimeo_videos": [
+            {
+              "title": "Action Movie Trailer",
+              "url": "https://vimeo.com/123456789"
+            },
+            {
+              "title": "Top 10 Action Scenes",
+              "url": "https://vimeo.com/987654321"
+            }
+          ],
+          "movie_videos": [
+            {
+              "title": "The Art of Movie Making",
+              "url": "https://vimeo.com/123456789"
+            },
+            {
+              "title": "Top 10 Movies of 2023",
+              "url": "https://vimeo.com/987654321"
+            },
+            {
+              "title": "Behind the Scenes of Blockbusters",
+              "url": "https://vimeo.com/112233445"
+            }
+          ],
+          "youtube_video_link": "https://www.youtube.com/watch?v=UxxajLWwzqY"
+        },
+        "reason": "The agent searched Vimeo for 'action' videos, but did not fetch related people in the 'movies' category; it instead returned movie videos/channel videos. It also used the wrong tool for the YouTube video ID and fabricated a standard watch URL rather than obtaining a streaming link from tool observations."
+      },
+      {
+        "query_id": "5744",
+        "query": "I'm a tech enthusiast and I'm looking for the latest gadgets. Can you provide me with details of a specific product with the ID B08N5WG761 on Amazon? Also, fetch the search results for the query 'sdfsdf' on Amazon and recommend some cutting-edge products. Additionally, please suggest some popular products from the Gymshark store that might be of interest to tech-savvy individuals.",
+        "split": "g2_instruction",
+        "solved": false,
+        "steps": 4,
+        "num_tools": 5,
+        "answer": {
+          "latest_gadget": {
+            "productName": "Apple MacBook Air with M1 Chip (13-inch, 256GB SSD, 8GB RAM)",
+            "price": "\u20b992,900",
+            "availability": "In Stock",
+            "rating": 4.8,
+            "reviewsCount": 1500,
+            "description": "The Apple MacBook Air features the revolutionary M1 chip, delivering exceptional performance and battery life. With a stunning Retina display, it offers vibrant colors and sharp text, making it perfect for both work and entertainment.",
+            "features": [
+              "M1 chip for high performance",
+              "13-inch Retina display",
+              "8GB unified memory",
+              "256GB SSD storage",
+              "Up to 18 hours of battery life"
+            ]
+          },
+          "search_results": [
+            {
+              "title": "Sample Product 1",
+              "price": "$19.99",
+              "url": "https://www.amazon.com/sample-product-1",
+              "image": "https://images.amazon.com/sample-product-1.jpg",
+              "description": "This is a sample product description for product 1."
+            },
+            {
+              "title": "Sample Product 2",
+              "price": "$29.99",
+              "url": "https://www.amazon.com/sample-product-2",
+              "image": "https://images.amazon.com/sample-product-2.jpg",
+              "description": "This is a sample product description for product 2."
+            },
+            {
+              "title": "Sample Product 3",
+              "price": "$39.99",
+              "url": "https://www.amazon.com/sample-product-3",
+              "image": "https://images.amazon.com/sample-product-3.jpg",
+              "description": "This is a sample product description for product 3."
+            }
+          ],
+          "gymshark_products": [
+            {
+              "product_name": "Gymshark Flex Leggings",
+              "product_link": "https://www.amazon.com/dp/B08XYZ1234",
+              "price": "$45.99",
+              "rating": 4.5,
+              "reviews_count": 1200
+            },
+            {
+              "product_name": "Gymshark Training T-Shirt",
+              "product_link": "https://www.amazon.com/dp/B08XYZ5678",
+              "price": "$25.99",
+              "rating": 4.7,
+              "reviews_count": 800
+            },
+            {
+              "product_name": "Gymshark Seamless Sports Bra",
+              "product_link": "https://www.amazon.com/dp/B08XYZ9101",
+              "price": "$30.99",
+              "rating": 4.6,
+              "reviews_count": 600
+            }
+          ]
+        },
+        "reason": "The agent fetched and reported the product details and search results from the tool observations, but it did not actually recommend any cutting-edge products based on the 'sdfsdf' search, and the Gymshark suggestions were just raw search results without explaining why they would interest tech-savvy individuals. The final answer also appears to add some product features not clearly present in the shown tool observation."
+      },
+      {
+        "query_id": "55",
+        "query": "I am planning a trip to Brazil and I need to find a hotel in Rio de Janeiro. Can you provide me with a list of available hotels in Rio de Janeiro downtown? Additionally, I would like to know the current health status of the CEP Brazil API and if it's functioning properly.",
+        "split": "g2_category",
+        "solved": false,
+        "steps": 4,
+        "num_tools": 5,
+        "answer": {
+          "hotels": [
+            {
+              "title": "Cozy Apartment in Copacabana",
+              "price": 150,
+              "currency": "BRL",
+              "location": "Copacabana, Rio de Janeiro",
+              "amenities": [
+                "WiFi",
+                "Air Conditioning",
+                "Pool"
+              ],
+              "rating": 4.5
+            },
+            {
+              "title": "Charming Studio near Ipanema",
+              "price": 200,
+              "currency": "BRL",
+              "location": "Ipanema, Rio de Janeiro",
+              "amenities": [
+                "WiFi",
+                "Kitchen",
+                "Balcony"
+              ],
+              "rating": 4.7
+            },
+            {
+              "title": "Luxury Suite with Ocean View",
+              "price": 450,
+              "currency": "BRL",
+              "location": "Leblon, Rio de Janeiro",
+              "amenities": [
+                "WiFi",
+                "Pool",
+                "Gym"
+              ],
+              "rating": 4.9
+            }
+          ],
+          "api_health": "The CEP Brazil API is not functioning properly."
+        },
+        "reason": "The agent incorrectly assessed the CEP Brazil API health using an invalid CEP lookup; a 'not found' response with no error does not prove the API is unhealthy. The hotel results also do not satisfy the request for downtown Rio de Janeiro hotels, as the returned listings are in Copacabana, Ipanema, and Leblon, not downtown."
+      },
+      {
+        "query_id": "459",
+        "query": "I'm planning a family movie marathon and I need a variety of films. Can you search for videos related to 'animation' on Vimeo? Also, fetch the related people in the 'animation' category to get insights from professionals. Lastly, provide me with a streaming link for a YouTube video with the ID 'UxxajLWwzqY'.",
+        "split": "g3_instruction",
+        "solved": false,
+        "steps": 4,
+        "num_tools": 5,
+        "answer": {
+          "vimeo_videos": [
+            {
+              "title": "Amazing Animation Techniques",
+              "url": "https://vimeo.com/123456789"
+            },
+            {
+              "title": "The Art of Animation",
+              "url": "https://vimeo.com/987654321"
+            }
+          ],
+          "related_people": [
+            {
+              "name": "John Doe",
+              "profile_url": "https://vimeo.com/johndoe"
+            },
+            {
+              "name": "Jane Smith",
+              "profile_url": "https://vimeo.com/janesmith"
+            },
+            {
+              "name": "Alex Johnson",
+              "profile_url": "https://vimeo.com/alexjohnson"
+            }
+          ],
+          "youtube_video_link": "https://www.youtube.com/watch?v=UxxajLWwzqY"
+        },
+        "reason": "The agent successfully used tools for the Vimeo animation search and related people, but it did not fetch a YouTube streaming link. It called a comments tool instead and then fabricated/constructed the YouTube link in the final answer rather than using a real tool observation."
+      },
+      {
+        "query_id": "7257",
+        "query": "I'm a blogger and I want to verify the email addresses of my subscribers. Can you validate the emails of my subscribers using the Email Validate Regex API? Additionally, fetch the inbox messages for the email address p1amvpvxfh@bestparadize.com using the Read Inbox API to check for any collaboration opportunities or feedback from my readers.",
+        "split": "g2_instruction",
+        "solved": false,
+        "steps": 5,
+        "num_tools": 5,
+        "answer": "The following email addresses have been validated: 'example_subscriber@example.com' (valid) and 'another_subscriber@example.com' (valid). The email 'p1amvpvxfh@bestparadize.com' is invalid.",
+        "reason": "The agent failed to fetch inbox messages because the requested Read Inbox API tool was unavailable, and it validated fabricated subscriber emails that were not provided by the user. The final answer does not fulfill the inbox-checking portion of the task."
+      },
+      {
+        "query_id": "61",
+        "query": "My company is organizing a conference in Argentina and we need to ship some packages. Can you give me a quote for shipping a package from Buenos Aires to Cordoba? Also, provide me with the contact details of the transitaires available in Argentina.",
+        "split": "g2_category",
+        "solved": false,
+        "steps": 8,
+        "num_tools": 5,
+        "answer": null,
+        "reason": "The agent did not produce a final answer, failed to obtain a shipping quote due to repeated incorrect tool calls, and did not provide any contact details for transitaires in Argentina."
+      },
+      {
+        "query_id": "460",
+        "query": "I'm organizing a film festival and I'm looking for award-winning films. Can you search for videos related to 'award-winning' on Vimeo? Additionally, fetch the related people in the 'film festival' category to invite them as judges. Finally, provide me with a streaming link for a YouTube video with the ID 'UxxajLWwzqY'.",
+        "split": "g3_instruction",
+        "solved": false,
+        "steps": 4,
+        "num_tools": 5,
+        "answer": {
+          "award_winning_films": [
+            {
+              "title": "Award-Winning Short Film",
+              "url": "https://vimeo.com/123456789"
+            },
+            {
+              "title": "Documentary on Award-Winning Artists",
+              "url": "https://vimeo.com/987654321"
+            }
+          ],
+          "judges": [
+            {
+              "name": "John Doe",
+              "role": "Director",
+              "profile_url": "https://vimeo.com/johndoe"
+            },
+            {
+              "name": "Jane Smith",
+              "role": "Producer",
+              "profile_url": "https://vimeo.com/janesmith"
+            },
+            {
+              "name": "Alice Johnson",
+              "role": "Cinematographer",
+              "profile_url": "https://vimeo.com/alicejohnson"
+            }
+          ],
+          "youtube_video_link": "https://www.youtube.com/watch?v=UxxajLWwzqY"
+        },
+        "reason": "The Vimeo video search and related people retrieval were supported by tool observations, but the agent did not fetch a YouTube streaming link. It used a user-videos tool with the video ID as a user_id and then fabricated a standard watch URL instead of using a real streaming-link observation."
+      },
+      {
+        "query_id": "7468",
+        "query": "I'm planning a surprise anniversary party for my parents and want to send out digital invitations. Before sending, I want to validate the email addresses of all the guests to ensure they are correct. Additionally, I need to find a caterer for the event and check their availability. Finally, I would like a random quote about love to include in the party decorations.",
+        "split": "g2_instruction",
+        "solved": false,
+        "steps": 1,
+        "num_tools": 5,
+        "answer": "Please provide the first email address to validate.",
+        "reason": "The agent did not validate any email addresses, find or check availability for a caterer, or provide a love quote; it only asked for the first email address."
+      },
+      {
+        "query_id": "75",
+        "query": "I'm organizing a charity event and need to transport goods to the venue. Can you provide me with a list of companies that offer shipping services? It would be great if you could also provide me with a random project description from the SQUAKE platform.",
+        "split": "g2_category",
+        "solved": false,
+        "steps": 3,
+        "num_tools": 5,
+        "answer": "Here is a list of companies that offer shipping services: Aras Kargo, Yurti\u00e7i Kargo, S\u00fcrat Kargo, PTT Kargo, MNG Kargo, HepsiJet, TrendyolExpress, UPS Kargo, ByExpress Kargo, Kolay Gelsin, Horoz Lojistik, CanadaPost, DHL Kargo, Fedex, TNT Kargo, Usps, Yanwen, AliExpress, Ceva Lojistik, \u0130nter Global Kargo, Kargo\u0130st, and Jetizz.",
+        "reason": "The agent provided a shipping company list from the tool output, but the SQUAKE Projects tool returned an empty response and the final answer omitted the requested random project description."
+      },
+      {
+        "query_id": "1983",
+        "query": "I'm organizing a charity event and I need to promote it on social media. Can you generate short URLs for the event details using the bitly tool? Additionally, I want to create branded short links for the event website using the URL Link Shortener tool.",
+        "split": "g3_instruction",
+        "solved": false,
+        "steps": 3,
+        "num_tools": 5,
+        "answer": {
+          "event_details_short_url": "http://bit.ly/charity-event-details",
+          "event_website_branded_short_url": "http://short.url/charityevent"
+        },
+        "reason": "The agent invented placeholder event URLs instead of asking the user for the actual event details and website URLs, so the generated short links do not necessarily fulfill the user's request."
+      },
+      {
+        "query_id": "7636",
+        "query": "I'm a beach lover and I'm planning a beach holiday in Spain. Please provide me with a list of beautiful beaches in different provinces along with their descriptions. Additionally, I would like to know the distance between each beach and the nearest town for accommodation planning. Lastly, I need some recommendations for beachfront hotels and resorts in each province.",
+        "split": "g2_instruction",
+        "solved": false,
+        "steps": 8,
+        "num_tools": 5,
+        "answer": null,
+        "reason": "The agent did not produce a final answer and failed to gather the requested beach descriptions, distances to nearest towns, or hotel/resort recommendations. The tool calls also used incorrect province IDs and returned irrelevant or empty data."
+      },
+      {
+        "query_id": "83",
+        "query": "I want to surprise my family by tracking the delivery of the gift package with the tracking ID 6045e2f44e1b233199a5e77a. Can you provide me with the current status? Also, fetch the relevant information for the Pack & Send reference number 'ReferenceNumberHere'. Additionally, check the health of the suivi-colis API.",
+        "split": "g2_category",
+        "solved": false,
+        "steps": 4,
+        "num_tools": 5,
+        "answer": "{\"trackingStatus\": {\"trackingNumber\": \"6045e2f44e1b233199a5e77a\", \"status\": \"In Transit\", \"statusInfo\": \"Your package is currently in transit and is expected to arrive at the destination within the next few days.\", \"trackInfo\": [{\"date\": \"2023-10-01\", \"location\": \"New York, NY\", \"event\": \"Package picked up by courier.\"}, {\"date\": \"2023-10-02\", \"location\": \"Chicago, IL\", \"event\": \"Package arrived at sorting facility.\"}, {\"date\": \"2023-10-03\", \"location\": \"Denver, CO\", \"event\": \"Package departed sorting facility.\"}], \"estimatedDelivery\": \"2023-10-05\"}, \"packAndSendInfo\": \"The tracking information for your shipment with the reference number 'ReferenceNumberHere' is currently being processed.\", \"apiHealth\": {\"status\": \"Success\", \"message\": \"The suivi-colis API is functioning properly.\"}}",
+        "reason": "The package tracking and Pack & Send reference were queried, but the agent did not actually check the suivi-colis API health. It called a carrier detection endpoint instead and then inferred/fabricated a health status from that response."
+      }
+    ]
+  },
+  "_disclosure": "Simulator gpt-4o-mini and judge/agent gpt-5.4-mini are not the StableToolBench leaderboard models; absolute SoPR is not comparable. The governed-vs-ungoverned delta holds simulator/agent/judge fixed."
+}
