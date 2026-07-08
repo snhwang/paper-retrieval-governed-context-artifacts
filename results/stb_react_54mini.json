@@ -1,0 +1,442 @@
+{
+  "config": {
+    "agent_model": "gpt-5.4-mini-2026-03-17",
+    "judge_model": "gpt-5.5-2026-04-23",
+    "simulator": "gpt-4o-mini (in sim server)",
+    "backend": "bge",
+    "top_k": 5,
+    "max_steps": 8,
+    "splits": [
+      "g2_instruction",
+      "g2_category",
+      "g3_instruction"
+    ],
+    "n_tasks": 20
+  },
+  "SoPR": {
+    "governed": 0.05,
+    "ungoverned": 0.15,
+    "delta": -0.09999999999999999,
+    "governed_ci95": [
+      0.0,
+      0.15
+    ],
+    "ungoverned_ci95": [
+      0.0,
+      0.3
+    ]
+  },
+  "SoWR": {
+    "governed_win_rate": 0.45,
+    "governed_wins": 9,
+    "ungoverned_wins": 9,
+    "ties": 2
+  },
+  "per_task": {
+    "governed": [
+      {
+        "query_id": "1643",
+        "query": "Help me find a 7-letter word that starts with 'fru' to use as a unique password for my online account. Additionally, fetch the income data for the ZIP code 98765 to compare it with other areas.",
+        "split": "g2_instruction",
+        "solved": true,
+        "steps": 4,
+        "num_tools": 5,
+        "answer": "Password word: fructed\n\nZIP 98765 income data:\n- Household median income: $95,000\n- Household mean income: $120,000\n- Family median income: $80,000\n- Family mean income: $110,000\n- Non-family household median income: $60,000\n- Non-family household mean income: $75,000\n- Number of households: 5,000\n- Family poverty rate: 10.5%\n\nIf you want, I can also help you compare these figures with another ZIP code or area.",
+        "reason": "The agent used the word tool to find a 7-letter word starting with 'fru' and used the ZIP code tool to fetch income data for 98765, then accurately reported the observed results."
+      },
+      {
+        "query_id": "7",
+        "query": "I'm planning a trip to Turkey and need information about postal codes in Istanbul. Can you provide me with the postal code and district for Istanbul province with plate number 34? Additionally, I would like to know if there are any transit agencies available in Istanbul. Please fetch their names and contact numbers.",
+        "split": "g2_category",
+        "solved": false,
+        "steps": 5,
+        "num_tools": 5,
+        "answer": "For Istanbul province (plate 34), the lookup returned these district/postal code examples:\n- Be\u015fikta\u015f / Kabata\u015f \u2014 34357\n- Be\u015fikta\u015f / Ortak\u00f6y \u2014 34340\n- Be\u015fikta\u015f / E\u015fit \u2014 34330\n- Be\u015fikta\u015f / Mecidiyek\u00f6y \u2014 34387\n\nFor transit agencies in Istanbul: I couldn\u2019t retrieve any through the available tools. The office/service lookup only supports Andreani, Oca, and Correo Argentino, which are Argentina-based services, so there\u2019s no Istanbul transit-agency data available from this API.",
+        "reason": "The agent only provided a few sample Istanbul postal code/district entries (some not visible in the tool observation) and did not fetch any transit agency names or contact numbers. The attempted transit lookup used an unsupported/Argentina-specific service and does not satisfy the user's request for Istanbul transit agencies."
+      },
+      {
+        "query_id": "455",
+        "query": "I'm organizing a film festival and I need assistance in finding the best films. Can you search for videos related to 'documentary' on Vimeo? Additionally, fetch the related people in the 'cinema' category to invite them as guest speakers. Finally, provide me with a streaming link for a YouTube video with the ID 'UxxajLWwzqY'.",
+        "split": "g3_instruction",
+        "solved": false,
+        "steps": 5,
+        "num_tools": 5,
+        "answer": "Here you go:\n\nVimeo documentary-related videos:\n1. The Last Documentary \u2014 https://vimeo.com/123456789\n2. Documentary on Climate Change \u2014 https://vimeo.com/987654321\n3. Wildlife Conservation Efforts \u2014 https://vimeo.com/112233445\n\nCinema-related people to consider inviting as guest speakers:\n- John Doe \u2014 Director \u2014 https://vimeo.com/johndoe\n- Jane Smith \u2014 Producer \u2014 https://vimeo.com/janesmith\n- Alice Johnson \u2014 Cinematographer \u2014 https://vimeo.com/alicejohnson\n- Bob Brown \u2014 Editor \u2014 https://vimeo.com/bobbrown\n- Charlie Davis \u2014 Screenwriter \u2014 https://vimeo.com/charliedavis\n- Diana Evans \u2014 Actor \u2014 https://vimeo.com/dianaevans\n- Ethan White \u2014 Sound Designer \u2014 https://vimeo.com/ethanwhite\n- Fiona Green \u2014 Production Designer \u2014 https://vimeo.com/fionagreen\n- George Black \u2014 Visual Effects Artist \u2014 https://vimeo.com/georgeblack\n- Hannah Blue \u2014 Costume Designer \u2014 https://vimeo.com/hannahblue\n\nYouTube streaming link for video ID UxxajLWwzqY:\nhttps://www.youtube.com/watch?v=UxxajLWwzqY",
+        "reason": "The Vimeo search and related people calls were made, but the agent did not fetch a true YouTube streaming link from any tool; it only constructed a standard watch URL, which does not satisfy the requested streaming link using tool observations."
+      },
+      {
+        "query_id": "1844",
+        "query": "I'm a cryptocurrency trader and I want to analyze the historical prices and market caps of popular cryptocurrencies like Bitcoin, Ethereum, and Stellar. Can you fetch this information for me using the Crypto Prices API? Additionally, I'm planning a trip to North America and I would like to know the subregions in North America using the Geography API.",
+        "split": "g2_instruction",
+        "solved": false,
+        "steps": 6,
+        "num_tools": 5,
+        "answer": "I couldn\u2019t fetch the historical Bitcoin, Ethereum, and Stellar price/market-cap data because the available Crypto Prices API tool only returned a general description, not the underlying records. I also don\u2019t have access to a Geography API in the provided tools, and a search for North America subregions returned no usable results.\n\nIf you want, I can still help you in either of these ways:\n1. Summarize what historical crypto data you should request from a proper market-data API, or\n2. Provide a general, non-API-based list of North America subregions from my built-in knowledge.",
+        "reason": "The agent did not fetch historical cryptocurrency prices/market caps or North America subregions. It only received a generic Crypto Prices API description, lacked a Geography API tool, and provided no requested data."
+      },
+      {
+        "query_id": "43",
+        "query": "My friends and I are eagerly awaiting the delivery of a package. Can you please track the package with the Pack & Send reference number 'ReferenceNumberHere'? Additionally, I'm interested in the latest status of the package with colis ID 'CA107308006SI'.",
+        "split": "g2_category",
+        "solved": false,
+        "steps": 8,
+        "num_tools": 5,
+        "answer": null,
+        "reason": "The agent only retrieved tracking information for the Pack & Send reference and did not track the colis ID CA107308006SI. It also failed to provide a final answer within the step budget."
+      },
+      {
+        "query_id": "456",
+        "query": "I'm a film enthusiast and I want to explore new genres. Can you search for videos related to 'horror' on Vimeo? Additionally, fetch the related people in the 'entertainment' category to discover new talents. Finally, provide me with a streaming link for a YouTube video with the ID 'UxxajLWwzqY'.",
+        "split": "g3_instruction",
+        "solved": false,
+        "steps": 5,
+        "num_tools": 5,
+        "answer": "Here\u2019s a quick curated set of results:\n\nVimeo videos related to \u201chorror\u201d:\n1. Top 10 Horror Movies \u2014 https://vimeo.com/123456789\n2. Horror Short Film \u2014 https://vimeo.com/987654321\n3. The Psychology of Horror \u2014 https://vimeo.com/112233445\n4. Horror Movie Trailers \u2014 https://vimeo.com/556677889\n5. Behind the Scenes of Horror Films \u2014 https://vimeo.com/998877665\n\nRelated people in the \u201centertainment\u201d category:\n1. John Doe \u2014 Film director and producer \u2014 https://vimeo.com/johndoe\n2. Jane Smith \u2014 Actress \u2014 https://vimeo.com/janesmith\n3. Mike Johnson \u2014 Cinematographer \u2014 https://vimeo.com/mikejohnson\n4. Emily Davis \u2014 Screenwriter and editor \u2014 https://vimeo.com/emilydavis\n5. Chris Lee \u2014 Music video director \u2014 https://vimeo.com/chrislee\n\nYouTube streaming link for video ID UxxajLWwzqY:\nhttps://www.youtube.com/watch?v=UxxajLWwzqY",
+        "reason": "The agent used the Vimeo tools for the first two parts, but the final answer includes several video and people entries not present in the shown tool observations, suggesting fabrication. It also did not fetch an actual YouTube streaming link via any tool and only provided a standard watch URL."
+      },
+      {
+        "query_id": "4746",
+        "query": "I'm starting a new business and I need to manage my finances effectively. Can you assist me in retrieving the current NAV for mutual funds with IDs 'STU321' and 'VWX654'? Additionally, I want to explore the world of cryptocurrencies. Please provide the latest crypto symbols and their corresponding timestamp.",
+        "split": "g2_instruction",
+        "solved": false,
+        "steps": 6,
+        "num_tools": 5,
+        "answer": "Here are the mutual fund NAVs I retrieved:\n- STU321: NAV 150.75 USD (as of 2023-10-01)\n- VWX654: NAV 123.45 USD (as of 2023-10-01)\n\nLatest crypto symbols available from the API include:\n- 1INCHUSD, 1INCHUSD4, 1INCHUSDT, AAVEUSD, AAVEUSD4, AAVEUSDT, ACHUSD, ACHUSD4, ACHUSDT, ADABTC, ADABUSD, ADAETH, ADAUSD, ADAUSD4, ADAUSDC, ADAUSDT, ALGOBUSD, ALGOUSD, ALGOUSD4, ALGOUSDT, ALICEUSD, ALICEUSD4, ALICEUSDT, ALPINEUSD, ALPINEUSD4, ALPINEUSDT, AMPUSD, ANKRUSD, ANKRUSD4, ANKRUSDT, ANTUSD, ANTUSD4, ANTUSDT, APEUSD, APEUSD4, APEUSDT, API3USD, API3USD4, API3USDT, APTUSD, APTUSD4, APTUSDT, ARBUSD, ARBUSDT, ASTRUSD, ASTRUSD4, ASTRUSDT, ATOMBTC, ATOMUSD, ATOMUSD4, ATOMUSDT, AUDIOUSD, AUDIOUSD4, AUDIOUSDT, AVAXBTC, AVAXUSD, AVAXUSD4, AVAXUSDT, AXLUSD, AXLUSD4, AXLUSDT, AXSUSD, AXSUSD4, AXSUSDT, BALUSD, BALUSD4, BALUSDT, BANDUSD, BANDUSD4, BANDUSDT, BATUSD, BATUSD4, BATUSDT, BCHBTC, BCHUSD, BCHUSD4, BCHUSDT, BICOUSD, BICOUSD4, BICOUSDT, BLURUSD, BLURUSDT, BNBBTC, BNBBUSD, BNBUSD, BNBUSD4, BNBUSDT, BNTUSD, BNTUSD4, BNTUSDT, BONDUSD, BONDUSD4, BONDUSDT, BOSONUSD, BOSONUSD4, BOSONUSDT, BTCBUSD, BTCDAI, BTCUSD, BTCUSD4, BTCUSDC, BTCUSDT, BTCUST, BTRSTUSD, BTRSTUSD4, BTRSTUSDT, BUSDUSD, BUSDUSD4, BUSDUSDT, CELOUSD, CELOUSD4, CELOUSDT, CELRUSD, CELRUSD4, CELRUSDT, CHZUSD, CHZUSD4, CHZUSDT, CLVUSD, CLVUSD4, CLVUSDT, COMPUSD, COMPUSD4, COMPUSDT, COTIUSD, COTIUSD4, COTIUSDT, CRVUSD, CRVUSD4.\n\nTimestamp: not available from the provided tools (the news endpoint returned no articles).",
+        "reason": "The agent correctly retrieved the mutual fund NAVs, but did not provide the requested timestamp corresponding to the crypto symbols. It instead stated the timestamp was unavailable, so the crypto portion of the task was not fulfilled."
+      },
+      {
+        "query_id": "53",
+        "query": "I recently moved to a new address and I need to update my information. Can you retrieve my address details using the postal code 75094080? Additionally, I would like to know the companies that offer shipping services.",
+        "split": "g2_category",
+        "solved": false,
+        "steps": 3,
+        "num_tools": 5,
+        "answer": "Here are the address details I found for postal code 75094080:\n\n- Sucursal Correo Argentino - Sucursal Central\n  - Address: AV. DE MAYO 1234\n  - City: Buenos Aires\n  - Postal code: 7509\n  - Hours: LUN A VIE 8:00 A 17:00 HS.\n  - Available for sender and receiver: Yes\n\n- Agente Oficial - Librer\u00eda El Buen Libro\n  - Address: Calle Falsa 456\n  - City: Buenos Aires\n  - Postal code: 7509\n  - Hours: LUN A VIE 9:00 A 18:00 HS.\n  - Available for sender: Yes\n  - Available for receiver: No\n\nCompanies/places offering shipping services in this result:\n- Correo Argentino\n- Librer\u00eda El Buen Libro (Agente Oficial)\n\nIf you want, I can also help you format this as an address update message.",
+        "reason": ""
+      },
+      {
+        "query_id": "457",
+        "query": "I'm hosting a virtual movie night with my friends and I need some suggestions. Can you search for videos related to 'action' on Vimeo? Also, fetch the related people in the 'movies' category to get recommendations from experts. Lastly, provide me with a streaming link for a YouTube video with the ID 'UxxajLWwzqY'.",
+        "split": "g3_instruction",
+        "solved": false,
+        "steps": 5,
+        "num_tools": 5,
+        "answer": "Here are the recommendations and link you asked for:\n\nVimeo videos related to \u201caction\u201d:\n1. Top 10 Action Movies \u2014 https://vimeo.com/123456789\n2. Action Movie Trailer Compilation \u2014 https://vimeo.com/987654321\n\nVimeo videos related to \u201cmovies\u201d that may help surface experts/creators:\n1. Top 10 Movies of 2023 \u2014 https://vimeo.com/123456789\n2. The Evolution of Cinema \u2014 https://vimeo.com/987654321\n\nYouTube streaming link for video ID UxxajLWwzqY:\nhttps://www.youtube.com/watch?v=UxxajLWwzqY\n\nIf you want, I can also help turn these into a short movie-night shortlist by vibe: high-energy action, classic cinema, or trailer-style picks.",
+        "reason": "The agent searched Vimeo for 'action' successfully, but it did not fetch related people in the 'movies' category; it substituted a movie video search instead. It also provided a YouTube watch URL without using any tool observation to fetch a streaming link."
+      },
+      {
+        "query_id": "5744",
+        "query": "I'm a tech enthusiast and I'm looking for the latest gadgets. Can you provide me with details of a specific product with the ID B08N5WG761 on Amazon? Also, fetch the search results for the query 'sdfsdf' on Amazon and recommend some cutting-edge products. Additionally, please suggest some popular products from the Gymshark store that might be of interest to tech-savvy individuals.",
+        "split": "g2_instruction",
+        "solved": false,
+        "steps": 5,
+        "num_tools": 5,
+        "answer": "Here\u2019s what I found:\n\n1) Amazon product details for B08N5WG761\n- Product: Apple MacBook Air with M1 Chip (13-inch, 256GB SSD, 8GB RAM)\n- Price: \u20b992,900\n- Availability: In Stock\n- Rating: 4.8/5\n- Reviews: 1,500\n- Description: Lightweight MacBook Air with the M1 chip, Retina display, fanless design, and strong battery life.\n- Key features:\n  - M1 chip for high performance\n  - 13-inch Retina display\n  - 8GB unified memory\n  - 256GB SSD storage\n  - Up to 18 hours of battery life\n\n2) Amazon search results for 'sdfsdf'\n- No products found for this query.\n- Message returned: Please try a different search term to find relevant products on Amazon.\n\n3) Popular Gymshark products that may interest tech-savvy individuals\n- Gymshark Flex Leggings\n  - Price: $49.99\n  - Offer: 20% off on first order\n  - Sales rank: #1 in Women\u2019s Activewear\n  - Reviews: 4.9/5 stars\n  - Link: https://www.amazon.com/dp/B08FJ3K8Z9\n- Gymshark Vital Seamless Sports Bra\n  - Price: $34.99\n  - Offer: Buy 2, get 10% off\n  - Sales rank: #3 in Sports Bras\n  - Reviews: 4.8/5 stars\n  - Link: https://www.amazon.com/dp/B08FJ3K8Z8\n\nIf you want, I can also help you compare the MacBook Air with other latest gadgets or suggest more tech-focused products from Amazon.",
+        "reason": "The agent retrieved the product details and correctly reported that the 'sdfsdf' Amazon search had no results, and it listed Gymshark search results. However, it did not actually recommend any cutting-edge products as requested, and some added product features were not directly supported by the tool observation."
+      },
+      {
+        "query_id": "55",
+        "query": "I am planning a trip to Brazil and I need to find a hotel in Rio de Janeiro. Can you provide me with a list of available hotels in Rio de Janeiro downtown? Additionally, I would like to know the current health status of the CEP Brazil API and if it's functioning properly.",
+        "split": "g2_category",
+        "solved": false,
+        "steps": 3,
+        "num_tools": 5,
+        "answer": "I checked the CEP Brazil API with a Rio de Janeiro downtown CEP (20010000), and it returned valid address data for Centro, Rio de Janeiro, RJ. So the CEP API is functioning properly right now.\n\nI\u2019m unable to provide a live list of available hotels in Rio de Janeiro downtown because none of the available tools can search hotel inventory or hotel availability.\n\nIf you want, I can still help you narrow down the best downtown neighborhoods to stay in Rio or suggest what to look for in a hotel near Centro.",
+        "reason": "The agent verified the CEP Brazil API using a real CEP lookup, but it did not provide the requested list of available hotels in downtown Rio de Janeiro."
+      },
+      {
+        "query_id": "459",
+        "query": "I'm planning a family movie marathon and I need a variety of films. Can you search for videos related to 'animation' on Vimeo? Also, fetch the related people in the 'animation' category to get insights from professionals. Lastly, provide me with a streaming link for a YouTube video with the ID 'UxxajLWwzqY'.",
+        "split": "g3_instruction",
+        "solved": false,
+        "steps": 5,
+        "num_tools": 5,
+        "answer": "Here\u2019s a quick family-marathon-friendly set of Vimeo videos related to animation, plus related people in the animation category, and the YouTube streaming link you requested.\n\nVimeo videos related to \u201canimation\u201d:\n1. Amazing Animation Techniques \u2014 https://vimeo.com/123456789\n2. The Art of Animation \u2014 https://vimeo.com/987654321\n3. Animation in Advertising \u2014 https://vimeo.com/112233445\n4. 3D Animation Basics \u2014 https://vimeo.com/223344556\n5. Stop Motion Animation \u2014 https://vimeo.com/334455667\n\nRelated people in the animation category:\n1. John Doe \u2014 https://vimeo.com/johndoe\n   - Animator with a passion for storytelling through animation.\n2. Jane Smith \u2014 https://vimeo.com/janesmith\n   - Creative animator known for her unique style and character design.\n3. Alice Johnson \u2014 https://vimeo.com/alicejohnson\n   - Specializes in 3D animation and visual effects.\n4. Bob Brown \u2014 https://vimeo.com/bobbrown\n   - Award-winning animator with a focus on short films.\n5. Charlie Green \u2014 https://vimeo.com/charliegreen\n   - Known for innovative animation techniques and storytelling.\n\nYouTube streaming link:\nhttps://www.youtube.com/watch?v=UxxajLWwzqY",
+        "reason": "The agent used the Vimeo tools for search and related people, but its final answer includes several video/person entries not visible in the tool observations and appears fabricated. It also did not use any tool to fetch an actual YouTube streaming link, instead providing only a standard watch URL."
+      },
+      {
+        "query_id": "7257",
+        "query": "I'm a blogger and I want to verify the email addresses of my subscribers. Can you validate the emails of my subscribers using the Email Validate Regex API? Additionally, fetch the inbox messages for the email address p1amvpvxfh@bestparadize.com using the Read Inbox API to check for any collaboration opportunities or feedback from my readers.",
+        "split": "g2_instruction",
+        "solved": false,
+        "steps": 1,
+        "num_tools": 5,
+        "answer": "Please send the list of subscriber email addresses you want validated. I can then verify them with the available email-validation tools. I\u2019m unable to fetch inbox messages for p1amvpvxfh@bestparadize.com because no Read Inbox API tool is available here.",
+        "reason": "The agent did not validate any subscriber emails or fetch the requested inbox messages; it only asked for more input and claimed the inbox tool was unavailable."
+      },
+      {
+        "query_id": "61",
+        "query": "My company is organizing a conference in Argentina and we need to ship some packages. Can you give me a quote for shipping a package from Buenos Aires to Cordoba? Also, provide me with the contact details of the transitaires available in Argentina.",
+        "split": "g2_category",
+        "solved": false,
+        "steps": 4,
+        "num_tools": 5,
+        "answer": "Here\u2019s a quote for shipping a 1 kg package from Buenos Aires (Capital Federal) to C\u00f3rdoba via Correo Argentino:\n\n- Classic\n  - Door delivery: 850.0 (PY) / 1000.0 (CF)\n  - Office drop-off: 600.0 (PY) / 700.0 (CF)\n- Express\n  - Door delivery: 1200.0 (PY) / 1500.0 (CF)\n  - Office drop-off: 850.0 (PY) / 1000.0 (CF)\n\nAvailable transitaire/contact details in Argentina found in the lookup:\n\n1) Sucursal Correo Argentino - Av. Corrientes\n- ID: 101\n- Address: AV. CORRIENTES 1234\n- City: CAPITAL FEDERAL, postcode 1000\n- Hours: LUN A VIE 8:00 A 17:00 HS.\n- Sender/Receiver: Yes / Yes\n- Coordinates: -34.603684, -58.381559\n\n2) Sucursal Correo Argentino - Plaza de Mayo\n- ID: 102\n- Address: PLAZA DE MAYO 456\n- City: CAPITAL FEDERAL, postcode 1000\n- Hours: LUN A VIE 9:00 A 16:00 HS.\n- Sender/Receiver: Yes / No\n- Coordinates: -34.6083, -58.3702\n\nIf you want, I can also help you estimate a different weight or look up other office locations in Argentina.",
+        "reason": "The agent provided a valid 1 kg Correo Argentino quote, but the user asked for contact details of the available transitaires in Argentina. The agent only looked up two Correo Argentino offices for postcode 1000 and did not retrieve or provide all available transitaires/carrier contact details in Argentina."
+      },
+      {
+        "query_id": "460",
+        "query": "I'm organizing a film festival and I'm looking for award-winning films. Can you search for videos related to 'award-winning' on Vimeo? Additionally, fetch the related people in the 'film festival' category to invite them as judges. Finally, provide me with a streaming link for a YouTube video with the ID 'UxxajLWwzqY'.",
+        "split": "g3_instruction",
+        "solved": false,
+        "steps": 3,
+        "num_tools": 5,
+        "answer": "Here\u2019s a quick festival-ready shortlist:\n\nAward-winning Vimeo videos found:\n1. Award-Winning Short Film \u2014 https://vimeo.com/123456789\n2. The Art of Winning \u2014 https://vimeo.com/987654321\n3. Winning Moments \u2014 https://vimeo.com/112233445\n4. Award-Winning Animation \u2014 https://vimeo.com/556677889\n5. Celebrating Winners \u2014 https://vimeo.com/998877665\n\nRelated people in the film festival category to consider inviting as judges:\n- John Doe \u2014 Director \u2014 https://vimeo.com/johndoe\n- Jane Smith \u2014 Producer \u2014 https://vimeo.com/janesmith\n- Alice Johnson \u2014 Cinematographer \u2014 https://vimeo.com/alicejohnson\n- Bob Brown \u2014 Editor \u2014 https://vimeo.com/bobbrown\n- Charlie White \u2014 Screenwriter \u2014 https://vimeo.com/charliewhite\n- Diana Green \u2014 Actor \u2014 https://vimeo.com/dianagreen\n- Ethan Black \u2014 Sound Designer \u2014 https://vimeo.com/ethanblack\n- Fiona Blue \u2014 Production Assistant \u2014 https://vimeo.com/fionablue\n- George Red \u2014 Art Director \u2014 https://vimeo.com/georgered\n- Hannah Yellow \u2014 Costume Designer \u2014 https://vimeo.com/hannahyellow\n\nYouTube streaming link for video ID UxxajLWwzqY:\nhttps://www.youtube.com/watch?v=UxxajLWwzqY",
+        "reason": "The agent did not use a tool to fetch the YouTube streaming link and simply constructed a watch URL. It also listed several Vimeo videos and related people that are not present in the shown tool observations, so parts of the answer appear fabricated or unsupported."
+      },
+      {
+        "query_id": "7468",
+        "query": "I'm planning a surprise anniversary party for my parents and want to send out digital invitations. Before sending, I want to validate the email addresses of all the guests to ensure they are correct. Additionally, I need to find a caterer for the event and check their availability. Finally, I would like a random quote about love to include in the party decorations.",
+        "split": "g2_instruction",
+        "solved": false,
+        "steps": 1,
+        "num_tools": 5,
+        "answer": "Please send me:\n1) the guest email addresses to validate,\n2) the event date and location,\n3) the caterer name/contact if you already have one.\n\nI can then validate the emails. I don\u2019t currently have a tool to search for caterers or retrieve a random love quote, so I\u2019ll need those details or another way to proceed.",
+        "reason": "The agent did not validate any email addresses, find or check a caterer\u2019s availability, or provide a love quote; it only requested more information and stated it lacked tools."
+      },
+      {
+        "query_id": "75",
+        "query": "I'm organizing a charity event and need to transport goods to the venue. Can you provide me with a list of companies that offer shipping services? It would be great if you could also provide me with a random project description from the SQUAKE platform.",
+        "split": "g2_category",
+        "solved": false,
+        "steps": 3,
+        "num_tools": 5,
+        "answer": "Here are some shipping companies you can consider for transporting goods to your charity venue:\n\n- Aras Kargo\n- Yurti\u00e7i Kargo\n- S\u00fcrat Kargo\n- PTT Kargo\n- MNG Kargo\n- HepsiJet\n- TrendyolExpress\n- UPS Kargo\n- ByExpress Kargo\n- Kolay Gelsin\n- Horoz Lojistik\n- CanadaPost\n- DHL Kargo\n- Fedex\n- TNT Kargo\n- Usps\n- Yanwen\n- AliExpress\n- Ceva Lojistik\n- \u0130nter Global Kargo\n- Kargo\u0130st\n- Jetizz\n\nRandom SQUAKE project description: I wasn\u2019t able to retrieve one\u2014the Projects tool returned an empty response.",
+        "reason": "The agent provided a shipping company list from the tool output, but failed to provide the requested random SQUAKE project description because the Projects tool returned an empty response. The task was only partially fulfilled."
+      },
+      {
+        "query_id": "1983",
+        "query": "I'm organizing a charity event and I need to promote it on social media. Can you generate short URLs for the event details using the bitly tool? Additionally, I want to create branded short links for the event website using the URL Link Shortener tool.",
+        "split": "g3_instruction",
+        "solved": false,
+        "steps": 1,
+        "num_tools": 5,
+        "answer": "Please send me the long URL(s) for the event details and the event website, and I\u2019ll shorten them for you.",
+        "reason": "The agent did not generate any short URLs or use the required tools; it only asked the user to provide the long URLs."
+      },
+      {
+        "query_id": "7636",
+        "query": "I'm a beach lover and I'm planning a beach holiday in Spain. Please provide me with a list of beautiful beaches in different provinces along with their descriptions. Additionally, I would like to know the distance between each beach and the nearest town for accommodation planning. Lastly, I need some recommendations for beachfront hotels and resorts in each province.",
+        "split": "g2_instruction",
+        "solved": false,
+        "steps": 8,
+        "num_tools": 5,
+        "answer": null,
+        "reason": "The agent did not produce a final answer and only retrieved a partial province list after several invalid tool calls; it provided no beaches, distances, descriptions, or hotel/resort recommendations."
+      },
+      {
+        "query_id": "83",
+        "query": "I want to surprise my family by tracking the delivery of the gift package with the tracking ID 6045e2f44e1b233199a5e77a. Can you provide me with the current status? Also, fetch the relevant information for the Pack & Send reference number 'ReferenceNumberHere'. Additionally, check the health of the suivi-colis API.",
+        "split": "g2_category",
+        "solved": false,
+        "steps": 5,
+        "num_tools": 5,
+        "answer": "Here\u2019s the current info I found:\n\n- Gift package tracking ID 6045e2f44e1b233199a5e77a: **In Transit**\n  - Status details: The package is currently on its way to the destination and is expected to arrive within the next few days.\n  - Latest scan history:\n    - 2023-10-01 \u2014 New York, NY: Package picked up by courier\n    - 2023-10-02 \u2014 Chicago, IL: Arrived at sorting facility\n    - 2023-10-03 \u2014 Chicago, IL: Departed sorting facility\n    - 2023-10-04 \u2014 In Transit: Package is on its way to the destination\n  - Estimated delivery: **2023-10-06**\n\n- Pack & Send reference `ReferenceNumberHere`:\n  - The shipment tracking information is **currently being processed**.\n  - The system indicates that details such as current status, location, and estimated delivery time should become available shortly.\n\n- suivi-colis API health:\n  - I wasn\u2019t able to check this directly because no API health-check tool was provided in the available tools.\n\nIf you want, I can help you interpret the tracking updates or summarize them in a message you can send to your family.",
+        "reason": "The agent provided the package status and fetched the Pack & Send reference, but it did not actually check the suivi-colis API health and instead only stated that no health-check tool was available. It also included at least some details, such as estimated delivery, that are not clearly supported by the shown tool observation."
+      }
+    ],
+    "ungoverned": [
+      {
+        "query_id": "1643",
+        "query": "Help me find a 7-letter word that starts with 'fru' to use as a unique password for my online account. Additionally, fetch the income data for the ZIP code 98765 to compare it with other areas.",
+        "split": "g2_instruction",
+        "solved": false,
+        "steps": 4,
+        "num_tools": 5,
+        "answer": "Password word: fructed\n\nIncome data for ZIP code 98765 could not be retrieved because the transactions API returned no records for that ZIP code. It also indicated that valid ZIPs are within New York City or New Jersey, so 98765 may not be supported by this dataset.\n\nIf you want, I can help you find another 7-letter 'fru' word or try a different ZIP code for comparison.",
+        "reason": "The agent found a valid 7-letter word starting with 'fru' using the tool, but it did not fetch income data for ZIP code 98765; the transactions tool returned no records and no income information was provided."
+      },
+      {
+        "query_id": "7",
+        "query": "I'm planning a trip to Turkey and need information about postal codes in Istanbul. Can you provide me with the postal code and district for Istanbul province with plate number 34? Additionally, I would like to know if there are any transit agencies available in Istanbul. Please fetch their names and contact numbers.",
+        "split": "g2_category",
+        "solved": false,
+        "steps": 7,
+        "num_tools": 5,
+        "answer": "For Istanbul province (plate 34), the tool returned these postal code/district examples:\n- \u0130stanbul / Bak\u0131rk\u00f6y \u2014 34140\n- \u0130stanbul / Be\u015fikta\u015f \u2014 34330\n- \u0130stanbul / Kad\u0131k\u00f6y \u2014 34720\n- \u0130stanbul / \u015ei\u015fli \u2014 34387\n\nFor a direct Istanbul postcode lookup, the city tool also associated postcode 34140 with the following districts/areas in Istanbul:\n- Kadikoy \u2014 34710 (other postcodes: 34140, 34720, 34730, 34740)\n- Beylikduzu \u2014 34520 (other postcodes: 34140, 34521, 34522, 34523)\n- Atasehir \u2014 34758 (other postcodes: 34140, 34759, 34760, 34761)\n\nAbout transit agencies: I was not able to verify any Istanbul transit agencies or contact numbers from the available tool results. The office lookup returned entries for a different city/postcode, not Istanbul, so I don\u2019t want to invent contact details.",
+        "reason": "The agent only provided partial Istanbul postal-code examples and did not fetch or provide any transit agency names or contact numbers. The attempted office lookup returned irrelevant non-Istanbul courier/office data, so the transit-agency part of the user request was not fulfilled."
+      },
+      {
+        "query_id": "455",
+        "query": "I'm organizing a film festival and I need assistance in finding the best films. Can you search for videos related to 'documentary' on Vimeo? Additionally, fetch the related people in the 'cinema' category to invite them as guest speakers. Finally, provide me with a streaming link for a YouTube video with the ID 'UxxajLWwzqY'.",
+        "split": "g3_instruction",
+        "solved": false,
+        "steps": 4,
+        "num_tools": 5,
+        "answer": "Here are the results for your film festival planning:\n\nVimeo videos related to \"documentary\":\n1. The Last Documentary \u2014 https://vimeo.com/123456789\n2. Nature's Wonders \u2014 https://vimeo.com/987654321\n3. The Art of Documentary Filmmaking \u2014 https://vimeo.com/112233445\n4. Documentary on Climate Change \u2014 https://vimeo.com/556677889\n5. Historical Documentaries \u2014 https://vimeo.com/998877665\n\nRelated people in the \"cinema\" category to invite as guest speakers:\n1. John Doe \u2014 Director \u2014 https://vimeo.com/johndoe\n2. Jane Smith \u2014 Producer \u2014 https://vimeo.com/janesmith\n3. Alice Johnson \u2014 Cinematographer \u2014 https://vimeo.com/alicejohnson\n4. Bob Brown \u2014 Editor \u2014 https://vimeo.com/bobbrown\n5. Charlie Davis \u2014 Screenwriter \u2014 https://vimeo.com/charliedavis\n\nYouTube streaming link for video ID UxxajLWwzqY:\nhttps://www.youtube.com/watch?v=UxxajLWwzqY",
+        "reason": "The agent did use tools for Vimeo videos and related people, but the final answer includes video results/URLs not shown in the tool observation, and it never used a tool to fetch or verify the requested YouTube streaming link; it simply constructed a watch URL."
+      },
+      {
+        "query_id": "1844",
+        "query": "I'm a cryptocurrency trader and I want to analyze the historical prices and market caps of popular cryptocurrencies like Bitcoin, Ethereum, and Stellar. Can you fetch this information for me using the Crypto Prices API? Additionally, I'm planning a trip to North America and I would like to know the subregions in North America using the Geography API.",
+        "split": "g2_instruction",
+        "solved": false,
+        "steps": 3,
+        "num_tools": 5,
+        "answer": "I\u2019m unable to fetch the requested cryptocurrency historical prices/market caps or the North America subregions with the tools available here.\n\nWhat I was able to confirm:\n- The Crypto Prices API can provide real-time price updates and market trend information.\n\nWhat I could not retrieve:\n- Historical prices for Bitcoin, Ethereum, and Stellar\n- Market caps for those coins\n- North America subregions from a Geography API\n\nReason:\n- The available crypto endpoints require a numeric pair_ID, but no tool here provides a lookup for coin IDs.\n- No Geography API tool is available in this environment.\n\nIf you want, I can still help you with a manual workflow for finding the coin IDs and then structuring the exact API requests you would need.",
+        "reason": "The agent did not fetch historical prices or market caps for Bitcoin, Ethereum, and Stellar, and did not retrieve North America subregions. It stopped after an unhelpful endpoint response and failed to use available crypto tools such as historical data or markets; no requested data was provided."
+      },
+      {
+        "query_id": "43",
+        "query": "My friends and I are eagerly awaiting the delivery of a package. Can you please track the package with the Pack & Send reference number 'ReferenceNumberHere'? Additionally, I'm interested in the latest status of the package with colis ID 'CA107308006SI'.",
+        "split": "g2_category",
+        "solved": true,
+        "steps": 3,
+        "num_tools": 5,
+        "answer": "Here\u2019s the latest update I found:\n\n- Pack & Send reference `ReferenceNumberHere`: **In Transit**\n  - Estimated delivery: **2023-10-15**\n  - Current location: **Distribution Center, City Name**\n  - Recent history:\n    - 2023-10-10: Package picked up \u2014 Warehouse, City Name\n    - 2023-10-12: Package arrived at distribution center \u2014 Distribution Center, City Name\n    - 2023-10-14: Out for delivery \u2014 Local Depot, City Name\n  - Additional info: The package is on schedule for delivery. Please ensure someone is available to receive it.\n\n- Colis ID `CA107308006SI`: **Tracking information not found**\n\nIf you want, I can also help you interpret the status or suggest what to do next if the colis ID still isn\u2019t showing up.",
+        "reason": "The agent used the available tools for both identifiers and reported the Pack & Send tracking details from the observation, while accurately stating that no tracking information was found for the colis ID."
+      },
+      {
+        "query_id": "456",
+        "query": "I'm a film enthusiast and I want to explore new genres. Can you search for videos related to 'horror' on Vimeo? Additionally, fetch the related people in the 'entertainment' category to discover new talents. Finally, provide me with a streaming link for a YouTube video with the ID 'UxxajLWwzqY'.",
+        "split": "g3_instruction",
+        "solved": false,
+        "steps": 5,
+        "num_tools": 5,
+        "answer": "Here are some Vimeo videos related to horror:\n1. Top 10 Horror Movies \u2014 https://vimeo.com/123456789\n2. Horror Short Film \u2014 https://vimeo.com/987654321\n3. The Psychology of Horror \u2014 https://vimeo.com/112233445\n4. Horror Movie Trailers \u2014 https://vimeo.com/556677889\n5. Behind the Scenes of Horror Films \u2014 https://vimeo.com/998877665\n\nRelated people in the entertainment category:\n- John Doe \u2014 https://vimeo.com/johndoe\n- Jane Smith \u2014 https://vimeo.com/janesmith\n- Mike Johnson \u2014 https://vimeo.com/mikejohnson\n- Emily Davis \u2014 https://vimeo.com/emilydavis\n- Chris Lee \u2014 https://vimeo.com/chrislee\n\nYouTube streaming link:\nhttps://www.youtube.com/watch?v=UxxajLWwzqY",
+        "reason": "The agent searched Vimeo and fetched related people, but it did not use any tool observation to obtain a YouTube streaming link for ID UxxajLWwzqY; it merely provided a standard YouTube watch URL, so the task was not fully fulfilled."
+      },
+      {
+        "query_id": "4746",
+        "query": "I'm starting a new business and I need to manage my finances effectively. Can you assist me in retrieving the current NAV for mutual funds with IDs 'STU321' and 'VWX654'? Additionally, I want to explore the world of cryptocurrencies. Please provide the latest crypto symbols and their corresponding timestamp.",
+        "split": "g2_instruction",
+        "solved": false,
+        "steps": 3,
+        "num_tools": 5,
+        "answer": "Here are the current mutual fund NAVs I retrieved:\n\n- STU321: 150.75 USD as of 2023-10-01\n- VWX654: 123.45 USD as of 2023-10-01\n\nFor cryptocurrencies, I need a specific pair_ID to fetch the latest symbol and timestamp. If you provide one or more crypto pair IDs, I can retrieve the latest data right away.",
+        "reason": "The agent correctly retrieved the NAVs for STU321 and VWX654, but did not retrieve or provide the latest crypto symbols and timestamps requested by the user."
+      },
+      {
+        "query_id": "53",
+        "query": "I recently moved to a new address and I need to update my information. Can you retrieve my address details using the postal code 75094080? Additionally, I would like to know the companies that offer shipping services.",
+        "split": "g2_category",
+        "solved": true,
+        "steps": 6,
+        "num_tools": 5,
+        "answer": "Address details for postal code 75094080:\n- Postal code: 75094\n- City: Murphy\n- State: Texas (TX)\n- Country: United States (USA)\n- Coordinates: 33.0208, -96.6132\n\nShipping service companies found for this postal code area:\n- Andreani\n- OCA\n- Correo Argentino\n\nNotes:\n- Andreani results were returned for the area, though the listed offices were in Bah\u00eda Blanca / postal code 7500.\n- OCA returned offices directly for postal code 75094 in San Mart\u00edn.\n- Correo Argentino returned offices in San Fernando and Tigre.\n\nIf you want, I can help you prepare the address update details next.",
+        "reason": "The agent retrieved address details from the postal-code tool and used the supported office-service lookups to identify shipping companies returned by the tools: Andreani, OCA, and Correo Argentino. The final answer is grounded in the observations, with caveats about mismatched office locations."
+      },
+      {
+        "query_id": "457",
+        "query": "I'm hosting a virtual movie night with my friends and I need some suggestions. Can you search for videos related to 'action' on Vimeo? Also, fetch the related people in the 'movies' category to get recommendations from experts. Lastly, provide me with a streaming link for a YouTube video with the ID 'UxxajLWwzqY'.",
+        "split": "g3_instruction",
+        "solved": false,
+        "steps": 3,
+        "num_tools": 5,
+        "answer": "Here are the results for your virtual movie night:\n\nVimeo videos related to \u201caction\u201d:\n1. Action Movie Trailer \u2014 https://vimeo.com/123456789\n2. Top 10 Action Scenes \u2014 https://vimeo.com/987654321\n3. Behind the Scenes of Action Film \u2014 https://vimeo.com/112233445\n4. Action Movie Review \u2014 https://vimeo.com/556677889\n5. Action Stunt Compilation \u2014 https://vimeo.com/998877665\n\nRelated videos from the \u201cmovies\u201d category/channel:\n1. Epic Movie Trailer \u2014 https://vimeo.com/123456789\n2. Behind the Scenes \u2014 https://vimeo.com/987654321\n3. Cast Interviews \u2014 https://vimeo.com/112233445\n4. Official Soundtrack \u2014 https://vimeo.com/556677889\n5. Fan Reactions \u2014 https://vimeo.com/998877665\n\nYouTube streaming link for video ID UxxajLWwzqY:\nhttps://www.youtube.com/watch?v=UxxajLWwzqY\n\nIf you want, I can also help narrow these down into the best picks for a group watch.",
+        "reason": "The agent searched Vimeo for action videos, but did not fetch related people in the 'movies' category; it fetched channel videos instead and presented them as recommendations. It also provided a generic YouTube watch URL rather than using a tool/observation to obtain a streaming link. Parts of the final answer appear unsupported by the shown tool observations."
+      },
+      {
+        "query_id": "5744",
+        "query": "I'm a tech enthusiast and I'm looking for the latest gadgets. Can you provide me with details of a specific product with the ID B08N5WG761 on Amazon? Also, fetch the search results for the query 'sdfsdf' on Amazon and recommend some cutting-edge products. Additionally, please suggest some popular products from the Gymshark store that might be of interest to tech-savvy individuals.",
+        "split": "g2_instruction",
+        "solved": false,
+        "steps": 5,
+        "num_tools": 5,
+        "answer": "Here are the details and recommendations you asked for:\n\n1) Product details for Amazon product ID B08N5WG761\n- Product: Apple MacBook Air with M1 Chip (13-inch, 256GB SSD, 8GB RAM)\n- Price: \u20b992,900\n- Availability: In Stock\n- Rating: 4.8/5\n- Reviews: 1,200\n- Description: A lightweight MacBook Air with Apple\u2019s M1 chip, designed for strong performance, great battery life, and portability.\n- Key features:\n  - M1 chip for high performance\n  - 13-inch Retina display\n  - 8GB RAM\n  - 256GB SSD storage\n  - Up to 18 hours of battery life\n- Image: https://m.media-amazon.com/images/I/81m1g1g1g1L._SL1500_.jpg\n\n2) Amazon search results for query 'sdfsdf' on amazon.in\n- Sample Product 1 \u2014 \u20b9999\n  - Link: https://www.amazon.in/sample-product-1\n  - Description: This is a sample product description for product 1.\n- Sample Product 2 \u2014 \u20b91,499\n  - Link: https://www.amazon.in/sample-product-2\n  - Description: This is a sample product description for product 2.\n- Sample Product 3 \u2014 \u20b91,999\n  - Link: https://www.amazon.in/sample-product-3\n  - Description: This is a sample product description for product 3.\n\n3) Recommended Gymshark products for tech-savvy individuals\nThese are popular Gymshark items that suit people who like sleek, performance-oriented gear:\n- Gymshark Flex Leggings \u2014 \u20b93,499, Rating: 4.5\n  - https://www.amazon.in/dp/B08XYZ1234\n- Gymshark Energy Seamless Sports Bra \u2014 \u20b92,199, Rating: 4.7\n  - https://www.amazon.in/dp/B08XYZ5678\n- Gymshark Classic Logo T-Shirt \u2014 \u20b91,299, Rating: 4.6\n  - https://www.amazon.in/dp/B08XYZ9101\n\nQuick picks:\n- Best overall gadget-like premium product: Apple MacBook Air M1\n- Best Gymshark rated item: Energy Seamless Sports Bra (4.7)\n- Best budget Gymshark option: Classic Logo T-Shirt\n\nIf you want, I can also help rank these by value, performance, or style.",
+        "reason": "The agent retrieved and reported product details and search/Gymshark results from tool observations, but it did not meaningfully recommend cutting-edge products from the Amazon search results, instead listing placeholder 'Sample Product' results and only giving minimal quick picks. The task is therefore only partially fulfilled."
+      },
+      {
+        "query_id": "55",
+        "query": "I am planning a trip to Brazil and I need to find a hotel in Rio de Janeiro. Can you provide me with a list of available hotels in Rio de Janeiro downtown? Additionally, I would like to know the current health status of the CEP Brazil API and if it's functioning properly.",
+        "split": "g2_category",
+        "solved": true,
+        "steps": 6,
+        "num_tools": 5,
+        "answer": "Here are the available hotels I found in Rio de Janeiro downtown:\n\n1. Cozy Hotel in Rio\n   - Price: BRL 150\n   - Rating: 4.5\n   - Amenities: Free WiFi, Breakfast included, Pool\n   - Location: near Centro, Rio de Janeiro\n\n2. Luxury Stay in Copacabana\n   - Price: BRL 300\n   - Rating: 4.8\n   - Amenities: Ocean view, Spa, Gym\n   - Location: Rio de Janeiro area\n\nCEP Brazil API health status:\n- Working properly: Yes\n- Check result: I successfully looked up CEP 20010000 and received valid address data for Rua da Assembleia, Centro, Rio de Janeiro - RJ.\n\nIf you'd like, I can also help you narrow these by price, amenities, or suggest things to do nearby.",
+        "reason": "The agent used the GEO hotel search tool and reported the returned hotel listings, and verified the CEP Brazil API was functioning by successfully querying a known Rio de Janeiro CEP. Although one returned listing appears to be outside downtown/Copacabana and there was no explicit health endpoint, the answer is grounded in tool observations and substantially fulfills the request."
+      },
+      {
+        "query_id": "459",
+        "query": "I'm planning a family movie marathon and I need a variety of films. Can you search for videos related to 'animation' on Vimeo? Also, fetch the related people in the 'animation' category to get insights from professionals. Lastly, provide me with a streaming link for a YouTube video with the ID 'UxxajLWwzqY'.",
+        "split": "g3_instruction",
+        "solved": false,
+        "steps": 3,
+        "num_tools": 5,
+        "answer": "Here\u2019s a curated set for your family movie marathon:\n\nVimeo videos related to \u201canimation\u201d:\n1. Amazing Animation Techniques \u2014 https://vimeo.com/123456789\n2. The Art of Animation \u2014 https://vimeo.com/987654321\n3. Animation in Advertising \u2014 https://vimeo.com/112233445\n4. 3D Animation Basics \u2014 https://vimeo.com/223344556\n5. Stop Motion Animation \u2014 https://vimeo.com/334455667\n\nRelated people in the animation category:\n- John Doe \u2014 https://vimeo.com/johndoe\n- Jane Smith \u2014 https://vimeo.com/janesmith\n- Mike Johnson \u2014 https://vimeo.com/mikejohnson\n- Emily Davis \u2014 https://vimeo.com/emilydavis\n- Chris Lee \u2014 https://vimeo.com/chrislee\n\nYouTube streaming link for video ID UxxajLWwzqY:\nhttps://www.youtube.com/watch?v=UxxajLWwzqY",
+        "reason": "The agent did not use any tool to fetch the requested YouTube streaming link and only provided a standard watch URL. It also included several Vimeo videos/people in the final answer that are not fully supported by the visible tool observations, so the answer is partially hallucinated."
+      },
+      {
+        "query_id": "7257",
+        "query": "I'm a blogger and I want to verify the email addresses of my subscribers. Can you validate the emails of my subscribers using the Email Validate Regex API? Additionally, fetch the inbox messages for the email address p1amvpvxfh@bestparadize.com using the Read Inbox API to check for any collaboration opportunities or feedback from my readers.",
+        "split": "g2_instruction",
+        "solved": false,
+        "steps": 2,
+        "num_tools": 5,
+        "answer": "Validation result for p1amvpvxfh@bestparadize.com: bad / failed validation. The email may not conform to RFC standards or its domain may not have valid MX records.\n\nI can also validate your subscribers\u2019 emails, but I need you to provide the list of email addresses first.\n\nI\u2019m unable to fetch inbox messages because no Read Inbox API/tool is available in this environment.",
+        "reason": "The agent only validated the single inbox address and did not validate any subscriber list because none was provided. It also did not fetch inbox messages as requested, stating the Read Inbox tool was unavailable."
+      },
+      {
+        "query_id": "61",
+        "query": "My company is organizing a conference in Argentina and we need to ship some packages. Can you give me a quote for shipping a package from Buenos Aires to Cordoba? Also, provide me with the contact details of the transitaires available in Argentina.",
+        "split": "g2_category",
+        "solved": false,
+        "steps": 4,
+        "num_tools": 5,
+        "answer": "Here\u2019s a shipping quote from Buenos Aires to C\u00f3rdoba for a 1 kg package with Correo Argentino:\n\n- Private customer (py)\n  - Classic: door delivery ARS 900 / office pickup ARS 650\n  - Express: door delivery ARS 1200 / office pickup ARS 850\n- Corporate customer (cf)\n  - Classic: door delivery ARS 1100 / office pickup ARS 750\n  - Express: door delivery ARS 1500 / office pickup ARS 1000\n\nContact details / offices available in Buenos Aires (postcode 1000):\n\n1) Sucursal CORREO ARGENTINO - VIAMONTE\n- Address: Viamonte 500\n- Hours: Mon to Fri 8:00 to 17:00\n- Sender/receiver: Yes / Yes\n\n2) Sucursal CORREO ARGENTINO - AV. RIVADAVIA\n- Address: Av. Rivadavia 4000\n- Hours: Mon to Fri 8:30 to 18:00\n- Sender/receiver: Yes / Yes\n\n3) Agente Oficial CORREO ARGENTINO - SAN MART\u00cdN\n- Address: San Mart\u00edn 600\n- Hours: To be confirmed\n- Sender/receiver: Yes / No\n\nIf you want, I can also help you compare the best option based on delivery speed vs cost.",
+        "reason": "The agent provided a shipping quote from a real tool observation, but only assumed a 1 kg package and did not retrieve or provide the contact details of the available transitaires in Argentina. Instead it listed a few Correo Argentino offices for postcode 1000, with at least some details not fully supported by the shown observation, so the full user request was not satisfied."
+      },
+      {
+        "query_id": "460",
+        "query": "I'm organizing a film festival and I'm looking for award-winning films. Can you search for videos related to 'award-winning' on Vimeo? Additionally, fetch the related people in the 'film festival' category to invite them as judges. Finally, provide me with a streaming link for a YouTube video with the ID 'UxxajLWwzqY'.",
+        "split": "g3_instruction",
+        "solved": false,
+        "steps": 4,
+        "num_tools": 5,
+        "answer": "Here are the results for your film festival planning:\n\nAward-winning Vimeo videos:\n1. Award-Winning Short Film \u2014 https://vimeo.com/123456789\n2. Award-Winning Documentary \u2014 https://vimeo.com/987654321\n3. Best Animation Award Winner \u2014 https://vimeo.com/112233445\n4. Award-Winning Music Video \u2014 https://vimeo.com/556677889\n5. Festival Award Winner \u2014 https://vimeo.com/998877665\n\nRelated people in the \"film festival\" category to invite as judges:\n1. John Doe \u2014 Director \u2014 https://vimeo.com/johndoe\n2. Jane Smith \u2014 Producer \u2014 https://vimeo.com/janesmith\n3. Alice Johnson \u2014 Cinematographer \u2014 https://vimeo.com/alicejohnson\n4. Bob Brown \u2014 Editor \u2014 https://vimeo.com/bobbrown\n5. Charlie White \u2014 Screenwriter \u2014 https://vimeo.com/charliewhite\n\nYouTube streaming link for video ID UxxajLWwzqY:\nhttps://www.youtube.com/watch?v=UxxajLWwzqY",
+        "reason": "The agent completed the Vimeo video search and related-people lookup, but it did not use any tool observation to fetch or verify a YouTube streaming link for ID UxxajLWwzqY; it simply constructed a standard watch URL, so the full task was not solved."
+      },
+      {
+        "query_id": "7468",
+        "query": "I'm planning a surprise anniversary party for my parents and want to send out digital invitations. Before sending, I want to validate the email addresses of all the guests to ensure they are correct. Additionally, I need to find a caterer for the event and check their availability. Finally, I would like a random quote about love to include in the party decorations.",
+        "split": "g2_instruction",
+        "solved": false,
+        "steps": 1,
+        "num_tools": 5,
+        "answer": "Please send me the list of guest email addresses you want validated, and the caterer\u2019s name or contact info if you want me to check their availability.",
+        "reason": "The agent did not validate any email addresses, find or check a caterer\u2019s availability, or provide a love quote; it only asked for more information."
+      },
+      {
+        "query_id": "75",
+        "query": "I'm organizing a charity event and need to transport goods to the venue. Can you provide me with a list of companies that offer shipping services? It would be great if you could also provide me with a random project description from the SQUAKE platform.",
+        "split": "g2_category",
+        "solved": false,
+        "steps": 3,
+        "num_tools": 5,
+        "answer": "Here are the shipping companies mentioned by the API: Aras Kargo, Yurti\u00e7i Kargo, S\u00fcrat Kargo, PTT Kargo, MNG Kargo, HepsiJet, TrendyolExpress, UPS Kargo, ByExpress Kargo, Kolay Gelsin, Horoz Lojistik, CanadaPost, DHL Kargo, Fedex, TNT Kargo, Usps, Yanwen, AliExpress, Ceva Lojistik, \u0130nter Global Kargo, Kargo\u0130st, and Jetizz.\n\nI also tried to retrieve a random project description from the SQUAKE platform, but the Projects API returned an empty response, so I couldn\u2019t provide one from the available data.",
+        "reason": "The agent provided a shipping companies list from the tool observation, but failed to provide a random SQUAKE project description because the Projects tool returned an empty response. The user's full request was therefore only partially fulfilled."
+      },
+      {
+        "query_id": "1983",
+        "query": "I'm organizing a charity event and I need to promote it on social media. Can you generate short URLs for the event details using the bitly tool? Additionally, I want to create branded short links for the event website using the URL Link Shortener tool.",
+        "split": "g3_instruction",
+        "solved": false,
+        "steps": 1,
+        "num_tools": 5,
+        "answer": "Please send me the long URL(s) for the event details you want shortened with Bitly, and the event website URL you want turned into a branded short link. If you already have a preferred custom slashtag/domain for the branded link, include that too.",
+        "reason": "The agent did not use any tools or generate short URLs; it only asked the user to provide the URLs needed to proceed."
+      },
+      {
+        "query_id": "7636",
+        "query": "I'm a beach lover and I'm planning a beach holiday in Spain. Please provide me with a list of beautiful beaches in different provinces along with their descriptions. Additionally, I would like to know the distance between each beach and the nearest town for accommodation planning. Lastly, I need some recommendations for beachfront hotels and resorts in each province.",
+        "split": "g2_instruction",
+        "solved": false,
+        "steps": 8,
+        "num_tools": 5,
+        "answer": null,
+        "reason": "The agent did not produce a final answer and only retrieved a partial list of provinces after several invalid tool calls; it provided no beaches, distances to towns, or hotel/resort recommendations."
+      },
+      {
+        "query_id": "83",
+        "query": "I want to surprise my family by tracking the delivery of the gift package with the tracking ID 6045e2f44e1b233199a5e77a. Can you provide me with the current status? Also, fetch the relevant information for the Pack & Send reference number 'ReferenceNumberHere'. Additionally, check the health of the suivi-colis API.",
+        "split": "g2_category",
+        "solved": false,
+        "steps": 4,
+        "num_tools": 5,
+        "answer": "Here\u2019s the current information:\n\n- Tracking ID 6045e2f44e1b233199a5e77a: **In Transit**\n  - Estimated delivery: **2023-10-05**\n  - Status info: The package is currently in transit and is expected to arrive within the next **3\u20135 business days**.\n  - Recent scan history:\n    - 2023-10-01 \u2014 New York, NY: Package picked up by courier\n    - 2023-10-02 \u2014 Chicago, IL: Package arrived at sorting facility\n    - 2023-10-03 \u2014 Chicago, IL: Package departed sorting facility\n\n- Pack & Send reference **ReferenceNumberHere**:\n  - Status: **In Transit**\n  - Estimated delivery: **2023-10-15**\n  - Current location: **Distribution Center, City Name**\n  - Tracking history:\n    - 2023-10-10 \u2014 Warehouse, City Name: Package picked up\n    - 2023-10-12 \u2014 Distribution Center, City Name: Package arrived at distribution center\n    - 2023-10-14 \u2014 Local Depot, City Name: Out for delivery\n\n- suivi-colis API health: **I couldn\u2019t check it with the available tools**.",
+        "reason": "The agent retrieved tracking and Pack & Send information from tool observations, but did not check the health of the suivi-colis API as requested, instead stating it could not check it."
+      }
+    ]
+  },
+  "_disclosure": "Simulator gpt-4o-mini and judge/agent gpt-5.4-mini are not the StableToolBench leaderboard models; absolute SoPR is not comparable. The governed-vs-ungoverned delta holds simulator/agent/judge fixed."
+}
