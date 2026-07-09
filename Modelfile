@@ -1,0 +1,3 @@
+FROM mistral-nemo
+PARAMETER num_ctx 32768
+
