@@ -57,6 +57,7 @@ Options:
 from __future__ import annotations
 
 import argparse
+import gc
 import json
 import math
 import os
@@ -101,6 +102,25 @@ except ImportError:
     DEFAULT_LLM_URL = "http://127.0.0.1:1234/v1"
 
 DEFAULT_LLM_MODEL = "mistralai/Mistral-Nemo-Instruct-2407"
+
+
+def _release_gpu_memory() -> None:
+    """Return cached GPU blocks to the driver.
+
+    PyTorch's caching allocator does not hand freed memory back to the CUDA
+    driver, so embedding models from earlier conditions keep their VRAM
+    reserved even after their Python references are dropped. Across the full
+    condition sweep that accumulation can exhaust VRAM. Under WSL this does not
+    raise: the driver silently spills to host memory over PCIe and generation
+    throughput collapses to a few tokens per second.
+    """
+    gc.collect()
+    try:
+        import torch
+    except ImportError:
+        return
+    if torch.cuda.is_available():
+        torch.cuda.empty_cache()
 
 
 def call_llm_with_tools(
@@ -836,6 +856,12 @@ def main():
         print(f"      Exact accuracy: {format_ci(result['exact_ci'])}")
         print(f"      Tool accuracy:  {format_ci(result['tool_ci'])}")
         print(f"      LLM errors: {result['llm_errors']}/{result['total']}")
+
+        # Release this condition's embedder before building the next one, so
+        # embedder VRAM does not accumulate across the sweep and crowd out the
+        # LLM server when both share a GPU.
+        del retriever
+        _release_gpu_memory()
 
     # Monolithic baseline
     if not args.skip_monolithic:
