@@ -29,6 +29,24 @@ uv pip install -r requirements.txt      # pinned dependency set
 python evals/toolbench_setup.py         # download ToolBench + MetaTool data
 ```
 
+#### Script permissions
+
+The shell scripts (`run_evals.sh`, `serve_mistral_nemo.sh`, `evals/*.sh`) need
+the executable bit to be invoked as `./run_evals.sh`. It is often lost on a fresh
+clone, on a Windows checkout, or under WSL when the repository lives on a Windows
+drive (`/mnt/c/...`). If you see `Permission denied`, either set it once:
+
+```bash
+chmod +x run_evals.sh serve_mistral_nemo.sh evals/*.sh
+```
+
+or invoke the scripts through the interpreter, which needs no permission change:
+
+```bash
+bash run_evals.sh
+bash serve_mistral_nemo.sh
+```
+
 ### Every session after that
 
 The setup steps above do not need to be repeated. Just activate the environment
@@ -53,8 +71,9 @@ Any OpenAI-compatible endpoint works (vLLM, LM Studio, Ollama). If you do not ne
 ## Environment Setup
 
 Most paper tables are deterministic and require **no API keys**. Keys are only
-needed to (a) regenerate the LLM-inferred metadata for Tables 4 and 6, or (b)
-run the end-to-end experiments (Tables 7 and 8).
+needed to (a) regenerate the LLM-inferred metadata (the ToolBench
+inferred-category and MetaTool generated-tag conditions), or (b) download the
+model weights for the end-to-end experiments.
 
 Copy the template and fill in only the values you need:
 
@@ -62,19 +81,66 @@ Copy the template and fill in only the values you need:
 cp .env.example .env
 ```
 
-The eval scripts auto-load a `.env` from the repo root (via `python-dotenv`), so
-exporting the variables in your shell is optional. The `.env` file is
-git-ignored — never commit real keys.
+Both the Python evals (via `python-dotenv`) and `serve_mistral_nemo.sh` auto-load
+a `.env` from the repo root, so exporting variables in your shell is optional.
+Variables already present in the environment take precedence over the file, so a
+one-off `HF_TOKEN=... bash serve_mistral_nemo.sh` still overrides it. The `.env`
+file is git-ignored — never commit real keys.
+
+### Credentials
 
 | Variable | Needed for | Notes |
 |:--|:--|:--|
-| `ANTHROPIC_API_KEY` | Regenerating Table 4 / Table 6 metadata | Default provider for `metatool_generate_*.py` and the `*_categories.py` evals. |
+| `ANTHROPIC_API_KEY` | Regenerating the LLM-inferred metadata | Default provider for `metatool_generate_*.py` and the `*_categories.py` evals. |
 | `OPENAI_API_KEY` | Same scripts with an OpenAI `--model` | Also used as a fallback by the `metatool_generate_*` scripts. |
 | `OLLAMA_API_KEY` | Metadata generation against a non-OpenAI, OpenAI-compatible host | Only for the `metatool_generate_*` scripts. |
+| `HF_TOKEN` | Downloading the Mistral-Nemo weights | Optional, but anonymous downloads of the ~24GB checkpoint are heavily rate-limited. |
 
 The end-to-end evals (`eval_toolbench_e2e.py`, `eval_toolbench_react.py`) do not
-read a key from the environment; they talk to a local OpenAI-compatible endpoint
+read a key from the environment; they talk to an OpenAI-compatible endpoint
 selected with `--base-url` / `--model`.
+
+### LLM server settings
+
+`serve_mistral_nemo.sh` reads these from `.env` (or the environment):
+
+| Variable | Default | Notes |
+|:--|:--|:--|
+| `MODEL` | `mistralai/Mistral-Nemo-Instruct-2407` | The served model. Note the eval's `--model` must match this **exactly**, including case. |
+| `HOST` | `0.0.0.0` | Binds all interfaces so a remote eval can reach the server. Set `127.0.0.1` to restrict to localhost. |
+| `PORT` | `8355` | |
+| `MAX_MODEL_LEN` | `32768` | The monolithic baseline packs ~200 tool schemas into a single prompt. Do not lower below ~28k or that condition breaks. |
+| `GPU_MEM_UTIL` | `0.4` | Fraction of total VRAM vLLM reserves **up front**, independent of model size. |
+
+### Recommended: run the LLM server on a separate machine
+
+The evals load embedding models onto the GPU for retrieval, while vLLM holds its
+weights plus a pre-allocated KV cache on the same card. On a single GPU these
+compete, and the largest embedder (Qwen3-4B, ~8GB) can exhaust VRAM. Under WSL
+that does **not** raise an error — the driver silently spills to host memory over
+PCIe and throughput collapses to a few tokens per second.
+
+Serving the LLM from a second machine removes the contention entirely:
+
+```bash
+# On the GPU box serving the LLM
+#   .env:  HF_TOKEN=hf_...   HOST=0.0.0.0   GPU_MEM_UTIL=0.85
+bash serve_mistral_nemo.sh
+
+# On the machine running the evals — its GPU is now free for the embedders
+python evals/eval_toolbench_e2e.py --all \
+    --base-url http://<server-ip>:8355/v1 \
+    --model mistralai/Mistral-Nemo-Instruct-2407
+```
+
+Network latency (~1–5 ms) is negligible next to LLM inference (100–500 ms per
+call). If you must share one GPU, lower `GPU_MEM_UTIL` until the embedders fit;
+a 12B model at a 32k context needs roughly `0.4` on a 96GB card. Verify the
+server is reachable and get the exact model id with:
+
+```bash
+curl -s http://<server-ip>:8355/v1/models | python -m json.tool
+```
 
 ## Table-to-Script Mapping
 
@@ -196,12 +262,15 @@ Table 4 (LLM-inferred ToolBench categories) and Table 6 (MetaTool tag variants) 
 To regenerate:
 
 ```bash
-export ANTHROPIC_API_KEY=...
-python evals/metatool_generate_tags.py           # tool-level tags for Table 6
-python evals/metatool_generate_query_tags.py     # per-query top-1 tags for Table 6
-python evals/metatool_generate_query_tags_top5.py# per-query top-5 tags for Table 6
+# ANTHROPIC_API_KEY may live in .env instead of being exported
+python evals/metatool_generate_tags.py            # tool-level tags for Table 6
+python evals/metatool_generate_query_tags_top5.py # per-query tags (up to 5) for Table 6
 # ToolBench inferred-category variants are generated inline by their eval scripts.
 ```
+
+`evals/metatool_generate_query_tags.py` (a single top-1 tag per query) is kept for
+reference but is **not used by any reported table**. The manuscript reports only
+the up-to-five-tag MetaTool+QueryTags condition.
 
 Generated tag files are written to `evals/` (`metatool_tags.json`, `metatool_query_tags.json`, `metatool_query_tags_top5.json`).
 

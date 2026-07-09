@@ -32,6 +32,34 @@
 
 set -e
 
+# --- Load .env from the script's directory ---------------------------------
+# Lets HF_TOKEN (and MODEL / PORT / HOST / GPU_MEM_UTIL overrides) live in .env
+# instead of being exported every session. Variables already present in the
+# environment take precedence, so `HF_TOKEN=... ./serve_mistral_nemo.sh` still
+# wins over the file.
+ENV_FILE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/.env"
+if [[ -f "$ENV_FILE" ]]; then
+    while IFS= read -r line || [[ -n "$line" ]]; do
+        # skip comments, blanks, and anything without a KEY=VALUE shape
+        if [[ "$line" =~ ^[[:space:]]*# ]] || [[ "$line" != *=* ]]; then
+            continue
+        fi
+        key="${line%%=*}"
+        val="${line#*=}"
+        key="${key//[[:space:]]/}"
+        if [[ -z "$key" ]]; then
+            continue
+        fi
+        # strip surrounding quotes from the value
+        val="${val%\"}"; val="${val#\"}"
+        val="${val%\'}"; val="${val#\'}"
+        # existing environment wins
+        if [[ -z "${!key:-}" ]]; then
+            export "$key=$val"
+        fi
+    done < "$ENV_FILE"
+fi
+
 MODEL="${MODEL:-mistralai/Mistral-Nemo-Instruct-2407}"
 PORT="${PORT:-8355}"
 # Bind to all interfaces so the server is reachable from another machine. This
