@@ -1,0 +1,974 @@
+LLM model: mistral-nemo-instruct-2407
+LLM URL: http://100.76.185.86:1234/v1
+Top-k: 5
+LLM server: reachable
+
+Loading ToolBench data...
+Corpus: 3225 APIs
+Queries: 1100
+
+Conditions: BEAR+BGE (gov), BEAR+BGE-M3 (gov), BEAR+Qwen3-0.6B (gov), BEAR+Qwen3-4B (gov), BEAR+BM25 (gov), BEAR+Hash (gov), BGE (no gov), BGE-M3 (no gov), Qwen3-0.6B (no gov), Qwen3-4B (no gov), BM25 (no gov)
+
+============================================================
+  BEAR+BGE (gov)
+============================================================
+Batches:   0%|          | 0/101 [00:00<?, ?it/s]Batches:   1%|          | 1/101 [00:00<00:12,  8.00it/s]Batches:   3%|▎         | 3/101 [00:00<00:09, 10.00it/s]Batches:   5%|▍         | 5/101 [00:00<00:07, 12.14it/s]Batches:   7%|▋         | 7/101 [00:00<00:06, 14.20it/s]Batches:  10%|▉         | 10/101 [00:00<00:05, 17.79it/s]Batches:  13%|█▎        | 13/101 [00:00<00:04, 21.13it/s]Batches:  17%|█▋        | 17/101 [00:00<00:03, 23.78it/s]Batches:  21%|██        | 21/101 [00:01<00:03, 26.60it/s]Batches:  25%|██▍       | 25/101 [00:01<00:02, 28.67it/s]Batches:  29%|██▊       | 29/101 [00:01<00:02, 31.55it/s]Batches:  34%|███▎      | 34/101 [00:01<00:01, 34.79it/s]Batches:  39%|███▊      | 39/101 [00:01<00:01, 37.10it/s]Batches:  44%|████▎     | 44/101 [00:01<00:01, 39.41it/s]Batches:  50%|████▉     | 50/101 [00:01<00:01, 43.89it/s]Batches:  55%|█████▌    | 56/101 [00:01<00:00, 46.13it/s]Batches:  61%|██████▏   | 62/101 [00:01<00:00, 48.53it/s]Batches:  67%|██████▋   | 68/101 [00:02<00:00, 50.34it/s]Batches:  73%|███████▎  | 74/101 [00:02<00:00, 52.63it/s]Batches:  80%|████████  | 81/101 [00:02<00:00, 55.75it/s]Batches:  87%|████████▋ | 88/101 [00:02<00:00, 58.71it/s]Batches:  94%|█████████▍| 95/101 [00:02<00:00, 60.74it/s]Batches: 100%|██████████| 101/101 [00:02<00:00, 39.41it/s]
+    [50/1100] exact_acc=0.780 tool_acc=0.800 recall=0.858 llm_errors=3
+    [100/1100] exact_acc=0.810 tool_acc=0.830 recall=0.867 llm_errors=5
+    [150/1100] exact_acc=0.793 tool_acc=0.833 recall=0.838 llm_errors=6
+    [200/1100] exact_acc=0.810 tool_acc=0.845 recall=0.846 llm_errors=7
+    [250/1100] exact_acc=0.792 tool_acc=0.832 recall=0.829 llm_errors=8
+    [300/1100] exact_acc=0.800 tool_acc=0.837 recall=0.822 llm_errors=10
+    [350/1100] exact_acc=0.800 tool_acc=0.831 recall=0.819 llm_errors=12
+    [400/1100] exact_acc=0.802 tool_acc=0.830 recall=0.822 llm_errors=14
+    [450/1100] exact_acc=0.791 tool_acc=0.822 recall=0.809 llm_errors=15
+    [500/1100] exact_acc=0.780 tool_acc=0.818 recall=0.811 llm_errors=17
+    [550/1100] exact_acc=0.764 tool_acc=0.807 recall=0.806 llm_errors=19
+    [600/1100] exact_acc=0.763 tool_acc=0.807 recall=0.807 llm_errors=21
+    [650/1100] exact_acc=0.763 tool_acc=0.808 recall=0.799 llm_errors=21
+    [700/1100] exact_acc=0.756 tool_acc=0.799 recall=0.791 llm_errors=22
+    [750/1100] exact_acc=0.756 tool_acc=0.796 recall=0.785 llm_errors=22
+    [800/1100] exact_acc=0.751 tool_acc=0.792 recall=0.775 llm_errors=24
+    [850/1100] exact_acc=0.744 tool_acc=0.787 recall=0.764 llm_errors=26
+    [900/1100] exact_acc=0.729 tool_acc=0.774 recall=0.747 llm_errors=28
+    [950/1100] exact_acc=0.728 tool_acc=0.774 recall=0.737 llm_errors=28
+    [1000/1100] exact_acc=0.718 tool_acc=0.763 recall=0.720 llm_errors=28
+    [1050/1100] exact_acc=0.712 tool_acc=0.770 recall=0.713 llm_errors=29
+    [1100/1100] exact_acc=0.694 tool_acc=0.767 recall=0.696 llm_errors=34
+
+  BEAR+BGE (gov):
+    Retrieval:
+      Recall@5:    0.696 [0.675, 0.715]
+      NDCG@5:      0.655 [0.636, 0.674]
+      F1@5:        0.427 [0.414, 0.439]
+      Precision@5: 0.316 [0.306, 0.325]
+    LLM tool selection:
+      Exact accuracy: 0.694 [0.666, 0.721]
+      Tool accuracy:  0.767 [0.743, 0.792]
+      LLM errors: 34/1100
+
+============================================================
+  BEAR+BGE-M3 (gov)
+============================================================
+Batches:   0%|          | 0/101 [00:00<?, ?it/s]Batches:   1%|          | 1/101 [00:02<03:45,  2.26s/it]Batches:   2%|▏         | 2/101 [00:02<01:53,  1.15s/it]Batches:   3%|▎         | 3/101 [00:02<01:17,  1.27it/s]Batches:   4%|▍         | 4/101 [00:03<00:53,  1.82it/s]Batches:   5%|▍         | 5/101 [00:03<00:38,  2.47it/s]Batches:   6%|▌         | 6/101 [00:03<00:29,  3.20it/s]Batches:   7%|▋         | 7/101 [00:03<00:23,  3.98it/s]Batches:   8%|▊         | 8/101 [00:03<00:19,  4.72it/s]Batches:   9%|▉         | 9/101 [00:03<00:16,  5.46it/s]Batches:  10%|▉         | 10/101 [00:03<00:14,  6.12it/s]Batches:  11%|█         | 11/101 [00:04<00:13,  6.77it/s]Batches:  12%|█▏        | 12/101 [00:04<00:12,  7.30it/s]Batches:  13%|█▎        | 13/101 [00:04<00:11,  7.80it/s]Batches:  14%|█▍        | 14/101 [00:04<00:10,  8.10it/s]Batches:  15%|█▍        | 15/101 [00:04<00:10,  8.42it/s]Batches:  17%|█▋        | 17/101 [00:04<00:09,  9.22it/s]Batches:  55%|█████▌    | 56/101 [00:04<00:00, 92.95it/s]Batches:  66%|██████▋   | 67/101 [00:05<00:00, 53.48it/s]Batches:  74%|███████▍  | 75/101 [00:05<00:00, 43.42it/s]Batches:  81%|████████  | 82/101 [00:05<00:00, 38.75it/s]Batches:  87%|████████▋ | 88/101 [00:06<00:00, 36.37it/s]Batches:  92%|█████████▏| 93/101 [00:06<00:00, 35.30it/s]Batches:  97%|█████████▋| 98/101 [00:06<00:00, 34.69it/s]Batches: 100%|██████████| 101/101 [00:06<00:00, 15.77it/s]
+  LLM call failed (#1) at http://100.76.185.86:1234/v1: HTTPError: HTTP Error 400: Bad Request
+    [50/1100] exact_acc=0.780 tool_acc=0.820 recall=0.877 llm_errors=1
+    [100/1100] exact_acc=0.790 tool_acc=0.820 recall=0.838 llm_errors=3
+    [150/1100] exact_acc=0.793 tool_acc=0.840 recall=0.832 llm_errors=5
+    [200/1100] exact_acc=0.820 tool_acc=0.865 recall=0.849 llm_errors=5
+    [250/1100] exact_acc=0.808 tool_acc=0.856 recall=0.836 llm_errors=6
+    [300/1100] exact_acc=0.803 tool_acc=0.850 recall=0.832 llm_errors=8
+    [350/1100] exact_acc=0.809 tool_acc=0.851 recall=0.835 llm_errors=9
+    [400/1100] exact_acc=0.802 tool_acc=0.840 recall=0.834 llm_errors=11
+    [450/1100] exact_acc=0.802 tool_acc=0.840 recall=0.828 llm_errors=12
+    [500/1100] exact_acc=0.794 tool_acc=0.836 recall=0.828 llm_errors=14
+    [550/1100] exact_acc=0.775 tool_acc=0.822 recall=0.822 llm_errors=15
+    [600/1100] exact_acc=0.768 tool_acc=0.817 recall=0.818 llm_errors=17
+    [650/1100] exact_acc=0.768 tool_acc=0.814 recall=0.809 llm_errors=17
+    [700/1100] exact_acc=0.763 tool_acc=0.806 recall=0.803 llm_errors=18
+    [750/1100] exact_acc=0.763 tool_acc=0.805 recall=0.800 llm_errors=18
+    [800/1100] exact_acc=0.760 tool_acc=0.804 recall=0.791 llm_errors=18
+    [850/1100] exact_acc=0.752 tool_acc=0.798 recall=0.778 llm_errors=19
+    [900/1100] exact_acc=0.739 tool_acc=0.784 recall=0.762 llm_errors=19
+    [950/1100] exact_acc=0.736 tool_acc=0.781 recall=0.754 llm_errors=20
+    [1000/1100] exact_acc=0.725 tool_acc=0.770 recall=0.739 llm_errors=20
+    [1050/1100] exact_acc=0.715 tool_acc=0.772 recall=0.727 llm_errors=20
+    [1100/1100] exact_acc=0.700 tool_acc=0.765 recall=0.709 llm_errors=20
+
+  BEAR+BGE-M3 (gov):
+    Retrieval:
+      Recall@5:    0.709 [0.688, 0.729]
+      NDCG@5:      0.669 [0.649, 0.688]
+      F1@5:        0.435 [0.422, 0.448]
+      Precision@5: 0.322 [0.312, 0.332]
+    LLM tool selection:
+      Exact accuracy: 0.700 [0.673, 0.727]
+      Tool accuracy:  0.765 [0.740, 0.790]
+      LLM errors: 20/1100
+
+============================================================
+  BEAR+Qwen3-0.6B (gov)
+============================================================
+Batches:   0%|          | 0/101 [00:00<?, ?it/s]Batches:   1%|          | 1/101 [00:03<06:31,  3.91s/it]Batches:   2%|▏         | 2/101 [00:04<03:25,  2.08s/it]Batches:   3%|▎         | 3/101 [00:05<02:18,  1.41s/it]Batches:   4%|▍         | 4/101 [00:05<01:33,  1.04it/s]Batches:   5%|▍         | 5/101 [00:05<01:08,  1.40it/s]Batches:   6%|▌         | 6/101 [00:06<00:52,  1.81it/s]Batches:   7%|▋         | 7/101 [00:06<00:41,  2.28it/s]Batches:   8%|▊         | 8/101 [00:06<00:33,  2.79it/s]Batches:   9%|▉         | 9/101 [00:06<00:27,  3.32it/s]Batches:  10%|▉         | 10/101 [00:06<00:23,  3.88it/s]Batches:  11%|█         | 11/101 [00:06<00:20,  4.40it/s]Batches:  12%|█▏        | 12/101 [00:07<00:18,  4.84it/s]Batches:  13%|█▎        | 13/101 [00:07<00:16,  5.44it/s]Batches:  14%|█▍        | 14/101 [00:07<00:14,  5.99it/s]Batches:  15%|█▍        | 15/101 [00:07<00:13,  6.40it/s]Batches:  16%|█▌        | 16/101 [00:07<00:12,  6.81it/s]Batches:  17%|█▋        | 17/101 [00:07<00:13,  6.43it/s]Batches:  18%|█▊        | 18/101 [00:07<00:11,  7.11it/s]Batches:  19%|█▉        | 19/101 [00:08<00:11,  7.35it/s]Batches:  20%|█▉        | 20/101 [00:08<00:10,  7.45it/s]Batches:  21%|██        | 21/101 [00:08<00:10,  7.80it/s]Batches:  22%|██▏       | 22/101 [00:08<00:09,  8.28it/s]Batches:  23%|██▎       | 23/101 [00:08<00:09,  8.57it/s]Batches:  24%|██▍       | 24/101 [00:08<00:09,  8.38it/s]Batches:  26%|██▌       | 26/101 [00:08<00:08,  9.19it/s]Batches:  28%|██▊       | 28/101 [00:09<00:07, 10.14it/s]Batches:  30%|██▉       | 30/101 [00:09<00:06, 10.73it/s]Batches:  32%|███▏      | 32/101 [00:09<00:06, 11.25it/s]Batches:  34%|███▎      | 34/101 [00:09<00:05, 12.17it/s]Batches:  36%|███▌      | 36/101 [00:09<00:05, 12.24it/s]Batches:  38%|███▊      | 38/101 [00:09<00:04, 12.61it/s]Batches:  40%|███▉      | 40/101 [00:09<00:04, 13.15it/s]Batches:  42%|████▏     | 42/101 [00:10<00:04, 13.25it/s]Batches:  44%|████▎     | 44/101 [00:10<00:04, 13.67it/s]Batches:  46%|████▌     | 46/101 [00:10<00:03, 14.22it/s]Batches:  48%|████▊     | 48/101 [00:10<00:03, 14.54it/s]Batches:  50%|████▉     | 50/101 [00:10<00:03, 14.86it/s]Batches:  51%|█████▏    | 52/101 [00:10<00:03, 14.99it/s]Batches:  53%|█████▎    | 54/101 [00:10<00:03, 15.20it/s]Batches:  55%|█████▌    | 56/101 [00:10<00:02, 15.61it/s]Batches:  57%|█████▋    | 58/101 [00:11<00:02, 15.80it/s]Batches:  59%|█████▉    | 60/101 [00:11<00:02, 15.83it/s]Batches:  61%|██████▏   | 62/101 [00:11<00:02, 16.27it/s]Batches:  63%|██████▎   | 64/101 [00:11<00:02, 15.46it/s]Batches:  65%|██████▌   | 66/101 [00:11<00:02, 15.92it/s]Batches:  67%|██████▋   | 68/101 [00:11<00:02, 16.48it/s]Batches:  69%|██████▉   | 70/101 [00:11<00:01, 16.29it/s]Batches:  71%|███████▏  | 72/101 [00:11<00:01, 16.88it/s]Batches:  73%|███████▎  | 74/101 [00:12<00:01, 17.36it/s]Batches:  75%|███████▌  | 76/101 [00:12<00:01, 17.72it/s]Batches:  77%|███████▋  | 78/101 [00:12<00:01, 18.18it/s]Batches:  79%|███████▉  | 80/101 [00:12<00:01, 18.31it/s]Batches:  82%|████████▏ | 83/101 [00:12<00:00, 19.01it/s]Batches:  85%|████████▌ | 86/101 [00:12<00:00, 19.43it/s]Batches:  88%|████████▊ | 89/101 [00:12<00:00, 19.87it/s]Batches:  90%|█████████ | 91/101 [00:12<00:00, 19.37it/s]Batches:  93%|█████████▎| 94/101 [00:13<00:00, 19.82it/s]Batches:  96%|█████████▌| 97/101 [00:13<00:00, 20.11it/s]Batches:  99%|█████████▉| 100/101 [00:13<00:00, 20.91it/s]Batches: 100%|██████████| 101/101 [00:13<00:00,  7.55it/s]
+    [50/1100] exact_acc=0.840 tool_acc=0.880 recall=0.928 llm_errors=2
+    [100/1100] exact_acc=0.830 tool_acc=0.880 recall=0.896 llm_errors=5
+    [150/1100] exact_acc=0.820 tool_acc=0.880 recall=0.891 llm_errors=6
+    [200/1100] exact_acc=0.835 tool_acc=0.885 recall=0.896 llm_errors=6
+    [250/1100] exact_acc=0.832 tool_acc=0.876 recall=0.890 llm_errors=8
+    [300/1100] exact_acc=0.827 tool_acc=0.870 recall=0.889 llm_errors=10
+    [350/1100] exact_acc=0.829 tool_acc=0.874 recall=0.892 llm_errors=11
+    [400/1100] exact_acc=0.833 tool_acc=0.873 recall=0.895 llm_errors=12
+    [450/1100] exact_acc=0.820 tool_acc=0.864 recall=0.892 llm_errors=14
+    [500/1100] exact_acc=0.816 tool_acc=0.862 recall=0.887 llm_errors=16
+    [550/1100] exact_acc=0.811 tool_acc=0.860 recall=0.884 llm_errors=17
+    [600/1100] exact_acc=0.803 tool_acc=0.855 recall=0.885 llm_errors=20
+    [650/1100] exact_acc=0.802 tool_acc=0.851 recall=0.874 llm_errors=20
+    [700/1100] exact_acc=0.790 tool_acc=0.840 recall=0.860 llm_errors=21
+    [750/1100] exact_acc=0.791 tool_acc=0.837 recall=0.855 llm_errors=22
+    [800/1100] exact_acc=0.784 tool_acc=0.835 recall=0.842 llm_errors=23
+    [850/1100] exact_acc=0.774 tool_acc=0.826 recall=0.833 llm_errors=26
+    [900/1100] exact_acc=0.766 tool_acc=0.819 recall=0.818 llm_errors=26
+    [950/1100] exact_acc=0.761 tool_acc=0.813 recall=0.808 llm_errors=26
+    [1000/1100] exact_acc=0.755 tool_acc=0.806 recall=0.793 llm_errors=26
+    [1050/1100] exact_acc=0.745 tool_acc=0.811 recall=0.789 llm_errors=27
+    [1100/1100] exact_acc=0.732 tool_acc=0.807 recall=0.772 llm_errors=31
+
+  BEAR+Qwen3-0.6B (gov):
+    Retrieval:
+      Recall@5:    0.772 [0.754, 0.791]
+      NDCG@5:      0.736 [0.719, 0.753]
+      F1@5:        0.477 [0.465, 0.488]
+      Precision@5: 0.354 [0.345, 0.363]
+    LLM tool selection:
+      Exact accuracy: 0.732 [0.705, 0.757]
+      Tool accuracy:  0.807 [0.784, 0.830]
+      LLM errors: 31/1100
+
+============================================================
+  BEAR+Qwen3-4B (gov)
+============================================================
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:04<00:04,  4.03s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:05<00:00,  2.81s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:05<00:00,  3.00s/it]
+Batches:   0%|          | 0/101 [00:00<?, ?it/s]Batches:   1%|          | 1/101 [00:19<32:28, 19.49s/it]Batches:   2%|▏         | 2/101 [00:25<19:00, 11.52s/it]Batches:   3%|▎         | 3/101 [00:27<11:32,  7.07s/it]Batches:   4%|▍         | 4/101 [00:28<08:02,  4.98s/it]Batches:   5%|▍         | 5/101 [00:30<06:09,  3.85s/it]Batches:   6%|▌         | 6/101 [00:32<04:50,  3.06s/it]Batches:   7%|▋         | 7/101 [00:33<03:56,  2.51s/it]Batches:   8%|▊         | 8/101 [00:35<03:17,  2.12s/it]Batches:   9%|▉         | 9/101 [00:36<02:49,  1.84s/it]Batches:  10%|▉         | 10/101 [00:37<02:25,  1.59s/it]Batches:  11%|█         | 11/101 [00:38<02:08,  1.43s/it]Batches:  12%|█▏        | 12/101 [00:39<01:56,  1.31s/it]Batches:  13%|█▎        | 13/101 [00:40<01:45,  1.20s/it]Batches:  14%|█▍        | 14/101 [00:41<01:36,  1.11s/it]Batches:  15%|█▍        | 15/101 [00:42<01:31,  1.06s/it]Batches:  16%|█▌        | 16/101 [00:43<01:25,  1.00s/it]Batches:  17%|█▋        | 17/101 [00:44<01:29,  1.06s/it]Batches:  18%|█▊        | 18/101 [00:44<01:19,  1.05it/s]Batches:  19%|█▉        | 19/101 [00:45<01:16,  1.08it/s]Batches:  20%|█▉        | 20/101 [00:46<01:14,  1.08it/s]Batches:  21%|██        | 21/101 [00:47<01:09,  1.14it/s]Batches:  22%|██▏       | 22/101 [00:48<01:04,  1.22it/s]Batches:  23%|██▎       | 23/101 [00:48<01:02,  1.26it/s]Batches:  24%|██▍       | 24/101 [00:49<01:03,  1.22it/s]Batches:  25%|██▍       | 25/101 [00:50<00:57,  1.33it/s]Batches:  26%|██▌       | 26/101 [00:51<00:55,  1.36it/s]Batches:  27%|██▋       | 27/101 [00:51<00:50,  1.46it/s]Batches:  28%|██▊       | 28/101 [00:52<00:46,  1.56it/s]Batches:  29%|██▊       | 29/101 [00:52<00:44,  1.62it/s]Batches:  30%|██▉       | 30/101 [00:53<00:42,  1.67it/s]Batches:  31%|███       | 31/101 [00:53<00:39,  1.77it/s]Batches:  32%|███▏      | 32/101 [00:54<00:38,  1.79it/s]Batches:  33%|███▎      | 33/101 [00:54<00:36,  1.88it/s]Batches:  38%|███▊      | 38/101 [00:55<00:14,  4.46it/s]Batches:  39%|███▊      | 39/101 [00:55<00:16,  3.84it/s]Batches:  40%|███▉      | 40/101 [00:56<00:18,  3.32it/s]Batches:  41%|████      | 41/101 [00:56<00:20,  2.99it/s]Batches:  42%|████▏     | 42/101 [00:57<00:22,  2.65it/s]Batches:  43%|████▎     | 43/101 [00:57<00:23,  2.48it/s]Batches:  44%|████▎     | 44/101 [00:58<00:23,  2.41it/s]Batches:  45%|████▍     | 45/101 [00:58<00:22,  2.45it/s]Batches:  46%|████▌     | 46/101 [00:58<00:22,  2.43it/s]Batches:  47%|████▋     | 47/101 [00:59<00:22,  2.41it/s]Batches:  48%|████▊     | 48/101 [00:59<00:22,  2.39it/s]Batches:  49%|████▊     | 49/101 [01:00<00:21,  2.39it/s]Batches:  50%|████▉     | 50/101 [01:00<00:21,  2.39it/s]Batches:  50%|█████     | 51/101 [01:00<00:20,  2.39it/s]Batches:  51%|█████▏    | 52/101 [01:01<00:20,  2.34it/s]Batches:  52%|█████▏    | 53/101 [01:01<00:20,  2.30it/s]Batches:  53%|█████▎    | 54/101 [01:02<00:19,  2.40it/s]Batches:  54%|█████▍    | 55/101 [01:02<00:18,  2.48it/s]Batches:  55%|█████▌    | 56/101 [01:02<00:17,  2.56it/s]Batches:  56%|█████▋    | 57/101 [01:03<00:17,  2.50it/s]Batches:  57%|█████▋    | 58/101 [01:03<00:16,  2.63it/s]Batches:  58%|█████▊    | 59/101 [01:04<00:16,  2.48it/s]Batches:  59%|█████▉    | 60/101 [01:04<00:16,  2.55it/s]Batches:  60%|██████    | 61/101 [01:04<00:14,  2.67it/s]Batches:  61%|██████▏   | 62/101 [01:05<00:14,  2.69it/s]Batches:  62%|██████▏   | 63/101 [01:05<00:16,  2.25it/s]Batches:  63%|██████▎   | 64/101 [01:06<00:15,  2.43it/s]Batches:  64%|██████▍   | 65/101 [01:06<00:14,  2.52it/s]Batches:  65%|██████▌   | 66/101 [01:06<00:13,  2.65it/s]Batches:  66%|██████▋   | 67/101 [01:07<00:12,  2.69it/s]Batches:  67%|██████▋   | 68/101 [01:07<00:11,  2.79it/s]Batches:  68%|██████▊   | 69/101 [01:08<00:12,  2.52it/s]Batches:  69%|██████▉   | 70/101 [01:08<00:11,  2.66it/s]Batches:  70%|███████   | 71/101 [01:08<00:10,  2.76it/s]Batches:  71%|███████▏  | 72/101 [01:09<00:10,  2.84it/s]Batches:  72%|███████▏  | 73/101 [01:09<00:09,  2.89it/s]Batches:  73%|███████▎  | 74/101 [01:09<00:09,  2.94it/s]Batches:  74%|███████▍  | 75/101 [01:10<00:08,  2.96it/s]Batches:  75%|███████▌  | 76/101 [01:10<00:08,  2.99it/s]Batches:  76%|███████▌  | 77/101 [01:10<00:07,  3.12it/s]Batches:  77%|███████▋  | 78/101 [01:10<00:07,  3.11it/s]Batches:  78%|███████▊  | 79/101 [01:11<00:07,  3.08it/s]Batches:  79%|███████▉  | 80/101 [01:11<00:06,  3.08it/s]Batches:  80%|████████  | 81/101 [01:11<00:06,  3.20it/s]Batches:  81%|████████  | 82/101 [01:12<00:05,  3.29it/s]Batches:  82%|████████▏ | 83/101 [01:12<00:05,  3.34it/s]Batches:  83%|████████▎ | 84/101 [01:12<00:05,  3.38it/s]Batches:  84%|████████▍ | 85/101 [01:13<00:04,  3.41it/s]Batches:  85%|████████▌ | 86/101 [01:13<00:04,  3.44it/s]Batches:  86%|████████▌ | 87/101 [01:13<00:04,  3.46it/s]Batches:  87%|████████▋ | 88/101 [01:13<00:03,  3.59it/s]Batches:  88%|████████▊ | 89/101 [01:14<00:03,  3.69it/s]Batches:  89%|████████▉ | 90/101 [01:14<00:03,  3.62it/s]Batches:  90%|█████████ | 91/101 [01:14<00:03,  3.28it/s]Batches:  91%|█████████ | 92/101 [01:15<00:02,  3.33it/s]Batches:  92%|█████████▏| 93/101 [01:15<00:02,  3.49it/s]Batches:  93%|█████████▎| 94/101 [01:15<00:01,  3.51it/s]Batches:  94%|█████████▍| 95/101 [01:15<00:01,  3.63it/s]Batches:  95%|█████████▌| 96/101 [01:16<00:01,  3.59it/s]Batches:  96%|█████████▌| 97/101 [01:16<00:01,  3.56it/s]Batches:  97%|█████████▋| 98/101 [01:16<00:00,  3.68it/s]Batches:  98%|█████████▊| 99/101 [01:16<00:00,  3.81it/s]Batches:  99%|█████████▉| 100/101 [01:17<00:00,  4.00it/s]Batches: 100%|██████████| 101/101 [01:17<00:00,  4.42it/s]Batches: 100%|██████████| 101/101 [01:17<00:00,  1.31it/s]
+  LLM call failed (#2) at http://100.76.185.86:1234/v1: HTTPError: HTTP Error 400: Bad Request
+Hash embeddings selected. Similarity scores are based on character n-gram overlap and carry no semantic signal — retrieval ranking is effectively arbitrary. Use a sentence-transformers model (e.g. 'BAAI/bge-base-en-v1.5') for meaningful semantic retrieval.
+    [50/1100] exact_acc=0.800 tool_acc=0.820 recall=0.953 llm_errors=2
+    [100/1100] exact_acc=0.800 tool_acc=0.830 recall=0.903 llm_errors=4
+    [150/1100] exact_acc=0.787 tool_acc=0.853 recall=0.866 llm_errors=5
+    [200/1100] exact_acc=0.825 tool_acc=0.880 recall=0.882 llm_errors=5
+    [250/1100] exact_acc=0.824 tool_acc=0.872 recall=0.885 llm_errors=6
+    [300/1100] exact_acc=0.823 tool_acc=0.870 recall=0.893 llm_errors=8
+    [350/1100] exact_acc=0.826 tool_acc=0.871 recall=0.895 llm_errors=9
+    [400/1100] exact_acc=0.830 tool_acc=0.870 recall=0.892 llm_errors=10
+    [450/1100] exact_acc=0.820 tool_acc=0.867 recall=0.893 llm_errors=10
+    [500/1100] exact_acc=0.804 tool_acc=0.854 recall=0.896 llm_errors=12
+    [550/1100] exact_acc=0.796 tool_acc=0.853 recall=0.896 llm_errors=13
+    [600/1100] exact_acc=0.788 tool_acc=0.848 recall=0.893 llm_errors=16
+    [650/1100] exact_acc=0.778 tool_acc=0.837 recall=0.876 llm_errors=17
+    [700/1100] exact_acc=0.764 tool_acc=0.827 recall=0.858 llm_errors=18
+    [750/1100] exact_acc=0.764 tool_acc=0.824 recall=0.850 llm_errors=18
+    [800/1100] exact_acc=0.761 tool_acc=0.820 recall=0.836 llm_errors=18
+    [850/1100] exact_acc=0.751 tool_acc=0.809 recall=0.819 llm_errors=20
+    [900/1100] exact_acc=0.740 tool_acc=0.800 recall=0.802 llm_errors=20
+    [950/1100] exact_acc=0.726 tool_acc=0.787 recall=0.793 llm_errors=21
+    [1000/1100] exact_acc=0.720 tool_acc=0.785 recall=0.778 llm_errors=21
+    [1050/1100] exact_acc=0.712 tool_acc=0.791 recall=0.771 llm_errors=23
+    [1100/1100] exact_acc=0.695 tool_acc=0.792 recall=0.758 llm_errors=26
+
+  BEAR+Qwen3-4B (gov):
+    Retrieval:
+      Recall@5:    0.758 [0.740, 0.777]
+      NDCG@5:      0.708 [0.690, 0.726]
+      F1@5:        0.467 [0.455, 0.478]
+      Precision@5: 0.346 [0.337, 0.355]
+    LLM tool selection:
+      Exact accuracy: 0.695 [0.667, 0.723]
+      Tool accuracy:  0.792 [0.768, 0.815]
+      LLM errors: 26/1100
+
+============================================================
+  BEAR+BM25 (gov)
+============================================================
+    [50/1100] exact_acc=0.740 tool_acc=0.820 recall=0.717 llm_errors=2
+    [100/1100] exact_acc=0.690 tool_acc=0.760 recall=0.688 llm_errors=5
+    [150/1100] exact_acc=0.680 tool_acc=0.753 recall=0.686 llm_errors=7
+    [200/1100] exact_acc=0.725 tool_acc=0.795 recall=0.721 llm_errors=8
+    [250/1100] exact_acc=0.700 tool_acc=0.764 recall=0.694 llm_errors=9
+    [300/1100] exact_acc=0.697 tool_acc=0.760 recall=0.678 llm_errors=10
+    [350/1100] exact_acc=0.694 tool_acc=0.757 recall=0.679 llm_errors=11
+    [400/1100] exact_acc=0.695 tool_acc=0.752 recall=0.675 llm_errors=11
+    [450/1100] exact_acc=0.691 tool_acc=0.747 recall=0.669 llm_errors=12
+    [500/1100] exact_acc=0.686 tool_acc=0.740 recall=0.666 llm_errors=14
+    [550/1100] exact_acc=0.676 tool_acc=0.738 recall=0.664 llm_errors=15
+    [600/1100] exact_acc=0.678 tool_acc=0.742 recall=0.670 llm_errors=18
+    [650/1100] exact_acc=0.685 tool_acc=0.745 recall=0.669 llm_errors=18
+    [700/1100] exact_acc=0.686 tool_acc=0.741 recall=0.667 llm_errors=20
+    [750/1100] exact_acc=0.685 tool_acc=0.740 recall=0.666 llm_errors=21
+    [800/1100] exact_acc=0.684 tool_acc=0.740 recall=0.665 llm_errors=21
+    [850/1100] exact_acc=0.679 tool_acc=0.736 recall=0.660 llm_errors=23
+    [900/1100] exact_acc=0.672 tool_acc=0.728 recall=0.647 llm_errors=25
+    [950/1100] exact_acc=0.666 tool_acc=0.724 recall=0.641 llm_errors=25
+    [1000/1100] exact_acc=0.659 tool_acc=0.716 recall=0.631 llm_errors=27
+    [1050/1100] exact_acc=0.651 tool_acc=0.724 recall=0.625 llm_errors=29
+    [1100/1100] exact_acc=0.642 tool_acc=0.725 recall=0.613 llm_errors=29
+
+  BEAR+BM25 (gov):
+    Retrieval:
+      Recall@5:    0.613 [0.591, 0.634]
+      NDCG@5:      0.585 [0.564, 0.605]
+      F1@5:        0.377 [0.364, 0.390]
+      Precision@5: 0.280 [0.269, 0.290]
+    LLM tool selection:
+      Exact accuracy: 0.642 [0.614, 0.670]
+      Tool accuracy:  0.725 [0.698, 0.751]
+      LLM errors: 29/1100
+
+============================================================
+  BEAR+Hash (gov)
+============================================================
+    [50/1100] exact_acc=0.220 tool_acc=0.300 recall=0.173 llm_errors=3
+    [100/1100] exact_acc=0.210 tool_acc=0.320 recall=0.163 llm_errors=4
+    [150/1100] exact_acc=0.193 tool_acc=0.313 recall=0.151 llm_errors=4
+    [200/1100] exact_acc=0.205 tool_acc=0.305 recall=0.157 llm_errors=6
+    [250/1100] exact_acc=0.188 tool_acc=0.280 recall=0.141 llm_errors=8
+    [300/1100] exact_acc=0.187 tool_acc=0.273 recall=0.138 llm_errors=10
+    [350/1100] exact_acc=0.203 tool_acc=0.283 recall=0.150 llm_errors=10
+    [400/1100] exact_acc=0.203 tool_acc=0.280 recall=0.155 llm_errors=12
+    [450/1100] exact_acc=0.193 tool_acc=0.276 recall=0.148 llm_errors=12
+    [500/1100] exact_acc=0.186 tool_acc=0.266 recall=0.145 llm_errors=13
+    [550/1100] exact_acc=0.187 tool_acc=0.271 recall=0.147 llm_errors=13
+    [600/1100] exact_acc=0.190 tool_acc=0.268 recall=0.149 llm_errors=15
+    [650/1100] exact_acc=0.198 tool_acc=0.274 recall=0.155 llm_errors=16
+    [700/1100] exact_acc=0.204 tool_acc=0.280 recall=0.158 llm_errors=16
+    [800/1100] exact_acc=0.215 tool_acc=0.294 recall=0.171 llm_errors=18
+    [850/1100] exact_acc=0.218 tool_acc=0.298 recall=0.173 llm_errors=21
+    [900/1100] exact_acc=0.212 tool_acc=0.289 recall=0.168 llm_errors=22
+    [950/1100] exact_acc=0.208 tool_acc=0.283 recall=0.164 llm_errors=24
+    [1000/1100] exact_acc=0.204 tool_acc=0.276 recall=0.160 llm_errors=24
+    [1050/1100] exact_acc=0.201 tool_acc=0.278 recall=0.157 llm_errors=25
+    [1100/1100] exact_acc=0.194 tool_acc=0.281 recall=0.151 llm_errors=26
+
+  BEAR+Hash (gov):
+    Retrieval:
+      Recall@5:    0.151 [0.135, 0.168]
+      NDCG@5:      0.120 [0.106, 0.133]
+      F1@5:        0.092 [0.082, 0.102]
+      Precision@5: 0.068 [0.061, 0.076]
+    LLM tool selection:
+      Exact accuracy: 0.194 [0.170, 0.217]
+      Tool accuracy:  0.281 [0.255, 0.307]
+      LLM errors: 26/1100
+
+============================================================
+  BGE (no gov)
+============================================================
+Batches:   0%|          | 0/101 [00:00<?, ?it/s]Batches:   2%|▏         | 2/101 [00:00<00:09, 10.61it/s]Batches:   4%|▍         | 4/101 [00:00<00:08, 11.94it/s]Batches:   6%|▌         | 6/101 [00:00<00:06, 13.59it/s]Batches:   9%|▉         | 9/101 [00:00<00:05, 16.78it/s]Batches:  12%|█▏        | 12/101 [00:00<00:04, 20.18it/s]Batches:  16%|█▌        | 16/101 [00:00<00:03, 23.88it/s]Batches:  19%|█▉        | 19/101 [00:00<00:03, 24.83it/s]Batches:  23%|██▎       | 23/101 [00:01<00:02, 27.35it/s]Batches:  27%|██▋       | 27/101 [00:01<00:02, 30.02it/s]Batches:  31%|███       | 31/101 [00:01<00:02, 32.68it/s]Batches:  36%|███▌      | 36/101 [00:01<00:01, 35.51it/s]Batches:  41%|████      | 41/101 [00:01<00:01, 38.41it/s]Batches:  46%|████▌     | 46/101 [00:01<00:01, 40.17it/s]Batches:  51%|█████▏    | 52/101 [00:01<00:01, 43.76it/s]Batches:  57%|█████▋    | 58/101 [00:01<00:00, 46.54it/s]Batches:  62%|██████▏   | 63/101 [00:01<00:00, 47.38it/s]Batches:  68%|██████▊   | 69/101 [00:02<00:00, 49.81it/s]Batches:  74%|███████▍  | 75/101 [00:02<00:00, 52.14it/s]Batches:  80%|████████  | 81/101 [00:02<00:00, 53.71it/s]Batches:  87%|████████▋ | 88/101 [00:02<00:00, 56.49it/s]Batches:  94%|█████████▍| 95/101 [00:02<00:00, 59.55it/s]Batches: 100%|██████████| 101/101 [00:02<00:00, 39.28it/s]
+    [50/1100] exact_acc=0.700 tool_acc=0.720 recall=0.697 llm_errors=1
+    [100/1100] exact_acc=0.670 tool_acc=0.690 recall=0.698 llm_errors=3
+    [150/1100] exact_acc=0.673 tool_acc=0.720 recall=0.689 llm_errors=4
+    [200/1100] exact_acc=0.695 tool_acc=0.735 recall=0.712 llm_errors=5
+    [250/1100] exact_acc=0.692 tool_acc=0.732 recall=0.690 llm_errors=6
+    [300/1100] exact_acc=0.697 tool_acc=0.730 recall=0.697 llm_errors=8
+    [350/1100] exact_acc=0.706 tool_acc=0.734 recall=0.698 llm_errors=10
+    [400/1100] exact_acc=0.700 tool_acc=0.725 recall=0.693 llm_errors=12
+    [450/1100] exact_acc=0.693 tool_acc=0.716 recall=0.680 llm_errors=14
+    [500/1100] exact_acc=0.684 tool_acc=0.712 recall=0.679 llm_errors=16
+    [550/1100] exact_acc=0.667 tool_acc=0.704 recall=0.676 llm_errors=17
+    [600/1100] exact_acc=0.663 tool_acc=0.702 recall=0.680 llm_errors=20
+    [650/1100] exact_acc=0.663 tool_acc=0.698 recall=0.663 llm_errors=20
+    [700/1100] exact_acc=0.656 tool_acc=0.691 recall=0.656 llm_errors=23
+    [750/1100] exact_acc=0.663 tool_acc=0.697 recall=0.649 llm_errors=23
+    [800/1100] exact_acc=0.652 tool_acc=0.689 recall=0.640 llm_errors=24
+    [850/1100] exact_acc=0.642 tool_acc=0.680 recall=0.629 llm_errors=27
+    [900/1100] exact_acc=0.622 tool_acc=0.660 recall=0.610 llm_errors=29
+    [950/1100] exact_acc=0.622 tool_acc=0.661 recall=0.603 llm_errors=29
+    [1000/1100] exact_acc=0.611 tool_acc=0.650 recall=0.587 llm_errors=30
+    [1050/1100] exact_acc=0.610 tool_acc=0.656 recall=0.583 llm_errors=33
+    [1100/1100] exact_acc=0.599 tool_acc=0.660 recall=0.570 llm_errors=35
+
+  BGE (no gov):
+    Retrieval:
+      Recall@5:    0.570 [0.548, 0.592]
+      NDCG@5:      0.545 [0.524, 0.565]
+      F1@5:        0.349 [0.335, 0.363]
+      Precision@5: 0.258 [0.248, 0.269]
+    LLM tool selection:
+      Exact accuracy: 0.599 [0.571, 0.627]
+      Tool accuracy:  0.660 [0.632, 0.687]
+      LLM errors: 35/1100
+
+============================================================
+  BGE-M3 (no gov)
+============================================================
+Batches:   0%|          | 0/101 [00:00<?, ?it/s]Batches:   1%|          | 1/101 [00:02<03:40,  2.20s/it]Batches:   2%|▏         | 2/101 [00:02<01:51,  1.13s/it]Batches:   3%|▎         | 3/101 [00:02<01:16,  1.29it/s]Batches:   4%|▍         | 4/101 [00:03<00:52,  1.83it/s]Batches:   5%|▍         | 5/101 [00:03<00:38,  2.49it/s]Batches:   6%|▌         | 6/101 [00:03<00:29,  3.22it/s]Batches:   7%|▋         | 7/101 [00:03<00:23,  3.99it/s]Batches:   8%|▊         | 8/101 [00:03<00:19,  4.75it/s]Batches:   9%|▉         | 9/101 [00:03<00:16,  5.47it/s]Batches:  10%|▉         | 10/101 [00:03<00:14,  6.13it/s]Batches:  11%|█         | 11/101 [00:04<00:13,  6.76it/s]Batches:  12%|█▏        | 12/101 [00:04<00:12,  7.27it/s]Batches:  13%|█▎        | 13/101 [00:04<00:11,  7.77it/s]Batches:  14%|█▍        | 14/101 [00:04<00:10,  8.06it/s]Batches:  15%|█▍        | 15/101 [00:04<00:10,  8.40it/s]Batches:  17%|█▋        | 17/101 [00:04<00:09,  9.18it/s]Batches:  19%|█▉        | 19/101 [00:04<00:07, 10.71it/s]Batches:  21%|██        | 21/101 [00:04<00:06, 11.81it/s]Batches:  23%|██▎       | 23/101 [00:05<00:06, 12.65it/s]Batches:  25%|██▍       | 25/101 [00:05<00:05, 13.27it/s]Batches:  27%|██▋       | 27/101 [00:05<00:05, 13.87it/s]Batches:  29%|██▊       | 29/101 [00:05<00:04, 14.55it/s]Batches:  31%|███       | 31/101 [00:05<00:04, 15.26it/s]Batches:  33%|███▎      | 33/101 [00:05<00:04, 15.82it/s]Batches:  35%|███▍      | 35/101 [00:05<00:04, 16.21it/s]Batches:  37%|███▋      | 37/101 [00:05<00:03, 16.47it/s]Batches:  40%|███▉      | 40/101 [00:06<00:03, 17.61it/s]Batches:  42%|████▏     | 42/101 [00:06<00:03, 17.75it/s]Batches:  45%|████▍     | 45/101 [00:06<00:02, 19.78it/s]Batches:  48%|████▊     | 48/101 [00:06<00:02, 20.47it/s]Batches:  50%|█████     | 51/101 [00:06<00:02, 21.78it/s]Batches:  53%|█████▎    | 54/101 [00:06<00:02, 22.79it/s]Batches:  56%|█████▋    | 57/101 [00:06<00:01, 23.77it/s]Batches:  59%|█████▉    | 60/101 [00:06<00:01, 24.24it/s]Batches:  62%|██████▏   | 63/101 [00:07<00:01, 23.77it/s]Batches:  65%|██████▌   | 66/101 [00:07<00:01, 24.54it/s]Batches:  68%|██████▊   | 69/101 [00:07<00:01, 24.23it/s]Batches:  71%|███████▏  | 72/101 [00:07<00:01, 24.90it/s]Batches:  74%|███████▍  | 75/101 [00:07<00:01, 25.49it/s]Batches:  77%|███████▋  | 78/101 [00:07<00:00, 26.11it/s]Batches:  80%|████████  | 81/101 [00:07<00:00, 26.81it/s]Batches:  83%|████████▎ | 84/101 [00:07<00:00, 27.60it/s]Batches:  87%|████████▋ | 88/101 [00:07<00:00, 28.76it/s]Batches:  91%|█████████ | 92/101 [00:08<00:00, 29.66it/s]Batches:  95%|█████████▌| 96/101 [00:08<00:00, 30.30it/s]Batches:  99%|█████████▉| 100/101 [00:08<00:00, 31.98it/s]Batches: 100%|██████████| 101/101 [00:08<00:00, 12.11it/s]
+    [50/1100] exact_acc=0.720 tool_acc=0.740 recall=0.713 llm_errors=1
+    [100/1100] exact_acc=0.670 tool_acc=0.690 recall=0.698 llm_errors=3
+    [150/1100] exact_acc=0.673 tool_acc=0.713 recall=0.698 llm_errors=4
+    [200/1100] exact_acc=0.685 tool_acc=0.720 recall=0.714 llm_errors=4
+    [250/1100] exact_acc=0.672 tool_acc=0.704 recall=0.703 llm_errors=6
+    [300/1100] exact_acc=0.683 tool_acc=0.710 recall=0.705 llm_errors=8
+    [350/1100] exact_acc=0.691 tool_acc=0.714 recall=0.709 llm_errors=9
+    [400/1100] exact_acc=0.690 tool_acc=0.710 recall=0.712 llm_errors=11
+    [450/1100] exact_acc=0.691 tool_acc=0.713 recall=0.708 llm_errors=13
+    [500/1100] exact_acc=0.680 tool_acc=0.708 recall=0.704 llm_errors=15
+    [550/1100] exact_acc=0.669 tool_acc=0.704 recall=0.707 llm_errors=16
+    [600/1100] exact_acc=0.660 tool_acc=0.698 recall=0.704 llm_errors=19
+    [650/1100] exact_acc=0.658 tool_acc=0.694 recall=0.688 llm_errors=20
+    [700/1100] exact_acc=0.651 tool_acc=0.689 recall=0.680 llm_errors=21
+    [800/1100] exact_acc=0.646 tool_acc=0.681 recall=0.663 llm_errors=22
+    [850/1100] exact_acc=0.641 tool_acc=0.679 recall=0.653 llm_errors=23
+    [900/1100] exact_acc=0.627 tool_acc=0.663 recall=0.638 llm_errors=23
+    [950/1100] exact_acc=0.628 tool_acc=0.663 recall=0.632 llm_errors=24
+    [1000/1100] exact_acc=0.620 tool_acc=0.654 recall=0.618 llm_errors=24
+    [1050/1100] exact_acc=0.613 tool_acc=0.658 recall=0.610 llm_errors=25
+    [1100/1100] exact_acc=0.601 tool_acc=0.655 recall=0.596 llm_errors=25
+
+  BGE-M3 (no gov):
+    Retrieval:
+      Recall@5:    0.596 [0.574, 0.619]
+      NDCG@5:      0.566 [0.545, 0.588]
+      F1@5:        0.365 [0.351, 0.378]
+      Precision@5: 0.269 [0.258, 0.280]
+    LLM tool selection:
+      Exact accuracy: 0.601 [0.572, 0.629]
+      Tool accuracy:  0.655 [0.627, 0.682]
+      LLM errors: 25/1100
+
+============================================================
+  Qwen3-0.6B (no gov)
+============================================================
+Batches:   0%|          | 0/101 [00:00<?, ?it/s]Batches:   1%|          | 1/101 [00:03<06:32,  3.93s/it]Batches:   2%|▏         | 2/101 [00:04<03:26,  2.09s/it]Batches:   3%|▎         | 3/101 [00:05<02:19,  1.42s/it]Batches:   4%|▍         | 4/101 [00:05<01:33,  1.04it/s]Batches:   5%|▍         | 5/101 [00:05<01:08,  1.39it/s]Batches:   6%|▌         | 6/101 [00:06<00:52,  1.81it/s]Batches:   7%|▋         | 7/101 [00:06<00:41,  2.27it/s]Batches:   8%|▊         | 8/101 [00:06<00:33,  2.78it/s]Batches:   9%|▉         | 9/101 [00:06<00:27,  3.30it/s]Batches:  10%|▉         | 10/101 [00:06<00:23,  3.86it/s]Batches:  11%|█         | 11/101 [00:07<00:20,  4.37it/s]Batches:  12%|█▏        | 12/101 [00:07<00:18,  4.81it/s]Batches:  13%|█▎        | 13/101 [00:07<00:16,  5.38it/s]Batches:  14%|█▍        | 14/101 [00:07<00:14,  5.93it/s]Batches:  15%|█▍        | 15/101 [00:07<00:13,  6.33it/s]Batches:  16%|█▌        | 16/101 [00:07<00:12,  6.74it/s]Batches:  17%|█▋        | 17/101 [00:07<00:13,  6.37it/s]Batches:  18%|█▊        | 18/101 [00:07<00:11,  7.03it/s]Batches:  19%|█▉        | 19/101 [00:08<00:11,  7.28it/s]Batches:  20%|█▉        | 20/101 [00:08<00:10,  7.39it/s]Batches:  21%|██        | 21/101 [00:08<00:10,  7.74it/s]Batches:  22%|██▏       | 22/101 [00:08<00:09,  8.19it/s]Batches:  23%|██▎       | 23/101 [00:08<00:09,  8.46it/s]Batches:  24%|██▍       | 24/101 [00:08<00:09,  8.30it/s]Batches:  26%|██▌       | 26/101 [00:08<00:08,  9.09it/s]Batches:  28%|██▊       | 28/101 [00:09<00:07, 10.05it/s]Batches:  30%|██▉       | 30/101 [00:09<00:06, 10.61it/s]Batches:  32%|███▏      | 32/101 [00:09<00:06, 11.18it/s]Batches:  34%|███▎      | 34/101 [00:09<00:05, 12.07it/s]Batches:  36%|███▌      | 36/101 [00:09<00:05, 12.14it/s]Batches:  38%|███▊      | 38/101 [00:09<00:05, 12.53it/s]Batches:  40%|███▉      | 40/101 [00:09<00:04, 13.13it/s]Batches:  42%|████▏     | 42/101 [00:10<00:04, 13.25it/s]Batches:  44%|████▎     | 44/101 [00:10<00:04, 13.63it/s]Batches:  46%|████▌     | 46/101 [00:10<00:03, 14.16it/s]Batches:  48%|████▊     | 48/101 [00:10<00:03, 14.49it/s]Batches:  50%|████▉     | 50/101 [00:10<00:03, 14.79it/s]Batches:  51%|█████▏    | 52/101 [00:10<00:03, 14.96it/s]Batches:  53%|█████▎    | 54/101 [00:10<00:03, 15.07it/s]Batches:  55%|█████▌    | 56/101 [00:11<00:02, 15.46it/s]Batches:  57%|█████▋    | 58/101 [00:11<00:02, 15.72it/s]Batches:  59%|█████▉    | 60/101 [00:11<00:02, 15.71it/s]Batches:  61%|██████▏   | 62/101 [00:11<00:02, 16.03it/s]Batches:  63%|██████▎   | 64/101 [00:11<00:02, 15.23it/s]Batches:  65%|██████▌   | 66/101 [00:11<00:02, 15.61it/s]Batches:  67%|██████▋   | 68/101 [00:11<00:02, 16.27it/s]Batches:  69%|██████▉   | 70/101 [00:11<00:01, 16.13it/s]Batches:  71%|███████▏  | 72/101 [00:12<00:01, 16.80it/s]Batches:  73%|███████▎  | 74/101 [00:12<00:01, 17.34it/s]Batches:  75%|███████▌  | 76/101 [00:12<00:01, 17.75it/s]Batches:  78%|███████▊  | 79/101 [00:12<00:01, 18.30it/s]Batches:  80%|████████  | 81/101 [00:12<00:01, 18.66it/s]Batches:  83%|████████▎ | 84/101 [00:12<00:00, 19.28it/s]Batches:  86%|████████▌ | 87/101 [00:12<00:00, 19.56it/s]Batches:  89%|████████▉ | 90/101 [00:12<00:00, 19.95it/s]Batches:  91%|█████████ | 92/101 [00:13<00:00, 19.51it/s]Batches:  94%|█████████▍| 95/101 [00:13<00:00, 19.88it/s]Batches: 100%|██████████| 101/101 [00:11<00:00,  8.88it/s]
+    [50/1100] exact_acc=0.760 tool_acc=0.780 recall=0.862 llm_errors=3
+    [100/1100] exact_acc=0.710 tool_acc=0.740 recall=0.796 llm_errors=6
+    [150/1100] exact_acc=0.720 tool_acc=0.760 recall=0.798 llm_errors=7
+    [200/1100] exact_acc=0.735 tool_acc=0.775 recall=0.817 llm_errors=7
+    [250/1100] exact_acc=0.728 tool_acc=0.764 recall=0.819 llm_errors=9
+    [350/1100] exact_acc=0.743 tool_acc=0.777 recall=0.829 llm_errors=13
+    [400/1100] exact_acc=0.748 tool_acc=0.777 recall=0.832 llm_errors=14
+    [450/1100] exact_acc=0.740 tool_acc=0.773 recall=0.826 llm_errors=14
+    [500/1100] exact_acc=0.740 tool_acc=0.776 recall=0.821 llm_errors=16
+    [550/1100] exact_acc=0.735 tool_acc=0.776 recall=0.821 llm_errors=17
+    [600/1100] exact_acc=0.728 tool_acc=0.773 recall=0.820 llm_errors=21
+    [650/1100] exact_acc=0.712 tool_acc=0.755 recall=0.800 llm_errors=22
+    [700/1100] exact_acc=0.701 tool_acc=0.743 recall=0.783 llm_errors=23
+    [750/1100] exact_acc=0.701 tool_acc=0.741 recall=0.776 llm_errors=24
+    [800/1100] exact_acc=0.693 tool_acc=0.734 recall=0.762 llm_errors=24
+    [850/1100] exact_acc=0.686 tool_acc=0.726 recall=0.750 llm_errors=25
+    [900/1100] exact_acc=0.673 tool_acc=0.714 recall=0.734 llm_errors=25
+    [950/1100] exact_acc=0.671 tool_acc=0.713 recall=0.725 llm_errors=26
+    [1000/1100] exact_acc=0.662 tool_acc=0.703 recall=0.710 llm_errors=26
+    [1050/1100] exact_acc=0.655 tool_acc=0.710 recall=0.709 llm_errors=28
+    [1100/1100] exact_acc=0.645 tool_acc=0.707 recall=0.696 llm_errors=33
+
+  Qwen3-0.6B (no gov):
+    Retrieval:
+      Recall@5:    0.696 [0.675, 0.716]
+      NDCG@5:      0.662 [0.642, 0.682]
+      F1@5:        0.428 [0.415, 0.440]
+      Precision@5: 0.317 [0.306, 0.327]
+    LLM tool selection:
+      Exact accuracy: 0.645 [0.617, 0.674]
+      Tool accuracy:  0.707 [0.681, 0.734]
+      LLM errors: 33/1100
+
+============================================================
+  Qwen3-4B (no gov)
+============================================================
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:02<00:02,  2.06s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:02<00:00,  1.26s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:02<00:00,  1.38s/it]
+Batches:   0%|          | 0/101 [00:00<?, ?it/s]Batches:   1%|          | 1/101 [00:19<32:35, 19.55s/it]Batches:   2%|▏         | 2/101 [00:22<15:47,  9.57s/it]Batches:   3%|▎         | 3/101 [00:25<11:21,  6.96s/it]Batches:   4%|▍         | 4/101 [00:27<07:56,  4.91s/it]Batches:   5%|▍         | 5/101 [00:29<06:05,  3.81s/it]Batches:   6%|▌         | 6/101 [00:31<04:49,  3.05s/it]Batches:   7%|▋         | 7/101 [00:32<03:55,  2.51s/it]Batches:   8%|▊         | 8/101 [00:33<03:17,  2.12s/it]Batches:   9%|▉         | 9/101 [00:35<02:49,  1.84s/it]Batches:  10%|▉         | 10/101 [00:36<02:25,  1.60s/it]Batches:  11%|█         | 11/101 [00:37<02:08,  1.43s/it]Batches:  12%|█▏        | 12/101 [00:38<01:56,  1.31s/it]Batches:  13%|█▎        | 13/101 [00:39<01:45,  1.20s/it]Batches:  14%|█▍        | 14/101 [00:40<01:36,  1.11s/it]Batches:  15%|█▍        | 15/101 [00:41<01:31,  1.06s/it]Batches:  16%|█▌        | 16/101 [00:41<01:25,  1.00s/it]Batches:  17%|█▋        | 17/101 [00:43<01:29,  1.06s/it]Batches:  18%|█▊        | 18/101 [00:43<01:19,  1.05it/s]Batches:  19%|█▉        | 19/101 [00:44<01:16,  1.08it/s]Batches:  20%|█▉        | 20/101 [00:45<01:14,  1.08it/s]Batches:  21%|██        | 21/101 [00:46<01:09,  1.15it/s]Batches:  22%|██▏       | 22/101 [00:47<01:04,  1.22it/s]Batches:  23%|██▎       | 23/101 [00:47<01:01,  1.26it/s]Batches:  24%|██▍       | 24/101 [00:48<01:02,  1.23it/s]Batches:  28%|██▊       | 28/101 [00:48<00:24,  2.96it/s]Batches:  29%|██▊       | 29/101 [00:49<00:27,  2.63it/s]Batches:  30%|██▉       | 30/101 [00:49<00:29,  2.40it/s]Batches:  31%|███       | 31/101 [00:50<00:30,  2.31it/s]Batches:  32%|███▏      | 32/101 [00:51<00:31,  2.17it/s]Batches:  33%|███▎      | 33/101 [00:51<00:31,  2.15it/s]Batches:  34%|███▎      | 34/101 [00:51<00:31,  2.16it/s]Batches:  35%|███▍      | 35/101 [00:52<00:31,  2.08it/s]Batches:  36%|███▌      | 36/101 [00:53<00:32,  2.03it/s]Batches:  37%|███▋      | 37/101 [00:53<00:32,  1.97it/s]Batches:  38%|███▊      | 38/101 [00:54<00:30,  2.03it/s]Batches:  39%|███▊      | 39/101 [00:54<00:29,  2.08it/s]Batches:  40%|███▉      | 40/101 [00:54<00:29,  2.08it/s]Batches:  41%|████      | 41/101 [00:55<00:28,  2.11it/s]Batches:  42%|████▏     | 42/101 [00:55<00:28,  2.04it/s]Batches:  43%|████▎     | 43/101 [00:56<00:28,  2.05it/s]Batches:  44%|████▎     | 44/101 [00:56<00:27,  2.10it/s]Batches:  45%|████▍     | 45/101 [00:57<00:25,  2.22it/s]Batches:  46%|████▌     | 46/101 [00:57<00:24,  2.25it/s]Batches:  47%|████▋     | 47/101 [00:58<00:23,  2.28it/s]Batches:  48%|████▊     | 48/101 [00:58<00:23,  2.30it/s]Batches:  49%|████▊     | 49/101 [00:58<00:22,  2.32it/s]Batches:  50%|████▉     | 50/101 [00:59<00:21,  2.33it/s]Batches:  50%|█████     | 51/101 [00:59<00:21,  2.34it/s]Batches:  51%|█████▏    | 52/101 [01:00<00:21,  2.30it/s]Batches:  52%|█████▏    | 53/101 [01:00<00:21,  2.27it/s]Batches:  53%|█████▎    | 54/101 [01:01<00:19,  2.38it/s]Batches:  54%|█████▍    | 55/101 [01:01<00:18,  2.46it/s]Batches:  55%|█████▌    | 56/101 [01:01<00:17,  2.54it/s]Batches:  56%|█████▋    | 57/101 [01:02<00:17,  2.48it/s]Batches:  57%|█████▋    | 58/101 [01:02<00:16,  2.61it/s]Batches:  58%|█████▊    | 59/101 [01:03<00:17,  2.46it/s]Batches:  59%|█████▉    | 60/101 [01:03<00:16,  2.52it/s]Batches:  60%|██████    | 61/101 [01:03<00:15,  2.64it/s]Batches:  61%|██████▏   | 62/101 [01:04<00:14,  2.67it/s]Batches:  62%|██████▏   | 63/101 [01:04<00:17,  2.22it/s]Batches:  63%|██████▎   | 64/101 [01:05<00:15,  2.40it/s]Batches:  64%|██████▍   | 65/101 [01:05<00:14,  2.49it/s]Batches:  65%|██████▌   | 66/101 [01:05<00:13,  2.61it/s]Batches:  66%|██████▋   | 67/101 [01:06<00:12,  2.65it/s]Batches:  67%|██████▋   | 68/101 [01:06<00:11,  2.75it/s]Batches:  68%|██████▊   | 69/101 [01:06<00:12,  2.49it/s]Batches:  69%|██████▉   | 70/101 [01:07<00:11,  2.63it/s]Batches:  70%|███████   | 71/101 [01:07<00:11,  2.72it/s]Batches:  71%|███████▏  | 72/101 [01:07<00:10,  2.81it/s]Batches:  72%|███████▏  | 73/101 [01:08<00:09,  2.85it/s]Batches:  73%|███████▎  | 74/101 [01:08<00:09,  2.90it/s]Batches:  74%|███████▍  | 75/101 [01:08<00:08,  2.92it/s]Batches:  75%|███████▌  | 76/101 [01:09<00:08,  2.95it/s]Batches:  76%|███████▌  | 77/101 [01:09<00:07,  3.08it/s]Batches:  77%|███████▋  | 78/101 [01:09<00:07,  3.07it/s]Batches:  78%|███████▊  | 79/101 [01:10<00:07,  3.04it/s]Batches:  79%|███████▉  | 80/101 [01:10<00:06,  3.04it/s]Batches:  80%|████████  | 81/101 [01:10<00:06,  3.17it/s]Batches:  81%|████████  | 82/101 [01:11<00:05,  3.26it/s]Batches:  82%|████████▏ | 83/101 [01:11<00:05,  3.33it/s]Batches:  83%|████████▎ | 84/101 [01:11<00:05,  3.37it/s]Batches:  84%|████████▍ | 85/101 [01:12<00:04,  3.40it/s]Batches:  85%|████████▌ | 86/101 [01:12<00:04,  3.43it/s]Batches:  86%|████████▌ | 87/101 [01:12<00:04,  3.45it/s]Batches:  87%|████████▋ | 88/101 [01:12<00:03,  3.58it/s]Batches:  88%|████████▊ | 89/101 [01:13<00:03,  3.68it/s]Batches:  89%|████████▉ | 90/101 [01:13<00:03,  3.61it/s]Batches:  90%|█████████ | 91/101 [01:13<00:03,  3.27it/s]Batches:  91%|█████████ | 92/101 [01:14<00:02,  3.33it/s]Batches:  92%|█████████▏| 93/101 [01:14<00:02,  3.48it/s]Batches:  93%|█████████▎| 94/101 [01:14<00:02,  3.49it/s]Batches:  94%|█████████▍| 95/101 [01:14<00:01,  3.62it/s]Batches:  95%|█████████▌| 96/101 [01:15<00:01,  3.58it/s]Batches:  96%|█████████▌| 97/101 [01:15<00:01,  3.55it/s]Batches:  97%|█████████▋| 98/101 [01:15<00:00,  3.67it/s]Batches:  98%|█████████▊| 99/101 [01:15<00:00,  3.80it/s]Batches:  99%|█████████▉| 100/101 [01:16<00:00,  3.99it/s]Batches: 100%|██████████| 101/101 [01:16<00:00,  4.39it/s]Batches: 100%|██████████| 101/101 [01:16<00:00,  1.32it/s]
+    [50/1100] exact_acc=0.720 tool_acc=0.760 recall=0.890 llm_errors=2
+    [100/1100] exact_acc=0.700 tool_acc=0.750 recall=0.829 llm_errors=4
+    [150/1100] exact_acc=0.693 tool_acc=0.767 recall=0.801 llm_errors=5
+    [200/1100] exact_acc=0.725 tool_acc=0.790 recall=0.816 llm_errors=5
+    [250/1100] exact_acc=0.728 tool_acc=0.788 recall=0.825 llm_errors=6
+    [300/1100] exact_acc=0.727 tool_acc=0.780 recall=0.832 llm_errors=8
+    [350/1100] exact_acc=0.740 tool_acc=0.791 recall=0.839 llm_errors=9
+    [400/1100] exact_acc=0.748 tool_acc=0.792 recall=0.836 llm_errors=10
+    [450/1100] exact_acc=0.744 tool_acc=0.793 recall=0.834 llm_errors=12
+    [500/1100] exact_acc=0.740 tool_acc=0.790 recall=0.837 llm_errors=13
+    [550/1100] exact_acc=0.738 tool_acc=0.793 recall=0.839 llm_errors=14
+    [600/1100] exact_acc=0.730 tool_acc=0.792 recall=0.833 llm_errors=16
+    [650/1100] exact_acc=0.711 tool_acc=0.774 recall=0.807 llm_errors=16
+    [700/1100] exact_acc=0.701 tool_acc=0.763 recall=0.789 llm_errors=17
+    [750/1100] exact_acc=0.704 tool_acc=0.761 recall=0.778 llm_errors=18
+    [800/1100] exact_acc=0.695 tool_acc=0.754 recall=0.760 llm_errors=18
+    [850/1100] exact_acc=0.680 tool_acc=0.739 recall=0.741 llm_errors=21
+    [900/1100] exact_acc=0.667 tool_acc=0.726 recall=0.725 llm_errors=21
+    [950/1100] exact_acc=0.659 tool_acc=0.718 recall=0.714 llm_errors=23
+    [1000/1100] exact_acc=0.650 tool_acc=0.710 recall=0.699 llm_errors=24
+    [1050/1100] exact_acc=0.643 tool_acc=0.717 recall=0.695 llm_errors=27
+    [1100/1100] exact_acc=0.631 tool_acc=0.718 recall=0.686 llm_errors=29
+
+  Qwen3-4B (no gov):
+    Retrieval:
+      Recall@5:    0.686 [0.665, 0.706]
+      NDCG@5:      0.640 [0.620, 0.659]
+      F1@5:        0.421 [0.408, 0.434]
+      Precision@5: 0.312 [0.302, 0.321]
+    LLM tool selection:
+      Exact accuracy: 0.631 [0.603, 0.659]
+      Tool accuracy:  0.718 [0.692, 0.745]
+      LLM errors: 29/1100
+
+============================================================
+  BM25 (no gov)
+============================================================
+    [50/1100] exact_acc=0.600 tool_acc=0.700 recall=0.555 llm_errors=1
+    [100/1100] exact_acc=0.580 tool_acc=0.640 recall=0.548 llm_errors=4
+    [150/1100] exact_acc=0.560 tool_acc=0.627 recall=0.548 llm_errors=5
+    [200/1100] exact_acc=0.610 tool_acc=0.670 recall=0.600 llm_errors=7
+    [250/1100] exact_acc=0.584 tool_acc=0.632 recall=0.573 llm_errors=10
+    [300/1100] exact_acc=0.577 tool_acc=0.630 recall=0.553 llm_errors=10
+    [350/1100] exact_acc=0.563 tool_acc=0.614 recall=0.544 llm_errors=11
+    [400/1100] exact_acc=0.562 tool_acc=0.610 recall=0.544 llm_errors=15
+    [450/1100] exact_acc=0.560 tool_acc=0.604 recall=0.540 llm_errors=18
+    [500/1100] exact_acc=0.558 tool_acc=0.598 recall=0.534 llm_errors=22
+    [550/1100] exact_acc=0.556 tool_acc=0.602 recall=0.532 llm_errors=23
+    [600/1100] exact_acc=0.557 tool_acc=0.602 recall=0.537 llm_errors=28
+    [650/1100] exact_acc=0.554 tool_acc=0.595 recall=0.529 llm_errors=29
+    [700/1100] exact_acc=0.549 tool_acc=0.587 recall=0.521 llm_errors=31
+    [750/1100] exact_acc=0.551 tool_acc=0.589 recall=0.520 llm_errors=31
+    [800/1100] exact_acc=0.544 tool_acc=0.581 recall=0.513 llm_errors=32
+    [850/1100] exact_acc=0.539 tool_acc=0.574 recall=0.509 llm_errors=32
+    [900/1100] exact_acc=0.524 tool_acc=0.559 recall=0.493 llm_errors=32
+    [950/1100] exact_acc=0.521 tool_acc=0.558 recall=0.488 llm_errors=33
+    [1000/1100] exact_acc=0.509 tool_acc=0.546 recall=0.480 llm_errors=33
+    [1050/1100] exact_acc=0.504 tool_acc=0.545 recall=0.477 llm_errors=33
+    [1100/1100] exact_acc=0.496 tool_acc=0.545 recall=0.468 llm_errors=34
+
+  BM25 (no gov):
+    Retrieval:
+      Recall@5:    0.468 [0.445, 0.491]
+      NDCG@5:      0.444 [0.422, 0.466]
+      F1@5:        0.286 [0.272, 0.300]
+      Precision@5: 0.212 [0.201, 0.223]
+    LLM tool selection:
+      Exact accuracy: 0.496 [0.467, 0.525]
+      Tool accuracy:  0.545 [0.515, 0.575]
+      LLM errors: 34/1100
+
+============================================================
+  Monolithic (all tools)
+============================================================
+    [50/1100] exact_acc=0.400 tool_acc=0.420 errors=2
+    [100/1100] exact_acc=0.200 tool_acc=0.210 errors=5
+    [150/1100] exact_acc=0.140 tool_acc=0.147 errors=8
+    [250/1100] exact_acc=0.088 tool_acc=0.092 errors=20
+    [300/1100] exact_acc=0.073 tool_acc=0.077 errors=27
+    [350/1100] exact_acc=0.063 tool_acc=0.066 errors=36
+    [400/1100] exact_acc=0.055 tool_acc=0.058 errors=42
+    [450/1100] exact_acc=0.049 tool_acc=0.051 errors=46
+    [500/1100] exact_acc=0.044 tool_acc=0.046 errors=51
+    [550/1100] exact_acc=0.040 tool_acc=0.042 errors=57
+    [600/1100] exact_acc=0.037 tool_acc=0.038 errors=66
+    [650/1100] exact_acc=0.034 tool_acc=0.035 errors=77
+    [700/1100] exact_acc=0.031 tool_acc=0.033 errors=88
+    [750/1100] exact_acc=0.029 tool_acc=0.031 errors=97
+    [800/1100] exact_acc=0.028 tool_acc=0.030 errors=102
+    [850/1100] exact_acc=0.026 tool_acc=0.028 errors=112
+    [900/1100] exact_acc=0.024 tool_acc=0.027 errors=124
+    [1000/1100] exact_acc=0.022 tool_acc=0.024 errors=148
+    [1050/1100] exact_acc=0.021 tool_acc=0.023 errors=156
+    [1100/1100] exact_acc=0.020 tool_acc=0.022 errors=161
+
+  Monolithic:
+    Retrieval (static subset coverage):
+      Recall@5:    0.022 [0.014, 0.031]
+      NDCG@5:      0.001 [0.000, 0.001]
+      F1@5:        0.001 [0.001, 0.001]
+    LLM tool selection:
+      Exact accuracy: 0.020 [0.013, 0.029]
+      Tool accuracy:  0.022 [0.014, 0.031]
+
+============================================================
+  Statistical Tests (paired t-test, Wilcoxon, Cohen's d)
+  n=1100 queries
+============================================================
+
+  BEAR+BGE (gov)  vs  BEAR+BGE-M3 (gov):
+        recall: paired-t=-1.765, p=0.0779 n.s., d=-0.053; W=18816, p=0.0694
+          ndcg: paired-t=-1.963, p=0.0499 *, d=-0.059; W=88074, p=0.0667
+            f1: paired-t=-1.814, p=0.0699 n.s., d=-0.055; W=19275, p=0.1365
+     exact_acc: paired-t=-0.548, p=0.5837 n.s., d=-0.017; W=6396, p=0.5835
+      tool_acc: paired-t=0.168, p=0.8668 n.s., d=0.005; W=5005, p=0.8667
+
+  BEAR+BGE (gov)  vs  BEAR+Qwen3-0.6B (gov):
+        recall: paired-t=-9.319, p=0.0000 ***, d=-0.281; W=16931, p=0.0000
+          ndcg: paired-t=-10.589, p=0.0000 ***, d=-0.319; W=71688, p=0.0000
+            f1: paired-t=-9.766, p=0.0000 ***, d=-0.294; W=16772, p=0.0000
+     exact_acc: paired-t=-3.059, p=0.0023 **, d=-0.092; W=7067, p=0.0023
+      tool_acc: paired-t=-3.564, p=0.0004 ***, d=-0.107; W=4262, p=0.0004
+
+  BEAR+BGE (gov)  vs  BEAR+Qwen3-4B (gov):
+        recall: paired-t=-6.739, p=0.0000 ***, d=-0.203; W=26330, p=0.0000
+          ndcg: paired-t=-5.943, p=0.0000 ***, d=-0.179; W=113773, p=0.0000
+            f1: paired-t=-6.878, p=0.0000 ***, d=-0.207; W=26200, p=0.0000
+     exact_acc: paired-t=-0.132, p=0.8952 n.s., d=-0.004; W=13167, p=0.8951
+      tool_acc: paired-t=-1.988, p=0.0471 *, d=-0.060; W=7347, p=0.0471
+
+  BEAR+BGE (gov)  vs  BEAR+BM25 (gov):
+        recall: paired-t=8.101, p=0.0000 ***, d=0.244; W=27326, p=0.0000
+          ndcg: paired-t=7.510, p=0.0000 ***, d=0.226; W=97104, p=0.0000
+            f1: paired-t=7.738, p=0.0000 ***, d=0.233; W=27442, p=0.0000
+     exact_acc: paired-t=3.647, p=0.0003 ***, d=0.110; W=11780, p=0.0003
+      tool_acc: paired-t=3.300, p=0.0010 ***, d=0.100; W=7388, p=0.0010
+
+  BEAR+BGE (gov)  vs  BEAR+Hash (gov):
+        recall: paired-t=45.095, p=0.0000 ***, d=1.360; W=5766, p=0.0000
+          ndcg: paired-t=48.115, p=0.0000 ***, d=1.451; W=7603, p=0.0000
+            f1: paired-t=45.361, p=0.0000 ***, d=1.368; W=5240, p=0.0000
+     exact_acc: paired-t=29.947, p=0.0000 ***, d=0.903; W=9502, p=0.0000
+      tool_acc: paired-t=28.310, p=0.0000 ***, d=0.854; W=12669, p=0.0000
+
+  BEAR+BGE (gov)  vs  BGE (no gov):
+        recall: paired-t=15.341, p=0.0000 ***, d=0.463; W=3410, p=0.0000
+          ndcg: paired-t=15.965, p=0.0000 ***, d=0.481; W=17098, p=0.0000
+            f1: paired-t=15.549, p=0.0000 ***, d=0.469; W=3308, p=0.0000
+     exact_acc: paired-t=7.702, p=0.0000 ***, d=0.232; W=4246, p=0.0000
+      tool_acc: paired-t=9.011, p=0.0000 ***, d=0.272; W=3052, p=0.0000
+
+  BEAR+BGE (gov)  vs  BGE-M3 (no gov):
+        recall: paired-t=10.442, p=0.0000 ***, d=0.315; W=16904, p=0.0000
+          ndcg: paired-t=10.391, p=0.0000 ***, d=0.313; W=68185, p=0.0000
+            f1: paired-t=10.527, p=0.0000 ***, d=0.317; W=16290, p=0.0000
+     exact_acc: paired-t=6.961, p=0.0000 ***, d=0.210; W=6862, p=0.0000
+      tool_acc: paired-t=8.512, p=0.0000 ***, d=0.257; W=5788, p=0.0000
+
+  BEAR+BGE (gov)  vs  Qwen3-0.6B (no gov):
+        recall: paired-t=-0.026, p=0.9789 n.s., d=-0.001; W=36366, p=0.6496
+          ndcg: paired-t=-0.816, p=0.4146 n.s., d=-0.025; W=118318, p=0.3800
+            f1: paired-t=-0.166, p=0.8686 n.s., d=-0.005; W=36112, p=0.5681
+     exact_acc: paired-t=3.475, p=0.0005 ***, d=0.105; W=10738, p=0.0005
+      tool_acc: paired-t=4.530, p=0.0000 ***, d=0.137; W=8138, p=0.0000
+
+  BEAR+BGE (gov)  vs  Qwen3-4B (no gov):
+        recall: paired-t=1.006, p=0.3147 n.s., d=0.030; W=42416, p=0.2208
+          ndcg: paired-t=1.704, p=0.0887 n.s., d=0.051; W=133144, p=0.0387
+            f1: paired-t=0.871, p=0.3837 n.s., d=0.026; W=42099, p=0.1771
+     exact_acc: paired-t=4.356, p=0.0000 ***, d=0.131; W=11904, p=0.0000
+      tool_acc: paired-t=3.644, p=0.0003 ***, d=0.110; W=9366, p=0.0003
+
+  BEAR+BGE (gov)  vs  BM25 (no gov):
+        recall: paired-t=20.005, p=0.0000 ***, d=0.603; W=15836, p=0.0000
+          ndcg: paired-t=20.111, p=0.0000 ***, d=0.606; W=48075, p=0.0000
+            f1: paired-t=19.876, p=0.0000 ***, d=0.599; W=15901, p=0.0000
+     exact_acc: paired-t=12.519, p=0.0000 ***, d=0.377; W=10836, p=0.0000
+      tool_acc: paired-t=14.475, p=0.0000 ***, d=0.436; W=7966, p=0.0000
+
+  BEAR+BGE (gov)  vs  Monolithic (all tools):
+        recall: paired-t=61.671, p=0.0000 ***, d=1.859; W=1793, p=0.0000
+          ndcg: paired-t=66.391, p=0.0000 ***, d=2.002; W=0, p=0.0000
+            f1: paired-t=66.952, p=0.0000 ***, d=2.019; W=3, p=0.0000
+     exact_acc: paired-t=46.673, p=0.0000 ***, d=1.407; W=1880, p=0.0000
+      tool_acc: paired-t=55.675, p=0.0000 ***, d=1.679; W=1658, p=0.0000
+
+  BEAR+BGE-M3 (gov)  vs  BEAR+Qwen3-0.6B (gov):
+        recall: paired-t=-7.714, p=0.0000 ***, d=-0.233; W=15498, p=0.0000
+          ndcg: paired-t=-8.752, p=0.0000 ***, d=-0.264; W=82840, p=0.0000
+            f1: paired-t=-7.890, p=0.0000 ***, d=-0.238; W=14889, p=0.0000
+     exact_acc: paired-t=-2.500, p=0.0126 *, d=-0.075; W=8019, p=0.0126
+      tool_acc: paired-t=-3.634, p=0.0003 ***, d=-0.110; W=4727, p=0.0003
+
+  BEAR+BGE-M3 (gov)  vs  BEAR+Qwen3-4B (gov):
+        recall: paired-t=-5.273, p=0.0000 ***, d=-0.159; W=27520, p=0.0000
+          ndcg: paired-t=-4.337, p=0.0000 ***, d=-0.131; W=119810, p=0.0000
+            f1: paired-t=-5.281, p=0.0000 ***, d=-0.159; W=26937, p=0.0000
+     exact_acc: paired-t=0.341, p=0.7333 n.s., d=0.010; W=11340, p=0.7331
+      tool_acc: paired-t=-2.147, p=0.0320 *, d=-0.065; W=7084, p=0.0321
+
+  BEAR+BGE-M3 (gov)  vs  BEAR+BM25 (gov):
+        recall: paired-t=9.485, p=0.0000 ***, d=0.286; W=28930, p=0.0000
+          ndcg: paired-t=9.082, p=0.0000 ***, d=0.274; W=88142, p=0.0000
+            f1: paired-t=9.076, p=0.0000 ***, d=0.274; W=29786, p=0.0000
+     exact_acc: paired-t=4.127, p=0.0000 ***, d=0.124; W=11025, p=0.0000
+      tool_acc: paired-t=3.206, p=0.0014 **, d=0.097; W=6972, p=0.0014
+
+  BEAR+BGE-M3 (gov)  vs  BEAR+Hash (gov):
+        recall: paired-t=47.220, p=0.0000 ***, d=1.424; W=2493, p=0.0000
+          ndcg: paired-t=50.322, p=0.0000 ***, d=1.517; W=3938, p=0.0000
+            f1: paired-t=47.007, p=0.0000 ***, d=1.417; W=2612, p=0.0000
+     exact_acc: paired-t=30.604, p=0.0000 ***, d=0.923; W=8596, p=0.0000
+      tool_acc: paired-t=28.128, p=0.0000 ***, d=0.848; W=12978, p=0.0000
+
+  BEAR+BGE-M3 (gov)  vs  BGE (no gov):
+        recall: paired-t=14.490, p=0.0000 ***, d=0.437; W=13454, p=0.0000
+          ndcg: paired-t=14.240, p=0.0000 ***, d=0.429; W=52810, p=0.0000
+            f1: paired-t=14.498, p=0.0000 ***, d=0.437; W=13474, p=0.0000
+     exact_acc: paired-t=7.165, p=0.0000 ***, d=0.216; W=8820, p=0.0000
+      tool_acc: paired-t=8.083, p=0.0000 ***, d=0.244; W=5584, p=0.0000
+
+  BEAR+BGE-M3 (gov)  vs  BGE-M3 (no gov):
+        recall: paired-t=14.485, p=0.0000 ***, d=0.437; W=1169, p=0.0000
+          ndcg: paired-t=15.626, p=0.0000 ***, d=0.471; W=8906, p=0.0000
+            f1: paired-t=14.551, p=0.0000 ***, d=0.439; W=1170, p=0.0000
+     exact_acc: paired-t=8.831, p=0.0000 ***, d=0.266; W=2214, p=0.0000
+      tool_acc: paired-t=10.008, p=0.0000 ***, d=0.302; W=1630, p=0.0000
+
+  BEAR+BGE-M3 (gov)  vs  Qwen3-0.6B (no gov):
+        recall: paired-t=1.389, p=0.1650 n.s., d=0.042; W=30602, p=0.0952
+          ndcg: paired-t=0.751, p=0.4527 n.s., d=0.023; W=125290, p=0.5385
+            f1: paired-t=1.274, p=0.2028 n.s., d=0.038; W=31000, p=0.1428
+     exact_acc: paired-t=4.037, p=0.0001 ***, d=0.122; W=9225, p=0.0001
+      tool_acc: paired-t=4.613, p=0.0000 ***, d=0.139; W=6501, p=0.0000
+
+  BEAR+BGE-M3 (gov)  vs  Qwen3-4B (no gov):
+        recall: paired-t=2.287, p=0.0224 *, d=0.069; W=40264, p=0.0449
+          ndcg: paired-t=3.029, p=0.0025 **, d=0.091; W=127088, p=0.0032
+            f1: paired-t=2.176, p=0.0298 *, d=0.066; W=40420, p=0.0521
+     exact_acc: paired-t=4.979, p=0.0000 ***, d=0.150; W=9680, p=0.0000
+      tool_acc: paired-t=3.608, p=0.0003 ***, d=0.109; W=8334, p=0.0003
+
+  BEAR+BGE-M3 (gov)  vs  BM25 (no gov):
+        recall: paired-t=20.974, p=0.0000 ***, d=0.632; W=14340, p=0.0000
+          ndcg: paired-t=21.090, p=0.0000 ***, d=0.636; W=44182, p=0.0000
+            f1: paired-t=20.800, p=0.0000 ***, d=0.627; W=14684, p=0.0000
+     exact_acc: paired-t=13.049, p=0.0000 ***, d=0.393; W=9889, p=0.0000
+      tool_acc: paired-t=14.436, p=0.0000 ***, d=0.435; W=7705, p=0.0000
+
+  BEAR+BGE-M3 (gov)  vs  Monolithic (all tools):
+        recall: paired-t=61.998, p=0.0000 ***, d=1.869; W=876, p=0.0000
+          ndcg: paired-t=66.526, p=0.0000 ***, d=2.006; W=0, p=0.0000
+            f1: paired-t=66.131, p=0.0000 ***, d=1.994; W=1, p=0.0000
+     exact_acc: paired-t=47.731, p=0.0000 ***, d=1.439; W=1132, p=0.0000
+      tool_acc: paired-t=55.671, p=0.0000 ***, d=1.679; W=1238, p=0.0000
+
+  BEAR+Qwen3-0.6B (gov)  vs  BEAR+Qwen3-4B (gov):
+        recall: paired-t=1.942, p=0.0524 n.s., d=0.059; W=16839, p=0.0656
+          ndcg: paired-t=3.962, p=0.0001 ***, d=0.119; W=85309, p=0.0000
+            f1: paired-t=2.151, p=0.0317 *, d=0.065; W=16924, p=0.0761
+     exact_acc: paired-t=2.992, p=0.0028 **, d=0.090; W=6335, p=0.0029
+      tool_acc: paired-t=1.422, p=0.1552 n.s., d=0.043; W=4536, p=0.1551
+
+  BEAR+Qwen3-0.6B (gov)  vs  BEAR+BM25 (gov):
+        recall: paired-t=15.146, p=0.0000 ***, d=0.457; W=18650, p=0.0000
+          ndcg: paired-t=15.325, p=0.0000 ***, d=0.462; W=59892, p=0.0000
+            f1: paired-t=15.119, p=0.0000 ***, d=0.456; W=18713, p=0.0000
+     exact_acc: paired-t=6.044, p=0.0000 ***, d=0.182; W=12371, p=0.0000
+      tool_acc: paired-t=6.140, p=0.0000 ***, d=0.185; W=7359, p=0.0000
+
+  BEAR+Qwen3-0.6B (gov)  vs  BEAR+Hash (gov):
+        recall: paired-t=54.472, p=0.0000 ***, d=1.642; W=1176, p=0.0000
+          ndcg: paired-t=59.116, p=0.0000 ***, d=1.782; W=1871, p=0.0000
+            f1: paired-t=54.701, p=0.0000 ***, d=1.649; W=1090, p=0.0000
+     exact_acc: paired-t=32.604, p=0.0000 ***, d=0.983; W=9086, p=0.0000
+      tool_acc: paired-t=31.102, p=0.0000 ***, d=0.938; W=11736, p=0.0000
+
+  BEAR+Qwen3-0.6B (gov)  vs  BGE (no gov):
+        recall: paired-t=19.703, p=0.0000 ***, d=0.594; W=10389, p=0.0000
+          ndcg: paired-t=20.132, p=0.0000 ***, d=0.607; W=38636, p=0.0000
+            f1: paired-t=19.884, p=0.0000 ***, d=0.600; W=10200, p=0.0000
+     exact_acc: paired-t=8.904, p=0.0000 ***, d=0.268; W=10260, p=0.0000
+      tool_acc: paired-t=10.768, p=0.0000 ***, d=0.325; W=5522, p=0.0000
+
+  BEAR+Qwen3-0.6B (gov)  vs  BGE-M3 (no gov):
+        recall: paired-t=17.034, p=0.0000 ***, d=0.514; W=12424, p=0.0000
+          ndcg: paired-t=17.619, p=0.0000 ***, d=0.531; W=48920, p=0.0000
+            f1: paired-t=17.260, p=0.0000 ***, d=0.520; W=11880, p=0.0000
+     exact_acc: paired-t=9.011, p=0.0000 ***, d=0.272; W=8938, p=0.0000
+      tool_acc: paired-t=11.064, p=0.0000 ***, d=0.334; W=5654, p=0.0000
+
+  BEAR+Qwen3-0.6B (gov)  vs  Qwen3-0.6B (no gov):
+        recall: paired-t=11.935, p=0.0000 ***, d=0.360; W=1412, p=0.0000
+          ndcg: paired-t=13.329, p=0.0000 ***, d=0.402; W=11996, p=0.0000
+            f1: paired-t=12.053, p=0.0000 ***, d=0.363; W=1284, p=0.0000
+     exact_acc: paired-t=7.632, p=0.0000 ***, d=0.230; W=2788, p=0.0000
+      tool_acc: paired-t=9.069, p=0.0000 ***, d=0.273; W=1908, p=0.0000
+
+  BEAR+Qwen3-0.6B (gov)  vs  Qwen3-4B (no gov):
+        recall: paired-t=10.158, p=0.0000 ***, d=0.306; W=14378, p=0.0000
+          ndcg: paired-t=12.063, p=0.0000 ***, d=0.364; W=58905, p=0.0000
+            f1: paired-t=10.274, p=0.0000 ***, d=0.310; W=14348, p=0.0000
+     exact_acc: paired-t=7.624, p=0.0000 ***, d=0.230; W=6272, p=0.0000
+      tool_acc: paired-t=7.046, p=0.0000 ***, d=0.212; W=5278, p=0.0000
+
+  BEAR+Qwen3-0.6B (gov)  vs  BM25 (no gov):
+        recall: paired-t=25.798, p=0.0000 ***, d=0.778; W=10634, p=0.0000
+          ndcg: paired-t=26.578, p=0.0000 ***, d=0.801; W=27982, p=0.0000
+            f1: paired-t=26.121, p=0.0000 ***, d=0.788; W=10440, p=0.0000
+     exact_acc: paired-t=14.427, p=0.0000 ***, d=0.435; W=11904, p=0.0000
+      tool_acc: paired-t=16.829, p=0.0000 ***, d=0.507; W=7380, p=0.0000
+
+  BEAR+Qwen3-0.6B (gov)  vs  Monolithic (all tools):
+        recall: paired-t=74.683, p=0.0000 ***, d=2.252; W=914, p=0.0000
+          ndcg: paired-t=82.305, p=0.0000 ***, d=2.482; W=0, p=0.0000
+            f1: paired-t=82.348, p=0.0000 ***, d=2.483; W=1, p=0.0000
+     exact_acc: paired-t=50.984, p=0.0000 ***, d=1.537; W=1985, p=0.0000
+      tool_acc: paired-t=62.428, p=0.0000 ***, d=1.882; W=1306, p=0.0000
+
+  BEAR+Qwen3-4B (gov)  vs  BEAR+BM25 (gov):
+        recall: paired-t=12.924, p=0.0000 ***, d=0.390; W=29532, p=0.0000
+          ndcg: paired-t=11.453, p=0.0000 ***, d=0.345; W=92955, p=0.0000
+            f1: paired-t=12.702, p=0.0000 ***, d=0.383; W=29512, p=0.0000
+     exact_acc: paired-t=3.590, p=0.0003 ***, d=0.108; W=14659, p=0.0004
+      tool_acc: paired-t=4.852, p=0.0000 ***, d=0.146; W=9164, p=0.0000
+
+  BEAR+Qwen3-4B (gov)  vs  BEAR+Hash (gov):
+        recall: paired-t=52.736, p=0.0000 ***, d=1.590; W=2670, p=0.0000
+          ndcg: paired-t=54.597, p=0.0000 ***, d=1.646; W=4419, p=0.0000
+            f1: paired-t=52.866, p=0.0000 ***, d=1.594; W=2540, p=0.0000
+     exact_acc: paired-t=29.967, p=0.0000 ***, d=0.904; W=9872, p=0.0000
+      tool_acc: paired-t=30.075, p=0.0000 ***, d=0.907; W=11784, p=0.0000
+
+  BEAR+Qwen3-4B (gov)  vs  BGE (no gov):
+        recall: paired-t=17.102, p=0.0000 ***, d=0.516; W=18108, p=0.0000
+          ndcg: paired-t=15.458, p=0.0000 ***, d=0.466; W=71766, p=0.0000
+            f1: paired-t=17.080, p=0.0000 ***, d=0.515; W=17909, p=0.0000
+     exact_acc: paired-t=6.119, p=0.0000 ***, d=0.185; W=15861, p=0.0000
+      tool_acc: paired-t=8.956, p=0.0000 ***, d=0.270; W=9588, p=0.0000
+
+  BEAR+Qwen3-4B (gov)  vs  BGE-M3 (no gov):
+        recall: paired-t=14.460, p=0.0000 ***, d=0.436; W=20564, p=0.0000
+          ndcg: paired-t=13.118, p=0.0000 ***, d=0.396; W=78962, p=0.0000
+            f1: paired-t=14.453, p=0.0000 ***, d=0.436; W=19914, p=0.0000
+     exact_acc: paired-t=6.324, p=0.0000 ***, d=0.191; W=12364, p=0.0000
+      tool_acc: paired-t=9.618, p=0.0000 ***, d=0.290; W=7772, p=0.0000
+
+  BEAR+Qwen3-4B (gov)  vs  Qwen3-0.6B (no gov):
+        recall: paired-t=6.921, p=0.0000 ***, d=0.209; W=21146, p=0.0000
+          ndcg: paired-t=5.248, p=0.0000 ***, d=0.158; W=98628, p=0.0000
+            f1: paired-t=6.798, p=0.0000 ***, d=0.205; W=20772, p=0.0000
+     exact_acc: paired-t=3.518, p=0.0005 ***, d=0.106; W=11904, p=0.0005
+      tool_acc: paired-t=6.280, p=0.0000 ***, d=0.189; W=7638, p=0.0000
+
+  BEAR+Qwen3-4B (gov)  vs  Qwen3-4B (no gov):
+        recall: paired-t=10.801, p=0.0000 ***, d=0.326; W=3422, p=0.0000
+          ndcg: paired-t=11.721, p=0.0000 ***, d=0.353; W=24192, p=0.0000
+            f1: paired-t=10.898, p=0.0000 ***, d=0.329; W=3450, p=0.0000
+     exact_acc: paired-t=5.711, p=0.0000 ***, d=0.172; W=3520, p=0.0000
+      tool_acc: paired-t=6.677, p=0.0000 ***, d=0.201; W=2772, p=0.0000
+
+  BEAR+Qwen3-4B (gov)  vs  BM25 (no gov):
+        recall: paired-t=23.546, p=0.0000 ***, d=0.710; W=16598, p=0.0000
+          ndcg: paired-t=22.389, p=0.0000 ***, d=0.675; W=50886, p=0.0000
+            f1: paired-t=23.527, p=0.0000 ***, d=0.709; W=16782, p=0.0000
+     exact_acc: paired-t=12.135, p=0.0000 ***, d=0.366; W=13875, p=0.0000
+      tool_acc: paired-t=15.330, p=0.0000 ***, d=0.462; W=10260, p=0.0000
+
+  BEAR+Qwen3-4B (gov)  vs  Monolithic (all tools):
+        recall: paired-t=73.652, p=0.0000 ***, d=2.221; W=368, p=0.0000
+          ndcg: paired-t=77.218, p=0.0000 ***, d=2.328; W=0, p=0.0000
+            f1: paired-t=80.740, p=0.0000 ***, d=2.434; W=0, p=0.0000
+     exact_acc: paired-t=47.051, p=0.0000 ***, d=1.419; W=1504, p=0.0000
+      tool_acc: paired-t=60.044, p=0.0000 ***, d=1.810; W=852, p=0.0000
+
+  BEAR+BM25 (gov)  vs  BEAR+Hash (gov):
+        recall: paired-t=38.636, p=0.0000 ***, d=1.165; W=7218, p=0.0000
+          ndcg: paired-t=41.868, p=0.0000 ***, d=1.262; W=7536, p=0.0000
+            f1: paired-t=39.110, p=0.0000 ***, d=1.179; W=6888, p=0.0000
+     exact_acc: paired-t=26.723, p=0.0000 ***, d=0.806; W=9554, p=0.0000
+      tool_acc: paired-t=26.291, p=0.0000 ***, d=0.793; W=10434, p=0.0000
+
+  BEAR+BM25 (gov)  vs  BGE (no gov):
+        recall: paired-t=4.205, p=0.0000 ***, d=0.127; W=40664, p=0.0001
+          ndcg: paired-t=4.284, p=0.0000 ***, d=0.129; W=109838, p=0.0000
+            f1: paired-t=4.416, p=0.0000 ***, d=0.133; W=40406, p=0.0001
+     exact_acc: paired-t=2.833, p=0.0047 **, d=0.085; W=15985, p=0.0047
+      tool_acc: paired-t=4.795, p=0.0000 ***, d=0.145; W=9124, p=0.0000
+
+  BEAR+BM25 (gov)  vs  BGE-M3 (no gov):
+        recall: paired-t=1.573, p=0.1160 n.s., d=0.047; W=49474, p=0.2348
+          ndcg: paired-t=1.879, p=0.0605 n.s., d=0.057; W=120818, p=0.0424
+            f1: paired-t=1.916, p=0.0556 n.s., d=0.058; W=48576, p=0.1316
+     exact_acc: paired-t=2.732, p=0.0064 **, d=0.082; W=15618, p=0.0065
+      tool_acc: paired-t=5.092, p=0.0000 ***, d=0.154; W=9760, p=0.0000
+
+  BEAR+BM25 (gov)  vs  Qwen3-0.6B (no gov):
+        recall: paired-t=-7.700, p=0.0000 ***, d=-0.232; W=34488, p=0.0000
+          ndcg: paired-t=-7.716, p=0.0000 ***, d=-0.233; W=101604, p=0.0000
+            f1: paired-t=-7.520, p=0.0000 ***, d=-0.227; W=35225, p=0.0000
+     exact_acc: paired-t=-0.242, p=0.8092 n.s., d=-0.007; W=18562, p=0.8091
+      tool_acc: paired-t=1.302, p=0.1931 n.s., d=0.039; W=12798, p=0.1930
+
+  BEAR+BM25 (gov)  vs  Qwen3-4B (no gov):
+        recall: paired-t=-6.338, p=0.0000 ***, d=-0.191; W=46830, p=0.0000
+          ndcg: paired-t=-4.978, p=0.0000 ***, d=-0.150; W=130812, p=0.0000
+            f1: paired-t=-6.125, p=0.0000 ***, d=-0.185; W=47444, p=0.0000
+     exact_acc: paired-t=0.722, p=0.4704 n.s., d=0.022; W=18282, p=0.4701
+      tool_acc: paired-t=0.514, p=0.6073 n.s., d=0.016; W=14216, p=0.6071
+
+  BEAR+BM25 (gov)  vs  BM25 (no gov):
+        recall: paired-t=19.358, p=0.0000 ***, d=0.584; W=275, p=0.0000
+          ndcg: paired-t=21.446, p=0.0000 ***, d=0.647; W=2323, p=0.0000
+            f1: paired-t=19.522, p=0.0000 ***, d=0.589; W=302, p=0.0000
+     exact_acc: paired-t=11.177, p=0.0000 ***, d=0.337; W=3893, p=0.0000
+      tool_acc: paired-t=13.844, p=0.0000 ***, d=0.417; W=2530, p=0.0000
+
+  BEAR+BM25 (gov)  vs  Monolithic (all tools):
+        recall: paired-t=50.547, p=0.0000 ***, d=1.524; W=4229, p=0.0000
+          ndcg: paired-t=54.931, p=0.0000 ***, d=1.656; W=0, p=0.0000
+            f1: paired-t=55.255, p=0.0000 ***, d=1.666; W=3, p=0.0000
+     exact_acc: paired-t=41.403, p=0.0000 ***, d=1.248; W=2446, p=0.0000
+      tool_acc: paired-t=50.426, p=0.0000 ***, d=1.520; W=1172, p=0.0000
+
+  BEAR+Hash (gov)  vs  BGE (no gov):
+        recall: paired-t=-32.190, p=0.0000 ***, d=-0.971; W=14322, p=0.0000
+          ndcg: paired-t=-35.411, p=0.0000 ***, d=-1.068; W=15625, p=0.0000
+            f1: paired-t=-32.369, p=0.0000 ***, d=-0.976; W=14253, p=0.0000
+     exact_acc: paired-t=-23.329, p=0.0000 ***, d=-0.703; W=13675, p=0.0000
+      tool_acc: paired-t=-21.027, p=0.0000 ***, d=-0.634; W=18492, p=0.0000
+
+  BEAR+Hash (gov)  vs  BGE-M3 (no gov):
+        recall: paired-t=-34.805, p=0.0000 ***, d=-1.049; W=9764, p=0.0000
+          ndcg: paired-t=-37.428, p=0.0000 ***, d=-1.128; W=11290, p=0.0000
+            f1: paired-t=-34.637, p=0.0000 ***, d=-1.044; W=10395, p=0.0000
+     exact_acc: paired-t=-23.748, p=0.0000 ***, d=-0.716; W=12128, p=0.0000
+      tool_acc: paired-t=-20.253, p=0.0000 ***, d=-0.611; W=21791, p=0.0000
+
+  BEAR+Hash (gov)  vs  Qwen3-0.6B (no gov):
+        recall: paired-t=-44.060, p=0.0000 ***, d=-1.328; W=5804, p=0.0000
+          ndcg: paired-t=-47.873, p=0.0000 ***, d=-1.443; W=6613, p=0.0000
+            f1: paired-t=-43.966, p=0.0000 ***, d=-1.326; W=5710, p=0.0000
+     exact_acc: paired-t=-26.537, p=0.0000 ***, d=-0.800; W=11232, p=0.0000
+      tool_acc: paired-t=-23.829, p=0.0000 ***, d=-0.718; W=17346, p=0.0000
+
+  BEAR+Hash (gov)  vs  Qwen3-4B (no gov):
+        recall: paired-t=-42.114, p=0.0000 ***, d=-1.270; W=8308, p=0.0000
+          ndcg: paired-t=-44.337, p=0.0000 ***, d=-1.337; W=10400, p=0.0000
+            f1: paired-t=-42.451, p=0.0000 ***, d=-1.280; W=7878, p=0.0000
+     exact_acc: paired-t=-25.601, p=0.0000 ***, d=-0.772; W=11562, p=0.0000
+      tool_acc: paired-t=-24.577, p=0.0000 ***, d=-0.741; W=16632, p=0.0000
+
+  BEAR+Hash (gov)  vs  BM25 (no gov):
+        recall: paired-t=-24.754, p=0.0000 ***, d=-0.746; W=19909, p=0.0000
+          ndcg: paired-t=-27.308, p=0.0000 ***, d=-0.823; W=20780, p=0.0000
+            f1: paired-t=-25.097, p=0.0000 ***, d=-0.757; W=19334, p=0.0000
+     exact_acc: paired-t=-17.346, p=0.0000 ***, d=-0.523; W=15980, p=0.0000
+      tool_acc: paired-t=-14.365, p=0.0000 ***, d=-0.433; W=23912, p=0.0000
+
+  BEAR+Hash (gov)  vs  Monolithic (all tools):
+        recall: paired-t=13.643, p=0.0000 ***, d=0.411; W=5672, p=0.0000
+          ndcg: paired-t=17.181, p=0.0000 ***, d=0.518; W=56, p=0.0000
+            f1: paired-t=18.203, p=0.0000 ***, d=0.549; W=210, p=0.0000
+     exact_acc: paired-t=13.713, p=0.0000 ***, d=0.413; W=2052, p=0.0000
+      tool_acc: paired-t=18.047, p=0.0000 ***, d=0.544; W=3078, p=0.0000
+
+  BGE (no gov)  vs  BGE-M3 (no gov):
+        recall: paired-t=-3.182, p=0.0015 **, d=-0.096; W=23794, p=0.0035
+          ndcg: paired-t=-2.977, p=0.0030 **, d=-0.090; W=79388, p=0.0023
+            f1: paired-t=-3.042, p=0.0024 **, d=-0.092; W=24495, p=0.0117
+     exact_acc: paired-t=-0.144, p=0.8853 n.s., d=-0.004; W=9168, p=0.8852
+      tool_acc: paired-t=0.447, p=0.6549 n.s., d=0.013; W=7874, p=0.6547
+
+  BGE (no gov)  vs  Qwen3-0.6B (no gov):
+        recall: paired-t=-13.742, p=0.0000 ***, d=-0.414; W=15505, p=0.0000
+          ndcg: paired-t=-13.883, p=0.0000 ***, d=-0.419; W=52992, p=0.0000
+            f1: paired-t=-13.784, p=0.0000 ***, d=-0.416; W=15675, p=0.0000
+     exact_acc: paired-t=-3.416, p=0.0007 ***, d=-0.103; W=9831, p=0.0007
+      tool_acc: paired-t=-3.756, p=0.0002 ***, d=-0.113; W=6922, p=0.0002
+
+  BGE (no gov)  vs  Qwen3-4B (no gov):
+        recall: paired-t=-11.121, p=0.0000 ***, d=-0.335; W=26574, p=0.0000
+          ndcg: paired-t=-9.574, p=0.0000 ***, d=-0.289; W=91980, p=0.0000
+            f1: paired-t=-11.121, p=0.0000 ***, d=-0.335; W=26988, p=0.0000
+     exact_acc: paired-t=-2.187, p=0.0290 *, d=-0.066; W=14319, p=0.0290
+      tool_acc: paired-t=-4.330, p=0.0000 ***, d=-0.131; W=8808, p=0.0000
+
+  BGE (no gov)  vs  BM25 (no gov):
+        recall: paired-t=10.122, p=0.0000 ***, d=0.305; W=25582, p=0.0000
+          ndcg: paired-t=10.787, p=0.0000 ***, d=0.325; W=71414, p=0.0000
+            f1: paired-t=10.076, p=0.0000 ***, d=0.304; W=25806, p=0.0000
+     exact_acc: paired-t=6.806, p=0.0000 ***, d=0.205; W=12528, p=0.0000
+      tool_acc: paired-t=7.787, p=0.0000 ***, d=0.235; W=10388, p=0.0000
+
+  BGE (no gov)  vs  Monolithic (all tools):
+        recall: paired-t=45.638, p=0.0000 ***, d=1.376; W=4318, p=0.0000
+          ndcg: paired-t=50.090, p=0.0000 ***, d=1.510; W=1, p=0.0000
+            f1: paired-t=50.058, p=0.0000 ***, d=1.509; W=10, p=0.0000
+     exact_acc: paired-t=37.511, p=0.0000 ***, d=1.131; W=3290, p=0.0000
+      tool_acc: paired-t=42.703, p=0.0000 ***, d=1.288; W=2876, p=0.0000
+
+  BGE-M3 (no gov)  vs  Qwen3-0.6B (no gov):
+        recall: paired-t=-10.404, p=0.0000 ***, d=-0.314; W=19138, p=0.0000
+          ndcg: paired-t=-11.181, p=0.0000 ***, d=-0.337; W=65862, p=0.0000
+            f1: paired-t=-10.551, p=0.0000 ***, d=-0.318; W=18588, p=0.0000
+     exact_acc: paired-t=-3.422, p=0.0006 ***, d=-0.103; W=8216, p=0.0007
+      tool_acc: paired-t=-4.240, p=0.0000 ***, d=-0.128; W=6303, p=0.0000
+
+  BGE-M3 (no gov)  vs  Qwen3-4B (no gov):
+        recall: paired-t=-8.298, p=0.0000 ***, d=-0.250; W=30513, p=0.0000
+          ndcg: paired-t=-7.264, p=0.0000 ***, d=-0.219; W=100324, p=0.0000
+            f1: paired-t=-8.450, p=0.0000 ***, d=-0.255; W=29736, p=0.0000
+     exact_acc: paired-t=-2.120, p=0.0342 *, d=-0.064; W=12810, p=0.0343
+      tool_acc: paired-t=-4.788, p=0.0000 ***, d=-0.144; W=8103, p=0.0000
+
+  BGE-M3 (no gov)  vs  BM25 (no gov):
+        recall: paired-t=12.027, p=0.0000 ***, d=0.363; W=23770, p=0.0000
+          ndcg: paired-t=12.314, p=0.0000 ***, d=0.371; W=63756, p=0.0000
+            f1: paired-t=11.795, p=0.0000 ***, d=0.356; W=24188, p=0.0000
+     exact_acc: paired-t=7.009, p=0.0000 ***, d=0.211; W=11703, p=0.0000
+      tool_acc: paired-t=7.342, p=0.0000 ***, d=0.221; W=11240, p=0.0000
+
+  BGE-M3 (no gov)  vs  Monolithic (all tools):
+        recall: paired-t=46.937, p=0.0000 ***, d=1.415; W=3647, p=0.0000
+          ndcg: paired-t=51.061, p=0.0000 ***, d=1.540; W=0, p=0.0000
+            f1: paired-t=50.814, p=0.0000 ***, d=1.532; W=6, p=0.0000
+     exact_acc: paired-t=38.321, p=0.0000 ***, d=1.155; W=1625, p=0.0000
+      tool_acc: paired-t=42.847, p=0.0000 ***, d=1.292; W=1410, p=0.0000
+
+  Qwen3-0.6B (no gov)  vs  Qwen3-4B (no gov):
+        recall: paired-t=1.226, p=0.2205 n.s., d=0.037; W=27360, p=0.2727
+          ndcg: paired-t=2.930, p=0.0035 **, d=0.088; W=101348, p=0.0059
+            f1: paired-t=1.213, p=0.2254 n.s., d=0.037; W=27673, p=0.3571
+     exact_acc: paired-t=1.089, p=0.2765 n.s., d=0.033; W=10850, p=0.2763
+      tool_acc: paired-t=-0.885, p=0.3766 n.s., d=-0.027; W=7955, p=0.3763
+
+  Qwen3-0.6B (no gov)  vs  BM25 (no gov):
+        recall: paired-t=20.341, p=0.0000 ***, d=0.613; W=12400, p=0.0000
+          ndcg: paired-t=21.167, p=0.0000 ***, d=0.638; W=37941, p=0.0000
+            f1: paired-t=20.503, p=0.0000 ***, d=0.618; W=12506, p=0.0000
+     exact_acc: paired-t=9.701, p=0.0000 ***, d=0.292; W=11352, p=0.0000
+      tool_acc: paired-t=10.925, p=0.0000 ***, d=0.329; W=8555, p=0.0000
+
+  Qwen3-0.6B (no gov)  vs  Monolithic (all tools):
+        recall: paired-t=60.482, p=0.0000 ***, d=1.824; W=1964, p=0.0000
+          ndcg: paired-t=66.105, p=0.0000 ***, d=1.993; W=0, p=0.0000
+            f1: paired-t=65.612, p=0.0000 ***, d=1.978; W=3, p=0.0000
+     exact_acc: paired-t=41.721, p=0.0000 ***, d=1.258; W=2460, p=0.0000
+      tool_acc: paired-t=47.938, p=0.0000 ***, d=1.445; W=1912, p=0.0000
+
+  Qwen3-4B (no gov)  vs  BM25 (no gov):
+        recall: paired-t=18.009, p=0.0000 ***, d=0.543; W=25142, p=0.0000
+          ndcg: paired-t=16.907, p=0.0000 ***, d=0.510; W=69070, p=0.0000
+            f1: paired-t=18.088, p=0.0000 ***, d=0.545; W=25703, p=0.0000
+     exact_acc: paired-t=8.568, p=0.0000 ***, d=0.258; W=13558, p=0.0000
+      tool_acc: paired-t=11.091, p=0.0000 ***, d=0.334; W=11118, p=0.0000
+
+  Qwen3-4B (no gov)  vs  Monolithic (all tools):
+        recall: paired-t=60.002, p=0.0000 ***, d=1.809; W=961, p=0.0000
+          ndcg: paired-t=63.042, p=0.0000 ***, d=1.901; W=0, p=0.0000
+            f1: paired-t=65.141, p=0.0000 ***, d=1.964; W=0, p=0.0000
+     exact_acc: paired-t=40.767, p=0.0000 ***, d=1.229; W=1708, p=0.0000
+      tool_acc: paired-t=49.569, p=0.0000 ***, d=1.495; W=1160, p=0.0000
+
+  BM25 (no gov)  vs  Monolithic (all tools):
+        recall: paired-t=36.281, p=0.0000 ***, d=1.094; W=5464, p=0.0000
+          ndcg: paired-t=39.307, p=0.0000 ***, d=1.185; W=57, p=0.0000
+            f1: paired-t=40.026, p=0.0000 ***, d=1.207; W=15, p=0.0000
+     exact_acc: paired-t=30.526, p=0.0000 ***, d=0.920; W=2725, p=0.0000
+      tool_acc: paired-t=33.786, p=0.0000 ***, d=1.019; W=2372, p=0.0000
+
+============================================================
+  Summary
+============================================================
+  Condition                                       Recall@k               NDCG@k                 F1@k            Exact Acc             Tool Acc   Errors
+  -----------------------------------------------------------------------------------------------------------------------------------------------
+  BEAR+BGE (gov)                      0.696 [0.675, 0.715] 0.655 [0.636, 0.674] 0.427 [0.414, 0.439] 0.694 [0.666, 0.721] 0.767 [0.743, 0.792]    34/1100
+  BEAR+BGE-M3 (gov)                   0.709 [0.688, 0.729] 0.669 [0.649, 0.688] 0.435 [0.422, 0.448] 0.700 [0.673, 0.727] 0.765 [0.740, 0.790]    20/1100
+  BEAR+Qwen3-0.6B (gov)               0.772 [0.754, 0.791] 0.736 [0.719, 0.753] 0.477 [0.465, 0.488] 0.732 [0.705, 0.757] 0.807 [0.784, 0.830]    31/1100
+  BEAR+Qwen3-4B (gov)                 0.758 [0.740, 0.777] 0.708 [0.690, 0.726] 0.467 [0.455, 0.478] 0.695 [0.667, 0.723] 0.792 [0.768, 0.815]    26/1100
+  BEAR+BM25 (gov)                     0.613 [0.591, 0.634] 0.585 [0.564, 0.605] 0.377 [0.364, 0.390] 0.642 [0.614, 0.670] 0.725 [0.698, 0.751]    29/1100
+  BEAR+Hash (gov)                     0.151 [0.135, 0.168] 0.120 [0.106, 0.133] 0.092 [0.082, 0.102] 0.194 [0.170, 0.217] 0.281 [0.255, 0.307]    26/1100
+  BGE (no gov)                        0.570 [0.548, 0.592] 0.545 [0.524, 0.565] 0.349 [0.335, 0.363] 0.599 [0.571, 0.627] 0.660 [0.632, 0.687]    35/1100
+  BGE-M3 (no gov)                     0.596 [0.574, 0.619] 0.566 [0.545, 0.588] 0.365 [0.351, 0.378] 0.601 [0.572, 0.629] 0.655 [0.627, 0.682]    25/1100
+  Qwen3-0.6B (no gov)                 0.696 [0.675, 0.716] 0.662 [0.642, 0.682] 0.428 [0.415, 0.440] 0.645 [0.617, 0.674] 0.707 [0.681, 0.734]    33/1100
+  Qwen3-4B (no gov)                   0.686 [0.665, 0.706] 0.640 [0.620, 0.659] 0.421 [0.408, 0.434] 0.631 [0.603, 0.659] 0.718 [0.692, 0.745]    29/1100
+  BM25 (no gov)                       0.468 [0.445, 0.491] 0.444 [0.422, 0.466] 0.286 [0.272, 0.300] 0.496 [0.467, 0.525] 0.545 [0.515, 0.575]    34/1100
+  Monolithic (all tools)              0.022 [0.014, 0.031] 0.001 [0.000, 0.001] 0.001 [0.001, 0.001] 0.020 [0.013, 0.029] 0.022 [0.014, 0.031]   161/1100
+
+
+% === LaTeX Table ===
+\begin{table}[t]
+\caption{End-to-end ToolBench evaluation: retrieval + LLM tool selection. Retrieval $\rightarrow$ LLM (mistral-nemo-instruct-2407) $\rightarrow$ tool call. $n=1100$ queries, $k=5$, 95\% bootstrap CIs.}
+\label{tab:e2e-toolbench}
+\centering\small
+\begin{tabular}{@{}l ccc cc@{}}
+\toprule
+Condition & Recall@5 & NDCG@5 & F1@5 & Exact Acc & Tool Acc \\
+\midrule
+BEAR+BGE (gov) & $0.696\;[0.675,\;0.715]$ & $0.655\;[0.636,\;0.674]$ & $0.427\;[0.414,\;0.439]$ & $0.694\;[0.666,\;0.721]$ & $0.767\;[0.743,\;0.792]$ \\
+BEAR+BGE-M3 (gov) & $0.709\;[0.688,\;0.729]$ & $0.669\;[0.649,\;0.688]$ & $0.435\;[0.422,\;0.448]$ & $0.700\;[0.673,\;0.727]$ & $0.765\;[0.740,\;0.790]$ \\
+BEAR+Qwen3-0.6B (gov) & $0.772\;[0.754,\;0.791]$ & $0.736\;[0.719,\;0.753]$ & $0.477\;[0.465,\;0.488]$ & $0.732\;[0.705,\;0.757]$ & $0.807\;[0.784,\;0.830]$ \\
+BEAR+Qwen3-4B (gov) & $0.758\;[0.740,\;0.777]$ & $0.708\;[0.690,\;0.726]$ & $0.467\;[0.455,\;0.478]$ & $0.695\;[0.667,\;0.723]$ & $0.792\;[0.768,\;0.815]$ \\
+BEAR+BM25 (gov) & $0.613\;[0.591,\;0.634]$ & $0.585\;[0.564,\;0.605]$ & $0.377\;[0.364,\;0.390]$ & $0.642\;[0.614,\;0.670]$ & $0.725\;[0.698,\;0.751]$ \\
+BEAR+Hash (gov) & $0.151\;[0.135,\;0.168]$ & $0.120\;[0.106,\;0.133]$ & $0.092\;[0.082,\;0.102]$ & $0.194\;[0.170,\;0.217]$ & $0.281\;[0.255,\;0.307]$ \\
+BGE (no gov) & $0.570\;[0.548,\;0.592]$ & $0.545\;[0.524,\;0.565]$ & $0.349\;[0.335,\;0.363]$ & $0.599\;[0.571,\;0.627]$ & $0.660\;[0.632,\;0.687]$ \\
+BGE-M3 (no gov) & $0.596\;[0.574,\;0.619]$ & $0.566\;[0.545,\;0.588]$ & $0.365\;[0.351,\;0.378]$ & $0.601\;[0.572,\;0.629]$ & $0.655\;[0.627,\;0.682]$ \\
+Qwen3-0.6B (no gov) & $0.696\;[0.675,\;0.716]$ & $0.662\;[0.642,\;0.682]$ & $0.428\;[0.415,\;0.440]$ & $0.645\;[0.617,\;0.674]$ & $0.707\;[0.681,\;0.734]$ \\
+Qwen3-4B (no gov) & $0.686\;[0.665,\;0.706]$ & $0.640\;[0.620,\;0.659]$ & $0.421\;[0.408,\;0.434]$ & $0.631\;[0.603,\;0.659]$ & $0.718\;[0.692,\;0.745]$ \\
+BM25 (no gov) & $0.468\;[0.445,\;0.491]$ & $0.444\;[0.422,\;0.466]$ & $0.286\;[0.272,\;0.300]$ & $0.496\;[0.467,\;0.525]$ & $0.545\;[0.515,\;0.575]$ \\
+Monolithic (all tools) & $0.022\;[0.014,\;0.031]$ & $0.001\;[0.000,\;0.001]$ & $0.001\;[0.001,\;0.001]$ & $0.020\;[0.013,\;0.029]$ & $0.022\;[0.014,\;0.031]$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Results saved to /mnt/c/users/scott/documents/work/paper-retrieval-governed-context-artifacts/evals/results/toolbench_e2e_results.json
+Raw scores saved to /mnt/c/users/scott/documents/work/paper-retrieval-governed-context-artifacts/evals/results/toolbench_e2e_scores.json

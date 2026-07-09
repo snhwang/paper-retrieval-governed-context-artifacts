@@ -40,7 +40,7 @@ PORT="${PORT:-8000}"
 # up to 128k natively; bump higher if your VRAM allows and you want a
 # bigger KV-cache concurrency window.
 MAX_MODEL_LEN="${MAX_MODEL_LEN:-32768}"
-GPU_MEM_UTIL="${GPU_MEM_UTIL:-0.85}"
+GPU_MEM_UTIL="${GPU_MEM_UTIL:-0.3}"
 
 # --- Auto-detect WSL and default to eager mode ----------------------------
 # vLLM's CUDA graph capture (Profiling CUDA graph memory step) segfaults on

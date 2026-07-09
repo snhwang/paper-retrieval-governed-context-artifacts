@@ -93,26 +93,52 @@ def call_llm_with_tools(
     """Send query + tool schemas to LLM, return the tool_call or None."""
     import urllib.request
 
+    tool_names = [s.get("name", "") for s in tool_schemas if s.get("name")]
+    if not tool_names:
+        return None
+
+    # List the candidate tools in the prompt (name + description is the
+    # selection-relevant information; parameters are not scored). The model
+    # selects one by name.
+    tool_list = "\n".join(
+        f"- {s['name']}: {(s.get('description') or '').strip()[:400]}"
+        for s in tool_schemas if s.get("name")
+    )
     messages = [
-        {"role": "system", "content": "You are a helpful assistant. Use the provided tools to answer the user's query. Call exactly one tool."},
+        {"role": "system", "content": (
+            "You are a tool-selection assistant. Given the user's query and the "
+            "list of available tools, choose the single most appropriate tool. "
+            "Respond with a JSON object {\"tool\": \"<exact tool name>\"} and nothing else."
+            "\n\nAvailable tools:\n" + tool_list
+        )},
         {"role": "user", "content": query},
     ]
 
-    # Format tools in OpenAI function-calling format
-    tools = []
-    for schema in tool_schemas:
-        tools.append({
-            "type": "function",
-            "function": schema,
-        })
+    # Constrained decoding: force the answer to be exactly one of the candidate
+    # tool names via an enum JSON schema. This makes malformed / free-form output
+    # impossible, so the metric measures tool *selection* rather than the model's
+    # ability to emit syntactically valid function-call JSON. The OpenAI
+    # Structured-Outputs response_format is honored by vLLM and LM Studio.
+    response_format = {
+        "type": "json_schema",
+        "json_schema": {
+            "name": "tool_selection",
+            "strict": True,
+            "schema": {
+                "type": "object",
+                "properties": {"tool": {"type": "string", "enum": tool_names}},
+                "required": ["tool"],
+                "additionalProperties": False,
+            },
+        },
+    }
 
     payload = json.dumps({
         "model": model,
         "messages": messages,
-        "tools": tools,
-        "tool_choice": "auto",
         "temperature": temperature,
-        "max_tokens": 512,
+        "max_tokens": 100,
+        "response_format": response_format,
     }, ensure_ascii=False).encode("utf-8")
 
     req = urllib.request.Request(
@@ -143,8 +169,9 @@ def call_llm_with_tools(
                 f"\nFATAL: 20 consecutive LLM calls failed with zero successes.\n"
                 f"  Base URL: {base_url}\n"
                 f"  Model:    {model}\n"
-                f"  Aborting to prevent an all-zero result. Check the vLLM\n"
-                f"  server URL and --base-url flag.",
+                f"  Aborting to prevent an all-zero result. Check the LLM\n"
+                f"  server URL and --base-url flag, and that it supports\n"
+                f"  response_format json_schema (structured outputs).",
                 file=sys.stderr,
             )
             sys.exit(1)
@@ -152,24 +179,22 @@ def call_llm_with_tools(
 
     call_llm_with_tools._success_count = getattr(call_llm_with_tools, "_success_count", 0) + 1
 
-    msg = data["choices"][0]["message"]
-    tool_calls = msg.get("tool_calls", [])
-    if tool_calls:
-        tc = tool_calls[0]
-        return {
-            "name": tc["function"]["name"],
-            "arguments": tc["function"].get("arguments", "{}"),
-        }
-    # Some models return the tool call in content
-    content = msg.get("content", "").strip()
-    if content:
-        # Try to parse as JSON tool call
-        try:
-            parsed = json.loads(content)
-            if "name" in parsed:
-                return {"name": parsed["name"], "arguments": json.dumps(parsed.get("arguments", {}))}
-        except (json.JSONDecodeError, TypeError):
-            pass
+    content = (data["choices"][0]["message"].get("content") or "").strip()
+    if not content:
+        return None
+    # Under strict schema decoding this parses on every call; the fallbacks guard
+    # against a server that silently ignores response_format.
+    try:
+        parsed = json.loads(content)
+        name = parsed.get("tool")
+        if name in tool_names:
+            return {"name": name, "arguments": "{}"}
+    except (json.JSONDecodeError, TypeError):
+        pass
+    # Fallback: an exact tool name appearing verbatim in the text.
+    for nm in tool_names:
+        if nm in content:
+            return {"name": nm, "arguments": "{}"}
     return None
 
 

@@ -1,0 +1,17 @@
+LLM model: mistralai/Mistral-Nemo-Instruct-2407
+LLM URL: http://localhost:8000/v1
+Top-k: 5
+LLM server: reachable
+
+Loading ToolBench data...
+Corpus: 3225 APIs
+Queries: 1100
+
+Conditions: BEAR+BGE (gov), BEAR+BGE-M3 (gov), BEAR+Qwen3-0.6B (gov), BEAR+Qwen3-4B (gov), BEAR+BM25 (gov), BEAR+Hash (gov), BGE (no gov), BGE-M3 (no gov), Qwen3-0.6B (no gov), Qwen3-4B (no gov), BM25 (no gov)
+
+============================================================
+  BEAR+BGE (gov)
+============================================================
+Batches:   0%|          | 0/101 [00:00<?, ?it/s]Batches:   1%|          | 1/101 [00:00<00:12,  8.02it/s]Batches:   3%|▎         | 3/101 [00:00<00:09, 10.12it/s]Batches:   5%|▍         | 5/101 [00:00<00:07, 12.18it/s]Batches:   7%|▋         | 7/101 [00:00<00:06, 14.11it/s]Batches:  10%|▉         | 10/101 [00:00<00:05, 17.80it/s]Batches:  14%|█▍        | 14/101 [00:00<00:03, 22.15it/s]Batches:  17%|█▋        | 17/101 [00:00<00:03, 23.74it/s]Batches:  21%|██        | 21/101 [00:01<00:02, 26.81it/s]Batches:  25%|██▍       | 25/101 [00:01<00:02, 28.95it/s]Batches:  30%|██▉       | 30/101 [00:01<00:02, 32.73it/s]Batches:  35%|███▍      | 35/101 [00:01<00:01, 35.71it/s]Batches:  40%|███▉      | 40/101 [00:01<00:01, 38.25it/s]Batches:  45%|████▍     | 45/101 [00:01<00:01, 40.51it/s]Batches:  50%|█████     | 51/101 [00:01<00:01, 43.99it/s]Batches:  56%|█████▋    | 57/101 [00:01<00:00, 46.97it/s]Batches:  62%|██████▏   | 63/101 [00:01<00:00, 47.92it/s]Batches:  68%|██████▊   | 69/101 [00:02<00:00, 50.34it/s]Batches:  74%|███████▍  | 75/101 [00:02<00:00, 52.96it/s]Batches:  81%|████████  | 82/101 [00:02<00:00, 56.42it/s]Batches:  88%|████████▊ | 89/101 [00:02<00:00, 59.60it/s]Batches:  95%|█████████▌| 96/101 [00:02<00:00, 61.19it/s]Batches: 100%|██████████| 101/101 [00:02<00:00, 39.59it/s]
+  LLM call failed (#1) at http://localhost:8000/v1: HTTPError: HTTP Error 500: Internal Server Error
+  LLM call failed (#2) at http://localhost:8000/v1: HTTPError: HTTP Error 500: Internal Server Error

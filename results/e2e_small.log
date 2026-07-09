@@ -1,0 +1,66 @@
+  LLM call failed (#1) at http://localhost:8000/v1: HTTPError: HTTP Error 500: Internal Server Error
+  LLM call failed (#2) at http://localhost:8000/v1: HTTPError: HTTP Error 500: Internal Server Error
+  LLM call failed (#3) at http://localhost:8000/v1: HTTPError: HTTP Error 500: Internal Server Error
+  LLM call failed (#4) at http://localhost:8000/v1: HTTPError: HTTP Error 500: Internal Server Error
+  LLM call failed (#5) at http://localhost:8000/v1: HTTPError: HTTP Error 500: Internal Server Error
+  LLM call failed (#50) at http://localhost:8000/v1: HTTPError: HTTP Error 500: Internal Server Error
+LLM model: mistralai/Mistral-Nemo-Instruct-2407
+LLM URL: http://localhost:8000/v1
+Top-k: 5
+LLM server: reachable
+
+Loading ToolBench data...
+Corpus: 3225 APIs
+Queries: 1100
+
+Conditions: 
+
+============================================================
+  Monolithic (all tools)
+============================================================
+    [50/1100] exact_acc=0.380 tool_acc=0.400 errors=11
+    [150/1100] exact_acc=0.133 tool_acc=0.140 errors=38
+    [250/1100] exact_acc=0.084 tool_acc=0.088 errors=62
+    [350/1100] exact_acc=0.060 tool_acc=0.063 errors=94
+    [450/1100] exact_acc=0.047 tool_acc=0.049 errors=123
+    [500/1100] exact_acc=0.042 tool_acc=0.044 errors=140
+    [550/1100] exact_acc=0.038 tool_acc=0.040 errors=150
+    [650/1100] exact_acc=0.032 tool_acc=0.034 errors=192
+    [700/1100] exact_acc=0.031 tool_acc=0.033 errors=210
+    [850/1100] exact_acc=0.027 tool_acc=0.028 errors=267
+    [900/1100] exact_acc=0.026 tool_acc=0.027 errors=284
+    [1000/1100] exact_acc=0.024 tool_acc=0.025 errors=321
+
+  Monolithic:
+    Retrieval (static subset coverage):
+      Recall@5:    0.022 [0.014, 0.031]
+      NDCG@5:      0.000 [0.000, 0.001]
+      F1@5:        0.001 [0.001, 0.001]
+    LLM tool selection:
+      Exact accuracy: 0.022 [0.014, 0.031]
+      Tool accuracy:  0.023 [0.015, 0.032]
+
+============================================================
+  Summary
+============================================================
+  Condition                                       Recall@k               NDCG@k                 F1@k            Exact Acc             Tool Acc   Errors
+  -----------------------------------------------------------------------------------------------------------------------------------------------
+  Monolithic (all tools)              0.022 [0.014, 0.031] 0.000 [0.000, 0.001] 0.001 [0.001, 0.001] 0.022 [0.014, 0.031] 0.023 [0.015, 0.032]   357/1100
+
+
+% === LaTeX Table ===
+\begin{table}[t]
+\caption{End-to-end ToolBench evaluation: retrieval + LLM tool selection. Retrieval $\rightarrow$ LLM (mistralai/Mistral-Nemo-Instruct-2407) $\rightarrow$ tool call. $n=1100$ queries, $k=5$, 95\% bootstrap CIs.}
+\label{tab:e2e-toolbench}
+\centering\small
+\begin{tabular}{@{}l ccc cc@{}}
+\toprule
+Condition & Recall@5 & NDCG@5 & F1@5 & Exact Acc & Tool Acc \\
+\midrule
+Monolithic (all tools) & $0.022\;[0.014,\;0.031]$ & $0.000\;[0.000,\;0.001]$ & $0.001\;[0.001,\;0.001]$ & $0.022\;[0.014,\;0.031]$ & $0.023\;[0.015,\;0.032]$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Results saved to /mnt/c/users/scott/documents/work/paper-retrieval-governed-context-artifacts/evals/results/toolbench_e2e_results.json
+Raw scores saved to /mnt/c/users/scott/documents/work/paper-retrieval-governed-context-artifacts/evals/results/toolbench_e2e_scores.json

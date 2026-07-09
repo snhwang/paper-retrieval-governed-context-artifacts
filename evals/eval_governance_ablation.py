@@ -326,7 +326,7 @@ def main():
               f"{data['savings']:>7.1f}%")
 
     all_results["token_efficiency"] = {
-        k: {"tokens": v["tokens"], "savings": v["savings"]}
+        k: {"tokens": v["tokens"], "instructions": v.get("instructions"), "savings": v["savings"]}
         for k, v in tok_results.items()
     }
 
