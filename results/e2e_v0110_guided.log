@@ -1,0 +1,15 @@
+LLM model: mistralai/Mistral-Nemo-Instruct-2407
+LLM URL: http://localhost:8000/v1
+Top-k: 5
+LLM server: reachable
+
+Loading ToolBench data...
+Corpus: 3225 APIs
+Queries: 1100
+
+Conditions: BEAR+BGE (gov), BEAR+BGE-M3 (gov), BEAR+Qwen3-0.6B (gov), BEAR+Qwen3-4B (gov), BEAR+BM25 (gov), BEAR+Hash (gov), BGE (no gov), BGE-M3 (no gov), Qwen3-0.6B (no gov), Qwen3-4B (no gov), BM25 (no gov)
+
+============================================================
+  BEAR+BGE (gov)
+============================================================
+Batches:   0%|          | 0/101 [00:00<?, ?it/s]Batches:   1%|          | 1/101 [00:00<00:11,  8.69it/s]Batches:   3%|▎         | 3/101 [00:00<00:09, 10.36it/s]Batches:   5%|▍         | 5/101 [00:00<00:07, 12.65it/s]Batches:   7%|▋         | 7/101 [00:00<00:06, 14.58it/s]Batches:  10%|▉         | 10/101 [00:00<00:05, 18.08it/s]Batches:  13%|█▎        | 13/101 [00:00<00:04, 21.44it/s]Batches:  17%|█▋        | 17/101 [00:00<00:03, 23.81it/s]Batches:  21%|██        | 21/101 [00:01<00:03, 26.51it/s]Batches:  25%|██▍       | 25/101 [00:01<00:02, 29.26it/s]Batches:  30%|██▉       | 30/101 [00:01<00:02, 33.51it/s]Batches:  35%|███▍      | 35/101 [00:01<00:01, 37.03it/s]Batches:  40%|███▉      | 40/101 [00:01<00:01, 39.86it/s]Batches:  45%|████▍     | 45/101 [00:01<00:01, 42.48it/s]Batches:  50%|█████     | 51/101 [00:01<00:01, 46.36it/s]Batches:  56%|█████▋    | 57/101 [00:01<00:00, 49.63it/s]Batches:  62%|██████▏   | 63/101 [00:01<00:00, 51.37it/s]Batches:  69%|██████▉   | 70/101 [00:01<00:00, 54.60it/s]Batches:  76%|███████▌  | 77/101 [00:02<00:00, 57.95it/s]Batches:  83%|████████▎ | 84/101 [00:02<00:00, 61.12it/s]Batches:  91%|█████████ | 92/101 [00:02<00:00, 64.50it/s]Batches:  99%|█████████▉| 100/101 [00:02<00:00, 66.70it/s]Batches: 100%|██████████| 101/101 [00:02<00:00, 41.41it/s]

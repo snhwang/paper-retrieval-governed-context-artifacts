@@ -31,7 +31,7 @@ Usage:
     python eval_toolbench_e2e.py --all                    # all backends
     python eval_toolbench_e2e.py --backends bge bm25      # specific backends
     python eval_toolbench_e2e.py --max-queries 100        # quick test
-    python eval_toolbench_e2e.py --model mistral-nemo-instruct-2407
+    python eval_toolbench_e2e.py --model mistralai/Mistral-Nemo-Instruct-2407
 """
 
 from __future__ import annotations

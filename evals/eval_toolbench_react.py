@@ -20,16 +20,17 @@ We evaluate three conditions::
 
     1. Monolithic + ReAct           (all tool schemas, ReAct prompt)
     2. BEAR retrieval + ReAct       (top-k BEAR-retrieved, ReAct prompt)
-    3. BEAR retrieval + single-turn (reference; same as Table 5)
+    3. BEAR retrieval + single-turn (reference; same condition as the
+       single-turn end-to-end table, ``tab:e2e``)
 
 Metric: tool selection accuracy (exact match on tool_name + api_name)
 against ToolBench ground truth.
 
 LLM requirements
 ----------------
-Any OpenAI-compatible endpoint (LM Studio, vLLM, Ollama). Paper Table 5
-used ``mistralai/Mistral-Nemo-Instruct-2407`` 12B via vLLM. Pass
-``--model`` and ``--base-url`` to override.
+Any OpenAI-compatible endpoint (LM Studio, vLLM, Ollama). The paper's
+end-to-end experiments used ``mistralai/Mistral-Nemo-Instruct-2407`` 12B
+via vLLM. Pass ``--model`` and ``--base-url`` to override.
 
 Usage
 -----
@@ -52,8 +53,8 @@ Output
 - ``results/toolbench_react_metrics.json`` (per-condition tool-accuracy
   with 95% bootstrap CIs and paired bootstrap p-values)
 - ``results/toolbench_react_output.txt`` (tee'd printed log)
-- A LaTeX block printed at the end for paste into a new manuscript
-  table (Table 5b).
+- A LaTeX block printed at the end for paste into the manuscript's
+  ReAct end-to-end table (``tab:e2e-react``).
 """
 
 from __future__ import annotations
@@ -85,7 +86,7 @@ from eval_toolbench_e2e import (  # noqa: E402
 )
 
 # Default to port 8000 to match serve_mistral_nemo.sh and the paper's
-# Table 5 deployment. The user can still override with --base-url.
+# end-to-end deployment. The user can still override with --base-url.
 DEFAULT_LLM_URL = "http://127.0.0.1:8000/v1"
 from bear import Composer, CompositionStrategy, Context  # noqa: E402
 from repro_footer import print_repro_footer  # noqa: E402
@@ -589,7 +590,7 @@ def main() -> None:
 
         # Schema providers. The BEAR provider passes the query's
         # ground-truth category tags as Context.tags, matching the
-        # Table 5 (Section 5.3) deployment in eval_toolbench.py:
+        # end-to-end deployment in eval_toolbench.py:
         # ToolBench tools carry required_tags=[cat_tag], so an empty
         # context-tag set would exclude every tool. The monolithic
         # provider is tag-agnostic by design.
@@ -669,7 +670,7 @@ def main() -> None:
             })
 
         # LaTeX block
-        print("\n--- LaTeX table (paste into manuscript as Table 5b) ---\n")
+        print("\n--- LaTeX table (paste into manuscript as tab:e2e-react) ---\n")
         print(r"\begin{table}[t]")
         print(
             rf"  \caption{{End-to-end ToolBench tool-selection accuracy under "

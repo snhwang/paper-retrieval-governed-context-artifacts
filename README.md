@@ -9,16 +9,33 @@ Evaluation scripts, frozen corpus, and result files for:
 
 > "Retrieval-Governed Context: Scope-Gated Selection of Instructions and Tools for LLMs and Intelligent Agents"
 
-Uses the BEAR library at [snhwang/bear](https://github.com/snhwang/bear), pinned to `v0.1.0`.
+Uses the BEAR library at [snhwang/bear](https://github.com/snhwang/bear), pinned to `v0.1.10`.
 
 ## Quick Start
 
-```bash
-python -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt
+Requires [uv](https://docs.astral.sh/uv/).
 
-# Download external benchmark data (ToolBench + MetaTool)
-python evals/toolbench_setup.py
+### First-time setup (run once)
+
+Creates the environment, installs the pinned dependencies, and downloads the
+external benchmark data. Note that `uv venv` does not install `pip` into the
+environment, so use `uv pip` for installs (plain `pip` would resolve to a system
+interpreter and install outside the venv).
+
+```bash
+uv venv                                 # create .venv
+source .venv/bin/activate
+uv pip install -r requirements.txt      # pinned dependency set
+python evals/toolbench_setup.py         # download ToolBench + MetaTool data
+```
+
+### Every session after that
+
+The setup steps above do not need to be repeated. Just activate the environment
+and run:
+
+```bash
+source .venv/bin/activate
 
 # Reproduce all deterministic paper tables
 ./run_evals.sh
@@ -203,4 +220,4 @@ The `pet_sim/instructions/` directory is a frozen snapshot of the corpus used to
 
 ## BEAR Version
 
-Pinned to bear `v0.1.0` (see `requirements.txt`). Bumping the version will likely change numerical results. Update the pin and re-run the full suite before comparing to published numbers.
+Pinned to bear `v0.1.10` (see `requirements.txt`). Bumping the version will likely change numerical results. Update the pin and re-run the full suite before comparing to published numbers.

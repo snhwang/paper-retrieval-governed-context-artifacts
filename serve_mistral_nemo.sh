@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
 # =============================================================================
-# serve_mistral_nemo.sh — vLLM server for paper Table 5
+# serve_mistral_nemo.sh — vLLM server for the end-to-end ToolBench experiments
 #
 # Serves mistralai/Mistral-Nemo-Instruct-2407 (12B) on an OpenAI-compatible
 # chat-completions endpoint. This matches the deployment used for the paper's
-# end-to-end ToolBench experiment (Table 5).
+# end-to-end ToolBench experiments (tool selection and the ReAct variant),
+# produced by evals/eval_toolbench_e2e.py and evals/eval_toolbench_react.py.
 #
 # Prerequisites:
 #   - CUDA GPU with ~24GB VRAM at fp16 (less with quantization; see vLLM docs)
@@ -24,7 +25,7 @@
 #   - HF_TOKEN check -> warn if missing (non-fatal but slower downloads)
 #
 # Once the server is ready, in another shell:
-#   ./run_evals.sh --all --base-url http://127.0.0.1:8000/v1
+#   ./run_evals.sh --all --base-url http://127.0.0.1:8355/v1
 #
 # To stop: Ctrl+C
 # =============================================================================
@@ -32,7 +33,7 @@
 set -e
 
 MODEL="${MODEL:-mistralai/Mistral-Nemo-Instruct-2407}"
-PORT="${PORT:-8000}"
+PORT="${PORT:-8355}"
 # Default to 32768. The monolithic-200 ReAct condition in
 # eval_toolbench_react.py produces ~13.5k-token prompts and would crash on
 # the original 8192 default with VLLMValidationError. 32k fits comfortably
@@ -40,7 +41,7 @@ PORT="${PORT:-8000}"
 # up to 128k natively; bump higher if your VRAM allows and you want a
 # bigger KV-cache concurrency window.
 MAX_MODEL_LEN="${MAX_MODEL_LEN:-32768}"
-GPU_MEM_UTIL="${GPU_MEM_UTIL:-0.3}"
+GPU_MEM_UTIL="${GPU_MEM_UTIL:-0.4}"
 
 # --- Auto-detect WSL and default to eager mode ----------------------------
 # vLLM's CUDA graph capture (Profiling CUDA graph memory step) segfaults on
@@ -124,7 +125,7 @@ if [[ -z "${HF_TOKEN:-}" ]] && [[ ! -d "$HF_CACHE/hub/models--mistralai--Mistral
 fi
 
 echo "========================================"
-echo "  vLLM: serving paper Table 5 model"
+echo "  vLLM: serving the end-to-end ToolBench model"
 echo "========================================"
 echo "  Model:    $MODEL"
 echo "  Port:     $PORT"
