@@ -34,6 +34,11 @@ set -e
 
 MODEL="${MODEL:-mistralai/Mistral-Nemo-Instruct-2407}"
 PORT="${PORT:-8355}"
+# Bind to all interfaces so the server is reachable from another machine. This
+# lets you run the LLM on a dedicated GPU box and the eval elsewhere, so vLLM's
+# weights + KV cache never compete for VRAM with the eval's embedding models.
+# Override with HOST=127.0.0.1 to restrict to localhost.
+HOST="${HOST:-0.0.0.0}"
 # Default to 32768. The monolithic-200 ReAct condition in
 # eval_toolbench_react.py produces ~13.5k-token prompts and would crash on
 # the original 8192 default with VLLMValidationError. 32k fits comfortably
@@ -176,6 +181,7 @@ trap "kill $POLLER_PID 2>/dev/null" EXIT
 # tool_choice=auto. Without these flags, vLLM silently drops the tool block
 # and the eval scores 0 across the board.
 vllm serve "$MODEL" \
+    --host "$HOST" \
     --port "$PORT" \
     --max-model-len "$MAX_MODEL_LEN" \
     --gpu-memory-utilization "$GPU_MEM_UTIL" \

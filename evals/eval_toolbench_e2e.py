@@ -1,4 +1,4 @@
-"""End-to-end ToolBench evaluation: retrieval → LLM tool selection → accuracy.
+r"""End-to-end ToolBench evaluation: retrieval → LLM tool selection → accuracy.
 
 Measures whether BEAR's governance-aware retrieval improves the LLM's ability
 to select the correct tool, not just whether the correct tool is in the
@@ -6,9 +6,12 @@ retrieved candidate set.
 
 Pipeline per query:
   1. BEAR retrieves top-k tool schemas from the ToolBench corpus
-  2. Tool schemas are composed into an OpenAI-compatible tool array
-  3. The query + tools are sent to a local LLM (via LM Studio)
-  4. The LLM's tool_call is compared against ToolBench ground truth
+  2. The candidate tool names and descriptions are listed in the prompt
+  3. The query is sent to an OpenAI-compatible LLM endpoint under a strict
+     enum JSON schema (constrained decoding), so the model must return exactly
+     one of the candidate tool names. This isolates tool *selection* from the
+     model's ability to emit syntactically valid function-call JSON.
+  4. The selected tool is compared against ToolBench ground truth
 
 Metrics:
   - Tool selection accuracy (exact match on tool_name + api_name)
@@ -22,16 +25,33 @@ Backends tested (configurable via --backends):
   Baseline: Monolithic (all tools injected)
 
 LLM Requirements:
-  Any OpenAI-compatible endpoint (LM Studio, vLLM, Ollama). Paper Table 5
-  used mistralai/Mistral-Nemo-Instruct-2407 12B via vLLM. Pass via --model
-  and --base-url, or rely on the LM Studio defaults (port 1234).
+  Any OpenAI-compatible endpoint (LM Studio, vLLM, Ollama) that supports
+  response_format json_schema (structured outputs). The paper's end-to-end
+  experiments used mistralai/Mistral-Nemo-Instruct-2407 12B via vLLM. Pass via
+  --model and --base-url, or rely on the LM Studio defaults (port 1234).
 
 Usage:
-    python eval_toolbench_e2e.py                          # default: BGE gov + no-gov + monolithic
-    python eval_toolbench_e2e.py --all                    # all backends
-    python eval_toolbench_e2e.py --backends bge bm25      # specific backends
-    python eval_toolbench_e2e.py --max-queries 100        # quick test
-    python eval_toolbench_e2e.py --model mistralai/Mistral-Nemo-Instruct-2407
+    python eval_toolbench_e2e.py \
+        --all \
+        --max-queries 100 \
+        --top-k 5 \
+        --model gemma-4-12b \
+        --base-url http://localhost:8355/v1 \
+        --skip-monolithic
+
+    Run with no flags for the default set (BGE gov + no-gov + monolithic)
+    against an LM Studio endpoint on port 1234.
+
+Options:
+    --all                Run all backends (mutually exclusive with --backends)
+    --backends NAME...   Run only the named backends, e.g. --backends bge bm25
+    --max-queries N      Limit queries for a quick test (0 = all, default)
+    --top-k N            Number of tools to retrieve (default: 5)
+    --model ID           LLM model ID (default: mistralai/Mistral-Nemo-Instruct-2407)
+    --base-url URL       OpenAI-compatible endpoint (default: auto-detected,
+                         else http://127.0.0.1:1234/v1)
+    --skip-monolithic    Skip the monolithic baseline (slow with many tools)
+    --stats-only         Recompute stats from saved scores; no LLM required
 """
 
 from __future__ import annotations
