@@ -106,17 +106,15 @@ RESULTS_DIR.mkdir(exist_ok=True)
 
 REACT_SYSTEM_PROMPT = """You are a helpful assistant that selects exactly one tool to answer the user's query.
 
-You operate in a single Thought/Action step:
+You operate in a single Thought/Action step. Respond with a JSON object of the form:
 
-  Thought: <one or two sentences of reasoning about which tool best fits the query>
-  Action: <the exact name of the tool you choose, copied verbatim from the available tools list>
-
-After emitting `Action: <tool_name>`, you may also produce a regular structured tool_call with the same tool. Do not call more than one tool.
+  {"thought": "<one or two sentences of reasoning about which tool best fits the query>",
+   "action": "<the exact name of the tool you choose>"}
 
 Constraints:
+- Reason first in "thought", then commit to a single tool in "action".
 - Use exactly one tool.
-- The Action line must contain only the tool name. No JSON, no quotes, no extra punctuation.
-- The tool name MUST match exactly one of the names in the tool schemas provided to you. Do not invent tools.
+- The "action" value MUST be exactly one of the available tool names listed below. Do not invent tools.
 """
 
 
@@ -136,22 +134,60 @@ def call_llm_react(
 ) -> tuple[str | None, str]:
     """Return (selected_tool_name, raw_content) using a ReAct-style prompt.
 
-    Tries the structured tool_call first. Falls back to parsing
-    ``Action: <tool_name>`` out of the message content.
+    The reply is produced under constrained decoding: a JSON schema requires a
+    free-text ``thought`` followed by an ``action`` restricted to an enum of the
+    candidate tool names. The Thought step (the scaffold under test) is
+    preserved, while a malformed or out-of-vocabulary action is impossible, so
+    this condition records no parse failures.
+
+    The single-turn reference condition selects tools with the same constrained
+    mechanism (``call_llm_with_tools`` from the end-to-end eval), so the two
+    conditions differ only by the presence of the Thought. That is what makes
+    the ReAct-vs-single-turn contrast a clean test of the reasoning scaffold
+    rather than of the model's output formatting.
     """
+    tool_names = [s.get("name", "") for s in tool_schemas if s.get("name")]
+    if not tool_names:
+        return None, ""
+
+    # The candidate tools are listed in the prompt rather than passed as an
+    # OpenAI ``tools`` array: the array invites a structured tool_call whose
+    # arguments the server must parse, and a malformed one fails the whole
+    # request, discarding an otherwise valid action.
+    tool_list = "\n".join(
+        f"- {s['name']}: {(s.get('description') or '').strip()[:400]}"
+        for s in tool_schemas if s.get("name")
+    )
     messages = [
-        {"role": "system", "content": REACT_SYSTEM_PROMPT},
+        {"role": "system",
+         "content": REACT_SYSTEM_PROMPT + "\nAvailable tools:\n" + tool_list},
         {"role": "user", "content": query},
     ]
-    tools = [{"type": "function", "function": s} for s in tool_schemas]
+
+    response_format = {
+        "type": "json_schema",
+        "json_schema": {
+            "name": "react_step",
+            "strict": True,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "thought": {"type": "string"},
+                    "action": {"type": "string", "enum": tool_names},
+                },
+                "required": ["thought", "action"],
+                "additionalProperties": False,
+            },
+        },
+    }
+
     payload = json.dumps(
         {
             "model": model,
             "messages": messages,
-            "tools": tools,
-            "tool_choice": "auto",
             "temperature": temperature,
             "max_tokens": max_tokens,
+            "response_format": response_format,
         },
         ensure_ascii=False,
     ).encode("utf-8")
@@ -190,13 +226,18 @@ def call_llm_react(
     msg = data["choices"][0]["message"]
     raw_content = msg.get("content", "") or ""
 
-    # 1. Structured tool_call (preferred)
-    tcs = msg.get("tool_calls") or []
-    if tcs:
-        name = tcs[0]["function"]["name"]
-        return name, raw_content
+    # 1. Constrained JSON: {"thought": ..., "action": <one of tool_names>}.
+    #    Under strict schema decoding this parses on every call.
+    try:
+        parsed = json.loads(raw_content)
+        action = parsed.get("action")
+        if action in tool_names:
+            return action, raw_content
+    except (json.JSONDecodeError, TypeError):
+        pass
 
-    # 2. Parse Action: <name> from the content
+    # 2. Fallback, reachable only if the server ignored response_format:
+    #    parse an ``Action: <name>`` line out of free-form text.
     m = re.search(
         r"^\s*Action\s*:\s*([A-Za-z0-9_./-]+)\s*$",
         raw_content,

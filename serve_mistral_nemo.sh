@@ -204,10 +204,12 @@ echo ""
 POLLER_PID=$!
 trap "kill $POLLER_PID 2>/dev/null" EXIT
 
-# Tool-calling support is REQUIRED by the ReAct end-to-end ToolBench eval
-# (eval_toolbench_react.py), which sends OpenAI-compatible tools= and
-# tool_choice=auto. Without these flags, vLLM silently drops the tool block
-# and the eval scores 0 across the board.
+# What the end-to-end evals actually require is structured-output support: both
+# eval_toolbench_e2e.py and eval_toolbench_react.py constrain tool selection with
+# response_format json_schema, which vLLM supports natively. Neither sends
+# tools=/tool_choice any more, so the tool-calling flags below are no longer
+# needed by them; they are harmless and retained for any client that does use
+# native function calling.
 vllm serve "$MODEL" \
     --host "$HOST" \
     --port "$PORT" \
