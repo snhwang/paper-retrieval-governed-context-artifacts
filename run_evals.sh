@@ -30,9 +30,15 @@
 #     Table 8     End-to-end ToolBench (ReAct)           eval_toolbench_react.py
 #
 # LLM ENDPOINT:
-#   The paper used mistralai/Mistral-Nemo-Instruct-2407 (12B) served via
-#   vLLM 0.17.1 (see serve_mistral_nemo.sh). Any OpenAI-compatible endpoint
-#   works. Override defaults with --model and --base-url.
+#   The paper used Mistral-Nemo-Instruct-2407 (12B) at Q4_0 quantization,
+#   served by Ollama with OLLAMA_CONTEXT_LENGTH=32768:
+#       ollama pull mistral-nemo
+#       ./run_evals.sh --all --base-url http://127.0.0.1:11434/v1 \
+#           --model mistral-nemo
+#   Any OpenAI-compatible endpoint with structured-output (response_format
+#   json_schema) support works. Override with --model and --base-url.
+#   serve_mistral_nemo.sh serves the bf16 checkpoint via vLLM instead; it is
+#   NOT the deployment behind the published numbers.
 #
 # EMBEDDING MODELS (downloaded automatically on first use):
 #   BAAI/bge-base-en-v1.5 (primary), BAAI/bge-m3, Qwen/Qwen3-Embedding-0.6B,

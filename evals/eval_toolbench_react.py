@@ -28,9 +28,15 @@ against ToolBench ground truth.
 
 LLM requirements
 ----------------
-Any OpenAI-compatible endpoint (LM Studio, vLLM, Ollama). The paper's
-end-to-end experiments used ``mistralai/Mistral-Nemo-Instruct-2407`` 12B
-via vLLM. Pass ``--model`` and ``--base-url`` to override.
+An OpenAI-compatible endpoint supporting ``response_format`` json_schema
+(structured outputs): Ollama, vLLM, and LM Studio all qualify. Tool
+selection is constrained decoding over an enum of candidate tool names;
+this eval never sends ``tools=`` / ``tool_choice=``.
+
+The paper's ReAct experiment (``tab:e2e-react``) used
+``Mistral-Nemo-Instruct-2407`` 12B at Q4_0 quantization, served by Ollama
+with ``OLLAMA_CONTEXT_LENGTH=32768``. Pass ``--model`` and ``--base-url``
+to point elsewhere; note that other quantizations will shift the scores.
 
 Usage
 -----
@@ -45,8 +51,8 @@ Full run on the standard 1{,}100-query slice (~3 hours on GPU)::
 Override the LLM endpoint::
 
     python evals/eval_toolbench_react.py \
-        --model mistralai/Mistral-Nemo-Instruct-2407 \
-        --base-url http://localhost:8000/v1
+        --model mistral-nemo \
+        --base-url http://localhost:11434/v1
 
 Output
 ------
@@ -78,6 +84,7 @@ sys.path.insert(0, str(EVALS_DIR))
 # Reuse the existing e2e infrastructure
 from eval_toolbench_e2e import (  # noqa: E402
     DEFAULT_LLM_MODEL,
+    assert_prompt_fits,
     build_retriever,
     strip_governance,
     load_toolbench_data,
@@ -85,9 +92,9 @@ from eval_toolbench_e2e import (  # noqa: E402
     BOOTSTRAP_ITERS,
 )
 
-# Default to port 8000 to match serve_mistral_nemo.sh and the paper's
-# end-to-end deployment. The user can still override with --base-url.
-DEFAULT_LLM_URL = "http://127.0.0.1:8000/v1"
+# Default to Ollama's port, matching the paper's end-to-end deployment
+# (Mistral-Nemo-Instruct-2407 at Q4_0). Override with --base-url.
+DEFAULT_LLM_URL = "http://127.0.0.1:11434/v1"
 from bear import Composer, CompositionStrategy, Context  # noqa: E402
 from repro_footer import print_repro_footer  # noqa: E402
 
@@ -366,8 +373,11 @@ def build_monolithic_schemas(
     """Build the monolithic tool list (no retrieval).
 
     Skips instructions without an OpenAI schema. The cap reflects valid
-    tools emitted, not positions walked in the corpus.
+    tools emitted, not positions walked in the corpus. ``max_tools <= 0``
+    means the whole corpus, matching ``eval_toolbench_e2e.py``.
     """
+    if max_tools <= 0:
+        max_tools = len(corpus)
     schemas = []
     for inst in corpus:
         if len(schemas) >= max_tools:
@@ -520,10 +530,14 @@ def parse_args() -> argparse.Namespace:
     p.add_argument(
         "--monolithic-cap",
         type=int,
-        default=200,
-        help="Number of tools to inject in the monolithic baseline (default 200). "
-        "The full 3,225-tool corpus does not fit in most context windows; we "
-        "cap at the same number used by eval_toolbench_e2e.py.",
+        default=0,
+        help="Tools injected in the monolithic baseline; 0 = the whole corpus "
+        "(default), matching eval_toolbench_e2e.py. Capping truncates the corpus, "
+        "so the gold tool is often absent from the prompt and accuracy then "
+        "measures coverage rather than the model's ability to select. The full "
+        "3,225-tool corpus costs ~82k prompt tokens in the compact "
+        "'name: description' form and needs a server context window to match "
+        "(OLLAMA_CONTEXT_LENGTH=131072).",
     )
     p.add_argument(
         "--skip",
@@ -546,7 +560,17 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> None:
     args = parse_args()
-    log_path = RESULTS_DIR / "toolbench_react_output.txt"
+
+    # A partial run (subset of queries, or conditions skipped) must never clobber
+    # the canonical result files a full run produced. Suffix them instead.
+    partial = bool(args.max_queries) or bool(args.skip)
+    suffix = "_partial" if partial else ""
+    if partial:
+        print("NOTE: partial run (--max-queries and/or --skip); writing to "
+              f"results/toolbench_react_*{suffix}.* so the full-run results "
+              "are left untouched.\n")
+
+    log_path = RESULTS_DIR / f"toolbench_react_output{suffix}.txt"
     log_handle = log_path.open("w", encoding="utf-8")
 
     class _Tee:
@@ -635,6 +659,19 @@ def main() -> None:
         # ToolBench tools carry required_tags=[cat_tag], so an empty
         # context-tag set would exclude every tool. The monolithic
         # provider is tag-agnostic by design.
+        # Fail loudly rather than let the server truncate the tool list; a
+        # truncated monolithic prompt scores near zero for reasons that have
+        # nothing to do with the model.
+        if "mono-react" not in args.skip:
+            _mono = build_monolithic_schemas(corpus, args.monolithic_cap, name_map)
+            assert_prompt_fits(
+                args.base_url,
+                sum(len(s["name"]) + len((s.get("description") or "")[:400]) + 4
+                    for s in _mono if s.get("name")),
+                f"monolithic ({len(_mono)} tools)",
+                model=args.model,
+            )
+
         def mono_schemas(_qtext, _ctx_tags, _expected):
             return build_monolithic_schemas(
                 corpus, args.monolithic_cap, name_map
@@ -710,6 +747,38 @@ def main() -> None:
                 "ci_hi": float(hi),
             })
 
+        # Paired significance between conditions run on the same queries.
+        # CI overlap on the marginals is the wrong test here; these conditions
+        # share the 1,100 queries, so we report McNemar (exact) plus a paired
+        # bootstrap on the delta.
+        try:
+            from stat_utils import mcnemar, paired_bootstrap
+        except ImportError:
+            mcnemar = paired_bootstrap = None
+        comparisons = []
+        if mcnemar is not None:
+            pairs = [("bear_single", "bear_react"),   # does the ReAct scaffold help or hurt?
+                     ("bear_react", "mono_react")]     # does governed retrieval beat monolithic?
+            print("\n--- Paired comparisons (same queries; McNemar + paired bootstrap) ---\n")
+            for hi_name, lo_name in pairs:
+                if hi_name in results and lo_name in results:
+                    a, b = results[hi_name], results[lo_name]
+                    mc = mcnemar(a, b)
+                    pb = paired_bootstrap(a.astype(float), b.astype(float), BOOTSTRAP_ITERS)
+                    print(f"  {hi_name} vs {lo_name}: "
+                          f"Δ={pb['delta']:+.3f} [{pb['ci_lower']:+.3f}, {pb['ci_upper']:+.3f}], "
+                          f"McNemar p={mc['p_value']:.2e} "
+                          f"(discordant {mc['b_a_right_b_wrong']}/{mc['c_a_wrong_b_right']})")
+                    comparisons.append({
+                        "higher": hi_name, "lower": lo_name,
+                        "delta": pb["delta"], "delta_ci_lo": pb["ci_lower"],
+                        "delta_ci_hi": pb["ci_upper"],
+                        "paired_bootstrap_p": pb["p_value"],
+                        "mcnemar_p": mc["p_value"],
+                        "discordant_hi_only": mc["b_a_right_b_wrong"],
+                        "discordant_lo_only": mc["c_a_wrong_b_right"],
+                    })
+
         # LaTeX block
         print("\n--- LaTeX table (paste into manuscript as tab:e2e-react) ---\n")
         print(r"\begin{table}[t]")
@@ -740,10 +809,16 @@ def main() -> None:
         print(r"  \end{tabular}")
         print(r"\end{table}")
 
-        # JSON
-        out_path = RESULTS_DIR / "toolbench_react_metrics.json"
+        # JSON. Persist per-query 0/1 arrays alongside the aggregates so the
+        # paired tests are reproducible from disk without re-running the eval.
+        out_path = RESULTS_DIR / f"toolbench_react_metrics{suffix}.json"
         with out_path.open("w") as f:
-            json.dump({"model": args.model, "top_k": args.top_k, "rows": rows}, f, indent=2)
+            json.dump({"model": args.model, "top_k": args.top_k,
+                       "monolithic_cap": args.monolithic_cap, "rows": rows,
+                       "comparisons": comparisons,
+                       "per_query_correct": {k: v.astype(int).tolist()
+                                             for k, v in results.items()}},
+                      f, indent=2)
         print(f"\nWrote {out_path}")
         print(f"Wrote {log_path}")
         print(f"\nElapsed: {(time.time() - t0)/60:.1f} min")

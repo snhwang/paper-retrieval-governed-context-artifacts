@@ -2,10 +2,21 @@
 # =============================================================================
 # serve_mistral_nemo.sh — vLLM server for the end-to-end ToolBench experiments
 #
-# Serves mistralai/Mistral-Nemo-Instruct-2407 (12B) on an OpenAI-compatible
-# chat-completions endpoint. This matches the deployment used for the paper's
-# end-to-end ToolBench experiments (tool selection and the ReAct variant),
-# produced by evals/eval_toolbench_e2e.py and evals/eval_toolbench_react.py.
+# Serves mistralai/Mistral-Nemo-Instruct-2407 (12B, bf16) on an OpenAI-compatible
+# chat-completions endpoint, for use with evals/eval_toolbench_e2e.py and
+# evals/eval_toolbench_react.py.
+#
+# NOTE: this is NOT the deployment behind the paper's published numbers. Those
+# used the same model at Q4_0 quantization, served by Ollama:
+#
+#     ollama pull mistral-nemo
+#     OLLAMA_CONTEXT_LENGTH=32768 OLLAMA_MAX_LOADED_MODELS=1 ollama serve
+#     python evals/eval_toolbench_e2e.py --all \
+#         --model mistral-nemo --base-url http://127.0.0.1:11434/v1
+#
+# Quantization is not output-preserving, so serving bf16 here will shift the
+# scores slightly relative to Tables 7 and 8. This script is kept because vLLM
+# is the better choice for throughput-bound work and for unquantized runs.
 #
 # Prerequisites:
 #   - CUDA GPU with ~24GB VRAM at fp16 (less with quantization; see vLLM docs)

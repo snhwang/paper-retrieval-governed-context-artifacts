@@ -25,29 +25,34 @@ Backends tested (configurable via --backends):
   Baseline: Monolithic (all tools injected)
 
 LLM Requirements:
-  Any OpenAI-compatible endpoint (LM Studio, vLLM, Ollama) that supports
-  response_format json_schema (structured outputs). The paper's end-to-end
-  experiments used mistralai/Mistral-Nemo-Instruct-2407 12B via vLLM. Pass via
-  --model and --base-url, or rely on the LM Studio defaults (port 1234).
+  Any OpenAI-compatible endpoint (Ollama, vLLM, LM Studio) that supports
+  response_format json_schema (structured outputs). Tool selection is
+  constrained decoding over an enum of candidate tool names; this eval never
+  sends tools= / tool_choice=.
+
+  The paper's end-to-end experiment (tab:e2e) used Mistral-Nemo-Instruct-2407
+  12B at Q4_0 quantization, served by Ollama with OLLAMA_CONTEXT_LENGTH=32768:
+
+    python eval_toolbench_e2e.py --all \
+        --model mistral-nemo --base-url http://localhost:11434/v1
+
+  Other quantizations will shift the scores.
 
 Usage:
     python eval_toolbench_e2e.py \
         --all \
         --max-queries 100 \
         --top-k 5 \
-        --model gemma-4-12b \
-        --base-url http://localhost:8355/v1 \
+        --model mistral-nemo \
+        --base-url http://localhost:11434/v1 \
         --skip-monolithic
-
-    Run with no flags for the default set (BGE gov + no-gov + monolithic)
-    against an LM Studio endpoint on port 1234.
 
 Options:
     --all                Run all backends (mutually exclusive with --backends)
     --backends NAME...   Run only the named backends, e.g. --backends bge bm25
     --max-queries N      Limit queries for a quick test (0 = all, default)
     --top-k N            Number of tools to retrieve (default: 5)
-    --model ID           LLM model ID (default: mistralai/Mistral-Nemo-Instruct-2407)
+    --model ID           LLM model ID (default: mistral-nemo)
     --base-url URL       OpenAI-compatible endpoint (default: auto-detected,
                          else http://127.0.0.1:1234/v1)
     --skip-monolithic    Skip the monolithic baseline (slow with many tools)
@@ -95,13 +100,97 @@ from eval_toolbench import (
 # LLM interface
 # ---------------------------------------------------------------------------
 
+
+def server_context_length(base_url: str, model: str | None = None) -> int | None:
+    """Best-effort: the loaded model's context window, or None if unknown.
+
+    Ollama-specific (``/api/ps``). It matters because Ollama truncates an
+    over-long prompt silently rather than erroring, which turns a too-small
+    context window into a plausible-looking near-zero accuracy instead of a
+    crash. Returns None for any other server, in which case callers must not
+    treat the absence of a window as evidence the prompt fits.
+
+    ``/api/ps`` only reports *resident* models, and Ollama evicts them after
+    ``OLLAMA_KEEP_ALIVE``. When nothing is loaded we issue a one-token
+    completion to page the model back in, then re-ask.
+    """
+    import urllib.error
+    import urllib.request
+
+    root = base_url.rstrip("/")
+    if root.endswith("/v1"):
+        root = root[: -len("/v1")]
+
+    def _ps() -> list[dict]:
+        try:
+            with urllib.request.urlopen(f"{root}/api/ps", timeout=5) as r:
+                return json.loads(r.read()).get("models") or []
+        except (urllib.error.URLError, OSError, ValueError):
+            # Not an Ollama server, unreachable, or an unexpected payload. Catch
+            # only these: a broad `except Exception` would swallow programming
+            # errors and silently disable the guard -- which is the exact failure
+            # mode this guard exists to prevent.
+            return []
+
+    models = _ps()
+    if not models and model:
+        try:
+            req = urllib.request.Request(
+                f"{base_url.rstrip('/')}/chat/completions",
+                data=json.dumps({"model": model, "max_tokens": 1,
+                                 "messages": [{"role": "user", "content": "hi"}]}).encode(),
+                headers={"Content-Type": "application/json"},
+            )
+            urllib.request.urlopen(req, timeout=120).read()
+        except (urllib.error.URLError, OSError, ValueError):
+            return None
+        models = _ps()
+
+    lengths = [m["context_length"] for m in models if m.get("context_length")]
+    return max(lengths) if lengths else None
+
+
+def assert_prompt_fits(base_url: str, prompt_chars: int, label: str,
+                       model: str | None = None) -> None:
+    """Abort if the prompt plainly cannot fit the server's context window.
+
+    Uses a deliberately conservative 3.0 chars/token ratio: under-estimating
+    the token count would let a truncating prompt through, which is the failure
+    this guard exists to prevent.
+    """
+    ctx = server_context_length(base_url, model)
+    est_tokens = prompt_chars / 3.0 + 1024  # + system preamble and output budget
+    if ctx is None:
+        print(f"  WARNING: could not determine the server's context window; the "
+              f"{label} prompt is ~{est_tokens:,.0f} tokens. If the window is "
+              f"smaller, the prompt is silently truncated and this condition's "
+              f"accuracy is meaningless.")
+        return
+    print(f"  Context check: {label} prompt ~{est_tokens:,.0f} tokens, "
+          f"server window {ctx:,}.")
+    if est_tokens > ctx:
+        raise SystemExit(
+            f"\nERROR: the {label} prompt does not fit the server's context window.\n"
+            f"  prompt: ~{est_tokens:,.0f} tokens ({prompt_chars:,} chars)\n"
+            f"  server: {ctx:,} tokens\n\n"
+            f"Ollama truncates silently, so this would score near zero for reasons\n"
+            f"that have nothing to do with the model. Restart the server with a\n"
+            f"larger window, e.g.:\n\n"
+            f"  OLLAMA_CONTEXT_LENGTH=131072 ollama serve\n\n"
+            f"or reduce the injected tool count with --monolithic-cap N.\n"
+        )
+
+
 try:
     from bear.utils import detect_local_llm_url
     DEFAULT_LLM_URL = detect_local_llm_url()
 except ImportError:
     DEFAULT_LLM_URL = "http://127.0.0.1:1234/v1"
 
-DEFAULT_LLM_MODEL = "mistralai/Mistral-Nemo-Instruct-2407"
+# Ollama's tag for Mistral-Nemo-Instruct-2407 (Q4_0), the paper's deployment.
+# For the vLLM path (serve_mistral_nemo.sh), pass the HF id explicitly:
+#   --model mistralai/Mistral-Nemo-Instruct-2407
+DEFAULT_LLM_MODEL = "mistral-nemo"
 
 
 def _release_gpu_memory() -> None:
@@ -549,12 +638,18 @@ def evaluate_monolithic(
     llm_model: str,
     llm_url: str,
     top_k: int,
+    monolithic_cap: int = 0,
 ) -> dict:
-    """Baseline: inject ALL tool schemas into every query.
+    """Baseline: inject tool schemas for every query, with no retrieval step.
 
-    No retrieval step — all tools are injected, so retrieval metrics
-    reflect the coverage of the truncated tool set rather than retrieval
-    quality. Included for completeness alongside LLM metrics.
+    ``monolithic_cap`` bounds how many schemas are injected; 0 means the whole
+    corpus. Capping truncates the corpus to its first N entries, so the gold
+    tool is often absent from the prompt entirely. When that happens the
+    reported accuracy is bounded above by the ``recall`` field (the fraction of
+    expected tools present in the injected subset), and measures coverage
+    rather than the model's ability to select. Prefer the uncapped default:
+    all 3,225 ToolBench schemas cost ~82k prompt tokens in this compact
+    ``name: description`` form, which fits Mistral-Nemo's 128k context.
     """
     all_schemas = []
     id_to_name: dict[str, str] = {}
@@ -564,10 +659,16 @@ def evaluate_monolithic(
             all_schemas.append(schema)
             id_to_name[inst.id] = schema["name"]
 
-    # Limit to top_k*3 tools to avoid exceeding context (3225 tools would be too many)
-    # For monolithic, we inject the maximum the LLM can handle
-    max_tools = min(len(all_schemas), 128)  # Most LLMs handle ~128 tools
+    max_tools = len(all_schemas) if monolithic_cap <= 0 else min(len(all_schemas), monolithic_cap)
     schemas_subset = all_schemas[:max_tools]
+
+    # Fail loudly rather than let the server truncate the tool list.
+    prompt_chars = sum(
+        len(s["name"]) + len((s.get("description") or "")[:400]) + 4
+        for s in schemas_subset if s.get("name")
+    )
+    assert_prompt_fits(llm_url, prompt_chars, f"monolithic ({max_tools} tools)",
+                       model=llm_model)
 
     # Track which IDs are in the truncated subset
     subset_ids = set()
@@ -755,6 +856,11 @@ def main():
                         help="Limit number of queries (0 = all)")
     parser.add_argument("--top-k", type=int, default=DEFAULT_TOP_K,
                         help=f"Number of tools to retrieve (default: {DEFAULT_TOP_K})")
+    parser.add_argument("--monolithic-cap", type=int, default=0,
+                        help="Tools injected in the monolithic baseline; 0 = the "
+                             "whole corpus (default). Capping truncates the corpus, "
+                             "so the gold tool is often absent and accuracy measures "
+                             "coverage rather than selection; see the 'recall' field.")
     parser.add_argument("--model", default=DEFAULT_LLM_MODEL,
                         help=f"LLM model ID (default: {DEFAULT_LLM_MODEL})")
     parser.add_argument("--base-url", default=DEFAULT_LLM_URL,
@@ -869,7 +975,8 @@ def main():
         print(f"  Monolithic (all tools)")
         print(f"{'=' * 60}")
         mono_result = evaluate_monolithic(
-            corpus, queries, args.model, args.base_url, args.top_k
+            corpus, queries, args.model, args.base_url, args.top_k,
+            monolithic_cap=args.monolithic_cap,
         )
         results.append(mono_result)
         print(f"\n  Monolithic:")
@@ -923,8 +1030,17 @@ def main():
     print(r"\end{tabular}")
     print(r"\end{table}")
 
+    # A partial run (query subset, backend subset, or monolithic skipped) must
+    # never clobber the canonical result files a full `--all` run produced.
+    partial = bool(args.max_queries) or bool(args.skip_monolithic) or not args.all
+    suffix = "_partial" if partial else ""
+    if partial:
+        print("\nNOTE: partial run; writing results/toolbench_e2e_*_partial.json "
+              "so the full-run results are left untouched.")
+
     # Save JSON
-    output_path = Path(__file__).resolve().parent / "results" / "toolbench_e2e_results.json"
+    output_path = (Path(__file__).resolve().parent / "results"
+                   / f"toolbench_e2e_results{suffix}.json")
     output_path.parent.mkdir(parents=True, exist_ok=True)
     json_results = [{k: v for k, v in r.items() if not k.startswith("_")} for r in results]
     # Convert tuples to lists for JSON serialisation
@@ -943,7 +1059,7 @@ def main():
     print(f"\nResults saved to {output_path}")
 
     # Save raw per-query scores for statistical tests
-    scores_path = output_path.with_name("toolbench_e2e_scores.json")
+    scores_path = output_path.with_name(f"toolbench_e2e_scores{suffix}.json")
     scores_data = []
     for r in results:
         entry = {"condition": r["condition"]}

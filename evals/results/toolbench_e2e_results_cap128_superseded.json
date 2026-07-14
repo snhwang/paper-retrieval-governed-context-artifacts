@@ -588,58 +588,56 @@
     },
     {
       "condition": "Monolithic (all tools)",
-      "exact_accuracy": 0.18636363636363637,
+      "exact_accuracy": 0.02,
       "exact_ci": {
-        "point_estimate": 0.18636363636363637,
-        "ci_lower": 0.16272727272727272,
-        "ci_upper": 0.21,
-        "std": 0.3895769555787084,
+        "point_estimate": 0.02,
+        "ci_lower": 0.012727272727272728,
+        "ci_upper": 0.028181818181818183,
+        "std": 0.1400636797849623,
         "n": 1100
       },
-      "tool_accuracy": 0.2509090909090909,
+      "tool_accuracy": 0.02181818181818182,
       "tool_ci": {
-        "point_estimate": 0.2509090909090909,
-        "ci_lower": 0.22545454545454546,
-        "ci_upper": 0.2763863636363633,
-        "std": 0.43373349132910827,
+        "point_estimate": 0.02181818181818182,
+        "ci_lower": 0.013636363636363636,
+        "ci_upper": 0.03090909090909091,
+        "std": 0.14615597274123898,
         "n": 1100
       },
-      "recall": 0.9953030303030305,
+      "recall": 0.022045454545454545,
       "recall_ci": {
-        "point_estimate": 0.9953030303030305,
-        "ci_lower": 0.9916666666666668,
-        "ci_upper": 0.9981818181818182,
-        "std": 0.056012108282932446,
+        "point_estimate": 0.022045454545454545,
+        "ci_lower": 0.013863636363636364,
+        "ci_upper": 0.031136363636363636,
+        "std": 0.1463163017930772,
         "n": 1100
       },
-      "precision": 0.0007430533874492664,
+      "precision": 0.0004119318181818182,
       "precision_ci": {
-        "point_estimate": 0.0007430533874492664,
-        "ci_lower": 0.0007282944966366759,
-        "ci_upper": 0.0007578122782618568,
-        "std": 0.00024543147925610285,
+        "point_estimate": 0.0004119318181818182,
+        "ci_lower": 0.0002556818181818182,
+        "ci_upper": 0.0005823863636363636,
+        "std": 0.00279776426646464,
         "n": 1100
       },
-      "f1": 0.0014848816924360184,
+      "f1": 0.0008078872318983352,
       "f1_ci": {
-        "point_estimate": 0.0014848816924360184,
-        "ci_lower": 0.0014554182274059072,
-        "ci_upper": 0.001514352792045195,
-        "std": 0.0004899600477816157,
+        "point_estimate": 0.0008078872318983352,
+        "ci_lower": 0.000502855922703251,
+        "ci_upper": 0.001141837366889414,
+        "std": 0.005481136563946183,
         "n": 1100
       },
-      "ndcg": 0.0017577165211452174,
+      "ndcg": 0.0016582888589672942,
       "ndcg_ci": {
-        "point_estimate": 0.0017577165211452174,
-        "ci_lower": 0.0003516843702132197,
-        "ci_upper": 0.003587387787830005,
-        "std": 0.027947043700521836,
+        "point_estimate": 0.0016582888589672942,
+        "ci_lower": 0.00037834650504430076,
+        "ci_upper": 0.0033647569535954994,
+        "std": 0.02627258631630785,
         "n": 1100
       },
       "llm_errors": 0,
       "total": 1100
     }
-  ],
-  "monolithic_cap": 0,
-  "note": "The monolithic row was produced by a separate run with --monolithic-cap 0 (the whole 3,225-tool corpus, ~82k prompt tokens, served with OLLAMA_CONTEXT_LENGTH=131072). Earlier runs capped the corpus at its first 128 (e2e) / 200 (react) schemas, so the gold tool was absent from the prompt for ~98% of queries and accuracy measured coverage rather than selection. The retrieval conditions are unaffected by the cap and come from the original run. Recall is 0.995 rather than 1.000 because 14 sanitized function names collide across 22 instructions."
+  ]
 }

@@ -104,17 +104,20 @@ The cache file is worth committing because future readers can re-run the downstr
 
 ### Prerequisites
 
-The paper used `mistralai/Mistral-Nemo-Instruct-2407` 12B via vLLM, served on port 8000. The artifacts repo includes `serve_mistral_nemo.sh` which starts the exact configuration.
+The paper used `Mistral-Nemo-Instruct-2407` 12B at **Q4_0 quantization, served by Ollama** on port 11434.
 
-**Terminal 1 (vLLM server):**
+**Terminal 1 (Ollama):**
 
 ```bash
-cd /path/to/paper-retrieval-governed-context-artifacts
-./serve_mistral_nemo.sh
-# Wait for the 'vLLM READY at http://127.0.0.1:8000/v1' banner.
+ollama pull mistral-nemo                                    # ~7 GB, one time
+OLLAMA_CONTEXT_LENGTH=32768 OLLAMA_MAX_LOADED_MODELS=1 ollama serve
 ```
 
-The script auto-detects WSL and adds `--enforce-eager` to avoid the CUDA graph segfault. First-run model download is ~24 GB from Hugging Face.
+`OLLAMA_CONTEXT_LENGTH` is not optional. Unset, Ollama sizes the KV cache from *free* VRAM and will reserve tens of gigabytes it never uses, starving the embedders the eval loads onto the same card. 32768 caps it near 5 GB and still clears the largest prompt (~13.5k tokens, monolithic ReAct).
+
+Under WSL, `localhost` is not the Windows loopback. If the eval runs in WSL and Ollama on Windows, add `OLLAMA_HOST=0.0.0.0` and use the host's LAN address.
+
+`serve_mistral_nemo.sh` (vLLM, bf16, port 8355) is an alternative, but quantization is not output-preserving, so it will not reproduce Tables 7 and 8 exactly.
 
 ### Quick smoke test (50 queries, ~5 minutes)
 
@@ -124,7 +127,7 @@ The script auto-detects WSL and adds `--enforce-eager` to avoid the CUDA graph s
 python evals/eval_toolbench_react.py --max-queries 50
 ```
 
-The script defaults to `http://127.0.0.1:8000/v1` to match `serve_mistral_nemo.sh`. Pass `--base-url` to override if you serve on a different port.
+The script defaults to `http://127.0.0.1:11434/v1` and `--model mistral-nemo`, matching the paper. Pass `--base-url` / `--model` to override.
 
 ### Full run (~1,100 queries, ~3 hours on a single GPU)
 

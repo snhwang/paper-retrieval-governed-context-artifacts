@@ -59,21 +59,24 @@ source .venv/bin/activate
 ./run_evals.sh
 
 # Add end-to-end LLM experiments (Tables 7, 8).
-# Paper-exact reproduction: mistralai/Mistral-Nemo-Instruct-2407 (12B) via vLLM.
-# In one shell, start the server (requires CUDA GPU with ~24GB VRAM):
-./serve_mistral_nemo.sh
-# In another shell, run the full suite against it:
-./run_evals.sh --all --base-url http://127.0.0.1:8000/v1
+# Paper-exact reproduction: Mistral-Nemo-Instruct-2407 (12B, Q4_0) served by Ollama.
+ollama pull mistral-nemo                            # ~7GB, one time
+OLLAMA_CONTEXT_LENGTH=32768 ollama serve            # in one shell
+./run_evals.sh --all \
+    --base-url http://127.0.0.1:11434/v1 \
+    --model mistral-nemo                            # in another
 ```
 
-Any OpenAI-compatible endpoint works (vLLM, LM Studio, Ollama). If you do not need paper-exact reproduction, point `--base-url` at whatever endpoint you have running. LM Studio's default endpoint (`http://127.0.0.1:1234/v1`) works without overriding `--base-url`.
+Any OpenAI-compatible endpoint works (Ollama, vLLM, LM Studio). See
+[Serving the model](#serving-the-model) for the exact deployment behind Tables 7
+and 8, and for alternatives.
 
 ## Environment Setup
 
 Most paper tables are deterministic and require **no API keys**. Keys are only
-needed to (a) regenerate the LLM-inferred metadata (the ToolBench
-inferred-category and MetaTool generated-tag conditions), or (b) download the
-model weights for the end-to-end experiments.
+needed to regenerate the LLM-inferred metadata (the ToolBench inferred-category
+and MetaTool generated-tag conditions). The end-to-end experiments need no key:
+`ollama pull mistral-nemo` is unauthenticated.
 
 Copy the template and fill in only the values you need:
 
@@ -94,53 +97,115 @@ file is git-ignored — never commit real keys.
 | `ANTHROPIC_API_KEY` | Regenerating the LLM-inferred metadata | Default provider for `metatool_generate_*.py` and the `*_categories.py` evals. |
 | `OPENAI_API_KEY` | Same scripts with an OpenAI `--model` | Also used as a fallback by the `metatool_generate_*` scripts. |
 | `OLLAMA_API_KEY` | Metadata generation against a non-OpenAI, OpenAI-compatible host | Only for the `metatool_generate_*` scripts. |
-| `HF_TOKEN` | Downloading the Mistral-Nemo weights | Optional, but anonymous downloads of the ~24GB checkpoint are heavily rate-limited. |
+| `HF_TOKEN` | Downloading Mistral-Nemo weights for the **vLLM** path only | Not needed for Ollama. Anonymous downloads of the ~24GB `bf16` checkpoint are heavily rate-limited. |
 
 The end-to-end evals (`eval_toolbench_e2e.py`, `eval_toolbench_react.py`) do not
 read a key from the environment; they talk to an OpenAI-compatible endpoint
 selected with `--base-url` / `--model`.
 
-### LLM server settings
+## Serving the model
 
-`serve_mistral_nemo.sh` reads these from `.env` (or the environment):
+Tables 7 and 8 were produced with **Mistral-Nemo-Instruct-2407 (12B) at `Q4_0`
+quantization, served by [Ollama](https://ollama.com)**. This is the only
+deployment the published numbers come from, and the only one needed to
+reproduce them:
 
-| Variable | Default | Notes |
+```bash
+ollama pull mistral-nemo                                    # Q4_0 by default; ~7GB
+
+OLLAMA_CONTEXT_LENGTH=32768 OLLAMA_MAX_LOADED_MODELS=1 ollama serve
+```
+
+```bash
+python evals/eval_toolbench_e2e.py --all \
+    --base-url http://127.0.0.1:11434/v1 --model mistral-nemo
+python evals/eval_toolbench_react.py \
+    --base-url http://127.0.0.1:11434/v1 --model mistral-nemo
+```
+
+Three things this depends on, all of which will silently change the numbers if
+you get them wrong:
+
+**Quantization.** `Q4_0`, which is what `ollama pull mistral-nemo` gives you by
+default. Quantization is not output-preserving — serving the same model at
+`bf16` produces different scores.
+
+**Structured outputs.** Both evals constrain tool selection with a
+`response_format` JSON schema whose enum lists the candidate tool names, so the
+server must support OpenAI-style structured outputs. Neither eval sends
+`tools=` / `tool_choice=`; free-form function calling is not used anywhere in
+this repository, and models that emit malformed tool-call JSON under it were
+the source of a large error rate before this was fixed.
+
+**Context length.** `OLLAMA_CONTEXT_LENGTH=32768`. Left unset, Ollama sizes the
+KV cache from *free VRAM* at load time and will reserve tens of gigabytes it
+never uses, starving the retrieval embedders the eval loads onto the same card.
+32768 caps the cache near 5GB and still clears the largest prompt by a wide
+margin — the monolithic ReAct condition packs ~200 tool schemas into ~13.5k
+tokens. `OLLAMA_MAX_LOADED_MODELS=1` keeps previously used models from
+lingering in VRAM.
+
+| Variable | Value | Why |
 |:--|:--|:--|
-| `MODEL` | `mistralai/Mistral-Nemo-Instruct-2407` | The served model. Note the eval's `--model` must match this **exactly**, including case. |
-| `HOST` | `0.0.0.0` | Binds all interfaces so a remote eval can reach the server. Set `127.0.0.1` to restrict to localhost. |
-| `PORT` | `8355` | |
-| `MAX_MODEL_LEN` | `32768` | The monolithic baseline packs ~200 tool schemas into a single prompt. Do not lower below ~28k or that condition breaks. |
-| `GPU_MEM_UTIL` | `0.4` | Fraction of total VRAM vLLM reserves **up front**, independent of model size. |
+| `OLLAMA_CONTEXT_LENGTH` | `32768` | Bounds the KV cache; otherwise sized to free VRAM. |
+| `OLLAMA_MAX_LOADED_MODELS` | `1` | Stops idle models from holding VRAM. |
+| `OLLAMA_HOST` | `0.0.0.0` | Only needed to reach the server from another machine (or from WSL — see below). |
 
-### Recommended: run the LLM server on a separate machine
+Any other OpenAI-compatible endpoint with structured-output support (vLLM, LM
+Studio) will run the evals, but will not reproduce the published numbers unless
+it serves the same model at the same quantization.
 
-The evals load embedding models onto the GPU for retrieval, while vLLM holds its
-weights plus a pre-allocated KV cache on the same card. On a single GPU these
-compete, and the largest embedder (Qwen3-4B, ~8GB) can exhaust VRAM. Under WSL
-that does **not** raise an error — the driver silently spills to host memory over
-PCIe and throughput collapses to a few tokens per second.
+### VRAM: keep the LLM off the embedders' card
+
+The evals load embedding models onto the GPU for retrieval while the LLM server
+holds weights plus a KV cache on the same card. `eval_toolbench_e2e.py --all`
+is the worst case: it builds six retrievers, the largest (Qwen3-4B) about 8GB.
+Under WSL, exhausting VRAM does **not** raise an error — the driver silently
+spills to host memory over PCIe and throughput collapses to a few tokens per
+second.
+
+Two failure modes are worth naming, because neither announces itself:
+
+- A server sized against free VRAM (Ollama's default, and llama.cpp's, which
+  backs LM Studio) expands to fill an empty card. Quantization does not save
+  you here: a 7GB model can still occupy 50GB. Bound the context explicitly.
+- Idle models left resident. Check with `ollama ps`, and check for a stray
+  `llama-server` or `vllm` with
+  `nvidia-smi --query-compute-apps=pid,process_name,used_memory --format=csv`.
 
 Serving the LLM from a second machine removes the contention entirely:
 
 ```bash
 # On the GPU box serving the LLM
-#   .env:  HF_TOKEN=hf_...   HOST=0.0.0.0   GPU_MEM_UTIL=0.85
-bash serve_mistral_nemo.sh
+OLLAMA_HOST=0.0.0.0 OLLAMA_CONTEXT_LENGTH=32768 ollama serve
 
 # On the machine running the evals — its GPU is now free for the embedders
 python evals/eval_toolbench_e2e.py --all \
-    --base-url http://<server-ip>:8355/v1 \
-    --model mistralai/Mistral-Nemo-Instruct-2407
+    --base-url http://<server-ip>:11434/v1 --model mistral-nemo
 ```
 
 Network latency (~1–5 ms) is negligible next to LLM inference (100–500 ms per
-call). If you must share one GPU, lower `GPU_MEM_UTIL` until the embedders fit;
-a 12B model at a 32k context needs roughly `0.4` on a 96GB card. Verify the
-server is reachable and get the exact model id with:
+call). Verify reachability and get the exact model id with:
 
 ```bash
-curl -s http://<server-ip>:8355/v1/models | python -m json.tool
+curl -s http://<server-ip>:11434/v1/models | python -m json.tool
 ```
+
+Note for **WSL**: WSL2 is NAT'd, so `localhost` inside WSL is not the Windows
+loopback. If the eval runs in WSL and Ollama runs on Windows, set
+`OLLAMA_HOST=0.0.0.0` and point `--base-url` at the host's LAN address, not
+`127.0.0.1`.
+
+### Extras (not used by the paper)
+
+`serve_mistral_nemo.sh` starts a vLLM server for the unquantized `bf16`
+checkpoint. **Nothing in the paper was produced with it.** It is kept because
+vLLM is a better choice for throughput-bound work and for unquantized runs, and
+it is here to play with, not to reproduce anything. It reads `MODEL`, `HOST`,
+`PORT` (default `8355`), `MAX_MODEL_LEN`, and `GPU_MEM_UTIL` from `.env`; see
+the script's header. Serving `bf16` needs ~24GB of weights against `Q4_0`'s
+~7GB, and the eval's `--model` must then be the full Hugging Face id
+(`mistralai/Mistral-Nemo-Instruct-2407`), not `mistral-nemo`.
 
 ## Table-to-Script Mapping
 
@@ -215,7 +280,7 @@ pet_sim/instructions/                 # frozen Pet Simulation corpus (8 YAML fil
                                       # paper measured against
 results/                              # pre-computed result files referenced in the paper
 run_evals.sh                          # runner reproducing all paper tables
-serve_mistral_nemo.sh                 # vLLM server matching paper Tables 7, 8 deployment
+serve_mistral_nemo.sh                 # optional vLLM server (bf16); Tables 7, 8 used Ollama
 requirements.txt                      # pinned dependency set
 ```
 
@@ -246,13 +311,14 @@ python evals/eval_toolbench_multitag_categories.py   # Table 4 (multi-tag)
 python evals/eval_toolbench_top5_categories.py       # Table 4 (top-5)
 python evals/eval_metatool_subset_analysis.py    # Table 19 (Appendix B)
 
-# End-to-end LLM experiments (requires OpenAI-compatible endpoint)
-python evals/eval_toolbench_e2e.py \             # Table 7
-    --model mistralai/Mistral-Nemo-Instruct-2407 \
-    --base-url http://127.0.0.1:8000/v1
+# End-to-end LLM experiments (requires an OpenAI-compatible endpoint with
+# structured-output support; see "Serving the model")
+python evals/eval_toolbench_e2e.py --all \       # Table 7
+    --model mistral-nemo \
+    --base-url http://127.0.0.1:11434/v1
 python evals/eval_toolbench_react.py \           # Table 8
-    --model mistralai/Mistral-Nemo-Instruct-2407 \
-    --base-url http://127.0.0.1:8000/v1
+    --model mistral-nemo \
+    --base-url http://127.0.0.1:11434/v1
 ```
 
 ## Regenerating LLM-Generated Metadata

@@ -82,6 +82,60 @@ def mann_whitney_u(a: np.ndarray | list[float], b: np.ndarray | list[float]) -> 
     }
 
 
+def mcnemar(a: np.ndarray | list[float], b: np.ndarray | list[float]) -> dict:
+    """McNemar's test for paired binary outcomes (same items, two conditions).
+
+    ``a`` and ``b`` are aligned 0/1 arrays over the same items. Returns the
+    discordant-pair counts and an exact (binomial) two-sided p-value, which is
+    the correct paired test here -- CI overlap on the two marginals is not.
+    """
+    from scipy import stats
+    a = np.asarray(a, dtype=int)
+    b = np.asarray(b, dtype=int)
+    if a.shape != b.shape:
+        raise ValueError("mcnemar requires aligned, equal-length arrays")
+    b_disc = int(np.sum((a == 1) & (b == 0)))  # a right, b wrong
+    c_disc = int(np.sum((a == 0) & (b == 1)))  # a wrong, b right
+    n_disc = b_disc + c_disc
+    # Exact binomial two-sided p over the discordant pairs (robust for small n).
+    p_val = 1.0 if n_disc == 0 else float(
+        stats.binomtest(min(b_disc, c_disc), n_disc, 0.5, alternative="two-sided").pvalue)
+    return {
+        "b_a_right_b_wrong": b_disc,
+        "c_a_wrong_b_right": c_disc,
+        "n_discordant": n_disc,
+        "p_value": p_val,
+    }
+
+
+def paired_bootstrap(a: np.ndarray | list[float], b: np.ndarray | list[float],
+                     n_boot: int = 10000, seed: int = 42) -> dict:
+    """Bootstrap the paired mean difference ``mean(a) - mean(b)``.
+
+    Resamples items (not conditions) so the pairing is preserved. Returns the
+    observed delta, a 95% CI, and a two-sided bootstrap p-value.
+    """
+    a = np.asarray(a, dtype=float)
+    b = np.asarray(b, dtype=float)
+    if a.shape != b.shape:
+        raise ValueError("paired_bootstrap requires aligned, equal-length arrays")
+    diff = a - b
+    n = len(diff)
+    rng = np.random.default_rng(seed)
+    idx = rng.integers(0, n, size=(n_boot, n))
+    boots = diff[idx].mean(axis=1)
+    lo, hi = np.percentile(boots, [2.5, 97.5])
+    # Two-sided p: proportion of bootstrap deltas on the far side of zero.
+    p = 2.0 * min((boots <= 0).mean(), (boots >= 0).mean())
+    return {
+        "delta": float(diff.mean()),
+        "ci_lower": float(lo),
+        "ci_upper": float(hi),
+        "p_value": float(min(max(p, 1.0 / n_boot), 1.0)),
+        "n": int(n),
+    }
+
+
 def cohens_d_ind(a: np.ndarray | list[float], b: np.ndarray | list[float]) -> float:
     """Cohen's d for independent samples (pooled SD)."""
     a, b = np.asarray(a, dtype=float), np.asarray(b, dtype=float)

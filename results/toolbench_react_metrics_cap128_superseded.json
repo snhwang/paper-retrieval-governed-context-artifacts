@@ -1,0 +1,31 @@
+{
+  "model": "mistral-nemo",
+  "top_k": 5,
+  "monolithic_cap": 200,
+  "rows": [
+    {
+      "condition": "mono_react",
+      "label": "Monolithic + ReAct",
+      "n": 1100,
+      "tool_acc": 0.025454545454545455,
+      "ci_lo": 0.016363636363636365,
+      "ci_hi": 0.035454545454545454
+    },
+    {
+      "condition": "bear_react",
+      "label": "BEAR retrieval + ReAct",
+      "n": 1100,
+      "tool_acc": 0.6645454545454546,
+      "ci_lo": 0.6363636363636364,
+      "ci_hi": 0.6918181818181818
+    },
+    {
+      "condition": "bear_single",
+      "label": "BEAR retrieval + single-turn",
+      "n": 1100,
+      "tool_acc": 0.7209090909090909,
+      "ci_lo": 0.6945454545454546,
+      "ci_hi": 0.7463636363636363
+    }
+  ]
+}

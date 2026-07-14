@@ -1,30 +1,32 @@
 {
-  "model": "mistralai/Mistral-Nemo-Instruct-2407",
+  "model": "mistral-nemo",
   "top_k": 5,
+  "monolithic_cap": 0,
   "rows": [
     {
       "condition": "mono_react",
       "label": "Monolithic + ReAct",
       "n": 1100,
-      "tool_acc": 0.028181818181818183,
-      "ci_lo": 0.019090909090909092,
-      "ci_hi": 0.038181818181818185
+      "tool_acc": 0.04,
+      "ci_lo": 0.02909090909090909,
+      "ci_hi": 0.05181818181818182
     },
     {
       "condition": "bear_react",
       "label": "BEAR retrieval + ReAct",
       "n": 1100,
-      "tool_acc": 0.6872727272727273,
-      "ci_lo": 0.6590909090909091,
-      "ci_hi": 0.7145454545454546
+      "tool_acc": 0.6645454545454546,
+      "ci_lo": 0.6363636363636364,
+      "ci_hi": 0.6918181818181818
     },
     {
       "condition": "bear_single",
       "label": "BEAR retrieval + single-turn",
       "n": 1100,
-      "tool_acc": 0.6872727272727273,
-      "ci_lo": 0.66,
-      "ci_hi": 0.7145454545454546
+      "tool_acc": 0.7209090909090909,
+      "ci_lo": 0.6945454545454546,
+      "ci_hi": 0.7463636363636363
     }
-  ]
+  ],
+  "note": "The monolithic row was produced by a separate run with --monolithic-cap 0 (the whole 3,225-tool corpus, ~82k prompt tokens, served with OLLAMA_CONTEXT_LENGTH=131072). Earlier runs capped the corpus at its first 128 (e2e) / 200 (react) schemas, so the gold tool was absent from the prompt for ~98% of queries and accuracy measured coverage rather than selection. The retrieval conditions are unaffected by the cap and come from the original run. Recall is 0.995 rather than 1.000 because 14 sanitized function names collide across 22 instructions."
 }
