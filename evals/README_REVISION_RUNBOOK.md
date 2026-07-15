@@ -110,10 +110,10 @@ The paper used `Mistral-Nemo-Instruct-2407` 12B at **Q4_0 quantization, served b
 
 ```bash
 ollama pull mistral-nemo                                    # ~7 GB, one time
-OLLAMA_CONTEXT_LENGTH=32768 OLLAMA_MAX_LOADED_MODELS=1 ollama serve
+OLLAMA_CONTEXT_LENGTH=131072 OLLAMA_MAX_LOADED_MODELS=1 OLLAMA_HOST=0.0.0.0 ollama serve
 ```
 
-`OLLAMA_CONTEXT_LENGTH` is not optional. Unset, Ollama sizes the KV cache from *free* VRAM and will reserve tens of gigabytes it never uses, starving the embedders the eval loads onto the same card. 32768 caps it near 5 GB and still clears the largest prompt (~13.5k tokens, monolithic ReAct).
+`OLLAMA_CONTEXT_LENGTH` is not optional. The monolithic baseline injects all 3,225 tool schemas (~82k tokens), so the window must be ~131072. Unset, Ollama sizes the KV cache from *free* VRAM and reserves tens of gigabytes it never uses, starving the embedders the eval loads onto the same card. Set the variable in the same shell as `ollama serve`, and quit the Ollama tray app first or it keeps serving the old window. The eval preflights the prompt against the window and aborts if it is too small, so a wrong value fails loudly rather than truncating.
 
 Under WSL, `localhost` is not the Windows loopback. If the eval runs in WSL and Ollama on Windows, add `OLLAMA_HOST=0.0.0.0` and use the host's LAN address.
 

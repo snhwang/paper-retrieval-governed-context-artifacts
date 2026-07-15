@@ -44,36 +44,39 @@ DATA_DIR = Path(__file__).resolve().parent / "data" / "external_benchmarks" / "m
 
 
 def load_tools() -> list[dict]:
-    """Build the tool list from plugin_info.json (the full 388-tool universe).
+    """Build the tool list from plugin_des.json -- the retrieval corpus.
 
-    plugin_info.json is the authoritative source: it is what the shipped
-    plugin_tags.json covers one-for-one. plugin_des.json holds only 199 of these
-    and is used solely as a description fallback. (The earlier generator read
-    plugin_des.json as its primary source, which would silently cover a smaller,
-    different tool set.)
+    The MetaTool retrieval corpus is exactly the 199 tools in plugin_des.json,
+    and every benchmark query targets one of them. We must tag that set, so the
+    required_tags gate can scope every retrievable tool. plugin_info.json (388
+    real-plugin entries) supplies richer descriptions where a tool appears in
+    both, but 46 corpus tools (the generic single-tool targets such as
+    FinanceTool, WeatherTool) exist ONLY in plugin_des; tagging plugin_info
+    instead of the corpus leaves those 46 untagged, orphaning ~11k queries.
     """
-    plugin_info_path = DATA_DIR / "plugin_info.json"
     plugin_des_path = DATA_DIR / "plugin_des.json"
-    if not plugin_info_path.exists():
-        raise SystemExit("plugin_info.json not found. Run toolbench_setup.py first.")
+    plugin_info_path = DATA_DIR / "plugin_info.json"
+    if not plugin_des_path.exists():
+        raise SystemExit("plugin_des.json not found. Run toolbench_setup.py first.")
 
-    des_data: dict = {}
-    if plugin_des_path.exists():
-        with open(plugin_des_path) as f:
-            des_data = json.load(f)
+    with open(plugin_des_path) as f:
+        des_data = json.load(f)  # {tool_name: short_description} -- the corpus
+
+    info_lookup: dict[str, dict] = {}
+    if plugin_info_path.exists():
+        with open(plugin_info_path) as f:
+            for item in json.load(f):
+                name = (item.get("name_for_model") or "").strip()
+                if name:
+                    info_lookup[name] = item
 
     tools: list[dict] = []
-    seen: set[str] = set()
-    with open(plugin_info_path) as f:
-        for item in json.load(f):
-            name = (item.get("name_for_model") or "").strip()
-            if not name or name in seen:
-                continue
-            seen.add(name)
-            description = (item.get("description_for_model")
-                          or item.get("description_for_human")
-                          or des_data.get(name) or "")
-            tools.append({"name": name, "description": description.strip()[:500]})
+    for name, short_desc in des_data.items():
+        info = info_lookup.get(name.strip(), {})
+        description = (info.get("description_for_model")
+                      or info.get("description_for_human")
+                      or short_desc or "")
+        tools.append({"name": name.strip(), "description": description.strip()[:500]})
     return tools
 
 

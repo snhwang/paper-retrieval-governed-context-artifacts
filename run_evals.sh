@@ -31,8 +31,10 @@
 #
 # LLM ENDPOINT:
 #   The paper used Mistral-Nemo-Instruct-2407 (12B) at Q4_0 quantization,
-#   served by Ollama with OLLAMA_CONTEXT_LENGTH=32768:
+#   served by Ollama with OLLAMA_CONTEXT_LENGTH=131072 (the monolithic baseline
+#   injects all 3,225 schemas, ~82k tokens):
 #       ollama pull mistral-nemo
+#       OLLAMA_CONTEXT_LENGTH=131072 OLLAMA_MAX_LOADED_MODELS=1 ollama serve
 #       ./run_evals.sh --all --base-url http://127.0.0.1:11434/v1 \
 #           --model mistral-nemo
 #   Any OpenAI-compatible endpoint with structured-output (response_format

@@ -10,7 +10,7 @@
 # used the same model at Q4_0 quantization, served by Ollama:
 #
 #     ollama pull mistral-nemo
-#     OLLAMA_CONTEXT_LENGTH=32768 OLLAMA_MAX_LOADED_MODELS=1 ollama serve
+#     OLLAMA_CONTEXT_LENGTH=131072 OLLAMA_MAX_LOADED_MODELS=1 ollama serve
 #     python evals/eval_toolbench_e2e.py --all \
 #         --model mistral-nemo --base-url http://127.0.0.1:11434/v1
 #
@@ -78,13 +78,13 @@ PORT="${PORT:-8355}"
 # weights + KV cache never compete for VRAM with the eval's embedding models.
 # Override with HOST=127.0.0.1 to restrict to localhost.
 HOST="${HOST:-0.0.0.0}"
-# Default to 32768. The monolithic-200 ReAct condition in
-# eval_toolbench_react.py produces ~13.5k-token prompts and would crash on
-# the original 8192 default with VLLMValidationError. 32k fits comfortably
-# and leaves room for the 768-token output budget. Mistral-Nemo supports
-# up to 128k natively; bump higher if your VRAM allows and you want a
-# bigger KV-cache concurrency window.
-MAX_MODEL_LEN="${MAX_MODEL_LEN:-32768}"
+# Default to 131072. The monolithic baseline injects all 3,225 tool schemas
+# (~82k tokens), so the window must exceed ~98k; 131072 clears it and stays
+# within Mistral-Nemo's 128k native context. If you run only the retrieval
+# conditions (skip the monolithic baseline) you can drop this to 32768 to save
+# KV-cache VRAM. NOTE: at bf16 a 131072 window needs substantial VRAM; lower
+# GPU_MEM_UTIL headroom accordingly, or use the Ollama path (Q4_0) instead.
+MAX_MODEL_LEN="${MAX_MODEL_LEN:-131072}"
 GPU_MEM_UTIL="${GPU_MEM_UTIL:-0.4}"
 
 # --- Auto-detect WSL and default to eager mode ----------------------------

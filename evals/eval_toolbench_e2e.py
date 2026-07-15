@@ -193,6 +193,31 @@ except ImportError:
 DEFAULT_LLM_MODEL = "mistral-nemo"
 
 
+def _post_with_retry(req, timeout: int = 180, max_attempts: int = 4):
+    """POST a request, retrying transient failures with backoff.
+
+    A transient server hiccup -- most commonly an HTTP 500 when a request lands
+    while Ollama is still loading the model after a restart -- must not be
+    scored as a wrong answer. Retries HTTP 5xx, timeouts, and connection errors;
+    a 4xx (malformed request) is not transient and is raised immediately.
+    """
+    import urllib.error
+    last = None
+    for attempt in range(max_attempts):
+        try:
+            with urllib.request.urlopen(req, timeout=timeout) as resp:
+                return json.loads(resp.read())
+        except urllib.error.HTTPError as e:
+            if e.code < 500:
+                raise
+            last = e
+        except (urllib.error.URLError, OSError, ValueError) as e:
+            last = e
+        if attempt < max_attempts - 1:
+            time.sleep(2 ** attempt)  # 1s, 2s, 4s
+    raise last
+
+
 def _release_gpu_memory() -> None:
     """Return cached GPU blocks to the driver.
 
@@ -277,8 +302,7 @@ def call_llm_with_tools(
     )
 
     try:
-        with urllib.request.urlopen(req, timeout=120) as resp:
-            data = json.loads(resp.read())
+        data = _post_with_retry(req)
     except Exception as e:
         # Surface the first few transport-level failures so a misconfigured
         # endpoint or model name does not silently produce an all-zero run.

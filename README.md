@@ -61,7 +61,7 @@ source .venv/bin/activate
 # Add end-to-end LLM experiments (Tables 7, 8).
 # Paper-exact reproduction: Mistral-Nemo-Instruct-2407 (12B, Q4_0) served by Ollama.
 ollama pull mistral-nemo                            # ~7GB, one time
-OLLAMA_CONTEXT_LENGTH=32768 ollama serve            # in one shell
+OLLAMA_CONTEXT_LENGTH=131072 ollama serve           # in one shell (fits the ~82k monolithic prompt)
 ./run_evals.sh --all \
     --base-url http://127.0.0.1:11434/v1 \
     --model mistral-nemo                            # in another
@@ -113,7 +113,20 @@ reproduce them:
 ```bash
 ollama pull mistral-nemo                                    # Q4_0 by default; ~7GB
 
-OLLAMA_CONTEXT_LENGTH=32768 OLLAMA_MAX_LOADED_MODELS=1 ollama serve
+# The monolithic baseline injects the whole 3,225-tool corpus (~82k tokens), so
+# the context window must be 131072. Set the variable in the SAME shell that
+# runs `ollama serve`; quit the Ollama tray app first, or it keeps serving the
+# old window on port 11434 and ignores this.
+OLLAMA_CONTEXT_LENGTH=131072 OLLAMA_MAX_LOADED_MODELS=1 OLLAMA_HOST=0.0.0.0 ollama serve
+```
+
+Verify the window took effect (Ollama only reports a model once it is loaded, so
+warm it first):
+
+```bash
+curl -s http://127.0.0.1:11434/v1/chat/completions -H 'Content-Type: application/json' \
+    -d '{"model":"mistral-nemo","messages":[{"role":"user","content":"hi"}],"max_tokens":1}' >/dev/null
+curl -s http://127.0.0.1:11434/api/ps          # expect "context_length":131072
 ```
 
 ```bash
@@ -122,6 +135,10 @@ python evals/eval_toolbench_e2e.py --all \
 python evals/eval_toolbench_react.py \
     --base-url http://127.0.0.1:11434/v1 --model mistral-nemo
 ```
+
+Both evals preflight the prompt against the server's context window and abort
+with instructions if it is too small, so a wrong `OLLAMA_CONTEXT_LENGTH` fails
+loudly rather than silently truncating the monolithic prompt.
 
 Three things this depends on, all of which will silently change the numbers if
 you get them wrong:
@@ -137,17 +154,23 @@ server must support OpenAI-style structured outputs. Neither eval sends
 this repository, and models that emit malformed tool-call JSON under it were
 the source of a large error rate before this was fixed.
 
-**Context length.** `OLLAMA_CONTEXT_LENGTH=32768`. Left unset, Ollama sizes the
-KV cache from *free VRAM* at load time and will reserve tens of gigabytes it
-never uses, starving the retrieval embedders the eval loads onto the same card.
-32768 caps the cache near 5GB and still clears the largest prompt by a wide
-margin — the monolithic ReAct condition packs ~200 tool schemas into ~13.5k
-tokens. `OLLAMA_MAX_LOADED_MODELS=1` keeps previously used models from
+**Context length.** `OLLAMA_CONTEXT_LENGTH=131072`. The monolithic baseline
+injects all 3,225 tool schemas into one prompt (~82k tokens), so the window must
+be at least ~98k; 131072 clears it with margin and stays within Mistral-Nemo's
+128k native context. The retrieval conditions only need ~2k, so if you run
+*only* those (`--skip-monolithic`, or `--monolithic-cap` at a small value) you
+can drop to `32768` and save KV-cache VRAM — but the default paper runs include
+the monolithic baseline, so use 131072.
+
+Left unset entirely, Ollama sizes the KV cache from *free VRAM* at load time and
+will reserve tens of gigabytes it never uses, starving the retrieval embedders
+the eval loads onto the same card. Pinning the value bounds it: ~20GB at 131072,
+~5GB at 32768. `OLLAMA_MAX_LOADED_MODELS=1` keeps previously used models from
 lingering in VRAM.
 
 | Variable | Value | Why |
 |:--|:--|:--|
-| `OLLAMA_CONTEXT_LENGTH` | `32768` | Bounds the KV cache; otherwise sized to free VRAM. |
+| `OLLAMA_CONTEXT_LENGTH` | `131072` | Fits the ~82k-token monolithic prompt; also bounds the KV cache. Drop to `32768` only if you skip the monolithic baseline. |
 | `OLLAMA_MAX_LOADED_MODELS` | `1` | Stops idle models from holding VRAM. |
 | `OLLAMA_HOST` | `0.0.0.0` | Only needed to reach the server from another machine (or from WSL — see below). |
 
@@ -177,7 +200,7 @@ Serving the LLM from a second machine removes the contention entirely:
 
 ```bash
 # On the GPU box serving the LLM
-OLLAMA_HOST=0.0.0.0 OLLAMA_CONTEXT_LENGTH=32768 ollama serve
+OLLAMA_HOST=0.0.0.0 OLLAMA_CONTEXT_LENGTH=131072 ollama serve
 
 # On the machine running the evals — its GPU is now free for the embedders
 python evals/eval_toolbench_e2e.py --all \

@@ -84,6 +84,7 @@ sys.path.insert(0, str(EVALS_DIR))
 # Reuse the existing e2e infrastructure
 from eval_toolbench_e2e import (  # noqa: E402
     DEFAULT_LLM_MODEL,
+    _post_with_retry,
     assert_prompt_fits,
     build_retriever,
     strip_governance,
@@ -205,8 +206,7 @@ def call_llm_react(
         headers={"Content-Type": "application/json"},
     )
     try:
-        with urllib.request.urlopen(req, timeout=timeout) as resp:
-            data = json.loads(resp.read())
+        data = _post_with_retry(req, timeout=timeout)
     except Exception as e:  # noqa: BLE001
         # Surface transport-level failures so a misconfigured endpoint does
         # not silently produce an all-zero run. Counters track per-process.
