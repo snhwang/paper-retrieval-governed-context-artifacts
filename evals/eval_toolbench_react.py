@@ -125,6 +125,19 @@ Constraints:
 - The "action" value MUST be exactly one of the available tool names listed below. Do not invent tools.
 """
 
+# Reasoning-mode prompt: used with --reasoning-mode for natively-thinking models.
+# The output is NOT grammar-constrained (constrained decoding would suppress the
+# model's <think> phase), so we instead ask for a final Action line and parse it
+# out of the free-form (post-thinking) text.
+REACT_REASONING_SYSTEM_PROMPT = """You select exactly one tool to answer the user's query.
+
+Think step by step about which tool best fits, considering the available tools below. After your reasoning, output your final choice on its own line in exactly this format:
+
+Action: <the exact name of one tool from the list>
+
+Use exactly one tool. The name after "Action:" must match one of the available tool names below exactly, character for character.
+"""
+
 
 # ---------------------------------------------------------------------------
 # LLM call with ReAct system prompt
@@ -139,6 +152,7 @@ def call_llm_react(
     temperature: float = 0.0,
     max_tokens: int = 768,
     timeout: int = 180,
+    reasoning_mode: bool = False,
 ) -> tuple[str | None, str]:
     """Return (selected_tool_name, raw_content) using a ReAct-style prompt.
 
@@ -166,39 +180,52 @@ def call_llm_react(
         f"- {s['name']}: {(s.get('description') or '').strip()[:400]}"
         for s in tool_schemas if s.get("name")
     )
-    messages = [
-        {"role": "system",
-         "content": REACT_SYSTEM_PROMPT + "\nAvailable tools:\n" + tool_list},
-        {"role": "user", "content": query},
-    ]
-
-    response_format = {
-        "type": "json_schema",
-        "json_schema": {
-            "name": "react_step",
-            "strict": True,
-            "schema": {
-                "type": "object",
-                "properties": {
-                    "thought": {"type": "string"},
-                    "action": {"type": "string", "enum": tool_names},
+    if reasoning_mode:
+        # Natively-thinking model: no grammar constraint (it would gag the
+        # <think> phase). Ask for a final Action line and give a generous token
+        # budget for the reasoning tokens.
+        messages = [
+            {"role": "system",
+             "content": REACT_REASONING_SYSTEM_PROMPT + "\nAvailable tools:\n" + tool_list},
+            {"role": "user", "content": query},
+        ]
+        body = {
+            "model": model,
+            "messages": messages,
+            "temperature": temperature,
+            "max_tokens": max(max_tokens, 8192),
+        }
+    else:
+        messages = [
+            {"role": "system",
+             "content": REACT_SYSTEM_PROMPT + "\nAvailable tools:\n" + tool_list},
+            {"role": "user", "content": query},
+        ]
+        response_format = {
+            "type": "json_schema",
+            "json_schema": {
+                "name": "react_step",
+                "strict": True,
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "thought": {"type": "string"},
+                        "action": {"type": "string", "enum": tool_names},
+                    },
+                    "required": ["thought", "action"],
+                    "additionalProperties": False,
                 },
-                "required": ["thought", "action"],
-                "additionalProperties": False,
             },
-        },
-    }
-
-    payload = json.dumps(
-        {
+        }
+        body = {
             "model": model,
             "messages": messages,
             "temperature": temperature,
             "max_tokens": max_tokens,
             "response_format": response_format,
-        },
-        ensure_ascii=False,
-    ).encode("utf-8")
+        }
+
+    payload = json.dumps(body, ensure_ascii=False).encode("utf-8")
 
     req = urllib.request.Request(
         f"{base_url}/chat/completions",
@@ -232,6 +259,35 @@ def call_llm_react(
     call_llm_react._success_count = getattr(call_llm_react, "_success_count", 0) + 1
     msg = data["choices"][0]["message"]
     raw_content = msg.get("content", "") or ""
+
+    if reasoning_mode:
+        # The model reasoned freely. Its thinking may name many tools while
+        # weighing options, so parse the post-reasoning answer preferentially.
+        # Ollama returns the thinking in a separate `reasoning` field and the
+        # final answer (with the Action line) in `content`; strip any inline
+        # <think> block for models that embed it instead. Fall back to the
+        # reasoning field only if `content` yields nothing.
+        answer = re.sub(r"<think>.*?</think>", "", raw_content,
+                        flags=re.DOTALL | re.IGNORECASE)
+        reasoning_field = msg.get("reasoning") or ""
+        for text in (answer, reasoning_field):
+            if not text:
+                continue
+            # Prefer the explicit final Action line.
+            m = re.search(r"Action\s*:\s*([A-Za-z0-9_./-]+)", text, flags=re.IGNORECASE)
+            if m and m.group(1) in tool_names:
+                return m.group(1), raw_content
+            # Otherwise, the LAST tool name mentioned (the conclusion, not an
+            # option weighed earlier).
+            last = None
+            for s in tool_schemas:
+                if s.get("name") and re.search(rf"\b{re.escape(s['name'])}\b", text):
+                    pos = text.rfind(s["name"])
+                    if last is None or pos > last[1]:
+                        last = (s["name"], pos)
+            if last:
+                return last[0], raw_content
+        return None, raw_content
 
     # 1. Constrained JSON: {"thought": ..., "action": <one of tool_names>}.
     #    Under strict schema decoding this parses on every call.
@@ -441,6 +497,7 @@ def run_condition(
     id_to_function: dict[str, str],
     debug_dump_n: int = 0,
     debug_dump_path = None,
+    reasoning_mode: bool = False,
 ):
     """Run one condition end-to-end. ``schemas_per_query_fn`` is a callable
     returning the tool schemas to pass for each query.
@@ -456,7 +513,8 @@ def run_condition(
     for i, (qtext, ctx_tags, expected, _api_details) in enumerate(queries):
         schemas = schemas_per_query_fn(qtext, ctx_tags, expected)
         if use_react:
-            pred, raw = call_llm_react(qtext, schemas, model, base_url)
+            pred, raw = call_llm_react(qtext, schemas, model, base_url,
+                                       reasoning_mode=reasoning_mode)
         else:
             from eval_toolbench_e2e import call_llm_with_tools
             tc = call_llm_with_tools(qtext, schemas, model, base_url)
@@ -562,6 +620,15 @@ def parse_args() -> argparse.Namespace:
         help="Tag inserted into the output filenames, e.g. --run-label gemma4-31b "
         "writes results/toolbench_react_metrics_gemma4-31b.json. Use it to keep "
         "different models' results from overwriting each other.",
+    )
+    p.add_argument(
+        "--reasoning-mode",
+        action="store_true",
+        help="For natively-thinking models: drop the constrained {thought, action} "
+        "schema (which would suppress the model's own reasoning) and instead let it "
+        "reason freely, parsing the tool from a final 'Action:' line. Affects the "
+        "ReAct conditions (mono-react, bear-react); the single-turn reference stays "
+        "constrained. Use a run-label to keep these results separate.",
     )
     return p.parse_args()
 
@@ -713,6 +780,7 @@ def main() -> None:
                 use_react=True, id_to_function=id_to_function,
                 debug_dump_n=args.debug_dump_n,
                 debug_dump_path=debug_dump_path,
+                reasoning_mode=args.reasoning_mode,
             )
 
         if "bear-react" not in args.skip:
@@ -722,6 +790,7 @@ def main() -> None:
                 use_react=True, id_to_function=id_to_function,
                 debug_dump_n=args.debug_dump_n,
                 debug_dump_path=debug_dump_path,
+                reasoning_mode=args.reasoning_mode,
             )
 
         if "bear-single" not in args.skip:
