@@ -153,6 +153,8 @@ def call_llm_react(
     max_tokens: int = 768,
     timeout: int = 180,
     reasoning_mode: bool = False,
+    top_p: float | None = None,
+    top_k: int | None = None,
 ) -> tuple[str | None, str]:
     """Return (selected_tool_name, raw_content) using a ReAct-style prompt.
 
@@ -195,6 +197,10 @@ def call_llm_react(
             "temperature": temperature,
             "max_tokens": max(max_tokens, 8192),
         }
+        if top_p is not None:
+            body["top_p"] = top_p
+        if top_k is not None:
+            body["top_k"] = top_k
     else:
         messages = [
             {"role": "system",
@@ -224,6 +230,10 @@ def call_llm_react(
             "max_tokens": max_tokens,
             "response_format": response_format,
         }
+        if top_p is not None:
+            body["top_p"] = top_p
+        if top_k is not None:
+            body["top_k"] = top_k
 
     payload = json.dumps(body, ensure_ascii=False).encode("utf-8")
 
@@ -498,6 +508,9 @@ def run_condition(
     debug_dump_n: int = 0,
     debug_dump_path = None,
     reasoning_mode: bool = False,
+    temperature: float = 0.0,
+    top_p: float | None = None,
+    top_k: int | None = None,
 ):
     """Run one condition end-to-end. ``schemas_per_query_fn`` is a callable
     returning the tool schemas to pass for each query.
@@ -514,10 +527,12 @@ def run_condition(
         schemas = schemas_per_query_fn(qtext, ctx_tags, expected)
         if use_react:
             pred, raw = call_llm_react(qtext, schemas, model, base_url,
+                                       temperature=temperature, top_p=top_p, top_k=top_k,
                                        reasoning_mode=reasoning_mode)
         else:
             from eval_toolbench_e2e import call_llm_with_tools
-            tc = call_llm_with_tools(qtext, schemas, model, base_url)
+            tc = call_llm_with_tools(qtext, schemas, model, base_url,
+                                     temperature=temperature, top_p=top_p, top_k=top_k)
             pred = tc["name"] if tc else None
             raw = json.dumps(tc) if tc else "<no tool call>"
         correct[i] = tool_correct(pred, expected, id_to_function)
@@ -621,6 +636,16 @@ def parse_args() -> argparse.Namespace:
         "writes results/toolbench_react_metrics_gemma4-31b.json. Use it to keep "
         "different models' results from overwriting each other.",
     )
+    p.add_argument("--temperature", type=float, default=0.0,
+                   help="LLM sampling temperature (default 0.0 = greedy). Thinking "
+                   "models expect their own recommended sampling, e.g. Gemma 4 "
+                   "wants --temperature 1.0 --llm-top-p 0.95 --llm-top-k 64.")
+    p.add_argument("--llm-top-p", type=float, default=None,
+                   help="LLM nucleus sampling top_p (default: unset). Distinct "
+                   "from the retrieval --top-k.")
+    p.add_argument("--llm-top-k", type=int, default=None,
+                   help="LLM top_k sampling (default: unset). Honored by Ollama's "
+                   "OpenAI-compatible endpoint. Distinct from the retrieval --top-k.")
     p.add_argument(
         "--reasoning-mode",
         action="store_true",
@@ -781,6 +806,7 @@ def main() -> None:
                 debug_dump_n=args.debug_dump_n,
                 debug_dump_path=debug_dump_path,
                 reasoning_mode=args.reasoning_mode,
+                temperature=args.temperature, top_p=args.llm_top_p, top_k=args.llm_top_k,
             )
 
         if "bear-react" not in args.skip:
@@ -791,6 +817,7 @@ def main() -> None:
                 debug_dump_n=args.debug_dump_n,
                 debug_dump_path=debug_dump_path,
                 reasoning_mode=args.reasoning_mode,
+                temperature=args.temperature, top_p=args.llm_top_p, top_k=args.llm_top_k,
             )
 
         if "bear-single" not in args.skip:
@@ -800,6 +827,7 @@ def main() -> None:
                 use_react=False, id_to_function=id_to_function,
                 debug_dump_n=args.debug_dump_n,
                 debug_dump_path=debug_dump_path,
+                temperature=args.temperature, top_p=args.llm_top_p, top_k=args.llm_top_k,
             )
 
         # Summary

@@ -243,6 +243,8 @@ def call_llm_with_tools(
     model: str,
     base_url: str,
     temperature: float = 0.0,
+    top_p: float | None = None,
+    top_k: int | None = None,
 ) -> dict | None:
     """Send query + tool schemas to LLM, return the tool_call or None."""
     import urllib.request
@@ -287,13 +289,18 @@ def call_llm_with_tools(
         },
     }
 
-    payload = json.dumps({
+    body = {
         "model": model,
         "messages": messages,
         "temperature": temperature,
         "max_tokens": 100,
         "response_format": response_format,
-    }, ensure_ascii=False).encode("utf-8")
+    }
+    if top_p is not None:
+        body["top_p"] = top_p
+    if top_k is not None:
+        body["top_k"] = top_k  # Ollama honors this via its OpenAI-compatible endpoint
+    payload = json.dumps(body, ensure_ascii=False).encode("utf-8")
 
     req = urllib.request.Request(
         f"{base_url}/chat/completions",
