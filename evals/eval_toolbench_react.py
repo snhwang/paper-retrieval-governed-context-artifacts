@@ -107,6 +107,53 @@ except ImportError:
 RESULTS_DIR = REPO_ROOT / "results"
 RESULTS_DIR.mkdir(exist_ok=True)
 
+# ToolBench evaluation splits, in the order load_toolbench_data concatenates
+# them. Sizes are 200/200/200/200/200/100 = 1,100.
+TOOLBENCH_SPLITS = ["g1_instruction", "g1_category", "g1_tool",
+                    "g2_instruction", "g2_category", "g3_instruction"]
+
+
+def _split_boundaries(n_queries: int):
+    """Return [(split, start, end), ...] matching the flat query order.
+
+    Reads the benchmark file for the true split sizes. Returns None if the
+    reconstructed total does not match ``n_queries`` (i.e. some rows were
+    skipped on load), so callers can fall back to a flat random sample.
+    """
+    path = (EVALS_DIR / "data" / "external_benchmarks" / "toolbench"
+            / "benchmark_data.json")
+    try:
+        data = json.loads(path.read_text())
+    except (OSError, ValueError):
+        return None
+    bounds, start = [], 0
+    for s in TOOLBENCH_SPLITS:
+        n = len(data.get(s, []))
+        bounds.append((s, start, start + n))
+        start += n
+    return bounds if start == n_queries else None
+
+
+def stratified_sample_indices(n_queries: int, sample_n: int, seed: int) -> list:
+    """Seeded indices sampled proportionally from each ToolBench split.
+
+    Falls back to a flat seeded random sample if split boundaries can't be
+    reconstructed. Deterministic, so the same seed selects the same queries for
+    every model, enabling matched cross-model comparison.
+    """
+    if sample_n >= n_queries:
+        return list(range(n_queries))
+    rng = np.random.default_rng(seed)
+    bounds = _split_boundaries(n_queries)
+    if bounds is None:
+        return sorted(rng.choice(n_queries, size=sample_n, replace=False).tolist())
+    idx = []
+    for _, s, e in bounds:
+        k = min(e - s, round(sample_n * (e - s) / n_queries))
+        if k > 0:
+            idx.extend(rng.choice(range(s, e), size=k, replace=False).tolist())
+    return sorted(idx)
+
 
 # ---------------------------------------------------------------------------
 # ReAct prompt
@@ -644,6 +691,14 @@ def parse_args() -> argparse.Namespace:
         "writes results/toolbench_react_metrics_gemma4-31b.json. Use it to keep "
         "different models' results from overwriting each other.",
     )
+    p.add_argument("--sample-queries", type=int, default=None,
+                   help="Evaluate a representative sample of N queries stratified "
+                   "across the six ToolBench splits (seeded). Prefer this over "
+                   "--max-queries, which takes only the first split (g1_instruction, "
+                   "the easiest) and biases the result. The selected indices are "
+                   "saved so another model's per-query arrays can be matched.")
+    p.add_argument("--sample-seed", type=int, default=42,
+                   help="Seed for --sample-queries (default 42).")
     p.add_argument("--temperature", type=float, default=0.0,
                    help="LLM sampling temperature (default 0.0 = greedy). Thinking "
                    "models expect their own recommended sampling, e.g. Gemma 4 "
@@ -684,7 +739,7 @@ def main() -> None:
     if args.run_label:
         safe = _re.sub(r"[^A-Za-z0-9._-]+", "-", args.run_label).strip("-")
         label = f"_{safe}"
-    partial = bool(args.max_queries) or bool(args.skip)
+    partial = bool(args.max_queries) or bool(args.sample_queries) or bool(args.skip)
     suffix = f"{label}{'_partial' if partial else ''}"
     if suffix:
         print(f"NOTE: writing to results/toolbench_react_*{suffix}.* "
@@ -740,7 +795,19 @@ def main() -> None:
         # Load corpus + queries
         print("Loading ToolBench data ...")
         corpus, queries = load_toolbench_data()
-        if args.max_queries is not None:
+        sample_indices = None
+        if args.sample_queries is not None:
+            # Representative sample stratified across the six ToolBench splits.
+            # queries[:N] would take only the first split (g1_instruction, the
+            # easiest), so --max-queries silently biases the sample; use this
+            # instead. The chosen indices are saved so another model's per-query
+            # arrays can be subsampled to the identical set for a matched compare.
+            sample_indices = stratified_sample_indices(
+                len(queries), args.sample_queries, args.sample_seed)
+            queries = [queries[i] for i in sample_indices]
+            print(f"Stratified sample: {len(queries)} queries "
+                  f"(seed={args.sample_seed}) across the 6 splits")
+        elif args.max_queries is not None:
             queries = queries[: args.max_queries]
         print(f"Corpus: {len(corpus)} APIs, evaluating {len(queries)} queries")
 
@@ -944,6 +1011,8 @@ def main() -> None:
         with out_path.open("w") as f:
             json.dump({"model": args.model, "top_k": args.top_k,
                        "monolithic_cap": args.monolithic_cap, "rows": rows,
+                       "sample_seed": args.sample_seed if args.sample_queries else None,
+                       "sample_indices": sample_indices,
                        "comparisons": comparisons,
                        "per_query_correct": {k: v.astype(int).tolist()
                                              for k, v in results.items()}},
