@@ -539,7 +539,8 @@ def run_condition(
         else:
             from eval_toolbench_e2e import call_llm_with_tools
             tc = call_llm_with_tools(qtext, schemas, model, base_url,
-                                     temperature=temperature, top_p=top_p, top_k=top_k)
+                                     temperature=temperature, top_p=top_p, top_k=top_k,
+                                     reasoning_effort=reasoning_effort)
             pred = tc["name"] if tc else None
             raw = json.dumps(tc) if tc else "<no tool call>"
         correct[i] = tool_correct(pred, expected, id_to_function)

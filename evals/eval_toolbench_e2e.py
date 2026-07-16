@@ -245,8 +245,18 @@ def call_llm_with_tools(
     temperature: float = 0.0,
     top_p: float | None = None,
     top_k: int | None = None,
+    reasoning_effort: str | None = None,
+    max_tokens: int = 2048,
 ) -> dict | None:
-    """Send query + tool schemas to LLM, return the tool_call or None."""
+    """Send query + tool schemas to LLM, return the tool_call or None.
+
+    ``max_tokens`` defaults to 2048 (not the old 100) so a thinking model has
+    room to emit its reasoning tokens AND the constrained ``{tool}`` JSON; with
+    only 100 tokens a thinking model spends the whole budget reasoning and never
+    reaches the JSON, so ``content`` comes back empty and this returns None.
+    Pass ``reasoning_effort="none"`` to disable a thinking model's reasoning for
+    a clean non-thinking constrained selection.
+    """
     import urllib.request
 
     tool_names = [s.get("name", "") for s in tool_schemas if s.get("name")]
@@ -293,13 +303,15 @@ def call_llm_with_tools(
         "model": model,
         "messages": messages,
         "temperature": temperature,
-        "max_tokens": 100,
+        "max_tokens": max_tokens,
         "response_format": response_format,
     }
     if top_p is not None:
         body["top_p"] = top_p
     if top_k is not None:
         body["top_k"] = top_k  # Ollama honors this via its OpenAI-compatible endpoint
+    if reasoning_effort is not None:
+        body["reasoning_effort"] = reasoning_effort
     payload = json.dumps(body, ensure_ascii=False).encode("utf-8")
 
     req = urllib.request.Request(
