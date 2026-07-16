@@ -23,7 +23,6 @@
 #     Table 15    Governance ablation                    eval_governance_ablation.py
 #     Table 16    Decomposed governance ablation         eval_governance_decomposed.py
 #     Table 17    Alpha weight sweep                     eval_alpha_sweep.py
-#     Table 19    MetaTool retained-vs-excluded (App. B) eval_metatool_subset_analysis.py
 #
 #   LLM-required (add --all):
 #     Table 7     End-to-end ToolBench                   eval_toolbench_e2e.py
@@ -161,9 +160,6 @@ echo "--- Table 4: ToolBench with LLM-inferred categories (top-5) ---"
 python3 "$EVAL_DIR/eval_toolbench_top5_categories.py" | tee "$RESULTS_DIR/eval_toolbench_top5_categories_output.txt"
 echo ""
 
-echo "--- Table 19 (Appendix B): MetaTool retained-vs-excluded subset ---"
-python3 "$EVAL_DIR/eval_metatool_subset_analysis.py" | tee "$RESULTS_DIR/eval_metatool_subset_output.txt"
-echo ""
 
 # =========================
 # End-to-end tool selection (REQUIRES LLM)

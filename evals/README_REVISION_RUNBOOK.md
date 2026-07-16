@@ -17,44 +17,12 @@ Each script also prints a `git add` command at the end so you know exactly what 
 |---|---|---|---|
 | `eval_governance_decomposed.py` | CPU only, ~15-20 min (full set) | R1.W3, R4.1 | Already run, committed |
 | `eval_alpha_sweep.py` | CPU only, ~15-20 min (full set) | R1.W3, follow-up | Already run, committed |
-| `eval_metatool_subset_analysis.py` | CPU only, <10 sec | R1.5 | Ready to run |
 | `eval_toolbench_inferred_categories.py` | CPU + LLM API (~30 min, ~$0.10) | R3.7 | Ready to run |
 | `eval_toolbench_react.py` | GPU + local vLLM (~3 hours) | R4.2 | Ready to run |
 
 ---
 
-## 1. `eval_metatool_subset_analysis.py`
-
-**Reviewer 1 #5** asked whether the 10,051-query retained subset of MetaTool+Tags differs systematically from the 11,060 excluded queries. This script answers that question with statistical tests.
-
-### Run
-
-```bash
-cd /path/to/paper-retrieval-governed-context-artifacts
-python evals/eval_metatool_subset_analysis.py
-```
-
-Deterministic, no LLM calls, ~10 seconds.
-
-### Outputs
-
-- `results/metatool_subset_analysis.json` — structured per-property output.
-- `results/metatool_subset_output.txt` — printed log including a LaTeX block ready to paste into Appendix A, Table `tab:metatool-subset`.
-
-### What to commit
-
-The script prints the exact `git add` command at the end. Typical output:
-
-```bash
-git add results/metatool_subset_analysis.json \
-        results/metatool_subset_output.txt
-git commit -m "Add MetaTool retained-vs-excluded subset analysis results"
-git push
-```
-
----
-
-## 2. `eval_toolbench_inferred_categories.py`
+## 1. `eval_toolbench_inferred_categories.py`
 
 **Reviewer 3 #7** said the ToolBench comparison is unfair because BEAR uses oracle category labels as `required_tags` while ToolLLM operates zero-shot. This script answers the structural-equivalence question with an LLM-classifier substitute for the oracle.
 
@@ -98,7 +66,7 @@ The cache file is worth committing because future readers can re-run the downstr
 
 ---
 
-## 3. `eval_toolbench_react.py`
+## 2. `eval_toolbench_react.py`
 
 **Reviewer 4 #2** asked whether BEAR's gains over the monolithic baseline hold under iterative reasoning paradigms like ReAct. This script evaluates three conditions: monolithic+ReAct, BEAR retrieval+ReAct, BEAR retrieval+single-turn.
 

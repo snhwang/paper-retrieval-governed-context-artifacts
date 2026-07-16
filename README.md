@@ -256,7 +256,6 @@ Every numeric table in the paper is produced by a Python script in `evals/`. Sta
 | Table 16 | `tab:decomposed-ablation` | `eval_governance_decomposed.py` | no |
 | Table 17 | `tab:alpha-sweep` | `eval_alpha_sweep.py` | no |
 | Table 18 | `tab:summary` | *(narrative summary)* | — |
-| Table 19 | `tab:metatool-subset` | `eval_metatool_subset_analysis.py` (Appendix B) | no |
 
 For each script, a fresh run writes a structured JSON result file to `results/` plus a reproducibility footer that captures Python, numpy, scipy, and bear versions along with the git commit hash. Pre-computed result files corresponding to the paper's numbers are already committed to `results/` for direct comparison.
 
@@ -282,7 +281,6 @@ evals/                                # evaluation scripts
   eval_toolbench_inferred_categories.py  # Table 4: LLM-inferred categories (top-1)
   eval_toolbench_multitag_categories.py  # Table 4: LLM-inferred categories (multi-tag)
   eval_toolbench_top5_categories.py      # Table 4: LLM-inferred categories (top-5)
-  eval_metatool_subset_analysis.py    # Table 19 (Appendix B): retained vs excluded subsets
 
   # Anthropic-API metadata generation (produces JSON consumed by the retrieval evals)
   metatool_generate_tags.py           # MetaTool tool-tag generation
@@ -332,7 +330,6 @@ python evals/eval_toolbench.py --latex           # Tables 3, 5, 6
 python evals/eval_toolbench_inferred_categories.py   # Table 4 (top-1)
 python evals/eval_toolbench_multitag_categories.py   # Table 4 (multi-tag)
 python evals/eval_toolbench_top5_categories.py       # Table 4 (top-5)
-python evals/eval_metatool_subset_analysis.py    # Table 19 (Appendix B)
 
 # End-to-end LLM experiments (requires an OpenAI-compatible endpoint with
 # structured-output support; see "Serving the model")
