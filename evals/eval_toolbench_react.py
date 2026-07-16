@@ -555,20 +555,35 @@ def parse_args() -> argparse.Namespace:
         "inspecting what the model and the eval are actually doing. Set to "
         "5 or 10 when running --max-queries 20 for a quick correctness check.",
     )
+    p.add_argument(
+        "--run-label",
+        type=str,
+        default="",
+        help="Tag inserted into the output filenames, e.g. --run-label gemma4-31b "
+        "writes results/toolbench_react_metrics_gemma4-31b.json. Use it to keep "
+        "different models' results from overwriting each other.",
+    )
     return p.parse_args()
 
 
 def main() -> None:
     args = parse_args()
 
-    # A partial run (subset of queries, or conditions skipped) must never clobber
-    # the canonical result files a full run produced. Suffix them instead.
+    # Namespace the output files so different models/runs do not clobber each
+    # other. --run-label gives an explicit tag (e.g. a model name); a partial
+    # run (subset of queries, or conditions skipped) is additionally suffixed so
+    # it never overwrites the canonical full-run file.
+    import re as _re
+    label = ""
+    if args.run_label:
+        safe = _re.sub(r"[^A-Za-z0-9._-]+", "-", args.run_label).strip("-")
+        label = f"_{safe}"
     partial = bool(args.max_queries) or bool(args.skip)
-    suffix = "_partial" if partial else ""
-    if partial:
-        print("NOTE: partial run (--max-queries and/or --skip); writing to "
-              f"results/toolbench_react_*{suffix}.* so the full-run results "
-              "are left untouched.\n")
+    suffix = f"{label}{'_partial' if partial else ''}"
+    if suffix:
+        print(f"NOTE: writing to results/toolbench_react_*{suffix}.* "
+              "(run-label and/or partial-run suffix), leaving the canonical "
+              "full-run results untouched.\n")
 
     log_path = RESULTS_DIR / f"toolbench_react_output{suffix}.txt"
     log_handle = log_path.open("w", encoding="utf-8")
