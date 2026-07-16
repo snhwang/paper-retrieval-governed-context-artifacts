@@ -155,6 +155,7 @@ def call_llm_react(
     reasoning_mode: bool = False,
     top_p: float | None = None,
     top_k: int | None = None,
+    reasoning_effort: str | None = None,
 ) -> tuple[str | None, str]:
     """Return (selected_tool_name, raw_content) using a ReAct-style prompt.
 
@@ -201,6 +202,8 @@ def call_llm_react(
             body["top_p"] = top_p
         if top_k is not None:
             body["top_k"] = top_k
+        if reasoning_effort is not None:
+            body["reasoning_effort"] = reasoning_effort
     else:
         messages = [
             {"role": "system",
@@ -234,6 +237,8 @@ def call_llm_react(
             body["top_p"] = top_p
         if top_k is not None:
             body["top_k"] = top_k
+        if reasoning_effort is not None:
+            body["reasoning_effort"] = reasoning_effort
 
     payload = json.dumps(body, ensure_ascii=False).encode("utf-8")
 
@@ -511,6 +516,7 @@ def run_condition(
     temperature: float = 0.0,
     top_p: float | None = None,
     top_k: int | None = None,
+    reasoning_effort: str | None = None,
 ):
     """Run one condition end-to-end. ``schemas_per_query_fn`` is a callable
     returning the tool schemas to pass for each query.
@@ -528,7 +534,8 @@ def run_condition(
         if use_react:
             pred, raw = call_llm_react(qtext, schemas, model, base_url,
                                        temperature=temperature, top_p=top_p, top_k=top_k,
-                                       reasoning_mode=reasoning_mode)
+                                       reasoning_mode=reasoning_mode,
+                                       reasoning_effort=reasoning_effort)
         else:
             from eval_toolbench_e2e import call_llm_with_tools
             tc = call_llm_with_tools(qtext, schemas, model, base_url,
@@ -655,6 +662,12 @@ def parse_args() -> argparse.Namespace:
         "ReAct conditions (mono-react, bear-react); the single-turn reference stays "
         "constrained. Use a run-label to keep these results separate.",
     )
+    p.add_argument("--reasoning-effort", type=str, default=None,
+                   choices=["none", "low", "medium", "high"],
+                   help="OpenAI-standard reasoning_effort, honored by Ollama for "
+                   "thinking models. Use 'none' to DISABLE a thinking model's "
+                   "reasoning (Gemma 4 thinks by default), enabling a clean "
+                   "thinking-on vs thinking-off ablation on the same model.")
     return p.parse_args()
 
 
@@ -807,6 +820,7 @@ def main() -> None:
                 debug_dump_path=debug_dump_path,
                 reasoning_mode=args.reasoning_mode,
                 temperature=args.temperature, top_p=args.llm_top_p, top_k=args.llm_top_k,
+                reasoning_effort=args.reasoning_effort,
             )
 
         if "bear-react" not in args.skip:
@@ -818,6 +832,7 @@ def main() -> None:
                 debug_dump_path=debug_dump_path,
                 reasoning_mode=args.reasoning_mode,
                 temperature=args.temperature, top_p=args.llm_top_p, top_k=args.llm_top_k,
+                reasoning_effort=args.reasoning_effort,
             )
 
         if "bear-single" not in args.skip:
@@ -828,6 +843,7 @@ def main() -> None:
                 debug_dump_n=args.debug_dump_n,
                 debug_dump_path=debug_dump_path,
                 temperature=args.temperature, top_p=args.llm_top_p, top_k=args.llm_top_k,
+                reasoning_effort=args.reasoning_effort,
             )
 
         # Summary
