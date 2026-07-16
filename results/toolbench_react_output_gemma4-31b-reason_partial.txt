@@ -1,0 +1,71 @@
+=== ToolBench end-to-end with ReAct-style prompting ===
+
+Model: gemma4:31b
+Base URL: http://192.168.1.175:11434/v1
+BEAR top-k: 5
+Monolithic cap: 0
+
+Loading ToolBench data ...
+Corpus: 3225 APIs, evaluating 200 queries
+Corpus schema coverage: 3225/3225 (100.0%) instructions have an OpenAI function schema.
+  Context check: monolithic (3225 tools) prompt ~113,942 tokens, server window 131,072.
+
+[Monolithic + ReAct] running 200 queries ...
+  50/200 done; acc-so-far = 0.840; ETA 70.6 min
+  100/200 done; acc-so-far = 0.750; ETA 49.3 min
+  150/200 done; acc-so-far = 0.740; ETA 24.9 min
+  200/200 done; acc-so-far = 0.755; ETA 0.0 min
+[Monolithic + ReAct] done; tool-acc = 0.755; elapsed 97.8 min
+
+--- Tool selection accuracy (1 if predicted tool matches any expected api_id) ---
+
+Condition                                 Tool Acc [95% CI]              n
+--------------------------------------------------------------------------
+Monolithic + ReAct                        0.755 [0.695,0.815]      200
+
+--- Paired comparisons (same queries; McNemar + paired bootstrap) ---
+
+
+--- LaTeX table (paste into manuscript as tab:e2e-react) ---
+
+\begin{table}[t]
+  \caption{End-to-end ToolBench tool-selection accuracy under single-turn vs.\ ReAct prompting (gemma4:31b, $k=5$, 95\% bootstrap CIs). Tool accuracy is exact match between the LLM's selected tool and any expected \texttt{api\_id} in the ground-truth set. The monolithic baseline injects 0 tool schemas directly into the prompt; BEAR retrieval injects the top-5 under full governance.}
+  \label{tab:toolbench-react}
+  \centering
+  \small
+  \begin{tabular}{@{}l c c@{}}
+    \toprule
+    Condition & Tool accuracy [95\% CI] & $n$ \\
+    \midrule
+    Monolithic + ReAct & 0.755 [0.695,0.815] & 200 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Wrote /mnt/c/users/scott/documents/work/paper-retrieval-governed-context-artifacts/results/toolbench_react_metrics_gemma4-31b-reason_partial.json
+Wrote /mnt/c/users/scott/documents/work/paper-retrieval-governed-context-artifacts/results/toolbench_react_output_gemma4-31b-reason_partial.txt
+
+Elapsed: 99.5 min
+
+=== Reproducibility ===
+Timestamp (UTC): 2026-07-16T07:04:48Z
+Command line:    evals/eval_toolbench_react.py --max-queries 200 --skip bear-react bear-single --reasoning-mode --temperature 1.0 --llm-top-p 0.95 --llm-top-k 64 --run-label gemma4-31b-reason --base-url http://192.168.1.175:11434/v1 --model gemma4:31b
+Python:          3.12.3 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
+numpy:           2.2.6
+scipy:           1.17.1
+bear:            0.1.10
+git commit:      7f7bbe6d61fd7c7cb373607a96d0b8c975a53947
+git status:      DIRTY (16 files modified)
+git branch:      main
+
+  model: gemma4:31b
+  base_url: http://192.168.1.175:11434/v1
+  top_k: 5
+  monolithic_cap: 0
+  max_queries: 200
+  conditions_run: ['mono_react']
+===
+
+To commit these results to the artifacts repo:
+  git add results/toolbench_react_metrics_gemma4-31b-reason_partial.json \
+          results/toolbench_react_output_gemma4-31b-reason_partial.txt
