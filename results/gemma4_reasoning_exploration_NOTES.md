@@ -10,33 +10,45 @@ An earlier probe used `queries[:200]` = the first split only (g1_instruction, th
 easiest), which inflated every gemma4 number by +0.08 to +0.19; those biased
 numbers are superseded by the stratified ones below.
 
-## Final matched grid (same 198 stratified queries, seed 42)
+## Final matched grid (pooled over two stratified samples, seeds 42+43, n=396)
+
+Reasoning is added in each model's native idiom: prompted ReAct scaffold for the
+non-thinking Mistral-12B, native thinking channel for the thinking gemma4-31b.
+The two "without reasoning" cells differ in instrument (Mistral single-turn,
+gemma4 native-off) but both are the model's plain selection without its reasoning
+boost. Mistral cells come from its saved per-query arrays subsampled to the same
+indices (e2e single-turn; react-eval scaffold) -- no Mistral re-run.
 
 | condition | Mistral-12B | gemma4-31b |
 |---|--:|--:|
-| Monolithic (3,225) + constrained scaffold | 0.035 | -- |
-| Monolithic + reasoning OFF | -- | 0.364 |
-| Monolithic + reasoning ON | -- | 0.621 |
-| BEAR (top-5) single-turn, non-thinking | 0.727 | 0.768 |
-| BEAR + reasoning / ReAct | 0.677 | 0.742 |
+| Monolithic (3,225), without reasoning | 0.199 [0.159, 0.240] | 0.402 [0.356, 0.449] |
+| Monolithic, with reasoning            | 0.035 [0.018, 0.056] | 0.614 [0.566, 0.662] |
+| BEAR (top-5) single-turn              | 0.722 [0.677, 0.765] | 0.763 [0.720, 0.803] |
+| BEAR + reasoning / ReAct              | 0.677 [0.629, 0.722] | 0.740 [0.697, 0.783] |
 
 ## Findings
 
-1. **Native reasoning helps the hard monolithic condition at 31B**: 0.364 -> 0.621
-   (+0.258, McNemar p=1.6e-11, paired). Opposite to the 12B, where the ReAct
-   scaffold *hurt* -- a clean demonstration of scale-emergent CoT (Wei 2022).
-2. **Governance still wins on the same model**: gemma4 BEAR (0.742-0.768) beats
-   its own monolithic-with-reasoning (0.621) by ~+0.12, and far cheaper
-   (~5k vs ~82k prompt tokens; one call vs ~29 s/query of reasoning).
-3. **Governance collapses the model-scale gap**: on monolithic the 12B->31B gap
-   is +0.586 (0.035 -> 0.621); on BEAR it is +0.040 (0.727 -> 0.768). A small
-   governed model matches a 2.5x-larger reasoning model, because governance makes
-   the decision tractable enough that scale and reasoning stop mattering.
+1. **Reasoning flips sign with scale.** Adding reasoning to the monolithic prompt
+   *drops* the 12B model (0.199 -> 0.035, -0.164, McNemar p=3.4e-15, paired) but
+   *lifts* the 31B model (0.402 -> 0.614, +0.212, p=3.8e-14). Clean scale-emergent
+   CoT (Wei 2022): the same intervention degrades selection at 12B, rescues it at 31B.
+2. **Governance still wins on the same model**: gemma4 BEAR (0.740-0.763) beats
+   its own monolithic-with-reasoning (0.614) by ~+0.13, and far cheaper
+   (~5k vs ~82k prompt tokens; one call vs tens of seconds of reasoning/query).
+3. **Governance collapses the model-scale gap**: on monolithic the 12B->31B gap is
+   large in either condition (without reasoning 0.199 -> 0.402; with reasoning
+   0.035 -> 0.614); on BEAR it is +0.041 (0.722 -> 0.763). A small governed model
+   matches a 2.5x-larger reasoning model, because governance makes the decision
+   tractable enough that scale and reasoning stop mattering.
 4. Reasoning does not help once the set is narrow: gemma4 BEAR non-thinking
-   (0.768) >= reasoning (0.742), same pattern as the 12B ReAct result.
+   (0.763) >= reasoning (0.740), same pattern as the 12B ReAct result.
 
-Caveat: temp=1.0, single seed. Effects are large (0.26, p=1e-11), so a second
-seed would not change conclusions, but one more seed would fully lock it if this
-goes into the paper.
+Two seeds (42, 43), samples 85% disjoint (30/198 overlap), so the pooled n=396 is
+near-independent. Effects are large and hold on each seed separately.
 
-Result files: `toolbench_react_metrics_g4-*-strat_partial.json` (+ logs).
+Note: the earlier seed-42-only grid reported 0.364/0.621 for gemma4 monolithic and
+0.035 for Mistral (its ReAct scaffold as the only monolithic cell); superseded by
+the pooled, symmetric grid above (Mistral monolithic single-turn 0.199 is its fair
+baseline; its scaffold 0.035 is the "with reasoning" cell).
+
+Result files: `toolbench_react_metrics_g4-*-s4{2,3}_partial.json` (+ logs).
