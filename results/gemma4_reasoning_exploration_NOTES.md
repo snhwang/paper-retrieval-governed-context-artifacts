@@ -52,3 +52,27 @@ the pooled, symmetric grid above (Mistral monolithic single-turn 0.199 is its fa
 baseline; its scaffold 0.035 is the "with reasoning" cell).
 
 Result files: `toolbench_react_metrics_g4-*-s4{2,3}_partial.json` (+ logs).
+
+## Extending to full 1,100 (standard ToolBench test set)
+
+To move Table 9 from the stratified pilot to the full 1,100-query test set without
+re-running the 366 queries already collected:
+
+```
+# 1. write the index split (366 done, 734 complement); deterministic
+python evals/make_complement_indices.py
+
+# 2. run Gemma on ONLY the 734 complement (4 conditions, cheap -> expensive)
+#    override BASE_URL / MODEL if your Ollama server differs
+bash evals/run_gemma_complement.sh
+
+# 3. stitch pilot (366) + complement (734) -> full 1,100 grid + paired McNemar
+python evals/merge_gemma_full1100.py
+```
+
+Each query is evaluated exactly once at the same settings (temp 1.0, top_p 0.95,
+top_k 64, cap 0); for the 30 queries in both seeds, seed 42's result is kept. The
+merge writes `toolbench_react_metrics_g4-FULL1100_merged.json` and prints the
+full-1,100 numbers to drop into Table 9. The `--query-indices-file` flag on
+`eval_toolbench_react.py` (a JSON list of indices into the flat 1,100 order) is
+the general mechanism.

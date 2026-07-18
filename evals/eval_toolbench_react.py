@@ -699,6 +699,13 @@ def parse_args() -> argparse.Namespace:
                    "saved so another model's per-query arrays can be matched.")
     p.add_argument("--sample-seed", type=int, default=42,
                    help="Seed for --sample-queries (default 42).")
+    p.add_argument("--query-indices-file", type=str, default=None,
+                   help="Path to a JSON list of query indices (into the flat "
+                   "1,100-query order) to evaluate, in that order. Use to run an "
+                   "explicit subset such as the complement of an earlier sample, "
+                   "so already-collected per-query results can be extended to full "
+                   "coverage instead of re-run. Mutually exclusive with "
+                   "--sample-queries / --max-queries.")
     p.add_argument("--temperature", type=float, default=0.0,
                    help="LLM sampling temperature (default 0.0 = greedy). Thinking "
                    "models expect their own recommended sampling, e.g. Gemma 4 "
@@ -739,7 +746,8 @@ def main() -> None:
     if args.run_label:
         safe = _re.sub(r"[^A-Za-z0-9._-]+", "-", args.run_label).strip("-")
         label = f"_{safe}"
-    partial = bool(args.max_queries) or bool(args.sample_queries) or bool(args.skip)
+    partial = (bool(args.max_queries) or bool(args.sample_queries)
+               or bool(args.query_indices_file) or bool(args.skip))
     suffix = f"{label}{'_partial' if partial else ''}"
     if suffix:
         print(f"NOTE: writing to results/toolbench_react_*{suffix}.* "
@@ -796,7 +804,18 @@ def main() -> None:
         print("Loading ToolBench data ...")
         corpus, queries = load_toolbench_data()
         sample_indices = None
-        if args.sample_queries is not None:
+        if args.query_indices_file is not None:
+            # Explicit index list (e.g. the complement of a prior sample). The
+            # indices are saved so the resulting per-query arrays can be merged
+            # back with the earlier ones to reach full 1,100 coverage.
+            with open(args.query_indices_file) as _f:
+                sample_indices = json.load(_f)
+            assert all(0 <= i < len(queries) for i in sample_indices), \
+                "query index out of range for the loaded query set"
+            queries = [queries[i] for i in sample_indices]
+            print(f"Explicit index list: {len(queries)} queries "
+                  f"from {args.query_indices_file}")
+        elif args.sample_queries is not None:
             # Representative sample stratified across the six ToolBench splits.
             # queries[:N] would take only the first split (g1_instruction, the
             # easiest), so --max-queries silently biases the sample; use this
@@ -1012,6 +1031,7 @@ def main() -> None:
             json.dump({"model": args.model, "top_k": args.top_k,
                        "monolithic_cap": args.monolithic_cap, "rows": rows,
                        "sample_seed": args.sample_seed if args.sample_queries else None,
+                       "query_indices_file": args.query_indices_file,
                        "sample_indices": sample_indices,
                        "comparisons": comparisons,
                        "per_query_correct": {k: v.astype(int).tolist()
