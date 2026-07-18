@@ -1,0 +1,74 @@
+NOTE: writing to results/toolbench_react_*_g4-bear-s43_partial.* (run-label and/or partial-run suffix), leaving the canonical full-run results untouched.
+
+=== ToolBench end-to-end with ReAct-style prompting ===
+
+Model: gemma4:31b
+Base URL: http://192.168.1.175:11434/v1
+BEAR top-k: 5
+Monolithic cap: 0
+
+Loading ToolBench data ...
+Stratified sample: 198 queries (seed=43) across the 6 splits
+Corpus: 3225 APIs, evaluating 198 queries
+Batches:   0%|          | 0/101 [00:00<?, ?it/s]Batches:   1%|          | 1/101 [00:00<00:12,  7.75it/s]Batches:   3%|▎         | 3/101 [00:00<00:09,  9.86it/s]Batches:   5%|▍         | 5/101 [00:00<00:08, 11.94it/s]Batches:   7%|▋         | 7/101 [00:00<00:06, 13.95it/s]Batches:  10%|▉         | 10/101 [00:00<00:05, 17.60it/s]Batches:  13%|█▎        | 13/101 [00:00<00:04, 21.14it/s]Batches:  17%|█▋        | 17/101 [00:00<00:03, 23.45it/s]Batches:  21%|██        | 21/101 [00:01<00:03, 26.10it/s]Batches:  25%|██▍       | 25/101 [00:01<00:02, 28.39it/s]Batches:  30%|██▉       | 30/101 [00:01<00:02, 32.04it/s]Batches:  35%|███▍      | 35/101 [00:01<00:01, 34.92it/s]Batches:  40%|███▉      | 40/101 [00:01<00:01, 37.73it/s]Batches:  45%|████▍     | 45/101 [00:01<00:01, 40.15it/s]Batches:  50%|█████     | 51/101 [00:01<00:01, 43.89it/s]Batches:  56%|█████▋    | 57/101 [00:01<00:00, 47.17it/s]Batches:  62%|██████▏   | 63/101 [00:01<00:00, 48.53it/s]Batches:  68%|██████▊   | 69/101 [00:02<00:00, 50.73it/s]Batches:  74%|███████▍  | 75/101 [00:02<00:00, 53.14it/s]Batches:  81%|████████  | 82/101 [00:02<00:00, 56.29it/s]Batches:  88%|████████▊ | 89/101 [00:02<00:00, 59.51it/s]Batches:  95%|█████████▌| 96/101 [00:02<00:00, 61.51it/s]Batches: 100%|██████████| 101/101 [00:02<00:00, 39.31it/s]
+Batches:   0%|          | 0/101 [00:00<?, ?it/s]Batches:   2%|▏         | 2/101 [00:00<00:08, 11.16it/s]Batches:   4%|▍         | 4/101 [00:00<00:07, 12.50it/s]Batches:   6%|▌         | 6/101 [00:00<00:06, 14.27it/s]Batches:   9%|▉         | 9/101 [00:00<00:05, 17.43it/s]Batches:  12%|█▏        | 12/101 [00:00<00:04, 21.05it/s]Batches:  16%|█▌        | 16/101 [00:00<00:03, 24.61it/s]Batches:  19%|█▉        | 19/101 [00:00<00:03, 25.61it/s]Batches:  23%|██▎       | 23/101 [00:01<00:02, 28.20it/s]Batches:  27%|██▋       | 27/101 [00:01<00:02, 31.17it/s]Batches:  32%|███▏      | 32/101 [00:01<00:02, 34.25it/s]Batches:  37%|███▋      | 37/101 [00:01<00:01, 36.56it/s]Batches:  42%|████▏     | 42/101 [00:01<00:01, 39.23it/s]Batches:  47%|████▋     | 47/101 [00:01<00:01, 41.88it/s]Batches:  52%|█████▏    | 53/101 [00:01<00:01, 44.58it/s]Batches:  58%|█████▊    | 59/101 [00:01<00:00, 47.14it/s]Batches:  64%|██████▍   | 65/101 [00:01<00:00, 48.31it/s]Batches:  70%|███████   | 71/101 [00:02<00:00, 50.46it/s]Batches:  77%|███████▋  | 78/101 [00:02<00:00, 53.45it/s]Batches:  84%|████████▍ | 85/101 [00:02<00:00, 56.32it/s]Batches:  91%|█████████ | 92/101 [00:02<00:00, 59.12it/s]Batches:  98%|█████████▊| 99/101 [00:02<00:00, 61.01it/s]Batches: 100%|██████████| 101/101 [00:02<00:00, 40.22it/s]
+Corpus schema coverage: 3225/3225 (100.0%) instructions have an OpenAI function schema.
+
+[BEAR retrieval + ReAct] running 198 queries ...
+  50/198 done; acc-so-far = 0.740; ETA 37.7 min
+  100/198 done; acc-so-far = 0.770; ETA 23.6 min
+  150/198 done; acc-so-far = 0.773; ETA 13.1 min
+[BEAR retrieval + ReAct] done; tool-acc = 0.737; elapsed 52.8 min
+
+--- Tool selection accuracy (1 if predicted tool matches any expected api_id) ---
+
+Condition                                 Tool Acc [95% CI]              n
+--------------------------------------------------------------------------
+BEAR retrieval + ReAct                    0.737 [0.677,0.798]      198
+
+--- Paired comparisons (same queries; McNemar + paired bootstrap) ---
+
+
+--- LaTeX table (paste into manuscript as tab:e2e-react) ---
+
+\begin{table}[t]
+  \caption{End-to-end ToolBench tool-selection accuracy under single-turn vs.\ ReAct prompting (gemma4:31b, $k=5$, 95\% bootstrap CIs). Tool accuracy is exact match between the LLM's selected tool and any expected \texttt{api\_id} in the ground-truth set. The monolithic baseline injects 0 tool schemas directly into the prompt; BEAR retrieval injects the top-5 under full governance.}
+  \label{tab:toolbench-react}
+  \centering
+  \small
+  \begin{tabular}{@{}l c c@{}}
+    \toprule
+    Condition & Tool accuracy [95\% CI] & $n$ \\
+    \midrule
+    BEAR retrieval + ReAct & 0.737 [0.677,0.798] & 198 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Wrote /mnt/c/users/scott/documents/work/paper-retrieval-governed-context-artifacts/results/toolbench_react_metrics_g4-bear-s43_partial.json
+Wrote /mnt/c/users/scott/documents/work/paper-retrieval-governed-context-artifacts/results/toolbench_react_output_g4-bear-s43_partial.txt
+
+Elapsed: 54.1 min
+
+=== Reproducibility ===
+Timestamp (UTC): 2026-07-17T13:05:56Z
+Command line:    evals/eval_toolbench_react.py --sample-queries 200 --sample-seed 43 --skip mono-react bear-single --reasoning-mode --temperature 1.0 --llm-top-p 0.95 --llm-top-k 64 --run-label g4-bear-s43 --base-url http://192.168.1.175:11434/v1 --model gemma4:31b
+Python:          3.12.3 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
+numpy:           2.2.6
+scipy:           1.17.1
+bear:            0.1.10
+git commit:      e80be5f9904dc6231473c1d0a35951e2439d69e6
+git status:      DIRTY (27 files modified)
+git branch:      main
+
+  model: gemma4:31b
+  base_url: http://192.168.1.175:11434/v1
+  top_k: 5
+  monolithic_cap: 0
+  max_queries: None
+  conditions_run: ['bear_react']
+===
+
+To commit these results to the artifacts repo:
+  git add results/toolbench_react_metrics_g4-bear-s43_partial.json \
+          results/toolbench_react_output_g4-bear-s43_partial.txt
