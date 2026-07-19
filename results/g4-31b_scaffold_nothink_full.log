@@ -1,0 +1,149 @@
+NOTE: writing to results/toolbench_react_*_g4-31b-scaffold-nothink-full.* (run-label and/or partial-run suffix), leaving the canonical full-run results untouched.
+
+=== ToolBench end-to-end with ReAct-style prompting ===
+
+Model: gemma4:31b
+Base URL: http://192.168.1.175:11434/v1
+BEAR top-k: 5
+Monolithic cap: 0
+
+Loading ToolBench data ...
+Corpus: 3225 APIs, evaluating 1100 queries
+Batches:   0%|          | 0/101 [00:00<?, ?it/s]Batches:   1%|          | 1/101 [00:00<00:12,  8.23it/s]Batches:   3%|▎         | 3/101 [00:00<00:09, 10.24it/s]Batches:   5%|▍         | 5/101 [00:00<00:07, 12.32it/s]Batches:   7%|▋         | 7/101 [00:00<00:06, 14.45it/s]Batches:  10%|▉         | 10/101 [00:00<00:04, 18.22it/s]Batches:  14%|█▍        | 14/101 [00:00<00:03, 22.59it/s]Batches:  17%|█▋        | 17/101 [00:00<00:03, 24.20it/s]Batches:  21%|██        | 21/101 [00:01<00:02, 27.29it/s]Batches:  25%|██▍       | 25/101 [00:01<00:02, 29.65it/s]Batches: 100%|██████████| 101/101 [00:00<00:00, 139.74it/s]
+Batches:   0%|          | 0/101 [00:00<?, ?it/s]Batches:   2%|▏         | 2/101 [00:00<00:08, 11.30it/s]Batches:   4%|▍         | 4/101 [00:00<00:07, 12.62it/s]Batches:   6%|▌         | 6/101 [00:00<00:06, 14.28it/s]Batches:   9%|▉         | 9/101 [00:00<00:05, 17.60it/s]Batches:  13%|█▎        | 13/101 [00:00<00:04, 21.99it/s]Batches:  17%|█▋        | 17/101 [00:00<00:03, 24.34it/s]Batches:  21%|██        | 21/101 [00:00<00:02, 27.00it/s]Batches:  25%|██▍       | 25/101 [00:01<00:02, 29.25it/s]Batches:  30%|██▉       | 30/101 [00:01<00:02, 32.98it/s]Batches:  35%|███▍      | 35/101 [00:01<00:01, 35.99it/s]Batches:  40%|███▉      | 40/101 [00:01<00:01, 38.22it/s]Batches:  45%|████▍     | 45/101 [00:01<00:01, 40.57it/s]Batches:  50%|█████     | 51/101 [00:01<00:01, 44.49it/s]Batches:  56%|█████▋    | 57/101 [00:01<00:00, 47.66it/s]Batches:  62%|██████▏   | 63/101 [00:01<00:00, 49.15it/s]Batches:  68%|██████▊   | 69/101 [00:01<00:00, 51.88it/s]Batches:  75%|███████▌  | 76/101 [00:02<00:00, 54.91it/s]Batches:  82%|████████▏ | 83/101 [00:02<00:00, 57.95it/s]Batches:  89%|████████▉ | 90/101 [00:02<00:00, 61.11it/s]Batches:  96%|█████████▌| 97/101 [00:02<00:00, 63.30it/s]Batches: 100%|██████████| 101/101 [00:02<00:00, 41.20it/s]
+Corpus schema coverage: 3225/3225 (100.0%) instructions have an OpenAI function schema.
+  Context check: monolithic (3225 tools) prompt ~113,942 tokens, server window 262,144.
+
+[Monolithic + ReAct] running 1100 queries ...
+  50/1100 done; acc-so-far = 0.900; ETA 77.4 min
+  100/1100 done; acc-so-far = 0.820; ETA 68.0 min
+  150/1100 done; acc-so-far = 0.793; ETA 62.3 min
+  200/1100 done; acc-so-far = 0.805; ETA 56.7 min
+  250/1100 done; acc-so-far = 0.788; ETA 51.5 min
+  300/1100 done; acc-so-far = 0.790; ETA 47.6 min
+  350/1100 done; acc-so-far = 0.777; ETA 44.9 min
+  400/1100 done; acc-so-far = 0.775; ETA 41.1 min
+  450/1100 done; acc-so-far = 0.767; ETA 38.5 min
+  500/1100 done; acc-so-far = 0.764; ETA 35.6 min
+  550/1100 done; acc-so-far = 0.756; ETA 32.6 min
+  600/1100 done; acc-so-far = 0.747; ETA 29.9 min
+  650/1100 done; acc-so-far = 0.735; ETA 27.2 min
+  700/1100 done; acc-so-far = 0.724; ETA 24.2 min
+  750/1100 done; acc-so-far = 0.719; ETA 21.1 min
+  800/1100 done; acc-so-far = 0.710; ETA 18.4 min
+  850/1100 done; acc-so-far = 0.705; ETA 15.4 min
+  900/1100 done; acc-so-far = 0.694; ETA 12.4 min
+  950/1100 done; acc-so-far = 0.697; ETA 9.3 min
+  1000/1100 done; acc-so-far = 0.688; ETA 6.3 min
+  1050/1100 done; acc-so-far = 0.675; ETA 3.1 min
+  1100/1100 done; acc-so-far = 0.660; ETA 0.0 min
+[Monolithic + ReAct] done; tool-acc = 0.660; elapsed 68.9 min
+
+[BEAR retrieval + ReAct] running 1100 queries ...
+  50/1100 done; acc-so-far = 0.880; ETA 29.2 min
+  100/1100 done; acc-so-far = 0.870; ETA 27.8 min
+  150/1100 done; acc-so-far = 0.833; ETA 26.7 min
+  200/1100 done; acc-so-far = 0.855; ETA 24.8 min
+  250/1100 done; acc-so-far = 0.828; ETA 23.4 min
+  300/1100 done; acc-so-far = 0.827; ETA 21.9 min
+  350/1100 done; acc-so-far = 0.817; ETA 20.4 min
+  400/1100 done; acc-so-far = 0.825; ETA 18.9 min
+  450/1100 done; acc-so-far = 0.807; ETA 17.7 min
+  500/1100 done; acc-so-far = 0.804; ETA 16.3 min
+  550/1100 done; acc-so-far = 0.796; ETA 15.1 min
+  600/1100 done; acc-so-far = 0.793; ETA 13.8 min
+  650/1100 done; acc-so-far = 0.795; ETA 12.5 min
+  700/1100 done; acc-so-far = 0.793; ETA 11.1 min
+  750/1100 done; acc-so-far = 0.789; ETA 9.7 min
+  800/1100 done; acc-so-far = 0.789; ETA 8.3 min
+  850/1100 done; acc-so-far = 0.784; ETA 7.0 min
+  900/1100 done; acc-so-far = 0.776; ETA 5.6 min
+  950/1100 done; acc-so-far = 0.775; ETA 4.2 min
+  1000/1100 done; acc-so-far = 0.765; ETA 2.8 min
+  1050/1100 done; acc-so-far = 0.761; ETA 1.4 min
+  1100/1100 done; acc-so-far = 0.745; ETA 0.0 min
+[BEAR retrieval + ReAct] done; tool-acc = 0.745; elapsed 30.5 min
+
+[BEAR retrieval + single-turn (reference)] running 1100 queries ...
+  50/1100 done; acc-so-far = 0.860; ETA 13.6 min
+  100/1100 done; acc-so-far = 0.870; ETA 12.3 min
+  150/1100 done; acc-so-far = 0.833; ETA 11.7 min
+  200/1100 done; acc-so-far = 0.850; ETA 11.1 min
+  250/1100 done; acc-so-far = 0.820; ETA 10.4 min
+  300/1100 done; acc-so-far = 0.823; ETA 9.7 min
+  350/1100 done; acc-so-far = 0.829; ETA 9.0 min
+  400/1100 done; acc-so-far = 0.835; ETA 8.4 min
+  450/1100 done; acc-so-far = 0.822; ETA 7.8 min
+  500/1100 done; acc-so-far = 0.820; ETA 7.2 min
+  550/1100 done; acc-so-far = 0.813; ETA 6.6 min
+  600/1100 done; acc-so-far = 0.812; ETA 6.0 min
+  650/1100 done; acc-so-far = 0.809; ETA 5.4 min
+  700/1100 done; acc-so-far = 0.807; ETA 4.8 min
+  750/1100 done; acc-so-far = 0.804; ETA 4.2 min
+  800/1100 done; acc-so-far = 0.804; ETA 3.6 min
+  850/1100 done; acc-so-far = 0.801; ETA 3.0 min
+  900/1100 done; acc-so-far = 0.794; ETA 2.4 min
+  950/1100 done; acc-so-far = 0.796; ETA 1.8 min
+  1000/1100 done; acc-so-far = 0.786; ETA 1.2 min
+  1050/1100 done; acc-so-far = 0.783; ETA 0.6 min
+  1100/1100 done; acc-so-far = 0.768; ETA 0.0 min
+[BEAR retrieval + single-turn (reference)] done; tool-acc = 0.768; elapsed 13.4 min
+
+--- Tool selection accuracy (1 if predicted tool matches any expected api_id) ---
+
+Condition                                 Tool Acc [95% CI]              n
+--------------------------------------------------------------------------
+Monolithic + ReAct                        0.660 [0.632,0.687]     1100
+BEAR retrieval + ReAct                    0.745 [0.718,0.770]     1100
+BEAR retrieval + single-turn              0.768 [0.743,0.793]     1100
+
+--- Paired comparisons (same queries; McNemar + paired bootstrap) ---
+
+  bear_single vs bear_react: Δ=+0.024 [+0.011, +0.036], McNemar p=3.06e-04 (discordant 38/12)
+  bear_react vs mono_react: Δ=+0.085 [+0.057, +0.113], McNemar p=3.68e-09 (discordant 171/78)
+
+--- LaTeX table (paste into manuscript as tab:e2e-react) ---
+
+\begin{table}[t]
+  \caption{End-to-end ToolBench tool-selection accuracy under single-turn vs.\ ReAct prompting (gemma4:31b, $k=5$, 95\% bootstrap CIs). Tool accuracy is exact match between the LLM's selected tool and any expected \texttt{api\_id} in the ground-truth set. The monolithic baseline injects 0 tool schemas directly into the prompt; BEAR retrieval injects the top-5 under full governance.}
+  \label{tab:toolbench-react}
+  \centering
+  \small
+  \begin{tabular}{@{}l c c@{}}
+    \toprule
+    Condition & Tool accuracy [95\% CI] & $n$ \\
+    \midrule
+    Monolithic + ReAct & 0.660 [0.632,0.687] & 1100 \\
+    BEAR retrieval + ReAct & 0.745 [0.718,0.770] & 1100 \\
+    BEAR retrieval + single-turn & 0.768 [0.743,0.793] & 1100 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Wrote /mnt/c/users/scott/documents/work/paper-retrieval-governed-context-artifacts/results/toolbench_react_metrics_g4-31b-scaffold-nothink-full.json
+Wrote /mnt/c/users/scott/documents/work/paper-retrieval-governed-context-artifacts/results/toolbench_react_output_g4-31b-scaffold-nothink-full.txt
+
+Elapsed: 114.0 min
+
+=== Reproducibility ===
+Timestamp (UTC): 2026-07-19T06:08:56Z
+Command line:    evals/eval_toolbench_react.py --reasoning-effort none --temperature 1.0 --llm-top-p 0.95 --llm-top-k 64 --base-url http://192.168.1.175:11434/v1 --model gemma4:31b --run-label g4-31b-scaffold-nothink-full
+Python:          3.12.3 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
+numpy:           2.2.6
+scipy:           1.17.1
+bear:            0.1.10
+git commit:      3c8c87dcc9bb70e86d7c31daa50cb9561e079851
+git status:      DIRTY (17 files modified)
+git branch:      main
+
+  model: gemma4:31b
+  base_url: http://192.168.1.175:11434/v1
+  top_k: 5
+  monolithic_cap: 0
+  max_queries: None
+  conditions_run: ['mono_react', 'bear_react', 'bear_single']
+===
+
+To commit these results to the artifacts repo:
+  git add results/toolbench_react_metrics_g4-31b-scaffold-nothink-full.json \
+          results/toolbench_react_output_g4-31b-scaffold-nothink-full.txt

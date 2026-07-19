@@ -18,6 +18,8 @@ if len(sys.argv) != 2:
 LABEL = sys.argv[1]
 R = pathlib.Path(__file__).resolve().parent.parent / "results"
 p = R / f"toolbench_react_metrics_{LABEL}-scaffold-nothink-full_partial.json"
+if not p.exists():
+    p = R / f"toolbench_react_metrics_{LABEL}-scaffold-nothink-full.json"
 d = json.load(open(p))["per_query_correct"]
 
 def ci(k):
