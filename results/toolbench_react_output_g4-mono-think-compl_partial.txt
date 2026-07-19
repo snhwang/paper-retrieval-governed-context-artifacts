@@ -1,0 +1,82 @@
+=== ToolBench end-to-end with ReAct-style prompting ===
+
+Model: gemma4:31b
+Base URL: http://192.168.1.175:11434/v1
+BEAR top-k: 5
+Monolithic cap: 0
+
+Loading ToolBench data ...
+Explicit index list: 734 queries from results/g4_complement_indices.json
+Corpus: 3225 APIs, evaluating 734 queries
+Corpus schema coverage: 3225/3225 (100.0%) instructions have an OpenAI function schema.
+  Context check: monolithic (3225 tools) prompt ~113,942 tokens, server window 262,144.
+
+[Monolithic + ReAct] running 734 queries ...
+  50/734 done; acc-so-far = 0.780; ETA 289.2 min
+  100/734 done; acc-so-far = 0.770; ETA 309.6 min
+  150/734 done; acc-so-far = 0.733; ETA 261.2 min
+  200/734 done; acc-so-far = 0.740; ETA 241.8 min
+  250/734 done; acc-so-far = 0.736; ETA 224.3 min
+  300/734 done; acc-so-far = 0.733; ETA 196.8 min
+  350/734 done; acc-so-far = 0.717; ETA 176.1 min
+  400/734 done; acc-so-far = 0.705; ETA 151.5 min
+  450/734 done; acc-so-far = 0.687; ETA 129.9 min
+  500/734 done; acc-so-far = 0.678; ETA 108.8 min
+  550/734 done; acc-so-far = 0.669; ETA 85.4 min
+  600/734 done; acc-so-far = 0.658; ETA 63.5 min
+  650/734 done; acc-so-far = 0.655; ETA 40.4 min
+  700/734 done; acc-so-far = 0.639; ETA 16.4 min
+[Monolithic + ReAct] done; tool-acc = 0.625; elapsed 355.9 min
+
+--- Tool selection accuracy (1 if predicted tool matches any expected api_id) ---
+
+Condition                                 Tool Acc [95% CI]              n
+--------------------------------------------------------------------------
+Monolithic + ReAct                        0.625 [0.590,0.659]      734
+
+--- Paired comparisons (same queries; McNemar + paired bootstrap) ---
+
+
+--- LaTeX table (paste into manuscript as tab:e2e-react) ---
+
+\begin{table}[t]
+  \caption{End-to-end ToolBench tool-selection accuracy under single-turn vs.\ ReAct prompting (gemma4:31b, $k=5$, 95\% bootstrap CIs). Tool accuracy is exact match between the LLM's selected tool and any expected \texttt{api\_id} in the ground-truth set. The monolithic baseline injects 0 tool schemas directly into the prompt; BEAR retrieval injects the top-5 under full governance.}
+  \label{tab:toolbench-react}
+  \centering
+  \small
+  \begin{tabular}{@{}l c c@{}}
+    \toprule
+    Condition & Tool accuracy [95\% CI] & $n$ \\
+    \midrule
+    Monolithic + ReAct & 0.625 [0.590,0.659] & 734 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Wrote /mnt/c/users/scott/documents/work/paper-retrieval-governed-context-artifacts/results/toolbench_react_metrics_g4-mono-think-compl_partial.json
+Wrote /mnt/c/users/scott/documents/work/paper-retrieval-governed-context-artifacts/results/toolbench_react_output_g4-mono-think-compl_partial.txt
+
+Elapsed: 357.1 min
+
+=== Reproducibility ===
+Timestamp (UTC): 2026-07-18T20:12:48Z
+Command line:    evals/eval_toolbench_react.py --skip bear-react bear-single --reasoning-mode --temperature 1.0 --llm-top-p 0.95 --llm-top-k 64 --base-url http://192.168.1.175:11434/v1 --model gemma4:31b --query-indices-file results/g4_complement_indices.json --run-label g4-mono-think-compl
+Python:          3.12.3 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
+numpy:           2.2.6
+scipy:           1.17.1
+bear:            0.1.10
+git commit:      db0de41da7ecb145d305c7e46b7fecacad44eaf7
+git status:      DIRTY (29 files modified)
+git branch:      main
+
+  model: gemma4:31b
+  base_url: http://192.168.1.175:11434/v1
+  top_k: 5
+  monolithic_cap: 0
+  max_queries: None
+  conditions_run: ['mono_react']
+===
+
+To commit these results to the artifacts repo:
+  git add results/toolbench_react_metrics_g4-mono-think-compl_partial.json \
+          results/toolbench_react_output_g4-mono-think-compl_partial.txt

@@ -1,0 +1,86 @@
+NOTE: writing to results/toolbench_react_*_g4-mono-think-compl_partial.* (run-label and/or partial-run suffix), leaving the canonical full-run results untouched.
+
+=== ToolBench end-to-end with ReAct-style prompting ===
+
+Model: gemma4:31b
+Base URL: http://192.168.1.175:11434/v1
+BEAR top-k: 5
+Monolithic cap: 0
+
+Loading ToolBench data ...
+Explicit index list: 734 queries from results/g4_complement_indices.json
+Corpus: 3225 APIs, evaluating 734 queries
+Batches:   0%|          | 0/101 [00:00<?, ?it/s]Batches:   1%|          | 1/101 [00:00<00:12,  8.13it/s]Batches:   3%|▎         | 3/101 [00:00<00:09, 10.43it/s]Batches:   5%|▍         | 5/101 [00:00<00:07, 12.61it/s]Batches:   7%|▋         | 7/101 [00:00<00:06, 14.84it/s]Batches:  10%|▉         | 10/101 [00:00<00:04, 18.64it/s]Batches:  14%|█▍        | 14/101 [00:00<00:03, 23.20it/s]Batches:  17%|█▋        | 17/101 [00:00<00:03, 24.94it/s]Batches:  21%|██        | 21/101 [00:00<00:02, 28.03it/s]Batches:  25%|██▍       | 25/101 [00:01<00:02, 30.47it/s]Batches:  30%|██▉       | 30/101 [00:01<00:02, 34.24it/s]Batches:  35%|███▍      | 35/101 [00:01<00:01, 37.23it/s]Batches:  40%|███▉      | 40/101 [00:01<00:01, 39.87it/s]Batches:  45%|████▍     | 45/101 [00:01<00:01, 42.43it/s]Batches:  50%|█████     | 51/101 [00:01<00:01, 46.42it/s]Batches:  56%|█████▋    | 57/101 [00:01<00:00, 49.72it/s]Batches:  62%|██████▏   | 63/101 [00:01<00:00, 50.75it/s]Batches:  69%|██████▉   | 70/101 [00:01<00:00, 54.09it/s]Batches:  76%|███████▌  | 77/101 [00:02<00:00, 57.44it/s]Batches:  83%|████████▎ | 84/101 [00:02<00:00, 60.16it/s]Batches:  90%|█████████ | 91/101 [00:02<00:00, 62.88it/s]Batches:  98%|█████████▊| 99/101 [00:02<00:00, 65.53it/s]Batches: 100%|██████████| 101/101 [00:02<00:00, 41.67it/s]
+Batches:   0%|          | 0/101 [00:00<?, ?it/s]Batches:   2%|▏         | 2/101 [00:00<00:08, 11.54it/s]Batches:   4%|▍         | 4/101 [00:00<00:07, 12.80it/s]Batches:   6%|▌         | 6/101 [00:00<00:06, 14.60it/s]Batches:   9%|▉         | 9/101 [00:00<00:05, 17.99it/s]Batches:  13%|█▎        | 13/101 [00:00<00:03, 22.48it/s]Batches:  17%|█▋        | 17/101 [00:00<00:03, 24.82it/s]Batches:  21%|██        | 21/101 [00:00<00:02, 27.76it/s]Batches:  25%|██▍       | 25/101 [00:01<00:02, 30.40it/s]Batches:  30%|██▉       | 30/101 [00:01<00:02, 34.12it/s]Batches:  35%|███▍      | 35/101 [00:01<00:01, 37.43it/s]Batches:  40%|███▉      | 40/101 [00:01<00:01, 40.21it/s]Batches:  45%|████▍     | 45/101 [00:01<00:01, 42.68it/s]Batches:  50%|█████     | 51/101 [00:01<00:01, 46.43it/s]Batches:  56%|█████▋    | 57/101 [00:01<00:00, 49.82it/s]Batches:  62%|██████▏   | 63/101 [00:01<00:00, 50.92it/s]Batches:  69%|██████▉   | 70/101 [00:01<00:00, 54.08it/s]Batches:  76%|███████▌  | 77/101 [00:02<00:00, 57.30it/s]Batches:  83%|████████▎ | 84/101 [00:02<00:00, 60.48it/s]Batches:  91%|█████████ | 92/101 [00:02<00:00, 64.16it/s]Batches:  99%|█████████▉| 100/101 [00:02<00:00, 66.11it/s]Batches: 100%|██████████| 101/101 [00:02<00:00, 42.64it/s]
+Corpus schema coverage: 3225/3225 (100.0%) instructions have an OpenAI function schema.
+  Context check: monolithic (3225 tools) prompt ~113,942 tokens, server window 262,144.
+
+[Monolithic + ReAct] running 734 queries ...
+  50/734 done; acc-so-far = 0.780; ETA 289.2 min
+  100/734 done; acc-so-far = 0.770; ETA 309.6 min
+  150/734 done; acc-so-far = 0.733; ETA 261.2 min
+  200/734 done; acc-so-far = 0.740; ETA 241.8 min
+  250/734 done; acc-so-far = 0.736; ETA 224.3 min
+  300/734 done; acc-so-far = 0.733; ETA 196.8 min
+  350/734 done; acc-so-far = 0.717; ETA 176.1 min
+  400/734 done; acc-so-far = 0.705; ETA 151.5 min
+  450/734 done; acc-so-far = 0.687; ETA 129.9 min
+  500/734 done; acc-so-far = 0.678; ETA 108.8 min
+  550/734 done; acc-so-far = 0.669; ETA 85.4 min
+  600/734 done; acc-so-far = 0.658; ETA 63.5 min
+  650/734 done; acc-so-far = 0.655; ETA 40.4 min
+  700/734 done; acc-so-far = 0.639; ETA 16.4 min
+[Monolithic + ReAct] done; tool-acc = 0.625; elapsed 355.9 min
+
+--- Tool selection accuracy (1 if predicted tool matches any expected api_id) ---
+
+Condition                                 Tool Acc [95% CI]              n
+--------------------------------------------------------------------------
+Monolithic + ReAct                        0.625 [0.590,0.659]      734
+
+--- Paired comparisons (same queries; McNemar + paired bootstrap) ---
+
+
+--- LaTeX table (paste into manuscript as tab:e2e-react) ---
+
+\begin{table}[t]
+  \caption{End-to-end ToolBench tool-selection accuracy under single-turn vs.\ ReAct prompting (gemma4:31b, $k=5$, 95\% bootstrap CIs). Tool accuracy is exact match between the LLM's selected tool and any expected \texttt{api\_id} in the ground-truth set. The monolithic baseline injects 0 tool schemas directly into the prompt; BEAR retrieval injects the top-5 under full governance.}
+  \label{tab:toolbench-react}
+  \centering
+  \small
+  \begin{tabular}{@{}l c c@{}}
+    \toprule
+    Condition & Tool accuracy [95\% CI] & $n$ \\
+    \midrule
+    Monolithic + ReAct & 0.625 [0.590,0.659] & 734 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Wrote /mnt/c/users/scott/documents/work/paper-retrieval-governed-context-artifacts/results/toolbench_react_metrics_g4-mono-think-compl_partial.json
+Wrote /mnt/c/users/scott/documents/work/paper-retrieval-governed-context-artifacts/results/toolbench_react_output_g4-mono-think-compl_partial.txt
+
+Elapsed: 357.1 min
+
+=== Reproducibility ===
+Timestamp (UTC): 2026-07-18T20:12:48Z
+Command line:    evals/eval_toolbench_react.py --skip bear-react bear-single --reasoning-mode --temperature 1.0 --llm-top-p 0.95 --llm-top-k 64 --base-url http://192.168.1.175:11434/v1 --model gemma4:31b --query-indices-file results/g4_complement_indices.json --run-label g4-mono-think-compl
+Python:          3.12.3 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
+numpy:           2.2.6
+scipy:           1.17.1
+bear:            0.1.10
+git commit:      db0de41da7ecb145d305c7e46b7fecacad44eaf7
+git status:      DIRTY (29 files modified)
+git branch:      main
+
+  model: gemma4:31b
+  base_url: http://192.168.1.175:11434/v1
+  top_k: 5
+  monolithic_cap: 0
+  max_queries: None
+  conditions_run: ['mono_react']
+===
+
+To commit these results to the artifacts repo:
+  git add results/toolbench_react_metrics_g4-mono-think-compl_partial.json \
+          results/toolbench_react_output_g4-mono-think-compl_partial.txt
