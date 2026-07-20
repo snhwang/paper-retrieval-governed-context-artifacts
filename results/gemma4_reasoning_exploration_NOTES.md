@@ -10,67 +10,59 @@ An earlier probe used `queries[:200]` = the first split only (g1_instruction, th
 easiest), which inflated every gemma4 number by +0.08 to +0.19; those biased
 numbers are superseded by the stratified ones below.
 
-## Final grid (FULL 1,100-query ToolBench test set, both models)
+## IMPORTANT: a retracted condition (empty-response bug)
 
-Reasoning is added in each model's native idiom: prompted ReAct scaffold for the
-non-thinking Mistral-12B, native thinking channel for the thinking gemma4-31b.
-Both "without reasoning" cells are the model's plain selection without its
-reasoning boost. Mistral cells are its existing full-1,100 numbers (Tables 7/8:
-e2e single-turn 0.186; react-eval scaffold 0.035, BEAR 0.719/0.675). Gemma cells
-are the merged full-1,100 (`toolbench_react_metrics_g4-FULL1100_merged.json`),
-assembled from the stratified pilot (seed42 u seed43 = 366) + the 734 complement.
+The condition `--reasoning-mode --reasoning-effort none` (free-form reasoning
+prompt with the native thinking channel DISABLED) makes Gemma return **no content
+at all** on a large fraction of queries. Measured empty rates: **43%** on
+gemma4:31b (13/30) and **67%** on gemma4:12b (4/6). Empty responses score 0, so
+the condition was reported as accuracy 0.383 (31b) / 0.145 (12b) when it was
+largely measuring silence -- gemma4:31b is 88% accurate on the queries where it
+does answer.
 
-| condition | Mistral-12B | gemma4-31b |
-|---|--:|--:|
-| Monolithic (3,225), without reasoning | 0.186 [0.163, 0.210] | 0.383 [0.354, 0.412] |
-| Monolithic, with reasoning            | 0.035 [0.025, 0.045] | 0.620 [0.591, 0.648] |
-| BEAR (top-5) single-turn              | 0.719 [0.693, 0.745] | 0.766 [0.741, 0.791] |
-| BEAR + reasoning / ReAct              | 0.675 [0.648, 0.703] | 0.745 [0.720, 0.771] |
+Those two numbers are **retracted** and must not be used. The valid
+"without reasoning" baseline is the constrained {thought, action} scaffold with
+native thinking off (0.660 / 0.499), which produces valid output on every query.
+The reasoning-ON cells were verified clean (0/30 empty on both models).
+
+Guarded against recurrence in `eval_toolbench_react.py` (commit 10659ab): empty
+responses are now counted separately, reported per condition with
+`accuracy_when_answered`, persisted as `response_health`, and a run aborts after
+25 queries if the empty rate exceeds `--max-empty-rate` (default 0.10). Verify
+with `bash evals/verify_empty_guard.sh`.
+
+## Final grid (FULL 1,100-query test set, three models)
+
+Each model was given several ways to succeed on the crowded monolithic prompt, so
+the result does not hinge on one prompting choice.
+
+| configuration | Mistral-12B | gemma4:12b | gemma4:31b |
+|---|--:|--:|--:|
+| **Monolithic (3,225)** | | | |
+| single-turn | 0.186 [0.163, 0.210] | -- | -- |
+| constrained ReAct scaffold | 0.035 [0.025, 0.045] | 0.499 [0.469, 0.528] | **0.660** [0.632, 0.687] |
+| + native reasoning | -- | 0.475 [0.445, 0.505] | 0.620 [0.591, 0.648] |
+| **BEAR (governed top-5)** | | | |
+| single-turn | **0.719** [0.693, 0.745] | 0.735 [0.709, 0.760] | **0.768** [0.743, 0.793] |
+| constrained ReAct scaffold | 0.675 [0.648, 0.703] | 0.723 [0.696, 0.749] | 0.745 [0.718, 0.770] |
+| + native reasoning | -- | 0.749 [0.724, 0.774] | 0.745 [0.720, 0.771] |
 
 ## Findings
 
-1. **Reasoning flips sign with scale.** Adding reasoning to the monolithic prompt
-   *drops* the 12B model (0.186 -> 0.035, -0.152, McNemar p=1.4e-36, paired) but
-   *lifts* the 31B model (0.383 -> 0.620, +0.237, p=3.2e-44). Clean scale-emergent
-   CoT (Wei 2022): the same intervention degrades selection at 12B, rescues it at 31B.
-2. **Governance still wins on the same model**: gemma4 BEAR (0.745-0.766) beats
-   its own monolithic-with-reasoning (0.620) by ~+0.14, and far cheaper
-   (~5k vs ~82k prompt tokens; one call vs tens of seconds of reasoning/query).
-3. **Governance collapses the model-scale gap**: on monolithic the 12B->31B gap is
-   large in either condition (without reasoning 0.186 -> 0.383; with reasoning
-   0.035 -> 0.620); on BEAR it is +0.047 (0.719 -> 0.766). A small governed model
-   matches a 2.5x-larger reasoning model, because governance makes the decision
-   tractable enough that scale and reasoning stop mattering.
-4. Reasoning does not help once the set is narrow: gemma4 BEAR non-thinking
-   (0.766) > reasoning (0.745), McNemar p=0.01 -- same direction as the 12B ReAct
-   result, now significant at full n.
+1. **No monolithic configuration reaches governed accuracy.** Best monolithic
+   anywhere (0.660, 31b scaffold) < weakest governed anywhere (0.719, Mistral).
+2. **Governance compresses the between-model spread**: monolithic 0.186-0.660
+   (0.47) vs governed 0.719-0.768 (0.05). Model choice nearly stops mattering.
+3. **Neither scale nor native reasoning is the operative variable.** Two same-size
+   models under the identical scaffold differ >10x (0.035 vs 0.499), so the
+   monolithic gap tracks model quality, not parameter count. Native reasoning does
+   not exceed either Gemma model's best non-reasoning config (0.475 vs 0.499;
+   0.620 vs 0.660) -- though those differ in output format too, so this is not a
+   controlled ablation of the reasoning channel.
+4. **Reasoning does not help once the set is narrow**: the scaffold costs Mistral
+   0.044 (p=3.1e-5) and gemma4:31b 0.024 (p=3.1e-4); gemma4:12b +0.015 (ns).
 
-Each query scored on a single draw at temp=1.0 (stochastic). The earlier pilot
-(two stratified 198-samples, seeds 42/43) confirmed independent draws agree; its
-pooled n=396 grid (0.402/0.614/0.763/0.740) is superseded by the full 1,100 above.
+Each query scored on a single draw at temp=1.0 (Gemma's recommended sampling).
 
-Result files: `toolbench_react_metrics_g4-*-s4{2,3}_partial.json` (+ logs).
-
-## Extending to full 1,100 (standard ToolBench test set)
-
-To move Table 9 from the stratified pilot to the full 1,100-query test set without
-re-running the 366 queries already collected:
-
-```
-# 1. write the index split (366 done, 734 complement); deterministic
-python evals/make_complement_indices.py
-
-# 2. run Gemma on ONLY the 734 complement (4 conditions, cheap -> expensive)
-#    override BASE_URL / MODEL if your Ollama server differs
-bash evals/run_gemma_complement.sh
-
-# 3. stitch pilot (366) + complement (734) -> full 1,100 grid + paired McNemar
-python evals/merge_gemma_full1100.py
-```
-
-Each query is evaluated exactly once at the same settings (temp 1.0, top_p 0.95,
-top_k 64, cap 0); for the 30 queries in both seeds, seed 42's result is kept. The
-merge writes `toolbench_react_metrics_g4-FULL1100_merged.json` and prints the
-full-1,100 numbers to drop into Table 9. The `--query-indices-file` flag on
-`eval_toolbench_react.py` (a JSON list of indices into the flat 1,100 order) is
-the general mechanism.
+Superseded: the earlier two-seed pilot grid (198x2) and the scale-emergence
+framing built on the retracted condition above.
