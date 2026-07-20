@@ -549,6 +549,18 @@ def build_id_to_function(corpus, name_map: dict) -> dict[str, str]:
 # ---------------------------------------------------------------------------
 
 
+# Per-condition response-health counters, filled by run_condition and persisted
+# alongside the metrics. A model that returns nothing scores 0 on every such
+# query, which is indistinguishable from a wrong answer in the accuracy alone --
+# that is how a 43%-empty condition was once reported as a real capability
+# measurement. These counters make the failure visible.
+CONDITION_HEALTH: dict = {}
+
+# Fail fast after this many queries if the empty rate is already over the limit,
+# rather than burning hours to produce an uninterpretable number.
+EMPTY_CHECK_AFTER = 25
+
+
 def run_condition(
     name: str,
     schemas_per_query_fn,
@@ -564,6 +576,7 @@ def run_condition(
     top_p: float | None = None,
     top_k: int | None = None,
     reasoning_effort: str | None = None,
+    max_empty_rate: float = 0.10,
 ):
     """Run one condition end-to-end. ``schemas_per_query_fn`` is a callable
     returning the tool schemas to pass for each query.
@@ -575,6 +588,8 @@ def run_condition(
     print(f"\n[{name}] running {len(queries)} queries ...")
     correct = np.zeros(len(queries), dtype=int)
     dump_rows = []
+    n_empty = 0     # model returned no content at all
+    n_unparsed = 0  # model returned content, but no valid tool name in it
     t0 = time.time()
     for i, (qtext, ctx_tags, expected, _api_details) in enumerate(queries):
         schemas = schemas_per_query_fn(qtext, ctx_tags, expected)
@@ -591,6 +606,31 @@ def run_condition(
             pred = tc["name"] if tc else None
             raw = json.dumps(tc) if tc else "<no tool call>"
         correct[i] = tool_correct(pred, expected, id_to_function)
+
+        # Separate "said nothing" from "said something unusable". Both score 0,
+        # but only the first means the condition itself is misconfigured.
+        raw_str = (raw or "").strip()
+        if not raw_str or raw_str == "<no tool call>":
+            n_empty += 1
+        elif pred is None:
+            n_unparsed += 1
+        if (i + 1) == EMPTY_CHECK_AFTER and n_empty / (i + 1) > max_empty_rate:
+            raise SystemExit(
+                f"\nFATAL [{name}]: {n_empty}/{i+1} responses were EMPTY "
+                f"({100*n_empty/(i+1):.0f}% > {100*max_empty_rate:.0f}% limit).\n"
+                f"Empty responses score 0 and would be silently reported as low "
+                f"accuracy, so this run is aborted rather than producing a number "
+                f"that measures silence instead of capability.\n"
+                f"Common cause: a thinking model asked to reason free-form while its "
+                f"reasoning channel is disabled (--reasoning-mode with "
+                f"--reasoning-effort none) -- it emits nothing. Either enable "
+                f"reasoning, or drop --reasoning-mode so the constrained "
+                f"{{thought, action}} schema forces an answer.\n"
+                f"Model={model} reasoning_mode={reasoning_mode} "
+                f"reasoning_effort={reasoning_effort}\n"
+                f"Pass --max-empty-rate 1.0 to override if the emptiness is the "
+                f"thing being measured.\n"
+            )
         if i < debug_dump_n:
             dump_rows.append({
                 "condition": name,
@@ -610,7 +650,22 @@ def run_condition(
             elapsed = time.time() - t0
             eta = elapsed / (i + 1) * (len(queries) - i - 1)
             print(f"  {i+1}/{len(queries)} done; acc-so-far = {correct[:i+1].mean():.3f}; ETA {eta/60:.1f} min")
-    print(f"[{name}] done; tool-acc = {correct.mean():.3f}; elapsed {(time.time()-t0)/60:.1f} min")
+    n = len(queries)
+    CONDITION_HEALTH[name] = {
+        "n": n, "n_empty": n_empty, "n_unparsed": n_unparsed,
+        "empty_rate": round(n_empty / n, 4) if n else None,
+        "accuracy_when_answered": (
+            round(float(correct.sum()) / (n - n_empty), 4) if n - n_empty else None),
+    }
+    flag = "  <-- SUSPECT" if n and n_empty / n > max_empty_rate else ""
+    print(f"[{name}] done; tool-acc = {correct.mean():.3f}; "
+          f"empty = {n_empty}/{n} ({100*n_empty/max(1,n):.1f}%), "
+          f"unparsed = {n_unparsed}; elapsed {(time.time()-t0)/60:.1f} min{flag}")
+    if n and n_empty:
+        denom = n - n_empty
+        print(f"  NOTE: accuracy among queries that produced any output = "
+              f"{correct.sum()}/{denom} = {correct.sum()/denom:.3f}. A large gap "
+              f"vs tool-acc means the score reflects silence, not selection.")
     if dump_rows and debug_dump_path is not None:
         # Append-only so repeated conditions accumulate into one file
         existing = []
@@ -731,6 +786,11 @@ def parse_args() -> argparse.Namespace:
                    "thinking models. Use 'none' to DISABLE a thinking model's "
                    "reasoning (Gemma 4 thinks by default), enabling a clean "
                    "thinking-on vs thinking-off ablation on the same model.")
+    p.add_argument("--max-empty-rate", type=float, default=0.10,
+                   help="Abort a condition if more than this fraction of the first "
+                   f"25 responses are empty (default 0.10). Empty responses score 0 "
+                   "and would otherwise be silently reported as low accuracy. Set to "
+                   "1.0 to disable the guard.")
     return p.parse_args()
 
 
@@ -908,6 +968,7 @@ def main() -> None:
                 reasoning_mode=args.reasoning_mode,
                 temperature=args.temperature, top_p=args.llm_top_p, top_k=args.llm_top_k,
                 reasoning_effort=args.reasoning_effort,
+                max_empty_rate=args.max_empty_rate,
             )
 
         if "bear-react" not in args.skip:
@@ -920,6 +981,7 @@ def main() -> None:
                 reasoning_mode=args.reasoning_mode,
                 temperature=args.temperature, top_p=args.llm_top_p, top_k=args.llm_top_k,
                 reasoning_effort=args.reasoning_effort,
+                max_empty_rate=args.max_empty_rate,
             )
 
         if "bear-single" not in args.skip:
@@ -931,6 +993,7 @@ def main() -> None:
                 debug_dump_path=debug_dump_path,
                 temperature=args.temperature, top_p=args.llm_top_p, top_k=args.llm_top_k,
                 reasoning_effort=args.reasoning_effort,
+                max_empty_rate=args.max_empty_rate,
             )
 
         # Summary
@@ -1034,6 +1097,7 @@ def main() -> None:
                        "query_indices_file": args.query_indices_file,
                        "sample_indices": sample_indices,
                        "comparisons": comparisons,
+                       "response_health": CONDITION_HEALTH,
                        "per_query_correct": {k: v.astype(int).tolist()
                                              for k, v in results.items()}},
                       f, indent=2)
