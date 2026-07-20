@@ -1,14 +1,21 @@
-# gemma4:31b vs Mistral-Nemo-12B: does scale/reasoning obviate governance?
+# Does any monolithic configuration substitute for governance?
 
-Matched cross-model comparison on ToolBench tool selection. **Representative**
-(stratified sample of 198 queries across all six ToolBench splits, seed 42) and
-**matched** (Mistral-Nemo's saved per-query arrays subsampled to the identical
-indices -- no Mistral re-run). Gemma 4 at its recommended sampling
-(`--temperature 1.0 --llm-top-p 0.95 --llm-top-k 64`), Ollama, ctx 131072.
+Cross-model comparison on ToolBench tool selection: Mistral-Nemo-12B (dense,
+non-thinking) vs gemma4:12b and gemma4:31b (both dense, natively thinking). All
+three on the **full 1,100-query test set**, matched query-for-query. Gemma at its
+recommended sampling (`--temperature 1.0 --llm-top-p 0.95 --llm-top-k 64`),
+Ollama, ctx 131072.
 
-An earlier probe used `queries[:200]` = the first split only (g1_instruction, the
-easiest), which inflated every gemma4 number by +0.08 to +0.19; those biased
-numbers are superseded by the stratified ones below.
+Two earlier measurement errors, both superseded by the grid below:
+- `queries[:200]` took only the first split (g1_instruction, the easiest),
+  inflating every gemma4 number by +0.08 to +0.19. Fixed by stratified sampling,
+  then by moving to the full 1,100.
+- A stratified 198x2 two-seed pilot, superseded once all models ran on the full
+  1,100.
+
+A third error -- an entire condition that measured silence rather than
+selection -- is documented next; it is the reason two previously reported numbers
+are retracted.
 
 ## IMPORTANT: a retracted condition (empty-response bug)
 
