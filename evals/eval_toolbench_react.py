@@ -277,7 +277,13 @@ def call_llm_react(
             "model": model,
             "messages": messages,
             "temperature": temperature,
-            "max_tokens": max_tokens,
+            # A thinking model spends its budget on reasoning regardless of the
+            # response format, so the floor tracks whether reasoning is enabled,
+            # not which prompt is used. Without this, a thinking model under the
+            # constrained schema exhausts 768 tokens mid-thought and returns
+            # empty content -- scored as a wrong answer.
+            "max_tokens": (max_tokens if reasoning_effort == "none"
+                           else max(max_tokens, 8192)),
             "response_format": response_format,
         }
         if top_p is not None:
