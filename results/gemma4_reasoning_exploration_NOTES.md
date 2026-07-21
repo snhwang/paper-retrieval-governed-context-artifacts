@@ -27,10 +27,19 @@ the condition was reported as accuracy 0.383 (31b) / 0.145 (12b) when it was
 largely measuring silence -- gemma4:31b is 88% accurate on the queries where it
 does answer.
 
-Those two numbers are **retracted** and must not be used. The valid
-"without reasoning" baseline is the constrained {thought, action} scaffold with
-native thinking off (0.660 / 0.499), which produces valid output on every query.
-The reasoning-ON cells were verified clean (0/30 empty on both models).
+Those two numbers are **retracted** and must not be used. The valid replacement is
+the constrained {thought, action} scaffold with the native channel off
+(0.660 / 0.499), which produces valid output on every query.
+The native-reasoning cells were verified clean (0/30 empty on both models).
+
+Note on terminology: the scaffold with `--reasoning-effort none` is **not** a
+"no reasoning" condition. `reasoning-effort none` disables only the *native*
+channel; the scaffold's `thought` field still elicits brief prompted reasoning
+(e.g. `{"thought": "To get Messi's career info I first need his Transfermarkt
+slug", "action": "..."}`). For the Gemma models there is therefore **no**
+reasoning-free condition here -- only Mistral's single-turn function call, which
+has no thought field, is genuinely reasoning-free. Do not describe any Gemma cell
+as "without reasoning."
 
 Guarded against recurrence in `eval_toolbench_react.py` (commit 10659ab): empty
 responses are now counted separately, reported per condition with
@@ -60,12 +69,11 @@ the result does not hinge on one prompting choice.
    anywhere (0.660, 31b scaffold) < weakest governed anywhere (0.719, Mistral).
 2. **Governance compresses the between-model spread**: monolithic 0.186-0.660
    (0.47) vs governed 0.719-0.768 (0.05). Model choice nearly stops mattering.
-3. **Neither scale nor native reasoning is the operative variable.** Two same-size
-   models under the identical scaffold differ >10x (0.035 vs 0.499), so the
-   monolithic gap tracks model quality, not parameter count. Native reasoning does
-   not exceed either Gemma model's best non-reasoning config (0.475 vs 0.499;
-   0.620 vs 0.660) -- though those differ in output format too, so this is not a
-   controlled ablation of the reasoning channel.
+3. **Model quality, not scale, is the operative variable.** Two same-size models
+   given the identical scaffold differ >10x (0.035 vs 0.499), so the monolithic
+   gap does not track parameter count. We make no reasoning-vs-no-reasoning claim
+   for the Gemma models: their configurations differ in output format as well as
+   reasoning, and (see terminology note above) none of them is reasoning-free.
 4. **Reasoning does not help once the set is narrow**: the scaffold costs Mistral
    0.044 (p=3.1e-5) and gemma4:31b 0.024 (p=3.1e-4); gemma4:12b +0.015 (ns).
 
