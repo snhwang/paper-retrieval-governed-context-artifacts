@@ -75,7 +75,9 @@ the result does not hinge on one prompting choice.
    for the Gemma models: their configurations differ in output format as well as
    reasoning, and (see terminology note above) none of them is reasoning-free.
 4. **Reasoning does not help once the set is narrow**: the scaffold costs Mistral
-   0.044 (p=3.1e-5) and gemma4:31b 0.024 (p=3.1e-4); gemma4:12b +0.015 (ns).
+   0.044 (p=3.1e-5) and gemma4:31b 0.024 (p=3.1e-4); gemma4:12b 0.012 (p=0.17, ns).
+   (Do not confuse this with gemma4:12b's native-reasoning delta on BEAR, which is
+   +0.015 -- a different comparison.)
 
 Each query scored on a single draw at temp=1.0 (Gemma's recommended sampling).
 
