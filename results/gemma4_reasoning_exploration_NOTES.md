@@ -66,9 +66,10 @@ the result does not hinge on one prompting choice.
 ## Findings
 
 1. **No monolithic configuration reaches governed accuracy.** Best monolithic
-   anywhere (0.660, 31b scaffold) < weakest governed anywhere (0.719, Mistral).
+   anywhere (0.660, 31b scaffold) < weakest governed anywhere (0.675, Mistral
+   scaffold), and below every model's governed single-turn accuracy (0.719-0.768).
 2. **Governance compresses the between-model spread**: monolithic 0.186-0.660
-   (0.47) vs governed 0.719-0.768 (0.05). Model choice nearly stops mattering.
+   (0.47) vs governed single-turn 0.719-0.768 (0.05). Model choice nearly stops mattering.
 3. **Model quality, not scale, is the operative variable.** Two same-size models
    given the identical scaffold differ >10x (0.035 vs 0.499), so the monolithic
    gap does not track parameter count. We make no reasoning-vs-no-reasoning claim
