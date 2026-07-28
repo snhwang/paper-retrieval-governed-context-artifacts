@@ -51,6 +51,14 @@ sentence-transformers==5.4.1
 tokenizers==0.22.2
 huggingface-hub==0.36.2
 
+# ----- Production-framework comparisons --------------------------------------
+# eval_framework_baseline.py runs the released LlamaIndex retrieval path
+# (VectorStoreIndex.as_retriever, the mechanism behind ObjectIndex tool
+# retrieval) against BEAR. eval_reranker_composition.py needs only
+# sentence-transformers above (CrossEncoder, BAAI/bge-reranker-base).
+llama-index-core==0.14.23
+llama-index-embeddings-huggingface==0.7.0
+
 # ----- HuggingFace datasets --------------------------------------------------
 # Required by toolbench_setup.py for downloading benchmark splits.
 datasets==4.8.4

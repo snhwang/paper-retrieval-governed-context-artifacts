@@ -1,0 +1,66 @@
+
+=== Reranker head-to-head and composition: petsim ===
+
+corpus     58 items
+queries    60
+first stage BAAI/bge-base-en-v1.5  (k=10, over-fetch N=50)
+reranker   BAAI/bge-reranker-base
+ungoverned pure_similarity
+device     cuda
+
+Building retrievers (BAAI/bge-base-en-v1.5, 58 items)...
+  indexed in 3s
+  60/60 queries in 6s
+
+--- Arms (strict F1@10, n=60) ---
+
+  Bi-encoder, no governance                  0.199 [0.179, 0.221]   relaxed 0.331 [0.285, 0.379]
+  Bi-encoder + cross-encoder reranker        0.219 [0.198, 0.242]   relaxed 0.339 [0.299, 0.380]
+  BEAR governed                              0.653 [0.634, 0.671]   relaxed 0.792 [0.764, 0.820]
+  BEAR governed + cross-encoder reranker     0.589 [0.555, 0.620]   relaxed 0.740 [0.720, 0.760]
+
+--- Candidate sets at N=50 (ceiling for the reranked arms) ---
+
+  bi    recall@N 0.775   mean candidates 50.0
+  bear  recall@N 0.997   mean candidates 11.3
+
+--- Contrasts (paired bootstrap, strict F1@10) ---
+
+  bear     - bi       +0.454 [+0.426, +0.480] p=0.0001* d=+4.21   governance effect (published contrast)
+  bi_rr    - bi       +0.020 [+0.003, +0.038] p=0.0188* d=+0.28   reranker alone
+  bear     - bi_rr    +0.434 [+0.406, +0.460] p=0.0001* d=+4.07   head-to-head: governance vs reranking
+  bear_rr  - bear     -0.064 [-0.088, -0.043] p=0.0001* d=-0.69   reranker added on top of governance
+  bear_rr  - bi_rr    +0.369 [+0.327, +0.409] p=0.0001* d=+2.24   governance effect with reranker held fixed
+
+--- Contrasts (paired bootstrap, relaxed F1@10) ---
+
+  bear     - bi       +0.462 [+0.422, +0.499] p=0.0001* d=+3.01   governance effect (published contrast)
+  bi_rr    - bi       +0.009 [-0.013, +0.031] p=0.4482  d=+0.10   reranker alone
+  bear     - bi_rr    +0.453 [+0.421, +0.485] p=0.0001* d=+3.56   head-to-head: governance vs reranking
+  bear_rr  - bear     -0.052 [-0.071, -0.034] p=0.0001* d=-0.70   reranker added on top of governance
+  bear_rr  - bi_rr    +0.401 [+0.360, +0.443] p=0.0001* d=+2.42   governance effect with reranker held fixed
+
+Saved to /mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts/results/reranker_composition_petsim.json
+
+Read: 'bear vs bi_rr' is the substitution comparison the reviewers asked
+for. 'bear_rr vs bear' and 'bear_rr vs bi_rr' test whether governance and
+reranking compose, which is the claim made in the response letter. A
+reranker cannot recover a document that is absent from the candidate set,
+so compare each reranked arm against its own recall@N ceiling above.
+
+=== Reproducibility ===
+Timestamp (UTC): 2026-07-28T20:03:16Z
+Command line:    evals/eval_reranker_composition.py --corpus petsim
+Python:          3.12.3 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
+numpy:           2.2.6
+scipy:           1.17.1
+bear:            0.1.10
+git commit:      fa25be89603015442d3710a64a4ada6eba925204
+git status:      DIRTY (32 files modified)
+git branch:      main
+
+  corpus: petsim
+  queries: 60
+  overfetch: 50
+  reranker: BAAI/bge-reranker-base
+===
