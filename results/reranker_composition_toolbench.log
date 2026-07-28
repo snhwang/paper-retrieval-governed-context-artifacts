@@ -1,0 +1,70 @@
+
+=== Reranker head-to-head and composition: toolbench ===
+
+corpus     3225 items
+queries    1100
+first stage BAAI/bge-base-en-v1.5  (k=5, over-fetch N=50)
+reranker   BAAI/bge-reranker-base
+ungoverned pure_similarity
+device     cuda
+
+Building retrievers (BAAI/bge-base-en-v1.5, 3225 items)...
+Batches:   0%|          | 0/101 [00:00<?, ?it/s]Batches:   1%|          | 1/101 [00:00<00:14,  7.01it/s]Batches:   3%|▎         | 3/101 [00:00<00:10,  9.64it/s]Batches:   5%|▍         | 5/101 [00:00<00:08, 10.74it/s]Batches:   7%|▋         | 7/101 [00:00<00:07, 12.81it/s]Batches:   9%|▉         | 9/101 [00:00<00:06, 14.65it/s]Batches:  12%|█▏        | 12/101 [00:00<00:04, 18.57it/s]Batches:  16%|█▌        | 16/101 [00:00<00:03, 21.75it/s]Batches:  20%|█▉        | 20/101 [00:01<00:03, 24.55it/s]Batches:  24%|██▍       | 24/101 [00:01<00:02, 26.72it/s]Batches:  28%|██▊       | 28/101 [00:01<00:02, 29.12it/s]Batches:  32%|███▏      | 32/101 [00:01<00:02, 31.26it/s]Batches:  36%|███▌      | 36/101 [00:01<00:01, 32.81it/s]Batches:  40%|███▉      | 40/101 [00:01<00:01, 34.09it/s]Batches:  44%|████▎     | 44/101 [00:01<00:01, 35.03it/s]Batches:  48%|████▊     | 48/101 [00:01<00:01, 35.73it/s]Batches:  52%|█████▏    | 53/101 [00:01<00:01, 37.93it/s]Batches:  57%|█████▋    | 58/101 [00:02<00:01, 39.43it/s]Batches:  62%|██████▏   | 63/101 [00:02<00:00, 40.97it/s]Batches:  67%|██████▋   | 68/101 [00:02<00:00, 42.39it/s]Batches:  72%|███████▏  | 73/101 [00:02<00:00, 44.41it/s]Batches:  78%|███████▊  | 79/101 [00:02<00:00, 46.53it/s]Batches:  84%|████████▍ | 85/101 [00:02<00:00, 47.85it/s]Batches:  90%|█████████ | 91/101 [00:02<00:00, 49.27it/s]Batches:  96%|█████████▌| 97/101 [00:02<00:00, 49.90it/s]Batches: 100%|██████████| 101/101 [00:02<00:00, 34.11it/s]
+Batches:   0%|          | 0/101 [00:00<?, ?it/s]Batches:   2%|▏         | 2/101 [00:00<00:08, 11.38it/s]Batches:   4%|▍         | 4/101 [00:00<00:08, 11.66it/s]Batches:   6%|▌         | 6/101 [00:00<00:06, 13.93it/s]Batches:   8%|▊         | 8/101 [00:00<00:05, 15.62it/s]Batches:  11%|█         | 11/101 [00:00<00:04, 19.85it/s]Batches:  15%|█▍        | 15/101 [00:00<00:03, 23.92it/s]Batches:  19%|█▉        | 19/101 [00:00<00:03, 26.43it/s]Batches:  23%|██▎       | 23/101 [00:01<00:02, 28.59it/s]Batches:  27%|██▋       | 27/101 [00:01<00:02, 31.13it/s]Batches:  32%|███▏      | 32/101 [00:01<00:02, 34.21it/s]Batches:  37%|███▋      | 37/101 [00:01<00:01, 36.80it/s]Batches:  42%|████▏     | 42/101 [00:01<00:01, 38.57it/s]Batches:  47%|████▋     | 47/101 [00:01<00:01, 41.36it/s]Batches:  52%|█████▏    | 53/101 [00:01<00:01, 44.80it/s]Batches:  57%|█████▋    | 58/101 [00:01<00:00, 46.23it/s]Batches:  63%|██████▎   | 64/101 [00:01<00:00, 48.60it/s]Batches:  69%|██████▉   | 70/101 [00:02<00:00, 50.25it/s]Batches:  75%|███████▌  | 76/101 [00:02<00:00, 52.34it/s]Batches:  81%|████████  | 82/101 [00:02<00:00, 54.29it/s]Batches:  87%|████████▋ | 88/101 [00:02<00:00, 55.86it/s]Batches:  93%|█████████▎| 94/101 [00:02<00:00, 56.85it/s]Batches:  99%|█████████▉| 100/101 [00:02<00:00, 57.23it/s]Batches: 100%|██████████| 101/101 [00:02<00:00, 39.40it/s]
+  indexed in 10s
+  100/1100 queries (3.7/s)
+  200/1100 queries (3.6/s)
+  300/1100 queries (3.6/s)
+  400/1100 queries (3.6/s)
+  500/1100 queries (3.6/s)
+  600/1100 queries (3.6/s)
+  700/1100 queries (3.6/s)
+  800/1100 queries (3.6/s)
+  900/1100 queries (3.6/s)
+  1000/1100 queries (3.6/s)
+  1100/1100 queries in 308s
+
+--- Arms (Recall@5, n=1100) ---
+
+  Bi-encoder, no governance                  0.574 [0.552, 0.596]
+  Bi-encoder + cross-encoder reranker        0.647 [0.625, 0.669]
+  BEAR governed                              0.688 [0.668, 0.709]
+  BEAR governed + cross-encoder reranker     0.742 [0.722, 0.761]
+
+--- Candidate sets at N=50 (ceiling for the reranked arms) ---
+
+  bi    recall@N 0.841   mean candidates 50.0
+  bear  recall@N 0.948   mean candidates 46.0
+
+--- Contrasts (paired bootstrap, Recall@5) ---
+
+  bear     - bi       +0.114 [+0.099, +0.130] p=0.0001* d=+0.43   governance effect (published contrast)
+  bi_rr    - bi       +0.073 [+0.056, +0.090] p=0.0001* d=+0.25   reranker alone
+  bear     - bi_rr    +0.041 [+0.022, +0.060] p=0.0001* d=+0.13   head-to-head: governance vs reranking
+  bear_rr  - bear     +0.054 [+0.037, +0.069] p=0.0001* d=+0.19   reranker added on top of governance
+  bear_rr  - bi_rr    +0.095 [+0.081, +0.108] p=0.0001* d=+0.42   governance effect with reranker held fixed
+
+Saved to /mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts/results/reranker_composition_toolbench.json
+
+Read: 'bear vs bi_rr' is the substitution comparison the reviewers asked
+for. 'bear_rr vs bear' and 'bear_rr vs bi_rr' test whether governance and
+reranking compose, which is the claim made in the response letter. A
+reranker cannot recover a document that is absent from the candidate set,
+so compare each reranked arm against its own recall@N ceiling above.
+
+=== Reproducibility ===
+Timestamp (UTC): 2026-07-28T21:21:25Z
+Command line:    evals/eval_reranker_composition.py --corpus toolbench
+Python:          3.12.3 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
+numpy:           2.2.6
+scipy:           1.17.1
+bear:            0.1.10
+git commit:      cc13939bf0bd16b88d9206b60c8989edf57e5341
+git status:      DIRTY (31 files modified)
+git branch:      main
+
+  corpus: toolbench
+  queries: 1100
+  overfetch: 50
+  reranker: BAAI/bge-reranker-base
+===

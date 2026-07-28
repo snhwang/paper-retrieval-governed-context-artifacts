@@ -97,11 +97,20 @@ BI_ENCODER_QUERY_PREFIX = "Represent this sentence for retrieving relevant docum
 #   petsim    -> eval_governance_decomposed.py (k=10, alpha=0.3, thr=0.3, mand=safety)
 #   toolbench -> eval_toolbench.py             (k=5,  alpha=0.3, thr=0.0, no mandatory)
 CORPUS_SETTINGS = {
+    # ungoverned_use_tags mirrors each corpus's published ungoverned row.
+    # BEAR builds a structured query text, so a context tag becomes a
+    # "[tags:...]" header in the query embedding: semantic tag matching, not a
+    # governance mechanism (no gate, no priority, no injection). The published
+    # Pet Sim similarity-only row (strict F1 0.168) passes context tags through
+    # that semantic path; the published ToolBench no-governance rows (e.g. BGE
+    # 0.574) do not pass tags. Reproducing each row requires matching its
+    # convention.
     "petsim": {
         "top_k": 10,
         "priority_weight": 0.3,
         "threshold": 0.3,
         "mandatory_tags": ["safety"],
+        "ungoverned_use_tags": True,
         "primary": "f1",
         "primary_label": "strict F1@10",
     },
@@ -110,6 +119,7 @@ CORPUS_SETTINGS = {
         "priority_weight": 0.3,
         "threshold": 0.0,
         "mandatory_tags": [],
+        "ungoverned_use_tags": False,
         "primary": "recall",
         "primary_label": "Recall@5",
     },
@@ -289,7 +299,9 @@ def run_arms(corpus_name: str, corpus: Corpus, queries, reranker, overfetch: int
 
         expected_rel = relaxed_expected(corpus_name, query_text, expected)
 
-        for stage, retriever, use_tags in (("bi", r_plain, False), ("bear", r_gov, True)):
+        for stage, retriever, use_tags in (
+                ("bi", r_plain, settings["ungoverned_use_tags"]),
+                ("bear", r_gov, True)):
             ctx = Context(tags=list(tags) if use_tags else [])
             deep = retriever.retrieve(query_text, ctx, top_k=n_fetch)
             deep_ids = [d.id for d in deep]

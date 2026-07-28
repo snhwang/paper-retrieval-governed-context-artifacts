@@ -170,8 +170,11 @@ def main():
         for m, v in score(li_ids, expected, k, expected_rel).items():
             scores["llamaindex"][m].append(v)
 
-        for arm, retriever, use_tags in (("bear_nogov", r_plain, False),
-                                         ("bear_gov", r_gov, True)):
+        # bear_nogov mirrors the published ungoverned convention per corpus
+        # (see CORPUS_SETTINGS.ungoverned_use_tags in eval_reranker_composition).
+        for arm, retriever, use_tags in (
+                ("bear_nogov", r_plain, settings["ungoverned_use_tags"]),
+                ("bear_gov", r_gov, True)):
             ctx = Context(tags=list(tags) if use_tags else [])
             res = retriever.retrieve(query_text, ctx, top_k=k)
             for m, v in score([r.id for r in res], expected, k, expected_rel).items():
