@@ -1,0 +1,51 @@
+
+=== Framework baseline (LlamaIndex) vs BEAR: petsim ===
+
+corpus   58 items
+queries  60
+encoder  BAAI/bge-base-en-v1.5 (pinned in all arms), k=10
+
+Building LlamaIndex VectorStoreIndex...
+Generating embeddings:   0%|          | 0/58 [00:00<?, ?it/s]Generating embeddings:  17%|█▋        | 10/58 [00:00<00:02, 16.65it/s]Generating embeddings: 100%|██████████| 58/58 [00:00<00:00, 85.09it/s]
+  built in 93s
+Building BEAR retrievers...
+  built in 2s
+
+  60/60 queries in 1s
+
+--- Arms (strict F1@10, n=60) ---
+
+  LlamaIndex retriever (released package)    0.168 [0.153, 0.184]   relaxed 0.302 [0.256, 0.350]
+  BEAR, no governance (published baseline)   0.168 [0.152, 0.186]   relaxed 0.309 [0.262, 0.359]
+  BEAR governed (published row)              0.653 [0.634, 0.671]   relaxed 0.792 [0.764, 0.820]
+
+--- Contrasts (paired bootstrap, strict F1@10) ---
+
+  bear_nogov - llamaindex +0.000 [-0.011, +0.013] p=0.9592  d=+0.00   same mechanism, different implementation
+  bear_gov   - llamaindex +0.485 [+0.458, +0.511] p=0.0001* d=+4.68   governance vs the framework's retrieval
+
+--- Contrasts (paired bootstrap, relaxed F1@10) ---
+
+  bear_nogov - llamaindex +0.007 [-0.005, +0.019] p=0.2400  d=+0.15   same mechanism, different implementation
+  bear_gov   - llamaindex +0.490 [+0.451, +0.528] p=0.0001* d=+3.20   governance vs the framework's retrieval
+
+Saved to /mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts/results/framework_baseline_petsim.json
+
+Read: if 'bear_nogov vs llamaindex' is within noise, the paper's
+ungoverned rows faithfully represent what production frameworks ship,
+and the governed contrast carries over to them unchanged.
+
+=== Reproducibility ===
+Timestamp (UTC): 2026-07-28T23:30:08Z
+Command line:    evals/eval_framework_baseline.py --corpus petsim
+Python:          3.12.3 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
+numpy:           2.2.6
+scipy:           1.17.1
+bear:            0.1.10
+git commit:      6d987f4695de62ca6f47755b2ba48dceb96f19c1
+git status:      DIRTY (33 files modified)
+git branch:      main
+
+  corpus: petsim
+  queries: 60
+===

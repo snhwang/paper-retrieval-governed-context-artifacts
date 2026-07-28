@@ -10,32 +10,32 @@ device     cuda
 
 Building retrievers (BAAI/bge-base-en-v1.5, 58 items)...
   indexed in 3s
-  60/60 queries in 6s
+  60/60 queries in 5s
 
 --- Arms (strict F1@10, n=60) ---
 
-  Bi-encoder, no governance                  0.199 [0.179, 0.221]   relaxed 0.331 [0.285, 0.379]
+  Bi-encoder, no governance                  0.168 [0.152, 0.186]   relaxed 0.309 [0.262, 0.359]
   Bi-encoder + cross-encoder reranker        0.219 [0.198, 0.242]   relaxed 0.339 [0.299, 0.380]
   BEAR governed                              0.653 [0.634, 0.671]   relaxed 0.792 [0.764, 0.820]
   BEAR governed + cross-encoder reranker     0.589 [0.555, 0.620]   relaxed 0.740 [0.720, 0.760]
 
 --- Candidate sets at N=50 (ceiling for the reranked arms) ---
 
-  bi    recall@N 0.775   mean candidates 50.0
+  bi    recall@N 0.671   mean candidates 50.0
   bear  recall@N 0.997   mean candidates 11.3
 
 --- Contrasts (paired bootstrap, strict F1@10) ---
 
-  bear     - bi       +0.454 [+0.426, +0.480] p=0.0001* d=+4.21   governance effect (published contrast)
-  bi_rr    - bi       +0.020 [+0.003, +0.038] p=0.0188* d=+0.28   reranker alone
+  bear     - bi       +0.485 [+0.457, +0.510] p=0.0001* d=+4.65   governance effect (published contrast)
+  bi_rr    - bi       +0.051 [+0.031, +0.073] p=0.0001* d=+0.60   reranker alone
   bear     - bi_rr    +0.434 [+0.406, +0.460] p=0.0001* d=+4.07   head-to-head: governance vs reranking
   bear_rr  - bear     -0.064 [-0.088, -0.043] p=0.0001* d=-0.69   reranker added on top of governance
   bear_rr  - bi_rr    +0.369 [+0.327, +0.409] p=0.0001* d=+2.24   governance effect with reranker held fixed
 
 --- Contrasts (paired bootstrap, relaxed F1@10) ---
 
-  bear     - bi       +0.462 [+0.422, +0.499] p=0.0001* d=+3.01   governance effect (published contrast)
-  bi_rr    - bi       +0.009 [-0.013, +0.031] p=0.4482  d=+0.10   reranker alone
+  bear     - bi       +0.484 [+0.444, +0.521] p=0.0001* d=+3.12   governance effect (published contrast)
+  bi_rr    - bi       +0.031 [+0.004, +0.057] p=0.0208* d=+0.29   reranker alone
   bear     - bi_rr    +0.453 [+0.421, +0.485] p=0.0001* d=+3.56   head-to-head: governance vs reranking
   bear_rr  - bear     -0.052 [-0.071, -0.034] p=0.0001* d=-0.70   reranker added on top of governance
   bear_rr  - bi_rr    +0.401 [+0.360, +0.443] p=0.0001* d=+2.42   governance effect with reranker held fixed
@@ -49,14 +49,14 @@ reranker cannot recover a document that is absent from the candidate set,
 so compare each reranked arm against its own recall@N ceiling above.
 
 === Reproducibility ===
-Timestamp (UTC): 2026-07-28T20:03:16Z
+Timestamp (UTC): 2026-07-28T23:28:22Z
 Command line:    evals/eval_reranker_composition.py --corpus petsim
 Python:          3.12.3 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
 numpy:           2.2.6
 scipy:           1.17.1
 bear:            0.1.10
-git commit:      fa25be89603015442d3710a64a4ada6eba925204
-git status:      DIRTY (32 files modified)
+git commit:      6d987f4695de62ca6f47755b2ba48dceb96f19c1
+git status:      DIRTY (33 files modified)
 git branch:      main
 
   corpus: petsim
