@@ -309,6 +309,32 @@ serve_mistral_nemo.sh                 # optional vLLM server (bf16); Tables 7, 8
 requirements.txt                      # pinned dependency set
 ```
 
+## Composition Layer
+
+`evals/composition.py` packages the paper's composition claim as reusable
+code: BEAR governs candidate-set construction, and external systems attach as
+post-stages over the governed candidate set, through BEAR's public API, with
+no changes to BEAR core (pinned at v0.1.10).
+
+- `ComposedRetriever` — drop-in wrapper: governed over-fetch, post-stage,
+  top-k cut. A post-stage sees only the governed candidate set, so gate
+  exclusions and mandatory injections are preserved by construction.
+- `CrossEncoderReranker` — the released `BAAI/bge-reranker-base` as a
+  post-stage. This is the measured composition (paper Table 21):
+  `eval_reranker_composition.py` runs its arms through this layer, and the
+  refactor was verified to reproduce the committed per-query results exactly
+  on both corpora.
+- `OutcomeReweightStage` — OATS-inspired outcome-aware reordering from
+  per-item success priors. Illustrative adapter, not a reproduction of OATS.
+- `GroupBoostStage` — Tool-to-Agent-inspired hierarchy grouping (sibling APIs
+  of a strongly matched parent tool surface together). Illustrative adapter.
+
+`evals/demo_composition.py` walks a few ToolBench queries through all four
+configurations and prints the reordered top-k side by side (output committed
+at `results/composition_demo.txt`). The demo is an illustration of
+composability, not an evaluation; quantitative claims live in
+`eval_reranker_composition.py`.
+
 ## Running Individual Evals
 
 `./run_evals.sh` invokes every deterministic script; passing `--all` adds the LLM-required experiments. To reproduce a single table, run its script directly:

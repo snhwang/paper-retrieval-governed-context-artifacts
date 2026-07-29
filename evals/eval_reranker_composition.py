@@ -78,6 +78,7 @@ from eval_toolbench import (  # noqa: E402
     f1_at_k,
     ndcg_at_k,
 )
+from composition import ComposedRetriever, CrossEncoderReranker  # noqa: E402
 from stat_utils import bootstrap_ci, paired_bootstrap  # noqa: E402
 from repro_footer import print_repro_footer  # noqa: E402
 
@@ -282,6 +283,11 @@ def run_arms(corpus_name: str, corpus: Corpus, queries, reranker, overfetch: int
     n_fetch = min(overfetch, len(corpus))
     if n_fetch < overfetch:
         print(f"  over-fetch clamped to corpus size: N={n_fetch}")
+
+    # Composition layer over BEAR's public API (no changes to BEAR core).
+    reranker.set_texts(texts)
+    c_gov = ComposedRetriever(r_gov, reranker, overfetch=n_fetch)
+    c_plain = ComposedRetriever(r_plain, reranker, overfetch=n_fetch)
     metrics = list(BASE_METRICS)
     if corpus_name == "petsim":
         metrics += list(RELAXED_METRICS)
@@ -299,12 +305,11 @@ def run_arms(corpus_name: str, corpus: Corpus, queries, reranker, overfetch: int
 
         expected_rel = relaxed_expected(corpus_name, query_text, expected)
 
-        for stage, retriever, use_tags in (
-                ("bi", r_plain, settings["ungoverned_use_tags"]),
-                ("bear", r_gov, True)):
+        for stage, composed, retriever, use_tags in (
+                ("bi", c_plain, r_plain, settings["ungoverned_use_tags"]),
+                ("bear", c_gov, r_gov, True)):
             ctx = Context(tags=list(tags) if use_tags else [])
-            deep = retriever.retrieve(query_text, ctx, top_k=n_fetch)
-            deep_ids = [d.id for d in deep]
+            deep_ids = composed.candidate_ids(query_text, ctx)
             cand_counts[stage].append(len(deep_ids))
             ceilings[stage].append(recall_at_k(set(deep_ids), expected, n_fetch))
 
@@ -318,18 +323,11 @@ def run_arms(corpus_name: str, corpus: Corpus, queries, reranker, overfetch: int
             for m, v in score_arm([s.id for s in shallow], expected, k, expected_rel).items():
                 scores[stage][m].append(v)
 
-            # Reranked arm: cross-encoder orders the same candidate set.
-            rr_arm = f"{stage}_rr"
-            if deep_ids:
-                pairs = [(query_text, texts.get(d, "")) for d in deep_ids]
-                rr_scores = reranker.predict(pairs, batch_size=batch_size,
-                                             show_progress_bar=False)
-                order = np.argsort(-np.asarray(rr_scores, dtype=float))
-                reranked = [deep_ids[j] for j in order]
-            else:
-                reranked = []
+            # Reranked arm: the composition layer (governed candidate set,
+            # cross-encoder post-stage). See composition.py.
+            reranked = composed.retrieve_ids(query_text, ctx, top_k=n_fetch)
             for m, v in score_arm(reranked, expected, k, expected_rel).items():
-                scores[rr_arm][m].append(v)
+                scores[f"{stage}_rr"][m].append(v)
 
     elapsed = time.time() - t0
     print(f"  {len(queries)}/{len(queries)} queries in {elapsed:.0f}s\n")
@@ -375,17 +373,13 @@ def main():
     print(f"reranker   {args.reranker}")
     print(f"ungoverned {args.ungoverned}")
 
-    from sentence_transformers import CrossEncoder  # imported late: heavy
-
-    device = args.device
-    if device is None:
-        try:
-            import torch
-            device = "cuda" if torch.cuda.is_available() else "cpu"
-        except Exception:
-            device = "cpu"
+    # The reranker is wrapped as a composition-layer post-stage (composition.py):
+    # BEAR's governed retrieval plus the cross-encoder, through BEAR's public
+    # API, with no changes to BEAR core.
+    reranker = CrossEncoderReranker(model_name=args.reranker, device=args.device,
+                                    batch_size=args.batch_size)
+    device = reranker.device
     print(f"device     {device}\n")
-    reranker = CrossEncoder(args.reranker, device=device)
 
     res = run_arms(args.corpus, corpus, queries, reranker, args.overfetch,
                    args.batch_size, drop_conflicts=args.ungoverned == "no_mechanisms")

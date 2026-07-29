@@ -1,0 +1,98 @@
+ToolBench: 3225 items, showing 3 queries, top-5 of a governed top-50
+[*] marks items in the query's ground truth
+
+Query 1: I am a fitness enthusiast and I want to buy a fitness tracker. Can you suggest some top-rated fitnes...
+  governed (BEAR alone):
+    1. [ ] toolbench/data/ASIN Data/Reviews
+    2. [*] toolbench/data/ASIN Data/Search
+    3. [*] toolbench/data/ASIN Data/Product
+    4. [ ] toolbench/data/ASIN Data/Offers
+    5. [ ] toolbench/data/Diablo4 Smartable/GetPeople
+  + reranker (cross-encoder):
+    1. [*] toolbench/data/ASIN Data/Search
+    2. [ ] toolbench/data/ASIN Data/Offers
+    3. [*] toolbench/data/ASIN Data/Product
+    4. [ ] toolbench/data/ASIN Data/Reviews
+    5. [ ] toolbench/data/ASIN Data/Category
+  + outcome (OATS-inspired):
+    1. [ ] toolbench/data/ASIN Data/Reviews
+    2. [*] toolbench/data/ASIN Data/Search
+    3. [*] toolbench/data/ASIN Data/Product
+    4. [ ] toolbench/data/ASIN Data/Offers
+    5. [ ] toolbench/data/ASIN Data/Category
+  + groups (Tool-to-Agent-inspired):
+    1. [ ] toolbench/data/ASIN Data/Reviews
+    2. [*] toolbench/data/ASIN Data/Search
+    3. [*] toolbench/data/ASIN Data/Product
+    4. [ ] toolbench/data/ASIN Data/Offers
+    5. [ ] toolbench/data/ASIN Data/Category
+
+Query 2: I'm a football enthusiast and I want to know more about Lionel Messi's career. Can you provide me wi...
+  governed (BEAR alone):
+    1. [*] toolbench/data/TheClique/Transfermarkt details
+    2. [ ] toolbench/data/Kick.com API | Kick API/Get Chat User (like user from chat)
+    3. [ ] toolbench/data/TheClique/Get info about artist
+    4. [ ] toolbench/data/Geography/Get Country By FIFA Code
+    5. [ ] toolbench/data/Diablo4 Smartable/GetPeople
+  + reranker (cross-encoder):
+    1. [*] toolbench/data/TheClique/Transfermarkt details
+    2. [*] toolbench/data/TheClique/Transfermarkt search
+    3. [ ] toolbench/data/France 2D/History
+    4. [ ] toolbench/data/Twitter Data/auto-complete
+    5. [ ] toolbench/data/Diablo4 Smartable/GetPeople
+  + outcome (OATS-inspired):
+    1. [*] toolbench/data/TheClique/Transfermarkt details
+    2. [ ] toolbench/data/Kick.com API | Kick API/Get Chat User (like user from chat)
+    3. [ ] toolbench/data/TheClique/Get info about artist
+    4. [ ] toolbench/data/Geography/Get Country By FIFA Code
+    5. [*] toolbench/data/TheClique/Transfermarkt search
+  + groups (Tool-to-Agent-inspired):
+    1. [*] toolbench/data/TheClique/Transfermarkt details
+    2. [ ] toolbench/data/TheClique/Get info about artist
+    3. [*] toolbench/data/TheClique/Transfermarkt search
+    4. [ ] toolbench/data/TheClique/Songkick festivals
+    5. [ ] toolbench/data/TheClique/SongKick search Artist
+
+Query 3: I'm a fan of the streamer 'gmhikaru' on Kick.com and I want to explore their channel. Can you provid...
+  governed (BEAR alone):
+    1. [*] toolbench/data/Kick.com API | Kick API/Get Channel Clips
+    2. [ ] toolbench/data/Kick.com API | Kick API/Get Channel Livestream Info
+    3. [*] toolbench/data/Kick.com API | Kick API/Get Channel Details
+    4. [ ] toolbench/data/Kick.com API | Kick API/Get Channel Emotes
+    5. [ ] toolbench/data/Kick.com API | Kick API/Get Channel Links
+  + reranker (cross-encoder):
+    1. [*] toolbench/data/Kick.com API | Kick API/Get Channel Clips
+    2. [*] toolbench/data/Kick.com API | Kick API/Get Channel Details
+    3. [ ] toolbench/data/Kick.com API | Kick API/Get Channel Links
+    4. [ ] toolbench/data/Kick.com API | Kick API/Get Channel Livestream Info
+    5. [ ] toolbench/data/Kick.com API | Kick API/Get Channel Chatroom
+  + outcome (OATS-inspired):
+    1. [*] toolbench/data/Kick.com API | Kick API/Get Channel Clips
+    2. [ ] toolbench/data/Kick.com API | Kick API/Get Channel Livestream Info
+    3. [*] toolbench/data/Kick.com API | Kick API/Get Channel Details
+    4. [ ] toolbench/data/Kick.com API | Kick API/Get Channel Emotes
+    5. [ ] toolbench/data/Kick.com API | Kick API/Get Channel Links
+  + groups (Tool-to-Agent-inspired):
+    1. [*] toolbench/data/Kick.com API | Kick API/Get Channel Clips
+    2. [ ] toolbench/data/Kick.com API | Kick API/Get Channel Livestream Info
+    3. [*] toolbench/data/Kick.com API | Kick API/Get Channel Details
+    4. [ ] toolbench/data/Kick.com API | Kick API/Get Channel Emotes
+    5. [ ] toolbench/data/Kick.com API | Kick API/Get Channel Links
+
+Every arm above draws from the same governed candidate set; the
+stages reorder within it and cannot admit what the gate excluded.
+
+=== Reproducibility ===
+Timestamp (UTC): 2026-07-29T18:13:38Z
+Command line:    evals/demo_composition.py
+Python:          3.12.3 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
+numpy:           2.2.6
+scipy:           1.17.1
+bear:            0.1.10
+git commit:      e4de63572b847da043a14f0d4a9f8ad40e26a178
+git status:      DIRTY (33 files modified)
+git branch:      main
+
+  demo: composition
+  queries: 3
+===
