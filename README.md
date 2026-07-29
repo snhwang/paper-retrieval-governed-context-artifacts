@@ -258,6 +258,7 @@ Every numeric table in the paper is produced by a Python script in `evals/`. Sta
 | Table 18 | `tab:alpha-sweep` | `eval_alpha_sweep.py` | no |
 | Table 19 | `tab:summary` | *(narrative summary)* | — |
 | Table 20 | `tab:transfer` | `eval_backend_transfer.py` | no |
+| Table 21 | `tab:reranker` | `eval_reranker_composition.py` (reranker arms, both corpora); `eval_framework_baseline.py` (LlamaIndex row) | no |
 
 For each script, a fresh run writes a structured JSON result file to `results/` plus a reproducibility footer that captures Python, numpy, scipy, and bear versions along with the git commit hash. Pre-computed result files corresponding to the paper's numbers are already committed to `results/` for direct comparison.
 
