@@ -84,11 +84,11 @@
       "condition": "itr_offshelf",
       "label": "ITR library (off-the-shelf)",
       "n": 60,
-      "mean_f1": 0.18196428571428572,
-      "ci_lo": 0.16176537698412694,
-      "ci_hi": 0.2029970238095238,
-      "delta_vs_full": -0.682840539090539,
-      "cohen_d_vs_full": 3.6302931413808173,
+      "mean_f1": 0.21117063492063493,
+      "ci_lo": 0.18630853174603174,
+      "ci_hi": 0.23714285714285713,
+      "delta_vs_full": -0.6536341898841898,
+      "cohen_d_vs_full": 3.6382565723019904,
       "p_vs_full": 0.0,
       "notes": "Off-the-shelf `instruction-tool-retrieval` library. NOT a faithful re-implementation of the ITR paper's full pipeline."
     }

@@ -95,6 +95,9 @@ fi
 EVAL_DIR="evals"
 RESULTS_DIR="results"
 mkdir -p "$RESULTS_DIR"
+# Mark the start of this re-run campaign; verify_rerun.py only trusts result
+# files newer than this marker.
+date +%s > "$RESULTS_DIR/.rerun_started"
 
 echo "========================================"
 echo "  Retrieval-Governed Context (paper)"

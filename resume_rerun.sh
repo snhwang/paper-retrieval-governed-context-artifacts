@@ -31,6 +31,11 @@ RESULTS_DIR="results"
 DONE_DIR="$RESULTS_DIR/.rerun_done"
 LOG="$RESULTS_DIR/author_rerun_2026-08-01.log"
 mkdir -p "$DONE_DIR"
+# Campaign marker for verify_rerun.py. If missing, initialize it to the start
+# of the author re-run campaign (2026-08-04 00:00 local) so the outputs of the
+# partial first run count as regenerated. A fresh full run (run_evals.sh)
+# overwrites it with the current time.
+[[ -f "$RESULTS_DIR/.rerun_started" ]] || date -d "2026-08-04 00:00" +%s > "$RESULTS_DIR/.rerun_started"
 
 step() {
   local name="$1"; shift

@@ -48,6 +48,10 @@ matplotlib==3.10.8
 torch==2.10.0
 transformers==4.57.6
 sentence-transformers==5.4.1
+
+# ITR baseline (Table 17 row); version pinned because the row's value is
+# sensitive to the library's internals
+instruction-tool-retrieval==0.1.1
 tokenizers==0.22.2
 huggingface-hub==0.36.2
 

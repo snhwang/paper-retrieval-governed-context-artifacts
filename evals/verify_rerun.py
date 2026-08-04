@@ -22,11 +22,17 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
 VOLATILE = {"elapsed_s", "device", "hostname", "timestamp", "duration_s"}
+# key-name patterns that are machine timings, not scientific values
+VOLATILE_SUBSTRINGS = ("_ms", "time_s", "latency")
+
+
+def is_volatile(key: str) -> bool:
+    return key in VOLATILE or any(t in key for t in VOLATILE_SUBSTRINGS)
 
 
 def strip(o):
     if isinstance(o, dict):
-        return {k: strip(v) for k, v in sorted(o.items()) if k not in VOLATILE}
+        return {k: strip(v) for k, v in sorted(o.items()) if not is_volatile(k)}
     if isinstance(o, list):
         return [strip(v) for v in o]
     return o
@@ -61,24 +67,35 @@ def find_mismatch(a, b, path=""):
     return None if a == b else path
 
 
-def head_commit_time() -> float:
-    r = subprocess.run(["git", "log", "-1", "--format=%ct"], cwd=REPO,
-                       capture_output=True, text=True)
-    return float(r.stdout.strip() or 0)
+def run_marker_time() -> float | None:
+    """Start time of the current re-run campaign, written by run_evals.sh /
+    resume_rerun.sh. Files older than this were not produced by the re-run."""
+    marker = REPO / "results" / ".rerun_started"
+    if not marker.exists():
+        return None
+    try:
+        return float(marker.read_text().strip())
+    except ValueError:
+        return None
 
 
 def main():
     results = sorted((REPO / "results").glob("*.json"))
-    since = head_commit_time()
+    since = run_marker_time()
+    if since is None:
+        print("NO RUN MARKER: results/.rerun_started not found. Start the")
+        print("re-run with ./run_evals.sh or ./resume_rerun.sh (they write")
+        print("the marker), then run this verifier.")
+        sys.exit(2)
     fresh = [p for p in results if p.stat().st_mtime > since]
     if not fresh:
         print(f"checked {len(results)} result JSONs")
-        print("NO RE-RUN DETECTED: no result file is newer than the last git")
-        print("commit, so there is nothing new to verify. Comparing committed")
-        print("files to themselves would trivially pass. Run ./run_evals.sh")
-        print("first, then re-run this verifier.")
+        print("NO RE-RUN DETECTED: no result file is newer than the run marker")
+        print("(results/.rerun_started), so there is nothing new to verify.")
+        print("Comparing committed files to themselves would trivially pass.")
+        print("Run ./run_evals.sh or ./resume_rerun.sh first.")
         sys.exit(2)
-    print(f"{len(fresh)} of {len(results)} result JSONs regenerated since last commit")
+    print(f"{len(fresh)} of {len(results)} result JSONs regenerated since the run marker")
 
     matched, changed, new = [], [], []
     for p in results:
