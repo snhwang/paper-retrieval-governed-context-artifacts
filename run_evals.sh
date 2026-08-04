@@ -160,6 +160,33 @@ echo "--- Table 4: ToolBench with LLM-inferred categories (top-5) ---"
 python3 "$EVAL_DIR/eval_toolbench_top5_categories.py" | tee "$RESULTS_DIR/eval_toolbench_top5_categories_output.txt"
 echo ""
 
+echo "--- Table 17 safety panel: scope-excluded mandatory injection ---"
+python3 "$EVAL_DIR/eval_scope_excluded_safety.py" | tee "$RESULTS_DIR/scope_excluded_safety_output.txt"
+echo ""
+
+echo "--- Pet Sim over-fetch change diagnosis (letter, R3.3) ---"
+python3 "$EVAL_DIR/eval_petsim_fix_diagnosis.py" | tee "$RESULTS_DIR/petsim_fix_diagnosis_output.txt"
+echo ""
+
+echo "--- Table 20: fine-tuned retriever in and out of domain ---"
+python3 "$EVAL_DIR/eval_backend_transfer.py" --corpus toolbench | tee "$RESULTS_DIR/backend_transfer_toolbench_output.txt"
+python3 "$EVAL_DIR/eval_backend_transfer.py" --corpus metatool | tee "$RESULTS_DIR/backend_transfer_metatool_output.txt"
+echo ""
+
+echo "--- Table 21: reranker substitution and composition ---"
+python3 "$EVAL_DIR/eval_reranker_composition.py" --corpus petsim | tee "$RESULTS_DIR/reranker_composition_petsim.log"
+python3 "$EVAL_DIR/eval_reranker_composition.py" --corpus toolbench | tee "$RESULTS_DIR/reranker_composition_toolbench.log"
+echo ""
+
+echo "--- Table 21: LlamaIndex framework baseline ---"
+python3 "$EVAL_DIR/eval_framework_baseline.py" --corpus petsim | tee "$RESULTS_DIR/framework_baseline_petsim.log"
+python3 "$EVAL_DIR/eval_framework_baseline.py" --corpus toolbench | tee "$RESULTS_DIR/framework_baseline_toolbench.log"
+echo ""
+
+echo "--- Composition-layer demonstration (illustrative, not an evaluation) ---"
+python3 "$EVAL_DIR/demo_composition.py" > "$RESULTS_DIR/composition_demo.txt" 2>&1
+echo ""
+
 
 # =========================
 # End-to-end tool selection (REQUIRES LLM)
