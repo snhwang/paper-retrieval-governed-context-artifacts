@@ -61,8 +61,25 @@ def find_mismatch(a, b, path=""):
     return None if a == b else path
 
 
+def head_commit_time() -> float:
+    r = subprocess.run(["git", "log", "-1", "--format=%ct"], cwd=REPO,
+                       capture_output=True, text=True)
+    return float(r.stdout.strip() or 0)
+
+
 def main():
     results = sorted((REPO / "results").glob("*.json"))
+    since = head_commit_time()
+    fresh = [p for p in results if p.stat().st_mtime > since]
+    if not fresh:
+        print(f"checked {len(results)} result JSONs")
+        print("NO RE-RUN DETECTED: no result file is newer than the last git")
+        print("commit, so there is nothing new to verify. Comparing committed")
+        print("files to themselves would trivially pass. Run ./run_evals.sh")
+        print("first, then re-run this verifier.")
+        sys.exit(2)
+    print(f"{len(fresh)} of {len(results)} result JSONs regenerated since last commit")
+
     matched, changed, new = [], [], []
     for p in results:
         rel = p.relative_to(REPO).as_posix()
@@ -82,7 +99,12 @@ def main():
         else:
             changed.append((rel, where))
 
+    stale = [p.relative_to(REPO).as_posix() for p in results
+             if p.stat().st_mtime <= since]
     print(f"checked {len(results)} result JSONs")
+    if stale:
+        print(f"  NOT regenerated this run      : {len(stale)} "
+              "(unchanged committed copies, not re-verified evidence)")
     print(f"  identical to committed values : {len(matched)}")
     print(f"  new (no committed counterpart): {len(new)}")
     for n in new:
