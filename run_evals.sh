@@ -79,6 +79,19 @@ E2E_ARGS=""
 [[ -n "$MODEL" ]]    && E2E_ARGS="$E2E_ARGS --model $MODEL"
 [[ -n "$BASE_URL" ]] && E2E_ARGS="$E2E_ARGS --base-url $BASE_URL"
 
+# Use the project venv automatically when present, so the script works
+# without manual activation. Fail early with a clear message otherwise.
+PY="python3"
+if [[ -x ".venv/bin/python" ]]; then
+  PY=".venv/bin/python"
+fi
+if ! "$PY" -c "import bear" 2>/dev/null; then
+  echo "ERROR: cannot import bear with $PY." >&2
+  echo "Run from the repo root inside WSL, with the project venv present" >&2
+  echo "(.venv/bin/python) or activated." >&2
+  exit 1
+fi
+
 EVAL_DIR="evals"
 RESULTS_DIR="results"
 mkdir -p "$RESULTS_DIR"
@@ -93,51 +106,51 @@ echo ""
 # =========================
 
 echo "--- Table 9: Pet Sim retrieval (lexical) ---"
-python3 "$EVAL_DIR/eval_retrieval.py" | tee "$RESULTS_DIR/eval_retrieval_output.txt"
+"$PY" "$EVAL_DIR/eval_retrieval.py" | tee "$RESULTS_DIR/eval_retrieval_output.txt"
 echo ""
 
 echo "--- Table 9: Pet Sim retrieval (semantic) ---"
-python3 "$EVAL_DIR/eval_retrieval.py" --semantic | tee "$RESULTS_DIR/eval_retrieval_semantic_output.txt"
+"$PY" "$EVAL_DIR/eval_retrieval.py" --semantic | tee "$RESULTS_DIR/eval_retrieval_semantic_output.txt"
 echo ""
 
 echo "--- Retrieval backend comparison (BGE-M3, Qwen3) ---"
-python3 "$EVAL_DIR/eval_retrieval_backends.py" --all | tee "$RESULTS_DIR/eval_retrieval_backends_output.txt"
+"$PY" "$EVAL_DIR/eval_retrieval_backends.py" --all | tee "$RESULTS_DIR/eval_retrieval_backends_output.txt"
 echo ""
 
 echo "--- Table 15: Governance ablation ---"
-python3 "$EVAL_DIR/eval_governance_ablation.py" | tee "$RESULTS_DIR/eval_governance_ablation_output.txt"
+"$PY" "$EVAL_DIR/eval_governance_ablation.py" | tee "$RESULTS_DIR/eval_governance_ablation_output.txt"
 echo ""
 
 echo "--- Table 16: Decomposed governance ablation (5 backends + ITR) ---"
-python3 "$EVAL_DIR/eval_governance_decomposed.py" | tee "$RESULTS_DIR/eval_governance_decomposed_output.txt"
+"$PY" "$EVAL_DIR/eval_governance_decomposed.py" | tee "$RESULTS_DIR/eval_governance_decomposed_output.txt"
 echo ""
 
 echo "--- Table 17: Alpha weight sweep ---"
-python3 "$EVAL_DIR/eval_alpha_sweep.py" | tee "$RESULTS_DIR/eval_alpha_sweep_output.txt"
+"$PY" "$EVAL_DIR/eval_alpha_sweep.py" | tee "$RESULTS_DIR/eval_alpha_sweep_output.txt"
 echo ""
 
 echo "--- Tables 13, 14: BEAR vs CPA baseline ---"
-python3 "$EVAL_DIR/eval_baseline_comparison.py" | tee "$RESULTS_DIR/eval_baseline_output.txt"
+"$PY" "$EVAL_DIR/eval_baseline_comparison.py" | tee "$RESULTS_DIR/eval_baseline_output.txt"
 echo ""
 
 echo "--- Table 12: Scalability (10-500 agents) ---"
-python3 "$EVAL_DIR/eval_scalability.py" | tee "$RESULTS_DIR/eval_scalability_output.txt"
+"$PY" "$EVAL_DIR/eval_scalability.py" | tee "$RESULTS_DIR/eval_scalability_output.txt"
 echo ""
 
 echo "--- Tables 10, 11: Tool scaling + token savings ---"
-python3 "$EVAL_DIR/eval_tool_scaling.py" | tee "$RESULTS_DIR/eval_tool_scaling_output.txt"
+"$PY" "$EVAL_DIR/eval_tool_scaling.py" | tee "$RESULTS_DIR/eval_tool_scaling_output.txt"
 echo ""
 
 echo "--- Tool composition (Composer validation) ---"
-python3 "$EVAL_DIR/eval_tool_composition.py" | tee "$RESULTS_DIR/eval_tool_composition_output.txt"
+"$PY" "$EVAL_DIR/eval_tool_composition.py" | tee "$RESULTS_DIR/eval_tool_composition_output.txt"
 echo ""
 
 echo "--- Parameter sensitivity (alpha, theta, K; lexical) ---"
-python3 "$EVAL_DIR/eval_ablation.py" | tee "$RESULTS_DIR/eval_ablation_output.txt"
+"$PY" "$EVAL_DIR/eval_ablation.py" | tee "$RESULTS_DIR/eval_ablation_output.txt"
 echo ""
 
 echo "--- Parameter sensitivity (semantic) ---"
-python3 "$EVAL_DIR/eval_ablation.py" --semantic | tee "$RESULTS_DIR/eval_ablation_semantic_output.txt"
+"$PY" "$EVAL_DIR/eval_ablation.py" --semantic | tee "$RESULTS_DIR/eval_ablation_semantic_output.txt"
 echo ""
 
 # =========================
@@ -145,46 +158,46 @@ echo ""
 # =========================
 
 echo "--- Tables 3, 5, 6: ToolBench + MetaTool retrieval ---"
-python3 "$EVAL_DIR/eval_toolbench.py" --latex | tee "$RESULTS_DIR/eval_toolbench_output.txt"
+"$PY" "$EVAL_DIR/eval_toolbench.py" --latex | tee "$RESULTS_DIR/eval_toolbench_output.txt"
 echo ""
 
 echo "--- Table 4: ToolBench with LLM-inferred categories (top-1) ---"
-python3 "$EVAL_DIR/eval_toolbench_inferred_categories.py" | tee "$RESULTS_DIR/eval_toolbench_inferred_categories_output.txt"
+"$PY" "$EVAL_DIR/eval_toolbench_inferred_categories.py" | tee "$RESULTS_DIR/eval_toolbench_inferred_categories_output.txt"
 echo ""
 
 echo "--- Table 4: ToolBench with LLM-inferred categories (multi-tag) ---"
-python3 "$EVAL_DIR/eval_toolbench_multitag_categories.py" | tee "$RESULTS_DIR/eval_toolbench_multitag_categories_output.txt"
+"$PY" "$EVAL_DIR/eval_toolbench_multitag_categories.py" | tee "$RESULTS_DIR/eval_toolbench_multitag_categories_output.txt"
 echo ""
 
 echo "--- Table 4: ToolBench with LLM-inferred categories (top-5) ---"
-python3 "$EVAL_DIR/eval_toolbench_top5_categories.py" | tee "$RESULTS_DIR/eval_toolbench_top5_categories_output.txt"
+"$PY" "$EVAL_DIR/eval_toolbench_top5_categories.py" | tee "$RESULTS_DIR/eval_toolbench_top5_categories_output.txt"
 echo ""
 
 echo "--- Table 17 safety panel: scope-excluded mandatory injection ---"
-python3 "$EVAL_DIR/eval_scope_excluded_safety.py" | tee "$RESULTS_DIR/scope_excluded_safety_output.txt"
+"$PY" "$EVAL_DIR/eval_scope_excluded_safety.py" | tee "$RESULTS_DIR/scope_excluded_safety_output.txt"
 echo ""
 
 echo "--- Pet Sim over-fetch change diagnosis (letter, R3.3) ---"
-python3 "$EVAL_DIR/eval_petsim_fix_diagnosis.py" | tee "$RESULTS_DIR/petsim_fix_diagnosis_output.txt"
+"$PY" "$EVAL_DIR/eval_petsim_fix_diagnosis.py" | tee "$RESULTS_DIR/petsim_fix_diagnosis_output.txt"
 echo ""
 
 echo "--- Table 20: fine-tuned retriever in and out of domain ---"
-python3 "$EVAL_DIR/eval_backend_transfer.py" --corpus toolbench | tee "$RESULTS_DIR/backend_transfer_toolbench_output.txt"
-python3 "$EVAL_DIR/eval_backend_transfer.py" --corpus metatool | tee "$RESULTS_DIR/backend_transfer_metatool_output.txt"
+"$PY" "$EVAL_DIR/eval_backend_transfer.py" --corpus toolbench | tee "$RESULTS_DIR/backend_transfer_toolbench_output.txt"
+"$PY" "$EVAL_DIR/eval_backend_transfer.py" --corpus metatool | tee "$RESULTS_DIR/backend_transfer_metatool_output.txt"
 echo ""
 
 echo "--- Table 21: reranker substitution and composition ---"
-python3 "$EVAL_DIR/eval_reranker_composition.py" --corpus petsim | tee "$RESULTS_DIR/reranker_composition_petsim.log"
-python3 "$EVAL_DIR/eval_reranker_composition.py" --corpus toolbench | tee "$RESULTS_DIR/reranker_composition_toolbench.log"
+"$PY" "$EVAL_DIR/eval_reranker_composition.py" --corpus petsim | tee "$RESULTS_DIR/reranker_composition_petsim.log"
+"$PY" "$EVAL_DIR/eval_reranker_composition.py" --corpus toolbench | tee "$RESULTS_DIR/reranker_composition_toolbench.log"
 echo ""
 
 echo "--- Table 21: LlamaIndex framework baseline ---"
-python3 "$EVAL_DIR/eval_framework_baseline.py" --corpus petsim | tee "$RESULTS_DIR/framework_baseline_petsim.log"
-python3 "$EVAL_DIR/eval_framework_baseline.py" --corpus toolbench | tee "$RESULTS_DIR/framework_baseline_toolbench.log"
+"$PY" "$EVAL_DIR/eval_framework_baseline.py" --corpus petsim | tee "$RESULTS_DIR/framework_baseline_petsim.log"
+"$PY" "$EVAL_DIR/eval_framework_baseline.py" --corpus toolbench | tee "$RESULTS_DIR/framework_baseline_toolbench.log"
 echo ""
 
 echo "--- Composition-layer demonstration (illustrative, not an evaluation) ---"
-python3 "$EVAL_DIR/demo_composition.py" > "$RESULTS_DIR/composition_demo.txt" 2>&1
+"$PY" "$EVAL_DIR/demo_composition.py" > "$RESULTS_DIR/composition_demo.txt" 2>&1
 echo ""
 
 
@@ -194,13 +207,13 @@ echo ""
 
 if [[ "$ALL" == true ]]; then
     echo "--- Table 7: End-to-end ToolBench (single-turn, LLM required) ---"
-    python3 "$EVAL_DIR/eval_toolbench_e2e.py" $E2E_ARGS \
+    "$PY" "$EVAL_DIR/eval_toolbench_e2e.py" $E2E_ARGS \
         | tee "$RESULTS_DIR/eval_toolbench_e2e_output.txt" \
         || echo "  [e2e ToolBench failed: see error above; continuing]"
     echo ""
 
     echo "--- Table 8: End-to-end ToolBench (ReAct, LLM required) ---"
-    python3 "$EVAL_DIR/eval_toolbench_react.py" $E2E_ARGS \
+    "$PY" "$EVAL_DIR/eval_toolbench_react.py" $E2E_ARGS \
         | tee "$RESULTS_DIR/eval_toolbench_react_output.txt" \
         || echo "  [e2e ReAct ToolBench failed: see error above; continuing]"
     echo ""
