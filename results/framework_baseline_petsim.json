@@ -5,7 +5,7 @@
   "top_k": 10,
   "encoder": "BAAI/bge-base-en-v1.5",
   "primary_metric": "f1",
-  "elapsed_s": 0.9011728763580322,
+  "elapsed_s": 0.8814623355865479,
   "arms": {
     "llamaindex": {
       "label": "LlamaIndex retriever (released package)",

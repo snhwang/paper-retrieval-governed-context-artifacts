@@ -54,7 +54,7 @@ Comparison: BEAR retrieval pipeline vs Conditional Prompt Assembly (CPA)
   Tokens/query: BEAR=995 [994, 997]  CPA=952 [951, 952]  Static=8021
   Novel recall: BEAR=1.000  CPA=0.912  (24 queries)  Fisher's p=None
   Unresolved conflicts: BEAR=0  CPA=0
-  Semantic recall: BEAR=0.917  CPA=0.000  (12 queries)
+  Semantic recall: BEAR=1.000  CPA=0.000  (12 queries)
   CPA wiring: 123 lines, 5 lookup tables
 
 ======================================================================
@@ -68,7 +68,7 @@ Comparison: BEAR retrieval pipeline vs Conditional Prompt Assembly (CPA)
   Tokens/query: BEAR=967 [958, 976]  CPA=946 [945, 948]  Static=14696
   Novel recall: BEAR=1.000  CPA=0.912  (24 queries)  Fisher's p=None
   Unresolved conflicts: BEAR=0  CPA=0
-  Semantic recall: BEAR=0.917  CPA=0.000  (12 queries)
+  Semantic recall: BEAR=1.000  CPA=0.000  (12 queries)
   CPA wiring: 233 lines, 5 lookup tables
 
 ======================================================================
@@ -82,7 +82,7 @@ Comparison: BEAR retrieval pipeline vs Conditional Prompt Assembly (CPA)
   Tokens/query: BEAR=953 [946, 961]  CPA=944 [943, 946]  Static=34721
   Novel recall: BEAR=1.000  CPA=0.912  (24 queries)  Fisher's p=None
   Unresolved conflicts: BEAR=0  CPA=0
-  Semantic recall: BEAR=0.917  CPA=0.000  (12 queries)
+  Semantic recall: BEAR=1.000  CPA=0.000  (12 queries)
   CPA wiring: 563 lines, 5 lookup tables
 
 ==========================================================================================
@@ -115,9 +115,9 @@ Comparison: BEAR retrieval pipeline vs Conditional Prompt Assembly (CPA)
    10    1.000   0.000   +1.000
    25    1.000   0.000   +1.000
    50    1.000   0.000   +1.000
-  100    0.917   0.000   +0.917
-  200    0.917   0.000   +0.917
-  500    0.917   0.000   +0.917
+  100    1.000   0.000   +1.000
+  200    1.000   0.000   +1.000
+  500    1.000   0.000   +1.000
 
 --- Token Efficiency ---
     N    BEAR    CPA  Static     B/S    C/S   CPA Lines
@@ -223,9 +223,9 @@ $N$ & Semantic $Q$ & BEAR & CPA & $\Delta$ \\
 10 & 12 & 1.000 & 0.000 & +1.000 \\
 25 & 12 & 1.000 & 0.000 & +1.000 \\
 50 & 12 & 1.000 & 0.000 & +1.000 \\
-100 & 12 & 0.917 & 0.000 & +0.917 \\
-200 & 12 & 0.917 & 0.000 & +0.917 \\
-500 & 12 & 0.917 & 0.000 & +0.917 \\
+100 & 12 & 1.000 & 0.000 & +1.000 \\
+200 & 12 & 1.000 & 0.000 & +1.000 \\
+500 & 12 & 1.000 & 0.000 & +1.000 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -241,7 +241,7 @@ have no entries for these instruction types.}
 Scenario Type & Count & BEAR & CPA & $\Delta$ \\
 \midrule
 Semantically scoped & 3 & 1.000 & 0.000 & +1.000 \\
-Paraphrased query & 3 & 0.667 & 0.000 & +0.667 \\
+Paraphrased query & 3 & 1.000 & 0.000 & +1.000 \\
 Cross-cutting concern & 3 & 1.000 & 0.000 & +1.000 \\
 Compositional novelty & 3 & 1.000 & 0.000 & +1.000 \\
 \bottomrule

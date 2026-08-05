@@ -46,21 +46,21 @@ no_governance           0.574 [0.55,0.60]  0.545 [0.52,0.57]  0.351 [0.34,0.36]
   \end{tabular}
 \end{table}
 
-Wrote /mnt/c/users/scott/documents/work/paper-retrieval-governed-context-artifacts/results/toolbench_multitag_metrics.json
-Wrote /mnt/c/users/scott/documents/work/paper-retrieval-governed-context-artifacts/results/toolbench_multitag_output.txt
-Cache: /mnt/c/users/scott/documents/work/paper-retrieval-governed-context-artifacts/results/toolbench_multitag_categories.json
+Wrote /mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts/results/toolbench_multitag_metrics.json
+Wrote /mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts/results/toolbench_multitag_output.txt
+Cache: /mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts/results/toolbench_multitag_categories.json
 
-Elapsed: 117.2s
+Elapsed: 113.3s
 
 === Reproducibility ===
-Timestamp (UTC): 2026-07-07T06:58:24Z
+Timestamp (UTC): 2026-08-05T03:06:24Z
 Command line:    evals/eval_toolbench_multitag_categories.py
 Python:          3.12.3 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
 numpy:           2.2.6
 scipy:           1.17.1
 bear:            0.1.10
-git commit:      62516a931afd95dc1b14b804a77cf54fa514997f
-git status:      DIRTY (6 files modified)
+git commit:      1f0b43c490c8c76e746a76e607841a0ed158eea9
+git status:      DIRTY (51 files modified)
 git branch:      main
 
   provider: anthropic

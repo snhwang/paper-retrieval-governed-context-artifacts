@@ -12,7 +12,7 @@
   "priority_weight": 0.3,
   "threshold": 0.0,
   "mandatory_tags": [],
-  "elapsed_s": 307.5590720176697,
+  "elapsed_s": 298.4567651748657,
   "arms": {
     "bi": {
       "label": "Bi-encoder, no governance",

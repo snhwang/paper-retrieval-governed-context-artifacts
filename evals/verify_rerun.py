@@ -64,6 +64,12 @@ def find_mismatch(a, b, path=""):
             if r:
                 return r
         return None
+    if isinstance(a, float) and isinstance(b, float):
+        # Summation over set-ordered items can differ by one ULP between
+        # processes (floating-point addition is not associative). Equality at
+        # machine precision is reproduction; anything larger is not.
+        import math
+        return None if math.isclose(a, b, rel_tol=1e-12, abs_tol=1e-15) else path
     return None if a == b else path
 
 

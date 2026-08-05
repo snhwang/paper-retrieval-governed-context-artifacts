@@ -1,6 +1,7 @@
 ToolBench: 3225 items, showing 3 queries, top-5 of a governed top-50
 [*] marks items in the query's ground truth
 
+Batches:   0%|          | 0/101 [00:00<?, ?it/s]Batches:   1%|          | 1/101 [00:00<00:11,  8.89it/s]Batches:   3%|▎         | 3/101 [00:00<00:08, 11.00it/s]Batches:   5%|▍         | 5/101 [00:00<00:07, 12.06it/s]Batches:   7%|▋         | 7/101 [00:00<00:06, 14.17it/s]Batches:  10%|▉         | 10/101 [00:00<00:05, 17.49it/s]Batches:  14%|█▍        | 14/101 [00:00<00:03, 22.48it/s]Batches:  17%|█▋        | 17/101 [00:00<00:03, 24.43it/s]Batches:  21%|██        | 21/101 [00:01<00:02, 27.89it/s]Batches:  25%|██▍       | 25/101 [00:01<00:02, 30.15it/s]Batches:  30%|██▉       | 30/101 [00:01<00:02, 33.82it/s]Batches:  35%|███▍      | 35/101 [00:01<00:01, 36.95it/s]Batches:  40%|███▉      | 40/101 [00:01<00:01, 39.09it/s]Batches:  45%|████▍     | 45/101 [00:01<00:01, 41.16it/s]Batches:  50%|████▉     | 50/101 [00:01<00:01, 42.36it/s]Batches:  55%|█████▌    | 56/101 [00:01<00:01, 44.92it/s]Batches:  61%|██████▏   | 62/101 [00:01<00:00, 47.27it/s]Batches:  67%|██████▋   | 68/101 [00:02<00:00, 49.55it/s]Batches:  74%|███████▍  | 75/101 [00:02<00:00, 53.04it/s]Batches:  81%|████████  | 82/101 [00:02<00:00, 55.99it/s]Batches:  88%|████████▊ | 89/101 [00:02<00:00, 57.80it/s]Batches:  95%|█████████▌| 96/101 [00:02<00:00, 59.41it/s]Batches: 100%|██████████| 101/101 [00:02<00:00, 39.80it/s]
 Query 1: I am a fitness enthusiast and I want to buy a fitness tracker. Can you suggest some top-rated fitnes...
   governed (BEAR alone):
     1. [ ] toolbench/data/ASIN Data/Reviews
@@ -83,14 +84,14 @@ Every arm above draws from the same governed candidate set; the
 stages reorder within it and cannot admit what the gate excluded.
 
 === Reproducibility ===
-Timestamp (UTC): 2026-07-29T18:13:38Z
+Timestamp (UTC): 2026-08-05T03:29:42Z
 Command line:    evals/demo_composition.py
 Python:          3.12.3 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
 numpy:           2.2.6
 scipy:           1.17.1
 bear:            0.1.10
-git commit:      e4de63572b847da043a14f0d4a9f8ad40e26a178
-git status:      DIRTY (33 files modified)
+git commit:      1f0b43c490c8c76e746a76e607841a0ed158eea9
+git status:      DIRTY (59 files modified)
 git branch:      main
 
   demo: composition

@@ -173,7 +173,7 @@
       "inspection": {
         "dropped": {
           "n": 14,
-          "mean_similarity": 0.055654870363562765,
+          "mean_similarity": 0.05565487036356276,
           "mean_priority": 92.5
         },
         "added": {

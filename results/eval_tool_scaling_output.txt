@@ -33,8 +33,10 @@ EVAL 2: Prompt token savings (scoped vs. all tools)
 EVAL 3: End-to-end pipeline (retrieve → compose → LLM → dispatch)
 ======================================================================
   Retrieved 3 tools: ['eat', 'forage', 'harvest']
-  Skipping LLM call (no backend available: No LLM backend available. Install one of: ollama, openai, anthropic, or google-generativeai. For local operation, install and start Ollama.)
-  SKIP (no LLM)
+  Using LLM: openai/gpt-5.4-2026-03-05
+  LLM call failed: Error code: 401 - {'error': {'message': 'Incorrect API key provided: not-needed. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+  (Model may not support function calling)
+  SKIP (LLM error)
 
 ======================================================================
 Summary

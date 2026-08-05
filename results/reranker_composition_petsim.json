@@ -14,7 +14,7 @@
   "mandatory_tags": [
     "safety"
   ],
-  "elapsed_s": 4.950375556945801,
+  "elapsed_s": 4.95653223991394,
   "arms": {
     "bi": {
       "label": "Bi-encoder, no governance",
