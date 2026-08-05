@@ -1,0 +1,8 @@
+=== g4-31b  full-1100 grid ===
+
+  mono_off     MISSING (g4-31b-mono-nothink-full)
+  mono_on      MISSING (g4-31b-mono-think-full)
+  bear_single  MISSING (g4-31b-bearsingle-nothink-full)
+  bear_react   MISSING (g4-31b-bear-full)
+
+=== paired McNemar ===
