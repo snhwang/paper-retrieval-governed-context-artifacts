@@ -383,6 +383,35 @@ python evals/eval_toolbench_react.py \           # Table 8
     --base-url http://127.0.0.1:11434/v1
 ```
 
+## Troubleshooting
+
+**`/usr/bin/env: 'bash\r': No such file or directory` or `$'\r': command not
+found` when running a shell script.** The script has Windows (CRLF) line
+endings, which Linux and WSL cannot execute. This can happen when the
+repository is shared between Windows and WSL on the same working tree (for
+example on `/mnt/c`) and a Windows-side tool, editor, or `git` with
+`core.autocrlf=true` rewrites the file. `.gitattributes` pins `*.sh` to LF at
+checkout, but it cannot repair a working-tree file that a Windows tool has
+already rewritten, and `git pull` will report "already up to date" because
+the committed content is unchanged. Fix in place:
+
+```bash
+sed -i 's/\r$//' run_evals.sh resume_rerun.sh
+```
+
+The same symptom in Python scripts is harmless (Python accepts CRLF), but
+shell scripts, including any you add, should stay LF.
+
+**`run_evals.sh` exits within seconds.** The script needs the project venv.
+It prefers `.venv/bin/python` automatically and aborts with an explicit error
+if `import bear` fails. Run it from the repo root inside WSL.
+
+**`verify_rerun.py` reports "NO RE-RUN DETECTED".** The verifier only trusts
+result files newer than `results/.rerun_started`, which `run_evals.sh` and
+`resume_rerun.sh` write when they start. Run one of those first; the message
+prevents the misleading case where untouched committed files are compared
+against themselves and trivially "match."
+
 ## Regenerating LLM-Generated Metadata
 
 Table 4 (LLM-inferred ToolBench categories) and Table 6 (MetaTool tag variants) use tag JSON that was generated once via the Anthropic Messages API and then committed. The retrieval evals that consume this JSON are deterministic; only the generation step needs an API key.
