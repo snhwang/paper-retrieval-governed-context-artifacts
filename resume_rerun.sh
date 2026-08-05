@@ -67,7 +67,7 @@ step inferred_top1   "$PY" "$EVAL_DIR/eval_toolbench_inferred_categories.py"
 step inferred_multi  "$PY" "$EVAL_DIR/eval_toolbench_multitag_categories.py"
 step inferred_top5   "$PY" "$EVAL_DIR/eval_toolbench_top5_categories.py"
 step safety          "$PY" "$EVAL_DIR/eval_scope_excluded_safety.py"
-step diagnosis       "$PY" "$EVAL_DIR/eval_petsim_fix_diagnosis.py"
+step diagnosis       "$PY" "$EVAL_DIR/eval_petsim_fix_diagnosis.py" --backends bge bge-m3 qwen3 qwen3-4b bm25
 step transfer_tb     "$PY" "$EVAL_DIR/eval_backend_transfer.py" --corpus toolbench
 step transfer_mt     "$PY" "$EVAL_DIR/eval_backend_transfer.py" --corpus metatool
 step reranker_petsim "$PY" "$EVAL_DIR/eval_reranker_composition.py" --corpus petsim

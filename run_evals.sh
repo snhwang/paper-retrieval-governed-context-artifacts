@@ -181,7 +181,7 @@ echo "--- Table 17 safety panel: scope-excluded mandatory injection ---"
 echo ""
 
 echo "--- Pet Sim over-fetch change diagnosis (letter, R3.3) ---"
-"$PY" "$EVAL_DIR/eval_petsim_fix_diagnosis.py" | tee "$RESULTS_DIR/petsim_fix_diagnosis_output.txt"
+"$PY" "$EVAL_DIR/eval_petsim_fix_diagnosis.py" --backends bge bge-m3 qwen3 qwen3-4b bm25 | tee "$RESULTS_DIR/petsim_fix_diagnosis_output.txt"
 echo ""
 
 echo "--- Table 20: fine-tuned retriever in and out of domain ---"
