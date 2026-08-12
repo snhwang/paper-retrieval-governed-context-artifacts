@@ -24,12 +24,12 @@ Prerequisites (to run on another machine):
     ~/.cache/huggingface; the configured port (default 8355) must be free.
 
 Usage:
-    python serve_llm.py                    # default port 8355
-    python serve_llm.py --port 8356        # custom port
-    python serve_llm.py --model 12b        # use 12B model
+    python serve_vllm-gemma-4.py                    # default port 8355
+    python serve_vllm-gemma-4.py --port 8356        # custom port
+    python serve_vllm-gemma-4.py --model 31b        # use 31B model
 
 Override the vLLM image (e.g. for a CUDA 12.9 host):
-    VLLM_SPARK_IMAGE=vllm/vllm-openai:gemma4-unified-cu129 python serve_llm.py
+    VLLM_SPARK_IMAGE=vllm/vllm-openai:gemma4-unified-cu129 python serve_vllm-gemma-4.py
 
 Then start the sim pointing at this server:
     python -m examples.evolutionary_ecosystem.server.app \\
@@ -43,11 +43,27 @@ import subprocess
 from pathlib import Path
 
 # Model options: (hf_id, served_name)
+# 31b uses NVIDIA's NVFP4 quantization (~33 GiB weights vs ~59 GiB bf16 — only
+# partially 4-bit; embeddings/vision layers stay at higher precision). NVFP4
+# requires a Blackwell GPU (e.g. DGX Spark GB10). vLLM auto-detects the
+# quantization from the checkpoint, so no extra flags are needed.
 MODELS = {
     "e2b":  ("google/gemma-4-E2B-it",  "gemma-4-e2b"),
     "e4b":  ("google/gemma-4-E4B-it",  "gemma-4-e4b"),
     "12b":  ("google/gemma-4-12B-it",  "gemma-4-12b"),
-    "31b":  ("google/gemma-4-31B-it",  "gemma-4-31b"),
+    "31b":  ("nvidia/Gemma-4-31B-IT-NVFP4", "gemma-4-31b"),
+}
+
+# Default --gpu-memory-utilization per model. vLLM's budget is this fraction of
+# total GPU memory and must cover weights + CUDA graphs + KV cache. A 32k-token
+# request needs ~9.5 GiB of KV cache; with the NVFP4 31B's ~33 GiB of weights,
+# 0.5 of a ~96 GiB-visible host leaves only ~10 GiB for KV — too tight, so use
+# 0.6 (~20 GiB of KV headroom).
+GPU_UTIL_DEFAULTS = {
+    "e2b": 0.5,
+    "e4b": 0.5,
+    "12b": 0.5,
+    "31b": 0.6,
 }
 
 DEFAULT_PORT       = 8355
@@ -79,9 +95,10 @@ def main():
     parser = argparse.ArgumentParser(description="Serve LLM for BEAR evolutionary ecosystem")
     parser.add_argument("--port",  type=int, default=DEFAULT_PORT)
     parser.add_argument("--model", choices=list(MODELS), default=DEFAULT_MODEL,
-                        help="Model size: 12b, 27b, or 31b (default: 12b)")
-    parser.add_argument("--gpu-memory-utilization", type=float, default=0.5,
-                        help="Fraction of GPU memory vLLM will reserve (default: 0.5)")
+                        help="Model size: e2b, e4b, 12b, or 31b (default: 12b)")
+    parser.add_argument("--gpu-memory-utilization", type=float, default=None,
+                        help="Fraction of GPU memory vLLM will reserve "
+                             "(default: per-model, currently 0.5 for all)")
     parser.add_argument("--max-model-len", type=int, default=32768,
                         help="Max context length in tokens (default: 32768)")
     args = parser.parse_args()
@@ -96,6 +113,8 @@ def main():
 
     hf_cache  = os.path.expanduser("~/.cache/huggingface")
     model_hf, model_name = MODELS[args.model]
+    if args.gpu_memory_utilization is None:
+        args.gpu_memory_utilization = GPU_UTIL_DEFAULTS[args.model]
     gpu_util = str(args.gpu_memory_utilization)
     max_len = str(args.max_model_len)
 
@@ -133,6 +152,7 @@ def main():
     print(f"Server: http://localhost:{args.port}/v1")
     print(f"Model name for API calls: {model_name}")
     print(f"Context: {int(max_len)//1024}k tokens")
+    print(f"GPU memory utilization: {gpu_util}")
     print("-" * 60)
     print(f"Then run the sim with:")
     print(f"  python -m examples.evolutionary_ecosystem.server.app \\")
