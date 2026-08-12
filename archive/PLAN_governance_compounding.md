@@ -1,3 +1,7 @@
+> **HISTORICAL PLAN — COMPLETED/SUPERSEDED.** Kept for provenance. The
+> multi-step compounding experiment explored here did not enter the paper;
+> the reported ReAct comparison is eval_toolbench_react.py (Tables 8-9).
+
 # Experiment plan: does governance's advantage compound with task complexity?
 
 ## Question and hypothesis

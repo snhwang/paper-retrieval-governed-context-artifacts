@@ -326,7 +326,7 @@ single-step tab:e2e-react), to test whether governance's advantage compounds
 end to end: governed vs ungoverned BEAR retrieval feeding a ReAct agent on
 ToolBench I2/I3 multi-tool tasks, scored by pass rate. Gated on the Tier-0
 retrieval-level result (eval_compounding_coverage.py). See
-PLAN_governance_compounding.md for the full plan. Scaffold:
+archive/PLAN_governance_compounding.md for the full (historical) plan. Scaffold:
 evals/eval_stabletoolbench_react.py (four TODOs to fill against the sim server).
 
 Machine layout.
