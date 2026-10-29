@@ -1,0 +1,6408 @@
+[
+ {
+  "config": "main",
+  "config_overrides": {},
+  "config_full": {
+   "default_top_k": 10,
+   "default_threshold": 0.3,
+   "priority_weight": 0.3,
+   "mandatory_tags": [
+    "safety",
+    "compliance"
+   ],
+   "embedding_query_prefix": "",
+   "embedding_passage_prefix": "",
+   "embedding_model": "wp1-clustered-stub",
+   "embedding_dim": 24
+  },
+  "invariant": "I5",
+  "invariant_label": "No orphan prerequisites",
+  "k": 2,
+  "context": {
+   "tags": [],
+   "gate_tags": []
+  },
+  "query": "query 2 <<c=0 v=2 s=2>>",
+  "instructions": [
+   {
+    "id": "i29",
+    "type": "constraint",
+    "priority": 63,
+    "content": "Instruction i29 <<c=1 v=2 s=2>>",
+    "labels": [],
+    "scope_tags": [
+     "safety"
+    ],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i35",
+    "type": "persona",
+    "priority": 46,
+    "content": "Instruction i35 <<c=4 v=3 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": [
+     "i40"
+    ]
+   },
+   {
+    "id": "i40",
+    "type": "protocol",
+    "priority": 70,
+    "content": "Instruction i40 <<c=1 v=2 s=1>>",
+    "labels": [],
+    "scope_tags": [
+     "t6"
+    ],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   }
+  ],
+  "similarity_to_query": {
+   "i29": -0.0526,
+   "i35": 0.2487,
+   "i40": 0.156
+  },
+  "output": [
+   [
+    "i40",
+    0.7
+   ],
+   [
+    "i29",
+    0.63
+   ]
+  ],
+  "trace_admitted": {
+   "i35": "search",
+   "i29": "mandatory",
+   "i40": "requires"
+  },
+  "trace_excluded": {
+   "i35": {
+    "id": "i35",
+    "reason": "top_k",
+    "similarity": 0.24871687591075897,
+    "by": null
+   }
+  },
+  "trace_missing_prerequisites": {},
+  "violation": "items admitted only as prerequisites, unreachable from any item admitted on its own: ['i40']",
+  "source": {
+   "corpus": 0,
+   "case": 2,
+   "k": 2,
+   "detail": "items admitted only as prerequisites, unreachable from any item admitted on its own: ['i40']"
+  },
+  "reproduced": true
+ },
+ {
+  "config": "main",
+  "config_overrides": {},
+  "config_full": {
+   "default_top_k": 10,
+   "default_threshold": 0.3,
+   "priority_weight": 0.3,
+   "mandatory_tags": [
+    "safety",
+    "compliance"
+   ],
+   "embedding_query_prefix": "",
+   "embedding_passage_prefix": "",
+   "embedding_model": "wp1-clustered-stub",
+   "embedding_dim": 24
+  },
+  "invariant": "I5a",
+  "invariant_label": "  I5 orphan made by the top-k cut",
+  "k": 2,
+  "context": {
+   "tags": [],
+   "gate_tags": []
+  },
+  "query": "query 2 <<c=0 v=2 s=2>>",
+  "instructions": [
+   {
+    "id": "i29",
+    "type": "constraint",
+    "priority": 63,
+    "content": "Instruction i29 <<c=1 v=2 s=2>>",
+    "labels": [],
+    "scope_tags": [
+     "safety"
+    ],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i35",
+    "type": "persona",
+    "priority": 46,
+    "content": "Instruction i35 <<c=4 v=3 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": [
+     "i40"
+    ]
+   },
+   {
+    "id": "i40",
+    "type": "protocol",
+    "priority": 70,
+    "content": "Instruction i40 <<c=1 v=2 s=1>>",
+    "labels": [],
+    "scope_tags": [
+     "t6"
+    ],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   }
+  ],
+  "similarity_to_query": {
+   "i29": -0.0526,
+   "i35": 0.2487,
+   "i40": 0.156
+  },
+  "output": [
+   [
+    "i40",
+    0.7
+   ],
+   [
+    "i29",
+    0.63
+   ]
+  ],
+  "trace_admitted": {
+   "i35": "search",
+   "i29": "mandatory",
+   "i40": "requires"
+  },
+  "trace_excluded": {
+   "i35": {
+    "id": "i35",
+    "reason": "top_k",
+    "similarity": 0.24871687591075897,
+    "by": null
+   }
+  },
+  "trace_missing_prerequisites": {},
+  "violation": "items admitted only as prerequisites, unreachable from any item admitted on its own: ['i40']; their dependents were cut by top-k",
+  "source": {
+   "corpus": 0,
+   "case": 2,
+   "k": 2,
+   "detail": "items admitted only as prerequisites, unreachable from any item admitted on its own: ['i40']; their dependents were cut by top-k"
+  },
+  "reproduced": true
+ },
+ {
+  "config": "main",
+  "config_overrides": {},
+  "config_full": {
+   "default_top_k": 10,
+   "default_threshold": 0.3,
+   "priority_weight": 0.3,
+   "mandatory_tags": [
+    "safety",
+    "compliance"
+   ],
+   "embedding_query_prefix": "",
+   "embedding_passage_prefix": "",
+   "embedding_model": "wp1-clustered-stub",
+   "embedding_dim": 24
+  },
+  "invariant": "I5b",
+  "invariant_label": "  I5 orphan left by resolution (cycle)",
+  "k": 1,
+  "context": {
+   "tags": [],
+   "gate_tags": []
+  },
+  "query": "query 3 <<c=0 v=2 s=2>>",
+  "instructions": [
+   {
+    "id": "i07",
+    "type": "directive",
+    "priority": 83,
+    "content": "Instruction i07 <<c=1 v=2 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": [
+     "i07"
+    ]
+   },
+   {
+    "id": "i13",
+    "type": "tool",
+    "priority": 90,
+    "content": "Instruction i13 <<c=2 v=3 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": [
+     "i07",
+     "ghost4"
+    ]
+   },
+   {
+    "id": "i14",
+    "type": "protocol",
+    "priority": 30,
+    "content": "Instruction i14 <<c=2 v=0 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i15",
+    "type": "constraint",
+    "priority": 90,
+    "content": "Instruction i15 <<c=0 v=2 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i16",
+    "type": "tool",
+    "priority": 24,
+    "content": "Instruction i16 <<c=2 v=1 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i17",
+    "type": "persona",
+    "priority": 70,
+    "content": "Instruction i17 <<c=1 v=2 s=1>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i18",
+    "type": "directive",
+    "priority": 35,
+    "content": "Instruction i18 <<c=1 v=0 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i19",
+    "type": "persona",
+    "priority": 64,
+    "content": "Instruction i19 <<c=0 v=3 s=2>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i20",
+    "type": "directive",
+    "priority": 50,
+    "content": "Instruction i20 <<c=1 v=0 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i21",
+    "type": "directive",
+    "priority": 90,
+    "content": "Instruction i21 <<c=0 v=3 s=2>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i23",
+    "type": "directive",
+    "priority": 70,
+    "content": "Instruction i23 <<c=0 v=1 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i24",
+    "type": "tool",
+    "priority": 50,
+    "content": "Instruction i24 <<c=0 v=0 s=2>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i25",
+    "type": "directive",
+    "priority": 70,
+    "content": "Instruction i25 <<c=0 v=1 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i26",
+    "type": "tool",
+    "priority": 25,
+    "content": "Instruction i26 <<c=0 v=2 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i27",
+    "type": "directive",
+    "priority": 82,
+    "content": "Instruction i27 <<c=2 v=0 s=2>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i28",
+    "type": "protocol",
+    "priority": 90,
+    "content": "Instruction i28 <<c=0 v=3 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i29",
+    "type": "directive",
+    "priority": 90,
+    "content": "Instruction i29 <<c=1 v=2 s=1>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i30",
+    "type": "protocol",
+    "priority": 87,
+    "content": "Instruction i30 <<c=0 v=3 s=2>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i31",
+    "type": "persona",
+    "priority": 43,
+    "content": "Instruction i31 <<c=1 v=3 s=2>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i32",
+    "type": "tool",
+    "priority": 90,
+    "content": "Instruction i32 <<c=2 v=3 s=1>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i33",
+    "type": "directive",
+    "priority": 39,
+    "content": "Instruction i33 <<c=1 v=3 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i34",
+    "type": "constraint",
+    "priority": 21,
+    "content": "Instruction i34 <<c=2 v=1 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i35",
+    "type": "constraint",
+    "priority": 35,
+    "content": "Instruction i35 <<c=1 v=0 s=1>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i36",
+    "type": "tool",
+    "priority": 70,
+    "content": "Instruction i36 <<c=1 v=2 s=2>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i37",
+    "type": "persona",
+    "priority": 39,
+    "content": "Instruction i37 <<c=0 v=1 s=1>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i38",
+    "type": "persona",
+    "priority": 50,
+    "content": "Instruction i38 <<c=2 v=0 s=1>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i39",
+    "type": "tool",
+    "priority": 70,
+    "content": "Instruction i39 <<c=2 v=2 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i40",
+    "type": "protocol",
+    "priority": 50,
+    "content": "Instruction i40 <<c=0 v=1 s=2>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i41",
+    "type": "tool",
+    "priority": 28,
+    "content": "Instruction i41 <<c=0 v=0 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i42",
+    "type": "persona",
+    "priority": 33,
+    "content": "Instruction i42 <<c=1 v=3 s=2>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i43",
+    "type": "directive",
+    "priority": 84,
+    "content": "Instruction i43 <<c=0 v=0 s=1>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   }
+  ],
+  "similarity_to_query": {
+   "i07": -0.1826,
+   "i13": 0.0684,
+   "i14": 0.1037,
+   "i15": 0.384,
+   "i16": 0.1353,
+   "i17": 0.156,
+   "i18": 0.1674,
+   "i19": 0.0641,
+   "i20": 0.1674,
+   "i21": 0.0641,
+   "i23": 0.3435,
+   "i24": 0.4435,
+   "i25": 0.3435,
+   "i26": 0.384,
+   "i27": 0.066,
+   "i28": 0.2832,
+   "i29": 0.156,
+   "i30": 0.0641,
+   "i31": -0.0216,
+   "i32": -0.043,
+   "i33": -0.088,
+   "i34": 0.1353,
+   "i35": -0.0967,
+   "i36": -0.0526,
+   "i37": 0.1966,
+   "i38": 0.1832,
+   "i39": -0.094,
+   "i40": -0.1792,
+   "i41": 0.3751,
+   "i42": -0.0216,
+   "i43": 0.0158
+  },
+  "output": [
+   [
+    "i07",
+    0.83
+   ]
+  ],
+  "trace_admitted": {
+   "i24": "search",
+   "i26": "search",
+   "i15": "search",
+   "i41": "search",
+   "i23": "search",
+   "i25": "search",
+   "i28": "search",
+   "i37": "search",
+   "i38": "search",
+   "i20": "search",
+   "i18": "search",
+   "i29": "search",
+   "i17": "search",
+   "i16": "search",
+   "i34": "search",
+   "i14": "search",
+   "i13": "search",
+   "i27": "search",
+   "i30": "search",
+   "i19": "search",
+   "i21": "search",
+   "i43": "search",
+   "i31": "search",
+   "i42": "search",
+   "i32": "search",
+   "i36": "search",
+   "i33": "search",
+   "i39": "search",
+   "i35": "search",
+   "i40": "search",
+   "i07": "requires"
+  },
+  "trace_excluded": {
+   "i13": {
+    "id": "i13",
+    "reason": "prerequisite",
+    "similarity": 0.06840340793132782,
+    "by": "ghost4"
+   },
+   "i15": {
+    "id": "i15",
+    "reason": "top_k",
+    "similarity": 0.3840024471282959,
+    "by": null
+   },
+   "i28": {
+    "id": "i28",
+    "reason": "top_k",
+    "similarity": 0.2832256555557251,
+    "by": null
+   },
+   "i24": {
+    "id": "i24",
+    "reason": "top_k",
+    "similarity": 0.44348281621932983,
+    "by": null
+   },
+   "i23": {
+    "id": "i23",
+    "reason": "top_k",
+    "similarity": 0.343530535697937,
+    "by": null
+   },
+   "i25": {
+    "id": "i25",
+    "reason": "top_k",
+    "similarity": 0.343530535697937,
+    "by": null
+   },
+   "i29": {
+    "id": "i29",
+    "reason": "top_k",
+    "similarity": 0.15603776276111603,
+    "by": null
+   },
+   "i41": {
+    "id": "i41",
+    "reason": "top_k",
+    "similarity": 0.3751348555088043,
+    "by": null
+   },
+   "i26": {
+    "id": "i26",
+    "reason": "top_k",
+    "similarity": 0.3840024471282959,
+    "by": null
+   },
+   "i17": {
+    "id": "i17",
+    "reason": "top_k",
+    "similarity": 0.15603776276111603,
+    "by": null
+   },
+   "i21": {
+    "id": "i21",
+    "reason": "top_k",
+    "similarity": 0.06406352669000626,
+    "by": null
+   },
+   "i30": {
+    "id": "i30",
+    "reason": "top_k",
+    "similarity": 0.06406352669000626,
+    "by": null
+   },
+   "i27": {
+    "id": "i27",
+    "reason": "top_k",
+    "similarity": 0.0660128965973854,
+    "by": null
+   },
+   "i38": {
+    "id": "i38",
+    "reason": "top_k",
+    "similarity": 0.18324576318264008,
+    "by": null
+   },
+   "i20": {
+    "id": "i20",
+    "reason": "top_k",
+    "similarity": 0.1674419641494751,
+    "by": null
+   },
+   "i43": {
+    "id": "i43",
+    "reason": "top_k",
+    "similarity": 0.01581186056137085,
+    "by": null
+   },
+   "i37": {
+    "id": "i37",
+    "reason": "top_k",
+    "similarity": 0.1966114342212677,
+    "by": null
+   },
+   "i32": {
+    "id": "i32",
+    "reason": "top_k",
+    "similarity": -0.04301545023918152,
+    "by": null
+   },
+   "i19": {
+    "id": "i19",
+    "reason": "top_k",
+    "similarity": 0.06406352669000626,
+    "by": null
+   },
+   "i18": {
+    "id": "i18",
+    "reason": "top_k",
+    "similarity": 0.1674419641494751,
+    "by": null
+   },
+   "i36": {
+    "id": "i36",
+    "reason": "top_k",
+    "similarity": -0.0525754950940609,
+    "by": null
+   },
+   "i16": {
+    "id": "i16",
+    "reason": "top_k",
+    "similarity": 0.1352541297674179,
+    "by": null
+   },
+   "i14": {
+    "id": "i14",
+    "reason": "top_k",
+    "similarity": 0.10371554642915726,
+    "by": null
+   },
+   "i34": {
+    "id": "i34",
+    "reason": "top_k",
+    "similarity": 0.1352541297674179,
+    "by": null
+   },
+   "i39": {
+    "id": "i39",
+    "reason": "top_k",
+    "similarity": -0.09399420022964478,
+    "by": null
+   },
+   "i31": {
+    "id": "i31",
+    "reason": "top_k",
+    "similarity": -0.02162856049835682,
+    "by": null
+   },
+   "i42": {
+    "id": "i42",
+    "reason": "top_k",
+    "similarity": -0.021628575399518013,
+    "by": null
+   },
+   "i33": {
+    "id": "i33",
+    "reason": "top_k",
+    "similarity": -0.08804501593112946,
+    "by": null
+   },
+   "i35": {
+    "id": "i35",
+    "reason": "top_k",
+    "similarity": -0.09673801809549332,
+    "by": null
+   },
+   "i40": {
+    "id": "i40",
+    "reason": "top_k",
+    "similarity": -0.1792125105857849,
+    "by": null
+   }
+  },
+  "trace_missing_prerequisites": {},
+  "violation": "items admitted only as prerequisites, unreachable from any item admitted on its own: ['i07']; already orphaned after relationship resolution (kept alive by a requires cycle)",
+  "source": {
+   "corpus": 6,
+   "case": 3,
+   "k": 6,
+   "detail": "items admitted only as prerequisites, unreachable from any item admitted on its own: ['i07']; already orphaned after relationship resolution (kept alive by a requires cycle)"
+  },
+  "reproduced": true
+ },
+ {
+  "config": "main_hash",
+  "config_overrides": {},
+  "config_full": {
+   "default_top_k": 10,
+   "default_threshold": 0.3,
+   "priority_weight": 0.3,
+   "mandatory_tags": [
+    "safety",
+    "compliance"
+   ],
+   "embedding_query_prefix": "",
+   "embedding_passage_prefix": "",
+   "embedding_model": "hash",
+   "embedding_dim": 768
+  },
+  "invariant": "I5",
+  "invariant_label": "No orphan prerequisites",
+  "k": 1,
+  "context": {
+   "tags": [],
+   "gate_tags": []
+  },
+  "query": "query 3 <<c=0 v=0 s=2>>",
+  "instructions": [
+   {
+    "id": "i09",
+    "type": "tool",
+    "priority": 47,
+    "content": "Instruction i09 <<c=3 v=1 s=2>>",
+    "labels": [
+     "t4"
+    ],
+    "scope_tags": [
+     "t3"
+    ],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i27",
+    "type": "protocol",
+    "priority": 50,
+    "content": "Instruction i27 <<c=3 v=0 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": [
+     "i09"
+    ]
+   }
+  ],
+  "similarity_to_query": {
+   "i09": 0.2919,
+   "i27": 0.317
+  },
+  "output": [
+   [
+    "i09",
+    0.47
+   ]
+  ],
+  "trace_admitted": {
+   "i27": "search",
+   "i09": "requires"
+  },
+  "trace_excluded": {
+   "i27": {
+    "id": "i27",
+    "reason": "top_k",
+    "similarity": 0.31702911853790283,
+    "by": null
+   }
+  },
+  "trace_missing_prerequisites": {},
+  "violation": "items admitted only as prerequisites, unreachable from any item admitted on its own: ['i09']",
+  "source": {
+   "corpus": 3,
+   "case": 3,
+   "k": 7,
+   "detail": "items admitted only as prerequisites, unreachable from any item admitted on its own: ['i09']"
+  },
+  "reproduced": true
+ },
+ {
+  "config": "main_hash",
+  "config_overrides": {},
+  "config_full": {
+   "default_top_k": 10,
+   "default_threshold": 0.3,
+   "priority_weight": 0.3,
+   "mandatory_tags": [
+    "safety",
+    "compliance"
+   ],
+   "embedding_query_prefix": "",
+   "embedding_passage_prefix": "",
+   "embedding_model": "hash",
+   "embedding_dim": 768
+  },
+  "invariant": "I5a",
+  "invariant_label": "  I5 orphan made by the top-k cut",
+  "k": 1,
+  "context": {
+   "tags": [],
+   "gate_tags": []
+  },
+  "query": "query 3 <<c=0 v=0 s=2>>",
+  "instructions": [
+   {
+    "id": "i09",
+    "type": "tool",
+    "priority": 47,
+    "content": "Instruction i09 <<c=3 v=1 s=2>>",
+    "labels": [
+     "t4"
+    ],
+    "scope_tags": [
+     "t3"
+    ],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i27",
+    "type": "protocol",
+    "priority": 50,
+    "content": "Instruction i27 <<c=3 v=0 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": [
+     "i09"
+    ]
+   }
+  ],
+  "similarity_to_query": {
+   "i09": 0.2919,
+   "i27": 0.317
+  },
+  "output": [
+   [
+    "i09",
+    0.47
+   ]
+  ],
+  "trace_admitted": {
+   "i27": "search",
+   "i09": "requires"
+  },
+  "trace_excluded": {
+   "i27": {
+    "id": "i27",
+    "reason": "top_k",
+    "similarity": 0.31702911853790283,
+    "by": null
+   }
+  },
+  "trace_missing_prerequisites": {},
+  "violation": "items admitted only as prerequisites, unreachable from any item admitted on its own: ['i09']; their dependents were cut by top-k",
+  "source": {
+   "corpus": 3,
+   "case": 3,
+   "k": 7,
+   "detail": "items admitted only as prerequisites, unreachable from any item admitted on its own: ['i09']; their dependents were cut by top-k"
+  },
+  "reproduced": true
+ },
+ {
+  "config": "main_hash",
+  "config_overrides": {},
+  "config_full": {
+   "default_top_k": 10,
+   "default_threshold": 0.3,
+   "priority_weight": 0.3,
+   "mandatory_tags": [
+    "safety",
+    "compliance"
+   ],
+   "embedding_query_prefix": "",
+   "embedding_passage_prefix": "",
+   "embedding_model": "hash",
+   "embedding_dim": 768
+  },
+  "invariant": "I5b",
+  "invariant_label": "  I5 orphan left by resolution (cycle)",
+  "k": 1,
+  "context": {
+   "tags": [],
+   "gate_tags": []
+  },
+  "query": "query 3 <<c=4 v=0 s=1>>",
+  "instructions": [
+   {
+    "id": "i06",
+    "type": "directive",
+    "priority": 28,
+    "content": "Instruction i06 <<c=0 v=2 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": [
+     "i15",
+     "i05"
+    ]
+   },
+   {
+    "id": "i10",
+    "type": "directive",
+    "priority": 90,
+    "content": "Instruction i10 <<c=1 v=1 s=0>>",
+    "labels": [],
+    "scope_tags": [
+     "t4"
+    ],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": [
+     "i15"
+    ]
+   },
+   {
+    "id": "i15",
+    "type": "constraint",
+    "priority": 90,
+    "content": "Instruction i15 <<c=1 v=0 s=1>>",
+    "labels": [],
+    "scope_tags": [
+     "t7"
+    ],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": [
+     "i10"
+    ]
+   }
+  ],
+  "similarity_to_query": {
+   "i06": 0.335,
+   "i10": 0.1408,
+   "i15": 0.2074
+  },
+  "output": [
+   [
+    "i15",
+    0.9
+   ],
+   [
+    "i10",
+    0.9
+   ]
+  ],
+  "trace_admitted": {
+   "i06": "search",
+   "i15": "requires",
+   "i10": "requires"
+  },
+  "trace_excluded": {
+   "i06": {
+    "id": "i06",
+    "reason": "prerequisite",
+    "similarity": 0.33501550555229187,
+    "by": "i05"
+   }
+  },
+  "trace_missing_prerequisites": {},
+  "violation": "items admitted only as prerequisites, unreachable from any item admitted on its own: ['i10', 'i15']; already orphaned after relationship resolution (kept alive by a requires cycle)",
+  "source": {
+   "corpus": 321,
+   "case": 3,
+   "k": 2,
+   "detail": "items admitted only as prerequisites, unreachable from any item admitted on its own: ['i10', 'i15']; already orphaned after relationship resolution (kept alive by a requires cycle)"
+  },
+  "reproduced": true
+ },
+ {
+  "config": "legacy_pool_by_k",
+  "config_overrides": {
+   "restore_pool_by_k": true
+  },
+  "config_full": {
+   "default_top_k": 10,
+   "default_threshold": 0.3,
+   "priority_weight": 0.3,
+   "mandatory_tags": [
+    "safety",
+    "compliance"
+   ],
+   "embedding_query_prefix": "",
+   "embedding_passage_prefix": "",
+   "embedding_model": "wp1-clustered-stub",
+   "embedding_dim": 24,
+   "restore_pool_by_k": true
+  },
+  "invariant": "I5",
+  "invariant_label": "No orphan prerequisites",
+  "k": 2,
+  "context": {
+   "tags": [],
+   "gate_tags": []
+  },
+  "query": "query 2 <<c=0 v=2 s=2>>",
+  "instructions": [
+   {
+    "id": "i29",
+    "type": "constraint",
+    "priority": 63,
+    "content": "Instruction i29 <<c=1 v=2 s=2>>",
+    "labels": [],
+    "scope_tags": [
+     "safety"
+    ],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i35",
+    "type": "persona",
+    "priority": 46,
+    "content": "Instruction i35 <<c=4 v=3 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": [
+     "i40"
+    ]
+   },
+   {
+    "id": "i40",
+    "type": "protocol",
+    "priority": 70,
+    "content": "Instruction i40 <<c=1 v=2 s=1>>",
+    "labels": [],
+    "scope_tags": [
+     "t6"
+    ],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   }
+  ],
+  "similarity_to_query": {
+   "i29": -0.0526,
+   "i35": 0.2487,
+   "i40": 0.156
+  },
+  "output": [
+   [
+    "i40",
+    0.7
+   ],
+   [
+    "i29",
+    0.63
+   ]
+  ],
+  "trace_admitted": {
+   "i35": "search",
+   "i29": "mandatory",
+   "i40": "requires"
+  },
+  "trace_excluded": {
+   "i35": {
+    "id": "i35",
+    "reason": "top_k",
+    "similarity": 0.24871687591075897,
+    "by": null
+   }
+  },
+  "trace_missing_prerequisites": {},
+  "violation": "items admitted only as prerequisites, unreachable from any item admitted on its own: ['i40']",
+  "source": {
+   "corpus": 0,
+   "case": 2,
+   "k": 5,
+   "detail": "items admitted only as prerequisites, unreachable from any item admitted on its own: ['i40']"
+  },
+  "reproduced": true
+ },
+ {
+  "config": "legacy_pool_by_k",
+  "config_overrides": {
+   "restore_pool_by_k": true
+  },
+  "config_full": {
+   "default_top_k": 10,
+   "default_threshold": 0.3,
+   "priority_weight": 0.3,
+   "mandatory_tags": [
+    "safety",
+    "compliance"
+   ],
+   "embedding_query_prefix": "",
+   "embedding_passage_prefix": "",
+   "embedding_model": "wp1-clustered-stub",
+   "embedding_dim": 24,
+   "restore_pool_by_k": true
+  },
+  "invariant": "I5a",
+  "invariant_label": "  I5 orphan made by the top-k cut",
+  "k": 2,
+  "context": {
+   "tags": [],
+   "gate_tags": []
+  },
+  "query": "query 2 <<c=0 v=2 s=2>>",
+  "instructions": [
+   {
+    "id": "i29",
+    "type": "constraint",
+    "priority": 63,
+    "content": "Instruction i29 <<c=1 v=2 s=2>>",
+    "labels": [],
+    "scope_tags": [
+     "safety"
+    ],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i35",
+    "type": "persona",
+    "priority": 46,
+    "content": "Instruction i35 <<c=4 v=3 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": [
+     "i40"
+    ]
+   },
+   {
+    "id": "i40",
+    "type": "protocol",
+    "priority": 70,
+    "content": "Instruction i40 <<c=1 v=2 s=1>>",
+    "labels": [],
+    "scope_tags": [
+     "t6"
+    ],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   }
+  ],
+  "similarity_to_query": {
+   "i29": -0.0526,
+   "i35": 0.2487,
+   "i40": 0.156
+  },
+  "output": [
+   [
+    "i40",
+    0.7
+   ],
+   [
+    "i29",
+    0.63
+   ]
+  ],
+  "trace_admitted": {
+   "i35": "search",
+   "i29": "mandatory",
+   "i40": "requires"
+  },
+  "trace_excluded": {
+   "i35": {
+    "id": "i35",
+    "reason": "top_k",
+    "similarity": 0.24871687591075897,
+    "by": null
+   }
+  },
+  "trace_missing_prerequisites": {},
+  "violation": "items admitted only as prerequisites, unreachable from any item admitted on its own: ['i40']; their dependents were cut by top-k",
+  "source": {
+   "corpus": 0,
+   "case": 2,
+   "k": 5,
+   "detail": "items admitted only as prerequisites, unreachable from any item admitted on its own: ['i40']; their dependents were cut by top-k"
+  },
+  "reproduced": true
+ },
+ {
+  "config": "legacy_pool_by_k",
+  "config_overrides": {
+   "restore_pool_by_k": true
+  },
+  "config_full": {
+   "default_top_k": 10,
+   "default_threshold": 0.3,
+   "priority_weight": 0.3,
+   "mandatory_tags": [
+    "safety",
+    "compliance"
+   ],
+   "embedding_query_prefix": "",
+   "embedding_passage_prefix": "",
+   "embedding_model": "wp1-clustered-stub",
+   "embedding_dim": 24,
+   "restore_pool_by_k": true
+  },
+  "invariant": "I5b",
+  "invariant_label": "  I5 orphan left by resolution (cycle)",
+  "k": 1,
+  "context": {
+   "tags": [],
+   "gate_tags": []
+  },
+  "query": "query 3 <<c=0 v=2 s=2>>",
+  "instructions": [
+   {
+    "id": "i07",
+    "type": "directive",
+    "priority": 83,
+    "content": "Instruction i07 <<c=1 v=2 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": [
+     "i07"
+    ]
+   },
+   {
+    "id": "i13",
+    "type": "tool",
+    "priority": 90,
+    "content": "Instruction i13 <<c=2 v=3 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": [
+     "i07",
+     "ghost4"
+    ]
+   },
+   {
+    "id": "i42",
+    "type": "persona",
+    "priority": 33,
+    "content": "Instruction i42 <<c=1 v=3 s=2>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i43",
+    "type": "directive",
+    "priority": 84,
+    "content": "Instruction i43 <<c=0 v=0 s=1>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   }
+  ],
+  "similarity_to_query": {
+   "i07": -0.1826,
+   "i13": 0.0684,
+   "i42": -0.0216,
+   "i43": 0.0158
+  },
+  "output": [
+   [
+    "i07",
+    0.83
+   ]
+  ],
+  "trace_admitted": {
+   "i13": "search",
+   "i43": "search",
+   "i42": "search",
+   "i07": "requires"
+  },
+  "trace_excluded": {
+   "i13": {
+    "id": "i13",
+    "reason": "prerequisite",
+    "similarity": 0.06840340793132782,
+    "by": "ghost4"
+   },
+   "i43": {
+    "id": "i43",
+    "reason": "top_k",
+    "similarity": 0.015811853110790253,
+    "by": null
+   },
+   "i42": {
+    "id": "i42",
+    "reason": "top_k",
+    "similarity": -0.02162856049835682,
+    "by": null
+   }
+  },
+  "trace_missing_prerequisites": {},
+  "violation": "items admitted only as prerequisites, unreachable from any item admitted on its own: ['i07']; already orphaned after relationship resolution (kept alive by a requires cycle)",
+  "source": {
+   "corpus": 6,
+   "case": 3,
+   "k": 8,
+   "detail": "items admitted only as prerequisites, unreachable from any item admitted on its own: ['i07']; already orphaned after relationship resolution (kept alive by a requires cycle)"
+  },
+  "reproduced": true
+ },
+ {
+  "config": "legacy_pool_by_k",
+  "config_overrides": {
+   "restore_pool_by_k": true
+  },
+  "config_full": {
+   "default_top_k": 10,
+   "default_threshold": 0.3,
+   "priority_weight": 0.3,
+   "mandatory_tags": [
+    "safety",
+    "compliance"
+   ],
+   "embedding_query_prefix": "",
+   "embedding_passage_prefix": "",
+   "embedding_model": "wp1-clustered-stub",
+   "embedding_dim": 24,
+   "restore_pool_by_k": true
+  },
+  "invariant": "I7",
+  "invariant_label": "Budget stability (k <= pool base)",
+  "k": 5,
+  "context": {
+   "tags": [],
+   "gate_tags": []
+  },
+  "query": "query 2 <<c=0 v=2 s=2>>",
+  "instructions": [
+   {
+    "id": "i02",
+    "type": "constraint",
+    "priority": 64,
+    "content": "Instruction i02 <<c=0 v=0 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i04",
+    "type": "directive",
+    "priority": 73,
+    "content": "Instruction i04 <<c=0 v=3 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i06",
+    "type": "directive",
+    "priority": 83,
+    "content": "Instruction i06 <<c=3 v=1 s=2>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i09",
+    "type": "protocol",
+    "priority": 14,
+    "content": "Instruction i09 <<c=1 v=1 s=2>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i11",
+    "type": "constraint",
+    "priority": 48,
+    "content": "Instruction i11 <<c=4 v=2 s=2>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i12",
+    "type": "persona",
+    "priority": 98,
+    "content": "Instruction i12 <<c=0 v=0 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i14",
+    "type": "directive",
+    "priority": 70,
+    "content": "Instruction i14 <<c=1 v=1 s=2>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i15",
+    "type": "directive",
+    "priority": 3,
+    "content": "Instruction i15 <<c=0 v=0 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i23",
+    "type": "persona",
+    "priority": 50,
+    "content": "Instruction i23 <<c=0 v=0 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i24",
+    "type": "protocol",
+    "priority": 90,
+    "content": "Instruction i24 <<c=0 v=0 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i25",
+    "type": "constraint",
+    "priority": 1,
+    "content": "Instruction i25 <<c=3 v=1 s=2>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i35",
+    "type": "persona",
+    "priority": 46,
+    "content": "Instruction i35 <<c=4 v=3 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [
+     "i39"
+    ],
+    "requires": []
+   },
+   {
+    "id": "i39",
+    "type": "constraint",
+    "priority": 90,
+    "content": "Instruction i39 <<c=4 v=2 s=2>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   }
+  ],
+  "similarity_to_query": {
+   "i02": 0.3751,
+   "i04": 0.2832,
+   "i06": 0.3603,
+   "i09": 0.2873,
+   "i11": 0.4306,
+   "i12": 0.3751,
+   "i14": 0.2873,
+   "i15": 0.3751,
+   "i23": 0.3751,
+   "i24": 0.3751,
+   "i25": 0.3603,
+   "i35": 0.2487,
+   "i39": 0.4306
+  },
+  "output": [
+   [
+    "i12",
+    0.5566
+   ],
+   [
+    "i24",
+    0.5326
+   ],
+   [
+    "i06",
+    0.5012
+   ],
+   [
+    "i02",
+    0.4546
+   ],
+   [
+    "i11",
+    0.4454
+   ]
+  ],
+  "trace_admitted": {
+   "i39": "search",
+   "i11": "search",
+   "i23": "search",
+   "i15": "search",
+   "i24": "search",
+   "i12": "search",
+   "i02": "search",
+   "i06": "search",
+   "i25": "search",
+   "i09": "search",
+   "i14": "search",
+   "i04": "search",
+   "i35": "search"
+  },
+  "trace_excluded": {
+   "i39": {
+    "id": "i39",
+    "reason": "superseded",
+    "similarity": 0.4306056499481201,
+    "by": "i35"
+   },
+   "i04": {
+    "id": "i04",
+    "reason": "top_k",
+    "similarity": 0.2832256555557251,
+    "by": null
+   },
+   "i23": {
+    "id": "i23",
+    "reason": "top_k",
+    "similarity": 0.3751348555088043,
+    "by": null
+   },
+   "i14": {
+    "id": "i14",
+    "reason": "top_k",
+    "similarity": 0.28728681802749634,
+    "by": null
+   },
+   "i35": {
+    "id": "i35",
+    "reason": "top_k",
+    "similarity": 0.24871689081192017,
+    "by": null
+   },
+   "i15": {
+    "id": "i15",
+    "reason": "top_k",
+    "similarity": 0.3751348555088043,
+    "by": null
+   },
+   "i25": {
+    "id": "i25",
+    "reason": "top_k",
+    "similarity": 0.3603134751319885,
+    "by": null
+   },
+   "i09": {
+    "id": "i09",
+    "reason": "top_k",
+    "similarity": 0.28728681802749634,
+    "by": null
+   }
+  },
+  "trace_missing_prerequisites": {},
+  "violation": "k=4 -> ['i39', 'i12', 'i24', 'i06']; k=5 -> ['i12', 'i24', 'i06', 'i02', 'i11']",
+  "source": {
+   "corpus": 0,
+   "case": 2,
+   "k": 5,
+   "detail": "k=4 -> ['i29', 'i39', 'i24', 'i06']; k=5 -> ['i40', 'i29', 'i24', 'i06', 'i02']; dropped ['i39']"
+  },
+  "reproduced": true
+ },
+ {
+  "config": "legacy_unchecked_requires",
+  "config_overrides": {
+   "restore_unchecked_requires": true
+  },
+  "config_full": {
+   "default_top_k": 10,
+   "default_threshold": 0.3,
+   "priority_weight": 0.3,
+   "mandatory_tags": [
+    "safety",
+    "compliance"
+   ],
+   "embedding_query_prefix": "",
+   "embedding_passage_prefix": "",
+   "embedding_model": "wp1-clustered-stub",
+   "embedding_dim": 24,
+   "restore_unchecked_requires": true
+  },
+  "invariant": "I3",
+  "invariant_label": "Conflict freeness",
+  "k": 2,
+  "context": {
+   "tags": [],
+   "gate_tags": []
+  },
+  "query": "query 2 <<c=2 v=3 s=2>>",
+  "instructions": [
+   {
+    "id": "i21",
+    "type": "constraint",
+    "priority": 90,
+    "content": "Instruction i21 <<c=2 v=0 s=1>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i29",
+    "type": "protocol",
+    "priority": 60,
+    "content": "Instruction i29 <<c=0 v=3 s=1>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": [
+     "i32"
+    ]
+   },
+   {
+    "id": "i32",
+    "type": "directive",
+    "priority": 69,
+    "content": "Instruction i32 <<c=3 v=3 s=2>>",
+    "labels": [],
+    "scope_tags": [
+     "t6"
+    ],
+    "required_tags": [],
+    "conflicts_with": [
+     "i21"
+    ],
+    "supersedes": [],
+    "requires": []
+   }
+  ],
+  "similarity_to_query": {
+   "i21": 0.3159,
+   "i29": -0.073,
+   "i32": 0.2568
+  },
+  "output": [
+   [
+    "i32",
+    0.69
+   ],
+   [
+    "i21",
+    0.4911
+   ]
+  ],
+  "trace_admitted": {
+   "i21": "search",
+   "i29": "search",
+   "i32": "requires"
+  },
+  "trace_excluded": {
+   "i29": {
+    "id": "i29",
+    "reason": "top_k",
+    "similarity": -0.07301629334688187,
+    "by": null
+   }
+  },
+  "trace_missing_prerequisites": {},
+  "violation": "conflicting pairs both in output: [('i32', 'i21')]",
+  "source": {
+   "corpus": 3,
+   "case": 2,
+   "k": 4,
+   "detail": "conflicting pairs both in output: [('i32', 'i21')]"
+  },
+  "reproduced": true
+ },
+ {
+  "config": "legacy_unchecked_requires",
+  "config_overrides": {
+   "restore_unchecked_requires": true
+  },
+  "config_full": {
+   "default_top_k": 10,
+   "default_threshold": 0.3,
+   "priority_weight": 0.3,
+   "mandatory_tags": [
+    "safety",
+    "compliance"
+   ],
+   "embedding_query_prefix": "",
+   "embedding_passage_prefix": "",
+   "embedding_model": "wp1-clustered-stub",
+   "embedding_dim": 24,
+   "restore_unchecked_requires": true
+  },
+  "invariant": "I3b",
+  "invariant_label": "Supersede consistency",
+  "k": 3,
+  "context": {
+   "tags": [],
+   "gate_tags": []
+  },
+  "query": "query 2 <<c=3 v=0 s=1>>",
+  "instructions": [
+   {
+    "id": "i08",
+    "type": "constraint",
+    "priority": 25,
+    "content": "Instruction i08 <<c=3 v=1 s=1>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i26",
+    "type": "tool",
+    "priority": 90,
+    "content": "Instruction i26 <<c=0 v=0 s=1>>",
+    "labels": [],
+    "scope_tags": [
+     "t6"
+    ],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [
+     "i08"
+    ],
+    "requires": []
+   },
+   {
+    "id": "i48",
+    "type": "constraint",
+    "priority": 70,
+    "content": "Instruction i48 <<c=3 v=1 s=1>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": [
+     "i26"
+    ]
+   }
+  ],
+  "similarity_to_query": {
+   "i08": 0.4222,
+   "i26": -0.1236,
+   "i48": 0.4222
+  },
+  "output": [
+   [
+    "i26",
+    0.9
+   ],
+   [
+    "i48",
+    0.5055
+   ],
+   [
+    "i08",
+    0.3705
+   ]
+  ],
+  "trace_admitted": {
+   "i48": "search",
+   "i08": "search",
+   "i26": "requires"
+  },
+  "trace_excluded": {},
+  "trace_missing_prerequisites": {},
+  "violation": "(superseder, superseded) both in output: [('i26', 'i08')]",
+  "source": {
+   "corpus": 2,
+   "case": 2,
+   "k": 10,
+   "detail": "(superseder, superseded) both in output: [('i26', 'i08')]"
+  },
+  "reproduced": true
+ },
+ {
+  "config": "legacy_unchecked_requires",
+  "config_overrides": {
+   "restore_unchecked_requires": true
+  },
+  "config_full": {
+   "default_top_k": 10,
+   "default_threshold": 0.3,
+   "priority_weight": 0.3,
+   "mandatory_tags": [
+    "safety",
+    "compliance"
+   ],
+   "embedding_query_prefix": "",
+   "embedding_passage_prefix": "",
+   "embedding_model": "wp1-clustered-stub",
+   "embedding_dim": 24,
+   "restore_unchecked_requires": true
+  },
+  "invariant": "I4",
+  "invariant_label": "Dependency closure",
+  "k": 1,
+  "context": {
+   "tags": [],
+   "gate_tags": []
+  },
+  "query": "query 0 <<c=1 v=2 s=0>>",
+  "instructions": [
+   {
+    "id": "i28",
+    "type": "directive",
+    "priority": 84,
+    "content": "Instruction i28 <<c=1 v=3 s=1>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": [
+     "i14"
+    ]
+   }
+  ],
+  "similarity_to_query": {
+   "i28": 0.6133
+  },
+  "output": [
+   [
+    "i28",
+    0.6813
+   ]
+  ],
+  "trace_admitted": {
+   "i28": "search"
+  },
+  "trace_excluded": {},
+  "trace_missing_prerequisites": {},
+  "violation": "i28 (optional) lacks ['i14']",
+  "source": {
+   "corpus": 0,
+   "case": 0,
+   "k": 3,
+   "detail": "i28 (optional) lacks ['i14']"
+  },
+  "reproduced": true
+ },
+ {
+  "config": "legacy_unchecked_requires",
+  "config_overrides": {
+   "restore_unchecked_requires": true
+  },
+  "config_full": {
+   "default_top_k": 10,
+   "default_threshold": 0.3,
+   "priority_weight": 0.3,
+   "mandatory_tags": [
+    "safety",
+    "compliance"
+   ],
+   "embedding_query_prefix": "",
+   "embedding_passage_prefix": "",
+   "embedding_model": "wp1-clustered-stub",
+   "embedding_dim": 24,
+   "restore_unchecked_requires": true
+  },
+  "invariant": "I5",
+  "invariant_label": "No orphan prerequisites",
+  "k": 2,
+  "context": {
+   "tags": [],
+   "gate_tags": []
+  },
+  "query": "query 2 <<c=0 v=2 s=2>>",
+  "instructions": [
+   {
+    "id": "i29",
+    "type": "constraint",
+    "priority": 63,
+    "content": "Instruction i29 <<c=1 v=2 s=2>>",
+    "labels": [],
+    "scope_tags": [
+     "safety"
+    ],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i35",
+    "type": "persona",
+    "priority": 46,
+    "content": "Instruction i35 <<c=4 v=3 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": [
+     "i40"
+    ]
+   },
+   {
+    "id": "i40",
+    "type": "protocol",
+    "priority": 70,
+    "content": "Instruction i40 <<c=1 v=2 s=1>>",
+    "labels": [],
+    "scope_tags": [
+     "t6"
+    ],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   }
+  ],
+  "similarity_to_query": {
+   "i29": -0.0526,
+   "i35": 0.2487,
+   "i40": 0.156
+  },
+  "output": [
+   [
+    "i40",
+    0.7
+   ],
+   [
+    "i29",
+    0.63
+   ]
+  ],
+  "trace_admitted": {
+   "i35": "search",
+   "i29": "mandatory",
+   "i40": "requires"
+  },
+  "trace_excluded": {
+   "i35": {
+    "id": "i35",
+    "reason": "top_k",
+    "similarity": 0.24871687591075897,
+    "by": null
+   }
+  },
+  "trace_missing_prerequisites": {},
+  "violation": "items admitted only as prerequisites, unreachable from any item admitted on its own: ['i40']",
+  "source": {
+   "corpus": 0,
+   "case": 2,
+   "k": 2,
+   "detail": "items admitted only as prerequisites, unreachable from any item admitted on its own: ['i40']"
+  },
+  "reproduced": true
+ },
+ {
+  "config": "legacy_unchecked_requires",
+  "config_overrides": {
+   "restore_unchecked_requires": true
+  },
+  "config_full": {
+   "default_top_k": 10,
+   "default_threshold": 0.3,
+   "priority_weight": 0.3,
+   "mandatory_tags": [
+    "safety",
+    "compliance"
+   ],
+   "embedding_query_prefix": "",
+   "embedding_passage_prefix": "",
+   "embedding_model": "wp1-clustered-stub",
+   "embedding_dim": 24,
+   "restore_unchecked_requires": true
+  },
+  "invariant": "I5a",
+  "invariant_label": "  I5 orphan made by the top-k cut",
+  "k": 2,
+  "context": {
+   "tags": [],
+   "gate_tags": []
+  },
+  "query": "query 2 <<c=0 v=2 s=2>>",
+  "instructions": [
+   {
+    "id": "i29",
+    "type": "constraint",
+    "priority": 63,
+    "content": "Instruction i29 <<c=1 v=2 s=2>>",
+    "labels": [],
+    "scope_tags": [
+     "safety"
+    ],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i35",
+    "type": "persona",
+    "priority": 46,
+    "content": "Instruction i35 <<c=4 v=3 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": [
+     "i40"
+    ]
+   },
+   {
+    "id": "i40",
+    "type": "protocol",
+    "priority": 70,
+    "content": "Instruction i40 <<c=1 v=2 s=1>>",
+    "labels": [],
+    "scope_tags": [
+     "t6"
+    ],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   }
+  ],
+  "similarity_to_query": {
+   "i29": -0.0526,
+   "i35": 0.2487,
+   "i40": 0.156
+  },
+  "output": [
+   [
+    "i40",
+    0.7
+   ],
+   [
+    "i29",
+    0.63
+   ]
+  ],
+  "trace_admitted": {
+   "i35": "search",
+   "i29": "mandatory",
+   "i40": "requires"
+  },
+  "trace_excluded": {
+   "i35": {
+    "id": "i35",
+    "reason": "top_k",
+    "similarity": 0.24871687591075897,
+    "by": null
+   }
+  },
+  "trace_missing_prerequisites": {},
+  "violation": "items admitted only as prerequisites, unreachable from any item admitted on its own: ['i40']; their dependents were cut by top-k",
+  "source": {
+   "corpus": 0,
+   "case": 2,
+   "k": 2,
+   "detail": "items admitted only as prerequisites, unreachable from any item admitted on its own: ['i40']; their dependents were cut by top-k"
+  },
+  "reproduced": true
+ },
+ {
+  "config": "legacy_below_threshold",
+  "config_overrides": {
+   "restore_below_threshold": true
+  },
+  "config_full": {
+   "default_top_k": 10,
+   "default_threshold": 0.3,
+   "priority_weight": 0.3,
+   "mandatory_tags": [
+    "safety",
+    "compliance"
+   ],
+   "embedding_query_prefix": "",
+   "embedding_passage_prefix": "",
+   "embedding_model": "wp1-clustered-stub",
+   "embedding_dim": 24,
+   "restore_below_threshold": true
+  },
+  "invariant": "I5",
+  "invariant_label": "No orphan prerequisites",
+  "k": 2,
+  "context": {
+   "tags": [],
+   "gate_tags": []
+  },
+  "query": "query 2 <<c=0 v=2 s=2>>",
+  "instructions": [
+   {
+    "id": "i29",
+    "type": "constraint",
+    "priority": 63,
+    "content": "Instruction i29 <<c=1 v=2 s=2>>",
+    "labels": [],
+    "scope_tags": [
+     "safety"
+    ],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i35",
+    "type": "persona",
+    "priority": 46,
+    "content": "Instruction i35 <<c=4 v=3 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": [
+     "i40"
+    ]
+   },
+   {
+    "id": "i40",
+    "type": "protocol",
+    "priority": 70,
+    "content": "Instruction i40 <<c=1 v=2 s=1>>",
+    "labels": [],
+    "scope_tags": [
+     "t6"
+    ],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   }
+  ],
+  "similarity_to_query": {
+   "i29": -0.0526,
+   "i35": 0.2487,
+   "i40": 0.156
+  },
+  "output": [
+   [
+    "i40",
+    0.7
+   ],
+   [
+    "i29",
+    0.63
+   ]
+  ],
+  "trace_admitted": {
+   "i35": "search",
+   "i29": "mandatory",
+   "i40": "requires"
+  },
+  "trace_excluded": {
+   "i35": {
+    "id": "i35",
+    "reason": "top_k",
+    "similarity": 0.24871687591075897,
+    "by": null
+   }
+  },
+  "trace_missing_prerequisites": {},
+  "violation": "items admitted only as prerequisites, unreachable from any item admitted on its own: ['i40']",
+  "source": {
+   "corpus": 0,
+   "case": 2,
+   "k": 2,
+   "detail": "items admitted only as prerequisites, unreachable from any item admitted on its own: ['i40']"
+  },
+  "reproduced": true
+ },
+ {
+  "config": "legacy_below_threshold",
+  "config_overrides": {
+   "restore_below_threshold": true
+  },
+  "config_full": {
+   "default_top_k": 10,
+   "default_threshold": 0.3,
+   "priority_weight": 0.3,
+   "mandatory_tags": [
+    "safety",
+    "compliance"
+   ],
+   "embedding_query_prefix": "",
+   "embedding_passage_prefix": "",
+   "embedding_model": "wp1-clustered-stub",
+   "embedding_dim": 24,
+   "restore_below_threshold": true
+  },
+  "invariant": "I5a",
+  "invariant_label": "  I5 orphan made by the top-k cut",
+  "k": 2,
+  "context": {
+   "tags": [],
+   "gate_tags": []
+  },
+  "query": "query 2 <<c=0 v=2 s=2>>",
+  "instructions": [
+   {
+    "id": "i29",
+    "type": "constraint",
+    "priority": 63,
+    "content": "Instruction i29 <<c=1 v=2 s=2>>",
+    "labels": [],
+    "scope_tags": [
+     "safety"
+    ],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i35",
+    "type": "persona",
+    "priority": 46,
+    "content": "Instruction i35 <<c=4 v=3 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": [
+     "i40"
+    ]
+   },
+   {
+    "id": "i40",
+    "type": "protocol",
+    "priority": 70,
+    "content": "Instruction i40 <<c=1 v=2 s=1>>",
+    "labels": [],
+    "scope_tags": [
+     "t6"
+    ],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   }
+  ],
+  "similarity_to_query": {
+   "i29": -0.0526,
+   "i35": 0.2487,
+   "i40": 0.156
+  },
+  "output": [
+   [
+    "i40",
+    0.7
+   ],
+   [
+    "i29",
+    0.63
+   ]
+  ],
+  "trace_admitted": {
+   "i35": "search",
+   "i29": "mandatory",
+   "i40": "requires"
+  },
+  "trace_excluded": {
+   "i35": {
+    "id": "i35",
+    "reason": "top_k",
+    "similarity": 0.24871687591075897,
+    "by": null
+   }
+  },
+  "trace_missing_prerequisites": {},
+  "violation": "items admitted only as prerequisites, unreachable from any item admitted on its own: ['i40']; their dependents were cut by top-k",
+  "source": {
+   "corpus": 0,
+   "case": 2,
+   "k": 2,
+   "detail": "items admitted only as prerequisites, unreachable from any item admitted on its own: ['i40']; their dependents were cut by top-k"
+  },
+  "reproduced": true
+ },
+ {
+  "config": "legacy_below_threshold",
+  "config_overrides": {
+   "restore_below_threshold": true
+  },
+  "config_full": {
+   "default_top_k": 10,
+   "default_threshold": 0.3,
+   "priority_weight": 0.3,
+   "mandatory_tags": [
+    "safety",
+    "compliance"
+   ],
+   "embedding_query_prefix": "",
+   "embedding_passage_prefix": "",
+   "embedding_model": "wp1-clustered-stub",
+   "embedding_dim": 24,
+   "restore_below_threshold": true
+  },
+  "invariant": "I5b",
+  "invariant_label": "  I5 orphan left by resolution (cycle)",
+  "k": 1,
+  "context": {
+   "tags": [],
+   "gate_tags": []
+  },
+  "query": "query 3 <<c=0 v=2 s=2>>",
+  "instructions": [
+   {
+    "id": "i07",
+    "type": "directive",
+    "priority": 83,
+    "content": "Instruction i07 <<c=1 v=2 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": [
+     "i07"
+    ]
+   },
+   {
+    "id": "i13",
+    "type": "tool",
+    "priority": 90,
+    "content": "Instruction i13 <<c=2 v=3 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": [
+     "i07",
+     "ghost4"
+    ]
+   },
+   {
+    "id": "i14",
+    "type": "protocol",
+    "priority": 30,
+    "content": "Instruction i14 <<c=2 v=0 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i15",
+    "type": "constraint",
+    "priority": 90,
+    "content": "Instruction i15 <<c=0 v=2 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i16",
+    "type": "tool",
+    "priority": 24,
+    "content": "Instruction i16 <<c=2 v=1 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i17",
+    "type": "persona",
+    "priority": 70,
+    "content": "Instruction i17 <<c=1 v=2 s=1>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i18",
+    "type": "directive",
+    "priority": 35,
+    "content": "Instruction i18 <<c=1 v=0 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i19",
+    "type": "persona",
+    "priority": 64,
+    "content": "Instruction i19 <<c=0 v=3 s=2>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i20",
+    "type": "directive",
+    "priority": 50,
+    "content": "Instruction i20 <<c=1 v=0 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i21",
+    "type": "directive",
+    "priority": 90,
+    "content": "Instruction i21 <<c=0 v=3 s=2>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i23",
+    "type": "directive",
+    "priority": 70,
+    "content": "Instruction i23 <<c=0 v=1 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i24",
+    "type": "tool",
+    "priority": 50,
+    "content": "Instruction i24 <<c=0 v=0 s=2>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i25",
+    "type": "directive",
+    "priority": 70,
+    "content": "Instruction i25 <<c=0 v=1 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i26",
+    "type": "tool",
+    "priority": 25,
+    "content": "Instruction i26 <<c=0 v=2 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i27",
+    "type": "directive",
+    "priority": 82,
+    "content": "Instruction i27 <<c=2 v=0 s=2>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i28",
+    "type": "protocol",
+    "priority": 90,
+    "content": "Instruction i28 <<c=0 v=3 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i29",
+    "type": "directive",
+    "priority": 90,
+    "content": "Instruction i29 <<c=1 v=2 s=1>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i30",
+    "type": "protocol",
+    "priority": 87,
+    "content": "Instruction i30 <<c=0 v=3 s=2>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i31",
+    "type": "persona",
+    "priority": 43,
+    "content": "Instruction i31 <<c=1 v=3 s=2>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i32",
+    "type": "tool",
+    "priority": 90,
+    "content": "Instruction i32 <<c=2 v=3 s=1>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i33",
+    "type": "directive",
+    "priority": 39,
+    "content": "Instruction i33 <<c=1 v=3 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i34",
+    "type": "constraint",
+    "priority": 21,
+    "content": "Instruction i34 <<c=2 v=1 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i35",
+    "type": "constraint",
+    "priority": 35,
+    "content": "Instruction i35 <<c=1 v=0 s=1>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i36",
+    "type": "tool",
+    "priority": 70,
+    "content": "Instruction i36 <<c=1 v=2 s=2>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i37",
+    "type": "persona",
+    "priority": 39,
+    "content": "Instruction i37 <<c=0 v=1 s=1>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i38",
+    "type": "persona",
+    "priority": 50,
+    "content": "Instruction i38 <<c=2 v=0 s=1>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i39",
+    "type": "tool",
+    "priority": 70,
+    "content": "Instruction i39 <<c=2 v=2 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i40",
+    "type": "protocol",
+    "priority": 50,
+    "content": "Instruction i40 <<c=0 v=1 s=2>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i41",
+    "type": "tool",
+    "priority": 28,
+    "content": "Instruction i41 <<c=0 v=0 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i42",
+    "type": "persona",
+    "priority": 33,
+    "content": "Instruction i42 <<c=1 v=3 s=2>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i43",
+    "type": "directive",
+    "priority": 84,
+    "content": "Instruction i43 <<c=0 v=0 s=1>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   }
+  ],
+  "similarity_to_query": {
+   "i07": -0.1826,
+   "i13": 0.0684,
+   "i14": 0.1037,
+   "i15": 0.384,
+   "i16": 0.1353,
+   "i17": 0.156,
+   "i18": 0.1674,
+   "i19": 0.0641,
+   "i20": 0.1674,
+   "i21": 0.0641,
+   "i23": 0.3435,
+   "i24": 0.4435,
+   "i25": 0.3435,
+   "i26": 0.384,
+   "i27": 0.066,
+   "i28": 0.2832,
+   "i29": 0.156,
+   "i30": 0.0641,
+   "i31": -0.0216,
+   "i32": -0.043,
+   "i33": -0.088,
+   "i34": 0.1353,
+   "i35": -0.0967,
+   "i36": -0.0526,
+   "i37": 0.1966,
+   "i38": 0.1832,
+   "i39": -0.094,
+   "i40": -0.1792,
+   "i41": 0.3751,
+   "i42": -0.0216,
+   "i43": 0.0158
+  },
+  "output": [
+   [
+    "i07",
+    0.83
+   ]
+  ],
+  "trace_admitted": {
+   "i24": "search",
+   "i26": "search",
+   "i15": "search",
+   "i41": "search",
+   "i23": "search",
+   "i25": "search",
+   "i28": "search",
+   "i37": "search",
+   "i38": "search",
+   "i20": "search",
+   "i18": "search",
+   "i29": "search",
+   "i17": "search",
+   "i16": "search",
+   "i34": "search",
+   "i14": "search",
+   "i13": "search",
+   "i27": "search",
+   "i30": "search",
+   "i19": "search",
+   "i21": "search",
+   "i43": "search",
+   "i31": "search",
+   "i42": "search",
+   "i32": "search",
+   "i36": "search",
+   "i33": "search",
+   "i39": "search",
+   "i35": "search",
+   "i40": "search",
+   "i07": "requires"
+  },
+  "trace_excluded": {
+   "i13": {
+    "id": "i13",
+    "reason": "prerequisite",
+    "similarity": 0.06840340793132782,
+    "by": "ghost4"
+   },
+   "i15": {
+    "id": "i15",
+    "reason": "top_k",
+    "similarity": 0.3840024471282959,
+    "by": null
+   },
+   "i28": {
+    "id": "i28",
+    "reason": "top_k",
+    "similarity": 0.2832256555557251,
+    "by": null
+   },
+   "i24": {
+    "id": "i24",
+    "reason": "top_k",
+    "similarity": 0.44348281621932983,
+    "by": null
+   },
+   "i23": {
+    "id": "i23",
+    "reason": "top_k",
+    "similarity": 0.343530535697937,
+    "by": null
+   },
+   "i25": {
+    "id": "i25",
+    "reason": "top_k",
+    "similarity": 0.343530535697937,
+    "by": null
+   },
+   "i29": {
+    "id": "i29",
+    "reason": "top_k",
+    "similarity": 0.15603776276111603,
+    "by": null
+   },
+   "i41": {
+    "id": "i41",
+    "reason": "top_k",
+    "similarity": 0.3751348555088043,
+    "by": null
+   },
+   "i26": {
+    "id": "i26",
+    "reason": "top_k",
+    "similarity": 0.3840024471282959,
+    "by": null
+   },
+   "i17": {
+    "id": "i17",
+    "reason": "top_k",
+    "similarity": 0.15603776276111603,
+    "by": null
+   },
+   "i21": {
+    "id": "i21",
+    "reason": "top_k",
+    "similarity": 0.06406352669000626,
+    "by": null
+   },
+   "i30": {
+    "id": "i30",
+    "reason": "top_k",
+    "similarity": 0.06406352669000626,
+    "by": null
+   },
+   "i27": {
+    "id": "i27",
+    "reason": "top_k",
+    "similarity": 0.0660128965973854,
+    "by": null
+   },
+   "i38": {
+    "id": "i38",
+    "reason": "top_k",
+    "similarity": 0.18324576318264008,
+    "by": null
+   },
+   "i20": {
+    "id": "i20",
+    "reason": "top_k",
+    "similarity": 0.1674419641494751,
+    "by": null
+   },
+   "i43": {
+    "id": "i43",
+    "reason": "top_k",
+    "similarity": 0.01581186056137085,
+    "by": null
+   },
+   "i37": {
+    "id": "i37",
+    "reason": "top_k",
+    "similarity": 0.1966114342212677,
+    "by": null
+   },
+   "i32": {
+    "id": "i32",
+    "reason": "top_k",
+    "similarity": -0.04301545023918152,
+    "by": null
+   },
+   "i19": {
+    "id": "i19",
+    "reason": "top_k",
+    "similarity": 0.06406352669000626,
+    "by": null
+   },
+   "i18": {
+    "id": "i18",
+    "reason": "top_k",
+    "similarity": 0.1674419641494751,
+    "by": null
+   },
+   "i36": {
+    "id": "i36",
+    "reason": "top_k",
+    "similarity": -0.0525754950940609,
+    "by": null
+   },
+   "i16": {
+    "id": "i16",
+    "reason": "top_k",
+    "similarity": 0.1352541297674179,
+    "by": null
+   },
+   "i14": {
+    "id": "i14",
+    "reason": "top_k",
+    "similarity": 0.10371554642915726,
+    "by": null
+   },
+   "i34": {
+    "id": "i34",
+    "reason": "top_k",
+    "similarity": 0.1352541297674179,
+    "by": null
+   },
+   "i39": {
+    "id": "i39",
+    "reason": "top_k",
+    "similarity": -0.09399420022964478,
+    "by": null
+   },
+   "i31": {
+    "id": "i31",
+    "reason": "top_k",
+    "similarity": -0.02162856049835682,
+    "by": null
+   },
+   "i42": {
+    "id": "i42",
+    "reason": "top_k",
+    "similarity": -0.021628575399518013,
+    "by": null
+   },
+   "i33": {
+    "id": "i33",
+    "reason": "top_k",
+    "similarity": -0.08804501593112946,
+    "by": null
+   },
+   "i35": {
+    "id": "i35",
+    "reason": "top_k",
+    "similarity": -0.09673801809549332,
+    "by": null
+   },
+   "i40": {
+    "id": "i40",
+    "reason": "top_k",
+    "similarity": -0.1792125105857849,
+    "by": null
+   }
+  },
+  "trace_missing_prerequisites": {},
+  "violation": "items admitted only as prerequisites, unreachable from any item admitted on its own: ['i07']; already orphaned after relationship resolution (kept alive by a requires cycle)",
+  "source": {
+   "corpus": 6,
+   "case": 3,
+   "k": 6,
+   "detail": "items admitted only as prerequisites, unreachable from any item admitted on its own: ['i07']; already orphaned after relationship resolution (kept alive by a requires cycle)"
+  },
+  "reproduced": true
+ },
+ {
+  "config": "no_mandatory",
+  "config_overrides": {
+   "mandatory_tags": []
+  },
+  "config_full": {
+   "default_top_k": 10,
+   "default_threshold": 0.3,
+   "priority_weight": 0.3,
+   "mandatory_tags": [],
+   "embedding_query_prefix": "",
+   "embedding_passage_prefix": "",
+   "embedding_model": "wp1-clustered-stub",
+   "embedding_dim": 24
+  },
+  "invariant": "I5",
+  "invariant_label": "No orphan prerequisites",
+  "k": 1,
+  "context": {
+   "tags": [],
+   "gate_tags": []
+  },
+  "query": "query 2 <<c=0 v=2 s=2>>",
+  "instructions": [
+   {
+    "id": "i35",
+    "type": "persona",
+    "priority": 46,
+    "content": "Instruction i35 <<c=4 v=3 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": [
+     "i40"
+    ]
+   },
+   {
+    "id": "i40",
+    "type": "protocol",
+    "priority": 70,
+    "content": "Instruction i40 <<c=1 v=2 s=1>>",
+    "labels": [],
+    "scope_tags": [
+     "t6"
+    ],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   }
+  ],
+  "similarity_to_query": {
+   "i35": 0.2487,
+   "i40": 0.156
+  },
+  "output": [
+   [
+    "i40",
+    0.7
+   ]
+  ],
+  "trace_admitted": {
+   "i35": "search",
+   "i40": "requires"
+  },
+  "trace_excluded": {
+   "i35": {
+    "id": "i35",
+    "reason": "top_k",
+    "similarity": 0.24871687591075897,
+    "by": null
+   }
+  },
+  "trace_missing_prerequisites": {},
+  "violation": "items admitted only as prerequisites, unreachable from any item admitted on its own: ['i40']",
+  "source": {
+   "corpus": 0,
+   "case": 2,
+   "k": 1,
+   "detail": "items admitted only as prerequisites, unreachable from any item admitted on its own: ['i40']"
+  },
+  "reproduced": true
+ },
+ {
+  "config": "no_mandatory",
+  "config_overrides": {
+   "mandatory_tags": []
+  },
+  "config_full": {
+   "default_top_k": 10,
+   "default_threshold": 0.3,
+   "priority_weight": 0.3,
+   "mandatory_tags": [],
+   "embedding_query_prefix": "",
+   "embedding_passage_prefix": "",
+   "embedding_model": "wp1-clustered-stub",
+   "embedding_dim": 24
+  },
+  "invariant": "I5a",
+  "invariant_label": "  I5 orphan made by the top-k cut",
+  "k": 1,
+  "context": {
+   "tags": [],
+   "gate_tags": []
+  },
+  "query": "query 2 <<c=0 v=2 s=2>>",
+  "instructions": [
+   {
+    "id": "i35",
+    "type": "persona",
+    "priority": 46,
+    "content": "Instruction i35 <<c=4 v=3 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": [
+     "i40"
+    ]
+   },
+   {
+    "id": "i40",
+    "type": "protocol",
+    "priority": 70,
+    "content": "Instruction i40 <<c=1 v=2 s=1>>",
+    "labels": [],
+    "scope_tags": [
+     "t6"
+    ],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   }
+  ],
+  "similarity_to_query": {
+   "i35": 0.2487,
+   "i40": 0.156
+  },
+  "output": [
+   [
+    "i40",
+    0.7
+   ]
+  ],
+  "trace_admitted": {
+   "i35": "search",
+   "i40": "requires"
+  },
+  "trace_excluded": {
+   "i35": {
+    "id": "i35",
+    "reason": "top_k",
+    "similarity": 0.24871687591075897,
+    "by": null
+   }
+  },
+  "trace_missing_prerequisites": {},
+  "violation": "items admitted only as prerequisites, unreachable from any item admitted on its own: ['i40']; their dependents were cut by top-k",
+  "source": {
+   "corpus": 0,
+   "case": 2,
+   "k": 1,
+   "detail": "items admitted only as prerequisites, unreachable from any item admitted on its own: ['i40']; their dependents were cut by top-k"
+  },
+  "reproduced": true
+ },
+ {
+  "config": "no_mandatory",
+  "config_overrides": {
+   "mandatory_tags": []
+  },
+  "config_full": {
+   "default_top_k": 10,
+   "default_threshold": 0.3,
+   "priority_weight": 0.3,
+   "mandatory_tags": [],
+   "embedding_query_prefix": "",
+   "embedding_passage_prefix": "",
+   "embedding_model": "wp1-clustered-stub",
+   "embedding_dim": 24
+  },
+  "invariant": "I5b",
+  "invariant_label": "  I5 orphan left by resolution (cycle)",
+  "k": 1,
+  "context": {
+   "tags": [],
+   "gate_tags": []
+  },
+  "query": "query 4 <<c=0 v=0 s=2>>",
+  "instructions": [
+   {
+    "id": "i26",
+    "type": "tool",
+    "priority": 90,
+    "content": "Instruction i26 <<c=0 v=0 s=1>>",
+    "labels": [],
+    "scope_tags": [
+     "t6"
+    ],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": [
+     "i48"
+    ]
+   },
+   {
+    "id": "i31",
+    "type": "directive",
+    "priority": 61,
+    "content": "Instruction i31 <<c=3 v=1 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": [
+     "i48",
+     "i12"
+    ]
+   },
+   {
+    "id": "i48",
+    "type": "constraint",
+    "priority": 70,
+    "content": "Instruction i48 <<c=3 v=1 s=1>>",
+    "labels": [],
+    "scope_tags": [
+     "t3"
+    ],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": [
+     "i26"
+    ]
+   }
+  ],
+  "similarity_to_query": {
+   "i26": 0.1089,
+   "i31": -0.052,
+   "i48": -0.247
+  },
+  "output": [
+   [
+    "i26",
+    0.9
+   ],
+   [
+    "i48",
+    0.7
+   ]
+  ],
+  "trace_admitted": {
+   "i31": "search",
+   "i48": "requires",
+   "i26": "requires"
+  },
+  "trace_excluded": {
+   "i31": {
+    "id": "i31",
+    "reason": "prerequisite",
+    "similarity": -0.05195486173033714,
+    "by": "i12"
+   }
+  },
+  "trace_missing_prerequisites": {},
+  "violation": "items admitted only as prerequisites, unreachable from any item admitted on its own: ['i26', 'i48']; already orphaned after relationship resolution (kept alive by a requires cycle)",
+  "source": {
+   "corpus": 2,
+   "case": 4,
+   "k": 1,
+   "detail": "items admitted only as prerequisites, unreachable from any item admitted on its own: ['i26', 'i48']; already orphaned after relationship resolution (kept alive by a requires cycle)"
+  },
+  "reproduced": true
+ },
+ {
+  "config": "no_priority",
+  "config_overrides": {
+   "priority_weight": 0.0
+  },
+  "config_full": {
+   "default_top_k": 10,
+   "default_threshold": 0.3,
+   "priority_weight": 0.0,
+   "mandatory_tags": [
+    "safety",
+    "compliance"
+   ],
+   "embedding_query_prefix": "",
+   "embedding_passage_prefix": "",
+   "embedding_model": "wp1-clustered-stub",
+   "embedding_dim": 24
+  },
+  "invariant": "I5",
+  "invariant_label": "No orphan prerequisites",
+  "k": 2,
+  "context": {
+   "tags": [],
+   "gate_tags": []
+  },
+  "query": "query 2 <<c=0 v=2 s=2>>",
+  "instructions": [
+   {
+    "id": "i29",
+    "type": "constraint",
+    "priority": 63,
+    "content": "Instruction i29 <<c=1 v=2 s=2>>",
+    "labels": [],
+    "scope_tags": [
+     "safety"
+    ],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i35",
+    "type": "persona",
+    "priority": 46,
+    "content": "Instruction i35 <<c=4 v=3 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": [
+     "i40"
+    ]
+   },
+   {
+    "id": "i40",
+    "type": "protocol",
+    "priority": 70,
+    "content": "Instruction i40 <<c=1 v=2 s=1>>",
+    "labels": [],
+    "scope_tags": [
+     "t6"
+    ],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   }
+  ],
+  "similarity_to_query": {
+   "i29": -0.0526,
+   "i35": 0.2487,
+   "i40": 0.156
+  },
+  "output": [
+   [
+    "i40",
+    0.7
+   ],
+   [
+    "i29",
+    0.63
+   ]
+  ],
+  "trace_admitted": {
+   "i35": "search",
+   "i29": "mandatory",
+   "i40": "requires"
+  },
+  "trace_excluded": {
+   "i35": {
+    "id": "i35",
+    "reason": "top_k",
+    "similarity": 0.24871687591075897,
+    "by": null
+   }
+  },
+  "trace_missing_prerequisites": {},
+  "violation": "items admitted only as prerequisites, unreachable from any item admitted on its own: ['i40']",
+  "source": {
+   "corpus": 0,
+   "case": 2,
+   "k": 2,
+   "detail": "items admitted only as prerequisites, unreachable from any item admitted on its own: ['i40']"
+  },
+  "reproduced": true
+ },
+ {
+  "config": "no_priority",
+  "config_overrides": {
+   "priority_weight": 0.0
+  },
+  "config_full": {
+   "default_top_k": 10,
+   "default_threshold": 0.3,
+   "priority_weight": 0.0,
+   "mandatory_tags": [
+    "safety",
+    "compliance"
+   ],
+   "embedding_query_prefix": "",
+   "embedding_passage_prefix": "",
+   "embedding_model": "wp1-clustered-stub",
+   "embedding_dim": 24
+  },
+  "invariant": "I5a",
+  "invariant_label": "  I5 orphan made by the top-k cut",
+  "k": 2,
+  "context": {
+   "tags": [],
+   "gate_tags": []
+  },
+  "query": "query 2 <<c=0 v=2 s=2>>",
+  "instructions": [
+   {
+    "id": "i29",
+    "type": "constraint",
+    "priority": 63,
+    "content": "Instruction i29 <<c=1 v=2 s=2>>",
+    "labels": [],
+    "scope_tags": [
+     "safety"
+    ],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i35",
+    "type": "persona",
+    "priority": 46,
+    "content": "Instruction i35 <<c=4 v=3 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": [
+     "i40"
+    ]
+   },
+   {
+    "id": "i40",
+    "type": "protocol",
+    "priority": 70,
+    "content": "Instruction i40 <<c=1 v=2 s=1>>",
+    "labels": [],
+    "scope_tags": [
+     "t6"
+    ],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   }
+  ],
+  "similarity_to_query": {
+   "i29": -0.0526,
+   "i35": 0.2487,
+   "i40": 0.156
+  },
+  "output": [
+   [
+    "i40",
+    0.7
+   ],
+   [
+    "i29",
+    0.63
+   ]
+  ],
+  "trace_admitted": {
+   "i35": "search",
+   "i29": "mandatory",
+   "i40": "requires"
+  },
+  "trace_excluded": {
+   "i35": {
+    "id": "i35",
+    "reason": "top_k",
+    "similarity": 0.24871687591075897,
+    "by": null
+   }
+  },
+  "trace_missing_prerequisites": {},
+  "violation": "items admitted only as prerequisites, unreachable from any item admitted on its own: ['i40']; their dependents were cut by top-k",
+  "source": {
+   "corpus": 0,
+   "case": 2,
+   "k": 2,
+   "detail": "items admitted only as prerequisites, unreachable from any item admitted on its own: ['i40']; their dependents were cut by top-k"
+  },
+  "reproduced": true
+ },
+ {
+  "config": "no_priority",
+  "config_overrides": {
+   "priority_weight": 0.0
+  },
+  "config_full": {
+   "default_top_k": 10,
+   "default_threshold": 0.3,
+   "priority_weight": 0.0,
+   "mandatory_tags": [
+    "safety",
+    "compliance"
+   ],
+   "embedding_query_prefix": "",
+   "embedding_passage_prefix": "",
+   "embedding_model": "wp1-clustered-stub",
+   "embedding_dim": 24
+  },
+  "invariant": "I5b",
+  "invariant_label": "  I5 orphan left by resolution (cycle)",
+  "k": 1,
+  "context": {
+   "tags": [],
+   "gate_tags": []
+  },
+  "query": "query 3 <<c=0 v=2 s=2>>",
+  "instructions": [
+   {
+    "id": "i07",
+    "type": "directive",
+    "priority": 83,
+    "content": "Instruction i07 <<c=1 v=2 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": [
+     "i07"
+    ]
+   },
+   {
+    "id": "i13",
+    "type": "tool",
+    "priority": 90,
+    "content": "Instruction i13 <<c=2 v=3 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": [
+     "i07",
+     "ghost4"
+    ]
+   },
+   {
+    "id": "i14",
+    "type": "protocol",
+    "priority": 30,
+    "content": "Instruction i14 <<c=2 v=0 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i15",
+    "type": "constraint",
+    "priority": 90,
+    "content": "Instruction i15 <<c=0 v=2 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i16",
+    "type": "tool",
+    "priority": 24,
+    "content": "Instruction i16 <<c=2 v=1 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i17",
+    "type": "persona",
+    "priority": 70,
+    "content": "Instruction i17 <<c=1 v=2 s=1>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i18",
+    "type": "directive",
+    "priority": 35,
+    "content": "Instruction i18 <<c=1 v=0 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i19",
+    "type": "persona",
+    "priority": 64,
+    "content": "Instruction i19 <<c=0 v=3 s=2>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i20",
+    "type": "directive",
+    "priority": 50,
+    "content": "Instruction i20 <<c=1 v=0 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i21",
+    "type": "directive",
+    "priority": 90,
+    "content": "Instruction i21 <<c=0 v=3 s=2>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i23",
+    "type": "directive",
+    "priority": 70,
+    "content": "Instruction i23 <<c=0 v=1 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i24",
+    "type": "tool",
+    "priority": 50,
+    "content": "Instruction i24 <<c=0 v=0 s=2>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i25",
+    "type": "directive",
+    "priority": 70,
+    "content": "Instruction i25 <<c=0 v=1 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i26",
+    "type": "tool",
+    "priority": 25,
+    "content": "Instruction i26 <<c=0 v=2 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i27",
+    "type": "directive",
+    "priority": 82,
+    "content": "Instruction i27 <<c=2 v=0 s=2>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i28",
+    "type": "protocol",
+    "priority": 90,
+    "content": "Instruction i28 <<c=0 v=3 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i29",
+    "type": "directive",
+    "priority": 90,
+    "content": "Instruction i29 <<c=1 v=2 s=1>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i30",
+    "type": "protocol",
+    "priority": 87,
+    "content": "Instruction i30 <<c=0 v=3 s=2>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i31",
+    "type": "persona",
+    "priority": 43,
+    "content": "Instruction i31 <<c=1 v=3 s=2>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i32",
+    "type": "tool",
+    "priority": 90,
+    "content": "Instruction i32 <<c=2 v=3 s=1>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i33",
+    "type": "directive",
+    "priority": 39,
+    "content": "Instruction i33 <<c=1 v=3 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i34",
+    "type": "constraint",
+    "priority": 21,
+    "content": "Instruction i34 <<c=2 v=1 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i35",
+    "type": "constraint",
+    "priority": 35,
+    "content": "Instruction i35 <<c=1 v=0 s=1>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i36",
+    "type": "tool",
+    "priority": 70,
+    "content": "Instruction i36 <<c=1 v=2 s=2>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i37",
+    "type": "persona",
+    "priority": 39,
+    "content": "Instruction i37 <<c=0 v=1 s=1>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i38",
+    "type": "persona",
+    "priority": 50,
+    "content": "Instruction i38 <<c=2 v=0 s=1>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i39",
+    "type": "tool",
+    "priority": 70,
+    "content": "Instruction i39 <<c=2 v=2 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i40",
+    "type": "protocol",
+    "priority": 50,
+    "content": "Instruction i40 <<c=0 v=1 s=2>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i41",
+    "type": "tool",
+    "priority": 28,
+    "content": "Instruction i41 <<c=0 v=0 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i42",
+    "type": "persona",
+    "priority": 33,
+    "content": "Instruction i42 <<c=1 v=3 s=2>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i43",
+    "type": "directive",
+    "priority": 84,
+    "content": "Instruction i43 <<c=0 v=0 s=1>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   }
+  ],
+  "similarity_to_query": {
+   "i07": -0.1826,
+   "i13": 0.0684,
+   "i14": 0.1037,
+   "i15": 0.384,
+   "i16": 0.1353,
+   "i17": 0.156,
+   "i18": 0.1674,
+   "i19": 0.0641,
+   "i20": 0.1674,
+   "i21": 0.0641,
+   "i23": 0.3435,
+   "i24": 0.4435,
+   "i25": 0.3435,
+   "i26": 0.384,
+   "i27": 0.066,
+   "i28": 0.2832,
+   "i29": 0.156,
+   "i30": 0.0641,
+   "i31": -0.0216,
+   "i32": -0.043,
+   "i33": -0.088,
+   "i34": 0.1353,
+   "i35": -0.0967,
+   "i36": -0.0526,
+   "i37": 0.1966,
+   "i38": 0.1832,
+   "i39": -0.094,
+   "i40": -0.1792,
+   "i41": 0.3751,
+   "i42": -0.0216,
+   "i43": 0.0158
+  },
+  "output": [
+   [
+    "i07",
+    0.83
+   ]
+  ],
+  "trace_admitted": {
+   "i24": "search",
+   "i26": "search",
+   "i15": "search",
+   "i41": "search",
+   "i23": "search",
+   "i25": "search",
+   "i28": "search",
+   "i37": "search",
+   "i38": "search",
+   "i20": "search",
+   "i18": "search",
+   "i29": "search",
+   "i17": "search",
+   "i16": "search",
+   "i34": "search",
+   "i14": "search",
+   "i13": "search",
+   "i27": "search",
+   "i30": "search",
+   "i19": "search",
+   "i21": "search",
+   "i43": "search",
+   "i31": "search",
+   "i42": "search",
+   "i32": "search",
+   "i36": "search",
+   "i33": "search",
+   "i39": "search",
+   "i35": "search",
+   "i40": "search",
+   "i07": "requires"
+  },
+  "trace_excluded": {
+   "i13": {
+    "id": "i13",
+    "reason": "prerequisite",
+    "similarity": 0.06840340793132782,
+    "by": "ghost4"
+   },
+   "i24": {
+    "id": "i24",
+    "reason": "top_k",
+    "similarity": 0.44348281621932983,
+    "by": null
+   },
+   "i15": {
+    "id": "i15",
+    "reason": "top_k",
+    "similarity": 0.3840024471282959,
+    "by": null
+   },
+   "i26": {
+    "id": "i26",
+    "reason": "top_k",
+    "similarity": 0.3840024471282959,
+    "by": null
+   },
+   "i41": {
+    "id": "i41",
+    "reason": "top_k",
+    "similarity": 0.3751348555088043,
+    "by": null
+   },
+   "i23": {
+    "id": "i23",
+    "reason": "top_k",
+    "similarity": 0.343530535697937,
+    "by": null
+   },
+   "i25": {
+    "id": "i25",
+    "reason": "top_k",
+    "similarity": 0.343530535697937,
+    "by": null
+   },
+   "i28": {
+    "id": "i28",
+    "reason": "top_k",
+    "similarity": 0.2832256555557251,
+    "by": null
+   },
+   "i37": {
+    "id": "i37",
+    "reason": "top_k",
+    "similarity": 0.1966114342212677,
+    "by": null
+   },
+   "i38": {
+    "id": "i38",
+    "reason": "top_k",
+    "similarity": 0.18324576318264008,
+    "by": null
+   },
+   "i20": {
+    "id": "i20",
+    "reason": "top_k",
+    "similarity": 0.1674419641494751,
+    "by": null
+   },
+   "i18": {
+    "id": "i18",
+    "reason": "top_k",
+    "similarity": 0.1674419641494751,
+    "by": null
+   },
+   "i29": {
+    "id": "i29",
+    "reason": "top_k",
+    "similarity": 0.15603776276111603,
+    "by": null
+   },
+   "i17": {
+    "id": "i17",
+    "reason": "top_k",
+    "similarity": 0.15603776276111603,
+    "by": null
+   },
+   "i16": {
+    "id": "i16",
+    "reason": "top_k",
+    "similarity": 0.1352541297674179,
+    "by": null
+   },
+   "i34": {
+    "id": "i34",
+    "reason": "top_k",
+    "similarity": 0.1352541297674179,
+    "by": null
+   },
+   "i14": {
+    "id": "i14",
+    "reason": "top_k",
+    "similarity": 0.10371554642915726,
+    "by": null
+   },
+   "i27": {
+    "id": "i27",
+    "reason": "top_k",
+    "similarity": 0.0660128965973854,
+    "by": null
+   },
+   "i21": {
+    "id": "i21",
+    "reason": "top_k",
+    "similarity": 0.06406352669000626,
+    "by": null
+   },
+   "i30": {
+    "id": "i30",
+    "reason": "top_k",
+    "similarity": 0.06406352669000626,
+    "by": null
+   },
+   "i19": {
+    "id": "i19",
+    "reason": "top_k",
+    "similarity": 0.06406352669000626,
+    "by": null
+   },
+   "i43": {
+    "id": "i43",
+    "reason": "top_k",
+    "similarity": 0.01581186056137085,
+    "by": null
+   },
+   "i31": {
+    "id": "i31",
+    "reason": "top_k",
+    "similarity": -0.02162856049835682,
+    "by": null
+   },
+   "i42": {
+    "id": "i42",
+    "reason": "top_k",
+    "similarity": -0.021628575399518013,
+    "by": null
+   },
+   "i32": {
+    "id": "i32",
+    "reason": "top_k",
+    "similarity": -0.04301545023918152,
+    "by": null
+   },
+   "i36": {
+    "id": "i36",
+    "reason": "top_k",
+    "similarity": -0.0525754950940609,
+    "by": null
+   },
+   "i33": {
+    "id": "i33",
+    "reason": "top_k",
+    "similarity": -0.08804501593112946,
+    "by": null
+   },
+   "i39": {
+    "id": "i39",
+    "reason": "top_k",
+    "similarity": -0.09399420022964478,
+    "by": null
+   },
+   "i35": {
+    "id": "i35",
+    "reason": "top_k",
+    "similarity": -0.09673801809549332,
+    "by": null
+   },
+   "i40": {
+    "id": "i40",
+    "reason": "top_k",
+    "similarity": -0.1792125105857849,
+    "by": null
+   }
+  },
+  "trace_missing_prerequisites": {},
+  "violation": "items admitted only as prerequisites, unreachable from any item admitted on its own: ['i07']; already orphaned after relationship resolution (kept alive by a requires cycle)",
+  "source": {
+   "corpus": 6,
+   "case": 3,
+   "k": 6,
+   "detail": "items admitted only as prerequisites, unreachable from any item admitted on its own: ['i07']; already orphaned after relationship resolution (kept alive by a requires cycle)"
+  },
+  "reproduced": true
+ },
+ {
+  "config": "no_threshold",
+  "config_overrides": {
+   "default_threshold": -1.01
+  },
+  "config_full": {
+   "default_top_k": 10,
+   "default_threshold": -1.01,
+   "priority_weight": 0.3,
+   "mandatory_tags": [
+    "safety",
+    "compliance"
+   ],
+   "embedding_query_prefix": "",
+   "embedding_passage_prefix": "",
+   "embedding_model": "wp1-clustered-stub",
+   "embedding_dim": 24
+  },
+  "invariant": "I5",
+  "invariant_label": "No orphan prerequisites",
+  "k": 19,
+  "context": {
+   "tags": [],
+   "gate_tags": []
+  },
+  "query": "query 1 <<c=3 v=1 s=1>>",
+  "instructions": [
+   {
+    "id": "i03",
+    "type": "tool",
+    "priority": 70,
+    "content": "Instruction i03 <<c=3 v=1 s=2>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i06",
+    "type": "persona",
+    "priority": 50,
+    "content": "Instruction i06 <<c=3 v=0 s=1>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i10",
+    "type": "tool",
+    "priority": 33,
+    "content": "Instruction i10 <<c=0 v=3 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i11",
+    "type": "constraint",
+    "priority": 63,
+    "content": "Instruction i11 <<c=3 v=3 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i16",
+    "type": "directive",
+    "priority": 90,
+    "content": "Instruction i16 <<c=3 v=1 s=2>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i18",
+    "type": "protocol",
+    "priority": 1,
+    "content": "Instruction i18 <<c=2 v=1 s=2>>",
+    "labels": [],
+    "scope_tags": [
+     "compliance"
+    ],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i21",
+    "type": "tool",
+    "priority": 55,
+    "content": "Instruction i21 <<c=1 v=2 s=1>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i22",
+    "type": "constraint",
+    "priority": 70,
+    "content": "Instruction i22 <<c=3 v=1 s=1>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i24",
+    "type": "persona",
+    "priority": 36,
+    "content": "Instruction i24 <<c=3 v=2 s=2>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i25",
+    "type": "protocol",
+    "priority": 88,
+    "content": "Instruction i25 <<c=3 v=3 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": [
+     "i41"
+    ]
+   },
+   {
+    "id": "i26",
+    "type": "persona",
+    "priority": 87,
+    "content": "Instruction i26 <<c=0 v=1 s=0>>",
+    "labels": [],
+    "scope_tags": [
+     "compliance"
+    ],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i27",
+    "type": "protocol",
+    "priority": 50,
+    "content": "Instruction i27 <<c=3 v=0 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": [
+     "i08"
+    ]
+   },
+   {
+    "id": "i28",
+    "type": "directive",
+    "priority": 55,
+    "content": "Instruction i28 <<c=3 v=3 s=2>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i29",
+    "type": "persona",
+    "priority": 50,
+    "content": "Instruction i29 <<c=1 v=0 s=1>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i30",
+    "type": "directive",
+    "priority": 20,
+    "content": "Instruction i30 <<c=3 v=3 s=1>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i31",
+    "type": "constraint",
+    "priority": 50,
+    "content": "Instruction i31 <<c=3 v=1 s=2>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i32",
+    "type": "protocol",
+    "priority": 70,
+    "content": "Instruction i32 <<c=1 v=1 s=0>>",
+    "labels": [
+     "compliance"
+    ],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i34",
+    "type": "protocol",
+    "priority": 96,
+    "content": "Instruction i34 <<c=3 v=3 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i35",
+    "type": "tool",
+    "priority": 65,
+    "content": "Instruction i35 <<c=0 v=0 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i36",
+    "type": "tool",
+    "priority": 70,
+    "content": "Instruction i36 <<c=3 v=0 s=2>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [
+     "i41"
+    ],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i37",
+    "type": "protocol",
+    "priority": 50,
+    "content": "Instruction i37 <<c=0 v=2 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i38",
+    "type": "constraint",
+    "priority": 50,
+    "content": "Instruction i38 <<c=3 v=3 s=2>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i39",
+    "type": "constraint",
+    "priority": 65,
+    "content": "Instruction i39 <<c=1 v=2 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i40",
+    "type": "directive",
+    "priority": 15,
+    "content": "Instruction i40 <<c=3 v=3 s=2>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": [
+     "i10"
+    ]
+   },
+   {
+    "id": "i41",
+    "type": "constraint",
+    "priority": 70,
+    "content": "Instruction i41 <<c=2 v=1 s=1>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i42",
+    "type": "constraint",
+    "priority": 50,
+    "content": "Instruction i42 <<c=1 v=3 s=0>>",
+    "labels": [
+     "compliance"
+    ],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i46",
+    "type": "tool",
+    "priority": 70,
+    "content": "Instruction i46 <<c=3 v=0 s=2>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i47",
+    "type": "protocol",
+    "priority": 12,
+    "content": "Instruction i47 <<c=3 v=0 s=2>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i48",
+    "type": "directive",
+    "priority": 70,
+    "content": "Instruction i48 <<c=3 v=2 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i49",
+    "type": "protocol",
+    "priority": 90,
+    "content": "Instruction i49 <<c=0 v=1 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i52",
+    "type": "directive",
+    "priority": 21,
+    "content": "Instruction i52 <<c=3 v=1 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": [
+     "i33"
+    ]
+   },
+   {
+    "id": "i53",
+    "type": "persona",
+    "priority": 12,
+    "content": "Instruction i53 <<c=1 v=2 s=1>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i55",
+    "type": "persona",
+    "priority": 64,
+    "content": "Instruction i55 <<c=3 v=1 s=1>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   }
+  ],
+  "similarity_to_query": {
+   "i03": 0.535,
+   "i06": 0.5107,
+   "i10": 0.0063,
+   "i11": 0.6214,
+   "i16": 0.535,
+   "i18": 0.1731,
+   "i21": 0.0532,
+   "i22": 0.4179,
+   "i24": 0.2993,
+   "i25": 0.6214,
+   "i26": 0.0615,
+   "i27": 0.6116,
+   "i28": 0.396,
+   "i29": 0.0287,
+   "i30": 0.5669,
+   "i31": 0.535,
+   "i32": -0.158,
+   "i34": 0.6214,
+   "i35": 0.0274,
+   "i36": 0.3335,
+   "i37": 0.1085,
+   "i38": 0.396,
+   "i39": 0.0211,
+   "i40": 0.396,
+   "i41": 0.2016,
+   "i42": -0.0323,
+   "i46": 0.3335,
+   "i47": 0.3335,
+   "i48": 0.5933,
+   "i49": 0.0615,
+   "i52": 0.6834,
+   "i53": 0.0532,
+   "i55": 0.4179
+  },
+  "output": [
+   [
+    "i34",
+    0.723
+   ],
+   [
+    "i32",
+    0.7
+   ],
+   [
+    "i16",
+    0.6445
+   ],
+   [
+    "i48",
+    0.6253
+   ],
+   [
+    "i11",
+    0.624
+   ],
+   [
+    "i03",
+    0.5845
+   ],
+   [
+    "i31",
+    0.5245
+   ],
+   [
+    "i06",
+    0.5075
+   ],
+   [
+    "i22",
+    0.5025
+   ],
+   [
+    "i42",
+    0.5
+   ],
+   [
+    "i55",
+    0.4845
+   ],
+   [
+    "i30",
+    0.4568
+   ],
+   [
+    "i36",
+    0.4435
+   ],
+   [
+    "i46",
+    0.4435
+   ],
+   [
+    "i28",
+    0.4422
+   ],
+   [
+    "i38",
+    0.4272
+   ],
+   [
+    "i10",
+    0.33
+   ],
+   [
+    "i26",
+    0.304
+   ],
+   [
+    "i18",
+    0.1242
+   ]
+  ],
+  "trace_admitted": {
+   "i52": "search",
+   "i11": "search",
+   "i34": "search",
+   "i25": "search",
+   "i27": "search",
+   "i48": "search",
+   "i30": "search",
+   "i03": "search",
+   "i16": "search",
+   "i31": "search",
+   "i06": "search",
+   "i55": "search",
+   "i22": "search",
+   "i38": "search",
+   "i40": "search",
+   "i28": "search",
+   "i36": "search",
+   "i47": "search",
+   "i46": "search",
+   "i24": "search",
+   "i41": "search",
+   "i18": "search",
+   "i37": "search",
+   "i26": "search",
+   "i49": "search",
+   "i53": "search",
+   "i21": "search",
+   "i29": "search",
+   "i35": "search",
+   "i39": "search",
+   "i32": "mandatory",
+   "i42": "mandatory",
+   "i10": "requires"
+  },
+  "trace_excluded": {
+   "i41": {
+    "id": "i41",
+    "reason": "conflict",
+    "similarity": 0.20156100392341614,
+    "by": "i36"
+   },
+   "i52": {
+    "id": "i52",
+    "reason": "prerequisite",
+    "similarity": 0.6834421157836914,
+    "by": "i33"
+   },
+   "i25": {
+    "id": "i25",
+    "reason": "prerequisite",
+    "similarity": 0.6214401125907898,
+    "by": "i41"
+   },
+   "i27": {
+    "id": "i27",
+    "reason": "prerequisite",
+    "similarity": 0.61160808801651,
+    "by": "i08"
+   },
+   "i40": {
+    "id": "i40",
+    "reason": "top_k",
+    "similarity": 0.39602017402648926,
+    "by": null
+   },
+   "i24": {
+    "id": "i24",
+    "reason": "top_k",
+    "similarity": 0.2992958724498749,
+    "by": null
+   },
+   "i49": {
+    "id": "i49",
+    "reason": "top_k",
+    "similarity": 0.06146328151226044,
+    "by": null
+   },
+   "i47": {
+    "id": "i47",
+    "reason": "top_k",
+    "similarity": 0.3335152268409729,
+    "by": null
+   },
+   "i37": {
+    "id": "i37",
+    "reason": "top_k",
+    "similarity": 0.10850252956151962,
+    "by": null
+   },
+   "i35": {
+    "id": "i35",
+    "reason": "top_k",
+    "similarity": 0.027368493378162384,
+    "by": null
+   },
+   "i39": {
+    "id": "i39",
+    "reason": "top_k",
+    "similarity": 0.021149754524230957,
+    "by": null
+   },
+   "i21": {
+    "id": "i21",
+    "reason": "top_k",
+    "similarity": 0.05321664363145828,
+    "by": null
+   },
+   "i29": {
+    "id": "i29",
+    "reason": "top_k",
+    "similarity": 0.028651636093854904,
+    "by": null
+   },
+   "i53": {
+    "id": "i53",
+    "reason": "top_k",
+    "similarity": 0.05321664363145828,
+    "by": null
+   }
+  },
+  "trace_missing_prerequisites": {},
+  "violation": "items admitted only as prerequisites, unreachable from any item admitted on its own: ['i10']",
+  "source": {
+   "corpus": 4,
+   "case": 1,
+   "k": 19,
+   "detail": "items admitted only as prerequisites, unreachable from any item admitted on its own: ['i10']"
+  },
+  "reproduced": true
+ },
+ {
+  "config": "no_threshold",
+  "config_overrides": {
+   "default_threshold": -1.01
+  },
+  "config_full": {
+   "default_top_k": 10,
+   "default_threshold": -1.01,
+   "priority_weight": 0.3,
+   "mandatory_tags": [
+    "safety",
+    "compliance"
+   ],
+   "embedding_query_prefix": "",
+   "embedding_passage_prefix": "",
+   "embedding_model": "wp1-clustered-stub",
+   "embedding_dim": 24
+  },
+  "invariant": "I5a",
+  "invariant_label": "  I5 orphan made by the top-k cut",
+  "k": 19,
+  "context": {
+   "tags": [],
+   "gate_tags": []
+  },
+  "query": "query 1 <<c=3 v=1 s=1>>",
+  "instructions": [
+   {
+    "id": "i03",
+    "type": "tool",
+    "priority": 70,
+    "content": "Instruction i03 <<c=3 v=1 s=2>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i06",
+    "type": "persona",
+    "priority": 50,
+    "content": "Instruction i06 <<c=3 v=0 s=1>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i10",
+    "type": "tool",
+    "priority": 33,
+    "content": "Instruction i10 <<c=0 v=3 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i11",
+    "type": "constraint",
+    "priority": 63,
+    "content": "Instruction i11 <<c=3 v=3 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i16",
+    "type": "directive",
+    "priority": 90,
+    "content": "Instruction i16 <<c=3 v=1 s=2>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i18",
+    "type": "protocol",
+    "priority": 1,
+    "content": "Instruction i18 <<c=2 v=1 s=2>>",
+    "labels": [],
+    "scope_tags": [
+     "compliance"
+    ],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i21",
+    "type": "tool",
+    "priority": 55,
+    "content": "Instruction i21 <<c=1 v=2 s=1>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i22",
+    "type": "constraint",
+    "priority": 70,
+    "content": "Instruction i22 <<c=3 v=1 s=1>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i24",
+    "type": "persona",
+    "priority": 36,
+    "content": "Instruction i24 <<c=3 v=2 s=2>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i25",
+    "type": "protocol",
+    "priority": 88,
+    "content": "Instruction i25 <<c=3 v=3 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": [
+     "i41"
+    ]
+   },
+   {
+    "id": "i26",
+    "type": "persona",
+    "priority": 87,
+    "content": "Instruction i26 <<c=0 v=1 s=0>>",
+    "labels": [],
+    "scope_tags": [
+     "compliance"
+    ],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i27",
+    "type": "protocol",
+    "priority": 50,
+    "content": "Instruction i27 <<c=3 v=0 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": [
+     "i08"
+    ]
+   },
+   {
+    "id": "i28",
+    "type": "directive",
+    "priority": 55,
+    "content": "Instruction i28 <<c=3 v=3 s=2>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i29",
+    "type": "persona",
+    "priority": 50,
+    "content": "Instruction i29 <<c=1 v=0 s=1>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i30",
+    "type": "directive",
+    "priority": 20,
+    "content": "Instruction i30 <<c=3 v=3 s=1>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i31",
+    "type": "constraint",
+    "priority": 50,
+    "content": "Instruction i31 <<c=3 v=1 s=2>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i32",
+    "type": "protocol",
+    "priority": 70,
+    "content": "Instruction i32 <<c=1 v=1 s=0>>",
+    "labels": [
+     "compliance"
+    ],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i34",
+    "type": "protocol",
+    "priority": 96,
+    "content": "Instruction i34 <<c=3 v=3 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i35",
+    "type": "tool",
+    "priority": 65,
+    "content": "Instruction i35 <<c=0 v=0 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i36",
+    "type": "tool",
+    "priority": 70,
+    "content": "Instruction i36 <<c=3 v=0 s=2>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [
+     "i41"
+    ],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i37",
+    "type": "protocol",
+    "priority": 50,
+    "content": "Instruction i37 <<c=0 v=2 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i38",
+    "type": "constraint",
+    "priority": 50,
+    "content": "Instruction i38 <<c=3 v=3 s=2>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i39",
+    "type": "constraint",
+    "priority": 65,
+    "content": "Instruction i39 <<c=1 v=2 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i40",
+    "type": "directive",
+    "priority": 15,
+    "content": "Instruction i40 <<c=3 v=3 s=2>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": [
+     "i10"
+    ]
+   },
+   {
+    "id": "i41",
+    "type": "constraint",
+    "priority": 70,
+    "content": "Instruction i41 <<c=2 v=1 s=1>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i42",
+    "type": "constraint",
+    "priority": 50,
+    "content": "Instruction i42 <<c=1 v=3 s=0>>",
+    "labels": [
+     "compliance"
+    ],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i46",
+    "type": "tool",
+    "priority": 70,
+    "content": "Instruction i46 <<c=3 v=0 s=2>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i47",
+    "type": "protocol",
+    "priority": 12,
+    "content": "Instruction i47 <<c=3 v=0 s=2>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i48",
+    "type": "directive",
+    "priority": 70,
+    "content": "Instruction i48 <<c=3 v=2 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i49",
+    "type": "protocol",
+    "priority": 90,
+    "content": "Instruction i49 <<c=0 v=1 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i52",
+    "type": "directive",
+    "priority": 21,
+    "content": "Instruction i52 <<c=3 v=1 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": [
+     "i33"
+    ]
+   },
+   {
+    "id": "i53",
+    "type": "persona",
+    "priority": 12,
+    "content": "Instruction i53 <<c=1 v=2 s=1>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i55",
+    "type": "persona",
+    "priority": 64,
+    "content": "Instruction i55 <<c=3 v=1 s=1>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   }
+  ],
+  "similarity_to_query": {
+   "i03": 0.535,
+   "i06": 0.5107,
+   "i10": 0.0063,
+   "i11": 0.6214,
+   "i16": 0.535,
+   "i18": 0.1731,
+   "i21": 0.0532,
+   "i22": 0.4179,
+   "i24": 0.2993,
+   "i25": 0.6214,
+   "i26": 0.0615,
+   "i27": 0.6116,
+   "i28": 0.396,
+   "i29": 0.0287,
+   "i30": 0.5669,
+   "i31": 0.535,
+   "i32": -0.158,
+   "i34": 0.6214,
+   "i35": 0.0274,
+   "i36": 0.3335,
+   "i37": 0.1085,
+   "i38": 0.396,
+   "i39": 0.0211,
+   "i40": 0.396,
+   "i41": 0.2016,
+   "i42": -0.0323,
+   "i46": 0.3335,
+   "i47": 0.3335,
+   "i48": 0.5933,
+   "i49": 0.0615,
+   "i52": 0.6834,
+   "i53": 0.0532,
+   "i55": 0.4179
+  },
+  "output": [
+   [
+    "i34",
+    0.723
+   ],
+   [
+    "i32",
+    0.7
+   ],
+   [
+    "i16",
+    0.6445
+   ],
+   [
+    "i48",
+    0.6253
+   ],
+   [
+    "i11",
+    0.624
+   ],
+   [
+    "i03",
+    0.5845
+   ],
+   [
+    "i31",
+    0.5245
+   ],
+   [
+    "i06",
+    0.5075
+   ],
+   [
+    "i22",
+    0.5025
+   ],
+   [
+    "i42",
+    0.5
+   ],
+   [
+    "i55",
+    0.4845
+   ],
+   [
+    "i30",
+    0.4568
+   ],
+   [
+    "i36",
+    0.4435
+   ],
+   [
+    "i46",
+    0.4435
+   ],
+   [
+    "i28",
+    0.4422
+   ],
+   [
+    "i38",
+    0.4272
+   ],
+   [
+    "i10",
+    0.33
+   ],
+   [
+    "i26",
+    0.304
+   ],
+   [
+    "i18",
+    0.1242
+   ]
+  ],
+  "trace_admitted": {
+   "i52": "search",
+   "i11": "search",
+   "i34": "search",
+   "i25": "search",
+   "i27": "search",
+   "i48": "search",
+   "i30": "search",
+   "i03": "search",
+   "i16": "search",
+   "i31": "search",
+   "i06": "search",
+   "i55": "search",
+   "i22": "search",
+   "i38": "search",
+   "i40": "search",
+   "i28": "search",
+   "i36": "search",
+   "i47": "search",
+   "i46": "search",
+   "i24": "search",
+   "i41": "search",
+   "i18": "search",
+   "i37": "search",
+   "i26": "search",
+   "i49": "search",
+   "i53": "search",
+   "i21": "search",
+   "i29": "search",
+   "i35": "search",
+   "i39": "search",
+   "i32": "mandatory",
+   "i42": "mandatory",
+   "i10": "requires"
+  },
+  "trace_excluded": {
+   "i41": {
+    "id": "i41",
+    "reason": "conflict",
+    "similarity": 0.20156100392341614,
+    "by": "i36"
+   },
+   "i52": {
+    "id": "i52",
+    "reason": "prerequisite",
+    "similarity": 0.6834421157836914,
+    "by": "i33"
+   },
+   "i25": {
+    "id": "i25",
+    "reason": "prerequisite",
+    "similarity": 0.6214401125907898,
+    "by": "i41"
+   },
+   "i27": {
+    "id": "i27",
+    "reason": "prerequisite",
+    "similarity": 0.61160808801651,
+    "by": "i08"
+   },
+   "i40": {
+    "id": "i40",
+    "reason": "top_k",
+    "similarity": 0.39602017402648926,
+    "by": null
+   },
+   "i24": {
+    "id": "i24",
+    "reason": "top_k",
+    "similarity": 0.2992958724498749,
+    "by": null
+   },
+   "i49": {
+    "id": "i49",
+    "reason": "top_k",
+    "similarity": 0.06146328151226044,
+    "by": null
+   },
+   "i47": {
+    "id": "i47",
+    "reason": "top_k",
+    "similarity": 0.3335152268409729,
+    "by": null
+   },
+   "i37": {
+    "id": "i37",
+    "reason": "top_k",
+    "similarity": 0.10850252956151962,
+    "by": null
+   },
+   "i35": {
+    "id": "i35",
+    "reason": "top_k",
+    "similarity": 0.027368493378162384,
+    "by": null
+   },
+   "i39": {
+    "id": "i39",
+    "reason": "top_k",
+    "similarity": 0.021149754524230957,
+    "by": null
+   },
+   "i21": {
+    "id": "i21",
+    "reason": "top_k",
+    "similarity": 0.05321664363145828,
+    "by": null
+   },
+   "i29": {
+    "id": "i29",
+    "reason": "top_k",
+    "similarity": 0.028651636093854904,
+    "by": null
+   },
+   "i53": {
+    "id": "i53",
+    "reason": "top_k",
+    "similarity": 0.05321664363145828,
+    "by": null
+   }
+  },
+  "trace_missing_prerequisites": {},
+  "violation": "items admitted only as prerequisites, unreachable from any item admitted on its own: ['i10']; their dependents were cut by top-k",
+  "source": {
+   "corpus": 4,
+   "case": 1,
+   "k": 19,
+   "detail": "items admitted only as prerequisites, unreachable from any item admitted on its own: ['i10']; their dependents were cut by top-k"
+  },
+  "reproduced": true
+ },
+ {
+  "config": "no_threshold",
+  "config_overrides": {
+   "default_threshold": -1.01
+  },
+  "config_full": {
+   "default_top_k": 10,
+   "default_threshold": -1.01,
+   "priority_weight": 0.3,
+   "mandatory_tags": [
+    "safety",
+    "compliance"
+   ],
+   "embedding_query_prefix": "",
+   "embedding_passage_prefix": "",
+   "embedding_model": "wp1-clustered-stub",
+   "embedding_dim": 24
+  },
+  "invariant": "I5b",
+  "invariant_label": "  I5 orphan left by resolution (cycle)",
+  "k": 1,
+  "context": {
+   "tags": [],
+   "gate_tags": []
+  },
+  "query": "query 3 <<c=0 v=2 s=2>>",
+  "instructions": [
+   {
+    "id": "i07",
+    "type": "directive",
+    "priority": 83,
+    "content": "Instruction i07 <<c=1 v=2 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": [
+     "i07"
+    ]
+   },
+   {
+    "id": "i13",
+    "type": "tool",
+    "priority": 90,
+    "content": "Instruction i13 <<c=2 v=3 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": [
+     "i07",
+     "ghost4"
+    ]
+   },
+   {
+    "id": "i14",
+    "type": "protocol",
+    "priority": 30,
+    "content": "Instruction i14 <<c=2 v=0 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i15",
+    "type": "constraint",
+    "priority": 90,
+    "content": "Instruction i15 <<c=0 v=2 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i16",
+    "type": "tool",
+    "priority": 24,
+    "content": "Instruction i16 <<c=2 v=1 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i17",
+    "type": "persona",
+    "priority": 70,
+    "content": "Instruction i17 <<c=1 v=2 s=1>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i18",
+    "type": "directive",
+    "priority": 35,
+    "content": "Instruction i18 <<c=1 v=0 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i19",
+    "type": "persona",
+    "priority": 64,
+    "content": "Instruction i19 <<c=0 v=3 s=2>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i20",
+    "type": "directive",
+    "priority": 50,
+    "content": "Instruction i20 <<c=1 v=0 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i21",
+    "type": "directive",
+    "priority": 90,
+    "content": "Instruction i21 <<c=0 v=3 s=2>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i23",
+    "type": "directive",
+    "priority": 70,
+    "content": "Instruction i23 <<c=0 v=1 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i24",
+    "type": "tool",
+    "priority": 50,
+    "content": "Instruction i24 <<c=0 v=0 s=2>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i25",
+    "type": "directive",
+    "priority": 70,
+    "content": "Instruction i25 <<c=0 v=1 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i26",
+    "type": "tool",
+    "priority": 25,
+    "content": "Instruction i26 <<c=0 v=2 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i27",
+    "type": "directive",
+    "priority": 82,
+    "content": "Instruction i27 <<c=2 v=0 s=2>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i28",
+    "type": "protocol",
+    "priority": 90,
+    "content": "Instruction i28 <<c=0 v=3 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i29",
+    "type": "directive",
+    "priority": 90,
+    "content": "Instruction i29 <<c=1 v=2 s=1>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i30",
+    "type": "protocol",
+    "priority": 87,
+    "content": "Instruction i30 <<c=0 v=3 s=2>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i31",
+    "type": "persona",
+    "priority": 43,
+    "content": "Instruction i31 <<c=1 v=3 s=2>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i32",
+    "type": "tool",
+    "priority": 90,
+    "content": "Instruction i32 <<c=2 v=3 s=1>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i33",
+    "type": "directive",
+    "priority": 39,
+    "content": "Instruction i33 <<c=1 v=3 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i34",
+    "type": "constraint",
+    "priority": 21,
+    "content": "Instruction i34 <<c=2 v=1 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i35",
+    "type": "constraint",
+    "priority": 35,
+    "content": "Instruction i35 <<c=1 v=0 s=1>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i36",
+    "type": "tool",
+    "priority": 70,
+    "content": "Instruction i36 <<c=1 v=2 s=2>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i37",
+    "type": "persona",
+    "priority": 39,
+    "content": "Instruction i37 <<c=0 v=1 s=1>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i38",
+    "type": "persona",
+    "priority": 50,
+    "content": "Instruction i38 <<c=2 v=0 s=1>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i39",
+    "type": "tool",
+    "priority": 70,
+    "content": "Instruction i39 <<c=2 v=2 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i40",
+    "type": "protocol",
+    "priority": 50,
+    "content": "Instruction i40 <<c=0 v=1 s=2>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i41",
+    "type": "tool",
+    "priority": 28,
+    "content": "Instruction i41 <<c=0 v=0 s=0>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i42",
+    "type": "persona",
+    "priority": 33,
+    "content": "Instruction i42 <<c=1 v=3 s=2>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   },
+   {
+    "id": "i43",
+    "type": "directive",
+    "priority": 84,
+    "content": "Instruction i43 <<c=0 v=0 s=1>>",
+    "labels": [],
+    "scope_tags": [],
+    "required_tags": [],
+    "conflicts_with": [],
+    "supersedes": [],
+    "requires": []
+   }
+  ],
+  "similarity_to_query": {
+   "i07": -0.1826,
+   "i13": 0.0684,
+   "i14": 0.1037,
+   "i15": 0.384,
+   "i16": 0.1353,
+   "i17": 0.156,
+   "i18": 0.1674,
+   "i19": 0.0641,
+   "i20": 0.1674,
+   "i21": 0.0641,
+   "i23": 0.3435,
+   "i24": 0.4435,
+   "i25": 0.3435,
+   "i26": 0.384,
+   "i27": 0.066,
+   "i28": 0.2832,
+   "i29": 0.156,
+   "i30": 0.0641,
+   "i31": -0.0216,
+   "i32": -0.043,
+   "i33": -0.088,
+   "i34": 0.1353,
+   "i35": -0.0967,
+   "i36": -0.0526,
+   "i37": 0.1966,
+   "i38": 0.1832,
+   "i39": -0.094,
+   "i40": -0.1792,
+   "i41": 0.3751,
+   "i42": -0.0216,
+   "i43": 0.0158
+  },
+  "output": [
+   [
+    "i07",
+    0.83
+   ]
+  ],
+  "trace_admitted": {
+   "i24": "search",
+   "i26": "search",
+   "i15": "search",
+   "i41": "search",
+   "i23": "search",
+   "i25": "search",
+   "i28": "search",
+   "i37": "search",
+   "i38": "search",
+   "i20": "search",
+   "i18": "search",
+   "i29": "search",
+   "i17": "search",
+   "i16": "search",
+   "i34": "search",
+   "i14": "search",
+   "i13": "search",
+   "i27": "search",
+   "i30": "search",
+   "i19": "search",
+   "i21": "search",
+   "i43": "search",
+   "i31": "search",
+   "i42": "search",
+   "i32": "search",
+   "i36": "search",
+   "i33": "search",
+   "i39": "search",
+   "i35": "search",
+   "i40": "search",
+   "i07": "requires"
+  },
+  "trace_excluded": {
+   "i13": {
+    "id": "i13",
+    "reason": "prerequisite",
+    "similarity": 0.06840340793132782,
+    "by": "ghost4"
+   },
+   "i15": {
+    "id": "i15",
+    "reason": "top_k",
+    "similarity": 0.3840024471282959,
+    "by": null
+   },
+   "i28": {
+    "id": "i28",
+    "reason": "top_k",
+    "similarity": 0.2832256555557251,
+    "by": null
+   },
+   "i24": {
+    "id": "i24",
+    "reason": "top_k",
+    "similarity": 0.44348281621932983,
+    "by": null
+   },
+   "i23": {
+    "id": "i23",
+    "reason": "top_k",
+    "similarity": 0.343530535697937,
+    "by": null
+   },
+   "i25": {
+    "id": "i25",
+    "reason": "top_k",
+    "similarity": 0.343530535697937,
+    "by": null
+   },
+   "i29": {
+    "id": "i29",
+    "reason": "top_k",
+    "similarity": 0.15603776276111603,
+    "by": null
+   },
+   "i41": {
+    "id": "i41",
+    "reason": "top_k",
+    "similarity": 0.3751348555088043,
+    "by": null
+   },
+   "i26": {
+    "id": "i26",
+    "reason": "top_k",
+    "similarity": 0.3840024471282959,
+    "by": null
+   },
+   "i17": {
+    "id": "i17",
+    "reason": "top_k",
+    "similarity": 0.15603776276111603,
+    "by": null
+   },
+   "i21": {
+    "id": "i21",
+    "reason": "top_k",
+    "similarity": 0.06406352669000626,
+    "by": null
+   },
+   "i30": {
+    "id": "i30",
+    "reason": "top_k",
+    "similarity": 0.06406352669000626,
+    "by": null
+   },
+   "i27": {
+    "id": "i27",
+    "reason": "top_k",
+    "similarity": 0.0660128965973854,
+    "by": null
+   },
+   "i38": {
+    "id": "i38",
+    "reason": "top_k",
+    "similarity": 0.18324576318264008,
+    "by": null
+   },
+   "i20": {
+    "id": "i20",
+    "reason": "top_k",
+    "similarity": 0.1674419641494751,
+    "by": null
+   },
+   "i43": {
+    "id": "i43",
+    "reason": "top_k",
+    "similarity": 0.01581186056137085,
+    "by": null
+   },
+   "i37": {
+    "id": "i37",
+    "reason": "top_k",
+    "similarity": 0.1966114342212677,
+    "by": null
+   },
+   "i32": {
+    "id": "i32",
+    "reason": "top_k",
+    "similarity": -0.04301545023918152,
+    "by": null
+   },
+   "i19": {
+    "id": "i19",
+    "reason": "top_k",
+    "similarity": 0.06406352669000626,
+    "by": null
+   },
+   "i18": {
+    "id": "i18",
+    "reason": "top_k",
+    "similarity": 0.1674419641494751,
+    "by": null
+   },
+   "i36": {
+    "id": "i36",
+    "reason": "top_k",
+    "similarity": -0.0525754950940609,
+    "by": null
+   },
+   "i16": {
+    "id": "i16",
+    "reason": "top_k",
+    "similarity": 0.1352541297674179,
+    "by": null
+   },
+   "i14": {
+    "id": "i14",
+    "reason": "top_k",
+    "similarity": 0.10371554642915726,
+    "by": null
+   },
+   "i34": {
+    "id": "i34",
+    "reason": "top_k",
+    "similarity": 0.1352541297674179,
+    "by": null
+   },
+   "i39": {
+    "id": "i39",
+    "reason": "top_k",
+    "similarity": -0.09399420022964478,
+    "by": null
+   },
+   "i31": {
+    "id": "i31",
+    "reason": "top_k",
+    "similarity": -0.02162856049835682,
+    "by": null
+   },
+   "i42": {
+    "id": "i42",
+    "reason": "top_k",
+    "similarity": -0.021628575399518013,
+    "by": null
+   },
+   "i33": {
+    "id": "i33",
+    "reason": "top_k",
+    "similarity": -0.08804501593112946,
+    "by": null
+   },
+   "i35": {
+    "id": "i35",
+    "reason": "top_k",
+    "similarity": -0.09673801809549332,
+    "by": null
+   },
+   "i40": {
+    "id": "i40",
+    "reason": "top_k",
+    "similarity": -0.1792125105857849,
+    "by": null
+   }
+  },
+  "trace_missing_prerequisites": {},
+  "violation": "items admitted only as prerequisites, unreachable from any item admitted on its own: ['i07']; already orphaned after relationship resolution (kept alive by a requires cycle)",
+  "source": {
+   "corpus": 6,
+   "case": 3,
+   "k": 6,
+   "detail": "items admitted only as prerequisites, unreachable from any item admitted on its own: ['i07']; already orphaned after relationship resolution (kept alive by a requires cycle)"
+  },
+  "reproduced": true
+ }
+]

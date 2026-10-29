@@ -1,0 +1,658 @@
+
+=== BEAR retrieval invariants: 2000 random corpora ===
+
+Corpora: 20-60 instructions, 5 contexts each, k = 1..30, default_top_k = 10 (pool base 30), threshold = 0.3, priority_weight = 0.3, mandatory_tags = ['safety', 'compliance']
+Configurations: ['main', 'main_hash', 'legacy_pool_by_k', 'legacy_unchecked_requires', 'legacy_below_threshold', 'no_mandatory', 'no_priority', 'no_threshold']
+Workers: 16
+
+Ran in 121.7s. Corpus sizes: mean 39.6, range 20-60
+
+--- main (Main defaults (stub)) ---
+cases=10000 (ungated 3540), outputs=300000, mean |output|=11.83, P(|output|>k)=0.222, P(top-k cut removes >=1)=0.512
+threshold removals/output=3.906, requires admissions/output=0.814, P(missing-prereq record)=0.2844, P(loser of a winner cut by top-k)=0.2548, P(loser of a winner removed in resolution)=0.4515, mandatory displaced by mandatory=91170, I7 strict-prefix share=0.7146
+Inv   Invariant                                  Corpora violated [95% CP CI]       Outputs violated   Non-vacuous outputs 
+----------------------------------------------------------------------------------------------------------------------------
+I1    Gate soundness                             0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       127880
+I2    Mandatory completeness                     0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       265320
+I2b   Budget bound                               0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       300000
+I3    Conflict freeness                          0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       227910
+I3b   Supersede consistency                      0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       189720
+I4    Dependency closure                         0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       205376
+I5    No orphan prerequisites                    718/2000 = 0.3590 [0.3379, 0.3805] 13830/300000       75585
+I5a     I5 orphan made by the top-k cut          705/2000 = 0.3525 [0.3315, 0.3739] 12799/300000       75585
+I5b     I5 orphan left by resolution (cycle)     28/2000 = 0.0140 [0.0093, 0.0202]  1062/300000       75585
+I6    Determinism                                0/2000 = 0.0000 [0.0000, 0.0018]   0/29331        29331
+I7    Budget stability (k <= pool base)          0/2000 = 0.0000 [0.0000, 0.0018]   0/290000       290000
+I8    Mandatory not displaced by optional        0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       185340
+I9    Threshold removes only soft-scope failures 0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       274170
+
+--- main_hash (Main defaults (hash)) ---
+cases=10000 (ungated 3540), outputs=300000, mean |output|=12.38, P(|output|>k)=0.242, P(top-k cut removes >=1)=0.552
+threshold removals/output=2.010, requires admissions/output=0.574, P(missing-prereq record)=0.2877, P(loser of a winner cut by top-k)=0.2865, P(loser of a winner removed in resolution)=0.5089, mandatory displaced by mandatory=91320, I7 strict-prefix share=0.6612
+Inv   Invariant                                  Corpora violated [95% CP CI]       Outputs violated   Non-vacuous outputs 
+----------------------------------------------------------------------------------------------------------------------------
+I1    Gate soundness                             0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       129871
+I2    Mandatory completeness                     0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       265320
+I2b   Budget bound                               0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       300000
+I3    Conflict freeness                          0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       238080
+I3b   Supersede consistency                      0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       204570
+I4    Dependency closure                         0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       207260
+I5    No orphan prerequisites                    574/2000 = 0.2870 [0.2672, 0.3074] 10224/300000       54114
+I5a     I5 orphan made by the top-k cut          560/2000 = 0.2800 [0.2604, 0.3002] 9587/300000       54114
+I5b     I5 orphan left by resolution (cycle)     17/2000 = 0.0085 [0.0050, 0.0136]  647/300000       54114
+I6    Determinism                                0/2000 = 0.0000 [0.0000, 0.0018]   0/29331        29331
+I7    Budget stability (k <= pool base)          0/2000 = 0.0000 [0.0000, 0.0018]   0/290000       290000
+I8    Mandatory not displaced by optional        0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       185340
+I9    Threshold removes only soft-scope failures 0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       196650
+
+--- legacy_pool_by_k (restore_pool_by_k) ---
+cases=10000 (ungated 3540), outputs=300000, mean |output|=12.08, P(|output|>k)=0.231, P(top-k cut removes >=1)=0.524
+threshold removals/output=4.119, requires admissions/output=0.757, P(missing-prereq record)=0.2856, P(loser of a winner cut by top-k)=0.2452, P(loser of a winner removed in resolution)=0.4513, mandatory displaced by mandatory=91207, I7 strict-prefix share=0.6872
+Inv   Invariant                                  Corpora violated [95% CP CI]       Outputs violated   Non-vacuous outputs 
+----------------------------------------------------------------------------------------------------------------------------
+I1    Gate soundness                             0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       127880
+I2    Mandatory completeness                     0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       265320
+I2b   Budget bound                               0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       300000
+I3    Conflict freeness                          0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       226419
+I3b   Supersede consistency                      0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       187752
+I4    Dependency closure                         0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       206442
+I5    No orphan prerequisites                    816/2000 = 0.4080 [0.3864, 0.4299] 13924/300000       73969
+I5a     I5 orphan made by the top-k cut          800/2000 = 0.4000 [0.3784, 0.4219] 13033/300000       73969
+I5b     I5 orphan left by resolution (cycle)     38/2000 = 0.0190 [0.0135, 0.0260]  913/300000       73969
+I6    Determinism                                0/2000 = 0.0000 [0.0000, 0.0018]   0/29331        29331
+I7    Budget stability (k <= pool base)          1208/2000 = 0.6040 [0.5822, 0.6255] 7475/290000       290000
+I8    Mandatory not displaced by optional        0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       185340
+I9    Threshold removes only soft-scope failures 0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       263730
+
+--- legacy_unchecked_requires (restore_unchecked_requires) ---
+cases=10000 (ungated 3540), outputs=300000, mean |output|=12.37, P(|output|>k)=0.070, P(top-k cut removes >=1)=0.584
+threshold removals/output=3.938, requires admissions/output=0.752, P(missing-prereq record)=0.0000, P(loser of a winner cut by top-k)=0.3069, P(loser of a winner removed in resolution)=0.3556, mandatory displaced by mandatory=91170, I7 strict-prefix share=0.6897
+Inv   Invariant                                  Corpora violated [95% CP CI]       Outputs violated   Non-vacuous outputs 
+----------------------------------------------------------------------------------------------------------------------------
+I1    Gate soundness                             0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       129524
+I2    Mandatory completeness                     0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       265320
+I2b   Budget bound                               0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       300000
+I3    Conflict freeness                          460/2000 = 0.2300 [0.2117, 0.2491] 16525/300000       227670
+I3b   Supersede consistency                      322/2000 = 0.1610 [0.1451, 0.1779] 8989/300000       189210
+I4    Dependency closure                         1870/2000 = 0.9350 [0.9233, 0.9454] 214581/300000       247581
+I5    No orphan prerequisites                    1194/2000 = 0.5970 [0.5751, 0.6186] 29910/300000       102518
+I5a     I5 orphan made by the top-k cut          1194/2000 = 0.5970 [0.5751, 0.6186] 29910/300000       102518
+I5b     I5 orphan left by resolution (cycle)     0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       102518
+I6    Determinism                                0/2000 = 0.0000 [0.0000, 0.0018]   0/29331        29331
+I7    Budget stability (k <= pool base)          0/2000 = 0.0000 [0.0000, 0.0018]   0/290000       290000
+I8    Mandatory not displaced by optional        0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       185340
+I9    Threshold removes only soft-scope failures 0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       274380
+
+--- legacy_below_threshold (restore_below_threshold) ---
+cases=10000 (ungated 3540), outputs=300000, mean |output|=11.91, P(|output|>k)=0.224, P(top-k cut removes >=1)=0.518
+threshold removals/output=3.628, requires admissions/output=0.777, P(missing-prereq record)=0.2846, P(loser of a winner cut by top-k)=0.2605, P(loser of a winner removed in resolution)=0.4589, mandatory displaced by mandatory=91170, I7 strict-prefix share=0.7092
+Inv   Invariant                                  Corpora violated [95% CP CI]       Outputs violated   Non-vacuous outputs 
+----------------------------------------------------------------------------------------------------------------------------
+I1    Gate soundness                             0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       135913
+I2    Mandatory completeness                     0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       265320
+I2b   Budget bound                               0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       300000
+I3    Conflict freeness                          0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       230070
+I3b   Supersede consistency                      0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       192210
+I4    Dependency closure                         0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       205465
+I5    No orphan prerequisites                    667/2000 = 0.3335 [0.3128, 0.3546] 13182/300000       71648
+I5a     I5 orphan made by the top-k cut          653/2000 = 0.3265 [0.3060, 0.3475] 12171/300000       71648
+I5b     I5 orphan left by resolution (cycle)     27/2000 = 0.0135 [0.0089, 0.0196]  1042/300000       71648
+I6    Determinism                                0/2000 = 0.0000 [0.0000, 0.0018]   0/29331        29331
+I7    Budget stability (k <= pool base)          0/2000 = 0.0000 [0.0000, 0.0018]   0/290000       290000
+I8    Mandatory not displaced by optional        0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       185340
+I9    Threshold removes only soft-scope failures 0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       266130
+
+--- no_mandatory (mandatory_tags=[]) ---
+cases=10000 (ungated 3540), outputs=300000, mean |output|=11.01, P(|output|>k)=0.137, P(top-k cut removes >=1)=0.474
+threshold removals/output=4.677, requires admissions/output=0.906, P(missing-prereq record)=0.0000, P(loser of a winner cut by top-k)=0.2580, P(loser of a winner removed in resolution)=0.4760, mandatory displaced by mandatory=0, I7 strict-prefix share=0.8885
+Inv   Invariant                                  Corpora violated [95% CP CI]       Outputs violated   Non-vacuous outputs 
+----------------------------------------------------------------------------------------------------------------------------
+I1    Gate soundness                             0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       123426
+I2    Mandatory completeness                     0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       0
+I2b   Budget bound                               0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       300000
+I3    Conflict freeness                          0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       210510
+I3b   Supersede consistency                      0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       178890
+I4    Dependency closure                         0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       171592
+I5    No orphan prerequisites                    883/2000 = 0.4415 [0.4196, 0.4636] 20070/300000       81244
+I5a     I5 orphan made by the top-k cut          870/2000 = 0.4350 [0.4131, 0.4571] 18511/300000       81244
+I5b     I5 orphan left by resolution (cycle)     35/2000 = 0.0175 [0.0122, 0.0243]  1639/300000       81244
+I6    Determinism                                0/2000 = 0.0000 [0.0000, 0.0018]   0/29331        29331
+I7    Budget stability (k <= pool base)          0/2000 = 0.0000 [0.0000, 0.0018]   0/290000       290000
+I8    Mandatory not displaced by optional        0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       0
+I9    Threshold removes only soft-scope failures 0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       282990
+
+--- no_priority (priority_weight=0) ---
+cases=10000 (ungated 3540), outputs=300000, mean |output|=11.83, P(|output|>k)=0.219, P(top-k cut removes >=1)=0.513
+threshold removals/output=3.906, requires admissions/output=0.814, P(missing-prereq record)=0.2844, P(loser of a winner cut by top-k)=0.2663, P(loser of a winner removed in resolution)=0.4515, mandatory displaced by mandatory=91170, I7 strict-prefix share=0.7191
+Inv   Invariant                                  Corpora violated [95% CP CI]       Outputs violated   Non-vacuous outputs 
+----------------------------------------------------------------------------------------------------------------------------
+I1    Gate soundness                             0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       127839
+I2    Mandatory completeness                     0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       265320
+I2b   Budget bound                               0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       300000
+I3    Conflict freeness                          0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       227910
+I3b   Supersede consistency                      0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       189720
+I4    Dependency closure                         0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       205631
+I5    No orphan prerequisites                    740/2000 = 0.3700 [0.3488, 0.3916] 14364/300000       76016
+I5a     I5 orphan made by the top-k cut          728/2000 = 0.3640 [0.3429, 0.3855] 13319/300000       76016
+I5b     I5 orphan left by resolution (cycle)     28/2000 = 0.0140 [0.0093, 0.0202]  1086/300000       76016
+I6    Determinism                                0/2000 = 0.0000 [0.0000, 0.0018]   0/29331        29331
+I7    Budget stability (k <= pool base)          0/2000 = 0.0000 [0.0000, 0.0018]   0/290000       290000
+I8    Mandatory not displaced by optional        0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       185340
+I9    Threshold removes only soft-scope failures 0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       274170
+
+--- no_threshold (threshold off) ---
+cases=10000 (ungated 3540), outputs=300000, mean |output|=12.90, P(|output|>k)=0.253, P(top-k cut removes >=1)=0.591
+threshold removals/output=0.000, requires admissions/output=0.310, P(missing-prereq record)=0.2885, P(loser of a winner cut by top-k)=0.3335, P(loser of a winner removed in resolution)=0.5671, mandatory displaced by mandatory=91230, I7 strict-prefix share=0.6376
+Inv   Invariant                                  Corpora violated [95% CP CI]       Outputs violated   Non-vacuous outputs 
+----------------------------------------------------------------------------------------------------------------------------
+I1    Gate soundness                             0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       130908
+I2    Mandatory completeness                     0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       265320
+I2b   Budget bound                               0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       300000
+I3    Conflict freeness                          0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       248310
+I3b   Supersede consistency                      0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       219750
+I4    Dependency closure                         0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       208894
+I5    No orphan prerequisites                    319/2000 = 0.1595 [0.1437, 0.1763] 6076/300000       26266
+I5a     I5 orphan made by the top-k cut          314/2000 = 0.1570 [0.1413, 0.1737] 5664/300000       26266
+I5b     I5 orphan left by resolution (cycle)     14/2000 = 0.0070 [0.0038, 0.0117]  483/300000       26266
+I6    Determinism                                0/2000 = 0.0000 [0.0000, 0.0018]   0/29331        29331
+I7    Budget stability (k <= pool base)          0/2000 = 0.0000 [0.0000, 0.0018]   0/290000       290000
+I8    Mandatory not displaced by optional        0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       185340
+I9    Threshold removes only soft-scope failures 0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       0
+
+--- Corpus-level violation rate by configuration (violated corpora / corpora) ---
+
+Inv                main         main_hash  legacy_pool_by_k  legacy_unchecked  legacy_below_thr      no_mandatory       no_priority      no_threshold
+I1              0/2000            0/2000            0/2000            0/2000            0/2000            0/2000            0/2000            0/2000 
+I2              0/2000            0/2000            0/2000            0/2000            0/2000            0/2000            0/2000            0/2000 
+I2b             0/2000            0/2000            0/2000            0/2000            0/2000            0/2000            0/2000            0/2000 
+I3              0/2000            0/2000            0/2000          460/2000            0/2000            0/2000            0/2000            0/2000 
+I3b             0/2000            0/2000            0/2000          322/2000            0/2000            0/2000            0/2000            0/2000 
+I4              0/2000            0/2000            0/2000         1870/2000            0/2000            0/2000            0/2000            0/2000 
+I5            718/2000          574/2000          816/2000         1194/2000          667/2000          883/2000          740/2000          319/2000 
+I5a           705/2000          560/2000          800/2000         1194/2000          653/2000          870/2000          728/2000          314/2000 
+I5b            28/2000           17/2000           38/2000            0/2000           27/2000           35/2000           28/2000           14/2000 
+I6              0/2000            0/2000            0/2000            0/2000            0/2000            0/2000            0/2000            0/2000 
+I7              0/2000            0/2000         1208/2000            0/2000            0/2000            0/2000            0/2000            0/2000 
+I8              0/2000            0/2000            0/2000            0/2000            0/2000            0/2000            0/2000            0/2000 
+I9              0/2000            0/2000            0/2000            0/2000            0/2000            0/2000            0/2000            0/2000 
+
+--- Pool growth sensitivity (main defaults, stub embedder) ---
+
+(a) retrieval_pool = 10, k = 1..30, nesting of consecutive k:
+    ungated_within   pairs=31860   non-nested=0     rate=0.0000 [0.0000, 0.0001]
+    ungated_above    pairs=70800   non-nested=2026  rate=0.0286 [0.0274, 0.0299]  dropped items by trace reason: {'superseded': 816, 'conflict': 1188, 'none': 114, 'unrequired': 88, 'prerequisite': 311, 'top_k': 171, 'threshold': 18}
+    gated_within     pairs=58140   non-nested=0     rate=0.0000 [0.0000, 0.0001]
+    gated_above      pairs=129200  non-nested=0     rate=0.0000 [0.0000, 0.0000]
+    example ungated_above_conflict: corpus 4 case 0 k 10->11: i36 dropped, trace {'id': 'i36', 'reason': 'conflict', 'similarity': 0.0, 'by': 'i41'}
+    example ungated_above_none: corpus 4 case 0 k 23->24: i21 dropped, trace {}
+    example ungated_above_prerequisite: corpus 4 case 1 k 17->18: i25 dropped, trace {'id': 'i25', 'reason': 'prerequisite', 'similarity': 0.6214401125907898, 'by': 'i41'}
+    example ungated_above_superseded: corpus 0 case 0 k 10->11: i39 dropped, trace {'id': 'i39', 'reason': 'superseded', 'similarity': 0.33148473501205444, 'by': 'i35'}
+    example ungated_above_threshold: corpus 451 case 2 k 25->26: i03 dropped, trace {'id': 'i03', 'reason': 'threshold', 'similarity': 0.15374219417572021, 'by': None}
+    example ungated_above_top_k: corpus 6 case 2 k 13->14: i16 dropped, trace {'id': 'i16', 'reason': 'top_k', 'similarity': 0.0, 'by': None}
+    example ungated_above_unrequired: corpus 4 case 1 k 17->18: i04 dropped, trace {'id': 'i04', 'reason': 'unrequired', 'similarity': 0.0, 'by': None}
+
+(b) Resolution order: resolved set (top_k=ALL, no cut) with the candidates resolved in reverse order differs in 698/10000 cases [0.0649, 0.0750], 285/2000 corpora. Example: {'corpus': 5, 'case': 0, 'only_forward': [], 'only_reversed': ['i06']}
+
+(c) Ungated cases, output at pool p versus whole-corpus pool:
+    k = 5
+      pool=  5  cases=3540   differ=0.6184 [0.6021, 0.6344]  mean Jaccard=0.7332
+      pool= 10  cases=3540   differ=0.4709 [0.4543, 0.4875]  mean Jaccard=0.8243
+      pool= 15  cases=3540   differ=0.3616 [0.3457, 0.3777]  mean Jaccard=0.8737
+      pool= 20  cases=3540   differ=0.2785 [0.2638, 0.2936]  mean Jaccard=0.9072
+      pool= 30  cases=3540   differ=0.1268 [0.1160, 0.1382]  mean Jaccard=0.9599
+      pool= 45  cases=3540   differ=0.0280 [0.0228, 0.0339]  mean Jaccard=0.9918
+      pool= 60  cases=3540   differ=0.0000 [0.0000, 0.0010]  mean Jaccard=1.0000
+    k = 10
+      pool=  5  cases=3540   differ=0.8788 [0.8676, 0.8894]  mean Jaccard=0.6930
+      pool= 10  cases=3540   differ=0.8788 [0.8676, 0.8894]  mean Jaccard=0.6930
+      pool= 15  cases=3540   differ=0.7621 [0.7478, 0.7761]  mean Jaccard=0.7807
+      pool= 20  cases=3540   differ=0.6141 [0.5979, 0.6302]  mean Jaccard=0.8464
+      pool= 30  cases=3540   differ=0.3201 [0.3047, 0.3357]  mean Jaccard=0.9311
+      pool= 45  cases=3540   differ=0.0811 [0.0723, 0.0906]  mean Jaccard=0.9846
+      pool= 60  cases=3540   differ=0.0000 [0.0000, 0.0010]  mean Jaccard=1.0000
+
+Cross-process determinism (main, 200 corpora, PYTHONHASHSEED (random) vs 12345): 0 digest mismatches
+
+--- Minimal counterexamples ---
+
+  [main] I5 No orphan prerequisites: corpus 0, case 2, k 2 -> shrunk to 3 instructions, k=2
+    context: {'tags': [], 'gate_tags': []}  query: 'query 2 <<c=0 v=2 s=2>>'
+    i29: p=63 sim=-0.0526 {'scope_tags': ['safety']}
+    i35: p=46 sim=0.2487 {'requires': ['i40']}
+    i40: p=70 sim=0.156 {'scope_tags': ['t6']}
+    output: [('i40', 0.7), ('i29', 0.63)]
+    trace admitted: {'i35': 'search', 'i29': 'mandatory', 'i40': 'requires'}
+    violation: items admitted only as prerequisites, unreachable from any item admitted on its own: ['i40']
+
+  [main] I5a   I5 orphan made by the top-k cut: corpus 0, case 2, k 2 -> shrunk to 3 instructions, k=2
+    context: {'tags': [], 'gate_tags': []}  query: 'query 2 <<c=0 v=2 s=2>>'
+    i29: p=63 sim=-0.0526 {'scope_tags': ['safety']}
+    i35: p=46 sim=0.2487 {'requires': ['i40']}
+    i40: p=70 sim=0.156 {'scope_tags': ['t6']}
+    output: [('i40', 0.7), ('i29', 0.63)]
+    trace admitted: {'i35': 'search', 'i29': 'mandatory', 'i40': 'requires'}
+    violation: items admitted only as prerequisites, unreachable from any item admitted on its own: ['i40']; their dependents were cut by top-k
+
+  [main] I5b   I5 orphan left by resolution (cycle): corpus 6, case 3, k 6 -> shrunk to 31 instructions, k=1
+    context: {'tags': [], 'gate_tags': []}  query: 'query 3 <<c=0 v=2 s=2>>'
+    i07: p=83 sim=-0.1826 {'requires': ['i07']}
+    i13: p=90 sim=0.0684 {'requires': ['i07', 'ghost4']}
+    i14: p=30 sim=0.1037 {}
+    i15: p=90 sim=0.384 {}
+    i16: p=24 sim=0.1353 {}
+    i17: p=70 sim=0.156 {}
+    i18: p=35 sim=0.1674 {}
+    i19: p=64 sim=0.0641 {}
+    i20: p=50 sim=0.1674 {}
+    i21: p=90 sim=0.0641 {}
+    i23: p=70 sim=0.3435 {}
+    i24: p=50 sim=0.4435 {}
+    i25: p=70 sim=0.3435 {}
+    i26: p=25 sim=0.384 {}
+    i27: p=82 sim=0.066 {}
+    i28: p=90 sim=0.2832 {}
+    i29: p=90 sim=0.156 {}
+    i30: p=87 sim=0.0641 {}
+    i31: p=43 sim=-0.0216 {}
+    i32: p=90 sim=-0.043 {}
+    i33: p=39 sim=-0.088 {}
+    i34: p=21 sim=0.1353 {}
+    i35: p=35 sim=-0.0967 {}
+    i36: p=70 sim=-0.0526 {}
+    i37: p=39 sim=0.1966 {}
+    i38: p=50 sim=0.1832 {}
+    i39: p=70 sim=-0.094 {}
+    i40: p=50 sim=-0.1792 {}
+    i41: p=28 sim=0.3751 {}
+    i42: p=33 sim=-0.0216 {}
+    i43: p=84 sim=0.0158 {}
+    output: [('i07', 0.83)]
+    trace admitted: {'i24': 'search', 'i26': 'search', 'i15': 'search', 'i41': 'search', 'i23': 'search', 'i25': 'search', 'i28': 'search', 'i37': 'search', 'i38': 'search', 'i20': 'search', 'i18': 'search', 'i29': 'search', 'i17': 'search', 'i16': 'search', 'i34': 'search', 'i14': 'search', 'i13': 'search', 'i27': 'search', 'i30': 'search', 'i19': 'search', 'i21': 'search', 'i43': 'search', 'i31': 'search', 'i42': 'search', 'i32': 'search', 'i36': 'search', 'i33': 'search', 'i39': 'search', 'i35': 'search', 'i40': 'search', 'i07': 'requires'}
+    violation: items admitted only as prerequisites, unreachable from any item admitted on its own: ['i07']; already orphaned after relationship resolution (kept alive by a requires cycle)
+
+  [main_hash] I5 No orphan prerequisites: corpus 3, case 3, k 7 -> shrunk to 2 instructions, k=1
+    context: {'tags': [], 'gate_tags': []}  query: 'query 3 <<c=0 v=0 s=2>>'
+    i09: p=47 sim=0.2919 {'scope_tags': ['t3'], 'labels': ['t4']}
+    i27: p=50 sim=0.317 {'requires': ['i09']}
+    output: [('i09', 0.47)]
+    trace admitted: {'i27': 'search', 'i09': 'requires'}
+    violation: items admitted only as prerequisites, unreachable from any item admitted on its own: ['i09']
+
+  [main_hash] I5a   I5 orphan made by the top-k cut: corpus 3, case 3, k 7 -> shrunk to 2 instructions, k=1
+    context: {'tags': [], 'gate_tags': []}  query: 'query 3 <<c=0 v=0 s=2>>'
+    i09: p=47 sim=0.2919 {'scope_tags': ['t3'], 'labels': ['t4']}
+    i27: p=50 sim=0.317 {'requires': ['i09']}
+    output: [('i09', 0.47)]
+    trace admitted: {'i27': 'search', 'i09': 'requires'}
+    violation: items admitted only as prerequisites, unreachable from any item admitted on its own: ['i09']; their dependents were cut by top-k
+
+  [main_hash] I5b   I5 orphan left by resolution (cycle): corpus 321, case 3, k 2 -> shrunk to 3 instructions, k=1
+    context: {'tags': [], 'gate_tags': []}  query: 'query 3 <<c=4 v=0 s=1>>'
+    i06: p=28 sim=0.335 {'requires': ['i15', 'i05']}
+    i10: p=90 sim=0.1408 {'scope_tags': ['t4'], 'requires': ['i15']}
+    i15: p=90 sim=0.2074 {'scope_tags': ['t7'], 'requires': ['i10']}
+    output: [('i15', 0.9), ('i10', 0.9)]
+    trace admitted: {'i06': 'search', 'i15': 'requires', 'i10': 'requires'}
+    violation: items admitted only as prerequisites, unreachable from any item admitted on its own: ['i10', 'i15']; already orphaned after relationship resolution (kept alive by a requires cycle)
+
+  [legacy_pool_by_k] I5 No orphan prerequisites: corpus 0, case 2, k 5 -> shrunk to 3 instructions, k=2
+    context: {'tags': [], 'gate_tags': []}  query: 'query 2 <<c=0 v=2 s=2>>'
+    i29: p=63 sim=-0.0526 {'scope_tags': ['safety']}
+    i35: p=46 sim=0.2487 {'requires': ['i40']}
+    i40: p=70 sim=0.156 {'scope_tags': ['t6']}
+    output: [('i40', 0.7), ('i29', 0.63)]
+    trace admitted: {'i35': 'search', 'i29': 'mandatory', 'i40': 'requires'}
+    violation: items admitted only as prerequisites, unreachable from any item admitted on its own: ['i40']
+
+  [legacy_pool_by_k] I5a   I5 orphan made by the top-k cut: corpus 0, case 2, k 5 -> shrunk to 3 instructions, k=2
+    context: {'tags': [], 'gate_tags': []}  query: 'query 2 <<c=0 v=2 s=2>>'
+    i29: p=63 sim=-0.0526 {'scope_tags': ['safety']}
+    i35: p=46 sim=0.2487 {'requires': ['i40']}
+    i40: p=70 sim=0.156 {'scope_tags': ['t6']}
+    output: [('i40', 0.7), ('i29', 0.63)]
+    trace admitted: {'i35': 'search', 'i29': 'mandatory', 'i40': 'requires'}
+    violation: items admitted only as prerequisites, unreachable from any item admitted on its own: ['i40']; their dependents were cut by top-k
+
+  [legacy_pool_by_k] I5b   I5 orphan left by resolution (cycle): corpus 6, case 3, k 8 -> shrunk to 4 instructions, k=1
+    context: {'tags': [], 'gate_tags': []}  query: 'query 3 <<c=0 v=2 s=2>>'
+    i07: p=83 sim=-0.1826 {'requires': ['i07']}
+    i13: p=90 sim=0.0684 {'requires': ['i07', 'ghost4']}
+    i42: p=33 sim=-0.0216 {}
+    i43: p=84 sim=0.0158 {}
+    output: [('i07', 0.83)]
+    trace admitted: {'i13': 'search', 'i43': 'search', 'i42': 'search', 'i07': 'requires'}
+    violation: items admitted only as prerequisites, unreachable from any item admitted on its own: ['i07']; already orphaned after relationship resolution (kept alive by a requires cycle)
+
+  [legacy_pool_by_k] I7 Budget stability (k <= pool base): corpus 0, case 2, k 5 -> shrunk to 13 instructions, k=5
+    context: {'tags': [], 'gate_tags': []}  query: 'query 2 <<c=0 v=2 s=2>>'
+    i02: p=64 sim=0.3751 {}
+    i04: p=73 sim=0.2832 {}
+    i06: p=83 sim=0.3603 {}
+    i09: p=14 sim=0.2873 {}
+    i11: p=48 sim=0.4306 {}
+    i12: p=98 sim=0.3751 {}
+    i14: p=70 sim=0.2873 {}
+    i15: p=3 sim=0.3751 {}
+    i23: p=50 sim=0.3751 {}
+    i24: p=90 sim=0.3751 {}
+    i25: p=1 sim=0.3603 {}
+    i35: p=46 sim=0.2487 {'supersedes': ['i39']}
+    i39: p=90 sim=0.4306 {}
+    output: [('i12', 0.5566), ('i24', 0.5326), ('i06', 0.5012), ('i02', 0.4546), ('i11', 0.4454)]
+    trace admitted: {'i39': 'search', 'i11': 'search', 'i23': 'search', 'i15': 'search', 'i24': 'search', 'i12': 'search', 'i02': 'search', 'i06': 'search', 'i25': 'search', 'i09': 'search', 'i14': 'search', 'i04': 'search', 'i35': 'search'}
+    violation: k=4 -> ['i39', 'i12', 'i24', 'i06']; k=5 -> ['i12', 'i24', 'i06', 'i02', 'i11']
+
+  [legacy_unchecked_requires] I3 Conflict freeness: corpus 3, case 2, k 4 -> shrunk to 3 instructions, k=2
+    context: {'tags': [], 'gate_tags': []}  query: 'query 2 <<c=2 v=3 s=2>>'
+    i21: p=90 sim=0.3159 {}
+    i29: p=60 sim=-0.073 {'requires': ['i32']}
+    i32: p=69 sim=0.2568 {'scope_tags': ['t6'], 'conflicts_with': ['i21']}
+    output: [('i32', 0.69), ('i21', 0.4911)]
+    trace admitted: {'i21': 'search', 'i29': 'search', 'i32': 'requires'}
+    violation: conflicting pairs both in output: [('i32', 'i21')]
+
+  [legacy_unchecked_requires] I3b Supersede consistency: corpus 2, case 2, k 10 -> shrunk to 3 instructions, k=3
+    context: {'tags': [], 'gate_tags': []}  query: 'query 2 <<c=3 v=0 s=1>>'
+    i08: p=25 sim=0.4222 {}
+    i26: p=90 sim=-0.1236 {'scope_tags': ['t6'], 'supersedes': ['i08']}
+    i48: p=70 sim=0.4222 {'requires': ['i26']}
+    output: [('i26', 0.9), ('i48', 0.5055), ('i08', 0.3705)]
+    trace admitted: {'i48': 'search', 'i08': 'search', 'i26': 'requires'}
+    violation: (superseder, superseded) both in output: [('i26', 'i08')]
+
+  [legacy_unchecked_requires] I4 Dependency closure: corpus 0, case 0, k 3 -> shrunk to 1 instructions, k=1
+    context: {'tags': [], 'gate_tags': []}  query: 'query 0 <<c=1 v=2 s=0>>'
+    i28: p=84 sim=0.6133 {'requires': ['i14']}
+    output: [('i28', 0.6813)]
+    trace admitted: {'i28': 'search'}
+    violation: i28 (optional) lacks ['i14']
+
+  [legacy_unchecked_requires] I5 No orphan prerequisites: corpus 0, case 2, k 2 -> shrunk to 3 instructions, k=2
+    context: {'tags': [], 'gate_tags': []}  query: 'query 2 <<c=0 v=2 s=2>>'
+    i29: p=63 sim=-0.0526 {'scope_tags': ['safety']}
+    i35: p=46 sim=0.2487 {'requires': ['i40']}
+    i40: p=70 sim=0.156 {'scope_tags': ['t6']}
+    output: [('i40', 0.7), ('i29', 0.63)]
+    trace admitted: {'i35': 'search', 'i29': 'mandatory', 'i40': 'requires'}
+    violation: items admitted only as prerequisites, unreachable from any item admitted on its own: ['i40']
+
+  [legacy_unchecked_requires] I5a   I5 orphan made by the top-k cut: corpus 0, case 2, k 2 -> shrunk to 3 instructions, k=2
+    context: {'tags': [], 'gate_tags': []}  query: 'query 2 <<c=0 v=2 s=2>>'
+    i29: p=63 sim=-0.0526 {'scope_tags': ['safety']}
+    i35: p=46 sim=0.2487 {'requires': ['i40']}
+    i40: p=70 sim=0.156 {'scope_tags': ['t6']}
+    output: [('i40', 0.7), ('i29', 0.63)]
+    trace admitted: {'i35': 'search', 'i29': 'mandatory', 'i40': 'requires'}
+    violation: items admitted only as prerequisites, unreachable from any item admitted on its own: ['i40']; their dependents were cut by top-k
+
+  [legacy_below_threshold] I5 No orphan prerequisites: corpus 0, case 2, k 2 -> shrunk to 3 instructions, k=2
+    context: {'tags': [], 'gate_tags': []}  query: 'query 2 <<c=0 v=2 s=2>>'
+    i29: p=63 sim=-0.0526 {'scope_tags': ['safety']}
+    i35: p=46 sim=0.2487 {'requires': ['i40']}
+    i40: p=70 sim=0.156 {'scope_tags': ['t6']}
+    output: [('i40', 0.7), ('i29', 0.63)]
+    trace admitted: {'i35': 'search', 'i29': 'mandatory', 'i40': 'requires'}
+    violation: items admitted only as prerequisites, unreachable from any item admitted on its own: ['i40']
+
+  [legacy_below_threshold] I5a   I5 orphan made by the top-k cut: corpus 0, case 2, k 2 -> shrunk to 3 instructions, k=2
+    context: {'tags': [], 'gate_tags': []}  query: 'query 2 <<c=0 v=2 s=2>>'
+    i29: p=63 sim=-0.0526 {'scope_tags': ['safety']}
+    i35: p=46 sim=0.2487 {'requires': ['i40']}
+    i40: p=70 sim=0.156 {'scope_tags': ['t6']}
+    output: [('i40', 0.7), ('i29', 0.63)]
+    trace admitted: {'i35': 'search', 'i29': 'mandatory', 'i40': 'requires'}
+    violation: items admitted only as prerequisites, unreachable from any item admitted on its own: ['i40']; their dependents were cut by top-k
+
+  [legacy_below_threshold] I5b   I5 orphan left by resolution (cycle): corpus 6, case 3, k 6 -> shrunk to 31 instructions, k=1
+    context: {'tags': [], 'gate_tags': []}  query: 'query 3 <<c=0 v=2 s=2>>'
+    i07: p=83 sim=-0.1826 {'requires': ['i07']}
+    i13: p=90 sim=0.0684 {'requires': ['i07', 'ghost4']}
+    i14: p=30 sim=0.1037 {}
+    i15: p=90 sim=0.384 {}
+    i16: p=24 sim=0.1353 {}
+    i17: p=70 sim=0.156 {}
+    i18: p=35 sim=0.1674 {}
+    i19: p=64 sim=0.0641 {}
+    i20: p=50 sim=0.1674 {}
+    i21: p=90 sim=0.0641 {}
+    i23: p=70 sim=0.3435 {}
+    i24: p=50 sim=0.4435 {}
+    i25: p=70 sim=0.3435 {}
+    i26: p=25 sim=0.384 {}
+    i27: p=82 sim=0.066 {}
+    i28: p=90 sim=0.2832 {}
+    i29: p=90 sim=0.156 {}
+    i30: p=87 sim=0.0641 {}
+    i31: p=43 sim=-0.0216 {}
+    i32: p=90 sim=-0.043 {}
+    i33: p=39 sim=-0.088 {}
+    i34: p=21 sim=0.1353 {}
+    i35: p=35 sim=-0.0967 {}
+    i36: p=70 sim=-0.0526 {}
+    i37: p=39 sim=0.1966 {}
+    i38: p=50 sim=0.1832 {}
+    i39: p=70 sim=-0.094 {}
+    i40: p=50 sim=-0.1792 {}
+    i41: p=28 sim=0.3751 {}
+    i42: p=33 sim=-0.0216 {}
+    i43: p=84 sim=0.0158 {}
+    output: [('i07', 0.83)]
+    trace admitted: {'i24': 'search', 'i26': 'search', 'i15': 'search', 'i41': 'search', 'i23': 'search', 'i25': 'search', 'i28': 'search', 'i37': 'search', 'i38': 'search', 'i20': 'search', 'i18': 'search', 'i29': 'search', 'i17': 'search', 'i16': 'search', 'i34': 'search', 'i14': 'search', 'i13': 'search', 'i27': 'search', 'i30': 'search', 'i19': 'search', 'i21': 'search', 'i43': 'search', 'i31': 'search', 'i42': 'search', 'i32': 'search', 'i36': 'search', 'i33': 'search', 'i39': 'search', 'i35': 'search', 'i40': 'search', 'i07': 'requires'}
+    violation: items admitted only as prerequisites, unreachable from any item admitted on its own: ['i07']; already orphaned after relationship resolution (kept alive by a requires cycle)
+
+  [no_mandatory] I5 No orphan prerequisites: corpus 0, case 2, k 1 -> shrunk to 2 instructions, k=1
+    context: {'tags': [], 'gate_tags': []}  query: 'query 2 <<c=0 v=2 s=2>>'
+    i35: p=46 sim=0.2487 {'requires': ['i40']}
+    i40: p=70 sim=0.156 {'scope_tags': ['t6']}
+    output: [('i40', 0.7)]
+    trace admitted: {'i35': 'search', 'i40': 'requires'}
+    violation: items admitted only as prerequisites, unreachable from any item admitted on its own: ['i40']
+
+  [no_mandatory] I5a   I5 orphan made by the top-k cut: corpus 0, case 2, k 1 -> shrunk to 2 instructions, k=1
+    context: {'tags': [], 'gate_tags': []}  query: 'query 2 <<c=0 v=2 s=2>>'
+    i35: p=46 sim=0.2487 {'requires': ['i40']}
+    i40: p=70 sim=0.156 {'scope_tags': ['t6']}
+    output: [('i40', 0.7)]
+    trace admitted: {'i35': 'search', 'i40': 'requires'}
+    violation: items admitted only as prerequisites, unreachable from any item admitted on its own: ['i40']; their dependents were cut by top-k
+
+  [no_mandatory] I5b   I5 orphan left by resolution (cycle): corpus 2, case 4, k 1 -> shrunk to 3 instructions, k=1
+    context: {'tags': [], 'gate_tags': []}  query: 'query 4 <<c=0 v=0 s=2>>'
+    i26: p=90 sim=0.1089 {'scope_tags': ['t6'], 'requires': ['i48']}
+    i31: p=61 sim=-0.052 {'requires': ['i48', 'i12']}
+    i48: p=70 sim=-0.247 {'scope_tags': ['t3'], 'requires': ['i26']}
+    output: [('i26', 0.9), ('i48', 0.7)]
+    trace admitted: {'i31': 'search', 'i48': 'requires', 'i26': 'requires'}
+    violation: items admitted only as prerequisites, unreachable from any item admitted on its own: ['i26', 'i48']; already orphaned after relationship resolution (kept alive by a requires cycle)
+
+  [no_priority] I5 No orphan prerequisites: corpus 0, case 2, k 2 -> shrunk to 3 instructions, k=2
+    context: {'tags': [], 'gate_tags': []}  query: 'query 2 <<c=0 v=2 s=2>>'
+    i29: p=63 sim=-0.0526 {'scope_tags': ['safety']}
+    i35: p=46 sim=0.2487 {'requires': ['i40']}
+    i40: p=70 sim=0.156 {'scope_tags': ['t6']}
+    output: [('i40', 0.7), ('i29', 0.63)]
+    trace admitted: {'i35': 'search', 'i29': 'mandatory', 'i40': 'requires'}
+    violation: items admitted only as prerequisites, unreachable from any item admitted on its own: ['i40']
+
+  [no_priority] I5a   I5 orphan made by the top-k cut: corpus 0, case 2, k 2 -> shrunk to 3 instructions, k=2
+    context: {'tags': [], 'gate_tags': []}  query: 'query 2 <<c=0 v=2 s=2>>'
+    i29: p=63 sim=-0.0526 {'scope_tags': ['safety']}
+    i35: p=46 sim=0.2487 {'requires': ['i40']}
+    i40: p=70 sim=0.156 {'scope_tags': ['t6']}
+    output: [('i40', 0.7), ('i29', 0.63)]
+    trace admitted: {'i35': 'search', 'i29': 'mandatory', 'i40': 'requires'}
+    violation: items admitted only as prerequisites, unreachable from any item admitted on its own: ['i40']; their dependents were cut by top-k
+
+  [no_priority] I5b   I5 orphan left by resolution (cycle): corpus 6, case 3, k 6 -> shrunk to 31 instructions, k=1
+    context: {'tags': [], 'gate_tags': []}  query: 'query 3 <<c=0 v=2 s=2>>'
+    i07: p=83 sim=-0.1826 {'requires': ['i07']}
+    i13: p=90 sim=0.0684 {'requires': ['i07', 'ghost4']}
+    i14: p=30 sim=0.1037 {}
+    i15: p=90 sim=0.384 {}
+    i16: p=24 sim=0.1353 {}
+    i17: p=70 sim=0.156 {}
+    i18: p=35 sim=0.1674 {}
+    i19: p=64 sim=0.0641 {}
+    i20: p=50 sim=0.1674 {}
+    i21: p=90 sim=0.0641 {}
+    i23: p=70 sim=0.3435 {}
+    i24: p=50 sim=0.4435 {}
+    i25: p=70 sim=0.3435 {}
+    i26: p=25 sim=0.384 {}
+    i27: p=82 sim=0.066 {}
+    i28: p=90 sim=0.2832 {}
+    i29: p=90 sim=0.156 {}
+    i30: p=87 sim=0.0641 {}
+    i31: p=43 sim=-0.0216 {}
+    i32: p=90 sim=-0.043 {}
+    i33: p=39 sim=-0.088 {}
+    i34: p=21 sim=0.1353 {}
+    i35: p=35 sim=-0.0967 {}
+    i36: p=70 sim=-0.0526 {}
+    i37: p=39 sim=0.1966 {}
+    i38: p=50 sim=0.1832 {}
+    i39: p=70 sim=-0.094 {}
+    i40: p=50 sim=-0.1792 {}
+    i41: p=28 sim=0.3751 {}
+    i42: p=33 sim=-0.0216 {}
+    i43: p=84 sim=0.0158 {}
+    output: [('i07', 0.83)]
+    trace admitted: {'i24': 'search', 'i26': 'search', 'i15': 'search', 'i41': 'search', 'i23': 'search', 'i25': 'search', 'i28': 'search', 'i37': 'search', 'i38': 'search', 'i20': 'search', 'i18': 'search', 'i29': 'search', 'i17': 'search', 'i16': 'search', 'i34': 'search', 'i14': 'search', 'i13': 'search', 'i27': 'search', 'i30': 'search', 'i19': 'search', 'i21': 'search', 'i43': 'search', 'i31': 'search', 'i42': 'search', 'i32': 'search', 'i36': 'search', 'i33': 'search', 'i39': 'search', 'i35': 'search', 'i40': 'search', 'i07': 'requires'}
+    violation: items admitted only as prerequisites, unreachable from any item admitted on its own: ['i07']; already orphaned after relationship resolution (kept alive by a requires cycle)
+
+  [no_threshold] I5 No orphan prerequisites: corpus 4, case 1, k 19 -> shrunk to 33 instructions, k=19
+    context: {'tags': [], 'gate_tags': []}  query: 'query 1 <<c=3 v=1 s=1>>'
+    i03: p=70 sim=0.535 {}
+    i06: p=50 sim=0.5107 {}
+    i10: p=33 sim=0.0063 {}
+    i11: p=63 sim=0.6214 {}
+    i16: p=90 sim=0.535 {}
+    i18: p=1 sim=0.1731 {'scope_tags': ['compliance']}
+    i21: p=55 sim=0.0532 {}
+    i22: p=70 sim=0.4179 {}
+    i24: p=36 sim=0.2993 {}
+    i25: p=88 sim=0.6214 {'requires': ['i41']}
+    i26: p=87 sim=0.0615 {'scope_tags': ['compliance']}
+    i27: p=50 sim=0.6116 {'requires': ['i08']}
+    i28: p=55 sim=0.396 {}
+    i29: p=50 sim=0.0287 {}
+    i30: p=20 sim=0.5669 {}
+    i31: p=50 sim=0.535 {}
+    i32: p=70 sim=-0.158 {'labels': ['compliance']}
+    i34: p=96 sim=0.6214 {}
+    i35: p=65 sim=0.0274 {}
+    i36: p=70 sim=0.3335 {'conflicts_with': ['i41']}
+    i37: p=50 sim=0.1085 {}
+    i38: p=50 sim=0.396 {}
+    i39: p=65 sim=0.0211 {}
+    i40: p=15 sim=0.396 {'requires': ['i10']}
+    i41: p=70 sim=0.2016 {}
+    i42: p=50 sim=-0.0323 {'labels': ['compliance']}
+    i46: p=70 sim=0.3335 {}
+    i47: p=12 sim=0.3335 {}
+    i48: p=70 sim=0.5933 {}
+    i49: p=90 sim=0.0615 {}
+    i52: p=21 sim=0.6834 {'requires': ['i33']}
+    i53: p=12 sim=0.0532 {}
+    i55: p=64 sim=0.4179 {}
+    output: [('i34', 0.723), ('i32', 0.7), ('i16', 0.6445), ('i48', 0.6253), ('i11', 0.624), ('i03', 0.5845), ('i31', 0.5245), ('i06', 0.5075), ('i22', 0.5025), ('i42', 0.5), ('i55', 0.4845), ('i30', 0.4568), ('i36', 0.4435), ('i46', 0.4435), ('i28', 0.4422), ('i38', 0.4272), ('i10', 0.33), ('i26', 0.304), ('i18', 0.1242)]
+    trace admitted: {'i52': 'search', 'i11': 'search', 'i34': 'search', 'i25': 'search', 'i27': 'search', 'i48': 'search', 'i30': 'search', 'i03': 'search', 'i16': 'search', 'i31': 'search', 'i06': 'search', 'i55': 'search', 'i22': 'search', 'i38': 'search', 'i40': 'search', 'i28': 'search', 'i36': 'search', 'i47': 'search', 'i46': 'search', 'i24': 'search', 'i41': 'search', 'i18': 'search', 'i37': 'search', 'i26': 'search', 'i49': 'search', 'i53': 'search', 'i21': 'search', 'i29': 'search', 'i35': 'search', 'i39': 'search', 'i32': 'mandatory', 'i42': 'mandatory', 'i10': 'requires'}
+    violation: items admitted only as prerequisites, unreachable from any item admitted on its own: ['i10']
+
+  [no_threshold] I5a   I5 orphan made by the top-k cut: corpus 4, case 1, k 19 -> shrunk to 33 instructions, k=19
+    context: {'tags': [], 'gate_tags': []}  query: 'query 1 <<c=3 v=1 s=1>>'
+    i03: p=70 sim=0.535 {}
+    i06: p=50 sim=0.5107 {}
+    i10: p=33 sim=0.0063 {}
+    i11: p=63 sim=0.6214 {}
+    i16: p=90 sim=0.535 {}
+    i18: p=1 sim=0.1731 {'scope_tags': ['compliance']}
+    i21: p=55 sim=0.0532 {}
+    i22: p=70 sim=0.4179 {}
+    i24: p=36 sim=0.2993 {}
+    i25: p=88 sim=0.6214 {'requires': ['i41']}
+    i26: p=87 sim=0.0615 {'scope_tags': ['compliance']}
+    i27: p=50 sim=0.6116 {'requires': ['i08']}
+    i28: p=55 sim=0.396 {}
+    i29: p=50 sim=0.0287 {}
+    i30: p=20 sim=0.5669 {}
+    i31: p=50 sim=0.535 {}
+    i32: p=70 sim=-0.158 {'labels': ['compliance']}
+    i34: p=96 sim=0.6214 {}
+    i35: p=65 sim=0.0274 {}
+    i36: p=70 sim=0.3335 {'conflicts_with': ['i41']}
+    i37: p=50 sim=0.1085 {}
+    i38: p=50 sim=0.396 {}
+    i39: p=65 sim=0.0211 {}
+    i40: p=15 sim=0.396 {'requires': ['i10']}
+    i41: p=70 sim=0.2016 {}
+    i42: p=50 sim=-0.0323 {'labels': ['compliance']}
+    i46: p=70 sim=0.3335 {}
+    i47: p=12 sim=0.3335 {}
+    i48: p=70 sim=0.5933 {}
+    i49: p=90 sim=0.0615 {}
+    i52: p=21 sim=0.6834 {'requires': ['i33']}
+    i53: p=12 sim=0.0532 {}
+    i55: p=64 sim=0.4179 {}
+    output: [('i34', 0.723), ('i32', 0.7), ('i16', 0.6445), ('i48', 0.6253), ('i11', 0.624), ('i03', 0.5845), ('i31', 0.5245), ('i06', 0.5075), ('i22', 0.5025), ('i42', 0.5), ('i55', 0.4845), ('i30', 0.4568), ('i36', 0.4435), ('i46', 0.4435), ('i28', 0.4422), ('i38', 0.4272), ('i10', 0.33), ('i26', 0.304), ('i18', 0.1242)]
+    trace admitted: {'i52': 'search', 'i11': 'search', 'i34': 'search', 'i25': 'search', 'i27': 'search', 'i48': 'search', 'i30': 'search', 'i03': 'search', 'i16': 'search', 'i31': 'search', 'i06': 'search', 'i55': 'search', 'i22': 'search', 'i38': 'search', 'i40': 'search', 'i28': 'search', 'i36': 'search', 'i47': 'search', 'i46': 'search', 'i24': 'search', 'i41': 'search', 'i18': 'search', 'i37': 'search', 'i26': 'search', 'i49': 'search', 'i53': 'search', 'i21': 'search', 'i29': 'search', 'i35': 'search', 'i39': 'search', 'i32': 'mandatory', 'i42': 'mandatory', 'i10': 'requires'}
+    violation: items admitted only as prerequisites, unreachable from any item admitted on its own: ['i10']; their dependents were cut by top-k
+
+  [no_threshold] I5b   I5 orphan left by resolution (cycle): corpus 6, case 3, k 6 -> shrunk to 31 instructions, k=1
+    context: {'tags': [], 'gate_tags': []}  query: 'query 3 <<c=0 v=2 s=2>>'
+    i07: p=83 sim=-0.1826 {'requires': ['i07']}
+    i13: p=90 sim=0.0684 {'requires': ['i07', 'ghost4']}
+    i14: p=30 sim=0.1037 {}
+    i15: p=90 sim=0.384 {}
+    i16: p=24 sim=0.1353 {}
+    i17: p=70 sim=0.156 {}
+    i18: p=35 sim=0.1674 {}
+    i19: p=64 sim=0.0641 {}
+    i20: p=50 sim=0.1674 {}
+    i21: p=90 sim=0.0641 {}
+    i23: p=70 sim=0.3435 {}
+    i24: p=50 sim=0.4435 {}
+    i25: p=70 sim=0.3435 {}
+    i26: p=25 sim=0.384 {}
+    i27: p=82 sim=0.066 {}
+    i28: p=90 sim=0.2832 {}
+    i29: p=90 sim=0.156 {}
+    i30: p=87 sim=0.0641 {}
+    i31: p=43 sim=-0.0216 {}
+    i32: p=90 sim=-0.043 {}
+    i33: p=39 sim=-0.088 {}
+    i34: p=21 sim=0.1353 {}
+    i35: p=35 sim=-0.0967 {}
+    i36: p=70 sim=-0.0526 {}
+    i37: p=39 sim=0.1966 {}
+    i38: p=50 sim=0.1832 {}
+    i39: p=70 sim=-0.094 {}
+    i40: p=50 sim=-0.1792 {}
+    i41: p=28 sim=0.3751 {}
+    i42: p=33 sim=-0.0216 {}
+    i43: p=84 sim=0.0158 {}
+    output: [('i07', 0.83)]
+    trace admitted: {'i24': 'search', 'i26': 'search', 'i15': 'search', 'i41': 'search', 'i23': 'search', 'i25': 'search', 'i28': 'search', 'i37': 'search', 'i38': 'search', 'i20': 'search', 'i18': 'search', 'i29': 'search', 'i17': 'search', 'i16': 'search', 'i34': 'search', 'i14': 'search', 'i13': 'search', 'i27': 'search', 'i30': 'search', 'i19': 'search', 'i21': 'search', 'i43': 'search', 'i31': 'search', 'i42': 'search', 'i32': 'search', 'i36': 'search', 'i33': 'search', 'i39': 'search', 'i35': 'search', 'i40': 'search', 'i07': 'requires'}
+    violation: items admitted only as prerequisites, unreachable from any item admitted on its own: ['i07']; already orphaned after relationship resolution (kept alive by a requires cycle)
+
+Wrote /mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts/results/invariants.json
+Wrote /mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts/results/invariants_counterexamples.json
+
+Elapsed: 140.0s
+
+=== Reproducibility ===
+Timestamp (UTC): 2026-10-29T21:26:32Z
+Command line:    evals/eval_invariants.py --workers 16
+Python:          3.12.13 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
+numpy:           2.2.6
+scipy:           1.17.1
+bear:            0.3.1
+git commit:      bf4428993a21deff2804b3ac2d6296398850a178
+git status:      DIRTY (32 files modified)
+git branch:      tist-r2
+
+  n_corpora: 2000
+  configs: ['main', 'main_hash', 'legacy_pool_by_k', 'legacy_unchecked_requires', 'legacy_below_threshold', 'no_mandatory', 'no_priority', 'no_threshold']
+  bear_path: /home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/bear/__init__.py
+  bear_source_sha: 90daeb9e7634c9bebe86f2ca76c69b496e51b30d
+===
