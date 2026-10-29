@@ -37,7 +37,7 @@ ToolBench, mandatory-only (supplementary)  [k=5, n=1100, corpus=3225]
   hash trace, default pool               0.00      0.0         0.000 [0.000, 0.003]
   hash cut removed >=1 item                                    0.000 [0.000, 0.003]
   hash top-k differs, default vs whole pool 0.000 [0.000, 0.003]
-  [toolbench: 170.3s]
+  [toolbench: 155.7s]
 MetaTool: 199 tools, 21111 queries
 
 MetaTool base (no tags)  [k=5, n=21111, corpus=199]
@@ -85,7 +85,7 @@ MetaTool+QueryTags (query_tags_top5.json, supplementary)  [k=5, n=21111, corpus=
   hash trace, default pool              24.27     22.0         0.983 [0.982, 0.985]
   hash cut removed >=1 item                                    0.983 [0.982, 0.985]
   hash top-k differs, default vs whole pool 0.000 [0.000, 0.000]
-  [metatool: 707.6s]
+  [metatool: 840.9s]
 Pet Sim: 58 instructions
 
 Pet Sim full governance, Standard  [k=10, n=60, corpus=58]
@@ -135,9 +135,9 @@ Pet Sim full governance, No-tag  [k=10, n=54, corpus=58]
   hash cut removed >=1 item                                    0.000 [0.000, 0.066]
   hash top-k differs, default vs whole pool 0.000 [0.000, 0.066]
   bge trace, whole pool                  8.00      8.0         0.000 [0.000, 0.066]
-  bge trace, default pool                7.19      7.0         0.000 [0.000, 0.066]
+  bge trace, default pool                8.00      8.0         0.000 [0.000, 0.066]
   bge cut removed >=1 item                                     0.000 [0.000, 0.066]
-  bge top-k differs, default vs whole pool 0.593 [0.450, 0.724]
+  bge top-k differs, default vs whole pool 0.000 [0.000, 0.066]
 
 Pet Sim full governance, Complex  [k=10, n=60, corpus=58]
   threshold-dependent gate-passing items per query: mean 4.72, max 5  -> admission is backend-dependent
@@ -155,7 +155,7 @@ Pet Sim full governance, Complex  [k=10, n=60, corpus=58]
   bge trace, default pool               10.67     10.0         0.300 [0.188, 0.432]
   bge cut removed >=1 item                                     0.283 [0.175, 0.414]
   bge top-k differs, default vs whole pool 0.000 [0.000, 0.060]
-  [petsim: 23.1s]
+  [petsim: 22.9s]
 
 Procedural CS, all scale points  [k=25, n=180, corpus=-]
   source                                 mean   median         P(|A|>k) [95% CP CI]
@@ -216,7 +216,7 @@ Procedural CS, 500 agents (675 instructions)  [k=25, n=30, corpus=675]
   hash trace, default pool              19.20     19.0         0.000 [0.000, 0.116]
   hash cut removed >=1 item                                    0.000 [0.000, 0.116]
   hash top-k differs, default vs whole pool 0.000 [0.000, 0.116]
-  [cs: 2.1s]
+  [cs: 2.3s]
 
 --- Summary: P(admissible set > k) ---
 
@@ -283,21 +283,21 @@ Procedural CS, all scale points                       25    180  metadata    19.
 
 Wrote /mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts/results/budget_binding.json
 
-Elapsed: 903.4s
+Elapsed: 1022.2s
 
 === Reproducibility ===
-Timestamp (UTC): 2026-10-29T21:21:27Z
+Timestamp (UTC): 2026-10-29T22:24:37Z
 Command line:    evals/eval_budget_binding.py --backends bm25 hash bge
 Python:          3.12.13 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
 numpy:           2.2.6
 scipy:           1.17.1
-bear:            0.3.1
-git commit:      bf4428993a21deff2804b3ac2d6296398850a178
-git status:      DIRTY (32 files modified)
+bear:            0.4.0
+git commit:      65dc9ab38ec80af1e3aa8e52fadf1c7cdc5ff69e
+git status:      DIRTY (33 files modified)
 git branch:      tist-r2
 
   conditions: ['toolbench', 'metatool', 'petsim', 'cs']
   backends: ['bm25', 'hash', 'bge']
   bear_path: /home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/bear/__init__.py
-  bear_source_sha: 90daeb9e7634c9bebe86f2ca76c69b496e51b30d
+  bear_source_sha: 10730c8ae682f972b731b89789f0f7b97a521523
 ===

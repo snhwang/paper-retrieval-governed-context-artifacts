@@ -39,32 +39,57 @@ against the precedence order that the revised Section 3.1.1 states:
     I9   Threshold condition. Every item the threshold removes passes its
          gate, fails its soft scope, and has similarity below the threshold.
 
+    I10  Resolution order-independence. The resolved set (top_k=ALL, so no
+         cut, and the threshold off, so the admitted set is fixed) is
+         unchanged when the similarity order of the candidates changes. With
+         the stub the order is reversed exactly, by reassigning similarity
+         markers, and also shuffled. With the hash embedder it is shuffled.
+    I11  Pool admissibility. The ranked pool is the min(pool,
+         #gate-passing) most similar gate-passing instructions, so no
+         gate-failing instruction takes a place in it. Checked against the
+         similarities: (a) every gate-passing instruction strictly above the
+         boundary similarity was a candidate (it appears in the trace other
+         than as a gate exclusion), and (b) none strictly below it was a
+         search candidate (admitted by search, or set aside by the
+         threshold). Non-vacuous for ungated queries on a corpus that gates
+         anything. Similarities come from the stub's markers, or for the
+         hash embedder from a public retrieve over the same texts.
+    I12  No acting after removal. For every conflict or superseded exclusion
+         at position n of RetrievalTrace.excluded (insertion order), its "by"
+         is not among the first n excluded ids. The remover may still leave
+         later (a supersede, the cut, closure, unrequired), since resolution
+         is one pass, so it is not required to be in the output.
+
+Invariants can be reported apart as pending (--pending), for a sha that
+predates the rule they state.
+
 Similarities come from a controlled stub embedder that gives clustered,
 deterministic similarities (instructions and queries carry a cluster marker;
 equal markers give equal vectors, so exact ties occur). A second "main"
 configuration uses BEAR's built-in hash embedder instead.
 
 Configurations: BEAR main defaults; each legacy switch on
-(restore_pool_by_k, restore_unchecked_requires, restore_below_threshold);
+(restore_pool_by_k, restore_unchecked_requires, restore_below_threshold,
+restore_ranked_resolution, restore_ungated_pool, restore_removed_acting);
 and each mechanism Config can disable (mandatory_tags=[], priority_weight=0,
 threshold off). The gate and the relationship edges are corpus metadata, so
 Config cannot disable them.
 
 Pool growth is reported separately, as a sensitivity of the retriever: k
 above the pool base (retrieval_pool=10, k to 30), and the pool varied at
-fixed k against a whole-corpus pool. A third sensitivity resolves the same
-candidates in reverse order (top_k=ALL, so no cut) and counts how often the
-resolved set changes, which shows whether relationship resolution is a
-function of the admitted set or of its similarity order.
+fixed k against a whole-corpus pool.
 
 Violation rates are reported per corpus (the independent unit) with
 Clopper-Pearson 95% CIs, alongside output-level counts. For every
 configuration and invariant with a violation, the first one found is shrunk
 to a minimal counterexample and saved.
 
-The retrieval trace is read by calling Retriever._retrieve with a fresh
-bear.audit._RetrievalTrace, which is exactly what Retriever.retrieve does
-inside an audited turn. I6 checks that the trace changes nothing.
+Only BEAR's public API is used. The trace comes from
+Retriever.retrieve_with_trace (BEAR 0.4.0 and later), and I6 checks that it
+returns what Retriever.retrieve returns. Since that version a prerequisite
+the cut drops with its dependent is recorded as "unrequired" rather than
+"top_k". The I5a/I5b split reads "unrequired" as a resolution removal, so it
+is exact for orphans only on shas where the cut can still strand one.
 
 Usage:
     python evals/eval_invariants.py                         # 2,000 corpora, all configs
@@ -98,7 +123,6 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 import bear  # noqa: E402
 from bear import Config, Context, Corpus, Retriever  # noqa: E402
-from bear.audit import _RetrievalTrace  # noqa: E402
 from bear.models import Instruction, InstructionType, ScopeCondition  # noqa: E402
 from repro_footer import print_repro_footer  # noqa: E402
 
@@ -142,6 +166,12 @@ CONFIGS: dict[str, dict] = {
                                   "overrides": {"restore_unchecked_requires": True}},
     "legacy_below_threshold": {"label": "restore_below_threshold", "embedder": "stub",
                                "overrides": {"restore_below_threshold": True}},
+    "legacy_ranked_resolution": {"label": "restore_ranked_resolution", "embedder": "stub",
+                                 "overrides": {"restore_ranked_resolution": True}},
+    "legacy_ungated_pool": {"label": "restore_ungated_pool", "embedder": "stub",
+                            "overrides": {"restore_ungated_pool": True}},
+    "legacy_removed_acting": {"label": "restore_removed_acting", "embedder": "stub",
+                              "overrides": {"restore_removed_acting": True}},
     "no_mandatory": {"label": "mandatory_tags=[]", "embedder": "stub",
                      "overrides": {"mandatory_tags": []}},
     "no_priority": {"label": "priority_weight=0", "embedder": "stub",
@@ -164,9 +194,22 @@ INVARIANTS = [
     ("I7", "Budget stability (k <= pool base)"),
     ("I8", "Mandatory not displaced by optional"),
     ("I9", "Threshold removes only soft-scope failures"),
+    ("I10", "Resolution order-independence"),
+    ("I11", "Pool admissibility"),
+    ("I12", "No acting after removal"),
 ]
 INV_KEYS = [k for k, _ in INVARIANTS]
 INV_LABEL = dict(INVARIANTS)
+# Invariants to report apart as pending, for a sha that predates the rule they
+# state (I10 to I12 need canonical resolution order, the gate-passing ungated
+# pool and removed instructions that stop acting, all in 0.4.0 at 10730c8).
+# Empty by default. Pass --pending I10 I11 I12 to run against an older sha.
+PENDING_INVARIANTS: set[str] = set()
+# Similarity shuffles behind I10, in addition to the exact reversal the stub
+# allows, and the tolerance for comparing the stub's similarities with BEAR's
+# float32 ones at a pool boundary (I11).
+ORDER_SHUFFLES = 1
+SIM_TOL = 1e-5
 
 
 # ---------------------------------------------------------------------------
@@ -184,7 +227,7 @@ class ClusteredEmbedder:
     Equal markers give equal vectors and therefore exact similarity ties.
     """
 
-    _MARK = re.compile(r"<<c=(\d+) v=(\d+) s=(\d+)>>")
+    MARK = re.compile(r"<<c=(\d+) v=(\d+) s=(\d+)>>")
     NOISE = (0.5, 1.0, 2.0)
 
     def __init__(self, dim: int = EMBED_DIM, n_clusters: int = MAX_CLUSTERS,
@@ -197,7 +240,7 @@ class ClusteredEmbedder:
         self._cache: dict[tuple, np.ndarray] = {}
 
     def _vec(self, text: str, is_query: bool) -> np.ndarray:
-        m = self._MARK.search(text)
+        m = self.MARK.search(text)
         c, v, s = (int(g) for g in m.groups()) if m else (0, 0, 2)
         key = (c, v, s, int(is_query))
         vec = self._cache.get(key)
@@ -387,10 +430,80 @@ def make_context(case: dict) -> Context:
     return Context(tags=list(case["tags"]), gate_tags=list(case["gate_tags"]))
 
 
-def traced(r: Retriever, case: dict, k: int):
-    trace = _RetrievalTrace()
-    out = r._retrieve(case["query"], make_context(case), k, None, trace)
-    return out, trace
+def traced(r: Retriever, case: dict, k: int, threshold: float | None = None):
+    """Results and the public RetrievalTrace for one retrieval."""
+    return r.retrieve_with_trace(case["query"], make_context(case), top_k=k,
+                                 threshold=threshold)
+
+
+def _with_marks(instructions: list[dict], marks: list[str]) -> list[dict]:
+    out = []
+    for d, m in zip(instructions, marks):
+        e = dict(d)
+        e["content"] = ClusteredEmbedder.MARK.sub(m, d["content"])
+        out.append(e)
+    return out
+
+
+def stub_similarities(instructions: list[dict], case: dict) -> dict[str, float]:
+    """Cosine of each instruction with the query under the stub embedder,
+    computed here from the markers, independently of the retriever."""
+    q = STUB.embed_single(case["query"], is_query=True)
+    return {d["id"]: float(np.dot(q, STUB.embed_single(d["content"]))) for d in instructions}
+
+
+def order_variants(instructions: list[dict], case: dict, config_name: str,
+                   seed: str) -> list[tuple[str, list[dict]]]:
+    """The same corpus with the similarity order of its instructions changed (I10).
+
+    Only the similarity markers move. Metadata, ids and the rest of the text
+    stay, so with the threshold off and top_k=ALL the admitted set is the same.
+    With the stub the order for this query is reversed exactly: the instruction
+    at similarity rank r takes the marker of the one at rank n-1-r. Shuffles
+    are added for every embedder (the only option for hash embeddings).
+    """
+    marks = [ClusteredEmbedder.MARK.search(d["content"]).group(0) for d in instructions]
+    variants = []
+    if CONFIGS[config_name]["embedder"] == "stub":
+        sims = stub_similarities(instructions, case)
+        rank = sorted(range(len(instructions)),
+                      key=lambda j: (-sims[instructions[j]["id"]], instructions[j]["id"]))
+        rev = list(marks)
+        for r_, j in enumerate(rank):
+            rev[j] = marks[rank[len(rank) - 1 - r_]]
+        variants.append(("reversed", _with_marks(instructions, rev)))
+    for s in range(ORDER_SHUFFLES + (0 if variants else 1)):
+        shuffled = list(marks)
+        random.Random(f"{seed}-{s}").shuffle(shuffled)
+        variants.append((f"shuffle {s}", _with_marks(instructions, shuffled)))
+    return variants
+
+
+def resolved_set(r: Retriever, case: dict) -> set[str]:
+    """Resolved set with admission held fixed: no cut, threshold off."""
+    return {s.id for s in traced(r, case, Retriever.ALL, threshold=-2.0)[0]}
+
+
+def similarity_retriever(instructions: list[dict], config_name: str) -> Retriever:
+    """A retriever over the same texts with relationships and mandatory tags
+    stripped, for reading similarities through the public API."""
+    stripped = [dict(d, conflicts_with=[], supersedes=[], requires=[]) for d in instructions]
+    return build_retriever(stripped, config_name, {"mandatory_tags": []})[0]
+
+
+def public_similarities(instructions: list[dict], case: dict, config_name: str,
+                        r: Retriever | None = None) -> dict[str, float]:
+    """Similarity of every instruction to the query under a configuration's
+    embedder, through the public API. With relationships and mandatory tags
+    stripped, the threshold off and top_k=ALL, every instruction is either a
+    result or a gate exclusion, and both carry the similarity."""
+    r = r or similarity_retriever(instructions, config_name)
+    out, trace = traced(r, case, Retriever.ALL, threshold=-2.0)
+    sims = {s.id: float(s.similarity) for s in out}
+    for i, e in trace.excluded.items():
+        if e.get("similarity") is not None:
+            sims.setdefault(i, float(e["similarity"]))
+    return sims
 
 
 def signature(out) -> list:
@@ -406,7 +519,10 @@ class CaseInfo:
     """Spec-level facts about one (corpus, context) pair, computed independently
     of the retriever from the corpus metadata."""
 
-    def __init__(self, instructions: list[dict], case: dict, mandatory_tags) -> None:
+    def __init__(self, instructions: list[dict], case: dict, mandatory_tags,
+                 sims: dict[str, float] | None = None) -> None:
+        # Similarity of each instruction to the query, for I11.
+        self.sims = sims
         tags = set(case["tags"])
         all_tags = tags | set(case["gate_tags"])
         mand_tags = set(mandatory_tags)
@@ -424,6 +540,14 @@ class CaseInfo:
         self.sup = {i: self.by_id[i]["supersedes"] for i in self.ids}
         self.prio = {i: self.by_id[i]["priority"] for i in self.ids}
         self.adm_mand = [i for i in self.ids if self.mand[i] and self.gate[i]]
+        self.gate_passing = [i for i in self.ids if self.gate[i]]
+        self.corpus_gates = any(d["required_tags"] for d in instructions)
+        # I10 is non-vacuous where two gate-passing items share a conflict or
+        # supersede edge, the only place resolution order can matter.
+        gp = set(self.gate_passing)
+        self.relation_among_admissible = any(
+            x in gp for i in self.gate_passing
+            for x in (*self.by_id[i]["conflicts_with"], *self.by_id[i]["supersedes"]))
         # BEAR ranks the whole corpus when the corpus has a gate and the
         # context any tag; otherwise it ranks a pool.
         self.gated_query = (any(d["required_tags"] for d in instructions)
@@ -564,6 +688,52 @@ def check_output(info: CaseInfo, out, trace, k: int, threshold: float) -> dict:
         if d not in info.gate or info.soft[d] or not info.gate[d] or sim is None or sim >= threshold:
             bad9.append(f"{d} (soft={info.soft.get(d)}, gate={info.gate.get(d)}, sim={sim})")
     res["I9"] = (bool(bad9), n_thr > 0, "; ".join(bad9) if bad9 else None)
+
+    # I11 pool admissibility: the ranked pool is the p = min(pool,
+    # #gate-passing) most similar gate-passing instructions. (a) Every
+    # gate-passing one strictly above the p-th similarity was a candidate, so
+    # it appears in the trace other than as a gate exclusion. (b) None strictly
+    # below it was a search candidate (admitted by "search" or set aside by
+    # the threshold). Instructions outside the pool may still enter through
+    # mandatory injection or requires, which (b) allows. Ties at the boundary
+    # are left alone.
+    if info.sims is not None and info.gate_passing:
+        g_sims = sorted((info.sims[i] for i in info.gate_passing), reverse=True)
+        p = min(trace.pool, len(g_sims))
+        if p >= len(g_sims):
+            above, below = list(info.gate_passing), []
+        elif p > 0:
+            boundary = g_sims[p - 1]
+            above = [i for i in info.gate_passing if info.sims[i] > boundary + SIM_TOL]
+            below = [i for i in info.gate_passing if info.sims[i] < boundary - SIM_TOL]
+        else:
+            above, below = [], list(info.gate_passing)
+        seen = set(trace.admitted) | {d for d, e in trace.excluded.items() if e["reason"] != "gate"}
+        searched = ({d for d, h in trace.admitted.items() if h == "search"}
+                    | {d for d, e in trace.excluded.items() if e["reason"] == "threshold"})
+        missed = sorted(i for i in above if i not in seen)
+        extra = sorted(i for i in below if i in searched)
+        bad11 = []
+        if missed:
+            bad11.append(f"gate-passing items within the top {p} never candidates: {missed}")
+        if extra:
+            bad11.append(f"gate-passing items below the top {p} searched: {extra}")
+        res["I11"] = (bool(bad11), (not trace.gated) and info.corpus_gates,
+                      f"pool {trace.pool}, gated={trace.gated}: " + "; ".join(bad11)
+                      if bad11 else None)
+    else:
+        res["I11"] = (False, False, None)
+
+    # I12 no acting after removal: a conflict or superseded exclusion never
+    # names a remover that was already excluded when it was recorded.
+    order_ex = {d: n for n, d in enumerate(trace.excluded)}
+    bad12 = [f"{d} removed ({e['reason']}) by {e['by']}, already excluded "
+             f"({trace.excluded[e['by']]['reason']})"
+             for d, e in trace.excluded.items()
+             if e["reason"] in ("conflict", "superseded") and e["by"] in order_ex
+             and order_ex[e["by"]] < order_ex[d]]
+    n_removals = sum(1 for e in trace.excluded.values() if e["reason"] in ("conflict", "superseded"))
+    res["I12"] = (bool(bad12), n_removals > 1, "; ".join(bad12) if bad12 else None)
     return res
 
 
@@ -589,8 +759,22 @@ def run_config_on_corpus(corpus: dict, cases: list[dict], config_name: str,
     inv = _empty_inv_stats()
     info_stats = defaultdict(float)
     digest = hashlib.sha256()
+    is_stub = CONFIGS[config_name]["embedder"] == "stub"
+    # Similarities for I11: from the stub's markers, or through the public API.
+    sim_r = None if is_stub else similarity_retriever(corpus["instructions"], config_name)
+    # I10 retrievers over order variants, cached by their texts.
+    variant_cache: dict[tuple, Retriever] = {}
+
+    def variant_retriever(ins: list[dict]) -> Retriever:
+        key = tuple(d["content"] for d in ins)
+        if key not in variant_cache:
+            variant_cache[key] = build_retriever(ins, config_name)[0]
+        return variant_cache[key]
+
     for ci, case in enumerate(cases):
-        info = CaseInfo(corpus["instructions"], case, config.mandatory_tags)
+        sims = (stub_similarities(corpus["instructions"], case) if is_stub
+                else public_similarities(corpus["instructions"], case, config_name, sim_r))
+        info = CaseInfo(corpus["instructions"], case, config.mandatory_tags, sims=sims)
         case_viol = set()
         prev_ids = None
         outputs = {}
@@ -676,6 +860,27 @@ def run_config_on_corpus(corpus: dict, cases: list[dict], config_name: str,
             if st["first"] is None:
                 st["first"] = {"corpus": corpus["index"], "case": ci, "k": det_ks[0],
                                "detail": "; ".join(det_bad)}
+
+        # I10 resolution order-independence. top_k=ALL and the threshold off
+        # fix the admitted set (every gate-passing item), so only the
+        # similarity order of the candidates differs.
+        ref_set = resolved_set(r, case)
+        diffs = []
+        for label, ins in order_variants(corpus["instructions"], case, config_name,
+                                         perm_prefix(corpus["index"])):
+            got = resolved_set(variant_retriever(ins), case)
+            if got != ref_set:
+                diffs.append(f"{label}: only original {sorted(ref_set - got)}, "
+                             f"only reordered {sorted(got - ref_set)}")
+        st = inv["I10"]
+        st["outputs"] += 1
+        st["outputs_nonvacuous"] += info.relation_among_admissible
+        if diffs:
+            st["outputs_violated"] += 1
+            case_viol.add("I10")
+            if st["first"] is None:
+                st["first"] = {"corpus": corpus["index"], "case": ci, "k": Retriever.ALL,
+                               "detail": "; ".join(diffs)}
         for key in case_viol:
             inv[key]["cases_violated"] += 1
         info_stats["cases"] += 1
@@ -684,38 +889,9 @@ def run_config_on_corpus(corpus: dict, cases: list[dict], config_name: str,
             "digest": digest.hexdigest() if want_digest else None}
 
 
-class _ReversedResolution(Retriever):
-    """Resolves relationships over the candidates in reverse order. Membership
-    of the resolved set should not depend on the order if resolution were a
-    function of the admitted set alone."""
-
-    def _resolve_relationships(self, scored, trace=None, context=None):
-        return super()._resolve_relationships(list(reversed(scored)), trace, context)
-
-
-def order_sensitivity_on_corpus(corpus: dict, cases: list[dict]) -> dict:
-    """Does the resolved set (no cut, top_k=ALL) change when the candidates are
-    resolved in reverse order? Main defaults, stub embedder."""
-    r, config = build_retriever(corpus["instructions"], "main")
-    rr = _ReversedResolution(r.corpus, config=config, embedder=STUB)
-    rr.build_index()
-    out = {"cases": 0, "differ": 0, "example": None}
-    for ci, case in enumerate(cases):
-        a = {s.id for s in r.retrieve(case["query"], make_context(case), top_k=Retriever.ALL)}
-        b = {s.id for s in rr.retrieve(case["query"], make_context(case), top_k=Retriever.ALL)}
-        out["cases"] += 1
-        if a != b:
-            out["differ"] += 1
-            if out["example"] is None:
-                out["example"] = {"corpus": corpus["index"], "case": ci,
-                                  "only_forward": sorted(a - b), "only_reversed": sorted(b - a)}
-    return out
-
-
 def sensitivity_on_corpus(corpus: dict, cases: list[dict]) -> dict:
     """Pool growth under main defaults: k above the base, and pool at fixed k."""
-    out: dict = {"above_base": defaultdict(int), "fixed_k": {}, "examples": {},
-                 "order": order_sensitivity_on_corpus(corpus, cases)}
+    out: dict = {"above_base": defaultdict(int), "fixed_k": {}, "examples": {}}
     infos = [CaseInfo(corpus["instructions"], c, MANDATORY_TAGS) for c in cases]
 
     # (a) retrieval_pool = SENS_POOL_BASE, k from 1 to 30. For each item that
@@ -804,11 +980,28 @@ def run_parallel(indices: list[int], config_names: list[str], do_sensitivity: bo
 # Counterexample shrinking
 # ---------------------------------------------------------------------------
 
-def violates(config_name: str, instructions: list[dict], case: dict, k: int, inv: str) -> tuple[bool, str | None]:
+def perm_prefix(corpus_index: int) -> str:
+    """Seed prefix for a corpus's I10 permutations, shared by the run and the shrinker."""
+    return f"wp1-perm-{BASE_SEED}-{corpus_index}"
+
+
+def violates(config_name: str, instructions: list[dict], case: dict, k: int, inv: str,
+             perm: str = "wp1-perm") -> tuple[bool, str | None]:
     if not instructions:
         return False, None
     r, config = build_retriever(instructions, config_name)
-    info = CaseInfo(instructions, case, config.mandatory_tags)
+    is_stub = CONFIGS[config_name]["embedder"] == "stub"
+    if inv == "I10":
+        ref = resolved_set(r, case)
+        for label, ins in order_variants(instructions, case, config_name, perm):
+            got = resolved_set(build_retriever(ins, config_name)[0], case)
+            if got != ref:
+                return True, (f"resolved set {sorted(ref)} becomes {sorted(got)} when the "
+                              f"similarity order is changed ({label})")
+        return False, None
+    sims = (stub_similarities(instructions, case) if is_stub
+            else public_similarities(instructions, case, config_name))
+    info = CaseInfo(instructions, case, config.mandatory_tags, sims=sims)
     if inv == "I7":
         if k < 2:
             return False, None
@@ -841,11 +1034,11 @@ def _scrub(instructions: list[dict], drop_id: str) -> list[dict]:
 
 
 def shrink(config_name: str, instructions: list[dict], case: dict, k: int, inv: str,
-           max_rounds: int = 6) -> tuple[list[dict], dict, int]:
+           max_rounds: int = 6, perm: str = "wp1-perm") -> tuple[list[dict], dict, int]:
     """Greedy delta-debugging: smallest k, fewest instructions, fewest edges and tags."""
     def fails(ins, cs, kk):
         try:
-            return violates(config_name, ins, cs, kk, inv)[0]
+            return violates(config_name, ins, cs, kk, inv, perm)[0]
         except Exception:  # noqa: BLE001
             return False
 
@@ -888,18 +1081,13 @@ def shrink(config_name: str, instructions: list[dict], case: dict, k: int, inv: 
 
 
 def describe_counterexample(config_name: str, instructions: list[dict], case: dict,
-                            k: int, inv: str) -> dict:
+                            k: int, inv: str, perm: str = "wp1-perm") -> dict:
     r, config = build_retriever(instructions, config_name)
-    ctx = make_context(case)
-    out, trace = traced(r, case, k)
-    _, detail = violates(config_name, instructions, case, k, inv)
+    out, trace = traced(r, case, k, threshold=-2.0 if inv == "I10" else None)
+    _, detail = violates(config_name, instructions, case, k, inv, perm)
     # Similarity of every instruction to the query under this configuration's embedder.
-    qctx = ctx.model_copy(update={"query": case["query"]})
-    qv = r._embedder.embed_single(r._query_text(case["query"], qctx), is_query=True)
-    sims = {}
-    for inst in r.corpus:
-        v = r._embedder.embed_single(r._instruction_text(inst), is_query=False)
-        sims[inst.id] = round(float(np.dot(qv, v) / (np.linalg.norm(qv) * np.linalg.norm(v))), 4)
+    sims = {i: round(s, 4) for i, s in
+            public_similarities(instructions, case, config_name).items()}
     return {
         "config": config_name,
         "config_overrides": CONFIGS[config_name]["overrides"],
@@ -916,6 +1104,8 @@ def describe_counterexample(config_name: str, instructions: list[dict], case: di
         "trace_admitted": dict(trace.admitted),
         "trace_excluded": dict(trace.excluded),
         "trace_missing_prerequisites": dict(trace.missing_prerequisites),
+        "trace_pool": trace.pool,
+        "trace_gated": trace.gated,
         "violation": detail,
     }
 
@@ -987,18 +1177,10 @@ def aggregate_sensitivity(rows: list[dict]) -> dict:
     above = defaultdict(int)
     fixed: dict = {}
     examples: dict = {}
-    order = {"cases": 0, "differ": 0, "corpora_differ": 0, "corpora": 0, "example": None}
     for row in rows:
         sens = row.get("sensitivity")
         if not sens:
             continue
-        o = sens["order"]
-        order["cases"] += o["cases"]
-        order["differ"] += o["differ"]
-        order["corpora"] += 1
-        order["corpora_differ"] += o["differ"] > 0
-        if order["example"] is None and o["example"] is not None:
-            order["example"] = o["example"]
         for key, val in sens["above_base"].items():
             above[key] += val
         for key, ex in sens.get("examples", {}).items():
@@ -1026,11 +1208,8 @@ def aggregate_sensitivity(rows: list[dict]) -> dict:
             v["frac_differ"] = v["differ"] / v["cases"] if v["cases"] else float("nan")
             v["frac_differ_ci"] = clopper_pearson(v["differ"], v["cases"])
             v["mean_jaccard"] = v["jaccard_sum"] / v["cases"] if v["cases"] else float("nan")
-    order["case_ci"] = clopper_pearson(order["differ"], order["cases"])
-    order["corpus_ci"] = clopper_pearson(order["corpora_differ"], order["corpora"])
     return {"pool_base": SENS_POOL_BASE, "above_base": above_out,
-            "fixed_k": fixed, "pools": list(SENS_POOLS), "examples": examples,
-            "resolution_order": order}
+            "fixed_k": fixed, "pools": list(SENS_POOLS), "examples": examples}
 
 
 def fmt_rate(x: int, n: int, ci: tuple[float, float]) -> str:
@@ -1039,7 +1218,9 @@ def fmt_rate(x: int, n: int, ci: tuple[float, float]) -> str:
     return f"{x}/{n} = {x / n:.4f} [{ci[0]:.4f}, {ci[1]:.4f}]"
 
 
-def print_tables(agg: dict, sens: dict | None, config_names: list[str]) -> None:
+def print_tables(agg: dict, sens: dict | None, config_names: list[str],
+                 pending: set[str] = frozenset()) -> None:
+    active = [inv for inv in INV_KEYS if inv not in pending]
     for name in config_names:
         a = agg[name]
         s = a["summary"]
@@ -1058,11 +1239,18 @@ def print_tables(agg: dict, sens: dict | None, config_names: list[str]) -> None:
         print(f"{'Inv':<5} {'Invariant':<42} {'Corpora violated [95% CP CI]':<34} "
               f"{'Outputs violated':<18} {'Non-vacuous outputs':<20}")
         print("-" * 124)
-        for inv in INV_KEYS:
-            t = a["invariants"][inv]
-            print(f"{inv:<5} {INV_LABEL[inv]:<42} "
-                  f"{fmt_rate(t['corpora_violated'], t['n_corpora'], t['corpus_ci']):<34} "
-                  f"{t['outputs_violated']}/{t['outputs']:<12} {t['outputs_nonvacuous']}")
+        for block, invs in (("", active),
+                            ("pending (expected to hold only on the final release sha)",
+                             [i for i in INV_KEYS if i in pending])):
+            if not invs:
+                continue
+            if block:
+                print(f"  {block}")
+            for inv in invs:
+                t = a["invariants"][inv]
+                print(f"{inv:<5} {INV_LABEL[inv]:<42} "
+                      f"{fmt_rate(t['corpora_violated'], t['n_corpora'], t['corpus_ci']):<34} "
+                      f"{t['outputs_violated']}/{t['outputs']:<12} {t['outputs_nonvacuous']}")
 
     print("\n--- Corpus-level violation rate by configuration (violated corpora / corpora) ---\n")
     header = f"{'Inv':<5}" + "".join(f"{n[:16]:>18}" for n in config_names)
@@ -1072,7 +1260,7 @@ def print_tables(agg: dict, sens: dict | None, config_names: list[str]) -> None:
         for n in config_names:
             t = agg[n]["invariants"][inv]
             line += f"{t['corpora_violated']:>12}/{t['n_corpora']:<5}"
-        print(line)
+        print(line + ("   (pending)" if inv in pending else ""))
 
     if sens:
         print("\n--- Pool growth sensitivity (main defaults, stub embedder) ---\n")
@@ -1085,12 +1273,7 @@ def print_tables(agg: dict, sens: dict | None, config_names: list[str]) -> None:
         for key, ex in sorted(sens.get("examples", {}).items()):
             print(f"    example {key}: corpus {ex['corpus']} case {ex['case']} k {ex['k'] - 1}->{ex['k']}: "
                   f"{ex['dropped']} dropped, trace {ex['trace_record']}")
-        o = sens["resolution_order"]
-        print(f"\n(b) Resolution order: resolved set (top_k=ALL, no cut) with the candidates "
-              f"resolved in reverse order differs in {o['differ']}/{o['cases']} cases "
-              f"[{o['case_ci'][0]:.4f}, {o['case_ci'][1]:.4f}], "
-              f"{o['corpora_differ']}/{o['corpora']} corpora. Example: {o['example']}")
-        print("\n(c) Ungated cases, output at pool p versus whole-corpus pool:")
+        print("\n(b) Ungated cases, output at pool p versus whole-corpus pool:")
         for k, prow in sens["fixed_k"].items():
             print(f"    k = {k}")
             for p, v in prow.items():
@@ -1133,6 +1316,10 @@ def parse_args() -> argparse.Namespace:
                    default=project_root / "results" / "invariants_counterexamples.json")
     p.add_argument("--log-file", type=Path,
                    default=project_root / "results" / "invariants_output.txt")
+    p.add_argument("--pending", nargs="*", default=sorted(PENDING_INVARIANTS),
+                   choices=INV_KEYS, metavar="INV",
+                   help="Invariants to report apart as pending, for a sha that predates "
+                        "the rule they state (for example --pending I10 I11 I12).")
     p.add_argument("--digest-only", action="store_true", help=argparse.SUPPRESS)
     return p.parse_args()
 
@@ -1149,6 +1336,7 @@ def main() -> None:
     config_names = list(args.configs)
     if "main" not in config_names:
         config_names.insert(0, "main")
+    pending = set(args.pending)
 
     log_handle = None
     original_stdout = sys.stdout
@@ -1196,7 +1384,7 @@ def main() -> None:
                 t = agg["main"]["invariants"]["I6"]
                 t["cross_process_mismatches"] = len(cross["mismatched"])
 
-        print_tables(agg, sens, config_names)
+        print_tables(agg, sens, config_names, pending)
         if cross is not None:
             print(f"\nCross-process determinism (main, {cross.get('corpora')} corpora, "
                   f"PYTHONHASHSEED {cross.get('pythonhashseed_this')} vs "
@@ -1212,28 +1400,38 @@ def main() -> None:
                 first = agg[name]["invariants"][inv]["first"]
                 if first is None:
                     continue
+                if inv in pending and name != "main":
+                    # A pending invariant is expected to fail on a sha without the
+                    # rule it states, so one shrunk example (main) is enough.
+                    cexs.append({"config": name, "invariant": inv, "pending": True,
+                                 "reproduced": None, "first": first})
+                    continue
                 corpus = generate_corpus(first["corpus"])
                 case = generate_cases(corpus)[first["case"]]
-                ok, _ = violates(name, corpus["instructions"], case, first["k"], inv)
+                perm = perm_prefix(first["corpus"])
+                ok, _ = violates(name, corpus["instructions"], case, first["k"], inv, perm)
                 if not ok:
                     print(f"  {name} {inv}: first violation did not reproduce in isolation "
                           f"(corpus {first['corpus']}, case {first['case']}, k {first['k']})")
                     cexs.append({"config": name, "invariant": inv, "reproduced": False,
                                  "first": first})
                     continue
-                ins, cs, kk = shrink(name, corpus["instructions"], case, first["k"], inv)
-                cex = describe_counterexample(name, ins, cs, kk, inv)
+                ins, cs, kk = shrink(name, corpus["instructions"], case, first["k"], inv, perm=perm)
+                cex = describe_counterexample(name, ins, cs, kk, inv, perm)
                 cex["source"] = first
                 cex["reproduced"] = True
+                cex["pending"] = inv in pending
                 cexs.append(cex)
-                print(f"\n  [{name}] {inv} {INV_LABEL[inv]}: corpus {first['corpus']}, "
+                print(f"\n  [{name}] {inv} {INV_LABEL[inv]}"
+                      f"{' (pending)' if inv in pending else ''}: corpus {first['corpus']}, "
                       f"case {first['case']}, k {first['k']} -> shrunk to "
                       f"{len(ins)} instructions, k={kk}")
                 print(f"    context: {cex['context']}  query: {cex['query']!r}")
                 for d in ins:
                     rel = {f: d[f] for f in ("required_tags", "scope_tags", "labels",
                                              "conflicts_with", "supersedes", "requires") if d[f]}
-                    print(f"    {d['id']}: p={d['priority']} sim={cex['similarity_to_query'][d['id']]} {rel}")
+                    print(f"    {d['id']}: p={d['priority']} "
+                          f"sim={cex['similarity_to_query'].get(d['id'])} {rel}")
                 print(f"    output: {cex['output']}")
                 print(f"    trace admitted: {cex['trace_admitted']}")
                 print(f"    violation: {cex['violation']}")
@@ -1253,6 +1451,7 @@ def main() -> None:
             "bear_path": bear.__file__,
             "bear_source_sha": os.environ.get("BEAR_SOURCE_SHA", "(unset)"),
             "invariant_labels": INV_LABEL,
+            "pending_invariants": sorted(pending),
             "results": agg,
             "sensitivity": sens,
             "cross_process_determinism": cross,

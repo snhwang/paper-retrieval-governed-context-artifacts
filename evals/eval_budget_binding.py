@@ -47,9 +47,9 @@ Backends: metadata needs none. Threshold-dependent conditions run on BM25 and
 the hash embedder, and on BGE-base when --backends includes bge (forced onto
 the CPU). Backend-free conditions run a hash-trace cross-check.
 
-The retrieval trace is read by calling Retriever._retrieve with a fresh
-bear.audit._RetrievalTrace, which is exactly what Retriever.retrieve does
-inside an audited turn.
+Only BEAR's public API is used. The trace comes from
+Retriever.retrieve_with_trace (BEAR 0.4.0 and later), and the default-pool
+size each query ranked is recorded from RetrievalTrace.pool.
 
 Fractions above k carry Clopper-Pearson 95% CIs. Per-query arrays are saved
 in the result JSON.
@@ -80,7 +80,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 import bear  # noqa: E402
 from bear import Config, Context, Corpus, EmbeddingBackend, Retriever  # noqa: E402
-from bear.audit import _RetrievalTrace  # noqa: E402
+from bear.retriever import Embedder  # noqa: E402
 from repro_footer import print_repro_footer  # noqa: E402
 
 logging.getLogger("bear").setLevel(logging.ERROR)
@@ -194,11 +194,11 @@ def make_config(backend: str, *, k: int, threshold_dense: float, threshold_bm25:
 
 
 def traced(r: Retriever, query: str, ctx: Context, k: int):
-    trace = _RetrievalTrace()
-    out = r._retrieve(query, ctx, k, None, trace)
+    """Results, admitted-on-merit count, whether the cut removed anything, pool."""
+    out, trace = r.retrieve_with_trace(query, ctx, top_k=k)
     merit = sum(1 for h in trace.admitted.values() if h in MERIT)
     cut = any(e["reason"] == "top_k" for e in trace.excluded.values())
-    return out, merit, cut
+    return out, merit, cut, trace.pool
 
 
 # ---------------------------------------------------------------------------
@@ -244,20 +244,24 @@ def run_condition(key: str, label: str, corpus: Corpus, queries: list[tuple[str,
     for b in run_backends:
         kw = dict(k=k, threshold_dense=threshold_dense, threshold_bm25=threshold_bm25,
                   priority_weight=priority_weight, mandatory_tags=mandatory_tags)
-        r_whole = Retriever(corpus, config=make_config(b, retrieval_pool=n_corpus, **kw))
+        cfg_whole = make_config(b, retrieval_pool=n_corpus, **kw)
+        # One embedder for both retrievers, through the public embedder
+        # argument, so a dense model is loaded once. BM25 needs none.
+        shared = None if b == "bm25" else Embedder.from_config(cfg_whole)
+        r_whole = Retriever(corpus, config=cfg_whole, embedder=shared)
         r_whole.build_index()
-        # Share the embedder so a dense query is embedded once per retriever pair.
         r_def = Retriever(corpus, config=make_config(b, retrieval_pool=None, **kw),
-                          embedder=r_whole._embedder)
+                          embedder=shared)
         r_def.build_index()
-        whole, default, cut, out_size, differ = [], [], [], [], []
+        whole, default, cut, out_size, differ, pools = [], [], [], [], [], []
         for q, ctx in queries:
-            out_w, m_w, _ = traced(r_whole, q, ctx, k)
-            out_d, m_d, c_d = traced(r_def, q, ctx, k)
+            out_w, m_w, _, _ = traced(r_whole, q, ctx, k)
+            out_d, m_d, c_d, pool_d = traced(r_def, q, ctx, k)
             whole.append(m_w)
             default.append(m_d)
             cut.append(c_d)
             out_size.append(len(out_d))
+            pools.append(pool_d)
             # Membership, not order: a mandatory item the search finds is scored
             # by the blend, one injected at priority/100, so order can differ
             # between pools while the set does not.
@@ -273,6 +277,7 @@ def run_condition(key: str, label: str, corpus: Corpus, queries: list[tuple[str,
             "per_query_default_pool": default,
             "per_query_cut_binds": cut,
             "per_query_output_size": out_size,
+            "per_query_default_pool_size": pools,
         }
         if backend_free:
             mism = [i for i, (a, f) in enumerate(zip(whole, floor)) if a != f]

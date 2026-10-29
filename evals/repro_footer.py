@@ -26,9 +26,14 @@ import sys as _sys
 from pathlib import Path as _Path
 
 
-def _safe_git(args: list[str], cwd: str | None = None) -> str:
+def _safe_git(args: list[str], cwd: str | None = None) -> str | None:
+    """Stripped stdout, or None if git is missing, fails or times out.
+
+    None and "" differ: an empty ``git status --porcelain`` means clean, a
+    failed one means unknown.
+    """
     if not _shutil.which("git"):
-        return ""
+        return None
     try:
         out = _subprocess.run(
             ["git"] + args,
@@ -39,10 +44,10 @@ def _safe_git(args: list[str], cwd: str | None = None) -> str:
             cwd=cwd,
         )
         if out.returncode != 0:
-            return ""
+            return None
         return out.stdout.strip()
     except Exception:  # noqa: BLE001
-        return ""
+        return None
 
 
 def _try_version(modname: str) -> str:
@@ -80,7 +85,9 @@ def print_repro_footer(extra: dict | None = None) -> None:
     if sha:
         print(f"git commit:      {sha}")
         dirty = _safe_git(["status", "--porcelain"], cwd=str(repo_root))
-        if dirty:
+        if dirty is None:
+            print("git status:      unknown (git status failed or timed out)")
+        elif dirty:
             print(f"git status:      DIRTY ({dirty.count(chr(10))+1} files modified)")
         else:
             print(f"git status:      clean")
