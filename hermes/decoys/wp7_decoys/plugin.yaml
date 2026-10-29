@@ -1,0 +1,5 @@
+name: wp7_decoys
+version: 1.0.0
+description: "WP7 decoy tools for the TIST revision. Names, descriptions and parameters are ToolBench APIs sampled by hermes/decoys/make_decoys.py. Every call returns a fixed service-unavailable error."
+author: paper-retrieval-governed-context
+kind: standalone

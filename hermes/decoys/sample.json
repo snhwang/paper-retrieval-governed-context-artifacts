@@ -1,0 +1,7090 @@
+{
+ "seed": 20261029,
+ "source": {
+  "path": "evals/data/external_benchmarks/toolbench/benchmark_data.json",
+  "sha256": "e1d4d4eb4a2dd68a8f1562b3fe7e173a9e87813cec1b73d8010c6c5a5da66a6c"
+ },
+ "filters": {
+  "description_chars": [
+   20,
+   600
+  ],
+  "max_params": 8,
+  "param_description_max_chars": 300,
+  "reject": "control characters or escaped-backslash runs in any text"
+ },
+ "pool_size": 2351,
+ "in_scope_targets": [
+  "search_files",
+  "read_file",
+  "web_search",
+  "web_extract",
+  "image_generate",
+  "cronjob_manage",
+  "session_search",
+  "process_manage"
+ ],
+ "in_scope_similarity": {
+  "method": "embed",
+  "url": "http://localhost:8360",
+  "endpoint": "http://localhost:8360/v1/embeddings",
+  "model_id": "nvidia/llama-nemotron-embed-vl-1b-v2",
+  "dim": 2048,
+  "served_model": "nemotron-embed-vl",
+  "source": "health"
+ },
+ "registry_commit": "d923a5eb487a17c0a68801bba9ef0f56c81040a8",
+ "in_scope_tag": "team:ops",
+ "toolset": "wp7_decoys",
+ "error": "Service unavailable (HTTP 503): this API cannot be reached from this environment.",
+ "sizes": {
+  "100": [
+   "github_repos_search",
+   "article_api_extract",
+   "neo_google_search_web_search",
+   "url_content_extractor_get_content",
+   "avatar_io_modern_avatar_placeholder_api_generate_avatar",
+   "remote_jobs_api_get_a_specific_remote_job_by_id",
+   "lemurbot_get_a_conversation_turn",
+   "carbon_management_getprocesscountforcelery",
+   "twttrapi_get_dm_conversation",
+   "probablythese_endponit",
+   "tiktok_v2_feeds",
+   "wnba_api_wnba_team_info",
+   "world_clock_get_current_time_within_a_timezone",
+   "shazam_api_search",
+   "onelike_social_media_news_in_german",
+   "giphy_trending_gifs",
+   "yandex_serp_canceltask_free_of_use",
+   "transportistas_de_argentina_quotes_postcode_oca_cuit_ope",
+   "judge0_ce_get_languages",
+   "fmpcloud_cash_flow_statement",
+   "bulk_whatsapp_validator_about_info_free",
+   "swagger_petstore_getpetbyid",
+   "text_sentiment_api_sentiment_analysis",
+   "web_search_websearch",
+   "zillow_v2_property_details",
+   "betbro_sportbook_fixture_fixture_id",
+   "macrotrends_finance_financial_cash_statement",
+   "latest_anime_api_get_anime_by_page",
+   "qrlink_api_url_to_qr_code",
+   "captcha_generator_captcha_generator",
+   "fast_food_restaurants_usa_top_50_chains_get_all_restaura",
+   "vatlayer_request_list_of_types_of_goods",
+   "tank01_nfl_live_in_game_real_time_statistics_nfl_get_dai",
+   "node_express_api_tutorial_get_all_users",
+   "airvisual_stations_v2_get_information",
+   "viperscore_get_live_games",
+   "open_brewery_db_search",
+   "epoch_converter_date_to_time",
+   "airdna_rental_amenities",
+   "cheap_youtube_api_channel",
+   "f1_drivers_quotes_driver_s_quotes_with_pagination_of_10",
+   "mlemapi_new_mlem",
+   "joe_rogan_quote_generator_generate_rogan_quote",
+   "minecraft_forge_optifine_downloadminecraftjson",
+   "beekeeping_research_basic_endpoint",
+   "textking_translation_get_project",
+   "memeados_google_fake_autocomplete",
+   "football_data_daily_match_list_all",
+   "vimeo_getvideofromuser",
+   "musicdata_api_youtube_24h_type",
+   "movie_tv_music_search_and_download_get_monthly_top_100_t",
+   "airplanesdb_airplanes_ordered_by_ascending",
+   "heywatch_video_encoding_downloadencodedvideo",
+   "shescoresapi_get_players_by_country",
+   "public_url_share_media_sources_statistics",
+   "lost_ark_simple_get_character_skills",
+   "learning_engine_memre_api_v1_users_user_id_learning_stat",
+   "measurement_unit_converter_measurements_detailed",
+   "live_golf_data_tournaments",
+   "manatee_jokes_find_all",
+   "nearby_places_types_google",
+   "thefluentme_get_language_by_id",
+   "torrent_search_get_from_yts",
+   "spachero_spac_database_spac_top_10_rankings",
+   "date_calculator_rdates",
+   "youtube_videos_mp4",
+   "recipe_by_api_ninjas_v1_recipe",
+   "luhn_algorithm_service_status",
+   "magisto_check_movie_status",
+   "morning_star_type_price_get_other_fees",
+   "line_messaging_get_content",
+   "cricketapi2_leaguenextmatches",
+   "searchhook_extend",
+   "air_quality_air_quality_forecast",
+   "drinking_get_random_question",
+   "fdj_matches",
+   "voo_end1",
+   "viewdns_port_scanner",
+   "email_checker_and_validator_check_email",
+   "spotify_web_get_artists",
+   "textking_translation_get_price_info_for_word_count",
+   "airdna_active_listings",
+   "colorme_specificcolorset",
+   "facebook_user_info_find_feed_find_get",
+   "fachaapi_live_aircraft_by_reg",
+   "id_game_checker_get_username_genshin_impact",
+   "crypto_prices_api_prices_and_up_and_down",
+   "flixbus_cities",
+   "team_petstore_getuserbyname",
+   "temu_com_shopping_api_realtime_api_scrapper_from_temu_co",
+   "virtual_number_get_all_countries",
+   "sigue_payout_batch",
+   "list_movies_genre",
+   "stock_analysis_revenue_estimate",
+   "onelike_social_media_news_in_indonesian",
+   "gamerpower_filter_group_giveaways",
+   "seo_fast_audit_analysis",
+   "europe_fuel_prices_get_specific_country",
+   "dictionary_translation_hablaa_similar_words",
+   "platformbil_getinventory"
+  ],
+  "300": [
+   "github_repos_search",
+   "article_api_extract",
+   "neo_google_search_web_search",
+   "url_content_extractor_get_content",
+   "avatar_io_modern_avatar_placeholder_api_generate_avatar",
+   "remote_jobs_api_get_a_specific_remote_job_by_id",
+   "lemurbot_get_a_conversation_turn",
+   "carbon_management_getprocesscountforcelery",
+   "twttrapi_get_dm_conversation",
+   "probablythese_endponit",
+   "tiktok_v2_feeds",
+   "wnba_api_wnba_team_info",
+   "world_clock_get_current_time_within_a_timezone",
+   "shazam_api_search",
+   "onelike_social_media_news_in_german",
+   "giphy_trending_gifs",
+   "yandex_serp_canceltask_free_of_use",
+   "transportistas_de_argentina_quotes_postcode_oca_cuit_ope",
+   "judge0_ce_get_languages",
+   "fmpcloud_cash_flow_statement",
+   "bulk_whatsapp_validator_about_info_free",
+   "swagger_petstore_getpetbyid",
+   "text_sentiment_api_sentiment_analysis",
+   "web_search_websearch",
+   "zillow_v2_property_details",
+   "betbro_sportbook_fixture_fixture_id",
+   "macrotrends_finance_financial_cash_statement",
+   "latest_anime_api_get_anime_by_page",
+   "qrlink_api_url_to_qr_code",
+   "captcha_generator_captcha_generator",
+   "fast_food_restaurants_usa_top_50_chains_get_all_restaura",
+   "vatlayer_request_list_of_types_of_goods",
+   "tank01_nfl_live_in_game_real_time_statistics_nfl_get_dai",
+   "node_express_api_tutorial_get_all_users",
+   "airvisual_stations_v2_get_information",
+   "viperscore_get_live_games",
+   "open_brewery_db_search",
+   "epoch_converter_date_to_time",
+   "airdna_rental_amenities",
+   "cheap_youtube_api_channel",
+   "f1_drivers_quotes_driver_s_quotes_with_pagination_of_10",
+   "mlemapi_new_mlem",
+   "joe_rogan_quote_generator_generate_rogan_quote",
+   "minecraft_forge_optifine_downloadminecraftjson",
+   "beekeeping_research_basic_endpoint",
+   "textking_translation_get_project",
+   "memeados_google_fake_autocomplete",
+   "football_data_daily_match_list_all",
+   "vimeo_getvideofromuser",
+   "musicdata_api_youtube_24h_type",
+   "movie_tv_music_search_and_download_get_monthly_top_100_t",
+   "airplanesdb_airplanes_ordered_by_ascending",
+   "heywatch_video_encoding_downloadencodedvideo",
+   "shescoresapi_get_players_by_country",
+   "public_url_share_media_sources_statistics",
+   "lost_ark_simple_get_character_skills",
+   "learning_engine_memre_api_v1_users_user_id_learning_stat",
+   "measurement_unit_converter_measurements_detailed",
+   "live_golf_data_tournaments",
+   "manatee_jokes_find_all",
+   "nearby_places_types_google",
+   "thefluentme_get_language_by_id",
+   "torrent_search_get_from_yts",
+   "spachero_spac_database_spac_top_10_rankings",
+   "date_calculator_rdates",
+   "youtube_videos_mp4",
+   "recipe_by_api_ninjas_v1_recipe",
+   "luhn_algorithm_service_status",
+   "magisto_check_movie_status",
+   "morning_star_type_price_get_other_fees",
+   "line_messaging_get_content",
+   "cricketapi2_leaguenextmatches",
+   "searchhook_extend",
+   "air_quality_air_quality_forecast",
+   "drinking_get_random_question",
+   "fdj_matches",
+   "voo_end1",
+   "viewdns_port_scanner",
+   "email_checker_and_validator_check_email",
+   "spotify_web_get_artists",
+   "textking_translation_get_price_info_for_word_count",
+   "airdna_active_listings",
+   "colorme_specificcolorset",
+   "facebook_user_info_find_feed_find_get",
+   "fachaapi_live_aircraft_by_reg",
+   "id_game_checker_get_username_genshin_impact",
+   "crypto_prices_api_prices_and_up_and_down",
+   "flixbus_cities",
+   "team_petstore_getuserbyname",
+   "temu_com_shopping_api_realtime_api_scrapper_from_temu_co",
+   "virtual_number_get_all_countries",
+   "sigue_payout_batch",
+   "list_movies_genre",
+   "stock_analysis_revenue_estimate",
+   "onelike_social_media_news_in_indonesian",
+   "gamerpower_filter_group_giveaways",
+   "seo_fast_audit_analysis",
+   "europe_fuel_prices_get_specific_country",
+   "dictionary_translation_hablaa_similar_words",
+   "platformbil_getinventory",
+   "ubidots_get_variables_variable_id",
+   "spotify_downloader_metadata_playlist",
+   "opensquat_get_daily_domains",
+   "social_media_data_tt_hashtag_metadata_information_v2",
+   "guinness_world_records_api_get_records",
+   "open_proxies_open_proxies",
+   "jet_set_radio_api_songs",
+   "woo_temp_product_category",
+   "keyword_analysis_popularsitesforquery",
+   "airbnb_listings_listing_status_full",
+   "health_calculator_api_bodyfat_imperial",
+   "tank01_nfl_live_in_game_real_time_statistics_nfl_get_nfl",
+   "bingoapi_eu",
+   "yahoo_finance_balance_sheet",
+   "ski_resort_forecast_hourly_forecast",
+   "musicdata_api_youtube_global_countryid_timeframe",
+   "airdna_top_property_managers",
+   "transportistas_de_argentina_cities_states_stateisocode",
+   "miza_retrieve_file",
+   "brand_recognition_get_version",
+   "tiktok_v2_feeds_by_secuid",
+   "similar_movies_get_id",
+   "cheap_translate_goo_translate_languages",
+   "airplanesdb_search",
+   "powerbi_getpeoplebytopic",
+   "phone_area_code",
+   "signnow_get_role_ids_for_template",
+   "qr_code_generator_generate_basic_base64",
+   "magic_aliexpress_api_currenciesavailable",
+   "morning_star_type_portfolio_get_credit_quality",
+   "weather_forecast_14_days_get_forecastdata_by_lat_lon",
+   "airdna_rental_settings",
+   "mailboxlayer_validate_email_address",
+   "investing_cryptocurrency_markets_coins_search",
+   "token_scanner_multichain_honeypot_checker_multichain_get",
+   "trackingmore_v2_packages_v2_track",
+   "onlyfans_count",
+   "dice_roll_simulator_custom_dice",
+   "twitter_v5_get_user_followings",
+   "email_validator_v3_email_validate_regex",
+   "email_scraper_email_extractor",
+   "dice_roll_simulator_custom_dice_rolls",
+   "wnba_api_wnba_standings",
+   "house_plants_get_by_category",
+   "geolocate_get_coordinates",
+   "air_quality_current_air_quality",
+   "greip_validateemail",
+   "toxdetectai_ai_powered_toxic_comment_detector_toxdetecta",
+   "diffbot_frontpage",
+   "virtual_accounts_api_getallaccounts",
+   "168predict_vip_football_predictions_today_sure_vip_btts",
+   "d7sms_get_otp_status",
+   "easy_weather_current_conditions_detailed",
+   "yh_finance_complete_earnings",
+   "indie_songs_distrokid_unsigned_get_songs_with_all_metada",
+   "helioviewer_v1_downloadmovie",
+   "onelike_social_media_news_in_dutch",
+   "outking_get_poster",
+   "anime_quotes_v4_get_quotes_by_anime_title",
+   "echo_api_echo_get",
+   "nowpayments_3_getestimatedprice",
+   "amazon_scrapper_v4_get_a_product_details",
+   "google_reviews_scraper_getreviews",
+   "world_clock_coordinated_universal_time",
+   "validate_vat_validate_vat",
+   "yts_am_torrent_movie_comments_xml",
+   "nowpayments_1_getapistatus",
+   "bmi_calculator_v2_bmi",
+   "memeados_sponge_bob",
+   "rapidweather_reverse_geocoding",
+   "hashtag_category_tags",
+   "ecoweather_ecoweather",
+   "explorarc_s_password_generation_api_password_generation",
+   "humor_jokes_and_memes_random_joke",
+   "fast_food_restaurants_usa_top_50_chains_get_all_restaura_2",
+   "facts_by_api_ninjas_v1_facts",
+   "movie_and_tv_shows_quotes_get_quote_by_year",
+   "onlyfans_mass_messages",
+   "league_of_legends_api_get_player_by_name",
+   "random_chunk_api_getrandompassword",
+   "instagram_looter_get_media_download_link",
+   "youtube_mp3_get_mp3",
+   "shazam_search_track",
+   "random_chunk_api_getrandomuser",
+   "astronomy_get_positions_for_body",
+   "tank01_nfl_live_in_game_real_time_statistics_nfl_get_pla",
+   "tomba_emailverifier",
+   "instagram_v2_search_hashtags",
+   "diablo4_smartable_getnewsletters",
+   "investing_commodity_indices",
+   "suivi_colis_latest",
+   "betsapi_bet365_result",
+   "movie_showtimes_api_all",
+   "bing_search_apis_emails_search",
+   "free_nba_get_specific_player",
+   "movies_tv_shows_database_get_movie_images_by_id",
+   "minecraft_forge_optifine_minecraftresources",
+   "morning_star_type_parent_get_highest_rated_investments",
+   "uptosite_link_shortener_get_long_url",
+   "tank01_nfl_live_in_game_real_time_statistics_nfl_get_nfl_2",
+   "twitter_pack_v2_user_timeline",
+   "text_sentiment_api_list_endpoints_can_be_used_as_an_endp",
+   "movie_showtimes_api_information",
+   "house_plants_get_by_climate",
+   "usa_jobs_for_it_business_intelligence_jobs",
+   "binance_smart_chain_account_balance",
+   "id_game_checker_get_username_mobile_legends",
+   "23andme_drug_responses",
+   "hafez_fal",
+   "whin_hook_receiver",
+   "shazam_top_track_by_country",
+   "hashtag_get_category",
+   "fomoapi_get_campaign_lead_from_id",
+   "weblasso_get_scan_status",
+   "whatsapp_scraper_is_registered_on_whatsapp_get_free_toke",
+   "ai_translation_apis_supported_languages_list",
+   "random_chunk_api_getrandomarray",
+   "youtube_search_v3_getvideodetails",
+   "vimeo_getrelatedpeople",
+   "climate_change_live_v27_get_all_climate_change_news",
+   "vatlayer_calculate_eu_vat_compliant_price",
+   "quality_porn_live_tags",
+   "viewdns_iran_firewall_test",
+   "meme_generator_and_template_database_search",
+   "wayfair_products_search",
+   "mmaapi_femalefighterimageplaceholder",
+   "ticketbud_tickets_for_an_event",
+   "miza_ip_address_check",
+   "heywatch_video_encoding_getformat",
+   "genius_song_lyrics_user_contributions_all",
+   "test_random_usr",
+   "world_of_jokes_get_jokes",
+   "catalogapi_list_available_catalogs",
+   "whatsapp_scraper_fetch_profile_picture_get_free_token",
+   "apjoy_weather_forecast_getweatherforecast",
+   "date_calculator_now",
+   "cryptocurrency_balance_get_digibyte_balance",
+   "baseball_teams_affiliates_teamids",
+   "qr_code_api_updated_qr_endpoint",
+   "nexweave_getcampaigndetails",
+   "email_address_validator_validate_email_address",
+   "betigolo_tips_premium_tips",
+   "holistic_finance_stock_data_shares_float",
+   "teste_getpetbyid",
+   "geography_get_country_by_fifa_code",
+   "mmaapi_teamdetails",
+   "account_verifyer_instagram_account_verifyer",
+   "b2bhint_get_company_full_data",
+   "quality_porn_docs",
+   "jak_api_jak",
+   "stocks_archive_tickerdata",
+   "youtube_mp3_downloader_download_youtube_mp3",
+   "ubidots_get_variables",
+   "swagger_petstore_getorderbyid",
+   "churchapp_get_all_contacts",
+   "random_word_api_get_word_by_length",
+   "league_of_legends_api_get_champion_rotation",
+   "smsto_get_messages",
+   "instagram_1_feed_by_username",
+   "phone_validator_api_is_mobile",
+   "searchingwebrequest_searchwebrequest",
+   "stormglass_complete_get_astronomy_data",
+   "learning_engine_memre_api_v1_concepts",
+   "minecraft_forge_optifine_optifineversionlist",
+   "otp_2fa_createsecret",
+   "twitter_data_user_tweets_and_replies",
+   "live_golf_data_fedexcup_ranking",
+   "id_game_checker_get_username_pubg_mobile",
+   "felina_multisig_wallet_api_get_nfts",
+   "lost_ark_simple_get_weapon_recipes",
+   "airbnb_listings_get_administrative_divisions",
+   "urltest_getinventory",
+   "keyword_tool_v2_langlist",
+   "yahoo_finance_esg",
+   "free_stopwords_languages",
+   "mmaapi_teamnextevents",
+   "domain_info_full_information",
+   "cities_cost_of_living_get_currencies_list",
+   "fake_data_generator_random_profiles",
+   "proxy_list_proxy_health",
+   "social_media_data_tt_hashtag_feed_video_posts",
+   "yandex_serp_getmytasks_free_of_use",
+   "comfyfood_get_all_recipes_1",
+   "flaticon_totalicons",
+   "b2bhint_get_company_basic_data",
+   "xxxtremelightningrouletteapi_latest_outcome",
+   "yahoo_finance_index",
+   "botlibre_form_check_instance",
+   "films_searchinventory",
+   "memeados_drakelikehate",
+   "zeus_api_competitions_scorers",
+   "minecraft_forge_optifine_minecraftversionlist",
+   "waktu_solat_solat_time",
+   "meme_generator_and_template_database_fonts",
+   "daily_atmosphere_carbon_dioxide_concentration_carbon_dio",
+   "hashtag_trending_countries_list",
+   "arimagesynthesizer_get_image",
+   "rankiteo_climate_risk_assessment_getdisastertypebydatean",
+   "tibia_items_get_imbuements_for_vampirism_life_steal",
+   "yahoo_finance_v2_stock_net_share_purchase_activity"
+  ]
+ },
+ "category_counts": {
+  "100": {
+   "team:ops": 8,
+   "team:Social": 2,
+   "team:Tools": 14,
+   "team:Sports": 10,
+   "team:Music": 3,
+   "team:News_Media": 2,
+   "team:Media": 5,
+   "team:Monitoring": 1,
+   "team:Logistics": 1,
+   "team:Financial": 2,
+   "team:eCommerce": 2,
+   "team:Data": 7,
+   "team:Finance": 6,
+   "team:Movies": 2,
+   "team:Food": 2,
+   "team:Other": 3,
+   "team:Health_and_Fitness": 1,
+   "team:Video_Images": 3,
+   "team:Entertainment": 4,
+   "team:Science": 2,
+   "team:Business": 2,
+   "team:Database": 1,
+   "team:Gaming": 3,
+   "team:Education": 3,
+   "team:Location": 1,
+   "team:Communication": 2,
+   "team:Search": 1,
+   "team:Weather": 1,
+   "team:Travel": 2,
+   "team:Transportation": 1,
+   "team:SMS": 1,
+   "team:Payments": 1,
+   "team:Energy": 1
+  },
+  "300": {
+   "team:ops": 8,
+   "team:Social": 16,
+   "team:Tools": 29,
+   "team:Sports": 24,
+   "team:Music": 8,
+   "team:News_Media": 4,
+   "team:Media": 9,
+   "team:Monitoring": 4,
+   "team:Logistics": 4,
+   "team:Financial": 6,
+   "team:eCommerce": 6,
+   "team:Data": 26,
+   "team:Finance": 18,
+   "team:Movies": 6,
+   "team:Food": 4,
+   "team:Other": 8,
+   "team:Health_and_Fitness": 3,
+   "team:Video_Images": 8,
+   "team:Entertainment": 21,
+   "team:Science": 6,
+   "team:Business": 9,
+   "team:Database": 5,
+   "team:Gaming": 12,
+   "team:Education": 5,
+   "team:Location": 1,
+   "team:Communication": 4,
+   "team:Search": 4,
+   "team:Weather": 8,
+   "team:Travel": 5,
+   "team:Transportation": 1,
+   "team:SMS": 3,
+   "team:Payments": 4,
+   "team:Energy": 2,
+   "team:Devices": 2,
+   "team:Visual_Recognition": 1,
+   "team:Translation": 2,
+   "team:Cybersecurity": 3,
+   "team:Email": 3,
+   "team:Artificial_Intelligence_Machine_Learning": 3,
+   "team:Medical": 1,
+   "team:Business_Software": 4
+  }
+ },
+ "decoys": [
+  {
+   "name": "github_repos_search",
+   "scope_tag": "team:ops",
+   "in_scope": true,
+   "category": "Tools",
+   "tool_name": "Github Repos",
+   "api_name": "Search",
+   "description": "Search for public repositories of an user",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "user": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "user"
+    ]
+   },
+   "near": "search_files",
+   "near_similarity": 0.4363
+  },
+  {
+   "name": "article_api_extract",
+   "scope_tag": "team:ops",
+   "in_scope": true,
+   "category": "News_Media",
+   "tool_name": "article-api",
+   "api_name": "/extract",
+   "description": "get readable content and metadata of a url",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "url": {
+      "type": "string",
+      "description": "url of the article"
+     }
+    },
+    "required": [
+     "url"
+    ]
+   },
+   "near": "read_file",
+   "near_similarity": 0.5401
+  },
+  {
+   "name": "neo_google_search_web_search",
+   "scope_tag": "team:ops",
+   "in_scope": true,
+   "category": "Search",
+   "tool_name": "Neo Google Search",
+   "api_name": "Web Search",
+   "description": "This endpoint is used for web searches",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "q": {
+      "type": "string",
+      "description": "Search query"
+     },
+     "lr": {
+      "type": "string",
+      "description": "Restricts the search to documents written in a particular language"
+     },
+     "gl": {
+      "type": "string",
+      "description": "The gl parameter value is a two-letter country code. The gl parameter boosts search results whose country of origin matches the parameter value"
+     },
+     "num": {
+      "type": "number",
+      "description": "Number of search results to return.\nValid values are integers between 1 and 20, inclusive"
+     },
+     "start": {
+      "type": "number",
+      "description": "The index of the first result to return."
+     }
+    },
+    "required": [
+     "q"
+    ]
+   },
+   "near": "web_search",
+   "near_similarity": 0.5636
+  },
+  {
+   "name": "url_content_extractor_get_content",
+   "scope_tag": "team:ops",
+   "in_scope": true,
+   "category": "Tools",
+   "tool_name": "URL Content Extractor",
+   "api_name": "Get Content",
+   "description": "Give a url and it will spit back the content of that url",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "url": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "url"
+    ]
+   },
+   "near": "web_extract",
+   "near_similarity": 0.5067
+  },
+  {
+   "name": "avatar_io_modern_avatar_placeholder_api_generate_avatar",
+   "scope_tag": "team:ops",
+   "in_scope": true,
+   "category": "Tools",
+   "tool_name": "Avatar.io - MODERN AVATAR PLACEHOLDER API",
+   "api_name": "Generate avatar",
+   "description": "Generates the desired avatar and returns the image to the client.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "randomizer": {
+      "type": "string",
+      "description": "The default browser behavior is to cache responses that return from the same endpoint.\nIf your images are all returning the same, pass this param with ANY value to ensure you bypass this default behaviour and get random images for every request."
+     },
+     "name": {
+      "type": "string",
+      "description": "Specify the name for the avatar. Only the first character of this parameter will be shown in the avatar."
+     },
+     "bg-color": {
+      "type": "string",
+      "description": "Specify a HEX CODE color for the background of the avatar. \nDo not include the # of the hex code as it will be ignored on api request."
+     },
+     "text-color": {
+      "type": "string",
+      "description": "Specify a HEX CODE color for the letter on the avatar. \nDo not include the # of the hex code as it will be ignored on api request."
+     }
+    },
+    "required": []
+   },
+   "near": "image_generate",
+   "near_similarity": 0.6251
+  },
+  {
+   "name": "remote_jobs_api_get_a_specific_remote_job_by_id",
+   "scope_tag": "team:ops",
+   "in_scope": true,
+   "category": "Jobs",
+   "tool_name": "Remote Jobs API",
+   "api_name": "Get a specific remote job by id",
+   "description": "Using the id of the job returned from /jobs route, get more details about a specific job",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "id": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "id"
+    ]
+   },
+   "near": "cronjob_manage",
+   "near_similarity": 0.3932
+  },
+  {
+   "name": "lemurbot_get_a_conversation_turn",
+   "scope_tag": "team:ops",
+   "in_scope": true,
+   "category": "Artificial_Intelligence_Machine_Learning",
+   "tool_name": "LemurBot",
+   "api_name": "Get A Conversation Turn",
+   "description": "Get a specific conversation turn by it's id and view it's details",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "id": {
+      "type": "number",
+      "description": "The id of ConversationTurn"
+     }
+    },
+    "required": [
+     "id"
+    ]
+   },
+   "near": "session_search",
+   "near_similarity": 0.409
+  },
+  {
+   "name": "carbon_management_getprocesscountforcelery",
+   "scope_tag": "team:ops",
+   "in_scope": true,
+   "category": "Artificial_Intelligence_Machine_Learning",
+   "tool_name": "Carbon management",
+   "api_name": "Getprocesscountforcelery",
+   "description": "Get results in details from the task id.",
+   "parameters": {
+    "type": "object",
+    "properties": {},
+    "required": []
+   },
+   "near": "process_manage",
+   "near_similarity": 0.3969
+  },
+  {
+   "name": "twttrapi_get_dm_conversation",
+   "scope_tag": "team:Social",
+   "in_scope": false,
+   "category": "Social",
+   "tool_name": "TwttrAPI",
+   "api_name": "Get DM Conversation",
+   "description": "Get single conversation messages",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "user_id": {
+      "type": "string"
+     },
+     "max_id": {
+      "type": "string"
+     },
+     "username": {
+      "type": "string"
+     }
+    },
+    "required": []
+   }
+  },
+  {
+   "name": "probablythese_endponit",
+   "scope_tag": "team:Tools",
+   "in_scope": false,
+   "category": "Tools",
+   "tool_name": "ProbablyThese",
+   "api_name": "EndPonit",
+   "description": "This is an End Point",
+   "parameters": {
+    "type": "object",
+    "properties": {},
+    "required": []
+   }
+  },
+  {
+   "name": "tiktok_v2_feeds",
+   "scope_tag": "team:Social",
+   "in_scope": false,
+   "category": "Social",
+   "tool_name": "Tiktok_v2",
+   "api_name": "Feeds",
+   "description": "Fetch TikToc user recent feeds by username",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "schemaType": {
+      "type": "string"
+     },
+     "username": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "schemaType",
+     "username"
+    ]
+   }
+  },
+  {
+   "name": "wnba_api_wnba_team_info",
+   "scope_tag": "team:Sports",
+   "in_scope": false,
+   "category": "Sports",
+   "tool_name": "WNBA API",
+   "api_name": "WNBA TEAM INFO",
+   "description": "This endpoint gets team information for a specific WNBA team.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "teamid": {
+      "type": "string",
+      "description": "Team Id"
+     }
+    },
+    "required": [
+     "teamid"
+    ]
+   }
+  },
+  {
+   "name": "world_clock_get_current_time_within_a_timezone",
+   "scope_tag": "team:Tools",
+   "in_scope": false,
+   "category": "Tools",
+   "tool_name": "World Clock",
+   "api_name": "Get Current Time (within a Timezone)",
+   "description": "Get the Current Time for EST",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "time_zone": {
+      "type": "string",
+      "description": "Timezone (see: https://www.timeanddate.com/time/zones/)"
+     }
+    },
+    "required": [
+     "time_zone"
+    ]
+   }
+  },
+  {
+   "name": "shazam_api_search",
+   "scope_tag": "team:Music",
+   "in_scope": false,
+   "category": "Music",
+   "tool_name": "Shazam API",
+   "api_name": "/search",
+   "description": "Search for songs, artists that match input term",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "term": {
+      "type": "string",
+      "description": "Full name of songs or artists"
+     }
+    },
+    "required": [
+     "term"
+    ]
+   }
+  },
+  {
+   "name": "onelike_social_media_news_in_german",
+   "scope_tag": "team:News_Media",
+   "in_scope": false,
+   "category": "News_Media",
+   "tool_name": "OneLike",
+   "api_name": "Social Media News in German",
+   "description": "Get social media news in German",
+   "parameters": {
+    "type": "object",
+    "properties": {},
+    "required": []
+   }
+  },
+  {
+   "name": "giphy_trending_gifs",
+   "scope_tag": "team:Media",
+   "in_scope": false,
+   "category": "Media",
+   "tool_name": "Giphy",
+   "api_name": "Trending GIFs",
+   "description": "Fetch GIFs currently trending online. The data returned mirrors that used to create The Hot 100 list of GIFs on Giphy. Returns 25 results by default.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "limit": {
+      "type": "string",
+      "description": "limits the number of results returned. By default returns 25 results."
+     },
+     "rating": {
+      "type": "string",
+      "description": "limit results to those rated (y,g, pg, pg-13 or r)."
+     }
+    },
+    "required": []
+   }
+  },
+  {
+   "name": "yandex_serp_canceltask_free_of_use",
+   "scope_tag": "team:Monitoring",
+   "in_scope": false,
+   "category": "Monitoring",
+   "tool_name": "Yandex SERP",
+   "api_name": "CancelTask [free of use]",
+   "description": "Cancels pending task. Removes task from your job queue. Use this endpoint how much you want. **It's free of charge**!",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "task_id": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "task_id"
+    ]
+   }
+  },
+  {
+   "name": "transportistas_de_argentina_quotes_postcode_oca_cuit_ope",
+   "scope_tag": "team:Logistics",
+   "in_scope": false,
+   "category": "Logistics",
+   "tool_name": "Transportistas de Argentina",
+   "api_name": "/quotes/postcode/oca/:cuit/:operativa/:cost/:weight/:volume/:postCodeSrc/:postCodeDst",
+   "description": "Quote for postcode in OCA e-Pack.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "postCodeDst": {
+      "type": "number",
+      "description": "Postcode Destination"
+     },
+     "cuit": {
+      "type": "string",
+      "description": "CUIT of your account in OCA e-Pack"
+     },
+     "operativa": {
+      "type": "string",
+      "description": "Operativa number of your account in OCA e-Pack"
+     },
+     "cost": {
+      "type": "number",
+      "description": "Cost of products in ARS"
+     },
+     "postCodeSrc": {
+      "type": "number",
+      "description": "Postcode Source"
+     },
+     "volume": {
+      "type": "number",
+      "description": "Volume in cm3"
+     },
+     "weight": {
+      "type": "number",
+      "description": "Weight in KG"
+     }
+    },
+    "required": [
+     "postCodeDst",
+     "cuit",
+     "operativa",
+     "cost",
+     "postCodeSrc",
+     "volume",
+     "weight"
+    ]
+   }
+  },
+  {
+   "name": "judge0_ce_get_languages",
+   "scope_tag": "team:Tools",
+   "in_scope": false,
+   "category": "Tools",
+   "tool_name": "Judge0 CE",
+   "api_name": "Get Languages",
+   "description": "Get active languages.",
+   "parameters": {
+    "type": "object",
+    "properties": {},
+    "required": []
+   }
+  },
+  {
+   "name": "fmpcloud_cash_flow_statement",
+   "scope_tag": "team:Financial",
+   "in_scope": false,
+   "category": "Financial",
+   "tool_name": "FmpCloud",
+   "api_name": "Cash Flow Statement",
+   "description": "Get Cash Flow Statement in JSON Format",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "stock": {
+      "type": "string"
+     },
+     "apikey": {
+      "type": "string",
+      "description": "get your apikey at https://fmpcloud.io/register"
+     },
+     "period": {
+      "type": "string",
+      "description": "period / annual"
+     }
+    },
+    "required": [
+     "stock",
+     "apikey"
+    ]
+   }
+  },
+  {
+   "name": "bulk_whatsapp_validator_about_info_free",
+   "scope_tag": "team:Tools",
+   "in_scope": false,
+   "category": "Tools",
+   "tool_name": "Bulk Whatsapp Validator",
+   "api_name": "About info (free)",
+   "description": "You need a **valid token** to use this endpoint, learn how to get it on this [video](https://youtu.be/TcaAwKpAkl8). \nThis endpoint will return the `About` info of the number, and the time when the value was set.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "phone": {
+      "type": "number",
+      "description": "The phone number must be written as a number (including countrycode); \ndo **NOT** include: any non-number character, spaces, or anything which is not a number; do **NOT** add zeros (0) at the beginning."
+     },
+     "token": {
+      "type": "string",
+      "description": "To get a free token, click [here](https://wa.me/34631428039?text=get-token) to send a whatsapp with the command `get-token`."
+     }
+    },
+    "required": [
+     "phone",
+     "token"
+    ]
+   }
+  },
+  {
+   "name": "swagger_petstore_getpetbyid",
+   "scope_tag": "team:eCommerce",
+   "in_scope": false,
+   "category": "eCommerce",
+   "tool_name": "Swagger PetStore",
+   "api_name": "getPetById",
+   "description": "Returns a single pet",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "petId": {
+      "type": "number",
+      "description": "ID of pet to return"
+     }
+    },
+    "required": [
+     "petId"
+    ]
+   }
+  },
+  {
+   "name": "text_sentiment_api_sentiment_analysis",
+   "scope_tag": "team:Tools",
+   "in_scope": false,
+   "category": "Tools",
+   "tool_name": "Text Sentiment API",
+   "api_name": "Sentiment Analysis",
+   "description": "This endpoint takes a GET request with a string as a parameter and returns the sentiment scores (polarity and subjectivity) of the text as well as the 'Full Text', 'Language', 'Entities', 'Keywords', 'Sentiment Label' and 'Subjectivity Label'.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "text": {
+      "type": "string"
+     }
+    },
+    "required": []
+   }
+  },
+  {
+   "name": "web_search_websearch",
+   "scope_tag": "team:Data",
+   "in_scope": false,
+   "category": "Data",
+   "tool_name": "Web Search",
+   "api_name": "webSearch",
+   "description": "Get relevant web pages for a given query.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "q": {
+      "type": "string",
+      "description": "The user's search query string."
+     },
+     "autoCorrect": {
+      "type": "boolean",
+      "description": "Automatically correct spelling."
+     },
+     "pageNumber": {
+      "type": "number",
+      "description": "The page to view."
+     },
+     "pageSize": {
+      "type": "number",
+      "description": "The number of items per page. The maximum value is 50."
+     },
+     "safeSearch": {
+      "type": "boolean",
+      "description": "A filter used to filter results for adult content."
+     }
+    },
+    "required": [
+     "q",
+     "autoCorrect",
+     "pageNumber",
+     "pageSize"
+    ]
+   }
+  },
+  {
+   "name": "zillow_v2_property_details",
+   "scope_tag": "team:Data",
+   "in_scope": false,
+   "category": "Data",
+   "tool_name": "Zillow_v2",
+   "api_name": "Property details",
+   "description": "Get a property's details by its zpid",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "zpid": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "zpid"
+    ]
+   }
+  },
+  {
+   "name": "betbro_sportbook_fixture_fixture_id",
+   "scope_tag": "team:Sports",
+   "in_scope": false,
+   "category": "Sports",
+   "tool_name": "Betbro Sportbook",
+   "api_name": "/fixture/{fixture_id}",
+   "description": "Get full fixture SportBook\nwhat the fuck is going on !",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "fixture_id": {
+      "type": "number"
+     }
+    },
+    "required": [
+     "fixture_id"
+    ]
+   }
+  },
+  {
+   "name": "macrotrends_finance_financial_cash_statement",
+   "scope_tag": "team:Finance",
+   "in_scope": false,
+   "category": "Finance",
+   "tool_name": "MacroTrends Finance",
+   "api_name": "Financial Cash Statement",
+   "description": "Gives 10 years data of cash statement by the given ticker symbol.\n\nTo choose for a time format put a QUERY PARAMETER (freq) either \"A\" for annual or \"Q\" for quarterly\n\n(symbol) To choose what ticker symbol to see the company financials.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "symbol": {
+      "type": "string"
+     },
+     "formstyle": {
+      "type": "string"
+     },
+     "freq": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "symbol"
+    ]
+   }
+  },
+  {
+   "name": "latest_anime_api_get_anime_by_page",
+   "scope_tag": "team:Movies",
+   "in_scope": false,
+   "category": "Movies",
+   "tool_name": "Latest Anime API",
+   "api_name": "Get Anime By Page",
+   "description": "Get Latest Anime by Page",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "num": {
+      "type": "number"
+     }
+    },
+    "required": [
+     "num"
+    ]
+   }
+  },
+  {
+   "name": "qrlink_api_url_to_qr_code",
+   "scope_tag": "team:Tools",
+   "in_scope": false,
+   "category": "Tools",
+   "tool_name": "QRLink API",
+   "api_name": "URL to QR code",
+   "description": "This endpoint is a GET request that takes a single parameter \"url\" which specifies the website URL. The endpoint generates a QR code image using the input URL and the response is downloadable.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "url": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "url"
+    ]
+   }
+  },
+  {
+   "name": "captcha_generator_captcha_generator",
+   "scope_tag": "team:Tools",
+   "in_scope": false,
+   "category": "Tools",
+   "tool_name": "Captcha Generator",
+   "api_name": "Captcha Generator",
+   "description": "This is a captcha generator tool that gives you an image of 270x80 pixels and the text solution. It has different settings that allows you to configure the captcha difficulty, and even create a captcha with a custom text solution.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "fontname": {
+      "type": "string",
+      "description": "Supported fontnames:  'sora', 'noto-sans', 'ubuntu'. Default = 'sora'"
+     },
+     "noise_number": {
+      "type": "number",
+      "description": "An integer value. Default = 10"
+     },
+     "text": {
+      "type": "string",
+      "description": "A custom captcha solution text. Default text solution is set aleatory"
+     }
+    },
+    "required": []
+   }
+  },
+  {
+   "name": "fast_food_restaurants_usa_top_50_chains_get_all_restaura",
+   "scope_tag": "team:Food",
+   "in_scope": false,
+   "category": "Food",
+   "tool_name": "Fast Food Restaurants USA - TOP 50 Chains",
+   "api_name": "GET all Restaurants by {Chain} & {City} & {State}",
+   "description": "**10 results per request. Use page number for Pagination.**",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "page": {
+      "type": "number"
+     },
+     "city": {
+      "type": "string"
+     },
+     "state": {
+      "type": "string"
+     },
+     "restaurantChainName": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "page",
+     "city",
+     "state",
+     "restaurantChainName"
+    ]
+   }
+  },
+  {
+   "name": "vatlayer_request_list_of_types_of_goods",
+   "scope_tag": "team:Finance",
+   "in_scope": false,
+   "category": "Finance",
+   "tool_name": "vatlayer",
+   "api_name": "Request list of types of goods",
+   "description": "Request an entire list of all available \"types of goods\", which fall into reduced VAT categories in specific EU member states",
+   "parameters": {
+    "type": "object",
+    "properties": {},
+    "required": []
+   }
+  },
+  {
+   "name": "tank01_nfl_live_in_game_real_time_statistics_nfl_get_dai",
+   "scope_tag": "team:Sports",
+   "in_scope": false,
+   "category": "Sports",
+   "tool_name": "Tank01 NFL Live In-Game Real Time Statistics NFL",
+   "api_name": "Get Daily NFL Schedule",
+   "description": "Get basic information on which games are being played during a day.  \ncall is like this:\n/getNFLGamesForDate?gameDate=20221211\nThe above call will return all of the games from December 11th, 2022.  Date must be in that format.  \nThey come back in a list format within the body of the response.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "gameDate": {
+      "type": "string"
+     }
+    },
+    "required": []
+   }
+  },
+  {
+   "name": "node_express_api_tutorial_get_all_users",
+   "scope_tag": "team:Other",
+   "in_scope": false,
+   "category": "Other",
+   "tool_name": "Node Express API Tutorial",
+   "api_name": "Get All Users",
+   "description": "This endpoint will return all users stored in the database.",
+   "parameters": {
+    "type": "object",
+    "properties": {},
+    "required": []
+   }
+  },
+  {
+   "name": "airvisual_stations_v2_get_information",
+   "scope_tag": "team:Health_and_Fitness",
+   "in_scope": false,
+   "category": "Health_and_Fitness",
+   "tool_name": "AirVisual",
+   "api_name": "stations/v2/get-information",
+   "description": "Get information at specific station by its id",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "id": {
+      "type": "string",
+      "description": "The value of id field (type is station) that returned in …/v2/auto-complete endpoint"
+     },
+     "x-user-timezone": {
+      "type": "string"
+     },
+     "x-units-distance": {
+      "type": "string",
+      "description": "One of the following : miles|kilometer"
+     },
+     "x-units-pressure": {
+      "type": "string",
+      "description": "One of the following : hg|mbar"
+     },
+     "x-user-lang": {
+      "type": "string"
+     },
+     "x-units-temperature": {
+      "type": "string",
+      "description": "One of the following : fahrenheit|celsius"
+     },
+     "x-aqi-index": {
+      "type": "string",
+      "description": "One of the following : us|cn"
+     }
+    },
+    "required": [
+     "id"
+    ]
+   }
+  },
+  {
+   "name": "viperscore_get_live_games",
+   "scope_tag": "team:Sports",
+   "in_scope": false,
+   "category": "Sports",
+   "tool_name": "ViperScore",
+   "api_name": "Get live games",
+   "description": "With \"Get live games\" you'll receive a full list of all live games with their current status and score.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "sport": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "sport"
+    ]
+   }
+  },
+  {
+   "name": "open_brewery_db_search",
+   "scope_tag": "team:Data",
+   "in_scope": false,
+   "category": "Data",
+   "tool_name": "Open Brewery DB",
+   "api_name": "Search",
+   "description": "Search for a brewery",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "query": {
+      "type": "string",
+      "description": "Search for a brewery"
+     }
+    },
+    "required": []
+   }
+  },
+  {
+   "name": "epoch_converter_date_to_time",
+   "scope_tag": "team:Tools",
+   "in_scope": false,
+   "category": "Tools",
+   "tool_name": "Epoch Converter",
+   "api_name": "date_to_time",
+   "description": "Convert datetime to timestamp. (year, month, day Hours:Minutes:Seconds) -> 1674919760",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "figure": {
+      "type": "string"
+     },
+     "data_type": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "figure",
+     "data_type"
+    ]
+   }
+  },
+  {
+   "name": "airdna_rental_amenities",
+   "scope_tag": "team:Data",
+   "in_scope": false,
+   "category": "Data",
+   "tool_name": "Airdna",
+   "api_name": "Rental amenities",
+   "description": "Returns rental amenities",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "location": {
+      "type": "string"
+     },
+     "currency": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "location"
+    ]
+   }
+  },
+  {
+   "name": "cheap_youtube_api_channel",
+   "scope_tag": "team:Media",
+   "in_scope": false,
+   "category": "Media",
+   "tool_name": "🚀 Cheap YouTube API 🔥",
+   "api_name": "Channel",
+   "description": "Get all info and videos from a channel\nexample:  /channels/UCN9Nj4tjXbVTLYWN0EKly_Q",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "id": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "id"
+    ]
+   }
+  },
+  {
+   "name": "f1_drivers_quotes_driver_s_quotes_with_pagination_of_10",
+   "scope_tag": "team:Sports",
+   "in_scope": false,
+   "category": "Sports",
+   "tool_name": "F1 drivers quotes",
+   "api_name": "Driver's quotes with pagination of 10 quotes each page",
+   "description": "Gets 10 quotes of the driver depending on which page you input.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "driverId": {
+      "type": "string"
+     },
+     "page": {
+      "type": "number"
+     }
+    },
+    "required": [
+     "driverId",
+     "page"
+    ]
+   }
+  },
+  {
+   "name": "mlemapi_new_mlem",
+   "scope_tag": "team:Video_Images",
+   "in_scope": false,
+   "category": "Video_Images",
+   "tool_name": "MlemAPI",
+   "api_name": "New mlem",
+   "description": "Returns one most recently published mlem image in JSON",
+   "parameters": {
+    "type": "object",
+    "properties": {},
+    "required": []
+   }
+  },
+  {
+   "name": "joe_rogan_quote_generator_generate_rogan_quote",
+   "scope_tag": "team:Tools",
+   "in_scope": false,
+   "category": "Tools",
+   "tool_name": "Joe Rogan Quote Generator",
+   "api_name": "Generate Rogan Quote",
+   "description": "Generate a quote from Joe Rogan",
+   "parameters": {
+    "type": "object",
+    "properties": {},
+    "required": []
+   }
+  },
+  {
+   "name": "minecraft_forge_optifine_downloadminecraftjson",
+   "scope_tag": "team:Entertainment",
+   "in_scope": false,
+   "category": "Entertainment",
+   "tool_name": "Minecraft-Forge-Optifine",
+   "api_name": "downloadMinecraftJson",
+   "description": "Redirect to download Minecraft .json file.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "minecraftversion": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "minecraftversion"
+    ]
+   }
+  },
+  {
+   "name": "beekeeping_research_basic_endpoint",
+   "scope_tag": "team:Science",
+   "in_scope": false,
+   "category": "Science",
+   "tool_name": "Beekeeping Research",
+   "api_name": "Basic endpoint",
+   "description": "See full docs on https://research.docs.beekeeping.io",
+   "parameters": {
+    "type": "object",
+    "properties": {},
+    "required": []
+   }
+  },
+  {
+   "name": "textking_translation_get_project",
+   "scope_tag": "team:Business",
+   "in_scope": false,
+   "category": "Business",
+   "tool_name": "TEXTKING Translation",
+   "api_name": "Get project",
+   "description": "Returns a single project with the given ID.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "projectid": {
+      "type": "string",
+      "description": "The project UUID."
+     }
+    },
+    "required": [
+     "projectid"
+    ]
+   }
+  },
+  {
+   "name": "memeados_google_fake_autocomplete",
+   "scope_tag": "team:Entertainment",
+   "in_scope": false,
+   "category": "Entertainment",
+   "tool_name": "Memeados",
+   "api_name": "Google Fake Autocomplete",
+   "description": "Generate Fake google autocomplete",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "text1": {
+      "type": "string"
+     },
+     "text3": {
+      "type": "string"
+     },
+     "text2": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "text1",
+     "text3",
+     "text2"
+    ]
+   }
+  },
+  {
+   "name": "football_data_daily_match_list_all",
+   "scope_tag": "team:Sports",
+   "in_scope": false,
+   "category": "Sports",
+   "tool_name": "Football Data",
+   "api_name": "Daily Match List-All",
+   "description": "Daily match list including scheduled, live and finished matches.\n\n**The data will return for only -+7 days period, so endpoint can be tested with date range of today - 7 days.**",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "date": {
+      "type": "string",
+      "description": "Date of the match. The format is {dd/MM/yyyy}. Match list data can be retrieved for only ± 7 days."
+     }
+    },
+    "required": [
+     "date"
+    ]
+   }
+  },
+  {
+   "name": "vimeo_getvideofromuser",
+   "scope_tag": "team:Media",
+   "in_scope": false,
+   "category": "Media",
+   "tool_name": "Vimeo",
+   "api_name": "GetVideoFromUser",
+   "description": "Get all videos credited to a user (both uploaded and appears).",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "format": {
+      "type": "string",
+      "description": "json/xml/php"
+     },
+     "user_id": {
+      "type": "string",
+      "description": "The ID number or username of the user. A token may be used instead."
+     },
+     "sort": {
+      "type": "string",
+      "description": "Method to sort by: newest, oldest, most_played, most_commented, or most_liked."
+     },
+     "page": {
+      "type": "number",
+      "description": "The page number to show."
+     },
+     "per_page": {
+      "type": "string",
+      "description": "Number of items to show on each page. Max 50."
+     },
+     "summary_response": {
+      "type": "boolean",
+      "description": "Set this parameter to get back more information."
+     },
+     "full_response": {
+      "type": "boolean",
+      "description": "Set this parameter to get back the full video information."
+     }
+    },
+    "required": [
+     "format",
+     "user_id"
+    ]
+   }
+  },
+  {
+   "name": "musicdata_api_youtube_24h_type",
+   "scope_tag": "team:Music",
+   "in_scope": false,
+   "category": "Music",
+   "tool_name": "MusicData API",
+   "api_name": "/youtube/24h/{type}",
+   "description": "Youtube most viewed music video by content language type: (English, Spanish, Asian or Other)",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "type": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "type"
+    ]
+   }
+  },
+  {
+   "name": "movie_tv_music_search_and_download_get_monthly_top_100_t",
+   "scope_tag": "team:Movies",
+   "in_scope": false,
+   "category": "Movies",
+   "tool_name": "Movie, TV, music search and download",
+   "api_name": "Get Monthly Top 100 TV-shows Torrents",
+   "description": "Monthly Top 100 TV-shows Torrents",
+   "parameters": {
+    "type": "object",
+    "properties": {},
+    "required": []
+   }
+  },
+  {
+   "name": "airplanesdb_airplanes_ordered_by_ascending",
+   "scope_tag": "team:Database",
+   "in_scope": false,
+   "category": "Database",
+   "tool_name": "AirplanesDB",
+   "api_name": "Airplanes ordered by ascending",
+   "description": "Get all airplanes ordered by name in ascending order.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "ordering": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "ordering"
+    ]
+   }
+  },
+  {
+   "name": "heywatch_video_encoding_downloadencodedvideo",
+   "scope_tag": "team:Entertainment",
+   "in_scope": false,
+   "category": "Entertainment",
+   "tool_name": "HeyWatch Video Encoding",
+   "api_name": "DownloadEncodedVideo",
+   "description": "Download the encoded video file",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "id": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "id"
+    ]
+   }
+  },
+  {
+   "name": "shescoresapi_get_players_by_country",
+   "scope_tag": "team:Sports",
+   "in_scope": false,
+   "category": "Sports",
+   "tool_name": "SheScoresAPI",
+   "api_name": "Get players by country",
+   "description": "Gets all the players from a team",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "id": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "id"
+    ]
+   }
+  },
+  {
+   "name": "public_url_share_media_sources_statistics",
+   "scope_tag": "team:Media",
+   "in_scope": false,
+   "category": "Media",
+   "tool_name": "public-url-share",
+   "api_name": "Media sources statistics",
+   "description": "Search and find details or statistics on media sources",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "apiKey": {
+      "type": "string"
+     }
+    },
+    "required": []
+   }
+  },
+  {
+   "name": "lost_ark_simple_get_character_skills",
+   "scope_tag": "team:Gaming",
+   "in_scope": false,
+   "category": "Gaming",
+   "tool_name": "Lost Ark Simple",
+   "api_name": "Get Character Skills",
+   "description": "List of Lost Ark Character Skills",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "character_name": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "character_name"
+    ]
+   }
+  },
+  {
+   "name": "learning_engine_memre_api_v1_users_user_id_learning_stat",
+   "scope_tag": "team:Education",
+   "in_scope": false,
+   "category": "Education",
+   "tool_name": "Learning Engine",
+   "api_name": "/memre_api/v1/users/{user_id}/learning_stats",
+   "description": "Get the most effective times of day for a user to study.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "user_id": {
+      "type": "string",
+      "description": "The ID of the user you want to get learning stats for"
+     }
+    },
+    "required": [
+     "user_id"
+    ]
+   }
+  },
+  {
+   "name": "measurement_unit_converter_measurements_detailed",
+   "scope_tag": "team:Tools",
+   "in_scope": false,
+   "category": "Tools",
+   "tool_name": "Measurement Unit Converter",
+   "api_name": "Measurements detailed",
+   "description": "GET a list of all the available measurements with unit details.",
+   "parameters": {
+    "type": "object",
+    "properties": {},
+    "required": []
+   }
+  },
+  {
+   "name": "live_golf_data_tournaments",
+   "scope_tag": "team:Sports",
+   "in_scope": false,
+   "category": "Sports",
+   "tool_name": "Live Golf Data",
+   "api_name": "tournaments",
+   "description": "Fetch tournament information, such as metadata, players, courses, and earnings. Query the `schedule` endpoint to retrieve the necessary `tournId` and `year` parameters. This info will be updated with a players entry list the Friday before the tournament.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "orgId": {
+      "type": "string",
+      "description": "Choose 1 for PGA Tour or  2 for LIV Tour."
+     },
+     "tournId": {
+      "type": "string"
+     },
+     "year": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "orgId",
+     "tournId",
+     "year"
+    ]
+   }
+  },
+  {
+   "name": "manatee_jokes_find_all",
+   "scope_tag": "team:Science",
+   "in_scope": false,
+   "category": "Science",
+   "tool_name": "manatee jokes",
+   "api_name": "find all",
+   "description": "retrieves all available jokes",
+   "parameters": {
+    "type": "object",
+    "properties": {},
+    "required": []
+   }
+  },
+  {
+   "name": "nearby_places_types_google",
+   "scope_tag": "team:Location",
+   "in_scope": false,
+   "category": "Location",
+   "tool_name": "Nearby Places",
+   "api_name": "Types - (Google)",
+   "description": "Get a list of establishment types.\n\nThese types will only work with **/nearby (Google)**.",
+   "parameters": {
+    "type": "object",
+    "properties": {},
+    "required": []
+   }
+  },
+  {
+   "name": "thefluentme_get_language_by_id",
+   "scope_tag": "team:Education",
+   "in_scope": false,
+   "category": "Education",
+   "tool_name": "thefluentme",
+   "api_name": "Get language by id",
+   "description": "Returns a language by id",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "language_id": {
+      "type": "number"
+     }
+    },
+    "required": [
+     "language_id"
+    ]
+   }
+  },
+  {
+   "name": "torrent_search_get_from_yts",
+   "scope_tag": "team:Tools",
+   "in_scope": false,
+   "category": "Tools",
+   "tool_name": "Torrent-Search",
+   "api_name": "Get from yts",
+   "description": "You can use this for moive search",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "searchtopic": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "searchtopic"
+    ]
+   }
+  },
+  {
+   "name": "spachero_spac_database_spac_top_10_rankings",
+   "scope_tag": "team:Finance",
+   "in_scope": false,
+   "category": "Finance",
+   "tool_name": "spacHero - SPAC Database",
+   "api_name": "SPAC Top-10 Rankings",
+   "description": "Returns Top-10 gainers, losers and volume leaders for a given period and equity type (i.e., common, unit, warrants). \n\nAccepts three query parameters:\n\n**period: **daily, weekly, monthly\n**type:** common, unit, warrant\n**sortby:** gainers, losers, volume",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "sortby": {
+      "type": "string"
+     },
+     "period": {
+      "type": "string"
+     },
+     "type": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "sortby",
+     "period",
+     "type"
+    ]
+   }
+  },
+  {
+   "name": "date_calculator_rdates",
+   "scope_tag": "team:Finance",
+   "in_scope": false,
+   "category": "Finance",
+   "tool_name": "Date Calculator",
+   "api_name": "rdates",
+   "description": "Computes and returns recurring dates based on very flexible recurrence rules as defined and specified in the [iCalendar RFC 5545](https://tools.ietf.org/html/rfc5545 \"ICalendar\"). It's possible to specify more than one recurrence rule.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "start_date": {
+      "type": "string",
+      "description": "The start date w/ or w/o the time part in  [ISO 8601 format](https://www.w3.org/TR/NOTE-datetime)"
+     },
+     "rrules": {
+      "type": "string",
+      "description": "The recurrence rules list as string seperated by space; Each rule should be prefixed by **RRULE:**"
+     }
+    },
+    "required": [
+     "start_date",
+     "rrules"
+    ]
+   }
+  },
+  {
+   "name": "youtube_videos_mp4",
+   "scope_tag": "team:Video_Images",
+   "in_scope": false,
+   "category": "Video_Images",
+   "tool_name": "Youtube Videos",
+   "api_name": "/mp4",
+   "description": "Returns a list of MP4 files with different qualities and other details.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "videoId": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "videoId"
+    ]
+   }
+  },
+  {
+   "name": "recipe_by_api_ninjas_v1_recipe",
+   "scope_tag": "team:Food",
+   "in_scope": false,
+   "category": "Food",
+   "tool_name": "Recipe by API-Ninjas",
+   "api_name": "/v1/recipe",
+   "description": "Get a list of recipes for a given search query. Returns at most 10 results. To access more than the first 10 results, use the offset parameter to offset results in multiple API calls.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "query": {
+      "type": "string",
+      "description": "query text to search."
+     },
+     "offset": {
+      "type": "string",
+      "description": "number of results to offset for pagination."
+     }
+    },
+    "required": [
+     "query"
+    ]
+   }
+  },
+  {
+   "name": "luhn_algorithm_service_status",
+   "scope_tag": "team:Financial",
+   "in_scope": false,
+   "category": "Financial",
+   "tool_name": "Luhn algorithm",
+   "api_name": "Service status",
+   "description": "Returns service status",
+   "parameters": {
+    "type": "object",
+    "properties": {},
+    "required": []
+   }
+  },
+  {
+   "name": "magisto_check_movie_status",
+   "scope_tag": "team:Media",
+   "in_scope": false,
+   "category": "Media",
+   "tool_name": "Magisto",
+   "api_name": "Check Movie Status",
+   "description": "Check the state of the movie session",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "vsid": {
+      "type": "string",
+      "description": "From Start Movie Session API call response"
+     }
+    },
+    "required": [
+     "vsid"
+    ]
+   }
+  },
+  {
+   "name": "morning_star_type_price_get_other_fees",
+   "scope_tag": "team:Finance",
+   "in_scope": false,
+   "category": "Finance",
+   "tool_name": "Morning Star",
+   "api_name": "{type}/price/get-other-fees",
+   "description": "Get other fees as displayed in the Price tab",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "type": {
+      "type": "string",
+      "description": "One of the following values : etf|fund"
+     },
+     "securityId": {
+      "type": "string",
+      "description": "The value of securityId field returned in .../market/v2/get-returns"
+     }
+    },
+    "required": [
+     "type",
+     "securityId"
+    ]
+   }
+  },
+  {
+   "name": "line_messaging_get_content",
+   "scope_tag": "team:Communication",
+   "in_scope": false,
+   "category": "Communication",
+   "tool_name": "LINE Messaging",
+   "api_name": "Get content",
+   "description": "Gets image, video, and audio data sent by users.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "messageId": {
+      "type": "string",
+      "description": "Message ID"
+     }
+    },
+    "required": [
+     "messageId"
+    ]
+   }
+  },
+  {
+   "name": "cricketapi2_leaguenextmatches",
+   "scope_tag": "team:Sports",
+   "in_scope": false,
+   "category": "Sports",
+   "tool_name": "CricketAPI2",
+   "api_name": "LeagueNextMatches",
+   "description": "Get a list of next matches for a cricket league using the tournament ID, season ID, and page number.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "seasonId": {
+      "type": "number",
+      "description": "The season ID for which you want to retrieve the league's next matches."
+     },
+     "page": {
+      "type": "number",
+      "description": "Zero-based page number."
+     },
+     "tournamentId": {
+      "type": "number",
+      "description": "The unique tournament ID for which you want to retrieve the league's next matches."
+     }
+    },
+    "required": [
+     "seasonId",
+     "page",
+     "tournamentId"
+    ]
+   }
+  },
+  {
+   "name": "searchhook_extend",
+   "scope_tag": "team:Search",
+   "in_scope": false,
+   "category": "Search",
+   "tool_name": "searchhook",
+   "api_name": "extend",
+   "description": "Extend expiry of query identified with parameter `queryId` .",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "queryId": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "queryId"
+    ]
+   }
+  },
+  {
+   "name": "air_quality_air_quality_forecast",
+   "scope_tag": "team:Weather",
+   "in_scope": false,
+   "category": "Weather",
+   "tool_name": "Air Quality",
+   "api_name": "Air Quality Forecast",
+   "description": "Returns a 3 day (72 hour) air quality forecast for any point in the world given a lat/lon.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "lat": {
+      "type": "number",
+      "description": "Latitude"
+     },
+     "lon": {
+      "type": "number",
+      "description": "Longitude"
+     },
+     "hours": {
+      "type": "number",
+      "description": "Limits response forecast hours (default 72)."
+     }
+    },
+    "required": [
+     "lat",
+     "lon"
+    ]
+   }
+  },
+  {
+   "name": "drinking_get_random_question",
+   "scope_tag": "team:Entertainment",
+   "in_scope": false,
+   "category": "Entertainment",
+   "tool_name": "Drinking",
+   "api_name": "Get random question",
+   "description": "Allows you to get a random question with optionally specifying the type of the challenge.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "type": {
+      "type": "string",
+      "description": "You can choose question type from: funny, dirty."
+     }
+    },
+    "required": []
+   }
+  },
+  {
+   "name": "fdj_matches",
+   "scope_tag": "team:Sports",
+   "in_scope": false,
+   "category": "Sports",
+   "tool_name": "FDJ",
+   "api_name": "Matches",
+   "description": "Latest Matches for FDJ",
+   "parameters": {
+    "type": "object",
+    "properties": {},
+    "required": []
+   }
+  },
+  {
+   "name": "voo_end1",
+   "scope_tag": "team:Travel",
+   "in_scope": false,
+   "category": "Travel",
+   "tool_name": "VOO",
+   "api_name": "End1",
+   "description": "Para ver voos baratos",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "voo": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "voo"
+    ]
+   }
+  },
+  {
+   "name": "viewdns_port_scanner",
+   "scope_tag": "team:Tools",
+   "in_scope": false,
+   "category": "Tools",
+   "tool_name": "ViewDNS",
+   "api_name": "Port Scanner",
+   "description": "This web based port scanner will test whether common ports are open on a server. Useful in determining if a specific service (e.g. HTTP) is up or down on a specific server.   Ports scanned are: 21, 22, 23, 25, 80, 110, 139, 143, 445, 1433, 1521, 3306 and 3389",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "host": {
+      "type": "string",
+      "description": "the host to perform the port scanner on (domain or IP address)"
+     },
+     "output": {
+      "type": "string",
+      "description": "the output format required ('xml' or 'json')"
+     }
+    },
+    "required": [
+     "host",
+     "output"
+    ]
+   }
+  },
+  {
+   "name": "email_checker_and_validator_check_email",
+   "scope_tag": "team:Communication",
+   "in_scope": false,
+   "category": "Communication",
+   "tool_name": "Email Checker and Validator",
+   "api_name": "Check Email",
+   "description": "Just paste the Email Address you want to validate and wait for the results",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "email": {
+      "type": "string",
+      "description": "The email address to validate"
+     }
+    },
+    "required": [
+     "email"
+    ]
+   }
+  },
+  {
+   "name": "spotify_web_get_artists",
+   "scope_tag": "team:Music",
+   "in_scope": false,
+   "category": "Music",
+   "tool_name": "Spotify Web",
+   "api_name": "Get artists",
+   "description": "Get one or more artists",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "ids": {
+      "type": "string",
+      "description": "Artist IDs (you can use commas)"
+     }
+    },
+    "required": [
+     "ids"
+    ]
+   }
+  },
+  {
+   "name": "textking_translation_get_price_info_for_word_count",
+   "scope_tag": "team:Business",
+   "in_scope": false,
+   "category": "Business",
+   "tool_name": "TEXTKING Translation",
+   "api_name": "Get price info for word count",
+   "description": "Returns price information for a specific number of words for all available quality levels.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "words": {
+      "type": "number",
+      "description": "An integer value defining the number of words to translate."
+     },
+     "source_language": {
+      "type": "string",
+      "description": "ISO 639 language code of the source language."
+     },
+     "target_language": {
+      "type": "string",
+      "description": "ISO 639 language code of the target language."
+     },
+     "topic": {
+      "type": "string",
+      "description": "A topic UUID."
+     }
+    },
+    "required": [
+     "words",
+     "source_language",
+     "target_language",
+     "topic"
+    ]
+   }
+  },
+  {
+   "name": "airdna_active_listings",
+   "scope_tag": "team:Data",
+   "in_scope": false,
+   "category": "Data",
+   "tool_name": "Airdna",
+   "api_name": "Active listings",
+   "description": "Returns active rentals",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "location": {
+      "type": "string"
+     },
+     "start_year": {
+      "type": "number"
+     },
+     "start_month": {
+      "type": "number"
+     },
+     "number_of_months": {
+      "type": "number"
+     }
+    },
+    "required": [
+     "location",
+     "start_year",
+     "start_month",
+     "number_of_months"
+    ]
+   }
+  },
+  {
+   "name": "colorme_specificcolorset",
+   "scope_tag": "team:Tools",
+   "in_scope": false,
+   "category": "Tools",
+   "tool_name": "ColorMe",
+   "api_name": "SpecificColorSet",
+   "description": "Get a set of colors based on input color like - \"yellow\" / \"red\"",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "colorname": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "colorname"
+    ]
+   }
+  },
+  {
+   "name": "facebook_user_info_find_feed_find_get",
+   "scope_tag": "team:Data",
+   "in_scope": false,
+   "category": "Data",
+   "tool_name": "Facebook User Info",
+   "api_name": "find_feed_find_get",
+   "description": "Find Feed by UID or by_object_id(PageID, GroupID)",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "by_facebook_id": {
+      "type": "string"
+     },
+     "by_object_id": {
+      "type": "string"
+     }
+    },
+    "required": []
+   }
+  },
+  {
+   "name": "fachaapi_live_aircraft_by_reg",
+   "scope_tag": "team:Transportation",
+   "in_scope": false,
+   "category": "Transportation",
+   "tool_name": "FachaAPI",
+   "api_name": "Live Aircraft by REG",
+   "description": "Get live positioning for an aircraft with a specific REG",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "reg": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "reg"
+    ]
+   }
+  },
+  {
+   "name": "id_game_checker_get_username_genshin_impact",
+   "scope_tag": "team:Gaming",
+   "in_scope": false,
+   "category": "Gaming",
+   "tool_name": "ID Game Checker",
+   "api_name": "GET username Genshin Impact",
+   "description": "Enter the Genshin Impact ID and Server in the required parameters",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "server": {
+      "type": "string",
+      "description": "Choice your server"
+     },
+     "id": {
+      "type": "number"
+     }
+    },
+    "required": [
+     "server",
+     "id"
+    ]
+   }
+  },
+  {
+   "name": "crypto_prices_api_prices_and_up_and_down",
+   "scope_tag": "team:Data",
+   "in_scope": false,
+   "category": "Data",
+   "tool_name": "Crypto Prices API",
+   "api_name": "Prices and up and down",
+   "description": "Here you can fetch the data using this rest endpoint",
+   "parameters": {
+    "type": "object",
+    "properties": {},
+    "required": []
+   }
+  },
+  {
+   "name": "flixbus_cities",
+   "scope_tag": "team:Travel",
+   "in_scope": false,
+   "category": "Travel",
+   "tool_name": "Flixbus",
+   "api_name": "cities",
+   "description": "Get a list of cities",
+   "parameters": {
+    "type": "object",
+    "properties": {},
+    "required": []
+   }
+  },
+  {
+   "name": "team_petstore_getuserbyname",
+   "scope_tag": "team:Other",
+   "in_scope": false,
+   "category": "Other",
+   "tool_name": "team petstore",
+   "api_name": "getUserByName",
+   "description": "Get user by user name",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "username": {
+      "type": "string",
+      "description": "The name that needs to be fetched. Use user1 for testing."
+     }
+    },
+    "required": [
+     "username"
+    ]
+   }
+  },
+  {
+   "name": "temu_com_shopping_api_realtime_api_scrapper_from_temu_co",
+   "scope_tag": "team:eCommerce",
+   "in_scope": false,
+   "category": "eCommerce",
+   "tool_name": "Temu.com Shopping API (Realtime api scrapper from temu.com)",
+   "api_name": "product details",
+   "description": "Returns the product details information based on the given goodsId (product id defined by temu, returned by the /search endpoint)\nResponse includes:\n- price information\n- product reviews\n- offers/availability\n- sku - variants in different options like size, color etc.\n- metadata, image gallery, description ...\n\n-",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "goodsId": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "goodsId"
+    ]
+   }
+  },
+  {
+   "name": "virtual_number_get_all_countries",
+   "scope_tag": "team:SMS",
+   "in_scope": false,
+   "category": "SMS",
+   "tool_name": "Virtual Number",
+   "api_name": "Get All Countries",
+   "description": "Get the list of currently available countries",
+   "parameters": {
+    "type": "object",
+    "properties": {},
+    "required": []
+   }
+  },
+  {
+   "name": "sigue_payout_batch",
+   "scope_tag": "team:Payments",
+   "in_scope": false,
+   "category": "Payments",
+   "tool_name": "Sigue payout",
+   "api_name": "batch",
+   "description": "batch process to retrieve payout transaction data",
+   "parameters": {
+    "type": "object",
+    "properties": {},
+    "required": []
+   }
+  },
+  {
+   "name": "list_movies_genre",
+   "scope_tag": "team:Video_Images",
+   "in_scope": false,
+   "category": "Video_Images",
+   "tool_name": "List Movies",
+   "api_name": "Genre",
+   "description": "Used to filter by a given genre (See http://www.imdb.com/genre/ for full list)",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "genre": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "genre"
+    ]
+   }
+  },
+  {
+   "name": "stock_analysis_revenue_estimate",
+   "scope_tag": "team:Finance",
+   "in_scope": false,
+   "category": "Finance",
+   "tool_name": "Stock Analysis",
+   "api_name": "Revenue Estimate",
+   "description": "Get revenue estimate.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "ticker": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "ticker"
+    ]
+   }
+  },
+  {
+   "name": "onelike_social_media_news_in_indonesian",
+   "scope_tag": "team:News_Media",
+   "in_scope": false,
+   "category": "News_Media",
+   "tool_name": "OneLike",
+   "api_name": "Social Media News in Indonesian",
+   "description": "Get social media news in Indonesian",
+   "parameters": {
+    "type": "object",
+    "properties": {},
+    "required": []
+   }
+  },
+  {
+   "name": "gamerpower_filter_group_giveaways",
+   "scope_tag": "team:Gaming",
+   "in_scope": false,
+   "category": "Gaming",
+   "tool_name": "GamerPower",
+   "api_name": "Filter & Group Giveaways",
+   "description": "Filter and group platforms and giveaway types to get personalized results.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "platform": {
+      "type": "string"
+     },
+     "type": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "platform"
+    ]
+   }
+  },
+  {
+   "name": "seo_fast_audit_analysis",
+   "scope_tag": "team:Tools",
+   "in_scope": false,
+   "category": "Tools",
+   "tool_name": "SEO Fast Audit",
+   "api_name": "Analysis",
+   "description": "Analyse the content from URL",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "url": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "url"
+    ]
+   }
+  },
+  {
+   "name": "europe_fuel_prices_get_specific_country",
+   "scope_tag": "team:Energy",
+   "in_scope": false,
+   "category": "Energy",
+   "tool_name": "Europe Fuel Prices",
+   "api_name": "Get specific country",
+   "description": "Get fuel prices for a specific country",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "country": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "country"
+    ]
+   }
+  },
+  {
+   "name": "dictionary_translation_hablaa_similar_words",
+   "scope_tag": "team:Education",
+   "in_scope": false,
+   "category": "Education",
+   "tool_name": "Dictionary Translation Hablaa",
+   "api_name": "Similar words",
+   "description": "Get translations of similar words.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "text_to_translate": {
+      "type": "string"
+     },
+     "lang_code_src-lang_code_dst": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "text_to_translate",
+     "lang_code_src-lang_code_dst"
+    ]
+   }
+  },
+  {
+   "name": "platformbil_getinventory",
+   "scope_tag": "team:Other",
+   "in_scope": false,
+   "category": "Other",
+   "tool_name": "platformbil",
+   "api_name": "getInventory",
+   "description": "Returns a map of status codes to quantities",
+   "parameters": {
+    "type": "object",
+    "properties": {},
+    "required": []
+   }
+  },
+  {
+   "name": "ubidots_get_variables_variable_id",
+   "scope_tag": "team:Devices",
+   "in_scope": false,
+   "category": "Devices",
+   "tool_name": "Ubidots",
+   "api_name": "GET /variables/{variable_id}",
+   "description": "This resource returns a variable and its details. It shows additional fields than the ones required during the creation of the variable:  last_value: Shows the last value written to the variable.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "variable_id": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "variable_id"
+    ]
+   }
+  },
+  {
+   "name": "spotify_downloader_metadata_playlist",
+   "scope_tag": "team:Tools",
+   "in_scope": false,
+   "category": "Tools",
+   "tool_name": "Spotify Downloader",
+   "api_name": "Metadata - Playlist",
+   "description": "Get metadata about playlist",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "id": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "id"
+    ]
+   }
+  },
+  {
+   "name": "opensquat_get_daily_domains",
+   "scope_tag": "team:Monitoring",
+   "in_scope": false,
+   "category": "Monitoring",
+   "tool_name": "openSquat",
+   "api_name": "Get Daily Domains",
+   "description": "Get the daily list of domains that have been registered in the past day that have a similar word to {keyword} - the keyword should not contain any domain, e.g: Google",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "keyword": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "keyword"
+    ]
+   }
+  },
+  {
+   "name": "social_media_data_tt_hashtag_metadata_information_v2",
+   "scope_tag": "team:Social",
+   "in_scope": false,
+   "category": "Social",
+   "tool_name": "Social Media Data TT",
+   "api_name": "Hashtag metadata (information) V2",
+   "description": "Get hashtag metadata V2\n\nV2 - returns more data then older version of the endpoint",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "hashtag": {
+      "type": "string",
+      "description": "Hashtag name. For example: **summer**"
+     }
+    },
+    "required": [
+     "hashtag"
+    ]
+   }
+  },
+  {
+   "name": "guinness_world_records_api_get_records",
+   "scope_tag": "team:Entertainment",
+   "in_scope": false,
+   "category": "Entertainment",
+   "tool_name": "Guinness-World-Records-Api",
+   "api_name": "Get Records",
+   "description": "Get Guinness World Records for a given term",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "term": {
+      "type": "string"
+     },
+     "pageNum": {
+      "type": "number"
+     },
+     "maxResults": {
+      "type": "number"
+     }
+    },
+    "required": [
+     "term"
+    ]
+   }
+  },
+  {
+   "name": "open_proxies_open_proxies",
+   "scope_tag": "team:Data",
+   "in_scope": false,
+   "category": "Data",
+   "tool_name": "Open Proxies",
+   "api_name": "Open Proxies",
+   "description": "Get a list of 200-400 working open proxies, updated every 15 minutes. Because they can go up & down, these IPs may not be functional when you retrieve them. For higher reliability, consider a [paid proxy service](https://proxymesh.com/).",
+   "parameters": {
+    "type": "object",
+    "properties": {},
+    "required": []
+   }
+  },
+  {
+   "name": "jet_set_radio_api_songs",
+   "scope_tag": "team:Entertainment",
+   "in_scope": false,
+   "category": "Entertainment",
+   "tool_name": "Jet Set Radio API",
+   "api_name": "Songs",
+   "description": "Returns a list of all Songs from JSR/JSRF",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "limit": {
+      "type": "string",
+      "description": "Limit the number of items returned in the response."
+     },
+     "sortBy": {
+      "type": "string",
+      "description": "Possible Values:\nAny field on the document\n\nExamples:\n - name\n - stats"
+     },
+     "orderBy": {
+      "type": "string",
+      "description": "Possible Values:\n - `asc`\n - `desc`\n\nsortBy must be present for this to take effect. \nThe default value is `asc`"
+     }
+    },
+    "required": []
+   }
+  },
+  {
+   "name": "woo_temp_product_category",
+   "scope_tag": "team:Business",
+   "in_scope": false,
+   "category": "Business",
+   "tool_name": "Woo-temp",
+   "api_name": "product_category",
+   "description": "get product category",
+   "parameters": {
+    "type": "object",
+    "properties": {},
+    "required": []
+   }
+  },
+  {
+   "name": "keyword_analysis_popularsitesforquery",
+   "scope_tag": "team:Data",
+   "in_scope": false,
+   "category": "Data",
+   "tool_name": "Keyword Analysis",
+   "api_name": "PopularSitesForQuery",
+   "description": "Get the **popular sites** for a given search query.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "q": {
+      "type": "string",
+      "description": "The user's search query string."
+     }
+    },
+    "required": [
+     "q"
+    ]
+   }
+  },
+  {
+   "name": "airbnb_listings_listing_status_full",
+   "scope_tag": "team:Travel",
+   "in_scope": false,
+   "category": "Travel",
+   "tool_name": "Airbnb listings",
+   "api_name": "Listing status Full",
+   "description": "Retrieve the calculated status (available/not available for stay) for the next 12 months of a listing based on previous and following days stay rules.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "id": {
+      "type": "string",
+      "description": "the listing id"
+     }
+    },
+    "required": [
+     "id"
+    ]
+   }
+  },
+  {
+   "name": "health_calculator_api_bodyfat_imperial",
+   "scope_tag": "team:Health_and_Fitness",
+   "in_scope": false,
+   "category": "Health_and_Fitness",
+   "tool_name": "Health Calculator API",
+   "api_name": "BodyFat - Imperial",
+   "description": "This endpoint calculates the body fat percentage based on the provided gender, age, height, and weight parameters in imperial units.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "age": {
+      "type": "number",
+      "description": "The age of the person in **years**. Required."
+     },
+     "weight": {
+      "type": "number",
+      "description": "The weight of the person in **pounds**. Required."
+     },
+     "gender": {
+      "type": "string",
+      "description": "The gender of the person. Must be either '**male**' or '**female**'. Required."
+     },
+     "height": {
+      "type": "number",
+      "description": "The height of the person in **inches**. Required."
+     }
+    },
+    "required": [
+     "age",
+     "weight",
+     "gender",
+     "height"
+    ]
+   }
+  },
+  {
+   "name": "tank01_nfl_live_in_game_real_time_statistics_nfl_get_nfl",
+   "scope_tag": "team:Sports",
+   "in_scope": false,
+   "category": "Sports",
+   "tool_name": "Tank01 NFL Live In-Game Real Time Statistics NFL",
+   "api_name": "Get NFL Teams",
+   "description": "This call will retrieve the list of NFL teams. Included is their name, city, abbreviation, and teamID which can be used in other calls.  Their current record and current W/L streak is included as well. Optional data that can be included are the team rosters and their schedules.      \n\nIncluded in team rosters is all players injuries. \n/getNFLTeams\n\nOptional parameters are ?schedules=true    or    ?rosters=true",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "schedules": {
+      "type": "string"
+     },
+     "rosters": {
+      "type": "string"
+     }
+    },
+    "required": []
+   }
+  },
+  {
+   "name": "bingoapi_eu",
+   "scope_tag": "team:Gaming",
+   "in_scope": false,
+   "category": "Gaming",
+   "tool_name": "BingoAPI",
+   "api_name": "/eu",
+   "description": "EU game spec.\nReturns numbers between 1 and 90.\n\nIf you have a paid plan you can specify the number of cards to generate as a query parameter: `?cards=10`\nThis will return an array of array (the cards).\n\nPlease note that empty spaces are not returned as it is more portable for who don't need them. You are free to loop through the cards and add them at your wish.",
+   "parameters": {
+    "type": "object",
+    "properties": {},
+    "required": []
+   }
+  },
+  {
+   "name": "yahoo_finance_balance_sheet",
+   "scope_tag": "team:Financial",
+   "in_scope": false,
+   "category": "Financial",
+   "tool_name": "Yahoo Finance",
+   "api_name": "balance-sheet",
+   "description": "A **balance sheet** is a financial statement that communicates the so-called “book value” of an organization, as calculated by subtracting all of the company's liabilities and shareholder equity from its total assets.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "symbol": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "symbol"
+    ]
+   }
+  },
+  {
+   "name": "ski_resort_forecast_hourly_forecast",
+   "scope_tag": "team:Weather",
+   "in_scope": false,
+   "category": "Weather",
+   "tool_name": "Ski Resort Forecast",
+   "api_name": "Hourly Forecast",
+   "description": "Returns the hourly forecast for a given resort name",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "resort": {
+      "type": "string"
+     },
+     "el": {
+      "type": "string",
+      "description": "Specify a part of the mountain. Accepted values are 'top', 'mid', and 'bot'. Using this parameter improves response time."
+     },
+     "units": {
+      "type": "string",
+      "description": "Specify desired units. Accepted values are 'i' (imperial) and 'm' (metric). Using this parameter improves response time."
+     },
+     "c": {
+      "type": "boolean",
+      "description": "Limit result to current day only"
+     }
+    },
+    "required": [
+     "resort"
+    ]
+   }
+  },
+  {
+   "name": "musicdata_api_youtube_global_countryid_timeframe",
+   "scope_tag": "team:Music",
+   "in_scope": false,
+   "category": "Music",
+   "tool_name": "MusicData API",
+   "api_name": "/youtube/global/{countryID}/{timeframe}",
+   "description": "Weekly/Daily country Youtube chart for a specific country. Read external docs for more information",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "countryID": {
+      "type": "string"
+     },
+     "timeframe": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "countryID",
+     "timeframe"
+    ]
+   }
+  },
+  {
+   "name": "airdna_top_property_managers",
+   "scope_tag": "team:Data",
+   "in_scope": false,
+   "category": "Data",
+   "tool_name": "Airdna",
+   "api_name": "Top property managers",
+   "description": "Returns the largest property managers",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "location": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "location"
+    ]
+   }
+  },
+  {
+   "name": "transportistas_de_argentina_cities_states_stateisocode",
+   "scope_tag": "team:Logistics",
+   "in_scope": false,
+   "category": "Logistics",
+   "tool_name": "Transportistas de Argentina",
+   "api_name": "/cities/states/:stateIsoCode",
+   "description": "List of city for iso state.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "stateIsoCode": {
+      "type": "string",
+      "description": "State ISO Code"
+     }
+    },
+    "required": [
+     "stateIsoCode"
+    ]
+   }
+  },
+  {
+   "name": "miza_retrieve_file",
+   "scope_tag": "team:Music",
+   "in_scope": false,
+   "category": "Music",
+   "tool_name": "Miza",
+   "api_name": "Retrieve file",
+   "description": "Retrieves a file hosted by the server. This link is usually obtained by replacing the /p/ path in the /merge and /edit endpoint responses with /f/ or /d/. The request fails if the file requested does not exist or has been deleted.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "path": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "path"
+    ]
+   }
+  },
+  {
+   "name": "brand_recognition_get_version",
+   "scope_tag": "team:Visual_Recognition",
+   "in_scope": false,
+   "category": "Visual_Recognition",
+   "tool_name": "Brand Recognition",
+   "api_name": "Get version",
+   "description": "Returns an actual version of the service in format `vX.Y.Z` where X is the version of API.",
+   "parameters": {
+    "type": "object",
+    "properties": {},
+    "required": []
+   }
+  },
+  {
+   "name": "tiktok_v2_feeds_by_secuid",
+   "scope_tag": "team:Social",
+   "in_scope": false,
+   "category": "Social",
+   "tool_name": "Tiktok_v2",
+   "api_name": "Feeds by secUid",
+   "description": "Fetch feeds from secUid\n\nYou can get secUid from Profile api",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "schemaType": {
+      "type": "string"
+     },
+     "username": {
+      "type": "string"
+     },
+     "secUid": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "schemaType",
+     "username",
+     "secUid"
+    ]
+   }
+  },
+  {
+   "name": "similar_movies_get_id",
+   "scope_tag": "team:Movies",
+   "in_scope": false,
+   "category": "Movies",
+   "tool_name": "Similar Movies",
+   "api_name": "get Id",
+   "description": "get the id of your movie",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "q": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "q"
+    ]
+   }
+  },
+  {
+   "name": "cheap_translate_goo_translate_languages",
+   "scope_tag": "team:Translation",
+   "in_scope": false,
+   "category": "Translation",
+   "tool_name": "Cheap Translate",
+   "api_name": "/goo/translate/languages",
+   "description": "Get all Goog supported language",
+   "parameters": {
+    "type": "object",
+    "properties": {},
+    "required": []
+   }
+  },
+  {
+   "name": "airplanesdb_search",
+   "scope_tag": "team:Database",
+   "in_scope": false,
+   "category": "Database",
+   "tool_name": "AirplanesDB",
+   "api_name": "Search",
+   "description": "Search airplane by name.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "search": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "search"
+    ]
+   }
+  },
+  {
+   "name": "powerbi_getpeoplebytopic",
+   "scope_tag": "team:Data",
+   "in_scope": false,
+   "category": "Data",
+   "tool_name": "PowerBI",
+   "api_name": "GetPeopleByTopic",
+   "description": "Get Power BI influencers by topic.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "page": {
+      "type": "number"
+     },
+     "topic": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "page",
+     "topic"
+    ]
+   }
+  },
+  {
+   "name": "phone_area_code",
+   "scope_tag": "team:Data",
+   "in_scope": false,
+   "category": "Data",
+   "tool_name": "Phone",
+   "api_name": "area-code",
+   "description": "Get the International Country Calling Code and the Local Area Code information",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "country": {
+      "type": "string",
+      "description": "\"ISO 2 letter country code\" or \"Name of the Country in English\""
+     },
+     "region": {
+      "type": "string",
+      "description": "Geographic Region (e.g. City). No accented letter is required."
+     }
+    },
+    "required": [
+     "country",
+     "region"
+    ]
+   }
+  },
+  {
+   "name": "signnow_get_role_ids_for_template",
+   "scope_tag": "team:Business",
+   "in_scope": false,
+   "category": "Business",
+   "tool_name": "SignNow",
+   "api_name": "Get role ids for template",
+   "description": "The endpoint allows to get role ids for a template.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "template_id": {
+      "type": "string",
+      "description": "ID of the template."
+     }
+    },
+    "required": [
+     "template_id"
+    ]
+   }
+  },
+  {
+   "name": "qr_code_generator_generate_basic_base64",
+   "scope_tag": "team:Tools",
+   "in_scope": false,
+   "category": "Tools",
+   "tool_name": "QR Code Generator",
+   "api_name": "Generate Basic - Base64",
+   "description": "Generates a QR code as base64 with limited settings.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "data": {
+      "type": "string"
+     },
+     "size": {
+      "type": "number"
+     }
+    },
+    "required": [
+     "data"
+    ]
+   }
+  },
+  {
+   "name": "magic_aliexpress_api_currenciesavailable",
+   "scope_tag": "team:eCommerce",
+   "in_scope": false,
+   "category": "eCommerce",
+   "tool_name": "Magic AliExpress",
+   "api_name": "/api/currenciesAvailable",
+   "description": "This resource represents a currency in the system. Each currency is composed of Code and Name Attributes. This service can be used to communicate with product service with the target currency attribute.",
+   "parameters": {
+    "type": "object",
+    "properties": {},
+    "required": []
+   }
+  },
+  {
+   "name": "morning_star_type_portfolio_get_credit_quality",
+   "scope_tag": "team:Finance",
+   "in_scope": false,
+   "category": "Finance",
+   "tool_name": "Morning Star",
+   "api_name": "{type}/portfolio/get-credit-quality",
+   "description": "Get credit quality as displayed in the Portfolio tab",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "type": {
+      "type": "string",
+      "description": "One of the following values : etf|fund"
+     },
+     "securityId": {
+      "type": "string",
+      "description": "The value of securityId field returned in .../market/v2/get-returns"
+     }
+    },
+    "required": [
+     "type",
+     "securityId"
+    ]
+   }
+  },
+  {
+   "name": "weather_forecast_14_days_get_forecastdata_by_lat_lon",
+   "scope_tag": "team:Weather",
+   "in_scope": false,
+   "category": "Weather",
+   "tool_name": "weather forecast 14 days",
+   "api_name": "Get forecastdata by lat/lon",
+   "description": "get forecast for 14 days for the location Lat/Lon",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "LAT": {
+      "type": "number",
+      "description": "Latitude"
+     },
+     "LON": {
+      "type": "number",
+      "description": "Longitude"
+     },
+     "LANG": {
+      "type": "string",
+      "description": "Language [en,de,nl,fr,pl,gr,it,cn,ru,cz,pt,es]"
+     }
+    },
+    "required": [
+     "LAT",
+     "LON"
+    ]
+   }
+  },
+  {
+   "name": "airdna_rental_settings",
+   "scope_tag": "team:Data",
+   "in_scope": false,
+   "category": "Data",
+   "tool_name": "Airdna",
+   "api_name": "Rental settings",
+   "description": "Returns rental settings.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "location": {
+      "type": "string"
+     },
+     "currency": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "location"
+    ]
+   }
+  },
+  {
+   "name": "mailboxlayer_validate_email_address",
+   "scope_tag": "team:Tools",
+   "in_scope": false,
+   "category": "Tools",
+   "tool_name": "mailboxlayer",
+   "api_name": "Validate email address",
+   "description": "The main API endpoint for validating email addresses",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "email": {
+      "type": "string",
+      "description": "the email address to be validated"
+     },
+     "catch_all": {
+      "type": "number",
+      "description": "Set to \"0\" (default) to turn off Catch-all detection, set to \"1\" to turn on Catch-all detection"
+     },
+     "smtp": {
+      "type": "number",
+      "description": "Set to \"0\" to turn off SMTP check, set to \"1\" (default) to turn on SMTP check"
+     }
+    },
+    "required": [
+     "email"
+    ]
+   }
+  },
+  {
+   "name": "investing_cryptocurrency_markets_coins_search",
+   "scope_tag": "team:Finance",
+   "in_scope": false,
+   "category": "Finance",
+   "tool_name": "Investing - Cryptocurrency Markets",
+   "api_name": "coins/search",
+   "description": "Search for available cryptocurrencies relating to a word, name, etc...",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "string": {
+      "type": "string",
+      "description": "A word or name of any currencies"
+     },
+     "time_utc_offset": {
+      "type": "number",
+      "description": "UTC value in seconds, for example : utc+8 -> 8 * 60 * 60 = 28800"
+     },
+     "lang_ID": {
+      "type": "number",
+      "description": "The value of all&#95;langs/lang&#95;ID returned in .../get-meta-data endpoint"
+     }
+    },
+    "required": [
+     "string"
+    ]
+   }
+  },
+  {
+   "name": "token_scanner_multichain_honeypot_checker_multichain_get",
+   "scope_tag": "team:Cybersecurity",
+   "in_scope": false,
+   "category": "Cybersecurity",
+   "tool_name": "Token Scanner Multichain | Honeypot Checker Multichain",
+   "api_name": "Get Chain Id",
+   "description": "Returns chainId from chain name.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "chain": {
+      "type": "string",
+      "description": "Available chains:\n**ethereum, bsc, okc, heco, polygon, arbitrum, optimism, avalanche, fantom, kcc, gnosis, tron, linea, harmony, zkysnc, ethw, fon, cronos**"
+     }
+    },
+    "required": [
+     "chain"
+    ]
+   }
+  },
+  {
+   "name": "trackingmore_v2_packages_v2_track",
+   "scope_tag": "team:Logistics",
+   "in_scope": false,
+   "category": "Logistics",
+   "tool_name": "TrackingMore_v2",
+   "api_name": "packages/v2/track",
+   "description": "Get tracking information of specific package",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "trackingNumber": {
+      "type": "string",
+      "description": "Tracking number of package"
+     }
+    },
+    "required": [
+     "trackingNumber"
+    ]
+   }
+  },
+  {
+   "name": "onlyfans_count",
+   "scope_tag": "team:Social",
+   "in_scope": false,
+   "category": "Social",
+   "tool_name": "OnlyFans",
+   "api_name": "Count",
+   "description": "Used to get the total expired followers\n\nMust hit the auth endpoint first!",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "signstart": {
+      "type": "string"
+     },
+     "apptoken": {
+      "type": "string"
+     },
+     "signend": {
+      "type": "string"
+     },
+     "xbc": {
+      "type": "string"
+     },
+     "timezone": {
+      "type": "string"
+     },
+     "useragent": {
+      "type": "string"
+     },
+     "auth_id": {
+      "type": "string"
+     },
+     "sess": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "signstart",
+     "apptoken",
+     "signend",
+     "xbc",
+     "timezone",
+     "useragent",
+     "auth_id",
+     "sess"
+    ]
+   }
+  },
+  {
+   "name": "dice_roll_simulator_custom_dice",
+   "scope_tag": "team:Gaming",
+   "in_scope": false,
+   "category": "Gaming",
+   "tool_name": "Dice Roll Simulator",
+   "api_name": "Custom dice",
+   "description": "Roll any number of dice with any number of sides.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "dice": {
+      "type": "number"
+     },
+     "sides": {
+      "type": "number"
+     }
+    },
+    "required": []
+   }
+  },
+  {
+   "name": "twitter_v5_get_user_followings",
+   "scope_tag": "team:Social",
+   "in_scope": false,
+   "category": "Social",
+   "tool_name": "Twitter_v5",
+   "api_name": "Get User Followings",
+   "description": "Get User Followings By ID. \n\nYou can get the user(rest_id) query from \"Get User By Username\" endpoint",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "count": {
+      "type": "string"
+     },
+     "user": {
+      "type": "string"
+     },
+     "cursor": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "count",
+     "user"
+    ]
+   }
+  },
+  {
+   "name": "email_validator_v3_email_validate_regex",
+   "scope_tag": "team:Email",
+   "in_scope": false,
+   "category": "Email",
+   "tool_name": "Email Validator_v3",
+   "api_name": "Email Validate Regex",
+   "description": "Email Validate Regex",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "email": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "email"
+    ]
+   }
+  },
+  {
+   "name": "email_scraper_email_extractor",
+   "scope_tag": "team:Business",
+   "in_scope": false,
+   "category": "Business",
+   "tool_name": "Email Scraper",
+   "api_name": "email-extractor",
+   "description": "Get emails scraped from url provided",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "url": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "url"
+    ]
+   }
+  },
+  {
+   "name": "dice_roll_simulator_custom_dice_rolls",
+   "scope_tag": "team:Gaming",
+   "in_scope": false,
+   "category": "Gaming",
+   "tool_name": "Dice Roll Simulator",
+   "api_name": "Custom dice rolls",
+   "description": "Roll any number of dice with any number of sides any number of times.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "dice": {
+      "type": "number"
+     },
+     "sides": {
+      "type": "number"
+     },
+     "rolls": {
+      "type": "string"
+     }
+    },
+    "required": []
+   }
+  },
+  {
+   "name": "wnba_api_wnba_standings",
+   "scope_tag": "team:Sports",
+   "in_scope": false,
+   "category": "Sports",
+   "tool_name": "WNBA API",
+   "api_name": "WNBA Standings",
+   "description": "The endpoint provides you with the team standings for the WNBA",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "year": {
+      "type": "string"
+     },
+     "group": {
+      "type": "string",
+      "description": "acceptable group names: 'league', 'conference'. Default: 'league'"
+     }
+    },
+    "required": [
+     "year"
+    ]
+   }
+  },
+  {
+   "name": "house_plants_get_by_category",
+   "scope_tag": "team:Database",
+   "in_scope": false,
+   "category": "Database",
+   "tool_name": "House Plants",
+   "api_name": "Get By Category",
+   "description": "Get plants by their category.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "category": {
+      "type": "string"
+     }
+    },
+    "required": []
+   }
+  },
+  {
+   "name": "geolocate_get_coordinates",
+   "scope_tag": "team:Tools",
+   "in_scope": false,
+   "category": "Tools",
+   "tool_name": "Geolocate",
+   "api_name": "GET coordinates",
+   "description": "GET request to the \"/geocode\" endpoint with an \"address\" parameter containing the address or place you want to geocode",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "address": {
+      "type": "string"
+     }
+    },
+    "required": []
+   }
+  },
+  {
+   "name": "air_quality_current_air_quality",
+   "scope_tag": "team:Weather",
+   "in_scope": false,
+   "category": "Weather",
+   "tool_name": "Air Quality",
+   "api_name": "Current Air Quality",
+   "description": "Retrieves current air quality conditions for any location in the world, given a lat/lon.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "lon": {
+      "type": "string",
+      "description": "Longitude"
+     },
+     "lat": {
+      "type": "string",
+      "description": "Latitude"
+     }
+    },
+    "required": [
+     "lon",
+     "lat"
+    ]
+   }
+  },
+  {
+   "name": "greip_validateemail",
+   "scope_tag": "team:Cybersecurity",
+   "in_scope": false,
+   "category": "Cybersecurity",
+   "tool_name": "Greip",
+   "api_name": "/validateEmail",
+   "description": "This method can be used as an extra-layer of your system for validating email addresses.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "email": {
+      "type": "string",
+      "description": "The Email Address you want to validate."
+     },
+     "key": {
+      "type": "string",
+      "description": "Your API Key. Each user has a unique API Key that can be used to access the API functions. If you don't have an account yet, please create new account first."
+     },
+     "format": {
+      "type": "string",
+      "description": "Sets the format of the API response. JSON is the default format."
+     }
+    },
+    "required": [
+     "email",
+     "key"
+    ]
+   }
+  },
+  {
+   "name": "toxdetectai_ai_powered_toxic_comment_detector_toxdetecta",
+   "scope_tag": "team:Artificial_Intelligence_Machine_Learning",
+   "in_scope": false,
+   "category": "Artificial_Intelligence_Machine_Learning",
+   "tool_name": "ToxDetectAI - AI Powered Toxic Comment Detector",
+   "api_name": "🔥 ToxDetectAI API",
+   "description": "😀 Our AI-powered endpoint can analyze text in over 140 languages",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "text": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "text"
+    ]
+   }
+  },
+  {
+   "name": "diffbot_frontpage",
+   "scope_tag": "team:Data",
+   "in_scope": false,
+   "category": "Data",
+   "tool_name": "Diffbot",
+   "api_name": "Frontpage",
+   "description": "The Frontpage API takes in a multifaceted “homepage” and returns individual page elements.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "url": {
+      "type": "string",
+      "description": "Frontpage URL from which to extract items"
+     },
+     "timeout": {
+      "type": "string",
+      "description": "Specify a value in milliseconds (e.g., &timeout=15000) to override the default API timeout of 5000ms."
+     },
+     "format": {
+      "type": "string",
+      "description": "Format the response output in xml (default) or json"
+     },
+     "all": {
+      "type": "string",
+      "description": "Returns all content from page, including navigation and similar links that the Diffbot visual processing engine considers less important / non-core."
+     }
+    },
+    "required": [
+     "url"
+    ]
+   }
+  },
+  {
+   "name": "virtual_accounts_api_getallaccounts",
+   "scope_tag": "team:Payments",
+   "in_scope": false,
+   "category": "Payments",
+   "tool_name": "Virtual Accounts API",
+   "api_name": "GetAllAccounts",
+   "description": "To get all virtual accounts in your organisation.",
+   "parameters": {
+    "type": "object",
+    "properties": {},
+    "required": []
+   }
+  },
+  {
+   "name": "168predict_vip_football_predictions_today_sure_vip_btts",
+   "scope_tag": "team:Sports",
+   "in_scope": false,
+   "category": "Sports",
+   "tool_name": "168predict VIP Football Predictions",
+   "api_name": "Today Sure VIP BTTS/Goal Goal",
+   "description": "This endpiont delivers daily sure and precise BTTS/Goal Goal forecasts. All of the forecasts have been carefully selected. Visit www.168predict.site for more information.",
+   "parameters": {
+    "type": "object",
+    "properties": {},
+    "required": []
+   }
+  },
+  {
+   "name": "d7sms_get_otp_status",
+   "scope_tag": "team:SMS",
+   "in_scope": false,
+   "category": "SMS",
+   "tool_name": "D7SMS",
+   "api_name": "Get OTP Status",
+   "description": "Get the status of OTP generated or verified",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "otp_id": {
+      "type": "string",
+      "description": "The otp_ id which was returned from **Send OTP** endpoint"
+     }
+    },
+    "required": [
+     "otp_id"
+    ]
+   }
+  },
+  {
+   "name": "easy_weather_current_conditions_detailed",
+   "scope_tag": "team:Weather",
+   "in_scope": false,
+   "category": "Weather",
+   "tool_name": "Easy Weather",
+   "api_name": "Current conditions (detailed)",
+   "description": "Get (detailed) current conditions for the given latitude and longitude.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "longitude": {
+      "type": "string"
+     },
+     "latitude": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "longitude",
+     "latitude"
+    ]
+   }
+  },
+  {
+   "name": "yh_finance_complete_earnings",
+   "scope_tag": "team:Finance",
+   "in_scope": false,
+   "category": "Finance",
+   "tool_name": "YH Finance Complete",
+   "api_name": "Earnings",
+   "description": "This endpoint returns the company earnings.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "to": {
+      "type": "string",
+      "description": "Date format: yyyy-mm-dd"
+     },
+     "from": {
+      "type": "string",
+      "description": "Date format: yyyy-mm-dd"
+     },
+     "symbol": {
+      "type": "string"
+     },
+     "period": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "to",
+     "from",
+     "symbol"
+    ]
+   }
+  },
+  {
+   "name": "indie_songs_distrokid_unsigned_get_songs_with_all_metada",
+   "scope_tag": "team:Music",
+   "in_scope": false,
+   "category": "Music",
+   "tool_name": "Indie Songs : DistroKid & Unsigned",
+   "api_name": "Get songs with ALL metadata and stats (play counts)",
+   "description": "Get all tracks with full metadata including recent Spotify play counts.\n\nAlso Apple song URL, Spotify song URL, Composer name, ISRC, Label, Release date, Genres, Apple IDs, Spotify IDs are included.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "offset": {
+      "type": "string"
+     },
+     "limit": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "offset",
+     "limit"
+    ]
+   }
+  },
+  {
+   "name": "helioviewer_v1_downloadmovie",
+   "scope_tag": "team:Education",
+   "in_scope": false,
+   "category": "Education",
+   "tool_name": "Helioviewer v1",
+   "api_name": "downloadMovie",
+   "description": "Download a custom movie in one of three file formats.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "id": {
+      "type": "string",
+      "description": "Unique movie identifier (provided by the response to a `queueMovie` request)."
+     },
+     "format": {
+      "type": "string",
+      "description": "Movie Format (`mp4`, `webm`, or `flv`)."
+     },
+     "hq": {
+      "type": "boolean",
+      "description": "Optionally download a higher-quality movie file (valid for .mp4 movies only, ignored otherwise)."
+     }
+    },
+    "required": [
+     "id",
+     "format"
+    ]
+   }
+  },
+  {
+   "name": "onelike_social_media_news_in_dutch",
+   "scope_tag": "team:News_Media",
+   "in_scope": false,
+   "category": "News_Media",
+   "tool_name": "OneLike",
+   "api_name": "Social Media News in Dutch",
+   "description": "Get social media news in Dutch",
+   "parameters": {
+    "type": "object",
+    "properties": {},
+    "required": []
+   }
+  },
+  {
+   "name": "outking_get_poster",
+   "scope_tag": "team:Entertainment",
+   "in_scope": false,
+   "category": "Entertainment",
+   "tool_name": "Outking",
+   "api_name": "Get Poster",
+   "description": "Get movie poster by title and release year",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "title": {
+      "type": "string"
+     },
+     "year": {
+      "type": "number"
+     }
+    },
+    "required": [
+     "title",
+     "year"
+    ]
+   }
+  },
+  {
+   "name": "anime_quotes_v4_get_quotes_by_anime_title",
+   "scope_tag": "team:Entertainment",
+   "in_scope": false,
+   "category": "Entertainment",
+   "tool_name": "Anime Quotes_v4",
+   "api_name": "Get quotes by anime title",
+   "description": "Get quotes by anime title",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "title": {
+      "type": "string"
+     },
+     "page": {
+      "type": "string"
+     }
+    },
+    "required": []
+   }
+  },
+  {
+   "name": "echo_api_echo_get",
+   "scope_tag": "team:Tools",
+   "in_scope": false,
+   "category": "Tools",
+   "tool_name": "echo-api",
+   "api_name": "Echo GET",
+   "description": "Make a HTTP GET request with the code you like to get in the response.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "code": {
+      "type": "string"
+     }
+    },
+    "required": []
+   }
+  },
+  {
+   "name": "nowpayments_3_getestimatedprice",
+   "scope_tag": "team:Payments",
+   "in_scope": false,
+   "category": "Payments",
+   "tool_name": "NOWPayments",
+   "api_name": "3.Getestimatedprice",
+   "description": "This is a method for calculating the approximate price in cryptocurrency for a given value in Fiat currency. You will need to provide the initial cost in the Fiat currency (amount, currency_from) and the necessary cryptocurrency (currency_to)\nCurrently following fiat currencies are available: usd, eur, nzd, brl, gbp.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "currency_to": {
+      "type": "string"
+     },
+     "currency_from": {
+      "type": "string"
+     },
+     "amount": {
+      "type": "number"
+     }
+    },
+    "required": [
+     "currency_to",
+     "currency_from",
+     "amount"
+    ]
+   }
+  },
+  {
+   "name": "amazon_scrapper_v4_get_a_product_details",
+   "scope_tag": "team:eCommerce",
+   "in_scope": false,
+   "category": "eCommerce",
+   "tool_name": "Amazon Scrapper_v4",
+   "api_name": "GET a product details",
+   "description": "GET a product details.\nYou can get the product id from the URL when you search for a particular product. It is the next value after '/dp/'.\nEg: B08N5WG761 is the value we want from the url - \nhttps://www.amazon.in/Apple-MacBook-Chip-13-inch-256GB/dp/B08N5WG761/",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "productId": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "productId"
+    ]
+   }
+  },
+  {
+   "name": "google_reviews_scraper_getreviews",
+   "scope_tag": "team:Search",
+   "in_scope": false,
+   "category": "Search",
+   "tool_name": "Google Reviews Scraper",
+   "api_name": "GetReviews",
+   "description": "with this endpoint you can all reviews for any business searched  with pagination",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "sort": {
+      "type": "string"
+     },
+     "nextpage": {
+      "type": "string"
+     },
+     "id": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "sort",
+     "nextpage",
+     "id"
+    ]
+   }
+  },
+  {
+   "name": "world_clock_coordinated_universal_time",
+   "scope_tag": "team:Tools",
+   "in_scope": false,
+   "category": "Tools",
+   "tool_name": "World Clock",
+   "api_name": "Coordinated Universal Time",
+   "description": "Gets the coordinated universal time",
+   "parameters": {
+    "type": "object",
+    "properties": {},
+    "required": []
+   }
+  },
+  {
+   "name": "validate_vat_validate_vat",
+   "scope_tag": "team:Business",
+   "in_scope": false,
+   "category": "Business",
+   "tool_name": "Validate VAT",
+   "api_name": "Validate VAT",
+   "description": "“Validate VAT” validates VAT numbers, get company information, including address, returned for each VAT number.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "vat_number": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "vat_number"
+    ]
+   }
+  },
+  {
+   "name": "yts_am_torrent_movie_comments_xml",
+   "scope_tag": "team:Media",
+   "in_scope": false,
+   "category": "Media",
+   "tool_name": "YTS.am Torrent",
+   "api_name": "Movie Comments (XML)",
+   "description": "Returns all the comments for the specified movie",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "movie_id": {
+      "type": "number",
+      "description": "The ID of the movie"
+     }
+    },
+    "required": []
+   }
+  },
+  {
+   "name": "nowpayments_1_getapistatus",
+   "scope_tag": "team:Payments",
+   "in_scope": false,
+   "category": "Payments",
+   "tool_name": "NOWPayments",
+   "api_name": "1.GetAPIstatus",
+   "description": "This is a method to get information about the current state of the API. If everything is OK, you will receive an \"OK\" message. Otherwise, you'll see some error.",
+   "parameters": {
+    "type": "object",
+    "properties": {},
+    "required": []
+   }
+  },
+  {
+   "name": "bmi_calculator_v2_bmi",
+   "scope_tag": "team:Health_and_Fitness",
+   "in_scope": false,
+   "category": "Health_and_Fitness",
+   "tool_name": "BMI Calculator_v2",
+   "api_name": "BMI",
+   "description": "Calculate BMI using weight and height.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "weight": {
+      "type": "number"
+     },
+     "height": {
+      "type": "number"
+     },
+     "system": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "weight",
+     "height"
+    ]
+   }
+  },
+  {
+   "name": "memeados_sponge_bob",
+   "scope_tag": "team:Entertainment",
+   "in_scope": false,
+   "category": "Entertainment",
+   "tool_name": "Memeados",
+   "api_name": "Sponge bob",
+   "description": "Generate Sponge Bob meme",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "text": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "text"
+    ]
+   }
+  },
+  {
+   "name": "rapidweather_reverse_geocoding",
+   "scope_tag": "team:Weather",
+   "in_scope": false,
+   "category": "Weather",
+   "tool_name": "RapidWeather",
+   "api_name": "Reverse geocoding",
+   "description": "Reverse geocoding allows to get name of the location (city name or area name) by using geografical coordinates (lat, lon). The **limit **parameter in the API call allows you to cap how many location names you will see in the API response.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "lat": {
+      "type": "number",
+      "description": "Geographical coordinates (latitude, longitude)"
+     },
+     "lon": {
+      "type": "number",
+      "description": "Geographical coordinates (latitude, longitude)"
+     },
+     "limit": {
+      "type": "number",
+      "description": "Number of the location names in the API response (several results can be returned in the API response)"
+     }
+    },
+    "required": [
+     "lat",
+     "lon"
+    ]
+   }
+  },
+  {
+   "name": "hashtag_category_tags",
+   "scope_tag": "team:Social",
+   "in_scope": false,
+   "category": "Social",
+   "tool_name": "Hashtag",
+   "api_name": "Category Tags",
+   "description": "Get a list of all the tags from a category",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "id": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "id"
+    ]
+   }
+  },
+  {
+   "name": "ecoweather_ecoweather",
+   "scope_tag": "team:Energy",
+   "in_scope": false,
+   "category": "Energy",
+   "tool_name": "ecoweather",
+   "api_name": "ecoweather",
+   "description": "Retrieve historical weather data for a location. Dataset lasts back until year 2016. Results are limited to 366 days (1 year)  per request.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "lon": {
+      "type": "number",
+      "description": "Longitude of a geo-location in degrees."
+     },
+     "lat": {
+      "type": "number",
+      "description": "Latitude of a geo-location in degrees."
+     },
+     "from": {
+      "type": "string",
+      "description": "Start date in YYYY-MM-DD format."
+     },
+     "to": {
+      "type": "string",
+      "description": "End date in YYYY-MM-DD format. \n\nNote: if time period relative to `from` is more than 366 days it will automatically be replaced with this date."
+     }
+    },
+    "required": [
+     "lon",
+     "lat",
+     "from"
+    ]
+   }
+  },
+  {
+   "name": "explorarc_s_password_generation_api_password_generation",
+   "scope_tag": "team:Tools",
+   "in_scope": false,
+   "category": "Tools",
+   "tool_name": "ExplorArc's Password Generation API",
+   "api_name": "Password Generation",
+   "description": "The Best API to Generate Random Password with your desired length and as a response you get an set of 10 Passwords",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "length": {
+      "type": "number"
+     }
+    },
+    "required": []
+   }
+  },
+  {
+   "name": "humor_jokes_and_memes_random_joke",
+   "scope_tag": "team:Entertainment",
+   "in_scope": false,
+   "category": "Entertainment",
+   "tool_name": "Humor-Jokes-and-Memes",
+   "api_name": "random-joke",
+   "description": "Get a random joke.\nSee https://humorapi.com/docs/#Random-Joke for more.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "keywords": {
+      "type": "string",
+      "description": "A comma separated list of keywords."
+     },
+     "include-tags": {
+      "type": "string",
+      "description": "A comma separated list of tags that the joke must have."
+     },
+     "min-rating": {
+      "type": "number",
+      "description": "The minimum rating between 0 and 10 the result should have."
+     },
+     "max-length": {
+      "type": "number",
+      "description": "The maximum number of letters in the joke."
+     },
+     "exclude-tags": {
+      "type": "string",
+      "description": "A comma separated list of tags that the joke must not have."
+     }
+    },
+    "required": []
+   }
+  },
+  {
+   "name": "fast_food_restaurants_usa_top_50_chains_get_all_restaura_2",
+   "scope_tag": "team:Food",
+   "in_scope": false,
+   "category": "Food",
+   "tool_name": "Fast Food Restaurants USA - TOP 50 Chains",
+   "api_name": "GET all Restaurants by {Chain} & {State}",
+   "description": "**10 results per request. Use page number for Pagination.**",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "state": {
+      "type": "string"
+     },
+     "restaurantChainName": {
+      "type": "string"
+     },
+     "page": {
+      "type": "number"
+     }
+    },
+    "required": [
+     "state",
+     "restaurantChainName",
+     "page"
+    ]
+   }
+  },
+  {
+   "name": "facts_by_api_ninjas_v1_facts",
+   "scope_tag": "team:Other",
+   "in_scope": false,
+   "category": "Other",
+   "tool_name": "Facts by API-Ninjas",
+   "api_name": "/v1/facts",
+   "description": "API Ninjas Facts API endpoint",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "limit": {
+      "type": "number",
+      "description": "How many results to return. Must be between **1** and **30**. Default is **1**."
+     }
+    },
+    "required": []
+   }
+  },
+  {
+   "name": "movie_and_tv_shows_quotes_get_quote_by_year",
+   "scope_tag": "team:Movies",
+   "in_scope": false,
+   "category": "Movies",
+   "tool_name": "Movie and TV shows Quotes",
+   "api_name": "GET quote by Year",
+   "description": "This endpoint will return back quotes by the given year",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "year": {
+      "type": "number"
+     }
+    },
+    "required": [
+     "year"
+    ]
+   }
+  },
+  {
+   "name": "onlyfans_mass_messages",
+   "scope_tag": "team:Social",
+   "in_scope": false,
+   "category": "Social",
+   "tool_name": "OnlyFans",
+   "api_name": "Mass Messages",
+   "description": "Used to get the last 100 mass messages\n\nMust hit the auth endpoint first!",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "timezone": {
+      "type": "string"
+     },
+     "useragent": {
+      "type": "string"
+     },
+     "auth_id": {
+      "type": "string"
+     },
+     "signstart": {
+      "type": "string"
+     },
+     "signend": {
+      "type": "string"
+     },
+     "sess": {
+      "type": "string"
+     },
+     "xbc": {
+      "type": "string"
+     },
+     "apptoken": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "timezone",
+     "useragent",
+     "auth_id",
+     "signstart",
+     "signend",
+     "sess",
+     "xbc",
+     "apptoken"
+    ]
+   }
+  },
+  {
+   "name": "league_of_legends_api_get_player_by_name",
+   "scope_tag": "team:Gaming",
+   "in_scope": false,
+   "category": "Gaming",
+   "tool_name": "League of Legends API",
+   "api_name": "GET player by name",
+   "description": "Return you the summoner related the name given",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "summonerName": {
+      "type": "string"
+     },
+     "region": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "summonerName",
+     "region"
+    ]
+   }
+  },
+  {
+   "name": "random_chunk_api_getrandompassword",
+   "scope_tag": "team:Data",
+   "in_scope": false,
+   "category": "Data",
+   "tool_name": "Random Chunk API",
+   "api_name": "getRandomPassword",
+   "description": "Get random password string.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "length": {
+      "type": "number"
+     }
+    },
+    "required": []
+   }
+  },
+  {
+   "name": "instagram_looter_get_media_download_link",
+   "scope_tag": "team:Social",
+   "in_scope": false,
+   "category": "Social",
+   "tool_name": "Instagram Looter",
+   "api_name": "Get Media download link",
+   "description": "Get **Instagram** media download link by **/p/** - **/tv/** - **/reel/**",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "link": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "link"
+    ]
+   }
+  },
+  {
+   "name": "youtube_mp3_get_mp3",
+   "scope_tag": "team:Tools",
+   "in_scope": false,
+   "category": "Tools",
+   "tool_name": "YouTube MP3",
+   "api_name": "Get MP3",
+   "description": "Convert to MP3 at the default bit rate.\nQuota cost will apply according to the length of the mp3 file.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "id": {
+      "type": "string",
+      "description": "Quota cost will apply according to the length of the mp3 file.\nQuota is calculated as follows:\nif length <= 30 then 1\nif 30 < length <= 60 then 2\nif 60 < length <= 90 then 3\nif 90 < length <= 120 then 4\nif 120 < length <= 150 then 5\nif 150 < length <= 180 then 6"
+     },
+     "cut": {
+      "type": "number",
+      "description": "Cut the mp3 according to the provided sStart and sEnd parameters\nThe value must be provided as 1\nThe quota Cost is +1."
+     },
+     "sStart": {
+      "type": "string",
+      "description": "Starting point for cutting the mp3.\nFormat must be HH:MM:SS"
+     },
+     "sEnd": {
+      "type": "string",
+      "description": "End point for cutting the mp3.\nFormat must be HH:MM:SS"
+     }
+    },
+    "required": [
+     "id"
+    ]
+   }
+  },
+  {
+   "name": "shazam_search_track",
+   "scope_tag": "team:Media",
+   "in_scope": false,
+   "category": "Media",
+   "tool_name": "Shazam",
+   "api_name": "Search Track",
+   "description": "This endpoint will search for the name of any song and return similar songs with the name.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "limit": {
+      "type": "number"
+     },
+     "track": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "limit",
+     "track"
+    ]
+   }
+  },
+  {
+   "name": "random_chunk_api_getrandomuser",
+   "scope_tag": "team:Data",
+   "in_scope": false,
+   "category": "Data",
+   "tool_name": "Random Chunk API",
+   "api_name": "getRandomUser",
+   "description": "Returns random user data such as name, e-mail, etc.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "count": {
+      "type": "number"
+     }
+    },
+    "required": []
+   }
+  },
+  {
+   "name": "astronomy_get_positions_for_body",
+   "scope_tag": "team:Science",
+   "in_scope": false,
+   "category": "Science",
+   "tool_name": "Astronomy",
+   "api_name": "Get positions for body",
+   "description": "Returns properties of the given body for the given date range in tabular format.\n\nSupported bodies are \"sun\" ,\"moon\", \"mercury\", \"venus\", \"earth\", \"mars\", \"jupiter\", \"saturn\", \"uranus\", \"neptune\", \"pluto\"",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "to_date": {
+      "type": "string"
+     },
+     "body": {
+      "type": "string"
+     },
+     "latitude": {
+      "type": "number"
+     },
+     "from_date": {
+      "type": "string"
+     },
+     "longitude": {
+      "type": "number"
+     },
+     "time": {
+      "type": "string"
+     },
+     "elevation": {
+      "type": "number"
+     }
+    },
+    "required": [
+     "to_date",
+     "body",
+     "latitude",
+     "from_date",
+     "longitude"
+    ]
+   }
+  },
+  {
+   "name": "tank01_nfl_live_in_game_real_time_statistics_nfl_get_pla",
+   "scope_tag": "team:Sports",
+   "in_scope": false,
+   "category": "Sports",
+   "tool_name": "Tank01 NFL Live In-Game Real Time Statistics NFL",
+   "api_name": "Get Player List",
+   "description": "Grabs all of this season's players and their IDs.  \n\nONE CALL is all you need to retrieve every player.  No need to call multiple times to get the full list.\n\nRosters are updated multiple times per day during the season.\n\nYou mainly will use this to match a player with his playerID.\n\nThere are no parameters, just a simple call..\n\n/getNFLPlayerList",
+   "parameters": {
+    "type": "object",
+    "properties": {},
+    "required": []
+   }
+  },
+  {
+   "name": "tomba_emailverifier",
+   "scope_tag": "team:Data",
+   "in_scope": false,
+   "category": "Data",
+   "tool_name": "Tomba",
+   "api_name": "EmailVerifier",
+   "description": "verify the deliverability of an email address.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "email": {
+      "type": "string",
+      "description": "The email address you want to verify."
+     }
+    },
+    "required": [
+     "email"
+    ]
+   }
+  },
+  {
+   "name": "instagram_v2_search_hashtags",
+   "scope_tag": "team:Social",
+   "in_scope": false,
+   "category": "Social",
+   "tool_name": "Instagram_v2",
+   "api_name": "Search Hashtags",
+   "description": "Search tags name by keyword",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "name": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "name"
+    ]
+   }
+  },
+  {
+   "name": "diablo4_smartable_getnewsletters",
+   "scope_tag": "team:Data",
+   "in_scope": false,
+   "category": "Data",
+   "tool_name": "Diablo4 Smartable",
+   "api_name": "GetNewsletters",
+   "description": "Get Diablo 4 newsletters.",
+   "parameters": {
+    "type": "object",
+    "properties": {},
+    "required": []
+   }
+  },
+  {
+   "name": "investing_commodity_indices",
+   "scope_tag": "team:Finance",
+   "in_scope": false,
+   "category": "Finance",
+   "tool_name": "Investing",
+   "api_name": "Commodity Indices",
+   "description": "page source : https://www.investing.com/indices/commodities-indices",
+   "parameters": {
+    "type": "object",
+    "properties": {},
+    "required": []
+   }
+  },
+  {
+   "name": "suivi_colis_latest",
+   "scope_tag": "team:Logistics",
+   "in_scope": false,
+   "category": "Logistics",
+   "tool_name": "suivi-colis",
+   "api_name": "Latest",
+   "description": "L'état courant (ie. le dernier état du colis).",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "colisId": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "colisId"
+    ]
+   }
+  },
+  {
+   "name": "betsapi_bet365_result",
+   "scope_tag": "team:Sports",
+   "in_scope": false,
+   "category": "Sports",
+   "tool_name": "BetsAPI",
+   "api_name": "Bet365 Result",
+   "description": "to view bet365 event result",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "event_id": {
+      "type": "number"
+     }
+    },
+    "required": [
+     "event_id"
+    ]
+   }
+  },
+  {
+   "name": "movie_showtimes_api_all",
+   "scope_tag": "team:Entertainment",
+   "in_scope": false,
+   "category": "Entertainment",
+   "tool_name": "Movie Showtimes",
+   "api_name": "/api/all",
+   "description": "Get all the sessions for all the available movies",
+   "parameters": {
+    "type": "object",
+    "properties": {},
+    "required": []
+   }
+  },
+  {
+   "name": "bing_search_apis_emails_search",
+   "scope_tag": "team:Search",
+   "in_scope": false,
+   "category": "Search",
+   "tool_name": "Bing Search APIs",
+   "api_name": "Emails Search",
+   "description": "Search emails from search engines for related keywords.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "keyword": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "keyword"
+    ]
+   }
+  },
+  {
+   "name": "free_nba_get_specific_player",
+   "scope_tag": "team:Sports",
+   "in_scope": false,
+   "category": "Sports",
+   "tool_name": "Free NBA",
+   "api_name": "Get Specific Player",
+   "description": "This endpoint retrieves a specific player.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "id": {
+      "type": "number",
+      "description": "The ID of the player to retrieve"
+     }
+    },
+    "required": [
+     "id"
+    ]
+   }
+  },
+  {
+   "name": "movies_tv_shows_database_get_movie_images_by_id",
+   "scope_tag": "team:Movies",
+   "in_scope": false,
+   "category": "Movies",
+   "tool_name": "Movies Tv Shows Database",
+   "api_name": "Get Movie Images by ID",
+   "description": "A valid Movie ID (e.g. tt1375666)\nreturn title, id, poster, fanart",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "movieid": {
+      "type": "string",
+      "description": "A valid Movie ID (e.g. tt1375666)"
+     }
+    },
+    "required": [
+     "movieid"
+    ]
+   }
+  },
+  {
+   "name": "minecraft_forge_optifine_minecraftresources",
+   "scope_tag": "team:Entertainment",
+   "in_scope": false,
+   "category": "Entertainment",
+   "tool_name": "Minecraft-Forge-Optifine",
+   "api_name": "minecraftResources",
+   "description": "Same to official source. Used to get resources file for MC 1.6.",
+   "parameters": {
+    "type": "object",
+    "properties": {},
+    "required": []
+   }
+  },
+  {
+   "name": "morning_star_type_parent_get_highest_rated_investments",
+   "scope_tag": "team:Finance",
+   "in_scope": false,
+   "category": "Finance",
+   "tool_name": "Morning Star",
+   "api_name": "{type}/parent/get-highest-rated-investments",
+   "description": "Get highest rated investments as displayed in the Parent tab",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "type": {
+      "type": "string",
+      "description": "One of the following values : etf|fund"
+     },
+     "securityId": {
+      "type": "string",
+      "description": "The value of securityId field returned in .../market/v2/get-returns"
+     }
+    },
+    "required": [
+     "type",
+     "securityId"
+    ]
+   }
+  },
+  {
+   "name": "uptosite_link_shortener_get_long_url",
+   "scope_tag": "team:Tools",
+   "in_scope": false,
+   "category": "Tools",
+   "tool_name": "UptoSite Link Shortener",
+   "api_name": "Get Long URL",
+   "description": "Get the actual long URL from shortened URL",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "slug": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "slug"
+    ]
+   }
+  },
+  {
+   "name": "tank01_nfl_live_in_game_real_time_statistics_nfl_get_nfl_2",
+   "scope_tag": "team:Sports",
+   "in_scope": false,
+   "category": "Sports",
+   "tool_name": "Tank01 NFL Live In-Game Real Time Statistics NFL",
+   "api_name": "Get NFL Team Schedule",
+   "description": "This call returns the schedule of any team, using the teamID that can be found in \"getNFLTeams\" call.\n\nCall needs to look like this:\n/getNFLTeamSchedule?teamID=1\nYou can also use the team Abbreviation:\n/getNFLTeamSchedule?teamAbv=CHI   \n\nThat will return a list of the team's games in the body. \n\nTo get a list of appropriate team abbreviations, use the getNFLTeams call.\n\nYou can also add the \"season\" parameter if you want to specify season.  Good for seasons 2022 and 2023.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "teamID": {
+      "type": "string"
+     },
+     "season": {
+      "type": "string"
+     },
+     "teamAbv": {
+      "type": "string"
+     }
+    },
+    "required": []
+   }
+  },
+  {
+   "name": "twitter_pack_v2_user_timeline",
+   "scope_tag": "team:Data",
+   "in_scope": false,
+   "category": "Data",
+   "tool_name": "Twitter Pack_v2",
+   "api_name": "user-timeline",
+   "description": "Get tweet timeline by user ID",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "user_id": {
+      "type": "number"
+     },
+     "cursor": {
+      "type": "string"
+     },
+     "count": {
+      "type": "number"
+     }
+    },
+    "required": [
+     "user_id"
+    ]
+   }
+  },
+  {
+   "name": "text_sentiment_api_list_endpoints_can_be_used_as_an_endp",
+   "scope_tag": "team:Artificial_Intelligence_Machine_Learning",
+   "in_scope": false,
+   "category": "Artificial_Intelligence_Machine_Learning",
+   "tool_name": "Text Sentiment API",
+   "api_name": "List Endpoints (Can be used as an endpoint health-check)",
+   "description": "This endpoint lists the possible endpoints to connect to.\n\nAlias: /api/sentiment",
+   "parameters": {
+    "type": "object",
+    "properties": {},
+    "required": []
+   }
+  },
+  {
+   "name": "movie_showtimes_api_information",
+   "scope_tag": "team:Entertainment",
+   "in_scope": false,
+   "category": "Entertainment",
+   "tool_name": "Movie Showtimes",
+   "api_name": "/api/information",
+   "description": "Get the sessions for the specified movie (IMDb id)",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "id": {
+      "type": "string",
+      "description": "IMDb movie id"
+     }
+    },
+    "required": [
+     "id"
+    ]
+   }
+  },
+  {
+   "name": "house_plants_get_by_climate",
+   "scope_tag": "team:Database",
+   "in_scope": false,
+   "category": "Database",
+   "tool_name": "House Plants",
+   "api_name": "Get By Climate",
+   "description": "Get plants by climate of their natural habitat.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "climate": {
+      "type": "string"
+     }
+    },
+    "required": []
+   }
+  },
+  {
+   "name": "usa_jobs_for_it_business_intelligence_jobs",
+   "scope_tag": "team:Tools",
+   "in_scope": false,
+   "category": "Tools",
+   "tool_name": "USA Jobs for IT",
+   "api_name": "Business Intelligence Jobs",
+   "description": "Business Intelligence Jobs Api",
+   "parameters": {
+    "type": "object",
+    "properties": {},
+    "required": []
+   }
+  },
+  {
+   "name": "binance_smart_chain_account_balance",
+   "scope_tag": "team:Finance",
+   "in_scope": false,
+   "category": "Finance",
+   "tool_name": "Binance Smart Chain",
+   "api_name": "Account Balance",
+   "description": "Get the BNB balance for an address on the Binance Smart Chain.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "address": {
+      "type": "string",
+      "description": "Address you want to scan!"
+     },
+     "network": {
+      "type": "string",
+      "description": "Specify wich network you wanna use! (mainnet/testnet)"
+     }
+    },
+    "required": [
+     "address"
+    ]
+   }
+  },
+  {
+   "name": "id_game_checker_get_username_mobile_legends",
+   "scope_tag": "team:Gaming",
+   "in_scope": false,
+   "category": "Gaming",
+   "tool_name": "ID Game Checker",
+   "api_name": "GET username Mobile Legends",
+   "description": "Enter the Mobile Legends ID and Server in the required parameters",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "id": {
+      "type": "number"
+     },
+     "server": {
+      "type": "number"
+     }
+    },
+    "required": [
+     "id",
+     "server"
+    ]
+   }
+  },
+  {
+   "name": "23andme_drug_responses",
+   "scope_tag": "team:Medical",
+   "in_scope": false,
+   "category": "Medical",
+   "tool_name": "23andMe",
+   "api_name": "drug_responses",
+   "description": "Our analysis of how each profile responds to these drugs (starred reports). status is reduced, typical, or increased for a person, not_applicable if the drug is not applicable to them (e.g., the oral contraceptives report is for women only), or null if they're not analyzed at any of the markers.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "profile_id": {
+      "type": "string",
+      "description": "profile_id"
+     }
+    },
+    "required": [
+     "profile_id"
+    ]
+   }
+  },
+  {
+   "name": "hafez_fal",
+   "scope_tag": "team:Other",
+   "in_scope": false,
+   "category": "Other",
+   "tool_name": "Hafez",
+   "api_name": "Fal",
+   "description": "get a random a poem(Fal) and it's meaning!",
+   "parameters": {
+    "type": "object",
+    "properties": {},
+    "required": []
+   }
+  },
+  {
+   "name": "whin_hook_receiver",
+   "scope_tag": "team:Communication",
+   "in_scope": false,
+   "category": "Communication",
+   "tool_name": "whin",
+   "api_name": "hook receiver",
+   "description": "This endpoint shall be triggered by the webhook origin and is not intended to be used through this frontend.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "user": {
+      "type": "string"
+     },
+     "gid": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "user"
+    ]
+   }
+  },
+  {
+   "name": "shazam_top_track_by_country",
+   "scope_tag": "team:Media",
+   "in_scope": false,
+   "category": "Media",
+   "tool_name": "Shazam",
+   "api_name": "Top Track by Country",
+   "description": "This endpoint will return the top tracks from a specific country",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "limit": {
+      "type": "number"
+     },
+     "country_code": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "limit",
+     "country_code"
+    ]
+   }
+  },
+  {
+   "name": "hashtag_get_category",
+   "scope_tag": "team:Social",
+   "in_scope": false,
+   "category": "Social",
+   "tool_name": "Hashtag",
+   "api_name": "Get Category",
+   "description": "Get a specific category",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "id": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "id"
+    ]
+   }
+  },
+  {
+   "name": "fomoapi_get_campaign_lead_from_id",
+   "scope_tag": "team:Business_Software",
+   "in_scope": false,
+   "category": "Business_Software",
+   "tool_name": "fomoAPI",
+   "api_name": "Get Campaign  Lead From ID",
+   "description": "Get ALL Lead From Your Campaign Social Proof",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "id": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "id"
+    ]
+   }
+  },
+  {
+   "name": "weblasso_get_scan_status",
+   "scope_tag": "team:Cybersecurity",
+   "in_scope": false,
+   "category": "Cybersecurity",
+   "tool_name": "WebLasso",
+   "api_name": "Get Scan Status",
+   "description": "Check the status of a scan (ongoing/completed) using a scan ID.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "scan_id": {
+      "type": "string"
+     }
+    },
+    "required": []
+   }
+  },
+  {
+   "name": "whatsapp_scraper_is_registered_on_whatsapp_get_free_toke",
+   "scope_tag": "team:Social",
+   "in_scope": false,
+   "category": "Social",
+   "tool_name": "Whatsapp Scraper",
+   "api_name": "Is registered on whatsapp? (get free token)",
+   "description": "Free token needed, click [here](https://wa.me/34631428039?text=get-token) to get it. This endpoint returns `true` if the phone is registered on whatsapp.\nLearn how to use this endpoint on this [video](https://youtu.be/txPQ4ROpfuc).",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "phone": {
+      "type": "number",
+      "description": "The phone number must be written as a number (including countrycode); \ndo **NOT** include: any non-number character, spaces, or anything which is not a number; do **NOT** add zeros (0) at the beginning."
+     },
+     "token": {
+      "type": "string",
+      "description": "To get a free token, click [here](https://wa.me/34631428039?text=get-token) to send a whatsapp with the command `get-token`."
+     }
+    },
+    "required": [
+     "phone",
+     "token"
+    ]
+   }
+  },
+  {
+   "name": "ai_translation_apis_supported_languages_list",
+   "scope_tag": "team:Translation",
+   "in_scope": false,
+   "category": "Translation",
+   "tool_name": "AI Translation APIs",
+   "api_name": "Supported Languages List",
+   "description": "Get Supported Languages List That  AI Translation APIs Support",
+   "parameters": {
+    "type": "object",
+    "properties": {},
+    "required": []
+   }
+  },
+  {
+   "name": "random_chunk_api_getrandomarray",
+   "scope_tag": "team:Data",
+   "in_scope": false,
+   "category": "Data",
+   "tool_name": "Random Chunk API",
+   "api_name": "getRandomArray",
+   "description": "Generate a random array with numbers, words or mixed values.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "data_type": {
+      "type": "string"
+     },
+     "size": {
+      "type": "number"
+     }
+    },
+    "required": []
+   }
+  },
+  {
+   "name": "youtube_search_v3_getvideodetails",
+   "scope_tag": "team:Search",
+   "in_scope": false,
+   "category": "Search",
+   "tool_name": "Youtube Search_v3",
+   "api_name": "getVideoDetails",
+   "description": "Retrieve comprehensive video details to enhance your application's functionality and provide users with valuable insights about the videos they are interacting with.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "id": {
+      "type": "string",
+      "description": "(Required) Channel ID"
+     }
+    },
+    "required": [
+     "id"
+    ]
+   }
+  },
+  {
+   "name": "vimeo_getrelatedpeople",
+   "scope_tag": "team:Media",
+   "in_scope": false,
+   "category": "Media",
+   "tool_name": "Vimeo",
+   "api_name": "GetRelatedPeople",
+   "description": "Get a list of related people for a category.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "category": {
+      "type": "string",
+      "description": "The name of the category."
+     },
+     "format": {
+      "type": "string",
+      "description": "json or xml or php"
+     },
+     "page": {
+      "type": "number",
+      "description": "The page number to show."
+     },
+     "per_page": {
+      "type": "number",
+      "description": "Number of items to show on each page. Max 50."
+     }
+    },
+    "required": [
+     "category",
+     "format"
+    ]
+   }
+  },
+  {
+   "name": "climate_change_live_v27_get_all_climate_change_news",
+   "scope_tag": "team:News_Media",
+   "in_scope": false,
+   "category": "News_Media",
+   "tool_name": "Climate Change Live_v27",
+   "api_name": "Get all climate change news",
+   "description": "This endpoint will return back all news about Climate Change from all over the world.",
+   "parameters": {
+    "type": "object",
+    "properties": {},
+    "required": []
+   }
+  },
+  {
+   "name": "vatlayer_calculate_eu_vat_compliant_price",
+   "scope_tag": "team:Finance",
+   "in_scope": false,
+   "category": "Finance",
+   "tool_name": "vatlayer",
+   "api_name": "Calculate EU VAT Compliant Price",
+   "description": "Use the \"price\" endpoint, you may request the API to calculate a country-specific VAT compliant price on your behalf. Important: There are 3 options to define a country - choose only one!",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "amount": {
+      "type": "string",
+      "description": "\"amount\" parameter - append the amount to convert to VAT compliant price"
+     },
+     "country_code": {
+      "type": "string",
+      "description": "Option 1 - define country by 2-letter country code"
+     },
+     "ip_address": {
+      "type": "string",
+      "description": "Option 2 - define country by IP address"
+     },
+     "use_client_ip": {
+      "type": "string",
+      "description": "Option 3 - set to \"1\" in order to use the IP of the client making the API request"
+     },
+     "incl": {
+      "type": "string",
+      "description": "set to \"1\" in case your amount already contains the respective VAT percentage"
+     },
+     "type": {
+      "type": "string",
+      "description": "define a reduced VAT \"type\" (product category) according to the API's \"type\" endpoint"
+     }
+    },
+    "required": [
+     "amount"
+    ]
+   }
+  },
+  {
+   "name": "quality_porn_live_tags",
+   "scope_tag": "team:Video_Images",
+   "in_scope": false,
+   "category": "Video_Images",
+   "tool_name": "Quality Porn",
+   "api_name": "Live tags",
+   "description": "Search for live tags and the associated data.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "gender": {
+      "type": "string"
+     }
+    },
+    "required": []
+   }
+  },
+  {
+   "name": "viewdns_iran_firewall_test",
+   "scope_tag": "team:Tools",
+   "in_scope": false,
+   "category": "Tools",
+   "tool_name": "ViewDNS",
+   "api_name": "Iran Firewall Test",
+   "description": "Test if any website is accessible using the Internet in Iran in real-time.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "siteurl": {
+      "type": "string",
+      "description": "the URL to test"
+     },
+     "output": {
+      "type": "string",
+      "description": "the output format required ('xml' or 'json')"
+     }
+    },
+    "required": [
+     "siteurl",
+     "output"
+    ]
+   }
+  },
+  {
+   "name": "meme_generator_and_template_database_search",
+   "scope_tag": "team:Entertainment",
+   "in_scope": false,
+   "category": "Entertainment",
+   "tool_name": "Meme Generator and Template Database",
+   "api_name": "/search",
+   "description": "Returns meme templates that contain a specific string. **searchString is case sensitive**",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "searchString": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "searchString"
+    ]
+   }
+  },
+  {
+   "name": "wayfair_products_search",
+   "scope_tag": "team:eCommerce",
+   "in_scope": false,
+   "category": "eCommerce",
+   "tool_name": "Wayfair",
+   "api_name": "products/search",
+   "description": "Search for products by term or phrase",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "keyword": {
+      "type": "string",
+      "description": "Any term or phrase to look for relating products"
+     },
+     "filters": {
+      "type": "string",
+      "description": "The value of filter&#95;string&#95;unencoded fields returned right in this endpoint to filter products, pass this parameter multiple times for multiple filters. Ex : ...&filters=colorList~White&filters=masterClID~180&..."
+     },
+     "curpage": {
+      "type": "number",
+      "description": "For paging purpose"
+     },
+     "itemsperpage": {
+      "type": "number",
+      "description": "For paging purpose"
+     },
+     "sortby": {
+      "type": "number",
+      "description": "The value of sort_value fields returned right in this endpoint. Default is 0"
+     }
+    },
+    "required": [
+     "keyword"
+    ]
+   }
+  },
+  {
+   "name": "mmaapi_femalefighterimageplaceholder",
+   "scope_tag": "team:Sports",
+   "in_scope": false,
+   "category": "Sports",
+   "tool_name": "MMAAPI",
+   "api_name": "FemaleFighterImagePlaceholder",
+   "description": "Get female fighter placeholder image",
+   "parameters": {
+    "type": "object",
+    "properties": {},
+    "required": []
+   }
+  },
+  {
+   "name": "ticketbud_tickets_for_an_event",
+   "scope_tag": "team:Business",
+   "in_scope": false,
+   "category": "Business",
+   "tool_name": "Ticketbud",
+   "api_name": "Tickets for an Event",
+   "description": "All tickets for an event that you have access to",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "event_id": {
+      "type": "string",
+      "description": "The unique identifier of the event."
+     }
+    },
+    "required": [
+     "event_id"
+    ]
+   }
+  },
+  {
+   "name": "miza_ip_address_check",
+   "scope_tag": "team:Music",
+   "in_scope": false,
+   "category": "Music",
+   "tool_name": "Miza",
+   "api_name": "IP address check",
+   "description": "Retrieves the host (server) and remote (your) IP addresses. A fast and responsive endpoint that is also handy for checking whether the service is online.",
+   "parameters": {
+    "type": "object",
+    "properties": {},
+    "required": []
+   }
+  },
+  {
+   "name": "heywatch_video_encoding_getformat",
+   "scope_tag": "team:Entertainment",
+   "in_scope": false,
+   "category": "Entertainment",
+   "tool_name": "HeyWatch Video Encoding",
+   "api_name": "GetFormat",
+   "description": "Get a specific format",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "id": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "id"
+    ]
+   }
+  },
+  {
+   "name": "genius_song_lyrics_user_contributions_all",
+   "scope_tag": "team:Music",
+   "in_scope": false,
+   "category": "Music",
+   "tool_name": "Genius - Song Lyrics",
+   "api_name": "User Contributions (all)",
+   "description": "User Contributions (all)",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "id": {
+      "type": "string",
+      "description": "User ID"
+     },
+     "per_page": {
+      "type": "number",
+      "description": "Number of results to return per request"
+     },
+     "text_format": {
+      "type": "string",
+      "description": "Format for text bodies related to the document. One or more of `dom`, `plain`, `markdown`, and `html`, separated by commas (defaults to html)."
+     },
+     "next_cursor": {
+      "type": "string",
+      "description": "Next cursor"
+     }
+    },
+    "required": [
+     "id"
+    ]
+   }
+  },
+  {
+   "name": "test_random_usr",
+   "scope_tag": "team:Science",
+   "in_scope": false,
+   "category": "Science",
+   "tool_name": "test",
+   "api_name": "random_usr",
+   "description": "api/users/random_user",
+   "parameters": {
+    "type": "object",
+    "properties": {},
+    "required": []
+   }
+  },
+  {
+   "name": "world_of_jokes_get_jokes",
+   "scope_tag": "team:Entertainment",
+   "in_scope": false,
+   "category": "Entertainment",
+   "tool_name": "World of Jokes",
+   "api_name": "Get Jokes",
+   "description": "Access our huge collection of jokes and paginate through them based on your desired limit and sorting criteria.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "limit": {
+      "type": "number"
+     },
+     "page": {
+      "type": "number"
+     },
+     "sortBy": {
+      "type": "string",
+      "description": "Valid format to sort is `field:order`\ne.g. `score:desc` for highest score first sorting\n\nwhere `asc` for sorting in ascending order\n`desc` for sorting in descending order"
+     }
+    },
+    "required": [
+     "limit",
+     "page"
+    ]
+   }
+  },
+  {
+   "name": "catalogapi_list_available_catalogs",
+   "scope_tag": "team:Business",
+   "in_scope": false,
+   "category": "Business",
+   "tool_name": "CatalogAPI",
+   "api_name": "List Available Catalogs",
+   "description": "Lists the Available Catalogs",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "format": {
+      "type": "string",
+      "description": "rest or restx"
+     },
+     "token": {
+      "type": "string"
+     },
+     "creds_uuid": {
+      "type": "string",
+      "description": "GUID"
+     },
+     "creds_datetime": {
+      "type": "string",
+      "description": "UTC iso8601 datetime"
+     },
+     "creds_checksum": {
+      "type": "string",
+      "description": "checksum"
+     }
+    },
+    "required": [
+     "format"
+    ]
+   }
+  },
+  {
+   "name": "whatsapp_scraper_fetch_profile_picture_get_free_token",
+   "scope_tag": "team:Social",
+   "in_scope": false,
+   "category": "Social",
+   "tool_name": "Whatsapp Scraper",
+   "api_name": "Fetch profile picture (get free token)",
+   "description": "Free token needed, click [here](https://wa.me/34631428039?text=get-token) to get it. Gets the whatsapp number profile picture, you can select its resolution (`high` or `low`) and the response format: `png` file, `url` or `base64` encoded file.\nLearn how to use this endpoint on this [video](https://youtu.be/65eJN7S8sBw).",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "phone": {
+      "type": "number",
+      "description": "The phone number must be written as a number (including countrycode); \ndo **NOT** include: any non-number character, spaces, or anything which is not a number; do **NOT** add zeros (0) at the beginning."
+     },
+     "token": {
+      "type": "string",
+      "description": "To get a free token, click [here](https://wa.me/34631428039?text=get-token) to send a whatsapp with the command `get-token`."
+     },
+     "quality": {
+      "type": "string",
+      "description": "Quality of the Picture: High or Low."
+     }
+    },
+    "required": [
+     "phone",
+     "token"
+    ]
+   }
+  },
+  {
+   "name": "apjoy_weather_forecast_getweatherforecast",
+   "scope_tag": "team:Weather",
+   "in_scope": false,
+   "category": "Weather",
+   "tool_name": "APJOY-Weather Forecast",
+   "api_name": "GetWeatherForecast",
+   "description": "This endpoint provides weather forecast information based on the user's location. It returns the current weather conditions, daily forecasts, and additional weather data, such as temperature, humidity, and wind speed. The data is sourced from OpenWeatherMap, ensuring accurate and reliable information.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "location": {
+      "type": "string",
+      "description": "The name of the city or location for which to retrieve the weather forecast."
+     },
+     "days": {
+      "type": "number",
+      "description": "The number of days of forecast data to retrieve (1-16). If not provided, it defaults to 1 day."
+     }
+    },
+    "required": [
+     "location"
+    ]
+   }
+  },
+  {
+   "name": "date_calculator_now",
+   "scope_tag": "team:Finance",
+   "in_scope": false,
+   "category": "Finance",
+   "tool_name": "Date Calculator",
+   "api_name": "now",
+   "description": "Computes and returns local time zone taking into account Daylight Saving Time (DST).",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "tzname": {
+      "type": "string",
+      "description": "The time zone name"
+     }
+    },
+    "required": []
+   }
+  },
+  {
+   "name": "cryptocurrency_balance_get_digibyte_balance",
+   "scope_tag": "team:Financial",
+   "in_scope": false,
+   "category": "Financial",
+   "tool_name": "Cryptocurrency balance",
+   "api_name": "Get DigiByte Balance",
+   "description": "This endpoint will return back the DigiByte balance of an address",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "address": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "address"
+    ]
+   }
+  },
+  {
+   "name": "baseball_teams_affiliates_teamids",
+   "scope_tag": "team:Sports",
+   "in_scope": false,
+   "category": "Sports",
+   "tool_name": "Baseball",
+   "api_name": "teams-affiliates/{teamIds}",
+   "description": "Query baseball team affiliates by ID",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "teamIds": {
+      "type": "string",
+      "description": "Enter a team ID - can be found in the game's endpoint"
+     }
+    },
+    "required": []
+   }
+  },
+  {
+   "name": "qr_code_api_updated_qr_endpoint",
+   "scope_tag": "team:Tools",
+   "in_scope": false,
+   "category": "Tools",
+   "tool_name": "QR Code API updated",
+   "api_name": "qr endpoint",
+   "description": "qr endpoint to  surf to any website",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "url": {
+      "type": "string"
+     }
+    },
+    "required": []
+   }
+  },
+  {
+   "name": "nexweave_getcampaigndetails",
+   "scope_tag": "team:Video_Images",
+   "in_scope": false,
+   "category": "Video_Images",
+   "tool_name": "Nexweave",
+   "api_name": "GetCampaignDetails",
+   "description": "This API will return the Campaign details including variables used in the overall Campaign.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "campaignId": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "campaignId"
+    ]
+   }
+  },
+  {
+   "name": "email_address_validator_validate_email_address",
+   "scope_tag": "team:Email",
+   "in_scope": false,
+   "category": "Email",
+   "tool_name": "Email Address Validator",
+   "api_name": "Validate Email Address",
+   "description": "Determine firsthand if the email is deliverable and working",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "email": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "email"
+    ]
+   }
+  },
+  {
+   "name": "betigolo_tips_premium_tips",
+   "scope_tag": "team:Sports",
+   "in_scope": false,
+   "category": "Sports",
+   "tool_name": "Betigolo Tips",
+   "api_name": "Premium Tips",
+   "description": "List of active Premium Tips",
+   "parameters": {
+    "type": "object",
+    "properties": {},
+    "required": []
+   }
+  },
+  {
+   "name": "holistic_finance_stock_data_shares_float",
+   "scope_tag": "team:Finance",
+   "in_scope": false,
+   "category": "Finance",
+   "tool_name": "Holistic Finance - Stock Data",
+   "api_name": "Shares float",
+   "description": "Provides the amount of current shares float.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "symbol": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "symbol"
+    ]
+   }
+  },
+  {
+   "name": "teste_getpetbyid",
+   "scope_tag": "team:Science",
+   "in_scope": false,
+   "category": "Science",
+   "tool_name": "teste",
+   "api_name": "getPetById",
+   "description": "Returns a single pet",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "petId": {
+      "type": "number",
+      "description": "ID of pet to return"
+     }
+    },
+    "required": [
+     "petId"
+    ]
+   }
+  },
+  {
+   "name": "geography_get_country_by_fifa_code",
+   "scope_tag": "team:Data",
+   "in_scope": false,
+   "category": "Data",
+   "tool_name": "Geography",
+   "api_name": "Get Country By FIFA Code",
+   "description": "Get Country by FIFA assigned Country Code",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "fifaCode": {
+      "type": "string",
+      "description": "FIFA assigned Country Code"
+     },
+     "fields": {
+      "type": "string",
+      "description": "Comma separated fields list to filter response"
+     }
+    },
+    "required": [
+     "fifaCode"
+    ]
+   }
+  },
+  {
+   "name": "mmaapi_teamdetails",
+   "scope_tag": "team:Sports",
+   "in_scope": false,
+   "category": "Sports",
+   "tool_name": "MMAAPI",
+   "api_name": "TeamDetails",
+   "description": "Get detailed information about a specific team.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "id": {
+      "type": "number",
+      "description": "The team ID you want to retrieve the details."
+     }
+    },
+    "required": [
+     "id"
+    ]
+   }
+  },
+  {
+   "name": "account_verifyer_instagram_account_verifyer",
+   "scope_tag": "team:Email",
+   "in_scope": false,
+   "category": "Email",
+   "tool_name": "account verifyer",
+   "api_name": "Instagram account verifyer",
+   "description": "to verify Instagram account",
+   "parameters": {
+    "type": "object",
+    "properties": {},
+    "required": []
+   }
+  },
+  {
+   "name": "b2bhint_get_company_full_data",
+   "scope_tag": "team:Business_Software",
+   "in_scope": false,
+   "category": "Business_Software",
+   "tool_name": "B2BHint",
+   "api_name": "Get company [Full data]",
+   "description": "The Get company details endpoint will return all full company data, including company contacts, financial reports and other data",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "internationalNumber": {
+      "type": "string"
+     },
+     "countryCode": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "internationalNumber",
+     "countryCode"
+    ]
+   }
+  },
+  {
+   "name": "quality_porn_docs",
+   "scope_tag": "team:Video_Images",
+   "in_scope": false,
+   "category": "Video_Images",
+   "tool_name": "Quality Porn",
+   "api_name": "Docs",
+   "description": "Get available routs and parameters as json.",
+   "parameters": {
+    "type": "object",
+    "properties": {},
+    "required": []
+   }
+  },
+  {
+   "name": "jak_api_jak",
+   "scope_tag": "team:Other",
+   "in_scope": false,
+   "category": "Other",
+   "tool_name": "JAK_API",
+   "api_name": "JAK",
+   "description": "Get the JSON formated file containing details about JAK!!",
+   "parameters": {
+    "type": "object",
+    "properties": {},
+    "required": []
+   }
+  },
+  {
+   "name": "stocks_archive_tickerdata",
+   "scope_tag": "team:Finance",
+   "in_scope": false,
+   "category": "Finance",
+   "tool_name": "stocks_archive",
+   "api_name": "tickerData",
+   "description": "Returns a list of ticker records",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "period": {
+      "type": "string",
+      "description": "Ticker period"
+     },
+     "startDate": {
+      "type": "string",
+      "description": "Start date"
+     },
+     "tickerName": {
+      "type": "string",
+      "description": "Ticker name"
+     },
+     "endDate": {
+      "type": "string",
+      "description": "End date"
+     }
+    },
+    "required": [
+     "period",
+     "startDate",
+     "tickerName",
+     "endDate"
+    ]
+   }
+  },
+  {
+   "name": "youtube_mp3_downloader_download_youtube_mp3",
+   "scope_tag": "team:Video_Images",
+   "in_scope": false,
+   "category": "Video_Images",
+   "tool_name": "YouTube Mp3 Downloader",
+   "api_name": "Download YouTube Mp3",
+   "description": "Update: 17 May 2023: API is fixed & it is now 100% working. Converts any YouTube video into Mp3 downloadable files. No Ads. No wild redirects.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "url": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "url"
+    ]
+   }
+  },
+  {
+   "name": "ubidots_get_variables",
+   "scope_tag": "team:Devices",
+   "in_scope": false,
+   "category": "Devices",
+   "tool_name": "Ubidots",
+   "api_name": "GET /variables",
+   "description": "Retrieves the list of all the variables owned by a user. The header X-Auth-Token is needed to have the permissions for this endpoint.",
+   "parameters": {
+    "type": "object",
+    "properties": {},
+    "required": []
+   }
+  },
+  {
+   "name": "swagger_petstore_getorderbyid",
+   "scope_tag": "team:eCommerce",
+   "in_scope": false,
+   "category": "eCommerce",
+   "tool_name": "Swagger PetStore",
+   "api_name": "getOrderById",
+   "description": "For valid response try integer IDs with value >= 1 and <= 10.         Other values will generated exceptions",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "orderId": {
+      "type": "number",
+      "description": "ID of pet that needs to be fetched"
+     }
+    },
+    "required": [
+     "orderId"
+    ]
+   }
+  },
+  {
+   "name": "churchapp_get_all_contacts",
+   "scope_tag": "team:Other",
+   "in_scope": false,
+   "category": "Other",
+   "tool_name": "ChurchApp",
+   "api_name": "Get all Contacts",
+   "description": "Get all contacts, listed alphabetically",
+   "parameters": {
+    "type": "object",
+    "properties": {},
+    "required": []
+   }
+  },
+  {
+   "name": "random_word_api_get_word_by_length",
+   "scope_tag": "team:Data",
+   "in_scope": false,
+   "category": "Data",
+   "tool_name": "Random Word API",
+   "api_name": "Get Word by Length",
+   "description": "Returns a random word that has the specified length. For example, 7 will return any word that is 7 letters long, such as \"swallow\".",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "length": {
+      "type": "number"
+     }
+    },
+    "required": [
+     "length"
+    ]
+   }
+  },
+  {
+   "name": "league_of_legends_api_get_champion_rotation",
+   "scope_tag": "team:Gaming",
+   "in_scope": false,
+   "category": "Gaming",
+   "tool_name": "League of Legends API",
+   "api_name": "GET Champion rotation",
+   "description": "Return's you a liste of free champion ids and liste of free champions ids for new player.",
+   "parameters": {
+    "type": "object",
+    "properties": {},
+    "required": []
+   }
+  },
+  {
+   "name": "smsto_get_messages",
+   "scope_tag": "team:SMS",
+   "in_scope": false,
+   "category": "SMS",
+   "tool_name": "SMSto",
+   "api_name": "Get messages",
+   "description": "Fetch paginated messages.\n\nPlease note that the messages will be sorted by the date of creating (sending) - latest first.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "created_at": {
+      "type": "string",
+      "description": "Filter by created at"
+     },
+     "order_by": {
+      "type": "string",
+      "description": "Field to sort by"
+     },
+     "to": {
+      "type": "string",
+      "description": "Filter by recipient number"
+     },
+     "order_direction": {
+      "type": "string",
+      "description": "Sort messages."
+     },
+     "status": {
+      "type": "string",
+      "description": "Filter by status"
+     },
+     "limit": {
+      "type": "number",
+      "description": "The number of messages per page."
+     }
+    },
+    "required": []
+   }
+  },
+  {
+   "name": "instagram_1_feed_by_username",
+   "scope_tag": "team:Social",
+   "in_scope": false,
+   "category": "Social",
+   "tool_name": "Instagram #1",
+   "api_name": "Feed by username",
+   "description": "Collect the current feed from the username",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "username": {
+      "type": "string"
+     },
+     "raw": {
+      "type": "boolean",
+      "description": "set to 'true' or '1' to return the raw unprocessed data feed"
+     }
+    },
+    "required": [
+     "username"
+    ]
+   }
+  },
+  {
+   "name": "phone_validator_api_is_mobile",
+   "scope_tag": "team:Business",
+   "in_scope": false,
+   "category": "Business",
+   "tool_name": "Phone Validator API",
+   "api_name": "Is mobile?",
+   "description": "Returns `true` or `false` depending on whether the number is a mobile line or not.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "phone": {
+      "type": "number"
+     }
+    },
+    "required": [
+     "phone"
+    ]
+   }
+  },
+  {
+   "name": "searchingwebrequest_searchwebrequest",
+   "scope_tag": "team:Monitoring",
+   "in_scope": false,
+   "category": "Monitoring",
+   "tool_name": "SearchingWebRequest",
+   "api_name": "SearchWebRequest",
+   "description": "We need to get the response from the web after specifying a keyword",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "Keyword": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "Keyword"
+    ]
+   }
+  },
+  {
+   "name": "stormglass_complete_get_astronomy_data",
+   "scope_tag": "team:Weather",
+   "in_scope": false,
+   "category": "Weather",
+   "tool_name": "Stormglass Complete",
+   "api_name": "GET Astronomy Data",
+   "description": "Stormglass Astronomy Data\n\nRetrieve sunrise, sunset, moonrise, moonset and moon phase for a single coordinate.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "lat": {
+      "type": "string"
+     },
+     "lng": {
+      "type": "string"
+     },
+     "startDate": {
+      "type": "string"
+     },
+     "endDate": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "lat",
+     "lng"
+    ]
+   }
+  },
+  {
+   "name": "learning_engine_memre_api_v1_concepts",
+   "scope_tag": "team:Education",
+   "in_scope": false,
+   "category": "Education",
+   "tool_name": "Learning Engine",
+   "api_name": "/memre_api/v1/concepts",
+   "description": "Retrieve a list of concepts for the current customer.",
+   "parameters": {
+    "type": "object",
+    "properties": {},
+    "required": []
+   }
+  },
+  {
+   "name": "minecraft_forge_optifine_optifineversionlist",
+   "scope_tag": "team:Entertainment",
+   "in_scope": false,
+   "category": "Entertainment",
+   "tool_name": "Minecraft-Forge-Optifine",
+   "api_name": "optifineVersionList",
+   "description": "Get Optifine version list.",
+   "parameters": {
+    "type": "object",
+    "properties": {},
+    "required": []
+   }
+  },
+  {
+   "name": "otp_2fa_createsecret",
+   "scope_tag": "team:Tools",
+   "in_scope": false,
+   "category": "Tools",
+   "tool_name": "otp-2fa",
+   "api_name": "/createSecret",
+   "description": "[Step 0] Create new secret",
+   "parameters": {
+    "type": "object",
+    "properties": {},
+    "required": []
+   }
+  },
+  {
+   "name": "twitter_data_user_tweets_and_replies",
+   "scope_tag": "team:Data",
+   "in_scope": false,
+   "category": "Data",
+   "tool_name": "Twitter Data",
+   "api_name": "user-tweets-and-replies",
+   "description": "user-tweets-and-replies",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "id": {
+      "type": "string",
+      "description": "User ID\n\nUse the User By Screen Name endpoint to find the ID from a username."
+     },
+     "count": {
+      "type": "number",
+      "description": "Number of results"
+     },
+     "cursor": {
+      "type": "string",
+      "description": "Cursor for other results"
+     }
+    },
+    "required": [
+     "id"
+    ]
+   }
+  },
+  {
+   "name": "live_golf_data_fedexcup_ranking",
+   "scope_tag": "team:Sports",
+   "in_scope": false,
+   "category": "Sports",
+   "tool_name": "Live Golf Data",
+   "api_name": "FedExCup Ranking",
+   "description": "Fetch the FedExCup ranking leaderboard for a given year. These rankings are updated live during a tournament to show the player's projected ranking.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "year": {
+      "type": "string"
+     },
+     "statId": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "year",
+     "statId"
+    ]
+   }
+  },
+  {
+   "name": "id_game_checker_get_username_pubg_mobile",
+   "scope_tag": "team:Gaming",
+   "in_scope": false,
+   "category": "Gaming",
+   "tool_name": "ID Game Checker",
+   "api_name": "GET username PUBG Mobile",
+   "description": "Enter your PUBG Mobile ID  in the required parameters\n\nINFO: The API for this game is currently in the process of being maintained",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "id": {
+      "type": "number"
+     }
+    },
+    "required": [
+     "id"
+    ]
+   }
+  },
+  {
+   "name": "felina_multisig_wallet_api_get_nfts",
+   "scope_tag": "team:Database",
+   "in_scope": false,
+   "category": "Database",
+   "tool_name": "Felina Multisig Wallet API",
+   "api_name": "Get NFTs",
+   "description": "Fetch the list of owned NFTs by the wallet",
+   "parameters": {
+    "type": "object",
+    "properties": {},
+    "required": []
+   }
+  },
+  {
+   "name": "lost_ark_simple_get_weapon_recipes",
+   "scope_tag": "team:Gaming",
+   "in_scope": false,
+   "category": "Gaming",
+   "tool_name": "Lost Ark Simple",
+   "api_name": "Get Weapon Recipes",
+   "description": "Get List of** Lost Ark** craftable Weapons.",
+   "parameters": {
+    "type": "object",
+    "properties": {},
+    "required": []
+   }
+  },
+  {
+   "name": "airbnb_listings_get_administrative_divisions",
+   "scope_tag": "team:Travel",
+   "in_scope": false,
+   "category": "Travel",
+   "tool_name": "Airbnb listings",
+   "api_name": "Get administrative divisions",
+   "description": "Retrieve geographical admin names to be used in Listing by georef endpoint. admin* parameters are optional but to use admin2, admin1 is required, to use admin 3, admin2 and admin1 are required and so on. Not respecting this requirement could give you unwanted results (ie cities with the same name but in different countries). Returns 50 results",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "countrycode": {
+      "type": "string"
+     },
+     "admin2": {
+      "type": "string"
+     },
+     "admin1": {
+      "type": "string"
+     },
+     "admin4": {
+      "type": "string"
+     },
+     "admin3": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "countrycode"
+    ]
+   }
+  },
+  {
+   "name": "urltest_getinventory",
+   "scope_tag": "team:Other",
+   "in_scope": false,
+   "category": "Other",
+   "tool_name": "URLTEST",
+   "api_name": "getInventory",
+   "description": "Returns a map of status codes to quantities",
+   "parameters": {
+    "type": "object",
+    "properties": {},
+    "required": []
+   }
+  },
+  {
+   "name": "keyword_tool_v2_langlist",
+   "scope_tag": "team:Tools",
+   "in_scope": false,
+   "category": "Tools",
+   "tool_name": "Keyword Tool_v2",
+   "api_name": "/langlist",
+   "description": "List of support Language",
+   "parameters": {
+    "type": "object",
+    "properties": {},
+    "required": []
+   }
+  },
+  {
+   "name": "yahoo_finance_esg",
+   "scope_tag": "team:Financial",
+   "in_scope": false,
+   "category": "Financial",
+   "tool_name": "Yahoo Finance",
+   "api_name": "ESG",
+   "description": "Simply explained, an ESG score is a measure of a company's exposure to long-term environmental, social, and governance risks that are often overlooked during traditional financial analyses.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "symb": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "symb"
+    ]
+   }
+  },
+  {
+   "name": "free_stopwords_languages",
+   "scope_tag": "team:Data",
+   "in_scope": false,
+   "category": "Data",
+   "tool_name": "Free stopwords",
+   "api_name": "Languages",
+   "description": "Will list all available stopword languages including how many words each language contains.",
+   "parameters": {
+    "type": "object",
+    "properties": {},
+    "required": []
+   }
+  },
+  {
+   "name": "mmaapi_teamnextevents",
+   "scope_tag": "team:Sports",
+   "in_scope": false,
+   "category": "Sports",
+   "tool_name": "MMAAPI",
+   "api_name": "TeamNextEvents",
+   "description": "Get information about the next events for a specific team.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "page": {
+      "type": "number",
+      "description": "Zero-based page."
+     },
+     "id": {
+      "type": "number",
+      "description": "The team ID you want to retrieve the next events."
+     }
+    },
+    "required": [
+     "page",
+     "id"
+    ]
+   }
+  },
+  {
+   "name": "domain_info_full_information",
+   "scope_tag": "team:Data",
+   "in_scope": false,
+   "category": "Data",
+   "tool_name": "Domain Info",
+   "api_name": "Full information",
+   "description": "This endpoint returns the full information on the domain.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "domain": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "domain"
+    ]
+   }
+  },
+  {
+   "name": "cities_cost_of_living_get_currencies_list",
+   "scope_tag": "team:Travel",
+   "in_scope": false,
+   "category": "Travel",
+   "tool_name": "Cities Cost of Living",
+   "api_name": "Get Currencies List",
+   "description": "Get a list of all the Currencies available",
+   "parameters": {
+    "type": "object",
+    "properties": {},
+    "required": []
+   }
+  },
+  {
+   "name": "fake_data_generator_random_profiles",
+   "scope_tag": "team:Data",
+   "in_scope": false,
+   "category": "Data",
+   "tool_name": "Fake Data Generator",
+   "api_name": "random_profiles",
+   "description": "This endpoint generate a list of fake user profiles",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "size": {
+      "type": "number"
+     }
+    },
+    "required": []
+   }
+  },
+  {
+   "name": "proxy_list_proxy_health",
+   "scope_tag": "team:Business_Software",
+   "in_scope": false,
+   "category": "Business_Software",
+   "tool_name": "Proxy List",
+   "api_name": "/proxy/health",
+   "description": "ReturnS the health status of the API. Also return last time the proxies check was completed. Time is in UTC.",
+   "parameters": {
+    "type": "object",
+    "properties": {},
+    "required": []
+   }
+  },
+  {
+   "name": "social_media_data_tt_hashtag_feed_video_posts",
+   "scope_tag": "team:Social",
+   "in_scope": false,
+   "category": "Social",
+   "tool_name": "Social Media Data TT",
+   "api_name": "Hashtag feed (Video posts)",
+   "description": "Get current hashtag feed. \n\n- Before testing don't forget to fill out the name **OR** hashtag_id inputs\n- Endpoint will return an array of objects with very useful metadata. \n- Direct urls to the video , statistics and more.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "limit": {
+      "type": "number",
+      "description": "Limit the output number of records. \n\n- Default is 100\n- Max number is 500"
+     },
+     "hashtag_id": {
+      "type": "string",
+      "description": "**NOTE:** By using **hashtag_id**, request will be executed faster then if you will use hashtag name\n\n**NOTE:** **hashtag_id** can be obtained from the **/live/hashtag** endpoint\n\n**NOTE:** **hashtag_id** example: 4232322"
+     },
+     "max_cursor": {
+      "type": "string",
+      "description": "Pagination cursor. \nTo get more videos, paste here **max_cursor** value that you have received in previous request response."
+     },
+     "name": {
+      "type": "string",
+      "description": "Hashtag name. For example: **duett**\n\n- **NOTE:** By using **hashtag_id** instead of the hashtag **name** request will be executed faster\n- To use **hashtag_id** use input field **BELOW**"
+     }
+    },
+    "required": []
+   }
+  },
+  {
+   "name": "yandex_serp_getmytasks_free_of_use",
+   "scope_tag": "team:Monitoring",
+   "in_scope": false,
+   "category": "Monitoring",
+   "tool_name": "Yandex SERP",
+   "api_name": "GetMyTasks [free of use]",
+   "description": "Retrieves your all tasks. Use this endpoint when lost your **task_id** . Use this endpoint how much you want. **It's free of charge**!",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "task_status": {
+      "type": "string"
+     }
+    },
+    "required": []
+   }
+  },
+  {
+   "name": "comfyfood_get_all_recipes_1",
+   "scope_tag": "team:Food",
+   "in_scope": false,
+   "category": "Food",
+   "tool_name": "ComfyFood",
+   "api_name": "Get all Recipes 1",
+   "description": "returns all the recipes from comfyfood's website",
+   "parameters": {
+    "type": "object",
+    "properties": {},
+    "required": []
+   }
+  },
+  {
+   "name": "flaticon_totalicons",
+   "scope_tag": "team:Video_Images",
+   "in_scope": false,
+   "category": "Video_Images",
+   "tool_name": "Flaticon",
+   "api_name": "totalIcons",
+   "description": "Method that allows you to get a number stating the full quantity of icons available at Flaticon. The number refreshes periodically according to the content available at flaticon.com.",
+   "parameters": {
+    "type": "object",
+    "properties": {},
+    "required": []
+   }
+  },
+  {
+   "name": "b2bhint_get_company_basic_data",
+   "scope_tag": "team:Business_Software",
+   "in_scope": false,
+   "category": "Business_Software",
+   "tool_name": "B2BHint",
+   "api_name": "Get company [Basic data]",
+   "description": "The Get company details endpoint will return all basic company data on B2BHint.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "countryCode": {
+      "type": "string"
+     },
+     "internationalNumber": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "countryCode",
+     "internationalNumber"
+    ]
+   }
+  },
+  {
+   "name": "xxxtremelightningrouletteapi_latest_outcome",
+   "scope_tag": "team:Entertainment",
+   "in_scope": false,
+   "category": "Entertainment",
+   "tool_name": "XXXtremeLightningRouletteAPI",
+   "api_name": "latest-outcome",
+   "description": "last spin details and Outcome Data",
+   "parameters": {
+    "type": "object",
+    "properties": {},
+    "required": []
+   }
+  },
+  {
+   "name": "yahoo_finance_index",
+   "scope_tag": "team:Financial",
+   "in_scope": false,
+   "category": "Financial",
+   "tool_name": "Yahoo Finance",
+   "api_name": "index",
+   "description": "Trend Analysis is a relatively straightforward quantitative demand forecasting technique that uses the historical relationship between the operational index (i.e. sales level) and the number of employees required by the organization (demand for labour) to forecast future requirements.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "symbol": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "symbol"
+    ]
+   }
+  },
+  {
+   "name": "botlibre_form_check_instance",
+   "scope_tag": "team:Communication",
+   "in_scope": false,
+   "category": "Communication",
+   "tool_name": "BOTlibre",
+   "api_name": "form-check-instance",
+   "description": "The form-check-instance API validates that a bot ID or name exists, and returns the bot's details.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "password": {
+      "type": "string",
+      "description": "OPTIONAL: The password of the user. A token can also be used."
+     },
+     "id": {
+      "type": "string",
+      "description": "REQUIRED: The ID of the bot to validate. The bot's name can also be used, but the ID is better as it is guaranteed to be unique."
+     },
+     "name": {
+      "type": "string",
+      "description": "REQUIRED: The nameof the bot to validate. The bot's ID can also be used."
+     },
+     "application": {
+      "type": "string",
+      "description": "OPTIONAL: The application ID. If not passed, the application will be anonymous."
+     },
+     "user": {
+      "type": "string",
+      "description": "OPTIONAL: The ID of the user. The user must be registered with BOT libre. If not passed the user will be anonymous. The user is required if the bot is private."
+     },
+     "token": {
+      "type": "string",
+      "description": "OPTIONAL: The token of the user. A token can be obtained through check-user, and is valid until reset."
+     }
+    },
+    "required": [
+     "password"
+    ]
+   }
+  },
+  {
+   "name": "films_searchinventory",
+   "scope_tag": "team:Movies",
+   "in_scope": false,
+   "category": "Movies",
+   "tool_name": "Films",
+   "api_name": "searchInventory",
+   "description": "By passing in the appropriate options, you can search for\navailable inventory in the system",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "searchString": {
+      "type": "string",
+      "description": "pass an optional search string for looking up inventory"
+     },
+     "limit": {
+      "type": "number",
+      "description": "maximum number of records to return"
+     },
+     "skip": {
+      "type": "number",
+      "description": "number of records to skip for pagination"
+     }
+    },
+    "required": []
+   }
+  },
+  {
+   "name": "memeados_drakelikehate",
+   "scope_tag": "team:Entertainment",
+   "in_scope": false,
+   "category": "Entertainment",
+   "tool_name": "Memeados",
+   "api_name": "drakelikehate",
+   "description": "Generate Drake Likes and Hates meme",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "text2": {
+      "type": "string"
+     },
+     "text1": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "text2",
+     "text1"
+    ]
+   }
+  },
+  {
+   "name": "zeus_api_competitions_scorers",
+   "scope_tag": "team:Sports",
+   "in_scope": false,
+   "category": "Sports",
+   "tool_name": "Zeus API",
+   "api_name": "Competitions Scorers",
+   "description": "List the current scorers for a league ⚽.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "id": {
+      "type": "string"
+     },
+     "year": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "id"
+    ]
+   }
+  },
+  {
+   "name": "minecraft_forge_optifine_minecraftversionlist",
+   "scope_tag": "team:Entertainment",
+   "in_scope": false,
+   "category": "Entertainment",
+   "tool_name": "Minecraft-Forge-Optifine",
+   "api_name": "minecraftVersionList",
+   "description": "Return Minecraft version list in JSON format.",
+   "parameters": {
+    "type": "object",
+    "properties": {},
+    "required": []
+   }
+  },
+  {
+   "name": "waktu_solat_solat_time",
+   "scope_tag": "team:Tools",
+   "in_scope": false,
+   "category": "Tools",
+   "tool_name": "Waktu Solat",
+   "api_name": "/solat/time",
+   "description": "Display the prayer time based on selected zone.\nData in json format.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "code": {
+      "type": "string",
+      "description": "zone code, get from API /solat/list"
+     }
+    },
+    "required": [
+     "code"
+    ]
+   }
+  },
+  {
+   "name": "meme_generator_and_template_database_fonts",
+   "scope_tag": "team:Entertainment",
+   "in_scope": false,
+   "category": "Entertainment",
+   "tool_name": "Meme Generator and Template Database",
+   "api_name": "/fonts",
+   "description": "Any of the fonts can be used  in any text box or caption.\nSome fonts are language specific:\n- Chinese -> zcool-wenyi\n- Japanese -> takaopmincho\n-  Korean -> gugi\n- Hindi -> poppins",
+   "parameters": {
+    "type": "object",
+    "properties": {},
+    "required": []
+   }
+  },
+  {
+   "name": "daily_atmosphere_carbon_dioxide_concentration_carbon_dio",
+   "scope_tag": "team:Science",
+   "in_scope": false,
+   "category": "Science",
+   "tool_name": "Daily atmosphere  carbon dioxide concentration",
+   "api_name": "Carbon dioxide endpoint",
+   "description": "The response will be an object with no CORS resources enabled.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "co2": {
+      "type": "object"
+     }
+    },
+    "required": []
+   }
+  },
+  {
+   "name": "hashtag_trending_countries_list",
+   "scope_tag": "team:Social",
+   "in_scope": false,
+   "category": "Social",
+   "tool_name": "Hashtag",
+   "api_name": "Trending Countries List",
+   "description": "List countries where we can fetch trending tags from",
+   "parameters": {
+    "type": "object",
+    "properties": {},
+    "required": []
+   }
+  },
+  {
+   "name": "arimagesynthesizer_get_image",
+   "scope_tag": "team:Artificial_Intelligence_Machine_Learning",
+   "in_scope": false,
+   "category": "Artificial_Intelligence_Machine_Learning",
+   "tool_name": "ARImageSynthesizer",
+   "api_name": "Get Image",
+   "description": "Retrieve generated image with given `hash`.",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "hash": {
+      "type": "string"
+     },
+     "returnType": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "hash"
+    ]
+   }
+  },
+  {
+   "name": "rankiteo_climate_risk_assessment_getdisastertypebydatean",
+   "scope_tag": "team:Finance",
+   "in_scope": false,
+   "category": "Finance",
+   "tool_name": "Rankiteo Climate Risk Assessment",
+   "api_name": "GetDisasterTypeByDateAndStatus",
+   "description": "Get disaster by status within a time range",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "disaster_status": {
+      "type": "number",
+      "description": "0 : Past Disaster\n1 : Ongoing Disaster"
+     },
+     "start_date": {
+      "type": "string"
+     },
+     "end_date": {
+      "type": "string"
+     },
+     "page_number": {
+      "type": "number"
+     }
+    },
+    "required": [
+     "disaster_status",
+     "start_date",
+     "end_date"
+    ]
+   }
+  },
+  {
+   "name": "tibia_items_get_imbuements_for_vampirism_life_steal",
+   "scope_tag": "team:Gaming",
+   "in_scope": false,
+   "category": "Gaming",
+   "tool_name": "Tibia Items",
+   "api_name": "Get imbuements for Vampirism (Life steal)",
+   "description": "This enpoint will get all imbuement for type Vampirism\n\nVampirism (Life steal)\nVampire Teeth \nBloody Pincers \nPiece of Dead Brain",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "World": {
+      "type": "string"
+     }
+    },
+    "required": [
+     "World"
+    ]
+   }
+  },
+  {
+   "name": "yahoo_finance_v2_stock_net_share_purchase_activity",
+   "scope_tag": "team:Finance",
+   "in_scope": false,
+   "category": "Finance",
+   "tool_name": "Yahoo Finance_v2",
+   "api_name": "stock/net-share-purchase-activity",
+   "description": "Get net share purchase activity information for a particular stock",
+   "parameters": {
+    "type": "object",
+    "properties": {
+     "symbol": {
+      "type": "string",
+      "description": "A single symbol"
+     }
+    },
+    "required": [
+     "symbol"
+    ]
+   }
+  }
+ ]
+}

@@ -1,0 +1,246 @@
+{
+ "hermes_commit": "d923a5eb487a17c0a68801bba9ef0f56c81040a8",
+ "made_by": "hermes/run.py registry: worker_local.py in WP7_DRY mode, cronjob_manage enabled, no decoys, no plugin",
+ "toolsets": [
+  "file",
+  "terminal",
+  "search",
+  "web",
+  "todo",
+  "session_search",
+  "clarify",
+  "image_gen",
+  "computer_use",
+  "cronjob",
+  "memory",
+  "desktop_ui",
+  "project",
+  "code_execution"
+ ],
+ "candidates": [
+  "annotate_preview",
+  "clarify",
+  "close_terminal",
+  "computer_use",
+  "cronjob_manage",
+  "desktop_preview",
+  "desktop_project",
+  "drive_preview",
+  "execute_code",
+  "focus_pane",
+  "gui_tour",
+  "image_generate",
+  "memory",
+  "patch",
+  "process_manage",
+  "react_to_message",
+  "read_file",
+  "read_terminal",
+  "read_window_below",
+  "search_files",
+  "session_search",
+  "set_theme",
+  "show_tip",
+  "terminal",
+  "todo_list",
+  "web_extract",
+  "web_search",
+  "write_file"
+ ],
+ "toolset_of": {
+  "annotate_preview": "desktop_ui",
+  "clarify": "clarify",
+  "close_terminal": "desktop_ui",
+  "computer_use": "computer_use",
+  "cronjob_manage": "cronjob",
+  "desktop_preview": "desktop_ui",
+  "desktop_project": "project",
+  "drive_preview": "desktop_ui",
+  "execute_code": "code_execution",
+  "focus_pane": "desktop_ui",
+  "gui_tour": "desktop_ui",
+  "image_generate": "image_gen",
+  "memory": "memory",
+  "patch": "file",
+  "process_manage": "terminal",
+  "react_to_message": "desktop_ui",
+  "read_file": "file",
+  "read_terminal": "desktop_ui",
+  "read_window_below": "desktop_ui",
+  "search_files": "file",
+  "session_search": "session_search",
+  "set_theme": "desktop_ui",
+  "show_tip": "desktop_ui",
+  "terminal": "terminal",
+  "todo_list": "todo",
+  "web_extract": "web",
+  "web_search": "web",
+  "write_file": "file"
+ },
+ "agent_tools": [
+  "annotate_preview",
+  "clarify",
+  "close_terminal",
+  "computer_use",
+  "cronjob_manage",
+  "desktop_preview",
+  "desktop_project",
+  "drive_preview",
+  "execute_code",
+  "focus_pane",
+  "gui_tour",
+  "image_generate",
+  "memory",
+  "patch",
+  "process_manage",
+  "read_file",
+  "read_terminal",
+  "read_window_below",
+  "search_files",
+  "session_search",
+  "set_theme",
+  "show_tip",
+  "terminal",
+  "todo_list",
+  "web_extract",
+  "web_search",
+  "write_file"
+ ],
+ "tools": [
+  {
+   "name": "annotate_preview",
+   "toolset": "desktop_ui",
+   "description": "Highlight elements on the preview-pane page, lastingly (drive_preview's own marks fade; annotations stay until removed) — point at findings, flag what you're about to change, keep your place. Use the refs from drive_preview action='elements'. add: outline one element (optional short label — a word or two, drawn on the page). hold: freeze the whole visible field, every element outlined and named. remove/clear: take one/all down. Marks follow their element on scroll; navigation clears them."
+  },
+  {
+   "name": "clarify",
+   "toolset": "clarify",
+   "description": "Ask the user one or more questions when you need a decision, clarification, or feedback before proceeding. Pass every question in `questions` (1-5 entries) — a single question is a one-entry array, and several INDEPENDENT questions belong in ONE call (one form beats a chain of clarify calls; if one answer would change another question, ask separately). Per question: single-select (up to 4 choices — put your recommended option FIRST, the UI marks it '(Recommended)' and auto-appends an 'Other' free-text row), multi-select (multi_select=true), or open-ended (omit choices). Options go ONLY in `choices`, never enumerated inside the question text (choices render as pickable rows; options written into the question are dead prose the user can't click). Result: {responses: [...], outcome} in question order. Each response has status answered, skipped or unanswered (user_response is null unless answered); outcome is submitted, cancelled, timed_out or undelivered, with a notice saying why when the wait ended without a submit. Prefer deciding low-stakes questions yourself; don't use this for dangerous-command confirmation (the terminal tool handles that)."
+  },
+  {
+   "name": "close_terminal",
+   "toolset": "desktop_ui",
+   "description": "Hide a background process's terminal tab (process keeps running) in the Hermes desktop GUI (the tabs mirroring terminal(background=true) runs). This does NOT kill the process — it only drops the tab/view; the output keeps buffering and the user can reopen it from the status stack. Use it to tidy up when a background process's live terminal is no longer worth showing. To actually stop the process, use process(action='kill') instead."
+  },
+  {
+   "name": "computer_use",
+   "toolset": "computer_use",
+   "description": "Drive the desktop via cua-driver — screenshots, mouse, keyboard, scroll, drag — on macOS, Windows, and Linux. Input is background-FIRST, not background-only: the default delivery routes to the target window without stealing the user's cursor or focus (works even on hidden/minimized windows), and when a result's `verdict` says to escalate you climb — pixel coordinates, or delivery_mode='foreground' (briefly fronts the window; separate approval). Each result carries a `verdict` with the next step; follow it — never repeat confirmed input, and re-capture to verify an unverifiable one before retrying. Workflow: action='capture' (mode='som' gives numbered element overlays), then click by `element` index; re-capture after state-changing actions (or pass capture_after=true). Image captures include a shareable `screenshot_path`; deliver it via the platform's MEDIA syntax when the user asks to see it — not for captures used only for control."
+  },
+  {
+   "name": "cronjob_manage",
+   "toolset": "cronjob",
+   "description": "Manage scheduled cron jobs: action='create' schedules a job from a prompt and/or skills; 'list' inspects jobs; 'update'/'pause'/'resume'/'remove' manage one by job_id (always list first — never guess job IDs); 'run' fires a job immediately in the BACKGROUND (returns a handle at once, outcome re-enters the conversation when done — do not wait or poll; optional 'prompt' adds transient context for that fire only).\n\nJobs run on the main agent model (whatever `hermes model` is set to when they fire) unless pinned.\n\nJobs run in a fresh session with no current-chat context, so prompts must be self-contained, and the agent's FINAL RESPONSE is what gets delivered — cron runs are autonomous and cannot ask questions. Jobs run on the main agent model (whatever `hermes model` is set to when they fire) unless the user pins one. Prefer updating an existing job over creating near-duplicates."
+  },
+  {
+   "name": "desktop_preview",
+   "toolset": "desktop_ui",
+   "description": "Open, close, or read the preview pane beside the chat. open: show a web URL (bare domains fine), a localhost dev server, or a file path (HTML renders live) — opens for the current window only. close: dismiss the whole pane, or one tab via url. read: what the pane currently shows — returns {kind, url, title, text, start, end, total_chars}; a Browser tab's text is the rendered page's visible text, paged with start/count (char offsets); a file tab answers identity only (read the file with read_file)."
+  },
+  {
+   "name": "desktop_project",
+   "toolset": "project",
+   "description": "Create or switch desktop Projects (named workspaces). create: one and switch this chat into it — pass path to anchor it to a repo/folder (the chat's workspace moves there, the sidebar follows). switch: move this chat into an existing project by name/slug/id — the intentional way to move the session, not `cd`. list: all projects + which one this chat is in."
+  },
+  {
+   "name": "drive_preview",
+   "toolset": "desktop_ui",
+   "description": "Use the web page open in the desktop preview pane (the one `desktop_preview` opens): log in, fill forms, click through flows. ALWAYS start with action='elements' — it inventories clickable/typable things as refs ('btn-sign-in') with role/label/value; act by ref, not guessed selectors. Refs survive re-renders and only die on navigation (you'll be told they're stale — call elements again). After the first full inventory, actions answer with a DELTA: 'added' in full, 'changed' as ref + moved fields, 'removed'/'rebound' as ref lists ('rebound' needs nothing from you — the ref already follows the rebuilt element). Anything unmentioned is unchanged; do not re-read to check. Input is real (pointer travels, hover menus open). Actions: elements, click, hover (park the pointer — opens dropdowns before clicking in), type (submit=true also presses Enter), scroll, press, strobe (visual flourish only — one call runs a multi-second burst; never loop it), back/forward/reload. Moves draw live and fade; annotate_preview leaves a lasting mark. A printable press on body/html is refused unless allow_shortcut is true. Page text only: desktop_preview action=read. Separate automated browser: browser_* tools."
+  },
+  {
+   "name": "execute_code",
+   "toolset": "code_execution",
+   "description": "Run Python that calls Hermes tools programmatically. Use when you need 3+ tool calls with logic between them: filtering/reducing large outputs before they enter context, branching, or loops (N pages/files, retry on failure). Use normal tool calls for single calls, results you must reason over in full, or anything needing user interaction.\n\nCalls run in a persistent session kernel: variables, imports, and loaded data survive across execute_code calls, so build on earlier work instead of re-loading it. A timed-out or interrupted call loses that state.\n\nAvailable via `from hermes_tools import ...`:\n\n  web_search(query: str, limit: int = 5) -> dict\n    Returns {\"data\": {\"web\": [{\"url\", \"title\", \"description\"}, ...]}}\n  web_extract(urls: list[str], char_limit: int = None) -> dict\n    Returns {\"results\": [{\"url\", \"title\", \"content\", \"error\"}, ...]} where content is markdown.\n    No LLM summarization. Pages over char_limit (default 15000) are head+tail truncated; full text stored on disk (path in the content footer).\n  read_file(path: str, offset: int = 1, limit: int = 2000) -> dict\n    Lines are 1-indexed. Returns {\"content\": \"...\", \"total_lines\": N}\n  write_file(path: str, content: str) -> dict\n    Always overwrites the entire file; an existing file must be read_file'd first or the write is refused.\n  search_files(pattern: str, target=\"content\", path=\".\", file_glob=None, limit=50, order=\"discovery\") -> dict\n    target: \"content\" (search inside files) or \"files\" (find files by name). Returns {\"matches\": [...]}\n  patch(path: str, old_string: str, new_string: str, replace_all: bool = False) -> dict\n    Replaces old_string with new_string in the file.\n  terminal(command: str, timeout=None, workdir=None) -> dict\n    Foreground only (no background/pty). Returns {\"output\": \"...\", \"exit_code\": N}\n\nLimits: 5-minute timeout, max 50 tool calls per call. Stdout over 50KB shows head/tail inline; the FULL text is auto-saved to a file whose path rides in the result.\n\nScripts run in the session's working directory. Interpreter: the project's activated venv/conda python when one is active (VIRTUAL_ENV/CONDA_PREFIX — matches terminal()); otherwise Hermes's own python (the common case — stdlib plus Hermes's deps; check `import x` before relying on project packages).\n\nHelpers require imports: `from hermes_tools import json_parse, shell_quote, retry`. json_parse(text) — tolerant json.loads for terminal() output; shell_quote(s) — shlex.quote for dynamic shell args; retry(fn, max_attempts=3, delay=2) — exponential backoff."
+  },
+  {
+   "name": "focus_pane",
+   "toolset": "desktop_ui",
+   "description": "Reveal and focus a Hermes desktop pane when the user asks to see it: chat, files, terminal, review (git diff), or sessions. For URLs/files use the desktop_preview tool instead."
+  },
+  {
+   "name": "gui_tour",
+   "toolset": "desktop_ui",
+   "description": "Guided tour in the desktop GUI: dim the screen, highlight an element, attach a titled popover. Surfaces: 'app' (Hermes itself) or 'preview' (the page in the preview pane). A general look around the app is ONE call: action='start' with no steps runs the app's built-in tour (preset 'quick' or 'full', default full). For a custom tour, call action='targets' first — prefer targets marked stable:true (their selectors survive re-renders); re-scan if one stops matching. Then narrate with action='show' (one highlight per call, replaces the last — pair each with a chat message) or hand over with action='start' + steps (user gets Next/Prev; 'next'/'prev' also page it). 'stop' clears. Use for how-does-X-work / where-is-Y walkthroughs."
+  },
+  {
+   "name": "image_generate",
+   "toolset": "image_gen",
+   "description": "Generate high-quality images from text prompts, or edit / transform an existing image by passing image_url. Returns the result in the `image` field — a URL or an absolute file path; reference it in your response using the current platform's file-delivery convention."
+  },
+  {
+   "name": "memory",
+   "toolset": "memory",
+   "description": "Save durable facts to persistent memory that survive across sessions. Memory is injected into every future turn, so keep entries compact and high-signal.\n\nHOW: make ALL your changes to one target in ONE call via an 'operations' array (each item: {action, content?, old_text?}). The batch applies atomically and the char limit is checked only on the FINAL result — so a single call can remove/patch stale entries to free room AND add new ones, even when an add alone would overflow. The response reports current/limit chars and confirms completion; one batch call finishes the update, so don't repeat it. Use the bare action/content/old_text fields only for a single lone change.\n\nWHEN: only for facts that apply to EVERY session regardless of task: who the user is, stable environment facts, standing conventions with no task home. Anything learned while doing a task (procedures, pitfalls, and the user's preferences and corrections for that kind of work) belongs in the task's skill via skill_manage, where it loads only when relevant; memory is injected into every turn and must stay small.\n\nIF FULL: an add is rejected with the current entries shown. Reissue as ONE batch that removes or shortens enough stale entries and adds the new one together.\n\nTARGETS: 'user' = who the user is (name, role, preferences, style). 'memory' = your notes (environment, conventions, tool quirks, lessons).\n\nSKIP: trivial/obvious info, easily re-discovered facts, raw data dumps, task progress, completed-work logs, temporary TODO state (use session_search for those). Reusable procedures belong in a skill, not memory."
+  },
+  {
+   "name": "patch",
+   "toolset": "file",
+   "description": "Targeted find-and-replace edits in files. Use this instead of sed/awk in terminal. Uses fuzzy matching (9 strategies) so minor whitespace/indentation differences won't break it. Returns a unified diff. Auto-runs syntax checks after editing. Finds a unique string and replaces it."
+  },
+  {
+   "name": "process_manage",
+   "toolset": "terminal",
+   "description": "Poll, wait on, or kill background terminal processes (from terminal(background=true)). Completed results remain retrievable by session_id when resuming their owning conversation (up to 7 days, newest 64 results per profile; rolling output tail). poll: status + new output. log: full output, paged. wait: block until exit or timeout (partial output on timeout). write vs submit: submit appends Enter — use it to answer prompts; write sends raw bytes, no newline. close: EOF stdin. kill: terminate. handoff (subagents only): transfer a running process you started to your parent agent, which then receives its completion; `data` = one sentence on its purpose. Subagent-owned processes are otherwise killed when the subagent finishes and their notifications never reach the parent."
+  },
+  {
+   "name": "read_file",
+   "toolset": "file",
+   "description": "Read a text file with line numbers and pagination. Use this instead of cat/head/tail in terminal. Output format: 'LINE_NUM|CONTENT'. Suggests similar filenames if not found. Use offset and limit for large files. Reads exceeding ~100K characters are truncated on a line boundary and return a next_offset; continue with offset to read the rest. Documents auto-extract to readable text: .ipynb, Office (.docx/.xlsx/.pptx and legacy .doc/.ppt/.xls), PDF (text layer), OpenDocument, RTF, EPUB, SQLite (.db/.sqlite: schema, row counts, first rows). Cannot read images/binary — use vision_analyze for images."
+  },
+  {
+   "name": "read_terminal",
+   "toolset": "desktop_ui",
+   "description": "Read the in-app terminal pane beside this chat. No args = visible screen + total_lines; page scrollback with start_line (0 = oldest) + count. JSON: {total_lines, start, end, viewport_rows, cursor_row, text}."
+  },
+  {
+   "name": "read_window_below",
+   "toolset": "desktop_ui",
+   "description": "Identify the app window directly behind the Hermes desktop window (what the user is working in). JSON: {window: {app, title, bounds, id}, frontmost, platform}. title may be empty when the OS withholds it (noted in `note`); where windows cannot be enumerated at all, {error, platform} says what would fix it — relay that instead of retrying. Metadata only; never captures pixels."
+  },
+  {
+   "name": "search_files",
+   "toolset": "file",
+   "description": "Search file contents or find files by name. Use this instead of grep/rg/find/ls in terminal. Ripgrep-backed, faster than shell equivalents. On macOS, broad searches above the user home automatically skip TCC-protected folders (Desktop, Documents, Downloads, Library, Movies, Music, Pictures); target one directly when access is intentional.\n\nContent search (target='content'): Regex search inside files. Output modes: full matches with line numbers, file paths only, or match counts.\n\nFile search (target='files'): Find files by glob pattern (e.g., '*.py', '*config*'). Also use this instead of ls. Discovery order is the fast bounded default; exact global newest-first order is an explicit opt-in and may scan the full tree."
+  },
+  {
+   "name": "session_search",
+   "toolset": "session_search",
+   "description": "Recall past conversations: search or read old Hermes sessions (FTS5), or scroll inside one. Four shapes, picked by args: `query` = discovery (top-N matching sessions, top result fully hydrated); `session_id` + `around_message_id` = scroll (window of messages around an anchor); `session_id` alone = read a whole session — how you resolve an `@session:<profile>/<id>` link (split on '/' into profile + id); no args = browse recent sessions. Results are actual DB messages, no LLM. Searches conversation history ONLY — when the user gave a direct source (URL, file, contact, live system), inspect that first; never conclude 'not found' from history alone. Use for questions about past conversations: 'what did we do about X', 'where did we leave Y'. When referring the user to a session, write its `link` value verbatim inline (it renders as a titled link)."
+  },
+  {
+   "name": "set_theme",
+   "toolset": "desktop_ui",
+   "description": "Change how the Hermes desktop app looks: accent colour, light/dark mode, layout. Pass the values to apply them now; the result says what was applied. Pass picker instead to show the user an accent or layout picker card in the chat and wait for their pick. To reveal ONE pane, use focus_pane instead."
+  },
+  {
+   "name": "show_tip",
+   "toolset": "desktop_ui",
+   "description": "Point at one thing in the desktop UI with a small arrow bubble (no dimming, no tour chrome) — for when a sentence is clearer with a finger on its subject. Get selectors from tour(action='targets'), prefer stable:true, never guess. One tip at a time (new replaces last); say the same thing in chat too — the bubble is a pointer, not the message. Sparingly: a bubble every turn stops being read."
+  },
+  {
+   "name": "terminal",
+   "toolset": "terminal",
+   "description": "Execute shell commands on the OS, shell and backend named in your environment section. The working directory, files and exported variables persist between calls: activate a virtualenv or export once, not before every command.\n\nUse read_file, search_files, patch and write_file instead of cat/head/tail, grep/find/ls, sed/awk and echo/heredoc. Output is auto-truncated with the full text saved to a file; never pipe through head/tail to shorten it.\n\nForeground (default) returns as soon as the command finishes. To wait a fixed time, run the wait in the foreground; never background a sleep or polling loop. Background is only for commands that must keep running after this call returns; health-check a server in a separate call and manage jobs with process_manage. When a command changes directory, trust the result's \"cwd\" instead of prefixing later commands with cd.\n"
+  },
+  {
+   "name": "todo_list",
+   "toolset": "todo",
+   "description": "Track a task list for multi-step work (3+ steps). Use for complex tasks with 3+ steps or when the user provides multiple tasks. For 'all N items' tasks, enumerate every instance as its own checklist item so none are silently dropped. Call with no parameters to read the current list.\nList order is priority. Only ONE item in_progress at a time. Break large phases into subtasks via parent. Mark an item completed only after the work is verified done, never based on intent. If something fails, cancel it and add a revised item. Always returns the full current list."
+  },
+  {
+   "name": "web_extract",
+   "toolset": "web",
+   "description": "Extract content from web page URLs. Returns clean page content in markdown/text (no LLM summarization — fast). Also works with PDF URLs (arxiv papers, documents) — pass the PDF link directly. Pages within the char budget (default 15000) return whole; larger pages return a head+tail window with a footer telling you the full text's saved file path and the read_file call to page through the omitted middle. Inline images appear as [IMAGE: alt] placeholders; real image URLs are kept as links. If a URL fails or times out, use the browser tool instead."
+  },
+  {
+   "name": "web_search",
+   "toolset": "web",
+   "description": "Search the web for information. Returns up to 5 results by default with titles, URLs, and descriptions. The query is passed through to the configured backend, so operators such as site:domain, filetype:pdf, intitle:word, -term, and \"exact phrase\" may work when the backend supports them."
+  },
+  {
+   "name": "write_file",
+   "toolset": "file",
+   "description": "Write content to a file, completely replacing existing content. Use this instead of echo/cat heredoc in terminal. Creates parent directories automatically. OVERWRITES the entire file — use 'patch' for targeted edits. For an EXISTING file, call read_file first: write_file refuses (file untouched) when this task has no current full read/write of the file or the file changed on disk since; on refusal, read_file, merge, then retry. Auto-runs syntax checks on .py/.json/.yaml/.toml and other linted languages; only NEW errors introduced by this write are surfaced (pre-existing errors are filtered out). The result's verified:true means the on-disk content hash was confirmed — do NOT re-read the file to check the write landed."
+  }
+ ]
+}

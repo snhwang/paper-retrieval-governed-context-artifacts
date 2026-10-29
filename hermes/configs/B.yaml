@@ -1,0 +1,55 @@
+# WP7 arm B: HERMES_HOME config.yaml template, rendered by hermes/arms.py
+# with the default switches ({"role": "operator", "decoys": 0, "backend": "nemotron", "annotation": "off", "scope": "turn", "query": "message", "priority_weight": "0", "always_offer": ["clarify"], "k": null}).
+# The runner fills the <...> paths per cell. Decoys > 0 add wp7_decoys to
+# plugins.enabled and registry_toolsets, and a plugins.entries.wp7_decoys block.
+model:
+  default: Qwen3.8-27B
+  provider: custom
+  base_url: http://localhost:8355/v1
+  api_key: not-needed
+tools:
+  tool_search:
+    enabled: 'on'
+plugins:
+  enabled:
+  - bear
+  entries:
+    bear:
+      settings:
+        corpus_dir: <run>/corpus/d<decoys>
+        mode: observe
+        unlisted: block
+        users:
+          platform:cli:
+          - role:operator
+          - team:ops
+        default_tags:
+        - role:guest
+        embedding: remote:http://localhost:8360
+        embedding_revision: <nemotron image digest>
+        audit_path: <run>/audit/<cell>.jsonl
+        narrow: observe
+        narrow_top_k: null
+        narrow_threshold: 0.0
+        narrow_scope: turn
+        narrow_query: message
+        always_offer:
+        - clarify
+        annotate_tools: false
+        withheld_disclosure: counts
+        registry_toolsets:
+        - file
+        - terminal
+        - search
+        - web
+        - todo
+        - session_search
+        - clarify
+        - image_gen
+        - computer_use
+        - cronjob
+        - memory
+        - desktop_ui
+        - project
+        - code_execution
+        narrow_priority_weight: 0.0

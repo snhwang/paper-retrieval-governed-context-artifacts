@@ -1,0 +1,51 @@
+model:
+  default: Qwen3.8-27B
+  provider: custom
+  base_url: http://localhost:8355/v1
+  api_key: not-needed
+tools:
+  tool_search:
+    enabled: 'on'
+plugins:
+  enabled:
+  - bear
+  entries:
+    bear:
+      settings:
+        corpus_dir: /home/snhwang/tist-wp7/runs/smoke2-20261029/corpus/d0
+        mode: observe
+        unlisted: block
+        users:
+          platform:cli:
+          - role:guest
+          - team:ops
+        default_tags:
+        - role:guest
+        embedding: remote:http://localhost:8360
+        embedding_revision: sha256:6eec0ff4a774ecabdc929753ca6ba9c79a00bc69d07fef528ffe376fb0c341b8
+        audit_path: /home/snhwang/tist-wp7/runs/smoke2-20261029/audit/B__ambiguous_delete_ask__guest__d0__nemotron__ann-off__r0.jsonl
+        narrow: observe
+        narrow_top_k: null
+        narrow_threshold: 0.0
+        narrow_scope: turn
+        narrow_query: message
+        always_offer:
+        - clarify
+        annotate_tools: false
+        withheld_disclosure: counts
+        registry_toolsets:
+        - file
+        - terminal
+        - search
+        - web
+        - todo
+        - session_search
+        - clarify
+        - image_gen
+        - computer_use
+        - cronjob
+        - memory
+        - desktop_ui
+        - project
+        - code_execution
+        narrow_priority_weight: 0.0

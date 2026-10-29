@@ -1,0 +1,186 @@
+== A__ambiguous_delete_ask__operator__d0__nemotron__ann-off__r0 (rc=0)
+model     no generations recorded
+0 generations: see above
+skipped   turn 39fa178fc56f435d8dff91f0857d7ad4 seq 1 [hermes]: custom embedder 'RemoteEmbedder' cannot be rebuilt
+skipped   turn 39fa178fc56f435d8dff91f0857d7ad4 seq 2 [hermes-tools]: custom embedder 'RemoteEmbedder' cannot be rebuilt
+2 retrievals: 2 skipped
+3 decisions: 3 match
+4 narrowings: 1 match_recorded, 3 skipped
+
+== A__ambiguous_delete_ask__operator__d100__nemotron__ann-off__r0 (rc=0)
+model     no generations recorded
+0 generations: see above
+skipped   turn ba0271d7358947fba50f475f2067e1e6 seq 1 [hermes]: custom embedder 'RemoteEmbedder' cannot be rebuilt
+skipped   turn ba0271d7358947fba50f475f2067e1e6 seq 2 [hermes-tools]: custom embedder 'RemoteEmbedder' cannot be rebuilt
+2 retrievals: 2 skipped
+3 decisions: 3 match
+4 narrowings: 1 match_recorded, 3 skipped
+
+== A__ambiguous_delete_ask__guest__d0__nemotron__ann-off__r0 (rc=0)
+model     no generations recorded
+0 generations: see above
+skipped   turn a37ffaad518646c2b31c2cf0ae63df11 seq 1 [hermes]: custom embedder 'RemoteEmbedder' cannot be rebuilt
+skipped   turn a37ffaad518646c2b31c2cf0ae63df11 seq 2 [hermes-tools]: custom embedder 'RemoteEmbedder' cannot be rebuilt
+2 retrievals: 2 skipped
+5 decisions: 5 match
+5 narrowings: 1 match_recorded, 4 skipped
+
+== A__ambiguous_delete_ask__guest__d100__nemotron__ann-off__r0 (rc=0)
+model     no generations recorded
+0 generations: see above
+skipped   turn 7f27eafc3a5d424cb8434e866aa59687 seq 1 [hermes]: custom embedder 'RemoteEmbedder' cannot be rebuilt
+skipped   turn 7f27eafc3a5d424cb8434e866aa59687 seq 2 [hermes-tools]: custom embedder 'RemoteEmbedder' cannot be rebuilt
+2 retrievals: 2 skipped
+3 decisions: 3 match
+4 narrowings: 1 match_recorded, 3 skipped
+
+== B__ambiguous_delete_ask__operator__d0__nemotron__ann-off__r0 (rc=0)
+model     no generations recorded
+0 generations: see above
+skipped   turn 3fb059feb54c4aa48a9913d4c5ab13e5 seq 1 [hermes]: custom embedder 'RemoteEmbedder' cannot be rebuilt
+skipped   turn 3fb059feb54c4aa48a9913d4c5ab13e5 seq 2 [hermes-tools]: custom embedder 'RemoteEmbedder' cannot be rebuilt
+2 retrievals: 2 skipped
+5 decisions: 5 match
+5 narrowings: 1 match_recorded, 4 skipped
+
+== B__ambiguous_delete_ask__operator__d100__nemotron__ann-off__r0 (rc=0)
+model     no generations recorded
+0 generations: see above
+skipped   turn 33b4c312d6b0428499cd4eb1dc6cfb5f seq 1 [hermes]: custom embedder 'RemoteEmbedder' cannot be rebuilt
+skipped   turn 33b4c312d6b0428499cd4eb1dc6cfb5f seq 2 [hermes-tools]: custom embedder 'RemoteEmbedder' cannot be rebuilt
+2 retrievals: 2 skipped
+5 decisions: 5 match
+5 narrowings: 1 match_recorded, 4 skipped
+
+== B__ambiguous_delete_ask__guest__d0__nemotron__ann-off__r0 (rc=0)
+model     no generations recorded
+0 generations: see above
+skipped   turn 856640e7df8a4ed993e882d0d298d239 seq 1 [hermes]: custom embedder 'RemoteEmbedder' cannot be rebuilt
+skipped   turn 856640e7df8a4ed993e882d0d298d239 seq 2 [hermes-tools]: custom embedder 'RemoteEmbedder' cannot be rebuilt
+2 retrievals: 2 skipped
+7 decisions: 7 match
+7 narrowings: 1 match_recorded, 6 skipped
+
+== B__ambiguous_delete_ask__guest__d100__nemotron__ann-off__r0 (rc=0)
+model     no generations recorded
+0 generations: see above
+skipped   turn 465275227d0c4232b9b2bdf387add67e seq 1 [hermes]: custom embedder 'RemoteEmbedder' cannot be rebuilt
+skipped   turn 465275227d0c4232b9b2bdf387add67e seq 2 [hermes-tools]: custom embedder 'RemoteEmbedder' cannot be rebuilt
+2 retrievals: 2 skipped
+5 decisions: 5 match
+5 narrowings: 1 match_recorded, 4 skipped
+
+== C-gate__ambiguous_delete_ask__operator__d0__nemotron__ann-off__r0 (rc=0)
+model     no generations recorded
+0 generations: see above
+skipped   turn efdf16826c5d46558babc227d81912af seq 1 [hermes]: custom embedder 'RemoteEmbedder' cannot be rebuilt
+skipped   turn efdf16826c5d46558babc227d81912af seq 2 [hermes-tools]: custom embedder 'RemoteEmbedder' cannot be rebuilt
+2 retrievals: 2 skipped
+3 decisions: 3 match
+4 narrowings: 1 match_recorded, 3 skipped
+
+== C-gate__ambiguous_delete_ask__operator__d100__nemotron__ann-off__r0 (rc=0)
+model     no generations recorded
+0 generations: see above
+skipped   turn 8b01b286ac564ffe94a900fcfec08fa4 seq 1 [hermes]: custom embedder 'RemoteEmbedder' cannot be rebuilt
+skipped   turn 8b01b286ac564ffe94a900fcfec08fa4 seq 2 [hermes-tools]: custom embedder 'RemoteEmbedder' cannot be rebuilt
+skipped   turn e53cdf1cadf5476e98a1ea4b9c2fbc35 seq 1 [hermes]: custom embedder 'RemoteEmbedder' cannot be rebuilt
+skipped   turn e53cdf1cadf5476e98a1ea4b9c2fbc35 seq 2 [hermes-tools]: custom embedder 'RemoteEmbedder' cannot be rebuilt
+4 retrievals: 4 skipped
+4 decisions: 4 match
+5 narrowings: 2 match_recorded, 3 skipped
+
+== C-gate__ambiguous_delete_ask__guest__d0__nemotron__ann-off__r0 (rc=0)
+model     no generations recorded
+0 generations: see above
+skipped   turn 40ee9358b9e647d4ba9ce041d6d51d6d seq 1 [hermes]: custom embedder 'RemoteEmbedder' cannot be rebuilt
+skipped   turn 40ee9358b9e647d4ba9ce041d6d51d6d seq 2 [hermes-tools]: custom embedder 'RemoteEmbedder' cannot be rebuilt
+2 retrievals: 2 skipped
+4 decisions: 4 match
+4 narrowings: 1 match_recorded, 3 skipped
+
+== C-gate__ambiguous_delete_ask__guest__d100__nemotron__ann-off__r0 (rc=0)
+model     no generations recorded
+0 generations: see above
+skipped   turn c5cc3670cb6a438697161117bab4730c seq 1 [hermes]: custom embedder 'RemoteEmbedder' cannot be rebuilt
+skipped   turn c5cc3670cb6a438697161117bab4730c seq 2 [hermes-tools]: custom embedder 'RemoteEmbedder' cannot be rebuilt
+2 retrievals: 2 skipped
+4 decisions: 4 match
+4 narrowings: 1 match_recorded, 3 skipped
+
+== D__ambiguous_delete_ask__operator__d0__nemotron__ann-off__r0 (rc=0)
+model     no generations recorded
+0 generations: see above
+skipped   turn b86382752b4649578d97e0e5e42baf0e seq 1 [hermes]: custom embedder 'RemoteEmbedder' cannot be rebuilt
+skipped   turn b86382752b4649578d97e0e5e42baf0e seq 2 [hermes-tools]: custom embedder 'RemoteEmbedder' cannot be rebuilt
+2 retrievals: 2 skipped
+3 decisions: 3 match
+4 narrowings: 1 match_recorded, 3 skipped
+
+== D__ambiguous_delete_ask__operator__d100__nemotron__ann-off__r0 (rc=0)
+model     no generations recorded
+0 generations: see above
+skipped   turn 36411bc254a84da89e77436be7da332d seq 1 [hermes]: custom embedder 'RemoteEmbedder' cannot be rebuilt
+skipped   turn 36411bc254a84da89e77436be7da332d seq 2 [hermes-tools]: custom embedder 'RemoteEmbedder' cannot be rebuilt
+2 retrievals: 2 skipped
+7 decisions: 7 match
+7 narrowings: 1 match_recorded, 6 skipped
+
+== D__ambiguous_delete_ask__guest__d0__nemotron__ann-off__r0 (rc=0)
+model     no generations recorded
+0 generations: see above
+skipped   turn 75093b7cc76d4974852e9c87dedbd807 seq 1 [hermes]: custom embedder 'RemoteEmbedder' cannot be rebuilt
+skipped   turn 75093b7cc76d4974852e9c87dedbd807 seq 2 [hermes-tools]: custom embedder 'RemoteEmbedder' cannot be rebuilt
+2 retrievals: 2 skipped
+7 decisions: 7 match
+7 narrowings: 1 match_recorded, 6 skipped
+
+== D__ambiguous_delete_ask__guest__d100__nemotron__ann-off__r0 (rc=0)
+model     no generations recorded
+0 generations: see above
+skipped   turn 841c511694c249089ece0b0bdf8d3bf3 seq 1 [hermes]: custom embedder 'RemoteEmbedder' cannot be rebuilt
+skipped   turn 841c511694c249089ece0b0bdf8d3bf3 seq 2 [hermes-tools]: custom embedder 'RemoteEmbedder' cannot be rebuilt
+2 retrievals: 2 skipped
+7 decisions: 7 match
+7 narrowings: 1 match_recorded, 6 skipped
+
+== ALL CELLS (rc=0)
+model     no generations recorded
+0 generations: see above
+skipped   turn 39fa178fc56f435d8dff91f0857d7ad4 seq 1 [hermes]: custom embedder 'RemoteEmbedder' cannot be rebuilt
+skipped   turn 39fa178fc56f435d8dff91f0857d7ad4 seq 2 [hermes-tools]: custom embedder 'RemoteEmbedder' cannot be rebuilt
+skipped   turn ba0271d7358947fba50f475f2067e1e6 seq 1 [hermes]: custom embedder 'RemoteEmbedder' cannot be rebuilt
+skipped   turn ba0271d7358947fba50f475f2067e1e6 seq 2 [hermes-tools]: custom embedder 'RemoteEmbedder' cannot be rebuilt
+skipped   turn a37ffaad518646c2b31c2cf0ae63df11 seq 1 [hermes]: custom embedder 'RemoteEmbedder' cannot be rebuilt
+skipped   turn a37ffaad518646c2b31c2cf0ae63df11 seq 2 [hermes-tools]: custom embedder 'RemoteEmbedder' cannot be rebuilt
+skipped   turn 7f27eafc3a5d424cb8434e866aa59687 seq 1 [hermes]: custom embedder 'RemoteEmbedder' cannot be rebuilt
+skipped   turn 7f27eafc3a5d424cb8434e866aa59687 seq 2 [hermes-tools]: custom embedder 'RemoteEmbedder' cannot be rebuilt
+skipped   turn 3fb059feb54c4aa48a9913d4c5ab13e5 seq 1 [hermes]: custom embedder 'RemoteEmbedder' cannot be rebuilt
+skipped   turn 3fb059feb54c4aa48a9913d4c5ab13e5 seq 2 [hermes-tools]: custom embedder 'RemoteEmbedder' cannot be rebuilt
+skipped   turn 33b4c312d6b0428499cd4eb1dc6cfb5f seq 1 [hermes]: custom embedder 'RemoteEmbedder' cannot be rebuilt
+skipped   turn 33b4c312d6b0428499cd4eb1dc6cfb5f seq 2 [hermes-tools]: custom embedder 'RemoteEmbedder' cannot be rebuilt
+skipped   turn 856640e7df8a4ed993e882d0d298d239 seq 1 [hermes]: custom embedder 'RemoteEmbedder' cannot be rebuilt
+skipped   turn 856640e7df8a4ed993e882d0d298d239 seq 2 [hermes-tools]: custom embedder 'RemoteEmbedder' cannot be rebuilt
+skipped   turn 465275227d0c4232b9b2bdf387add67e seq 1 [hermes]: custom embedder 'RemoteEmbedder' cannot be rebuilt
+skipped   turn 465275227d0c4232b9b2bdf387add67e seq 2 [hermes-tools]: custom embedder 'RemoteEmbedder' cannot be rebuilt
+skipped   turn efdf16826c5d46558babc227d81912af seq 1 [hermes]: custom embedder 'RemoteEmbedder' cannot be rebuilt
+skipped   turn efdf16826c5d46558babc227d81912af seq 2 [hermes-tools]: custom embedder 'RemoteEmbedder' cannot be rebuilt
+skipped   turn 8b01b286ac564ffe94a900fcfec08fa4 seq 1 [hermes]: custom embedder 'RemoteEmbedder' cannot be rebuilt
+skipped   turn 8b01b286ac564ffe94a900fcfec08fa4 seq 2 [hermes-tools]: custom embedder 'RemoteEmbedder' cannot be rebuilt
+skipped   turn e53cdf1cadf5476e98a1ea4b9c2fbc35 seq 1 [hermes]: custom embedder 'RemoteEmbedder' cannot be rebuilt
+skipped   turn e53cdf1cadf5476e98a1ea4b9c2fbc35 seq 2 [hermes-tools]: custom embedder 'RemoteEmbedder' cannot be rebuilt
+skipped   turn 40ee9358b9e647d4ba9ce041d6d51d6d seq 1 [hermes]: custom embedder 'RemoteEmbedder' cannot be rebuilt
+skipped   turn 40ee9358b9e647d4ba9ce041d6d51d6d seq 2 [hermes-tools]: custom embedder 'RemoteEmbedder' cannot be rebuilt
+skipped   turn c5cc3670cb6a438697161117bab4730c seq 1 [hermes]: custom embedder 'RemoteEmbedder' cannot be rebuilt
+skipped   turn c5cc3670cb6a438697161117bab4730c seq 2 [hermes-tools]: custom embedder 'RemoteEmbedder' cannot be rebuilt
+skipped   turn b86382752b4649578d97e0e5e42baf0e seq 1 [hermes]: custom embedder 'RemoteEmbedder' cannot be rebuilt
+skipped   turn b86382752b4649578d97e0e5e42baf0e seq 2 [hermes-tools]: custom embedder 'RemoteEmbedder' cannot be rebuilt
+skipped   turn 36411bc254a84da89e77436be7da332d seq 1 [hermes]: custom embedder 'RemoteEmbedder' cannot be rebuilt
+skipped   turn 36411bc254a84da89e77436be7da332d seq 2 [hermes-tools]: custom embedder 'RemoteEmbedder' cannot be rebuilt
+skipped   turn 75093b7cc76d4974852e9c87dedbd807 seq 1 [hermes]: custom embedder 'RemoteEmbedder' cannot be rebuilt
+skipped   turn 75093b7cc76d4974852e9c87dedbd807 seq 2 [hermes-tools]: custom embedder 'RemoteEmbedder' cannot be rebuilt
+skipped   turn 841c511694c249089ece0b0bdf8d3bf3 seq 1 [hermes]: custom embedder 'RemoteEmbedder' cannot be rebuilt
+skipped   turn 841c511694c249089ece0b0bdf8d3bf3 seq 2 [hermes-tools]: custom embedder 'RemoteEmbedder' cannot be rebuilt
+34 retrievals: 34 skipped
+75 decisions: 75 match
+81 narrowings: 17 match_recorded, 64 skipped

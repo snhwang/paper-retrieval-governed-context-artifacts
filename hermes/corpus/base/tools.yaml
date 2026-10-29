@@ -1,0 +1,100 @@
+# WP7 experiment corpus: allow rules for every tool the Hermes harness can expose.
+#
+# Coverage. The 28 tools the harness's toolsets name in Hermes v0.22.2 (d923a5eb), from
+# hermes/registry/harness_registry.json ("candidates"), plus manage_connections (named by the
+# harness's project_mcp_setup grader, not exposed by its toolsets) and the tool-search bridge.
+# The decoy rules are in ../decoys/decoys-<N>.yaml. The plugin runs with unlisted: block, so a
+# tool missing from this file is withheld and blocked, never silently allowed.
+#
+# Authority follows bear-dev main's examples/hermes/corpus/tools.yaml (90daeb9): the same tools
+# are operator-only and the same priorities (70 operator, 60 anyone). Two changes:
+# - Every rule also requires team:ops. Every WP7 context carries team:ops, and the decoys of
+#   other teams require team:<RapidAPI category>, as tenants of one shared agent platform.
+# - No rule decides approve. The starter's approve decisions (terminal, execute_code,
+#   write_file, patch, drive_preview, computer_use, process_manage, cronjob_manage,
+#   manage_connections) are allow here, and its argument rules are dropped. In the hermetic
+#   worker a plugin's approve goes to Hermes's approval gate, which fails closed with no human
+#   (tools/approval.py, request_tool_approval). Runs must be unattended, so a rule allows or
+#   the scope blocks.
+#
+# No must-haves. No battery task needs one (see hermes/CHANGES.md, corpus notes).
+#
+# content holds only the tool's name. Narrowing ranks Hermes's own description
+# (bear.narrowing.tool_corpus), and the guidance path sets tool rules aside, so no text here
+# reaches the model or the ranking.
+instructions:
+  # --- Anyone in team:ops (operator and guest) --------------------------------------------
+  - {id: tool-read-file, type: tool, priority: 60, content: read_file,
+     actions: {function: read_file}, scope: {required_tags: ['team:ops']}}
+  - {id: tool-search-files, type: tool, priority: 60, content: search_files,
+     actions: {function: search_files}, scope: {required_tags: ['team:ops']}}
+  - {id: tool-web-search, type: tool, priority: 60, content: web_search,
+     actions: {function: web_search}, scope: {required_tags: ['team:ops']}}
+  - {id: tool-web-extract, type: tool, priority: 60, content: web_extract,
+     actions: {function: web_extract}, scope: {required_tags: ['team:ops']}}
+  - {id: tool-clarify, type: tool, priority: 60, content: clarify,
+     actions: {function: clarify}, scope: {required_tags: ['team:ops']}}
+  - {id: tool-memory, type: tool, priority: 60, content: memory,
+     actions: {function: memory}, scope: {required_tags: ['team:ops']}}
+  - {id: tool-todo-list, type: tool, priority: 60, content: todo_list,
+     actions: {function: todo_list}, scope: {required_tags: ['team:ops']}}
+  - {id: tool-show-tip, type: tool, priority: 60, content: show_tip,
+     actions: {function: show_tip}, scope: {required_tags: ['team:ops']}}
+  - {id: tool-gui-tour, type: tool, priority: 60, content: gui_tour,
+     actions: {function: gui_tour}, scope: {required_tags: ['team:ops']}}
+  - {id: tool-set-theme, type: tool, priority: 60, content: set_theme,
+     actions: {function: set_theme}, scope: {required_tags: ['team:ops']}}
+  - {id: tool-image-generate, type: tool, priority: 60, content: image_generate,
+     actions: {function: image_generate}, scope: {required_tags: ['team:ops']}}
+  # Not in the starter corpus. A desktop_ui tool (emoji reaction), UI-only like show_tip.
+  - {id: tool-react-to-message, type: tool, priority: 60, content: react_to_message,
+     actions: {function: react_to_message}, scope: {required_tags: ['team:ops']}}
+
+  # Tool search's bridge (arm B). A call through tool_call reaches the gate under the
+  # underlying tool's name, so these rules govern only the lookups.
+  - {id: tool-tool-search, type: tool, priority: 60, content: tool_search,
+     actions: {function: tool_search}, scope: {required_tags: ['team:ops']}}
+  - {id: tool-tool-describe, type: tool, priority: 60, content: tool_describe,
+     actions: {function: tool_describe}, scope: {required_tags: ['team:ops']}}
+  - {id: tool-tool-call, type: tool, priority: 60, content: tool_call,
+     actions: {function: tool_call}, scope: {required_tags: ['team:ops']}}
+
+  # --- Operators in team:ops only ---------------------------------------------------------
+  # Changes the machine.
+  - {id: tool-terminal, type: tool, priority: 70, content: terminal,
+     actions: {function: terminal}, scope: {required_tags: ['role:operator', 'team:ops']}}
+  - {id: tool-execute-code, type: tool, priority: 70, content: execute_code,
+     actions: {function: execute_code}, scope: {required_tags: ['role:operator', 'team:ops']}}
+  - {id: tool-write-file, type: tool, priority: 70, content: write_file,
+     actions: {function: write_file}, scope: {required_tags: ['role:operator', 'team:ops']}}
+  - {id: tool-patch, type: tool, priority: 70, content: patch,
+     actions: {function: patch}, scope: {required_tags: ['role:operator', 'team:ops']}}
+  # Reads the operator's desktop or past conversations.
+  - {id: tool-session-search, type: tool, priority: 70, content: session_search,
+     actions: {function: session_search}, scope: {required_tags: ['role:operator', 'team:ops']}}
+  - {id: tool-read-terminal, type: tool, priority: 70, content: read_terminal,
+     actions: {function: read_terminal}, scope: {required_tags: ['role:operator', 'team:ops']}}
+  - {id: tool-read-window-below, type: tool, priority: 70, content: read_window_below,
+     actions: {function: read_window_below}, scope: {required_tags: ['role:operator', 'team:ops']}}
+  - {id: tool-focus-pane, type: tool, priority: 70, content: focus_pane,
+     actions: {function: focus_pane}, scope: {required_tags: ['role:operator', 'team:ops']}}
+  - {id: tool-desktop-preview, type: tool, priority: 70, content: desktop_preview,
+     actions: {function: desktop_preview}, scope: {required_tags: ['role:operator', 'team:ops']}}
+  - {id: tool-annotate-preview, type: tool, priority: 70, content: annotate_preview,
+     actions: {function: annotate_preview}, scope: {required_tags: ['role:operator', 'team:ops']}}
+  - {id: tool-close-terminal, type: tool, priority: 70, content: close_terminal,
+     actions: {function: close_terminal}, scope: {required_tags: ['role:operator', 'team:ops']}}
+  - {id: tool-desktop-project, type: tool, priority: 70, content: desktop_project,
+     actions: {function: desktop_project}, scope: {required_tags: ['role:operator', 'team:ops']}}
+  # Acts in the world, on credentials or on processes (approve in the starter, allow here).
+  - {id: tool-drive-preview, type: tool, priority: 70, content: drive_preview,
+     actions: {function: drive_preview}, scope: {required_tags: ['role:operator', 'team:ops']}}
+  - {id: tool-computer-use, type: tool, priority: 70, content: computer_use,
+     actions: {function: computer_use}, scope: {required_tags: ['role:operator', 'team:ops']}}
+  - {id: tool-process-manage, type: tool, priority: 70, content: process_manage,
+     actions: {function: process_manage}, scope: {required_tags: ['role:operator', 'team:ops']}}
+  - {id: tool-cronjob-manage, type: tool, priority: 70, content: cronjob_manage,
+     actions: {function: cronjob_manage}, scope: {required_tags: ['role:operator', 'team:ops']}}
+  - {id: tool-manage-connections, type: tool, priority: 70, content: manage_connections,
+     actions: {function: manage_connections},
+     scope: {required_tags: ['role:operator', 'team:ops']}}
