@@ -136,8 +136,10 @@ def leak_check(cell: str, marker: str, extra_dirs: list[str]) -> list[str]:
             problems.append(f"process {pid} outlived the cell: {cmd}")
     roots = [os.path.expanduser(p) for p in LEAK_WATCH] + list(extra_dirs)
     roots = [r for r in roots if os.path.exists(r)]
-    p = subprocess.run(["find", *roots, "-newer", marker, "-not", "-path", "*/__pycache__*",
-                        "-not", "-name", "*.pyc", "-not", "-path", "*/.git/*"],
+    # .git is pruned whole: the runner's own `git status` (provenance) rewrites the index lock,
+    # which bumps the .git directory's mtime on the host.
+    p = subprocess.run(["find", *roots, "(", "-name", ".git", "-o", "-name", "__pycache__", ")",
+                        "-prune", "-o", "-newer", marker, "-not", "-name", "*.pyc", "-print"],
                        capture_output=True, text=True)
     changed = [ln for ln in p.stdout.splitlines() if ln.strip()]
     if changed:
