@@ -106,8 +106,22 @@ case "${1:-}" in
         --output results/budget_binding_v042_vs_v040.json \
         --log-file results/budget_binding_v042_vs_v040_output.txt
     ;;
+  v042-bge)
+    # BGE-base budget binding on 0.4.2, CPU only (a local model load, cleared
+    # for CPU inside tist.slice). About 20 minutes at 8 threads, 3 GB.
+    export BEAR_SOURCE_SHA=9d085b49c004cb03e2bede9055fdc3810cf260c0 CUDA_VISIBLE_DEVICES= \
+        OMP_NUM_THREADS=8 MKL_NUM_THREADS=8 HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1
+    CAP="$HOME/bin/tist-capped --mem 8G --"
+    python evals/eval_budget_binding.py --backends bge \
+        --output results/budget_binding_v042_bge.json \
+        --log-file results/budget_binding_v042_bge_output.txt
+    python evals/compare_budget_binding.py \
+        --old results/budget_binding.json --new results/budget_binding_v042_bge.json \
+        --output results/budget_binding_v042_bge_vs_v040.json \
+        --log-file results/budget_binding_v042_bge_vs_v040_output.txt
+    ;;
   *)
-    echo "usage: bash evals/run_wp256.sh {embed|run|v041|v042}" >&2
+    echo "usage: bash evals/run_wp256.sh {embed|run|v041|v042|v042-bge}" >&2
     exit 2
     ;;
 esac

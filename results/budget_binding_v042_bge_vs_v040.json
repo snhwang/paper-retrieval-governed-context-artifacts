@@ -1,0 +1,1434 @@
+{
+ "old": "results/budget_binding.json",
+ "new": "results/budget_binding_v042_bge.json",
+ "old_bear": [
+  "0.4.0",
+  "10730c8ae682f972b731b89789f0f7b97a521523"
+ ],
+ "new_bear": [
+  "0.4.2",
+  "9d085b49c004cb03e2bede9055fdc3810cf260c0"
+ ],
+ "rows": [
+  {
+   "key": "toolbench_gov",
+   "label": "ToolBench, governed",
+   "k": 5,
+   "new": "metadata",
+   "old": "metadata",
+   "n": 1100,
+   "mean_old": 187.33454545454546,
+   "mean_new": 187.33454545454546,
+   "queries_changed": 0,
+   "above_k_old": 1100,
+   "above_k_new": 1100,
+   "size": {
+    "delta": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ],
+    "p_bootstrap": 1.0,
+    "cohens_d_paired": null,
+    "wilcoxon": {
+     "W": null,
+     "p": null,
+     "n_nonzero": 0
+    },
+    "paired_t": {
+     "t": null,
+     "p": 1.0
+    },
+    "n": 1100
+   },
+   "above_k_mcnemar": {
+    "b_a_right_b_wrong": 0,
+    "c_a_wrong_b_right": 0,
+    "n_discordant": 0,
+    "p_value": 1.0
+   }
+  },
+  {
+   "key": "toolbench_gov",
+   "label": "ToolBench, governed",
+   "k": 5,
+   "new": "hash",
+   "old": "hash",
+   "n": 1100,
+   "mean_old": 187.33454545454546,
+   "mean_new": 187.33454545454546,
+   "queries_changed": 0,
+   "above_k_old": 1100,
+   "above_k_new": 1100,
+   "size": {
+    "delta": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ],
+    "p_bootstrap": 1.0,
+    "cohens_d_paired": null,
+    "wilcoxon": {
+     "W": null,
+     "p": null,
+     "n_nonzero": 0
+    },
+    "paired_t": {
+     "t": null,
+     "p": 1.0
+    },
+    "n": 1100
+   },
+   "above_k_mcnemar": {
+    "b_a_right_b_wrong": 0,
+    "c_a_wrong_b_right": 0,
+    "n_discordant": 0,
+    "p_value": 1.0
+   },
+   "cut_old": 1100,
+   "cut_new": 1100,
+   "cut_mcnemar": {
+    "b_a_right_b_wrong": 0,
+    "c_a_wrong_b_right": 0,
+    "n_discordant": 0,
+    "p_value": 1.0
+   }
+  },
+  {
+   "key": "toolbench_nogov",
+   "label": "ToolBench, ungated (no gov)",
+   "k": 5,
+   "new": "metadata",
+   "old": "metadata",
+   "n": 1100,
+   "mean_old": 3225.0,
+   "mean_new": 3225.0,
+   "queries_changed": 0,
+   "above_k_old": 1100,
+   "above_k_new": 1100,
+   "size": {
+    "delta": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ],
+    "p_bootstrap": 1.0,
+    "cohens_d_paired": null,
+    "wilcoxon": {
+     "W": null,
+     "p": null,
+     "n_nonzero": 0
+    },
+    "paired_t": {
+     "t": null,
+     "p": 1.0
+    },
+    "n": 1100
+   },
+   "above_k_mcnemar": {
+    "b_a_right_b_wrong": 0,
+    "c_a_wrong_b_right": 0,
+    "n_discordant": 0,
+    "p_value": 1.0
+   }
+  },
+  {
+   "key": "toolbench_mandonly",
+   "label": "ToolBench, mandatory-only (supplementary)",
+   "k": 5,
+   "new": "metadata",
+   "old": "metadata",
+   "n": 1100,
+   "mean_old": 0.0,
+   "mean_new": 0.0,
+   "queries_changed": 0,
+   "above_k_old": 0,
+   "above_k_new": 0,
+   "size": {
+    "delta": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ],
+    "p_bootstrap": 1.0,
+    "cohens_d_paired": null,
+    "wilcoxon": {
+     "W": null,
+     "p": null,
+     "n_nonzero": 0
+    },
+    "paired_t": {
+     "t": null,
+     "p": 1.0
+    },
+    "n": 1100
+   },
+   "above_k_mcnemar": {
+    "b_a_right_b_wrong": 0,
+    "c_a_wrong_b_right": 0,
+    "n_discordant": 0,
+    "p_value": 1.0
+   }
+  },
+  {
+   "key": "toolbench_mandonly",
+   "label": "ToolBench, mandatory-only (supplementary)",
+   "k": 5,
+   "new": "hash",
+   "old": "hash",
+   "n": 1100,
+   "mean_old": 0.0,
+   "mean_new": 0.0,
+   "queries_changed": 0,
+   "above_k_old": 0,
+   "above_k_new": 0,
+   "size": {
+    "delta": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ],
+    "p_bootstrap": 1.0,
+    "cohens_d_paired": null,
+    "wilcoxon": {
+     "W": null,
+     "p": null,
+     "n_nonzero": 0
+    },
+    "paired_t": {
+     "t": null,
+     "p": 1.0
+    },
+    "n": 1100
+   },
+   "above_k_mcnemar": {
+    "b_a_right_b_wrong": 0,
+    "c_a_wrong_b_right": 0,
+    "n_discordant": 0,
+    "p_value": 1.0
+   },
+   "cut_old": 0,
+   "cut_new": 0,
+   "cut_mcnemar": {
+    "b_a_right_b_wrong": 0,
+    "c_a_wrong_b_right": 0,
+    "n_discordant": 0,
+    "p_value": 1.0
+   }
+  },
+  {
+   "key": "metatool_base",
+   "label": "MetaTool base (no tags)",
+   "k": 5,
+   "new": "metadata",
+   "old": "metadata",
+   "n": 21111,
+   "mean_old": 0.0,
+   "mean_new": 0.0,
+   "queries_changed": 0,
+   "above_k_old": 0,
+   "above_k_new": 0,
+   "size": {
+    "delta": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ],
+    "p_bootstrap": 1.0,
+    "cohens_d_paired": null,
+    "wilcoxon": {
+     "W": null,
+     "p": null,
+     "n_nonzero": 0
+    },
+    "paired_t": {
+     "t": null,
+     "p": 1.0
+    },
+    "n": 21111
+   },
+   "above_k_mcnemar": {
+    "b_a_right_b_wrong": 0,
+    "c_a_wrong_b_right": 0,
+    "n_discordant": 0,
+    "p_value": 1.0
+   }
+  },
+  {
+   "key": "metatool_base",
+   "label": "MetaTool base (no tags)",
+   "k": 5,
+   "new": "bge",
+   "old": "bge",
+   "n": 21111,
+   "mean_old": 199.0,
+   "mean_new": 199.0,
+   "queries_changed": 0,
+   "above_k_old": 21111,
+   "above_k_new": 21111,
+   "size": {
+    "delta": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ],
+    "p_bootstrap": 1.0,
+    "cohens_d_paired": null,
+    "wilcoxon": {
+     "W": null,
+     "p": null,
+     "n_nonzero": 0
+    },
+    "paired_t": {
+     "t": null,
+     "p": 1.0
+    },
+    "n": 21111
+   },
+   "above_k_mcnemar": {
+    "b_a_right_b_wrong": 0,
+    "c_a_wrong_b_right": 0,
+    "n_discordant": 0,
+    "p_value": 1.0
+   },
+   "cut_old": 21111,
+   "cut_new": 21111,
+   "cut_mcnemar": {
+    "b_a_right_b_wrong": 0,
+    "c_a_wrong_b_right": 0,
+    "n_discordant": 0,
+    "p_value": 1.0
+   }
+  },
+  {
+   "key": "metatool_tags",
+   "label": "MetaTool+Tags, governed",
+   "k": 5,
+   "new": "metadata",
+   "old": "metadata",
+   "n": 21111,
+   "mean_old": 11.587750461844536,
+   "mean_new": 11.587750461844536,
+   "queries_changed": 0,
+   "above_k_old": 16752,
+   "above_k_new": 16752,
+   "size": {
+    "delta": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ],
+    "p_bootstrap": 1.0,
+    "cohens_d_paired": null,
+    "wilcoxon": {
+     "W": null,
+     "p": null,
+     "n_nonzero": 0
+    },
+    "paired_t": {
+     "t": null,
+     "p": 1.0
+    },
+    "n": 21111
+   },
+   "above_k_mcnemar": {
+    "b_a_right_b_wrong": 0,
+    "c_a_wrong_b_right": 0,
+    "n_discordant": 0,
+    "p_value": 1.0
+   }
+  },
+  {
+   "key": "metatool_tags",
+   "label": "MetaTool+Tags, governed",
+   "k": 5,
+   "new": "hash",
+   "old": "hash",
+   "n": 21111,
+   "mean_old": 11.587750461844536,
+   "mean_new": 11.587750461844536,
+   "queries_changed": 0,
+   "above_k_old": 16752,
+   "above_k_new": 16752,
+   "size": {
+    "delta": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ],
+    "p_bootstrap": 1.0,
+    "cohens_d_paired": null,
+    "wilcoxon": {
+     "W": null,
+     "p": null,
+     "n_nonzero": 0
+    },
+    "paired_t": {
+     "t": null,
+     "p": 1.0
+    },
+    "n": 21111
+   },
+   "above_k_mcnemar": {
+    "b_a_right_b_wrong": 0,
+    "c_a_wrong_b_right": 0,
+    "n_discordant": 0,
+    "p_value": 1.0
+   },
+   "cut_old": 16752,
+   "cut_new": 16752,
+   "cut_mcnemar": {
+    "b_a_right_b_wrong": 0,
+    "c_a_wrong_b_right": 0,
+    "n_discordant": 0,
+    "p_value": 1.0
+   }
+  },
+  {
+   "key": "metatool_querytags_query_tags",
+   "label": "MetaTool+QueryTags (query_tags.json, supplementary)",
+   "k": 5,
+   "new": "metadata",
+   "old": "metadata",
+   "n": 21111,
+   "mean_old": 9.96968405096869,
+   "mean_new": 9.96968405096869,
+   "queries_changed": 0,
+   "above_k_old": 15010,
+   "above_k_new": 15010,
+   "size": {
+    "delta": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ],
+    "p_bootstrap": 1.0,
+    "cohens_d_paired": null,
+    "wilcoxon": {
+     "W": null,
+     "p": null,
+     "n_nonzero": 0
+    },
+    "paired_t": {
+     "t": null,
+     "p": 1.0
+    },
+    "n": 21111
+   },
+   "above_k_mcnemar": {
+    "b_a_right_b_wrong": 0,
+    "c_a_wrong_b_right": 0,
+    "n_discordant": 0,
+    "p_value": 1.0
+   }
+  },
+  {
+   "key": "metatool_querytags_query_tags",
+   "label": "MetaTool+QueryTags (query_tags.json, supplementary)",
+   "k": 5,
+   "new": "hash",
+   "old": "hash",
+   "n": 21111,
+   "mean_old": 9.96968405096869,
+   "mean_new": 9.96968405096869,
+   "queries_changed": 0,
+   "above_k_old": 15010,
+   "above_k_new": 15010,
+   "size": {
+    "delta": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ],
+    "p_bootstrap": 1.0,
+    "cohens_d_paired": null,
+    "wilcoxon": {
+     "W": null,
+     "p": null,
+     "n_nonzero": 0
+    },
+    "paired_t": {
+     "t": null,
+     "p": 1.0
+    },
+    "n": 21111
+   },
+   "above_k_mcnemar": {
+    "b_a_right_b_wrong": 0,
+    "c_a_wrong_b_right": 0,
+    "n_discordant": 0,
+    "p_value": 1.0
+   },
+   "cut_old": 15010,
+   "cut_new": 15010,
+   "cut_mcnemar": {
+    "b_a_right_b_wrong": 0,
+    "c_a_wrong_b_right": 0,
+    "n_discordant": 0,
+    "p_value": 1.0
+   }
+  },
+  {
+   "key": "metatool_querytags_query_tags_top5",
+   "label": "MetaTool+QueryTags (query_tags_top5.json, supplementary)",
+   "k": 5,
+   "new": "metadata",
+   "old": "metadata",
+   "n": 21111,
+   "mean_old": 24.272038273885652,
+   "mean_new": 24.272038273885652,
+   "queries_changed": 0,
+   "above_k_old": 20759,
+   "above_k_new": 20759,
+   "size": {
+    "delta": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ],
+    "p_bootstrap": 1.0,
+    "cohens_d_paired": null,
+    "wilcoxon": {
+     "W": null,
+     "p": null,
+     "n_nonzero": 0
+    },
+    "paired_t": {
+     "t": null,
+     "p": 1.0
+    },
+    "n": 21111
+   },
+   "above_k_mcnemar": {
+    "b_a_right_b_wrong": 0,
+    "c_a_wrong_b_right": 0,
+    "n_discordant": 0,
+    "p_value": 1.0
+   }
+  },
+  {
+   "key": "metatool_querytags_query_tags_top5",
+   "label": "MetaTool+QueryTags (query_tags_top5.json, supplementary)",
+   "k": 5,
+   "new": "hash",
+   "old": "hash",
+   "n": 21111,
+   "mean_old": 24.272038273885652,
+   "mean_new": 24.272038273885652,
+   "queries_changed": 0,
+   "above_k_old": 20759,
+   "above_k_new": 20759,
+   "size": {
+    "delta": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ],
+    "p_bootstrap": 1.0,
+    "cohens_d_paired": null,
+    "wilcoxon": {
+     "W": null,
+     "p": null,
+     "n_nonzero": 0
+    },
+    "paired_t": {
+     "t": null,
+     "p": 1.0
+    },
+    "n": 21111
+   },
+   "above_k_mcnemar": {
+    "b_a_right_b_wrong": 0,
+    "c_a_wrong_b_right": 0,
+    "n_discordant": 0,
+    "p_value": 1.0
+   },
+   "cut_old": 20759,
+   "cut_new": 20759,
+   "cut_mcnemar": {
+    "b_a_right_b_wrong": 0,
+    "c_a_wrong_b_right": 0,
+    "n_discordant": 0,
+    "p_value": 1.0
+   }
+  },
+  {
+   "key": "petsim_standard",
+   "label": "Pet Sim full governance, Standard",
+   "k": 10,
+   "new": "metadata",
+   "old": "metadata",
+   "n": 60,
+   "mean_old": 6.65,
+   "mean_new": 6.65,
+   "queries_changed": 0,
+   "above_k_old": 7,
+   "above_k_new": 7,
+   "size": {
+    "delta": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ],
+    "p_bootstrap": 1.0,
+    "cohens_d_paired": null,
+    "wilcoxon": {
+     "W": null,
+     "p": null,
+     "n_nonzero": 0
+    },
+    "paired_t": {
+     "t": null,
+     "p": 1.0
+    },
+    "n": 60
+   },
+   "above_k_mcnemar": {
+    "b_a_right_b_wrong": 0,
+    "c_a_wrong_b_right": 0,
+    "n_discordant": 0,
+    "p_value": 1.0
+   }
+  },
+  {
+   "key": "petsim_standard",
+   "label": "Pet Sim full governance, Standard",
+   "k": 10,
+   "new": "bge",
+   "old": "bge",
+   "n": 60,
+   "mean_old": 11.4,
+   "mean_new": 11.4,
+   "queries_changed": 0,
+   "above_k_old": 26,
+   "above_k_new": 26,
+   "size": {
+    "delta": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ],
+    "p_bootstrap": 1.0,
+    "cohens_d_paired": null,
+    "wilcoxon": {
+     "W": null,
+     "p": null,
+     "n_nonzero": 0
+    },
+    "paired_t": {
+     "t": null,
+     "p": 1.0
+    },
+    "n": 60
+   },
+   "above_k_mcnemar": {
+    "b_a_right_b_wrong": 0,
+    "c_a_wrong_b_right": 0,
+    "n_discordant": 0,
+    "p_value": 1.0
+   },
+   "cut_old": 23,
+   "cut_new": 23,
+   "cut_mcnemar": {
+    "b_a_right_b_wrong": 0,
+    "c_a_wrong_b_right": 0,
+    "n_discordant": 0,
+    "p_value": 1.0
+   }
+  },
+  {
+   "key": "petsim_paraphrase",
+   "label": "Pet Sim full governance, Paraphrase",
+   "k": 10,
+   "new": "metadata",
+   "old": "metadata",
+   "n": 60,
+   "mean_old": 4.0,
+   "mean_new": 4.0,
+   "queries_changed": 0,
+   "above_k_old": 0,
+   "above_k_new": 0,
+   "size": {
+    "delta": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ],
+    "p_bootstrap": 1.0,
+    "cohens_d_paired": null,
+    "wilcoxon": {
+     "W": null,
+     "p": null,
+     "n_nonzero": 0
+    },
+    "paired_t": {
+     "t": null,
+     "p": 1.0
+    },
+    "n": 60
+   },
+   "above_k_mcnemar": {
+    "b_a_right_b_wrong": 0,
+    "c_a_wrong_b_right": 0,
+    "n_discordant": 0,
+    "p_value": 1.0
+   }
+  },
+  {
+   "key": "petsim_paraphrase",
+   "label": "Pet Sim full governance, Paraphrase",
+   "k": 10,
+   "new": "bge",
+   "old": "bge",
+   "n": 60,
+   "mean_old": 9.0,
+   "mean_new": 9.0,
+   "queries_changed": 0,
+   "above_k_old": 0,
+   "above_k_new": 0,
+   "size": {
+    "delta": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ],
+    "p_bootstrap": 1.0,
+    "cohens_d_paired": null,
+    "wilcoxon": {
+     "W": null,
+     "p": null,
+     "n_nonzero": 0
+    },
+    "paired_t": {
+     "t": null,
+     "p": 1.0
+    },
+    "n": 60
+   },
+   "above_k_mcnemar": {
+    "b_a_right_b_wrong": 0,
+    "c_a_wrong_b_right": 0,
+    "n_discordant": 0,
+    "p_value": 1.0
+   },
+   "cut_old": 0,
+   "cut_new": 0,
+   "cut_mcnemar": {
+    "b_a_right_b_wrong": 0,
+    "c_a_wrong_b_right": 0,
+    "n_discordant": 0,
+    "p_value": 1.0
+   }
+  },
+  {
+   "key": "petsim_notag",
+   "label": "Pet Sim full governance, No-tag",
+   "k": 10,
+   "new": "metadata",
+   "old": "metadata",
+   "n": 54,
+   "mean_old": 3.0,
+   "mean_new": 3.0,
+   "queries_changed": 0,
+   "above_k_old": 0,
+   "above_k_new": 0,
+   "size": {
+    "delta": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ],
+    "p_bootstrap": 1.0,
+    "cohens_d_paired": null,
+    "wilcoxon": {
+     "W": null,
+     "p": null,
+     "n_nonzero": 0
+    },
+    "paired_t": {
+     "t": null,
+     "p": 1.0
+    },
+    "n": 54
+   },
+   "above_k_mcnemar": {
+    "b_a_right_b_wrong": 0,
+    "c_a_wrong_b_right": 0,
+    "n_discordant": 0,
+    "p_value": 1.0
+   }
+  },
+  {
+   "key": "petsim_notag",
+   "label": "Pet Sim full governance, No-tag",
+   "k": 10,
+   "new": "bge",
+   "old": "bge",
+   "n": 54,
+   "mean_old": 8.0,
+   "mean_new": 8.0,
+   "queries_changed": 0,
+   "above_k_old": 0,
+   "above_k_new": 0,
+   "size": {
+    "delta": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ],
+    "p_bootstrap": 1.0,
+    "cohens_d_paired": null,
+    "wilcoxon": {
+     "W": null,
+     "p": null,
+     "n_nonzero": 0
+    },
+    "paired_t": {
+     "t": null,
+     "p": 1.0
+    },
+    "n": 54
+   },
+   "above_k_mcnemar": {
+    "b_a_right_b_wrong": 0,
+    "c_a_wrong_b_right": 0,
+    "n_discordant": 0,
+    "p_value": 1.0
+   },
+   "cut_old": 0,
+   "cut_new": 0,
+   "cut_mcnemar": {
+    "b_a_right_b_wrong": 0,
+    "c_a_wrong_b_right": 0,
+    "n_discordant": 0,
+    "p_value": 1.0
+   }
+  },
+  {
+   "key": "petsim_complex",
+   "label": "Pet Sim full governance, Complex",
+   "k": 10,
+   "new": "metadata",
+   "old": "metadata",
+   "n": 60,
+   "mean_old": 5.95,
+   "mean_new": 5.95,
+   "queries_changed": 0,
+   "above_k_old": 4,
+   "above_k_new": 4,
+   "size": {
+    "delta": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ],
+    "p_bootstrap": 1.0,
+    "cohens_d_paired": null,
+    "wilcoxon": {
+     "W": null,
+     "p": null,
+     "n_nonzero": 0
+    },
+    "paired_t": {
+     "t": null,
+     "p": 1.0
+    },
+    "n": 60
+   },
+   "above_k_mcnemar": {
+    "b_a_right_b_wrong": 0,
+    "c_a_wrong_b_right": 0,
+    "n_discordant": 0,
+    "p_value": 1.0
+   }
+  },
+  {
+   "key": "petsim_complex",
+   "label": "Pet Sim full governance, Complex",
+   "k": 10,
+   "new": "bge",
+   "old": "bge",
+   "n": 60,
+   "mean_old": 10.666666666666666,
+   "mean_new": 10.666666666666666,
+   "queries_changed": 0,
+   "above_k_old": 18,
+   "above_k_new": 18,
+   "size": {
+    "delta": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ],
+    "p_bootstrap": 1.0,
+    "cohens_d_paired": null,
+    "wilcoxon": {
+     "W": null,
+     "p": null,
+     "n_nonzero": 0
+    },
+    "paired_t": {
+     "t": null,
+     "p": 1.0
+    },
+    "n": 60
+   },
+   "above_k_mcnemar": {
+    "b_a_right_b_wrong": 0,
+    "c_a_wrong_b_right": 0,
+    "n_discordant": 0,
+    "p_value": 1.0
+   },
+   "cut_old": 17,
+   "cut_new": 17,
+   "cut_mcnemar": {
+    "b_a_right_b_wrong": 0,
+    "c_a_wrong_b_right": 0,
+    "n_discordant": 0,
+    "p_value": 1.0
+   }
+  },
+  {
+   "key": "cs_pooled",
+   "label": "Procedural CS, all scale points",
+   "k": 25,
+   "new": "metadata",
+   "old": "metadata",
+   "n": 180,
+   "mean_old": 19.583333333333332,
+   "mean_new": 19.583333333333332,
+   "queries_changed": 0,
+   "above_k_old": 0,
+   "above_k_new": 0,
+   "size": {
+    "delta": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ],
+    "p_bootstrap": 1.0,
+    "cohens_d_paired": null,
+    "wilcoxon": {
+     "W": null,
+     "p": null,
+     "n_nonzero": 0
+    },
+    "paired_t": {
+     "t": null,
+     "p": 1.0
+    },
+    "n": 180
+   },
+   "above_k_mcnemar": {
+    "b_a_right_b_wrong": 0,
+    "c_a_wrong_b_right": 0,
+    "n_discordant": 0,
+    "p_value": 1.0
+   }
+  },
+  {
+   "key": "cs_10",
+   "label": "Procedural CS, 10 agents (28 instructions)",
+   "k": 25,
+   "new": "metadata",
+   "old": "metadata",
+   "n": 30,
+   "mean_old": 19.0,
+   "mean_new": 19.0,
+   "queries_changed": 0,
+   "above_k_old": 0,
+   "above_k_new": 0,
+   "size": {
+    "delta": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ],
+    "p_bootstrap": 1.0,
+    "cohens_d_paired": null,
+    "wilcoxon": {
+     "W": null,
+     "p": null,
+     "n_nonzero": 0
+    },
+    "paired_t": {
+     "t": null,
+     "p": 1.0
+    },
+    "n": 30
+   },
+   "above_k_mcnemar": {
+    "b_a_right_b_wrong": 0,
+    "c_a_wrong_b_right": 0,
+    "n_discordant": 0,
+    "p_value": 1.0
+   }
+  },
+  {
+   "key": "cs_10",
+   "label": "Procedural CS, 10 agents (28 instructions)",
+   "k": 25,
+   "new": "hash",
+   "old": "hash",
+   "n": 30,
+   "mean_old": 19.0,
+   "mean_new": 19.0,
+   "queries_changed": 0,
+   "above_k_old": 0,
+   "above_k_new": 0,
+   "size": {
+    "delta": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ],
+    "p_bootstrap": 1.0,
+    "cohens_d_paired": null,
+    "wilcoxon": {
+     "W": null,
+     "p": null,
+     "n_nonzero": 0
+    },
+    "paired_t": {
+     "t": null,
+     "p": 1.0
+    },
+    "n": 30
+   },
+   "above_k_mcnemar": {
+    "b_a_right_b_wrong": 0,
+    "c_a_wrong_b_right": 0,
+    "n_discordant": 0,
+    "p_value": 1.0
+   },
+   "cut_old": 0,
+   "cut_new": 0,
+   "cut_mcnemar": {
+    "b_a_right_b_wrong": 0,
+    "c_a_wrong_b_right": 0,
+    "n_discordant": 0,
+    "p_value": 1.0
+   }
+  },
+  {
+   "key": "cs_25",
+   "label": "Procedural CS, 25 agents (51 instructions)",
+   "k": 25,
+   "new": "metadata",
+   "old": "metadata",
+   "n": 30,
+   "mean_old": 20.0,
+   "mean_new": 20.0,
+   "queries_changed": 0,
+   "above_k_old": 0,
+   "above_k_new": 0,
+   "size": {
+    "delta": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ],
+    "p_bootstrap": 1.0,
+    "cohens_d_paired": null,
+    "wilcoxon": {
+     "W": null,
+     "p": null,
+     "n_nonzero": 0
+    },
+    "paired_t": {
+     "t": null,
+     "p": 1.0
+    },
+    "n": 30
+   },
+   "above_k_mcnemar": {
+    "b_a_right_b_wrong": 0,
+    "c_a_wrong_b_right": 0,
+    "n_discordant": 0,
+    "p_value": 1.0
+   }
+  },
+  {
+   "key": "cs_25",
+   "label": "Procedural CS, 25 agents (51 instructions)",
+   "k": 25,
+   "new": "hash",
+   "old": "hash",
+   "n": 30,
+   "mean_old": 20.0,
+   "mean_new": 20.0,
+   "queries_changed": 0,
+   "above_k_old": 0,
+   "above_k_new": 0,
+   "size": {
+    "delta": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ],
+    "p_bootstrap": 1.0,
+    "cohens_d_paired": null,
+    "wilcoxon": {
+     "W": null,
+     "p": null,
+     "n_nonzero": 0
+    },
+    "paired_t": {
+     "t": null,
+     "p": 1.0
+    },
+    "n": 30
+   },
+   "above_k_mcnemar": {
+    "b_a_right_b_wrong": 0,
+    "c_a_wrong_b_right": 0,
+    "n_discordant": 0,
+    "p_value": 1.0
+   },
+   "cut_old": 0,
+   "cut_new": 0,
+   "cut_mcnemar": {
+    "b_a_right_b_wrong": 0,
+    "c_a_wrong_b_right": 0,
+    "n_discordant": 0,
+    "p_value": 1.0
+   }
+  },
+  {
+   "key": "cs_50",
+   "label": "Procedural CS, 50 agents (84 instructions)",
+   "k": 25,
+   "new": "metadata",
+   "old": "metadata",
+   "n": 30,
+   "mean_old": 19.8,
+   "mean_new": 19.8,
+   "queries_changed": 0,
+   "above_k_old": 0,
+   "above_k_new": 0,
+   "size": {
+    "delta": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ],
+    "p_bootstrap": 1.0,
+    "cohens_d_paired": null,
+    "wilcoxon": {
+     "W": null,
+     "p": null,
+     "n_nonzero": 0
+    },
+    "paired_t": {
+     "t": null,
+     "p": 1.0
+    },
+    "n": 30
+   },
+   "above_k_mcnemar": {
+    "b_a_right_b_wrong": 0,
+    "c_a_wrong_b_right": 0,
+    "n_discordant": 0,
+    "p_value": 1.0
+   }
+  },
+  {
+   "key": "cs_50",
+   "label": "Procedural CS, 50 agents (84 instructions)",
+   "k": 25,
+   "new": "hash",
+   "old": "hash",
+   "n": 30,
+   "mean_old": 19.8,
+   "mean_new": 19.8,
+   "queries_changed": 0,
+   "above_k_old": 0,
+   "above_k_new": 0,
+   "size": {
+    "delta": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ],
+    "p_bootstrap": 1.0,
+    "cohens_d_paired": null,
+    "wilcoxon": {
+     "W": null,
+     "p": null,
+     "n_nonzero": 0
+    },
+    "paired_t": {
+     "t": null,
+     "p": 1.0
+    },
+    "n": 30
+   },
+   "above_k_mcnemar": {
+    "b_a_right_b_wrong": 0,
+    "c_a_wrong_b_right": 0,
+    "n_discordant": 0,
+    "p_value": 1.0
+   },
+   "cut_old": 0,
+   "cut_new": 0,
+   "cut_mcnemar": {
+    "b_a_right_b_wrong": 0,
+    "c_a_wrong_b_right": 0,
+    "n_discordant": 0,
+    "p_value": 1.0
+   }
+  },
+  {
+   "key": "cs_100",
+   "label": "Procedural CS, 100 agents (155 instructions)",
+   "k": 25,
+   "new": "metadata",
+   "old": "metadata",
+   "n": 30,
+   "mean_old": 20.0,
+   "mean_new": 20.0,
+   "queries_changed": 0,
+   "above_k_old": 0,
+   "above_k_new": 0,
+   "size": {
+    "delta": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ],
+    "p_bootstrap": 1.0,
+    "cohens_d_paired": null,
+    "wilcoxon": {
+     "W": null,
+     "p": null,
+     "n_nonzero": 0
+    },
+    "paired_t": {
+     "t": null,
+     "p": 1.0
+    },
+    "n": 30
+   },
+   "above_k_mcnemar": {
+    "b_a_right_b_wrong": 0,
+    "c_a_wrong_b_right": 0,
+    "n_discordant": 0,
+    "p_value": 1.0
+   }
+  },
+  {
+   "key": "cs_100",
+   "label": "Procedural CS, 100 agents (155 instructions)",
+   "k": 25,
+   "new": "hash",
+   "old": "hash",
+   "n": 30,
+   "mean_old": 20.0,
+   "mean_new": 20.0,
+   "queries_changed": 0,
+   "above_k_old": 0,
+   "above_k_new": 0,
+   "size": {
+    "delta": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ],
+    "p_bootstrap": 1.0,
+    "cohens_d_paired": null,
+    "wilcoxon": {
+     "W": null,
+     "p": null,
+     "n_nonzero": 0
+    },
+    "paired_t": {
+     "t": null,
+     "p": 1.0
+    },
+    "n": 30
+   },
+   "above_k_mcnemar": {
+    "b_a_right_b_wrong": 0,
+    "c_a_wrong_b_right": 0,
+    "n_discordant": 0,
+    "p_value": 1.0
+   },
+   "cut_old": 0,
+   "cut_new": 0,
+   "cut_mcnemar": {
+    "b_a_right_b_wrong": 0,
+    "c_a_wrong_b_right": 0,
+    "n_discordant": 0,
+    "p_value": 1.0
+   }
+  },
+  {
+   "key": "cs_200",
+   "label": "Procedural CS, 200 agents (285 instructions)",
+   "k": 25,
+   "new": "metadata",
+   "old": "metadata",
+   "n": 30,
+   "mean_old": 19.5,
+   "mean_new": 19.5,
+   "queries_changed": 0,
+   "above_k_old": 0,
+   "above_k_new": 0,
+   "size": {
+    "delta": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ],
+    "p_bootstrap": 1.0,
+    "cohens_d_paired": null,
+    "wilcoxon": {
+     "W": null,
+     "p": null,
+     "n_nonzero": 0
+    },
+    "paired_t": {
+     "t": null,
+     "p": 1.0
+    },
+    "n": 30
+   },
+   "above_k_mcnemar": {
+    "b_a_right_b_wrong": 0,
+    "c_a_wrong_b_right": 0,
+    "n_discordant": 0,
+    "p_value": 1.0
+   }
+  },
+  {
+   "key": "cs_200",
+   "label": "Procedural CS, 200 agents (285 instructions)",
+   "k": 25,
+   "new": "hash",
+   "old": "hash",
+   "n": 30,
+   "mean_old": 19.5,
+   "mean_new": 19.5,
+   "queries_changed": 0,
+   "above_k_old": 0,
+   "above_k_new": 0,
+   "size": {
+    "delta": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ],
+    "p_bootstrap": 1.0,
+    "cohens_d_paired": null,
+    "wilcoxon": {
+     "W": null,
+     "p": null,
+     "n_nonzero": 0
+    },
+    "paired_t": {
+     "t": null,
+     "p": 1.0
+    },
+    "n": 30
+   },
+   "above_k_mcnemar": {
+    "b_a_right_b_wrong": 0,
+    "c_a_wrong_b_right": 0,
+    "n_discordant": 0,
+    "p_value": 1.0
+   },
+   "cut_old": 0,
+   "cut_new": 0,
+   "cut_mcnemar": {
+    "b_a_right_b_wrong": 0,
+    "c_a_wrong_b_right": 0,
+    "n_discordant": 0,
+    "p_value": 1.0
+   }
+  },
+  {
+   "key": "cs_500",
+   "label": "Procedural CS, 500 agents (675 instructions)",
+   "k": 25,
+   "new": "metadata",
+   "old": "metadata",
+   "n": 30,
+   "mean_old": 19.2,
+   "mean_new": 19.2,
+   "queries_changed": 0,
+   "above_k_old": 0,
+   "above_k_new": 0,
+   "size": {
+    "delta": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ],
+    "p_bootstrap": 1.0,
+    "cohens_d_paired": null,
+    "wilcoxon": {
+     "W": null,
+     "p": null,
+     "n_nonzero": 0
+    },
+    "paired_t": {
+     "t": null,
+     "p": 1.0
+    },
+    "n": 30
+   },
+   "above_k_mcnemar": {
+    "b_a_right_b_wrong": 0,
+    "c_a_wrong_b_right": 0,
+    "n_discordant": 0,
+    "p_value": 1.0
+   }
+  },
+  {
+   "key": "cs_500",
+   "label": "Procedural CS, 500 agents (675 instructions)",
+   "k": 25,
+   "new": "hash",
+   "old": "hash",
+   "n": 30,
+   "mean_old": 19.2,
+   "mean_new": 19.2,
+   "queries_changed": 0,
+   "above_k_old": 0,
+   "above_k_new": 0,
+   "size": {
+    "delta": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ],
+    "p_bootstrap": 1.0,
+    "cohens_d_paired": null,
+    "wilcoxon": {
+     "W": null,
+     "p": null,
+     "n_nonzero": 0
+    },
+    "paired_t": {
+     "t": null,
+     "p": 1.0
+    },
+    "n": 30
+   },
+   "above_k_mcnemar": {
+    "b_a_right_b_wrong": 0,
+    "c_a_wrong_b_right": 0,
+    "n_discordant": 0,
+    "p_value": 1.0
+   },
+   "cut_old": 0,
+   "cut_new": 0,
+   "cut_mcnemar": {
+    "b_a_right_b_wrong": 0,
+    "c_a_wrong_b_right": 0,
+    "n_discordant": 0,
+    "p_value": 1.0
+   }
+  }
+ ]
+}

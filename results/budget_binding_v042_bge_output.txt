@@ -1,0 +1,235 @@
+
+=== Budget-binding rate: admissible set larger than k ===
+
+Backends for threshold-dependent conditions: ['bge']
+ToolBench: 3225 APIs, 1100 queries
+
+ToolBench, governed  [k=5, n=1100, corpus=3225]
+  note: Gate on the RapidAPI category. Every gate-passing API also matches its soft scope (the category is in scope.tags), so the threshold cannot act.
+  threshold-dependent gate-passing items per query: mean 0.00, max 0  -> admission is backend-independent
+  source                                 mean   median         P(|A|>k) [95% CP CI]
+  metadata (backend-free)              187.33    144.0         1.000 [0.997, 1.000]
+  hash trace, whole pool               187.33    144.0         1.000 [0.997, 1.000]   (0 queries differ from metadata)
+  hash trace, default pool             187.33    144.0         1.000 [0.997, 1.000]
+  hash cut removed >=1 item                                    1.000 [0.997, 1.000]
+  hash top-k differs, default vs whole pool 0.000 [0.000, 0.003]
+
+ToolBench, ungated (no gov)  [k=5, n=1100, corpus=3225]
+  note: Empty scopes match every context, so every API is admissible. The trace rows show the operational pool (base 15). Before BEAR 0.4.2 (or with restore_dropped_rows) BM25 search also drops zero-score rows.
+  threshold-dependent gate-passing items per query: mean 0.00, max 0  -> admission is backend-independent
+  source                                 mean   median         P(|A|>k) [95% CP CI]
+  metadata (backend-free)             3225.00   3225.0         1.000 [0.997, 1.000]
+
+ToolBench, mandatory-only (supplementary)  [k=5, n=1100, corpus=3225]
+  note: Governed corpus, context without tags. The gate fails closed, so nothing is admissible. No mandatory tags are configured.
+  threshold-dependent gate-passing items per query: mean 0.00, max 0  -> admission is backend-independent
+  source                                 mean   median         P(|A|>k) [95% CP CI]
+  metadata (backend-free)                0.00      0.0         0.000 [0.000, 0.003]
+  hash trace, whole pool                 0.00      0.0         0.000 [0.000, 0.003]   (0 queries differ from metadata)
+  hash trace, default pool               0.00      0.0         0.000 [0.000, 0.003]
+  hash cut removed >=1 item                                    0.000 [0.000, 0.003]
+  hash top-k differs, default vs whole pool 0.000 [0.000, 0.003]
+  [toolbench: 68.1s]
+MetaTool: 199 tools, 21111 queries
+
+MetaTool base (no tags)  [k=5, n=21111, corpus=199]
+  note: Soft scope is the tool's own name and queries carry no tags, so admission is sim >= theta alone. All priorities are 50.
+  threshold-dependent gate-passing items per query: mean 199.00, max 199  -> admission is backend-dependent
+  source                                 mean   median         P(|A|>k) [95% CP CI]
+  metadata floor (lower bound)           0.00      0.0         0.000 [0.000, 0.000]
+  bge trace, whole pool                199.00    199.0         1.000 [1.000, 1.000]
+  bge trace, default pool               15.00     15.0         1.000 [1.000, 1.000]
+  bge cut removed >=1 item                                     1.000 [1.000, 1.000]
+  bge top-k differs, default vs whole pool 0.000 [0.000, 0.000]
+
+MetaTool+Tags, governed  [k=5, n=21111, corpus=199]
+  note: required_tags = scope.tags = the tool's generated tags. A tool passes only if all its tags are in the query context.
+  threshold-dependent gate-passing items per query: mean 0.00, max 0  -> admission is backend-independent
+  source                                 mean   median         P(|A|>k) [95% CP CI]
+  metadata (backend-free)               11.59      9.0         0.794 [0.788, 0.799]
+  hash trace, whole pool                11.59      9.0         0.794 [0.788, 0.799]   (0 queries differ from metadata)
+  hash trace, default pool              11.59      9.0         0.794 [0.788, 0.799]
+  hash cut removed >=1 item                                    0.794 [0.788, 0.799]
+  hash top-k differs, default vs whole pool 0.000 [0.000, 0.000]
+
+MetaTool+QueryTags (query_tags.json, supplementary)  [k=5, n=21111, corpus=199]
+  threshold-dependent gate-passing items per query: mean 0.00, max 0  -> admission is backend-independent
+  source                                 mean   median         P(|A|>k) [95% CP CI]
+  metadata (backend-free)                9.97      8.0         0.711 [0.705, 0.717]
+  hash trace, whole pool                 9.97      8.0         0.711 [0.705, 0.717]   (0 queries differ from metadata)
+  hash trace, default pool               9.97      8.0         0.711 [0.705, 0.717]
+  hash cut removed >=1 item                                    0.711 [0.705, 0.717]
+  hash top-k differs, default vs whole pool 0.000 [0.000, 0.000]
+
+MetaTool+QueryTags (query_tags_top5.json, supplementary)  [k=5, n=21111, corpus=199]
+  threshold-dependent gate-passing items per query: mean 0.00, max 0  -> admission is backend-independent
+  source                                 mean   median         P(|A|>k) [95% CP CI]
+  metadata (backend-free)               24.27     22.0         0.983 [0.982, 0.985]
+  hash trace, whole pool                24.27     22.0         0.983 [0.982, 0.985]   (0 queries differ from metadata)
+  hash trace, default pool              24.27     22.0         0.983 [0.982, 0.985]
+  hash cut removed >=1 item                                    0.983 [0.982, 0.985]
+  hash top-k differs, default vs whole pool 0.000 [0.000, 0.000]
+  [metatool: 1103.9s]
+Pet Sim: 58 instructions
+
+Pet Sim full governance, Standard  [k=10, n=60, corpus=58]
+  threshold-dependent gate-passing items per query: mean 4.75, max 5  -> admission is backend-dependent
+  source                                 mean   median         P(|A|>k) [95% CP CI]
+  metadata floor (lower bound)           6.65      5.0         0.117 [0.048, 0.226]
+  bge trace, whole pool                 11.40     10.0         0.433 [0.306, 0.568]
+  bge trace, default pool               11.40     10.0         0.433 [0.306, 0.568]
+  bge cut removed >=1 item                                     0.383 [0.261, 0.518]
+  bge top-k differs, default vs whole pool 0.000 [0.000, 0.060]
+
+Pet Sim full governance, Paraphrase  [k=10, n=60, corpus=58]
+  threshold-dependent gate-passing items per query: mean 5.00, max 5  -> admission is backend-dependent
+  source                                 mean   median         P(|A|>k) [95% CP CI]
+  metadata floor (lower bound)           4.00      4.0         0.000 [0.000, 0.060]
+  bge trace, whole pool                  9.00      9.0         0.000 [0.000, 0.060]
+  bge trace, default pool                9.00      9.0         0.000 [0.000, 0.060]
+  bge cut removed >=1 item                                     0.000 [0.000, 0.060]
+  bge top-k differs, default vs whole pool 0.000 [0.000, 0.060]
+
+Pet Sim full governance, No-tag  [k=10, n=54, corpus=58]
+  threshold-dependent gate-passing items per query: mean 5.00, max 5  -> admission is backend-dependent
+  source                                 mean   median         P(|A|>k) [95% CP CI]
+  metadata floor (lower bound)           3.00      3.0         0.000 [0.000, 0.066]
+  bge trace, whole pool                  8.00      8.0         0.000 [0.000, 0.066]
+  bge trace, default pool                8.00      8.0         0.000 [0.000, 0.066]
+  bge cut removed >=1 item                                     0.000 [0.000, 0.066]
+  bge top-k differs, default vs whole pool 0.000 [0.000, 0.066]
+
+Pet Sim full governance, Complex  [k=10, n=60, corpus=58]
+  threshold-dependent gate-passing items per query: mean 4.72, max 5  -> admission is backend-dependent
+  source                                 mean   median         P(|A|>k) [95% CP CI]
+  metadata floor (lower bound)           5.95      5.0         0.067 [0.018, 0.162]
+  bge trace, whole pool                 10.67     10.0         0.300 [0.188, 0.432]
+  bge trace, default pool               10.67     10.0         0.300 [0.188, 0.432]
+  bge cut removed >=1 item                                     0.283 [0.175, 0.414]
+  bge top-k differs, default vs whole pool 0.000 [0.000, 0.060]
+  [petsim: 37.9s]
+
+Procedural CS, all scale points  [k=25, n=180, corpus=-]
+  source                                 mean   median         P(|A|>k) [95% CP CI]
+  metadata (backend-free)               19.58     20.0         0.000 [0.000, 0.020]
+  hash trace, whole pool                19.58     20.0         0.000 [0.000, 0.020]   (0 queries differ from metadata)
+  hash cut removed >=1 item                                    0.000 [0.000, 0.020]
+
+Procedural CS, 10 agents (28 instructions)  [k=25, n=30, corpus=28]
+  threshold-dependent gate-passing items per query: mean 0.00, max 0  -> admission is backend-independent
+  source                                 mean   median         P(|A|>k) [95% CP CI]
+  metadata (backend-free)               19.00     19.0         0.000 [0.000, 0.116]
+  hash trace, whole pool                19.00     19.0         0.000 [0.000, 0.116]   (0 queries differ from metadata)
+  hash trace, default pool              19.00     19.0         0.000 [0.000, 0.116]
+  hash cut removed >=1 item                                    0.000 [0.000, 0.116]
+  hash top-k differs, default vs whole pool 0.000 [0.000, 0.116]
+
+Procedural CS, 25 agents (51 instructions)  [k=25, n=30, corpus=51]
+  threshold-dependent gate-passing items per query: mean 0.00, max 0  -> admission is backend-independent
+  source                                 mean   median         P(|A|>k) [95% CP CI]
+  metadata (backend-free)               20.00     20.0         0.000 [0.000, 0.116]
+  hash trace, whole pool                20.00     20.0         0.000 [0.000, 0.116]   (0 queries differ from metadata)
+  hash trace, default pool              20.00     20.0         0.000 [0.000, 0.116]
+  hash cut removed >=1 item                                    0.000 [0.000, 0.116]
+  hash top-k differs, default vs whole pool 0.000 [0.000, 0.116]
+
+Procedural CS, 50 agents (84 instructions)  [k=25, n=30, corpus=84]
+  threshold-dependent gate-passing items per query: mean 0.00, max 0  -> admission is backend-independent
+  source                                 mean   median         P(|A|>k) [95% CP CI]
+  metadata (backend-free)               19.80     20.0         0.000 [0.000, 0.116]
+  hash trace, whole pool                19.80     20.0         0.000 [0.000, 0.116]   (0 queries differ from metadata)
+  hash trace, default pool              19.80     20.0         0.000 [0.000, 0.116]
+  hash cut removed >=1 item                                    0.000 [0.000, 0.116]
+  hash top-k differs, default vs whole pool 0.000 [0.000, 0.116]
+
+Procedural CS, 100 agents (155 instructions)  [k=25, n=30, corpus=155]
+  threshold-dependent gate-passing items per query: mean 0.00, max 0  -> admission is backend-independent
+  source                                 mean   median         P(|A|>k) [95% CP CI]
+  metadata (backend-free)               20.00     20.0         0.000 [0.000, 0.116]
+  hash trace, whole pool                20.00     20.0         0.000 [0.000, 0.116]   (0 queries differ from metadata)
+  hash trace, default pool              20.00     20.0         0.000 [0.000, 0.116]
+  hash cut removed >=1 item                                    0.000 [0.000, 0.116]
+  hash top-k differs, default vs whole pool 0.000 [0.000, 0.116]
+
+Procedural CS, 200 agents (285 instructions)  [k=25, n=30, corpus=285]
+  threshold-dependent gate-passing items per query: mean 0.00, max 0  -> admission is backend-independent
+  source                                 mean   median         P(|A|>k) [95% CP CI]
+  metadata (backend-free)               19.50     19.5         0.000 [0.000, 0.116]
+  hash trace, whole pool                19.50     19.5         0.000 [0.000, 0.116]   (0 queries differ from metadata)
+  hash trace, default pool              19.50     19.5         0.000 [0.000, 0.116]
+  hash cut removed >=1 item                                    0.000 [0.000, 0.116]
+  hash top-k differs, default vs whole pool 0.000 [0.000, 0.116]
+
+Procedural CS, 500 agents (675 instructions)  [k=25, n=30, corpus=675]
+  threshold-dependent gate-passing items per query: mean 0.00, max 0  -> admission is backend-independent
+  source                                 mean   median         P(|A|>k) [95% CP CI]
+  metadata (backend-free)               19.20     19.0         0.000 [0.000, 0.116]
+  hash trace, whole pool                19.20     19.0         0.000 [0.000, 0.116]   (0 queries differ from metadata)
+  hash trace, default pool              19.20     19.0         0.000 [0.000, 0.116]
+  hash cut removed >=1 item                                    0.000 [0.000, 0.116]
+  hash top-k differs, default vs whole pool 0.000 [0.000, 0.116]
+  [cs: 2.4s]
+
+--- Summary: P(admissible set > k) ---
+
+Condition                                              k      n     basis    mean  median  P(|A|>k) [95% CP CI]
+ToolBench, governed                                    5   1100  metadata   187.3     144  1.000 [0.997, 1.000]
+ToolBench, ungated (no gov)                            5   1100  metadata  3225.0    3225  1.000 [0.997, 1.000]
+ToolBench, mandatory-only (supplementary)              5   1100  metadata     0.0       0  0.000 [0.000, 0.003]
+MetaTool base (no tags)                                5  21111       bge   199.0     199  1.000 [1.000, 1.000]
+MetaTool+Tags, governed                                5  21111  metadata    11.6       9  0.794 [0.788, 0.799]
+MetaTool+QueryTags (query_tags.json, supplementary)    5  21111  metadata    10.0       8  0.711 [0.705, 0.717]
+MetaTool+QueryTags (query_tags_top5.json, supplement   5  21111  metadata    24.3      22  0.983 [0.982, 0.985]
+Pet Sim full governance, Standard                     10     60       bge    11.4      10  0.433 [0.306, 0.568]
+Pet Sim full governance, Paraphrase                   10     60       bge     9.0       9  0.000 [0.000, 0.060]
+Pet Sim full governance, No-tag                       10     54       bge     8.0       8  0.000 [0.000, 0.066]
+Pet Sim full governance, Complex                      10     60       bge    10.7      10  0.300 [0.188, 0.432]
+Procedural CS, all scale points                       25    180  metadata    19.6      20  0.000 [0.000, 0.020]
+
+--- LaTeX table (paste into manuscript) ---
+
+\begin{table}[t]
+  \caption{Budget-binding rate: fraction of queries whose admissible candidate set (gate, then soft scope or threshold, before relationship resolution and the cut) exceeds $k$. Metadata rows need no backend. Backend rows read the retriever's trace with the whole corpus ranked. 95\% Clopper--Pearson CIs.}
+  \label{tab:budget-binding}
+  \centering
+  \small
+  \begin{tabular}{@{}l c r l c c c@{}}
+    \toprule
+    Condition & $k$ & $n$ & Basis & Mean $|A|$ & Median $|A|$ & $P(|A|>k)$ [95\% CI] \\
+    \midrule
+    ToolBench, governed & 5 & 1{,}100 & metadata & 187.3 & 144 & 1.000 [0.997, 1.000] \\
+    ToolBench, ungated (no gov) & 5 & 1{,}100 & metadata & 3225.0 & 3225 & 1.000 [0.997, 1.000] \\
+    ToolBench, mandatory-only (supplementary) & 5 & 1{,}100 & metadata & 0.0 & 0 & 0.000 [0.000, 0.003] \\
+    MetaTool base (no tags) & 5 & 21{,}111 & bge & 199.0 & 199 & 1.000 [1.000, 1.000] \\
+    MetaTool+Tags, governed & 5 & 21{,}111 & metadata & 11.6 & 9 & 0.794 [0.788, 0.799] \\
+    MetaTool+QueryTags (query\_tags.json, supplementary) & 5 & 21{,}111 & metadata & 10.0 & 8 & 0.711 [0.705, 0.717] \\
+    MetaTool+QueryTags (query\_tags\_top5.json, supplementary) & 5 & 21{,}111 & metadata & 24.3 & 22 & 0.983 [0.982, 0.985] \\
+    Pet Sim full governance, Standard & 10 & 60 & bge & 11.4 & 10 & 0.433 [0.306, 0.568] \\
+    Pet Sim full governance, Paraphrase & 10 & 60 & bge & 9.0 & 9 & 0.000 [0.000, 0.060] \\
+    Pet Sim full governance, No-tag & 10 & 54 & bge & 8.0 & 8 & 0.000 [0.000, 0.066] \\
+    Pet Sim full governance, Complex & 10 & 60 & bge & 10.7 & 10 & 0.300 [0.188, 0.432] \\
+    Procedural CS, all scale points & 25 & 180 & metadata & 19.6 & 20 & 0.000 [0.000, 0.020] \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Wrote results/budget_binding_v042_bge.json
+
+Elapsed: 1212.6s
+
+=== Reproducibility ===
+Timestamp (UTC): 2026-10-30T12:26:28Z
+Command line:    evals/eval_budget_binding.py --backends bge --output results/budget_binding_v042_bge.json --log-file results/budget_binding_v042_bge_output.txt
+Python:          3.12.13 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
+numpy:           2.2.6
+scipy:           1.17.1
+bear:            0.4.2
+git commit:      a0a4a9b4daeb5d7213a4dd97f74fce63e3d6fce9
+git status:      unknown (git status failed or timed out)
+git branch:      tist-r2
+
+  conditions: ['toolbench', 'metatool', 'petsim', 'cs']
+  backends: ['bge']
+  bear_path: /home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/bear/__init__.py
+  bear_source_sha: 9d085b49c004cb03e2bede9055fdc3810cf260c0
+===
