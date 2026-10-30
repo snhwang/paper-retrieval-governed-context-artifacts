@@ -63,7 +63,8 @@ logging.getLogger("bear").setLevel(os.environ.get("TIST_BEAR_LOG", "ERROR"))
 
 # 0.4.0 produced the committed results. 0.4.1 changes only the required-tags
 # backfill (scored at similarity 0), which only a row-dropping search reaches.
-EXPECTED_BEAR_VERSIONS = ("0.4.0", "0.4.1")
+# 0.4.2 makes BM25 return every row and breaks exact ties by id.
+EXPECTED_BEAR_VERSIONS = ("0.4.0", "0.4.1", "0.4.2")
 NEMOTRON_URL = os.environ.get("TIST_NEMOTRON_URL", "http://localhost:8360")
 FORBIDDEN_PORTS = (":8355",)  # the shared LLM server, kept idle for other runs
 EMB_CACHE_DIR = Path(os.environ.get(
@@ -101,7 +102,16 @@ def bear_provenance() -> dict:
         dist = md.distribution("bear")
         du = dist.read_text("direct_url.json")
         if du:
-            info["bear_direct_url"] = json.loads(du).get("url")
+            url = json.loads(du).get("url")
+            info["bear_direct_url"] = url
+            # A local export records its commit in BEAR_GIT_SHA (or EXPORTED_SHA).
+            if url and url.startswith("file://"):
+                src = Path(url[len("file://"):])
+                for name in ("BEAR_GIT_SHA", "EXPORTED_SHA"):
+                    f = src / name
+                    if f.exists():
+                        info["bear_export_sha"] = f.read_text(encoding="utf-8").strip()
+                        break
     except Exception:  # noqa: BLE001
         pass
     return info

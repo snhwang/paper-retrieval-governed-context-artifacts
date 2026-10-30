@@ -86,7 +86,9 @@ against the precedence order that the revised Section 3.1.1 states:
          search or by the backfill) with equal final score and equal
          priority, the output lists them by id, and the top-k cut keeps the
          smallest ids: no ranked row cut by top_k ties a kept ranked row with
-         a larger id. Scores of cut rows are recomputed with BEAR's own
+         a larger id (kept rows that another output row requires are left
+         out of that comparison, since closure, not the ranking, may have
+         kept them). Scores of cut rows are recomputed with BEAR's own
          float64 expression from the similarity the trace records, so ties
          are exact. Without a canonical tie-break the order of tied rows is
          whatever the backend's argsort gives, which can differ between numpy
@@ -111,6 +113,15 @@ an instruction with a soft scope can be dropped and reach the backfill. That
 is where I14 and restore_flat_backfill differ, so the flat-backfill column
 runs on it. Soft scopes then see no context tags.
 
+From 0.4.2, BM25 returns every row: a row that shares no term with the
+query comes back at similarity 0, ordered by priority then id, and meets the
+normal pool and admission rules. The backfill then has nothing to add under
+BM25, so I13 and I14 are exercised only by the columns that restore the
+earlier behavior (restore_dropped_rows, restore_flat_backfill and
+restore_below_threshold imply it). A configuration whose switch this BEAR
+does not define is skipped with a note, since Config would ignore it
+silently and report a column that changed nothing.
+
 Under a backend that drops rows two checks are restricted. I10 compares the
 resolved set only across order variants that admit the same instructions by
 the same paths, since moving the similarity markers changes which rows share
@@ -132,8 +143,10 @@ configuration uses BEAR's built-in hash embedder instead.
 
 Configurations: BEAR main defaults (stub, hash and BM25); each legacy switch
 on (restore_pool_by_k, restore_unchecked_requires, restore_below_threshold,
-restore_ranked_resolution, restore_ungated_pool, restore_removed_acting, and
-from 0.4.1 restore_flat_backfill, run under BM25 where the backfill acts);
+restore_ranked_resolution, restore_ungated_pool, restore_removed_acting; from
+0.4.1 restore_flat_backfill, run under BM25 where the backfill acts; from
+0.4.2 restore_dropped_rows under BM25, and restore_tie_order under the stub
+and under BM25, where exact ties occur);
 and each mechanism Config can disable (mandatory_tags=[], priority_weight=0,
 threshold off). The gate and the relationship edges are corpus metadata, so
 Config cannot disable them.
@@ -242,6 +255,12 @@ CONFIGS: dict[str, dict] = {
     "legacy_flat_backfill": {"label": "restore_flat_backfill (BM25, gate_tags context)",
                              "embedder": "bm25", "context": "gate",
                              "overrides": {"restore_flat_backfill": True}},
+    "legacy_dropped_rows": {"label": "restore_dropped_rows (BM25)", "embedder": "bm25",
+                            "overrides": {"restore_dropped_rows": True}},
+    "legacy_tie_order": {"label": "restore_tie_order (stub)", "embedder": "stub",
+                         "overrides": {"restore_tie_order": True}},
+    "legacy_tie_order_bm25": {"label": "restore_tie_order (BM25)", "embedder": "bm25",
+                              "overrides": {"restore_tie_order": True}},
     "no_mandatory": {"label": "mandatory_tags=[]", "embedder": "stub",
                      "overrides": {"mandatory_tags": []}},
     "no_priority": {"label": "priority_weight=0", "embedder": "stub",
@@ -906,8 +925,15 @@ def check_output(info: CaseInfo, out, trace, k: int, threshold: float,
             if not a_.id < b_.id:
                 bad16.append(f"{a_.id} listed before {b_.id} at equal score "
                              f"{float(a_.final_score)!r} and priority {info.prio[a_.id]}")
+    # Compare cut rows only with kept rows that took a ranked slot. A row no
+    # other output row requires took one. A required row may be in the output
+    # only through closure (the cut keeps a kept row's prerequisites), so it is
+    # left out of this comparison, which can miss a violation but not invent one.
+    required_by_out = {r for e in ids for r in info.req[e] if r != e}
     kept_keys: dict[tuple, list[str]] = {}
     for sc in ranked:
+        if sc.id in required_by_out:
+            continue
         kept_keys.setdefault((float(sc.final_score), info.prio[sc.id]), []).append(sc.id)
     for d, e in trace.excluded.items():
         if e["reason"] != "top_k" or not ranked_row(d):
@@ -1502,6 +1528,26 @@ def aggregate_sensitivity(rows: list[dict]) -> dict:
             "fixed_k": fixed, "pools": list(SENS_POOLS), "examples": examples}
 
 
+def bear_install_provenance() -> dict:
+    """Where the installed BEAR came from: direct_url and an export's recorded sha."""
+    info: dict = {}
+    try:
+        import importlib.metadata as md
+        du = md.distribution("bear").read_text("direct_url.json")
+        if du:
+            url = json.loads(du).get("url")
+            info["direct_url"] = url
+            if url and url.startswith("file://"):
+                for name in ("BEAR_GIT_SHA", "EXPORTED_SHA"):
+                    f = Path(url[len("file://"):]) / name
+                    if f.exists():
+                        info["export_sha"] = f.read_text(encoding="utf-8").strip()
+                        break
+    except Exception:  # noqa: BLE001
+        pass
+    return info
+
+
 def fmt_rate(x: int, n: int, ci: tuple[float, float]) -> str:
     if n == 0:
         return "n/a"
@@ -1639,6 +1685,12 @@ def main() -> None:
     config_names = list(args.configs)
     if "main" not in config_names:
         config_names.insert(0, "main")
+    unknown = {n: sorted(k for k in CONFIGS[n]["overrides"] if k not in Config.model_fields)
+               for n in config_names}
+    skipped = {n: u for n, u in unknown.items() if u}
+    if skipped:
+        print(f"Skipping configurations whose switches BEAR {bear.__version__} lacks: {skipped}")
+        config_names = [n for n in config_names if n not in skipped]
     pending = set(args.pending)
     if not args.overwrite:
         for path in (args.output, args.counterexamples, args.log_file):
@@ -1758,6 +1810,7 @@ def main() -> None:
             "bear_version": getattr(bear, "__version__", "?"),
             "bear_path": bear.__file__,
             "bear_source_sha": os.environ.get("BEAR_SOURCE_SHA", "(unset)"),
+            "bear_install": bear_install_provenance(),
             "invariant_labels": INV_LABEL,
             "pending_invariants": sorted(pending),
             "results": agg,

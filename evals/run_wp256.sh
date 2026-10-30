@@ -28,7 +28,7 @@ LOCAL="hash bge qwen3-0.6b"
 CAP="systemd-run --user --scope --slice=tist.slice -p MemoryMax=24G -p MemorySwapMax=0"
 python() { $CAP "$(command -v python)" "$@"; }
 
-command python -c "import bear,sys; sys.exit(0 if bear.__version__ in ('0.4.0','0.4.1') else 'BEAR 0.4.0 or 0.4.1 required, found '+bear.__version__)"
+command python -c "import bear,sys; sys.exit(0 if bear.__version__ in ('0.4.0','0.4.1','0.4.2') else 'BEAR 0.4.0 to 0.4.2 required, found '+bear.__version__)"
 
 embed_local() {
   python evals/eval_mandatory_coverage.py --phase embed --backends hash bge bge-m3 qwen3-0.6b qwen3-4b
@@ -78,8 +78,18 @@ case "${1:-}" in
     python evals/check_bm25_v041.py --workers "$WORKERS"
     python evals/eval_invariants.py --workers "$WORKERS"         --output results/invariants_v041.json         --counterexamples results/invariants_v041_counterexamples.json         --log-file results/invariants_v041_output.txt
     ;;
+  v042)
+    # BEAR 0.4.2 candidate (bear-dev 9d085b4): WP1 invariants, the release
+    # acceptance run. No model is loaded.
+    export BEAR_SOURCE_SHA=9d085b49c004cb03e2bede9055fdc3810cf260c0 CUDA_VISIBLE_DEVICES= OMP_NUM_THREADS=1
+    python evals/eval_invariants.py --workers "$WORKERS" \
+        --output results/invariants_v042.json \
+        --counterexamples results/invariants_v042_counterexamples.json \
+        --log-file results/invariants_v042_output.txt
+    command python evals/repro_bm25_admission_gap.py
+    ;;
   *)
-    echo "usage: bash evals/run_wp256.sh {embed|run|v041}" >&2
+    echo "usage: bash evals/run_wp256.sh {embed|run|v041|v042}" >&2
     exit 2
     ;;
 esac

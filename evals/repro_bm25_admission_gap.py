@@ -31,6 +31,11 @@ hash embedder) admits all three.
 So under BM25 both claims fail for gate-passing instructions without
 required tags that share no term with the query. The failure predates 0.4.1.
 
+Fixed in BEAR 0.4.2 (bear-dev 9d085b4): BM25 returns every row, a row that
+shares no term with the query at similarity 0, so greeting is admitted by
+search (similarity 0, score 0.15) and the two tied rows at 0.15 come out in
+id order. Config.restore_dropped_rows reproduces the earlier behavior.
+
 Usage:
     python evals/repro_bm25_admission_gap.py
 """
