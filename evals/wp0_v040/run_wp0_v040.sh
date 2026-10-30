@@ -717,6 +717,11 @@ lane_manddense042() {  # after dense042 (one dense lane at a time): redo the cap
         --backends bge bge-m3 qwen3 --out "results/wp0/diag_mandatory_dense_v042_L$sw.json"
     step "diag_mand_q4b_L$sw" cpu v042L 0 0 -- "$PY" $W/diag_mandatory_petsim.py \
         --backends qwen3-4b --out "results/wp0/diag_mandatory_q4b_v042_L$sw.json"
+    # dense attribution of the decomposed, alpha and governance tables (BGE)
+    step "decomposed_bge_L$sw" cpu v042L 0 0 -- "$PY" evals/eval_governance_decomposed.py --backends bge
+    step "alpha_sweep_bge_L$sw" cpu v042L 0 0 -- "$PY" evals/eval_alpha_sweep.py --backends bge
+    step "gov_ablation_bge_L$sw" cpu v042L 0 0 -- "$PY" evals/eval_governance_ablation.py \
+        --backends bge --skip-itr --output results/wp0/governance_ablation_bge.json
   done
   EXTRA_ENV=()
 }

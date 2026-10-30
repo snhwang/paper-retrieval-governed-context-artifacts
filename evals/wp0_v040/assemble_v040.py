@@ -45,6 +45,9 @@ OUTPUTS = {
     "diag_*": ["results/wp0/diag_*.json"],
     "decomposed*": ["results/governance_decomposed_*.json", "results/governance_decomposed_output.txt"],
     "alpha_sweep*": ["results/alpha_sweep_*.json", "results/alpha_sweep_output.txt"],
+    # 0.4.2 run (2026-10-30): forced-fallback reruns on 0.1.10 (lane fallback0110)
+    "fb_alpha": ["results/alpha_sweep_*.json", "results/alpha_sweep_output.txt"],
+    "fb_toolllm": ["results/wp0/toolbench_toolllm_fixed.json"],
 }
 
 
@@ -71,6 +74,8 @@ def patterns_for(step: str) -> list[str]:
     for key, pats in OUTPUTS.items():
         if fnmatch.fnmatch(step, key):
             return [p.replace("{step}", step) for p in pats]
+    if step.startswith("fb_"):  # a forced-fallback rerun writes what the step it copies writes
+        return patterns_for(step[3:])
     return []
 
 
@@ -97,7 +102,7 @@ def main() -> None:
                      else "blocked" if (logs / f"{step}.blocked").exists()
                      else "failed" if (logs / f"{step}.failed").exists() else "unknown")
             manifest["steps"][step] = {"version": ver, "state": state}
-            if step in PRE_TAG_FIX:
+            if step in PRE_TAG_FIX and ver_main == "v040":
                 manifest["steps"][step]["note"] = PRE_TAG_FIX[step]
             # Result files only from finished steps. A killed or failed step
             # keeps its log, which says how far it got.
@@ -132,6 +137,9 @@ def main() -> None:
                         ("lists/e2e_v0110", w / "lists_v0110" / "e2e"),
                         ("lists/wp4_toolbench", w / f"wp4_lists_{ver_main}" / "toolbench"),
                         ("lists/wp4_metatool-tags", w / f"wp4_lists_{ver_main}" / "metatool-tags")]
+            # e2e lists under legacy switches (attribution of the BM25 prompt changes)
+            for d in sorted(w.glob(f"lists_{ver_main}L_*")):
+                sources.append((f"lists/e2e_{d.name[6:]}", d / "e2e"))
     sources += [("wp4", root / "wp4"), ("compare", root / "compare")]
     sources += [(d, Path(sdir)) for d, sdir in (e.split("=", 1) for e in args.extra)]
     for sub, s in sources:
