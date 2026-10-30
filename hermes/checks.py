@@ -99,6 +99,8 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--root", required=True)
     ap.add_argument("--out-dir")
+    ap.add_argument("--jobs", type=int, default=1,
+                    help="run the per-cell verify-audit calls this many at a time")
     a = ap.parse_args()
     root = os.path.abspath(os.path.expanduser(a.root))
     out_dir = a.out_dir or root
@@ -109,7 +111,14 @@ def main() -> int:
     ck = Checker()
     summary = {}
     va_text = []
-    all_audit = []
+    combined = os.path.join(out_dir, "all_cells.audit.jsonl")
+    all_f = open(combined, "w", encoding="utf-8")
+    va_results: dict = {}
+    if a.jobs > 1:
+        from concurrent.futures import ThreadPoolExecutor
+        with ThreadPoolExecutor(a.jobs) as ex:
+            futs = {d["cell"]: ex.submit(verify_audit, d["audit"]) for d in done}
+            va_results = {c: f.result() for c, f in futs.items()}
 
     for d in done:
         cell, arm, sw = d["cell"], d["arm"], d["switches"]
@@ -117,7 +126,8 @@ def main() -> int:
         flushes = [r for r in log if r.get("event") == "flush_cache" and r.get("cell") == cell]
         res = json.load(open(d["out"])) if os.path.exists(d["out"]) else {}
         recs = load_jsonl(d["audit"])
-        all_audit.extend(recs)
+        for r in recs:  # streamed, so a large run is never held in memory at once
+            all_f.write(json.dumps(r) + "\n")
         nar = [r for r in recs if r.get("schema") == "bear.narrowing/1"]
         comp = [r for r in nar if not r.get("reused_from")]
         dec = [r for r in recs if r.get("schema") == "bear.decision/1"]
@@ -280,17 +290,14 @@ def main() -> int:
             ck.check(cell, "annotation.off", all(not r.get("annotation") and not r.get("annotation_placed")
                                                  for r in nar), "")
         # verify
-        rc, text = verify_audit(d["audit"])
+        rc, text = va_results.get(cell) or verify_audit(d["audit"])
         va_text.append(f"== {cell} (rc={rc})\n{text}")
         nd = differs(text)
         row["verify_audit"] = [ln for ln in text.splitlines() if not ln.startswith("skipped")]
         ck.check(cell, "verify.no_differs", rc == 0 and nd == 0, f"rc={rc} differs={nd}")
         summary[cell] = row
 
-    combined = os.path.join(out_dir, "all_cells.audit.jsonl")
-    with open(combined, "w", encoding="utf-8") as f:
-        for r in all_audit:
-            f.write(json.dumps(r) + "\n")
+    all_f.close()
     rc, text = verify_audit(combined)
     va_text.append(f"== ALL CELLS (rc={rc})\n{text}")
     ck.check("ALL", "verify.combined_no_differs", rc == 0 and differs(text) == 0,

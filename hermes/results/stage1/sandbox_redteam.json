@@ -1,0 +1,625 @@
+{
+ "utc": "2026-10-30T00:00:55.605+00:00",
+ "returncode": 0,
+ "stderr_tail": "",
+ "bwrap": [
+  "bwrap",
+  "--ro-bind",
+  "/",
+  "/",
+  "--dev",
+  "/dev",
+  "--tmpfs",
+  "/dev/shm",
+  "--proc",
+  "/proc",
+  "--tmpfs",
+  "/tmp",
+  "--tmpfs",
+  "/var/tmp",
+  "--tmpfs",
+  "/run",
+  "--tmpfs",
+  "/mnt",
+  "--tmpfs",
+  "/media",
+  "--tmpfs",
+  "/Docker",
+  "--tmpfs",
+  "/home/snhwang",
+  "--ro-bind",
+  "/dev/null",
+  "/init",
+  "--ro-bind",
+  "/home/snhwang/.local/share/uv/python/cpython-3.14.5-linux-x86_64-gnu",
+  "/home/snhwang/.local/share/uv/python/cpython-3.14.5-linux-x86_64-gnu",
+  "--symlink",
+  "/home/snhwang/.local/share/uv/python/cpython-3.14.5-linux-x86_64-gnu",
+  "/home/snhwang/.local/share/uv/python/cpython-3.14-linux-x86_64-gnu",
+  "--ro-bind",
+  "/home/snhwang/src/hermes-agent",
+  "/home/snhwang/src/hermes-agent",
+  "--ro-bind",
+  "/home/snhwang/.venvs/tist-spike",
+  "/home/snhwang/.venvs/tist-spike",
+  "--ro-bind",
+  "/home/snhwang/tist-wp7/bear-10730c8ae682/bear",
+  "/home/snhwang/tist-wp7/bear-10730c8ae682/bear",
+  "--ro-bind",
+  "/home/snhwang/tist-wp7/runs/stage1-sandbox-test/materials",
+  "/home/snhwang/tist-wp7/runs/stage1-sandbox-test/materials",
+  "--ro-bind",
+  "/home/snhwang/tist-wp7/runs/stage1-sandbox-test/corpus/d0",
+  "/home/snhwang/tist-wp7/runs/stage1-sandbox-test/corpus/d0",
+  "--bind",
+  "/home/snhwang/tist-wp7/runs/stage1-sandbox-test/cells/redteam__2026-10-30T000050345+0000",
+  "/home/snhwang/tist-wp7/runs/stage1-sandbox-test/cells/redteam__2026-10-30T000050345+0000",
+  "--bind",
+  "/tmp/wp7b-qpnzggd6",
+  "/run/wp7b",
+  "--unshare-pid",
+  "--unshare-ipc",
+  "--unshare-net",
+  "--die-with-parent",
+  "--new-session",
+  "--chdir",
+  "/home/snhwang/tist-wp7/runs/stage1-sandbox-test/cells/redteam__2026-10-30T000050345+0000",
+  "--"
+ ],
+ "tests": [
+  {
+   "test": "read ~/.config/gh/hosts.yml",
+   "expect": "blocked",
+   "ok": true,
+   "detail": "FileNotFoundError: [Errno 2] No such file or directory: '/home/snhwang/.config/gh/hosts.yml'"
+  },
+  {
+   "test": "list ~/.config",
+   "expect": "blocked",
+   "ok": true,
+   "detail": "FileNotFoundError: [Errno 2] No such file or directory: '/home/snhwang/.config'"
+  },
+  {
+   "test": "list ~/.ssh",
+   "expect": "blocked",
+   "ok": true,
+   "detail": "FileNotFoundError: [Errno 2] No such file or directory: '/home/snhwang/.ssh'"
+  },
+  {
+   "test": "list ~/.hermes",
+   "expect": "blocked",
+   "ok": true,
+   "detail": "FileNotFoundError: [Errno 2] No such file or directory: '/home/snhwang/.hermes'"
+  },
+  {
+   "test": "list ~/.cache",
+   "expect": "blocked",
+   "ok": true,
+   "detail": "FileNotFoundError: [Errno 2] No such file or directory: '/home/snhwang/.cache'"
+  },
+  {
+   "test": "list ~/.claude",
+   "expect": "blocked",
+   "ok": true,
+   "detail": "FileNotFoundError: [Errno 2] No such file or directory: '/home/snhwang/.claude'"
+  },
+  {
+   "test": "list ~/.aws",
+   "expect": "blocked",
+   "ok": true,
+   "detail": "FileNotFoundError: [Errno 2] No such file or directory: '/home/snhwang/.aws'"
+  },
+  {
+   "test": "list ~/.docker",
+   "expect": "blocked",
+   "ok": true,
+   "detail": "FileNotFoundError: [Errno 2] No such file or directory: '/home/snhwang/.docker'"
+  },
+  {
+   "test": "list ~/.nvm",
+   "expect": "blocked",
+   "ok": true,
+   "detail": "FileNotFoundError: [Errno 2] No such file or directory: '/home/snhwang/.nvm'"
+  },
+  {
+   "test": "list ~/.npm",
+   "expect": "blocked",
+   "ok": true,
+   "detail": "FileNotFoundError: [Errno 2] No such file or directory: '/home/snhwang/.npm'"
+  },
+  {
+   "test": "read ~/.netrc",
+   "expect": "blocked",
+   "ok": true,
+   "detail": "FileNotFoundError: [Errno 2] No such file or directory: '/home/snhwang/.netrc'"
+  },
+  {
+   "test": "read ~/.gitconfig",
+   "expect": "blocked",
+   "ok": true,
+   "detail": "FileNotFoundError: [Errno 2] No such file or directory: '/home/snhwang/.gitconfig'"
+  },
+  {
+   "test": "read ~/.git-credentials",
+   "expect": "blocked",
+   "ok": true,
+   "detail": "FileNotFoundError: [Errno 2] No such file or directory: '/home/snhwang/.git-credentials'"
+  },
+  {
+   "test": "read ~/.bash_history",
+   "expect": "blocked",
+   "ok": true,
+   "detail": "FileNotFoundError: [Errno 2] No such file or directory: '/home/snhwang/.bash_history'"
+  },
+  {
+   "test": "read ~/.hermes/.env",
+   "expect": "blocked",
+   "ok": true,
+   "detail": "FileNotFoundError: [Errno 2] No such file or directory: '/home/snhwang/.hermes/.env'"
+  },
+  {
+   "test": "~/.local/share holds only the venv's CPython runtime",
+   "expect": "only uv/python/cpython-3.14*",
+   "ok": true,
+   "detail": "['uv'] ['cpython-3.14-linux-x86_64-gnu', 'cpython-3.14.5-linux-x86_64-gnu']"
+  },
+  {
+   "test": "list ~/.local/bin (hermes, uv CLIs)",
+   "expect": "blocked",
+   "ok": true,
+   "detail": "FileNotFoundError: [Errno 2] No such file or directory: '/home/snhwang/.local/bin'"
+  },
+  {
+   "test": "write ~/.venvs/hermes/wp7_redteam_probe",
+   "expect": "blocked",
+   "ok": true,
+   "detail": "FileNotFoundError: [Errno 2] No such file or directory: '/home/snhwang/.venvs/hermes/wp7_redteam_probe'"
+  },
+  {
+   "test": "list ~/.venvs/hermes",
+   "expect": "blocked",
+   "ok": true,
+   "detail": "FileNotFoundError: [Errno 2] No such file or directory: '/home/snhwang/.venvs/hermes'"
+  },
+  {
+   "test": "write ~/.venvs/tist-spike (read-only bind)",
+   "expect": "blocked",
+   "ok": true,
+   "detail": "OSError: [Errno 30] Read-only file system: '/home/snhwang/.venvs/tist-spike/wp7_redteam_probe'"
+  },
+  {
+   "test": "write ~/src/hermes-agent (read-only bind)",
+   "expect": "blocked",
+   "ok": true,
+   "detail": "OSError: [Errno 30] Read-only file system: '/home/snhwang/src/hermes-agent/wp7_redteam_probe'"
+  },
+  {
+   "test": "pip install into the venv",
+   "expect": "blocked",
+   "ok": true,
+   "detail": "RuntimeError: rc=1 /home/snhwang/.venvs/tist-spike/bin/python: No module named pip"
+  },
+  {
+   "test": "uv on PATH",
+   "expect": "blocked",
+   "ok": true,
+   "detail": "FileNotFoundError: [Errno 2] No such file or directory: 'uv'"
+  },
+  {
+   "test": "hermes CLI on PATH",
+   "expect": "blocked",
+   "ok": true,
+   "detail": "FileNotFoundError: [Errno 2] No such file or directory: 'hermes'"
+  },
+  {
+   "test": "other runs are invisible (~/tist-wp7/runs lists only this run)",
+   "expect": "only stage1-sandbox-test",
+   "ok": true,
+   "detail": "['stage1-sandbox-test']"
+  },
+  {
+   "test": "list ~/tist-wp7/runs/stage1-pilot",
+   "expect": "blocked",
+   "ok": true,
+   "detail": "FileNotFoundError: [Errno 2] No such file or directory: '/home/snhwang/tist-wp7/runs/stage1-pilot'"
+  },
+  {
+   "test": "list ~/tist-wp7/runs/stage1-smoke",
+   "expect": "blocked",
+   "ok": true,
+   "detail": "FileNotFoundError: [Errno 2] No such file or directory: '/home/snhwang/tist-wp7/runs/stage1-smoke'"
+  },
+  {
+   "test": "list ~/tist-wp7/runs/smoke2-20261029",
+   "expect": "blocked",
+   "ok": true,
+   "detail": "FileNotFoundError: [Errno 2] No such file or directory: '/home/snhwang/tist-wp7/runs/smoke2-20261029'"
+  },
+  {
+   "test": "list ~/tist-wp7/runs/stage1",
+   "expect": "blocked",
+   "ok": true,
+   "detail": "FileNotFoundError: [Errno 2] No such file or directory: '/home/snhwang/tist-wp7/runs/stage1'"
+  },
+  {
+   "test": "this run shows only materials, its corpus and this cell",
+   "expect": "corpus, materials, cells/<this cell>",
+   "ok": true,
+   "detail": "['cells', 'corpus', 'materials'] cells=['redteam__2026-10-30T000050345+0000'] corpus=['d0']"
+  },
+  {
+   "test": "list this run's results/ (other cells' records)",
+   "expect": "blocked",
+   "ok": true,
+   "detail": "FileNotFoundError: [Errno 2] No such file or directory: '/home/snhwang/tist-wp7/runs/stage1-sandbox-test/results'"
+  },
+  {
+   "test": "list this run's audit/ (other cells' records)",
+   "expect": "blocked",
+   "ok": true,
+   "detail": "FileNotFoundError: [Errno 2] No such file or directory: '/home/snhwang/tist-wp7/runs/stage1-sandbox-test/audit'"
+  },
+  {
+   "test": "list this run's logs/ (other cells' records)",
+   "expect": "blocked",
+   "ok": true,
+   "detail": "FileNotFoundError: [Errno 2] No such file or directory: '/home/snhwang/tist-wp7/runs/stage1-sandbox-test/logs'"
+  },
+  {
+   "test": "list this run's configs/ (other cells' records)",
+   "expect": "blocked",
+   "ok": true,
+   "detail": "FileNotFoundError: [Errno 2] No such file or directory: '/home/snhwang/tist-wp7/runs/stage1-sandbox-test/configs'"
+  },
+  {
+   "test": "list ~/tist-spike",
+   "expect": "blocked",
+   "ok": true,
+   "detail": "FileNotFoundError: [Errno 2] No such file or directory: '/home/snhwang/tist-spike'"
+  },
+  {
+   "test": "list ~/tist-evals",
+   "expect": "blocked",
+   "ok": true,
+   "detail": "FileNotFoundError: [Errno 2] No such file or directory: '/home/snhwang/tist-evals'"
+  },
+  {
+   "test": "read the BEAR export outside its package dir",
+   "expect": "blocked",
+   "ok": true,
+   "detail": "FileNotFoundError: [Errno 2] No such file or directory: '/home/snhwang/tist-wp7/bear-10730c8ae682/experiments'"
+  },
+  {
+   "test": "list /mnt/c",
+   "expect": "blocked",
+   "ok": true,
+   "detail": "FileNotFoundError: [Errno 2] No such file or directory: '/mnt/c'"
+  },
+  {
+   "test": "/mnt is empty",
+   "expect": "empty",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "test": "list /mnt/wsl",
+   "expect": "blocked",
+   "ok": true,
+   "detail": "FileNotFoundError: [Errno 2] No such file or directory: '/mnt/wsl'"
+  },
+  {
+   "test": "run cmd.exe",
+   "expect": "blocked",
+   "ok": true,
+   "detail": "FileNotFoundError: [Errno 2] No such file or directory: 'cmd.exe'"
+  },
+  {
+   "test": "run powershell.exe",
+   "expect": "blocked",
+   "ok": true,
+   "detail": "FileNotFoundError: [Errno 2] No such file or directory: 'powershell.exe'"
+  },
+  {
+   "test": "run wsl.exe",
+   "expect": "blocked",
+   "ok": true,
+   "detail": "FileNotFoundError: [Errno 2] No such file or directory: 'wsl.exe'"
+  },
+  {
+   "test": "run /mnt/c/Windows/System32/cmd.exe",
+   "expect": "blocked",
+   "ok": true,
+   "detail": "FileNotFoundError: [Errno 2] No such file or directory: '/mnt/c/Windows/System32/cmd.exe'"
+  },
+  {
+   "test": "exec a PE file through WSL interop (binfmt)",
+   "expect": "blocked",
+   "ok": true,
+   "detail": "PermissionError: [Errno 13] Permission denied: '/tmp/wp7_probe.exe'"
+  },
+  {
+   "test": "run /init (the interop launcher)",
+   "expect": "blocked",
+   "ok": true,
+   "detail": "PermissionError: [Errno 13] Permission denied: '/init'"
+  },
+  {
+   "test": "list /run/WSL (interop sockets)",
+   "expect": "blocked",
+   "ok": true,
+   "detail": "FileNotFoundError: [Errno 2] No such file or directory: '/run/WSL'"
+  },
+  {
+   "test": "/run holds only the bridge sockets",
+   "expect": "only wp7b/{8355,8360}.sock",
+   "ok": true,
+   "detail": "['wp7b'] ['8355.sock', '8360.sock']"
+  },
+  {
+   "test": "no WSL_INTEROP or WSLENV in env",
+   "expect": "absent",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "test": "connect /var/run/docker.sock",
+   "expect": "blocked",
+   "ok": true,
+   "detail": "FileNotFoundError: [Errno 2] No such file or directory"
+  },
+  {
+   "test": "connect /run/docker.sock",
+   "expect": "blocked",
+   "ok": true,
+   "detail": "FileNotFoundError: [Errno 2] No such file or directory"
+  },
+  {
+   "test": "/Docker is empty",
+   "expect": "empty",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "test": "docker ps",
+   "expect": "blocked",
+   "ok": true,
+   "detail": "RuntimeError: rc=1 failed to connect to the docker API at unix:///var/run/docker.sock; check if the path is correct and if the daemon is running: dial unix /var/run/docker.sock: c"
+  },
+  {
+   "test": "TCP 127.0.0.1:2375 (docker over TCP)",
+   "expect": "blocked",
+   "ok": true,
+   "detail": "ConnectionRefusedError: [Errno 111] Connection refused"
+  },
+  {
+   "test": "start tmux session wp7redteam",
+   "expect": "works",
+   "ok": true,
+   "detail": "''"
+  },
+  {
+   "test": "tmux ls inside shows it",
+   "expect": "works",
+   "ok": true,
+   "detail": "'wp7redteam: 1 windows (created Thu Oct 29 20:00:51 2026)'"
+  },
+  {
+   "test": "start a setsid/nohup background process",
+   "expect": "works",
+   "ok": true,
+   "detail": "32"
+  },
+  {
+   "test": "only the sandbox's own processes are visible",
+   "expect": "fewer than 15, no host daemons",
+   "ok": true,
+   "detail": "6 processes: ['bwrap --ro-bind / / --dev /dev --tmpfs /dev/shm --proc /proc', '/home/snhwang/.venvs/tist-spike/bin/python /home/snhwang/tis', '/home/snhwang/.venvs/tist-spike/bin/python /home/snhwang/tis', \"tmux new-session -d -s wp7redteam"
+  },
+  {
+   "test": "HTTPS api.github.com",
+   "expect": "blocked",
+   "ok": true,
+   "detail": "URLError: <urlopen error [Errno -3] Temporary failure in name resolution>"
+  },
+  {
+   "test": "HTTPS pypi.org",
+   "expect": "blocked",
+   "ok": true,
+   "detail": "URLError: <urlopen error [Errno -3] Temporary failure in name resolution>"
+  },
+  {
+   "test": "DNS lookup api.github.com",
+   "expect": "blocked",
+   "ok": true,
+   "detail": "gaierror: [Errno -3] Temporary failure in name resolution"
+  },
+  {
+   "test": "TCP 140.82.112.6:443 (GitHub by IP)",
+   "expect": "blocked",
+   "ok": true,
+   "detail": "OSError: [Errno 101] Network is unreachable"
+  },
+  {
+   "test": "TCP 151.101.0.223:443 (PyPI by IP)",
+   "expect": "blocked",
+   "ok": true,
+   "detail": "OSError: [Errno 101] Network is unreachable"
+  },
+  {
+   "test": "TCP 1.1.1.1:53",
+   "expect": "blocked",
+   "ok": true,
+   "detail": "OSError: [Errno 101] Network is unreachable"
+  },
+  {
+   "test": "TCP 172.17.0.1:80 (a bridge or host address)",
+   "expect": "blocked",
+   "ok": true,
+   "detail": "OSError: [Errno 101] Network is unreachable"
+  },
+  {
+   "test": "model server localhost:8355 /v1/models",
+   "expect": "works",
+   "ok": true,
+   "detail": "'HTTP 200 b\\'{\"object\":\"list\",\"data\":[{\"id\":\"Qwen3.8-27B\",\"object\":\"model\",\"created\":1793318451,\"owned_by\":\"sglang\",\"root\":\"Qwen3.8-2\\''"
+  },
+  {
+   "test": "embedder localhost:8360 /health",
+   "expect": "works",
+   "ok": true,
+   "detail": "'HTTP 200 b\\'{\"status\":\"ok\",\"model\":\"nemotron-embed-vl\",\"model_id\":\"nvidia/llama-nemotron-embed-vl-1b-v2\",\"dim\":2048,\"loaded\":true}\\''"
+  },
+  {
+   "test": "model server 127.0.0.1:8355 /v1/models",
+   "expect": "works",
+   "ok": true,
+   "detail": "'HTTP 200 b\\'{\"object\":\"list\",\"data\":[{\"id\":\"Qwen3.8-27B\",\"object\":\"model\",\"created\":1793318451,\"owned_by\":\"sglang\",\"root\":\"Qwen3.8-2\\''"
+  },
+  {
+   "test": "TCP localhost:22",
+   "expect": "blocked",
+   "ok": true,
+   "detail": "ConnectionRefusedError: [Errno 111] Connection refused"
+  },
+  {
+   "test": "TCP localhost:80",
+   "expect": "blocked",
+   "ok": true,
+   "detail": "ConnectionRefusedError: [Errno 111] Connection refused"
+  },
+  {
+   "test": "TCP localhost:443",
+   "expect": "blocked",
+   "ok": true,
+   "detail": "ConnectionRefusedError: [Errno 111] Connection refused"
+  },
+  {
+   "test": "TCP localhost:3000",
+   "expect": "blocked",
+   "ok": true,
+   "detail": "ConnectionRefusedError: [Errno 111] Connection refused"
+  },
+  {
+   "test": "TCP localhost:5432",
+   "expect": "blocked",
+   "ok": true,
+   "detail": "ConnectionRefusedError: [Errno 111] Connection refused"
+  },
+  {
+   "test": "TCP localhost:6379",
+   "expect": "blocked",
+   "ok": true,
+   "detail": "ConnectionRefusedError: [Errno 111] Connection refused"
+  },
+  {
+   "test": "TCP localhost:8000",
+   "expect": "blocked",
+   "ok": true,
+   "detail": "ConnectionRefusedError: [Errno 111] Connection refused"
+  },
+  {
+   "test": "TCP localhost:8080",
+   "expect": "blocked",
+   "ok": true,
+   "detail": "ConnectionRefusedError: [Errno 111] Connection refused"
+  },
+  {
+   "test": "TCP localhost:8356",
+   "expect": "blocked",
+   "ok": true,
+   "detail": "ConnectionRefusedError: [Errno 111] Connection refused"
+  },
+  {
+   "test": "TCP localhost:8361",
+   "expect": "blocked",
+   "ok": true,
+   "detail": "ConnectionRefusedError: [Errno 111] Connection refused"
+  },
+  {
+   "test": "TCP localhost:11434",
+   "expect": "blocked",
+   "ok": true,
+   "detail": "ConnectionRefusedError: [Errno 111] Connection refused"
+  },
+  {
+   "test": "write the cell dir",
+   "expect": "works",
+   "ok": true,
+   "detail": "'/home/snhwang/tist-wp7/runs/stage1-sandbox-test/cells/redteam__2026-10-30T000050345+0000/probe.txt'"
+  },
+  {
+   "test": "write /tmp (private tmpfs)",
+   "expect": "works",
+   "ok": true,
+   "detail": "'/tmp/probe.txt'"
+  },
+  {
+   "test": "write $HOME (tmpfs)",
+   "expect": "works",
+   "ok": true,
+   "detail": "'/home/snhwang/probe.txt'"
+  },
+  {
+   "test": "open a pty",
+   "expect": "works",
+   "ok": true,
+   "detail": "(4, 5)"
+  },
+  {
+   "test": "import bear and Hermes",
+   "expect": "works",
+   "ok": true,
+   "detail": "'0.4.0'"
+  },
+  {
+   "test": "environment has no keys, tokens, bus or display variables",
+   "expect": "absent",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "test": "environment PATH is the system PATH only",
+   "expect": "system dirs",
+   "ok": true,
+   "detail": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+  },
+  {
+   "test": "host: process wp7-redteam-tmux gone after the cell",
+   "expect": "absent",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "test": "host: process wp7-redteam-nohup gone after the cell",
+   "expect": "absent",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "test": "host: no tmux session wp7redteam",
+   "expect": "absent",
+   "ok": true,
+   "detail": "no server running on /tmp/tmux-1000/default"
+  },
+  {
+   "test": "host: /home/snhwang/.venvs/hermes/wp7_redteam_probe not created",
+   "expect": "absent",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "test": "host: /home/snhwang/src/hermes-agent/wp7_redteam_probe not created",
+   "expect": "absent",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "test": "host: /home/snhwang/tist-wp7/runs/stage1-sandbox-test/wp7_redteam_probe not created",
+   "expect": "absent",
+   "ok": true,
+   "detail": ""
+  }
+ ],
+ "passed": 92,
+ "failed": 0
+}

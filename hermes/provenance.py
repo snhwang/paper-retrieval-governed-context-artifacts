@@ -121,6 +121,16 @@ def hermes_info(tree: str) -> dict:
             "dirty_files": 0 if status == "" else len(status.splitlines())}
 
 
+def artifacts_info(hermes_dir: str) -> dict:
+    """The artifacts repo commit these materials come from, and whether hermes/ is dirty."""
+    repo = os.path.dirname(os.path.abspath(hermes_dir))
+    status = _run(["git", "-C", repo, "status", "--porcelain", "--", "hermes"], timeout=60)
+    return {"repo": repo,
+            "branch": _run(["git", "-C", repo, "rev-parse", "--abbrev-ref", "HEAD"], timeout=60),
+            "commit": _run(["git", "-C", repo, "rev-parse", "HEAD"], timeout=60),
+            "hermes_dirty": status.splitlines() if status else []}
+
+
 def files(hermes_dir: str, tree: str) -> dict:
     paths = {
         "harness/worker.py": os.path.join(tree, "evals/core_tool_deferral/worker.py"),
@@ -128,7 +138,8 @@ def files(hermes_dir: str, tree: str) -> dict:
         "harness/sandbox.py": os.path.join(tree, "evals/core_tool_deferral/sandbox.py"),
         "toolperf/ab_eval.py": os.path.join(tree, "evals/toolperf_abeval/ab_eval.py"),
     }
-    for rel in ("worker/worker_local.py", "worker/wp7_tasks.py", "arms.py",
+    for rel in ("worker/worker_local.py", "worker/wp7_tasks.py", "arms.py", "run.py",
+                "provenance.py", "checks.py", "sandbox_bridge.py", "sandbox_redteam.py",
                 "corpus/base/tools.yaml", "corpus/decoys/decoys-100.yaml",
                 "corpus/decoys/decoys-300.yaml", "decoys/sample.json",
                 "decoys/wp7_decoys/__init__.py", "decoys/wp7_decoys/plugin.yaml",
@@ -145,6 +156,7 @@ def collect(hermes_dir: str, tree: str) -> dict:
         "python": sys.version.split()[0],
         "python_executable": sys.executable,
         "hermes": hermes_info(tree),
+        "artifacts": artifacts_info(hermes_dir),
         "bear": bear_info(),
         "sglang": {"endpoint": f"{SGLANG}/v1", **sglang_info(), "container": container(8355)},
         "embedder": {"endpoint": EMBED, "health": embedder_info(), "container": container(8360)},
@@ -152,19 +164,61 @@ def collect(hermes_dir: str, tree: str) -> dict:
     }
 
 
-def fingerprint() -> dict:
-    """What would reveal a server restart or a swapped model between cells."""
+SGLANG_GUARDED_SETTINGS = ("quantization", "kv_cache_dtype", "context_length", "random_seed",
+                           "enable_cache_report", "tool_call_parser", "reasoning_parser",
+                           "dtype", "tp_size")
+# A change in any of these between cells stops a guarded run (run.py --guard-provenance).
+GUARDED = ("sglang_version", "model_path", "model_revision", "sglang_image_id", "sglang_settings",
+           "embedder_model_id", "embedder_dim", "embedder_image_id", "bear_version", "bear_sha",
+           "hermes_commit", "hermes_dirty")
+# A change in these is logged as a warning only (a restart on the same image and model).
+WARN_ONLY = ("sglang_started_at", "embedder_started_at")
+
+
+def bear_info_fresh(python: str) -> dict:
+    """bear_info() in a new interpreter, so a reinstall mid-run shows up."""
+    here = os.path.dirname(os.path.abspath(__file__))
+    code = ("import sys, json; sys.path.insert(0, %r); import provenance; "
+            "print(json.dumps(provenance.bear_info()))" % here)
+    out = _run([python, "-c", code], timeout=60)
+    try:
+        return json.loads(out.splitlines()[-1])
+    except Exception:
+        return {"error": out[:300]}
+
+
+def fingerprint(python: str | None = None, tree: str | None = None) -> dict:
+    """What would reveal a server restart, a swapped model or a changed install between cells."""
     s = _get_json(f"{SGLANG}/get_server_info")
     e = embedder_info()
-    return {
+    cs, ce = container(8355), container(8360)
+    fp = {
         "sglang_version": s.get("version") if isinstance(s, dict) else None,
         "model_path": s.get("model_path") if isinstance(s, dict) else None,
         "model_revision": s.get("revision") if isinstance(s, dict) else None,
-        "sglang_started_at": container(8355).get("started_at"),
+        "sglang_settings": {k: s.get(k) for k in SGLANG_GUARDED_SETTINGS}
+        if isinstance(s, dict) and "_error" not in s else None,
+        "sglang_image_id": cs.get("image_id"),
+        "sglang_started_at": cs.get("started_at"),
         "embedder_model_id": e.get("model_id") if isinstance(e, dict) else None,
         "embedder_dim": e.get("dim") if isinstance(e, dict) else None,
-        "embedder_started_at": container(8360).get("started_at"),
+        "embedder_image_id": ce.get("image_id"),
+        "embedder_started_at": ce.get("started_at"),
     }
+    if python:
+        b = bear_info_fresh(python)
+        fp["bear_version"], fp["bear_sha"] = b.get("version"), b.get("sha")
+    if tree:
+        h = hermes_info(tree)
+        fp["hermes_commit"], fp["hermes_dirty"] = h["commit"], h["dirty_files"]
+    return fp
+
+
+def drift(ref: dict, cur: dict) -> tuple[dict, dict]:
+    """Guarded and warn-only fields whose value differs from the reference."""
+    changed = {k: [ref.get(k), cur.get(k)] for k in GUARDED if k in ref and ref.get(k) != cur.get(k)}
+    warned = {k: [ref.get(k), cur.get(k)] for k in WARN_ONLY if ref.get(k) != cur.get(k)}
+    return changed, warned
 
 
 def embedder_revision() -> str:

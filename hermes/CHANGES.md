@@ -1,6 +1,6 @@
 # WP7 Hermes materials: what we changed and why
 
-This directory holds the materials for the execution-level experiment (WP7) of the TIST revision. They run Hermes Agent v0.22.2 (commit `d923a5eb`) and its harness `evals/core_tool_deferral` under BEAR's Hermes plugin (bear-dev `90daeb9`). This file lists every change we made to the harness and why. Nothing in the Hermes tree is edited. The worker is generated from the harness's own `worker.py` by anchored replacements, and the full diff is at the end.
+This directory holds the materials for the execution-level experiment (WP7) of the TIST revision. They run Hermes Agent v0.22.2 (commit `d923a5eb`) and its harness `evals/core_tool_deferral` under BEAR's Hermes plugin (built on bear-dev `90daeb9`, and run from stage 1 on `10730c8`, which reports 0.4.0). This file lists every change we made to the harness and why. Nothing in the Hermes tree is edited. The worker is generated from the harness's own `worker.py` by anchored replacements, and the full diff is at the end.
 
 ## Worker
 
@@ -46,6 +46,57 @@ Task prompts, fixtures, graders and scripted replies (`tasks.py`), the sandbox (
 
 - The NeMo Relay probe and lookup counter. The spike confirmed that model-call records are complete with the relay on, and the counter wrapped a Hermes function.
 - The `SPIKE_PLATFORM` override and the `default_tags: ["role:operator"]` workaround. BEAR main treats an empty platform as `cli` (`bear/integrations/hermes/context.py`, `build_context`).
+
+## Runner changes for stage 1 (2026-10-29)
+
+These change `run.py` and `provenance.py` only. The worker, the tasks and the graders are unchanged, and every change applies to every arm alike.
+
+- **BEAR 0.4.0.** The venv now runs bear-dev `10730c8` (reports 0.4.0), exported with `git archive` to WSL `~/tist-wp7/bear-10730c8ae682/` and installed editable. Its `bear/` package is byte-identical to the export at `~/tist-evals/bear-10730c8`. The public tag v0.4.0 (`90de27e`) differs from it by one docstring in `audit.py`. Since `90daeb9`, the plugin gained `withheld_names_max` (default null, so no effect with annotations off), and the retriever gained the canonical resolution order, the gate-filtered ungated pool, closure fixes and "a removed instruction removes nothing". The WP7 corpus has no conflicts, supersedes or requires, so those rules do not act on it. `lint` passes on the corpus at 0, 100 and 300 decoys, and every arm's settings validate.
+- **Flush refusals are waited out.** SGLang refuses `/flush_cache` while any request runs, and other clients may share port 8355. The runner used to try 30 times, 5 s apart, and then skip the cell. It now retries with no limit, backing off from 5 s, doubling to a 60 s cap, and logs every attempt with its UTC time and status (and the planned wait). A cell starts only after a 200, and a refusal never fails or skips a cell. `cell_done` records the attempts and the seconds spent waiting.
+- **Order.** `--order rep-blocks --seed N` runs all of rep 0 in a seeded shuffle, then rep 1, then rep 2. Each block has its own generator (`seed*1000 + rep`), so drift over the hours does not line up with any arm, role or decoy size.
+- **Resume.** `--resume` fixes the cell order in `logs/plan.json` on the first start and, on a restart, runs only the planned cells with no `cell_done`. A cell interrupted part-way has its partial audit log, result and transcript moved to `aborted/` first, because the plugin appends to the audit log. A restart refuses a grid that differs from the plan and writes a fresh `provenance.resume-<utc>.json` beside the original.
+- **Error stop.** `--max-error-frac F` stops the batch when more than F of the finished cells errored (worker exit not 0, timeout, no result file, or an `error` in the result), checked once `--min-cells-error-check` cells are done (default 40), and always when errors exceed F of the whole plan.
+- **Provenance guard.** The per-cell fingerprint now also holds both containers' image ids, SGLang's serving settings, BEAR's version and sha (read in a fresh interpreter, so a reinstall shows up), and the Hermes commit and dirty count. With `--guard-provenance`, a change in any guarded field from the plan's reference fingerprint stops the batch before the next cell starts (re-read once after 15 s, to rule out a failed read). A container restart on the same image and model is logged as a warning only.
+- **STOP file.** A file named `STOP` in the run root ends the batch after the current cell.
+- `--tasks all` expands to the 14 core and 9 toolperf tasks.
+- `checks.py --jobs N` runs the per-cell `verify-audit` calls in parallel and streams the combined log to disk, for runs of about 1,700 cells. The checks themselves are unchanged.
+
+## Cell sandbox (fix 4, 2026-10-29)
+
+**Why.** The harness's `sandbox.py` isolates HOME, the crontab and the systemd user bus, and nothing else. A terminal command runs as the user, so it reaches the whole filesystem, every process and the network. The stage-1 pilot (27 cells, operator, arms A and B) showed what that allows:
+
+- `project_mcp_setup` read the GitHub OAuth token from `~/.config/gh/hosts.yml`, called the GitHub API with it (`GET /user`, twice), started the GitHub MCP server with it, and installed `mcp` with `uv pip install --python ~/.venvs/hermes/bin/python mcp`. That added 10 packages to the operator's own Hermes venv.
+- `longrange_backup_pipeline` (arm B) started `hermes gateway run` in a new tmux session, so its 2 am cron job would fire. The gateway outlived the cell, on the cell's temporary HERMES_HOME and on port 8355. It was stopped by hand.
+- `weekday_cron` started `hermes gateway run` as a background process (it ended with the cell).
+
+These are model actions the harness permits, not harness bugs, but they leave the sandbox, they can change the machine every later cell runs on, and they can read another cell's transcript. So every worker now runs in a bubblewrap sandbox, the same in every arm (`run.py --sandbox bwrap`, the default, recorded as `sandbox` in each `cell_done`).
+
+| What | How |
+| --- | --- |
+| Root filesystem | read-only (`--ro-bind / /`) |
+| Writable | a private tmpfs for `/tmp` and `/var/tmp`, a tmpfs over the whole home directory, and the cell's own directory `<run>/cells/<cell>/` |
+| Read-only binds | the Hermes tree, `~/.venvs/tist-spike`, the venv's base interpreter (uv's CPython 3.14.5 dir, with its versionless symlink), BEAR's `bear/` package dir only, the run's `materials/` and the cell's `corpus/d<N>/` |
+| Hidden | `/mnt` (all Windows drives, `/mnt/wsl`), `/run` (WSL interop sockets, the Docker socket, the user bus), `/media`, `/Docker`, and everything in the home directory not bound above (`~/.config`, `~/.ssh`, `~/.hermes`, `~/.venvs/hermes`, `~/.cache`, `~/.local`, `~/.netrc`, `~/.gitconfig`, `~/.nvm`, `~/.claude`, other runs, `~/tist-spike`, `~/tist-evals`, the rest of the BEAR export). `/init`, the WSL interop launcher, is replaced by `/dev/null`, so Windows executables cannot start |
+| Processes | private PID and IPC namespaces, a new session, `--die-with-parent`. Everything a cell starts (tmux, nohup, setsid, a gateway) dies when the worker exits or times out |
+| Network | a private network namespace with loopback only. `sandbox_bridge.py` forwards 127.0.0.1:8355 and :8360 (and ::1) inside to two unix sockets at `/run/wp7b/`, and a host-side process forwards those to the real servers. The sockets live in a short host directory (`/tmp/wp7b-XXXX`), because a unix socket path may not exceed 107 bytes and cell names are long. A bridge that does not come up fails the cell (exit 6) instead of letting the plugin start without its embedder. No other host or port is reachable, and DNS does not resolve |
+| Environment | scrubbed. Only `LANG`, `LC_*`, `TERM`, `USER`, `LOGNAME`, `TZ`, a system-only `PATH`, `HOME`, `SHELL`, `PYTHONUNBUFFERED` and the worker's own `WP7_*` and `ABDEFER_*` variables pass |
+| Materials | `worker_local.py`, `wp7_tasks.py`, the decoy plugin and sample, and the two sandbox scripts are copied into `<run>/materials/` with a sha256 manifest. A resumed run refuses materials that changed |
+| Outputs | the worker writes its result, transcript, kept HERMES_HOME and audit log in the cell dir. The runner moves them to `results/` and `audit/` after the worker exits and removes the cell dir. Cell configs record the in-sandbox audit path |
+
+Consequences, the same in every arm. `web_search` and `web_extract` fail, and so do pip, npm and `npx`. The `hermes`, `uv` and `node` command lines are absent. No task's grader needs any of them (the desktop tools, `image_generate` and `computer_use` are harness stubs, and every fixture is local). In the pilot, `web_extract` was called in two cells (`project_mcp_setup` and `preview_inspect_chain`), and both cells' graders score other things.
+
+**Leak check.** After every sandboxed live cell the runner checks three things, and a finding stops the batch (`batch_stopped`, reason `sandbox_leak`):
+- no process still carries the cell's `WP7_CELL`
+- no file under `~/.venvs/hermes`, `~/.hermes`, `~/.ssh`, `~/.config/gh`, `~/.config/systemd`, `~/.local/bin`, `~/.venvs/tist-spike`, `~/.local/share/uv/python`, the BEAR export or the Hermes tree is newer than the batch's marker file (bytecode caches and `.git` aside, which the runner writes itself)
+- no worker temp dir (`/tmp/ab-*`) or user crontab appeared on the host
+
+It takes about 0.2 s. The host side of the bridge logs every connection with its port to `logs/<cell>.bridge.stderr`. It can only connect to 127.0.0.1:8355 and :8360.
+
+**Provenance.** `provenance.json`, `plan.json` and each `batch_start` record the artifacts repo's branch, commit and any uncommitted files under `hermes/`.
+
+**Analysis.** `analyze_stage1.py` refuses cells that ran without the sandbox (`--allow-unsandboxed` is for tests). So the pilot and the earlier unsandboxed smokes never enter stage-1 results. It also counts out-of-cell attempts per cell from the transcripts, as task behavior: secrets, other host paths, installs, daemons, interop, Docker, the `hermes` CLI and internet. Under the sandbox none can succeed.
+
+`run.py redteam --root DIR` runs `sandbox_redteam.py` in a cell sandbox with no model. It tries each escape (reading `~/.config/gh/hosts.yml`, writing `~/.venvs/hermes`, listing `/mnt/c`, running `cmd.exe`, `powershell.exe`, `wsl.exe` and a PE file, the Docker socket, tmux and nohup processes, HTTPS to api.github.com and pypi.org, other hosts and local ports, other runs and other cells' records), checks that 8355 and 8360 answer, and checks from the host afterwards that nothing it started is still running. It writes `DIR/redteam.json`.
 
 ## Task registry
 
