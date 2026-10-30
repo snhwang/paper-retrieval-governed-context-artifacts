@@ -1,0 +1,147 @@
+
+=== BEAR retrieval invariants: 2000 random corpora ===
+
+Corpora: 20-60 instructions, 5 contexts each, k = 1..30, default_top_k = 10 (pool base 30), threshold = 0.3, priority_weight = 0.3, mandatory_tags = ['safety', 'compliance']
+Configurations: ['main']
+Workers: 8
+
+Ran in 200.1s. Corpus sizes: mean 39.6, range 20-60
+
+--- main (Main defaults (stub)) ---
+cases=10000 (ungated 3540), outputs=300000, mean |output|=12.24, P(|output|>k)=0.269, P(top-k cut removes >=1)=0.520
+threshold removals/output=4.275, requires admissions/output=0.810, P(missing-prereq record)=0.2822, P(loser of a winner cut by top-k)=0.2670, P(loser of a winner removed in resolution)=0.2895, mandatory displaced by mandatory=90210, I7 strict-prefix share=0.7064
+backfill admissions/output=0.000 (P(any)=0.000), backfilled rows in output/output=0.000, backfill rejections (threshold at similarity 0)/output=0.000
+Inv   Invariant                                  Corpora violated [95% CP CI]       Outputs violated   Non-vacuous outputs 
+----------------------------------------------------------------------------------------------------------------------------
+I1    Gate soundness                             0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       128665
+I2    Mandatory completeness                     0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       265320
+I2b   Budget bound                               0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       300000
+I3    Conflict freeness                          0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       230820
+I3b   Supersede consistency                      0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       193050
+I4    Dependency closure                         0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       207196
+I5    No orphan prerequisites                    0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       65875
+I5a     I5 orphan made by the top-k cut          0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       65875
+I5b     I5 orphan left by resolution (cycle)     0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       65875
+I6    Determinism                                0/2000 = 0.0000 [0.0000, 0.0018]   0/29331        29331
+I7    Budget stability (k <= pool base)          0/2000 = 0.0000 [0.0000, 0.0018]   0/290000       290000
+I8    Mandatory not displaced by optional        0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       185340
+I9    Threshold removes only soft-scope failures 0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       277020
+I10   Resolution order-independence              0/2000 = 0.0000 [0.0000, 0.0018]   0/10000        9386
+I11   Pool admissibility                         0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       62100
+I12   No acting after removal                    0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       206460
+I13   Ranked score rule (sim 0 if not searched)  0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       0
+I14   Backfill admission (gate, soft or theta<=0) 0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       0
+I15   Admission completeness (gate, soft or sim>=theta) 0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       300000
+I16   Canonical tie order (equal score, priority: by id) 0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       31923
+
+--- Corpus-level violation rate by configuration (violated corpora / corpora) ---
+
+Inv                main
+I1              0/2000 
+I2              0/2000 
+I2b             0/2000 
+I3              0/2000 
+I3b             0/2000 
+I4              0/2000 
+I5              0/2000 
+I5a             0/2000 
+I5b             0/2000 
+I6              0/2000 
+I7              0/2000 
+I8              0/2000 
+I9              0/2000 
+I10             0/2000 
+I11             0/2000 
+I12             0/2000 
+I13             0/2000 
+I14             0/2000 
+I15             0/2000 
+I16             0/2000 
+
+--- Pool growth sensitivity (main defaults, stub embedder) ---
+
+(a) retrieval_pool = 10, k = 1..30, nesting of consecutive k:
+    ungated_within   pairs=31860   non-nested=0     rate=0.0000 [0.0000, 0.0001] conflict/supersede pairs=0 (0.0000)
+    ungated_above    pairs=70800   non-nested=1680  rate=0.0237 [0.0226, 0.0249] conflict/supersede pairs=1679 (0.0237)  dropped items by trace reason: {'conflict': 1060, 'superseded': 742, 'none': 100, 'prerequisite': 301, 'unrequired': 80, 'top_k': 3, 'threshold': 17}
+    gated_within     pairs=58140   non-nested=0     rate=0.0000 [0.0000, 0.0001] conflict/supersede pairs=0 (0.0000)
+    gated_above      pairs=129200  non-nested=0     rate=0.0000 [0.0000, 0.0000] conflict/supersede pairs=0 (0.0000)
+    example ungated_above_conflict: corpus 4 case 0 k 10->11: i36 dropped, trace {'id': 'i36', 'reason': 'conflict', 'similarity': 0.0, 'by': 'i41'}
+    example ungated_above_none: corpus 4 case 0 k 24->25: i21 dropped, trace {}
+    example ungated_above_prerequisite: corpus 15 case 0 k 19->20: i50 dropped, trace {'id': 'i50', 'reason': 'prerequisite', 'similarity': 0.8625435829162598, 'by': 'i22'}
+    example ungated_above_superseded: corpus 4 case 0 k 13->14: i43 dropped, trace {'id': 'i43', 'reason': 'superseded', 'similarity': 0.6648223996162415, 'by': 'i46'}
+    example ungated_above_threshold: corpus 749 case 2 k 23->24: i30 dropped, trace {'id': 'i30', 'reason': 'threshold', 'similarity': 0.04848036170005798, 'by': None}
+    example ungated_above_top_k: corpus 276 case 0 k 12->13: i28 dropped, trace {'id': 'i28', 'reason': 'top_k', 'similarity': 0.438199520111084, 'by': None}
+    example ungated_above_unrequired: corpus 33 case 2 k 26->27: i40 dropped, trace {'id': 'i40', 'reason': 'unrequired', 'similarity': 0.0, 'by': None}
+
+(b) Ungated cases, output at pool p versus whole-corpus pool:
+    k = 5
+      pool=  5  cases=3540   differ=0.4395 [0.4231, 0.4561]  mean Jaccard=0.8348
+      pool= 10  cases=3540   differ=0.1935 [0.1806, 0.2069]  mean Jaccard=0.9350
+      pool= 15  cases=3540   differ=0.1082 [0.0981, 0.1189]  mean Jaccard=0.9659
+      pool= 20  cases=3540   differ=0.0726 [0.0643, 0.0816]  mean Jaccard=0.9780
+      pool= 30  cases=3540   differ=0.0285 [0.0233, 0.0346]  mean Jaccard=0.9921
+      pool= 45  cases=3540   differ=0.0054 [0.0032, 0.0084]  mean Jaccard=0.9990
+      pool= 60  cases=3540   differ=0.0000 [0.0000, 0.0010]  mean Jaccard=1.0000
+    k = 10
+      pool=  5  cases=3540   differ=0.7006 [0.6852, 0.7156]  mean Jaccard=0.8081
+      pool= 10  cases=3540   differ=0.7006 [0.6852, 0.7156]  mean Jaccard=0.8081
+      pool= 15  cases=3540   differ=0.4280 [0.4116, 0.4445]  mean Jaccard=0.9029
+      pool= 20  cases=3540   differ=0.2299 [0.2162, 0.2442]  mean Jaccard=0.9510
+      pool= 30  cases=3540   differ=0.0746 [0.0661, 0.0837]  mean Jaccard=0.9845
+      pool= 45  cases=3540   differ=0.0130 [0.0095, 0.0173]  mean Jaccard=0.9975
+      pool= 60  cases=3540   differ=0.0000 [0.0000, 0.0010]  mean Jaccard=1.0000
+
+--- Pool growth sensitivity, main_bm25 (Main defaults (BM25)) ---
+    ungated_within   pairs=31860   non-nested=0     rate=0.0000 [0.0000, 0.0001] conflict/supersede pairs=0 (0.0000)
+    ungated_above    pairs=70800   non-nested=1392  rate=0.0197 [0.0187, 0.0207] conflict/supersede pairs=1391 (0.0196)  dropped items by trace reason: {'conflict': 852, 'superseded': 632, 'none': 77, 'prerequisite': 236, 'unrequired': 60, 'threshold': 16, 'top_k': 2}
+    gated_within     pairs=58140   non-nested=0     rate=0.0000 [0.0000, 0.0001] conflict/supersede pairs=0 (0.0000)
+    gated_above      pairs=129200  non-nested=0     rate=0.0000 [0.0000, 0.0000] conflict/supersede pairs=0 (0.0000)
+
+--- Pool growth sensitivity, legacy_tie_order (restore_tie_order (stub)) ---
+    ungated_within   pairs=31860   non-nested=0     rate=0.0000 [0.0000, 0.0001] conflict/supersede pairs=0 (0.0000)
+    ungated_above    pairs=70800   non-nested=1710  rate=0.0242 [0.0230, 0.0253] conflict/supersede pairs=1710 (0.0242)  dropped items by trace reason: {'conflict': 1082, 'superseded': 752, 'none': 101, 'prerequisite': 308, 'unrequired': 83, 'top_k': 1, 'threshold': 16}
+    gated_within     pairs=58140   non-nested=0     rate=0.0000 [0.0000, 0.0001] conflict/supersede pairs=0 (0.0000)
+    gated_above      pairs=129200  non-nested=0     rate=0.0000 [0.0000, 0.0000] conflict/supersede pairs=0 (0.0000)
+
+--- Pool growth sensitivity, legacy_dropped_rows (restore_dropped_rows (BM25)) ---
+    ungated_within   pairs=31860   non-nested=0     rate=0.0000 [0.0000, 0.0001] conflict/supersede pairs=0 (0.0000)
+    ungated_above    pairs=70800   non-nested=822   rate=0.0116 [0.0108, 0.0124] conflict/supersede pairs=821 (0.0116)  dropped items by trace reason: {'conflict': 540, 'superseded': 337, 'prerequisite': 155, 'unrequired': 40, 'none': 58, 'threshold': 2, 'top_k': 2}
+    gated_within     pairs=58140   non-nested=0     rate=0.0000 [0.0000, 0.0001] conflict/supersede pairs=0 (0.0000)
+    gated_above      pairs=129200  non-nested=0     rate=0.0000 [0.0000, 0.0000] conflict/supersede pairs=0 (0.0000)
+
+--- Pool growth sensitivity, legacy_tie_order_bm25 (restore_tie_order (BM25)) ---
+    ungated_within   pairs=31860   non-nested=0     rate=0.0000 [0.0000, 0.0001] conflict/supersede pairs=0 (0.0000)
+    ungated_above    pairs=70800   non-nested=1561  rate=0.0220 [0.0210, 0.0232] conflict/supersede pairs=1560 (0.0220)  dropped items by trace reason: {'conflict': 1036, 'unrequired': 69, 'superseded': 636, 'prerequisite': 244, 'none': 70, 'threshold': 27, 'top_k': 3}
+    gated_within     pairs=58140   non-nested=0     rate=0.0000 [0.0000, 0.0001] conflict/supersede pairs=0 (0.0000)
+    gated_above      pairs=129200  non-nested=0     rate=0.0000 [0.0000, 0.0000] conflict/supersede pairs=0 (0.0000)
+
+--- Nesting above the base, paired (ungated pairs, retrieval_pool = 10) ---
+    main_bm25 vs main: 1392/70800 = 0.0197 vs 1680/70800 = 0.0237, delta -0.0041 [-0.0056, -0.0026] (corpus bootstrap p=0.0001), d=-0.122 per corpus, Wilcoxon p=7.41e-09 (n=518), McNemar 1297/1585 discordant p=8.78e-08
+    legacy_tie_order vs main: 1710/70800 = 0.0242 vs 1680/70800 = 0.0237, delta +0.0004 [+0.0001, +0.0007] (corpus bootstrap p=0.0026), d=+0.067 per corpus, Wilcoxon p=3.70e-03 (n=65), McNemar 512/482 discordant p=3.58e-01
+    legacy_dropped_rows vs main_bm25: 822/70800 = 0.0116 vs 1392/70800 = 0.0197, delta -0.0081 [-0.0091, -0.0071] (corpus bootstrap p=0.0001), d=-0.337 per corpus, Wilcoxon p=3.70e-58 (n=324), McNemar 0/570 discordant p=5.18e-172
+    legacy_tie_order_bm25 vs main_bm25: 1561/70800 = 0.0220 vs 1392/70800 = 0.0197, delta +0.0024 [+0.0015, +0.0033] (corpus bootstrap p=0.0001), d=+0.111 per corpus, Wilcoxon p=1.61e-06 (n=302), McNemar 903/734 discordant p=3.24e-05
+
+--- Minimal counterexamples ---
+  none
+
+Wrote results/invariants_v042_pool_sensitivity.json
+Wrote results/invariants_v042_pool_sensitivity_counterexamples.json
+
+Elapsed: 201.6s
+
+=== Reproducibility ===
+Timestamp (UTC): 2026-10-30T12:02:54Z
+Command line:    evals/eval_invariants.py --configs main --sensitivity-configs main main_bm25 legacy_tie_order legacy_dropped_rows legacy_tie_order_bm25 --skip-cross-process --workers 8 --output results/invariants_v042_pool_sensitivity.json --counterexamples results/invariants_v042_pool_sensitivity_counterexamples.json --log-file results/invariants_v042_pool_sensitivity_output.txt --overwrite
+Python:          3.12.13 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
+numpy:           2.2.6
+scipy:           1.17.1
+bear:            0.4.2
+git commit:      634caf5ab715b2a7c20fac0b170228a49810bdc7
+git status:      unknown (git status failed or timed out)
+git branch:      tist-r2
+
+  n_corpora: 2000
+  configs: ['main']
+  bear_path: /home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/bear/__init__.py
+  bear_source_sha: 9d085b49c004cb03e2bede9055fdc3810cf260c0
+===

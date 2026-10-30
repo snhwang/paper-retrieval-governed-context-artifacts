@@ -87,6 +87,24 @@ case "${1:-}" in
         --counterexamples results/invariants_v042_counterexamples.json \
         --log-file results/invariants_v042_output.txt
     command python evals/repro_bm25_admission_gap.py
+    # Nesting above the pool size on the stub and BM25, paired against the
+    # restore switches that move it.
+    python evals/eval_invariants.py --configs main --skip-cross-process --workers "$WORKERS" \
+        --sensitivity-configs main main_bm25 legacy_tie_order legacy_dropped_rows legacy_tie_order_bm25 \
+        --output results/invariants_v042_pool_sensitivity.json \
+        --counterexamples results/invariants_v042_pool_sensitivity_counterexamples.json \
+        --log-file results/invariants_v042_pool_sensitivity_output.txt
+    # Budget binding on BM25 and hash (bge is a model load, held), with the
+    # switches that give the earlier search and backfill, and the paired
+    # comparison with the 0.4.0 run.
+    python evals/eval_budget_binding.py \
+        --backends bm25 bm25:dropped_rows bm25:flat_backfill hash hash:flat_backfill \
+        --output results/budget_binding_v042.json \
+        --log-file results/budget_binding_v042_output.txt
+    python evals/compare_budget_binding.py \
+        --old results/budget_binding.json --new results/budget_binding_v042.json \
+        --output results/budget_binding_v042_vs_v040.json \
+        --log-file results/budget_binding_v042_vs_v040_output.txt
     ;;
   *)
     echo "usage: bash evals/run_wp256.sh {embed|run|v041|v042}" >&2

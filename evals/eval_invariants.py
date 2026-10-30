@@ -153,7 +153,11 @@ Config cannot disable them.
 
 Pool growth is reported separately, as a sensitivity of the retriever: k
 above the pool base (retrieval_pool=10, k to 30), and the pool varied at
-fixed k against a whole-corpus pool.
+fixed k against a whole-corpus pool. It runs on main (the stub) by default,
+and on any configurations --sensitivity-configs names. Every configuration
+sees the same consecutive-k pairs, so their nesting flags are saved per
+corpus and compared in pairs: McNemar over the pairs, and a bootstrap over
+corpora for the rate difference.
 
 Violation rates are reported per corpus (the independent unit) with
 Clopper-Pearson 95% CIs, alongside output-level counts. For every
@@ -236,7 +240,7 @@ CROSS_PROCESS_HASHSEED = "12345"
 CONFIGS: dict[str, dict] = {
     "main": {"label": "Main defaults (stub)", "embedder": "stub", "overrides": {}},
     "main_hash": {"label": "Main defaults (hash)", "embedder": "hash", "overrides": {}},
-    "main_bm25": {"label": "Main defaults (BM25, drops rows)", "embedder": "bm25",
+    "main_bm25": {"label": "Main defaults (BM25)", "embedder": "bm25",
                   "overrides": {}},
     "main_bm25_gatectx": {"label": "Main defaults (BM25, context tags as gate_tags)",
                           "embedder": "bm25", "context": "gate", "overrides": {}},
@@ -1186,14 +1190,21 @@ def run_config_on_corpus(corpus: dict, cases: list[dict], config_name: str,
             "digest": digest.hexdigest() if want_digest else None}
 
 
-def sensitivity_on_corpus(corpus: dict, cases: list[dict]) -> dict:
-    """Pool growth under main defaults: k above the base, and pool at fixed k."""
+def sensitivity_on_corpus(corpus: dict, cases: list[dict], config_name: str = "main") -> dict:
+    """Pool growth under a configuration's defaults (main = stub, main_bm25 =
+    BM25): k above the base, and pool at fixed k."""
     out: dict = {"above_base": defaultdict(int), "fixed_k": {}, "examples": {}}
+    # One character per ungated consecutive-k pair above the base, in (case, k)
+    # order: "1" where the larger k drops an item. The same corpora, cases and
+    # k give every configuration the same pairs, so the flags pair up.
+    ungated_above_flags: list[str] = []
+    cases = [case_for(config_name, c) for c in cases]
     infos = [CaseInfo(corpus["instructions"], c, MANDATORY_TAGS) for c in cases]
 
     # (a) retrieval_pool = SENS_POOL_BASE, k from 1 to 30. For each item that
-    # drops out as k grows, record the trace reason at the larger k.
-    r, _ = build_retriever(corpus["instructions"], "main",
+    # drops out as k grows, record the trace reason at the larger k, and count
+    # the pairs where a dropped item lost a conflict or a supersede.
+    r, _ = build_retriever(corpus["instructions"], config_name,
                            {"retrieval_pool": SENS_POOL_BASE})
     for ci, (case, info) in enumerate(zip(cases, infos)):
         tag = "gated" if info.gated_query else "ungated"
@@ -1205,8 +1216,13 @@ def sensitivity_on_corpus(corpus: dict, cases: list[dict]) -> dict:
                 region = "within" if k <= SENS_POOL_BASE else "above"
                 out["above_base"][f"{tag}_{region}_pairs"] += 1
                 dropped = sorted(set(prev) - set(ids))
+                if tag == "ungated" and region == "above":
+                    ungated_above_flags.append("1" if dropped else "0")
                 if dropped:
                     out["above_base"][f"{tag}_{region}_violations"] += 1
+                    if any((trace.excluded.get(d) or {}).get("reason") in ("conflict", "superseded")
+                           for d in dropped):
+                        out["above_base"][f"{tag}_{region}_conflict_pairs"] += 1
                     for d in dropped:
                         rec = trace.excluded.get(d) or {}
                         reason = rec.get("reason", "none")
@@ -1219,9 +1235,10 @@ def sensitivity_on_corpus(corpus: dict, cases: list[dict]) -> dict:
                                 "trace_record": rec}
             prev = ids
     out["above_base"] = dict(out["above_base"])
+    out["ungated_above_flags"] = "".join(ungated_above_flags)
 
     # (b) pool varied at fixed k, against a whole-corpus pool
-    rets = {p: build_retriever(corpus["instructions"], "main", {"retrieval_pool": p})[0]
+    rets = {p: build_retriever(corpus["instructions"], config_name, {"retrieval_pool": p})[0]
             for p in (*SENS_POOLS, WHOLE_POOL)}
     for k in SENS_FIXED_K:
         rows = {p: {"cases": 0, "differ": 0, "jaccard_sum": 0.0} for p in SENS_POOLS}
@@ -1242,6 +1259,8 @@ def sensitivity_on_corpus(corpus: dict, cases: list[dict]) -> dict:
 
 
 def worker(task: tuple) -> list[dict]:
+    # do_sensitivity is the list of configurations to run the pool-growth
+    # sensitivity on (empty for none).
     indices, config_names, do_sensitivity, digest_only = task
     results = []
     for idx in indices:
@@ -1254,12 +1273,15 @@ def worker(task: tuple) -> list[dict]:
             if digest_only:
                 row["configs"][name] = {"digest": row["configs"][name]["digest"]}
         if do_sensitivity and not digest_only:
-            row["sensitivity"] = sensitivity_on_corpus(corpus, cases)
+            row["sensitivity_by_config"] = {c: sensitivity_on_corpus(corpus, cases, c)
+                                            for c in do_sensitivity}
+            row["sensitivity"] = row["sensitivity_by_config"].get(
+                "main", next(iter(row["sensitivity_by_config"].values())))
         results.append(row)
     return results
 
 
-def run_parallel(indices: list[int], config_names: list[str], do_sensitivity: bool,
+def run_parallel(indices: list[int], config_names: list[str], do_sensitivity: list[str],
                  digest_only: bool, workers: int, chunk: int = 20) -> list[dict]:
     tasks = [(indices[i:i + chunk], config_names, do_sensitivity, digest_only)
              for i in range(0, len(indices), chunk)]
@@ -1489,12 +1511,68 @@ def aggregate(rows: list[dict], config_names: list[str]) -> dict:
     return agg
 
 
-def aggregate_sensitivity(rows: list[dict]) -> dict:
+SENS_N_BOOT = 10_000
+
+
+def sensitivity_pairs(configs: list[str]) -> list[tuple[str, str]]:
+    """Which sensitivity configurations to compare: BM25 against the stub, and
+    each other configuration against main defaults on its own embedder."""
+    out = []
+    if "main" in configs and "main_bm25" in configs:
+        out.append(("main_bm25", "main"))
+    for c in configs:
+        if c in ("main", "main_bm25"):
+            continue
+        ref = "main_bm25" if CONFIGS[c]["embedder"] == "bm25" else "main"
+        if CONFIGS[c]["embedder"] in ("stub", "bm25") and ref in configs:
+            out.append((c, ref))
+    return out
+
+
+def compare_nesting(rows: list[dict], a: str, b: str) -> dict:
+    """Ungated non-nesting above the base, configuration a against b, on the
+    same consecutive-k pairs. McNemar over the pairs, and a corpus-cluster
+    bootstrap of the rate difference (pairs within a corpus are not
+    independent), with a paired Cohen's d and Wilcoxon on per-corpus counts."""
+    from stat_utils import mcnemar
+    rows = sorted(rows, key=lambda r: r["index"])
+    fa = [r["sensitivity_by_config"][a]["ungated_above_flags"] for r in rows]
+    fb = [r["sensitivity_by_config"][b]["ungated_above_flags"] for r in rows]
+    assert all(len(x) == len(y) for x, y in zip(fa, fb)), "pairs do not align"
+    xa = np.array([x.count("1") for x in fa], dtype=float)
+    xb = np.array([y.count("1") for y in fb], dtype=float)
+    npairs = np.array([len(x) for x in fa], dtype=float)
+    total = npairs.sum()
+    flags_a = np.array([int(c) for x in fa for c in x], dtype=int)
+    flags_b = np.array([int(c) for y in fb for c in y], dtype=int)
+    mc = mcnemar(flags_a, flags_b)
+    rng = np.random.default_rng(20261030)
+    idx = rng.integers(0, len(rows), size=(SENS_N_BOOT, len(rows)))
+    boots = (xa[idx].sum(1) - xb[idx].sum(1)) / npairs[idx].sum(1)
+    lo, hi = np.percentile(boots, [2.5, 97.5])
+    p_boot = float(min(1.0, max(2.0 * min((boots <= 0).mean(), (boots >= 0).mean()),
+                                1.0 / SENS_N_BOOT)))
+    diff = xa - xb
+    sd = diff.std(ddof=1)
+    nz = diff[diff != 0]
+    w_p = float(stats.wilcoxon(nz).pvalue) if len(nz) >= 5 else None
+    return {"a": a, "b": b, "pairs": int(total), "corpora": len(rows),
+            "non_nested_a": int(xa.sum()), "non_nested_b": int(xb.sum()),
+            "rate_a": float(xa.sum() / total), "rate_b": float(xb.sum() / total),
+            "delta": float((xa.sum() - xb.sum()) / total), "delta_ci": [float(lo), float(hi)],
+            "p_cluster_bootstrap": p_boot,
+            "cohens_d_paired_per_corpus": float(diff.mean() / sd) if sd > 1e-12 else None,
+            "wilcoxon_p_per_corpus": w_p, "wilcoxon_n_nonzero": int(len(nz)),
+            "mcnemar": mc, "n_boot": SENS_N_BOOT}
+
+
+def aggregate_sensitivity(rows: list[dict], config_name: str | None = None) -> dict:
     above = defaultdict(int)
     fixed: dict = {}
     examples: dict = {}
     for row in rows:
-        sens = row.get("sensitivity")
+        sens = (row.get("sensitivity") if config_name is None
+                else (row.get("sensitivity_by_config") or {}).get(config_name))
         if not sens:
             continue
         for key, val in sens["above_base"].items():
@@ -1512,11 +1590,15 @@ def aggregate_sensitivity(rows: list[dict]) -> dict:
         for region in ("within", "above"):
             pairs = above.get(f"{tag}_{region}_pairs", 0)
             viol = above.get(f"{tag}_{region}_violations", 0)
+            conf = above.get(f"{tag}_{region}_conflict_pairs", 0)
             prefix = f"{tag}_{region}_reason_"
             above_out[f"{tag}_{region}"] = {
                 "pairs": pairs, "violations": viol,
                 "rate": viol / pairs if pairs else float("nan"),
                 "ci": clopper_pearson(viol, pairs),
+                "conflict_or_supersede_pairs": conf,
+                "conflict_or_supersede_rate": conf / pairs if pairs else float("nan"),
+                "conflict_or_supersede_ci": clopper_pearson(conf, pairs),
                 "dropped_by_reason": {k_[len(prefix):]: v_ for k_, v_ in above.items()
                                       if k_.startswith(prefix)}}
     for k, prow in fixed.items():
@@ -1615,6 +1697,9 @@ def print_tables(agg: dict, sens: dict | None, config_names: list[str],
         for key, v in sens["above_base"].items():
             print(f"    {key:<16} pairs={v['pairs']:<7} non-nested={v['violations']:<5} "
                   f"rate={v['rate']:.4f} [{v['ci'][0]:.4f}, {v['ci'][1]:.4f}]"
+                  + (f" conflict/supersede pairs={v['conflict_or_supersede_pairs']} "
+                     f"({v['conflict_or_supersede_rate']:.4f})"
+                     if v.get("conflict_or_supersede_pairs") is not None else "")
                   + (f"  dropped items by trace reason: {v['dropped_by_reason']}"
                      if v["dropped_by_reason"] else ""))
         for key, ex in sorted(sens.get("examples", {}).items()):
@@ -1657,6 +1742,8 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--configs", nargs="+", default=list(CONFIGS), choices=list(CONFIGS))
     p.add_argument("--workers", type=int, default=min(16, max(1, (os.cpu_count() or 2) - 2)))
     p.add_argument("--skip-sensitivity", action="store_true")
+    p.add_argument("--sensitivity-configs", nargs="+", default=["main"], choices=list(CONFIGS),
+                   help="Configurations for the pool-growth sensitivity (default main, the stub).")
     p.add_argument("--skip-cross-process", action="store_true")
     p.add_argument("--output", type=Path, default=project_root / "results" / "invariants.json")
     p.add_argument("--counterexamples", type=Path,
@@ -1714,13 +1801,17 @@ def main() -> None:
         print(f"Configurations: {config_names}")
         print(f"Workers: {args.workers}")
 
-        rows = run_parallel(indices, config_names, not args.skip_sensitivity, False, args.workers)
+        sens_configs = [] if args.skip_sensitivity else list(args.sensitivity_configs)
+        rows = run_parallel(indices, config_names, sens_configs, False, args.workers)
         sizes = [r["n"] for r in rows]
         print(f"\nRan in {time.time() - t0:.1f}s. Corpus sizes: mean {np.mean(sizes):.1f}, "
               f"range {min(sizes)}-{max(sizes)}")
 
         agg = aggregate(rows, config_names)
         sens = None if args.skip_sensitivity else aggregate_sensitivity(rows)
+        sens_by_config = ({} if args.skip_sensitivity else
+                          {c: aggregate_sensitivity(rows, c) for c in sens_configs})
+        sens_compare = [compare_nesting(rows, a, b) for a, b in sensitivity_pairs(sens_configs)]
 
         # Cross-process determinism (I6, part d)
         cross = None
@@ -1745,6 +1836,32 @@ def main() -> None:
                 t["cross_process_mismatches"] = len(cross["mismatched"])
 
         print_tables(agg, sens, config_names, pending)
+        for c, sc in sens_by_config.items():
+            if c == "main":
+                continue
+            print(f"\n--- Pool growth sensitivity, {c} ({CONFIGS[c]['label']}) ---")
+            for key, v in sc["above_base"].items():
+                print(f"    {key:<16} pairs={v['pairs']:<7} non-nested={v['violations']:<5} "
+                      f"rate={v['rate']:.4f} [{v['ci'][0]:.4f}, {v['ci'][1]:.4f}] "
+                      f"conflict/supersede pairs={v['conflict_or_supersede_pairs']} "
+                      f"({v['conflict_or_supersede_rate']:.4f})"
+                      + (f"  dropped items by trace reason: {v['dropped_by_reason']}"
+                         if v["dropped_by_reason"] else ""))
+        if sens_compare:
+            print("\n--- Nesting above the base, paired (ungated pairs, retrieval_pool = "
+                  f"{SENS_POOL_BASE}) ---")
+            for c in sens_compare:
+                d = c["cohens_d_paired_per_corpus"]
+                w = c["wilcoxon_p_per_corpus"]
+                m = c["mcnemar"]
+                print(f"    {c['a']} vs {c['b']}: {c['non_nested_a']}/{c['pairs']} = {c['rate_a']:.4f} "
+                      f"vs {c['non_nested_b']}/{c['pairs']} = {c['rate_b']:.4f}, "
+                      f"delta {c['delta']:+.4f} [{c['delta_ci'][0]:+.4f}, {c['delta_ci'][1]:+.4f}] "
+                      f"(corpus bootstrap p={c['p_cluster_bootstrap']:.4f}), "
+                      f"d={'n/a' if d is None else format(d, '+.3f')} per corpus, "
+                      f"Wilcoxon p={'n/a' if w is None else format(w, '.2e')} "
+                      f"(n={c['wilcoxon_n_nonzero']}), McNemar {m['b_a_right_b_wrong']}/"
+                      f"{m['c_a_wrong_b_right']} discordant p={m['p_value']:.2e}")
         if cross is not None:
             print(f"\nCross-process determinism (main, {cross.get('corpora')} corpora, "
                   f"PYTHONHASHSEED {cross.get('pythonhashseed_this')} vs "
@@ -1815,11 +1932,17 @@ def main() -> None:
             "pending_invariants": sorted(pending),
             "results": agg,
             "sensitivity": sens,
+            "sensitivity_by_config": sens_by_config,
+            "sensitivity_paired": sens_compare,
             "cross_process_determinism": cross,
             "per_corpus": [
                 {"index": r["index"], "n": r["n"],
                  "violations": {n: {inv: r["configs"][n]["inv"][inv]["outputs_violated"]
-                                    for inv in INV_KEYS} for n in config_names}}
+                                    for inv in INV_KEYS} for n in config_names},
+                 **({"ungated_above_flags": {
+                     c: v["ungated_above_flags"]
+                     for c, v in r["sensitivity_by_config"].items()}}
+                    if r.get("sensitivity_by_config") else {})}
                 for r in rows],
         }
         args.output.parent.mkdir(parents=True, exist_ok=True)

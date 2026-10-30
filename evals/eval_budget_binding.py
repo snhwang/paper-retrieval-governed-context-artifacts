@@ -27,9 +27,12 @@ Three measures per query:
      the corpus size so every row is ranked: the items admitted by search,
      the required-tags backfill or mandatory injection. This is the
      admissible set under that backend. It is what the threshold-dependent
-     conditions report. BM25 also drops zero-score rows from its search, so a
-     BM25 trace admits an ungated item only if it shares a term with the
-     query.
+     conditions report. Before BEAR 0.4.2, BM25 dropped zero-score rows from
+     its search, so a BM25 trace admitted an ungated item only if it shared a
+     term with the query. From 0.4.2 a zero-score row is a row of similarity
+     0, which the threshold admits wherever theta <= 0 or the soft scope
+     matches. The backend "bm25:dropped_rows" turns on
+     Config.restore_dropped_rows to give the earlier search on the same BEAR.
   3. Trace, default pool. The same at the pool the paper's runs used (pool
      base 3 x default_top_k, or the whole corpus for gated queries), plus
      whether the top-k cut removed anything after relationship resolution
@@ -45,7 +48,9 @@ scripts that produced each table):
 
 Backends: metadata needs none. Threshold-dependent conditions run on BM25 and
 the hash embedder, and on BGE-base when --backends includes bge (forced onto
-the CPU). Backend-free conditions run a hash-trace cross-check.
+the CPU). Backend-free conditions run a hash-trace cross-check. A backend may
+carry BEAR restore switches after colons, as in "bm25:dropped_rows" or
+"hash:flat_backfill", each of which sets Config.restore_<switch> = True.
 
 Only BEAR's public API is used. The trace comes from
 Retriever.retrieve_with_trace (BEAR 0.4.0 and later), and the default-pool
@@ -57,6 +62,7 @@ in the result JSON.
 Usage:
     python evals/eval_budget_binding.py                        # bm25 + hash
     python evals/eval_budget_binding.py --backends bm25 hash bge
+    python evals/eval_budget_binding.py --backends bm25 bm25:dropped_rows hash
     python evals/eval_budget_binding.py --conditions petsim cs
     BEAR_SOURCE_SHA=<sha> python evals/eval_budget_binding.py  # record the BEAR source commit
 """
@@ -172,11 +178,33 @@ def admission_metadata(instructions, ctx: Context, query: str,
     return floor, thr_dep, gate_n
 
 
+BASE_BACKENDS = ("bm25", "hash", "bge")
+
+
+def split_backend(backend: str) -> tuple[str, list[str]]:
+    """'bm25:dropped_rows' -> ('bm25', ['restore_dropped_rows'])."""
+    base, *switches = backend.split(":")
+    return base, [f"restore_{s}" for s in switches]
+
+
+def check_backend(backend: str) -> str:
+    base, switches = split_backend(backend)
+    if base not in BASE_BACKENDS:
+        raise argparse.ArgumentTypeError(f"unknown backend {base!r}")
+    missing = [s for s in switches if s not in Config.model_fields]
+    if missing:
+        raise argparse.ArgumentTypeError(
+            f"BEAR {getattr(bear, '__version__', '?')} has no Config field {missing}")
+    return backend
+
+
 def make_config(backend: str, *, k: int, threshold_dense: float, threshold_bm25: float,
                 priority_weight: float, mandatory_tags: list[str],
                 retrieval_pool: int | None) -> Config:
+    backend, switches = split_backend(backend)
     common = dict(priority_weight=priority_weight, default_top_k=k,
-                  mandatory_tags=list(mandatory_tags), retrieval_pool=retrieval_pool)
+                  mandatory_tags=list(mandatory_tags), retrieval_pool=retrieval_pool,
+                  **{s: True for s in switches})
     if backend == "bm25":
         return Config(embedding_model="bm25", embedding_backend=EmbeddingBackend.BM25,
                       embedding_dim=0, embedding_query_prefix="", embedding_passage_prefix="",
@@ -247,7 +275,7 @@ def run_condition(key: str, label: str, corpus: Corpus, queries: list[tuple[str,
         cfg_whole = make_config(b, retrieval_pool=n_corpus, **kw)
         # One embedder for both retrievers, through the public embedder
         # argument, so a dense model is loaded once. BM25 needs none.
-        shared = None if b == "bm25" else Embedder.from_config(cfg_whole)
+        shared = None if split_backend(b)[0] == "bm25" else Embedder.from_config(cfg_whole)
         r_whole = Retriever(corpus, config=cfg_whole, embedder=shared)
         r_whole.build_index()
         r_def = Retriever(corpus, config=make_config(b, retrieval_pool=None, **kw),
@@ -311,10 +339,11 @@ def toolbench_conditions(backends: list[str]) -> list[dict]:
     # backends always run (BGE adds nothing here, since every API is admissible).
     out.append(run_condition(
         "toolbench_nogov", "ToolBench, ungated (no gov)", stripped, nog_q,
-        priority_weight=0.0, backends=[b for b in backends if b != "bge"],
+        priority_weight=0.0, backends=[b for b in backends if split_backend(b)[0] != "bge"],
         always_run_backends=True, **kw,
         note="Empty scopes match every context, so every API is admissible. The trace rows "
-             "show the operational pool (base 15). BM25 search also drops zero-score rows."))
+             "show the operational pool (base 15). Before BEAR 0.4.2 (or with "
+             "restore_dropped_rows) BM25 search also drops zero-score rows."))
     out.append(run_condition(
         "toolbench_mandonly", "ToolBench, mandatory-only (supplementary)", corpus, nog_q,
         priority_weight=TB_PRIORITY_WEIGHT, backends=backends, **kw,
@@ -528,18 +557,24 @@ def parse_args() -> argparse.Namespace:
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("--conditions", nargs="+", default=list(ALL_CONDITIONS),
                    choices=list(ALL_CONDITIONS))
-    p.add_argument("--backends", nargs="+", default=["bm25", "hash"],
-                   choices=["bm25", "hash", "bge"],
-                   help="Backends for threshold-dependent conditions. bge runs on the CPU.")
+    p.add_argument("--backends", nargs="+", default=["bm25", "hash"], type=check_backend,
+                   help="Backends for threshold-dependent conditions: bm25, hash or bge, each "
+                        "optionally followed by :<switch> to set Config.restore_<switch>. "
+                        "bge runs on the CPU.")
     p.add_argument("--output", type=Path,
                    default=project_root / "results" / "budget_binding.json")
     p.add_argument("--log-file", type=Path,
                    default=project_root / "results" / "budget_binding_output.txt")
+    p.add_argument("--overwrite", action="store_true",
+                   help="Replace an existing output or log file.")
     return p.parse_args()
 
 
 def main() -> None:
     args = parse_args()
+    for path in (args.output, args.log_file):
+        if path and str(path).strip() and path.exists() and not args.overwrite:
+            sys.exit(f"{path} exists. Pass --overwrite or choose another path.")
     log_handle = None
     original_stdout = sys.stdout
     if args.log_file and str(args.log_file).strip():
