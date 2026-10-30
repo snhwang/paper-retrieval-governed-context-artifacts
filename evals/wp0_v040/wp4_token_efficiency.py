@@ -256,11 +256,15 @@ def analyse(bench: str, d: Path, main_runs: dict, enc, args, e2e: dict | None) -
                 continue
             r5 = R[:, 4]
             n5 = np.array([ndcg5(z["idx"][i], set(expected[i]), n_exp[i]) for i in range(n)])
+            # The curves are float32, so compare at 1e-6 (a recall of 1/3
+            # differs from the float64 reference by about 1e-8).
             cons[name] = {
-                "recall5_equal": bool(np.allclose(r5, np.asarray(ref["recall"]), atol=1e-9)),
-                "ndcg5_equal": bool(np.allclose(n5, np.asarray(ref["ndcg"]), atol=1e-9)),
-                "n_recall5_diff": int(np.sum(np.abs(r5 - np.asarray(ref["recall"])) > 1e-9)),
-                "n_ndcg5_diff": int(np.sum(np.abs(n5 - np.asarray(ref["ndcg"])) > 1e-9)),
+                "recall5_equal": bool(np.allclose(r5, np.asarray(ref["recall"]), rtol=0, atol=1e-6)),
+                "ndcg5_equal": bool(np.allclose(n5, np.asarray(ref["ndcg"]), rtol=0, atol=1e-6)),
+                "n_recall5_diff": int(np.sum(np.abs(r5 - np.asarray(ref["recall"])) > 1e-6)),
+                "n_ndcg5_diff": int(np.sum(np.abs(n5 - np.asarray(ref["ndcg"])) > 1e-6)),
+                "max_abs_recall5_diff": float(np.max(np.abs(r5 - np.asarray(ref["recall"])))),
+                "max_abs_ndcg5_diff": float(np.max(np.abs(n5 - np.asarray(ref["ndcg"])))),
             }
         rec["consistency_with_k5_run"] = cons
         rec["nesting_check"] = {g_name: sg.get("nesting_check"), u_name: su.get("nesting_check")}

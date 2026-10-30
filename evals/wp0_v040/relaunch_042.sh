@@ -54,6 +54,8 @@ if [ $# -gt 0 ]; then
                echo "started service wp0-e2erun" ;;
       mand042) sync_clone artifacts-nemo
                start_lane mand042 artifacts-nemo WP0_STEP_MEM=4G ;;
+      fallback0110) sync_clone artifacts-attr
+                    start_lane fallback0110 artifacts-attr WP0_STEP_MEM=4G ;;
       pair042) sync_clone artifacts-nemo
                start_lane pair042 artifacts-nemo WP0_STEP_MEM=4G ;;
       e2eattr042) sync_clone artifacts-nemo

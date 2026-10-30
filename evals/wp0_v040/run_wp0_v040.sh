@@ -91,6 +91,7 @@ step() {
     v041|v041L) pypath=$SITE:$BEAR041_SRC; sha=$BEAR041_SHA ;;
     v040|v040L) pypath=$SITE:$BEAR040_EXPORT; sha=$BEAR040_SHA ;;
     v0110)      pypath=$SITE:$BEAR0110_SRC; sha=$BEAR0110_SHA ;;
+    v0110F)     pypath=$SITE:$BEAR0110_SRC; sha=$BEAR0110_SHA ;;   # forced fallback (lane fallback0110)
     *) log "unknown version $ver"; return 1 ;;
   esac
   local envs=(
@@ -100,7 +101,7 @@ step() {
     WP0_REPORT_VRAM=$LOGS/vram.jsonl WP0_STEP=$name
     "${EXTRA_ENV[@]}"
   )
-  [[ ${WP0_ALLOW_LOCAL_MODELS:-0} == 1 ]] || envs+=(WP0_NO_LOCAL_MODELS=1)
+  [[ ${WP0_ALLOW_LOCAL_MODELS:-0} == 1 && $ver != v0110F ]] || envs+=(WP0_NO_LOCAL_MODELS=1)
   [[ $kind == gpu ]] || envs+=(CUDA_VISIBLE_DEVICES=)   # GPU only for gpu steps (coordinator, 2026-10-30)
   [[ -n ${WP0_ENCODE_BATCH:-} ]] && envs+=(WP0_ENCODE_BATCH=$WP0_ENCODE_BATCH)
   case $kind in
@@ -658,6 +659,39 @@ lane_pair042() {  # BM25 needs two switches at once: tie_order alone restores th
   tb tb_bm25_Ltie_dropped cpu v042L 0 all "BEAR+BM25 (gov)" "BEAR+BM25 (mand-only)" "BM25 (no gov)"
   EXTRA_ENV=()
 }
+lane_fallback0110() {  # the published 0.1.10 runs as they would have come out had every model
+  # failed to load (coordinator, 2026-10-30). Version v0110F is public v0.1.10
+  # with local model loads refused (WP0_NO_LOCAL_MODELS), so each dense backend
+  # takes 0.1.10's silent fallback to hash embeddings. 0.1.10 hashes only the
+  # first 32 dimensions and applies no prefix in hash mode, so the fallback is
+  # the same whatever the dense model's dimension and prefixes. These outputs
+  # are the hash comparators for files that publish no hash cell. Fifth clone
+  # (artifacts-attr), no model, 4G steps.
+  local F=v0110F
+  step fb_alpha cpu $F 0 0 -- "$PY" evals/eval_alpha_sweep.py --backends bge bge-m3 qwen3 qwen3-4b
+  step fb_decomposed cpu $F 0 0 -- "$PY" evals/eval_governance_decomposed.py --backends bge bge-m3 qwen3 qwen3-4b
+  step fb_backends cpu $F 0 0 -- "$PY" evals/eval_retrieval_backends.py --models bge bge-m3 qwen3 qwen3-4b itr \
+      --output results/wp0/backend_comparison_fb.json
+  step fb_gov_ablation cpu $F 0 0 -- "$PY" evals/eval_governance_ablation.py --backends bge bge-m3 qwen3 qwen3-4b \
+      --skip-itr --output results/wp0/governance_ablation_fb.json
+  step fb_retrieval_semantic cpu $F 0 0 -- "$PY" evals/eval_retrieval.py --semantic
+  step fb_t4_inferred cpu $F 0 0 -- "$PY" evals/eval_toolbench_inferred_categories.py
+  step fb_t4_multitag cpu $F 0 0 -- "$PY" evals/eval_toolbench_multitag_categories.py
+  step fb_t4_top5     cpu $F 0 0 -- "$PY" evals/eval_toolbench_top5_categories.py
+  step fb_baseline_comparison cpu $F 0 0 -- "$PY" evals/eval_baseline_comparison.py
+  step fb_tool_scaling cpu $F 0 0 -- "$PY" evals/eval_tool_scaling.py
+  step fb_scalability cpu $F 0 0 -- "$PY" evals/eval_scalability.py
+  step fb_transfer_toolbench cpu $F 0 0 -- "$PY" evals/eval_backend_transfer.py --corpus toolbench \
+      --output results/wp0/backend_transfer_toolbench_toolbench_ir_bert_based_uncased.json
+  step fb_transfer_metatool cpu $F 0 0 -- "$PY" evals/eval_backend_transfer.py --corpus metatool \
+      --output results/wp0/backend_transfer_metatool_toolbench_ir_bert_based_uncased.json
+  step fb_toolllm cpu $F 0 0 -- "$PY" evals/eval_toolbench_toolllm.py \
+      --model ToolBench/ToolBench_IR_bert_based_uncased --top-k 5 --mode both \
+      --output results/wp0/toolbench_toolllm_fixed.json
+  # The ITR library's own fallback, for the ITR column of tab:governance-ablation
+  step fb_gov_ablation_itr cpu $F 0 0 -- "$PY" evals/eval_governance_ablation.py --backends hash \
+      --output results/wp0/governance_ablation_fb_itr.json
+}
 lane_manddense042() {  # after dense042 (one dense lane at a time): redo the cap kills, then the
   # dense mandatory diagnostic. Launched like dense042 (20G, batch 4, 12 threads).
   [[ ${WP0_ALLOW_LOCAL_MODELS:-0} == 1 ]] || { log "manddense042 needs WP0_ALLOW_LOCAL_MODELS=1"; return 1; }
@@ -733,6 +767,7 @@ case $lane in
   mand042) lane_mand042 ;;
   e2eattr042) lane_e2eattr042 ;;
   pair042) lane_pair042 ;;
+  fallback0110) lane_fallback0110 ;;
   manddense042) lane_manddense042 ;;
   attrlex) lane_attrlex ;;
   tracklex) lane_tracklex ;;
