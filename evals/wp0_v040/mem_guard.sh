@@ -4,8 +4,9 @@
 # Runs the command in its own session and stops it if the session's resident
 # memory exceeds WP0_RSS_MAX_GIB (default 24), or if WSL's MemAvailable falls
 # below WP0_MEMAVAIL_MIN_GIB (default 16). Refuses to start below that
-# minimum. Exit 76 means the RSS limit was hit, 77 that memory ran low. The
-# peak resident memory of the session is printed at the end.
+# minimum. Exit 76 means the RSS limit was hit, 77 that memory ran low, 78
+# that the card passed WP0_WIN_GPU_STOP_MIB (Windows nvidia-smi, when set).
+# The peak resident memory of the session is printed at the end.
 max_kib=$(( ${WP0_RSS_MAX_GIB:-24} * 1024 * 1024 ))
 min_kib=$(( ${WP0_MEMAVAIL_MIN_GIB:-16} * 1024 * 1024 ))
 avail() { awk '/MemAvailable/ {print $2}' /proc/meminfo; }
@@ -23,14 +24,28 @@ stop() {
   echo "### mem guard: peak session RSS $(( peak / 1024 )) MiB"
   exit "$2"
 }
+tick=0
+card_peak=0
 while kill -0 "$pid" 2>/dev/null; do
   rss=$(ps -o rss= --sid "$pid" 2>/dev/null | awk '{s += $1} END {print s + 0}')
   (( rss > peak )) && peak=$rss
   (( rss > max_kib )) && stop "session RSS ${rss} kB over the ${WP0_RSS_MAX_GIB:-24} GiB limit" 76
   a=$(avail)
   (( a < min_kib )) && stop "MemAvailable ${a} kB below the ${WP0_MEMAVAIL_MIN_GIB:-16} GiB minimum" 77
+  # Card stop limit (model-server, 2026-10-30): Windows nvidia-smi above
+  # WP0_WIN_GPU_STOP_MIB stops the step, exit 78. Checked every 15 s.
+  if [ -n "${WP0_WIN_GPU_STOP_MIB:-}" ] && (( tick % 3 == 0 )); then
+    used=$(/mnt/c/Windows/System32/nvidia-smi.exe --query-gpu=memory.used --format=csv,noheader,nounits \
+           2>/dev/null | head -1 | tr -d ' \r')
+    if [[ $used =~ ^[0-9]+$ ]]; then
+      (( used > card_peak )) && card_peak=$used
+      (( used > WP0_WIN_GPU_STOP_MIB )) && stop "card at ${used} MiB, over the ${WP0_WIN_GPU_STOP_MIB} MiB stop limit" 78
+    fi
+  fi
+  tick=$((tick + 1))
   sleep 5
 done
+[ -n "${WP0_WIN_GPU_STOP_MIB:-}" ] && echo "### mem guard: card peak ${card_peak} MiB (stop limit ${WP0_WIN_GPU_STOP_MIB})"
 wait "$pid"; rc=$?
 echo "### mem guard: peak session RSS $(( peak / 1024 )) MiB"
 exit $rc

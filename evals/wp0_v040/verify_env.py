@@ -2,16 +2,18 @@
 
 * The imported bear package hashes the same as the source tree's bear/
   directory, and the source tree is at the expected commit. The source tree
-  is either an export with an EXPORTED_SHA file (0.4.0: bear-dev 10730c8) or
-  a git clone (0.4.1: public tag v0.4.1, fa87fc5).
+  is an export with a BEAR_GIT_SHA or EXPORTED_SHA file (0.4.2 candidate:
+  bear-dev 9d085b4, 0.4.0: bear-dev 10730c8) or a git clone (0.4.1: public
+  tag v0.4.1, fa87fc5). Line endings are normalized before hashing, so a
+  reinstall from the public tag compares equal if only line endings differ.
 * bear reports the expected version.
 * The embedding service at NEMOTRON_URL identifies itself through /health.
 
 Exits non-zero if any check fails.
 
 Usage:
-    python evals/wp0_v040/verify_env.py --export ~/tist-evals/bear-v0.4.1 \
-        --expect-sha fa87fc5 --expect-version 0.4.1 --out results/wp0/run_provenance.json
+    python evals/wp0_v040/verify_env.py --export ~/tist-evals/bear-9d085b4 \
+        --expect-sha 9d085b4 --expect-version 0.4.2 --out results/wp0/run_provenance.json
 """
 
 from __future__ import annotations
@@ -34,14 +36,15 @@ def tree_hash(pkg: Path) -> str:
             continue
         h.update(p.relative_to(pkg).as_posix().encode())
         h.update(b"\0")
-        h.update(p.read_bytes())
+        h.update(p.read_bytes().replace(b"\r\n", b"\n"))
     return h.hexdigest()
 
 
 def source_sha(src: Path) -> str:
-    f = src / "EXPORTED_SHA"
-    if f.exists():
-        return f.read_text().strip()
+    for name in ("BEAR_GIT_SHA", "EXPORTED_SHA"):
+        f = src / name
+        if f.exists():
+            return f.read_text().strip()
     out = subprocess.run(["git", "-C", str(src), "rev-parse", "HEAD"],
                          capture_output=True, text=True, check=True)
     return out.stdout.strip()

@@ -37,9 +37,17 @@
 # service run (lanes nomodel, attrlex, tracklex, nemo). Nemotron batches hold
 # at most 16 texts. The 0.4.0 run (root ~/tist-evals/wp0-v040) is the 0.4.0
 # record. This run's root is ~/tist-evals/wp0-v041.
+#
+# 2026-10-30, later (coordinator): BEAR 0.4.2 candidate, bear-dev 9d085b4, from
+# the export ~/tist-evals/bear-9d085b4 installed in the venv (label v042). The
+# comparison is 0.1.10 vs 0.4.2. No GPU: every step hides CUDA. Every step runs
+# through ~/bin/tist-capped (a systemd scope in tist.slice) at WP0_STEP_MEM
+# (default 8G), and the lanes run as tist-capped services. Local models run on
+# CPU only, in one dense lane at a time (WP0_ALLOW_LOCAL_MODELS=1). Root
+# ~/tist-evals/wp0-v042.
 set -u
 
-ROOT=${WP0_ROOT:-$HOME/tist-evals/wp0-v041}
+ROOT=${WP0_ROOT:-$HOME/tist-evals/wp0-v042}
 ART=${WP0_ART:-$ROOT/artifacts}   # lane attr runs in a second clone
 STAGE=$ROOT/stage
 LOGS=$ROOT/logs
@@ -47,6 +55,9 @@ PY=${WP0_PY:-$HOME/.venvs/tist-evals/bin/python}
 SITE=$ART/evals/wp0_v040/site
 BEAR040_EXPORT=$HOME/tist-evals/bear-10730c8
 BEAR040_SHA=$(cat "$BEAR040_EXPORT/EXPORTED_SHA")
+BEAR042_SRC=$HOME/tist-evals/bear-9d085b4
+BEAR042_SHA=$(cat "$BEAR042_SRC/BEAR_GIT_SHA" 2>/dev/null || echo unknown)
+BEAR042_EXPECT=9d085b4
 BEAR041_SRC=$HOME/tist-evals/bear-v0.4.1
 BEAR041_SHA=$(git -C "$BEAR041_SRC" rev-parse HEAD 2>/dev/null || echo unknown)
 BEAR041_TAG_SHA=fa87fc5
@@ -65,8 +76,7 @@ log() { echo "[$(date '+%F %T')] $*"; }
 EXTRA_ENV=()
 # Kernel-enforced memory cap for every job (coordinator, 2026-10-30): a
 # transient systemd scope in tist.slice, MemoryMax 24G, no swap.
-CAP=(systemd-run --user --scope --quiet --slice=tist.slice
-     -p "MemoryMax=${WP0_MEMMAX:-24G}" -p MemorySwapMax=0)
+CAP=("$HOME/bin/tist-capped" --mem "${WP0_STEP_MEM:-8G}" --)
 
 # step NAME KIND VERSION NEED_GIB MAXWAIT_S -- command...
 step() {
@@ -77,7 +87,8 @@ step() {
   touch "$marker"; sleep 1
   local pypath sha
   case $ver in
-    v041|v041L) pypath=$SITE; sha=$BEAR041_SHA ;;                       # venv site-packages
+    v042|v042L) pypath=$SITE; sha=$BEAR042_SHA ;;                       # venv site-packages
+    v041|v041L) pypath=$SITE:$BEAR041_SRC; sha=$BEAR041_SHA ;;
     v040|v040L) pypath=$SITE:$BEAR040_EXPORT; sha=$BEAR040_SHA ;;
     v0110)      pypath=$SITE:$BEAR0110_SRC; sha=$BEAR0110_SHA ;;
     *) log "unknown version $ver"; return 1 ;;
@@ -90,6 +101,8 @@ step() {
     "${EXTRA_ENV[@]}"
   )
   [[ ${WP0_ALLOW_LOCAL_MODELS:-0} == 1 ]] || envs+=(WP0_NO_LOCAL_MODELS=1)
+  [[ $kind == gpu ]] || envs+=(CUDA_VISIBLE_DEVICES=)   # GPU only for gpu steps (coordinator, 2026-10-30)
+  [[ -n ${WP0_ENCODE_BATCH:-} ]] && envs+=(WP0_ENCODE_BATCH=$WP0_ENCODE_BATCH)
   case $kind in
     gpu)    envs+=(WP0_QWEN4B_DTYPE=bfloat16 WP0_SHARE_MODELS=1 WP0_EMB_CACHE=$EMBCACHE) ;;
     remote) envs+=(CUDA_VISIBLE_DEVICES= WP0_NEMO_CACHE=$ROOT/nemocache/nemo.sqlite) ;;
@@ -123,7 +136,7 @@ step() {
       cpu)    env -u OPENAI_API_KEY "${envs[@]}" "${CAP[@]}" bash "$W/mem_guard.sh" "$@" \
                 >> "$LOGS/$name.log" 2>&1; rc=$? ;;
     esac
-    (( rc == 137 )) && echo "### killed (rc 137): most likely the ${WP0_MEMMAX:-24G} memory cap" >> "$LOGS/$name.log"
+    (( rc == 137 )) && echo "### killed (rc 137): the ${WP0_STEP_MEM:-8G} memory cap of the scope" >> "$LOGS/$name.log"
     if [[ $rc -eq 77 ]] && grep -q "not started" <(tail -2 "$LOGS/$name.log"); then
       rc=75   # memory low before start: wait like a VRAM shortfall
     fi
@@ -153,6 +166,8 @@ step() {
   if [[ $rc -eq 0 ]]; then touch "$LOGS/$name.done"; log "done $name"
   elif [[ $rc -eq 75 ]]; then echo "not enough free VRAM or memory" > "$LOGS/$name.blocked"; log "BLOCKED $name (VRAM or memory)"
   elif [[ $rc -eq 76 || $rc -eq 77 ]]; then echo "$rc memory guard" > "$LOGS/$name.failed"; log "FAILED $name (memory guard rc=$rc)"
+  elif [[ $rc -eq 78 ]]; then echo "78 card over the stop limit" > "$LOGS/$name.failed"; touch "$LOGS/.card_stop"
+       log "FAILED $name (card over ${WP0_WIN_GPU_STOP_MIB:-?} MiB, rc=78); the lane stops"
   else echo "$rc" > "$LOGS/$name.failed"; log "FAILED $name rc=$rc"; fi
   return 0
 }
@@ -478,8 +493,228 @@ lane_nemo() {  # Nemotron through 8360, batches of at most 16 texts
   lists wp4_mt_nemotron remote v041 0 metatool-tags nemotron
 }
 
+# ---------------------------------------------------------------------------
+# BEAR 0.4.2 lanes (coordinator, 2026-10-30). No GPU. Lexical and Nemotron
+# steps run at WP0_STEP_MEM=8G. Dense lanes run on CPU, one at a time, with
+# WP0_ALLOW_LOCAL_MODELS=1, WP0_STEP_MEM <= 20G, WP0_ENCODE_BATCH small and
+# WP0_CPU_THREADS <= 12 (set when the lane is launched).
+# ---------------------------------------------------------------------------
+
+SWITCHES_042="all ungated_pool below_threshold ranked_resolution removed_acting pool_by_k unchecked_requires flat_backfill dropped_rows tie_order"
+
+verify042() {
+  step verify cpu v042 0 0 -- "$PY" "$W/verify_env.py" --export "$BEAR042_SRC" \
+      --expect-sha "$BEAR042_EXPECT" --expect-version 0.4.2 --out results/wp0/run_provenance.json
+}
+
+lane_lex042() {  # step 1: BM25 and hash across all tables, and 0.1.10 controls
+  verify042
+  tb tb_bm25 cpu v042 0 all "BEAR+BM25 (gov)" "BEAR+BM25 (mand-only)" "BM25 (no gov)"
+  tb tb_hash cpu v042 0 all "BEAR+Hash (gov)" "BEAR+Hash (mand-only)" "Hash (no gov)"
+  tb tb_bm25_v0110 cpu v0110 0 all "BEAR+BM25 (gov)" "BEAR+BM25 (mand-only)" "BM25 (no gov)"
+  tb tb_hash_v0110 cpu v0110 0 all "BEAR+Hash (gov)" "BEAR+Hash (mand-only)" "Hash (no gov)"
+  lists e2e_lex_v042  cpu v042  0 e2e bm25 hash
+  lists e2e_lex_v0110 cpu v0110 0 e2e bm25 hash
+  petsim_lex v042 ""
+  petsim_lex v0110 "_v0110"
+  step ablation_lexical cpu v042 0 0 -- "$PY" evals/eval_ablation.py
+  step tool_composition cpu v042 0 0 -- "$PY" evals/eval_tool_composition.py
+  lists wp4_tb_lex cpu v042 0 toolbench bm25 hash
+  lists wp4_mt_lex cpu v042 0 metatool-tags bm25 hash
+}
+
+lane_attrpet042() {  # Pet Sim single-switch attribution on hash and BM25 (second clone)
+  local sw
+  for sw in $SWITCHES_042; do
+    EXTRA_ENV=(WP0_BEAR_LEGACY=$sw)
+    step "retrieval_hash_L$sw"   cpu v042L 0 0 -- "$PY" evals/eval_retrieval.py
+    step "backends_lex_L$sw"     cpu v042L 0 0 -- "$PY" evals/eval_retrieval_backends.py --models hash bm25 \
+        --output results/wp0/backend_comparison_lex.json
+    step "gov_ablation_lex_L$sw" cpu v042L 0 0 -- "$PY" evals/eval_governance_ablation.py \
+        --backends bm25 hash --skip-itr --output results/wp0/governance_ablation_lex.json
+    step "decomposed_bm25_L$sw"  cpu v042L 0 0 -- "$PY" evals/eval_governance_decomposed.py --backends bm25
+    step "alpha_sweep_bm25_L$sw" cpu v042L 0 0 -- "$PY" evals/eval_alpha_sweep.py --backends bm25
+  done
+  EXTRA_ENV=()
+}
+
+lane_attrtb042() {  # external-table single-switch attribution on BM25 and hash (third clone)
+  local sw
+  for sw in ${WP0_SWITCHES:-$SWITCHES_042}; do
+    EXTRA_ENV=(WP0_BEAR_LEGACY=$sw)
+    tb "tb_bm25_L$sw" cpu v042L 0 all "BEAR+BM25 (gov)" "BEAR+BM25 (mand-only)" "BM25 (no gov)"
+    tb "tb_hash_L$sw" cpu v042L 0 all "BEAR+Hash (gov)" "BEAR+Hash (mand-only)" "Hash (no gov)"
+  done
+  EXTRA_ENV=()
+}
+
+lane_nemo042() {  # step 2: Nemotron through 8360, batches of at most 16 texts
+  tb tb_nemotron remote v042 0 all "BEAR+Nemotron (gov)" "Nemotron (no gov)"
+  lists e2e_nemotron_v042 remote v042 0 e2e nemotron
+  lists wp4_tb_nemotron remote v042 0 toolbench nemotron
+  lists wp4_mt_nemotron remote v042 0 metatool-tags nemotron
+}
+
+lane_dense042() {  # step 3: local models on CPU, one dense lane at a time (fourth clone)
+  # Launched with WP0_ALLOW_LOCAL_MODELS=1 WP0_STEP_MEM=20G WP0_ENCODE_BATCH=4
+  # WP0_CPU_THREADS=12. Qwen3-4B on ToolBench and MetaTool is not here: on the
+  # CPU it needs far more than 12 hours, so it waits for a GPU window.
+  [[ ${WP0_ALLOW_LOCAL_MODELS:-0} == 1 ]] || { log "dense042 needs WP0_ALLOW_LOCAL_MODELS=1"; return 1; }
+  # BGE: Tables 3, 5, 6, the end-to-end lists, Table 4, WP4
+  tb tb_bge cpu v042 0 all "BEAR+BGE (gov)" "BEAR+BGE (mand-only)" "BGE (no gov)"
+  tb tb_bge_v0110 cpu v0110 0 all "BEAR+BGE (gov)" "BEAR+BGE (mand-only)" "BGE (no gov)"
+  lists e2e_bge_v042  cpu v042  0 e2e bge
+  lists e2e_bge_v0110 cpu v0110 0 e2e bge
+  step t4_inferred cpu v042 0 0 -- "$PY" evals/eval_toolbench_inferred_categories.py
+  step t4_multitag cpu v042 0 0 -- "$PY" evals/eval_toolbench_multitag_categories.py
+  step t4_top5     cpu v042 0 0 -- "$PY" evals/eval_toolbench_top5_categories.py
+  lists wp4_tb_bge cpu v042 0 toolbench bge
+  lists wp4_mt_bge cpu v042 0 metatool-tags bge
+  # Pet Sim, all backends. Qwen3-4B (16.1 GB in fp32) runs in its own process,
+  # so no other model is resident beside it under the 20G cap.
+  local v sfx
+  for v in v042 v0110; do
+    sfx=""; [[ $v == v0110 ]] && sfx=_v0110
+    step "retrieval_semantic$sfx" cpu $v 0 0 -- "$PY" evals/eval_retrieval.py --semantic
+    step "backends_dense$sfx" cpu $v 0 0 -- "$PY" evals/eval_retrieval_backends.py         --models bge bge-m3 qwen3 itr --output results/wp0/backend_comparison_dense.json
+    step "backends_q4b$sfx" cpu $v 0 0 -- "$PY" evals/eval_retrieval_backends.py         --models qwen3-4b --output results/wp0/backend_comparison_q4b.json
+    step "gov_ablation_dense$sfx" cpu $v 0 0 -- "$PY" evals/eval_governance_ablation.py         --backends bge bge-m3 qwen3 --output results/wp0/governance_ablation_dense.json
+    step "gov_ablation_q4b$sfx" cpu $v 0 0 -- "$PY" evals/eval_governance_ablation.py         --backends qwen3-4b --skip-itr --output results/wp0/governance_ablation_q4b.json
+    step "decomposed_dense$sfx" cpu $v 0 0 -- "$PY" evals/eval_governance_decomposed.py --backends bge bge-m3 qwen3
+    step "decomposed_q4b$sfx"   cpu $v 0 0 -- "$PY" evals/eval_governance_decomposed.py --backends qwen3-4b
+    step "alpha_sweep_dense$sfx" cpu $v 0 0 -- "$PY" evals/eval_alpha_sweep.py --backends bge bge-m3 qwen3
+    step "alpha_sweep_q4b$sfx"   cpu $v 0 0 -- "$PY" evals/eval_alpha_sweep.py --backends qwen3-4b
+  done
+  local sw
+  for sw in $SWITCHES_042; do   # dense attribution, BGE
+    EXTRA_ENV=(WP0_BEAR_LEGACY=$sw)
+    step "retrieval_semantic_L$sw" cpu v042L 0 0 -- "$PY" evals/eval_retrieval.py --semantic
+    step "backends_bge_L$sw" cpu v042L 0 0 -- "$PY" evals/eval_retrieval_backends.py --models bge \
+        --output results/wp0/backend_comparison_bge.json
+    EXTRA_ENV=()
+  done
+  # Customer support and tool scaling (BGE)
+  step baseline_comparison cpu v042 0 0 -- "$PY" evals/eval_baseline_comparison.py
+  step tool_scaling        cpu v042 0 0 -- "$PY" evals/eval_tool_scaling.py
+  step scalability         cpu v042 0 0 -- "$PY" evals/eval_scalability.py
+  step baseline_comparison_v0110 cpu v0110 0 0 -- "$PY" evals/eval_baseline_comparison.py
+  step tool_scaling_v0110        cpu v0110 0 0 -- "$PY" evals/eval_tool_scaling.py
+  # ToolBench-IR, LlamaIndex, reranker
+  step transfer_toolbench cpu v042 0 0 -- "$PY" evals/eval_backend_transfer.py --corpus toolbench \
+      --output results/wp0/backend_transfer_toolbench_toolbench_ir_bert_based_uncased.json
+  step transfer_metatool cpu v042 0 0 -- "$PY" evals/eval_backend_transfer.py --corpus metatool \
+      --output results/wp0/backend_transfer_metatool_toolbench_ir_bert_based_uncased.json
+  step toolllm_both cpu v042 0 0 -- "$PY" evals/eval_toolbench_toolllm.py \
+      --model ToolBench/ToolBench_IR_bert_based_uncased --top-k 5 --mode both \
+      --output results/wp0/toolbench_toolllm_fixed.json
+  step framework_petsim cpu v042 0 0 -- "$PY" evals/eval_framework_baseline.py --corpus petsim \
+      --output results/wp0/framework_baseline_petsim.json
+  step framework_toolbench cpu v042 0 0 -- "$PY" evals/eval_framework_baseline.py --corpus toolbench \
+      --output results/wp0/framework_baseline_toolbench.json
+  step reranker_petsim cpu v042 0 0 -- "$PY" evals/eval_reranker_composition.py --corpus petsim \
+      --device cpu --output results/wp0/reranker_composition_petsim.json
+  step reranker_toolbench cpu v042 0 0 -- "$PY" evals/eval_reranker_composition.py --corpus toolbench \
+      --device cpu --batch-size 4 --output results/wp0/reranker_composition_toolbench.json
+  # BGE-M3 and Qwen3-0.6B on the external tables
+  local m lab
+  for m in bgem3 qwen06; do
+    case $m in bgem3) lab=BGE-M3; b=bge-m3 ;; qwen06) lab=Qwen3-0.6B; b=qwen3-0.6b ;; esac
+    tb tb_$m cpu v042 0 all "BEAR+$lab (gov)" "$lab (no gov)"
+    tb tb_${m}_v0110 cpu v0110 0 all "BEAR+$lab (gov)" "$lab (no gov)"
+    lists e2e_${m}_v042  cpu v042  0 e2e $b
+    lists e2e_${m}_v0110 cpu v0110 0 e2e $b
+    lists wp4_tb_$m cpu v042 0 toolbench $b
+    lists wp4_mt_$m cpu v042 0 metatool-tags $b
+  done
+}
+
+lane_mand042() {  # mandatory finding, per query (coordinator, 2026-10-30): lexical backends, no model
+  local sw
+  step diag_mand_lex_v0110 cpu v0110 0 0 -- "$PY" $W/diag_mandatory_petsim.py \
+      --out results/wp0/diag_mandatory_lex_v0110.json
+  step diag_mand_lex_v042 cpu v042 0 0 -- "$PY" $W/diag_mandatory_petsim.py \
+      --out results/wp0/diag_mandatory_lex_v042.json
+  for sw in $SWITCHES_042; do
+    EXTRA_ENV=(WP0_BEAR_LEGACY=$sw)
+    step "diag_mand_lex_L$sw" cpu v042L 0 0 -- "$PY" $W/diag_mandatory_petsim.py \
+        --out "results/wp0/diag_mandatory_lex_v042_L$sw.json"
+  done
+  EXTRA_ENV=()
+}
+lane_e2eattr042() {  # which switch brings back the 0.1.10 BM25 end-to-end lists (Table 7)
+  local sw
+  for sw in $SWITCHES_042; do
+    EXTRA_ENV=(WP0_BEAR_LEGACY=$sw)
+    step "e2e_bm25_L$sw" cpu v042L 0 0 -- "$PY" "$W/dump_toolbench_lists.py" --mode e2e \
+        --backends bm25 --outdir "results/wp0/lists_v042L_$sw"
+  done
+  EXTRA_ENV=()
+}
+lane_pair042() {  # BM25 needs two switches at once: tie_order alone restores the governed
+  # e2e lists but not the ungated ones (2026-10-30). Rows kept beside every
+  # term-sharing row (dropped_rows) change numpy's tie order too.
+  EXTRA_ENV=(WP0_BEAR_LEGACY=tie_order,dropped_rows)
+  step e2e_bm25_Ltie_dropped cpu v042L 0 0 -- "$PY" "$W/dump_toolbench_lists.py" --mode e2e       --backends bm25 --outdir results/wp0/lists_v042L_tie_dropped
+  tb tb_bm25_Ltie_dropped cpu v042L 0 all "BEAR+BM25 (gov)" "BEAR+BM25 (mand-only)" "BM25 (no gov)"
+  EXTRA_ENV=()
+}
+lane_manddense042() {  # after dense042 (one dense lane at a time): redo the cap kills, then the
+  # dense mandatory diagnostic. Launched like dense042 (20G, batch 4, 12 threads).
+  [[ ${WP0_ALLOW_LOCAL_MODELS:-0} == 1 ]] || { log "manddense042 needs WP0_ALLOW_LOCAL_MODELS=1"; return 1; }
+  local sw ver sfx
+  # decomposed_q4b was killed at the 20G cap (rc 143, oom-kill, 2026-10-30
+  # 09:15): ITR's encoder evicted Qwen3-4B from the one-model share, so the
+  # adversarial-safety part loaded a second 16 GB copy. Keep two models.
+  for ver in v042 v0110; do
+    sfx=""; [[ $ver == v0110 ]] && sfx=_v0110
+    EXTRA_ENV=(WP0_SHARE_KEEP=2)
+    step "decomposed_q4b$sfx" cpu $ver 0 0 -- "$PY" evals/eval_governance_decomposed.py --backends qwen3-4b
+    EXTRA_ENV=()
+  done
+  for ver in v0110 v042; do
+    step "diag_mand_dense_$ver" cpu $ver 0 0 -- "$PY" $W/diag_mandatory_petsim.py \
+        --backends bge bge-m3 qwen3 --out "results/wp0/diag_mandatory_dense_$ver.json"
+    step "diag_mand_q4b_$ver" cpu $ver 0 0 -- "$PY" $W/diag_mandatory_petsim.py \
+        --backends qwen3-4b --out "results/wp0/diag_mandatory_q4b_$ver.json"
+  done
+  for sw in $SWITCHES_042; do
+    EXTRA_ENV=(WP0_BEAR_LEGACY=$sw)
+    step "diag_mand_dense_L$sw" cpu v042L 0 0 -- "$PY" $W/diag_mandatory_petsim.py \
+        --backends bge bge-m3 qwen3 --out "results/wp0/diag_mandatory_dense_v042_L$sw.json"
+    step "diag_mand_q4b_L$sw" cpu v042L 0 0 -- "$PY" $W/diag_mandatory_petsim.py \
+        --backends qwen3-4b --out "results/wp0/diag_mandatory_q4b_v042_L$sw.json"
+  done
+  EXTRA_ENV=()
+}
+lane_gpuq4b042() {  # Qwen3-4B on the GPU, bf16, once the coordinator gives the go
+  # Launched (relaunch_042.sh gpuq4b042) with WP0_ALLOW_LOCAL_MODELS=1
+  # WP0_STEP_MEM=12G WP0_ENCODE_BATCH=8 WP0_GPU_CAP_FIXED=11.2 (about 12 GB),
+  # and the card gates agreed with model-server (2026-10-30):
+  #   WP0_WIN_GPU_MAX_MIB=67000   gpu_gate.sh starts a step only if Windows
+  #                               nvidia-smi shows 67,000 MiB or less
+  #   WP0_WIN_GPU_STOP_MIB=80000  mem_guard.sh stops a step above 80,000 (rc 78),
+  #                               and the lane then stops
+  # gpu_gate.sh also refuses while the Ollama e2e rerun runs or its model is
+  # loaded, so the two GPU jobs never overlap.
+  [[ ${WP0_ALLOW_LOCAL_MODELS:-0} == 1 ]] || { log "gpuq4b042 needs WP0_ALLOW_LOCAL_MODELS=1"; return 1; }
+  rm -f "$LOGS/.card_stop"
+  local s
+  for s in "tb tb_qwen4b gpu v042 11 all" "tb tb_qwen4b_v0110 gpu v0110 11 all" \
+           "lists e2e_q4b_v042 gpu v042 11 e2e qwen3-4b" "lists e2e_q4b_v0110 gpu v0110 11 e2e qwen3-4b" \
+           "lists wp4_tb_q4b gpu v042 11 toolbench qwen3-4b" "lists wp4_mt_q4b gpu v042 11 metatool-tags qwen3-4b"; do
+    if [[ -f $LOGS/.card_stop ]]; then log "gpuq4b042 stopped: the card passed the stop limit"; return 1; fi
+    if [[ $s == tb* ]]; then
+      # shellcheck disable=SC2086
+      $s "BEAR+Qwen3-4B (gov)" "Qwen3-4B (no gov)"
+    else
+      # shellcheck disable=SC2086
+      $s
+    fi
+  done
+}
+
 lane=${1:-}
-log "WP0 lane=$lane bear041=$BEAR041_SHA bear040=$BEAR040_SHA bear0110=$BEAR0110_SHA"
+log "WP0 lane=$lane bear042=$BEAR042_SHA bear041=$BEAR041_SHA bear040=$BEAR040_SHA bear0110=$BEAR0110_SHA"
 case $lane in
   gpu) lane_gpu ;;
   gpu2) lane_gpu2 ;;
@@ -489,9 +724,19 @@ case $lane in
   attr) lane_attr ;;
   track) lane_track ;;
   nomodel) lane_nomodel ;;
+  lex042) lane_lex042 ;;
+  attrpet042) lane_attrpet042 ;;
+  attrtb042) lane_attrtb042 ;;
+  nemo042) lane_nemo042 ;;
+  dense042) lane_dense042 ;;
+  gpuq4b042) lane_gpuq4b042 ;;
+  mand042) lane_mand042 ;;
+  e2eattr042) lane_e2eattr042 ;;
+  pair042) lane_pair042 ;;
+  manddense042) lane_manddense042 ;;
   attrlex) lane_attrlex ;;
   tracklex) lane_tracklex ;;
   nemo) lane_nemo ;;
-  *) echo "usage: $0 nomodel|attrlex|tracklex|nemo (no local models) or gpu2|cpu1|attr|track|heavy (local models)"; exit 2 ;;
+  *) echo "usage: $0 lex042|attrpet042|attrtb042|nemo042 (0.4.2), or the older lanes"; exit 2 ;;
 esac
 log "WP0 lane=$lane finished"

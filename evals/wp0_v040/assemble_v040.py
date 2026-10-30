@@ -40,8 +40,9 @@ OUTPUTS = {
     "reranker_petsim": ["results/wp0/reranker_composition_petsim.json"],
     "scalability": ["results/scalability_results.csv"],
     "baseline_comparison*": ["results/baseline_comparison_results.csv"],
-    "backends*": ["results/wp0/backend_comparison.json*"],
-    "gov_ablation*": ["results/wp0/governance_ablation.json"],
+    "backends*": ["results/wp0/backend_comparison*.json*"],
+    "gov_ablation*": ["results/wp0/governance_ablation*.json"],
+    "diag_*": ["results/wp0/diag_*.json"],
     "decomposed*": ["results/governance_decomposed_*.json", "results/governance_decomposed_output.txt"],
     "alpha_sweep*": ["results/alpha_sweep_*.json", "results/alpha_sweep_output.txt"],
 }
@@ -77,9 +78,13 @@ def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--root", required=True, help="~/tist-evals/wp0-v040")
     ap.add_argument("--repo", required=True, help="artifacts repo (destination)")
+    ap.add_argument("--ver", default="v040", help="BEAR version label of the run (folder results/<ver>)")
+    ap.add_argument("--extra", nargs="*", default=[],
+                    help="more folders to copy, as dest_subdir=source_dir (absolute)")
     args = ap.parse_args()
     root, repo = Path(args.root), Path(args.repo)
-    dest = repo / "results" / "v040"
+    ver_main = args.ver
+    dest = repo / "results" / ver_main
     dest.mkdir(parents=True, exist_ok=True)
     manifest = {"files": [], "steps": {}}
     logs = root / "logs"
@@ -113,17 +118,27 @@ def main() -> None:
                 shutil.copy2(f, target)
                 manifest["files"].append({"path": target.relative_to(repo).as_posix(), "step": step,
                                           "version": ver, "sha256": sha256(target)})
-    for sub, src in (("lists/e2e_v040", "artifacts/results/wp0/lists_v040/e2e"),
-                     ("lists/e2e_v0110", "artifacts/results/wp0/lists_v0110/e2e"),
-                     ("lists/wp4_toolbench", "artifacts/results/wp0/wp4_lists/toolbench"),
-                     ("lists/wp4_metatool-tags", "artifacts/results/wp0/wp4_lists/metatool-tags"),
-                     ("wp4", "artifacts/results/wp0/wp4"),
-                     ("compare", "compare")):
-        s = root / src
+    sources = []
+    if ver_main == "v040":
+        sources = [("lists/e2e_v040", root / "artifacts/results/wp0/lists_v040/e2e"),
+                   ("lists/e2e_v0110", root / "artifacts/results/wp0/lists_v0110/e2e"),
+                   ("lists/wp4_toolbench", root / "artifacts/results/wp0/wp4_lists/toolbench"),
+                   ("lists/wp4_metatool-tags", root / "artifacts/results/wp0/wp4_lists/metatool-tags")]
+    else:
+        # Lanes ran in separate clones (artifacts, artifacts-nemo, artifacts-dense, ...).
+        for clone in sorted(root.glob("artifacts*")):
+            w = clone / "results" / "wp0"
+            sources += [(f"lists/e2e_{ver_main}", w / f"lists_{ver_main}" / "e2e"),
+                        ("lists/e2e_v0110", w / "lists_v0110" / "e2e"),
+                        ("lists/wp4_toolbench", w / f"wp4_lists_{ver_main}" / "toolbench"),
+                        ("lists/wp4_metatool-tags", w / f"wp4_lists_{ver_main}" / "metatool-tags")]
+    sources += [("wp4", root / "wp4"), ("compare", root / "compare")]
+    sources += [(d, Path(sdir)) for d, sdir in (e.split("=", 1) for e in args.extra)]
+    for sub, s in sources:
         if not s.exists():
             continue
         for f in sorted(s.rglob("*")):
-            if f.is_file():
+            if f.is_file() and not f.name.endswith(".tmp.npz") and not f.name.endswith(".tmp"):
                 target = dest / sub / f.relative_to(s)
                 target.parent.mkdir(parents=True, exist_ok=True)
                 shutil.copy2(f, target)
@@ -134,7 +149,7 @@ def main() -> None:
         if s.exists():
             t = dest / "logs" / s.name
             shutil.copy2(s, t)
-    prov = root / "stage" / "v040" / "verify" / "results" / "wp0" / "run_provenance.json"
+    prov = root / "stage" / ver_main / "verify" / "results" / "wp0" / "run_provenance.json"
     if prov.exists():
         manifest["run_provenance"] = json.loads(prov.read_text())
     (dest / "MANIFEST.json").write_text(json.dumps(manifest, indent=1), encoding="utf-8")

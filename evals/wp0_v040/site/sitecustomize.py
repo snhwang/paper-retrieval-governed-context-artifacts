@@ -102,8 +102,15 @@ def _install_st_patch() -> None:
         orig_init(self, *args, **kwargs)
         self.__dict__["_wp0_ready"] = True
         if _SHARE and key is not None:
-            shared.clear()
+            # Keep the WP0_SHARE_KEEP most recent models (default 1). With 1,
+            # a small model loaded in between (ITR's encoder) evicts
+            # Qwen3-4B, and the next Qwen3-4B load makes a second 16 GB copy
+            # while the first is still referenced (decomposed_q4b, rc 143 at
+            # the 20G cap, 2026-10-30). Steps like that run with 2.
+            shared.pop(key, None)
             shared[key] = self
+            while len(shared) > max(1, int(os.environ.get("WP0_SHARE_KEEP", "1") or 1)):
+                shared.pop(next(iter(shared)))
 
     cls.__new__ = staticmethod(_new)
     cls.__init__ = _init
@@ -200,6 +207,31 @@ def _install_no_local_models() -> None:
         if cls is not None:
             cls.from_pretrained = classmethod(lambda c, *a, **k: _deny())
     _say("local model loads refused (WP0_NO_LOCAL_MODELS)")
+
+
+_ENCODE_BATCH = os.environ.get("WP0_ENCODE_BATCH", "").strip()
+
+
+def _install_batch_cap() -> None:
+    """WP0_ENCODE_BATCH=<n>: cap the batch size of every
+    SentenceTransformer.encode call at n. Local models run on CPU inside a
+    memory-capped scope (coordinator, 2026-10-30), and a batch of 32 long
+    ToolBench documents needs tens of GB for attention on CPU. Installed
+    outside the embedding cache, so cache keys record the batch size used. A
+    smaller batch changes padding, so vectors can differ from batch-32 runs at
+    the level of float rounding."""
+    import sentence_transformers as st
+    cap = int(_ENCODE_BATCH)
+    cls = st.SentenceTransformer
+    inner = cls.encode
+
+    def encode(self, sentences, *args, **kwargs):
+        b = kwargs.get("batch_size", 32)
+        kwargs["batch_size"] = max(1, min(int(b), cap))
+        return inner(self, sentences, *args, **kwargs)
+
+    cls.encode = encode
+    _say(f"encode batch size capped at {cap}")
 
 
 _TRACE_LOG = os.environ.get("WP0_TRACE_LOG", "").strip()
@@ -334,6 +366,8 @@ try:
         _install_st_patch()
     if _CACHE_DIR:
         _install_encode_cache()
+    if _ENCODE_BATCH and not _NO_LOCAL:
+        _install_batch_cap()
     if _LEGACY:
         _install_legacy()
     if _TRACE_LOG:

@@ -32,7 +32,7 @@ def bear_identity() -> dict:
             continue
         h.update(p.relative_to(pkg).as_posix().encode())
         h.update(b"\0")
-        h.update(p.read_bytes())
+        h.update(p.read_bytes().replace(b"\r\n", b"\n"))  # line endings normalized
     return {
         "bear_version": getattr(bear, "__version__", "?"),
         "bear_path": str(pkg),
