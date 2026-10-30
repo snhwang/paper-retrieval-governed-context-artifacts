@@ -9,6 +9,14 @@ REPO=/mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifact
 R=$HOME/tist-evals/wp0-v041
 PY=$HOME/.venvs/tist-evals/bin/python
 mkdir -p $R/logs $R/stage
+CAP=(systemd-run --user --scope --quiet --slice=tist.slice -p MemoryMax=24G -p MemorySwapMax=0)
+
+# Every job runs under the kernel memory cap. Refuse to start without it.
+if ! "${CAP[@]}" true; then
+  echo "systemd-run scope in tist.slice is not available; not starting (ask the coordinator)"
+  exit 1
+fi
+echo "memory cap: ok ($("${CAP[@]}" bash -c 'cat /proc/self/cgroup' | tail -1))"
 
 echo "MemAvailable: $(awk '/MemAvailable/ {printf "%.1f GiB", $2/1048576}' /proc/meminfo)"
 curl -s -m 5 http://localhost:8360/health; echo
@@ -31,7 +39,7 @@ grep -n "def retrieve_with_trace" -A 60 $HOME/tist-evals/bear-v0.4.1/bear/retrie
 
 # The guard must refuse a local model before anything touches the GPU.
 cd $R/artifacts
-CUDA_VISIBLE_DEVICES= WP0_NO_LOCAL_MODELS=1 PYTHONPATH=evals/wp0_v040/site $PY -c "
+CUDA_VISIBLE_DEVICES= WP0_NO_LOCAL_MODELS=1 PYTHONPATH=evals/wp0_v040/site "${CAP[@]}" $PY -c "
 from sentence_transformers import SentenceTransformer
 try:
     SentenceTransformer('BAAI/bge-base-en-v1.5'); print('GUARD FAILED')

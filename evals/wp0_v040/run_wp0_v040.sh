@@ -63,6 +63,10 @@ cd "$ART" || exit 1
 
 log() { echo "[$(date '+%F %T')] $*"; }
 EXTRA_ENV=()
+# Kernel-enforced memory cap for every job (coordinator, 2026-10-30): a
+# transient systemd scope in tist.slice, MemoryMax 24G, no swap.
+CAP=(systemd-run --user --scope --quiet --slice=tist.slice
+     -p "MemoryMax=${WP0_MEMMAX:-24G}" -p MemorySwapMax=0)
 
 # step NAME KIND VERSION NEED_GIB MAXWAIT_S -- command...
 step() {
@@ -92,27 +96,34 @@ step() {
     cpu)    envs+=(CUDA_VISIBLE_DEVICES= OMP_NUM_THREADS=$CPU_THREADS MKL_NUM_THREADS=$CPU_THREADS
                    WP0_EMB_CACHE=$EMBCACHE WP0_SHARE_MODELS=1) ;;
   esac
+  # Append, never overwrite: a relaunch must not erase the log of an attempt
+  # that was killed (the 2026-10-29 relaunch overwrote three such logs).
   {
+    echo "### ================ attempt $(date -Is) ================"
     echo "### step:        $name"
     echo "### kind:        $kind (need ${need} GiB)"
     echo "### bear:        $ver ($sha)"
     echo "### started:     $(date -Is)"
     echo "### command:     $*"
     echo "### env:         ${envs[*]}"
-  } > "$LOGS/$name.log"
+    echo "### memory cap:  ${CAP[*]}"
+  } >> "$LOGS/$name.log"
   log "start $name ($kind, $ver)"
   local rc waited=0
   while true; do
-    # mem_guard.sh stops a step whose processes pass 24 GiB resident, or when
-    # WSL's available memory drops below 16 GiB (coordinator's limits after
-    # the 2026-10-29 WSL failure).
+    # Two memory layers. The kernel cap (CAP, systemd scope in tist.slice with
+    # MemoryMax and no swap) kills the step alone if it passes the cap, with
+    # exit 137. mem_guard.sh polls as a second layer, and also stops the step
+    # when WSL's available memory falls below 16 GiB.
     case $kind in
       gpu)    flock "$LOCK" env -u OPENAI_API_KEY "${envs[@]}" bash "$W/gpu_gate.sh" "$need" \
-                bash "$W/mem_guard.sh" "$@" >> "$LOGS/$name.log" 2>&1; rc=$? ;;
-      remote) flock "$LOCK" env -u OPENAI_API_KEY "${envs[@]}" bash "$W/mem_guard.sh" "$@" \
+                "${CAP[@]}" bash "$W/mem_guard.sh" "$@" >> "$LOGS/$name.log" 2>&1; rc=$? ;;
+      remote) flock "$LOCK" env -u OPENAI_API_KEY "${envs[@]}" "${CAP[@]}" bash "$W/mem_guard.sh" "$@" \
                 >> "$LOGS/$name.log" 2>&1; rc=$? ;;
-      cpu)    env -u OPENAI_API_KEY "${envs[@]}" bash "$W/mem_guard.sh" "$@" >> "$LOGS/$name.log" 2>&1; rc=$? ;;
+      cpu)    env -u OPENAI_API_KEY "${envs[@]}" "${CAP[@]}" bash "$W/mem_guard.sh" "$@" \
+                >> "$LOGS/$name.log" 2>&1; rc=$? ;;
     esac
+    (( rc == 137 )) && echo "### killed (rc 137): most likely the ${WP0_MEMMAX:-24G} memory cap" >> "$LOGS/$name.log"
     if [[ $rc -eq 77 ]] && grep -q "not started" <(tail -2 "$LOGS/$name.log"); then
       rc=75   # memory low before start: wait like a VRAM shortfall
     fi
@@ -137,7 +148,7 @@ step() {
     cp "$f" "$dest/$rel"
   done < <(find "$ART/results" "$ART/evals/results" -type f -newer "$marker" \
              ! -path "*/results/wp0/wp4_lists/*" ! -path "*/results/wp0/lists_*" 2>/dev/null)
-  env "${envs[@]}" CUDA_VISIBLE_DEVICES= WP0_EMB_CACHE= "$PY" "$W/stamp_dir.py" "$dest" \
+  env "${envs[@]}" CUDA_VISIBLE_DEVICES= WP0_EMB_CACHE= "${CAP[@]}" "$PY" "$W/stamp_dir.py" "$dest" \
       --step "$name" --command "$*" >> "$LOGS/$name.log" 2>&1
   if [[ $rc -eq 0 ]]; then touch "$LOGS/$name.done"; log "done $name"
   elif [[ $rc -eq 75 ]]; then echo "not enough free VRAM or memory" > "$LOGS/$name.blocked"; log "BLOCKED $name (VRAM or memory)"
