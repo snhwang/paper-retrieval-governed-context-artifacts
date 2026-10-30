@@ -82,6 +82,16 @@ against the precedence order that the revised Section 3.1.1 states:
          I11. Instructions within SIM_TOL of the threshold or of the boundary
          are left alone. I1, I9 and I14 check that admission is sound, I2
          that mandatory items are complete, and I15 that the rule is complete.
+    I16  Canonical tie order. Among ranked rows (not mandatory, admitted by
+         search or by the backfill) with equal final score and equal
+         priority, the output lists them by id, and the top-k cut keeps the
+         smallest ids: no ranked row cut by top_k ties a kept ranked row with
+         a larger id. Scores of cut rows are recomputed with BEAR's own
+         float64 expression from the similarity the trace records, so ties
+         are exact. Without a canonical tie-break the order of tied rows is
+         whatever the backend's argsort gives, which can differ between numpy
+         versions, so this turns a cross-environment difference into a check
+         within one environment.
 
 I13 and I14 are only non-vacuous where the search drops rows, since a gated
 query on a dense backend ranks the whole corpus and the backfill then adds
@@ -260,6 +270,7 @@ INVARIANTS = [
     ("I13", "Ranked score rule (sim 0 if not searched)"),
     ("I14", "Backfill admission (gate, soft or theta<=0)"),
     ("I15", "Admission completeness (gate, soft or sim>=theta)"),
+    ("I16", "Canonical tie order (equal score, priority: by id)"),
 ]
 INV_KEYS = [k for k, _ in INVARIANTS]
 INV_LABEL = dict(INVARIANTS)
@@ -693,7 +704,7 @@ class CaseInfo:
 
 
 def check_output(info: CaseInfo, out, trace, k: int, threshold: float,
-                 alpha: float) -> dict:
+                 alpha: float, flat_backfill: bool = False) -> dict:
     """Return {inv: (violated, nonvacuous, detail)} for one output."""
     ids = [s.id for s in out]
     O = set(ids)
@@ -881,6 +892,41 @@ def check_output(info: CaseInfo, out, trace, k: int, threshold: float,
     else:
         res["I15"] = (False, False, None)
 
+    # I16 canonical tie order among ranked rows, in the output and at the cut.
+    def ranked_row(d: str) -> bool:
+        return (not info.mand.get(d)) and trace.admitted.get(d) in ("search", "required_tags")
+
+    ranked = [sc for sc in out if ranked_row(sc.id)]
+    bad16 = []
+    n_ties = 0
+    for a_, b_ in zip(ranked, ranked[1:]):
+        if (float(a_.final_score) == float(b_.final_score)
+                and info.prio[a_.id] == info.prio[b_.id]):
+            n_ties += 1
+            if not a_.id < b_.id:
+                bad16.append(f"{a_.id} listed before {b_.id} at equal score "
+                             f"{float(a_.final_score)!r} and priority {info.prio[a_.id]}")
+    kept_keys: dict[tuple, list[str]] = {}
+    for sc in ranked:
+        kept_keys.setdefault((float(sc.final_score), info.prio[sc.id]), []).append(sc.id)
+    for d, e in trace.excluded.items():
+        if e["reason"] != "top_k" or not ranked_row(d):
+            continue
+        pn = info.prio[d] / 100.0
+        if trace.admitted.get(d) == "required_tags":
+            score = pn if flat_backfill else alpha * pn
+        else:
+            sim = float(e["similarity"]) if e.get("similarity") is not None else 0.0
+            score = (1 - alpha) * sim + alpha * pn
+        tied = kept_keys.get((score, info.prio[d]), [])
+        if tied:
+            n_ties += 1
+            larger = [x for x in tied if x > d]
+            if larger:
+                bad16.append(f"{d} cut while {larger} kept at equal score {score!r} and "
+                             f"priority {info.prio[d]}")
+    res["I16"] = (bool(bad16), n_ties > 0, "; ".join(bad16) if bad16 else None)
+
     # I12 no acting after removal: a conflict or superseded exclusion never
     # names a remover that was already excluded when it was recorded.
     order_ex = {d: n for n, d in enumerate(trace.excluded)}
@@ -963,6 +1009,8 @@ def run_config_on_corpus(corpus: dict, cases: list[dict], config_name: str,
         return variant_cache[key]
 
     cases = [case_for(config_name, c) for c in cases]
+    flat = bool(getattr(config, "restore_flat_backfill", False)
+                or getattr(config, "restore_below_threshold", False))
     for ci, case in enumerate(cases):
         sims = (stub_similarities(corpus["instructions"], case) if is_stub
                 else public_similarities(corpus["instructions"], case, config_name, sim_r))
@@ -977,7 +1025,8 @@ def run_config_on_corpus(corpus: dict, cases: list[dict], config_name: str,
             ids = [s.id for s in out]
             if want_digest:
                 digest.update(json.dumps([ci, k, signature(out)]).encode())
-            res = check_output(info, out, trace, k, threshold, config.priority_weight)
+            res = check_output(info, out, trace, k, threshold, config.priority_weight,
+                               flat_backfill=flat)
             # I7, consecutive k within the pool base
             if prev_ids is not None and k <= pool_base:
                 ok = set(prev_ids) <= set(ids)
@@ -1244,8 +1293,10 @@ def violates(config_name: str, instructions: list[dict], case: dict, k: int, inv
         bad = not (signature(x) == signature(y) == signature(z))
         return bad, ("outputs differ" if bad else None)
     out, trace = traced(r, case, k)
+    flat = bool(getattr(config, "restore_flat_backfill", False)
+                or getattr(config, "restore_below_threshold", False))
     viol, _, detail = check_output(info, out, trace, k, config.default_threshold,
-                                   config.priority_weight)[inv]
+                                   config.priority_weight, flat_backfill=flat)[inv]
     return viol, detail
 
 
