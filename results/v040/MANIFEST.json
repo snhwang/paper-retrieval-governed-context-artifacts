@@ -1,0 +1,516 @@
+{
+ "files": [
+  {
+   "path": "results/v040/logs/baseline_comparison_cpu_v0110.log",
+   "step": "baseline_comparison_cpu_v0110",
+   "version": "v0110",
+   "sha256": "3c8bba88b12a880d3acac3d4a5233012e2d8bf148d658e2bb36348ebf4353bb3"
+  },
+  {
+   "path": "results/v040/v0110/baseline_comparison_cpu_v0110/baseline_comparison_results.csv",
+   "step": "baseline_comparison_cpu_v0110",
+   "version": "v0110",
+   "sha256": "e8befb26043bab4ff2cb0fa183c0956f90a8000731b7519839fbdcbdda52e624"
+  },
+  {
+   "path": "results/v040/logs/e2e_lex_v0110.log",
+   "step": "e2e_lex_v0110",
+   "version": "v0110",
+   "sha256": "c241eb4b84f7c5ab0d9f188166b0212bb46a2dbac75e7967ccafe5971984d211"
+  },
+  {
+   "path": "results/v040/logs/tool_scaling_cpu_v0110.log",
+   "step": "tool_scaling_cpu_v0110",
+   "version": "v0110",
+   "sha256": "e2e0cbbc20ea0b9e9ce8bd7f11173501449f7f7b2923ea413db0d4c4c07b4064"
+  },
+  {
+   "path": "results/v040/logs/backends.log",
+   "step": "backends",
+   "version": "v040",
+   "sha256": "8edf6627a20a4a82335880d333e394760399951960dde9a61646cdb2572d3591"
+  },
+  {
+   "path": "results/v040/v040/backends/backend_comparison.json",
+   "step": "backends",
+   "version": "v040",
+   "sha256": "b991453ff1e760071e43607b23ebc527c4aebcccf2db60653b49a2ccecc14974"
+  },
+  {
+   "path": "results/v040/v040/backends/backend_comparison.json.provenance.json",
+   "step": "backends",
+   "version": "v040",
+   "sha256": "0f55c507062ea3129c94e79577a34106b5d0db474ab72bb183477ef43f883624"
+  },
+  {
+   "path": "results/v040/logs/baseline_comparison_cpu.log",
+   "step": "baseline_comparison_cpu",
+   "version": "v040",
+   "sha256": "895421c086f5821520c56197515e82c4a7313b51b0c284ed215ea1b96acdf2ee"
+  },
+  {
+   "path": "results/v040/v040/baseline_comparison_cpu/baseline_comparison_results.csv",
+   "step": "baseline_comparison_cpu",
+   "version": "v040",
+   "sha256": "b16148d6777135206c9620d1330544bd3fdb0ea95a428866e999ce1ae7512f74"
+  },
+  {
+   "path": "results/v040/logs/e2e_bge_v040.log",
+   "step": "e2e_bge_v040",
+   "version": "v040",
+   "sha256": "461fc8d5d50649e630bf0cde5719e1a4e6d454791253f25ee5c18cc717e25f0b"
+  },
+  {
+   "path": "results/v040/logs/e2e_lex_v040.log",
+   "step": "e2e_lex_v040",
+   "version": "v040",
+   "sha256": "1c183584ed8a00702847d62d40461c3f1ba130eb8dcb921466bcab0273eceff0"
+  },
+  {
+   "path": "results/v040/logs/retrieval_hash.log",
+   "step": "retrieval_hash",
+   "version": "v040",
+   "sha256": "c8ff724eeab7621249150f6d765026737eff2d3be6733177414ee7871c63549f"
+  },
+  {
+   "path": "results/v040/logs/retrieval_semantic.log",
+   "step": "retrieval_semantic",
+   "version": "v040",
+   "sha256": "5e6d77717257d85d325837764a34cd8a7f41259d06113a6a59b4e43fe6eefee0"
+  },
+  {
+   "path": "results/v040/v040/t4_inferred/toolbench_inferred_output.txt",
+   "step": "t4_inferred",
+   "version": "v040",
+   "sha256": "c84b8bfbf3705dc631957081313fc04f2b17da18bec41508f865017d85f92ccb"
+  },
+  {
+   "path": "results/v040/logs/t4_inferred.log",
+   "step": "t4_inferred",
+   "version": "v040",
+   "sha256": "56fc7a181ad1038c66f829dd9b69e04b5c4df909a071b1807403b36ec734207f"
+  },
+  {
+   "path": "results/v040/v040/t4_multitag/toolbench_multitag_output.txt",
+   "step": "t4_multitag",
+   "version": "v040",
+   "sha256": "6a114ad37c207ff88c33a74899b7ff01fd8911f5c745e9a210daa0887961dae1"
+  },
+  {
+   "path": "results/v040/logs/t4_multitag.log",
+   "step": "t4_multitag",
+   "version": "v040",
+   "sha256": "1382f76e424f74573d8d2e2da89d418f7c5a8f5ba58e7030d2772b441c2c9a8a"
+  },
+  {
+   "path": "results/v040/v040/t4_top5/toolbench_top5_output.txt",
+   "step": "t4_top5",
+   "version": "v040",
+   "sha256": "58c37f27183011e648ba50697c8dddff0867828286044d67d971e8f3e4c9365b"
+  },
+  {
+   "path": "results/v040/logs/t4_top5.log",
+   "step": "t4_top5",
+   "version": "v040",
+   "sha256": "e0166e4da1635fc725d2df4273ad016a1053535658c5555f54fc8d7f25d22dfa"
+  },
+  {
+   "path": "results/v040/logs/tb_bge.log",
+   "step": "tb_bge",
+   "version": "v040",
+   "sha256": "5ab73aafc445dbf857daef877da2eec157ef5fc8eb21ea15b9d949f3ce9dc64d"
+  },
+  {
+   "path": "results/v040/v040/tb_bm25/toolbench_eval_tb_bm25.json",
+   "step": "tb_bm25",
+   "version": "v040",
+   "sha256": "381faf869f18387f76f1365a13f5393a9dc5b60035e966780b9976990b0e2d8e"
+  },
+  {
+   "path": "results/v040/logs/tb_bm25.log",
+   "step": "tb_bm25",
+   "version": "v040",
+   "sha256": "8c2390f41e1ad59aeea2af26a72cf407db3c3a17e0d06443749e15b2095bddbc"
+  },
+  {
+   "path": "results/v040/v040/tb_hash/toolbench_eval_tb_hash.json",
+   "step": "tb_hash",
+   "version": "v040",
+   "sha256": "9e8da5fc32b11197a6ee0d569121508cc87da9c9411fec26cddd609633eb25e5"
+  },
+  {
+   "path": "results/v040/logs/tb_hash.log",
+   "step": "tb_hash",
+   "version": "v040",
+   "sha256": "fa710646bcd329bf56276ca25ee5c3a3bc0a55a2186953c34c4df66ac332f2c6"
+  },
+  {
+   "path": "results/v040/logs/tool_scaling_cpu.log",
+   "step": "tool_scaling_cpu",
+   "version": "v040",
+   "sha256": "fdce7b5a0f65adf4adc97a7184515aa91628da736c9b6968947b0ff3d743f3c1"
+  },
+  {
+   "path": "results/v040/v040/toolllm_both/toolbench_toolllm_fixed.json",
+   "step": "toolllm_both",
+   "version": "v040",
+   "sha256": "305f2e04de10a54807d5465f0486404dd7012757b3d3dc85ab9b8d9cb07d027d"
+  },
+  {
+   "path": "results/v040/logs/toolllm_both.log",
+   "step": "toolllm_both",
+   "version": "v040",
+   "sha256": "3386ee619a4c223c3f9c60d238c6370157107428bb47560a92b9dc604770ffe0"
+  },
+  {
+   "path": "results/v040/v040/transfer_metatool/backend_transfer_metatool_toolbench_ir_bert_based_uncased.json",
+   "step": "transfer_metatool",
+   "version": "v040",
+   "sha256": "2753587b6f4aec5c2957eb994071a2f2b80a5f0dd89b562d87cee1281a9b9042"
+  },
+  {
+   "path": "results/v040/logs/transfer_metatool.log",
+   "step": "transfer_metatool",
+   "version": "v040",
+   "sha256": "fd11767a959f12c65e14ff70275bdefd04d2f4287319863099a48808261f20cb"
+  },
+  {
+   "path": "results/v040/v040/transfer_toolbench/backend_transfer_toolbench_toolbench_ir_bert_based_uncased.json",
+   "step": "transfer_toolbench",
+   "version": "v040",
+   "sha256": "84f2e6eca60b9664ac090e10ab29d160b71ef97d1e1833dceb46ed7a0d37b121"
+  },
+  {
+   "path": "results/v040/logs/transfer_toolbench.log",
+   "step": "transfer_toolbench",
+   "version": "v040",
+   "sha256": "c51e48f2af18248d17816bba128db57561ecdf33da3e1c13c9a10513ced2f06b"
+  },
+  {
+   "path": "results/v040/v040/verify/run_provenance.json",
+   "step": "verify",
+   "version": "v040",
+   "sha256": "c19c093a779dab92a326551e6d88d87cfb411181bb7a58e4315902eaae1d9b67"
+  },
+  {
+   "path": "results/v040/logs/verify.log",
+   "step": "verify",
+   "version": "v040",
+   "sha256": "a4357a6e222e00008bf52cef84c6ac56308912cfc0478af84940fe5e48eff479"
+  },
+  {
+   "path": "results/v040/logs/wp4_mt_lex.log",
+   "step": "wp4_mt_lex",
+   "version": "v040",
+   "sha256": "5071252f2192e11b359d24cef5dd08bfdaded0462acb4353cc3e98c1fac8b4b2"
+  },
+  {
+   "path": "results/v040/logs/wp4_tb_lex.log",
+   "step": "wp4_tb_lex",
+   "version": "v040",
+   "sha256": "d5f7af4f0f469aab3e24888d4dbe587098d81fac42fd4b1d062d405734badfeb"
+  },
+  {
+   "path": "results/v040/logs/backends_Lall.log",
+   "step": "backends_Lall",
+   "version": "v040L",
+   "sha256": "1173848ac9afe99f60dc7a8a55041b38cafba76e3ddba8945d6e52c15ec66d51"
+  },
+  {
+   "path": "results/v040/v040L/backends_Lall/backend_comparison.json",
+   "step": "backends_Lall",
+   "version": "v040L",
+   "sha256": "8cb78ce04d4c288c8a11f7aefd70d5a2a6a029080f7cac005140c916a532eac7"
+  },
+  {
+   "path": "results/v040/v040L/backends_Lall/backend_comparison.json.provenance.json",
+   "step": "backends_Lall",
+   "version": "v040L",
+   "sha256": "4cb8e021881602af81754991a3a20a4e025db7bdf8b087251f3b64610211863e"
+  },
+  {
+   "path": "results/v040/logs/retrieval_hash_Lall.log",
+   "step": "retrieval_hash_Lall",
+   "version": "v040L",
+   "sha256": "9190e41f4c4a1fa3a4bc985ce9238511e0aa4c45bce7e76e39e0669a70a2df4b"
+  },
+  {
+   "path": "results/v040/logs/retrieval_semantic_Lall.log",
+   "step": "retrieval_semantic_Lall",
+   "version": "v040L",
+   "sha256": "69879a05b9c0970e773c3f7a48f2f3e4a62d934a9b1b9edf596b19c98247d3ee"
+  },
+  {
+   "path": "results/v040/lists/e2e_v040/bear_bm25_gov.json",
+   "step": "lists/e2e_v040",
+   "sha256": "9cd94142fc4572d3e671e004710e517a6f8051808876ddf90076081009969ce1"
+  },
+  {
+   "path": "results/v040/lists/e2e_v040/bear_hash_gov.json",
+   "step": "lists/e2e_v040",
+   "sha256": "7986424fbc59d3a23c8e836ee74da5d78c81c68b74a4a4c05b7dc012427ce3ac"
+  },
+  {
+   "path": "results/v040/lists/e2e_v040/bm25_no_gov.json",
+   "step": "lists/e2e_v040",
+   "sha256": "987f8645288cb2c56a36a49065a494e9fd485c07f2ac2b5dbaf7734767082954"
+  },
+  {
+   "path": "results/v040/lists/e2e_v040/hash_no_gov.json",
+   "step": "lists/e2e_v040",
+   "sha256": "7bdb92d1d4780efafdf9d7687ca6f9d70b9804c3126aaf1b4eda0516efbf49a0"
+  },
+  {
+   "path": "results/v040/lists/e2e_v0110/bear_bm25_gov.json",
+   "step": "lists/e2e_v0110",
+   "sha256": "5a9e45c3d1a2eab66ec1b44244b0d74d56c79e7cf3528ad18958c461208024d9"
+  },
+  {
+   "path": "results/v040/lists/e2e_v0110/bear_hash_gov.json",
+   "step": "lists/e2e_v0110",
+   "sha256": "6222d01869cbecdcc5cc0335956e4cfb9239c7c0feebbd2081b5fe6c99d8c39b"
+  },
+  {
+   "path": "results/v040/lists/e2e_v0110/bm25_no_gov.json",
+   "step": "lists/e2e_v0110",
+   "sha256": "defe3ebb0a49a58034221473d14ef87b7ede463347a0af8dd5e3ee18e835584f"
+  },
+  {
+   "path": "results/v040/lists/e2e_v0110/hash_no_gov.json",
+   "step": "lists/e2e_v0110",
+   "sha256": "9a4ef65a54f8458e199d248d07e003f318c10abade8f508714f1cc71b77ee945"
+  },
+  {
+   "path": "results/v040/lists/wp4_toolbench/bear_bm25_gov.json",
+   "step": "lists/wp4_toolbench",
+   "sha256": "9869de3e8b1951cc754703efca536bbe7eba8319524c69c56ccf198cf8044212"
+  },
+  {
+   "path": "results/v040/lists/wp4_toolbench/bear_bm25_gov.npz",
+   "step": "lists/wp4_toolbench",
+   "sha256": "395311ca1730ddddb706de298dfaa08a7ac501d6813ee21237bbba2bcb26827d"
+  },
+  {
+   "path": "results/v040/lists/wp4_toolbench/bear_hash_gov.json",
+   "step": "lists/wp4_toolbench",
+   "sha256": "ff2c79b70ae17ba5d85eedb49e33e56485caf2d310522feed5825d77c77fe484"
+  },
+  {
+   "path": "results/v040/lists/wp4_toolbench/bear_hash_gov.npz",
+   "step": "lists/wp4_toolbench",
+   "sha256": "6f0c970bc68dead8307bbf342431a148cdd486e7303a0a634988d162d8580bfb"
+  },
+  {
+   "path": "results/v040/lists/wp4_toolbench/bm25_no_gov.json",
+   "step": "lists/wp4_toolbench",
+   "sha256": "24f0d1d28b1adc90084b7e088f153c9eea004ea8b6e26bf0e002c876e7cbb193"
+  },
+  {
+   "path": "results/v040/lists/wp4_toolbench/bm25_no_gov.npz",
+   "step": "lists/wp4_toolbench",
+   "sha256": "594d948aa05d596b0573b6c33203c4f87408855b4d5dac0b8c3c3af52da8aa5d"
+  },
+  {
+   "path": "results/v040/lists/wp4_toolbench/hash_no_gov.json",
+   "step": "lists/wp4_toolbench",
+   "sha256": "68cde2cffd48f6f1fffe9a304aeafbed04c3be521e9f077b611a921702dc5daa"
+  },
+  {
+   "path": "results/v040/lists/wp4_toolbench/hash_no_gov.npz",
+   "step": "lists/wp4_toolbench",
+   "sha256": "8e829008492b118fee21883bf638ee2d538cbf29a773389dc3d3f3b92b2add18"
+  },
+  {
+   "path": "results/v040/lists/wp4_toolbench/meta.json",
+   "step": "lists/wp4_toolbench",
+   "sha256": "ebb1d56c6040b8e9f04614ed110186b9a141ebb3b3dbc8ea96c9b0bf7c82b189"
+  },
+  {
+   "path": "results/v040/compare/compare.json",
+   "step": "compare",
+   "sha256": "b2b2ddea85c72f32cda55df507a4493719d718a4a2fee880fe6214723b920b1b"
+  },
+  {
+   "path": "results/v040/compare/compare.md",
+   "step": "compare",
+   "sha256": "36f9559e109935666bd6f95738a99b5e32ecb0391077afcbd5c7e3a3bf511ace"
+  }
+ ],
+ "steps": {
+  "baseline_comparison_cpu_v0110": {
+   "version": "v0110",
+   "state": "done"
+  },
+  "e2e_lex_v0110": {
+   "version": "v0110",
+   "state": "done"
+  },
+  "tool_scaling_cpu_v0110": {
+   "version": "v0110",
+   "state": "done"
+  },
+  "backends": {
+   "version": "v040",
+   "state": "done"
+  },
+  "baseline_comparison_cpu": {
+   "version": "v040",
+   "state": "done"
+  },
+  "e2e_bge_v040": {
+   "version": "v040",
+   "state": "failed"
+  },
+  "e2e_lex_v040": {
+   "version": "v040",
+   "state": "done"
+  },
+  "retrieval_hash": {
+   "version": "v040",
+   "state": "done"
+  },
+  "retrieval_semantic": {
+   "version": "v040",
+   "state": "done"
+  },
+  "t4_inferred": {
+   "version": "v040",
+   "state": "done"
+  },
+  "t4_multitag": {
+   "version": "v040",
+   "state": "done"
+  },
+  "t4_top5": {
+   "version": "v040",
+   "state": "done"
+  },
+  "tb_bge": {
+   "version": "v040",
+   "state": "unknown"
+  },
+  "tb_bm25": {
+   "version": "v040",
+   "state": "done",
+   "note": "MetaTool+Tags (gov) made before the tag-order fix; BM25 is order-invariant, so unaffected"
+  },
+  "tb_hash": {
+   "version": "v040",
+   "state": "done",
+   "note": "MetaTool+Tags (gov) made before the tag-order fix; hash rows for two-tool queries depend on the hash seed"
+  },
+  "tool_scaling_cpu": {
+   "version": "v040",
+   "state": "done"
+  },
+  "toolllm_both": {
+   "version": "v040",
+   "state": "done"
+  },
+  "transfer_metatool": {
+   "version": "v040",
+   "state": "done"
+  },
+  "transfer_toolbench": {
+   "version": "v040",
+   "state": "done"
+  },
+  "verify": {
+   "version": "v040",
+   "state": "done"
+  },
+  "wp4_mt_lex": {
+   "version": "v040",
+   "state": "done",
+   "note": "MetaTool+Tags lists made before the tag-order fix"
+  },
+  "wp4_tb_lex": {
+   "version": "v040",
+   "state": "done"
+  },
+  "backends_Lall": {
+   "version": "v040L",
+   "state": "done"
+  },
+  "retrieval_hash_Lall": {
+   "version": "v040L",
+   "state": "done"
+  },
+  "retrieval_semantic_Lall": {
+   "version": "v040L",
+   "state": "done"
+  }
+ },
+ "run_provenance": {
+  "written_utc": "2026-10-29T23:26:52Z",
+  "argv": [
+   "evals/wp0_v040/verify_env.py",
+   "--export",
+   "/home/snhwang/tist-evals/bear-10730c8",
+   "--out",
+   "results/wp0/run_provenance.json"
+  ],
+  "bear_version": "0.4.0",
+  "bear_path": "/home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/bear",
+  "bear_source_sha": "10730c8ae682f972b731b89789f0f7b97a521523",
+  "bear_pkg_sha256": "b012a0f13ecae5a85d74eef62f733682c635544fc76d9eeec22dd46fae8def63",
+  "hooks": {
+   "WP0_REPORT_VRAM": "/home/snhwang/tist-evals/wp0-v040/logs/vram.jsonl",
+   "WP0_STEP": "verify",
+   "WP0_EMB_CACHE": "/home/snhwang/tist-evals/wp0-v040/embcache"
+  },
+  "versions": {
+   "python": "3.12.13",
+   "platform": "Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+   "numpy": "2.2.6",
+   "scipy": "1.17.1",
+   "torch": "2.10.0+cu128",
+   "transformers": "4.57.6",
+   "sentence_transformers": "5.4.1"
+  },
+  "export_dir": "/home/snhwang/tist-evals/bear-10730c8",
+  "export_sha": "10730c8ae682f972b731b89789f0f7b97a521523",
+  "export_pkg_sha256": "b012a0f13ecae5a85d74eef62f733682c635544fc76d9eeec22dd46fae8def63",
+  "installed_matches_export": true,
+  "export_sha_is_expected": true,
+  "nemotron_identity": {
+   "endpoint": "http://localhost:8360/v1/embeddings",
+   "model_id": "nvidia/llama-nemotron-embed-vl-1b-v2",
+   "dim": 2048,
+   "served_model": "nemotron-embed-vl",
+   "source": "health"
+  },
+  "_provenance": {
+   "written_utc": "2026-10-29T23:26:54Z",
+   "argv": [
+    "evals/wp0_v040/stamp_dir.py",
+    "/home/snhwang/tist-evals/wp0-v040/stage/v040/verify",
+    "--step",
+    "verify",
+    "--command",
+    "/home/snhwang/.venvs/tist-evals/bin/python evals/wp0_v040/verify_env.py --export /home/snhwang/tist-evals/bear-10730c8 --out results/wp0/run_provenance.json"
+   ],
+   "bear_version": "0.4.0",
+   "bear_path": "/home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/bear",
+   "bear_source_sha": "10730c8ae682f972b731b89789f0f7b97a521523",
+   "bear_pkg_sha256": "b012a0f13ecae5a85d74eef62f733682c635544fc76d9eeec22dd46fae8def63",
+   "hooks": {
+    "WP0_REPORT_VRAM": "/home/snhwang/tist-evals/wp0-v040/logs/vram.jsonl",
+    "WP0_STEP": "verify",
+    "WP0_EMB_CACHE": ""
+   },
+   "versions": {
+    "python": "3.12.13",
+    "platform": "Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "numpy": "2.2.6",
+    "scipy": "1.17.1",
+    "torch": "2.10.0+cu128",
+    "transformers": "4.57.6",
+    "sentence_transformers": "5.4.1"
+   },
+   "step": "verify",
+   "command": "/home/snhwang/.venvs/tist-evals/bin/python evals/wp0_v040/verify_env.py --export /home/snhwang/tist-evals/bear-10730c8 --out results/wp0/run_provenance.json",
+   "file": "results/wp0/run_provenance.json"
+  }
+ }
+}

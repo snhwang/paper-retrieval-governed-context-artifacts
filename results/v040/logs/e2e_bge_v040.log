@@ -1,0 +1,36 @@
+### step:        e2e_bge_v040
+### kind:        gpu (need 1 GiB)
+### bear:        v040 (10730c8ae682f972b731b89789f0f7b97a521523)
+### started:     2026-10-29T19:51:25-04:00
+### command:     /home/snhwang/.venvs/tist-evals/bin/python evals/wp0_v040/dump_toolbench_lists.py --mode e2e --backends bge --outdir results/wp0/lists_v040
+### env:         HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 TOKENIZERS_PARALLELISM=false PYTHONUNBUFFERED=1 PYTHONPATH=/home/snhwang/tist-evals/wp0-v040/artifacts/evals/wp0_v040/site BEAR_SOURCE_SHA=10730c8ae682f972b731b89789f0f7b97a521523 ANTHROPIC_API_KEY=wp0-dummy-key-no-paid-calls WP0_REPORT_VRAM=/home/snhwang/tist-evals/wp0-v040/logs/vram.jsonl WP0_STEP=e2e_bge_v040 WP0_QWEN4B_DTYPE=bfloat16 WP0_SHARE_QWEN4B=1
+### gpu gate: free 3380 MiB, allocator cap 2.30 GiB (need 1 GiB)
+[wp0-site] CUDA allocator capped at 2.30 GiB (0.0241 of 95.6 GiB)
+BEAR: {"bear_version": "0.4.0", "bear_path": "/home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/bear", "bear_source_sha": "10730c8ae682f972b731b89789f0f7b97a521523", "bear_pkg_sha256": "b012a0f13ecae5a85d74eef62f733682c635544fc76d9eeec22dd46fae8def63"}
+e2e corpus 3225 APIs, 1100 queries, k=5
+Could not load model BAAI/bge-base-en-v1.5 (CUDA driver error: unknown error).
+Traceback (most recent call last):
+  File "/home/snhwang/tist-evals/wp0-v040/artifacts/evals/wp0_v040/dump_toolbench_lists.py", line 295, in <module>
+    main()
+  File "/home/snhwang/tist-evals/wp0-v040/artifacts/evals/wp0_v040/dump_toolbench_lists.py", line 289, in main
+    run_e2e(args)
+  File "/home/snhwang/tist-evals/wp0-v040/artifacts/evals/wp0_v040/dump_toolbench_lists.py", line 144, in run_e2e
+    r = build(corp, cond["backend"], cond["governance"])
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/snhwang/tist-evals/wp0-v040/artifacts/evals/wp0_v040/dump_toolbench_lists.py", line 75, in build
+    return et.build_retriever(corpus, backend=backend, governance=governance, mandatory_tags=[])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/snhwang/tist-evals/wp0-v040/artifacts/evals/eval_toolbench.py", line 609, in build_retriever
+    retriever.build_index()
+  File "/home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/bear/retriever.py", line 782, in build_index
+    embeddings = self._embed_texts_cached(texts, store_dir)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/bear/retriever.py", line 2140, in _embed_texts_cached
+    return self._embedder.embed(texts, is_query=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/bear/retriever.py", line 408, in embed
+    self._ensure_loaded()
+  File "/home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/bear/retriever.py", line 316, in _ensure_loaded
+    raise RuntimeError(
+RuntimeError: Could not load embedding model 'BAAI/bge-base-en-v1.5' (see the log for the cause). Install sentence-transformers (pip install 'bear[embeddings]') and check the model name and network access, or use the BM25 backend, which needs no model. To run on hash embeddings instead, which carry no semantic signal, pass model_name='hash', or allow the fallback with allow_hash_fallback=True (BEAR_EMBEDDING_ALLOW_HASH_FALLBACK=1).
+### finished:    2026-10-29T19:55:24-04:00 rc=1

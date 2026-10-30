@@ -1,0 +1,36 @@
+### step:        wp4_mt_lex
+### kind:        cpu (need 0 GiB)
+### bear:        v040 (10730c8ae682f972b731b89789f0f7b97a521523)
+### started:     2026-10-29T19:52:19-04:00
+### command:     /home/snhwang/.venvs/tist-evals/bin/python evals/wp0_v040/dump_toolbench_lists.py --mode metatool-tags --backends bm25 hash --outdir results/wp0/wp4_lists --share-query-embeddings --nest-check 200 --progress 5000
+### env:         HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 TOKENIZERS_PARALLELISM=false PYTHONUNBUFFERED=1 PYTHONPATH=/home/snhwang/tist-evals/wp0-v040/artifacts/evals/wp0_v040/site BEAR_SOURCE_SHA=10730c8ae682f972b731b89789f0f7b97a521523 ANTHROPIC_API_KEY=wp0-dummy-key-no-paid-calls WP0_REPORT_VRAM=/home/snhwang/tist-evals/wp0-v040/logs/vram.jsonl WP0_STEP=wp4_mt_lex CUDA_VISIBLE_DEVICES= OMP_NUM_THREADS=8 MKL_NUM_THREADS=8 WP0_EMB_CACHE=/home/snhwang/tist-evals/wp0-v040/embcache
+BEAR: {"bear_version": "0.4.0", "bear_path": "/home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/bear", "bear_source_sha": "10730c8ae682f972b731b89789f0f7b97a521523", "bear_pkg_sha256": "b012a0f13ecae5a85d74eef62f733682c635544fc76d9eeec22dd46fae8def63"}
+metatool-tags: corpus 199, queries 21111, k=50
+    BEAR+BM25 (gov): 5000/21111 (4s)
+    BEAR+BM25 (gov): 10000/21111 (8s)
+    BEAR+BM25 (gov): 15000/21111 (13s)
+    BEAR+BM25 (gov): 20000/21111 (18s)
+    nesting check: 0 mismatches over 200 queries x 12 k
+  BEAR+BM25 (gov): done (22s)
+    BM25 (no gov): 5000/21111 (5s)
+    BM25 (no gov): 10000/21111 (9s)
+    BM25 (no gov): 15000/21111 (13s)
+    BM25 (no gov): 20000/21111 (18s)
+    nesting check: 0 mismatches over 200 queries x 12 k
+  BM25 (no gov): done (21s)
+Hash embeddings selected. Similarity scores are based on character n-gram overlap and carry no semantic signal — retrieval ranking is effectively arbitrary. Use a sentence-transformers model (e.g. 'BAAI/bge-base-en-v1.5') for meaningful semantic retrieval.
+    BEAR+Hash (gov): 5000/21111 (8s)
+    BEAR+Hash (gov): 10000/21111 (15s)
+    BEAR+Hash (gov): 15000/21111 (22s)
+    BEAR+Hash (gov): 20000/21111 (28s)
+    nesting check: 0 mismatches over 200 queries x 12 k
+  BEAR+Hash (gov): done (30s), query cache hits=2457 misses=21054
+Hash embeddings selected. Similarity scores are based on character n-gram overlap and carry no semantic signal — retrieval ranking is effectively arbitrary. Use a sentence-transformers model (e.g. 'BAAI/bge-base-en-v1.5') for meaningful semantic retrieval.
+    Hash (no gov): 5000/21111 (7s)
+    Hash (no gov): 10000/21111 (14s)
+    Hash (no gov): 15000/21111 (20s)
+    Hash (no gov): 20000/21111 (26s)
+    nesting check: 0 mismatches over 200 queries x 12 k
+  Hash (no gov): done (28s), query cache hits=4927 misses=42095
+[wp0-site] embedding cache: 0 hits, 0 misses (/home/snhwang/tist-evals/wp0-v040/embcache)
+### finished:    2026-10-29T19:54:09-04:00 rc=0

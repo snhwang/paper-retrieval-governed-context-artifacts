@@ -1,0 +1,77 @@
+{
+  "condition": "BM25 (no gov)",
+  "backend": "bm25",
+  "governance": false,
+  "use_tags": false,
+  "top_k": 50,
+  "nesting_check": {
+    "n_sample": 200,
+    "k_checked": [
+      1,
+      2,
+      3,
+      5,
+      10,
+      15,
+      16,
+      20,
+      25,
+      30,
+      40,
+      49
+    ],
+    "mismatches": {
+      "1": 0,
+      "2": 0,
+      "3": 0,
+      "5": 0,
+      "10": 0,
+      "15": 0,
+      "16": 0,
+      "20": 0,
+      "25": 0,
+      "30": 1,
+      "40": 1,
+      "49": 1
+    }
+  },
+  "elapsed_s": 126.70883560180664,
+  "query_cache": null,
+  "_provenance": {
+    "written_utc": "2026-10-29T23:51:42Z",
+    "argv": [
+      "evals/wp0_v040/dump_toolbench_lists.py",
+      "--mode",
+      "toolbench",
+      "--backends",
+      "bm25",
+      "hash",
+      "--outdir",
+      "results/wp0/wp4_lists",
+      "--share-query-embeddings",
+      "--nest-check",
+      "200",
+      "--progress",
+      "5000"
+    ],
+    "bear_version": "0.4.0",
+    "bear_path": "/home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/bear",
+    "bear_source_sha": "10730c8ae682f972b731b89789f0f7b97a521523",
+    "bear_pkg_sha256": "b012a0f13ecae5a85d74eef62f733682c635544fc76d9eeec22dd46fae8def63",
+    "hooks": {
+      "WP0_REPORT_VRAM": "/home/snhwang/tist-evals/wp0-v040/logs/vram.jsonl",
+      "WP0_STEP": "wp4_tb_lex",
+      "WP0_EMB_CACHE": "/home/snhwang/tist-evals/wp0-v040/embcache"
+    },
+    "versions": {
+      "python": "3.12.13",
+      "platform": "Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+      "numpy": "2.2.6",
+      "scipy": "1.17.1",
+      "torch": "2.10.0+cu128",
+      "transformers": "4.57.6",
+      "sentence_transformers": "5.4.1"
+    },
+    "mode": "toolbench"
+  }
+}

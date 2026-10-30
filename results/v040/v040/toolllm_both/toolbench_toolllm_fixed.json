@@ -1,0 +1,117 @@
+{
+ "model": "ToolBench/ToolBench_IR_bert_based_uncased",
+ "top_k": 5,
+ "n_queries": 1100,
+ "conditions": [
+  {
+   "label": "ToolBench-IR alone (no governance)",
+   "governance": false,
+   "metrics": {
+    "recall": {
+     "mean": 0.8470000000000001,
+     "ci": [
+      0.8319545454545455,
+      0.8622882575757576
+     ],
+     "n": 1100
+    },
+    "precision": {
+     "mean": 0.39399999999999996,
+     "ci": [
+      0.38509090909090904,
+      0.4027272727272727
+     ],
+     "n": 1100
+    },
+    "f1": {
+     "mean": 0.5278497310770038,
+     "ci": [
+      0.5174799865538502,
+      0.5379331496786043
+     ],
+     "n": 1100
+    },
+    "ndcg": {
+     "mean": 0.7927398774431946,
+     "ci": [
+      0.7776108128059773,
+      0.8081199967842033
+     ],
+     "n": 1100
+    }
+   }
+  },
+  {
+   "label": "BEAR governance + ToolBench-IR (oracle categories)",
+   "governance": true,
+   "metrics": {
+    "recall": {
+     "mean": 0.8417121212121211,
+     "ci": [
+      0.8256056818181818,
+      0.8575761363636364
+     ],
+     "n": 1100
+    },
+    "precision": {
+     "mean": 0.38927272727272727,
+     "ci": [
+      0.38036363636363635,
+      0.3981818181818182
+     ],
+     "n": 1100
+    },
+    "f1": {
+     "mean": 0.5226838515020333,
+     "ci": [
+      0.5121329791420701,
+      0.5330031286894924
+     ],
+     "n": 1100
+    },
+    "ndcg": {
+     "mean": 0.7887105907681753,
+     "ci": [
+      0.7728840867628878,
+      0.8047605993508178
+     ],
+     "n": 1100
+    }
+   }
+  }
+ ],
+ "_provenance": {
+  "written_utc": "2026-10-30T00:37:50Z",
+  "argv": [
+   "evals/wp0_v040/stamp_dir.py",
+   "/home/snhwang/tist-evals/wp0-v040/stage/v040/toolllm_both",
+   "--step",
+   "toolllm_both",
+   "--command",
+   "/home/snhwang/.venvs/tist-evals/bin/python evals/eval_toolbench_toolllm.py --model ToolBench/ToolBench_IR_bert_based_uncased --top-k 5 --mode both --output results/wp0/toolbench_toolllm_fixed.json"
+  ],
+  "bear_version": "0.4.0",
+  "bear_path": "/home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/bear",
+  "bear_source_sha": "10730c8ae682f972b731b89789f0f7b97a521523",
+  "bear_pkg_sha256": "b012a0f13ecae5a85d74eef62f733682c635544fc76d9eeec22dd46fae8def63",
+  "hooks": {
+   "WP0_REPORT_VRAM": "/home/snhwang/tist-evals/wp0-v040/logs/vram.jsonl",
+   "WP0_STEP": "toolllm_both",
+   "WP0_QWEN4B_DTYPE": "bfloat16",
+   "WP0_SHARE_QWEN4B": "1",
+   "WP0_EMB_CACHE": ""
+  },
+  "versions": {
+   "python": "3.12.13",
+   "platform": "Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+   "numpy": "2.2.6",
+   "scipy": "1.17.1",
+   "torch": "2.10.0+cu128",
+   "transformers": "4.57.6",
+   "sentence_transformers": "5.4.1"
+  },
+  "step": "toolllm_both",
+  "command": "/home/snhwang/.venvs/tist-evals/bin/python evals/eval_toolbench_toolllm.py --model ToolBench/ToolBench_IR_bert_based_uncased --top-k 5 --mode both --output results/wp0/toolbench_toolllm_fixed.json",
+  "file": "results/wp0/toolbench_toolllm_fixed.json"
+ }
+}

@@ -1,0 +1,42 @@
+### step:        transfer_toolbench
+### kind:        gpu (need 1 GiB)
+### bear:        v040 (10730c8ae682f972b731b89789f0f7b97a521523)
+### started:     2026-10-29T20:25:51-04:00
+### command:     /home/snhwang/.venvs/tist-evals/bin/python evals/eval_backend_transfer.py --corpus toolbench --output results/wp0/backend_transfer_toolbench_toolbench_ir_bert_based_uncased.json
+### env:         HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 TOKENIZERS_PARALLELISM=false PYTHONUNBUFFERED=1 PYTHONPATH=/home/snhwang/tist-evals/wp0-v040/artifacts/evals/wp0_v040/site BEAR_SOURCE_SHA=10730c8ae682f972b731b89789f0f7b97a521523 ANTHROPIC_API_KEY=wp0-dummy-key-no-paid-calls WP0_REPORT_VRAM=/home/snhwang/tist-evals/wp0-v040/logs/vram.jsonl WP0_STEP=transfer_toolbench WP0_QWEN4B_DTYPE=bfloat16 WP0_SHARE_QWEN4B=1
+### gpu gate: free 3912 MiB, allocator cap 2.82 GiB (need 1 GiB)
+[wp0-site] CUDA allocator capped at 2.82 GiB (0.0295 of 95.6 GiB)
+corpus=toolbench  3225 items  1100 queries
+model=ToolBench/ToolBench_IR_bert_based_uncased  (IN-domain (ToolBench-IR was fine-tuned on ToolBench))
+Batches:   0%|          | 0/101 [00:00<?, ?it/s]Batches:   1%|          | 1/101 [00:00<00:17,  5.75it/s]Batches:   3%|▎         | 3/101 [00:00<00:09, 10.35it/s]Batches:   5%|▍         | 5/101 [00:00<00:08, 11.32it/s]Batches:   7%|▋         | 7/101 [00:00<00:07, 13.29it/s]Batches:   9%|▉         | 9/101 [00:00<00:06, 15.05it/s]Batches:  12%|█▏        | 12/101 [00:00<00:04, 17.93it/s]Batches:  15%|█▍        | 15/101 [00:00<00:04, 20.78it/s]Batches:  18%|█▊        | 18/101 [00:01<00:03, 22.89it/s]Batches:  21%|██        | 21/101 [00:01<00:03, 24.58it/s]Batches:  25%|██▍       | 25/101 [00:01<00:02, 27.14it/s]Batches:  29%|██▊       | 29/101 [00:01<00:02, 29.52it/s]Batches:  33%|███▎      | 33/101 [00:01<00:02, 32.12it/s]Batches:  37%|███▋      | 37/101 [00:01<00:01, 33.13it/s]Batches:  42%|████▏     | 42/101 [00:01<00:01, 36.21it/s]Batches:  47%|████▋     | 47/101 [00:01<00:01, 39.86it/s]Batches:  51%|█████▏    | 52/101 [00:01<00:01, 42.32it/s]Batches:  56%|█████▋    | 57/101 [00:02<00:01, 43.12it/s]Batches:  62%|██████▏   | 63/101 [00:02<00:00, 45.68it/s]Batches:  68%|██████▊   | 69/101 [00:02<00:00, 48.01it/s]Batches:  74%|███████▍  | 75/101 [00:02<00:00, 51.10it/s]Batches:  80%|████████  | 81/101 [00:02<00:00, 53.05it/s]Batches:  86%|████████▌ | 87/101 [00:02<00:00, 52.80it/s]Batches:  92%|█████████▏| 93/101 [00:02<00:00, 54.48it/s]Batches:  98%|█████████▊| 99/101 [00:02<00:00, 53.42it/s]Batches: 100%|██████████| 101/101 [00:02<00:00, 35.67it/s]
+indexed + evaluated in 39s
+
+=== ToolBench/ToolBench_IR_bert_based_uncased on toolbench (no governance, k=5) ===
+  RECALL   0.847 [0.832, 0.862]
+  NDCG     0.793 [0.778, 0.808]
+  F1       0.528 [0.517, 0.538]
+
+Off-the-shelf no-governance references on toolbench (Recall@5, BEAR 0.1.10):
+  BGE          0.574
+  BGE-M3       0.601
+  Qwen3-0.6B   0.694
+  Qwen3-4B     0.681
+
+Saved to results/wp0/backend_transfer_toolbench_toolbench_ir_bert_based_uncased.json
+
+Read: on ToolBench the fine-tuned retriever should dominate (~0.847);
+on MetaTool, if it falls near or below the off-the-shelf encoders, that
+is the generalization gap -- fine-tuning is corpus-specific.
+
+=== Reproducibility ===
+Timestamp (UTC): 2026-10-30T00:26:37Z
+Command line:    evals/eval_backend_transfer.py --corpus toolbench --output results/wp0/backend_transfer_toolbench_toolbench_ir_bert_based_uncased.json
+Python:          3.12.13 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
+numpy:           2.2.6
+scipy:           1.17.1
+bear:            0.4.0
+git commit:      8f0ab8fd5e0a6510a67400f65c697c1f22c187bb
+git status:      DIRTY (5 files modified)
+git branch:      tist-r2
+===
+### finished:    2026-10-29T20:26:39-04:00 rc=0

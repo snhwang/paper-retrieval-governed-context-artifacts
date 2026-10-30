@@ -1,0 +1,88 @@
+### step:        t4_inferred
+### kind:        gpu (need 1 GiB)
+### bear:        v040 (10730c8ae682f972b731b89789f0f7b97a521523)
+### started:     2026-10-29T19:56:52-04:00
+### command:     /home/snhwang/.venvs/tist-evals/bin/python evals/eval_toolbench_inferred_categories.py
+### env:         HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 TOKENIZERS_PARALLELISM=false PYTHONUNBUFFERED=1 PYTHONPATH=/home/snhwang/tist-evals/wp0-v040/artifacts/evals/wp0_v040/site BEAR_SOURCE_SHA=10730c8ae682f972b731b89789f0f7b97a521523 ANTHROPIC_API_KEY=wp0-dummy-key-no-paid-calls WP0_REPORT_VRAM=/home/snhwang/tist-evals/wp0-v040/logs/vram.jsonl WP0_STEP=t4_inferred WP0_QWEN4B_DTYPE=bfloat16 WP0_SHARE_QWEN4B=1
+### gpu gate: free 2371 MiB, allocator cap 1.32 GiB (need 1 GiB)
+[wp0-site] CUDA allocator capped at 1.32 GiB (0.0138 of 95.6 GiB)
+=== ToolBench with LLM-inferred categories ===
+
+Loading ToolBench corpus and queries ...
+Corpus: 3225 APIs, 1100 queries
+Closed category vocabulary: 47 categories
+
+LLM cache: 1099 pre-computed classifications
+
+Classifying 1100 queries with anthropic claude-sonnet-4-6 ...
+  0 new LLM calls; 1100 served from cache
+  Classification time: 0.0s
+
+Classifier top-1 accuracy vs. benchmark gold category: 0.465
+
+  OOV classifications (no required_tags applied): 6
+
+Building retrievers and evaluating Recall@5 ...
+Batches:   0%|          | 0/101 [00:00<?, ?it/s]Batches:   1%|          | 1/101 [00:01<01:47,  1.07s/it]Batches:   2%|▏         | 2/101 [00:01<00:50,  1.95it/s]Batches:   3%|▎         | 3/101 [00:01<00:32,  3.05it/s]Batches:   4%|▍         | 4/101 [00:01<00:23,  4.21it/s]Batches:   6%|▌         | 6/101 [00:01<00:14,  6.52it/s]Batches:   8%|▊         | 8/101 [00:01<00:10,  8.72it/s]Batches:  10%|▉         | 10/101 [00:01<00:08, 11.08it/s]Batches:  13%|█▎        | 13/101 [00:01<00:05, 15.05it/s]Batches:  16%|█▌        | 16/101 [00:02<00:04, 17.40it/s]Batches:  20%|█▉        | 20/101 [00:02<00:03, 21.36it/s]Batches:  23%|██▎       | 23/101 [00:02<00:03, 22.29it/s]Batches:  27%|██▋       | 27/101 [00:02<00:03, 24.48it/s]Batches:  31%|███       | 31/101 [00:02<00:02, 27.36it/s]Batches:  35%|███▍      | 35/101 [00:02<00:02, 28.98it/s]Batches:  40%|███▉      | 40/101 [00:02<00:01, 32.49it/s]Batches:  45%|████▍     | 45/101 [00:02<00:01, 35.29it/s]Batches:  50%|████▉     | 50/101 [00:03<00:01, 36.99it/s]Batches:  54%|█████▍    | 55/101 [00:03<00:01, 39.56it/s]Batches:  59%|█████▉    | 60/101 [00:03<00:01, 40.99it/s]Batches:  64%|██████▍   | 65/101 [00:03<00:00, 41.92it/s]Batches:  69%|██████▉   | 70/101 [00:03<00:00, 43.99it/s]Batches:  74%|███████▍  | 75/101 [00:03<00:00, 45.27it/s]Batches:  79%|███████▉  | 80/101 [00:03<00:00, 46.29it/s]Batches:  84%|████████▍ | 85/101 [00:03<00:00, 46.72it/s]Batches:  90%|█████████ | 91/101 [00:03<00:00, 48.95it/s]Batches:  96%|█████████▌| 97/101 [00:03<00:00, 51.31it/s]Batches: 100%|██████████| 101/101 [00:04<00:00, 24.98it/s]
+[wp0-site] reusing shared BAAI/bge-base-en-v1.5
+Batches:   0%|          | 0/101 [00:00<?, ?it/s]Batches:   1%|          | 1/101 [00:00<00:12,  7.80it/s]Batches:   2%|▏         | 2/101 [00:00<00:11,  8.53it/s]Batches:   3%|▎         | 3/101 [00:00<00:10,  8.93it/s]Batches:   4%|▍         | 4/101 [00:00<00:10,  9.30it/s]Batches:   6%|▌         | 6/101 [00:00<00:08, 11.87it/s]Batches:   8%|▊         | 8/101 [00:00<00:06, 13.70it/s]Batches:  11%|█         | 11/101 [00:00<00:05, 17.44it/s]Batches:  15%|█▍        | 15/101 [00:00<00:03, 21.90it/s]Batches:  18%|█▊        | 18/101 [00:01<00:03, 23.14it/s]Batches:  21%|██        | 21/101 [00:01<00:03, 24.57it/s]Batches:  25%|██▍       | 25/101 [00:01<00:02, 27.03it/s]Batches:  29%|██▊       | 29/101 [00:01<00:02, 30.14it/s]Batches:  33%|███▎      | 33/101 [00:01<00:02, 32.08it/s]Batches:  37%|███▋      | 37/101 [00:01<00:01, 33.50it/s]Batches:  42%|████▏     | 42/101 [00:01<00:01, 36.74it/s]Batches:  47%|████▋     | 47/101 [00:01<00:01, 40.22it/s]Batches:  51%|█████▏    | 52/101 [00:01<00:01, 42.78it/s]Batches:  56%|█████▋    | 57/101 [00:02<00:00, 44.65it/s]Batches:  62%|██████▏   | 63/101 [00:02<00:00, 49.08it/s]Batches:  68%|██████▊   | 69/101 [00:02<00:00, 49.92it/s]Batches:  74%|███████▍  | 75/101 [00:02<00:00, 49.73it/s]Batches:  81%|████████  | 82/101 [00:02<00:00, 52.48it/s]Batches:  87%|████████▋ | 88/101 [00:02<00:00, 52.58it/s]Batches:  93%|█████████▎| 94/101 [00:02<00:00, 53.63it/s]Batches: 100%|██████████| 101/101 [00:02<00:00, 57.91it/s]Batches: 100%|██████████| 101/101 [00:02<00:00, 35.99it/s]
+  [1/3] BEAR + oracle categories (the manuscript number) ...
+  [2/3] BEAR + LLM-inferred categories (the new condition) ...
+  [3/3] BEAR with no governance (lower bound) ...
+
+--- Recall@5, NDCG@5, F1@5 ---
+
+Condition                           Recall@k                NDCG@k                  F1@k
+----------------------------------------------------------------------------------------
+oracle                  0.688 [0.67,0.71]  0.651 [0.63,0.67]  0.422 [0.41,0.43]
+inferred                0.336 [0.31,0.36]  0.322 [0.30,0.35]  0.206 [0.19,0.22]
+no_governance           0.574 [0.55,0.60]  0.545 [0.52,0.57]  0.351 [0.34,0.36]
+
+--- LaTeX table (paste into manuscript) ---
+
+\begin{table}[t]
+  \caption{ToolBench retrieval under three category-tag conditions (BGE-base backend, 1100 queries, $k = 5$, 95\% bootstrap CIs). The ``oracle'' condition uses the benchmark's ground-truth category labels as \texttt{required\_tags} (the original manuscript condition). The ``inferred'' condition uses an LLM classifier (claude-sonnet-4-6) to infer the category from query text alone with no access to ground-truth labels (top-1 classifier accuracy = 0.465). The ``no governance'' condition strips all scope metadata.}
+  \label{tab:toolbench-inferred}
+  \centering
+  \small
+  \begin{tabular}{@{}l c c c@{}}
+    \toprule
+    Condition & Recall@5 & NDCG@5 & F1@5 \\
+    \midrule
+    Oracle categories & 0.688 [0.67,0.71] & 0.651 [0.63,0.67] & 0.422 [0.41,0.43] \\
+    LLM-inferred categories & 0.336 [0.31,0.36] & 0.322 [0.30,0.35] & 0.206 [0.19,0.22] \\
+    No governance & 0.574 [0.55,0.60] & 0.545 [0.52,0.57] & 0.351 [0.34,0.36] \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Wrote /home/snhwang/tist-evals/wp0-v040/artifacts/results/toolbench_inferred_metrics.json
+Wrote /home/snhwang/tist-evals/wp0-v040/artifacts/results/toolbench_inferred_output.txt
+Cache: /home/snhwang/tist-evals/wp0-v040/artifacts/results/toolbench_inferred_categories.json
+
+Elapsed: 172.5s
+
+=== Reproducibility ===
+Timestamp (UTC): 2026-10-30T00:14:59Z
+Command line:    evals/eval_toolbench_inferred_categories.py
+Python:          3.12.13 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
+numpy:           2.2.6
+scipy:           1.17.1
+bear:            0.4.0
+git commit:      8f0ab8fd5e0a6510a67400f65c697c1f22c187bb
+git status:      DIRTY (3 files modified)
+git branch:      tist-r2
+
+  provider: anthropic
+  model: claude-sonnet-4-6
+  top_k: 5
+  n_queries: 1100
+  classifier_top1_accuracy: 0.46545454545454545
+  n_new_llm_calls: 0
+===
+
+To commit these results to the artifacts repo:
+  git add results/toolbench_inferred_metrics.json \
+          results/toolbench_inferred_output.txt \
+          results/toolbench_inferred_categories.json
+### finished:    2026-10-29T20:15:02-04:00 rc=0

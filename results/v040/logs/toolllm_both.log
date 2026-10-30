@@ -1,0 +1,47 @@
+### step:        toolllm_both
+### kind:        gpu (need 1 GiB)
+### bear:        v040 (10730c8ae682f972b731b89789f0f7b97a521523)
+### started:     2026-10-29T20:32:24-04:00
+### command:     /home/snhwang/.venvs/tist-evals/bin/python evals/eval_toolbench_toolllm.py --model ToolBench/ToolBench_IR_bert_based_uncased --top-k 5 --mode both --output results/wp0/toolbench_toolllm_fixed.json
+### env:         HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 TOKENIZERS_PARALLELISM=false PYTHONUNBUFFERED=1 PYTHONPATH=/home/snhwang/tist-evals/wp0-v040/artifacts/evals/wp0_v040/site BEAR_SOURCE_SHA=10730c8ae682f972b731b89789f0f7b97a521523 ANTHROPIC_API_KEY=wp0-dummy-key-no-paid-calls WP0_REPORT_VRAM=/home/snhwang/tist-evals/wp0-v040/logs/vram.jsonl WP0_STEP=toolllm_both WP0_QWEN4B_DTYPE=bfloat16 WP0_SHARE_QWEN4B=1
+### gpu gate: free 3197 MiB, allocator cap 2.12 GiB (need 1 GiB)
+[wp0-site] CUDA allocator capped at 2.12 GiB (0.0222 of 95.6 GiB)
+[1/2] Loading ToolBench corpus + queries ...
+      corpus: 3225 APIs   queries: 1100
+[2/2] Running ToolBench-IR conditions (both) ...
+
+  building [ToolBench-IR alone (no governance)] and indexing ...
+Batches:   0%|          | 0/101 [00:00<?, ?it/s]Batches:   1%|          | 1/101 [00:00<00:13,  7.46it/s]Batches:   3%|▎         | 3/101 [00:00<00:07, 12.54it/s]Batches:   5%|▍         | 5/101 [00:00<00:06, 15.32it/s]Batches:   8%|▊         | 8/101 [00:00<00:05, 17.64it/s]Batches:  11%|█         | 11/101 [00:00<00:04, 20.37it/s]Batches:  15%|█▍        | 15/101 [00:00<00:03, 24.26it/s]Batches:  18%|█▊        | 18/101 [00:00<00:03, 25.79it/s]Batches:  22%|██▏       | 22/101 [00:00<00:02, 28.92it/s]Batches:  26%|██▌       | 26/101 [00:01<00:02, 31.04it/s]Batches:  31%|███       | 31/101 [00:01<00:01, 35.14it/s]Batches:  36%|███▌      | 36/101 [00:01<00:01, 38.02it/s]Batches:  41%|████      | 41/101 [00:01<00:01, 40.08it/s]Batches:  47%|████▋     | 47/101 [00:01<00:01, 44.43it/s]Batches:  52%|█████▏    | 53/101 [00:01<00:01, 47.98it/s]Batches:  58%|█████▊    | 59/101 [00:01<00:00, 49.26it/s]Batches:  65%|██████▌   | 66/101 [00:01<00:00, 52.96it/s]Batches:  73%|███████▎  | 74/101 [00:01<00:00, 58.60it/s]Batches:  79%|███████▉  | 80/101 [00:02<00:00, 54.74it/s]Batches:  86%|████████▌ | 87/101 [00:02<00:00, 58.59it/s]Batches:  94%|█████████▍| 95/101 [00:02<00:00, 63.15it/s]Batches: 100%|██████████| 101/101 [00:02<00:00, 42.61it/s]
+=== ToolBench-IR alone (no governance)  (n=1100, k=5, 55s) ===
+  RECALL     0.847 [0.832, 0.862]
+  PRECISION  0.394 [0.385, 0.403]
+  F1         0.528 [0.517, 0.538]
+  NDCG       0.793 [0.778, 0.808]
+  building [BEAR governance + ToolBench-IR (oracle categories)] and indexing ...
+[wp0-site] reusing shared ToolBench/ToolBench_IR_bert_based_uncased
+Batches:   0%|          | 0/101 [00:00<?, ?it/s]Batches:   1%|          | 1/101 [00:00<00:10,  9.95it/s]Batches:   3%|▎         | 3/101 [00:00<00:07, 12.87it/s]Batches:   5%|▍         | 5/101 [00:00<00:06, 15.26it/s]Batches:   7%|▋         | 7/101 [00:00<00:05, 16.84it/s]Batches:   9%|▉         | 9/101 [00:00<00:05, 17.69it/s]Batches:  12%|█▏        | 12/101 [00:00<00:04, 19.84it/s]Batches:  15%|█▍        | 15/101 [00:00<00:03, 21.90it/s]Batches:  18%|█▊        | 18/101 [00:00<00:03, 22.67it/s]Batches:  21%|██        | 21/101 [00:01<00:03, 24.63it/s]Batches:  24%|██▍       | 24/101 [00:01<00:03, 24.83it/s]Batches:  27%|██▋       | 27/101 [00:01<00:02, 24.85it/s]Batches:  31%|███       | 31/101 [00:01<00:02, 28.40it/s]Batches:  35%|███▍      | 35/101 [00:01<00:02, 30.53it/s]Batches:  39%|███▊      | 39/101 [00:01<00:01, 32.65it/s]Batches:  43%|████▎     | 43/101 [00:01<00:01, 34.16it/s]Batches:  48%|████▊     | 48/101 [00:01<00:01, 36.73it/s]Batches:  52%|█████▏    | 53/101 [00:01<00:01, 39.58it/s]Batches:  57%|█████▋    | 58/101 [00:02<00:01, 41.01it/s]Batches:  62%|██████▏   | 63/101 [00:02<00:00, 41.48it/s]Batches:  67%|██████▋   | 68/101 [00:02<00:00, 43.28it/s]Batches:  73%|███████▎  | 74/101 [00:02<00:00, 45.73it/s]Batches:  79%|███████▉  | 80/101 [00:02<00:00, 47.48it/s]Batches:  85%|████████▌ | 86/101 [00:02<00:00, 48.66it/s]Batches:  91%|█████████ | 92/101 [00:02<00:00, 50.83it/s]Batches:  98%|█████████▊| 99/101 [00:02<00:00, 54.36it/s]Batches: 100%|██████████| 101/101 [00:02<00:00, 35.49it/s]
+=== BEAR governance + ToolBench-IR (oracle categories)  (n=1100, k=5, 97s) ===
+  RECALL     0.842 [0.826, 0.858]
+  PRECISION  0.389 [0.380, 0.398]
+  F1         0.523 [0.512, 0.533]
+  NDCG       0.789 [0.773, 0.805]
+
+Reference points (from the manuscript, same split/metric):
+  BEAR+BGE oracle categories   Recall@5 = 0.679
+  BEAR+BGE no governance       Recall@5 = 0.574
+  BEAR+BGE inferred (best)     Recall@5 = 0.502
+
+Saved to results/wp0/toolbench_toolllm_fixed.json
+
+=== Reproducibility ===
+Timestamp (UTC): 2026-10-30T00:35:20Z
+Command line:    evals/eval_toolbench_toolllm.py --model ToolBench/ToolBench_IR_bert_based_uncased --top-k 5 --mode both --output results/wp0/toolbench_toolllm_fixed.json
+Python:          3.12.13 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
+numpy:           2.2.6
+scipy:           1.17.1
+bear:            0.4.0
+git commit:      8f0ab8fd5e0a6510a67400f65c697c1f22c187bb
+git status:      DIRTY (5 files modified)
+git branch:      tist-r2
+===
+### finished:    2026-10-29T20:36:38-04:00 rc=0
