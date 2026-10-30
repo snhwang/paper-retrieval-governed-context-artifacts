@@ -72,10 +72,17 @@ MATERIALS = ("worker/worker_local.py", "worker/wp7_tasks.py", "decoys/sample.jso
              "decoys/wp7_decoys/plugin.yaml", "decoys/wp7_decoys/__init__.py",
              "sandbox_bridge.py", "sandbox_redteam.py")
 BRIDGED_PORTS = (8355, 8360)  # the model server and the embedder, the only reachable ports
-# Environment variables passed into the sandbox from the runner's own environment. Everything
-# else is dropped (keys, tokens, WSL interop, display, D-Bus, the user's PATH).
-ENV_KEEP = ("LANG", "LC_ALL", "LC_CTYPE", "TERM", "USER", "LOGNAME", "TZ")
+# The sandbox environment is fixed, not copied from the runner, so a cell sees the same
+# environment whether the runner was started from a shell, a systemd scope or a user service.
+# Everything else is dropped (keys, tokens, WSL interop, display, D-Bus, the user's PATH).
 SANDBOX_PATH = "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+
+
+def _fixed_env() -> dict:
+    import pwd
+    user = pwd.getpwuid(os.getuid()).pw_name
+    return {"LANG": "C.UTF-8", "TERM": "xterm-256color", "USER": user, "LOGNAME": user,
+            "PATH": SANDBOX_PATH, "HOME": HOME_DIR, "SHELL": "/bin/bash", "PYTHONUNBUFFERED": "1"}
 
 
 def _bear_package_dir() -> str:
@@ -332,10 +339,9 @@ class Run:
         return cell, cfg_path, audit
 
     def sandbox_env(self, cfg_in: str, sw: arms.Switches, cell: str, dry: bool) -> dict:
-        """A scrubbed environment: a fixed allow-list plus the worker's own WP7 variables."""
-        env = {k: os.environ[k] for k in ENV_KEEP if k in os.environ}
+        """A scrubbed environment: fixed values plus the worker's own WP7 variables."""
+        env = _fixed_env()
         env.update({
-            "PATH": SANDBOX_PATH, "HOME": HOME_DIR, "SHELL": "/bin/bash", "PYTHONUNBUFFERED": "1",
             "ABDEFER_BASE_TREE": HERMES_TREE,
             "WP7_ARM_CONFIG": cfg_in,
             "WP7_HARNESS_DIR": HARNESS,

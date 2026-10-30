@@ -61,6 +61,13 @@ These change `run.py` and `provenance.py` only. The worker, the tasks and the gr
 - `--tasks all` expands to the 14 core and 9 toolperf tasks.
 - `checks.py --jobs N` runs the per-cell `verify-audit` calls in parallel and streams the combined log to disk, for runs of about 1,700 cells. The checks themselves are unchanged.
 
+## Stage 1 runs on BEAR v0.4.1 (2026-10-30)
+
+- **Version.** Stage 1 runs on public BEAR v0.4.1 (tag `v0.4.1`, `fa87fc554fd394ce52b09ffa8121d36fc3758f28`), cloned with `git clone --depth 1 --branch v0.4.1` to WSL `~/tist-wp7/bear-v0.4.1` and installed editable in `~/.venvs/tist-spike`. Against `10730c8` it fixes the backfill scoring bug and bumps the version. The plugin now records `restore_flat_backfill` and `restore_below_threshold` in each narrowing record's settings. With a remote embedder the plugin builds its `Config` explicitly, not from `BEAR_*` variables, so both stay at their default, false.
+- **Checks for 0.4.2.** 0.4.2 returns zero-score BM25 rows and breaks exact final-score ties by priority, then id. Neither changes a run whose narrowing used Nemotron and had no exact ties among its ranked tools. `analyze_stage1.py` counts narrowing records by backend and embedder, exact final-score tie pairs among ranked tools (per computed record, overall and per arm), and records whose restore flags are true or missing.
+- **Memory caps.** Every process runs inside `tist.slice` (capped at 40 GB) through `~/bin/tist-capped`. Short jobs run as a scope (`--mem 8G`). The grid runs as a transient user service (`--mem 16G --service tist-wp7-stage1`), so it does not depend on a `wsl.exe` staying attached. Exit 137 inside a scope means the cap killed the job.
+- **Fixed sandbox environment.** The sandbox's environment no longer copies anything from the runner's (a user service passes no `TERM`, `USER` or `LOGNAME`). Every cell gets `LANG=C.UTF-8`, `TERM=xterm-256color`, the user name, the system `PATH`, `HOME`, `SHELL`, `PYTHONUNBUFFERED` and the worker's `WP7_*` and `ABDEFER_*` variables. So a scope and a service give a worker the same environment.
+
 ## Cell sandbox (fix 4, 2026-10-29)
 
 **Why.** The harness's `sandbox.py` isolates HOME, the crontab and the systemd user bus, and nothing else. A terminal command runs as the user, so it reaches the whole filesystem, every process and the network. The stage-1 pilot (27 cells, operator, arms A and B) showed what that allows:

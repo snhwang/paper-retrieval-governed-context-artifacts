@@ -167,7 +167,28 @@ def cell_metrics(d: dict, operator_only: set, decoys: set, known: set) -> dict:
                         for s in (x.get("results") or []) if s.get("admitted_by") == "required_tags")
     not_retrieved = sum(1 for r in nar for p in (r.get("offered") or []) + (r.get("ranked_out") or [])
                         if isinstance(p, dict) and p.get("retrieved") is False)
+    # Version checks for 0.4.2 (zero-score BM25 rows, exact ties broken by priority then id).
+    # Neither changes a run whose narrowing used Nemotron and had no exact final-score ties among
+    # its ranked tools. Ties are counted over computed narrowing records (reused ones repeat them).
+    comp = [r for r in nar if not r.get("reused_from")]
+    nemotron = sum(1 for r in nar if r.get("backend") == "remote"
+                   and "nemotron" in json.dumps(r.get("embedder") or {}).lower())
+    bm25 = sum(1 for r in nar if r.get("backend") == "bm25")
+    tie_pairs = tie_records = 0
+    for r in comp:
+        scores = Counter(p.get("final_score") for p in (r.get("offered") or []) + (r.get("ranked_out") or [])
+                         if isinstance(p, dict) and p.get("rank") is not None)
+        pairs = sum(n * (n - 1) // 2 for n in scores.values() if n > 1)
+        tie_pairs += pairs
+        tie_records += pairs > 0
+    flags = [(r.get("settings") or {}) for r in nar]
     return {
+        "nar_records": len(nar), "nar_computed": len(comp), "nar_nemotron": nemotron, "nar_bm25": bm25,
+        "tie_pairs": tie_pairs, "tie_records": tie_records,
+        "restore_flags_true": sum(1 for f in flags if f.get("restore_flat_backfill")
+                                  or f.get("restore_below_threshold")),
+        "restore_flags_missing": sum(1 for f in flags if "restore_flat_backfill" not in f
+                                     or "restore_below_threshold" not in f),
         "admitted_required_tags": rt_admissions,
         "narrowing_not_retrieved": not_retrieved,
         "retrieval_records": sum(len(r.get("retrievals") or []) for r in recs
@@ -448,6 +469,18 @@ def main() -> int:
                    for m in ["calls_not_sent", "gate_blocks", "blocked", "op_exec_guest", "trap_unsafe",
                              "invented", "decoy_calls", "cap_hits", "narrowing_errors", "model_errors"]},
         "invented_names": dict(Counter(n for r in rows for n in r["invented_names"].split(";") if n)),
+        "version_checks": {
+            "narrowing_records": int(sum(r["nar_records"] for r in rows_all)),
+            "nemotron_records": int(sum(r["nar_nemotron"] for r in rows_all)),
+            "bm25_records": int(sum(r["nar_bm25"] for r in rows_all)),
+            "computed_records": int(sum(r["nar_computed"] for r in rows_all)),
+            "exact_tie_pairs": int(sum(r["tie_pairs"] for r in rows_all)),
+            "records_with_ties": int(sum(r["tie_records"] for r in rows_all)),
+            "exact_tie_pairs_by_arm": {arm: int(sum(r["tie_pairs"] for r in rows_all if r["arm"] == arm))
+                                       for arm in ARMS},
+            "restore_flags_true": int(sum(r["restore_flags_true"] for r in rows_all)),
+            "restore_flags_missing": int(sum(r["restore_flags_missing"] for r in rows_all)),
+        },
         "backfill_bug_exposure": {
             "retrieval_records": int(sum(r["retrieval_records"] for r in rows_all)),
             "admitted_by_required_tags": int(sum(r["admitted_required_tags"] for r in rows_all)),
