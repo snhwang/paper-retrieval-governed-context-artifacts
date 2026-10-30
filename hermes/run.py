@@ -92,6 +92,18 @@ LEAK_WATCH = ("~/.venvs/hermes", "~/.hermes", "~/.ssh", "~/.config/gh", "~/.conf
               "~/.local/bin", "~/.venvs/tist-spike", "~/.local/share/uv/python")
 
 
+def mem_available_gb() -> float | None:
+    """MemAvailable from /proc/meminfo, in GB (None if unreadable)."""
+    try:
+        with open("/proc/meminfo") as f:
+            for line in f:
+                if line.startswith("MemAvailable:"):
+                    return int(line.split()[1]) / 1024 / 1024
+    except OSError:
+        return None
+    return None
+
+
 def leak_check(cell: str, marker: str, extra_dirs: list[str]) -> list[str]:
     """Signs that something from ``cell`` left its sandbox. Empty when all is well.
 
@@ -568,6 +580,8 @@ def add_grid_args(p: argparse.ArgumentParser) -> None:
     p.add_argument("--guard-provenance", action="store_true")
     p.add_argument("--sandbox", default="bwrap", choices=("bwrap", "none"),
                    help="bwrap (default): every worker in the cell sandbox; none: the old way")
+    p.add_argument("--min-avail-gb", type=float, default=16.0,
+                   help="stop before a cell when the host's MemAvailable is below this (0 = off)")
 
 
 def main() -> int:
@@ -607,7 +621,7 @@ def main() -> int:
                                priority_weight="0", always_offer="clarify", order="product",
                                seed="0", resume=False, max_error_frac=None,
                                min_cells_error_check=40, guard_provenance=False,
-                               sandbox=a.sandbox)
+                               sandbox=a.sandbox, min_avail_gb=16.0)
     cells = grid(a)
     t = _tasks_module()
     run = Run(a.root, sandbox=a.sandbox)
@@ -687,6 +701,12 @@ def main() -> int:
     failures = 0
     for c in todo:
         arm, task, rep, sw = c
+        avail = mem_available_gb()
+        if not dry and a.min_avail_gb and avail is not None and avail < a.min_avail_gb:
+            run.log({"event": "batch_stopped", "utc": provenance.now(), "reason": "low_memory",
+                     "mem_available_gb": round(avail, 1), "floor_gb": a.min_avail_gb,
+                     "next_cell": cid(c), "done": ndone, "errors": errors})
+            return 2
         rc = run.run_cell(arm, task, rep, sw, dry=dry, timeout_s=t.timeout_of(task) + 120,
                           guard=guard if (a.guard_provenance and not dry) else None)
         if rc == 5:

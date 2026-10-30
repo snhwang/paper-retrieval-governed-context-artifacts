@@ -92,6 +92,10 @@ Consequences, the same in every arm. `web_search` and `web_extract` fail, and so
 
 It takes about 0.2 s. The host side of the bridge logs every connection with its port to `logs/<cell>.bridge.stderr`. It can only connect to 127.0.0.1:8355 and :8360.
 
+**Memory floor.** Before each live cell the runner reads `MemAvailable` from `/proc/meminfo` and stops the batch (`batch_stopped`, reason `low_memory`) below `--min-avail-gb` (default 16).
+
+**BEAR 0.4.0 backfill bug.** 0.4.0 scores instructions wrongly when the retriever admits them through `required_tags` after its search dropped rows (BM25 with zero overlap). 0.4.1 fixes it. `analyze_stage1.py` counts, in every audit log, the retrieval results recorded with `admitted_by: required_tags`, and the narrowing entries recorded with `retrieved: false`. Zero for both means a run never reached the bug.
+
 **Provenance.** `provenance.json`, `plan.json` and each `batch_start` record the artifacts repo's branch, commit and any uncommitted files under `hermes/`.
 
 **Analysis.** `analyze_stage1.py` refuses cells that ran without the sandbox (`--allow-unsandboxed` is for tests). So the pilot and the earlier unsandboxed smokes never enter stage-1 results. It also counts out-of-cell attempts per cell from the transcripts, as task behavior: secrets, other host paths, installs, daemons, interop, Docker, the `hermes` CLI and internet. Under the sandbox none can succeed.
