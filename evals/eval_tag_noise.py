@@ -111,7 +111,9 @@ from tistr2_common import (  # noqa: E402
     BACKEND_LABEL, REPO_ROOT, CachedEmbedder, EmbeddingStore, Tee, bear_provenance,
     build_retriever, check_bm25_memo, ci_summary, enable_bm25_memo, json_default,
     make_config, ndcg, paired_summary, record_texts, refuse_overwrite, require_bear_040,
+    store_provenance,
 )
+import bear  # noqa: E402
 from bear import Context, Corpus  # noqa: E402
 from bear.models import Instruction, InstructionType, ScopeCondition  # noqa: E402
 from repro_footer import print_repro_footer  # noqa: E402
@@ -514,7 +516,7 @@ def phase_run(args) -> None:
     sys.stdout = Tee(orig, log)
     try:
         t0 = time.time()
-        print("=== Tag-noise sweep (WP6), BEAR 0.4.0, gate-only noise ===")
+        print(f"=== Tag-noise sweep (WP6), BEAR {bear.__version__}, gate-only noise ===")
         print(f"k={K}, priority weight {PRIORITY_WEIGHT} (ungated 0), theta dense {THETA_DENSE}, "
               f"BM25 {THETA_BM25}, sweep priority {SWEEP_PRIORITY}")
         print(f"Benchmarks {args.benchmarks}, backends {args.backends}, rates {args.rates}, "
@@ -564,9 +566,15 @@ def phase_run(args) -> None:
                                    "query_splits": [q[3] for q in G_BENCH[bn].queries],
                                    "query_sha256": query_sha(G_BENCH[bn])}
                               for bn in args.benchmarks},
-               "noise_stats": noise_info, "provenance": bear_provenance(),
+               "noise_stats": noise_info,
+               "provenance": {**bear_provenance(), "embedding_stores": {
+                   f"{bn}__{b}": store_provenance(f"{bn}__{b}")
+                   for bn in args.benchmarks for b in args.backends if b != "bm25"}},
                "summary": summ, "per_task": raw}
         args.output.write_text(json.dumps(out, default=json_default), encoding="utf-8")
+        for sp in out["provenance"]["embedding_stores"].values():
+            print(f"  embedding store {sp['store']}: {sp.get('model')}, run in "
+                  f"{sp.get('precision')}, filled {sp.get('embedded_utc')}")
         print(f"\nWrote {args.output}\nElapsed {time.time() - t0:.0f}s")
         print_repro_footer(extra={"eval": "tag_noise", "backends": args.backends,
                                   "benchmarks": args.benchmarks, **bear_provenance()})

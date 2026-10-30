@@ -79,6 +79,8 @@ ALL_BACKENDS = ["bm25", "hash", "bge", "bge-m3", "qwen3-0.6b", "qwen3-4b", "nemo
 # has little headroom. Recorded in each store's settings.
 FP16_BACKENDS = {b for b in os.environ.get("TIST_FP16_BACKENDS", "").split(",") if b}
 CHAR_BUDGET = int(os.environ.get("TIST_CHAR_BUDGET", "16000"))
+# Most texts per encoder batch when a store is filled (the GPU job sets 8).
+MAX_BATCH = int(os.environ.get("TIST_MAX_BATCH", "64"))
 DENSE_BACKENDS = ["bge", "bge-m3", "qwen3-0.6b", "qwen3-4b", "nemotron"]
 BACKEND_LABEL = {"bm25": "BM25", "hash": "Hash", "bge": "BGE-base", "bge-m3": "BGE-M3",
                  "qwen3-0.6b": "Qwen3-0.6B", "qwen3-4b": "Qwen3-4B",
@@ -272,7 +274,7 @@ class EmbeddingStore:
         return mq, md
 
     def fill(self, queries: Iterable[str], docs: Iterable[str],
-             char_budget: int | None = None, max_batch: int = 64) -> dict:
+             char_budget: int | None = None, max_batch: int | None = None) -> dict:
         """Embed whatever is missing with the real model. Loads the model only if needed.
 
         Texts go longest first in batches sized to a character budget, so a
@@ -300,7 +302,7 @@ class EmbeddingStore:
             order = sorted(todo, key=len, reverse=True)
             i = done = 0
             while i < len(order):
-                n = max(1, min(max_batch, char_budget // max(len(order[i]), 1)))
+                n = max(1, min(max_batch or MAX_BATCH, char_budget // max(len(order[i]), 1)))
                 part = order[i:i + n]
                 i += n
                 for attempt in range(5):
@@ -362,6 +364,28 @@ class CachedEmbedder:
         return self.embed([text], is_query=is_query)[0]
 
 
+def store_provenance(name: str) -> dict:
+    """Model, settings and precision of a stored embedding, from its metadata.
+
+    The precision is the torch dtype the model ran in (float16 where
+    TIST_FP16_BACKENDS or the backend's settings say so, else float32). The
+    vectors are stored as float32 either way."""
+    p = EMB_CACHE_DIR / f"{name}.json"
+    if not p.exists():
+        return {"store": name, "missing": True}
+    meta = json.loads(p.read_text(encoding="utf-8"))
+    s = meta.get("settings") or {}
+    model = str(s.get("model", ""))
+    precision = ((s.get("model_kwargs") or {}).get("torch_dtype")
+                 or ("served" if model.startswith("remote:") else "float32"))
+    out = {"store": name, "model": model, "precision": str(precision), "settings": s,
+           "embedded_utc": meta.get("embedded_utc"),
+           "n_queries": len(meta.get("query_texts", [])), "n_docs": len(meta.get("doc_texts", []))}
+    if "service_identity" in meta:
+        out["service_identity"] = meta["service_identity"]
+    return out
+
+
 GPU_CAP_GIB = float(os.environ.get("TIST_GPU_CAP_GIB", "13"))
 _CAPPED = False
 
@@ -370,16 +394,22 @@ def cap_cuda_memory() -> None:
     """Cap this process's CUDA allocator at min(13 GiB, free - 1 GiB), or refuse.
 
     Mirrors the WP0 runner's gate, so a step never pushes the shared card
-    over its budget. Does nothing when CUDA is hidden.
+    over its budget. Does nothing when CUDA is hidden, unless
+    TIST_REQUIRE_CUDA=1, which refuses to fall back to the CPU.
     """
     global _CAPPED
     if _CAPPED:
         return
+    require = os.environ.get("TIST_REQUIRE_CUDA") == "1"
     try:
         import torch
     except ImportError:
+        if require:
+            raise SystemExit("TIST_REQUIRE_CUDA=1 but torch is missing.")
         return
     if not torch.cuda.is_available():
+        if require:
+            raise SystemExit("TIST_REQUIRE_CUDA=1 but CUDA is not visible. Not running on the CPU.")
         return
     free, total = torch.cuda.mem_get_info()
     cap = min(GPU_CAP_GIB * 2**30, free - 2**30)

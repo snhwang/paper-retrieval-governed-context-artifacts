@@ -49,8 +49,9 @@ from tistr2_common import (  # noqa: E402
     ALL_BACKENDS, BACKEND_LABEL, REPO_ROOT, CachedEmbedder, EmbeddingStore, Tee,
     bear_provenance, build_retriever, ci_summary, clopper_pearson, enable_bm25_memo,
     json_default, make_config, mcnemar_summary, paired_summary, record_texts,
-    refuse_overwrite, require_bear_040,
+    refuse_overwrite, require_bear_040, store_provenance,
 )
+import bear  # noqa: E402
 from eval_tag_noise import (  # noqa: E402
     FAMILY, K, PRIORITY_WEIGHT, THETA_BM25, THETA_DENSE, load_bench, sweep_corpus,
 )
@@ -205,7 +206,7 @@ def main() -> None:
         enable_bm25_memo()
         bench = load_bench("toolbench")
         atk = attacks(bench)
-        print("=== Leakage under the threat model (WP6), ToolBench, BEAR 0.4.0 ===")
+        print(f"=== Leakage under the threat model (WP6), ToolBench, BEAR {bear.__version__} ===")
         print(f"{len(bench.items)} APIs, {len(bench.queries)} queries, k={K}. Attack seed "
               f"{ATTACK_SEED}, description prefix {DESC_CHARS} characters.")
         results = {}
@@ -226,9 +227,15 @@ def main() -> None:
                   f"{r['published/natural']['items_out_of_scope']:>10}  "
                   f"{na_u['attack_success'] / n:>11.3f} / {na_g['attack_success']:<6}  "
                   f"{nd_u['attack_success'] / n:>14.3f} / {nd_g['attack_success']:<6}")
+        stores = {b: store_provenance(f"toolbench__{b}") for b in args.backends if b != "bm25"}
+        for b, sp in stores.items():
+            print(f"  embedding store {sp['store']}: {sp.get('model')}, run in {sp.get('precision')}, "
+                  f"filled {sp.get('embedded_utc')}")
         out = {"design": {"k": K, "attack_seed": ATTACK_SEED, "desc_chars": DESC_CHARS,
                           "priority_weight": PRIORITY_WEIGHT},
-               "attacks": atk, "provenance": bear_provenance(), "backends": results}
+               "attacks": atk,
+               "provenance": {**bear_provenance(), "embedding_stores": stores},
+               "backends": results}
         args.output.write_text(json.dumps(out, default=json_default), encoding="utf-8")
         print(f"\nWrote {args.output}\nElapsed {time.time() - t0:.0f}s")
         print_repro_footer(extra={"eval": "leakage_threat", "backends": args.backends,

@@ -1,0 +1,36 @@
+=== Leakage under the threat model (WP6), ToolBench, BEAR 0.4.2 ===
+3225 APIs, 1100 queries, k=5. Attack seed 20261029, description prefix 300 characters.
+
+BGE-M3
+  natural           ungated: cross 0.352 (1935/5500) R@5 0.600 | gate_only: cross 0.000 (0/5500) R@5 0.716 | published: cross 0.000 (0/5500) R@5 0.711 |
+  inject_name       ungated: cross 0.430 (2364/5500) hit 348 R@5 0.547 | gate_only: cross 0.000 (0/5500) hit 0 R@5 0.695 | published: cross 0.000 (0/5500) hit 0 R@5 0.692 |
+  inject_name_desc  ungated: cross 0.533 (2933/5500) hit 709 R@5 0.468 | gate_only: cross 0.000 (0/5500) hit 0 R@5 0.674 | published: cross 0.000 (0/5500) hit 0 R@5 0.672 |
+
+--- Summary: share of top-5 outside the query's categories; attack success ---
+
+Backend                     ungated cross  gate cross  pub cross   name: ungated / gate   name+desc: ungated / gate
+BGE-M3             0.352 [0.332,0.372]           0          0        0.316 / 0                0.645 / 0     
+  embedding store toolbench__bge-m3: BAAI/bge-m3, run in float32, filled 2026-10-30T14:33:15Z
+
+Wrote results/leakage_threat_bge-m3.json
+Elapsed 68s
+
+=== Reproducibility ===
+Timestamp (UTC): 2026-10-30T14:34:26Z
+Command line:    evals/eval_leakage_threat.py --phase run --backends bge-m3 --output results/leakage_threat_bge-m3.json --log-file results/leakage_threat_bge-m3_output.txt
+Python:          3.12.13 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
+numpy:           2.2.6
+scipy:           1.17.1
+bear:            0.4.2
+git commit:      e0983612062de9cfe6e439e31642098f12008e79
+git status:      unknown (git status failed or timed out)
+git branch:      tist-r2
+
+  eval: leakage_threat
+  backends: ['bge-m3']
+  bear_version: 0.4.2
+  bear_path: /home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/bear/__init__.py
+  bear_source_sha: 9d085b49c004cb03e2bede9055fdc3810cf260c0
+  bear_direct_url: file:///home/snhwang/tist-evals/bear-9d085b4
+  bear_export_sha: 9d085b4
+===

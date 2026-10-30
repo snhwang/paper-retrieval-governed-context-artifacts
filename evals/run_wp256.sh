@@ -134,8 +134,20 @@ case "${1:-}" in
     python evals/check_bm25_v042.py --workers "$WORKERS" --switches flat_backfill tie_order
     python evals/check_bm25_v042.py --summarize
     ;;
+  v042-bgem3)
+    # BGE-M3 leakage on the CPU (cleared for CPU in tist.slice), float32. The
+    # store fill took 38 minutes at 8 threads (15,700 CPU-s, 3.5 GB), the run
+    # about a minute. The Qwen backends run on the GPU: evals/run_qwen_gpu.sh.
+    export BEAR_SOURCE_SHA=9d085b49c004cb03e2bede9055fdc3810cf260c0 CUDA_VISIBLE_DEVICES= \
+        OMP_NUM_THREADS=8 MKL_NUM_THREADS=8 HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1
+    CAP="$HOME/bin/tist-capped --mem 8G --"
+    python evals/eval_leakage_threat.py --phase embed --backends bge-m3
+    python evals/eval_leakage_threat.py --phase run --backends bge-m3 \
+        --output results/leakage_threat_bge-m3.json \
+        --log-file results/leakage_threat_bge-m3_output.txt
+    ;;
   *)
-    echo "usage: bash evals/run_wp256.sh {embed|run|v041|v042|v042-bge|v042-bm25}" >&2
+    echo "usage: bash evals/run_wp256.sh {embed|run|v041|v042|v042-bge|v042-bm25|v042-bgem3}" >&2
     exit 2
     ;;
 esac
