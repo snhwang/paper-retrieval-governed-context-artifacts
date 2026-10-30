@@ -59,6 +59,58 @@ against the precedence order that the revised Section 3.1.1 states:
          is not among the first n excluded ids. The remover may still leave
          later (a supersede, the cut, closure, unrequired), since resolution
          is one pass, so it is not required to be in the output.
+    I13  Ranked score rule (BEAR 0.4.1). Every output instruction that
+         competes for a ranked slot, meaning one that is not mandatory and
+         entered by search or by the required-tags backfill, has final score
+         (1 - alpha) * sim + alpha * priority / 100. sim is the search
+         similarity, or 0 for a row the search did not return, and such a
+         backfilled row must record similarity 0. Rows exempt from the cut
+         keep their own documented score: a mandatory instruction added by
+         injection, and a prerequisite added by requires, both at
+         priority / 100, which only orders the result.
+    I14  Backfill admission (BEAR 0.4.1). Every instruction the required-tags
+         backfill admits passes its gate and either matches its soft scope or
+         meets a threshold of at most 0 (similarity 0 >= theta). This is the
+         rule every searched row meets, at similarity 0.
+    I15  Admission completeness. Every candidate that the admission rule
+         admits (gate passes, and soft scope matches or similarity reaches
+         the threshold) is admitted: it appears in RetrievalTrace.admitted,
+         whatever resolution or the cut does to it afterwards. For a gated
+         query every instruction is a candidate, since BEAR ranks the whole
+         corpus. For an ungated query the candidates are the gate-passing
+         instructions strictly above the pool's boundary similarity, as in
+         I11. Instructions within SIM_TOL of the threshold or of the boundary
+         are left alone. I1, I9 and I14 check that admission is sound, I2
+         that mandatory items are complete, and I15 that the rule is complete.
+
+I13 and I14 are only non-vacuous where the search drops rows, since a gated
+query on a dense backend ranks the whole corpus and the backfill then adds
+nothing. The main_bm25 configuration supplies that: BM25 returns no row that
+shares no term with the query. Its texts write each similarity marker as
+cluster words ("clu<C>" repeated by strength, and "var<C>x<V>"), so an
+instruction in the query's cluster shares terms with it and others share
+only header tags. A quarter of the queries (marker v = 0) carry no cluster
+word at all.
+
+BEAR writes the context's tags into the query text ("[tags:t1,t3]") and an
+instruction's labels and scope tags into its own, so under main_bm25 every
+tagged query shares the word "tags" with every instruction that has a soft
+scope, and only scope-free instructions are ever dropped. main_bm25_gatectx
+passes the same tags as gate_tags instead, so the query carries no header and
+an instruction with a soft scope can be dropped and reach the backfill. That
+is where I14 and restore_flat_backfill differ, so the flat-backfill column
+runs on it. Soft scopes then see no context tags.
+
+Under a backend that drops rows two checks are restricted. I10 compares the
+resolved set only across order variants that admit the same instructions by
+the same paths, since moving the similarity markers changes which rows share
+a term with the query at all, and so whether a row enters on its own merit or
+only as a prerequisite. I11 requires only gate-passing rows of similarity above 0 to be
+candidates. The rows it leaves out (gate-passing, soft scope matching, no
+required tags, no term in common with the query) are admissible under the
+admission rule but never reach a result, because the search drops them and
+the backfill covers only rows with required tags. They are counted as
+"lexical admission gap" in the summary.
 
 Invariants can be reported apart as pending (--pending), for a sha that
 predates the rule they state.
@@ -68,9 +120,10 @@ deterministic similarities (instructions and queries carry a cluster marker;
 equal markers give equal vectors, so exact ties occur). A second "main"
 configuration uses BEAR's built-in hash embedder instead.
 
-Configurations: BEAR main defaults; each legacy switch on
-(restore_pool_by_k, restore_unchecked_requires, restore_below_threshold,
-restore_ranked_resolution, restore_ungated_pool, restore_removed_acting);
+Configurations: BEAR main defaults (stub, hash and BM25); each legacy switch
+on (restore_pool_by_k, restore_unchecked_requires, restore_below_threshold,
+restore_ranked_resolution, restore_ungated_pool, restore_removed_acting, and
+from 0.4.1 restore_flat_backfill, run under BM25 where the backfill acts);
 and each mechanism Config can disable (mandatory_tags=[], priority_weight=0,
 threshold off). The gate and the relationship edges are corpus metadata, so
 Config cannot disable them.
@@ -122,7 +175,7 @@ project_root = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 import bear  # noqa: E402
-from bear import Config, Context, Corpus, Retriever  # noqa: E402
+from bear import Config, Context, Corpus, EmbeddingBackend, Retriever  # noqa: E402
 from bear.models import Instruction, InstructionType, ScopeCondition  # noqa: E402
 from repro_footer import print_repro_footer  # noqa: E402
 
@@ -160,6 +213,10 @@ CROSS_PROCESS_HASHSEED = "12345"
 CONFIGS: dict[str, dict] = {
     "main": {"label": "Main defaults (stub)", "embedder": "stub", "overrides": {}},
     "main_hash": {"label": "Main defaults (hash)", "embedder": "hash", "overrides": {}},
+    "main_bm25": {"label": "Main defaults (BM25, drops rows)", "embedder": "bm25",
+                  "overrides": {}},
+    "main_bm25_gatectx": {"label": "Main defaults (BM25, context tags as gate_tags)",
+                          "embedder": "bm25", "context": "gate", "overrides": {}},
     "legacy_pool_by_k": {"label": "restore_pool_by_k", "embedder": "stub",
                          "overrides": {"restore_pool_by_k": True}},
     "legacy_unchecked_requires": {"label": "restore_unchecked_requires", "embedder": "stub",
@@ -172,6 +229,9 @@ CONFIGS: dict[str, dict] = {
                             "overrides": {"restore_ungated_pool": True}},
     "legacy_removed_acting": {"label": "restore_removed_acting", "embedder": "stub",
                               "overrides": {"restore_removed_acting": True}},
+    "legacy_flat_backfill": {"label": "restore_flat_backfill (BM25, gate_tags context)",
+                             "embedder": "bm25", "context": "gate",
+                             "overrides": {"restore_flat_backfill": True}},
     "no_mandatory": {"label": "mandatory_tags=[]", "embedder": "stub",
                      "overrides": {"mandatory_tags": []}},
     "no_priority": {"label": "priority_weight=0", "embedder": "stub",
@@ -197,6 +257,9 @@ INVARIANTS = [
     ("I10", "Resolution order-independence"),
     ("I11", "Pool admissibility"),
     ("I12", "No acting after removal"),
+    ("I13", "Ranked score rule (sim 0 if not searched)"),
+    ("I14", "Backfill admission (gate, soft or theta<=0)"),
+    ("I15", "Admission completeness (gate, soft or sim>=theta)"),
 ]
 INV_KEYS = [k for k, _ in INVARIANTS]
 INV_LABEL = dict(INVARIANTS)
@@ -210,6 +273,7 @@ PENDING_INVARIANTS: set[str] = set()
 # float32 ones at a pool boundary (I11).
 ORDER_SHUFFLES = 1
 SIM_TOL = 1e-5
+SCORE_TOL = 1e-9
 
 
 # ---------------------------------------------------------------------------
@@ -260,6 +324,37 @@ class ClusteredEmbedder:
 
 
 STUB = ClusteredEmbedder()
+
+
+def drops_rows(config_name: str) -> bool:
+    """True for a backend whose search leaves rows out (BM25: zero term overlap)."""
+    return CONFIGS[config_name]["embedder"] == "bm25"
+
+
+def lexical_text(text: str, is_query: bool) -> str:
+    """The stub's similarity marker written as words, for the BM25 configurations.
+
+    An instruction becomes "Instruction iNN clu<C> ... var<C>x<V>", with the
+    cluster word repeated 3 - S times so the stub's noise level S still moves
+    the score. A query becomes "query clu<C> var<C>x<V>", or just "query" when
+    its marker has V = 0, so a quarter of the queries share no term with any
+    instruction body and reach instructions only through header tags. The
+    case index is dropped from queries, so no number in an instruction header
+    ("priority:50") can match one.
+    """
+    m = ClusteredEmbedder.MARK.search(text)
+    c, v, s = (int(g) for g in m.groups()) if m else (0, 0, 2)
+    if is_query:
+        return "query" if v == 0 else f"query clu{c} var{c}x{v}"
+    words = " ".join([f"clu{c}"] * (3 - s) + [f"var{c}x{v}"])
+    return ClusteredEmbedder.MARK.sub(words, text)
+
+
+def query_of(r: Retriever, case: dict) -> str:
+    """The query text a retriever is asked, rendered for its configuration."""
+    if getattr(r, "_wp1_lexical", False):
+        return lexical_text(case["query"], True)
+    return case["query"]
 
 
 # ---------------------------------------------------------------------------
@@ -407,6 +502,9 @@ def config_kwargs(config_name: str, extra: dict | None = None) -> dict:
               embedding_query_prefix="", embedding_passage_prefix="")
     if spec["embedder"] == "hash":
         kw.update(embedding_model="hash", embedding_dim=768)
+    elif spec["embedder"] == "bm25":
+        kw.update(embedding_model="bm25", embedding_backend=EmbeddingBackend.BM25,
+                  embedding_dim=0)
     else:
         kw.update(embedding_model="wp1-clustered-stub", embedding_dim=EMBED_DIM)
     kw.update(spec["overrides"])
@@ -416,14 +514,28 @@ def config_kwargs(config_name: str, extra: dict | None = None) -> dict:
 
 def build_retriever(instructions: list[dict], config_name: str,
                     extra: dict | None = None) -> tuple[Retriever, Config]:
+    lexical = drops_rows(config_name)
     corpus = Corpus()
     for d in instructions:
+        if lexical:
+            d = dict(d, content=lexical_text(d["content"], False))
         corpus.add(build_instruction(d))
     config = Config(**config_kwargs(config_name, extra))
     embedder = STUB if CONFIGS[config_name]["embedder"] == "stub" else None
     r = Retriever(corpus, config=config, embedder=embedder)
+    r._wp1_lexical = lexical  # read by query_of, not a BEAR attribute
     r.build_index()
     return r, config
+
+
+def case_for(config_name: str, case: dict) -> dict:
+    """The case as a configuration sees it: under a "gate" context, every
+    context tag travels as a gate tag, so it gates without entering the
+    query text or the soft scope match."""
+    if CONFIGS[config_name].get("context") != "gate":
+        return case
+    return {"tags": [], "gate_tags": sorted(set(case["tags"]) | set(case["gate_tags"])),
+            "query": case["query"]}
 
 
 def make_context(case: dict) -> Context:
@@ -432,7 +544,7 @@ def make_context(case: dict) -> Context:
 
 def traced(r: Retriever, case: dict, k: int, threshold: float | None = None):
     """Results and the public RetrievalTrace for one retrieval."""
-    return r.retrieve_with_trace(case["query"], make_context(case), top_k=k,
+    return r.retrieve_with_trace(query_of(r, case), make_context(case), top_k=k,
                                  threshold=threshold)
 
 
@@ -481,7 +593,14 @@ def order_variants(instructions: list[dict], case: dict, config_name: str,
 
 def resolved_set(r: Retriever, case: dict) -> set[str]:
     """Resolved set with admission held fixed: no cut, threshold off."""
-    return {s.id for s in traced(r, case, Retriever.ALL, threshold=-2.0)[0]}
+    return resolved_and_admitted(r, case)[0]
+
+
+def resolved_and_admitted(r: Retriever, case: dict) -> tuple[set[str], tuple]:
+    """Resolved set, and how each instruction was admitted (search, backfill,
+    mandatory or requires), with no cut and the threshold off."""
+    out, trace = traced(r, case, Retriever.ALL, threshold=-2.0)
+    return {s.id for s in out}, tuple(sorted(trace.admitted.items()))
 
 
 def similarity_retriever(instructions: list[dict], config_name: str) -> Retriever:
@@ -503,6 +622,10 @@ def public_similarities(instructions: list[dict], case: dict, config_name: str,
     for i, e in trace.excluded.items():
         if e.get("similarity") is not None:
             sims.setdefault(i, float(e["similarity"]))
+    if drops_rows(config_name):
+        # A row BM25 did not return shares no term with the query: score 0.
+        for d in instructions:
+            sims.setdefault(d["id"], 0.0)
     return sims
 
 
@@ -569,7 +692,8 @@ class CaseInfo:
             for m in self.adm_mand for o in self.ids)
 
 
-def check_output(info: CaseInfo, out, trace, k: int, threshold: float) -> dict:
+def check_output(info: CaseInfo, out, trace, k: int, threshold: float,
+                 alpha: float) -> dict:
     """Return {inv: (violated, nonvacuous, detail)} for one output."""
     ids = [s.id for s in out]
     O = set(ids)
@@ -708,6 +832,9 @@ def check_output(info: CaseInfo, out, trace, k: int, threshold: float) -> dict:
             below = [i for i in info.gate_passing if info.sims[i] < boundary - SIM_TOL]
         else:
             above, below = [], list(info.gate_passing)
+        if getattr(info, "drops_rows", False):
+            # A backend that drops rows cannot rank a row it never returns.
+            above = [i for i in above if info.sims[i] > SIM_TOL]
         seen = set(trace.admitted) | {d for d, e in trace.excluded.items() if e["reason"] != "gate"}
         searched = ({d for d, h in trace.admitted.items() if h == "search"}
                     | {d for d, e in trace.excluded.items() if e["reason"] == "threshold"})
@@ -724,6 +851,36 @@ def check_output(info: CaseInfo, out, trace, k: int, threshold: float) -> dict:
     else:
         res["I11"] = (False, False, None)
 
+    # I15 admission completeness: every candidate the admission rule admits
+    # is admitted. Gated query: the whole corpus is ranked, so every
+    # instruction is a candidate. Ungated query: the pool, as in I11 (not
+    # restricted for row-dropping backends, since that restriction is what
+    # this checks).
+    if info.sims is not None:
+        if trace.gated:
+            cands = list(info.gate_passing)
+        else:
+            g_sims15 = sorted((info.sims[i] for i in info.gate_passing), reverse=True)
+            p15 = min(trace.pool, len(g_sims15))
+            if p15 >= len(g_sims15):
+                cands = list(info.gate_passing)
+            elif p15 > 0:
+                b15 = g_sims15[p15 - 1]
+                cands = [i for i in info.gate_passing if info.sims[i] > b15 + SIM_TOL]
+            else:
+                cands = []
+        rule15 = [i for i in cands
+                  if info.soft[i] or info.sims[i] >= threshold + SIM_TOL]
+        missing15 = sorted(i for i in rule15 if i not in trace.admitted)
+        res["I15"] = (bool(missing15), bool(rule15),
+                      f"admissible candidates never admitted (gated={trace.gated}, pool "
+                      f"{trace.pool}): " + ", ".join(
+                          f"{i} (soft={info.soft[i]}, sim={info.sims[i]:.4f}, "
+                          f"required={info.by_id[i]['required_tags']})" for i in missing15)
+                      if missing15 else None)
+    else:
+        res["I15"] = (False, False, None)
+
     # I12 no acting after removal: a conflict or superseded exclusion never
     # names a remover that was already excluded when it was recorded.
     order_ex = {d: n for n, d in enumerate(trace.excluded)}
@@ -734,6 +891,40 @@ def check_output(info: CaseInfo, out, trace, k: int, threshold: float) -> dict:
              and order_ex[e["by"]] < order_ex[d]]
     n_removals = sum(1 for e in trace.excluded.values() if e["reason"] in ("conflict", "superseded"))
     res["I12"] = (bool(bad12), n_removals > 1, "; ".join(bad12) if bad12 else None)
+
+    # I13 ranked score rule: a non-mandatory output row that entered by search
+    # or by the backfill scores (1 - alpha) * sim + alpha * p / 100, where sim
+    # is 0 for a row the search did not return (the backfill), and that row
+    # records similarity 0. Mandatory injection and prerequisites are exempt
+    # from the cut and keep priority / 100, so they are not checked here.
+    bad13 = []
+    n_backfilled_out = 0
+    for sc in out:
+        d = sc.id
+        how = trace.admitted.get(d)
+        if info.mand.get(d) or how not in ("search", "required_tags"):
+            continue
+        sim = float(sc.similarity)
+        if how == "required_tags":
+            n_backfilled_out += 1
+            if sim != 0.0:
+                bad13.append(f"{d} backfilled with recorded similarity {sim}")
+            sim = 0.0
+        want = (1.0 - alpha) * sim + alpha * info.prio[d] / 100.0
+        if abs(float(sc.final_score) - want) > SCORE_TOL:
+            bad13.append(f"{d} ({how}) scores {float(sc.final_score):.6f}, rule gives {want:.6f}")
+    res["I13"] = (bool(bad13), n_backfilled_out > 0, "; ".join(bad13) if bad13 else None)
+
+    # I14 backfill admission: gate, and soft scope or threshold <= 0.
+    backfilled = [d for d, h in trace.admitted.items() if h == "required_tags"]
+    bad14 = [f"{d} backfilled with gate={info.gate.get(d)}, soft={info.soft.get(d)}, "
+             f"theta={threshold}"
+             for d in backfilled
+             if not (info.gate.get(d) and (info.soft.get(d) or threshold <= 0.0))]
+    rejected = sum(1 for e in trace.excluded.values()
+                   if e["reason"] == "threshold" and e.get("similarity") == 0.0)
+    res["I14"] = (bool(bad14), bool(backfilled) or rejected > 0,
+                  "; ".join(bad14) if bad14 else None)
     return res
 
 
@@ -771,10 +962,12 @@ def run_config_on_corpus(corpus: dict, cases: list[dict], config_name: str,
             variant_cache[key] = build_retriever(ins, config_name)[0]
         return variant_cache[key]
 
+    cases = [case_for(config_name, c) for c in cases]
     for ci, case in enumerate(cases):
         sims = (stub_similarities(corpus["instructions"], case) if is_stub
                 else public_similarities(corpus["instructions"], case, config_name, sim_r))
         info = CaseInfo(corpus["instructions"], case, config.mandatory_tags, sims=sims)
+        info.drops_rows = drops_rows(config_name)
         case_viol = set()
         prev_ids = None
         outputs = {}
@@ -784,7 +977,7 @@ def run_config_on_corpus(corpus: dict, cases: list[dict], config_name: str,
             ids = [s.id for s in out]
             if want_digest:
                 digest.update(json.dumps([ci, k, signature(out)]).encode())
-            res = check_output(info, out, trace, k, threshold)
+            res = check_output(info, out, trace, k, threshold, config.priority_weight)
             # I7, consecutive k within the pool base
             if prev_ids is not None and k <= pool_base:
                 ok = set(prev_ids) <= set(ids)
@@ -814,6 +1007,14 @@ def run_config_on_corpus(corpus: dict, cases: list[dict], config_name: str,
                 1 for e in trace.excluded.values() if e["reason"] == "threshold")
             info_stats["requires_admissions"] += sum(
                 1 for h in trace.admitted.values() if h == "requires")
+            n_bf = sum(1 for h in trace.admitted.values() if h == "required_tags")
+            info_stats["backfill_admissions"] += n_bf
+            info_stats["outputs_with_backfill_admission"] += n_bf > 0
+            info_stats["backfill_rejections"] += sum(
+                1 for e in trace.excluded.values()
+                if e["reason"] == "threshold" and e.get("similarity") == 0.0)
+            info_stats["backfilled_in_output"] += sum(
+                1 for sc in out if trace.admitted.get(sc.id) == "required_tags")
             info_stats["outputs_with_missing_prereq_record"] += bool(trace.missing_prerequisites)
             # An item displaced (conflict or superseded) by a winner that is not
             # in the output either: the winner was cut by top-k, or removed in
@@ -837,6 +1038,21 @@ def run_config_on_corpus(corpus: dict, cases: list[dict], config_name: str,
             info_stats["topk_cut_binding"] += any(
                 e["reason"] == "top_k" for e in trace.excluded.values())
 
+        # Lexical admission gap (row-dropping backends): admissible under the
+        # admission rule (gate, and soft scope or similarity >= threshold, a
+        # non-mandatory row) yet never a candidate, because the search dropped
+        # it and the backfill covers only rows with required tags.
+        if info.drops_rows:
+            _, tr_all = traced(r, case, Retriever.ALL)
+            seen_all = set(tr_all.admitted) | set(tr_all.excluded)
+            gap = [i for i in info.ids if info.gate[i] and not info.mand[i]
+                   and (info.soft[i] or info.sims.get(i, 0.0) >= threshold)
+                   and i not in seen_all]
+            info_stats["lexical_gap_rows"] += len(gap)
+            info_stats["lexical_gap_cases"] += bool(gap)
+            info_stats["lexical_gap_rows_with_required_tags"] += sum(
+                1 for i in gap if info.by_id[i]["required_tags"])
+
         # I6 determinism, on three k values per case
         rng = random.Random(f"wp1-det-{BASE_SEED}-{corpus['index']}-{ci}")
         det_ks = sorted({1, rng.choice(K_VALUES), K_VALUES[-1]})
@@ -845,7 +1061,7 @@ def run_config_on_corpus(corpus: dict, cases: list[dict], config_name: str,
         for k in det_ks:
             ref = signature(outputs[k][0])
             again, _ = traced(r, case, k)
-            public = r.retrieve(case["query"], make_context(case), top_k=k)
+            public = r.retrieve(query_of(r, case), make_context(case), top_k=k)
             fresh, _ = traced(r_fresh, case, k)
             for name, sig in (("repeat", signature(again)), ("public", signature(public)),
                               ("fresh", signature(fresh))):
@@ -864,11 +1080,17 @@ def run_config_on_corpus(corpus: dict, cases: list[dict], config_name: str,
         # I10 resolution order-independence. top_k=ALL and the threshold off
         # fix the admitted set (every gate-passing item), so only the
         # similarity order of the candidates differs.
-        ref_set = resolved_set(r, case)
+        ref_set, ref_adm = resolved_and_admitted(r, case)
         diffs = []
         for label, ins in order_variants(corpus["instructions"], case, config_name,
                                          perm_prefix(corpus["index"])):
-            got = resolved_set(variant_retriever(ins), case)
+            got, got_adm = resolved_and_admitted(variant_retriever(ins), case)
+            if got_adm != ref_adm:
+                # Only where the search drops rows: the variant admits other
+                # rows, so resolution order is not what changed.
+                info_stats["i10_variants_skipped_admitted_set_changed"] += 1
+                continue
+            info_stats["i10_variants_compared"] += 1
             if got != ref_set:
                 diffs.append(f"{label}: only original {sorted(ref_set - got)}, "
                              f"only reordered {sorted(got - ref_set)}")
@@ -931,9 +1153,11 @@ def sensitivity_on_corpus(corpus: dict, cases: list[dict]) -> dict:
         for case, info in zip(cases, infos):
             if info.gated_query:
                 continue
-            ref = {s.id for s in rets[WHOLE_POOL].retrieve(case["query"], make_context(case), top_k=k)}
+            ref = {s.id for s in rets[WHOLE_POOL].retrieve(query_of(rets[WHOLE_POOL], case),
+                                                           make_context(case), top_k=k)}
             for p in SENS_POOLS:
-                got = {s.id for s in rets[p].retrieve(case["query"], make_context(case), top_k=k)}
+                got = {s.id for s in rets[p].retrieve(query_of(rets[p], case),
+                                                      make_context(case), top_k=k)}
                 rows[p]["cases"] += 1
                 rows[p]["differ"] += got != ref
                 union = got | ref
@@ -992,9 +1216,11 @@ def violates(config_name: str, instructions: list[dict], case: dict, k: int, inv
     r, config = build_retriever(instructions, config_name)
     is_stub = CONFIGS[config_name]["embedder"] == "stub"
     if inv == "I10":
-        ref = resolved_set(r, case)
+        ref, ref_adm = resolved_and_admitted(r, case)
         for label, ins in order_variants(instructions, case, config_name, perm):
-            got = resolved_set(build_retriever(ins, config_name)[0], case)
+            got, got_adm = resolved_and_admitted(build_retriever(ins, config_name)[0], case)
+            if got_adm != ref_adm:
+                continue
             if got != ref:
                 return True, (f"resolved set {sorted(ref)} becomes {sorted(got)} when the "
                               f"similarity order is changed ({label})")
@@ -1002,22 +1228,24 @@ def violates(config_name: str, instructions: list[dict], case: dict, k: int, inv
     sims = (stub_similarities(instructions, case) if is_stub
             else public_similarities(instructions, case, config_name))
     info = CaseInfo(instructions, case, config.mandatory_tags, sims=sims)
+    info.drops_rows = drops_rows(config_name)
     if inv == "I7":
         if k < 2:
             return False, None
-        a = [s.id for s in r.retrieve(case["query"], make_context(case), top_k=k - 1)]
-        b = [s.id for s in r.retrieve(case["query"], make_context(case), top_k=k)]
+        a = [s.id for s in r.retrieve(query_of(r, case), make_context(case), top_k=k - 1)]
+        b = [s.id for s in r.retrieve(query_of(r, case), make_context(case), top_k=k)]
         bad = not (set(a) <= set(b) and is_subsequence(a, b))
         return bad, (f"k={k-1} -> {a}; k={k} -> {b}" if bad else None)
     if inv == "I6":
         x, _ = traced(r, case, k)
         r2, _ = build_retriever(instructions, config_name)
         y, _ = traced(r2, case, k)
-        z = r.retrieve(case["query"], make_context(case), top_k=k)
+        z = r.retrieve(query_of(r, case), make_context(case), top_k=k)
         bad = not (signature(x) == signature(y) == signature(z))
         return bad, ("outputs differ" if bad else None)
     out, trace = traced(r, case, k)
-    viol, _, detail = check_output(info, out, trace, k, config.default_threshold)[inv]
+    viol, _, detail = check_output(info, out, trace, k, config.default_threshold,
+                                   config.priority_weight)[inv]
     return viol, detail
 
 
@@ -1098,6 +1326,7 @@ def describe_counterexample(config_name: str, instructions: list[dict], case: di
         "k": k,
         "context": {"tags": case["tags"], "gate_tags": case["gate_tags"]},
         "query": case["query"],
+        "query_as_retrieved": query_of(r, case),
         "instructions": instructions,
         "similarity_to_query": sims,
         "output": [(s.id, round(float(s.final_score), 4)) for s in out],
@@ -1162,6 +1391,16 @@ def aggregate(rows: list[dict], config_names: list[str]) -> dict:
             "frac_topk_cut_binding": info["topk_cut_binding"] / o,
             "threshold_removals_per_output": info["threshold_removals"] / o,
             "requires_admissions_per_output": info["requires_admissions"] / o,
+            "backfill_admissions_per_output": info["backfill_admissions"] / o,
+            "frac_outputs_with_backfill_admission": info["outputs_with_backfill_admission"] / o,
+            "backfill_rejections_per_output": info["backfill_rejections"] / o,
+            "backfilled_in_output_per_output": info["backfilled_in_output"] / o,
+            "i10_variants_compared": int(info["i10_variants_compared"]),
+            "i10_variants_skipped_admitted_set_changed":
+                int(info["i10_variants_skipped_admitted_set_changed"]),
+            "lexical_gap_rows": int(info["lexical_gap_rows"]),
+            "lexical_gap_cases": int(info["lexical_gap_cases"]),
+            "lexical_gap_rows_with_required_tags": int(info["lexical_gap_rows_with_required_tags"]),
             "frac_outputs_with_missing_prereq_record": info["outputs_with_missing_prereq_record"] / o,
             "frac_outputs_displaced_by_cut_winner": info["outputs_displaced_by_cut_winner"] / o,
             "frac_outputs_displaced_by_removed_winner": info["outputs_displaced_by_removed_winner"] / o,
@@ -1236,6 +1475,17 @@ def print_tables(agg: dict, sens: dict | None, config_names: list[str],
               f"P(loser of a winner removed in resolution)={s['frac_outputs_displaced_by_removed_winner']:.4f}, "
               f"mandatory displaced by mandatory={s['mandatory_displaced_by_mandatory']}, "
               f"I7 strict-prefix share={s['i7_frac_strict_prefix']:.4f}")
+        print(f"backfill admissions/output={s['backfill_admissions_per_output']:.3f} "
+              f"(P(any)={s['frac_outputs_with_backfill_admission']:.3f}), "
+              f"backfilled rows in output/output={s['backfilled_in_output_per_output']:.3f}, "
+              f"backfill rejections (threshold at similarity 0)/output="
+              f"{s['backfill_rejections_per_output']:.3f}")
+        if s["i10_variants_skipped_admitted_set_changed"] or s["lexical_gap_cases"]:
+            print(f"I10 variants compared={s['i10_variants_compared']}, skipped because the "
+                  f"admitted set changed={s['i10_variants_skipped_admitted_set_changed']}; "
+                  f"lexical admission gap: {s['lexical_gap_rows']} rows in "
+                  f"{s['lexical_gap_cases']}/{s['cases']} cases "
+                  f"({s['lexical_gap_rows_with_required_tags']} with required tags)")
         print(f"{'Inv':<5} {'Invariant':<42} {'Corpora violated [95% CP CI]':<34} "
               f"{'Outputs violated':<18} {'Non-vacuous outputs':<20}")
         print("-" * 124)
@@ -1320,6 +1570,8 @@ def parse_args() -> argparse.Namespace:
                    choices=INV_KEYS, metavar="INV",
                    help="Invariants to report apart as pending, for a sha that predates "
                         "the rule they state (for example --pending I10 I11 I12).")
+    p.add_argument("--overwrite", action="store_true",
+                   help="Allow replacing existing output files (refused by default).")
     p.add_argument("--digest-only", action="store_true", help=argparse.SUPPRESS)
     return p.parse_args()
 
@@ -1337,6 +1589,11 @@ def main() -> None:
     if "main" not in config_names:
         config_names.insert(0, "main")
     pending = set(args.pending)
+    if not args.overwrite:
+        for path in (args.output, args.counterexamples, args.log_file):
+            if path and str(path).strip() and Path(path).exists():
+                raise SystemExit(f"{path} exists. Pass new --output, --counterexamples and "
+                                 "--log-file paths, or --overwrite.")
 
     log_handle = None
     original_stdout = sys.stdout
@@ -1407,7 +1664,7 @@ def main() -> None:
                                  "reproduced": None, "first": first})
                     continue
                 corpus = generate_corpus(first["corpus"])
-                case = generate_cases(corpus)[first["case"]]
+                case = case_for(name, generate_cases(corpus)[first["case"]])
                 perm = perm_prefix(first["corpus"])
                 ok, _ = violates(name, corpus["instructions"], case, first["k"], inv, perm)
                 if not ok:

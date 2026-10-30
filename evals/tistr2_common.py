@@ -61,7 +61,9 @@ from bear.retriever import Embedder  # noqa: E402
 logging.basicConfig()
 logging.getLogger("bear").setLevel(os.environ.get("TIST_BEAR_LOG", "ERROR"))
 
-EXPECTED_BEAR_VERSION = "0.4.0"
+# 0.4.0 produced the committed results. 0.4.1 changes only the required-tags
+# backfill (scored at similarity 0), which only a row-dropping search reaches.
+EXPECTED_BEAR_VERSIONS = ("0.4.0", "0.4.1")
 NEMOTRON_URL = os.environ.get("TIST_NEMOTRON_URL", "http://localhost:8360")
 FORBIDDEN_PORTS = (":8355",)  # the shared LLM server, kept idle for other runs
 EMB_CACHE_DIR = Path(os.environ.get(
@@ -106,10 +108,11 @@ def bear_provenance() -> dict:
 
 
 def require_bear_040() -> None:
+    """BEAR 0.4.0 (the committed runs) or 0.4.1 (the backfill fix), with the trace API."""
     v = getattr(bear, "__version__", "?")
-    if v != EXPECTED_BEAR_VERSION:
-        raise SystemExit(f"BEAR {v} is installed. These evaluations are pinned to "
-                         f"{EXPECTED_BEAR_VERSION} (bear-dev 10730c8).")
+    if v not in EXPECTED_BEAR_VERSIONS:
+        raise SystemExit(f"BEAR {v} is installed. These evaluations expect one of "
+                         f"{EXPECTED_BEAR_VERSIONS}.")
     if not hasattr(Retriever, "retrieve_with_trace") or not hasattr(bear, "RetrievalTrace"):
         raise SystemExit("This BEAR lacks the public trace API.")
 
