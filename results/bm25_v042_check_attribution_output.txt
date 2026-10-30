@@ -1,0 +1,85 @@
+=== BM25 under BEAR 0.4.2 against 0.4.0: attribution to the restore switches ===
+BEAR 0.4.2 9d085b49c004cb03e2bede9055fdc3810cf260c0
+
+A run 'restores' an item when the item is identical to 0.4.0 under that run.
+'Changes' counts items whose result differs from the 0.4.2 default run.
+
+--- Tag noise (tasks per group) ---
+group                                    tasks moved  cause of the move (tasks)   | tasks each run changes vs 0.4.2
+metatool_tags/bm25/gate_clean                1     1  tie_order 1                 | flat_backfill 0, dropped_rows 0, tie_order 1, flat_backfill+tie_order 1
+metatool_tags/bm25/gate_clean/p50            1     1  only all three together 1   | flat_backfill 1, dropped_rows 0, tie_order 1, flat_backfill+tie_order 1
+metatool_tags/bm25/gate_noise              150   150  only all three together 125, tie_order 25 | flat_backfill 125, dropped_rows 125, tie_order 150, flat_backfill+tie_order 150
+metatool_tags/bm25/paper_governed            1     1  tie_order 1                 | flat_backfill 0, dropped_rows 0, tie_order 1, flat_backfill+tie_order 1
+metatool_tags/bm25/ungated                   1     1  only all three together 1   | flat_backfill 1, dropped_rows 1, tie_order 1, flat_backfill+tie_order 1
+metatool_tags/hash/gate_clean                1     0  -                           | flat_backfill 0, dropped_rows 0, tie_order 0, flat_backfill+tie_order 0
+metatool_tags/hash/paper_governed            1     0  -                           | flat_backfill 0, dropped_rows 0, tie_order 0, flat_backfill+tie_order 0
+metatool_tags/hash/ungated                   1     0  -                           | flat_backfill 0, dropped_rows 0, tie_order 0, flat_backfill+tie_order 0
+toolbench/bm25/gate_clean                    1     1  tie_order 1                 | flat_backfill 0, dropped_rows 0, tie_order 1, flat_backfill+tie_order 1
+toolbench/bm25/gate_clean/p50                1     1  only all three together 1   | flat_backfill 1, dropped_rows 0, tie_order 1, flat_backfill+tie_order 1
+toolbench/bm25/gate_noise                  150   150  only all three together 125, tie_order 25 | flat_backfill 125, dropped_rows 125, tie_order 150, flat_backfill+tie_order 150
+toolbench/bm25/paper_governed                1     1  tie_order 1                 | flat_backfill 0, dropped_rows 0, tie_order 1, flat_backfill+tie_order 1
+toolbench/bm25/ungated                       1     1  only all three together 1   | flat_backfill 0, dropped_rows 0, tie_order 1, flat_backfill+tie_order 1
+toolbench/hash/gate_clean                    1     0  -                           | flat_backfill 0, dropped_rows 0, tie_order 0, flat_backfill+tie_order 0
+toolbench/hash/paper_governed                1     0  -                           | flat_backfill 0, dropped_rows 0, tie_order 0, flat_backfill+tie_order 0
+toolbench/hash/ungated                       1     0  -                           | flat_backfill 0, dropped_rows 0, tie_order 0, flat_backfill+tie_order 0
+
+--- Tag noise headline arms, Recall@5 (0.4.0 -> run), paired delta vs 0.4.0 ---
+  metatool_tags/bm25/gate_clean/p50  default: 0.7950->0.8141 (+0.0192 [+0.0149,+0.0235] p=0.0001) | flat_backfill: 0.7950->0.7980 (+0.0030 [+0.0015,+0.0044] p=0.0001) | dropped_rows: 0.7950->0.8141 (+0.0192 [+0.0149,+0.0235] p=0.0001) | tie_order: 0.7950->0.8118 (+0.0168 [+0.0124,+0.0211] p=0.0001) | flat_backfill+tie_order: =0.4.0
+  metatool_tags/bm25/gate_clean      default: 0.8116->0.8140 (+0.0023 [+0.0014,+0.0033] p=0.0001) | flat_backfill: 0.8116->0.8140 (+0.0023 [+0.0014,+0.0033] p=0.0001) | dropped_rows: 0.8116->0.8140 (+0.0023 [+0.0014,+0.0033] p=0.0001) | tie_order: =0.4.0 | flat_backfill+tie_order: =0.4.0
+  toolbench/bm25/gate_clean/p50      default: 0.5918->0.6031 (+0.0114 [+0.0053,+0.0176] p=0.0001) | flat_backfill: 0.5918->0.5898 (-0.0019 [-0.0052,+0.0007] p=0.185) | dropped_rows: 0.5918->0.6031 (+0.0114 [+0.0053,+0.0176] p=0.0001) | tie_order: 0.5918->0.6037 (+0.0120 [+0.0061,+0.0181] p=0.0001) | flat_backfill+tie_order: =0.4.0
+  toolbench/bm25/gate_clean          default: 0.6037->0.6031 (-0.0006 [-0.0018,+0.0000] p=0.725) | flat_backfill: 0.6037->0.6031 (-0.0006 [-0.0018,+0.0000] p=0.725) | dropped_rows: 0.6037->0.6031 (-0.0006 [-0.0018,+0.0000] p=0.725) | tie_order: =0.4.0 | flat_backfill+tie_order: =0.4.0
+  metatool_tags/bm25/paper_governed  default: 0.9112->0.9111 (-0.0001 [-0.0003,+0.0001] p=0.45) | flat_backfill: 0.9112->0.9111 (-0.0001 [-0.0003,+0.0001] p=0.45) | dropped_rows: 0.9112->0.9111 (-0.0001 [-0.0003,+0.0001] p=0.45) | tie_order: =0.4.0 | flat_backfill+tie_order: =0.4.0
+  toolbench/bm25/paper_governed      default: 0.6121->0.6118 (-0.0003 [-0.0009,+0.0000] p=0.725) | flat_backfill: 0.6121->0.6118 (-0.0003 [-0.0009,+0.0000] p=0.725) | dropped_rows: 0.6121->0.6118 (-0.0003 [-0.0009,+0.0000] p=0.725) | tie_order: =0.4.0 | flat_backfill+tie_order: =0.4.0
+  metatool_tags/bm25/ungated         default: 0.4021->0.4020 (-0.0000 [-0.0001,+0.0000] p=0.742) | flat_backfill: 0.4021->0.4020 (-0.0000 [-0.0001,+0.0000] p=0.742) | dropped_rows: 0.4021->0.4020 (-0.0000 [-0.0001,+0.0000] p=0.742) | tie_order: 0.4021->0.4021 (+0.0000 [+0.0000,+0.0000] p=1) | flat_backfill+tie_order: =0.4.0
+  toolbench/bm25/ungated             default: 0.4684->0.4679 (-0.0005 [-0.0014,+0.0000] p=0.737) | flat_backfill: 0.4684->0.4679 (-0.0005 [-0.0014,+0.0000] p=0.737) | dropped_rows: 0.4684->0.4679 (-0.0005 [-0.0014,+0.0000] p=0.737) | tie_order: 0.4684->0.4682 (-0.0002 [-0.0014,+0.0009] p=0.947) | flat_backfill+tie_order: =0.4.0
+
+  Gate-only BM25 at priority 50 versus priority 0, per run:
+    default                  toolbench      p50 0.6031 p0 0.6031 difference +0.0000 [+0.0000, +0.0000]
+    default                  metatool_tags  p50 0.8141 p0 0.8140 difference +0.0002 [+0.0000, +0.0004]
+    flat_backfill            toolbench      p50 0.5898 p0 0.6031 difference -0.0133 [-0.0191, -0.0080]
+    flat_backfill            metatool_tags  p50 0.7980 p0 0.8140 difference -0.0160 [-0.0203, -0.0116]
+    dropped_rows             toolbench      p50 0.6031 p0 0.6031 difference +0.0000 [+0.0000, +0.0000]
+    dropped_rows             metatool_tags  p50 0.8141 p0 0.8140 difference +0.0002 [+0.0000, +0.0004]
+    tie_order                toolbench      p50 0.6037 p0 0.6037 difference +0.0000 [+0.0000, +0.0000]
+    tie_order                metatool_tags  p50 0.8118 p0 0.8116 difference +0.0001 [-0.0000, +0.0004]
+    flat_backfill+tie_order  toolbench      p50 0.5918 p0 0.6037 difference -0.0120 [-0.0181, -0.0061]
+    flat_backfill+tie_order  metatool_tags  p50 0.7950 p0 0.8116 difference -0.0166 [-0.0209, -0.0122]
+
+--- WP2 mandatory coverage: pairs differing from 0.4.0 (presence), per run ---
+  bm25/A_on                       present 0.4.0 738/738  default: 0 (0) | flat_backfill: 0 (0) | dropped_rows: 0 (0) | tie_order: 0 (0) | flat_backfill+tie_order: 0 (0)
+  bm25/A_off                      present 0.4.0 188/738  default: 7 (0) | flat_backfill: 0 (0)* | dropped_rows: 0 (0)* | tie_order: 7 (0) | flat_backfill+tie_order: 0 (0)*
+  bm25/B_on                       present 0.4.0 738/738  default: 0 (0) | flat_backfill: 0 (0) | dropped_rows: 0 (0) | tie_order: 0 (0) | flat_backfill+tie_order: 0 (0)
+  bm25/B_off                      present 0.4.0 0/738  default: 7 (0) | flat_backfill: 0 (0)* | dropped_rows: 0 (0)* | tie_order: 7 (0) | flat_backfill+tie_order: 0 (0)*
+  bm25/C_on                       present 0.4.0 0/738  default: 7 (0) | flat_backfill: 0 (0)* | dropped_rows: 0 (0)* | tie_order: 7 (0) | flat_backfill+tie_order: 0 (0)*
+  bm25/D_on                       present 0.4.0 255/738  default: 7 (0) | flat_backfill: 0 (0)* | dropped_rows: 0 (0)* | tie_order: 7 (0) | flat_backfill+tie_order: 0 (0)*
+  hash/A_on                       present 0.4.0 738/738  default: 0 (0) | flat_backfill: 0 (0) | dropped_rows: 0 (0) | tie_order: 0 (0) | flat_backfill+tie_order: 0 (0)
+  hash/A_off                      present 0.4.0 157/738  default: 0 (0) | flat_backfill: 0 (0) | dropped_rows: 0 (0) | tie_order: 0 (0) | flat_backfill+tie_order: 0 (0)
+  hash/B_on                       present 0.4.0 738/738  default: 0 (0) | flat_backfill: 0 (0) | dropped_rows: 0 (0) | tie_order: 0 (0) | flat_backfill+tie_order: 0 (0)
+  hash/B_off                      present 0.4.0 0/738  default: 0 (0) | flat_backfill: 0 (0) | dropped_rows: 0 (0) | tie_order: 0 (0) | flat_backfill+tie_order: 0 (0)
+  hash/C_on                       present 0.4.0 0/738  default: 0 (0) | flat_backfill: 0 (0) | dropped_rows: 0 (0) | tie_order: 0 (0) | flat_backfill+tie_order: 0 (0)
+  hash/D_on                       present 0.4.0 255/738  default: 0 (0) | flat_backfill: 0 (0) | dropped_rows: 0 (0) | tie_order: 0 (0) | flat_backfill+tie_order: 0 (0)
+  (* = differs from the 0.4.2 default run)
+
+--- WP6 leakage, BM25: identical to 0.4.0? recall, attack hits ---
+  ungated/natural              0.4.0 R 0.4684 hits 1  default: R 0.4679 hits 1 | flat_backfill: R 0.4679 hits 1 | dropped_rows: R 0.4679 hits 1 | tie_order: R 0.4682 hits 0 | flat_backfill+tie_order: =0.4.0
+  gate_only/natural            0.4.0 R 0.6037 hits 0  default: R 0.6031 hits 0 | flat_backfill: R 0.6031 hits 0 | dropped_rows: R 0.6031 hits 0 | tie_order: =0.4.0 | flat_backfill+tie_order: =0.4.0
+  published/natural            0.4.0 R 0.6121 hits 0  default: R 0.6118 hits 0 | flat_backfill: R 0.6118 hits 0 | dropped_rows: R 0.6118 hits 0 | tie_order: =0.4.0 | flat_backfill+tie_order: =0.4.0
+  ungated/inject_name          0.4.0 R 0.4130 hits 526  default: R 0.4125 hits 526 | flat_backfill: R 0.4125 hits 526 | dropped_rows: R 0.4125 hits 526 | tie_order: R 0.4120 hits 526 | flat_backfill+tie_order: =0.4.0
+  gate_only/inject_name        0.4.0 R 0.5887 hits 0  default: R 0.5881 hits 0 | flat_backfill: R 0.5881 hits 0 | dropped_rows: R 0.5881 hits 0 | tie_order: =0.4.0 | flat_backfill+tie_order: =0.4.0
+  published/inject_name        0.4.0 R 0.5967 hits 0  default: R 0.5964 hits 0 | flat_backfill: R 0.5964 hits 0 | dropped_rows: R 0.5964 hits 0 | tie_order: =0.4.0 | flat_backfill+tie_order: =0.4.0
+  ungated/inject_name_desc     0.4.0 R 0.3109 hits 928  default: =0.4.0 | flat_backfill: =0.4.0 | dropped_rows: =0.4.0 | tie_order: =0.4.0 | flat_backfill+tie_order: =0.4.0
+  gate_only/inject_name_desc   0.4.0 R 0.5602 hits 0  default: =0.4.0 | flat_backfill: =0.4.0 | dropped_rows: =0.4.0 | tie_order: =0.4.0 | flat_backfill+tie_order: =0.4.0
+  published/inject_name_desc   0.4.0 R 0.5693 hits 0  default: R 0.5690 hits 0 | flat_backfill: R 0.5690 hits 0 | dropped_rows: R 0.5690 hits 0 | tie_order: =0.4.0 | flat_backfill+tie_order: =0.4.0
+
+--- Query giveaways (BM25 strata) ---
+  default                  toolbench      gate-only effect difference {"delta": -0.0036695460991908735, "ci": [-0.0367992718338021 -> {"delta": -0.0034697059832045907, "ci": [-0.0376090225735592
+  default                  metatool_tags  gate-only effect difference {"delta": -0.3090927350025642, "ci": [-0.3248809399864593, - -> {"delta": -0.29769982401802897, "ci": [-0.3141242243526207, 
+  flat_backfill            toolbench      gate-only effect difference {"delta": -0.0036695460991908735, "ci": [-0.0367992718338021 -> {"delta": -0.0034697059832045907, "ci": [-0.0376090225735592
+  flat_backfill            metatool_tags  gate-only effect difference {"delta": -0.3090927350025642, "ci": [-0.3248809399864593, - -> {"delta": -0.29769982401802897, "ci": [-0.3141242243526207, 
+  dropped_rows             toolbench      gate-only effect difference {"delta": -0.0036695460991908735, "ci": [-0.0367992718338021 -> {"delta": -0.0034697059832045907, "ci": [-0.0376090225735592
+  dropped_rows             metatool_tags  gate-only effect difference {"delta": -0.3090927350025642, "ci": [-0.3248809399864593, - -> {"delta": -0.29769982401802897, "ci": [-0.3141242243526207, 
+  tie_order                toolbench      gate-only effect difference {"delta": -0.0036695460991908735, "ci": [-0.0367992718338021 -> {"delta": -0.0038693862509113497, "ci": [-0.0372759095330132
+  tie_order                metatool_tags  gate-only effect difference {"delta": -0.3090927350025642, "ci": [-0.3248809399864593, - -> {"delta": -0.3090927350025642, "ci": [-0.3248809399864593, -
+  flat_backfill+tie_order  BM25 arrays unchanged, strata identical to 0.4.0
+
+Wrote /mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts/results/bm25_v042_check_attribution.json

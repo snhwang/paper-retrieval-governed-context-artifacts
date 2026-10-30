@@ -1,0 +1,77 @@
+=== BM25 results under BEAR 0.4.2, run 'flat_backfill+tie_order', against the 0.4.0 runs ===
+switches on: ['flat_backfill', 'tie_order']  (Config restore fields: {'restore_flat_backfill': True, 'restore_tie_order': True})
+restore_flat_backfill implies restore_dropped_rows in BEAR 0.4.2.
+tag noise: 314 tasks, 8 workers
+  25/314 tasks, 33s
+  50/314 tasks, 53s
+  75/314 tasks, 74s
+  100/314 tasks, 101s
+  125/314 tasks, 124s
+  150/314 tasks, 150s
+  175/314 tasks, 234s
+  200/314 tasks, 308s
+  225/314 tasks, 372s
+  250/314 tasks, 485s
+  275/314 tasks, 569s
+  300/314 tasks, 637s
+  314/314 tasks, 662s
+
+tag noise: 314/314 tasks identical to 0.4.0 (0 not in the committed file)
+  toolbench: gate-only BM25 at priority 50 Recall@5 0.5918 [0.5698, 0.6131], priority 0 0.6037, difference -0.0120 [-0.0181, -0.0061], queries differing 39
+  metatool_tags: gate-only BM25 at priority 50 Recall@5 0.7950 [0.7895, 0.8004], priority 0 0.8116, difference -0.0166 [-0.0209, -0.0122], queries differing 2221
+
+BM25  safety-rule similarity to queries: min 0.000, median 0.178, max 1.000, share >= 0.3: 0.259
+  A theta=0.3:  ON 1.000 [1.000, 1.000]  OFF 0.255 [0.220, 0.290]  ON-OFF +0.745 [+0.710, +0.780] p=0.0001 d=+2.58
+      OFF reaches 188/738 pairs by similarity. ON paths {'in:mandatory': 549, 'in:search': 189}
+  B theta=1.001:  ON 1.000 [1.000, 1.000]  OFF 0.000 [0.000, 0.000]  ON-OFF +1.000 [+1.000, +1.000] p=0.0001 d=n/a
+      OFF reaches 0/738 pairs (want 0). ON paths {'in:mandatory': 738}
+  C gate fails, ON: recall 0.000, violations 0/738 (want 0). Paths {'out:gate': 738}
+  D gate on 'dog', ON: present-vs-gate mismatches 0/738 (want 0), gate passes in 255 pairs. Paths {'in:mandatory': 196, 'out:gate': 483, 'in:search': 59}
+
+Hash  safety-rule similarity to queries: min -0.441, median 0.158, max 0.665, share >= 0.3: 0.213
+  A theta=0.3:  ON 1.000 [1.000, 1.000]  OFF 0.213 [0.183, 0.244]  ON-OFF +0.787 [+0.756, +0.817] p=0.0001 d=+3.26
+      OFF reaches 157/738 pairs by similarity. ON paths {'in:mandatory': 581, 'in:search': 157}
+  B theta=0.665:  ON 1.000 [1.000, 1.000]  OFF 0.000 [0.000, 0.000]  ON-OFF +1.000 [+1.000, +1.000] p=0.0001 d=n/a
+      OFF reaches 0/738 pairs (want 0). ON paths {'in:mandatory': 738}
+  C gate fails, ON: recall 0.000, violations 0/738 (want 0). Paths {'out:gate': 738}
+  D gate on 'dog', ON: present-vs-gate mismatches 0/738 (want 0), gate passes in 255 pairs. Paths {'in:mandatory': 195, 'in:search': 60, 'out:gate': 483}
+
+mandatory coverage (pairs differing from 0.4.0, of which presence):
+  bm25: A_on 0/738 (0), A_off 0/738 (0), B_on 0/738 (0), B_off 0/738 (0), C_on 0/738 (0), D_on 0/738 (0); theta_b 1.001 -> 1.001
+  hash: A_on 0/738 (0), A_off 0/738 (0), B_on 0/738 (0), B_off 0/738 (0), C_on 0/738 (0), D_on 0/738 (0); theta_b 0.665 -> 0.665
+
+leakage, BM25 (queries differing from 0.4.0):
+  ungated/natural              identical=True  recall 0.4684 -> 0.4684  attack hits 1 -> 1
+  gate_only/natural            identical=True  recall 0.6037 -> 0.6037  attack hits 0 -> 0
+  published/natural            identical=True  recall 0.6121 -> 0.6121  attack hits 0 -> 0
+  ungated/inject_name          identical=True  recall 0.4130 -> 0.4130  attack hits 526 -> 526
+  gate_only/inject_name        identical=True  recall 0.5887 -> 0.5887  attack hits 0 -> 0
+  published/inject_name        identical=True  recall 0.5967 -> 0.5967  attack hits 0 -> 0
+  ungated/inject_name_desc     identical=True  recall 0.3109 -> 0.3109  attack hits 928 -> 928
+  gate_only/inject_name_desc   identical=True  recall 0.5602 -> 0.5602  attack hits 0 -> 0
+  published/inject_name_desc   identical=True  recall 0.5693 -> 0.5693  attack hits 0 -> 0
+
+giveaways: the BM25 arrays they use are unchanged, so the strata are too
+
+Wrote /mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts/results/bm25_v042_check_flat_backfill+tie_order.json and /mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts/results/bm25_v042_check_flat_backfill+tie_order_recall.npz
+Elapsed 1398s
+
+=== Reproducibility ===
+Timestamp (UTC): 2026-10-30T13:45:27Z
+Command line:    evals/check_bm25_v042.py --workers 8 --switches flat_backfill tie_order
+Python:          3.12.13 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
+numpy:           2.2.6
+scipy:           1.17.1
+bear:            0.4.2
+git commit:      0339a075773104cbe81e9a32bc9abda282a324bf
+git status:      unknown (git status failed or timed out)
+git branch:      tist-r2
+
+  eval: check_bm25_v042
+  run: flat_backfill+tie_order
+  bear_version: 0.4.2
+  bear_path: /home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/bear/__init__.py
+  bear_source_sha: 9d085b49c004cb03e2bede9055fdc3810cf260c0
+  bear_direct_url: file:///home/snhwang/tist-evals/bear-9d085b4
+  bear_export_sha: 9d085b4
+===

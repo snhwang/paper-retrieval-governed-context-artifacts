@@ -43,6 +43,7 @@ No model is loaded. Run in WSL under the memory cap, with at most 8 workers:
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import multiprocessing as mp
 import sys
@@ -56,7 +57,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import bear  # noqa: E402
 from tistr2_common import (  # noqa: E402
     REPO_ROOT, EmbeddingStore, Tee, bear_provenance, ci_summary, enable_bm25_memo,
-    json_default, paired_summary, refuse_overwrite, require_bear_040,
+    json_default, mcnemar_summary, paired_summary, refuse_overwrite, require_bear_040,
 )
 import eval_tag_noise as tn  # noqa: E402
 from repro_footer import print_repro_footer  # noqa: E402
@@ -71,6 +72,18 @@ def spec_key(spec: dict) -> tuple:
     return tuple(sorted((k, v) for k, v in spec.items()))
 
 
+def spec_id(spec: dict) -> str:
+    return json.dumps(spec, sort_keys=True)
+
+
+def digest(*arrays) -> str:
+    """Identity of a result across runs, so two reruns compare without the arrays."""
+    h = hashlib.sha1()
+    for a in arrays:
+        h.update(np.ascontiguousarray(a).tobytes())
+    return h.hexdigest()[:16]
+
+
 def tag_noise_specs(benches, with_hash: bool) -> list[dict]:
     specs = tn.all_specs(benches, ["bm25"], list(tn.RATES), list(tn.SEEDS))
     if with_hash:
@@ -78,6 +91,10 @@ def tag_noise_specs(benches, with_hash: bool) -> list[dict]:
             for arm in ("ungated", "gate_clean", "paper_governed"):
                 specs.append({"bench": bn, "backend": "hash", "arm": arm})
     return specs
+
+
+def task_digest(res: dict) -> str:
+    return digest(*(np.asarray(res[a], dtype=DTYPES[a]) for a in ARRAYS))
 
 
 def compare_task(new: dict, old: dict) -> dict:
@@ -90,6 +107,9 @@ def compare_task(new: dict, old: dict) -> dict:
             out["arrays_differing"][a] = int(np.sum(x != y)) if x.shape == y.shape else "shape"
     out["recall_new"] = float(np.mean(new["recall"]))
     out["recall_old"] = float(np.mean(old["recall"]))
+    if not out["identical"] and len(new["recall"]) == len(old["recall"]):
+        out["recall_paired"] = paired_summary(new["recall"], old["recall"])
+        out["ndcg_paired"] = paired_summary(new["ndcg"], old["ndcg"])
     return out
 
 
@@ -100,6 +120,8 @@ def part_tag_noise(args, log) -> dict:
         if not args.no_hash:
             tn.G_STORE[(bn, "hash")] = EmbeddingStore("hash", tn.FAMILY, name=f"{bn}__hash")
     specs = tag_noise_specs(benches, not args.no_hash)
+    if getattr(args, "smoke", False):
+        specs = [sp for sp in specs if sp["arm"] != "gate_noise"]
     print(f"tag noise: {len(specs)} tasks, {args.workers} workers", flush=True)
     t0 = time.time()
     new = []
@@ -124,7 +146,12 @@ def part_tag_noise(args, log) -> dict:
         rows.append({"spec": res["spec"], **c})
     del old
     out = {"n_tasks": len(new), "n_identical": n_ident, "n_missing_in_committed": n_missing,
-           "differing": [r for r in rows if not r.get("identical", False)]}
+           "differing": [r for r in rows if not r.get("identical", False)],
+           "digests": {spec_id(r["spec"]): task_digest(r) for r in new}}
+    # Per-query recall of the tasks that differ, saved beside the JSON.
+    differing_ids = {spec_id(r["spec"]) for r in out["differing"]}
+    out["_differing_recall"] = {spec_id(r["spec"]): np.asarray(r["recall"], np.float32)
+                                for r in new if spec_id(r["spec"]) in differing_ids}
     # The priority-50 gate-only arm, against priority 0, under this BEAR.
     by = {spec_key(r["spec"]): r for r in new}
     out["priority50"] = {}
@@ -167,7 +194,16 @@ def part_mandatory(args) -> dict:
             present_diff = sum(1 for x, y in zip(pairs, op) if x["present"] != y["present"])
             e[arm] = {"pairs": len(pairs), "pairs_differing": len(diff),
                       "presence_differing": present_diff,
+                      "present_new": int(sum(bool(x["present"]) for x in pairs)),
+                      "present_old": int(sum(bool(y["present"]) for y in op)),
+                      "digest": hashlib.sha1(json.dumps(
+                          [[x[k] for k in ("q", "rule", "present", "admitted_by",
+                                           "excluded_reason", "similarity")] for x in pairs],
+                          default=json_default).encode("utf-8")).hexdigest()[:16],
                       "examples": [{"new": pairs[i], "old": op[i]} for i in diff[:3]]}
+            if present_diff:
+                e[arm]["presence_mcnemar"] = mcnemar_summary(
+                    [int(bool(x["present"])) for x in pairs], [int(bool(y["present"])) for y in op])
         e["theta_b_new"] = new[b]["B_verified_unreachable"]["theta_b"]
         e["theta_b_old"] = old[b]["B_verified_unreachable"]["theta_b"]
         out[b] = e
@@ -193,7 +229,20 @@ def part_leakage(args) -> dict:
                     "recall_new": float(np.mean(e["per_query_recall"])),
                     "recall_old": float(np.mean(old[key]["per_query_recall"])),
                     "attack_hits_new": int(np.sum(e["per_query_attack_hit"])),
-                    "attack_hits_old": int(np.sum(old[key]["per_query_attack_hit"]))}
+                    "attack_hits_old": int(np.sum(old[key]["per_query_attack_hit"])),
+                    "cross_share_new": float(np.mean(e["per_query_cross_share"])),
+                    "cross_share_old": float(np.mean(old[key]["per_query_cross_share"])),
+                    "digest": digest(*(np.asarray(e[a], dtype=np.float64) for a in (
+                        "per_query_cross_share", "per_query_recall", "per_query_attack_hit",
+                        "per_query_n_out")))}
+        if not out[key]["identical"]:
+            out[key]["recall_paired"] = paired_summary(e["per_query_recall"],
+                                                       old[key]["per_query_recall"])
+            out[key]["cross_share_paired"] = paired_summary(e["per_query_cross_share"],
+                                                            old[key]["per_query_cross_share"])
+            out[key]["attack_hit_mcnemar"] = mcnemar_summary(
+                np.asarray(e["per_query_attack_hit"], dtype=int),
+                np.asarray(old[key]["per_query_attack_hit"], dtype=int))
     return out
 
 
@@ -244,50 +293,59 @@ def main() -> None:
     try:
         t0 = time.time()
         print(f"=== BM25 results under BEAR {bear.__version__} against the committed 0.4.0 runs ===")
-        enable_bm25_memo()
-        res: dict = {"provenance": bear_provenance()}
-        tnr = part_tag_noise(args, log)
-        arrays = tnr.pop("_arrays")
-        res["tag_noise"] = tnr
-        print(f"\ntag noise: {tnr['n_identical']}/{tnr['n_tasks']} tasks identical to 0.4.0 "
-              f"({tnr['n_missing_in_committed']} not in the committed file)")
-        for r in tnr["differing"]:
-            print(f"  differs: {r['spec']}  recall {r.get('recall_old', float('nan')):.4f} -> "
-                  f"{r.get('recall_new', float('nan')):.4f}  arrays {r.get('arrays_differing')}")
-        for bn, e in tnr["priority50"].items():
-            d = e["p50_minus_p0"]
-            print(f"  {bn}: gate-only BM25 at priority 50 Recall@5 {e['recall_p50']['mean']:.4f} "
-                  f"[{e['recall_p50']['ci'][0]:.4f}, {e['recall_p50']['ci'][1]:.4f}], priority 0 "
-                  f"{e['recall_p0']['mean']:.4f}, difference {d['delta']:+.4f} "
-                  f"[{d['ci'][0]:+.4f}, {d['ci'][1]:+.4f}], queries differing "
-                  f"{e['queries_with_different_recall']}")
-        res["mandatory_coverage"] = part_mandatory(args)
-        print("\nmandatory coverage (pairs differing from 0.4.0, of which presence):")
-        for b, e in res["mandatory_coverage"].items():
-            cells = ", ".join(f"{arm} {v['pairs_differing']}/{v['pairs']} ({v['presence_differing']})"
-                              for arm, v in e.items() if isinstance(v, dict))
-            print(f"  {b}: {cells}; theta_b {e['theta_b_old']} -> {e['theta_b_new']}")
-        res["leakage"] = part_leakage(args)
-        print("\nleakage, BM25 (queries differing from 0.4.0):")
-        for key, e in res["leakage"].items():
-            print(f"  {key:<28} identical={e['identical']}  recall {e['recall_old']:.4f} -> "
-                  f"{e['recall_new']:.4f}  attack hits {e['attack_hits_old']} -> {e['attack_hits_new']}"
-                  + ("" if e["identical"] else f"  {e['queries_differing']}"))
-        changed = any(r["spec"]["backend"] == "bm25" and r["spec"]["arm"] in
-                      ("ungated", "gate_clean", "paper_governed") and "priority" not in r["spec"]
-                      for r in tnr["differing"])
-        res["giveaways"] = {"bm25_arrays_changed": changed}
-        if changed:
-            res["giveaways"]["recomputed"] = part_giveaways(args, arrays)
-            print("\ngiveaways: BM25 arrays changed, strata recomputed (see JSON)")
-        else:
-            print("\ngiveaways: the BM25 arrays they use are unchanged, so the strata are too")
+        res = run_check(args, log)
+        res["tag_noise"].pop("_differing_recall", None)
         args.output.write_text(json.dumps(res, default=json_default), encoding="utf-8")
         print(f"\nWrote {args.output}\nElapsed {time.time() - t0:.0f}s")
         print_repro_footer(extra={"eval": "check_bm25_v041", **bear_provenance()})
     finally:
         sys.stdout = orig
         log.close()
+
+
+def run_check(args, log) -> dict:
+    """Every part, printed as it finishes. args carries workers, no_hash, the
+    committed result paths, and optionally smoke (no noise conditions, no
+    leakage)."""
+    enable_bm25_memo()
+    res: dict = {"provenance": bear_provenance()}
+    tnr = part_tag_noise(args, log)
+    arrays = tnr.pop("_arrays")
+    res["tag_noise"] = tnr
+    print(f"\ntag noise: {tnr['n_identical']}/{tnr['n_tasks']} tasks identical to 0.4.0 "
+          f"({tnr['n_missing_in_committed']} not in the committed file)")
+    for r in tnr["differing"]:
+        print(f"  differs: {r['spec']}  recall {r.get('recall_old', float('nan')):.4f} -> "
+              f"{r.get('recall_new', float('nan')):.4f}  arrays {r.get('arrays_differing')}")
+    for bn, e in tnr["priority50"].items():
+        d = e["p50_minus_p0"]
+        print(f"  {bn}: gate-only BM25 at priority 50 Recall@5 {e['recall_p50']['mean']:.4f} "
+              f"[{e['recall_p50']['ci'][0]:.4f}, {e['recall_p50']['ci'][1]:.4f}], priority 0 "
+              f"{e['recall_p0']['mean']:.4f}, difference {d['delta']:+.4f} "
+              f"[{d['ci'][0]:+.4f}, {d['ci'][1]:+.4f}], queries differing "
+              f"{e['queries_with_different_recall']}")
+    res["mandatory_coverage"] = part_mandatory(args)
+    print("\nmandatory coverage (pairs differing from 0.4.0, of which presence):")
+    for b, e in res["mandatory_coverage"].items():
+        cells = ", ".join(f"{arm} {v['pairs_differing']}/{v['pairs']} ({v['presence_differing']})"
+                          for arm, v in e.items() if isinstance(v, dict))
+        print(f"  {b}: {cells}; theta_b {e['theta_b_old']} -> {e['theta_b_new']}")
+    res["leakage"] = {} if getattr(args, "smoke", False) else part_leakage(args)
+    print("\nleakage, BM25 (queries differing from 0.4.0):")
+    for key, e in res["leakage"].items():
+        print(f"  {key:<28} identical={e['identical']}  recall {e['recall_old']:.4f} -> "
+              f"{e['recall_new']:.4f}  attack hits {e['attack_hits_old']} -> {e['attack_hits_new']}"
+              + ("" if e["identical"] else f"  {e['queries_differing']}"))
+    changed = any(r["spec"]["backend"] == "bm25" and r["spec"]["arm"] in
+                  ("ungated", "gate_clean", "paper_governed") and "priority" not in r["spec"]
+                  for r in tnr["differing"])
+    res["giveaways"] = {"bm25_arrays_changed": changed}
+    if changed:
+        res["giveaways"]["recomputed"] = part_giveaways(args, arrays)
+        print("\ngiveaways: BM25 arrays changed, strata recomputed (see JSON)")
+    else:
+        print("\ngiveaways: the BM25 arrays they use are unchanged, so the strata are too")
+    return res
 
 
 if __name__ == "__main__":

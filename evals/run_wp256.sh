@@ -120,8 +120,22 @@ case "${1:-}" in
         --output results/budget_binding_v042_bge_vs_v040.json \
         --log-file results/budget_binding_v042_bge_vs_v040_output.txt
     ;;
+  v042-bm25)
+    # The committed BM25 results (tag noise, WP2, leakage, giveaways) on 0.4.2,
+    # as released and with each restore switch, then the attribution. No model
+    # is loaded. About 15 minutes per run at 8 workers, 2 GB.
+    export BEAR_SOURCE_SHA=9d085b49c004cb03e2bede9055fdc3810cf260c0 CUDA_VISIBLE_DEVICES= \
+        OMP_NUM_THREADS=1 MKL_NUM_THREADS=1
+    CAP="$HOME/bin/tist-capped --mem 12G --"
+    python evals/check_bm25_v042.py --workers "$WORKERS"
+    python evals/check_bm25_v042.py --workers "$WORKERS" --switches flat_backfill
+    python evals/check_bm25_v042.py --workers "$WORKERS" --switches dropped_rows
+    python evals/check_bm25_v042.py --workers "$WORKERS" --switches tie_order
+    python evals/check_bm25_v042.py --workers "$WORKERS" --switches flat_backfill tie_order
+    python evals/check_bm25_v042.py --summarize
+    ;;
   *)
-    echo "usage: bash evals/run_wp256.sh {embed|run|v041|v042|v042-bge}" >&2
+    echo "usage: bash evals/run_wp256.sh {embed|run|v041|v042|v042-bge|v042-bm25}" >&2
     exit 2
     ;;
 esac

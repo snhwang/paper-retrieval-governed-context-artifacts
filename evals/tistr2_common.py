@@ -65,6 +65,10 @@ logging.getLogger("bear").setLevel(os.environ.get("TIST_BEAR_LOG", "ERROR"))
 # backfill (scored at similarity 0), which only a row-dropping search reaches.
 # 0.4.2 makes BM25 return every row and breaks exact ties by id.
 EXPECTED_BEAR_VERSIONS = ("0.4.0", "0.4.1", "0.4.2")
+# Config fields set on every Config that make_config builds, such as one BEAR
+# restore switch ({"restore_tie_order": True}), so a check can rerun an
+# evaluation with one behavior restored. Empty for every committed run.
+CONFIG_OVERRIDES: dict = {}
 NEMOTRON_URL = os.environ.get("TIST_NEMOTRON_URL", "http://localhost:8360")
 FORBIDDEN_PORTS = (":8355",)  # the shared LLM server, kept idle for other runs
 EMB_CACHE_DIR = Path(os.environ.get(
@@ -184,7 +188,7 @@ def make_config(backend: str, family: str, *, k: int, threshold: float,
                 retrieval_pool: int | None = None) -> Config:
     common = dict(priority_weight=priority_weight, default_threshold=threshold,
                   default_top_k=k, mandatory_tags=list(mandatory_tags),
-                  retrieval_pool=retrieval_pool)
+                  retrieval_pool=retrieval_pool, **CONFIG_OVERRIDES)
     if backend == "bm25":
         return Config(embedding_model="bm25", embedding_backend=EmbeddingBackend.BM25,
                       embedding_dim=0, embedding_query_prefix="", embedding_passage_prefix="",
