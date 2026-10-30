@@ -308,9 +308,15 @@ def load_metatool_queries_tagged(
 
     tagged_queries = []
     for query_text, _, expected_ids in queries_base:
-        # Get context tags from the expected tool's tags
+        # Get context tags from the expected tool's tags.
+        # Fix (TIST round 2, WP0): iterate the tools in sorted order.
+        # expected_ids is a set, so for a multi-tool query the tag order, and
+        # with it the "[tags:...]" header BEAR embeds with the query, used to
+        # depend on Python's string hash seed and changed from run to run.
+        # Each tool's own tag order is kept, so single-tool queries (20,614
+        # of 21,111) are unchanged. Only the 497 two-tool queries are affected.
         context_tags: list[str] = []
-        for tool_id in expected_ids:
+        for tool_id in sorted(expected_ids):
             tool_name = tool_id.replace("metatool/", "")
             tags = tool_tags.get(tool_name, [])
             context_tags.extend(tags)
