@@ -1,0 +1,167 @@
+=== Tag-noise sweep (WP6), BEAR 0.4.0, gate-only noise ===
+k=5, priority weight 0.3 (ungated 0), theta dense 0.15, BM25 0.0, sweep priority 0
+Benchmarks ['toolbench', 'metatool_tags'], backends ['bm25', 'hash', 'bge'], rates [0.1, 0.2, 0.3, 0.4, 0.5], seeds [0, 1, 2, 3, 4], workers 16
+toolbench: 3225 items, 1100 queries, vocabulary 47
+metatool_tags: 199 items, 21111 queries, vocabulary 19
+BM25 memo check: 0 of 50 queries differ from uncached search (want 0)
+920 tasks
+  25/920 tasks, 44s
+  50/920 tasks, 64s
+  75/920 tasks, 85s
+  100/920 tasks, 116s
+  125/920 tasks, 137s
+  150/920 tasks, 157s
+  175/920 tasks, 177s
+  200/920 tasks, 199s
+  225/920 tasks, 223s
+  250/920 tasks, 251s
+  275/920 tasks, 273s
+  300/920 tasks, 291s
+  325/920 tasks, 326s
+  350/920 tasks, 348s
+  375/920 tasks, 368s
+  400/920 tasks, 391s
+  425/920 tasks, 413s
+  450/920 tasks, 429s
+  475/920 tasks, 452s
+  500/920 tasks, 476s
+  525/920 tasks, 502s
+  550/920 tasks, 544s
+  575/920 tasks, 575s
+  600/920 tasks, 601s
+  625/920 tasks, 620s
+  650/920 tasks, 644s
+  675/920 tasks, 669s
+  700/920 tasks, 705s
+  725/920 tasks, 743s
+  750/920 tasks, 768s
+  775/920 tasks, 830s
+  800/920 tasks, 853s
+  825/920 tasks, 879s
+  850/920 tasks, 904s
+  875/920 tasks, 943s
+  900/920 tasks, 961s
+  920/920 tasks, 975s
+
+=== ToolBench: Recall@5 against tag noise (mean over 5 seeds, 95% bootstrap CI over queries) ===
+
+BM25: ungated 0.468  gate-only clean 0.604  published config 0.612  (BM25 gate-only at priority 50: 0.592)
+  condition          0.1     0.2     0.3     0.4     0.5   crossover  sig<ungated
+  query_drop       0.545   0.489   0.424   0.363   0.302        0.23         0.3
+  query_swap       0.548   0.481   0.432   0.378   0.311        0.23         0.3
+  query_add        0.602   0.600   0.597   0.595   0.594        none        none
+  corpus_drop      0.550   0.531   0.517   0.506   0.501        none        none
+  corpus_swap      0.551   0.498   0.444   0.387   0.337        0.25         0.3
+  corpus_add       0.558   0.515   0.460   0.399   0.349        0.28         0.4
+  failure split at rate 0.3 (needed items gate-excluded / top-5 out-of-scope share):
+    query_drop     over-restriction 0.298   leakage@5 0.000   admitted out-of-scope 0.0   empty output 0.287
+    query_swap     over-restriction 0.286   leakage@5 0.281   admitted out-of-scope 21.9   empty output 0.000
+    query_add      over-restriction 0.000   leakage@5 0.031   admitted out-of-scope 21.0   empty output 0.000
+    corpus_drop    over-restriction 0.000   leakage@5 0.380   admitted out-of-scope 741.9   empty output 0.000
+    corpus_swap    over-restriction 0.294   leakage@5 0.091   admitted out-of-scope 21.9   empty output 0.000
+    corpus_add     over-restriction 0.292   leakage@5 0.000   admitted out-of-scope 0.0   empty output 0.000
+
+Hash: ungated 0.013  gate-only clean 0.151  published config 0.151
+  condition          0.1     0.2     0.3     0.4     0.5   crossover  sig<ungated
+  query_drop       0.138   0.124   0.108   0.092   0.075        none        none
+  query_swap       0.138   0.121   0.110   0.095   0.076        none        none
+  query_add        0.146   0.141   0.136   0.128   0.125        none        none
+  corpus_drop      0.049   0.036   0.029   0.026   0.021        none        none
+  corpus_swap      0.126   0.109   0.098   0.088   0.075        none        none
+  corpus_add       0.146   0.143   0.137   0.126   0.121        none        none
+  failure split at rate 0.3 (needed items gate-excluded / top-5 out-of-scope share):
+    query_drop     over-restriction 0.307   leakage@5 0.000   admitted out-of-scope 0.0   empty output 0.287
+    query_swap     over-restriction 0.296   leakage@5 0.286   admitted out-of-scope 21.9   empty output 0.000
+    query_add      over-restriction 0.000   leakage@5 0.081   admitted out-of-scope 21.0   empty output 0.000
+    corpus_drop    over-restriction 0.000   leakage@5 0.764   admitted out-of-scope 917.4   empty output 0.000
+    corpus_swap    over-restriction 0.302   leakage@5 0.216   admitted out-of-scope 21.9   empty output 0.000
+    corpus_add     over-restriction 0.300   leakage@5 0.000   admitted out-of-scope 0.0   empty output 0.000
+
+BGE-base: ungated 0.576  gate-only clean 0.691  published config 0.688
+  condition          0.1     0.2     0.3     0.4     0.5   crossover  sig<ungated
+  query_drop       0.624   0.557   0.484   0.411   0.347        0.17         0.2
+  query_swap       0.629   0.553   0.493   0.434   0.350        0.17         0.2
+  query_add        0.690   0.689   0.689   0.689   0.687        none        none
+  corpus_drop      0.650   0.633   0.620   0.612   0.604        none        none
+  corpus_swap      0.636   0.569   0.512   0.446   0.387        0.19         0.3
+  corpus_add       0.637   0.591   0.520   0.450   0.390        0.22         0.3
+  failure split at rate 0.3 (needed items gate-excluded / top-5 out-of-scope share):
+    query_drop     over-restriction 0.307   leakage@5 0.000   admitted out-of-scope 0.0   empty output 0.287
+    query_swap     over-restriction 0.296   leakage@5 0.279   admitted out-of-scope 21.9   empty output 0.000
+    query_add      over-restriction 0.000   leakage@5 0.013   admitted out-of-scope 21.0   empty output 0.000
+    corpus_drop    over-restriction 0.000   leakage@5 0.246   admitted out-of-scope 917.4   empty output 0.000
+    corpus_swap    over-restriction 0.302   leakage@5 0.059   admitted out-of-scope 21.9   empty output 0.000
+    corpus_add     over-restriction 0.300   leakage@5 0.000   admitted out-of-scope 0.0   empty output 0.000
+
+=== MetaTool+Tags: Recall@5 against tag noise (mean over 5 seeds, 95% bootstrap CI over queries) ===
+
+BM25: ungated 0.402  gate-only clean 0.812  published config 0.911  (BM25 gate-only at priority 50: 0.795)
+  condition          0.1     0.2     0.3     0.4     0.5   crossover  sig<ungated
+  query_drop       0.678   0.567   0.458   0.363   0.282        0.36         0.4
+  query_swap       0.679   0.565   0.459   0.365   0.278        0.36         0.4
+  query_add        0.800   0.790   0.778   0.769   0.758        none        none
+  corpus_drop      0.653   0.602   0.545   0.522   0.493        none        none
+  corpus_swap      0.693   0.560   0.478   0.411   0.275        0.41         0.5
+  corpus_add       0.709   0.612   0.513   0.417   0.291        0.41         0.5
+  failure split at rate 0.3 (needed items gate-excluded / top-5 out-of-scope share):
+    query_drop     over-restriction 0.411   leakage@5 0.000   admitted out-of-scope 0.0   empty output 0.185
+    query_swap     over-restriction 0.410   leakage@5 0.279   admitted out-of-scope 2.3   empty output 0.015
+    query_add      over-restriction 0.000   leakage@5 0.121   admitted out-of-scope 2.8   empty output 0.000
+    corpus_drop    over-restriction 0.000   leakage@5 0.645   admitted out-of-scope 27.9   empty output 0.000
+    corpus_swap    over-restriction 0.415   leakage@5 0.225   admitted out-of-scope 2.0   empty output 0.001
+    corpus_add     over-restriction 0.398   leakage@5 0.000   admitted out-of-scope 0.0   empty output 0.027
+
+Hash: ungated 0.071  gate-only clean 0.659  published config 0.736
+  condition          0.1     0.2     0.3     0.4     0.5   crossover  sig<ungated
+  query_drop       0.556   0.470   0.385   0.309   0.242        none        none
+  query_swap       0.558   0.468   0.386   0.309   0.239        none        none
+  query_add        0.639   0.621   0.600   0.584   0.565        none        none
+  corpus_drop      0.396   0.314   0.217   0.177   0.149        none        none
+  corpus_swap      0.572   0.469   0.416   0.360   0.240        none        none
+  corpus_add       0.590   0.529   0.460   0.381   0.276        none        none
+  failure split at rate 0.3 (needed items gate-excluded / top-5 out-of-scope share):
+    query_drop     over-restriction 0.449   leakage@5 0.000   admitted out-of-scope 0.0   empty output 0.185
+    query_swap     over-restriction 0.447   leakage@5 0.283   admitted out-of-scope 2.3   empty output 0.015
+    query_add      over-restriction 0.000   leakage@5 0.136   admitted out-of-scope 2.8   empty output 0.000
+    corpus_drop    over-restriction 0.000   leakage@5 0.742   admitted out-of-scope 32.6   empty output 0.000
+    corpus_swap    over-restriction 0.454   leakage@5 0.238   admitted out-of-scope 2.0   empty output 0.001
+    corpus_add     over-restriction 0.435   leakage@5 0.000   admitted out-of-scope 0.0   empty output 0.027
+
+BGE-base: ungated 0.721  gate-only clean 0.962  published config 0.981
+  condition          0.1     0.2     0.3     0.4     0.5   crossover  sig<ungated
+  query_drop       0.800   0.663   0.532   0.419   0.322        0.16         0.2
+  query_swap       0.801   0.661   0.534   0.422   0.319        0.16         0.2
+  query_add        0.959   0.956   0.953   0.949   0.946        none        none
+  corpus_drop      0.930   0.904   0.877   0.847   0.823        none        none
+  corpus_swap      0.810   0.647   0.532   0.466   0.308        0.15         0.2
+  corpus_add       0.813   0.687   0.554   0.448   0.307        0.17         0.2
+  failure split at rate 0.3 (needed items gate-excluded / top-5 out-of-scope share):
+    query_drop     over-restriction 0.449   leakage@5 0.000   admitted out-of-scope 0.0   empty output 0.185
+    query_swap     over-restriction 0.447   leakage@5 0.270   admitted out-of-scope 2.3   empty output 0.015
+    query_add      over-restriction 0.000   leakage@5 0.087   admitted out-of-scope 2.8   empty output 0.000
+    corpus_drop    over-restriction 0.000   leakage@5 0.465   admitted out-of-scope 32.6   empty output 0.000
+    corpus_swap    over-restriction 0.454   leakage@5 0.192   admitted out-of-scope 2.0   empty output 0.001
+    corpus_add     over-restriction 0.435   leakage@5 0.000   admitted out-of-scope 0.0   empty output 0.027
+
+Wrote /mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts/results/tag_noise.json
+Elapsed 1078s
+
+=== Reproducibility ===
+Timestamp (UTC): 2026-10-30T00:13:50Z
+Command line:    evals/eval_tag_noise.py --phase run --workers 16 --backends bm25 hash bge
+Python:          3.12.13 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
+numpy:           2.2.6
+scipy:           1.17.1
+bear:            0.4.0
+git commit:      8f0ab8fd5e0a6510a67400f65c697c1f22c187bb
+git status:      unknown (git status failed or timed out)
+git branch:      tist-r2
+
+  eval: tag_noise
+  backends: ['bm25', 'hash', 'bge']
+  benchmarks: ['toolbench', 'metatool_tags']
+  bear_version: 0.4.0
+  bear_path: /home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/bear/__init__.py
+  bear_source_sha: 10730c8ae682f972b731b89789f0f7b97a521523
+  bear_direct_url: file:///home/snhwang/tist-evals/bear-10730c8
+===

@@ -1,0 +1,92 @@
+=== Mandatory-injection coverage (WP2), Pet Sim, BEAR 0.4.0 ===
+Corpus 58 instructions. Safety rules ['constraint-no-aggression', 'safety-boundaries', 'safety-reasonable-response'].
+Queries 246. k=10, theta=0.3, priority weight 0.3, mandatory ['safety']. Soft tag 'safety_review' carried by no query.
+
+BM25  safety-rule similarity to queries: min 0.000, median 0.178, max 1.000, share >= 0.3: 0.259
+  A theta=0.3:  ON 1.000 [1.000, 1.000]  OFF 0.255 [0.220, 0.290]  ON-OFF +0.745 [+0.710, +0.780] p=0.0001 d=+2.58
+      OFF reaches 188/738 pairs by similarity. ON paths {'in:mandatory': 549, 'in:search': 189}
+  B theta=1.001:  ON 1.000 [1.000, 1.000]  OFF 0.000 [0.000, 0.000]  ON-OFF +1.000 [+1.000, +1.000] p=0.0001 d=n/a
+      OFF reaches 0/738 pairs (want 0). ON paths {'in:mandatory': 738}
+  C gate fails, ON: recall 0.000, violations 0/738 (want 0). Paths {'out:gate': 738}
+  D gate on 'dog', ON: present-vs-gate mismatches 0/738 (want 0), gate passes in 255 pairs. Paths {'in:mandatory': 196, 'out:gate': 483, 'in:search': 59}
+
+Hash  safety-rule similarity to queries: min -0.441, median 0.158, max 0.665, share >= 0.3: 0.213
+  A theta=0.3:  ON 1.000 [1.000, 1.000]  OFF 0.213 [0.183, 0.244]  ON-OFF +0.787 [+0.756, +0.817] p=0.0001 d=+3.26
+      OFF reaches 157/738 pairs by similarity. ON paths {'in:mandatory': 581, 'in:search': 157}
+  B theta=0.665:  ON 1.000 [1.000, 1.000]  OFF 0.000 [0.000, 0.000]  ON-OFF +1.000 [+1.000, +1.000] p=0.0001 d=n/a
+      OFF reaches 0/738 pairs (want 0). ON paths {'in:mandatory': 738}
+  C gate fails, ON: recall 0.000, violations 0/738 (want 0). Paths {'out:gate': 738}
+  D gate on 'dog', ON: present-vs-gate mismatches 0/738 (want 0), gate passes in 255 pairs. Paths {'in:mandatory': 195, 'in:search': 60, 'out:gate': 483}
+
+BGE-base  safety-rule similarity to queries: min 0.292, median 0.492, max 0.725, share >= 0.3: 0.999
+  A theta=0.3:  ON 1.000 [1.000, 1.000]  OFF 0.978 [0.963, 0.991]  ON-OFF +0.022 [+0.009, +0.037] p=0.0001 d=+0.20
+      OFF reaches 722/738 pairs by similarity. ON paths {'in:search': 737, 'in:mandatory': 1}
+  B theta=0.725:  ON 1.000 [1.000, 1.000]  OFF 0.000 [0.000, 0.000]  ON-OFF +1.000 [+1.000, +1.000] p=0.0001 d=n/a
+      OFF reaches 0/738 pairs (want 0). ON paths {'in:mandatory': 738}
+  C gate fails, ON: recall 0.000, violations 0/738 (want 0). Paths {'out:gate': 738}
+  D gate on 'dog', ON: present-vs-gate mismatches 0/738 (want 0), gate passes in 255 pairs. Paths {'in:search': 255, 'out:gate': 483}
+
+BGE-M3  safety-rule similarity to queries: min 0.278, median 0.427, max 0.615, share >= 0.3: 0.997
+  A theta=0.3:  ON 1.000 [1.000, 1.000]  OFF 0.967 [0.947, 0.985]  ON-OFF +0.033 [+0.015, +0.053] p=0.0001 d=+0.22
+      OFF reaches 714/738 pairs by similarity. ON paths {'in:search': 736, 'in:mandatory': 2}
+  B theta=0.615:  ON 1.000 [1.000, 1.000]  OFF 0.000 [0.000, 0.000]  ON-OFF +1.000 [+1.000, +1.000] p=0.0001 d=n/a
+      OFF reaches 0/738 pairs (want 0). ON paths {'in:mandatory': 738}
+  C gate fails, ON: recall 0.000, violations 0/738 (want 0). Paths {'out:gate': 738}
+  D gate on 'dog', ON: present-vs-gate mismatches 0/738 (want 0), gate passes in 255 pairs. Paths {'in:search': 255, 'out:gate': 483}
+
+Qwen3-0.6B  safety-rule similarity to queries: min 0.179, median 0.416, max 0.727, share >= 0.3: 0.976
+  A theta=0.3:  ON 1.000 [1.000, 1.000]  OFF 0.947 [0.925, 0.967]  ON-OFF +0.053 [+0.033, +0.075] p=0.0001 d=+0.31
+      OFF reaches 699/738 pairs by similarity. ON paths {'in:search': 720, 'in:mandatory': 18}
+  B theta=0.727:  ON 1.000 [1.000, 1.000]  OFF 0.000 [0.000, 0.000]  ON-OFF +1.000 [+1.000, +1.000] p=0.0001 d=n/a
+      OFF reaches 0/738 pairs (want 0). ON paths {'in:mandatory': 738}
+  C gate fails, ON: recall 0.000, violations 0/738 (want 0). Paths {'out:gate': 738}
+  D gate on 'dog', ON: present-vs-gate mismatches 0/738 (want 0), gate passes in 255 pairs. Paths {'in:search': 255, 'out:gate': 483}
+
+Qwen3-4B  safety-rule similarity to queries: min 0.224, median 0.440, max 0.749, share >= 0.3: 0.982
+  A theta=0.3:  ON 1.000 [1.000, 1.000]  OFF 0.954 [0.932, 0.973]  ON-OFF +0.046 [+0.027, +0.068] p=0.0001 d=+0.29
+      OFF reaches 704/738 pairs by similarity. ON paths {'in:search': 725, 'in:mandatory': 13}
+  B theta=0.750:  ON 1.000 [1.000, 1.000]  OFF 0.000 [0.000, 0.000]  ON-OFF +1.000 [+1.000, +1.000] p=0.0001 d=n/a
+      OFF reaches 0/738 pairs (want 0). ON paths {'in:mandatory': 738}
+  C gate fails, ON: recall 0.000, violations 0/738 (want 0). Paths {'out:gate': 738}
+  D gate on 'dog', ON: present-vs-gate mismatches 0/738 (want 0), gate passes in 255 pairs. Paths {'in:search': 252, 'out:gate': 483, 'in:mandatory': 3}
+
+Nemotron-embed-1B  safety-rule similarity to queries: min 0.031, median 0.239, max 0.544, share >= 0.3: 0.229
+  A theta=0.3:  ON 1.000 [1.000, 1.000]  OFF 0.224 [0.191, 0.257]  ON-OFF +0.776 [+0.743, +0.809] p=0.0001 d=+2.93
+      OFF reaches 165/738 pairs by similarity. ON paths {'in:mandatory': 569, 'in:search': 169}
+  B theta=0.544:  ON 1.000 [1.000, 1.000]  OFF 0.000 [0.000, 0.000]  ON-OFF +1.000 [+1.000, +1.000] p=0.0001 d=n/a
+      OFF reaches 0/738 pairs (want 0). ON paths {'in:mandatory': 738}
+  C gate fails, ON: recall 0.000, violations 0/738 (want 0). Paths {'out:gate': 738}
+  D gate on 'dog', ON: present-vs-gate mismatches 0/738 (want 0), gate passes in 255 pairs. Paths {'in:mandatory': 178, 'in:search': 77, 'out:gate': 483}
+
+--- Summary: safety recall (95% bootstrap CI), 246 queries x 3 rules ---
+
+Backend               A ON   A OFF  A reach  theta_b   B ON  B OFF  B reach  C viol D mism
+BM25                 1.000   0.255  188/738    1.001  1.000  0.000    0/738       0      0
+Hash                 1.000   0.213  157/738    0.665  1.000  0.000    0/738       0      0
+BGE-base             1.000   0.978  722/738    0.725  1.000  0.000    0/738       0      0
+BGE-M3               1.000   0.967  714/738    0.615  1.000  0.000    0/738       0      0
+Qwen3-0.6B           1.000   0.947  699/738    0.727  1.000  0.000    0/738       0      0
+Qwen3-4B             1.000   0.954  704/738    0.750  1.000  0.000    0/738       0      0
+Nemotron-embed-1B    1.000   0.224  165/738    0.544  1.000  0.000    0/738       0      0
+
+Wrote /mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts/results/mandatory_coverage.json
+Elapsed 5.0s
+
+=== Reproducibility ===
+Timestamp (UTC): 2026-10-29T23:25:22Z
+Command line:    evals/eval_mandatory_coverage.py --phase run
+Python:          3.12.13 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
+numpy:           2.2.6
+scipy:           1.17.1
+bear:            0.4.0
+git commit:      8f0ab8fd5e0a6510a67400f65c697c1f22c187bb
+git status:      unknown (git status failed or timed out)
+git branch:      tist-r2
+
+  eval: mandatory_coverage
+  backends: ['bm25', 'hash', 'bge', 'bge-m3', 'qwen3-0.6b', 'qwen3-4b', 'nemotron']
+  bear_version: 0.4.0
+  bear_path: /home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/bear/__init__.py
+  bear_source_sha: 10730c8ae682f972b731b89789f0f7b97a521523
+  bear_direct_url: file:///home/snhwang/tist-evals/bear-10730c8
+===

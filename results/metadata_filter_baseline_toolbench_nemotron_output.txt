@@ -1,0 +1,47 @@
+=== Metadata filter + rules (LlamaIndex 0.14.23) vs BEAR 0.4.0: toolbench ===
+3225 items, 1100 queries, k=5, BEAR priority weight 0.3, theta 0.15, mandatory []
+  [nemotron] indexes built (LlamaIndex 48s, total 133s)
+    200/1100 queries
+    400/1100 queries
+    600/1100 queries
+    800/1100 queries
+    1000/1100 queries
+
+  nemotron: arms (95% bootstrap CI)
+    bear_gov        recall 0.761 [0.741, 0.780]   ndcg 0.721 [0.703, 0.739]   gate-failing items 0/5500
+    bear_nogov      recall 0.668 [0.646, 0.689]   ndcg 0.630 [0.609, 0.650]   gate-failing items 1688/5500
+    li_plain        recall 0.659 [0.638, 0.680]   ndcg 0.624 [0.603, 0.644]   gate-failing items 1721/5500
+    li_filter       recall 0.752 [0.733, 0.771]   ndcg 0.712 [0.693, 0.730]   gate-failing items 0/5500
+  nemotron: paired contrasts (delta [95% CI] p d)
+    li_filter_vs_bear_gov__recall            -0.009 [-0.018, +0.000] p=0.0570 d=-0.06
+    li_filter_vs_bear_gov__ndcg              -0.010 [-0.017, -0.002] p=0.0104 d=-0.07
+    li_filter_vs_li_plain__recall            +0.093 [+0.080, +0.105] p=0.0001 d=+0.43
+    li_filter_vs_li_plain__ndcg              +0.088 [+0.077, +0.099] p=0.0001 d=+0.47
+    bear_gov_vs_bear_nogov__recall           +0.093 [+0.079, +0.107] p=0.0001 d=+0.39
+    bear_gov_vs_bear_nogov__ndcg             +0.091 [+0.079, +0.104] p=0.0001 d=+0.43
+    li_plain_vs_bear_nogov__recall           -0.009 [-0.019, +0.001] p=0.0746 d=-0.05
+    li_plain_vs_bear_nogov__ndcg             -0.006 [-0.014, +0.001] p=0.1184 d=-0.05
+    li_filter and bear_gov return the same top-5 set on 376 queries
+
+Wrote results/metadata_filter_baseline_toolbench_nemotron.json
+Elapsed 866s
+
+=== Reproducibility ===
+Timestamp (UTC): 2026-10-30T00:11:52Z
+Command line:    evals/eval_metadata_filter_baseline.py --corpus toolbench --encoders nemotron --output results/metadata_filter_baseline_toolbench_nemotron.json --log-file results/metadata_filter_baseline_toolbench_nemotron_output.txt
+Python:          3.12.13 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
+numpy:           2.2.6
+scipy:           1.17.1
+bear:            0.4.0
+git commit:      8f0ab8fd5e0a6510a67400f65c697c1f22c187bb
+git status:      unknown (git status failed or timed out)
+git branch:      tist-r2
+
+  eval: metadata_filter_baseline
+  corpus: toolbench
+  encoders: ['nemotron']
+  bear_version: 0.4.0
+  bear_path: /home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/bear/__init__.py
+  bear_source_sha: 10730c8ae682f972b731b89789f0f7b97a521523
+  bear_direct_url: file:///home/snhwang/tist-evals/bear-10730c8
+===

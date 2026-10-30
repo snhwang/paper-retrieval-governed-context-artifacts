@@ -1,0 +1,77 @@
+=== Metadata filter + rules (LlamaIndex 0.14.23) vs BEAR 0.4.0: petsim ===
+58 items, 60 queries, k=10, BEAR priority weight 0.3, theta 0.3, mandatory ['safety']
+  [nemotron] indexes built (LlamaIndex 1s, total 13s)
+
+  nemotron: arms (95% bootstrap CI)
+    bear_gov        f1 0.698 [0.671, 0.726]   f1_relaxed 0.821 [0.792, 0.850]   gate-failing items 0/549
+    bear_nogov      f1 0.175 [0.161, 0.190]   f1_relaxed 0.315 [0.269, 0.364]   gate-failing items 414/600
+    li_plain        f1 0.193 [0.173, 0.214]   f1_relaxed 0.336 [0.289, 0.384]   gate-failing items 405/600
+    li_filter       f1 0.196 [0.178, 0.214]   f1_relaxed 0.326 [0.281, 0.374]   gate-failing items 413/594
+    li_filter_rule  f1 0.573 [0.558, 0.589]   f1_relaxed 0.656 [0.624, 0.688]   gate-failing items 253/600
+    li_contain      f1 0.610 [0.589, 0.630]   f1_relaxed 0.755 [0.732, 0.780]   gate-failing items 0/588
+    li_contain_rule f1 0.659 [0.643, 0.675]   f1_relaxed 0.791 [0.763, 0.818]   gate-failing items 0/588
+    li_plain_rule   f1 0.558 [0.546, 0.570]   f1_relaxed 0.652 [0.619, 0.685]   gate-failing items 251/600
+  nemotron: paired contrasts (delta [95% CI] p d)
+    li_filter_rule_vs_bear_gov__f1           -0.125 [-0.156, -0.096] p=0.0001 d=-1.05
+    li_filter_rule_vs_bear_gov__f1_relaxed   -0.165 [-0.201, -0.130] p=0.0001 d=-1.19
+    li_filter_rule_vs_bear_gov__recall       -0.109 [-0.136, -0.082] p=0.0001 d=-1.03
+    li_filter_rule_vs_bear_gov__recall_relaxed -0.142 [-0.181, -0.102] p=0.0001 d=-0.91
+    li_contain_rule_vs_bear_gov__f1          -0.039 [-0.067, -0.015] p=0.0004 d=-0.38
+    li_contain_rule_vs_bear_gov__f1_relaxed  -0.031 [-0.056, -0.010] p=0.0018 d=-0.33
+    li_contain_rule_vs_bear_gov__recall      +0.003 [-0.006, +0.014] p=0.5924 d=+0.07
+    li_contain_rule_vs_bear_gov__recall_relaxed +0.010 [+0.000, +0.022] p=0.0476 d=+0.23
+    li_filter_vs_bear_gov__f1                -0.502 [-0.538, -0.467] p=0.0001 d=-3.61
+    li_filter_vs_bear_gov__f1_relaxed        -0.495 [-0.538, -0.451] p=0.0001 d=-2.89
+    li_filter_vs_bear_gov__recall            -0.678 [-0.714, -0.640] p=0.0001 d=-4.65
+    li_filter_vs_bear_gov__recall_relaxed    -0.573 [-0.624, -0.521] p=0.0001 d=-2.79
+    li_contain_vs_bear_gov__f1               -0.089 [-0.117, -0.062] p=0.0001 d=-0.83
+    li_contain_vs_bear_gov__f1_relaxed       -0.066 [-0.091, -0.043] p=0.0001 d=-0.68
+    li_contain_vs_bear_gov__recall           -0.068 [-0.094, -0.043] p=0.0001 d=-0.65
+    li_contain_vs_bear_gov__recall_relaxed   -0.030 [-0.049, -0.010] p=0.0032 d=-0.37
+    li_filter_rule_vs_li_filter__f1          +0.377 [+0.363, +0.390] p=0.0001 d=+7.10
+    li_filter_rule_vs_li_filter__f1_relaxed  +0.330 [+0.309, +0.349] p=0.0001 d=+4.13
+    li_filter_rule_vs_li_filter__recall      +0.568 [+0.539, +0.596] p=0.0001 d=+5.02
+    li_filter_rule_vs_li_filter__recall_relaxed +0.431 [+0.393, +0.469] p=0.0001 d=+2.80
+    li_contain_rule_vs_li_contain__f1        +0.050 [+0.034, +0.067] p=0.0001 d=+0.73
+    li_contain_rule_vs_li_contain__f1_relaxed +0.035 [+0.022, +0.049] p=0.0001 d=+0.63
+    li_contain_rule_vs_li_contain__recall    +0.071 [+0.047, +0.095] p=0.0001 d=+0.74
+    li_contain_rule_vs_li_contain__recall_relaxed +0.040 [+0.025, +0.056] p=0.0001 d=+0.63
+    li_filter_rule_vs_li_plain_rule__f1      +0.015 [+0.004, +0.026] p=0.0018 d=+0.36
+    li_filter_rule_vs_li_plain_rule__f1_relaxed +0.004 [-0.010, +0.017] p=0.5826 d=+0.07
+    li_filter_rule_vs_li_plain_rule__recall  +0.022 [+0.007, +0.039] p=0.0018 d=+0.36
+    li_filter_rule_vs_li_plain_rule__recall_relaxed +0.005 [-0.012, +0.021] p=0.5870 d=+0.07
+    li_contain_rule_vs_li_filter_rule__f1    +0.086 [+0.068, +0.104] p=0.0001 d=+1.23
+    li_contain_rule_vs_li_filter_rule__f1_relaxed +0.135 [+0.103, +0.166] p=0.0001 d=+1.08
+    li_contain_rule_vs_li_filter_rule__recall +0.112 [+0.088, +0.136] p=0.0001 d=+1.17
+    li_contain_rule_vs_li_filter_rule__recall_relaxed +0.152 [+0.111, +0.193] p=0.0001 d=+0.94
+    bear_gov_vs_bear_nogov__f1               +0.523 [+0.490, +0.557] p=0.0001 d=+3.92
+    bear_gov_vs_bear_nogov__f1_relaxed       +0.507 [+0.463, +0.550] p=0.0001 d=+2.96
+    bear_gov_vs_bear_nogov__recall           +0.707 [+0.670, +0.740] p=0.0001 d=+5.07
+    bear_gov_vs_bear_nogov__recall_relaxed   +0.584 [+0.531, +0.634] p=0.0001 d=+2.91
+    li_plain_vs_bear_nogov__f1               +0.017 [+0.000, +0.035] p=0.0352 d=+0.25
+    li_plain_vs_bear_nogov__f1_relaxed       +0.021 [+0.004, +0.040] p=0.0134 d=+0.30
+    li_plain_vs_bear_nogov__recall           +0.026 [+0.002, +0.052] p=0.0334 d=+0.26
+    li_plain_vs_bear_nogov__recall_relaxed   +0.025 [+0.004, +0.048] p=0.0172 d=+0.29
+
+Wrote results/metadata_filter_baseline_petsim_nemotron.json
+Elapsed 38s
+
+=== Reproducibility ===
+Timestamp (UTC): 2026-10-29T23:57:17Z
+Command line:    evals/eval_metadata_filter_baseline.py --corpus petsim --encoders nemotron --output results/metadata_filter_baseline_petsim_nemotron.json --log-file results/metadata_filter_baseline_petsim_nemotron_output.txt
+Python:          3.12.13 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
+numpy:           2.2.6
+scipy:           1.17.1
+bear:            0.4.0
+git commit:      8f0ab8fd5e0a6510a67400f65c697c1f22c187bb
+git status:      unknown (git status failed or timed out)
+git branch:      tist-r2
+
+  eval: metadata_filter_baseline
+  corpus: petsim
+  encoders: ['nemotron']
+  bear_version: 0.4.0
+  bear_path: /home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/bear/__init__.py
+  bear_source_sha: 10730c8ae682f972b731b89789f0f7b97a521523
+  bear_direct_url: file:///home/snhwang/tist-evals/bear-10730c8
+===

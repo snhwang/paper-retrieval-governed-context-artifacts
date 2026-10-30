@@ -1,0 +1,52 @@
+=== Leakage under the threat model (WP6), ToolBench, BEAR 0.4.0 ===
+3225 APIs, 1100 queries, k=5. Attack seed 20261029, description prefix 300 characters.
+
+BM25
+  natural           ungated: cross 0.501 (2756/5500) R@5 0.468 | gate_only: cross 0.000 (0/5500) R@5 0.604 | published: cross 0.000 (0/5500) R@5 0.612 |
+  inject_name       ungated: cross 0.585 (3215/5500) hit 526 R@5 0.413 | gate_only: cross 0.000 (0/5500) hit 0 R@5 0.589 | published: cross 0.000 (0/5500) hit 0 R@5 0.597 |
+  inject_name_desc  ungated: cross 0.703 (3865/5500) hit 928 R@5 0.311 | gate_only: cross 0.000 (0/5500) hit 0 R@5 0.560 | published: cross 0.000 (0/5500) hit 0 R@5 0.569 |
+
+Hash
+  natural           ungated: cross 0.897 (4933/5500) R@5 0.013 | gate_only: cross 0.000 (0/5500) R@5 0.151 | published: cross 0.000 (0/5500) R@5 0.151 |
+  inject_name       ungated: cross 0.902 (4962/5500) hit 10 R@5 0.013 | gate_only: cross 0.000 (0/5500) hit 0 R@5 0.141 | published: cross 0.000 (0/5500) hit 0 R@5 0.140 |
+  inject_name_desc  ungated: cross 0.902 (4962/5500) hit 110 R@5 0.009 | gate_only: cross 0.000 (0/5500) hit 0 R@5 0.132 | published: cross 0.000 (0/5500) hit 0 R@5 0.135 |
+
+BGE-base
+  natural           ungated: cross 0.341 (1877/5500) R@5 0.576 | gate_only: cross 0.000 (0/5500) R@5 0.691 | published: cross 0.000 (0/5500) R@5 0.688 |
+  inject_name       ungated: cross 0.414 (2277/5500) hit 260 R@5 0.520 | gate_only: cross 0.000 (0/5500) hit 0 R@5 0.672 | published: cross 0.000 (0/5500) hit 0 R@5 0.670 |
+  inject_name_desc  ungated: cross 0.532 (2926/5500) hit 684 R@5 0.433 | gate_only: cross 0.000 (0/5500) hit 0 R@5 0.639 | published: cross 0.000 (0/5500) hit 0 R@5 0.639 |
+
+Nemotron-embed-1B
+  natural           ungated: cross 0.308 (1696/5500) R@5 0.669 | gate_only: cross 0.000 (0/5500) R@5 0.764 | published: cross 0.000 (0/5500) R@5 0.762 |
+  inject_name       ungated: cross 0.471 (2593/5500) hit 591 R@5 0.556 | gate_only: cross 0.000 (0/5500) hit 0 R@5 0.742 | published: cross 0.000 (0/5500) hit 0 R@5 0.744 |
+  inject_name_desc  ungated: cross 0.586 (3223/5500) hit 907 R@5 0.466 | gate_only: cross 0.000 (0/5500) hit 0 R@5 0.723 | published: cross 0.000 (0/5500) hit 0 R@5 0.730 |
+
+--- Summary: share of top-5 outside the query's categories; attack success ---
+
+Backend                     ungated cross  gate cross  pub cross   name: ungated / gate   name+desc: ungated / gate
+BM25               0.501 [0.481,0.521]           0          0        0.478 / 0                0.844 / 0     
+Hash               0.897 [0.886,0.907]           0          0        0.009 / 0                0.100 / 0     
+BGE-base           0.341 [0.321,0.362]           0          0        0.236 / 0                0.622 / 0     
+Nemotron-embed-1B  0.308 [0.289,0.327]           0          0        0.537 / 0                0.825 / 0     
+
+Wrote /mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts/results/leakage_threat.json
+Elapsed 994s
+
+=== Reproducibility ===
+Timestamp (UTC): 2026-10-30T00:34:13Z
+Command line:    evals/eval_leakage_threat.py --phase run --backends bm25 hash bge nemotron
+Python:          3.12.13 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
+numpy:           2.2.6
+scipy:           1.17.1
+bear:            0.4.0
+git commit:      8f0ab8fd5e0a6510a67400f65c697c1f22c187bb
+git status:      unknown (git status failed or timed out)
+git branch:      tist-r2
+
+  eval: leakage_threat
+  backends: ['bm25', 'hash', 'bge', 'nemotron']
+  bear_version: 0.4.0
+  bear_path: /home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/bear/__init__.py
+  bear_source_sha: 10730c8ae682f972b731b89789f0f7b97a521523
+  bear_direct_url: file:///home/snhwang/tist-evals/bear-10730c8
+===

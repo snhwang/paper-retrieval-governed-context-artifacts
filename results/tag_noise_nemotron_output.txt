@@ -1,0 +1,78 @@
+=== Tag-noise sweep (WP6), BEAR 0.4.0, gate-only noise ===
+k=5, priority weight 0.3 (ungated 0), theta dense 0.15, BM25 0.0, sweep priority 0
+Benchmarks ['toolbench', 'metatool_tags'], backends ['nemotron'], rates [0.1, 0.2, 0.3, 0.4, 0.5], seeds [0, 1, 2, 3, 4], workers 20
+toolbench: 3225 items, 1100 queries, vocabulary 47
+metatool_tags: 199 items, 21111 queries, vocabulary 19
+306 tasks
+  25/306 tasks, 38s
+  50/306 tasks, 57s
+  75/306 tasks, 75s
+  100/306 tasks, 98s
+  125/306 tasks, 117s
+  150/306 tasks, 139s
+  175/306 tasks, 173s
+  200/306 tasks, 208s
+  225/306 tasks, 247s
+  250/306 tasks, 309s
+  275/306 tasks, 345s
+  300/306 tasks, 375s
+  306/306 tasks, 388s
+
+=== ToolBench: Recall@5 against tag noise (mean over 5 seeds, 95% bootstrap CI over queries) ===
+
+Nemotron-embed-1B: ungated 0.669  gate-only clean 0.764  published config 0.762
+  condition          0.1     0.2     0.3     0.4     0.5   crossover  sig<ungated
+  query_drop       0.691   0.615   0.533   0.457   0.383        0.13         0.2
+  query_swap       0.694   0.608   0.542   0.479   0.388        0.13         0.2
+  query_add        0.763   0.762   0.761   0.760   0.760        none        none
+  corpus_drop      0.737   0.723   0.713   0.703   0.696        none        none
+  corpus_swap      0.698   0.620   0.555   0.486   0.416        0.14         0.2
+  corpus_add       0.696   0.640   0.564   0.481   0.416        0.15         0.2
+  failure split at rate 0.3 (needed items gate-excluded / top-5 out-of-scope share):
+    query_drop     over-restriction 0.307   leakage@5 0.000   admitted out-of-scope 0.0   empty output 0.287
+    query_swap     over-restriction 0.296   leakage@5 0.279   admitted out-of-scope 21.9   empty output 0.000
+    query_add      over-restriction 0.000   leakage@5 0.011   admitted out-of-scope 21.0   empty output 0.000
+    corpus_drop    over-restriction 0.000   leakage@5 0.213   admitted out-of-scope 917.4   empty output 0.000
+    corpus_swap    over-restriction 0.302   leakage@5 0.048   admitted out-of-scope 21.9   empty output 0.000
+    corpus_add     over-restriction 0.300   leakage@5 0.000   admitted out-of-scope 0.0   empty output 0.000
+
+=== MetaTool+Tags: Recall@5 against tag noise (mean over 5 seeds, 95% bootstrap CI over queries) ===
+
+Nemotron-embed-1B: ungated 0.801  gate-only clean 0.970  published config 0.986
+  condition          0.1     0.2     0.3     0.4     0.5   crossover  sig<ungated
+  query_drop       0.806   0.667   0.536   0.422   0.324        0.10         0.2
+  query_swap       0.807   0.666   0.539   0.424   0.321        0.10         0.2
+  query_add        0.967   0.965   0.963   0.960   0.958        none        none
+  corpus_drop      0.946   0.930   0.907   0.889   0.875        none        none
+  corpus_swap      0.815   0.650   0.533   0.468   0.310        0.11         0.2
+  corpus_add       0.818   0.691   0.556   0.449   0.307        0.11         0.2
+  failure split at rate 0.3 (needed items gate-excluded / top-5 out-of-scope share):
+    query_drop     over-restriction 0.449   leakage@5 0.000   admitted out-of-scope 0.0   empty output 0.185
+    query_swap     over-restriction 0.447   leakage@5 0.270   admitted out-of-scope 2.3   empty output 0.015
+    query_add      over-restriction 0.000   leakage@5 0.084   admitted out-of-scope 2.8   empty output 0.000
+    corpus_drop    over-restriction 0.000   leakage@5 0.455   admitted out-of-scope 32.6   empty output 0.000
+    corpus_swap    over-restriction 0.454   leakage@5 0.190   admitted out-of-scope 2.0   empty output 0.001
+    corpus_add     over-restriction 0.435   leakage@5 0.000   admitted out-of-scope 0.0   empty output 0.027
+
+Wrote results/tag_noise_nemotron.json
+Elapsed 422s
+
+=== Reproducibility ===
+Timestamp (UTC): 2026-10-30T00:21:10Z
+Command line:    evals/eval_tag_noise.py --phase run --workers 20 --backends nemotron --output results/tag_noise_nemotron.json --log-file results/tag_noise_nemotron_output.txt
+Python:          3.12.13 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
+numpy:           2.2.6
+scipy:           1.17.1
+bear:            0.4.0
+git commit:      8f0ab8fd5e0a6510a67400f65c697c1f22c187bb
+git status:      unknown (git status failed or timed out)
+git branch:      tist-r2
+
+  eval: tag_noise
+  backends: ['nemotron']
+  benchmarks: ['toolbench', 'metatool_tags']
+  bear_version: 0.4.0
+  bear_path: /home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/bear/__init__.py
+  bear_source_sha: 10730c8ae682f972b731b89789f0f7b97a521523
+  bear_direct_url: file:///home/snhwang/tist-evals/bear-10730c8
+===

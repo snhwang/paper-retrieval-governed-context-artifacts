@@ -1,0 +1,47 @@
+=== Metadata filter + rules (LlamaIndex 0.14.23) vs BEAR 0.4.0: toolbench ===
+3225 items, 1100 queries, k=5, BEAR priority weight 0.3, theta 0.15, mandatory []
+  [bge] indexes built (LlamaIndex 980s, total 1942s)
+    200/1100 queries
+    400/1100 queries
+    600/1100 queries
+    800/1100 queries
+    1000/1100 queries
+
+  bge: arms (95% bootstrap CI)
+    bear_gov        recall 0.688 [0.668, 0.709]   ndcg 0.651 [0.631, 0.670]   gate-failing items 0/5500
+    bear_nogov      recall 0.574 [0.552, 0.596]   ndcg 0.545 [0.524, 0.566]   gate-failing items 1878/5500
+    li_plain        recall 0.578 [0.556, 0.600]   ndcg 0.545 [0.524, 0.566]   gate-failing items 1903/5500
+    li_filter       recall 0.697 [0.676, 0.718]   ndcg 0.658 [0.639, 0.678]   gate-failing items 0/5500
+  bge: paired contrasts (delta [95% CI] p d)
+    li_filter_vs_bear_gov__recall            +0.009 [-0.003, +0.020] p=0.1340 d=+0.05
+    li_filter_vs_bear_gov__ndcg              +0.007 [-0.002, +0.016] p=0.1142 d=+0.05
+    li_filter_vs_li_plain__recall            +0.119 [+0.105, +0.134] p=0.0001 d=+0.48
+    li_filter_vs_li_plain__ndcg              +0.113 [+0.100, +0.126] p=0.0001 d=+0.52
+    bear_gov_vs_bear_nogov__recall           +0.114 [+0.099, +0.130] p=0.0001 d=+0.43
+    bear_gov_vs_bear_nogov__ndcg             +0.106 [+0.092, +0.119] p=0.0001 d=+0.47
+    li_plain_vs_bear_nogov__recall           +0.004 [-0.007, +0.014] p=0.5030 d=+0.02
+    li_plain_vs_bear_nogov__ndcg             -0.000 [-0.008, +0.008] p=0.9480 d=-0.00
+    li_filter and bear_gov return the same top-5 set on 341 queries
+
+Wrote results/metadata_filter_baseline_toolbench_bge.json
+Elapsed 2605s
+
+=== Reproducibility ===
+Timestamp (UTC): 2026-10-30T00:38:15Z
+Command line:    evals/eval_metadata_filter_baseline.py --corpus toolbench --encoders bge --output results/metadata_filter_baseline_toolbench_bge.json --log-file results/metadata_filter_baseline_toolbench_bge_output.txt
+Python:          3.12.13 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
+numpy:           2.2.6
+scipy:           1.17.1
+bear:            0.4.0
+git commit:      8f0ab8fd5e0a6510a67400f65c697c1f22c187bb
+git status:      unknown (git status failed or timed out)
+git branch:      tist-r2
+
+  eval: metadata_filter_baseline
+  corpus: toolbench
+  encoders: ['bge']
+  bear_version: 0.4.0
+  bear_path: /home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/bear/__init__.py
+  bear_source_sha: 10730c8ae682f972b731b89789f0f7b97a521523
+  bear_direct_url: file:///home/snhwang/tist-evals/bear-10730c8
+===
