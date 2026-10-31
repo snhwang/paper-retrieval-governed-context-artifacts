@@ -1,0 +1,54 @@
+=== Query giveaways (WP6): identifiers that point to exactly one tool ===
+Common-word lexicon: 22501 whole words (BERT uncased vocabulary).
+
+toolbench: 1110 tools, 3561 unique identifiers ({'tool_name': 520, 'parameter': 443, 'term': 1926, 'endpoint': 672}), 1100 queries
+  giveaway queries, names only (tool, endpoint, parameter): 176 (0.160)
+  giveaway queries, names or terms: 266 (0.242); by kind {'endpoint': 34, 'tool_name': 133, 'parameter': 18, 'term': 144}; lenient tool names 362
+  queries naming only another tool: 68
+    e.g. "I'm planning a golf tournament and I need information about the players. Can you provide m" -> [('scorecards', 'Live Golf Data', 'endpoint')]
+    e.g. "I'm planning a family vacation in Italy. Please give me a list of Flixbus stations and sea" -> [('flixbus', 'Flixbus', 'tool_name')]
+    e.g. "I'm helping my friend with their language studies, and we need assistance with spelling ou" -> [('spellout', 'Spellout', 'tool_name')]
+    e.g. "I just completed editing a video on Magisto and I'm excited to download the final movie. C" -> [('magisto', 'Magisto', 'tool_name'), ('vsid', 'Magisto', 'parameter')]
+    e.g. "Hey there! I'm curious about a specific transaction on the Binance Smart Chain. Can you pr" -> [('testnet', 'Binance Smart Chain', 'term'), ('binance smart chain', 'Binance Smart Chain', 'tool_name')]
+    e.g. "I'm organizing a company event in Santa Monica, CA and I need to find rental properties fo" -> [('zestimate', 'Zillow_v2', 'term'), ('rent zestimate and comparable properties', 'Zillow_v2', 'endpoint')]
+  BM25               giveaway (n=266): ungated 0.572 gate 0.705 published 0.724 | no giveaway (n=834): ungated 0.435 gate 0.571 published 0.576 | effect diff (gate) -0.003 [-0.038, +0.031]
+  Hash               giveaway (n=266): ungated 0.011 gate 0.168 published 0.171 | no giveaway (n=834): ungated 0.013 gate 0.146 published 0.144 | effect diff (gate) +0.024 [-0.012, +0.061]
+  BGE-base           giveaway (n=266): ungated 0.689 gate 0.765 published 0.758 | no giveaway (n=834): ungated 0.539 gate 0.667 published 0.666 | effect diff (gate) -0.052 [-0.081, -0.021]
+  Nemotron-embed-1B  giveaway (n=266): ungated 0.794 gate 0.843 published 0.837 | no giveaway (n=834): ungated 0.629 gate 0.739 published 0.738 | effect diff (gate) -0.061 [-0.085, -0.036]
+
+metatool_tags: 199 tools, 500 unique identifiers ({'tool_name': 125, 'term': 375}), 21111 queries
+  giveaway queries, names only (tool, endpoint, parameter): 460 (0.022)
+  giveaway queries, names or terms: 2225 (0.105); by kind {'term': 1939, 'tool_name': 460}; lenient tool names 2610
+  queries naming only another tool: 1298
+    e.g. 'I want to surprise my partner with some flowers. Are there any coupon codes available for ' -> [('coupon', 'Discount', 'term')]
+    e.g. "I'm planning to buy some books. Can you help me find any coupon codes for online bookstore" -> [('coupon', 'Discount', 'term')]
+    e.g. "I'm planning to buy a new laptop. Can you find any coupon codes for Best Buy?" -> [('coupon', 'Discount', 'term')]
+    e.g. 'I need to buy some clothes from H&M. Can you find any coupon codes for me?' -> [('coupon', 'Discount', 'term')]
+    e.g. "I'm in the mood for some online shopping. Do you have any coupon codes for clothing stores" -> [('coupon', 'Discount', 'term')]
+    e.g. 'Do you have any suggestions for popular and reliable websites that cater specifically to p' -> [('coupon', 'Discount', 'term')]
+  BM25               giveaway (n=2225): ungated 0.829 gate 0.975 published 0.965 | no giveaway (n=18886): ungated 0.352 gate 0.795 published 0.905 | effect diff (gate) -0.298 [-0.314, -0.282]
+  Hash               giveaway (n=2225): ungated 0.123 gate 0.713 published 0.738 | no giveaway (n=18886): ungated 0.065 gate 0.653 published 0.735 | effect diff (gate) +0.002 [-0.020, +0.023]
+  BGE-base           giveaway (n=2225): ungated 0.960 gate 0.995 published 0.997 | no giveaway (n=18886): ungated 0.693 gate 0.958 published 0.979 | effect diff (gate) -0.230 [-0.240, -0.220]
+  Nemotron-embed-1B  giveaway (n=2225): ungated 0.989 gate 1.000 published 0.998 | no giveaway (n=18886): ungated 0.779 gate 0.966 published 0.985 | effect diff (gate) -0.177 [-0.184, -0.170]
+
+Wrote results/query_giveaways_v042.json
+Elapsed 25s
+
+=== Reproducibility ===
+Timestamp (UTC): 2026-10-31T19:27:07Z
+Command line:    evals/eval_query_giveaways.py --tag-noise results/tag_noise_v042.json results/tag_noise_nemotron_v042.json --output results/query_giveaways_v042.json --log-file results/query_giveaways_v042_output.txt
+Python:          3.12.13 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
+numpy:           2.2.6
+scipy:           1.17.1
+bear:            0.4.2
+git commit:      6ae764af347c15dbfb7e044f8e0e042b0ce39742
+git status:      unknown (git status failed or timed out)
+git branch:      tist-r2
+
+  eval: query_giveaways
+  bear_version: 0.4.2
+  bear_path: /home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/bear/__init__.py
+  bear_source_sha: 0d0718a39a0b0788ef5cca4689352462b830494c
+  bear_direct_url: file:///home/snhwang/tist-evals/bear-v0.4.2
+  bear_export_sha: 0d0718a39a0b0788ef5cca4689352462b830494c
+===

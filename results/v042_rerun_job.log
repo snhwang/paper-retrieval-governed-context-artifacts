@@ -1,0 +1,539 @@
+### run_v042_rerun.sh all, BEAR_SOURCE_SHA 0d0718a39a0b0788ef5cca4689352462b830494c, 2026-10-31T18:54:47Z
+### tist.slice without page cache 780 MiB 2026-10-31T18:54:47Z
+=== tagnoise start 2026-10-31T18:54:47Z (cap 16G)
+=== Tag-noise sweep (WP6), BEAR 0.4.2, gate-only noise ===
+k=5, priority weight 0.3 (ungated 0), theta dense 0.15, BM25 0.0, sweep priority 0
+Benchmarks ['toolbench', 'metatool_tags'], backends ['bm25', 'hash', 'bge'], rates [0.1, 0.2, 0.3, 0.4, 0.5], seeds [0, 1, 2, 3, 4], workers 8
+toolbench: 3225 items, 1100 queries, vocabulary 47
+metatool_tags: 199 items, 21111 queries, vocabulary 19
+BM25 memo check: 0 of 50 queries differ from uncached search (want 0)
+920 tasks
+  25/920 tasks, 29s
+  50/920 tasks, 53s
+  75/920 tasks, 74s
+  100/920 tasks, 101s
+  125/920 tasks, 122s
+  150/920 tasks, 143s
+  175/920 tasks, 163s
+  200/920 tasks, 185s
+  225/920 tasks, 207s
+  250/920 tasks, 234s
+  275/920 tasks, 256s
+  300/920 tasks, 277s
+  325/920 tasks, 307s
+  350/920 tasks, 323s
+  375/920 tasks, 342s
+  400/920 tasks, 364s
+  425/920 tasks, 385s
+  450/920 tasks, 404s
+  475/920 tasks, 425s
+  500/920 tasks, 454s
+  525/920 tasks, 482s
+  550/920 tasks, 532s
+  575/920 tasks, 574s
+  600/920 tasks, 601s
+  625/920 tasks, 631s
+  650/920 tasks, 658s
+  675/920 tasks, 686s
+  700/920 tasks, 723s
+  725/920 tasks, 781s
+  750/920 tasks, 809s
+  775/920 tasks, 861s
+  800/920 tasks, 893s
+  825/920 tasks, 920s
+  850/920 tasks, 953s
+  875/920 tasks, 1011s
+  900/920 tasks, 1041s
+  920/920 tasks, 1060s
+
+=== ToolBench: Recall@5 against tag noise (mean over 5 seeds, 95% bootstrap CI over queries) ===
+
+BM25: ungated 0.468  gate-only clean 0.603  published config 0.612  (BM25 gate-only at priority 50: 0.603)
+  condition          0.1     0.2     0.3     0.4     0.5   crossover  sig<ungated
+  query_drop       0.544   0.488   0.424   0.363   0.302        0.23         0.3
+  query_swap       0.548   0.480   0.432   0.377   0.310        0.23         0.3
+  query_add        0.601   0.599   0.597   0.595   0.594        none        none
+  corpus_drop      0.550   0.531   0.518   0.506   0.501        none        none
+  corpus_swap      0.551   0.497   0.443   0.387   0.337        0.25         0.3
+  corpus_add       0.557   0.515   0.460   0.398   0.349        0.28         0.4
+  failure split at rate 0.3 (needed items gate-excluded / top-5 out-of-scope share):
+    query_drop     over-restriction 0.307   leakage@5 0.000   admitted out-of-scope 0.0   empty output 0.287
+    query_swap     over-restriction 0.296   leakage@5 0.281   admitted out-of-scope 21.9   empty output 0.000
+    query_add      over-restriction 0.000   leakage@5 0.031   admitted out-of-scope 21.0   empty output 0.000
+    corpus_drop    over-restriction 0.000   leakage@5 0.380   admitted out-of-scope 917.4   empty output 0.000
+    corpus_swap    over-restriction 0.302   leakage@5 0.091   admitted out-of-scope 21.9   empty output 0.000
+    corpus_add     over-restriction 0.300   leakage@5 0.000   admitted out-of-scope 0.0   empty output 0.000
+
+Hash: ungated 0.013  gate-only clean 0.151  published config 0.151
+  condition          0.1     0.2     0.3     0.4     0.5   crossover  sig<ungated
+  query_drop       0.138   0.124   0.108   0.092   0.075        none        none
+  query_swap       0.138   0.121   0.110   0.095   0.076        none        none
+  query_add        0.146   0.141   0.136   0.128   0.125        none        none
+  corpus_drop      0.049   0.036   0.029   0.026   0.021        none        none
+  corpus_swap      0.126   0.109   0.098   0.088   0.075        none        none
+  corpus_add       0.146   0.143   0.137   0.126   0.121        none        none
+  failure split at rate 0.3 (needed items gate-excluded / top-5 out-of-scope share):
+    query_drop     over-restriction 0.307   leakage@5 0.000   admitted out-of-scope 0.0   empty output 0.287
+    query_swap     over-restriction 0.296   leakage@5 0.286   admitted out-of-scope 21.9   empty output 0.000
+    query_add      over-restriction 0.000   leakage@5 0.081   admitted out-of-scope 21.0   empty output 0.000
+    corpus_drop    over-restriction 0.000   leakage@5 0.764   admitted out-of-scope 917.4   empty output 0.000
+    corpus_swap    over-restriction 0.302   leakage@5 0.216   admitted out-of-scope 21.9   empty output 0.000
+    corpus_add     over-restriction 0.300   leakage@5 0.000   admitted out-of-scope 0.0   empty output 0.000
+
+BGE-base: ungated 0.576  gate-only clean 0.691  published config 0.688
+  condition          0.1     0.2     0.3     0.4     0.5   crossover  sig<ungated
+  query_drop       0.624   0.557   0.484   0.411   0.347        0.17         0.2
+  query_swap       0.629   0.553   0.493   0.434   0.350        0.17         0.2
+  query_add        0.690   0.689   0.689   0.689   0.687        none        none
+  corpus_drop      0.650   0.633   0.620   0.612   0.604        none        none
+  corpus_swap      0.636   0.569   0.512   0.446   0.387        0.19         0.3
+  corpus_add       0.637   0.591   0.520   0.450   0.390        0.22         0.3
+  failure split at rate 0.3 (needed items gate-excluded / top-5 out-of-scope share):
+    query_drop     over-restriction 0.307   leakage@5 0.000   admitted out-of-scope 0.0   empty output 0.287
+    query_swap     over-restriction 0.296   leakage@5 0.279   admitted out-of-scope 21.9   empty output 0.000
+    query_add      over-restriction 0.000   leakage@5 0.013   admitted out-of-scope 21.0   empty output 0.000
+    corpus_drop    over-restriction 0.000   leakage@5 0.246   admitted out-of-scope 917.4   empty output 0.000
+    corpus_swap    over-restriction 0.302   leakage@5 0.059   admitted out-of-scope 21.9   empty output 0.000
+    corpus_add     over-restriction 0.300   leakage@5 0.000   admitted out-of-scope 0.0   empty output 0.000
+
+=== MetaTool+Tags: Recall@5 against tag noise (mean over 5 seeds, 95% bootstrap CI over queries) ===
+
+BM25: ungated 0.402  gate-only clean 0.814  published config 0.911  (BM25 gate-only at priority 50: 0.814)
+  condition          0.1     0.2     0.3     0.4     0.5   crossover  sig<ungated
+  query_drop       0.680   0.569   0.460   0.364   0.283        0.36         0.4
+  query_swap       0.681   0.567   0.461   0.366   0.279        0.36         0.4
+  query_add        0.802   0.792   0.780   0.771   0.760        none        none
+  corpus_drop      0.652   0.601   0.545   0.522   0.493        none        none
+  corpus_swap      0.695   0.563   0.479   0.412   0.276        0.41         0.5
+  corpus_add       0.712   0.614   0.516   0.418   0.292        0.41         0.5
+  failure split at rate 0.3 (needed items gate-excluded / top-5 out-of-scope share):
+    query_drop     over-restriction 0.449   leakage@5 0.000   admitted out-of-scope 0.0   empty output 0.185
+    query_swap     over-restriction 0.447   leakage@5 0.279   admitted out-of-scope 2.3   empty output 0.015
+    query_add      over-restriction 0.000   leakage@5 0.121   admitted out-of-scope 2.8   empty output 0.000
+    corpus_drop    over-restriction 0.000   leakage@5 0.645   admitted out-of-scope 32.6   empty output 0.000
+    corpus_swap    over-restriction 0.454   leakage@5 0.226   admitted out-of-scope 2.0   empty output 0.001
+    corpus_add     over-restriction 0.435   leakage@5 0.000   admitted out-of-scope 0.0   empty output 0.027
+
+Hash: ungated 0.071  gate-only clean 0.659  published config 0.736
+  condition          0.1     0.2     0.3     0.4     0.5   crossover  sig<ungated
+  query_drop       0.556   0.470   0.385   0.309   0.242        none        none
+  query_swap       0.558   0.468   0.386   0.309   0.239        none        none
+  query_add        0.639   0.621   0.600   0.584   0.565        none        none
+  corpus_drop      0.396   0.314   0.217   0.177   0.149        none        none
+  corpus_swap      0.572   0.469   0.416   0.360   0.240        none        none
+  corpus_add       0.590   0.529   0.460   0.381   0.276        none        none
+  failure split at rate 0.3 (needed items gate-excluded / top-5 out-of-scope share):
+    query_drop     over-restriction 0.449   leakage@5 0.000   admitted out-of-scope 0.0   empty output 0.185
+    query_swap     over-restriction 0.447   leakage@5 0.283   admitted out-of-scope 2.3   empty output 0.015
+    query_add      over-restriction 0.000   leakage@5 0.136   admitted out-of-scope 2.8   empty output 0.000
+    corpus_drop    over-restriction 0.000   leakage@5 0.742   admitted out-of-scope 32.6   empty output 0.000
+    corpus_swap    over-restriction 0.454   leakage@5 0.238   admitted out-of-scope 2.0   empty output 0.001
+    corpus_add     over-restriction 0.435   leakage@5 0.000   admitted out-of-scope 0.0   empty output 0.027
+
+BGE-base: ungated 0.721  gate-only clean 0.962  published config 0.981
+  condition          0.1     0.2     0.3     0.4     0.5   crossover  sig<ungated
+  query_drop       0.800   0.663   0.532   0.419   0.322        0.16         0.2
+  query_swap       0.801   0.661   0.534   0.422   0.319        0.16         0.2
+  query_add        0.959   0.956   0.953   0.949   0.946        none        none
+  corpus_drop      0.930   0.904   0.877   0.847   0.823        none        none
+  corpus_swap      0.810   0.647   0.532   0.466   0.308        0.15         0.2
+  corpus_add       0.813   0.687   0.554   0.448   0.307        0.17         0.2
+  failure split at rate 0.3 (needed items gate-excluded / top-5 out-of-scope share):
+    query_drop     over-restriction 0.449   leakage@5 0.000   admitted out-of-scope 0.0   empty output 0.185
+    query_swap     over-restriction 0.447   leakage@5 0.270   admitted out-of-scope 2.3   empty output 0.015
+    query_add      over-restriction 0.000   leakage@5 0.087   admitted out-of-scope 2.8   empty output 0.000
+    corpus_drop    over-restriction 0.000   leakage@5 0.465   admitted out-of-scope 32.6   empty output 0.000
+    corpus_swap    over-restriction 0.454   leakage@5 0.192   admitted out-of-scope 2.0   empty output 0.001
+    corpus_add     over-restriction 0.435   leakage@5 0.000   admitted out-of-scope 0.0   empty output 0.027
+  embedding store toolbench__hash: hash, run in float32, filled 2026-10-29T23:52:22Z
+  embedding store toolbench__bge: BAAI/bge-base-en-v1.5, run in float32, filled 2026-10-29T23:55:45Z
+  embedding store metatool_tags__hash: hash, run in float32, filled 2026-10-29T23:38:01Z
+  embedding store metatool_tags__bge: BAAI/bge-base-en-v1.5, run in float32, filled 2026-10-29T23:51:33Z
+
+Wrote results/tag_noise_v042.json
+Elapsed 1111s
+
+=== Reproducibility ===
+Timestamp (UTC): 2026-10-31T19:13:19Z
+Command line:    evals/eval_tag_noise.py --phase run --backends bm25 hash bge --workers 8 --output results/tag_noise_v042.json --log-file results/tag_noise_v042_output.txt
+Python:          3.12.13 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
+numpy:           2.2.6
+scipy:           1.17.1
+bear:            0.4.2
+git commit:      6ae764af347c15dbfb7e044f8e0e042b0ce39742
+git status:      unknown (git status failed or timed out)
+git branch:      tist-r2
+
+  eval: tag_noise
+  backends: ['bm25', 'hash', 'bge']
+  benchmarks: ['toolbench', 'metatool_tags']
+  bear_version: 0.4.2
+  bear_path: /home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/bear/__init__.py
+  bear_source_sha: 0d0718a39a0b0788ef5cca4689352462b830494c
+  bear_direct_url: file:///home/snhwang/tist-evals/bear-v0.4.2
+  bear_export_sha: 0d0718a39a0b0788ef5cca4689352462b830494c
+===
+=== tagnoise exit 0 2026-10-31T19:13:24Z
+### tist.slice without page cache 770 MiB 2026-10-31T19:13:24Z
+=== tagnoise_nemotron start 2026-10-31T19:13:24Z (cap 16G)
+=== Tag-noise sweep (WP6), BEAR 0.4.2, gate-only noise ===
+k=5, priority weight 0.3 (ungated 0), theta dense 0.15, BM25 0.0, sweep priority 0
+Benchmarks ['toolbench', 'metatool_tags'], backends ['nemotron'], rates [0.1, 0.2, 0.3, 0.4, 0.5], seeds [0, 1, 2, 3, 4], workers 8
+toolbench: 3225 items, 1100 queries, vocabulary 47
+metatool_tags: 199 items, 21111 queries, vocabulary 19
+306 tasks
+  25/306 tasks, 30s
+  50/306 tasks, 56s
+  75/306 tasks, 78s
+  100/306 tasks, 108s
+  125/306 tasks, 131s
+  150/306 tasks, 153s
+  175/306 tasks, 189s
+  200/306 tasks, 227s
+  225/306 tasks, 261s
+  250/306 tasks, 325s
+  275/306 tasks, 360s
+  300/306 tasks, 395s
+  306/306 tasks, 403s
+
+=== ToolBench: Recall@5 against tag noise (mean over 5 seeds, 95% bootstrap CI over queries) ===
+
+Nemotron-embed-1B: ungated 0.669  gate-only clean 0.764  published config 0.762
+  condition          0.1     0.2     0.3     0.4     0.5   crossover  sig<ungated
+  query_drop       0.691   0.615   0.533   0.457   0.383        0.13         0.2
+  query_swap       0.694   0.608   0.542   0.479   0.388        0.13         0.2
+  query_add        0.763   0.762   0.761   0.760   0.760        none        none
+  corpus_drop      0.737   0.723   0.713   0.703   0.696        none        none
+  corpus_swap      0.698   0.620   0.555   0.486   0.416        0.14         0.2
+  corpus_add       0.696   0.640   0.564   0.481   0.416        0.15         0.2
+  failure split at rate 0.3 (needed items gate-excluded / top-5 out-of-scope share):
+    query_drop     over-restriction 0.307   leakage@5 0.000   admitted out-of-scope 0.0   empty output 0.287
+    query_swap     over-restriction 0.296   leakage@5 0.279   admitted out-of-scope 21.9   empty output 0.000
+    query_add      over-restriction 0.000   leakage@5 0.011   admitted out-of-scope 21.0   empty output 0.000
+    corpus_drop    over-restriction 0.000   leakage@5 0.213   admitted out-of-scope 917.4   empty output 0.000
+    corpus_swap    over-restriction 0.302   leakage@5 0.048   admitted out-of-scope 21.9   empty output 0.000
+    corpus_add     over-restriction 0.300   leakage@5 0.000   admitted out-of-scope 0.0   empty output 0.000
+
+=== MetaTool+Tags: Recall@5 against tag noise (mean over 5 seeds, 95% bootstrap CI over queries) ===
+
+Nemotron-embed-1B: ungated 0.801  gate-only clean 0.970  published config 0.986
+  condition          0.1     0.2     0.3     0.4     0.5   crossover  sig<ungated
+  query_drop       0.806   0.667   0.536   0.422   0.324        0.10         0.2
+  query_swap       0.807   0.666   0.539   0.424   0.321        0.10         0.2
+  query_add        0.967   0.965   0.963   0.960   0.958        none        none
+  corpus_drop      0.946   0.930   0.907   0.889   0.875        none        none
+  corpus_swap      0.815   0.650   0.533   0.468   0.310        0.11         0.2
+  corpus_add       0.818   0.691   0.556   0.449   0.307        0.11         0.2
+  failure split at rate 0.3 (needed items gate-excluded / top-5 out-of-scope share):
+    query_drop     over-restriction 0.449   leakage@5 0.000   admitted out-of-scope 0.0   empty output 0.185
+    query_swap     over-restriction 0.447   leakage@5 0.270   admitted out-of-scope 2.3   empty output 0.015
+    query_add      over-restriction 0.000   leakage@5 0.084   admitted out-of-scope 2.8   empty output 0.000
+    corpus_drop    over-restriction 0.000   leakage@5 0.455   admitted out-of-scope 32.6   empty output 0.000
+    corpus_swap    over-restriction 0.454   leakage@5 0.190   admitted out-of-scope 2.0   empty output 0.001
+    corpus_add     over-restriction 0.435   leakage@5 0.000   admitted out-of-scope 0.0   empty output 0.027
+  embedding store toolbench__nemotron: remote:http://localhost:8360, run in served, filled 2026-10-29T23:54:34Z
+  embedding store metatool_tags__nemotron: remote:http://localhost:8360, run in served, filled 2026-10-29T23:53:22Z
+
+Wrote results/tag_noise_nemotron_v042.json
+Elapsed 420s
+
+=== Reproducibility ===
+Timestamp (UTC): 2026-10-31T19:20:25Z
+Command line:    evals/eval_tag_noise.py --phase run --backends nemotron --workers 8 --output results/tag_noise_nemotron_v042.json --log-file results/tag_noise_nemotron_v042_output.txt
+Python:          3.12.13 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
+numpy:           2.2.6
+scipy:           1.17.1
+bear:            0.4.2
+git commit:      6ae764af347c15dbfb7e044f8e0e042b0ce39742
+git status:      unknown (git status failed or timed out)
+git branch:      tist-r2
+
+  eval: tag_noise
+  backends: ['nemotron']
+  benchmarks: ['toolbench', 'metatool_tags']
+  bear_version: 0.4.2
+  bear_path: /home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/bear/__init__.py
+  bear_source_sha: 0d0718a39a0b0788ef5cca4689352462b830494c
+  bear_direct_url: file:///home/snhwang/tist-evals/bear-v0.4.2
+  bear_export_sha: 0d0718a39a0b0788ef5cca4689352462b830494c
+===
+=== tagnoise_nemotron exit 0 2026-10-31T19:20:30Z
+### tist.slice without page cache 779 MiB 2026-10-31T19:20:30Z
+=== gatecheck start 2026-10-31T19:20:30Z (cap 8G)
+toolbench: over-restriction (share of needed items the noisy gate excludes)
+  query_drop_0.1       0.099   trace agrees: {'hash': True, 'bge': True, 'bm25': True, 'nemotron': True, 'qwen3-0.6b': True}
+  query_drop_0.2       0.199   trace agrees: {'hash': True, 'bge': True, 'bm25': True, 'nemotron': True, 'qwen3-0.6b': True}
+  query_drop_0.3       0.307   trace agrees: {'hash': True, 'bge': True, 'bm25': True, 'nemotron': True, 'qwen3-0.6b': True}
+  query_drop_0.4       0.403   trace agrees: {'hash': True, 'bge': True, 'bm25': True, 'nemotron': True, 'qwen3-0.6b': True}
+  query_drop_0.5       0.504   trace agrees: {'hash': True, 'bge': True, 'bm25': True, 'nemotron': True, 'qwen3-0.6b': True}
+  query_swap_0.1       0.092   trace agrees: {'hash': True, 'bge': True, 'bm25': True, 'nemotron': True, 'qwen3-0.6b': True}
+  query_swap_0.2       0.207   trace agrees: {'hash': True, 'bge': True, 'bm25': True, 'nemotron': True, 'qwen3-0.6b': True}
+  query_swap_0.3       0.296   trace agrees: {'hash': True, 'bge': True, 'bm25': True, 'nemotron': True, 'qwen3-0.6b': True}
+  query_swap_0.4       0.380   trace agrees: {'hash': True, 'bge': True, 'bm25': True, 'nemotron': True, 'qwen3-0.6b': True}
+  query_swap_0.5       0.493   trace agrees: {'hash': True, 'bge': True, 'bm25': True, 'nemotron': True, 'qwen3-0.6b': True}
+  query_add_0.1        0.000   trace agrees: {'hash': True, 'bge': True, 'bm25': True, 'nemotron': True, 'qwen3-0.6b': True}
+  query_add_0.2        0.000   trace agrees: {'hash': True, 'bge': True, 'bm25': True, 'nemotron': True, 'qwen3-0.6b': True}
+  query_add_0.3        0.000   trace agrees: {'hash': True, 'bge': True, 'bm25': True, 'nemotron': True, 'qwen3-0.6b': True}
+  query_add_0.4        0.000   trace agrees: {'hash': True, 'bge': True, 'bm25': True, 'nemotron': True, 'qwen3-0.6b': True}
+  query_add_0.5        0.000   trace agrees: {'hash': True, 'bge': True, 'bm25': True, 'nemotron': True, 'qwen3-0.6b': True}
+  corpus_drop_0.1      0.000   trace agrees: {'hash': True, 'bge': True, 'bm25': True, 'nemotron': True, 'qwen3-0.6b': True}
+  corpus_drop_0.2      0.000   trace agrees: {'hash': True, 'bge': True, 'bm25': True, 'nemotron': True, 'qwen3-0.6b': True}
+  corpus_drop_0.3      0.000   trace agrees: {'hash': True, 'bge': True, 'bm25': True, 'nemotron': True, 'qwen3-0.6b': True}
+  corpus_drop_0.4      0.000   trace agrees: {'hash': True, 'bge': True, 'bm25': True, 'nemotron': True, 'qwen3-0.6b': True}
+  corpus_drop_0.5      0.000   trace agrees: {'hash': True, 'bge': True, 'bm25': True, 'nemotron': True, 'qwen3-0.6b': True}
+  corpus_swap_0.1      0.103   trace agrees: {'hash': True, 'bge': True, 'bm25': True, 'nemotron': True, 'qwen3-0.6b': True}
+  corpus_swap_0.2      0.206   trace agrees: {'hash': True, 'bge': True, 'bm25': True, 'nemotron': True, 'qwen3-0.6b': True}
+  corpus_swap_0.3      0.302   trace agrees: {'hash': True, 'bge': True, 'bm25': True, 'nemotron': True, 'qwen3-0.6b': True}
+  corpus_swap_0.4      0.402   trace agrees: {'hash': True, 'bge': True, 'bm25': True, 'nemotron': True, 'qwen3-0.6b': True}
+  corpus_swap_0.5      0.499   trace agrees: {'hash': True, 'bge': True, 'bm25': True, 'nemotron': True, 'qwen3-0.6b': True}
+  corpus_add_0.1       0.107   trace agrees: {'hash': True, 'bge': True, 'bm25': True, 'nemotron': True, 'qwen3-0.6b': True}
+  corpus_add_0.2       0.189   trace agrees: {'hash': True, 'bge': True, 'bm25': True, 'nemotron': True, 'qwen3-0.6b': True}
+  corpus_add_0.3       0.300   trace agrees: {'hash': True, 'bge': True, 'bm25': True, 'nemotron': True, 'qwen3-0.6b': True}
+  corpus_add_0.4       0.409   trace agrees: {'hash': True, 'bge': True, 'bm25': True, 'nemotron': True, 'qwen3-0.6b': True}
+  corpus_add_0.5       0.509   trace agrees: {'hash': True, 'bge': True, 'bm25': True, 'nemotron': True, 'qwen3-0.6b': True}
+metatool_tags: over-restriction (share of needed items the noisy gate excludes)
+  query_drop_0.1       0.170   trace agrees: {'hash': True, 'bge': True, 'bm25': True, 'nemotron': True, 'qwen3-0.6b': True}
+  query_drop_0.2       0.313   trace agrees: {'hash': True, 'bge': True, 'bm25': True, 'nemotron': True, 'qwen3-0.6b': True}
+  query_drop_0.3       0.449   trace agrees: {'hash': True, 'bge': True, 'bm25': True, 'nemotron': True, 'qwen3-0.6b': True}
+  query_drop_0.4       0.567   trace agrees: {'hash': True, 'bge': True, 'bm25': True, 'nemotron': True, 'qwen3-0.6b': True}
+  query_drop_0.5       0.667   trace agrees: {'hash': True, 'bge': True, 'bm25': True, 'nemotron': True, 'qwen3-0.6b': True}
+  query_swap_0.1       0.168   trace agrees: {'hash': True, 'bge': True, 'bm25': True, 'nemotron': True, 'qwen3-0.6b': True}
+  query_swap_0.2       0.315   trace agrees: {'hash': True, 'bge': True, 'bm25': True, 'nemotron': True, 'qwen3-0.6b': True}
+  query_swap_0.3       0.447   trace agrees: {'hash': True, 'bge': True, 'bm25': True, 'nemotron': True, 'qwen3-0.6b': True}
+  query_swap_0.4       0.564   trace agrees: {'hash': True, 'bge': True, 'bm25': True, 'nemotron': True, 'qwen3-0.6b': True}
+  query_swap_0.5       0.670   trace agrees: {'hash': True, 'bge': True, 'bm25': True, 'nemotron': True, 'qwen3-0.6b': True}
+  query_add_0.1        0.000   trace agrees: {'hash': True, 'bge': True, 'bm25': True, 'nemotron': True, 'qwen3-0.6b': True}
+  query_add_0.2        0.000   trace agrees: {'hash': True, 'bge': True, 'bm25': True, 'nemotron': True, 'qwen3-0.6b': True}
+  query_add_0.3        0.000   trace agrees: {'hash': True, 'bge': True, 'bm25': True, 'nemotron': True, 'qwen3-0.6b': True}
+  query_add_0.4        0.000   trace agrees: {'hash': True, 'bge': True, 'bm25': True, 'nemotron': True, 'qwen3-0.6b': True}
+  query_add_0.5        0.000   trace agrees: {'hash': True, 'bge': True, 'bm25': True, 'nemotron': True, 'qwen3-0.6b': True}
+  corpus_drop_0.1      0.000   trace agrees: {'hash': True, 'bge': True, 'bm25': True, 'nemotron': True, 'qwen3-0.6b': True}
+  corpus_drop_0.2      0.000   trace agrees: {'hash': True, 'bge': True, 'bm25': True, 'nemotron': True, 'qwen3-0.6b': True}
+  corpus_drop_0.3      0.000   trace agrees: {'hash': True, 'bge': True, 'bm25': True, 'nemotron': True, 'qwen3-0.6b': True}
+  corpus_drop_0.4      0.000   trace agrees: {'hash': True, 'bge': True, 'bm25': True, 'nemotron': True, 'qwen3-0.6b': True}
+  corpus_drop_0.5      0.000   trace agrees: {'hash': True, 'bge': True, 'bm25': True, 'nemotron': True, 'qwen3-0.6b': True}
+  corpus_swap_0.1      0.163   trace agrees: {'hash': True, 'bge': True, 'bm25': True, 'nemotron': True, 'qwen3-0.6b': True}
+  corpus_swap_0.2      0.337   trace agrees: {'hash': True, 'bge': True, 'bm25': True, 'nemotron': True, 'qwen3-0.6b': True}
+  corpus_swap_0.3      0.454   trace agrees: {'hash': True, 'bge': True, 'bm25': True, 'nemotron': True, 'qwen3-0.6b': True}
+  corpus_swap_0.4      0.519   trace agrees: {'hash': True, 'bge': True, 'bm25': True, 'nemotron': True, 'qwen3-0.6b': True}
+  corpus_swap_0.5      0.683   trace agrees: {'hash': True, 'bge': True, 'bm25': True, 'nemotron': True, 'qwen3-0.6b': True}
+  corpus_add_0.1       0.161   trace agrees: {'hash': True, 'bge': True, 'bm25': True, 'nemotron': True, 'qwen3-0.6b': True}
+  corpus_add_0.2       0.295   trace agrees: {'hash': True, 'bge': True, 'bm25': True, 'nemotron': True, 'qwen3-0.6b': True}
+  corpus_add_0.3       0.435   trace agrees: {'hash': True, 'bge': True, 'bm25': True, 'nemotron': True, 'qwen3-0.6b': True}
+  corpus_add_0.4       0.544   trace agrees: {'hash': True, 'bge': True, 'bm25': True, 'nemotron': True, 'qwen3-0.6b': True}
+  corpus_add_0.5       0.690   trace agrees: {'hash': True, 'bge': True, 'bm25': True, 'nemotron': True, 'qwen3-0.6b': True}
+Wrote results/tag_noise_overrestriction_v042.json
+=== gatecheck exit 0 2026-10-31T19:21:00Z
+### tist.slice without page cache 775 MiB 2026-10-31T19:21:00Z
+=== leakage start 2026-10-31T19:21:00Z (cap 12G)
+=== Leakage under the threat model (WP6), ToolBench, BEAR 0.4.2 ===
+3225 APIs, 1100 queries, k=5. Attack seed 20261029, description prefix 300 characters.
+
+BM25
+  natural           ungated: cross 0.501 (2757/5500) R@5 0.468 | gate_only: cross 0.000 (0/5500) R@5 0.603 | published: cross 0.000 (0/5500) R@5 0.612 |
+  inject_name       ungated: cross 0.585 (3217/5500) hit 526 R@5 0.413 | gate_only: cross 0.000 (0/5500) hit 0 R@5 0.588 | published: cross 0.000 (0/5500) hit 0 R@5 0.596 |
+  inject_name_desc  ungated: cross 0.703 (3865/5500) hit 928 R@5 0.311 | gate_only: cross 0.000 (0/5500) hit 0 R@5 0.560 | published: cross 0.000 (0/5500) hit 0 R@5 0.569 |
+
+Hash
+  natural           ungated: cross 0.897 (4933/5500) R@5 0.013 | gate_only: cross 0.000 (0/5500) R@5 0.151 | published: cross 0.000 (0/5500) R@5 0.151 |
+  inject_name       ungated: cross 0.902 (4962/5500) hit 10 R@5 0.013 | gate_only: cross 0.000 (0/5500) hit 0 R@5 0.141 | published: cross 0.000 (0/5500) hit 0 R@5 0.140 |
+  inject_name_desc  ungated: cross 0.902 (4962/5500) hit 110 R@5 0.009 | gate_only: cross 0.000 (0/5500) hit 0 R@5 0.132 | published: cross 0.000 (0/5500) hit 0 R@5 0.135 |
+
+BGE-base
+  natural           ungated: cross 0.341 (1877/5500) R@5 0.576 | gate_only: cross 0.000 (0/5500) R@5 0.691 | published: cross 0.000 (0/5500) R@5 0.688 |
+  inject_name       ungated: cross 0.414 (2277/5500) hit 260 R@5 0.520 | gate_only: cross 0.000 (0/5500) hit 0 R@5 0.672 | published: cross 0.000 (0/5500) hit 0 R@5 0.670 |
+  inject_name_desc  ungated: cross 0.532 (2926/5500) hit 684 R@5 0.433 | gate_only: cross 0.000 (0/5500) hit 0 R@5 0.639 | published: cross 0.000 (0/5500) hit 0 R@5 0.639 |
+
+Nemotron-embed-1B
+  natural           ungated: cross 0.308 (1696/5500) R@5 0.669 | gate_only: cross 0.000 (0/5500) R@5 0.764 | published: cross 0.000 (0/5500) R@5 0.762 |
+  inject_name       ungated: cross 0.471 (2593/5500) hit 591 R@5 0.556 | gate_only: cross 0.000 (0/5500) hit 0 R@5 0.742 | published: cross 0.000 (0/5500) hit 0 R@5 0.744 |
+  inject_name_desc  ungated: cross 0.586 (3223/5500) hit 907 R@5 0.466 | gate_only: cross 0.000 (0/5500) hit 0 R@5 0.723 | published: cross 0.000 (0/5500) hit 0 R@5 0.730 |
+
+--- Summary: share of top-5 outside the query's categories; attack success ---
+
+Backend                     ungated cross  gate cross  pub cross   name: ungated / gate   name+desc: ungated / gate
+BM25               0.501 [0.481,0.522]           0          0        0.478 / 0                0.844 / 0     
+Hash               0.897 [0.886,0.907]           0          0        0.009 / 0                0.100 / 0     
+BGE-base           0.341 [0.321,0.362]           0          0        0.236 / 0                0.622 / 0     
+Nemotron-embed-1B  0.308 [0.289,0.327]           0          0        0.537 / 0                0.825 / 0     
+  embedding store toolbench__hash: hash, run in float32, filled 2026-10-29T23:52:22Z
+  embedding store toolbench__bge: BAAI/bge-base-en-v1.5, run in float32, filled 2026-10-29T23:55:45Z
+  embedding store toolbench__nemotron: remote:http://localhost:8360, run in served, filled 2026-10-29T23:54:34Z
+
+Wrote results/leakage_threat_v042.json
+Elapsed 336s
+
+=== Reproducibility ===
+Timestamp (UTC): 2026-10-31T19:26:37Z
+Command line:    evals/eval_leakage_threat.py --phase run --backends bm25 hash bge nemotron --output results/leakage_threat_v042.json --log-file results/leakage_threat_v042_output.txt
+Python:          3.12.13 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
+numpy:           2.2.6
+scipy:           1.17.1
+bear:            0.4.2
+git commit:      6ae764af347c15dbfb7e044f8e0e042b0ce39742
+git status:      unknown (git status failed or timed out)
+git branch:      tist-r2
+
+  eval: leakage_threat
+  backends: ['bm25', 'hash', 'bge', 'nemotron']
+  bear_version: 0.4.2
+  bear_path: /home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/bear/__init__.py
+  bear_source_sha: 0d0718a39a0b0788ef5cca4689352462b830494c
+  bear_direct_url: file:///home/snhwang/tist-evals/bear-v0.4.2
+  bear_export_sha: 0d0718a39a0b0788ef5cca4689352462b830494c
+===
+=== leakage exit 0 2026-10-31T19:26:42Z
+### tist.slice without page cache 779 MiB 2026-10-31T19:26:42Z
+=== giveaways start 2026-10-31T19:26:42Z (cap 8G)
+=== Query giveaways (WP6): identifiers that point to exactly one tool ===
+Common-word lexicon: 22501 whole words (BERT uncased vocabulary).
+
+toolbench: 1110 tools, 3561 unique identifiers ({'tool_name': 520, 'parameter': 443, 'term': 1926, 'endpoint': 672}), 1100 queries
+  giveaway queries, names only (tool, endpoint, parameter): 176 (0.160)
+  giveaway queries, names or terms: 266 (0.242); by kind {'endpoint': 34, 'tool_name': 133, 'parameter': 18, 'term': 144}; lenient tool names 362
+  queries naming only another tool: 68
+    e.g. "I'm planning a golf tournament and I need information about the players. Can you provide m" -> [('scorecards', 'Live Golf Data', 'endpoint')]
+    e.g. "I'm planning a family vacation in Italy. Please give me a list of Flixbus stations and sea" -> [('flixbus', 'Flixbus', 'tool_name')]
+    e.g. "I'm helping my friend with their language studies, and we need assistance with spelling ou" -> [('spellout', 'Spellout', 'tool_name')]
+    e.g. "I just completed editing a video on Magisto and I'm excited to download the final movie. C" -> [('magisto', 'Magisto', 'tool_name'), ('vsid', 'Magisto', 'parameter')]
+    e.g. "Hey there! I'm curious about a specific transaction on the Binance Smart Chain. Can you pr" -> [('testnet', 'Binance Smart Chain', 'term'), ('binance smart chain', 'Binance Smart Chain', 'tool_name')]
+    e.g. "I'm organizing a company event in Santa Monica, CA and I need to find rental properties fo" -> [('zestimate', 'Zillow_v2', 'term'), ('rent zestimate and comparable properties', 'Zillow_v2', 'endpoint')]
+  BM25               giveaway (n=266): ungated 0.572 gate 0.705 published 0.724 | no giveaway (n=834): ungated 0.435 gate 0.571 published 0.576 | effect diff (gate) -0.003 [-0.038, +0.031]
+  Hash               giveaway (n=266): ungated 0.011 gate 0.168 published 0.171 | no giveaway (n=834): ungated 0.013 gate 0.146 published 0.144 | effect diff (gate) +0.024 [-0.012, +0.061]
+  BGE-base           giveaway (n=266): ungated 0.689 gate 0.765 published 0.758 | no giveaway (n=834): ungated 0.539 gate 0.667 published 0.666 | effect diff (gate) -0.052 [-0.081, -0.021]
+  Nemotron-embed-1B  giveaway (n=266): ungated 0.794 gate 0.843 published 0.837 | no giveaway (n=834): ungated 0.629 gate 0.739 published 0.738 | effect diff (gate) -0.061 [-0.085, -0.036]
+
+metatool_tags: 199 tools, 500 unique identifiers ({'tool_name': 125, 'term': 375}), 21111 queries
+  giveaway queries, names only (tool, endpoint, parameter): 460 (0.022)
+  giveaway queries, names or terms: 2225 (0.105); by kind {'term': 1939, 'tool_name': 460}; lenient tool names 2610
+  queries naming only another tool: 1298
+    e.g. 'I want to surprise my partner with some flowers. Are there any coupon codes available for ' -> [('coupon', 'Discount', 'term')]
+    e.g. "I'm planning to buy some books. Can you help me find any coupon codes for online bookstore" -> [('coupon', 'Discount', 'term')]
+    e.g. "I'm planning to buy a new laptop. Can you find any coupon codes for Best Buy?" -> [('coupon', 'Discount', 'term')]
+    e.g. 'I need to buy some clothes from H&M. Can you find any coupon codes for me?' -> [('coupon', 'Discount', 'term')]
+    e.g. "I'm in the mood for some online shopping. Do you have any coupon codes for clothing stores" -> [('coupon', 'Discount', 'term')]
+    e.g. 'Do you have any suggestions for popular and reliable websites that cater specifically to p' -> [('coupon', 'Discount', 'term')]
+  BM25               giveaway (n=2225): ungated 0.829 gate 0.975 published 0.965 | no giveaway (n=18886): ungated 0.352 gate 0.795 published 0.905 | effect diff (gate) -0.298 [-0.314, -0.282]
+  Hash               giveaway (n=2225): ungated 0.123 gate 0.713 published 0.738 | no giveaway (n=18886): ungated 0.065 gate 0.653 published 0.735 | effect diff (gate) +0.002 [-0.020, +0.023]
+  BGE-base           giveaway (n=2225): ungated 0.960 gate 0.995 published 0.997 | no giveaway (n=18886): ungated 0.693 gate 0.958 published 0.979 | effect diff (gate) -0.230 [-0.240, -0.220]
+  Nemotron-embed-1B  giveaway (n=2225): ungated 0.989 gate 1.000 published 0.998 | no giveaway (n=18886): ungated 0.779 gate 0.966 published 0.985 | effect diff (gate) -0.177 [-0.184, -0.170]
+
+Wrote results/query_giveaways_v042.json
+Elapsed 25s
+
+=== Reproducibility ===
+Timestamp (UTC): 2026-10-31T19:27:07Z
+Command line:    evals/eval_query_giveaways.py --tag-noise results/tag_noise_v042.json results/tag_noise_nemotron_v042.json --output results/query_giveaways_v042.json --log-file results/query_giveaways_v042_output.txt
+Python:          3.12.13 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
+numpy:           2.2.6
+scipy:           1.17.1
+bear:            0.4.2
+git commit:      6ae764af347c15dbfb7e044f8e0e042b0ce39742
+git status:      unknown (git status failed or timed out)
+git branch:      tist-r2
+
+  eval: query_giveaways
+  bear_version: 0.4.2
+  bear_path: /home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/bear/__init__.py
+  bear_source_sha: 0d0718a39a0b0788ef5cca4689352462b830494c
+  bear_direct_url: file:///home/snhwang/tist-evals/bear-v0.4.2
+  bear_export_sha: 0d0718a39a0b0788ef5cca4689352462b830494c
+===
+=== giveaways exit 0 2026-10-31T19:27:12Z
+### tist.slice without page cache 781 MiB 2026-10-31T19:27:12Z
+=== mandatory start 2026-10-31T19:27:12Z (cap 8G)
+=== Mandatory-injection coverage (WP2), Pet Sim, BEAR 0.4.2 ===
+Corpus 58 instructions. Safety rules ['constraint-no-aggression', 'safety-boundaries', 'safety-reasonable-response'].
+Queries 246. k=10, theta=0.3, priority weight 0.3, mandatory ['safety']. Soft tag 'safety_review' carried by no query.
+
+BM25  safety-rule similarity to queries: min 0.000, median 0.175, max 1.000, share >= 0.3: 0.256
+  A theta=0.3:  ON 1.000 [1.000, 1.000]  OFF 0.255 [0.220, 0.290]  ON-OFF +0.745 [+0.710, +0.780] p=0.0001 d=+2.58
+      OFF reaches 188/738 pairs by similarity. ON paths {'in:mandatory': 549, 'in:search': 189}
+  B theta=1.001:  ON 1.000 [1.000, 1.000]  OFF 0.000 [0.000, 0.000]  ON-OFF +1.000 [+1.000, +1.000] p=0.0001 d=n/a
+      OFF reaches 0/738 pairs (want 0). ON paths {'in:mandatory': 738}
+  C gate fails, ON: recall 0.000, violations 0/738 (want 0). Paths {'out:gate': 738}
+  D gate on 'dog', ON: present-vs-gate mismatches 0/738 (want 0), gate passes in 255 pairs. Paths {'in:mandatory': 196, 'out:gate': 483, 'in:search': 59}
+
+Hash  safety-rule similarity to queries: min -0.441, median 0.158, max 0.665, share >= 0.3: 0.213
+  A theta=0.3:  ON 1.000 [1.000, 1.000]  OFF 0.213 [0.183, 0.244]  ON-OFF +0.787 [+0.756, +0.817] p=0.0001 d=+3.26
+      OFF reaches 157/738 pairs by similarity. ON paths {'in:mandatory': 581, 'in:search': 157}
+  B theta=0.665:  ON 1.000 [1.000, 1.000]  OFF 0.000 [0.000, 0.000]  ON-OFF +1.000 [+1.000, +1.000] p=0.0001 d=n/a
+      OFF reaches 0/738 pairs (want 0). ON paths {'in:mandatory': 738}
+  C gate fails, ON: recall 0.000, violations 0/738 (want 0). Paths {'out:gate': 738}
+  D gate on 'dog', ON: present-vs-gate mismatches 0/738 (want 0), gate passes in 255 pairs. Paths {'in:mandatory': 195, 'in:search': 60, 'out:gate': 483}
+
+BGE-base  safety-rule similarity to queries: min 0.292, median 0.492, max 0.725, share >= 0.3: 0.999
+  A theta=0.3:  ON 1.000 [1.000, 1.000]  OFF 0.978 [0.963, 0.991]  ON-OFF +0.022 [+0.009, +0.037] p=0.0001 d=+0.20
+      OFF reaches 722/738 pairs by similarity. ON paths {'in:search': 737, 'in:mandatory': 1}
+  B theta=0.725:  ON 1.000 [1.000, 1.000]  OFF 0.000 [0.000, 0.000]  ON-OFF +1.000 [+1.000, +1.000] p=0.0001 d=n/a
+      OFF reaches 0/738 pairs (want 0). ON paths {'in:mandatory': 738}
+  C gate fails, ON: recall 0.000, violations 0/738 (want 0). Paths {'out:gate': 738}
+  D gate on 'dog', ON: present-vs-gate mismatches 0/738 (want 0), gate passes in 255 pairs. Paths {'in:search': 255, 'out:gate': 483}
+
+BGE-M3  safety-rule similarity to queries: min 0.278, median 0.427, max 0.615, share >= 0.3: 0.997
+  A theta=0.3:  ON 1.000 [1.000, 1.000]  OFF 0.967 [0.947, 0.985]  ON-OFF +0.033 [+0.015, +0.053] p=0.0001 d=+0.22
+      OFF reaches 714/738 pairs by similarity. ON paths {'in:search': 736, 'in:mandatory': 2}
+  B theta=0.615:  ON 1.000 [1.000, 1.000]  OFF 0.000 [0.000, 0.000]  ON-OFF +1.000 [+1.000, +1.000] p=0.0001 d=n/a
+      OFF reaches 0/738 pairs (want 0). ON paths {'in:mandatory': 738}
+  C gate fails, ON: recall 0.000, violations 0/738 (want 0). Paths {'out:gate': 738}
+  D gate on 'dog', ON: present-vs-gate mismatches 0/738 (want 0), gate passes in 255 pairs. Paths {'in:search': 255, 'out:gate': 483}
+
+Qwen3-0.6B  safety-rule similarity to queries: min 0.179, median 0.416, max 0.727, share >= 0.3: 0.976
+  A theta=0.3:  ON 1.000 [1.000, 1.000]  OFF 0.947 [0.925, 0.967]  ON-OFF +0.053 [+0.033, +0.075] p=0.0001 d=+0.31
+      OFF reaches 699/738 pairs by similarity. ON paths {'in:search': 720, 'in:mandatory': 18}
+  B theta=0.727:  ON 1.000 [1.000, 1.000]  OFF 0.000 [0.000, 0.000]  ON-OFF +1.000 [+1.000, +1.000] p=0.0001 d=n/a
+      OFF reaches 0/738 pairs (want 0). ON paths {'in:mandatory': 738}
+  C gate fails, ON: recall 0.000, violations 0/738 (want 0). Paths {'out:gate': 738}
+  D gate on 'dog', ON: present-vs-gate mismatches 0/738 (want 0), gate passes in 255 pairs. Paths {'in:search': 255, 'out:gate': 483}
+
+Qwen3-4B  safety-rule similarity to queries: min 0.224, median 0.440, max 0.749, share >= 0.3: 0.982
+  A theta=0.3:  ON 1.000 [1.000, 1.000]  OFF 0.954 [0.932, 0.973]  ON-OFF +0.046 [+0.027, +0.068] p=0.0001 d=+0.29
+      OFF reaches 704/738 pairs by similarity. ON paths {'in:search': 725, 'in:mandatory': 13}
+  B theta=0.750:  ON 1.000 [1.000, 1.000]  OFF 0.000 [0.000, 0.000]  ON-OFF +1.000 [+1.000, +1.000] p=0.0001 d=n/a
+      OFF reaches 0/738 pairs (want 0). ON paths {'in:mandatory': 738}
+  C gate fails, ON: recall 0.000, violations 0/738 (want 0). Paths {'out:gate': 738}
+  D gate on 'dog', ON: present-vs-gate mismatches 0/738 (want 0), gate passes in 255 pairs. Paths {'in:search': 252, 'out:gate': 483, 'in:mandatory': 3}
+
+Nemotron-embed-1B  safety-rule similarity to queries: min 0.031, median 0.239, max 0.544, share >= 0.3: 0.229
+  A theta=0.3:  ON 1.000 [1.000, 1.000]  OFF 0.224 [0.191, 0.257]  ON-OFF +0.776 [+0.743, +0.809] p=0.0001 d=+2.93
+      OFF reaches 165/738 pairs by similarity. ON paths {'in:mandatory': 569, 'in:search': 169}
+  B theta=0.544:  ON 1.000 [1.000, 1.000]  OFF 0.000 [0.000, 0.000]  ON-OFF +1.000 [+1.000, +1.000] p=0.0001 d=n/a
+      OFF reaches 0/738 pairs (want 0). ON paths {'in:mandatory': 738}
+  C gate fails, ON: recall 0.000, violations 0/738 (want 0). Paths {'out:gate': 738}
+  D gate on 'dog', ON: present-vs-gate mismatches 0/738 (want 0), gate passes in 255 pairs. Paths {'in:mandatory': 178, 'in:search': 77, 'out:gate': 483}
+
+--- Summary: safety recall (95% bootstrap CI), 246 queries x 3 rules ---
+
+Backend               A ON   A OFF  A reach  theta_b   B ON  B OFF  B reach  C viol D mism
+BM25                 1.000   0.255  188/738    1.001  1.000  0.000    0/738       0      0
+Hash                 1.000   0.213  157/738    0.665  1.000  0.000    0/738       0      0
+BGE-base             1.000   0.978  722/738    0.725  1.000  0.000    0/738       0      0
+BGE-M3               1.000   0.967  714/738    0.615  1.000  0.000    0/738       0      0
+Qwen3-0.6B           1.000   0.947  699/738    0.727  1.000  0.000    0/738       0      0
+Qwen3-4B             1.000   0.954  704/738    0.750  1.000  0.000    0/738       0      0
+Nemotron-embed-1B    1.000   0.224  165/738    0.544  1.000  0.000    0/738       0      0
+
+Wrote results/mandatory_coverage_v042.json
+Elapsed 5.7s
+
+=== Reproducibility ===
+Timestamp (UTC): 2026-10-31T19:27:20Z
+Command line:    evals/eval_mandatory_coverage.py --phase run --output results/mandatory_coverage_v042.json --log-file results/mandatory_coverage_v042_output.txt
+Python:          3.12.13 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
+numpy:           2.2.6
+scipy:           1.17.1
+bear:            0.4.2
+git commit:      6ae764af347c15dbfb7e044f8e0e042b0ce39742
+git status:      unknown (git status failed or timed out)
+git branch:      tist-r2
+
+  eval: mandatory_coverage
+  backends: ['bm25', 'hash', 'bge', 'bge-m3', 'qwen3-0.6b', 'qwen3-4b', 'nemotron']
+  bear_version: 0.4.2
+  bear_path: /home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/bear/__init__.py
+  bear_source_sha: 0d0718a39a0b0788ef5cca4689352462b830494c
+  bear_direct_url: file:///home/snhwang/tist-evals/bear-v0.4.2
+  bear_export_sha: 0d0718a39a0b0788ef5cca4689352462b830494c
+===
+=== mandatory exit 0 2026-10-31T19:27:25Z
+### run_v042_rerun.sh done 2026-10-31T19:27:25Z

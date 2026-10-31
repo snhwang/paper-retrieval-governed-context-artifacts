@@ -1,0 +1,121 @@
+{
+ "label": "agent validation run",
+ "note": "Launched by an agent (Claude) on 2026-10-31 to check the 0.4.0 results on BEAR 0.4.2. The author ran every result-producing script himself; these files serve only as a check.",
+ "bear": {
+  "version": "0.4.2",
+  "tag": "v0.4.2",
+  "source_sha": "0d0718a39a0b0788ef5cca4689352462b830494c"
+ },
+ "scripts": [
+  "evals/run_v042_rerun.sh",
+  "evals/run_v042_wp5.sh",
+  "evals/compare_v042_rerun.py",
+  "evals/rerun_filter_baseline_bear_cached.py"
+ ],
+ "scripts_commit": "c2221cd",
+ "not_rerun": {
+  "metadata_filter_baseline_{toolbench,petsim}_nemotron": "The cached Nemotron stores lack the governed-corpus document texts (3,225 ToolBench, 44 Pet Simulation). No request was sent to the Nemotron service, so these two files remain the 0.4.0 run. See the *_missing.json files."
+ },
+ "files": {
+  "tag_noise_v042.json.gz": {
+   "bytes": 15735638,
+   "sha256": "831b78df51836bbb79b500f83e7e250b7fc441b55325b5e35b99c47510ac5959"
+  },
+  "tag_noise_v042_output.txt": {
+   "bytes": 11202,
+   "sha256": "dd224ffdb358810bbbb89caf271f1572f77d8aa1aaa01efa84606c57bfeb5126"
+  },
+  "tag_noise_nemotron_v042.json.gz": {
+   "bytes": 4788958,
+   "sha256": "3cd917ee070dc2fe7c06e161991e4f345a96d01e3790a0250025123f57083d1f"
+  },
+  "tag_noise_nemotron_v042_output.txt": {
+   "bytes": 4874,
+   "sha256": "5f78335eab566c698f496ea2813e3dec97ba4ac02bf5e8ebaa52fb6d35a1b653"
+  },
+  "tag_noise_overrestriction_v042.json": {
+   "bytes": 35850,
+   "sha256": "d85ea219cd6f3ebe4017fe685ce324c45c33b3b71e1f6827977f337bd5d58742"
+  },
+  "leakage_threat_v042.json": {
+   "bytes": 1733197,
+   "sha256": "e34bbcd515eedc307dd429d3042371803a429fe9cbef7afe41fc5e39adf174dc"
+  },
+  "leakage_threat_v042_output.txt": {
+   "bytes": 4094,
+   "sha256": "80c2cd1d9af8ac785e367f7d62e15a3703865b3eeb5b064121d80d7b56d71ffd"
+  },
+  "query_giveaways_v042.json": {
+   "bytes": 2783184,
+   "sha256": "b3b664593b267f46d433f1db51e0e8ca26ccc2415915fefb45a3364d9085f3bc"
+  },
+  "query_giveaways_v042_output.txt": {
+   "bytes": 5180,
+   "sha256": "328bb940545a79eb58e123e2344461e42486c7d8647149557840f50fcf0320ad"
+  },
+  "mandatory_coverage_v042.json": {
+   "bytes": 6262122,
+   "sha256": "b9661e0d6be81048c2a192627f4cfedd337a58272c36deac511638aef36253d8"
+  },
+  "mandatory_coverage_v042_output.txt": {
+   "bytes": 7199,
+   "sha256": "50110355e84a8b5f492d5d9a990455c35484a7c8a96b87f85bb5f37771ed9cf2"
+  },
+  "metadata_filter_baseline_toolbench_bge_v042.json": {
+   "bytes": 1860358,
+   "sha256": "48ac0bb9e5e3d1fc0589b8eb482ab7583c358d983946907546e57dbde862cb18"
+  },
+  "metadata_filter_baseline_toolbench_bge_v042_output.txt": {
+   "bytes": 2617,
+   "sha256": "604e5d24c7b3235080f7e13e061c1cca5c9c340c5581ef8e426553d5ca8081b8"
+  },
+  "metadata_filter_baseline_petsim_bge_v042.json": {
+   "bytes": 177777,
+   "sha256": "36712bd39090d2e42381f504f10dbd8687b2ae5d1bafba77fbe295e6f9125091"
+  },
+  "metadata_filter_baseline_petsim_bge_v042_output.txt": {
+   "bytes": 5644,
+   "sha256": "03ac818bf85f3540f6a64dcf50b33975ac4730ca8bbbb4ddc5cb40da0c50fc99"
+  },
+  "metadata_filter_baseline_toolbench_nemotron_v042_missing.json": {
+   "bytes": 19494,
+   "sha256": "487c8c66f7a9f914e4fb15fa313276e833567d36ddccd399a98661f284a91b05"
+  },
+  "metadata_filter_baseline_toolbench_nemotron_v042_output.txt": {
+   "bytes": 513,
+   "sha256": "07476c93b4d854b22a52080e40cd889a7b6d883d364d221c3bfd7a937db56f94"
+  },
+  "metadata_filter_baseline_petsim_nemotron_v042_missing.json": {
+   "bytes": 8516,
+   "sha256": "a7c2e3806eb9a7b9e714e3756808aaead93fcf9299418006f699b23e4c29a08f"
+  },
+  "metadata_filter_baseline_petsim_nemotron_v042_output.txt": {
+   "bytes": 498,
+   "sha256": "15c18e02d0399836ef180be7b6c58bc396097e5950ca3f43c652d6defa2da9e7"
+  },
+  "cpa_maintained_v042.json": {
+   "bytes": 50020,
+   "sha256": "caab86c6945568151095cc94202395acbc752cbc6adc585af994b38a04c000e9"
+  },
+  "cpa_maintained_v042_output.txt": {
+   "bytes": 4760,
+   "sha256": "a150af931f16bf9002fce2c1bbf63be9494619d3a29d5b36c75eda2305d7f26d"
+  },
+  "v042_rerun_job.log": {
+   "bytes": 41352,
+   "sha256": "b2b450ba58f2644eba87b09f27a5affa4c211e6f11ffc447ee01d75dabea1523"
+  },
+  "v042_wp5_job.log": {
+   "bytes": 33026,
+   "sha256": "c9888ba980a2ab582f85aebd30f69986f9f853594c59c5b6e635121833cfa2c7"
+  },
+  "v042_rerun_comparison.json": {
+   "bytes": 427569,
+   "sha256": "d724c4b8d7ed2e6bc025ebc4d1d17578b1b1a14dd0237da0ce9ab9ff27ef43fd"
+  },
+  "v042_rerun_comparison_output.txt": {
+   "bytes": 116160,
+   "sha256": "d7fc0e9ad6cc7c2c28151dee5b8cd14b57afd49f75096956912c9d4598076db3"
+  }
+ }
+}

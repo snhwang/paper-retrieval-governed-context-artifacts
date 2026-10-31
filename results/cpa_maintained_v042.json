@@ -1,0 +1,3300 @@
+{
+ "settings": {
+  "k": 25,
+  "theta": 0.3,
+  "priority_weight": 0.3,
+  "embedding_model": "BAAI/bge-base-en-v1.5",
+  "device": "cpu"
+ },
+ "multi_dept_wiring_change": {
+  "published_body_lines": 15,
+  "multi_body_lines": 17,
+  "changed_body_lines": 7,
+  "call_site_lines": 1
+ },
+ "scale_points": [
+  {
+   "num_agents": 10,
+   "num_departments_before": 1,
+   "corpus_size_with_new_dept": 31,
+   "n_queries": 19,
+   "query_types": [
+    "unknown_dept",
+    "unknown_dept",
+    "unknown_dept",
+    "unknown_dept",
+    "unknown_dept",
+    "unknown_dept",
+    "unknown_dept",
+    "cross_dept",
+    "cross_dept",
+    "cross_dept",
+    "cross_dept",
+    "cross_dept",
+    "cross_dept",
+    "cross_dept",
+    "unseen_modifier",
+    "unseen_modifier",
+    "unseen_modifier",
+    "unseen_modifier",
+    "unseen_modifier"
+   ],
+   "new_department_ids": [
+    "dept-fraud-constraint-0",
+    "dept-fraud-constraint-1",
+    "dept-fraud-constraint-2"
+   ],
+   "maintenance": {
+    "cpa_table_diff": {
+     "keys_added": 1,
+     "entries_added": 3,
+     "by_table": {
+      "constraints": {
+       "keys_added": [
+        "fraud"
+       ],
+       "entries_added": 3
+      }
+     }
+    },
+    "cpa_wiring_lines_stale": 14,
+    "cpa_wiring_lines_maintained": 15,
+    "cpa_wiring_lines_added": 1,
+    "bear_wiring_lines_added": 0,
+    "bear_tag_annotations_with_new_instructions": 3
+   },
+   "arms": {
+    "bear": {
+     "recall": {
+      "mean": 0.9497607655502392,
+      "ci": [
+       0.9210526315789473,
+       0.978468899521531
+      ],
+      "sd": 0.06758108560682075,
+      "n": 19,
+      "bootstrap": "resample"
+     },
+     "complete_rate": 0.631578947368421,
+     "unresolved_conflicts": 0,
+     "by_type": {
+      "unknown_dept": 1.0,
+      "cross_dept": 0.8636363636363635,
+      "unseen_modifier": 1.0
+     }
+    },
+    "cpa_stale": {
+     "recall": {
+      "mean": 0.8883572567783095,
+      "ci": [
+       0.8588516746411484,
+       0.9202551834130781
+      ],
+      "sd": 0.06983782544558353,
+      "n": 19,
+      "bootstrap": "resample"
+     },
+     "complete_rate": 0.2631578947368421,
+     "unresolved_conflicts": 0,
+     "by_type": {
+      "unknown_dept": 0.8333333333333333,
+      "cross_dept": 0.8636363636363635,
+      "unseen_modifier": 1.0
+     }
+    },
+    "cpa_maintained": {
+     "recall": {
+      "mean": 0.9497607655502392,
+      "ci": [
+       0.9210526315789473,
+       0.978468899521531
+      ],
+      "sd": 0.06758108560682075,
+      "n": 19,
+      "bootstrap": "resample"
+     },
+     "complete_rate": 0.631578947368421,
+     "unresolved_conflicts": 0,
+     "by_type": {
+      "unknown_dept": 1.0,
+      "cross_dept": 0.8636363636363635,
+      "unseen_modifier": 1.0
+     }
+    },
+    "cpa_maintained_multi": {
+     "recall": {
+      "mean": 0.9497607655502392,
+      "ci": [
+       0.9210526315789473,
+       0.978468899521531
+      ],
+      "sd": 0.06758108560682075,
+      "n": 19,
+      "bootstrap": "resample"
+     },
+     "complete_rate": 0.631578947368421,
+     "unresolved_conflicts": 0,
+     "by_type": {
+      "unknown_dept": 1.0,
+      "cross_dept": 0.8636363636363635,
+      "unseen_modifier": 1.0
+     }
+    }
+   },
+   "per_query": {
+    "bear": {
+     "recall": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "complete": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1
+     ],
+     "conflicts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    },
+    "cpa_stale": {
+     "recall": [
+      0.8333333333333334,
+      0.8333333333333334,
+      0.8333333333333334,
+      0.8333333333333334,
+      0.8333333333333334,
+      0.8333333333333334,
+      0.8333333333333334,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "complete": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1
+     ],
+     "conflicts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    },
+    "cpa_maintained": {
+     "recall": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "complete": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1
+     ],
+     "conflicts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    },
+    "cpa_maintained_multi": {
+     "recall": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "complete": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1
+     ],
+     "conflicts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    }
+   }
+  },
+  {
+   "num_agents": 25,
+   "num_departments_before": 3,
+   "corpus_size_with_new_dept": 54,
+   "n_queries": 24,
+   "query_types": [
+    "unknown_dept",
+    "unknown_dept",
+    "unknown_dept",
+    "unknown_dept",
+    "unknown_dept",
+    "unknown_dept",
+    "unknown_dept",
+    "cross_dept",
+    "cross_dept",
+    "cross_dept",
+    "cross_dept",
+    "cross_dept",
+    "cross_dept",
+    "cross_dept",
+    "unseen_modifier",
+    "unseen_modifier",
+    "unseen_modifier",
+    "unseen_modifier",
+    "unseen_modifier",
+    "conflict",
+    "conflict",
+    "conflict",
+    "conflict",
+    "conflict"
+   ],
+   "new_department_ids": [
+    "dept-fraud-constraint-0",
+    "dept-fraud-constraint-1",
+    "dept-fraud-constraint-2"
+   ],
+   "maintenance": {
+    "cpa_table_diff": {
+     "keys_added": 1,
+     "entries_added": 3,
+     "by_table": {
+      "constraints": {
+       "keys_added": [
+        "fraud"
+       ],
+       "entries_added": 3
+      }
+     }
+    },
+    "cpa_wiring_lines_stale": 33,
+    "cpa_wiring_lines_maintained": 34,
+    "cpa_wiring_lines_added": 1,
+    "bear_wiring_lines_added": 0,
+    "bear_tag_annotations_with_new_instructions": 3
+   },
+   "arms": {
+    "bear": {
+     "recall": {
+      "mean": 0.9602272727272728,
+      "ci": [
+       0.931818181818182,
+       0.9829545454545454
+      ],
+      "sd": 0.0633144029301186,
+      "n": 24,
+      "bootstrap": "resample"
+     },
+     "complete_rate": 0.7083333333333334,
+     "unresolved_conflicts": 0,
+     "by_type": {
+      "unknown_dept": 1.0,
+      "cross_dept": 0.8636363636363635,
+      "unseen_modifier": 1.0,
+      "conflict": 1.0
+     }
+    },
+    "cpa_stale": {
+     "recall": {
+      "mean": 0.9116161616161618,
+      "ci": [
+       0.8819444444444445,
+       0.9425505050505052
+      ],
+      "sd": 0.07721479482067951,
+      "n": 24,
+      "bootstrap": "resample"
+     },
+     "complete_rate": 0.4166666666666667,
+     "unresolved_conflicts": 0,
+     "by_type": {
+      "unknown_dept": 0.8333333333333333,
+      "cross_dept": 0.8636363636363635,
+      "unseen_modifier": 1.0,
+      "conflict": 1.0
+     }
+    },
+    "cpa_maintained": {
+     "recall": {
+      "mean": 0.9602272727272728,
+      "ci": [
+       0.931818181818182,
+       0.9829545454545454
+      ],
+      "sd": 0.0633144029301186,
+      "n": 24,
+      "bootstrap": "resample"
+     },
+     "complete_rate": 0.7083333333333334,
+     "unresolved_conflicts": 0,
+     "by_type": {
+      "unknown_dept": 1.0,
+      "cross_dept": 0.8636363636363635,
+      "unseen_modifier": 1.0,
+      "conflict": 1.0
+     }
+    },
+    "cpa_maintained_multi": {
+     "recall": {
+      "mean": 0.9602272727272728,
+      "ci": [
+       0.931818181818182,
+       0.9829545454545454
+      ],
+      "sd": 0.0633144029301186,
+      "n": 24,
+      "bootstrap": "resample"
+     },
+     "complete_rate": 0.7083333333333334,
+     "unresolved_conflicts": 0,
+     "by_type": {
+      "unknown_dept": 1.0,
+      "cross_dept": 0.8636363636363635,
+      "unseen_modifier": 1.0,
+      "conflict": 1.0
+     }
+    }
+   },
+   "per_query": {
+    "bear": {
+     "recall": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "complete": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+     ],
+     "conflicts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    },
+    "cpa_stale": {
+     "recall": [
+      0.8333333333333334,
+      0.8333333333333334,
+      0.8333333333333334,
+      0.8333333333333334,
+      0.8333333333333334,
+      0.8333333333333334,
+      0.8333333333333334,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "complete": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+     ],
+     "conflicts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    },
+    "cpa_maintained": {
+     "recall": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "complete": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+     ],
+     "conflicts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    },
+    "cpa_maintained_multi": {
+     "recall": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "complete": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+     ],
+     "conflicts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    }
+   }
+  },
+  {
+   "num_agents": 50,
+   "num_departments_before": 5,
+   "corpus_size_with_new_dept": 87,
+   "n_queries": 24,
+   "query_types": [
+    "unknown_dept",
+    "unknown_dept",
+    "unknown_dept",
+    "unknown_dept",
+    "unknown_dept",
+    "unknown_dept",
+    "unknown_dept",
+    "cross_dept",
+    "cross_dept",
+    "cross_dept",
+    "cross_dept",
+    "cross_dept",
+    "cross_dept",
+    "cross_dept",
+    "unseen_modifier",
+    "unseen_modifier",
+    "unseen_modifier",
+    "unseen_modifier",
+    "unseen_modifier",
+    "conflict",
+    "conflict",
+    "conflict",
+    "conflict",
+    "conflict"
+   ],
+   "new_department_ids": [
+    "dept-fraud-constraint-0",
+    "dept-fraud-constraint-1",
+    "dept-fraud-constraint-2"
+   ],
+   "maintenance": {
+    "cpa_table_diff": {
+     "keys_added": 1,
+     "entries_added": 3,
+     "by_table": {
+      "constraints": {
+       "keys_added": [
+        "fraud"
+       ],
+       "entries_added": 3
+      }
+     }
+    },
+    "cpa_wiring_lines_stale": 62,
+    "cpa_wiring_lines_maintained": 63,
+    "cpa_wiring_lines_added": 1,
+    "bear_wiring_lines_added": 0,
+    "bear_tag_annotations_with_new_instructions": 3
+   },
+   "arms": {
+    "bear": {
+     "recall": {
+      "mean": 0.9602272727272728,
+      "ci": [
+       0.931818181818182,
+       0.9829545454545454
+      ],
+      "sd": 0.0633144029301186,
+      "n": 24,
+      "bootstrap": "resample"
+     },
+     "complete_rate": 0.7083333333333334,
+     "unresolved_conflicts": 0,
+     "by_type": {
+      "unknown_dept": 1.0,
+      "cross_dept": 0.8636363636363635,
+      "unseen_modifier": 1.0,
+      "conflict": 1.0
+     }
+    },
+    "cpa_stale": {
+     "recall": {
+      "mean": 0.9116161616161618,
+      "ci": [
+       0.8819444444444445,
+       0.9425505050505052
+      ],
+      "sd": 0.07721479482067951,
+      "n": 24,
+      "bootstrap": "resample"
+     },
+     "complete_rate": 0.4166666666666667,
+     "unresolved_conflicts": 0,
+     "by_type": {
+      "unknown_dept": 0.8333333333333333,
+      "cross_dept": 0.8636363636363635,
+      "unseen_modifier": 1.0,
+      "conflict": 1.0
+     }
+    },
+    "cpa_maintained": {
+     "recall": {
+      "mean": 0.9602272727272728,
+      "ci": [
+       0.931818181818182,
+       0.9829545454545454
+      ],
+      "sd": 0.0633144029301186,
+      "n": 24,
+      "bootstrap": "resample"
+     },
+     "complete_rate": 0.7083333333333334,
+     "unresolved_conflicts": 0,
+     "by_type": {
+      "unknown_dept": 1.0,
+      "cross_dept": 0.8636363636363635,
+      "unseen_modifier": 1.0,
+      "conflict": 1.0
+     }
+    },
+    "cpa_maintained_multi": {
+     "recall": {
+      "mean": 0.9602272727272728,
+      "ci": [
+       0.931818181818182,
+       0.9829545454545454
+      ],
+      "sd": 0.0633144029301186,
+      "n": 24,
+      "bootstrap": "resample"
+     },
+     "complete_rate": 0.7083333333333334,
+     "unresolved_conflicts": 0,
+     "by_type": {
+      "unknown_dept": 1.0,
+      "cross_dept": 0.8636363636363635,
+      "unseen_modifier": 1.0,
+      "conflict": 1.0
+     }
+    }
+   },
+   "per_query": {
+    "bear": {
+     "recall": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "complete": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+     ],
+     "conflicts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    },
+    "cpa_stale": {
+     "recall": [
+      0.8333333333333334,
+      0.8333333333333334,
+      0.8333333333333334,
+      0.8333333333333334,
+      0.8333333333333334,
+      0.8333333333333334,
+      0.8333333333333334,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "complete": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+     ],
+     "conflicts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    },
+    "cpa_maintained": {
+     "recall": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "complete": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+     ],
+     "conflicts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    },
+    "cpa_maintained_multi": {
+     "recall": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "complete": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+     ],
+     "conflicts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    }
+   }
+  },
+  {
+   "num_agents": 100,
+   "num_departments_before": 10,
+   "corpus_size_with_new_dept": 158,
+   "n_queries": 24,
+   "query_types": [
+    "unknown_dept",
+    "unknown_dept",
+    "unknown_dept",
+    "unknown_dept",
+    "unknown_dept",
+    "unknown_dept",
+    "unknown_dept",
+    "cross_dept",
+    "cross_dept",
+    "cross_dept",
+    "cross_dept",
+    "cross_dept",
+    "cross_dept",
+    "cross_dept",
+    "unseen_modifier",
+    "unseen_modifier",
+    "unseen_modifier",
+    "unseen_modifier",
+    "unseen_modifier",
+    "conflict",
+    "conflict",
+    "conflict",
+    "conflict",
+    "conflict"
+   ],
+   "new_department_ids": [
+    "dept-fraud-constraint-0",
+    "dept-fraud-constraint-1",
+    "dept-fraud-constraint-2"
+   ],
+   "maintenance": {
+    "cpa_table_diff": {
+     "keys_added": 1,
+     "entries_added": 3,
+     "by_table": {
+      "constraints": {
+       "keys_added": [
+        "fraud"
+       ],
+       "entries_added": 3
+      }
+     }
+    },
+    "cpa_wiring_lines_stale": 123,
+    "cpa_wiring_lines_maintained": 124,
+    "cpa_wiring_lines_added": 1,
+    "bear_wiring_lines_added": 0,
+    "bear_tag_annotations_with_new_instructions": 3
+   },
+   "arms": {
+    "bear": {
+     "recall": {
+      "mean": 1.0,
+      "ci": [
+       1.0,
+       1.0
+      ],
+      "sd": 0.0,
+      "n": 24,
+      "bootstrap": "resample"
+     },
+     "complete_rate": 1.0,
+     "unresolved_conflicts": 0,
+     "by_type": {
+      "unknown_dept": 1.0,
+      "cross_dept": 1.0,
+      "unseen_modifier": 1.0,
+      "conflict": 1.0
+     }
+    },
+    "cpa_stale": {
+     "recall": {
+      "mean": 0.9116161616161618,
+      "ci": [
+       0.8819444444444445,
+       0.9425505050505052
+      ],
+      "sd": 0.07721479482067951,
+      "n": 24,
+      "bootstrap": "resample"
+     },
+     "complete_rate": 0.4166666666666667,
+     "unresolved_conflicts": 0,
+     "by_type": {
+      "unknown_dept": 0.8333333333333333,
+      "cross_dept": 0.8636363636363635,
+      "unseen_modifier": 1.0,
+      "conflict": 1.0
+     }
+    },
+    "cpa_maintained": {
+     "recall": {
+      "mean": 0.9602272727272728,
+      "ci": [
+       0.931818181818182,
+       0.9829545454545454
+      ],
+      "sd": 0.0633144029301186,
+      "n": 24,
+      "bootstrap": "resample"
+     },
+     "complete_rate": 0.7083333333333334,
+     "unresolved_conflicts": 0,
+     "by_type": {
+      "unknown_dept": 1.0,
+      "cross_dept": 0.8636363636363635,
+      "unseen_modifier": 1.0,
+      "conflict": 1.0
+     }
+    },
+    "cpa_maintained_multi": {
+     "recall": {
+      "mean": 1.0,
+      "ci": [
+       1.0,
+       1.0
+      ],
+      "sd": 0.0,
+      "n": 24,
+      "bootstrap": "resample"
+     },
+     "complete_rate": 1.0,
+     "unresolved_conflicts": 0,
+     "by_type": {
+      "unknown_dept": 1.0,
+      "cross_dept": 1.0,
+      "unseen_modifier": 1.0,
+      "conflict": 1.0
+     }
+    }
+   },
+   "per_query": {
+    "bear": {
+     "recall": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "complete": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+     ],
+     "conflicts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    },
+    "cpa_stale": {
+     "recall": [
+      0.8333333333333334,
+      0.8333333333333334,
+      0.8333333333333334,
+      0.8333333333333334,
+      0.8333333333333334,
+      0.8333333333333334,
+      0.8333333333333334,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "complete": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+     ],
+     "conflicts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    },
+    "cpa_maintained": {
+     "recall": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "complete": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+     ],
+     "conflicts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    },
+    "cpa_maintained_multi": {
+     "recall": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "complete": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+     ],
+     "conflicts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    }
+   }
+  },
+  {
+   "num_agents": 200,
+   "num_departments_before": 20,
+   "corpus_size_with_new_dept": 288,
+   "n_queries": 24,
+   "query_types": [
+    "unknown_dept",
+    "unknown_dept",
+    "unknown_dept",
+    "unknown_dept",
+    "unknown_dept",
+    "unknown_dept",
+    "unknown_dept",
+    "cross_dept",
+    "cross_dept",
+    "cross_dept",
+    "cross_dept",
+    "cross_dept",
+    "cross_dept",
+    "cross_dept",
+    "unseen_modifier",
+    "unseen_modifier",
+    "unseen_modifier",
+    "unseen_modifier",
+    "unseen_modifier",
+    "conflict",
+    "conflict",
+    "conflict",
+    "conflict",
+    "conflict"
+   ],
+   "new_department_ids": [
+    "dept-fraud-constraint-0",
+    "dept-fraud-constraint-1",
+    "dept-fraud-constraint-2"
+   ],
+   "maintenance": {
+    "cpa_table_diff": {
+     "keys_added": 1,
+     "entries_added": 3,
+     "by_table": {
+      "constraints": {
+       "keys_added": [
+        "fraud"
+       ],
+       "entries_added": 3
+      }
+     }
+    },
+    "cpa_wiring_lines_stale": 233,
+    "cpa_wiring_lines_maintained": 234,
+    "cpa_wiring_lines_added": 1,
+    "bear_wiring_lines_added": 0,
+    "bear_tag_annotations_with_new_instructions": 3
+   },
+   "arms": {
+    "bear": {
+     "recall": {
+      "mean": 1.0,
+      "ci": [
+       1.0,
+       1.0
+      ],
+      "sd": 0.0,
+      "n": 24,
+      "bootstrap": "resample"
+     },
+     "complete_rate": 1.0,
+     "unresolved_conflicts": 0,
+     "by_type": {
+      "unknown_dept": 1.0,
+      "cross_dept": 1.0,
+      "unseen_modifier": 1.0,
+      "conflict": 1.0
+     }
+    },
+    "cpa_stale": {
+     "recall": {
+      "mean": 0.9116161616161618,
+      "ci": [
+       0.8819444444444445,
+       0.9425505050505052
+      ],
+      "sd": 0.07721479482067951,
+      "n": 24,
+      "bootstrap": "resample"
+     },
+     "complete_rate": 0.4166666666666667,
+     "unresolved_conflicts": 0,
+     "by_type": {
+      "unknown_dept": 0.8333333333333333,
+      "cross_dept": 0.8636363636363635,
+      "unseen_modifier": 1.0,
+      "conflict": 1.0
+     }
+    },
+    "cpa_maintained": {
+     "recall": {
+      "mean": 0.9602272727272728,
+      "ci": [
+       0.931818181818182,
+       0.9829545454545454
+      ],
+      "sd": 0.0633144029301186,
+      "n": 24,
+      "bootstrap": "resample"
+     },
+     "complete_rate": 0.7083333333333334,
+     "unresolved_conflicts": 0,
+     "by_type": {
+      "unknown_dept": 1.0,
+      "cross_dept": 0.8636363636363635,
+      "unseen_modifier": 1.0,
+      "conflict": 1.0
+     }
+    },
+    "cpa_maintained_multi": {
+     "recall": {
+      "mean": 1.0,
+      "ci": [
+       1.0,
+       1.0
+      ],
+      "sd": 0.0,
+      "n": 24,
+      "bootstrap": "resample"
+     },
+     "complete_rate": 1.0,
+     "unresolved_conflicts": 0,
+     "by_type": {
+      "unknown_dept": 1.0,
+      "cross_dept": 1.0,
+      "unseen_modifier": 1.0,
+      "conflict": 1.0
+     }
+    }
+   },
+   "per_query": {
+    "bear": {
+     "recall": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "complete": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+     ],
+     "conflicts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    },
+    "cpa_stale": {
+     "recall": [
+      0.8333333333333334,
+      0.8333333333333334,
+      0.8333333333333334,
+      0.8333333333333334,
+      0.8333333333333334,
+      0.8333333333333334,
+      0.8333333333333334,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "complete": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+     ],
+     "conflicts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    },
+    "cpa_maintained": {
+     "recall": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "complete": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+     ],
+     "conflicts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    },
+    "cpa_maintained_multi": {
+     "recall": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "complete": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+     ],
+     "conflicts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    }
+   }
+  },
+  {
+   "num_agents": 500,
+   "num_departments_before": 50,
+   "corpus_size_with_new_dept": 678,
+   "n_queries": 24,
+   "query_types": [
+    "unknown_dept",
+    "unknown_dept",
+    "unknown_dept",
+    "unknown_dept",
+    "unknown_dept",
+    "unknown_dept",
+    "unknown_dept",
+    "cross_dept",
+    "cross_dept",
+    "cross_dept",
+    "cross_dept",
+    "cross_dept",
+    "cross_dept",
+    "cross_dept",
+    "unseen_modifier",
+    "unseen_modifier",
+    "unseen_modifier",
+    "unseen_modifier",
+    "unseen_modifier",
+    "conflict",
+    "conflict",
+    "conflict",
+    "conflict",
+    "conflict"
+   ],
+   "new_department_ids": [
+    "dept-fraud-constraint-0",
+    "dept-fraud-constraint-1",
+    "dept-fraud-constraint-2"
+   ],
+   "maintenance": {
+    "cpa_table_diff": {
+     "keys_added": 1,
+     "entries_added": 3,
+     "by_table": {
+      "constraints": {
+       "keys_added": [
+        "fraud"
+       ],
+       "entries_added": 3
+      }
+     }
+    },
+    "cpa_wiring_lines_stale": 563,
+    "cpa_wiring_lines_maintained": 564,
+    "cpa_wiring_lines_added": 1,
+    "bear_wiring_lines_added": 0,
+    "bear_tag_annotations_with_new_instructions": 3
+   },
+   "arms": {
+    "bear": {
+     "recall": {
+      "mean": 1.0,
+      "ci": [
+       1.0,
+       1.0
+      ],
+      "sd": 0.0,
+      "n": 24,
+      "bootstrap": "resample"
+     },
+     "complete_rate": 1.0,
+     "unresolved_conflicts": 0,
+     "by_type": {
+      "unknown_dept": 1.0,
+      "cross_dept": 1.0,
+      "unseen_modifier": 1.0,
+      "conflict": 1.0
+     }
+    },
+    "cpa_stale": {
+     "recall": {
+      "mean": 0.9116161616161618,
+      "ci": [
+       0.8819444444444445,
+       0.9425505050505052
+      ],
+      "sd": 0.07721479482067951,
+      "n": 24,
+      "bootstrap": "resample"
+     },
+     "complete_rate": 0.4166666666666667,
+     "unresolved_conflicts": 0,
+     "by_type": {
+      "unknown_dept": 0.8333333333333333,
+      "cross_dept": 0.8636363636363635,
+      "unseen_modifier": 1.0,
+      "conflict": 1.0
+     }
+    },
+    "cpa_maintained": {
+     "recall": {
+      "mean": 0.9602272727272728,
+      "ci": [
+       0.931818181818182,
+       0.9829545454545454
+      ],
+      "sd": 0.0633144029301186,
+      "n": 24,
+      "bootstrap": "resample"
+     },
+     "complete_rate": 0.7083333333333334,
+     "unresolved_conflicts": 0,
+     "by_type": {
+      "unknown_dept": 1.0,
+      "cross_dept": 0.8636363636363635,
+      "unseen_modifier": 1.0,
+      "conflict": 1.0
+     }
+    },
+    "cpa_maintained_multi": {
+     "recall": {
+      "mean": 1.0,
+      "ci": [
+       1.0,
+       1.0
+      ],
+      "sd": 0.0,
+      "n": 24,
+      "bootstrap": "resample"
+     },
+     "complete_rate": 1.0,
+     "unresolved_conflicts": 0,
+     "by_type": {
+      "unknown_dept": 1.0,
+      "cross_dept": 1.0,
+      "unseen_modifier": 1.0,
+      "conflict": 1.0
+     }
+    }
+   },
+   "per_query": {
+    "bear": {
+     "recall": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "complete": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+     ],
+     "conflicts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    },
+    "cpa_stale": {
+     "recall": [
+      0.8333333333333334,
+      0.8333333333333334,
+      0.8333333333333334,
+      0.8333333333333334,
+      0.8333333333333334,
+      0.8333333333333334,
+      0.8333333333333334,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "complete": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+     ],
+     "conflicts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    },
+    "cpa_maintained": {
+     "recall": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      0.8636363636363636,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "complete": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+     ],
+     "conflicts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    },
+    "cpa_maintained_multi": {
+     "recall": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "complete": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+     ],
+     "conflicts": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    }
+   }
+  }
+ ],
+ "pooled": {
+  "arms": {
+   "bear": {
+    "recall": {
+     "mean": 0.9793982995421844,
+     "ci": [
+      0.9705689993459777,
+      0.987246566383257
+     ],
+     "sd": 0.049011983833655515,
+     "n": 139,
+     "bootstrap": "resample"
+    },
+    "complete": {
+     "mean": 0.8489208633093526,
+     "ci": [
+      0.7841726618705036,
+      0.9064748201438849
+     ],
+     "sd": 0.3594212147801405,
+     "n": 139,
+     "bootstrap": "resample"
+    }
+   },
+   "cpa_stale": {
+    "recall": {
+     "mean": 0.9084368868541529,
+     "ci": [
+      0.896010464355788,
+      0.9208633093525179
+     ],
+     "sd": 0.07529216953331094,
+     "n": 139,
+     "bootstrap": "resample"
+    },
+    "complete": {
+     "mean": 0.39568345323741005,
+     "ci": [
+      0.31654676258992803,
+      0.4748201438848921
+     ],
+     "sd": 0.49076552203956963,
+     "n": 139,
+     "bootstrap": "resample"
+    }
+   },
+   "cpa_maintained": {
+    "recall": {
+     "mean": 0.9587965990843688,
+     "ci": [
+      0.9480052321778939,
+      0.9686069326357095
+     ],
+     "sd": 0.06284375732559787,
+     "n": 139,
+     "bootstrap": "resample"
+    },
+    "complete": {
+     "mean": 0.697841726618705,
+     "ci": [
+      0.6187050359712231,
+      0.7697841726618705
+     ],
+     "sd": 0.4608542203877177,
+     "n": 139,
+     "bootstrap": "resample"
+    }
+   },
+   "cpa_maintained_multi": {
+    "recall": {
+     "mean": 0.9793982995421844,
+     "ci": [
+      0.9705689993459777,
+      0.987246566383257
+     ],
+     "sd": 0.049011983833655515,
+     "n": 139,
+     "bootstrap": "resample"
+    },
+    "complete": {
+     "mean": 0.8489208633093526,
+     "ci": [
+      0.7841726618705036,
+      0.9064748201438849
+     ],
+     "sd": 0.3594212147801405,
+     "n": 139,
+     "bootstrap": "resample"
+    }
+   }
+  },
+  "contrasts": {
+   "bear_vs_cpa_stale": {
+    "recall": {
+     "delta": 0.07096141268803138,
+     "ci": [
+      0.05820797907128842,
+      0.08415086112927839
+     ],
+     "p_bootstrap": 0.0001,
+     "cohens_d_paired": 0.900356265229993,
+     "wilcoxon": {
+      "W": 0.0,
+      "p": 6.028356942676967e-13,
+      "n_nonzero": 63
+     },
+     "paired_t": {
+      "t": 10.615043815411566,
+      "p": 1.299062221871236e-19
+     },
+     "n": 139
+    },
+    "mcnemar_complete": {
+     "b_a_right_b_wrong": 63,
+     "c_a_wrong_b_right": 0,
+     "n_discordant": 63,
+     "p_value": 2.168404344971009e-19
+    }
+   },
+   "bear_vs_cpa_maintained": {
+    "recall": {
+     "delta": 0.020601700457815564,
+     "ci": [
+      0.012753433616742967,
+      0.02943100065402223
+     ],
+     "p_bootstrap": 0.0001,
+     "cohens_d_paired": 0.42034006474287616,
+     "wilcoxon": {
+      "W": 0.0,
+      "p": 4.592833711753968e-06,
+      "n_nonzero": 21
+     },
+     "paired_t": {
+      "t": 4.95573627566059,
+      "p": 2.0771859274327526e-06
+     },
+     "n": 139
+    },
+    "mcnemar_complete": {
+     "b_a_right_b_wrong": 21,
+     "c_a_wrong_b_right": 0,
+     "n_discordant": 21,
+     "p_value": 9.5367431640625e-07
+    }
+   },
+   "bear_vs_cpa_maintained_multi": {
+    "recall": {
+     "delta": 0.0,
+     "ci": [
+      0.0,
+      0.0
+     ],
+     "p_bootstrap": 1.0,
+     "cohens_d_paired": null,
+     "wilcoxon": {
+      "W": null,
+      "p": null,
+      "n_nonzero": 0
+     },
+     "paired_t": {
+      "t": null,
+      "p": 1.0
+     },
+     "n": 139
+    },
+    "mcnemar_complete": {
+     "b_a_right_b_wrong": 0,
+     "c_a_wrong_b_right": 0,
+     "n_discordant": 0,
+     "p_value": 1.0
+    }
+   }
+  },
+  "by_type": {
+   "unknown_dept": {
+    "bear": {
+     "mean": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "sd": 0.0,
+     "n": 42,
+     "bootstrap": "resample"
+    },
+    "cpa_stale": {
+     "mean": 0.8333333333333335,
+     "ci": [
+      0.8333333333333335,
+      0.8333333333333335
+     ],
+     "sd": 1.1236807647640433e-16,
+     "n": 42,
+     "bootstrap": "resample"
+    },
+    "cpa_maintained": {
+     "mean": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "sd": 0.0,
+     "n": 42,
+     "bootstrap": "resample"
+    },
+    "cpa_maintained_multi": {
+     "mean": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "sd": 0.0,
+     "n": 42,
+     "bootstrap": "resample"
+    },
+    "n": 42,
+    "contrasts": {
+     "bear_vs_cpa_stale": {
+      "delta": 0.16666666666666666,
+      "ci": [
+       0.16666666666666666,
+       0.16666666666666666
+      ],
+      "p_bootstrap": 0.0001,
+      "cohens_d_paired": null,
+      "wilcoxon": {
+       "W": 0.0,
+       "p": 9.12734179928913e-11,
+       "n_nonzero": 42
+      },
+      "paired_t": {
+       "t": null,
+       "p": 0.0
+      },
+      "n": 42
+     },
+     "bear_vs_cpa_maintained": {
+      "delta": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ],
+      "p_bootstrap": 1.0,
+      "cohens_d_paired": null,
+      "wilcoxon": {
+       "W": null,
+       "p": null,
+       "n_nonzero": 0
+      },
+      "paired_t": {
+       "t": null,
+       "p": 1.0
+      },
+      "n": 42
+     },
+     "bear_vs_cpa_maintained_multi": {
+      "delta": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ],
+      "p_bootstrap": 1.0,
+      "cohens_d_paired": null,
+      "wilcoxon": {
+       "W": null,
+       "p": null,
+       "n_nonzero": 0
+      },
+      "paired_t": {
+       "t": null,
+       "p": 1.0
+      },
+      "n": 42
+     }
+    }
+   },
+   "cross_dept": {
+    "bear": {
+     "mean": 0.9318181818181819,
+     "ci": [
+      0.9123376623376623,
+      0.9512987012987014
+     ],
+     "sd": 0.06900829463829189,
+     "n": 42,
+     "bootstrap": "resample"
+    },
+    "cpa_stale": {
+     "mean": 0.8636363636363639,
+     "ci": [
+      0.8636363636363639,
+      0.8636363636363639
+     ],
+     "sd": 2.2473615295280866e-16,
+     "n": 42,
+     "bootstrap": "resample"
+    },
+    "cpa_maintained": {
+     "mean": 0.8636363636363639,
+     "ci": [
+      0.8636363636363639,
+      0.8636363636363639
+     ],
+     "sd": 2.2473615295280866e-16,
+     "n": 42,
+     "bootstrap": "resample"
+    },
+    "cpa_maintained_multi": {
+     "mean": 0.9318181818181819,
+     "ci": [
+      0.9123376623376623,
+      0.9512987012987014
+     ],
+     "sd": 0.06900829463829189,
+     "n": 42,
+     "bootstrap": "resample"
+    },
+    "n": 42,
+    "contrasts": {
+     "bear_vs_cpa_stale": {
+      "delta": 0.06818181818181818,
+      "ci": [
+       0.04870129870129869,
+       0.08766233766233766
+      ],
+      "p_bootstrap": 0.0001,
+      "cohens_d_paired": 0.9880235200593537,
+      "wilcoxon": {
+       "W": 0.0,
+       "p": 4.592833711753968e-06,
+       "n_nonzero": 21
+      },
+      "paired_t": {
+       "t": 6.403124237432849,
+       "p": 1.1553290422336917e-07
+      },
+      "n": 42
+     },
+     "bear_vs_cpa_maintained": {
+      "delta": 0.06818181818181818,
+      "ci": [
+       0.04870129870129869,
+       0.08766233766233766
+      ],
+      "p_bootstrap": 0.0001,
+      "cohens_d_paired": 0.9880235200593537,
+      "wilcoxon": {
+       "W": 0.0,
+       "p": 4.592833711753968e-06,
+       "n_nonzero": 21
+      },
+      "paired_t": {
+       "t": 6.403124237432849,
+       "p": 1.1553290422336917e-07
+      },
+      "n": 42
+     },
+     "bear_vs_cpa_maintained_multi": {
+      "delta": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ],
+      "p_bootstrap": 1.0,
+      "cohens_d_paired": null,
+      "wilcoxon": {
+       "W": null,
+       "p": null,
+       "n_nonzero": 0
+      },
+      "paired_t": {
+       "t": null,
+       "p": 1.0
+      },
+      "n": 42
+     }
+    }
+   },
+   "unseen_modifier": {
+    "bear": {
+     "mean": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "sd": 0.0,
+     "n": 30,
+     "bootstrap": "resample"
+    },
+    "cpa_stale": {
+     "mean": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "sd": 0.0,
+     "n": 30,
+     "bootstrap": "resample"
+    },
+    "cpa_maintained": {
+     "mean": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "sd": 0.0,
+     "n": 30,
+     "bootstrap": "resample"
+    },
+    "cpa_maintained_multi": {
+     "mean": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "sd": 0.0,
+     "n": 30,
+     "bootstrap": "resample"
+    },
+    "n": 30,
+    "contrasts": {
+     "bear_vs_cpa_stale": {
+      "delta": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ],
+      "p_bootstrap": 1.0,
+      "cohens_d_paired": null,
+      "wilcoxon": {
+       "W": null,
+       "p": null,
+       "n_nonzero": 0
+      },
+      "paired_t": {
+       "t": null,
+       "p": 1.0
+      },
+      "n": 30
+     },
+     "bear_vs_cpa_maintained": {
+      "delta": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ],
+      "p_bootstrap": 1.0,
+      "cohens_d_paired": null,
+      "wilcoxon": {
+       "W": null,
+       "p": null,
+       "n_nonzero": 0
+      },
+      "paired_t": {
+       "t": null,
+       "p": 1.0
+      },
+      "n": 30
+     },
+     "bear_vs_cpa_maintained_multi": {
+      "delta": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ],
+      "p_bootstrap": 1.0,
+      "cohens_d_paired": null,
+      "wilcoxon": {
+       "W": null,
+       "p": null,
+       "n_nonzero": 0
+      },
+      "paired_t": {
+       "t": null,
+       "p": 1.0
+      },
+      "n": 30
+     }
+    }
+   },
+   "conflict": {
+    "bear": {
+     "mean": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "sd": 0.0,
+     "n": 25,
+     "bootstrap": "resample"
+    },
+    "cpa_stale": {
+     "mean": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "sd": 0.0,
+     "n": 25,
+     "bootstrap": "resample"
+    },
+    "cpa_maintained": {
+     "mean": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "sd": 0.0,
+     "n": 25,
+     "bootstrap": "resample"
+    },
+    "cpa_maintained_multi": {
+     "mean": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "sd": 0.0,
+     "n": 25,
+     "bootstrap": "resample"
+    },
+    "n": 25,
+    "contrasts": {
+     "bear_vs_cpa_stale": {
+      "delta": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ],
+      "p_bootstrap": 1.0,
+      "cohens_d_paired": null,
+      "wilcoxon": {
+       "W": null,
+       "p": null,
+       "n_nonzero": 0
+      },
+      "paired_t": {
+       "t": null,
+       "p": 1.0
+      },
+      "n": 25
+     },
+     "bear_vs_cpa_maintained": {
+      "delta": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ],
+      "p_bootstrap": 1.0,
+      "cohens_d_paired": null,
+      "wilcoxon": {
+       "W": null,
+       "p": null,
+       "n_nonzero": 0
+      },
+      "paired_t": {
+       "t": null,
+       "p": 1.0
+      },
+      "n": 25
+     },
+     "bear_vs_cpa_maintained_multi": {
+      "delta": 0.0,
+      "ci": [
+       0.0,
+       0.0
+      ],
+      "p_bootstrap": 1.0,
+      "cohens_d_paired": null,
+      "wilcoxon": {
+       "W": null,
+       "p": null,
+       "n_nonzero": 0
+      },
+      "paired_t": {
+       "t": null,
+       "p": 1.0
+      },
+      "n": 25
+     }
+    }
+   }
+  }
+ },
+ "provenance": {
+  "bear_version": "0.4.2",
+  "bear_path": "/home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/bear/__init__.py",
+  "bear_source_sha": "0d0718a39a0b0788ef5cca4689352462b830494c",
+  "bear_direct_url": "file:///home/snhwang/tist-evals/bear-v0.4.2",
+  "bear_export_sha": "0d0718a39a0b0788ef5cca4689352462b830494c"
+ }
+}

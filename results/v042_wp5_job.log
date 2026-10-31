@@ -1,0 +1,236 @@
+### run_v042_wp5.sh all, BEAR_SOURCE_SHA 0d0718a39a0b0788ef5cca4689352462b830494c, 2026-10-31T18:58:05Z
+### waiting for tist-v042-rerun to finish 2026-10-31T18:58:05Z
+### waiting for tist-v042-rerun to finish 2026-10-31T19:00:05Z
+### waiting for tist-v042-rerun to finish 2026-10-31T19:02:05Z
+### waiting for tist-v042-rerun to finish 2026-10-31T19:04:05Z
+### waiting for tist-v042-rerun to finish 2026-10-31T19:06:05Z
+### waiting for tist-v042-rerun to finish 2026-10-31T19:08:05Z
+### waiting for tist-v042-rerun to finish 2026-10-31T19:10:05Z
+### waiting for tist-v042-rerun to finish 2026-10-31T19:12:05Z
+### waiting for tist-v042-rerun to finish 2026-10-31T19:14:05Z
+### waiting for tist-v042-rerun to finish 2026-10-31T19:16:05Z
+### waiting for tist-v042-rerun to finish 2026-10-31T19:18:05Z
+### waiting for tist-v042-rerun to finish 2026-10-31T19:20:05Z
+### waiting for tist-v042-rerun to finish 2026-10-31T19:22:05Z
+### waiting for tist-v042-rerun to finish 2026-10-31T19:24:05Z
+### waiting for tist-v042-rerun to finish 2026-10-31T19:26:05Z
+### tist.slice without page cache 778 MiB 2026-10-31T19:28:05Z
+=== nemotron_toolbench start 2026-10-31T19:28:05Z
+=== WP5a toolbench, Nemotron: BEAR rows on BEAR 0.4.2 from the cached store toolbench__nemotron; LlamaIndex rows from metadata_filter_baseline_toolbench_nemotron.json ===
+coverage: the BEAR arms embed 2198 query and 6450 document texts; the store lacks 0 and 3225
+store: remote:http://localhost:8360, identity {'endpoint': 'http://localhost:8360/v1/embeddings', 'model_id': 'nvidia/llama-nemotron-embed-vl-1b-v2', 'dim': 2048, 'served_model': 'nemotron-embed-vl', 'source': 'health'}, filled 2026-10-29T23:54:34Z
+Texts missing from the cache. Not calling the service. Stopping.
+=== nemotron_toolbench exit 1 2026-10-31T19:28:13Z
+### nemotron_toolbench failed, continuing (see its log)
+### tist.slice without page cache 778 MiB 2026-10-31T19:28:13Z
+=== nemotron_petsim start 2026-10-31T19:28:13Z
+=== WP5a petsim, Nemotron: BEAR rows on BEAR 0.4.2 from the cached store petsim__nemotron; LlamaIndex rows from metadata_filter_baseline_petsim_nemotron.json ===
+coverage: the BEAR arms embed 60 query and 99 document texts; the store lacks 0 and 44
+store: remote:http://localhost:8360, identity {'endpoint': 'http://localhost:8360/v1/embeddings', 'model_id': 'nvidia/llama-nemotron-embed-vl-1b-v2', 'dim': 2048, 'served_model': 'nemotron-embed-vl', 'source': 'health'}, filled 2026-10-29T23:13:17Z
+Texts missing from the cache. Not calling the service. Stopping.
+=== nemotron_petsim exit 1 2026-10-31T19:28:15Z
+### nemotron_petsim failed, continuing (see its log)
+### tist.slice without page cache 780 MiB 2026-10-31T19:28:15Z
+=== bge_petsim start 2026-10-31T19:28:15Z
+=== Metadata filter + rules (LlamaIndex 0.14.23) vs BEAR 0.4.2: petsim ===
+58 items, 60 queries, k=10, BEAR priority weight 0.3, theta 0.3, mandatory ['safety']
+  [bge] indexes built (LlamaIndex 6s, total 12s)
+
+  bge: arms (95% bootstrap CI)
+    bear_gov        f1 0.668 [0.655, 0.680]   f1_relaxed 0.792 [0.764, 0.820]   gate-failing items 0/588
+    bear_nogov      f1 0.168 [0.152, 0.186]   f1_relaxed 0.309 [0.262, 0.359]   gate-failing items 421/600
+    li_plain        f1 0.192 [0.174, 0.212]   f1_relaxed 0.327 [0.282, 0.374]   gate-failing items 408/600
+    li_filter       f1 0.187 [0.171, 0.203]   f1_relaxed 0.315 [0.270, 0.363]   gate-failing items 419/594
+    li_filter_rule  f1 0.568 [0.557, 0.580]   f1_relaxed 0.638 [0.604, 0.673]   gate-failing items 264/600
+    li_contain      f1 0.582 [0.548, 0.613]   f1_relaxed 0.736 [0.716, 0.756]   gate-failing items 0/588
+    li_contain_rule f1 0.667 [0.654, 0.681]   f1_relaxed 0.792 [0.764, 0.820]   gate-failing items 0/588
+    li_plain_rule   f1 0.562 [0.551, 0.573]   f1_relaxed 0.644 [0.612, 0.676]   gate-failing items 251/600
+  bge: paired contrasts (delta [95% CI] p d)
+    li_filter_rule_vs_bear_gov__f1           -0.099 [-0.116, -0.082] p=0.0001 d=-1.45
+    li_filter_rule_vs_bear_gov__f1_relaxed   -0.154 [-0.187, -0.121] p=0.0001 d=-1.17
+    li_filter_rule_vs_bear_gov__recall       -0.132 [-0.156, -0.108] p=0.0001 d=-1.37
+    li_filter_rule_vs_bear_gov__recall_relaxed -0.177 [-0.219, -0.134] p=0.0001 d=-1.05
+    li_contain_rule_vs_bear_gov__f1          -0.000 [-0.007, +0.006] p=0.9524 d=-0.01
+    li_contain_rule_vs_bear_gov__f1_relaxed  +0.000 [-0.008, +0.008] p=1.0000 d=+0.00
+    li_contain_rule_vs_bear_gov__recall      -0.001 [-0.010, +0.008] p=0.9524 d=-0.02
+    li_contain_rule_vs_bear_gov__recall_relaxed +0.000 [-0.009, +0.009] p=1.0000 d=+0.00
+    li_filter_vs_bear_gov__f1                -0.481 [-0.498, -0.463] p=0.0001 d=-6.79
+    li_filter_vs_bear_gov__f1_relaxed        -0.477 [-0.515, -0.438] p=0.0001 d=-3.11
+    li_filter_vs_bear_gov__recall            -0.705 [-0.732, -0.676] p=0.0001 d=-6.23
+    li_filter_vs_bear_gov__recall_relaxed    -0.597 [-0.649, -0.544] p=0.0001 d=-2.85
+    li_contain_vs_bear_gov__f1               -0.086 [-0.116, -0.058] p=0.0001 d=-0.73
+    li_contain_vs_bear_gov__f1_relaxed       -0.056 [-0.075, -0.037] p=0.0001 d=-0.72
+    li_contain_vs_bear_gov__recall           -0.121 [-0.162, -0.081] p=0.0001 d=-0.74
+    li_contain_vs_bear_gov__recall_relaxed   -0.059 [-0.080, -0.040] p=0.0001 d=-0.73
+    li_filter_rule_vs_li_filter__f1          +0.381 [+0.369, +0.392] p=0.0001 d=+8.30
+    li_filter_rule_vs_li_filter__f1_relaxed  +0.323 [+0.303, +0.341] p=0.0001 d=+4.17
+    li_filter_rule_vs_li_filter__recall      +0.573 [+0.548, +0.598] p=0.0001 d=+5.64
+    li_filter_rule_vs_li_filter__recall_relaxed +0.421 [+0.384, +0.457] p=0.0001 d=+2.86
+    li_contain_rule_vs_li_contain__f1        +0.086 [+0.058, +0.116] p=0.0001 d=+0.73
+    li_contain_rule_vs_li_contain__f1_relaxed +0.056 [+0.038, +0.075] p=0.0001 d=+0.75
+    li_contain_rule_vs_li_contain__recall    +0.120 [+0.081, +0.162] p=0.0001 d=+0.74
+    li_contain_rule_vs_li_contain__recall_relaxed +0.059 [+0.041, +0.080] p=0.0001 d=+0.75
+    li_filter_rule_vs_li_plain_rule__f1      +0.007 [+0.000, +0.015] p=0.0928 d=+0.23
+    li_filter_rule_vs_li_plain_rule__f1_relaxed -0.006 [-0.020, +0.007] p=0.4326 d=-0.10
+    li_filter_rule_vs_li_plain_rule__recall  +0.009 [+0.000, +0.022] p=0.0928 d=+0.23
+    li_filter_rule_vs_li_plain_rule__recall_relaxed -0.006 [-0.024, +0.010] p=0.4556 d=-0.09
+    li_contain_rule_vs_li_filter_rule__f1    +0.099 [+0.082, +0.116] p=0.0001 d=+1.45
+    li_contain_rule_vs_li_filter_rule__f1_relaxed +0.154 [+0.122, +0.186] p=0.0001 d=+1.20
+    li_contain_rule_vs_li_filter_rule__recall +0.132 [+0.107, +0.156] p=0.0001 d=+1.37
+    li_contain_rule_vs_li_filter_rule__recall_relaxed +0.177 [+0.135, +0.218] p=0.0001 d=+1.07
+    bear_gov_vs_bear_nogov__f1               +0.499 [+0.480, +0.517] p=0.0001 d=+6.71
+    bear_gov_vs_bear_nogov__f1_relaxed       +0.484 [+0.444, +0.521] p=0.0001 d=+3.12
+    bear_gov_vs_bear_nogov__recall           +0.731 [+0.702, +0.757] p=0.0001 d=+6.55
+    bear_gov_vs_bear_nogov__recall_relaxed   +0.605 [+0.550, +0.658] p=0.0001 d=+2.80
+    li_plain_vs_bear_nogov__f1               +0.024 [+0.009, +0.041] p=0.0020 d=+0.36
+    li_plain_vs_bear_nogov__f1_relaxed       +0.018 [+0.001, +0.037] p=0.0342 d=+0.26
+    li_plain_vs_bear_nogov__recall           +0.034 [+0.012, +0.059] p=0.0020 d=+0.36
+    li_plain_vs_bear_nogov__recall_relaxed   +0.024 [+0.002, +0.047] p=0.0318 d=+0.26
+
+Wrote results/metadata_filter_baseline_petsim_bge_v042.json
+Elapsed 22s
+
+=== Reproducibility ===
+Timestamp (UTC): 2026-10-31T19:28:39Z
+Command line:    evals/eval_metadata_filter_baseline.py --corpus petsim --encoders bge --output results/metadata_filter_baseline_petsim_bge_v042.json --log-file results/metadata_filter_baseline_petsim_bge_v042_output.txt
+Python:          3.12.13 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
+numpy:           2.2.6
+scipy:           1.17.1
+bear:            0.4.2
+git commit:      6ae764af347c15dbfb7e044f8e0e042b0ce39742
+git status:      unknown (git status failed or timed out)
+git branch:      tist-r2
+
+  eval: metadata_filter_baseline
+  corpus: petsim
+  encoders: ['bge']
+  bear_version: 0.4.2
+  bear_path: /home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/bear/__init__.py
+  bear_source_sha: 0d0718a39a0b0788ef5cca4689352462b830494c
+  bear_direct_url: file:///home/snhwang/tist-evals/bear-v0.4.2
+  bear_export_sha: 0d0718a39a0b0788ef5cca4689352462b830494c
+===
+=== bge_petsim exit 0 2026-10-31T19:28:45Z
+### tist.slice without page cache 785 MiB 2026-10-31T19:28:45Z
+=== bge_toolbench start 2026-10-31T19:28:45Z
+=== Metadata filter + rules (LlamaIndex 0.14.23) vs BEAR 0.4.2: toolbench ===
+3225 items, 1100 queries, k=5, BEAR priority weight 0.3, theta 0.15, mandatory []
+Batches:   0%|          | 0/101 [00:00<?, ?it/s]Batches:   1%|          | 1/101 [00:05<09:47,  5.87s/it]Batches:   2%|▏         | 2/101 [00:11<09:33,  5.79s/it]Batches:   3%|▎         | 3/101 [00:17<09:23,  5.75s/it]Batches:   4%|▍         | 4/101 [00:22<09:12,  5.70s/it]Batches:   5%|▍         | 5/101 [00:27<08:15,  5.16s/it]Batches:   6%|▌         | 6/101 [00:30<07:01,  4.43s/it]Batches:   7%|▋         | 7/101 [00:33<06:30,  4.15s/it]Batches:   8%|▊         | 8/101 [00:36<05:44,  3.70s/it]Batches:   9%|▉         | 9/101 [00:38<05:04,  3.31s/it]Batches:  10%|▉         | 10/101 [00:41<04:28,  2.95s/it]Batches:  11%|█         | 11/101 [00:43<04:01,  2.68s/it]Batches:  12%|█▏        | 12/101 [00:45<03:45,  2.54s/it]Batches:  13%|█▎        | 13/101 [00:47<03:27,  2.36s/it]Batches:  14%|█▍        | 14/101 [00:49<03:11,  2.20s/it]Batches:  15%|█▍        | 15/101 [00:51<03:02,  2.12s/it]Batches:  16%|█▌        | 16/101 [00:53<03:14,  2.29s/it]Batches:  17%|█▋        | 17/101 [00:55<02:52,  2.06s/it]Batches:  18%|█▊        | 18/101 [00:56<02:31,  1.83s/it]Batches:  19%|█▉        | 19/101 [00:58<02:25,  1.78s/it]Batches:  20%|█▉        | 20/101 [00:59<02:21,  1.75s/it]Batches:  21%|██        | 21/101 [01:01<02:18,  1.73s/it]Batches:  22%|██▏       | 22/101 [01:03<02:21,  1.79s/it]Batches:  23%|██▎       | 23/101 [01:04<02:11,  1.69s/it]Batches:  24%|██▍       | 24/101 [01:06<02:13,  1.74s/it]Batches:  25%|██▍       | 25/101 [01:08<02:06,  1.66s/it]Batches:  26%|██▌       | 26/101 [01:09<01:56,  1.55s/it]Batches:  27%|██▋       | 27/101 [01:10<01:48,  1.47s/it]Batches:  28%|██▊       | 28/101 [01:12<01:40,  1.38s/it]Batches:  29%|██▊       | 29/101 [01:13<01:35,  1.33s/it]Batches:  30%|██▉       | 30/101 [01:14<01:29,  1.26s/it]Batches:  31%|███       | 31/101 [01:15<01:26,  1.24s/it]Batches:  32%|███▏      | 32/101 [01:16<01:20,  1.17s/it]Batches:  33%|███▎      | 33/101 [01:17<01:21,  1.20s/it]Batches:  34%|███▎      | 34/101 [01:18<01:16,  1.15s/it]Batches:  35%|███▍      | 35/101 [01:19<01:14,  1.13s/it]Batches:  36%|███▌      | 36/101 [01:20<01:10,  1.08s/it]Batches:  37%|███▋      | 37/101 [01:21<01:07,  1.06s/it]Batches:  38%|███▊      | 38/101 [01:22<01:05,  1.05s/it]Batches:  39%|███▊      | 39/101 [01:24<01:05,  1.06s/it]Batches:  40%|███▉      | 40/101 [01:25<01:03,  1.04s/it]Batches:  41%|████      | 41/101 [01:25<01:00,  1.01s/it]Batches:  42%|████▏     | 42/101 [01:27<01:04,  1.09s/it]Batches:  43%|████▎     | 43/101 [01:28<01:04,  1.10s/it]Batches:  44%|████▎     | 44/101 [01:29<01:01,  1.07s/it]Batches:  45%|████▍     | 45/101 [01:31<01:13,  1.32s/it]Batches:  46%|████▌     | 46/101 [01:32<01:08,  1.25s/it]Batches:  47%|████▋     | 47/101 [01:33<01:12,  1.34s/it]Batches:  48%|████▊     | 48/101 [01:34<01:06,  1.26s/it]Batches:  49%|████▊     | 49/101 [01:35<00:57,  1.11s/it]Batches:  50%|████▉     | 50/101 [01:37<01:01,  1.22s/it]Batches:  50%|█████     | 51/101 [01:38<00:56,  1.12s/it]Batches:  51%|█████▏    | 52/101 [01:39<00:52,  1.07s/it]Batches:  52%|█████▏    | 53/101 [01:39<00:47,  1.01it/s]Batches:  53%|█████▎    | 54/101 [01:40<00:43,  1.07it/s]Batches:  54%|█████▍    | 55/101 [01:41<00:40,  1.13it/s]Batches:  55%|█████▌    | 56/101 [01:42<00:39,  1.14it/s]Batches:  56%|█████▋    | 57/101 [01:43<00:39,  1.12it/s]Batches:  57%|█████▋    | 58/101 [01:44<00:38,  1.12it/s]Batches:  58%|█████▊    | 59/101 [01:44<00:36,  1.16it/s]Batches:  59%|█████▉    | 60/101 [01:45<00:35,  1.17it/s]Batches:  60%|██████    | 61/101 [01:46<00:33,  1.21it/s]Batches:  61%|██████▏   | 62/101 [01:47<00:34,  1.12it/s]Batches:  62%|██████▏   | 63/101 [01:48<00:35,  1.08it/s]Batches:  63%|██████▎   | 64/101 [01:49<00:37,  1.02s/it]Batches:  64%|██████▍   | 65/101 [01:50<00:35,  1.02it/s]Batches:  65%|██████▌   | 66/101 [01:51<00:33,  1.04it/s]Batches:  66%|██████▋   | 67/101 [01:52<00:33,  1.03it/s]Batches:  67%|██████▋   | 68/101 [01:53<00:31,  1.04it/s]Batches:  68%|██████▊   | 69/101 [01:54<00:30,  1.06it/s]Batches:  69%|██████▉   | 70/101 [01:55<00:28,  1.07it/s]Batches:  70%|███████   | 71/101 [01:56<00:27,  1.08it/s]Batches:  71%|███████▏  | 72/101 [01:57<00:27,  1.07it/s]Batches:  72%|███████▏  | 73/101 [01:58<00:25,  1.08it/s]Batches:  73%|███████▎  | 74/101 [01:58<00:24,  1.09it/s]Batches:  74%|███████▍  | 75/101 [01:59<00:23,  1.13it/s]Batches:  75%|███████▌  | 76/101 [02:00<00:21,  1.19it/s]Batches:  76%|███████▌  | 77/101 [02:01<00:20,  1.19it/s]Batches:  77%|███████▋  | 78/101 [02:02<00:19,  1.21it/s]Batches:  78%|███████▊  | 79/101 [02:02<00:17,  1.26it/s]Batches:  79%|███████▉  | 80/101 [02:03<00:18,  1.15it/s]Batches:  80%|████████  | 81/101 [02:04<00:16,  1.20it/s]Batches:  81%|████████  | 82/101 [02:05<00:14,  1.28it/s]Batches:  82%|████████▏ | 83/101 [02:06<00:13,  1.35it/s]Batches:  83%|████████▎ | 84/101 [02:06<00:12,  1.41it/s]Batches:  84%|████████▍ | 85/101 [02:07<00:11,  1.45it/s]Batches:  85%|████████▌ | 86/101 [02:07<00:10,  1.48it/s]Batches:  86%|████████▌ | 87/101 [02:08<00:09,  1.48it/s]Batches:  87%|████████▋ | 88/101 [02:09<00:08,  1.55it/s]Batches:  88%|████████▊ | 89/101 [02:09<00:07,  1.57it/s]Batches:  89%|████████▉ | 90/101 [02:10<00:07,  1.53it/s]Batches:  90%|█████████ | 91/101 [02:11<00:06,  1.58it/s]Batches:  91%|█████████ | 92/101 [02:11<00:05,  1.63it/s]Batches:  92%|█████████▏| 93/101 [02:12<00:04,  1.72it/s]Batches:  93%|█████████▎| 94/101 [02:12<00:04,  1.67it/s]Batches:  94%|█████████▍| 95/101 [02:13<00:03,  1.71it/s]Batches:  95%|█████████▌| 96/101 [02:13<00:02,  1.71it/s]Batches:  96%|█████████▌| 97/101 [02:14<00:02,  1.74it/s]Batches:  97%|█████████▋| 98/101 [02:15<00:01,  1.73it/s]Batches:  98%|█████████▊| 99/101 [02:15<00:01,  1.81it/s]Batches:  99%|█████████▉| 100/101 [02:16<00:00,  1.85it/s]Batches: 100%|██████████| 101/101 [02:16<00:00,  2.11it/s]Batches: 100%|██████████| 101/101 [02:16<00:00,  1.35s/it]
+Batches:   0%|          | 0/101 [00:00<?, ?it/s]Batches:   1%|          | 1/101 [00:05<09:33,  5.74s/it]Batches:   2%|▏         | 2/101 [00:11<09:25,  5.71s/it]Batches:   3%|▎         | 3/101 [00:17<09:27,  5.79s/it]Batches:   4%|▍         | 4/101 [00:22<09:17,  5.75s/it]Batches:   5%|▍         | 5/101 [00:27<08:24,  5.25s/it]Batches:   6%|▌         | 6/101 [00:30<07:05,  4.48s/it]Batches:   7%|▋         | 7/101 [00:34<06:36,  4.21s/it]Batches:   8%|▊         | 8/101 [00:36<05:45,  3.71s/it]Batches:   9%|▉         | 9/101 [00:39<05:04,  3.31s/it]Batches:  10%|▉         | 10/101 [00:41<04:26,  2.92s/it]Batches:  11%|█         | 11/101 [00:42<03:53,  2.60s/it]Batches:  12%|█▏        | 12/101 [00:44<03:30,  2.36s/it]Batches:  13%|█▎        | 13/101 [00:46<03:09,  2.15s/it]Batches:  14%|█▍        | 14/101 [00:48<02:52,  1.99s/it]Batches:  15%|█▍        | 15/101 [00:49<02:44,  1.91s/it]Batches:  16%|█▌        | 16/101 [00:52<02:54,  2.06s/it]Batches:  17%|█▋        | 17/101 [00:53<02:34,  1.84s/it]Batches:  18%|█▊        | 18/101 [00:54<02:17,  1.66s/it]Batches:  19%|█▉        | 19/101 [00:56<02:09,  1.59s/it]Batches:  20%|█▉        | 20/101 [00:57<02:03,  1.53s/it]Batches:  21%|██        | 21/101 [00:59<02:04,  1.55s/it]Batches:  22%|██▏       | 22/101 [01:00<02:00,  1.52s/it]Batches:  23%|██▎       | 23/101 [01:02<01:56,  1.50s/it]Batches:  24%|██▍       | 24/101 [01:03<01:58,  1.54s/it]Batches:  25%|██▍       | 25/101 [01:05<01:51,  1.47s/it]Batches:  26%|██▌       | 26/101 [01:06<01:42,  1.37s/it]Batches:  27%|██▋       | 27/101 [01:07<01:31,  1.24s/it]Batches:  28%|██▊       | 28/101 [01:08<01:28,  1.21s/it]Batches:  29%|██▊       | 29/101 [01:09<01:20,  1.12s/it]Batches:  30%|██▉       | 30/101 [01:10<01:16,  1.08s/it]Batches:  31%|███       | 31/101 [01:11<01:11,  1.03s/it]Batches:  32%|███▏      | 32/101 [01:12<01:11,  1.04s/it]Batches:  33%|███▎      | 33/101 [01:12<01:07,  1.01it/s]Batches:  34%|███▎      | 34/101 [01:13<01:05,  1.02it/s]Batches:  35%|███▍      | 35/101 [01:14<01:03,  1.04it/s]Batches:  36%|███▌      | 36/101 [01:15<00:59,  1.08it/s]Batches:  37%|███▋      | 37/101 [01:16<00:59,  1.08it/s]Batches:  38%|███▊      | 38/101 [01:17<01:02,  1.00it/s]Batches:  39%|███▊      | 39/101 [01:18<00:58,  1.06it/s]Batches:  40%|███▉      | 40/101 [01:19<00:59,  1.02it/s]Batches:  41%|████      | 41/101 [01:20<00:56,  1.06it/s]Batches:  42%|████▏     | 42/101 [01:21<00:53,  1.10it/s]Batches:  43%|████▎     | 43/101 [01:22<00:48,  1.19it/s]Batches:  44%|████▎     | 44/101 [01:22<00:45,  1.25it/s]Batches:  45%|████▍     | 45/101 [01:23<00:43,  1.30it/s]Batches:  46%|████▌     | 46/101 [01:24<00:44,  1.23it/s]Batches:  47%|████▋     | 47/101 [01:24<00:40,  1.32it/s]Batches:  48%|████▊     | 48/101 [01:25<00:38,  1.37it/s]Batches:  49%|████▊     | 49/101 [01:26<00:36,  1.41it/s]Batches:  50%|████▉     | 50/101 [01:27<00:36,  1.41it/s]Batches:  50%|█████     | 51/101 [01:27<00:35,  1.41it/s]Batches:  51%|█████▏    | 52/101 [01:28<00:35,  1.36it/s]Batches:  52%|█████▏    | 53/101 [01:29<00:33,  1.43it/s]Batches:  53%|█████▎    | 54/101 [01:29<00:31,  1.49it/s]Batches:  54%|█████▍    | 55/101 [01:30<00:31,  1.44it/s]Batches:  55%|█████▌    | 56/101 [01:31<00:30,  1.46it/s]Batches:  56%|█████▋    | 57/101 [01:32<00:34,  1.28it/s]Batches:  57%|█████▋    | 58/101 [01:32<00:32,  1.33it/s]Batches:  58%|█████▊    | 59/101 [01:33<00:29,  1.42it/s]Batches:  59%|█████▉    | 60/101 [01:34<00:29,  1.39it/s]Batches:  60%|██████    | 61/101 [01:34<00:27,  1.47it/s]Batches:  61%|██████▏   | 62/101 [01:35<00:25,  1.54it/s]Batches:  62%|██████▏   | 63/101 [01:35<00:23,  1.59it/s]Batches:  63%|██████▎   | 64/101 [01:36<00:22,  1.63it/s]Batches:  64%|██████▍   | 65/101 [01:37<00:21,  1.67it/s]Batches:  65%|██████▌   | 66/101 [01:37<00:21,  1.66it/s]Batches:  66%|██████▋   | 67/101 [01:38<00:19,  1.71it/s]Batches:  67%|██████▋   | 68/101 [01:38<00:19,  1.70it/s]Batches:  68%|██████▊   | 69/101 [01:39<00:20,  1.55it/s]Batches:  69%|██████▉   | 70/101 [01:40<00:18,  1.64it/s]Batches:  70%|███████   | 71/101 [01:40<00:17,  1.67it/s]Batches:  71%|███████▏  | 72/101 [01:41<00:16,  1.72it/s]Batches:  72%|███████▏  | 73/101 [01:41<00:16,  1.66it/s]Batches:  73%|███████▎  | 74/101 [01:42<00:15,  1.74it/s]Batches:  74%|███████▍  | 75/101 [01:42<00:14,  1.79it/s]Batches:  75%|███████▌  | 76/101 [01:43<00:13,  1.83it/s]Batches:  76%|███████▌  | 77/101 [01:43<00:12,  1.87it/s]Batches:  77%|███████▋  | 78/101 [01:44<00:12,  1.89it/s]Batches:  78%|███████▊  | 79/101 [01:44<00:11,  1.92it/s]Batches:  79%|███████▉  | 80/101 [01:45<00:10,  1.97it/s]Batches:  80%|████████  | 81/101 [01:45<00:10,  1.98it/s]Batches:  81%|████████  | 82/101 [01:46<00:09,  1.96it/s]Batches:  82%|████████▏ | 83/101 [01:46<00:08,  2.08it/s]Batches:  83%|████████▎ | 84/101 [01:47<00:08,  2.11it/s]Batches:  84%|████████▍ | 85/101 [01:47<00:07,  2.08it/s]Batches:  85%|████████▌ | 86/101 [01:48<00:07,  2.10it/s]Batches:  86%|████████▌ | 87/101 [01:48<00:06,  2.03it/s]Batches:  87%|████████▋ | 88/101 [01:49<00:06,  2.02it/s]Batches:  88%|████████▊ | 89/101 [01:49<00:05,  2.00it/s]Batches:  89%|████████▉ | 90/101 [01:50<00:05,  2.00it/s]Batches:  90%|█████████ | 91/101 [01:50<00:05,  1.95it/s]Batches:  91%|█████████ | 92/101 [01:51<00:04,  2.04it/s]Batches:  92%|█████████▏| 93/101 [01:51<00:03,  2.02it/s]Batches:  93%|█████████▎| 94/101 [01:52<00:03,  2.07it/s]Batches:  94%|█████████▍| 95/101 [01:52<00:03,  1.92it/s]Batches:  95%|█████████▌| 96/101 [01:53<00:02,  1.94it/s]Batches:  96%|█████████▌| 97/101 [01:53<00:01,  2.03it/s]Batches:  97%|█████████▋| 98/101 [01:54<00:01,  2.16it/s]Batches:  98%|█████████▊| 99/101 [01:54<00:00,  2.18it/s]Batches:  99%|█████████▉| 100/101 [01:55<00:00,  2.27it/s]Batches: 100%|██████████| 101/101 [01:55<00:00,  2.54it/s]Batches: 100%|██████████| 101/101 [01:55<00:00,  1.14s/it]
+  [bge] indexes built (LlamaIndex 207s, total 459s)
+    200/1100 queries
+    400/1100 queries
+    600/1100 queries
+    800/1100 queries
+    1000/1100 queries
+
+  bge: arms (95% bootstrap CI)
+    bear_gov        recall 0.688 [0.668, 0.709]   ndcg 0.651 [0.631, 0.670]   gate-failing items 0/5500
+    bear_nogov      recall 0.574 [0.552, 0.596]   ndcg 0.545 [0.524, 0.566]   gate-failing items 1878/5500
+    li_plain        recall 0.578 [0.556, 0.600]   ndcg 0.545 [0.524, 0.566]   gate-failing items 1903/5500
+    li_filter       recall 0.697 [0.676, 0.718]   ndcg 0.658 [0.639, 0.678]   gate-failing items 0/5500
+  bge: paired contrasts (delta [95% CI] p d)
+    li_filter_vs_bear_gov__recall            +0.009 [-0.003, +0.020] p=0.1340 d=+0.05
+    li_filter_vs_bear_gov__ndcg              +0.007 [-0.002, +0.016] p=0.1142 d=+0.05
+    li_filter_vs_li_plain__recall            +0.119 [+0.105, +0.134] p=0.0001 d=+0.48
+    li_filter_vs_li_plain__ndcg              +0.113 [+0.100, +0.126] p=0.0001 d=+0.52
+    bear_gov_vs_bear_nogov__recall           +0.114 [+0.099, +0.130] p=0.0001 d=+0.43
+    bear_gov_vs_bear_nogov__ndcg             +0.106 [+0.092, +0.119] p=0.0001 d=+0.47
+    li_plain_vs_bear_nogov__recall           +0.004 [-0.007, +0.014] p=0.5030 d=+0.02
+    li_plain_vs_bear_nogov__ndcg             -0.000 [-0.008, +0.008] p=0.9480 d=-0.00
+    li_filter and bear_gov return the same top-5 set on 341 queries
+
+Wrote results/metadata_filter_baseline_toolbench_bge_v042.json
+Elapsed 719s
+
+=== Reproducibility ===
+Timestamp (UTC): 2026-10-31T19:40:46Z
+Command line:    evals/eval_metadata_filter_baseline.py --corpus toolbench --encoders bge --output results/metadata_filter_baseline_toolbench_bge_v042.json --log-file results/metadata_filter_baseline_toolbench_bge_v042_output.txt
+Python:          3.12.13 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
+numpy:           2.2.6
+scipy:           1.17.1
+bear:            0.4.2
+git commit:      6ae764af347c15dbfb7e044f8e0e042b0ce39742
+git status:      unknown (git status failed or timed out)
+git branch:      tist-r2
+
+  eval: metadata_filter_baseline
+  corpus: toolbench
+  encoders: ['bge']
+  bear_version: 0.4.2
+  bear_path: /home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/bear/__init__.py
+  bear_source_sha: 0d0718a39a0b0788ef5cca4689352462b830494c
+  bear_direct_url: file:///home/snhwang/tist-evals/bear-v0.4.2
+  bear_export_sha: 0d0718a39a0b0788ef5cca4689352462b830494c
+===
+=== bge_toolbench exit 0 2026-10-31T19:40:53Z
+### tist.slice without page cache 558 MiB 2026-10-31T19:40:53Z
+=== cpa start 2026-10-31T19:40:53Z
+=== Maintained CPA vs stale CPA vs BEAR on novel contexts (WP5), BEAR 0.4.2 ===
+BGE-base on the CPU, k=25, theta 0.3, priority weight 0.3, mandatory safety+global. Scale points [10, 25, 50, 100, 200, 500].
+
+  10 agents (31 instructions, 19 novel queries): bear 0.950 (fraud 1.000)  cpa_stale 0.888 (fraud 0.833)  cpa_maintained 0.950 (fraud 1.000)  cpa_maintained_multi 0.950 (fraud 1.000)
+     maintenance per new department: CPA tables +1 key(s), +3 entries, wiring formula +1 line(s); BEAR wiring +0, 3 required tags written with the new instructions
+
+  25 agents (54 instructions, 24 novel queries): bear 0.960 (fraud 1.000)  cpa_stale 0.912 (fraud 0.833)  cpa_maintained 0.960 (fraud 1.000)  cpa_maintained_multi 0.960 (fraud 1.000)
+     maintenance per new department: CPA tables +1 key(s), +3 entries, wiring formula +1 line(s); BEAR wiring +0, 3 required tags written with the new instructions
+
+  50 agents (87 instructions, 24 novel queries): bear 0.960 (fraud 1.000)  cpa_stale 0.912 (fraud 0.833)  cpa_maintained 0.960 (fraud 1.000)  cpa_maintained_multi 0.960 (fraud 1.000)
+     maintenance per new department: CPA tables +1 key(s), +3 entries, wiring formula +1 line(s); BEAR wiring +0, 3 required tags written with the new instructions
+Batches:   0%|          | 0/5 [00:00<?, ?it/s]Batches:  20%|██        | 1/5 [00:00<00:02,  1.57it/s]Batches:  40%|████      | 2/5 [00:01<00:01,  1.54it/s]Batches:  60%|██████    | 3/5 [00:01<00:01,  1.64it/s]Batches:  80%|████████  | 4/5 [00:02<00:00,  1.70it/s]Batches: 100%|██████████| 5/5 [00:02<00:00,  1.98it/s]Batches: 100%|██████████| 5/5 [00:02<00:00,  1.81it/s]
+
+ 100 agents (158 instructions, 24 novel queries): bear 1.000 (fraud 1.000)  cpa_stale 0.912 (fraud 0.833)  cpa_maintained 0.960 (fraud 1.000)  cpa_maintained_multi 1.000 (fraud 1.000)
+     maintenance per new department: CPA tables +1 key(s), +3 entries, wiring formula +1 line(s); BEAR wiring +0, 3 required tags written with the new instructions
+Batches:   0%|          | 0/9 [00:00<?, ?it/s]Batches:  11%|█         | 1/9 [00:00<00:05,  1.50it/s]Batches:  22%|██▏       | 2/9 [00:01<00:04,  1.61it/s]Batches:  33%|███▎      | 3/9 [00:01<00:03,  1.64it/s]Batches:  44%|████▍     | 4/9 [00:02<00:03,  1.59it/s]Batches:  56%|█████▌    | 5/9 [00:03<00:02,  1.63it/s]Batches:  67%|██████▋   | 6/9 [00:03<00:01,  1.68it/s]Batches:  78%|███████▊  | 7/9 [00:04<00:01,  1.75it/s]Batches:  89%|████████▉ | 8/9 [00:04<00:00,  1.99it/s]Batches: 100%|██████████| 9/9 [00:04<00:00,  2.11it/s]Batches: 100%|██████████| 9/9 [00:04<00:00,  1.82it/s]
+
+ 200 agents (288 instructions, 24 novel queries): bear 1.000 (fraud 1.000)  cpa_stale 0.912 (fraud 0.833)  cpa_maintained 0.960 (fraud 1.000)  cpa_maintained_multi 1.000 (fraud 1.000)
+     maintenance per new department: CPA tables +1 key(s), +3 entries, wiring formula +1 line(s); BEAR wiring +0, 3 required tags written with the new instructions
+Batches:   0%|          | 0/22 [00:00<?, ?it/s]Batches:   5%|▍         | 1/22 [00:00<00:13,  1.60it/s]Batches:   9%|▉         | 2/22 [00:01<00:12,  1.58it/s]Batches:  14%|█▎        | 3/22 [00:01<00:12,  1.52it/s]Batches:  18%|█▊        | 4/22 [00:02<00:11,  1.52it/s]Batches:  23%|██▎       | 5/22 [00:03<00:11,  1.52it/s]Batches:  27%|██▋       | 6/22 [00:03<00:10,  1.52it/s]Batches:  32%|███▏      | 7/22 [00:04<00:09,  1.57it/s]Batches:  36%|███▋      | 8/22 [00:05<00:08,  1.60it/s]Batches:  41%|████      | 9/22 [00:05<00:07,  1.70it/s]Batches:  45%|████▌     | 10/22 [00:06<00:06,  1.72it/s]Batches:  50%|█████     | 11/22 [00:06<00:06,  1.74it/s]Batches:  55%|█████▍    | 12/22 [00:07<00:05,  1.77it/s]Batches:  59%|█████▉    | 13/22 [00:07<00:05,  1.80it/s]Batches:  64%|██████▎   | 14/22 [00:08<00:04,  1.72it/s]Batches:  68%|██████▊   | 15/22 [00:09<00:03,  1.76it/s]Batches:  73%|███████▎  | 16/22 [00:09<00:03,  1.76it/s]Batches:  77%|███████▋  | 17/22 [00:09<00:02,  1.92it/s]Batches:  82%|████████▏ | 18/22 [00:10<00:01,  2.11it/s]Batches:  86%|████████▋ | 19/22 [00:10<00:01,  2.22it/s]Batches:  91%|█████████ | 20/22 [00:11<00:00,  2.38it/s]Batches:  95%|█████████▌| 21/22 [00:11<00:00,  2.62it/s]Batches: 100%|██████████| 22/22 [00:11<00:00,  1.92it/s]
+
+ 500 agents (678 instructions, 24 novel queries): bear 1.000 (fraud 1.000)  cpa_stale 0.912 (fraud 0.833)  cpa_maintained 0.960 (fraud 1.000)  cpa_maintained_multi 1.000 (fraud 1.000)
+     maintenance per new department: CPA tables +1 key(s), +3 entries, wiring formula +1 line(s); BEAR wiring +0, 3 required tags written with the new instructions
+
+Multi-department wiring change (one time): {'published_body_lines': 15, 'multi_body_lines': 17, 'changed_body_lines': 7, 'call_site_lines': 1}
+
+--- Pooled over scale points (novel-context recall, 95% bootstrap CI) ---
+  bear                   recall 0.979 [0.971, 0.987]   all-expected 0.849
+  cpa_stale              recall 0.908 [0.896, 0.921]   all-expected 0.396
+  cpa_maintained         recall 0.959 [0.948, 0.969]   all-expected 0.698
+  cpa_maintained_multi   recall 0.979 [0.971, 0.987]   all-expected 0.849
+  unknown_dept     (n=42): bear 1.000  cpa_stale 0.833  cpa_maintained 1.000  cpa_maintained_multi 1.000
+  cross_dept       (n=42): bear 0.932  cpa_stale 0.864  cpa_maintained 0.864  cpa_maintained_multi 0.932
+  unseen_modifier  (n=30): bear 1.000  cpa_stale 1.000  cpa_maintained 1.000  cpa_maintained_multi 1.000
+  conflict         (n=25): bear 1.000  cpa_stale 1.000  cpa_maintained 1.000  cpa_maintained_multi 1.000
+
+--- Paired contrasts, pooled ---
+  bear_vs_cpa_stale                recall +0.071 [+0.058, +0.084] p=0.0001 d=+0.90   McNemar(all expected) b=63 c=0 p=0.0000
+  bear_vs_cpa_maintained           recall +0.021 [+0.013, +0.029] p=0.0001 d=+0.42   McNemar(all expected) b=21 c=0 p=0.0000
+  bear_vs_cpa_maintained_multi     recall +0.000 [+0.000, +0.000] p=1.0000 d=n/a   McNemar(all expected) b=0 c=0 p=1.0000
+  New department only:
+    bear_vs_cpa_stale              +0.167 [+0.167, +0.167] p=0.0001 d=n/a
+    bear_vs_cpa_maintained         +0.000 [+0.000, +0.000] p=1.0000 d=n/a
+    bear_vs_cpa_maintained_multi   +0.000 [+0.000, +0.000] p=1.0000 d=n/a
+
+Wrote results/cpa_maintained_v042.json
+Elapsed 32s
+
+=== Reproducibility ===
+Timestamp (UTC): 2026-10-31T19:41:25Z
+Command line:    evals/eval_cpa_maintained.py --output results/cpa_maintained_v042.json --log-file results/cpa_maintained_v042_output.txt
+Python:          3.12.13 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
+numpy:           2.2.6
+scipy:           1.17.1
+bear:            0.4.2
+git commit:      6ae764af347c15dbfb7e044f8e0e042b0ce39742
+git status:      unknown (git status failed or timed out)
+git branch:      tist-r2
+
+  eval: cpa_maintained
+  bear_version: 0.4.2
+  bear_path: /home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/bear/__init__.py
+  bear_source_sha: 0d0718a39a0b0788ef5cca4689352462b830494c
+  bear_direct_url: file:///home/snhwang/tist-evals/bear-v0.4.2
+  bear_export_sha: 0d0718a39a0b0788ef5cca4689352462b830494c
+===
+=== cpa exit 0 2026-10-31T19:41:32Z
+### run_v042_wp5.sh done with a failed Nemotron step 2026-10-31T19:41:32Z

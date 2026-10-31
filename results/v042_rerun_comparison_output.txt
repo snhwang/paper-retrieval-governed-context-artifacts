@@ -1,0 +1,1064 @@
+# BEAR 0.4.0 against 0.4.2, agent validation run
+
+## tag_noise.json (0.4.0) -> tag_noise_v042.json (0.4.2): 1948 scalars and 74 arrays changed, 0 keys added, 0 removed
+  /summary/metatool_tags/bm25/gate_clean/failures/needed_admitted_but_cut_or_other: 0.19381710477600889 -> 0.19145686782673085
+  /summary/metatool_tags/bm25/gate_clean/failures/needed_retrieved: 0.8061828952239911 -> 0.8085431321732691
+  /summary/metatool_tags/bm25/gate_clean/ndcg/ci[0]: 0.6663351443637697 -> 0.6674994845327089
+  /summary/metatool_tags/bm25/gate_clean/ndcg/ci[1]: 0.6766802579555016 -> 0.6777671083446375
+  /summary/metatool_tags/bm25/gate_clean/ndcg/mean: 0.6716206448460499 -> 0.672624186430248
+  /summary/metatool_tags/bm25/gate_clean/ndcg/sd: 0.38670188003093203 -> 0.3855175373227325
+  /summary/metatool_tags/bm25/gate_clean/recall/ci[0]: 0.8062858225569608 -> 0.8086542560750319
+  /summary/metatool_tags/bm25/gate_clean/recall/ci[1]: 0.816825943820757 -> 0.8191470086684667
+  /summary/metatool_tags/bm25/gate_clean/recall/mean: 0.8116147979726209 -> 0.8139595471555113
+  /summary/metatool_tags/bm25/gate_clean/recall/sd: 0.3877745693122017 -> 0.3858938648318826
+  /summary/metatool_tags/bm25/gate_clean/vs_ungated_ndcg/ci[0]: 0.3276308217654856 -> 0.3287226677598945
+  /summary/metatool_tags/bm25/gate_clean/vs_ungated_ndcg/ci[1]: 0.3375116333092983 -> 0.3385554947435643
+  /summary/metatool_tags/bm25/gate_clean/vs_ungated_ndcg/cohens_d_paired: 0.9205035782356307 -> 0.924005299849789
+  /summary/metatool_tags/bm25/gate_clean/vs_ungated_ndcg/delta: 0.3325472057661889 -> 0.3336422852774786
+  /summary/metatool_tags/bm25/gate_clean/vs_ungated_ndcg/paired_t/t: 133.7457171927537 -> 134.2545042086528
+  /summary/metatool_tags/bm25/gate_clean/vs_ungated_ndcg/wilcoxon/n_nonzero: 11343 -> 11392
+  /summary/metatool_tags/bm25/gate_clean/vs_ungated_recall/ci[0]: 0.40291731798588415 -> 0.40538048884467814
+  /summary/metatool_tags/bm25/gate_clean/vs_ungated_recall/ci[1]: 0.41618113779546206 -> 0.41857325564871395
+  /summary/metatool_tags/bm25/gate_clean/vs_ungated_recall/cohens_d_paired: 0.8372600342135558 -> 0.841379062979017
+  /summary/metatool_tags/bm25/gate_clean/vs_ungated_recall/delta: 0.4095495239448629 -> 0.4119416417981147
+  /summary/metatool_tags/bm25/gate_clean/vs_ungated_recall/paired_t/t: 121.65074248528002 -> 122.24922191480069
+  /summary/metatool_tags/bm25/gate_clean/vs_ungated_recall/wilcoxon/n_nonzero: 8754 -> 8804
+  /summary/metatool_tags/bm25/gate_clean_priority50/recall/ci[0]: 0.7894936289138363 -> 0.8088437307564776
+  /summary/metatool_tags/bm25/gate_clean_priority50/recall/ci[1]: 0.800435791767325 -> 0.8193601676850931
+  /summary/metatool_tags/bm25/gate_clean_priority50/recall/mean: 0.7949883946757614 -> 0.814149021836957
+  /summary/metatool_tags/bm25/gate_clean_priority50/recall/sd: 0.40045034881288677 -> 0.3857396254032243
+  /summary/metatool_tags/bm25/gate_clean_priority50/vs_priority0/ci[0]: -0.02091386007294775 -> 4.736867036142295e-05
+  /summary/metatool_tags/bm25/gate_clean_priority50/vs_priority0/ci[1]: -0.012221116953247122 -> 0.0003789493628913836
+  /summary/metatool_tags/bm25/gate_clean_priority50/vs_priority0/cohens_d_paired: -0.05214479460364226 -> 0.013765958449724423
+  /summary/metatool_tags/bm25/gate_clean_priority50/vs_priority0/delta: -0.01662640329685946 -> 0.0001894746814456918
+  /summary/metatool_tags/bm25/gate_clean_priority50/vs_priority0/p_bootstrap: 0.0001 -> 0.0348
+  /summary/metatool_tags/bm25/gate_clean_priority50/vs_priority0/paired_t/p: 3.697622872524694e-14 -> 0.04549770585570165
+  /summary/metatool_tags/bm25/gate_clean_priority50/vs_priority0/paired_t/t: -7.576443065545287 -> 2.0001421278915936
+  /summary/metatool_tags/bm25/gate_clean_priority50/vs_priority0/wilcoxon/W: 1043480.0 -> None
+  /summary/metatool_tags/bm25/gate_clean_priority50/vs_priority0/wilcoxon/n_nonzero: 2221 -> 4
+  /summary/metatool_tags/bm25/gate_clean_priority50/vs_priority0/wilcoxon/p: 1.0145418435197054e-12 -> None
+  /summary/metatool_tags/bm25/paper_governed/failures/needed_admitted_but_cut_or_other: 0.09269714920399852 -> 0.09278970751573491
+  /summary/metatool_tags/bm25/paper_governed/failures/needed_retrieved: 0.9073028507960015 -> 0.9072102924842651
+  /summary/metatool_tags/bm25/paper_governed/ndcg/ci[0]: 0.7686182829056731 -> 0.7685135653660595
+  /summary/metatool_tags/bm25/paper_governed/ndcg/ci[1]: 0.7772506611221685 -> 0.7771533801441773
+  /summary/metatool_tags/bm25/paper_governed/ndcg/mean: 0.7729180014080939 -> 0.7728298315867047
+  /summary/metatool_tags/bm25/paper_governed/ndcg/sd: 0.32181816211991143 -> 0.32189221011690483
+  /summary/metatool_tags/bm25/paper_governed/recall/ci[0]: 0.9073942494434182 -> 0.9072995121026953
+  /summary/metatool_tags/bm25/paper_governed/recall/ci[1]: 0.9149969210364265 -> 0.9149027758040832
+  /summary/metatool_tags/bm25/paper_governed/recall/mean: 0.9112074274075127 -> 0.9111126900667899
+  /summary/metatool_tags/bm25/paper_governed/recall/sd: 0.2801931663220833 -> 0.2803321575651832
+  /summary/metatool_tags/bm25/paper_governed/vs_gate_clean_recall/ci[0]: 0.09551892378380938 -> 0.09300838425465398
+  /summary/metatool_tags/bm25/paper_governed/vs_gate_clean_recall/ci[1]: 0.10373738809151627 -> 0.10136895457344512
+  /summary/metatool_tags/bm25/paper_governed/vs_gate_clean_recall/cohens_d_paired: 0.32369413612103276 -> 0.3129680424042034
+  /summary/metatool_tags/bm25/paper_governed/vs_gate_clean_recall/delta: 0.09959262943489176 -> 0.09715314291127848
+  /summary/metatool_tags/bm25/paper_governed/vs_gate_clean_recall/paired_t/t: 47.03154383123353 -> 45.4730826467765
+  /summary/metatool_tags/bm25/paper_governed/vs_gate_clean_recall/wilcoxon/W: 86361.5 -> 134974.5
+  /summary/metatool_tags/bm25/paper_governed/vs_gate_clean_recall/wilcoxon/n_nonzero: 2327 -> 2352
+  /summary/metatool_tags/bm25/paper_governed/vs_ungated_recall/ci[0]: 0.5024868551939747 -> 0.5024388944152337
+  /summary/metatool_tags/bm25/paper_governed/vs_ungated_recall/ci[1]: 0.5159158732414381 -> 0.5158685045710767
+  /summary/metatool_tags/bm25/paper_governed/vs_ungated_recall/cohens_d_paired: 1.0243940007934964 -> 1.0242969039492769
+  /summary/metatool_tags/bm25/paper_governed/vs_ungated_recall/delta: 0.5091421533797547 -> 0.5090947847093932
+  /summary/metatool_tags/bm25/paper_governed/vs_ungated_recall/paired_t/t: 148.84060590692135 -> 148.82649809965767
+  /summary/metatool_tags/bm25/paper_governed/vs_ungated_recall/wilcoxon/n_nonzero: 10871 -> 10870
+  /summary/metatool_tags/bm25/sweep/corpus_add/crossover_rate_interpolated: 0.41171297402132756 -> 0.41279624379676755
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[0]/failures/needed_admitted_but_cut_or_other: 0.14794520547945206 -> 0.1309885227693447
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[0]/failures/needed_gate_excluded: 0.1464272491669752 -> 0.16114402073306183
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[0]/failures/needed_retrieved: 0.7056275453535727 -> 0.7078674564975935
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[0]/failures/queries_with_gate_excluded_needed: 0.14960920846951825 -> 0.16463455070816163
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[0]/ndcg/ci[0]: 0.5840551811991792 -> 0.5849344379269822
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[0]/ndcg/ci[1]: 0.5933606292222313 -> 0.5943660078093932
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[0]/ndcg/mean: 0.5886459729552302 -> 0.5896489570771133
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[0]/ndcg/sd: 0.34467791114711455 -> 0.3434530112844986
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[0]/recall/ci[0]: 0.7047508476274058 -> 0.7071146626873515
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[0]/recall/ci[1]: 0.7137324211719914 -> 0.7159632486501617
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[0]/recall/mean: 0.7092416343991604 -> 0.7115295411972398
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[0]/recall/sd: 0.3338297469872185 -> 0.3315491754312744
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[0]/recall_seed_means[0]: 0.6696982383728027 -> 0.6765430569648743
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[0]/recall_seed_means[1]: 0.7613803148269653 -> 0.7629197835922241
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[0]/recall_seed_means[2]: 0.6939273476600647 -> 0.6952536702156067
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[0]/recall_seed_means[3]: 0.7225379943847656 -> 0.7236511707305908
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[0]/recall_seed_means[4]: 0.6986641883850098 -> 0.6992800235748291
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[0]/recall_seed_sd: 0.034660227596759796 -> 0.03326747566461563
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[0]/vs_clean/ci[0]: -0.10488843993801239 -> -0.104988032575981
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[0]/vs_clean/ci[1]: -0.09982946609184347 -> -0.09991472959881943
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[0]/vs_clean/cohens_d_paired: -0.5332511167675752 -> -0.5317750560518006
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[0]/vs_clean/delta: -0.10237316357346048 -> -0.1024300059582716
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[0]/vs_clean/paired_t/t: -77.47938709007349 -> -77.26492100464046
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[0]/vs_clean/wilcoxon/W: 10034004.5 -> 10284731.5
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[0]/vs_clean/wilcoxon/n_nonzero: 10719 -> 10760
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[0]/vs_ungated/ci[0]: 0.3003928115342066 -> 0.3028745745668106
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[0]/vs_ungated/ci[1]: 0.3137987373888289 -> 0.3161388680574436
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[0]/vs_ungated/cohens_d_paired: 0.6226852149259425 -> 0.627053811362647
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[0]/vs_ungated/delta: 0.3071763603714024 -> 0.30951163583984315
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[0]/vs_ungated/paired_t/t: 90.47382609334707 -> 91.10856676939385
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[0]/vs_ungated/wilcoxon/W: 13023238.5 -> 12993807.0
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[0]/vs_ungated/wilcoxon/n_nonzero: 14785 -> 14853
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[1]/failures/needed_admitted_but_cut_or_other: 0.1214272491669752 -> 0.0941965938541281
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[1]/failures/needed_gate_excluded: 0.26892817475009256 -> 0.2948815253609774
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[1]/failures/needed_retrieved: 0.6096445760829322 -> 0.6109218807848945
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[1]/failures/queries_with_gate_excluded_needed: 0.27413196911562693 -> 0.30048789730472264
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[1]/ndcg/ci[0]: 0.5069969194312489 -> 0.507575348005355
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[1]/ndcg/ci[1]: 0.5154047125567666 -> 0.5161284922276675
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[1]/ndcg/mean: 0.5112447109967887 -> 0.5118571697577201
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[1]/ndcg/sd: 0.31397711011692686 -> 0.31323949739973456
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[1]/recall/ci[0]: 0.6081473023922415 -> 0.6094212828092072
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[1]/recall/ci[1]: 0.616299568957886 -> 0.6176261287501965
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[1]/recall/mean: 0.6122116527452315 -> 0.6135332387061241
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[1]/recall/sd: 0.3079702238984793 -> 0.30673349506429115
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[1]/recall_seed_means[0]: 0.6541376709938049 -> 0.6554639935493469
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[1]/recall_seed_means[1]: 0.5915162563323975 -> 0.5922268033027649
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[1]/recall_seed_means[2]: 0.5640187859535217 -> 0.5641845464706421
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[1]/recall_seed_means[3]: 0.5926294326782227 -> 0.5935531258583069
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[1]/recall_seed_means[4]: 0.6587560772895813 -> 0.6622377038002014
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[1]/recall_seed_sd: 0.042007409036159515 -> 0.04306615889072418
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[1]/vs_clean/ci[0]: -0.20308380923533692 -> -0.20402194573268465
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[1]/vs_clean/ci[1]: -0.1957744682097503 -> -0.19683102647605002
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[1]/vs_clean/cohens_d_paired: -0.7450871178276178 -> -0.7491918383305114
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[1]/vs_clean/delta: -0.19940314522738944 -> -0.20042630844938722
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[1]/vs_clean/paired_t/t: -108.25836346659756 -> -108.85476395923611
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[1]/vs_clean/wilcoxon/W: 15497700.5 -> 15526173.0
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[1]/vs_clean/wilcoxon/n_nonzero: 15318 -> 15380
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[1]/vs_ungated/ci[0]: 0.2033772772851786 -> 0.2046844158324266
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[1]/vs_ungated/ci[1]: 0.21694863827293923 -> 0.21831759281507998
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[1]/vs_ungated/cohens_d_paired: 0.4147168635181471 -> 0.4171505624974174
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[1]/vs_ungated/delta: 0.2101463787174734 -> 0.21151533334872752
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[1]/vs_ungated/paired_t/t: 60.256804704093824 -> 60.6104120371991
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[1]/vs_ungated/wilcoxon/W: 29415230.0 -> 29551314.0
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[1]/vs_ungated/wilcoxon/n_nonzero: 16928 -> 16991
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[2]/failures/needed_admitted_but_cut_or_other: 0.09019807478711589 -> 0.04952795261014439
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[2]/failures/needed_gate_excluded: 0.3978526471677157 -> 0.4349407626804887
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[2]/failures/needed_retrieved: 0.5119492780451684 -> 0.5155312847093669
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[2]/failures/queries_with_gate_excluded_needed: 0.4052768698782625 -> 0.4426981194637867
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[2]/ndcg/ci[0]: 0.41669509438203156 -> 0.418338926478261
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[2]/ndcg/ci[1]: 0.4241537706298172 -> 0.42574242945507884
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[2]/ndcg/mean: 0.42038921696373416 -> 0.4220901554711821
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[2]/ndcg/sd: 0.27807005610347574 -> 0.2763133916049833
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[2]/recall/ci[0]: 0.508474027613137 -> 0.5121405997149229
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[2]/recall/ci[1]: 0.5164986357682153 -> 0.5201745630396467
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[2]/recall/mean: 0.5125574438551376 -> 0.5162095684455982
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[2]/recall/sd: 0.2987991964088971 -> 0.2961967291297792
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[2]/recall_seed_means[0]: 0.557576596736908 -> 0.559566080570221
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[2]/recall_seed_means[1]: 0.5505897402763367 -> 0.5531476736068726
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[2]/recall_seed_means[2]: 0.4758893549442291 -> 0.4816209673881531
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[2]/recall_seed_means[3]: 0.5004026293754578 -> 0.5049500465393066
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[2]/recall_seed_means[4]: 0.4783288240432739 -> 0.4817630648612976
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[2]/recall_seed_sd: 0.039169713854789734 -> 0.037927303463220596
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[2]/vs_clean/ci[0]: -0.3037894841729303 -> -0.3025436880902186
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[2]/vs_clean/ci[1]: -0.2942919474801219 -> -0.2929845720350271
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[2]/vs_clean/cohens_d_paired: -0.8532697611434172 -> -0.8441606123135151
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[2]/vs_clean/delta: -0.29905735411748335 -> -0.29774997870991315
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[2]/vs_clean/paired_t/t: -123.9768957571648 -> -122.65337059976565
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[2]/vs_clean/wilcoxon/W: 17665000.0 -> 18840757.0
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[2]/vs_clean/wilcoxon/n_nonzero: 17125 -> 17280
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[2]/vs_ungated/ci[0]: 0.10299347248043081 -> 0.10663162331822926
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[2]/vs_ungated/ci[1]: 0.11815180221498316 -> 0.12175182130286215
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[2]/vs_ungated/cohens_d_paired: 0.19780601862328423 -> 0.20396988771682822
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[2]/vs_ungated/delta: 0.11049216982737953 -> 0.11419166308820154
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[2]/vs_ungated/paired_t/t: 28.740472553646285 -> 29.636059612827996
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[2]/vs_ungated/wilcoxon/W: 55862462.5 -> 56322832.5
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[2]/vs_ungated/wilcoxon/n_nonzero: 18424 -> 18581
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[3]/failures/needed_admitted_but_cut_or_other: 0.08194187338022954 -> 0.037810070344316916
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[3]/failures/needed_gate_excluded: 0.5008237689744539 -> 0.5435949648278415
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[3]/failures/needed_retrieved: 0.4172343576453165 -> 0.41859496482784153
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[3]/failures/queries_with_gate_excluded_needed: 0.5084647813935863 -> 0.5518355359765051
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[3]/ndcg/ci[0]: 0.3508599417068759 -> 0.35158146476514424
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[3]/ndcg/ci[1]: 0.35784085753345696 -> 0.3586036704062345
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[3]/ndcg/mean: 0.35435073959918334 -> 0.3551144738959586
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[3]/ndcg/sd: 0.26035046241234505 -> 0.25974123454559256
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[3]/recall/ci[0]: 0.4131683802412314 -> 0.41471733591791005
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[3]/recall/ci[1]: 0.42042064224440634 -> 0.4217423467122519
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[3]/recall/mean: 0.4167637808548298 -> 0.4182085253742614
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[3]/recall/sd: 0.2666881423316427 -> 0.26638452508654664
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[3]/recall_seed_means[0]: 0.46525508165359497 -> 0.4669840335845947
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[3]/recall_seed_means[1]: 0.43851545453071594 -> 0.4394865334033966
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[3]/recall_seed_means[2]: 0.41151532530784607 -> 0.4112311005592346
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[3]/recall_seed_means[3]: 0.38778361678123474 -> 0.38970205187797546
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[3]/recall_seed_means[4]: 0.380749374628067 -> 0.383638858795166
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[3]/recall_seed_sd: 0.035316336899995804 -> 0.03495772182941437
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[3]/vs_clean/ci[0]: -0.399815372262819 -> -0.40070590316417454
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[3]/vs_clean/ci[1]: -0.38988678049179504 -> -0.3907250874124234
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[3]/vs_clean/cohens_d_paired: -1.0563654717745135 -> -1.0573977409871966
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[3]/vs_clean/delta: -0.39485101711779114 -> -0.39575102178124993
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[3]/vs_clean/paired_t/t: -153.48594071839435 -> -153.63592556304968
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[3]/vs_clean/wilcoxon/W: 14466487.0 -> 14736270.5
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[3]/vs_clean/wilcoxon/n_nonzero: 18574 -> 18631
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[3]/vs_ungated/ci[0]: 0.007318112658505545 -> 0.008781804761920238
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[3]/vs_ungated/ci[1]: 0.02192222902259337 -> 0.023547092946941968
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[3]/vs_ungated/cohens_d_paired: 0.026987063645760142 -> 0.029674382895639423
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[3]/vs_ungated/delta: 0.014698506827071753 -> 0.016190620016864787
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[3]/vs_ungated/p_bootstrap: 0.0002 -> 0.0001
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[3]/vs_ungated/paired_t/p: 8.841715402962515e-05 -> 1.6282931539893838e-05
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[3]/vs_ungated/paired_t/t: 3.9211191217170307 -> 4.311576528835325
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[3]/vs_ungated/wilcoxon/W: 77333704.0 -> 77412467.0
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[3]/vs_ungated/wilcoxon/n_nonzero: 18583 -> 18632
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[4]/failures/needed_admitted_but_cut_or_other: 0.07303776379118845 -> 0.018622732321362457
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[4]/failures/needed_gate_excluded: 0.6354961125509071 -> 0.6895131432802666
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[4]/failures/needed_retrieved: 0.2914661236579045 -> 0.29186412439837095
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[4]/failures/queries_with_gate_excluded_needed: 0.6427360144000758 -> 0.6964899815262185
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[4]/ndcg/ci[0]: 0.24295992563460517 -> 0.24346414224010973
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[4]/ndcg/ci[1]: 0.2487203895430935 -> 0.24914389845024137
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[4]/ndcg/mean: 0.24586357153840244 -> 0.24632542914620545
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[4]/ndcg/sd: 0.21143450659912194 -> 0.21128224387345307
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[4]/recall/ci[0]: 0.2882050889190427 -> 0.28865047288350687
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[4]/recall/ci[1]: 0.2943820821581724 -> 0.29477524218717205
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[4]/recall/mean: 0.2912746973098931 -> 0.29168206788883594
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[4]/recall/sd: 0.22599565013617298 -> 0.2258013181953374
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[4]/recall_seed_means[0]: 0.3449860215187073 -> 0.3464544415473938
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[4]/recall_seed_means[1]: 0.3552650213241577 -> 0.35517027974128723
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[4]/recall_seed_means[2]: 0.22471697628498077 -> 0.22604329884052277
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[4]/recall_seed_means[3]: 0.2595566213130951 -> 0.259035587310791
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[4]/recall_seed_means[4]: 0.27184879779815674 -> 0.2717067003250122
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[4]/recall_seed_sd: 0.05655307322740555 -> 0.05657742917537689
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[4]/vs_clean/ci[0]: -0.5257496028592945 -> -0.5275970994039274
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[4]/vs_clean/ci[1]: -0.5148923483232392 -> -0.516905753572906
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[4]/vs_clean/cohens_d_paired: -1.3068679776567815 -> -1.3191720271254361
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[4]/vs_clean/delta: -0.5203401006627278 -> -0.5222774792666754
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[4]/vs_clean/paired_t/t: -189.88301521105828 -> -191.67074744748754
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[4]/vs_clean/wilcoxon/W: 8178536.0 -> 8009274.0
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[4]/vs_clean/wilcoxon/n_nonzero: 18999 -> 19017
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[4]/vs_ungated/ci[0]: -0.11810453627269128 -> -0.11751242791780758
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[4]/vs_ungated/ci[1]: -0.10339620883929629 -> -0.10298410137475347
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[4]/vs_ungated/cohens_d_paired: -0.20781368290615726 -> -0.20687310552499202
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[4]/vs_ungated/delta: -0.11079057671786495 -> -0.11033583746856067
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[4]/vs_ungated/paired_t/t: -30.19454863611268 -> -30.05788627064925
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[4]/vs_ungated/wilcoxon/W: 60299211.5 -> 60674208.5
+  /summary/metatool_tags/bm25/sweep/corpus_add/rows[4]/vs_ungated/wilcoxon/n_nonzero: 17680 -> 17716
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[0]/failures/admitted_out_of_scope_mean: 8.406224243285491 -> 9.745166027189617
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[0]/failures/leak_top5_share: 0.43999905262659283 -> 0.441119795367344
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[0]/failures/needed_admitted_but_cut_or_other: 0.3521843761569789 -> 0.3530821917808219
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[0]/failures/needed_retrieved: 0.647815623843021 -> 0.6469178082191781
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[0]/failures/queries_with_leak_in_top5: 0.8985078868836152 -> 0.8986784140969163
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[0]/ndcg/ci[0]: 0.5291877663071191 -> 0.5286044232829843
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[0]/ndcg/ci[1]: 0.5405384180740848 -> 0.5398667472069072
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[0]/ndcg/mean: 0.5348386208284464 -> 0.5342972821150478
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[0]/ndcg/sd: 0.4240402687248857 -> 0.42437000315171697
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[0]/recall/ci[0]: 0.6473307765325655 -> 0.6463785478378673
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[0]/recall/ci[1]: 0.6594382085983668 -> 0.6585810725448314
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[0]/recall/mean: 0.6534223875092549 -> 0.6524892246761714
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[0]/recall/sd: 0.45158965654215955 -> 0.4523346820080975
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[0]/recall_seed_means[1]: 0.6657192707061768 -> 0.6635876893997192
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[0]/recall_seed_means[2]: 0.6299322843551636 -> 0.6300506591796875
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[0]/recall_seed_means[3]: 0.6577613353729248 -> 0.6558666229248047
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[0]/recall_seed_means[4]: 0.6311638355255127 -> 0.6304059624671936
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[0]/recall_seed_sd: 0.022720156237483025 -> 0.022519443184137344
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[0]/vs_clean/ci[0]: -0.1626783419981896 -> -0.1661694129979591
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[0]/vs_clean/ci[1]: -0.15373016332057926 -> -0.15698439100310174
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[0]/vs_clean/cohens_d_paired: -0.47319279165646577 -> -0.47752200483432483
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[0]/vs_clean/delta: -0.15819241046336605 -> -0.1614703224793399
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[0]/vs_clean/paired_t/t: -68.75313772472369 -> -69.38215616098321
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[0]/vs_clean/wilcoxon/W: 1757.0 -> 0.0
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[0]/vs_clean/wilcoxon/n_nonzero: 4499 -> 4545
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[0]/vs_ungated/ci[0]: 0.2459285454015312 -> 0.24500011948316394
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[0]/vs_ungated/ci[1]: 0.25687094514455533 -> 0.25596608504769264
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[0]/vs_ungated/cohens_d_paired: 0.6169459759996024 -> 0.6148706114698639
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[0]/vs_ungated/delta: 0.2513571134814968 -> 0.2504713193187748
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[0]/vs_ungated/paired_t/t: 89.6399362047111 -> 89.33839352304298
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[0]/vs_ungated/wilcoxon/n_nonzero: 6551 -> 6521
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[1]/failures/admitted_out_of_scope_mean: 15.288427833830704 -> 17.56165032447539
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[1]/failures/leak_top5_share: 0.5416432191748377 -> 0.5423049594997869
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[1]/failures/needed_admitted_but_cut_or_other: 0.4041373565346168 -> 0.40492410218437613
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[1]/failures/needed_retrieved: 0.5958626434653832 -> 0.5950758978156239
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[1]/failures/queries_with_leak_in_top5: 0.9533987020984321 -> 0.953493439439155
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[1]/ndcg/ci[0]: 0.4934134303480357 -> 0.4930038560795327
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[1]/ndcg/ci[1]: 0.5049148350766829 -> 0.5046861632620768
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[1]/ndcg/mean: 0.499227681553547 -> 0.49878790052779265
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[1]/ndcg/sd: 0.43093023178894596 -> 0.43120596039985354
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[1]/recall/ci[0]: 0.5958645981101968 -> 0.59508289662055
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[1]/recall/ci[1]: 0.6081333206813262 -> 0.6072475264785385
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[1]/recall/mean: 0.6019658012875281 -> 0.6011463232731233
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[1]/recall/sd: 0.4598162681773863 -> 0.46057305046969665
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[1]/recall_seed_means[1]: 0.6074795126914978 -> 0.6069584488868713
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[1]/recall_seed_means[2]: 0.5939557552337646 -> 0.593529462814331
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[1]/recall_seed_means[3]: 0.619297981262207 -> 0.6188953518867493
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[1]/recall_seed_means[4]: 0.6490929126739502 -> 0.6463454961776733
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[1]/recall_seed_sd: 0.04017256945371628 -> 0.039332933723926544
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[1]/vs_clean/ci[0]: -0.2146180886376098 -> -0.21790061907571975
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[1]/vs_clean/ci[1]: -0.20463253608618692 -> -0.20778267110200435
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[1]/vs_clean/cohens_d_paired: -0.5642511109790947 -> -0.5679622251623186
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[1]/vs_clean/delta: -0.20964899668509288 -> -0.21281322388238805
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[1]/vs_clean/paired_t/t: -81.98356997085918 -> -82.52278094163113
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[1]/vs_clean/wilcoxon/W: 2031.0 -> 0.0
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[1]/vs_clean/wilcoxon/n_nonzero: 6043 -> 6090
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[1]/vs_ungated/ci[0]: 0.194974067058125 -> 0.1941923656014326
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[1]/vs_ungated/ci[1]: 0.20481289526351745 -> 0.2039742329065114
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[1]/vs_ungated/cohens_d_paired: 0.549544881002303 -> 0.5472857175554331
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[1]/vs_ungated/delta: 0.19990052725976998 -> 0.1991284179157267
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[1]/vs_ungated/paired_t/t: 79.84680991695735 -> 79.51856194204301
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[1]/vs_ungated/wilcoxon/n_nonzero: 5689 -> 5630
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[2]/failures/admitted_out_of_scope_mean: 27.8634077021458 -> 32.61245796030506
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[2]/failures/leak_top5_share: 0.6449846051821326 -> 0.6451366586139926
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[2]/failures/needed_admitted_but_cut_or_other: 0.46218067382450945 -> 0.462217697149204
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[2]/failures/needed_retrieved: 0.5378193261754906 -> 0.537782302850796
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[2]/failures/queries_with_leak_in_top5: 0.983553597650514 -> 0.9836104400549477
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[2]/ndcg/ci[0]: 0.44937307932974163 -> 0.4494455120322441
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[2]/ndcg/ci[1]: 0.46129877677555775 -> 0.4612853573727731
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[2]/ndcg/mean: 0.45536898606838017 -> 0.45525335012048157
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[2]/ndcg/sd: 0.440726279776461 -> 0.44067135140540775
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[2]/recall/ci[0]: 0.5381933598381529 -> 0.5382169257108755
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[2]/recall/ci[1]: 0.551200796699883 -> 0.5510823750462489
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[2]/recall/mean: 0.5446497095848218 -> 0.5446118146465564
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[2]/recall/sd: 0.4781622994056051 -> 0.4782292358927439
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[2]/recall_seed_means[1]: 0.524986982345581 -> 0.5250816941261292
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[2]/recall_seed_means[2]: 0.5333712100982666 -> 0.5334659814834595
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[2]/recall_seed_means[3]: 0.5736346244812012 -> 0.5733977556228638
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[2]/recall_seed_means[4]: 0.5544739961624146 -> 0.5543318390846252
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[2]/recall_seed_sd: 0.019444623962044716 -> 0.019300736486911774
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[2]/vs_clean/ci[0]: -0.27268722372935195 -> -0.27498934112310464
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[2]/vs_clean/ci[1]: -0.2613280982086054 -> -0.263658636814448
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[2]/vs_clean/cohens_d_paired: -0.6357064993968599 -> -0.63938643008619
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[2]/vs_clean/delta: -0.26696508838779903 -> -0.269347732508955
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[2]/vs_clean/paired_t/t: -92.36576988532212 -> -92.90045001139774
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[2]/vs_clean/wilcoxon/W: 2106.0 -> 0.0
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[2]/vs_clean/wilcoxon/n_nonzero: 6661 -> 6703
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[2]/vs_ungated/ci[0]: 0.1383399658626214 -> 0.13836365016079802
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[2]/vs_ungated/ci[1]: 0.14696615597763532 -> 0.14694247168974645
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[2]/vs_ungated/cohens_d_paired: 0.4428343629855759 -> 0.4427198822977848
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[2]/vs_ungated/delta: 0.14258443555706382 -> 0.14259390928915971
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[2]/vs_ungated/paired_t/t: 64.34217191053772 -> 64.32553829600829
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[2]/vs_ungated/wilcoxon/n_nonzero: 4084 -> 4080
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[3]/failures/admitted_out_of_scope_mean: 38.164975605134764 -> 46.37807777935674
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[3]/failures/leak_top5_share: 0.6846246032873857 -> 0.6846667614040074
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[3]/failures/needed_admitted_but_cut_or_other: 0.485394298407997 -> 0.48537578674564974
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[3]/failures/needed_retrieved: 0.5146057015920029 -> 0.5146242132543503
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[3]/ndcg/ci[0]: 0.42959176280149436 -> 0.42931573527040284
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[3]/ndcg/ci[1]: 0.44129173836557567 -> 0.4412790991909677
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[3]/ndcg/mean: 0.43541917499407323 -> 0.43532694913656894
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[3]/ndcg/sd: 0.4391019215387479 -> 0.4390289553974142
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[3]/recall/ci[0]: 0.5153662792243705 -> 0.5153615423611988
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[3]/recall/ci[1]: 0.5281464649052897 -> 0.5281797414293687
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[3]/recall/mean: 0.5217090626002165 -> 0.5217232732008309
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[3]/recall/sd: 0.4780061194820883 -> 0.4780089423819519
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[3]/recall_seed_means[0]: 0.495121031999588 -> 0.4950736463069916
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[3]/recall_seed_means[1]: 0.49985790252685547 -> 0.49981051683425903
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[3]/recall_seed_means[2]: 0.5646345615386963 -> 0.5647056102752686
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[3]/recall_seed_means[4]: 0.5294632911682129 -> 0.5295580625534058
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[3]/recall_seed_sd: 0.02780352160334587 -> 0.02785821445286274
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[3]/vs_clean/ci[0]: -0.2956706209774995 -> -0.2981243180781871
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[3]/vs_clean/ci[1]: -0.2842071659181234 -> -0.2865187569822015
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[3]/vs_clean/cohens_d_paired: -0.6751340649360531 -> -0.6787695359519115
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[3]/vs_clean/delta: -0.2899057353724044 -> -0.29223627395468044
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[3]/vs_clean/paired_t/t: -98.09444726896814 -> -98.62266757125248
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[3]/vs_clean/wilcoxon/W: 437.0 -> 0.0
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[3]/vs_clean/wilcoxon/n_nonzero: 7168 -> 7215
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[3]/vs_ungated/ci[0]: 0.11568850459378574 -> 0.11575470229880877
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[3]/vs_ungated/ci[1]: 0.12359919098291139 -> 0.12364182281354417
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[3]/vs_ungated/cohens_d_paired: 0.4101036365078155 -> 0.41019386207753095
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[3]/vs_ungated/delta: 0.11964378857245851 -> 0.11970536784343427
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[3]/vs_ungated/paired_t/t: 59.58652012328597 -> 59.59962956013774
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[3]/vs_ungated/wilcoxon/n_nonzero: 3763 -> 3765
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[4]/failures/admitted_out_of_scope_mean: 51.26435507555303 -> 62.33100279475155
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[4]/failures/leak_top5_share: 0.7267410354791343 -> 0.7267680356212403
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[4]/failures/needed_admitted_but_cut_or_other: 0.5139392817475009 -> 0.5139577934098482
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[4]/failures/needed_retrieved: 0.4860607182524991 -> 0.4860422065901518
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[4]/ndcg/ci[0]: 0.4061053689009806 -> 0.4060391354614708
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[4]/ndcg/ci[1]: 0.41784594428383337 -> 0.41777636282992814
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[4]/ndcg/mean: 0.4119972825907254 -> 0.4118994475794473
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[4]/ndcg/sd: 0.4394379821779339 -> 0.43936619336247396
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[4]/recall/ci[0]: 0.4868409842115003 -> 0.4867604575435824
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[4]/recall/ci[1]: 0.49967327547457663 -> 0.4995784197435158
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[4]/recall/mean: 0.4931883860597741 -> 0.49316943859346474
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[4]/recall/sd: 0.4816834767149768 -> 0.4816792745918617
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[4]/recall_seed_means[3]: 0.5154658555984497 -> 0.5153237581253052
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[4]/recall_seed_means[4]: 0.49760788679122925 -> 0.4976552426815033
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[4]/recall_seed_sd: 0.016380000859498978 -> 0.016334977000951767
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[4]/vs_clean/ci[0]: -0.3245370888241709 -> -0.32679645597704793
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[4]/vs_clean/ci[1]: -0.31242953828687686 -> -0.3147600768529273
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[4]/vs_clean/cohens_d_paired: -0.7148996539248866 -> -0.7187172399596011
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[4]/vs_clean/delta: -0.3184264119128468 -> -0.3207901085620466
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[4]/vs_clean/paired_t/t: -103.8722381919518 -> -104.42691912337915
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[4]/vs_clean/wilcoxon/W: 975.0 -> 0.0
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[4]/vs_clean/wilcoxon/n_nonzero: 7696 -> 7745
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[4]/vs_ungated/ci[0]: 0.08763677784172078 -> 0.08764613316119152
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[4]/vs_ungated/ci[1]: 0.09458588030623195 -> 0.09459997246297852
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[4]/vs_ungated/cohens_d_paired: 0.35530925717324213 -> 0.35536753176720026
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[4]/vs_ungated/delta: 0.09112311203201606 -> 0.09115153323606812
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[4]/vs_ungated/paired_t/t: 51.62510233468683 -> 51.63356941460625
+  /summary/metatool_tags/bm25/sweep/corpus_drop/rows[4]/vs_ungated/wilcoxon/n_nonzero: 2905 -> 2904
+  /summary/metatool_tags/bm25/sweep/corpus_swap/crossover_rate_interpolated: 0.4066636534513962 -> 0.4073476930855612
+  /summary/metatool_tags/bm25/sweep/corpus_swap/rows[0]/failures/leak_top5_share: 0.072594539971263 -> 0.07329749103942652
+  /summary/metatool_tags/bm25/sweep/corpus_swap/rows[0]/failures/needed_admitted_but_cut_or_other: 0.16051462421325435 -> 0.1455386893743058
+  /summary/metatool_tags/bm25/sweep/corpus_swap/rows[0]/failures/needed_gate_excluded: 0.15022213994816735 -> 0.16326360607182525
+  /summary/metatool_tags/bm25/sweep/corpus_swap/rows[0]/failures/needed_retrieved: 0.6892632358385783 -> 0.691197704553869
+  /summary/metatool_tags/bm25/sweep/corpus_swap/rows[0]/failures/queries_with_gate_excluded_needed: 0.1534555445028658 -> 0.16678508834257022
+  /summary/metatool_tags/bm25/sweep/corpus_swap/rows[0]/failures/queries_with_leak_in_top5: 0.27546776561981906 -> 0.2782719909052153
+  /summary/metatool_tags/bm25/sweep/corpus_swap/rows[0]/ndcg/ci[0]: 0.5740507835049994 -> 0.5748104540660203
+  /summary/metatool_tags/bm25/sweep/corpus_swap/rows[0]/ndcg/ci[1]: 0.5833834648548113 -> 0.5843242818303283
+  /summary/metatool_tags/bm25/sweep/corpus_swap/rows[0]/ndcg/mean: 0.578735819982242 -> 0.5796296862822448
+  /summary/metatool_tags/bm25/sweep/corpus_swap/rows[0]/ndcg/sd: 0.3526779394017839 -> 0.35164427923118896
+  /summary/metatool_tags/bm25/sweep/corpus_swap/rows[0]/recall/ci[0]: 0.6884420518087117 -> 0.6903982593768772
+  /summary/metatool_tags/bm25/sweep/corpus_swap/rows[0]/recall/ci[1]: 0.6978922199565261 -> 0.6997445720164679
+  /summary/metatool_tags/bm25/sweep/corpus_swap/rows[0]/recall/mean: 0.6932499718268119 -> 0.6951826136317671
+  /summary/metatool_tags/bm25/sweep/corpus_swap/rows[0]/recall/sd: 0.3448688718742823 -> 0.3428238450352961
+  /summary/metatool_tags/bm25/sweep/corpus_swap/rows[0]/recall_seed_means[0]: 0.7342143654823303 -> 0.7363933324813843
+  /summary/metatool_tags/bm25/sweep/corpus_swap/rows[0]/recall_seed_means[1]: 0.6773245930671692 -> 0.6787930727005005
+  /summary/metatool_tags/bm25/sweep/corpus_swap/rows[0]/recall_seed_means[2]: 0.6526692509651184 -> 0.6539955735206604
+  /summary/metatool_tags/bm25/sweep/corpus_swap/rows[0]/recall_seed_means[3]: 0.6931931376457214 -> 0.6947799921035767
+  /summary/metatool_tags/bm25/sweep/corpus_swap/rows[0]/recall_seed_means[4]: 0.7088484764099121 -> 0.7119511365890503
+  /summary/metatool_tags/bm25/sweep/corpus_swap/rows[0]/recall_seed_sd: 0.030910396948456764 -> 0.03140325844287872
+  /summary/metatool_tags/bm25/sweep/corpus_swap/rows[0]/vs_clean/ci[0]: -0.12077600982165984 -> -0.12112653794998889
+  /summary/metatool_tags/bm25/sweep/corpus_swap/rows[0]/vs_clean/ci[1]: -0.11593955028328355 -> -0.11633732865110268
+  /summary/metatool_tags/bm25/sweep/corpus_swap/rows[0]/vs_clean/cohens_d_paired: -0.6607168294694447 -> -0.6596439151623366
+  /summary/metatool_tags/bm25/sweep/corpus_swap/rows[0]/vs_clean/delta: -0.11836482614580897 -> -0.1187769335237442
+  /summary/metatool_tags/bm25/sweep/corpus_swap/rows[0]/vs_clean/paired_t/t: -95.99967703340394 -> -95.84378660898473
+  /summary/metatool_tags/bm25/sweep/corpus_swap/rows[0]/vs_clean/wilcoxon/W: 5181627.0 -> 5379406.0
+  ... 1548 more scalars in the JSON
+  array {'path': '/summary/metatool_tags/bm25/gate_clean/per_query_ndcg', 'n': 21111, 'changed': 172, 'max_abs_change': 1.0}
+  array {'path': '/summary/metatool_tags/bm25/gate_clean/per_query_recall', 'n': 21111, 'changed': 107, 'max_abs_change': 1.0}
+  array {'path': '/summary/metatool_tags/bm25/gate_clean_priority50/per_query_recall', 'n': 21111, 'changed': 2208, 'max_abs_change': 1.0}
+  array {'path': '/summary/metatool_tags/bm25/paper_governed/per_query_ndcg', 'n': 21111, 'changed': 18, 'max_abs_change': 0.38685280084609985}
+  array {'path': '/summary/metatool_tags/bm25/paper_governed/per_query_recall', 'n': 21111, 'changed': 4, 'max_abs_change': 1.0}
+  array {'path': '/summary/metatool_tags/bm25/sweep/corpus_add/rows[0]/per_query_recall_seedmean', 'n': 21111, 'changed': 379, 'max_abs_change': 1.0}
+  array {'path': '/summary/metatool_tags/bm25/sweep/corpus_add/rows[1]/per_query_recall_seedmean', 'n': 21111, 'changed': 329, 'max_abs_change': 0.800000011920929}
+  array {'path': '/summary/metatool_tags/bm25/sweep/corpus_add/rows[2]/per_query_recall_seedmean', 'n': 21111, 'changed': 429, 'max_abs_change': 0.800000011920929}
+  array {'path': '/summary/metatool_tags/bm25/sweep/corpus_add/rows[3]/per_query_recall_seedmean', 'n': 21111, 'changed': 370, 'max_abs_change': 0.6000000089406967}
+  array {'path': '/summary/metatool_tags/bm25/sweep/corpus_add/rows[4]/per_query_recall_seedmean', 'n': 21111, 'changed': 110, 'max_abs_change': 0.40000002086162567}
+  array {'path': '/summary/metatool_tags/bm25/sweep/corpus_drop/rows[0]/per_query_recall_seedmean', 'n': 21111, 'changed': 95, 'max_abs_change': 1.0}
+  array {'path': '/summary/metatool_tags/bm25/sweep/corpus_drop/rows[1]/per_query_recall_seedmean', 'n': 21111, 'changed': 79, 'max_abs_change': 0.800000011920929}
+  array {'path': '/summary/metatool_tags/bm25/sweep/corpus_drop/rows[2]/per_query_recall_seedmean', 'n': 21111, 'changed': 16, 'max_abs_change': 0.6000000238418579}
+  array {'path': '/summary/metatool_tags/bm25/sweep/corpus_drop/rows[3]/per_query_recall_seedmean', 'n': 21111, 'changed': 11, 'max_abs_change': 0.6000000238418579}
+  array {'path': '/summary/metatool_tags/bm25/sweep/corpus_drop/rows[4]/per_query_recall_seedmean', 'n': 21111, 'changed': 10, 'max_abs_change': 0.20000001788139343}
+  array {'path': '/summary/metatool_tags/bm25/sweep/corpus_swap/rows[0]/per_query_recall_seedmean', 'n': 21111, 'changed': 269, 'max_abs_change': 1.0}
+  array {'path': '/summary/metatool_tags/bm25/sweep/corpus_swap/rows[1]/per_query_recall_seedmean', 'n': 21111, 'changed': 436, 'max_abs_change': 1.0}
+  array {'path': '/summary/metatool_tags/bm25/sweep/corpus_swap/rows[2]/per_query_recall_seedmean', 'n': 21111, 'changed': 308, 'max_abs_change': 0.6000000238418579}
+  array {'path': '/summary/metatool_tags/bm25/sweep/corpus_swap/rows[3]/per_query_recall_seedmean', 'n': 21111, 'changed': 263, 'max_abs_change': 0.800000011920929}
+  array {'path': '/summary/metatool_tags/bm25/sweep/corpus_swap/rows[4]/per_query_recall_seedmean', 'n': 21111, 'changed': 111, 'max_abs_change': 0.6000000089406967}
+  array {'path': '/summary/metatool_tags/bm25/sweep/query_add/rows[0]/per_query_recall_seedmean', 'n': 21111, 'changed': 126, 'max_abs_change': 1.0}
+  array {'path': '/summary/metatool_tags/bm25/sweep/query_add/rows[1]/per_query_recall_seedmean', 'n': 21111, 'changed': 140, 'max_abs_change': 1.0}
+  array {'path': '/summary/metatool_tags/bm25/sweep/query_add/rows[2]/per_query_recall_seedmean', 'n': 21111, 'changed': 149, 'max_abs_change': 1.0}
+  array {'path': '/summary/metatool_tags/bm25/sweep/query_add/rows[3]/per_query_recall_seedmean', 'n': 21111, 'changed': 152, 'max_abs_change': 1.0}
+  array {'path': '/summary/metatool_tags/bm25/sweep/query_add/rows[4]/per_query_recall_seedmean', 'n': 21111, 'changed': 161, 'max_abs_change': 1.0}
+  array {'path': '/summary/metatool_tags/bm25/sweep/query_drop/rows[0]/per_query_recall_seedmean', 'n': 21111, 'changed': 108, 'max_abs_change': 1.0}
+  array {'path': '/summary/metatool_tags/bm25/sweep/query_drop/rows[1]/per_query_recall_seedmean', 'n': 21111, 'changed': 107, 'max_abs_change': 1.0}
+  array {'path': '/summary/metatool_tags/bm25/sweep/query_drop/rows[2]/per_query_recall_seedmean', 'n': 21111, 'changed': 105, 'max_abs_change': 1.0}
+  array {'path': '/summary/metatool_tags/bm25/sweep/query_drop/rows[3]/per_query_recall_seedmean', 'n': 21111, 'changed': 103, 'max_abs_change': 1.0}
+  array {'path': '/summary/metatool_tags/bm25/sweep/query_drop/rows[4]/per_query_recall_seedmean', 'n': 21111, 'changed': 91, 'max_abs_change': 1.0}
+  array {'path': '/summary/metatool_tags/bm25/sweep/query_swap/rows[0]/per_query_recall_seedmean', 'n': 21111, 'changed': 107, 'max_abs_change': 1.0}
+  array {'path': '/summary/metatool_tags/bm25/sweep/query_swap/rows[1]/per_query_recall_seedmean', 'n': 21111, 'changed': 107, 'max_abs_change': 1.0}
+  array {'path': '/summary/metatool_tags/bm25/sweep/query_swap/rows[2]/per_query_recall_seedmean', 'n': 21111, 'changed': 103, 'max_abs_change': 1.0}
+  array {'path': '/summary/metatool_tags/bm25/sweep/query_swap/rows[3]/per_query_recall_seedmean', 'n': 21111, 'changed': 100, 'max_abs_change': 1.0}
+  array {'path': '/summary/metatool_tags/bm25/sweep/query_swap/rows[4]/per_query_recall_seedmean', 'n': 21111, 'changed': 91, 'max_abs_change': 1.0}
+  array {'path': '/summary/metatool_tags/bm25/ungated/per_query_n_out', 'n': 21111, 'changed': 1, 'max_abs_change': 5}
+  array {'path': '/summary/metatool_tags/bm25/ungated/per_query_ndcg', 'n': 21111, 'changed': 6, 'max_abs_change': 0.38685280084609985}
+  array {'path': '/summary/metatool_tags/bm25/ungated/per_query_recall', 'n': 21111, 'changed': 1, 'max_abs_change': 1.0}
+  array {'path': '/summary/metatool_tags/bm25/ungated/per_query_top_oos', 'n': 21111, 'changed': 1, 'max_abs_change': 5}
+  array {'path': '/summary/toolbench/bm25/gate_clean/per_query_ndcg', 'n': 1100, 'changed': 13, 'max_abs_change': 0.38364914059638977}
+  array {'path': '/summary/toolbench/bm25/gate_clean/per_query_recall', 'n': 1100, 'changed': 1, 'max_abs_change': 0.6666666567325592}
+  array {'path': '/summary/toolbench/bm25/gate_clean_priority50/per_query_recall', 'n': 1100, 'changed': 40, 'max_abs_change': 1.0}
+  array {'path': '/summary/toolbench/bm25/paper_governed/per_query_ndcg', 'n': 1100, 'changed': 7, 'max_abs_change': 0.3065735995769501}
+  array {'path': '/summary/toolbench/bm25/paper_governed/per_query_recall', 'n': 1100, 'changed': 1, 'max_abs_change': 0.3333333432674408}
+  array {'path': '/summary/toolbench/bm25/sweep/corpus_add/rows[0]/per_query_recall_seedmean', 'n': 1100, 'changed': 2, 'max_abs_change': 0.666666716337204}
+  array {'path': '/summary/toolbench/bm25/sweep/corpus_add/rows[1]/per_query_recall_seedmean', 'n': 1100, 'changed': 4, 'max_abs_change': 0.46666666865348816}
+  array {'path': '/summary/toolbench/bm25/sweep/corpus_add/rows[2]/per_query_recall_seedmean', 'n': 1100, 'changed': 4, 'max_abs_change': 0.3999999463558197}
+  array {'path': '/summary/toolbench/bm25/sweep/corpus_add/rows[3]/per_query_recall_seedmean', 'n': 1100, 'changed': 2, 'max_abs_change': 0.2666666507720947}
+  array {'path': '/summary/toolbench/bm25/sweep/corpus_add/rows[4]/per_query_recall_seedmean', 'n': 1100, 'changed': 4, 'max_abs_change': 0.20000001043081284}
+  array {'path': '/summary/toolbench/bm25/sweep/corpus_drop/rows[0]/per_query_recall_seedmean', 'n': 1100, 'changed': 1, 'max_abs_change': 0.13333329558372498}
+  array {'path': '/summary/toolbench/bm25/sweep/corpus_drop/rows[2]/per_query_recall_seedmean', 'n': 1100, 'changed': 1, 'max_abs_change': 0.09999999403953552}
+  array {'path': '/summary/toolbench/bm25/sweep/corpus_swap/rows[0]/per_query_recall_seedmean', 'n': 1100, 'changed': 1, 'max_abs_change': 0.6666666567325592}
+  array {'path': '/summary/toolbench/bm25/sweep/corpus_swap/rows[1]/per_query_recall_seedmean', 'n': 1100, 'changed': 3, 'max_abs_change': 0.46666666865348816}
+  array {'path': '/summary/toolbench/bm25/sweep/corpus_swap/rows[2]/per_query_recall_seedmean', 'n': 1100, 'changed': 3, 'max_abs_change': 0.3333333432674408}
+  array {'path': '/summary/toolbench/bm25/sweep/corpus_swap/rows[3]/per_query_recall_seedmean', 'n': 1100, 'changed': 3, 'max_abs_change': 0.2666666805744171}
+  array {'path': '/summary/toolbench/bm25/sweep/corpus_swap/rows[4]/per_query_recall_seedmean', 'n': 1100, 'changed': 3, 'max_abs_change': 0.20000001043081284}
+  array {'path': '/summary/toolbench/bm25/sweep/query_add/rows[0]/per_query_recall_seedmean', 'n': 1100, 'changed': 2, 'max_abs_change': 0.6666666567325592}
+  array {'path': '/summary/toolbench/bm25/sweep/query_add/rows[1]/per_query_recall_seedmean', 'n': 1100, 'changed': 1, 'max_abs_change': 0.6666666567325592}
+  array {'path': '/summary/toolbench/bm25/sweep/query_add/rows[2]/per_query_recall_seedmean', 'n': 1100, 'changed': 2, 'max_abs_change': 0.6666666567325592}
+  array {'path': '/summary/toolbench/bm25/sweep/query_add/rows[3]/per_query_recall_seedmean', 'n': 1100, 'changed': 1, 'max_abs_change': 0.46666666865348816}
+  array {'path': '/summary/toolbench/bm25/sweep/query_add/rows[4]/per_query_recall_seedmean', 'n': 1100, 'changed': 1, 'max_abs_change': 0.46666666865348816}
+  array {'path': '/summary/toolbench/bm25/sweep/query_drop/rows[0]/per_query_recall_seedmean', 'n': 1100, 'changed': 1, 'max_abs_change': 0.6666666567325592}
+  array {'path': '/summary/toolbench/bm25/sweep/query_drop/rows[1]/per_query_recall_seedmean', 'n': 1100, 'changed': 1, 'max_abs_change': 0.5333333313465118}
+  array {'path': '/summary/toolbench/bm25/sweep/query_drop/rows[2]/per_query_recall_seedmean', 'n': 1100, 'changed': 1, 'max_abs_change': 0.5333333313465118}
+  array {'path': '/summary/toolbench/bm25/sweep/query_drop/rows[3]/per_query_recall_seedmean', 'n': 1100, 'changed': 1, 'max_abs_change': 0.2666666656732559}
+  array {'path': '/summary/toolbench/bm25/sweep/query_drop/rows[4]/per_query_recall_seedmean', 'n': 1100, 'changed': 1, 'max_abs_change': 0.2666666656732559}
+  array {'path': '/summary/toolbench/bm25/sweep/query_swap/rows[0]/per_query_recall_seedmean', 'n': 1100, 'changed': 1, 'max_abs_change': 0.5333333313465118}
+  array {'path': '/summary/toolbench/bm25/sweep/query_swap/rows[1]/per_query_recall_seedmean', 'n': 1100, 'changed': 1, 'max_abs_change': 0.5333333313465118}
+  array {'path': '/summary/toolbench/bm25/sweep/query_swap/rows[2]/per_query_recall_seedmean', 'n': 1100, 'changed': 1, 'max_abs_change': 0.6666666567325592}
+  array {'path': '/summary/toolbench/bm25/sweep/query_swap/rows[3]/per_query_recall_seedmean', 'n': 1100, 'changed': 1, 'max_abs_change': 0.5333333313465118}
+  array {'path': '/summary/toolbench/bm25/sweep/query_swap/rows[4]/per_query_recall_seedmean', 'n': 1100, 'changed': 1, 'max_abs_change': 0.40000002086162567}
+  array {'path': '/summary/toolbench/bm25/ungated/per_query_ndcg', 'n': 1100, 'changed': 7, 'max_abs_change': 0.46349209547042847}
+  array {'path': '/summary/toolbench/bm25/ungated/per_query_recall', 'n': 1100, 'changed': 1, 'max_abs_change': 0.5}
+  array {'path': '/summary/toolbench/bm25/ungated/per_query_top_oos', 'n': 1100, 'changed': 1, 'max_abs_change': 1}
+
+## tag_noise_nemotron.json (0.4.0) -> tag_noise_nemotron_v042.json (0.4.2): 0 scalars and 0 arrays changed, 0 keys added, 0 removed
+
+## tag_noise_overrestriction.json (0.4.0) -> tag_noise_overrestriction_v042.json (0.4.2): 240 scalars and 0 arrays changed, 240 keys added, 0 removed
+  /benchmarks/metatool_tags/corpus_add_0.1/matches_trace/bm25: False -> True
+  /benchmarks/metatool_tags/corpus_add_0.1/trace_counts_by_backend/bm25/0: 3808 -> 4115
+  /benchmarks/metatool_tags/corpus_add_0.1/trace_counts_by_backend/bm25/1: 2011 -> 2333
+  /benchmarks/metatool_tags/corpus_add_0.1/trace_counts_by_backend/bm25/2: 3671 -> 3962
+  /benchmarks/metatool_tags/corpus_add_0.1/trace_counts_by_backend/bm25/3: 2652 -> 2884
+  /benchmarks/metatool_tags/corpus_add_0.1/trace_counts_by_backend/bm25/4: 3678 -> 4116
+  /benchmarks/metatool_tags/corpus_add_0.2/matches_trace/bm25: False -> True
+  /benchmarks/metatool_tags/corpus_add_0.2/trace_counts_by_backend/bm25/0: 4738 -> 5356
+  /benchmarks/metatool_tags/corpus_add_0.2/trace_counts_by_backend/bm25/1: 6399 -> 7035
+  /benchmarks/metatool_tags/corpus_add_0.2/trace_counts_by_backend/bm25/2: 6757 -> 7327
+  /benchmarks/metatool_tags/corpus_add_0.2/trace_counts_by_backend/bm25/3: 6580 -> 7131
+  /benchmarks/metatool_tags/corpus_add_0.2/trace_counts_by_backend/bm25/4: 4581 -> 5010
+  /benchmarks/metatool_tags/corpus_add_0.3/matches_trace/bm25: False -> True
+  /benchmarks/metatool_tags/corpus_add_0.3/trace_counts_by_backend/bm25/0: 7767 -> 8483
+  /benchmarks/metatool_tags/corpus_add_0.3/trace_counts_by_backend/bm25/1: 7694 -> 8355
+  /benchmarks/metatool_tags/corpus_add_0.3/trace_counts_by_backend/bm25/2: 9408 -> 10284
+  /benchmarks/metatool_tags/corpus_add_0.3/trace_counts_by_backend/bm25/3: 9203 -> 9968
+  /benchmarks/metatool_tags/corpus_add_0.3/trace_counts_by_backend/bm25/4: 8912 -> 9901
+  /benchmarks/metatool_tags/corpus_add_0.4/matches_trace/bm25: False -> True
+  /benchmarks/metatool_tags/corpus_add_0.4/trace_counts_by_backend/bm25/0: 9785 -> 10414
+  /benchmarks/metatool_tags/corpus_add_0.4/trace_counts_by_backend/bm25/1: 10450 -> 11452
+  /benchmarks/metatool_tags/corpus_add_0.4/trace_counts_by_backend/bm25/2: 10850 -> 11829
+  /benchmarks/metatool_tags/corpus_add_0.4/trace_counts_by_backend/bm25/3: 11377 -> 12375
+  /benchmarks/metatool_tags/corpus_add_0.4/trace_counts_by_backend/bm25/4: 11647 -> 12660
+  /benchmarks/metatool_tags/corpus_add_0.5/matches_trace/bm25: False -> True
+  /benchmarks/metatool_tags/corpus_add_0.5/trace_counts_by_backend/bm25/0: 12328 -> 13698
+  /benchmarks/metatool_tags/corpus_add_0.5/trace_counts_by_backend/bm25/1: 12563 -> 13544
+  /benchmarks/metatool_tags/corpus_add_0.5/trace_counts_by_backend/bm25/2: 15195 -> 16492
+  /benchmarks/metatool_tags/corpus_add_0.5/trace_counts_by_backend/bm25/3: 14372 -> 15379
+  /benchmarks/metatool_tags/corpus_add_0.5/trace_counts_by_backend/bm25/4: 14201 -> 15382
+  /benchmarks/metatool_tags/corpus_swap_0.1/matches_trace/bm25: False -> True
+  /benchmarks/metatool_tags/corpus_swap_0.1/trace_counts_by_backend/bm25/0: 2166 -> 2372
+  /benchmarks/metatool_tags/corpus_swap_0.1/trace_counts_by_backend/bm25/1: 3564 -> 3879
+  /benchmarks/metatool_tags/corpus_swap_0.1/trace_counts_by_backend/bm25/2: 4193 -> 4567
+  /benchmarks/metatool_tags/corpus_swap_0.1/trace_counts_by_backend/bm25/3: 3708 -> 4090
+  /benchmarks/metatool_tags/corpus_swap_0.1/trace_counts_by_backend/bm25/4: 2599 -> 2731
+  /benchmarks/metatool_tags/corpus_swap_0.2/matches_trace/bm25: False -> True
+  /benchmarks/metatool_tags/corpus_swap_0.2/trace_counts_by_backend/bm25/0: 6620 -> 7125
+  /benchmarks/metatool_tags/corpus_swap_0.2/trace_counts_by_backend/bm25/1: 6462 -> 7055
+  /benchmarks/metatool_tags/corpus_swap_0.2/trace_counts_by_backend/bm25/2: 6084 -> 6523
+  /benchmarks/metatool_tags/corpus_swap_0.2/trace_counts_by_backend/bm25/3: 8011 -> 9007
+  /benchmarks/metatool_tags/corpus_swap_0.2/trace_counts_by_backend/bm25/4: 6256 -> 6721
+  /benchmarks/metatool_tags/corpus_swap_0.3/matches_trace/bm25: False -> True
+  /benchmarks/metatool_tags/corpus_swap_0.3/trace_counts_by_backend/bm25/0: 9539 -> 10425
+  /benchmarks/metatool_tags/corpus_swap_0.3/trace_counts_by_backend/bm25/1: 8715 -> 9687
+  /benchmarks/metatool_tags/corpus_swap_0.3/trace_counts_by_backend/bm25/2: 8512 -> 9251
+  /benchmarks/metatool_tags/corpus_swap_0.3/trace_counts_by_backend/bm25/3: 8566 -> 9319
+  /benchmarks/metatool_tags/corpus_swap_0.3/trace_counts_by_backend/bm25/4: 9519 -> 10397
+  /benchmarks/metatool_tags/corpus_swap_0.4/matches_trace/bm25: False -> True
+  /benchmarks/metatool_tags/corpus_swap_0.4/trace_counts_by_backend/bm25/0: 9684 -> 10585
+  /benchmarks/metatool_tags/corpus_swap_0.4/trace_counts_by_backend/bm25/1: 10987 -> 12002
+  /benchmarks/metatool_tags/corpus_swap_0.4/trace_counts_by_backend/bm25/2: 11456 -> 12541
+  /benchmarks/metatool_tags/corpus_swap_0.4/trace_counts_by_backend/bm25/3: 8994 -> 9678
+  /benchmarks/metatool_tags/corpus_swap_0.4/trace_counts_by_backend/bm25/4: 10284 -> 11301
+  /benchmarks/metatool_tags/corpus_swap_0.5/matches_trace/bm25: False -> True
+  /benchmarks/metatool_tags/corpus_swap_0.5/trace_counts_by_backend/bm25/0: 14190 -> 15503
+  /benchmarks/metatool_tags/corpus_swap_0.5/trace_counts_by_backend/bm25/1: 13066 -> 14200
+  /benchmarks/metatool_tags/corpus_swap_0.5/trace_counts_by_backend/bm25/2: 13932 -> 15189
+  /benchmarks/metatool_tags/corpus_swap_0.5/trace_counts_by_backend/bm25/3: 14205 -> 15553
+  /benchmarks/metatool_tags/corpus_swap_0.5/trace_counts_by_backend/bm25/4: 12379 -> 13361
+  /benchmarks/metatool_tags/query_drop_0.1/matches_trace/bm25: False -> True
+  /benchmarks/metatool_tags/query_drop_0.1/trace_counts_by_backend/bm25/0: 3367 -> 3694
+  /benchmarks/metatool_tags/query_drop_0.1/trace_counts_by_backend/bm25/1: 3225 -> 3516
+  /benchmarks/metatool_tags/query_drop_0.1/trace_counts_by_backend/bm25/2: 3410 -> 3713
+  /benchmarks/metatool_tags/query_drop_0.1/trace_counts_by_backend/bm25/3: 3327 -> 3640
+  /benchmarks/metatool_tags/query_drop_0.1/trace_counts_by_backend/bm25/4: 3435 -> 3761
+  /benchmarks/metatool_tags/query_drop_0.2/matches_trace/bm25: False -> True
+  /benchmarks/metatool_tags/query_drop_0.2/trace_counts_by_backend/bm25/0: 6203 -> 6784
+  /benchmarks/metatool_tags/query_drop_0.2/trace_counts_by_backend/bm25/1: 6280 -> 6835
+  /benchmarks/metatool_tags/query_drop_0.2/trace_counts_by_backend/bm25/2: 6224 -> 6770
+  /benchmarks/metatool_tags/query_drop_0.2/trace_counts_by_backend/bm25/3: 6120 -> 6677
+  /benchmarks/metatool_tags/query_drop_0.2/trace_counts_by_backend/bm25/4: 6222 -> 6794
+  /benchmarks/metatool_tags/query_drop_0.3/matches_trace/bm25: False -> True
+  /benchmarks/metatool_tags/query_drop_0.3/trace_counts_by_backend/bm25/0: 8885 -> 9698
+  /benchmarks/metatool_tags/query_drop_0.3/trace_counts_by_backend/bm25/1: 8842 -> 9647
+  /benchmarks/metatool_tags/query_drop_0.3/trace_counts_by_backend/bm25/2: 8921 -> 9723
+  /benchmarks/metatool_tags/query_drop_0.3/trace_counts_by_backend/bm25/3: 8887 -> 9673
+  /benchmarks/metatool_tags/query_drop_0.3/trace_counts_by_backend/bm25/4: 8901 -> 9723
+  /benchmarks/metatool_tags/query_drop_0.4/matches_trace/bm25: False -> True
+  /benchmarks/metatool_tags/query_drop_0.4/trace_counts_by_backend/bm25/0: 11237 -> 12257
+  /benchmarks/metatool_tags/query_drop_0.4/trace_counts_by_backend/bm25/1: 11259 -> 12203
+  /benchmarks/metatool_tags/query_drop_0.4/trace_counts_by_backend/bm25/2: 11180 -> 12181
+  /benchmarks/metatool_tags/query_drop_0.4/trace_counts_by_backend/bm25/3: 11295 -> 12299
+  /benchmarks/metatool_tags/query_drop_0.4/trace_counts_by_backend/bm25/4: 11266 -> 12283
+  /benchmarks/metatool_tags/query_drop_0.5/matches_trace/bm25: False -> True
+  /benchmarks/metatool_tags/query_drop_0.5/trace_counts_by_backend/bm25/0: 13328 -> 14514
+  /benchmarks/metatool_tags/query_drop_0.5/trace_counts_by_backend/bm25/1: 13166 -> 14375
+  /benchmarks/metatool_tags/query_drop_0.5/trace_counts_by_backend/bm25/2: 13201 -> 14403
+  /benchmarks/metatool_tags/query_drop_0.5/trace_counts_by_backend/bm25/3: 13186 -> 14392
+  /benchmarks/metatool_tags/query_drop_0.5/trace_counts_by_backend/bm25/4: 13184 -> 14337
+  /benchmarks/metatool_tags/query_swap_0.1/matches_trace/bm25: False -> True
+  /benchmarks/metatool_tags/query_swap_0.1/trace_counts_by_backend/bm25/0: 3294 -> 3603
+  /benchmarks/metatool_tags/query_swap_0.1/trace_counts_by_backend/bm25/1: 3351 -> 3648
+  /benchmarks/metatool_tags/query_swap_0.1/trace_counts_by_backend/bm25/2: 3341 -> 3614
+  /benchmarks/metatool_tags/query_swap_0.1/trace_counts_by_backend/bm25/3: 3342 -> 3658
+  /benchmarks/metatool_tags/query_swap_0.1/trace_counts_by_backend/bm25/4: 3341 -> 3646
+  /benchmarks/metatool_tags/query_swap_0.2/matches_trace/bm25: False -> True
+  /benchmarks/metatool_tags/query_swap_0.2/trace_counts_by_backend/bm25/0: 6201 -> 6771
+  /benchmarks/metatool_tags/query_swap_0.2/trace_counts_by_backend/bm25/1: 6259 -> 6827
+  /benchmarks/metatool_tags/query_swap_0.2/trace_counts_by_backend/bm25/2: 6196 -> 6746
+  /benchmarks/metatool_tags/query_swap_0.2/trace_counts_by_backend/bm25/3: 6300 -> 6857
+  /benchmarks/metatool_tags/query_swap_0.2/trace_counts_by_backend/bm25/4: 6255 -> 6829
+  /benchmarks/metatool_tags/query_swap_0.3/matches_trace/bm25: False -> True
+  /benchmarks/metatool_tags/query_swap_0.3/trace_counts_by_backend/bm25/0: 8900 -> 9698
+  /benchmarks/metatool_tags/query_swap_0.3/trace_counts_by_backend/bm25/1: 8853 -> 9654
+  /benchmarks/metatool_tags/query_swap_0.3/trace_counts_by_backend/bm25/2: 8913 -> 9717
+  /benchmarks/metatool_tags/query_swap_0.3/trace_counts_by_backend/bm25/3: 8754 -> 9555
+  /benchmarks/metatool_tags/query_swap_0.3/trace_counts_by_backend/bm25/4: 8831 -> 9635
+  /benchmarks/metatool_tags/query_swap_0.4/matches_trace/bm25: False -> True
+  /benchmarks/metatool_tags/query_swap_0.4/trace_counts_by_backend/bm25/0: 11233 -> 12238
+  /benchmarks/metatool_tags/query_swap_0.4/trace_counts_by_backend/bm25/1: 11254 -> 12275
+  /benchmarks/metatool_tags/query_swap_0.4/trace_counts_by_backend/bm25/2: 11245 -> 12233
+  /benchmarks/metatool_tags/query_swap_0.4/trace_counts_by_backend/bm25/3: 11116 -> 12149
+  /benchmarks/metatool_tags/query_swap_0.4/trace_counts_by_backend/bm25/4: 11042 -> 12051
+  /benchmarks/metatool_tags/query_swap_0.5/matches_trace/bm25: False -> True
+  /benchmarks/metatool_tags/query_swap_0.5/trace_counts_by_backend/bm25/0: 13365 -> 14557
+  /benchmarks/metatool_tags/query_swap_0.5/trace_counts_by_backend/bm25/1: 13198 -> 14417
+  /benchmarks/metatool_tags/query_swap_0.5/trace_counts_by_backend/bm25/2: 13283 -> 14454
+  /benchmarks/metatool_tags/query_swap_0.5/trace_counts_by_backend/bm25/3: 13392 -> 14587
+  /benchmarks/metatool_tags/query_swap_0.5/trace_counts_by_backend/bm25/4: 13196 -> 14393
+  /benchmarks/toolbench/corpus_add_0.1/matches_trace/bm25: False -> True
+  /benchmarks/toolbench/corpus_add_0.1/trace_counts_by_backend/bm25/0: 280 -> 293
+  /benchmarks/toolbench/corpus_add_0.1/trace_counts_by_backend/bm25/1: 252 -> 258
+  /benchmarks/toolbench/corpus_add_0.1/trace_counts_by_backend/bm25/2: 306 -> 310
+  /benchmarks/toolbench/corpus_add_0.1/trace_counts_by_backend/bm25/3: 276 -> 284
+  /benchmarks/toolbench/corpus_add_0.1/trace_counts_by_backend/bm25/4: 252 -> 260
+  /benchmarks/toolbench/corpus_add_0.2/matches_trace/bm25: False -> True
+  /benchmarks/toolbench/corpus_add_0.2/trace_counts_by_backend/bm25/0: 471 -> 484
+  /benchmarks/toolbench/corpus_add_0.2/trace_counts_by_backend/bm25/1: 503 -> 517
+  /benchmarks/toolbench/corpus_add_0.2/trace_counts_by_backend/bm25/2: 435 -> 449
+  /benchmarks/toolbench/corpus_add_0.2/trace_counts_by_backend/bm25/3: 445 -> 454
+  /benchmarks/toolbench/corpus_add_0.2/trace_counts_by_backend/bm25/4: 569 -> 580
+  /benchmarks/toolbench/corpus_add_0.3/matches_trace/bm25: False -> True
+  /benchmarks/toolbench/corpus_add_0.3/trace_counts_by_backend/bm25/0: 818 -> 843
+  /benchmarks/toolbench/corpus_add_0.3/trace_counts_by_backend/bm25/1: 776 -> 800
+  /benchmarks/toolbench/corpus_add_0.3/trace_counts_by_backend/bm25/2: 774 -> 787
+  /benchmarks/toolbench/corpus_add_0.3/trace_counts_by_backend/bm25/3: 703 -> 725
+  /benchmarks/toolbench/corpus_add_0.3/trace_counts_by_backend/bm25/4: 765 -> 787
+  /benchmarks/toolbench/corpus_add_0.4/matches_trace/bm25: False -> True
+  /benchmarks/toolbench/corpus_add_0.4/trace_counts_by_backend/bm25/0: 1015 -> 1036
+  /benchmarks/toolbench/corpus_add_0.4/trace_counts_by_backend/bm25/1: 1099 -> 1127
+  /benchmarks/toolbench/corpus_add_0.4/trace_counts_by_backend/bm25/2: 1041 -> 1067
+  /benchmarks/toolbench/corpus_add_0.4/trace_counts_by_backend/bm25/3: 1039 -> 1076
+  /benchmarks/toolbench/corpus_add_0.4/trace_counts_by_backend/bm25/4: 1035 -> 1064
+  /benchmarks/toolbench/corpus_add_0.5/matches_trace/bm25: False -> True
+  /benchmarks/toolbench/corpus_add_0.5/trace_counts_by_backend/bm25/0: 1289 -> 1325
+  /benchmarks/toolbench/corpus_add_0.5/trace_counts_by_backend/bm25/1: 1305 -> 1344
+  /benchmarks/toolbench/corpus_add_0.5/trace_counts_by_backend/bm25/2: 1301 -> 1344
+  /benchmarks/toolbench/corpus_add_0.5/trace_counts_by_backend/bm25/3: 1291 -> 1331
+  /benchmarks/toolbench/corpus_add_0.5/trace_counts_by_backend/bm25/4: 1316 -> 1348
+  /benchmarks/toolbench/corpus_swap_0.1/matches_trace/bm25: False -> True
+  /benchmarks/toolbench/corpus_swap_0.1/trace_counts_by_backend/bm25/0: 316 -> 326
+  /benchmarks/toolbench/corpus_swap_0.1/trace_counts_by_backend/bm25/1: 280 -> 294
+  /benchmarks/toolbench/corpus_swap_0.1/trace_counts_by_backend/bm25/2: 263 -> 272
+  /benchmarks/toolbench/corpus_swap_0.1/trace_counts_by_backend/bm25/3: 224 -> 229
+  /benchmarks/toolbench/corpus_swap_0.1/trace_counts_by_backend/bm25/4: 230 -> 237
+  /benchmarks/toolbench/corpus_swap_0.2/matches_trace/bm25: False -> True
+  /benchmarks/toolbench/corpus_swap_0.2/trace_counts_by_backend/bm25/0: 541 -> 566
+  /benchmarks/toolbench/corpus_swap_0.2/trace_counts_by_backend/bm25/1: 508 -> 525
+  /benchmarks/toolbench/corpus_swap_0.2/trace_counts_by_backend/bm25/2: 537 -> 545
+  /benchmarks/toolbench/corpus_swap_0.2/trace_counts_by_backend/bm25/3: 534 -> 547
+  /benchmarks/toolbench/corpus_swap_0.2/trace_counts_by_backend/bm25/4: 510 -> 522
+  /benchmarks/toolbench/corpus_swap_0.3/matches_trace/bm25: False -> True
+  /benchmarks/toolbench/corpus_swap_0.3/trace_counts_by_backend/bm25/0: 712 -> 725
+  /benchmarks/toolbench/corpus_swap_0.3/trace_counts_by_backend/bm25/1: 789 -> 820
+  /benchmarks/toolbench/corpus_swap_0.3/trace_counts_by_backend/bm25/2: 786 -> 802
+  /benchmarks/toolbench/corpus_swap_0.3/trace_counts_by_backend/bm25/3: 850 -> 872
+  /benchmarks/toolbench/corpus_swap_0.3/trace_counts_by_backend/bm25/4: 731 -> 750
+  /benchmarks/toolbench/corpus_swap_0.4/matches_trace/bm25: False -> True
+  /benchmarks/toolbench/corpus_swap_0.4/trace_counts_by_backend/bm25/0: 1020 -> 1052
+  /benchmarks/toolbench/corpus_swap_0.4/trace_counts_by_backend/bm25/1: 1065 -> 1090
+  /benchmarks/toolbench/corpus_swap_0.4/trace_counts_by_backend/bm25/2: 1037 -> 1061
+  /benchmarks/toolbench/corpus_swap_0.4/trace_counts_by_backend/bm25/3: 942 -> 972
+  /benchmarks/toolbench/corpus_swap_0.4/trace_counts_by_backend/bm25/4: 1074 -> 1104
+  /benchmarks/toolbench/corpus_swap_0.5/matches_trace/bm25: False -> True
+  /benchmarks/toolbench/corpus_swap_0.5/trace_counts_by_backend/bm25/0: 1388 -> 1426
+  /benchmarks/toolbench/corpus_swap_0.5/trace_counts_by_backend/bm25/1: 1303 -> 1346
+  /benchmarks/toolbench/corpus_swap_0.5/trace_counts_by_backend/bm25/2: 1224 -> 1253
+  /benchmarks/toolbench/corpus_swap_0.5/trace_counts_by_backend/bm25/3: 1204 -> 1241
+  /benchmarks/toolbench/corpus_swap_0.5/trace_counts_by_backend/bm25/4: 1271 -> 1292
+  /benchmarks/toolbench/query_drop_0.1/matches_trace/bm25: False -> True
+  /benchmarks/toolbench/query_drop_0.1/trace_counts_by_backend/bm25/0: 274 -> 285
+  /benchmarks/toolbench/query_drop_0.1/trace_counts_by_backend/bm25/1: 277 -> 282
+  /benchmarks/toolbench/query_drop_0.1/trace_counts_by_backend/bm25/2: 261 -> 266
+  /benchmarks/toolbench/query_drop_0.1/trace_counts_by_backend/bm25/3: 263 -> 272
+  /benchmarks/toolbench/query_drop_0.1/trace_counts_by_backend/bm25/4: 198 -> 201
+  /benchmarks/toolbench/query_drop_0.2/matches_trace/bm25: False -> True
+  /benchmarks/toolbench/query_drop_0.2/trace_counts_by_backend/bm25/0: 485 -> 494
+  /benchmarks/toolbench/query_drop_0.2/trace_counts_by_backend/bm25/1: 486 -> 496
+  /benchmarks/toolbench/query_drop_0.2/trace_counts_by_backend/bm25/2: 506 -> 534
+  /benchmarks/toolbench/query_drop_0.2/trace_counts_by_backend/bm25/3: 581 -> 601
+  /benchmarks/toolbench/query_drop_0.2/trace_counts_by_backend/bm25/4: 479 -> 495
+  /benchmarks/toolbench/query_drop_0.3/matches_trace/bm25: False -> True
+  /benchmarks/toolbench/query_drop_0.3/trace_counts_by_backend/bm25/0: 834 -> 853
+  /benchmarks/toolbench/query_drop_0.3/trace_counts_by_backend/bm25/1: 742 -> 764
+  /benchmarks/toolbench/query_drop_0.3/trace_counts_by_backend/bm25/2: 796 -> 818
+  /benchmarks/toolbench/query_drop_0.3/trace_counts_by_backend/bm25/3: 755 -> 773
+  /benchmarks/toolbench/query_drop_0.3/trace_counts_by_backend/bm25/4: 795 -> 821
+  /benchmarks/toolbench/query_drop_0.4/matches_trace/bm25: False -> True
+  /benchmarks/toolbench/query_drop_0.4/trace_counts_by_backend/bm25/0: 1027 -> 1058
+  /benchmarks/toolbench/query_drop_0.4/trace_counts_by_backend/bm25/1: 1044 -> 1076
+  /benchmarks/toolbench/query_drop_0.4/trace_counts_by_backend/bm25/2: 994 -> 1018
+  /benchmarks/toolbench/query_drop_0.4/trace_counts_by_backend/bm25/3: 1038 -> 1064
+  /benchmarks/toolbench/query_drop_0.4/trace_counts_by_backend/bm25/4: 1043 -> 1075
+  /benchmarks/toolbench/query_drop_0.5/matches_trace/bm25: False -> True
+  /benchmarks/toolbench/query_drop_0.5/trace_counts_by_backend/bm25/0: 1285 -> 1319
+  /benchmarks/toolbench/query_drop_0.5/trace_counts_by_backend/bm25/1: 1274 -> 1303
+  /benchmarks/toolbench/query_drop_0.5/trace_counts_by_backend/bm25/2: 1274 -> 1317
+  /benchmarks/toolbench/query_drop_0.5/trace_counts_by_backend/bm25/3: 1275 -> 1316
+  /benchmarks/toolbench/query_drop_0.5/trace_counts_by_backend/bm25/4: 1328 -> 1364
+  /benchmarks/toolbench/query_swap_0.1/matches_trace/bm25: False -> True
+  /benchmarks/toolbench/query_swap_0.1/trace_counts_by_backend/bm25/0: 224 -> 233
+  /benchmarks/toolbench/query_swap_0.1/trace_counts_by_backend/bm25/1: 249 -> 255
+  /benchmarks/toolbench/query_swap_0.1/trace_counts_by_backend/bm25/2: 255 -> 268
+  /benchmarks/toolbench/query_swap_0.1/trace_counts_by_backend/bm25/3: 229 -> 232
+  /benchmarks/toolbench/query_swap_0.1/trace_counts_by_backend/bm25/4: 209 -> 219
+  /benchmarks/toolbench/query_swap_0.2/matches_trace/bm25: False -> True
+  /benchmarks/toolbench/query_swap_0.2/trace_counts_by_backend/bm25/0: 563 -> 585
+  /benchmarks/toolbench/query_swap_0.2/trace_counts_by_backend/bm25/1: 436 -> 454
+  /benchmarks/toolbench/query_swap_0.2/trace_counts_by_backend/bm25/2: 550 -> 561
+  /benchmarks/toolbench/query_swap_0.2/trace_counts_by_backend/bm25/3: 565 -> 580
+  /benchmarks/toolbench/query_swap_0.2/trace_counts_by_backend/bm25/4: 520 -> 539
+  /benchmarks/toolbench/query_swap_0.3/matches_trace/bm25: False -> True
+  /benchmarks/toolbench/query_swap_0.3/trace_counts_by_backend/bm25/0: 743 -> 772
+  /benchmarks/toolbench/query_swap_0.3/trace_counts_by_backend/bm25/1: 814 -> 837
+  /benchmarks/toolbench/query_swap_0.3/trace_counts_by_backend/bm25/2: 758 -> 776
+  /benchmarks/toolbench/query_swap_0.3/trace_counts_by_backend/bm25/3: 731 -> 757
+  /benchmarks/toolbench/query_swap_0.3/trace_counts_by_backend/bm25/4: 718 -> 747
+  /benchmarks/toolbench/query_swap_0.4/matches_trace/bm25: False -> True
+  /benchmarks/toolbench/query_swap_0.4/trace_counts_by_backend/bm25/0: 950 -> 981
+  /benchmarks/toolbench/query_swap_0.4/trace_counts_by_backend/bm25/1: 970 -> 993
+  /benchmarks/toolbench/query_swap_0.4/trace_counts_by_backend/bm25/2: 996 -> 1027
+  /benchmarks/toolbench/query_swap_0.4/trace_counts_by_backend/bm25/3: 985 -> 1015
+  /benchmarks/toolbench/query_swap_0.4/trace_counts_by_backend/bm25/4: 948 -> 976
+  /benchmarks/toolbench/query_swap_0.5/matches_trace/bm25: False -> True
+  /benchmarks/toolbench/query_swap_0.5/trace_counts_by_backend/bm25/0: 1235 -> 1269
+  /benchmarks/toolbench/query_swap_0.5/trace_counts_by_backend/bm25/1: 1273 -> 1309
+  /benchmarks/toolbench/query_swap_0.5/trace_counts_by_backend/bm25/2: 1252 -> 1292
+  /benchmarks/toolbench/query_swap_0.5/trace_counts_by_backend/bm25/3: 1221 -> 1252
+  /benchmarks/toolbench/query_swap_0.5/trace_counts_by_backend/bm25/4: 1335 -> 1364
+  added /benchmarks/metatool_tags/corpus_add_0.1/matches_trace/nemotron
+  added /benchmarks/metatool_tags/corpus_add_0.1/matches_trace/qwen3-0.6b
+  added /benchmarks/metatool_tags/corpus_add_0.1/trace_counts_by_backend/nemotron
+  added /benchmarks/metatool_tags/corpus_add_0.1/trace_counts_by_backend/qwen3-0.6b
+  added /benchmarks/metatool_tags/corpus_add_0.2/matches_trace/nemotron
+  added /benchmarks/metatool_tags/corpus_add_0.2/matches_trace/qwen3-0.6b
+  added /benchmarks/metatool_tags/corpus_add_0.2/trace_counts_by_backend/nemotron
+  added /benchmarks/metatool_tags/corpus_add_0.2/trace_counts_by_backend/qwen3-0.6b
+  added /benchmarks/metatool_tags/corpus_add_0.3/matches_trace/nemotron
+  added /benchmarks/metatool_tags/corpus_add_0.3/matches_trace/qwen3-0.6b
+  added /benchmarks/metatool_tags/corpus_add_0.3/trace_counts_by_backend/nemotron
+  added /benchmarks/metatool_tags/corpus_add_0.3/trace_counts_by_backend/qwen3-0.6b
+  added /benchmarks/metatool_tags/corpus_add_0.4/matches_trace/nemotron
+  added /benchmarks/metatool_tags/corpus_add_0.4/matches_trace/qwen3-0.6b
+  added /benchmarks/metatool_tags/corpus_add_0.4/trace_counts_by_backend/nemotron
+  added /benchmarks/metatool_tags/corpus_add_0.4/trace_counts_by_backend/qwen3-0.6b
+  added /benchmarks/metatool_tags/corpus_add_0.5/matches_trace/nemotron
+  added /benchmarks/metatool_tags/corpus_add_0.5/matches_trace/qwen3-0.6b
+  added /benchmarks/metatool_tags/corpus_add_0.5/trace_counts_by_backend/nemotron
+  added /benchmarks/metatool_tags/corpus_add_0.5/trace_counts_by_backend/qwen3-0.6b
+
+## leakage_threat.json (0.4.0) -> leakage_threat_v042.json (0.4.2): 94 scalars and 9 arrays changed, 0 keys added, 0 removed
+  /backends/bm25/contrast/inject_name/cross_share_gate_minus_ungated/ci[0]: -0.6043636449223215 -> -0.6047272811985828
+  /backends/bm25/contrast/inject_name/cross_share_gate_minus_ungated/ci[1]: -0.5650909172669053 -> -0.5654545536085286
+  /backends/bm25/contrast/inject_name/cross_share_gate_minus_ungated/cohens_d_paired: -1.7789754631589296 -> -1.7799904945235363
+  /backends/bm25/contrast/inject_name/cross_share_gate_minus_ungated/delta: -0.5845454627817327 -> -0.5849090991507877
+  /backends/bm25/contrast/inject_name/cross_share_gate_minus_ungated/paired_t/t: -59.001941225468855 -> -59.03560600733728
+  /backends/bm25/contrast/inject_name/recall_gate_minus_ungated/ci[0]: 0.15957500033622438 -> 0.15934848558868875
+  /backends/bm25/contrast/inject_name/recall_gate_minus_ungated/ci[1]: 0.19194015213779428 -> 0.1917579553344033
+  /backends/bm25/contrast/inject_name/recall_gate_minus_ungated/cohens_d_paired: 0.645453050232902 -> 0.6454351829139764
+  /backends/bm25/contrast/inject_name/recall_gate_minus_ungated/delta: 0.1757121217386289 -> 0.17556060659614475
+  /backends/bm25/contrast/inject_name/recall_gate_minus_ungated/paired_t/t: 21.407255874129522 -> 21.40666328220066
+  /backends/bm25/contrast/inject_name/recall_published_minus_ungated/ci[0]: 0.1672723490003158 -> 0.16740871265428986
+  /backends/bm25/contrast/inject_name/recall_published_minus_ungated/ci[1]: 0.20015151579440996 -> 0.2003333337408575
+  /backends/bm25/contrast/inject_name/recall_published_minus_ungated/cohens_d_paired: 0.6537825341300401 -> 0.6540293406933538
+  /backends/bm25/contrast/inject_name/recall_published_minus_ungated/delta: 0.18375757629221137 -> 0.1839090914346955
+  /backends/bm25/contrast/inject_name/recall_published_minus_ungated/paired_t/t: 21.683513601970663 -> 21.691699249633746
+  /backends/bm25/contrast/inject_name/ungated_recall_drop_vs_natural/ci[0]: -0.06578787887909196 -> -0.06577272739092058
+  /backends/bm25/contrast/inject_name/ungated_recall_drop_vs_natural/ci[1]: -0.04518143955042417 -> -0.04518181834606962
+  /backends/bm25/contrast/inject_name_desc/gate_recall_drop_vs_natural/ci[0]: -0.05321212130683389 -> -0.05260606069490313
+  /backends/bm25/contrast/inject_name_desc/gate_recall_drop_vs_natural/ci[1]: -0.03386325759406794 -> -0.033318181917410004
+  /backends/bm25/contrast/inject_name_desc/gate_recall_drop_vs_natural/cohens_d_paired: -0.2663697771496104 -> -0.2644093391439261
+  /backends/bm25/contrast/inject_name_desc/gate_recall_drop_vs_natural/delta: -0.043500000102953476 -> -0.04289393950592388
+  /backends/bm25/contrast/inject_name_desc/gate_recall_drop_vs_natural/paired_t/t: -8.834486062958412 -> -8.769465690062336
+  /backends/bm25/contrast/inject_name_desc/gate_recall_drop_vs_natural/wilcoxon/W: 1438.5 -> 1437.5
+  /backends/bm25/contrast/inject_name_desc/gate_recall_drop_vs_natural/wilcoxon/n_nonzero: 148 -> 147
+  /backends/bm25/contrast/inject_name_desc/recall_published_minus_ungated/ci[0]: 0.2396356068944389 -> 0.23928787984089417
+  /backends/bm25/contrast/inject_name_desc/recall_published_minus_ungated/ci[1]: 0.2773030311278999 -> 0.27689507648687467
+  /backends/bm25/contrast/inject_name_desc/recall_published_minus_ungated/cohens_d_paired: 0.8040195628928742 -> 0.8036471701512982
+  /backends/bm25/contrast/inject_name_desc/recall_published_minus_ungated/delta: 0.2584696978466077 -> 0.2581666675345464
+  /backends/bm25/contrast/inject_name_desc/recall_published_minus_ungated/paired_t/t: 26.666312142212195 -> 26.653961272227598
+  /backends/bm25/contrast/inject_name_desc/ungated_recall_drop_vs_natural/ci[0]: -0.17387992494282395 -> -0.17336363693970172
+  /backends/bm25/contrast/inject_name_desc/ungated_recall_drop_vs_natural/ci[1]: -0.14175757635655728 -> -0.14130303089997984
+  /backends/bm25/contrast/inject_name_desc/ungated_recall_drop_vs_natural/cohens_d_paired: -0.5720322587510412 -> -0.5706990504605951
+  /backends/bm25/contrast/inject_name_desc/ungated_recall_drop_vs_natural/delta: -0.15750000060959296 -> -0.1570454551550475
+  /backends/bm25/contrast/inject_name_desc/ungated_recall_drop_vs_natural/paired_t/t: -18.97216370256698 -> -18.927946185898968
+  /backends/bm25/contrast/inject_name_desc/ungated_recall_drop_vs_natural/wilcoxon/W: 514.5 -> 513.0
+  /backends/bm25/contrast/inject_name_desc/ungated_recall_drop_vs_natural/wilcoxon/n_nonzero: 328 -> 327
+  /backends/bm25/contrast/natural/cross_share_gate_minus_ungated/ci[0]: -0.5214545533738353 -> -0.5216363711546768
+  /backends/bm25/contrast/natural/cross_share_gate_minus_ungated/ci[1]: -0.48109091696278616 -> -0.4812727352018384
+  /backends/bm25/contrast/natural/cross_share_gate_minus_ungated/cohens_d_paired: -1.469901200300934 -> -1.4704372674671597
+  /backends/bm25/contrast/natural/cross_share_gate_minus_ungated/delta: -0.5010909169370478 -> -0.5012727351351218
+  /backends/bm25/contrast/natural/cross_share_gate_minus_ungated/paired_t/t: -48.751107602912356 -> -48.76888693944035
+  /backends/bm25/contrast/natural/recall_gate_minus_ungated/ci[0]: 0.12133295476673679 -> 0.12125757623159072
+  /backends/bm25/contrast/natural/recall_gate_minus_ungated/ci[1]: 0.14977310667796567 -> 0.14950000022250143
+  /backends/bm25/contrast/natural/recall_gate_minus_ungated/cohens_d_paired: 0.5628812910703465 -> 0.5629130053392007
+  /backends/bm25/contrast/natural/recall_gate_minus_ungated/delta: 0.13536363670771773 -> 0.13521212156523357
+  /backends/bm25/contrast/natural/recall_gate_minus_ungated/paired_t/t: 18.668660439911644 -> 18.669712283214544
+  /backends/bm25/contrast/natural/recall_published_minus_ungated/ci[0]: 0.12919659111208534 -> 0.1292875004461543
+  /backends/bm25/contrast/natural/recall_published_minus_ungated/ci[1]: 0.1584094704701142 -> 0.15860606115379117
+  /backends/bm25/contrast/natural/recall_published_minus_ungated/cohens_d_paired: 0.5790214105518217 -> 0.5792428024228577
+  /backends/bm25/contrast/natural/recall_published_minus_ungated/delta: 0.14368181855841117 -> 0.14383333370089532
+  /backends/bm25/contrast/natural/recall_published_minus_ungated/paired_t/t: 19.203967643827234 -> 19.21131038150585
+  /backends/bm25/contrast/natural/recall_published_minus_ungated/wilcoxon/W: 199.0 -> 198.5
+  /backends/bm25/gate_only/inject_name/recall/ci[0]: 0.5663768960897896 -> 0.5657272751311009
+  /backends/bm25/gate_only/inject_name/recall/ci[1]: 0.6107272749329832 -> 0.6100621234246275
+  /backends/bm25/gate_only/inject_name/recall/mean: 0.5886666689000346 -> 0.588060608303005
+  /backends/bm25/gate_only/inject_name/recall/sd: 0.3771569113038366 -> 0.3770309491480882
+  /backends/bm25/gate_only/natural/recall/ci[0]: 0.5815909112790091 -> 0.5808931843452155
+  /backends/bm25/gate_only/natural/recall/ci[1]: 0.6252882595854726 -> 0.6247276538840749
+  /backends/bm25/gate_only/natural/recall/mean: 0.6037424264983697 -> 0.6031363659013401
+  /backends/bm25/gate_only/natural/recall/sd: 0.3721946379221841 -> 0.37209157426916584
+  /backends/bm25/published/inject_name/recall/ci[0]: 0.574317805363712 -> 0.5739242444915528
+  /backends/bm25/published/inject_name/recall/ci[1]: 0.6187424264414744 -> 0.6183943205536767
+  /backends/bm25/published/inject_name/recall/mean: 0.5967121234536171 -> 0.5964090931415558
+  /backends/bm25/published/inject_name/recall/sd: 0.37815440757363367 -> 0.3782318479328582
+  /backends/bm25/published/inject_name_desc/recall/ci[0]: 0.5469090932875195 -> 0.5465598507645455
+  /backends/bm25/published/inject_name_desc/recall/ci[1]: 0.5912125023627146 -> 0.5909094720374454
+  /backends/bm25/published/inject_name_desc/recall/mean: 0.5693484870276668 -> 0.5690454567156055
+  /backends/bm25/published/inject_name_desc/recall/sd: 0.382679189816139 -> 0.3827340304036243
+  /backends/bm25/published/natural/recall/ci[0]: 0.5900594720535658 -> 0.5897109872173857
+  /backends/bm25/published/natural/recall/ci[1]: 0.6337132598625665 -> 0.6335151536136189
+  /backends/bm25/published/natural/recall/mean: 0.6120606083490632 -> 0.6117575780370018
+  /backends/bm25/published/natural/recall/sd: 0.37067322708986894 -> 0.37076478619341935
+  /backends/bm25/ungated/inject_name/cross_share/ci[0]: 0.5650909172669053 -> 0.5654545536085286
+  /backends/bm25/ungated/inject_name/cross_share/ci[1]: 0.6043636449223215 -> 0.6047272811985828
+  /backends/bm25/ungated/inject_name/cross_share/mean: 0.5845454627817327 -> 0.5849090991507877
+  /backends/bm25/ungated/inject_name/cross_share/sd: 0.3285854554417262 -> 0.328602372288148
+  /backends/bm25/ungated/inject_name/items_out_of_scope: 3215 -> 3217
+  /backends/bm25/ungated/inject_name/items_out_of_scope_ci[0]: 0.5713887260152454 -> 0.5717538208881587
+  /backends/bm25/ungated/inject_name/items_out_of_scope_ci[1]: 0.5976124033464486 -> 0.5979741949472521
+  /backends/bm25/ungated/inject_name/recall/ci[0]: 0.38999848624386574 -> 0.3898030318851498
+  /backends/bm25/ungated/inject_name/recall/ci[1]: 0.4357878805486993 -> 0.4350765167518773
+  /backends/bm25/ungated/inject_name/recall/mean: 0.4129545471614057 -> 0.4125000017068603
+  /backends/bm25/ungated/inject_name/recall/sd: 0.38605063243607457 -> 0.38565295311222325
+  /backends/bm25/ungated/natural/cross_share/ci[0]: 0.48109091696278616 -> 0.4812727352018384
+  /backends/bm25/ungated/natural/cross_share/ci[1]: 0.5214545533738353 -> 0.5216363711546768
+  /backends/bm25/ungated/natural/cross_share/mean: 0.5010909169370478 -> 0.5012727351351218
+  /backends/bm25/ungated/natural/cross_share/sd: 0.3409010869808522 -> 0.3409004560926072
+  /backends/bm25/ungated/natural/items_out_of_scope: 2756 -> 2757
+  /backends/bm25/ungated/natural/items_out_of_scope_ci[0]: 0.48778833318883835 -> 0.4879700661983699
+  /backends/bm25/ungated/natural/items_out_of_scope_ci[1]: 0.5143923266967421 -> 0.5145740370014635
+  /backends/bm25/ungated/natural/recall/ci[0]: 0.4454242443350906 -> 0.44507424441521815
+  /backends/bm25/ungated/natural/recall/ci[1]: 0.49136363838240504 -> 0.49092424427988857
+  /backends/bm25/ungated/natural/recall/mean: 0.468378789790652 -> 0.4679242443361066
+  /backends/bm25/ungated/natural/recall/sd: 0.38626563473359304 -> 0.38593351958334304
+  array {'path': '/backends/bm25/gate_only/inject_name/per_query_recall', 'n': 1100, 'changed': 1, 'max_abs_change': 0.6666666567325592}
+  array {'path': '/backends/bm25/gate_only/natural/per_query_recall', 'n': 1100, 'changed': 1, 'max_abs_change': 0.6666666567325592}
+  array {'path': '/backends/bm25/published/inject_name/per_query_recall', 'n': 1100, 'changed': 1, 'max_abs_change': 0.3333333432674408}
+  array {'path': '/backends/bm25/published/inject_name_desc/per_query_recall', 'n': 1100, 'changed': 1, 'max_abs_change': 0.3333333432674408}
+  array {'path': '/backends/bm25/published/natural/per_query_recall', 'n': 1100, 'changed': 1, 'max_abs_change': 0.3333333432674408}
+  array {'path': '/backends/bm25/ungated/inject_name/per_query_cross_share', 'n': 1100, 'changed': 2, 'max_abs_change': 0.20000001788139343}
+  array {'path': '/backends/bm25/ungated/inject_name/per_query_recall', 'n': 1100, 'changed': 3, 'max_abs_change': 0.5}
+  array {'path': '/backends/bm25/ungated/natural/per_query_cross_share', 'n': 1100, 'changed': 1, 'max_abs_change': 0.20000001788139343}
+  array {'path': '/backends/bm25/ungated/natural/per_query_recall', 'n': 1100, 'changed': 1, 'max_abs_change': 0.5}
+
+## query_giveaways.json (0.4.0) -> query_giveaways_v042.json (0.4.2): 189 scalars and 0 arrays changed, 0 keys added, 0 removed
+  /benchmarks/metatool_tags/backends/bm25/all/gate_clean/ci[0]: 0.8062858225569608 -> 0.8086542560750319
+  /benchmarks/metatool_tags/backends/bm25/all/gate_clean/ci[1]: 0.816825943820757 -> 0.8191470086684667
+  /benchmarks/metatool_tags/backends/bm25/all/gate_clean/mean: 0.8116147979726209 -> 0.8139595471555113
+  /benchmarks/metatool_tags/backends/bm25/all/gate_clean/sd: 0.3877745693122017 -> 0.3858938648318826
+  /benchmarks/metatool_tags/backends/bm25/all/gate_clean_minus_ungated/ci[0]: 0.40291731798588415 -> 0.40538048884467814
+  /benchmarks/metatool_tags/backends/bm25/all/gate_clean_minus_ungated/ci[1]: 0.41618113779546206 -> 0.41857325564871395
+  /benchmarks/metatool_tags/backends/bm25/all/gate_clean_minus_ungated/cohens_d_paired: 0.8372600342135558 -> 0.841379062979017
+  /benchmarks/metatool_tags/backends/bm25/all/gate_clean_minus_ungated/delta: 0.4095495239448629 -> 0.4119416417981147
+  /benchmarks/metatool_tags/backends/bm25/all/gate_clean_minus_ungated/paired_t/t: 121.65074248528002 -> 122.24922191480069
+  /benchmarks/metatool_tags/backends/bm25/all/gate_clean_minus_ungated/wilcoxon/n_nonzero: 8754 -> 8804
+  /benchmarks/metatool_tags/backends/bm25/all/paper_governed/ci[0]: 0.9073942494434182 -> 0.9072995121026953
+  /benchmarks/metatool_tags/backends/bm25/all/paper_governed/ci[1]: 0.9149969210364265 -> 0.9149027758040832
+  /benchmarks/metatool_tags/backends/bm25/all/paper_governed/mean: 0.9112074274075127 -> 0.9111126900667899
+  /benchmarks/metatool_tags/backends/bm25/all/paper_governed/sd: 0.2801931663220833 -> 0.2803321575651832
+  /benchmarks/metatool_tags/backends/bm25/all/paper_governed_minus_ungated/ci[0]: 0.5024868551939747 -> 0.5024388944152337
+  /benchmarks/metatool_tags/backends/bm25/all/paper_governed_minus_ungated/ci[1]: 0.5159158732414381 -> 0.5158685045710767
+  /benchmarks/metatool_tags/backends/bm25/all/paper_governed_minus_ungated/cohens_d_paired: 1.0243940007934964 -> 1.0242969039492769
+  /benchmarks/metatool_tags/backends/bm25/all/paper_governed_minus_ungated/delta: 0.5091421533797547 -> 0.5090947847093932
+  /benchmarks/metatool_tags/backends/bm25/all/paper_governed_minus_ungated/paired_t/t: 148.84060590692135 -> 148.82649809965767
+  /benchmarks/metatool_tags/backends/bm25/all/paper_governed_minus_ungated/wilcoxon/n_nonzero: 10871 -> 10870
+  /benchmarks/metatool_tags/backends/bm25/all/ungated/ci[0]: 0.39540938373359863 -> 0.39533892283643596
+  /benchmarks/metatool_tags/backends/bm25/all/ungated/ci[1]: 0.4086258348728151 -> 0.4085784662024537
+  /benchmarks/metatool_tags/backends/bm25/all/ungated/mean: 0.40206527402775805 -> 0.4020179053573966
+  /benchmarks/metatool_tags/backends/bm25/all/ungated/sd: 0.48923852287210007 -> 0.4892290378781325
+  /benchmarks/metatool_tags/backends/bm25/effect_difference_gate_clean/ci[0]: -0.3248809399864593 -> -0.3141242243526207
+  /benchmarks/metatool_tags/backends/bm25/effect_difference_gate_clean/ci[1]: -0.29370153921756437 -> -0.28185911090433796
+  /benchmarks/metatool_tags/backends/bm25/effect_difference_gate_clean/delta: -0.3090927350025642 -> -0.29769982401802897
+  /benchmarks/metatool_tags/backends/bm25/effect_difference_names_gate_clean/ci[0]: -0.3713061584553227 -> -0.3733834817979127
+  /benchmarks/metatool_tags/backends/bm25/effect_difference_names_gate_clean/ci[1]: -0.3226998745191832 -> -0.3254732321626703
+  /benchmarks/metatool_tags/backends/bm25/effect_difference_names_gate_clean/delta: -0.3475574401071219 -> -0.3500028422668236
+  /benchmarks/metatool_tags/backends/bm25/effect_difference_names_paper_governed/ci[0]: -0.47256596953932123 -> -0.47251754573417865
+  /benchmarks/metatool_tags/backends/bm25/effect_difference_names_paper_governed/ci[1]: -0.4247367850383075 -> -0.4246883612331649
+  /benchmarks/metatool_tags/backends/bm25/effect_difference_names_paper_governed/delta: -0.4493684904194554 -> -0.44932006661431284
+  /benchmarks/metatool_tags/backends/bm25/effect_difference_paper_governed/ci[0]: -0.43326275869290254 -> -0.43331950960642623
+  /benchmarks/metatool_tags/backends/bm25/effect_difference_paper_governed/ci[1]: -0.40196710689923104 -> -0.40172352209055634
+  /benchmarks/metatool_tags/backends/bm25/effect_difference_paper_governed/delta: -0.41765545371578977 -> -0.4176025044411948
+  /benchmarks/metatool_tags/backends/bm25/giveaway/gate_clean/ci[0]: 0.9543820224719101 -> 0.9685393258426966
+  /benchmarks/metatool_tags/backends/bm25/giveaway/gate_clean/ci[1]: 0.9701123595505617 -> 0.981123595505618
+  /benchmarks/metatool_tags/backends/bm25/giveaway/gate_clean/mean: 0.9624719101123596 -> 0.9750561797752809
+  /benchmarks/metatool_tags/backends/bm25/giveaway/gate_clean/sd: 0.18920555760349503 -> 0.15490426664371804
+  /benchmarks/metatool_tags/backends/bm25/giveaway/gate_clean_minus_ungated/ci[0]: 0.11910112359550562 -> 0.13078651685393258
+  /benchmarks/metatool_tags/backends/bm25/giveaway/gate_clean_minus_ungated/ci[1]: 0.14696629213483145 -> 0.16
+  /benchmarks/metatool_tags/backends/bm25/giveaway/gate_clean_minus_ungated/cohens_d_paired: 0.3916355664999173 -> 0.4127469098426753
+  /benchmarks/metatool_tags/backends/bm25/giveaway/gate_clean_minus_ungated/delta: 0.13303370786516855 -> 0.1456179775280899
+  /benchmarks/metatool_tags/backends/bm25/giveaway/gate_clean_minus_ungated/paired_t/t: 18.473412725012597 -> 19.469232798852335
+  /benchmarks/metatool_tags/backends/bm25/giveaway/gate_clean_minus_ungated/wilcoxon/n_nonzero: 296 -> 324
+  /benchmarks/metatool_tags/backends/bm25/names_other_only/paper_governed/ci[0]: 0.8559322033898306 -> 0.8540061633281972
+  /benchmarks/metatool_tags/backends/bm25/names_other_only/paper_governed/ci[1]: 0.8921417565485362 -> 0.8909861325115562
+  /benchmarks/metatool_tags/backends/bm25/names_other_only/paper_governed/mean: 0.8744221879815101 -> 0.8728813559322034
+  /benchmarks/metatool_tags/backends/bm25/names_other_only/paper_governed/sd: 0.330918695790344 -> 0.33265528745074646
+  /benchmarks/metatool_tags/backends/bm25/names_other_only/paper_governed_minus_ungated/ci[0]: 0.6394260400616333 -> 0.6371340523882897
+  /benchmarks/metatool_tags/backends/bm25/names_other_only/paper_governed_minus_ungated/ci[1]: 0.689522342064715 -> 0.6879815100154083
+  /benchmarks/metatool_tags/backends/bm25/names_other_only/paper_governed_minus_ungated/cohens_d_paired: 1.4079700321480397 -> 1.4031157481663235
+  /benchmarks/metatool_tags/backends/bm25/names_other_only/paper_governed_minus_ungated/delta: 0.6648690292758089 -> 0.6633281972265023
+  /benchmarks/metatool_tags/backends/bm25/names_other_only/paper_governed_minus_ungated/paired_t/t: 50.726016358789536 -> 50.55112734620801
+  /benchmarks/metatool_tags/backends/bm25/names_other_only/paper_governed_minus_ungated/wilcoxon/n_nonzero: 863 -> 861
+  /benchmarks/metatool_tags/backends/bm25/no_giveaway/gate_clean/ci[0]: 0.7879646298845706 -> 0.7891295139256592
+  /benchmarks/metatool_tags/backends/bm25/no_giveaway/gate_clean/ci[1]: 0.7995611828867945 -> 0.8006989304246532
+  /benchmarks/metatool_tags/backends/bm25/no_giveaway/gate_clean/mean: 0.7938419993646088 -> 0.7949804087683999
+  /benchmarks/metatool_tags/backends/bm25/no_giveaway/gate_clean/sd: 0.4010889218706304 -> 0.4002689156123256
+  /benchmarks/metatool_tags/backends/bm25/no_giveaway/gate_clean_minus_ungated/ci[0]: 0.43505705284337604 -> 0.4362490733876946
+  /benchmarks/metatool_tags/backends/bm25/no_giveaway/gate_clean_minus_ungated/ci[1]: 0.4491951710261569 -> 0.45038652970454307
+  /benchmarks/metatool_tags/backends/bm25/no_giveaway/gate_clean_minus_ungated/cohens_d_paired: 0.8954179779435356 -> 0.8975552251278603
+  /benchmarks/metatool_tags/backends/bm25/no_giveaway/gate_clean_minus_ungated/delta: 0.4421264428677327 -> 0.44331780154611883
+  /benchmarks/metatool_tags/backends/bm25/no_giveaway/gate_clean_minus_ungated/paired_t/t: 123.05401897853528 -> 123.34773304510533
+  /benchmarks/metatool_tags/backends/bm25/no_giveaway/gate_clean_minus_ungated/wilcoxon/n_nonzero: 8458 -> 8480
+  /benchmarks/metatool_tags/backends/bm25/no_giveaway/paper_governed/ci[0]: 0.9007201101344912 -> 0.9006142115853013
+  /benchmarks/metatool_tags/backends/bm25/no_giveaway/paper_governed/ci[1]: 0.9089537223340041 -> 0.9088742984221116
+  /benchmarks/metatool_tags/backends/bm25/no_giveaway/paper_governed/mean: 0.9048766281901938 -> 0.9047707296410039
+  /benchmarks/metatool_tags/backends/bm25/no_giveaway/paper_governed/sd: 0.2888228381776418 -> 0.2889712388347232
+  /benchmarks/metatool_tags/backends/bm25/no_giveaway/paper_governed_minus_ungated/ci[0]: 0.546171767446786 -> 0.546118818172191
+  /benchmarks/metatool_tags/backends/bm25/no_giveaway/paper_governed_minus_ungated/ci[1]: 0.560282749126337 -> 0.560229799851742
+  /benchmarks/metatool_tags/backends/bm25/no_giveaway/paper_governed_minus_ungated/cohens_d_paired: 1.1199407461006607 -> 1.1198206289966475
+  /benchmarks/metatool_tags/backends/bm25/no_giveaway/paper_governed_minus_ungated/delta: 0.5531610716933179 -> 0.5531081224187229
+  /benchmarks/metatool_tags/backends/bm25/no_giveaway/paper_governed_minus_ungated/paired_t/t: 153.90936213053794 -> 153.89285487609254
+  /benchmarks/metatool_tags/backends/bm25/no_giveaway/paper_governed_minus_ungated/wilcoxon/n_nonzero: 10569 -> 10568
+  /benchmarks/metatool_tags/backends/bm25/no_giveaway/ungated/ci[0]: 0.344885100074129 -> 0.34483215079953405
+  /benchmarks/metatool_tags/backends/bm25/no_giveaway/ungated/ci[1]: 0.3584143015990681 -> 0.3583871650958382
+  /benchmarks/metatool_tags/backends/bm25/no_giveaway/ungated/mean: 0.35171555649687597 -> 0.35166260722228104
+  /benchmarks/metatool_tags/backends/bm25/no_giveaway/ungated/sd: 0.4763109171592752 -> 0.47629442896425866
+  /benchmarks/metatool_tags/backends/bm25/no_giveaway_names/gate_clean/ci[0]: 0.8019708488693041 -> 0.8044162510290058
+  /benchmarks/metatool_tags/backends/bm25/no_giveaway_names/gate_clean/ci[1]: 0.8127451455135345 -> 0.8151179119655223
+  /benchmarks/metatool_tags/backends/bm25/no_giveaway_names/gate_clean/mean: 0.8074185269478475 -> 0.8098155053024066
+  /benchmarks/metatool_tags/backends/bm25/no_giveaway_names/gate_clean/sd: 0.39103782454671454 -> 0.38915693300059695
+  /benchmarks/metatool_tags/backends/bm25/no_giveaway_names/gate_clean_minus_ungated/ci[0]: 0.4103669313834681 -> 0.4128129388407341
+  /benchmarks/metatool_tags/backends/bm25/no_giveaway_names/gate_clean_minus_ungated/ci[1]: 0.42385356641324873 -> 0.42629896857295047
+  /benchmarks/metatool_tags/backends/bm25/no_giveaway_names/gate_clean_minus_ungated/cohens_d_paired: 0.8505128180894094 -> 0.8547681578325713
+  /benchmarks/metatool_tags/backends/bm25/no_giveaway_names/gate_clean_minus_ungated/delta: 0.41712265749842625 -> 0.41956805965812793
+  /benchmarks/metatool_tags/backends/bm25/no_giveaway_names/gate_clean_minus_ungated/paired_t/t: 122.2225686265383 -> 122.83408034361764
+  /benchmarks/metatool_tags/backends/bm25/no_giveaway_names/gate_clean_minus_ungated/wilcoxon/n_nonzero: 8722 -> 8772
+  /benchmarks/metatool_tags/backends/bm25/no_giveaway_names/paper_governed/ci[0]: 0.9053314609462012 -> 0.9052346133359159
+  /benchmarks/metatool_tags/backends/bm25/no_giveaway_names/paper_governed/ci[1]: 0.9130792697690184 -> 0.9130308459638758
+  /benchmarks/metatool_tags/backends/bm25/no_giveaway_names/paper_governed/mean: 0.909229577260181 -> 0.9091327296498959
+  /benchmarks/metatool_tags/backends/bm25/no_giveaway_names/paper_governed/sd: 0.2829797212572287 -> 0.2831197324713955
+  /benchmarks/metatool_tags/backends/bm25/no_giveaway_names/paper_governed_minus_ungated/ci[0]: 0.5122264055009442 -> 0.5121779816958016
+  /benchmarks/metatool_tags/backends/bm25/no_giveaway_names/paper_governed_minus_ungated/ci[1]: 0.5257856762384389 -> 0.5257372524332962
+  /benchmarks/metatool_tags/backends/bm25/no_giveaway_names/paper_governed_minus_ungated/cohens_d_paired: 1.0448123749027227 -> 1.0447110012274459
+  /benchmarks/metatool_tags/backends/bm25/no_giveaway_names/paper_governed_minus_ungated/delta: 0.5189337078107598 -> 0.5188852840056172
+  /benchmarks/metatool_tags/backends/bm25/no_giveaway_names/paper_governed_minus_ungated/paired_t/t: 150.1443005647684 -> 150.12973270556637
+  /benchmarks/metatool_tags/backends/bm25/no_giveaway_names/paper_governed_minus_ungated/wilcoxon/n_nonzero: 10839 -> 10838
+  /benchmarks/metatool_tags/backends/bm25/no_giveaway_names/ungated/ci[0]: 0.38354074863202753 -> 0.3834923248268849
+  /benchmarks/metatool_tags/backends/bm25/no_giveaway_names/ungated/ci[1]: 0.39685729504624473 -> 0.39680947653866644
+  /benchmarks/metatool_tags/backends/bm25/no_giveaway_names/ungated/mean: 0.39029586944942135 -> 0.3902474456442787
+  /benchmarks/metatool_tags/backends/bm25/no_giveaway_names/ungated/sd: 0.4867103235923934 -> 0.4866994058441452
+  /benchmarks/toolbench/backends/bm25/all/gate_clean/ci[0]: 0.5815909112790091 -> 0.5808931843452155
+  /benchmarks/toolbench/backends/bm25/all/gate_clean/ci[1]: 0.6252882595854726 -> 0.6247276538840749
+  /benchmarks/toolbench/backends/bm25/all/gate_clean/mean: 0.6037424264983697 -> 0.6031363659013401
+  /benchmarks/toolbench/backends/bm25/all/gate_clean/sd: 0.3721946379221841 -> 0.37209157426916584
+  /benchmarks/toolbench/backends/bm25/all/gate_clean_minus_ungated/ci[0]: 0.12133295476673679 -> 0.12125757623159072
+  /benchmarks/toolbench/backends/bm25/all/gate_clean_minus_ungated/ci[1]: 0.14977310667796567 -> 0.14950000022250143
+  /benchmarks/toolbench/backends/bm25/all/gate_clean_minus_ungated/cohens_d_paired: 0.5628812910703465 -> 0.5629130053392007
+  /benchmarks/toolbench/backends/bm25/all/gate_clean_minus_ungated/delta: 0.13536363670771773 -> 0.13521212156523357
+  /benchmarks/toolbench/backends/bm25/all/gate_clean_minus_ungated/paired_t/t: 18.668660439911644 -> 18.669712283214544
+  /benchmarks/toolbench/backends/bm25/all/paper_governed/ci[0]: 0.5900594720535658 -> 0.5897109872173857
+  /benchmarks/toolbench/backends/bm25/all/paper_governed/ci[1]: 0.6337132598625665 -> 0.6335151536136189
+  /benchmarks/toolbench/backends/bm25/all/paper_governed/mean: 0.6120606083490632 -> 0.6117575780370018
+  /benchmarks/toolbench/backends/bm25/all/paper_governed/sd: 0.37067322708986894 -> 0.37076478619341935
+  /benchmarks/toolbench/backends/bm25/all/paper_governed_minus_ungated/ci[0]: 0.12919659111208534 -> 0.1292875004461543
+  /benchmarks/toolbench/backends/bm25/all/paper_governed_minus_ungated/ci[1]: 0.1584094704701142 -> 0.15860606115379117
+  /benchmarks/toolbench/backends/bm25/all/paper_governed_minus_ungated/cohens_d_paired: 0.5790214105518217 -> 0.5792428024228577
+  /benchmarks/toolbench/backends/bm25/all/paper_governed_minus_ungated/delta: 0.14368181855841117 -> 0.14383333370089532
+  /benchmarks/toolbench/backends/bm25/all/paper_governed_minus_ungated/paired_t/t: 19.203967643827234 -> 19.21131038150585
+  /benchmarks/toolbench/backends/bm25/all/paper_governed_minus_ungated/wilcoxon/W: 199.0 -> 198.5
+  /benchmarks/toolbench/backends/bm25/all/ungated/ci[0]: 0.4454242443350906 -> 0.44507424441521815
+  /benchmarks/toolbench/backends/bm25/all/ungated/ci[1]: 0.49136363838240504 -> 0.49092424427988857
+  /benchmarks/toolbench/backends/bm25/all/ungated/mean: 0.468378789790652 -> 0.4679242443361066
+  /benchmarks/toolbench/backends/bm25/all/ungated/sd: 0.38626563473359304 -> 0.38593351958334304
+  /benchmarks/toolbench/backends/bm25/effect_difference_gate_clean/ci[0]: -0.036799271833802105 -> -0.03760902257355923
+  /benchmarks/toolbench/backends/bm25/effect_difference_gate_clean/ci[1]: 0.03082867843450219 -> 0.031114122906941547
+  /benchmarks/toolbench/backends/bm25/effect_difference_gate_clean/delta: -0.0036695460991908735 -> -0.0034697059832045907
+  /benchmarks/toolbench/backends/bm25/effect_difference_gate_clean/p_bootstrap: 0.8116 -> 0.8214
+  /benchmarks/toolbench/backends/bm25/effect_difference_names_gate_clean/ci[0]: -0.037609916671130846 -> -0.03704522908735794
+  /benchmarks/toolbench/backends/bm25/effect_difference_names_gate_clean/ci[1]: 0.04106252202733916 -> 0.04189427665110222
+  /benchmarks/toolbench/backends/bm25/effect_difference_names_gate_clean/delta: 0.0007395379575880767 -> 0.0009199131272120409
+  /benchmarks/toolbench/backends/bm25/effect_difference_names_gate_clean/p_bootstrap: 0.9926 -> 0.9768
+  /benchmarks/toolbench/backends/bm25/effect_difference_names_paper_governed/ci[0]: -0.017784993306862687 -> -0.0183353626803249
+  /benchmarks/toolbench/backends/bm25/effect_difference_names_paper_governed/ci[1]: 0.06331439564635498 -> 0.06313740097115306
+  /benchmarks/toolbench/backends/bm25/effect_difference_names_paper_governed/delta: 0.02195165949385791 -> 0.021771284324233947
+  /benchmarks/toolbench/backends/bm25/effect_difference_names_paper_governed/p_bootstrap: 0.2964 -> 0.306
+  /benchmarks/toolbench/backends/bm25/effect_difference_paper_governed/ci[0]: -0.024777084534496424 -> -0.024455161683576556
+  /benchmarks/toolbench/backends/bm25/effect_difference_paper_governed/ci[1]: 0.04677139840604595 -> 0.04686981222726853
+  /benchmarks/toolbench/backends/bm25/effect_difference_paper_governed/delta: 0.010234068173379324 -> 0.010034228057393041
+  /benchmarks/toolbench/backends/bm25/effect_difference_paper_governed/p_bootstrap: 0.5658 -> 0.5818
+  /benchmarks/toolbench/backends/bm25/no_giveaway/gate_clean/ci[0]: 0.5452632918266012 -> 0.5445838348948948
+  /benchmarks/toolbench/backends/bm25/no_giveaway/gate_clean/ci[1]: 0.5969244628939196 -> 0.5960431677872221
+  /benchmarks/toolbench/backends/bm25/no_giveaway/gate_clean/mean: 0.571442847950853 -> 0.5706434874511737
+  /benchmarks/toolbench/backends/bm25/no_giveaway/gate_clean/sd: 0.3812702233960851 -> 0.3810694482911968
+  /benchmarks/toolbench/backends/bm25/no_giveaway/gate_clean_minus_ungated/ci[0]: 0.1203432257579778 -> 0.12016336956291462
+  /benchmarks/toolbench/backends/bm25/no_giveaway/gate_clean_minus_ungated/ci[1]: 0.15263789027518362 -> 0.15257843779645663
+  /benchmarks/toolbench/backends/bm25/no_giveaway/gate_clean_minus_ungated/cohens_d_paired: 0.5727421768758537 -> 0.5728084501243881
+  /benchmarks/toolbench/backends/bm25/no_giveaway/gate_clean_minus_ungated/delta: 0.13625099967352206 -> 0.13605115955753577
+  /benchmarks/toolbench/backends/bm25/no_giveaway/gate_clean_minus_ungated/paired_t/t: 16.54025463461364 -> 16.54216854361228
+  /benchmarks/toolbench/backends/bm25/no_giveaway/paper_governed/ci[0]: 0.5502592946887375 -> 0.5499375516906095
+  /benchmarks/toolbench/backends/bm25/no_giveaway/paper_governed/ci[1]: 0.6017785792402047 -> 0.6012794785625893
+  /benchmarks/toolbench/backends/bm25/no_giveaway/paper_governed/mean: 0.5763988830774522 -> 0.5759992028097455
+  /benchmarks/toolbench/backends/bm25/no_giveaway/paper_governed/sd: 0.3817510118214462 -> 0.38183087701807944
+  /benchmarks/toolbench/backends/bm25/no_giveaway/paper_governed_minus_ungated/ci[0]: 0.12462030413562802 -> 0.12497951662797722
+  /benchmarks/toolbench/backends/bm25/no_giveaway/paper_governed_minus_ungated/ci[1]: 0.15835331789657867 -> 0.15847322194785665
+  /benchmarks/toolbench/backends/bm25/no_giveaway/paper_governed_minus_ungated/cohens_d_paired: 0.5740716748421113 -> 0.5743613462319125
+  /benchmarks/toolbench/backends/bm25/no_giveaway/paper_governed_minus_ungated/delta: 0.14120703480012126 -> 0.14140687491610754
+  /benchmarks/toolbench/backends/bm25/no_giveaway/paper_governed_minus_ungated/paired_t/t: 16.578649283699995 -> 16.587014720612306
+  /benchmarks/toolbench/backends/bm25/no_giveaway/paper_governed_minus_ungated/wilcoxon/W: 137.5 -> 137.0
+  /benchmarks/toolbench/backends/bm25/no_giveaway/ungated/ci[0]: 0.4088724038838375 -> 0.40823291538716505
+  /benchmarks/toolbench/backends/bm25/no_giveaway/ungated/ci[1]: 0.4612719841980391 -> 0.46073141663784173
+  /benchmarks/toolbench/backends/bm25/no_giveaway/ungated/mean: 0.435191848277331 -> 0.43459232789363794
+  /benchmarks/toolbench/backends/bm25/no_giveaway/ungated/sd: 0.3875551011006627 -> 0.3870667585604902
+  /benchmarks/toolbench/backends/bm25/no_giveaway_names/gate_clean/ci[0]: 0.5689393963443027 -> 0.5682535195707049
+  /benchmarks/toolbench/backends/bm25/no_giveaway_names/gate_clean/ci[1]: 0.6178571447685716 -> 0.6171902080070534
+  /benchmarks/toolbench/backends/bm25/no_giveaway_names/gate_clean/mean: 0.5931457453346872 -> 0.5924242446239376
+  /benchmarks/toolbench/backends/bm25/no_giveaway_names/gate_clean/sd: 0.3788258243100298 -> 0.37868493275342807
+  /benchmarks/toolbench/backends/bm25/no_giveaway_names/gate_clean_minus_ungated/ci[0]: 0.12016549445567773 -> 0.11987644334392243
+  /benchmarks/toolbench/backends/bm25/no_giveaway_names/gate_clean_minus_ungated/ci[1]: 0.1510822511975577 -> 0.1508297261173204
+  /benchmarks/toolbench/backends/bm25/no_giveaway_names/gate_clean_minus_ungated/cohens_d_paired: 0.5652813735845578 -> 0.5653272798245306
+  /benchmarks/toolbench/backends/bm25/no_giveaway_names/gate_clean_minus_ungated/delta: 0.13524531063450362 -> 0.13506493546487966
+  /benchmarks/toolbench/backends/bm25/no_giveaway_names/gate_clean_minus_ungated/paired_t/t: 17.18306611001655 -> 17.1844615389006
+  /benchmarks/toolbench/backends/bm25/no_giveaway_names/paper_governed/ci[0]: 0.5735186706748651 -> 0.5731777615974217
+  /benchmarks/toolbench/backends/bm25/no_giveaway_names/paper_governed/ci[1]: 0.6225297641984764 -> 0.62202381170254
+  /benchmarks/toolbench/backends/bm25/no_giveaway_names/paper_governed/mean: 0.5980699877395774 -> 0.5977092373680759
+  /benchmarks/toolbench/backends/bm25/no_giveaway_names/paper_governed/sd: 0.3790215558714433 -> 0.3791148160545304
+  /benchmarks/toolbench/backends/bm25/no_giveaway_names/paper_governed_minus_ungated/ci[0]: 0.12465638565262417 -> 0.1248196252815232
+  /benchmarks/toolbench/backends/bm25/no_giveaway_names/paper_governed_minus_ungated/ci[1]: 0.15625947019270747 -> 0.15653003309349411
+  /benchmarks/toolbench/backends/bm25/no_giveaway_names/paper_governed_minus_ungated/cohens_d_paired: 0.5691005719418408 -> 0.5693646599578618
+  /benchmarks/toolbench/backends/bm25/no_giveaway_names/paper_governed_minus_ungated/delta: 0.1401695530393939 -> 0.14034992820901787
+  /benchmarks/toolbench/backends/bm25/no_giveaway_names/paper_governed_minus_ungated/paired_t/t: 17.299159689120913 -> 17.307187269809408
+  /benchmarks/toolbench/backends/bm25/no_giveaway_names/paper_governed_minus_ungated/wilcoxon/W: 162.0 -> 161.5
+  /benchmarks/toolbench/backends/bm25/no_giveaway_names/ungated/ci[0]: 0.43257530835049945 -> 0.43214285871763897
+  /benchmarks/toolbench/backends/bm25/no_giveaway_names/ungated/ci[1]: 0.48308171167671354 -> 0.4824679856160373
+  /benchmarks/toolbench/backends/bm25/no_giveaway_names/ungated/mean: 0.45790043470018355 -> 0.457359309159058
+  /benchmarks/toolbench/backends/bm25/no_giveaway_names/ungated/sd: 0.39084579595560504 -> 0.3904403610207783
+
+## mandatory_coverage.json (0.4.0) -> mandatory_coverage_v042.json (0.4.2): 6 scalars and 4 arrays changed, 0 keys added, 2 removed
+  /backends/bm25/A_soft_shut_theta_paper/off_paths/out:threshold: 542 -> 549
+  /backends/bm25/B_verified_unreachable/off_paths/out:threshold: 731 -> 738
+  /backends/bm25/similarity_to_queries/frac_ge_theta: 0.2585499316005472 -> 0.25609756097560976
+  /backends/bm25/similarity_to_queries/median: 0.17795446136864287 -> 0.17484849606682737
+  /backends/bm25/similarity_to_queries/min: 0.00045299260929248635 -> 0.0
+  /backends/bm25/similarity_to_queries/n_pairs_with_similarity: 731 -> 738
+  array {'path': '/backends/bm25/pairs/A_off', 'n': 738, 'changed': 7}
+  array {'path': '/backends/bm25/pairs/B_off', 'n': 738, 'changed': 7}
+  array {'path': '/backends/bm25/pairs/C_on', 'n': 738, 'changed': 7}
+  array {'path': '/backends/bm25/pairs/D_on', 'n': 738, 'changed': 7}
+  removed /backends/bm25/A_soft_shut_theta_paper/off_paths/out:not_in_pool
+  removed /backends/bm25/B_verified_unreachable/off_paths/out:not_in_pool
+
+## metadata_filter_baseline_toolbench_bge.json (0.4.0) -> metadata_filter_baseline_toolbench_bge_v042.json (0.4.2): 0 scalars and 0 arrays changed, 1 keys added, 0 removed
+  added /encoders/bge/embedding
+
+## metadata_filter_baseline_petsim_bge.json (0.4.0) -> metadata_filter_baseline_petsim_bge_v042.json (0.4.2): 0 scalars and 0 arrays changed, 1 keys added, 0 removed
+  added /encoders/bge/embedding
+
+## metadata_filter_baseline_toolbench_nemotron.json -> metadata_filter_baseline_toolbench_nemotron_v042.json: MISSING ['metadata_filter_baseline_toolbench_nemotron_v042.json']
+
+## metadata_filter_baseline_petsim_nemotron.json -> metadata_filter_baseline_petsim_nemotron_v042.json: MISSING ['metadata_filter_baseline_petsim_nemotron_v042.json']
+
+## cpa_maintained.json (0.4.0) -> cpa_maintained_v042.json (0.4.2): 0 scalars and 0 arrays changed, 0 keys added, 0 removed

@@ -1,0 +1,3 @@
+=== WP5a petsim, Nemotron: BEAR rows on BEAR 0.4.2 from the cached store petsim__nemotron; LlamaIndex rows from metadata_filter_baseline_petsim_nemotron.json ===
+coverage: the BEAR arms embed 60 query and 99 document texts; the store lacks 0 and 44
+store: remote:http://localhost:8360, identity {'endpoint': 'http://localhost:8360/v1/embeddings', 'model_id': 'nvidia/llama-nemotron-embed-vl-1b-v2', 'dim': 2048, 'served_model': 'nemotron-embed-vl', 'source': 'health'}, filled 2026-10-29T23:13:17Z

@@ -1,0 +1,63 @@
+=== Maintained CPA vs stale CPA vs BEAR on novel contexts (WP5), BEAR 0.4.2 ===
+BGE-base on the CPU, k=25, theta 0.3, priority weight 0.3, mandatory safety+global. Scale points [10, 25, 50, 100, 200, 500].
+
+  10 agents (31 instructions, 19 novel queries): bear 0.950 (fraud 1.000)  cpa_stale 0.888 (fraud 0.833)  cpa_maintained 0.950 (fraud 1.000)  cpa_maintained_multi 0.950 (fraud 1.000)
+     maintenance per new department: CPA tables +1 key(s), +3 entries, wiring formula +1 line(s); BEAR wiring +0, 3 required tags written with the new instructions
+
+  25 agents (54 instructions, 24 novel queries): bear 0.960 (fraud 1.000)  cpa_stale 0.912 (fraud 0.833)  cpa_maintained 0.960 (fraud 1.000)  cpa_maintained_multi 0.960 (fraud 1.000)
+     maintenance per new department: CPA tables +1 key(s), +3 entries, wiring formula +1 line(s); BEAR wiring +0, 3 required tags written with the new instructions
+
+  50 agents (87 instructions, 24 novel queries): bear 0.960 (fraud 1.000)  cpa_stale 0.912 (fraud 0.833)  cpa_maintained 0.960 (fraud 1.000)  cpa_maintained_multi 0.960 (fraud 1.000)
+     maintenance per new department: CPA tables +1 key(s), +3 entries, wiring formula +1 line(s); BEAR wiring +0, 3 required tags written with the new instructions
+
+ 100 agents (158 instructions, 24 novel queries): bear 1.000 (fraud 1.000)  cpa_stale 0.912 (fraud 0.833)  cpa_maintained 0.960 (fraud 1.000)  cpa_maintained_multi 1.000 (fraud 1.000)
+     maintenance per new department: CPA tables +1 key(s), +3 entries, wiring formula +1 line(s); BEAR wiring +0, 3 required tags written with the new instructions
+
+ 200 agents (288 instructions, 24 novel queries): bear 1.000 (fraud 1.000)  cpa_stale 0.912 (fraud 0.833)  cpa_maintained 0.960 (fraud 1.000)  cpa_maintained_multi 1.000 (fraud 1.000)
+     maintenance per new department: CPA tables +1 key(s), +3 entries, wiring formula +1 line(s); BEAR wiring +0, 3 required tags written with the new instructions
+
+ 500 agents (678 instructions, 24 novel queries): bear 1.000 (fraud 1.000)  cpa_stale 0.912 (fraud 0.833)  cpa_maintained 0.960 (fraud 1.000)  cpa_maintained_multi 1.000 (fraud 1.000)
+     maintenance per new department: CPA tables +1 key(s), +3 entries, wiring formula +1 line(s); BEAR wiring +0, 3 required tags written with the new instructions
+
+Multi-department wiring change (one time): {'published_body_lines': 15, 'multi_body_lines': 17, 'changed_body_lines': 7, 'call_site_lines': 1}
+
+--- Pooled over scale points (novel-context recall, 95% bootstrap CI) ---
+  bear                   recall 0.979 [0.971, 0.987]   all-expected 0.849
+  cpa_stale              recall 0.908 [0.896, 0.921]   all-expected 0.396
+  cpa_maintained         recall 0.959 [0.948, 0.969]   all-expected 0.698
+  cpa_maintained_multi   recall 0.979 [0.971, 0.987]   all-expected 0.849
+  unknown_dept     (n=42): bear 1.000  cpa_stale 0.833  cpa_maintained 1.000  cpa_maintained_multi 1.000
+  cross_dept       (n=42): bear 0.932  cpa_stale 0.864  cpa_maintained 0.864  cpa_maintained_multi 0.932
+  unseen_modifier  (n=30): bear 1.000  cpa_stale 1.000  cpa_maintained 1.000  cpa_maintained_multi 1.000
+  conflict         (n=25): bear 1.000  cpa_stale 1.000  cpa_maintained 1.000  cpa_maintained_multi 1.000
+
+--- Paired contrasts, pooled ---
+  bear_vs_cpa_stale                recall +0.071 [+0.058, +0.084] p=0.0001 d=+0.90   McNemar(all expected) b=63 c=0 p=0.0000
+  bear_vs_cpa_maintained           recall +0.021 [+0.013, +0.029] p=0.0001 d=+0.42   McNemar(all expected) b=21 c=0 p=0.0000
+  bear_vs_cpa_maintained_multi     recall +0.000 [+0.000, +0.000] p=1.0000 d=n/a   McNemar(all expected) b=0 c=0 p=1.0000
+  New department only:
+    bear_vs_cpa_stale              +0.167 [+0.167, +0.167] p=0.0001 d=n/a
+    bear_vs_cpa_maintained         +0.000 [+0.000, +0.000] p=1.0000 d=n/a
+    bear_vs_cpa_maintained_multi   +0.000 [+0.000, +0.000] p=1.0000 d=n/a
+
+Wrote results/cpa_maintained_v042.json
+Elapsed 32s
+
+=== Reproducibility ===
+Timestamp (UTC): 2026-10-31T19:41:25Z
+Command line:    evals/eval_cpa_maintained.py --output results/cpa_maintained_v042.json --log-file results/cpa_maintained_v042_output.txt
+Python:          3.12.13 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
+numpy:           2.2.6
+scipy:           1.17.1
+bear:            0.4.2
+git commit:      6ae764af347c15dbfb7e044f8e0e042b0ce39742
+git status:      unknown (git status failed or timed out)
+git branch:      tist-r2
+
+  eval: cpa_maintained
+  bear_version: 0.4.2
+  bear_path: /home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/bear/__init__.py
+  bear_source_sha: 0d0718a39a0b0788ef5cca4689352462b830494c
+  bear_direct_url: file:///home/snhwang/tist-evals/bear-v0.4.2
+  bear_export_sha: 0d0718a39a0b0788ef5cca4689352462b830494c
+===
