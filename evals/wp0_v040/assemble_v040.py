@@ -56,9 +56,13 @@ OUTPUTS = {
 # rows come from the *_fix steps at encode batch 2 (2026-10-31).
 PARTIAL = {
     "tb_qwen4b": "rows done at encode batch 8; MetaTool Qwen3-4B (no gov) and both ToolBench rows were "
-                 "skipped (OOM) and rerun at batch 2 in tb_qwen4b_mt_fix and tb_qwen4b_tb_fix",
+                 "skipped (OOM) and rerun at batch 2 in tb_qwen4b_mt_fix and tb_qwen4b_tb_fix. Its MetaTool "
+                 "BEAR+Qwen3-4B (gov) row is superseded by tb_qwen4b_mt_gov_b2 (batch 2, so the base MetaTool "
+                 "pair shares one batch size); it is kept as a record",
     "tb_qwen4b_v0110": "rows done at encode batch 8; MetaTool Qwen3-4B (no gov) and both ToolBench rows were "
-                       "skipped (OOM) and rerun at batch 2 in tb_qwen4b_v0110_mt_fix and tb_qwen4b_v0110_tb_fix",
+                       "skipped (OOM) and rerun at batch 2 in tb_qwen4b_v0110_mt_fix and tb_qwen4b_v0110_tb_fix. "
+                       "Its MetaTool BEAR+Qwen3-4B (gov) row is superseded by tb_qwen4b_v0110_mt_gov_b2 (batch 2); "
+                       "it is kept as a record",
 }
 
 

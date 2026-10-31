@@ -733,6 +733,24 @@ lane_gpuq4b042fix() {  # rerun only what gpuq4b042 lost (coordinator, 2026-10-31
     fi
   done
 }
+lane_gpuq4b042gov() {  # MetaTool base BEAR+Qwen3-4B (gov) again at encode batch 2 (coordinator,
+  # 2026-10-31), so the base MetaTool governed and ungated rows use vectors made
+  # at the same batch size. The batch-8 result in tb_qwen4b stays as a superseded
+  # record. Launched like gpuq4b042fix (batch 2, 11.2 GiB cap, gates 67,000 and
+  # 80,000). The 0.4.2 step runs first; the control reads its cached vectors.
+  [[ ${WP0_ALLOW_LOCAL_MODELS:-0} == 1 ]] || { log "gpuq4b042gov needs WP0_ALLOW_LOCAL_MODELS=1"; return 1; }
+  [[ ${WP0_ENCODE_BATCH:-} == 2 ]] || { log "gpuq4b042gov expects WP0_ENCODE_BATCH=2"; return 1; }
+  rm -f "$LOGS/.card_stop"
+  local name
+  for name in tb_qwen4b_mt_gov_b2:v042 tb_qwen4b_v0110_mt_gov_b2:v0110; do
+    tb "${name%%:*}" gpu "${name##*:}" 11 metatool-base "BEAR+Qwen3-4B (gov)"
+    name=${name%%:*}
+    if [[ -f $LOGS/.card_stop || -f $LOGS/$name.failed || -f $LOGS/$name.blocked ]]; then
+      log "gpuq4b042gov stopped after $name ($(cat "$LOGS/$name.failed" "$LOGS/$name.blocked" 2>/dev/null | head -1))"
+      return 1
+    fi
+  done
+}
 lane_manddense042() {  # after dense042 (one dense lane at a time): redo the cap kills, then the
   # dense mandatory diagnostic. Launched like dense042 (20G, batch 4, 12 threads).
   [[ ${WP0_ALLOW_LOCAL_MODELS:-0} == 1 ]] || { log "manddense042 needs WP0_ALLOW_LOCAL_MODELS=1"; return 1; }
@@ -811,6 +829,7 @@ case $lane in
   dense042) lane_dense042 ;;
   gpuq4b042) lane_gpuq4b042 ;;
   gpuq4b042fix) lane_gpuq4b042fix ;;
+  gpuq4b042gov) lane_gpuq4b042gov ;;
   mand042) lane_mand042 ;;
   e2eattr042) lane_e2eattr042 ;;
   pair042) lane_pair042 ;;
