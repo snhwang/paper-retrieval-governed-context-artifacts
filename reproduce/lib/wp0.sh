@@ -2,9 +2,10 @@
 # Source it after common.sh.
 #
 # The lane table below (clone and settings per lane) is the one in
-# evals/wp0_v040/relaunch_042.sh. That script cannot be called here: it names
-# absolute personal paths and copies the scripts from a session folder into the
-# clones. The kit runs the committed scripts of each clone instead. They are
+# evals/wp0_v040/relaunch_042.sh. The kit does not call that script. It copies
+# the checkout's working-tree WP0 scripts into each clone (so uncommitted edits
+# would run) and starts lanes side by side as services. The kit runs the
+# committed scripts of each clone instead, one lane at a time. They are
 # identical to the copies the October runs used.
 #
 # A lane runs in the foreground of the calling script, which itself runs as a

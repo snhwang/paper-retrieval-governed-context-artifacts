@@ -14,6 +14,8 @@
 #   Windows at 127.0.0.1:11434 (WSL mirrored networking) holds the tag
 #   mistral-nemo-32k (digest d79a1e80980f, GGUF layer b559938ab7a0, Q4_0, num_ctx
 #   32768). Make it once in PowerShell, in this repo: ollama create mistral-nemo-32k -f Modelfile
+#   e2e_rerun.py checks the GGUF layer in Ollama's manifest. It finds the models folder
+#   through OLLAMA_MODELS, or else the Windows profile (cmd.exe and wslpath).
 #   The model-server session agreed to the window, the card shows 67,000 MiB or less,
 #   Ollama holds no model, no other GPU job runs, wsl-keepalive is Running.
 # Resources: the GPU through Ollama (about 12 GB with the model loaded). Card limits:

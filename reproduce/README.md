@@ -211,7 +211,7 @@ Some paths are fixed, because the wrapped runners read them:
 
 `MANIFEST.md` lists every gap: results with no script, numbers worked out by hand, logs without JSON, and scripts that hold personal paths or LAN addresses. In short:
 - A few numbers in the text have no possible script (stale text, prose estimates, no data). `TEXT_FIXES.md` lists them with a proposed change. Every other number is computed, by an eval script, by `reproduce/derive/`, or by `collect.py` from the per-query arrays.
-- `evals/wp0_v040/relaunch_042.sh` cannot be used. It names personal paths and copies scripts from a session folder. The kit runs the committed WP0 scripts, which are identical to those copies, with the same lane settings.
+- The kit does not call `evals/wp0_v040/relaunch_042.sh`, which copies the checkout's working-tree WP0 scripts into the clones and starts lanes side by side. It runs the committed WP0 scripts, one lane at a time, with the same lane settings.
 - `evals/run_wp256.sh` labels its v042 modes with the candidate sha `9d085b4` in `BEAR_SOURCE_SHA`. The code is the same as v0.4.2. The result files also record `bear_export_sha` from `BEAR_GIT_SHA`, and the run record holds the real sha.
 
 ## Style

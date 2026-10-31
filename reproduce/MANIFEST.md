@@ -116,8 +116,7 @@ On the committed files, the computed values match the text except where `TEXT_FI
 
 ### Scripts on the path that hold personal paths or LAN addresses
 The kit itself holds none. It works around these:
-- `evals/wp0_v040/relaunch_042.sh` (and `relaunch_041.sh`) set `SP` to a session folder under `/mnt/c/Users/<user>/...` and `REPO` to `/mnt/c/Users/<user>/...`. Their `sync_clone` copies scripts from the session folder into each lane clone. The kit does not call them. It runs each lane in its clone with the same settings. The copied scripts are identical to the committed ones (checked 2026-10-31).
-- `evals/wp0_v040/e2e_rerun.py` L377 reads the GGUF manifest from `/mnt/c/Users/<user>/.ollama/...`. Elsewhere the layer check is skipped without a word. The tag digest check still runs.
+- Fixed in `33a4f05` (another session, 2026-10-31): `evals/wp0_v040/relaunch_042.sh` and `relaunch_041.sh` no longer name a session folder or a user path, and `e2e_rerun.py` finds the Ollama manifest through `OLLAMA_MODELS` or the Windows profile, and fails if it cannot read it. The kit still does not call the relaunch scripts. They copy the checkout's working-tree WP0 scripts into each clone, so uncommitted edits would run, and they start lanes side by side. The kit runs the committed scripts, one lane at a time, with the same lane settings.
 - `evals/run_model_full1100.sh`, `run_model_scaffold_nothink.sh`, `run_gemma_complement.sh`, `run_model_scaffold_thinking.sh`, `run_scaffold_thinking_ablation.sh` and `verify_empty_guard.sh` default `BASE_URL` to the LAN address `192.168.x.x`, which WSL in mirrored mode cannot reach. `55_` sets `BASE_URL` to 127.0.0.1. `evals/gpu_guard.sh` names that address in a comment.
 - `hermes/sandbox_redteam.py` sets `HOME = "/home/<user>"`, and `hermes/analyze_stage1.py` matches `/home/<user>` in its patterns (`hermes/REPRODUCE.md`, section 6, lists them for stripping).
 - `results/v042/MANIFEST.json` (`not_committed.kept_at`) and the committed result files' provenance (argv, `bear_path`, `WP0_*` paths) record `/home/<user>/...`.
@@ -129,4 +128,5 @@ Nothing was run to write this kit. Each script passed `bash -n` and `--dry-run`.
 - WP2/WP6 stores are filled from empty in one sequence for the first time (the October stores grew over several runs and settings). The Qwen3-0.6B ToolBench store of October had unrecorded batch settings. Yours records them.
 - The WP5 Nemotron rows run live on 0.4.2 for the first time.
 - The batch-8 Qwen3-4B lane must run out of memory on the long ToolBench texts as it did in October. If it does not, `20_` clears the three list markers so the batch-2 lane remakes them, and notes it.
+- `e2e_rerun.py` now fails when it cannot read the Ollama manifest. Inside the `50_` service it finds it through `cmd.exe` and `wslpath`. If that fails there, set `OLLAMA_MODELS` (the kit passes it to the service).
 - The Qwen3-4B mand-only step (`20_`, part mandonly) and the derive scripts that import BEAR or eval code (`metatool_split.py`, `e2e_name_collisions.py`, `tool_summary_tokens.py`) have only been compiled. `composer_tests.py` and the new `collect.py` extractors ran on the committed files.

@@ -288,7 +288,7 @@ maybe_launch() {
       REPRO_SGLANG_URL="$REPRO_SGLANG_URL" REPRO_SLICE_MAX_GB="$REPRO_SLICE_MAX_GB" \
       REPRO_GPU_START_MIB="$GPU_START_MIB" REPRO_GPU_STOP_MIB="$GPU_STOP_MIB" \
       REPRO_OLLAMA_ROW_MIB="$OLLAMA_ROW_MIB" REPRO_SKIP_KEEPALIVE_CHECK="${REPRO_SKIP_KEEPALIVE_CHECK:-0}" \
-      REPRO_LOG="$log" REPRO_RECORD="$rec" REPRO_UNIT="$unit" \
+      ${OLLAMA_MODELS:+OLLAMA_MODELS="$OLLAMA_MODELS"}       REPRO_LOG="$log" REPRO_RECORD="$rec" REPRO_UNIT="$unit" \
       bash "$SCRIPT_PATH" --foreground "${ARGS_REST[@]}") \
     || die "could not start the service $unit"
   sleep 2
