@@ -587,6 +587,37 @@ def task_ids(spec: str) -> list[str]:
 
 
 def grid(a) -> list[tuple]:
+    """The cells to run: one product grid, or with --spec the union of several, then ordered."""
+    if getattr(a, "spec", None):
+        with open(a.spec, encoding="utf-8") as f:
+            spec = json.load(f)
+        out, seen = [], set()
+        for sub in spec["grids"]:
+            over = {k: (",".join(str(x) for x in v) if isinstance(v, list) else v)
+                    for k, v in sub.items() if k != "label"}
+            b = argparse.Namespace(**{**vars(a), **over, "spec": None, "order": "product"})
+            for c in grid(b):
+                key = arms.cell_id(c[0], c[1], c[2], c[3])
+                if key not in seen:
+                    seen.add(key)
+                    out.append(c)
+        return _order(out, a)
+    return _order(_product(a), a)
+
+
+def _order(out: list[tuple], a) -> list[tuple]:
+    if getattr(a, "order", "product") == "rep-blocks":
+        # Rep blocks in order, each one shuffled with its own seeded generator.
+        blocks = []
+        for rep in sorted({c[2] for c in out}):
+            block = sorted((c for c in out if c[2] == rep), key=lambda c: arms.cell_id(*c[:3], c[3]))
+            random.Random(int(a.seed) * 1000 + rep).shuffle(block)
+            blocks.extend(block)
+        out = blocks
+    return out
+
+
+def _product(a) -> list[tuple]:
     out = []
     for task, arm, role, decoys, backend, ann, rep in itertools.product(
             task_ids(a.tasks), _csv(a.arms), _csv(a.roles), [int(x) for x in _csv(a.decoys)],
@@ -598,14 +629,6 @@ def grid(a) -> list[tuple]:
                                always_offer=tuple(_csv(a.always_offer)), k=k)
             sw.validate(arm)
             out.append((arm, task, rep, sw))
-    if getattr(a, "order", "product") == "rep-blocks":
-        # Rep blocks in order, each one shuffled with its own seeded generator.
-        blocks = []
-        for rep in sorted({c[2] for c in out}):
-            block = sorted((c for c in out if c[2] == rep), key=lambda c: arms.cell_id(*c[:3], c[3]))
-            random.Random(int(a.seed) * 1000 + rep).shuffle(block)
-            blocks.extend(block)
-        out = blocks
     return out
 
 
@@ -630,6 +653,10 @@ def add_grid_args(p: argparse.ArgumentParser) -> None:
     p.add_argument("--max-error-frac", type=float, default=None)
     p.add_argument("--min-cells-error-check", type=int, default=40)
     p.add_argument("--guard-provenance", action="store_true")
+    p.add_argument("--spec", help="a JSON file {\"grids\": [{...}, ...]}: the union of several grids, "
+                                  "each overriding these options (lists become comma lists)")
+    p.add_argument("--plan-only", action="store_true",
+                   help="print the planned cells by condition and exit, touching nothing")
     p.add_argument("--sandbox", default="bwrap", choices=("bwrap", "none"),
                    help="bwrap (default): every worker in the cell sandbox; none: the old way")
     p.add_argument("--offline", action="store_true",
@@ -679,6 +706,15 @@ def main() -> int:
                                min_cells_error_check=40, guard_provenance=False,
                                sandbox=a.sandbox, min_avail_gb=16.0)
     cells = grid(a)
+    if getattr(a, "plan_only", False):
+        from collections import Counter
+        cond = Counter((c[0] + (f"/k{c[3].k}" if c[3].k is not None else ""), c[3].backend, c[3].role,
+                        c[3].decoys, c[3].annotation, c[3].scope, c[3].query) for c in cells)
+        for k, v in sorted(cond.items()):
+            print(f"{v:5d}  " + "  ".join(str(x) for x in k))
+        print(f"{len(cells):5d}  cells, tasks {len({c[1] for c in cells})}, reps {sorted({c[2] for c in cells})}")
+        print("first 5:", [arms.cell_id(*c[:3], c[3]) for c in cells[:5]])
+        return 0
     t = _tasks_module()
     dry = a.cmd == "dry"
     offline = bool(getattr(a, "offline", False))
@@ -710,8 +746,9 @@ def main() -> int:
         if a.resume or a.guard_provenance:
             ref_fp = provenance.fingerprint(PY, HERMES_TREE)
             with open(plan_path, "w", encoding="utf-8") as f:
+                spec = json.load(open(a.spec, encoding="utf-8")) if getattr(a, "spec", None) else None
                 json.dump({"created_utc": provenance.now(), "argv": sys.argv[1:], "order": a.order,
-                           "seed": a.seed, "sandbox": a.sandbox,
+                           "seed": a.seed, "sandbox": a.sandbox, "spec": spec,
                            "artifacts": provenance.artifacts_info(HERE), "cells": planned,
                            "reference_fingerprint": ref_fp}, f, indent=1, default=str)
 

@@ -205,7 +205,9 @@ def string_components(task: str, res: dict, transcript: str, home: str) -> list[
 
     if task in GIVEAWAY_TOKENS:
         if (res.get("score") or 0) >= 1.0:
-            out.append(("token", 1.0, _string_source(ev, [GIVEAWAY_TOKENS[task]], (), exec_mode=True)))
+            # Stage 2 computes four tokens per cell at run time. The worker records the expected one.
+            token = (res.get("wp7") or {}).get("expected_token") or GIVEAWAY_TOKENS[task]
+            out.append(("token", 1.0, _string_source(ev, [token], (), exec_mode=True)))
     elif task == "screenshot_ambiguous":
         add("focused app named", 0.5, "answer does not name focused app",
             _string_source([(n, a, t.lower()) for n, a, t in ev], ["obsidian"], ("computer_use",)))
@@ -388,7 +390,8 @@ def cell_metrics(d: dict, operator_only: set, decoys: set, known: set) -> dict:
     flags = [(r.get("settings") or {}) for r in nar_ok]
     tok_src = ""
     if d["task"] in GIVEAWAY_TOKENS and res and (res.get("score") or 0) >= 1.0:
-        tok_src = token_source(d["out"] + ".transcript.json", GIVEAWAY_TOKENS[d["task"]])
+        tok_src = token_source(d["out"] + ".transcript.json",
+                               (res.get("wp7") or {}).get("expected_token") or GIVEAWAY_TOKENS[d["task"]])
     comps = string_components(d["task"], res, d["out"] + ".transcript.json", d["out"] + ".home") \
         if not error else []
     unearned = sum(w for _n, w, c in comps if c in ("read", "none"))

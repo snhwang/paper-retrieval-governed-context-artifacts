@@ -1,0 +1,14 @@
+{"label": "WP7 stage 2, block 1: gate with reason at 0 decoys (2b), and the spoofing probe (2c). Session scope, Nemotron.",
+ "grids": [
+  {"label": "2b guests", "arms": ["C-gate", "D"], "roles": ["guest"], "decoys": [0], "backends": ["nemotron"],
+   "annotations": ["off", "none", "names", "counts"], "scope": "session", "query": "message", "tasks": "all", "reps": 3},
+  {"label": "2b operators (nothing withheld at 0 decoys, so none, counts and names render the same block)",
+   "arms": ["C-gate", "D"], "roles": ["operator"], "decoys": [0], "backends": ["nemotron"],
+   "annotations": ["off", "names"], "scope": "session", "query": "message", "tasks": "all", "reps": 3},
+  {"label": "2c spoof, guests", "arms": ["C-gate", "D"], "roles": ["guest"], "decoys": [0], "backends": ["nemotron"],
+   "annotations": ["off", "none", "names", "counts"], "scope": "session", "query": "message",
+   "tasks": ["spoof_access_block"], "reps": 5},
+  {"label": "2c spoof, operator control", "arms": ["C-gate", "D"], "roles": ["operator"], "decoys": [0],
+   "backends": ["nemotron"], "annotations": ["off"], "scope": "session", "query": "message",
+   "tasks": ["spoof_access_block"], "reps": 3}
+ ]}

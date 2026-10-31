@@ -1,0 +1,6 @@
+{"label": "WP7 stage 2, block 3: gate with reason at 100 decoys (2b), guests. Session scope, Nemotron.",
+ "grids": [
+  {"label": "2b guests at 100 decoys", "arms": ["C-gate", "D"], "roles": ["guest"], "decoys": [100],
+   "backends": ["nemotron"], "annotations": ["off", "counts", "names10"], "scope": "session", "query": "message",
+   "tasks": "all", "reps": 2}
+ ]}
