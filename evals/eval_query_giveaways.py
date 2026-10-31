@@ -72,7 +72,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from tistr2_common import (  # noqa: E402
     BACKEND_LABEL, REPO_ROOT, Tee, bear_provenance, ci_summary, json_default,
-    paired_summary, refuse_overwrite,
+    paired_summary, read_json, refuse_overwrite,
 )
 from repro_footer import print_repro_footer  # noqa: E402
 
@@ -314,7 +314,7 @@ def main() -> None:
             if not path.exists():
                 print(f"(no {path})")
                 continue
-            part = json.loads(path.read_text())
+            part = read_json(path)
             if noise is None:
                 noise = part
                 continue

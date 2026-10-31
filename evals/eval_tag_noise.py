@@ -110,8 +110,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from tistr2_common import (  # noqa: E402
     BACKEND_LABEL, REPO_ROOT, CachedEmbedder, EmbeddingStore, Tee, bear_provenance,
     build_retriever, check_bm25_memo, ci_summary, enable_bm25_memo, json_default,
-    make_config, ndcg, paired_summary, record_texts, refuse_overwrite, require_bear_040,
-    store_provenance,
+    make_config, ndcg, paired_summary, read_json, record_texts, refuse_overwrite,
+    require_bear_040, store_provenance,
 )
 import bear  # noqa: E402
 from bear import Context, Corpus  # noqa: E402
@@ -596,7 +596,7 @@ def phase_gatecheck(args) -> None:
     from types import SimpleNamespace
     from bear.scope import passes_gate
     refuse_overwrite(args.output)
-    runs = [json.loads(Path(p).read_text()) for p in (args.compare or []) if Path(p).exists()]
+    runs = [read_json(Path(p)) for p in (args.compare or []) if Path(p).exists()]
     out: dict = {"provenance": bear_provenance(), "benchmarks": {}}
     for bn in args.benchmarks:
         bench = load_bench(bn)

@@ -5,10 +5,14 @@
 #   bash evals/run_qwen_gpu.sh embed    # the GPU steps only
 #   bash evals/run_qwen_gpu.sh run      # the CPU run phases only
 #
-# Start only on the coordinator's go: after WP0's Qwen3-4B lane, before the
-# Ollama rerun. Run from the repo root inside WSL, venv active, best as a
-# transient user service (tist-capped --service). BEAR is the public 0.4.2
-# (tag v0.4.2, 0d0718a).
+# Run by hand from the repo root inside WSL with the evaluation venv active,
+# when the GPU is free of other jobs (the gate below checks). BEAR is the
+# public 0.4.2 (tag v0.4.2, 0d0718a). The 2026-10-31 outputs (results/
+# tag_noise_qwen3-0.6b*, leakage_threat_qwen*, qwen_gpu_v042_job.log) came
+# from an agent validation run of this script. The stores it filled stay in
+# ~/.cache/tist-r2-embeddings, so a second run only re-embeds what is
+# missing. Outputs are never overwritten, so a second run needs QWEN_OUT set
+# to a new directory (created if missing).
 #
 # Precision: both models run in float16 on the GPU, as the existing ToolBench
 # Qwen3-0.6B store was made (TIST_FP16_BACKENDS=qwen3-0.6b, and Qwen3-4B is
@@ -47,9 +51,13 @@ export HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 TOKENIZERS_PARALLELISM=false
 export TIST_FP16_BACKENDS=qwen3-0.6b
 unset TIST_MAX_BATCH TIST_FIXED_BATCH TIST_CHAR_BUDGET
 PY=$(command -v python)
-TC=$HOME/bin/tist-capped
+TC=${TIST_CAPPED:-$HOME/bin/tist-capped}
+[ -x "$TC" ] || { echo "tist-capped not found at $TC (set TIST_CAPPED)"; exit 1; }
 LOCK=$HOME/tist-gpu.lock
-CG=/sys/fs/cgroup$(systemctl --user show tist.slice -p ControlGroup --value)
+CG=/sys/fs/cgroup$(systemctl --user show tist.slice -p ControlGroup --value 2>/dev/null)
+[ -r "$CG/memory.stat" ] || { echo "tist.slice not found (start it with tist-capped once)"; exit 1; }
+OUT=${QWEN_OUT:-results}
+mkdir -p "$OUT"
 SLICE_MAX=$((25 * 1024 * 1024 * 1024))
 SMI=/mnt/c/Windows/System32/nvidia-smi.exe
 
@@ -104,11 +112,11 @@ embed() {
 
 run() {
   cpu_step tagnoise_qwen06 evals/eval_tag_noise.py --phase run --backends qwen3-0.6b --workers 8 \
-    --output results/tag_noise_qwen3-0.6b.json \
-    --log-file results/tag_noise_qwen3-0.6b_output.txt || return
+    --output "$OUT/tag_noise_qwen3-0.6b.json" \
+    --log-file "$OUT/tag_noise_qwen3-0.6b_output.txt" || return
   cpu_step leakage_qwen evals/eval_leakage_threat.py --phase run --backends qwen3-0.6b qwen3-4b \
-    --output results/leakage_threat_qwen.json \
-    --log-file results/leakage_threat_qwen_output.txt
+    --output "$OUT/leakage_threat_qwen.json" \
+    --log-file "$OUT/leakage_threat_qwen_output.txt"
 }
 
 echo "### run_qwen_gpu.sh ${1:-all}, BEAR_SOURCE_SHA ${BEAR_SOURCE_SHA}, start $(date -u +%FT%TZ), card $(card)"

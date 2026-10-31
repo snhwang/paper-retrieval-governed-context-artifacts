@@ -80,6 +80,7 @@ from tistr2_common import (  # noqa: E402
     NEMOTRON_URL, REPO_ROOT, Tee, bear_provenance, ci_summary, fmt, fmt_delta,
     json_default, ndcg, paired_summary, prf, refuse_overwrite, require_bear_040,
 )
+import bear  # noqa: E402
 from bear import Config, Context, Corpus, EmbeddingBackend, Retriever  # noqa: E402
 from bear.remote_embedder import RemoteEmbedder  # noqa: E402
 from bear.retriever import Embedder  # noqa: E402
@@ -314,6 +315,13 @@ def run_encoder(corpus_name: str, encoder: str, corpus: Corpus, queries) -> dict
                                                   if q[4] == sp])) for a in arms} for sp in splits}
         out["identical_top5_li_filter_vs_bear_gov"] = int(sum(
             set(x) == set(y) for x, y in zip(lists["li_filter"], lists["bear_gov"])))
+    out["embedding"] = {
+        "encoder": encoder,
+        "llama_index_embed_batch_size": getattr(em, "embed_batch_size", None),
+        "bear_embedder_batching": ("bear.retriever.Embedder.embed: one batch for 64 or fewer "
+                                   "texts, else batches of 32 (identical in BEAR 0.4.0 and 0.4.2)"
+                                   if encoder == "bge" else "RemoteEmbedder, batch_size 64"),
+        "device": "cpu" if encoder == "bge" else "service"}
     out["elapsed_s"] = round(time.time() - t0, 1)
     return out
 
@@ -353,7 +361,7 @@ def main() -> None:
         t0 = time.time()
         corpus, queries = load(args.corpus)
         s = SETTINGS[args.corpus]
-        print(f"=== Metadata filter + rules (LlamaIndex {lic.__version__}) vs BEAR 0.4.0: "
+        print(f"=== Metadata filter + rules (LlamaIndex {lic.__version__}) vs BEAR {bear.__version__}: "
               f"{args.corpus} ===")
         print(f"{len(corpus)} items, {len(queries)} queries, k={s['k']}, BEAR priority weight "
               f"{s['pw']}, theta {s['theta']}, mandatory {s['mandatory']}")

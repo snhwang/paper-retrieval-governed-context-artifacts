@@ -772,6 +772,16 @@ class Tee:
         return getattr(self._streams[0], name)
 
 
+def read_json(path: Path):
+    """A result file, plain or gzipped (the large tag-noise files are committed as .json.gz)."""
+    import gzip
+    path = Path(path)
+    if path.suffix == ".gz":
+        with gzip.open(path, "rt", encoding="utf-8") as f:
+            return json.load(f)
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
 def refuse_overwrite(*paths: Path) -> None:
     """Stop before clobbering a result file that already exists."""
     for p in paths:

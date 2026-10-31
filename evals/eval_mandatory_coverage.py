@@ -66,6 +66,7 @@ from tistr2_common import (  # noqa: E402
     fmt, fmt_delta, json_default, make_config, mcnemar_summary, paired_summary,
     record_texts, refuse_overwrite, require_bear_040,
 )
+import bear  # noqa: E402
 from bear import Context, Corpus  # noqa: E402
 from bear.models import ScopeCondition  # noqa: E402
 from repro_footer import print_repro_footer  # noqa: E402
@@ -309,7 +310,7 @@ def main() -> None:
     sys.stdout = Tee(orig, log)
     try:
         t0 = time.time()
-        print("=== Mandatory-injection coverage (WP2), Pet Sim, BEAR 0.4.0 ===")
+        print(f"=== Mandatory-injection coverage (WP2), Pet Sim, BEAR {bear.__version__} ===")
         print(f"Corpus {len(base)} instructions. Safety rules {safety_ids}.")
         print(f"Queries {len(queries)}. k={K}, theta={THETA}, priority weight {PRIORITY_WEIGHT}, "
               f"mandatory {MANDATORY}. Soft tag {SOFT_TAG!r} carried by no query.")

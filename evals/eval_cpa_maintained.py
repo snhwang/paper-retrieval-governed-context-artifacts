@@ -61,6 +61,7 @@ from tistr2_common import (  # noqa: E402
     REPO_ROOT, Tee, bear_provenance, ci_summary, fmt, fmt_delta, json_default,
     mcnemar_summary, paired_summary, refuse_overwrite, require_bear_040,
 )
+import bear  # noqa: E402
 from bear import Config, EmbeddingBackend, Instruction, Retriever, ScoredInstruction  # noqa: E402
 from bear.retriever import Embedder  # noqa: E402
 from eval_baseline_comparison import (  # noqa: E402
@@ -284,7 +285,7 @@ def main() -> None:
     sys.stdout = Tee(orig, log)
     try:
         t0 = time.time()
-        print("=== Maintained CPA vs stale CPA vs BEAR on novel contexts (WP5), BEAR 0.4.0 ===")
+        print(f"=== Maintained CPA vs stale CPA vs BEAR on novel contexts (WP5), BEAR {bear.__version__} ===")
         print(f"BGE-base on the CPU, k={TOP_K}, theta {THRESHOLD}, priority weight {PRIORITY_WEIGHT}, "
               f"mandatory safety+global. Scale points {args.scale_points}.")
         embedder = Embedder(model_name=EMBEDDING_MODEL, dim=768,
