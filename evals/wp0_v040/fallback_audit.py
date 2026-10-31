@@ -346,6 +346,35 @@ def per_backend(pub: Path, stage: Path, prefix: str, step: str, table: str, key:
         checked(rel, n, table, "0.1.10 with model loads refused (fallback), same script and backend")
 
 
+def itr_rows(pub: Path, stage: Path):
+    """The ITR library row of every decomposed file, the BM25 one included:
+    BEAR's backend does not matter there, ITR embeds with its own encoder and
+    falls back to SHA-256 embeddings when that encoder does not load. The
+    comparator is the ITR row of the forced-fallback rerun (2026-10-31: the
+    published BM25 file was missed before, since BM25 itself loads no model)."""
+    fb = stage_file(stage, "v0110F", "fb_decomposed", "governance_decomposed_bge.json")
+    if fb is None:
+        return
+    F = next(r for r in jl(fb)["rows"] if r["condition"] == "itr_offshelf")
+    for rel in sorted(x for x in PUBLISHED if x.startswith("results/governance_decomposed") and x.endswith(".json")):
+        d = jl(pub / rel)
+        subs = [(d.get("backend"), d)] if isinstance(d, dict) and "rows" in d else \
+            [(k, v) for k, v in d.items() if isinstance(v, dict) and "rows" in v]
+        n = 0
+        for b, sub in subs:
+            r = next((x for x in sub["rows"] if x["condition"] == "itr_offshelf"), None)
+            if r is None:
+                continue
+            n += 1
+            if all(abs(r[k] - F[k]) < 1e-12 for k in ("mean_f1", "ci_lo", "ci_hi")):
+                note(rel, "tab:decomposed-ablation (ITR row)", f"{b} / itr_offshelf",
+                     "value and CI equal to the ITR library's fallback", r["mean_f1"], F["mean_f1"],
+                     "v0110F fb_decomposed ITR row (ITR encoder refused)")
+        f = FILES.setdefault(rel, {"table": "tab:decomposed-ablation", "cells_checked": 0, "comparators": set()})
+        f["cells_checked"] += n
+        f["comparators"].add("ITR row of the forced-fallback rerun")
+
+
 def aggregates(pub: Path, stage: Path):
     """alpha_sweep_all.json and governance_decomposed(_all).json repeat the
     per-backend files; check that they agree with them."""
@@ -586,6 +615,7 @@ def main() -> None:
                                                         "tab:decomposed-ablation", "condition")),
                      ("alpha", lambda: per_backend(pub, stage, "alpha_sweep", "fb_alpha", "tab:alpha-sweep", "alpha")),
                      ("aggregates", lambda: aggregates(pub, stage)),
+                     ("itr_rows", lambda: itr_rows(pub, stage)),
                      ("cs", lambda: cs(pub, stage)), ("tool_scaling", lambda: tool_scaling(pub, stage)),
                      ("transfer", lambda: transfer(pub, stage)), ("reranker", lambda: reranker(pub, lists))):
         try:

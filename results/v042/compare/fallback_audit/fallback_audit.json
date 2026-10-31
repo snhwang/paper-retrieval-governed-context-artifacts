@@ -62,6 +62,26 @@
    "replaced_by_042": null
   },
   {
+   "file": "results/governance_decomposed_all.json",
+   "table": "tab:decomposed-ablation (ITR row)",
+   "cell": "bm25 / itr_offshelf",
+   "match": "value and CI equal to the ITR library's fallback",
+   "dense": 0.21117063492063493,
+   "hash": 0.21117063492063493,
+   "comparator": "v0110F fb_decomposed ITR row (ITR encoder refused)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/governance_decomposed_bm25.json",
+   "table": "tab:decomposed-ablation (ITR row)",
+   "cell": "bm25 / itr_offshelf",
+   "match": "value and CI equal to the ITR library's fallback",
+   "dense": 0.21117063492063493,
+   "hash": 0.21117063492063493,
+   "comparator": "v0110F fb_decomposed ITR row (ITR encoder refused)",
+   "replaced_by_042": null
+  },
+  {
    "file": "results/scalability_results.csv",
    "table": "scalability (text)",
    "cell": "N=10",
@@ -1741,36 +1761,40 @@
   },
   "results/governance_decomposed_bge.json": {
    "table": "tab:decomposed-ablation",
-   "cells_checked": 7,
+   "cells_checked": 8,
    "comparators": [
-    "0.1.10 with model loads refused (fallback), same script and backend"
+    "0.1.10 with model loads refused (fallback), same script and backend",
+    "ITR row of the forced-fallback rerun"
    ],
    "flagged": 0,
    "constant_array_matches": 0
   },
   "results/governance_decomposed_bge-m3.json": {
    "table": "tab:decomposed-ablation",
-   "cells_checked": 7,
+   "cells_checked": 8,
    "comparators": [
-    "0.1.10 with model loads refused (fallback), same script and backend"
+    "0.1.10 with model loads refused (fallback), same script and backend",
+    "ITR row of the forced-fallback rerun"
    ],
    "flagged": 0,
    "constant_array_matches": 0
   },
   "results/governance_decomposed_qwen3.json": {
    "table": "tab:decomposed-ablation",
-   "cells_checked": 7,
+   "cells_checked": 8,
    "comparators": [
-    "0.1.10 with model loads refused (fallback), same script and backend"
+    "0.1.10 with model loads refused (fallback), same script and backend",
+    "ITR row of the forced-fallback rerun"
    ],
    "flagged": 0,
    "constant_array_matches": 0
   },
   "results/governance_decomposed_qwen3-4b.json": {
    "table": "tab:decomposed-ablation",
-   "cells_checked": 7,
+   "cells_checked": 8,
    "comparators": [
-    "0.1.10 with model loads refused (fallback), same script and backend"
+    "0.1.10 with model loads refused (fallback), same script and backend",
+    "ITR row of the forced-fallback rerun"
    ],
    "flagged": 0,
    "constant_array_matches": 0
@@ -1822,18 +1846,29 @@
   },
   "results/governance_decomposed_all.json": {
    "table": "tab:decomposed-ablation",
-   "cells_checked": 5,
+   "cells_checked": 10,
    "comparators": [
+    "ITR row of the forced-fallback rerun",
     "the per-backend files (consistency only)"
    ],
-   "flagged": 0,
+   "flagged": 1,
    "constant_array_matches": 0
   },
   "results/governance_decomposed.json": {
    "table": "tab:decomposed-ablation",
+   "cells_checked": 2,
+   "comparators": [
+    "ITR row of the forced-fallback rerun",
+    "the per-backend files (consistency only)"
+   ],
+   "flagged": 1,
+   "constant_array_matches": 0
+  },
+  "results/governance_decomposed_bm25.json": {
+   "table": "tab:decomposed-ablation",
    "cells_checked": 1,
    "comparators": [
-    "the per-backend files (consistency only)"
+    "ITR row of the forced-fallback rerun"
    ],
    "flagged": 1,
    "constant_array_matches": 0
@@ -1962,7 +1997,6 @@
   "results/composite_scale_audit.json",
   "results/g4_complement_indices.json",
   "results/g4_done_indices.json",
-  "results/governance_decomposed_bm25.json",
   "results/mandatory_injection.json",
   "results/petsim_fix_diagnosis.json",
   "results/scope_excluded_safety.json",

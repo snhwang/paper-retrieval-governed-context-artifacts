@@ -4515,12 +4515,12 @@
   {
    "step": "compare",
    "path": "results/v042/compare/fallback_audit/fallback_audit.json",
-   "sha256": "613df33a091623a3ad2ef1dda5500a67c5cc1170174ec23170943c5db5311abf"
+   "sha256": "d371392ef0293b677560aa110f97455eb43fa1ada4e44085da1bdfa51655fee7"
   },
   {
    "step": "compare",
    "path": "results/v042/compare/fallback_audit/fallback_audit.md",
-   "sha256": "2392c3b8396cdc98a01f638cb3062ac39ec49ea14d0af081580c587db70b65e5"
+   "sha256": "3b9274747b33e176334f43836ca60b11a0e14ee8fe1fd8b34ca508f193486e54"
   },
   {
    "step": "mandatory",
@@ -4735,7 +4735,7 @@
   {
    "step": "report",
    "path": "results/v042/report/wp0-report.md",
-   "sha256": "4102b5c762434195cb8a27f05ef0479f525e74569e461c76f98156a82246bf13"
+   "sha256": "289e6a4f93f5f5ca872dffc1e26e0cf1ffa92023fa0eafba2e854c4e82a3eac8"
   }
  ],
  "steps": {

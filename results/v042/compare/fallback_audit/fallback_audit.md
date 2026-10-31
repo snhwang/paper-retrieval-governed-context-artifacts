@@ -17,12 +17,13 @@
 | results/framework_baseline_petsim.json | tab:reranker | 1 | backend_comparison.json Hash (Full governance, k=10) | none found |
 | results/framework_baseline_toolbench.json | tab:reranker | 2 | Table 3 hash per-query arrays (same first stage on ToolBench) | none found |
 | results/governance_ablation.json | tab:governance-ablation, tab:token-compare | 125 | the Hash cells; the 0.1.10 fallback run | none found |
-| results/governance_decomposed.json | tab:decomposed-ablation | 1 | the per-backend files (consistency only) | stale June BGE run (Full 0.780), not used by the table (0.653 comes from governance_decomposed_bge.json); differs from the fallback (0.841). Not a fallback |
-| results/governance_decomposed_all.json | tab:decomposed-ablation | 5 | the per-backend files (consistency only) | none found |
-| results/governance_decomposed_bge-m3.json | tab:decomposed-ablation | 7 | 0.1.10 with model loads refused (fallback), same script and backend | none found |
-| results/governance_decomposed_bge.json | tab:decomposed-ablation | 7 | 0.1.10 with model loads refused (fallback), same script and backend | none found |
-| results/governance_decomposed_qwen3-4b.json | tab:decomposed-ablation | 7 | 0.1.10 with model loads refused (fallback), same script and backend | none found |
-| results/governance_decomposed_qwen3.json | tab:decomposed-ablation | 7 | 0.1.10 with model loads refused (fallback), same script and backend | none found |
+| results/governance_decomposed.json | tab:decomposed-ablation | 2 | ITR row of the forced-fallback rerun; the per-backend files (consistency only) | stale June BGE run (Full 0.780), not used by the table (0.653 comes from governance_decomposed_bge.json); differs from the fallback (0.841). Not a fallback |
+| results/governance_decomposed_all.json | tab:decomposed-ablation | 10 | ITR row of the forced-fallback rerun; the per-backend files (consistency only) | FALLBACK (ITR library): the bm25 entry's ITR row equals ITR's fallback (0.2112); the other entries are consistent with their per-backend files |
+| results/governance_decomposed_bge-m3.json | tab:decomposed-ablation | 8 | 0.1.10 with model loads refused (fallback), same script and backend; ITR row of the forced-fallback rerun | none found |
+| results/governance_decomposed_bge.json | tab:decomposed-ablation | 8 | 0.1.10 with model loads refused (fallback), same script and backend; ITR row of the forced-fallback rerun | none found |
+| results/governance_decomposed_bm25.json | tab:decomposed-ablation | 1 | ITR row of the forced-fallback rerun | FALLBACK (ITR library): the ITR row, 0.2112 [0.1863, 0.2371], equals ITR's own fallback exactly. It replaced the real 0.182 in 2acea02 (Aug 4). The manuscript prints 0.182. This run's dense-lane files give 0.182 |
+| results/governance_decomposed_qwen3-4b.json | tab:decomposed-ablation | 8 | 0.1.10 with model loads refused (fallback), same script and backend; ITR row of the forced-fallback rerun | none found |
+| results/governance_decomposed_qwen3.json | tab:decomposed-ablation | 8 | 0.1.10 with model loads refused (fallback), same script and backend; ITR row of the forced-fallback rerun | none found |
 | results/reranker_composition_petsim.json | tab:reranker | 1 | backend_comparison.json Hash (Full governance, k=10) | none found |
 | results/reranker_composition_toolbench.json | tab:reranker | 2 | Table 3 hash per-query arrays (same first stage on ToolBench) | none found |
 | results/scalability_results.csv | scalability (text) | 42 | 0.1.10 with model loads refused (fallback), same script | all BEAR columns equal the fallback, uninformative: they also equal real BGE on 0.4.2 (recall 1.0, tokens set by the gate); the published N=10 build took 70 s, a model load |
@@ -73,7 +74,6 @@ Published result files not compared, and why:
 - results/composite_scale_audit.json
 - results/g4_complement_indices.json
 - results/g4_done_indices.json
-- results/governance_decomposed_bm25.json
 - results/mandatory_injection.json
 - results/petsim_fix_diagnosis.json
 - results/scope_excluded_safety.json

@@ -10,6 +10,8 @@ VERDICT = {
     "results/scalability_results.csv": "all BEAR columns equal the fallback, uninformative: they also equal real BGE on 0.4.2 (recall 1.0, tokens set by the gate); the published N=10 build took 70 s, a model load",
     "results/eval_tool_scaling_output.txt": "all 38 cells equal the fallback, uninformative: they also equal real BGE on 0.4.2 (gate decides, threshold 0)",
     "results/governance_decomposed.json": "stale June BGE run (Full 0.780), not used by the table (0.653 comes from governance_decomposed_bge.json); differs from the fallback (0.841). Not a fallback",
+    "results/governance_decomposed_bm25.json": "FALLBACK (ITR library): the ITR row, 0.2112 [0.1863, 0.2371], equals ITR's own fallback exactly. It replaced the real 0.182 in 2acea02 (Aug 4). The manuscript prints 0.182. This run's dense-lane files give 0.182",
+    "results/governance_decomposed_all.json": "FALLBACK (ITR library): the bm25 entry's ITR row equals ITR's fallback (0.2112); the other entries are consistent with their per-backend files",
     "results/toolbench_react_metrics_gemma4-31b-bear_partial.json": "exploratory partial (Jul 16), not in Table 9. bear_single 0.005 is empty output (max_tokens 100 before the fix), not retrieval: bear_react on the same lists is 0.820",
 }
 for rel, v in sorted(d["files"].items()):

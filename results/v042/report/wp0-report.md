@@ -106,7 +106,15 @@ The audit (`evals/wp0_v040/fallback_audit.py`, full table in `results/v042/compa
 - this run's own control logs on 0.1.10
 
 Result:
-- **One real case:** the Qwen3-4B alpha tail (Summary, item 3). The 0.4.2 run replaces it.
+- **One real case in BEAR:** the Qwen3-4B alpha tail (Summary, item 3). The 0.4.2 run replaces it.
+- **One real case in the ITR library (added 2026-10-31).** The ITR library has its own silent fallback: when its encoder does not load, it logs "Using fallback embeddings" and embeds with SHA-256 bytes.
+  - In `results/governance_decomposed_bm25.json`, and in the bm25 entry of `governance_decomposed_all.json`, the ITR row is 0.2112 [0.1863, 0.2371]. That equals ITR's fallback exactly.
+  - Commit `2acea02` (Aug 4) replaced the real 0.182 [0.162, 0.203] with it and called it a "bm25-pass ITR quirk".
+  - The manuscript prints 0.182 for every column, which is the real value.
+  - In this run, every dense-lane file gives 0.182 with no fallback warning (`decomposed_dense`, `decomposed_q4b`, their 0.1.10 controls, and the BGE switch runs).
+  - The BM25-lane files of this run show 0.2112, because local models were refused in that lane. Those rows are the fallback too: `v042/decomposed_bm25`, `v0110/decomposed_bm25_v0110`, and `v042L/decomposed_bm25_L*`. Ignore their ITR row.
+  - The first audit missed the published case, because it skipped the BM25 file on the grounds that BM25 loads no model.
+  - Every other published ITR value is real: the decomposed dense files (0.182), ITR-standalone and ITR-hybrid in `backend_comparison.json`, and the ITR column of `governance_ablation.json`. Each differs from ITR's fallback, apart from ITR-hybrid's paraphrase cell (see below).
 - **Four matches carry no information:**
   - ITR-hybrid paraphrase F1, where every governed dense backend gives the same 0.637
   - `scalability_results.csv` and `eval_tool_scaling_output.txt`, where real BGE on 0.4.2 gives the same values
@@ -182,6 +190,24 @@ Result:
 | MetaTool+QueryTags-top5 | BEAR+Nemotron (gov) | 0.703 [0.697, 0.709] | 0.612 [0.606, 0.618] | −0.101 (d = −0.21, p = 1.9e-207) |
 | MetaTool+QueryTags-top5 | Nemotron (no gov) | 0.804 [0.799, 0.809] | 0.690 [0.684, 0.695] | |
 
+- **Why the ungoverned row is 0.815 in Table 5 but 0.804 in Table 6.** Only the embedded tool text differs; this is by design, not a defect. In both tables:
+  - the 21,111 queries are identical (same text, gold set and order)
+  - the ungoverned query text carries no tags
+  - the threshold is the same, and it never cuts the ungoverned lists (every ungoverned Nemotron k = 50 list holds all 50)
+
+  The difference is the tag header BEAR puts on each tool's text. Base MetaTool writes the tool's own name (`[tags:timeport]`), and the tagged corpus of Table 6 writes the LLM-generated tags (`[tags:entertainment,education]`). Every backend moves the same way, Table 6 minus Table 5, recall@5 [95% CI]:
+
+  | Backend | Δ |
+  |---|---|
+  | BGE | +0.0006 [−0.0023, +0.0035] |
+  | Qwen3-0.6B | −0.0012 [−0.0028, +0.0004] |
+  | BM25 | −0.0017 |
+  | BGE-M3 | −0.0037 |
+  | Qwen3-4B | −0.0038 (published −0.0037) |
+  | Hash | −0.0063 |
+  | Nemotron | −0.0105 [−0.0132, −0.0078] |
+
+  Nemotron reacts most to the header, but in the same direction as the others. The manuscript could say that Table 6's ungoverned reference embeds the tagged tool texts, so it is not the same condition as Table 5's.
 - On base MetaTool the fixed threshold of 0.15 leaves 6,670 governed queries with fewer than 5 results. Nemotron's cosine scale is narrow: top-1 similarity has a median of 0.235 and a 5th percentile of 0.139.
 - At threshold 0, governed recall is 0.802 and no query returns fewer than 5 (`diag_nemotron_threshold.json`). The threshold was left as published for comparability.
 
