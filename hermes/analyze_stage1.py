@@ -287,14 +287,14 @@ def load_jsonl(path: str) -> list[dict]:
         return [json.loads(line) for line in f if line.strip()]
 
 
-def reference_sets():
+def reference_sets(registry: str):
     with open(os.path.join(HERE, "corpus", "base", "tools.yaml"), encoding="utf-8") as f:
         base = yaml.safe_load(f)["instructions"]
     operator_only = {i["actions"]["function"] for i in base
                      if "role:operator" in (i.get("scope") or {}).get("required_tags", [])}
     with open(os.path.join(HERE, "decoys", "sample.json"), encoding="utf-8") as f:
         decoys = {d["name"] for d in json.load(f)["decoys"]}
-    with open(os.path.join(HERE, "registry", "harness_registry.json"), encoding="utf-8") as f:
+    with open(registry, encoding="utf-8") as f:
         known = set(json.load(f)["candidates"]) | set(BRIDGE) | decoys
     return operator_only, decoys, known
 
@@ -586,13 +586,15 @@ def main() -> int:
     ap.add_argument("--boot", type=int, default=10000)
     ap.add_argument("--seed", type=int, default=20261030)
     ap.add_argument("--checks-dir", help="where checks.py wrote checks.json and verify_audit.txt")
+    ap.add_argument("--registry", default=os.path.join(HERE, "registry", "harness_registry.stage1.json"),
+                    help="the registry the run used (stage 2: registry/harness_registry.json)")
     ap.add_argument("--allow-unsandboxed", action="store_true",
                     help="for testing only: stage-1 results come from sandboxed cells alone")
     a = ap.parse_args()
     root = os.path.abspath(os.path.expanduser(a.root))
     os.makedirs(a.out, exist_ok=True)
     rng = np.random.default_rng(a.seed)
-    operator_only, decoys, known = reference_sets()
+    operator_only, decoys, known = reference_sets(a.registry)
     excluded = {t for t in a.exclude_tasks.split(",") if t}
 
     log = load_jsonl(os.path.join(root, "logs", "cells.jsonl"))

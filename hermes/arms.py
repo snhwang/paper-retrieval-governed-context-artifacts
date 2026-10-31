@@ -53,7 +53,16 @@ ARMS: dict[str, dict[str, Any]] = {
 ROLES = ("operator", "guest")
 DECOY_SIZES = (0, 100, 300)
 BACKENDS = {"nemotron": f"remote:{EMBED_URL}", "bm25": "bm25"}
-ANNOTATIONS = ("off", "none", "names", "counts")
+ANNOTATIONS = ("off", "none", "names", "counts")  # plus "names<N>": names with withheld_names_max N
+
+
+def annotation_parts(level: str) -> tuple[bool, str, int | None]:
+    """(annotate_tools, withheld_disclosure, withheld_names_max) for an annotation level."""
+    if level == "off":
+        return False, "counts", None
+    if level.startswith("names") and level[5:].isdigit():
+        return True, "names", int(level[5:])
+    return True, level, None
 SCOPES = ("turn", "session")
 QUERIES = ("message", "first_plus_message")
 
@@ -79,8 +88,9 @@ class Switches:
             raise ValueError(f"decoys must be one of {DECOY_SIZES}")
         if self.backend not in BACKENDS:
             raise ValueError(f"backend must be one of {list(BACKENDS)}")
-        if self.annotation not in ANNOTATIONS:
-            raise ValueError(f"annotation must be one of {ANNOTATIONS}")
+        if self.annotation not in ANNOTATIONS and not (
+                self.annotation.startswith("names") and self.annotation[5:].isdigit()):
+            raise ValueError(f"annotation must be one of {ANNOTATIONS} or names<N>")
         if self.scope not in SCOPES:
             raise ValueError(f"scope must be one of {SCOPES}")
         if self.query not in QUERIES:
@@ -140,10 +150,12 @@ def bear_settings(arm: str, sw: Switches, *, corpus_dir: str, audit_path: str,
         "narrow_scope": sw.scope,
         "narrow_query": sw.query,
         "always_offer": list(sw.always_offer),
-        "annotate_tools": sw.annotation != "off",
-        "withheld_disclosure": "counts" if sw.annotation == "off" else sw.annotation,
         "registry_toolsets": registry_toolsets(sw.decoys),
     }
+    annotate, disclosure, names_max = annotation_parts(sw.annotation)
+    settings.update({"annotate_tools": annotate, "withheld_disclosure": disclosure})
+    if names_max is not None:
+        settings["withheld_names_max"] = names_max
     if sw.priority_weight != "default":
         settings["narrow_priority_weight"] = float(sw.priority_weight)
     return settings

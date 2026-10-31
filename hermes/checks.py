@@ -101,6 +101,10 @@ def main() -> int:
     ap.add_argument("--out-dir")
     ap.add_argument("--jobs", type=int, default=1,
                     help="run the per-cell verify-audit calls this many at a time")
+    ap.add_argument("--expect-sources-removed", action="store_true",
+                    help="stage 2: require the worker's 'staged sources removed' line in every cell")
+    ap.add_argument("--registry", default=os.path.join(HERE, "registry", "harness_registry.json"),
+                    help="the registry the run used (stage 1: registry/harness_registry.stage1.json)")
     a = ap.parse_args()
     root = os.path.abspath(os.path.expanduser(a.root))
     out_dir = a.out_dir or root
@@ -252,7 +256,7 @@ def main() -> int:
             ck.check(cell, "catalog.B_registry", all(r.get("catalog_source") == "registry"
                                                     for r in comp) and bool(comp),
                      str(row["catalog_source"]) + " " + str([r.get("registry_error") for r in comp]))
-            with open(os.path.join(HERE, "registry", "harness_registry.json")) as f:
+            with open(a.registry) as f:
                 reg_tools = {t["name"] for t in json.load(f)["tools"]}
             for r in comp:
                 before = set(r.get("tools_before") or [])
@@ -292,8 +296,7 @@ def main() -> int:
                      f"sent={r.get('sent')}/{want_sent}")
         # metrics: the worker's tool counts agree with the gate's decisions. Bridge lookups are
         # not in tool_counts, and a name no registry has (an invented tool) gets no decision.
-        known = set(json.load(open(os.path.join(HERE, "registry", "harness_registry.json")))["candidates"]) \
-            | in_scope | out_scope
+        known = set(json.load(open(a.registry))["candidates"]) | in_scope | out_scope
         dec_counts = Counter(r.get("tool") for r in dec if r.get("tool") not in BRIDGE)
         tc = Counter({k: v for k, v in (res.get("tool_counts") or {}).items() if k in known})
         invented = sorted(k for k in (res.get("tool_counts") or {}) if k not in known)
@@ -309,6 +312,17 @@ def main() -> int:
         if sw["annotation"] == "off":
             ck.check(cell, "annotation.off", all(not r.get("annotation") and not r.get("annotation_placed")
                                                  for r in nar), "")
+        else:
+            ok_nar = [r for r in nar if r.get("status") == "ok"]
+            want = "names" if sw["annotation"].startswith("names") else sw["annotation"]
+            bad = [r.get("narrowing_id") for r in ok_nar
+                   if not r.get("annotation") or not r.get("annotation_placed") or r.get("disclosure") != want]
+            ck.check(cell, "annotation.on_placed", bool(ok_nar) and not bad,
+                     f"{len(ok_nar)} records, {len(bad)} without the annotation or with another disclosure")
+        # stage 2: the staged worker and grader sources were removed before the agent started
+        if a.expect_sources_removed:
+            ck.check(cell, "run.sources_removed", "WP7: staged sources removed: True" in stderr,
+                     stderr[-200:] if "WP7: staged sources removed" not in stderr else "")
         # verify
         rc, text = va_results.get(cell) or verify_audit(d["audit"])
         va_text.append(f"== {cell} (rc={rc})\n{text}")

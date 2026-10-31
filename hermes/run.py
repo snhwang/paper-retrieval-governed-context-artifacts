@@ -66,11 +66,26 @@ HARNESS = os.path.join(HERMES_TREE, "evals", "core_tool_deferral")
 WORKER = os.path.join(HERE, "worker", "worker_local.py")
 PY = sys.executable
 HOME_DIR = os.path.expanduser("~")
-# Files the worker reads from this directory. Under the sandbox they are copied into the run
-# (materials/), checked by sha256, so the sandbox needs no view of /mnt.
-MATERIALS = ("worker/worker_local.py", "worker/wp7_tasks.py", "decoys/sample.json",
-             "decoys/wp7_decoys/plugin.yaml", "decoys/wp7_decoys/__init__.py",
-             "sandbox_bridge.py", "sandbox_redteam.py")
+# Files a cell needs, copied into the run (materials/) with a sha256 manifest, so the sandbox
+# needs no view of /mnt. The worker, the task registry and the graders (the harness's tasks.py
+# and sandbox.py, toolperf's ab_eval.py) hold the planted answers. They are never mounted in a
+# cell. Each cell gets its own copy in a private dir, which the worker deletes once it has
+# loaded them (worker edit E14). Only the decoy plugin and the two sandbox scripts are mounted.
+MATERIALS = {
+    "worker/worker_local.py": os.path.join(HERE, "worker", "worker_local.py"),
+    "worker/wp7_tasks.py": os.path.join(HERE, "worker", "wp7_tasks.py"),
+    "harness/tasks.py": os.path.join(HARNESS, "tasks.py"),
+    "harness/sandbox.py": os.path.join(HARNESS, "sandbox.py"),
+    "toolperf/ab_eval.py": os.path.join(HERMES_TREE, "evals", "toolperf_abeval", "ab_eval.py"),
+    "decoys/sample.json": os.path.join(HERE, "decoys", "sample.json"),
+    "decoys/wp7_decoys/plugin.yaml": os.path.join(HERE, "decoys", "wp7_decoys", "plugin.yaml"),
+    "decoys/wp7_decoys/__init__.py": os.path.join(HERE, "decoys", "wp7_decoys", "__init__.py"),
+    "sandbox_bridge.py": os.path.join(HERE, "sandbox_bridge.py"),
+    "sandbox_redteam.py": os.path.join(HERE, "sandbox_redteam.py"),
+}
+STAGED = ("worker/worker_local.py", "worker/wp7_tasks.py", "harness/tasks.py",
+          "harness/sandbox.py", "toolperf/ab_eval.py")  # per-cell private copies
+MOUNTED = ("decoys", "sandbox_bridge.py", "sandbox_redteam.py")  # read-only in every cell
 BRIDGED_PORTS = (8355, 8360)  # the model server and the embedder, the only reachable ports
 # The sandbox environment is fixed, not copied from the runner, so a cell sees the same
 # environment whether the runner was started from a shell, a systemd scope or a user service.
@@ -154,7 +169,8 @@ def leak_check(cell: str, marker: str, extra_dirs: list[str]) -> list[str]:
     return problems
 
 
-def bwrap_args(*, ro: list[str], rw: list[str], cwd: str, bridge_dir: str) -> list[str]:
+def bwrap_args(*, ro: list[str], rw: list[str], cwd: str, bridge_dir: str | None,
+               hide: list[str] = ()) -> list[str]:
     """The bubblewrap command line every sandboxed cell runs under, in every arm.
 
     Read-only root. A private tmpfs over /tmp, /var/tmp, /run (WSL interop sockets, the
@@ -192,7 +208,11 @@ def bwrap_args(*, ro: list[str], rw: list[str], cwd: str, bridge_dir: str) -> li
         a += ["--ro-bind", p, p]
     for p in rw:
         a += ["--bind", p, p]
-    a += ["--bind", bridge_dir, BRIDGE_IN]  # only the two bridge sockets
+    for p in hide:  # an empty tmpfs over a path inside a bound tree
+        if os.path.isdir(p):
+            a += ["--tmpfs", p]
+    if bridge_dir:  # offline cells (dry builds, the offline red team) get no bridge at all
+        a += ["--bind", bridge_dir, BRIDGE_IN]  # only the two bridge sockets
     a += ["--unshare-pid", "--unshare-ipc", "--unshare-net", "--die-with-parent", "--new-session",
           "--chdir", cwd, "--"]
     return a
@@ -226,7 +246,8 @@ class Bridge:
 
 
 class Run:
-    def __init__(self, root: str, sandbox: str = "bwrap"):
+    def __init__(self, root: str, sandbox: str = "bwrap", offline: bool = False):
+        self.offline = offline  # no bridge: nothing in a cell can reach 8355 or 8360
         self.root = os.path.abspath(os.path.expanduser(root))
         for sub in ("configs", "audit", "results", "logs", "corpus"):
             os.makedirs(os.path.join(self.root, sub), exist_ok=True)
@@ -244,7 +265,7 @@ class Run:
     def stage_materials(self) -> None:
         """Copy the worker's materials into the run, or check an earlier copy is unchanged."""
         man_path = os.path.join(self.materials, "MANIFEST.json")
-        want = {rel: provenance.sha256_file(os.path.join(HERE, rel)) for rel in MATERIALS}
+        want = {rel: provenance.sha256_file(src) for rel, src in MATERIALS.items()}
         if os.path.exists(man_path):
             with open(man_path, encoding="utf-8") as f:
                 have = json.load(f)
@@ -253,12 +274,24 @@ class Run:
                 raise SystemExit("ABORT: materials/ differs from the source files; a run must "
                                  "keep one set of materials")
             return
-        for rel in MATERIALS:
+        for rel, src in MATERIALS.items():
             dst = os.path.join(self.materials, rel)
             os.makedirs(os.path.dirname(dst), exist_ok=True)
-            shutil.copy2(os.path.join(HERE, rel), dst)
+            shutil.copy2(src, dst)
         with open(man_path, "w", encoding="utf-8") as f:
             json.dump(want, f, indent=1)
+
+    def src_dir(self, cell: str) -> str:
+        """The cell's private copy of the worker and graders, removed by the worker (E14)."""
+        return os.path.join(self.cell_dir(cell), ".wp7src")
+
+    def stage_sources(self, cell: str) -> str:
+        d = self.src_dir(cell)
+        for rel in STAGED:
+            dst = os.path.join(d, rel)
+            os.makedirs(os.path.dirname(dst), exist_ok=True)
+            shutil.copy2(os.path.join(self.materials, rel), dst)
+        return d
 
     def log(self, rec: dict) -> None:
         with open(self.log_path, "a", encoding="utf-8") as f:
@@ -343,10 +376,13 @@ class Run:
     def sandbox_env(self, cfg_in: str, sw: arms.Switches, cell: str, dry: bool) -> dict:
         """A scrubbed environment: fixed values plus the worker's own WP7 variables."""
         env = _fixed_env()
+        src = self.src_dir(cell)
         env.update({
             "ABDEFER_BASE_TREE": HERMES_TREE,
             "WP7_ARM_CONFIG": cfg_in,
-            "WP7_HARNESS_DIR": HARNESS,
+            "WP7_SRC_DIR": src,
+            "WP7_HARNESS_DIR": os.path.join(src, "harness"),
+            "WP7_TOOLPERF_PATH": os.path.join(src, "toolperf", "ab_eval.py"),
             "WP7_HERMES_TREE": HERMES_TREE,
             "WP7_DECOYS": str(sw.decoys),
             "WP7_DECOY_PLUGIN": os.path.join(self.materials, "decoys", "wp7_decoys"),
@@ -363,6 +399,13 @@ class Run:
         inside, because a unix socket path may not exceed 107 bytes."""
         import tempfile
         cdir = self.cell_dir(cell)
+        ro = [HERMES_TREE, sys.prefix, _bear_package_dir()] + \
+            [os.path.join(self.materials, m) for m in MOUNTED]
+        if decoys is not None:
+            ro.append(self.corpus_dir(decoys))
+        hide = [os.path.join(HERMES_TREE, "evals")]  # the harness graders and toolperf's checks
+        if self.offline:
+            return bwrap_args(ro=ro, rw=[cdir], cwd=cdir, bridge_dir=None, hide=hide) + inner, None
         bdir = tempfile.mkdtemp(prefix="wp7b-", dir="/tmp")
         socks = {p: os.path.join(bdir, f"{p}.sock") for p in BRIDGED_PORTS}
         err = open(os.path.join(self.root, "logs", f"{cell}.bridge.stderr"), "w")
@@ -379,10 +422,7 @@ class Run:
         if not all(os.path.exists(s) for s in socks.values()):
             bridge.stop()
             raise RuntimeError(f"host bridge did not start for {cell} (see logs/{cell}.bridge.stderr)")
-        ro = [HERMES_TREE, sys.prefix, _bear_package_dir(), self.materials]
-        if decoys is not None:
-            ro.append(self.corpus_dir(decoys))
-        cmd = bwrap_args(ro=ro, rw=[cdir], cwd=cdir, bridge_dir=bdir) + [
+        cmd = bwrap_args(ro=ro, rw=[cdir], cwd=cdir, bridge_dir=bdir, hide=hide) + [
             PY, os.path.join(self.materials, "sandbox_bridge.py"), "inside",
             *[f"{p}={BRIDGE_IN}/{p}.sock" for p in socks], "--", *inner]
         return cmd, bridge
@@ -448,7 +488,8 @@ class Run:
             cfg_in = os.path.join(cdir, "config.yaml")
             shutil.copy2(cfg_path, cfg_in)
             inner_out = os.path.join(cdir, f"result{suffix}.json")
-            inner = [PY, os.path.join(self.materials, "worker", "worker_local.py"), "base",
+            src = self.stage_sources(cell)
+            inner = [PY, os.path.join(src, "worker", "worker_local.py"), "base",
                      arms.MODEL, task, str(rep), inner_out]
             try:
                 cmd, host_bridge = self.sandboxed(cell, inner, sw.decoys)
@@ -499,8 +540,11 @@ class Run:
         inner = [PY, os.path.join(self.materials, "sandbox_redteam.py"), out]
         cmd, host_bridge = self.sandboxed(cell, inner, 0)
         env = self.sandbox_env(os.path.join(cdir, "none.yaml"), arms.Switches(), cell, False)
+        if self.offline:
+            env["WP7_REDTEAM_OFFLINE"] = "1"  # the two local ports must be unreachable too
         p = subprocess.run(cmd, env=env, capture_output=True, text=True, cwd=cdir, timeout=300)
-        host_bridge.stop()
+        if host_bridge is not None:
+            host_bridge.stop()
         time.sleep(2)
         rows = []
         if os.path.exists(out):
@@ -588,6 +632,8 @@ def add_grid_args(p: argparse.ArgumentParser) -> None:
     p.add_argument("--guard-provenance", action="store_true")
     p.add_argument("--sandbox", default="bwrap", choices=("bwrap", "none"),
                    help="bwrap (default): every worker in the cell sandbox; none: the old way")
+    p.add_argument("--offline", action="store_true",
+                   help="dry builds only: no bridge, so no request can reach 8355 or 8360")
     p.add_argument("--min-avail-gb", type=float, default=16.0,
                    help="stop before a cell when the host's MemAvailable is below this (0 = off)")
 
@@ -599,6 +645,8 @@ def main() -> int:
         add_grid_args(sub.add_parser(name))
     rp = sub.add_parser("redteam", help="escape attempts inside a cell sandbox, no model")
     rp.add_argument("--root", required=True)
+    rp.add_argument("--offline", action="store_true",
+                    help="no bridge: 8355 and 8360 must be unreachable too")
     sp = sub.add_parser("smoke")
     sp.add_argument("--root", required=True)
     sp.add_argument("--sandbox", default="bwrap", choices=("bwrap", "none"))
@@ -620,7 +668,7 @@ def main() -> int:
     if a.cmd == "registry":
         return registry()
     if a.cmd == "redteam":
-        return Run(a.root, sandbox="bwrap").redteam()
+        return Run(a.root, sandbox="bwrap", offline=a.offline).redteam()
 
     if a.cmd == "smoke":
         a = argparse.Namespace(cmd="smoke", root=a.root, arms="A,B,C-gate,D", tasks=a.task,
@@ -632,8 +680,12 @@ def main() -> int:
                                sandbox=a.sandbox, min_avail_gb=16.0)
     cells = grid(a)
     t = _tasks_module()
-    run = Run(a.root, sandbox=a.sandbox)
     dry = a.cmd == "dry"
+    offline = bool(getattr(a, "offline", False))
+    if offline and not dry:
+        print("ABORT: --offline is for dry builds only; a live cell needs the model", file=sys.stderr)
+        return 2
+    run = Run(a.root, sandbox=a.sandbox, offline=offline)
     cid = lambda c: arms.cell_id(c[0], c[1], c[2], c[3])  # noqa: E731
     planned = [{"cell": cid(c), "arm": c[0], "task": c[1], "rep": c[2], "switches": c[3].__dict__}
                for c in cells]
@@ -749,28 +801,28 @@ def main() -> int:
 
 
 def registry() -> int:
-    """Dry-build one agent with no decoys and no plugin, and save the registry it exposes."""
+    """Dry-build one arm-A agent (no decoys, BM25) in an offline cell sandbox and save the
+    registry it exposes. Offline: no request can reach 8355 or 8360, even from start-up probes.
+    The stage-1 registry is kept as registry/harness_registry.stage1.json."""
     import tempfile
-    root = tempfile.mkdtemp(prefix="wp7-registry-")
-    cfg = os.path.join(root, "config.yaml")
-    with open(cfg, "w") as f:
-        f.write(arms.render({"model": {"default": arms.MODEL, "provider": "custom",
-                                       "base_url": arms.MODEL_BASE_URL, "api_key": "not-needed"},
-                             "tools": {"tool_search": {"enabled": "off"}}}))
-    out = os.path.join(root, "dry.json")
-    env = dict(os.environ, ABDEFER_BASE_TREE=HERMES_TREE, WP7_ARM_CONFIG=cfg, WP7_DRY="1",
-               WP7_HARNESS_DIR=HARNESS, WP7_HERMES_TREE=HERMES_TREE, WP7_DECOYS="0")
-    env.pop("OPENROUTER_API_KEY", None)
-    p = subprocess.run([PY, WORKER, "base", arms.MODEL, "config_grep_distractor", "0", out],
-                       env=env, cwd=root, capture_output=True, text=True, timeout=600)
-    if p.returncode != 0:
-        print(p.stderr[-3000:], file=sys.stderr)
-        return p.returncode
+    stage1 = os.path.join(os.path.dirname(arms.REGISTRY_JSON), "harness_registry.stage1.json")
+    if os.path.exists(arms.REGISTRY_JSON) and not os.path.exists(stage1):
+        shutil.copy2(arms.REGISTRY_JSON, stage1)
+    root = tempfile.mkdtemp(prefix="wp7-registry-", dir=os.path.expanduser("~/tist-wp7/scratch"))
+    run = Run(root, sandbox="bwrap", offline=True)
+    sw = arms.Switches(backend="bm25")
+    rc = run.run_cell("A", "config_grep_distractor", 0, sw, dry=True, timeout_s=600)
+    cell = arms.cell_id("A", "config_grep_distractor", 0, sw)
+    out = os.path.join(run.root, "results", f"{cell}.dry.json")
+    if rc != 0 or not os.path.exists(out):
+        with open(os.path.join(run.root, "logs", f"{cell}.dry.stderr"), errors="replace") as f:
+            print(f.read()[-3000:], file=sys.stderr)
+        return rc or 1
     d = json.load(open(out))
     reg = {
         "hermes_commit": provenance.hermes_info(HERMES_TREE)["commit"],
-        "made_by": "hermes/run.py registry: worker_local.py in WP7_DRY mode, "
-                   "cronjob_manage enabled, no decoys, no plugin",
+        "made_by": "hermes/run.py registry: worker_local.py in WP7_DRY mode in an offline cell "
+                   "sandbox, cronjob_manage and manage_connections enabled, no decoys, BM25",
         "toolsets": d["wp7_surface"]["toolsets"],
         "candidates": d["registry_candidates"],
         "toolset_of": d["registry_toolset_of"],
@@ -783,7 +835,7 @@ def registry() -> int:
     with open(arms.REGISTRY_JSON, "w", encoding="utf-8", newline="\n") as f:
         json.dump(reg, f, indent=1, ensure_ascii=False)
         f.write("\n")
-    shutil.rmtree(root, ignore_errors=True)
+    shutil.rmtree(run.root, ignore_errors=True)
     print(f"wrote {arms.REGISTRY_JSON}: {len(reg['tools'])} tools, "
           f"{len(reg['candidates'])} candidates")
     return 0

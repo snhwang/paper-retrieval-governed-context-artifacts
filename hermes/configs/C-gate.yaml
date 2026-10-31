@@ -35,8 +35,6 @@ plugins:
         narrow_query: message
         always_offer:
         - clarify
-        annotate_tools: false
-        withheld_disclosure: counts
         registry_toolsets:
         - file
         - terminal
@@ -52,4 +50,7 @@ plugins:
         - desktop_ui
         - project
         - code_execution
+        - connections
+        annotate_tools: false
+        withheld_disclosure: counts
         narrow_priority_weight: 0.0

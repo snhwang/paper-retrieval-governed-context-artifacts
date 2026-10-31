@@ -71,6 +71,13 @@ import tasks as taskmod
 # WP7: the harness's 14 tasks unchanged, plus the 9 toolperf_abeval tasks (wp7_tasks.py).
 import wp7_tasks
 TASK = wp7_tasks.get_task(TASK_ID, workspace)
+# WP7 (stage 2): the runner stages this worker, the task registry and the graders (tasks.py,
+# sandbox.py, ab_eval.py) in a private dir in the cell. They are loaded now, so the dir is
+# removed before the agent starts and its tools cannot read the planted answers.
+_wp7_src = os.environ.get("WP7_SRC_DIR") or ""
+if _wp7_src and os.path.isdir(_wp7_src):
+    shutil.rmtree(_wp7_src, ignore_errors=True)
+    print(f"WP7: staged sources removed: {not os.path.exists(_wp7_src)}", file=sys.stderr)
 
 # --- seed session DB for recall tasks (both arms, always — cheap) ---------
 def seed_sessions():
@@ -237,10 +244,21 @@ if _cron_entry is None:
     sys.exit(3)
 _cron_entry.check_fn = None
 
+# WP7 (stage 2): expose manage_connections, which project_mcp_setup grades but the 14
+# toolsets leave out. Its toolset joins TOOLSETS below, and its check_fn (the connectors
+# portal gate) is cleared like cronjob_manage's. MCP targets go to connection_cb.
+import tools.connectors.tool  # noqa: F401  registers manage_connections
+_conn_entry = registry.get_entry("manage_connections")
+if _conn_entry is None:
+    print("ABORT: registry entry missing for manage_connections", file=sys.stderr)
+    sys.exit(3)
+_conn_entry.check_fn = None
+
 # --- build agent -----------------------------------------------------------
 TOOLSETS = ["file", "terminal", "search", "web", "todo", "session_search",
             "clarify", "image_gen", "computer_use", "cronjob", "memory",
             "desktop_ui", "project", "code_execution"]
+TOOLSETS = TOOLSETS + ["connections"]  # WP7 (stage 2): manage_connections, every arm
 if WP7_DECOYS > 0:  # WP7: the decoy plugin registers its tools in this toolset
     TOOLSETS = TOOLSETS + ["wp7_decoys"]
 
@@ -460,6 +478,7 @@ record = {
         "task_source": TASK.get("source", "core_tool_deferral"),
         "decoys": WP7_DECOYS,
         "cell": os.environ.get("WP7_CELL", ""),
+        "expected_token": (TASK.get("wp7_state") or {}).get("token"),
     },
 }
 

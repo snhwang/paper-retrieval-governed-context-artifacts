@@ -218,6 +218,7 @@ EDITS = [
         '        "task_source": TASK.get("source", "core_tool_deferral"),\n'
         '        "decoys": WP7_DECOYS,\n'
         '        "cell": os.environ.get("WP7_CELL", ""),\n'
+        '        "expected_token": (TASK.get("wp7_state") or {}).get("token"),\n'
         '    },\n}\n',
     ),
     (
@@ -236,6 +237,40 @@ EDITS = [
         '    except Exception as _e:\n'
         '        print(f"WP7: could not keep {_sub}: {_e}", file=sys.stderr)\n'
         'shutil.rmtree(tmp_root, ignore_errors=True)',
+    ),
+    # Stage 2. Applied after the edits above, so their anchors are the edited text.
+    (
+        "E14 staged sources leave the cell",
+        'TASK = wp7_tasks.get_task(TASK_ID, workspace)\n',
+        'TASK = wp7_tasks.get_task(TASK_ID, workspace)\n'
+        '# WP7 (stage 2): the runner stages this worker, the task registry and the graders (tasks.py,\n'
+        '# sandbox.py, ab_eval.py) in a private dir in the cell. They are loaded now, so the dir is\n'
+        '# removed before the agent starts and its tools cannot read the planted answers.\n'
+        '_wp7_src = os.environ.get("WP7_SRC_DIR") or ""\n'
+        'if _wp7_src and os.path.isdir(_wp7_src):\n'
+        '    shutil.rmtree(_wp7_src, ignore_errors=True)\n'
+        '    print(f"WP7: staged sources removed: {not os.path.exists(_wp7_src)}", file=sys.stderr)\n',
+    ),
+    (
+        "E15 expose manage_connections",
+        '_cron_entry.check_fn = None\n',
+        '_cron_entry.check_fn = None\n'
+        '\n'
+        '# WP7 (stage 2): expose manage_connections, which project_mcp_setup grades but the 14\n'
+        '# toolsets leave out. Its toolset joins TOOLSETS below, and its check_fn (the connectors\n'
+        '# portal gate) is cleared like cronjob_manage\'s. MCP targets go to connection_cb.\n'
+        'import tools.connectors.tool  # noqa: F401  registers manage_connections\n'
+        '_conn_entry = registry.get_entry("manage_connections")\n'
+        'if _conn_entry is None:\n'
+        '    print("ABORT: registry entry missing for manage_connections", file=sys.stderr)\n'
+        '    sys.exit(3)\n'
+        '_conn_entry.check_fn = None\n',
+    ),
+    (
+        "E15 connections toolset",
+        'if WP7_DECOYS > 0:  # WP7: the decoy plugin registers its tools in this toolset\n',
+        'TOOLSETS = TOOLSETS + ["connections"]  # WP7 (stage 2): manage_connections, every arm\n'
+        'if WP7_DECOYS > 0:  # WP7: the decoy plugin registers its tools in this toolset\n',
     ),
 ]
 
