@@ -81,6 +81,8 @@ FP16_BACKENDS = {b for b in os.environ.get("TIST_FP16_BACKENDS", "").split(",") 
 CHAR_BUDGET = int(os.environ.get("TIST_CHAR_BUDGET", "16000"))
 # Most texts per encoder batch when a store is filled (the GPU job sets 8).
 MAX_BATCH = int(os.environ.get("TIST_MAX_BATCH", "64"))
+# Every batch exactly MAX_BATCH texts, the last padded (TIST_FIXED_BATCH=1).
+FIXED_BATCH = os.environ.get("TIST_FIXED_BATCH") == "1"
 DENSE_BACKENDS = ["bge", "bge-m3", "qwen3-0.6b", "qwen3-4b", "nemotron"]
 BACKEND_LABEL = {"bm25": "BM25", "hash": "Hash", "bge": "BGE-base", "bge-m3": "BGE-M3",
                  "qwen3-0.6b": "Qwen3-0.6B", "qwen3-4b": "Qwen3-4B",
@@ -282,8 +284,24 @@ class EmbeddingStore:
         64 or fewer texts as one batch, and eager attention grows with the
         square of the longest text in it: 32 ToolBench documents of ~3,000
         tokens took about 18 GB in one batch on Qwen3-0.6B.
+
+        With TIST_FIXED_BATCH=1 every batch holds exactly max_batch texts
+        (TIST_MAX_BATCH), whatever their length, and the last batch of a side
+        is padded with copies of its own last text, whose outputs are
+        dropped. A store filled this way has one batch size throughout.
+
+        The side holding the longest text goes first, so the first batch is
+        the longest one, and its CUDA memory is printed as the probe.
+
+        Strict: a model that is not the one asked for (BEAR falls back to hash
+        embeddings when a model fails to load), a batch that returns another
+        number of rows, a non-finite or zero vector, or a text still missing
+        at the end stops the process. Nothing is skipped. Each fill appends a
+        record (batch, precision, device, probe) to the store's metadata.
         """
         char_budget = char_budget or CHAR_BUDGET
+        max_batch = max_batch or MAX_BATCH
+        fixed = FIXED_BATCH
         mq, md = self.missing(queries, docs)
         stats = {"backend": self.backend, "family": self.family,
                  "new_queries": len(mq), "new_docs": len(md),
@@ -295,19 +313,36 @@ class EmbeddingStore:
         if want is not None and have is not None and have != want and (self.q or self.d):
             raise SystemExit(f"{self.name}: stored vectors were made with {have}, "
                              f"not {want}. Use a new store rather than mixing them.")
+        if fixed:
+            # Every earlier fill, finished or not (a failed fill keeps what it saved).
+            prior = list(self.meta.get("fills", []))
+            if (self.q or self.d) and (not prior or any(
+                    not f.get("fixed_batch") or f.get("max_batch") != max_batch for f in prior)):
+                raise SystemExit(f"{self.name}: a fixed batch of {max_batch} would mix with vectors "
+                                 f"made at other batch sizes ({prior or 'unrecorded'}).")
         t0 = time.time()
         last_save = time.time()
         inner = real_embedder(self.backend, self.family)
-        for side, todo, bucket in ((True, mq, self.q), (False, md, self.d)):
+        record = {"utc_start": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+                  "status": "running", "max_batch": max_batch, "fixed_batch": fixed,
+                  "char_budget": None if fixed else char_budget,
+                  "new_queries": len(mq), "new_docs": len(md),
+                  "bear_source_sha": os.environ.get("BEAR_SOURCE_SHA", "(unset)")}
+        self.meta.setdefault("fills", []).append(record)
+        sides = [(True, mq, self.q), (False, md, self.d)]
+        sides.sort(key=lambda x: -max((len(t) for t in x[1]), default=0))
+        probed = False
+        for side, todo, bucket in sides:
             order = sorted(todo, key=len, reverse=True)
             i = done = 0
             while i < len(order):
-                n = max(1, min(max_batch or MAX_BATCH, char_budget // max(len(order[i]), 1)))
+                n = max_batch if fixed else max(1, min(max_batch, char_budget // max(len(order[i]), 1)))
                 part = order[i:i + n]
-                i += n
+                i += len(part)
+                batch = part + [part[-1]] * (n - len(part)) if fixed else part
                 for attempt in range(5):
                     try:
-                        vecs = inner.embed(part, is_query=side)
+                        vecs = inner.embed(batch, is_query=side)
                         break
                     except RuntimeError as exc:
                         # A shared embedding service can stall under load.
@@ -316,8 +351,23 @@ class EmbeddingStore:
                         wait = 15 * 2 ** attempt
                         print(f"    [{self.name}] {exc}; retrying in {wait}s", flush=True)
                         time.sleep(wait)
+                vecs = np.asarray(vecs, dtype=np.float32)
+                if vecs.ndim != 2 or vecs.shape[0] != len(batch):
+                    raise SystemExit(f"{self.name}: a batch of {len(batch)} texts returned "
+                                     f"{vecs.shape} vectors. Stopping rather than dropping rows.")
+                vecs = vecs[:len(part)]
+                norms = np.linalg.norm(vecs, axis=1)
+                if not np.all(np.isfinite(vecs)) or np.any(norms == 0):
+                    raise SystemExit(f"{self.name}: a non-finite or zero vector in a batch of "
+                                     f"{len(part)}. Stopping.")
+                if not probed:
+                    record.update(check_real_model(inner, self.backend))
+                    record["probe"] = probe_record(len(batch), len(part[0]), side)
+                    print(f"    [{self.name}] probe, longest batch first: {record['probe']}; "
+                          f"model {record.get('device')} {record.get('dtype')}", flush=True)
+                    probed = True
                 for t, v in zip(part, vecs):
-                    bucket[t] = np.asarray(v, dtype=np.float32)
+                    bucket[t] = v
                 done += len(part)
                 if time.time() - last_save > 120:
                     if want is not None:
@@ -326,20 +376,60 @@ class EmbeddingStore:
                     last_save = time.time()
                     print(f"    [{self.name}] {'queries' if side else 'docs'} {done}/{len(order)}",
                           flush=True)
+        mq2, md2 = self.missing(queries, docs)
+        if mq2 or md2:
+            raise SystemExit(f"{self.name}: {len(mq2)} queries and {len(md2)} docs still missing "
+                             "after the fill. Stopping.")
         s = embedder_settings(self.backend, self.family) if self.backend != "bm25" else {}
+        record.update(status="complete", seconds=round(time.time() - t0, 1),
+                      utc_end=time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()))
+        stats["seconds"] = record["seconds"]
+        try:
+            import torch
+            if torch.cuda.is_available():
+                stats["cuda_max_reserved_gib"] = round(torch.cuda.max_memory_reserved() / 2**30, 2)
+                record["cuda_max_reserved_gib"] = stats["cuda_max_reserved_gib"]
+        except Exception:  # noqa: BLE001
+            pass
         self.meta.update(backend=self.backend, family=self.family, settings=s,
                          embedded_utc=time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
                          **({"service_identity": inner.identity()}
                             if hasattr(inner, "identity") else {}))
         self.save()
-        stats["seconds"] = round(time.time() - t0, 1)
-        try:
-            import torch
-            if torch.cuda.is_available():
-                stats["cuda_max_reserved_gib"] = round(torch.cuda.max_memory_reserved() / 2**30, 2)
-        except Exception:  # noqa: BLE001
-            pass
+        stats["fill"] = record
         return stats
+
+
+def check_real_model(inner, backend: str) -> dict:
+    """Device and dtype of the loaded model. Stops if BEAR fell back to hash
+    embeddings, or if TIST_REQUIRE_CUDA=1 and the model is not on the GPU."""
+    if backend in ("hash", "nemotron", "bm25"):
+        return {}
+    mode = getattr(inner, "_mode", None)
+    model = getattr(inner, "_model", None)
+    if mode != "sentence_transformers" or model is None:
+        raise SystemExit(f"{backend}: BEAR's embedder is in mode {mode!r}, not the model "
+                         "(a failed load falls back to hash embeddings). Stopping.")
+    device = str(getattr(model, "device", "?"))
+    try:
+        dtype = str(next(model.parameters()).dtype)
+    except Exception:  # noqa: BLE001
+        dtype = "?"
+    if os.environ.get("TIST_REQUIRE_CUDA") == "1" and not device.startswith("cuda"):
+        raise SystemExit(f"{backend}: the model is on {device}, not the GPU. Stopping.")
+    return {"device": device, "dtype": dtype}
+
+
+def probe_record(n: int, max_chars: int, side: bool) -> dict:
+    out = {"batch": n, "longest_chars": max_chars, "side": "queries" if side else "docs"}
+    try:
+        import torch
+        if torch.cuda.is_available():
+            out["cuda_max_reserved_gib"] = round(torch.cuda.max_memory_reserved() / 2**30, 2)
+            out["cuda_max_allocated_gib"] = round(torch.cuda.max_memory_allocated() / 2**30, 2)
+    except Exception:  # noqa: BLE001
+        pass
+    return out
 
 
 class CachedEmbedder:
@@ -378,9 +468,16 @@ def store_provenance(name: str) -> dict:
     model = str(s.get("model", ""))
     precision = ((s.get("model_kwargs") or {}).get("torch_dtype")
                  or ("served" if model.startswith("remote:") else "float32"))
+    fills = meta.get("fills", [])
+    n_q, n_d = len(meta.get("query_texts", [])), len(meta.get("doc_texts", []))
+    recorded = sum(f.get("new_queries", 0) + f.get("new_docs", 0) for f in fills
+                   if f.get("status") == "complete")
     out = {"store": name, "model": model, "precision": str(precision), "settings": s,
-           "embedded_utc": meta.get("embedded_utc"),
-           "n_queries": len(meta.get("query_texts", [])), "n_docs": len(meta.get("doc_texts", []))}
+           "embedded_utc": meta.get("embedded_utc"), "n_queries": n_q, "n_docs": n_d,
+           "fills": fills,
+           "encode_batches": sorted({f.get("max_batch") for f in fills if f.get("status") == "complete"}
+                                    - {None}),
+           "vectors_from_unrecorded_fills": n_q + n_d - recorded}
     if "service_identity" in meta:
         out["service_identity"] = meta["service_identity"]
     return out
