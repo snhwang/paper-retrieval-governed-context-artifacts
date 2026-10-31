@@ -33,8 +33,8 @@ while kill -0 "$pid" 2>/dev/null; do
   a=$(avail)
   (( a < min_kib )) && stop "MemAvailable ${a} kB below the ${WP0_MEMAVAIL_MIN_GIB:-16} GiB minimum" 77
   # Card stop limit (model-server, 2026-10-30): Windows nvidia-smi above
-  # WP0_WIN_GPU_STOP_MIB stops the step, exit 78. Checked every 15 s.
-  if [ -n "${WP0_WIN_GPU_STOP_MIB:-}" ] && (( tick % 3 == 0 )); then
+  # WP0_WIN_GPU_STOP_MIB stops the step, exit 78. Checked every 5 s.
+  if [ -n "${WP0_WIN_GPU_STOP_MIB:-}" ]; then
     used=$(/mnt/c/Windows/System32/nvidia-smi.exe --query-gpu=memory.used --format=csv,noheader,nounits \
            2>/dev/null | head -1 | tr -d ' \r')
     if [[ $used =~ ^[0-9]+$ ]]; then

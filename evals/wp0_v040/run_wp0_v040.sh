@@ -55,9 +55,13 @@ PY=${WP0_PY:-$HOME/.venvs/tist-evals/bin/python}
 SITE=$ART/evals/wp0_v040/site
 BEAR040_EXPORT=$HOME/tist-evals/bear-10730c8
 BEAR040_SHA=$(cat "$BEAR040_EXPORT/EXPORTED_SHA")
-BEAR042_SRC=$HOME/tist-evals/bear-9d085b4
+# 2026-10-31 (coordinator): BEAR 0.4.2 is public (tag v0.4.2 = 0d0718a, bear/ equal to
+# 9d085b4 apart from line endings), and the venv was reinstalled from the public
+# clone. Steps from now on record 0d0718a. Steps recorded under 9d085b4 stay as
+# they are.
+BEAR042_SRC=$HOME/tist-evals/bear-v0.4.2
 BEAR042_SHA=$(cat "$BEAR042_SRC/BEAR_GIT_SHA" 2>/dev/null || echo unknown)
-BEAR042_EXPECT=9d085b4
+BEAR042_EXPECT=0d0718a
 BEAR041_SRC=$HOME/tist-evals/bear-v0.4.1
 BEAR041_SHA=$(git -C "$BEAR041_SRC" rev-parse HEAD 2>/dev/null || echo unknown)
 BEAR041_TAG_SHA=fa87fc5
@@ -179,7 +183,8 @@ tb() {
   local extra=()
   [[ $scope == toolbench ]] && extra=(--toolbench-only)
   [[ $scope == metatool ]] && extra=(--metatool-only)
-  step "$name" "$kind" "$ver" "$need" 0 -- "$PY" "$W/eval_toolbench_v040.py" --top-k 5 \
+  local wait=0; [[ $kind == gpu ]] && wait=${WP0_GPU_MAXWAIT:-0}
+  step "$name" "$kind" "$ver" "$need" "$wait" -- "$PY" "$W/eval_toolbench_v040.py" --top-k 5 \
       --metatool-query-tags-file "$QT5" "${extra[@]}" \
       --output "results/wp0/toolbench_eval_${name}.json" --backends "$@"
 }
@@ -192,7 +197,8 @@ lists() {
     out=results/wp0/wp4_lists_$ver
     extra=(--share-query-embeddings --nest-check 200 --progress 5000)
   fi
-  step "$name" "$kind" "$ver" "$need" 0 -- "$PY" "$W/dump_toolbench_lists.py" --mode "$mode" \
+  local wait=0; [[ $kind == gpu ]] && wait=${WP0_GPU_MAXWAIT:-0}
+  step "$name" "$kind" "$ver" "$need" "$wait" -- "$PY" "$W/dump_toolbench_lists.py" --mode "$mode" \
       --backends "$@" --outdir "$out" "${extra[@]}"
 }
 

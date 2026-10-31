@@ -61,7 +61,8 @@ OUT=${WP0_E2E_OUT:-$ART/results/v042/e2e_rerun}
 LOGS=$ROOT/logs
 LISTS=("$ROOT/artifacts/results/wp0/lists_v042/e2e" "$ROOT/artifacts-dense/results/wp0/lists_v042/e2e")
 BASE_URL=${WP0_OLLAMA_URL:-http://192.168.1.175:11434/v1}
-BEAR_SHA=$(cat "$HOME/tist-evals/bear-9d085b4/BEAR_GIT_SHA" 2>/dev/null || echo unknown)
+# BEAR 0.4.2 public tag v0.4.2 (0d0718a), installed from ~/tist-evals/bear-v0.4.2 (2026-10-31)
+BEAR_SHA=$(cat "$HOME/tist-evals/bear-v0.4.2/BEAR_GIT_SHA" 2>/dev/null || echo unknown)
 mkdir -p "$OUT" "$LOGS"
 cd "$ART" || exit 1
 

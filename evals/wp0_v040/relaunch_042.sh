@@ -44,7 +44,7 @@ if [ $# -gt 0 ]; then
                  sync_clone artifacts-gpu
                  start_lane gpuq4b042 artifacts-gpu WP0_ALLOW_LOCAL_MODELS=1 WP0_STEP_MEM=12G \
                      WP0_ENCODE_BATCH=8 WP0_GPU_CAP_FIXED=11.2 WP0_WIN_GPU_MAX_MIB=67000 \
-                     WP0_WIN_GPU_STOP_MIB=80000 ;;
+                     WP0_WIN_GPU_STOP_MIB=80000 WP0_GPU_MAXWAIT=${WP0_GPU_MAXWAIT:-7200} ;;
       e2erun)  # Table 7 executor rerun on Ollama (mistral-nemo-32k): 67,000 MiB before
                # loading, 81,000 before each later row. Never beside the Qwen3-4B lane.
                if systemctl --user is-active -q wp0-gpuq4b042; then echo "Qwen3-4B lane active, not started"; exit 75; fi
@@ -78,7 +78,7 @@ cd $R/artifacts
 # Preflight inside a capped scope: 0.4.2 installed and equal to the export, the
 # 0.4.2 switches present, local models refused unless allowed.
 $TC --mem 4G -- env CUDA_VISIBLE_DEVICES= PYTHONPATH=evals/wp0_v040/site $PY evals/wp0_v040/verify_env.py \
-    --export $HOME/tist-evals/bear-9d085b4 --expect-sha 9d085b4 --expect-version 0.4.2 \
+    --export $HOME/tist-evals/bear-v0.4.2 --expect-sha 0d0718a --expect-version 0.4.2 \
     --out /tmp/wp0_verify_042.json | tail -1
 $TC --mem 4G -- env CUDA_VISIBLE_DEVICES= $PY -c "
 from bear import Config
@@ -93,7 +93,7 @@ try:
 except RuntimeError as e:
     print('guard ok')
 " 2>&1 | tail -1
-grep -n "def retrieve_with_trace" -A 60 $HOME/tist-evals/bear-9d085b4/bear/retriever.py | grep -q "self\.retrieve(" \
+grep -n "def retrieve_with_trace" -A 60 $HOME/tist-evals/bear-v0.4.2/bear/retriever.py | grep -q "self\.retrieve(" \
   && echo "note: retrieve_with_trace calls retrieve (trace hook unsafe)" || echo "trace hook: no recursion"
 
 start_lane lex042 artifacts
