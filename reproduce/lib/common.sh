@@ -71,6 +71,7 @@ SCRIPT_NAME=$(basename "$0" .sh)
 REPRO_FAIL_REASON=""
 REPRO_OK_NOTE=""
 REPRO_RECORD=${REPRO_RECORD:-}
+REPRO_RUNNING_MARK=""
 
 say()  { printf '[%s] %s\n' "$(date -u +%H:%M:%SZ)" "$*"; }
 warn() { say "WARNING: $*"; }
@@ -102,6 +103,7 @@ repro_parse_args() {
 repro_finish() {
   local rc=$?
   trap - EXIT
+  [ -n "${REPRO_RUNNING_MARK:-}" ] && rm -f "$REPRO_RUNNING_MARK"
   local status=OK
   if [ "$rc" -ne 0 ] || [ -n "$REPRO_FAIL_REASON" ]; then
     status=FAILED
@@ -152,6 +154,13 @@ repro_begin() {
     --dry-run "$DRY_RUN" --unit "${REPRO_UNIT:-}" -- "$SCRIPT_PATH" "${ARGS_REST[@]}" \
     || { REPRO_RECORD=""; die "could not write the run record"; }
   export REPRO_RECORD
+  # A marker while a real run is in progress. 00_setup.sh --update refuses to
+  # move the clones while one exists for a live process.
+  if [ "$DRY_RUN" = 0 ]; then
+    mkdir -p "$REPRO_OUT/state/running"
+    REPRO_RUNNING_MARK=$REPRO_OUT/state/running/$SCRIPT_NAME.$$
+    echo "$$ $(date -u +%FT%TZ) ${REPRO_UNIT:-terminal}" > "$REPRO_RUNNING_MARK"
+  fi
   say "run record: $REPRO_RECORD"
 }
 
@@ -312,6 +321,19 @@ EOF
   exit 0
 }
 
+# kit_activity: print every kit run in progress (live markers and services),
+# one per line. Prints nothing when the kit is idle.
+kit_activity() {
+  local m pid
+  for m in "$REPRO_OUT"/state/running/*; do
+    [ -f "$m" ] || continue
+    pid=${m##*.}
+    [ "$pid" = "$$" ] && continue
+    if kill -0 "$pid" 2>/dev/null; then echo "running: $(basename "$m") ($(cat "$m"))"; else rm -f "$m"; fi
+  done
+  systemctl --user list-units --type=service --state=active,activating --no-legend 'tist-repro-*' 'wp0-*' 'tist-wp7-*'     2>/dev/null | awk '{print "service: " $1}'
+}
+
 # ---------------------------------------------------------------------------
 # Prerequisite checks. Each one dies with a reason. None sends a request in a dry run.
 # ---------------------------------------------------------------------------
@@ -374,7 +396,7 @@ check_clone() {  # check_clone DIR: a clone of this repo exists; warn if it is b
   local h a
   h=$(git -C "$d" rev-parse HEAD)
   a=$(git -C "$ART" rev-parse HEAD)
-  [ "$h" = "$a" ] || warn "$d is at ${h:0:7}, the checkout at ${a:0:7}. The clone's code runs. 00_setup.sh --update-clones moves it."
+  [ "$h" = "$a" ] || warn "$d is at ${h:0:7}, the checkout at ${a:0:7}. The clone's code runs. 00_setup.sh --update moves it."
 }
 
 # Card reading from Windows nvidia-smi.exe (MiB used). Not called in a dry run.

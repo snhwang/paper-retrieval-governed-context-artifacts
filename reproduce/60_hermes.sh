@@ -72,7 +72,7 @@ repro_begin
 say "Hermes step $STEP from $HERMES_CLONE, WP7_RUNS=$WP7_RUNS"
 [ -d "$HERMES_CLONE/.git" ] || [ "$DRY_RUN" = 1 ] || die "missing clone $HERMES_CLONE (run 00_setup.sh)"
 [ "$DRY_RUN" = 1 ] || check_clone "$HERMES_CLONE"
-[ -f "$HS/env.sh" ] || [ "$DRY_RUN" = 1 ] || die "$HS/env.sh is missing: the clone predates hermes/scripts (00_setup.sh --update-clones)"
+[ -f "$HS/env.sh" ] || [ "$DRY_RUN" = 1 ] || die "$HS/env.sh is missing. The clone predates hermes/scripts (run 00_setup.sh --update)"
 case $STEP in
   stage1|block[123]|pregrid)
     [ "$DRY_RUN" = 1 ] || { check_tc; check_slice; check_keepalive; check_no_gpu_jobs; } ;;

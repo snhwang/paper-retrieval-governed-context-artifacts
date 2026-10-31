@@ -97,3 +97,83 @@ check_lane() {
   fi
   say "lane $lane: finished, no unexpected failure ($(grep -c "\] done " <<<"$seg") steps done in this pass)"
 }
+
+# wp0_gpu_tb_step NAME SCOPE ROW...: one GPU step of eval_toolbench_v040.py on
+# BEAR 0.4.2, made the way run_wp0_v040.sh makes a "tb" step of kind gpu, for a
+# row no lane holds. Used for the Qwen3-4B mand-only rows (Section 5.4).
+# - the same clone (artifacts-gpu), stage folder, embedding cache, log header
+#   and .done/.failed markers as the lanes, so 70_assemble.sh picks it up
+# - the same chain: flock ~/tist-gpu.lock, gpu_gate.sh (start at GPU_START_MIB
+#   or less, allocator cap 11.2 GiB), tist-capped --mem 12G, mem_guard.sh (stop
+#   above GPU_STOP_MIB)
+# - the settings of lane gpuq4b042fix: bf16, encode batch 2, empty cache
+# Exit 75 from the gate (card busy) is retried every 5 minutes for WP0_GPU_MAXWAIT seconds.
+wp0_gpu_tb_step() {
+  local name=$1 scope=$2
+  shift 2
+  local art=$WP0_DIR/artifacts-gpu logs=$WP0_DIR/logs W=evals/wp0_v040
+  local out=results/wp0/toolbench_eval_$name.json extra=()
+  case $scope in
+    toolbench) extra=(--toolbench-only) ;;
+    metatool) extra=(--metatool-only) ;;
+    metatool-base) extra=(--metatool-only --metatool-base-only) ;;
+  esac
+  if [ -f "$logs/$name.done" ]; then
+    say "skip $name (done, $logs/$name.done)"
+    return 0
+  fi
+  local envs=(HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 TOKENIZERS_PARALLELISM=false PYTHONUNBUFFERED=1
+              PYTHONPATH="$art/$W/site" BEAR_SOURCE_SHA="$BEAR_SHA" ANTHROPIC_API_KEY=wp0-dummy-key-no-paid-calls
+              WP0_REPORT_VRAM="$logs/vram.jsonl" WP0_STEP="$name" WP0_ALLOW_LOCAL_MODELS=1 WP0_STEP_MEM=12G
+              WP0_ENCODE_BATCH=2 WP0_EMPTY_CACHE=1 WP0_GPU_CAP_FIXED=11.2 WP0_WIN_GPU_MAX_MIB="$GPU_START_MIB"
+              WP0_WIN_GPU_STOP_MIB="$GPU_STOP_MIB" WP0_QWEN4B_DTYPE=bfloat16 WP0_SHARE_MODELS=1
+              WP0_EMB_CACHE="$WP0_DIR/embcache" WP0_ART="$art")
+  local cmd=("$REPRO_PY" "$W/eval_toolbench_v040.py" --top-k 5
+             --metatool-query-tags-file evals/data/external_benchmarks/metatool/query_tags_top5.json
+             "${extra[@]}" --output "$out" --backends "$@")
+  say "step $name (GPU, Qwen3-4B bf16, batch 2, cap 11.2 GiB, gates $GPU_START_MIB and $GPU_STOP_MIB MiB)"
+  if [ "$DRY_RUN" = 1 ]; then
+    echo "+ (cd $art) flock $GPU_LOCK env -u OPENAI_API_KEY ${envs[*]} bash $W/gpu_gate.sh 11 $TC --mem 12G -- bash $W/mem_guard.sh $(printf '%q ' "${cmd[@]}")"
+    echo "+ (copy $out to $WP0_DIR/stage/v042/$name/, stamp it with $W/stamp_dir.py, write $logs/$name.done)"
+    return 0
+  fi
+  mkdir -p "$logs" "$art/results/wp0"
+  {
+    echo "### ================ attempt $(date -Is) ================"
+    echo "### step:        $name"
+    echo "### kind:        gpu (need 11 GiB)"
+    echo "### bear:        v042 ($BEAR_SHA)"
+    echo "### started:     $(date -Is)"
+    echo "### command:     ${cmd[*]}"
+    echo "### env:         ${envs[*]}"
+    echo "### memory cap:  $TC --mem 12G --"
+    echo "### made by:     reproduce/lib/wp0.sh wp0_gpu_tb_step (no lane holds this row)"
+  } >> "$logs/$name.log"
+  rm -f "$logs/$name.failed" "$logs/$name.blocked"
+  local rc waited=0 maxwait=${WP0_GPU_MAXWAIT:-7200} t0
+  t0=$(date -u +%FT%TZ)
+  while :; do
+    (cd "$art" && flock "$GPU_LOCK" env -u OPENAI_API_KEY "${envs[@]}" bash "$W/gpu_gate.sh" 11 \
+        "$TC" --mem 12G -- bash "$W/mem_guard.sh" "${cmd[@]}") >> "$logs/$name.log" 2>&1
+    rc=$?
+    [ "$rc" -ne 75 ] && break
+    (( waited >= maxwait )) && break
+    say "$name: the gate says not now (card or memory), retry in 5 minutes"
+    sleep 300; waited=$((waited + 300))
+  done
+  echo "### finished:    $(date -Is) rc=$rc" >> "$logs/$name.log"
+  python3 "$REPRO_DIR/lib/run_record.py" cmd "$REPRO_RECORD" --label "$name" --rc "$rc" --start "$t0" \
+    --cwd "$art" -- "${cmd[@]}" >/dev/null 2>&1
+  if [ "$rc" -ne 0 ]; then
+    echo "$rc" > "$logs/$name.failed"
+    die "step $name failed (exit $rc, 75 means the card stayed busy, 78 that it passed the stop limit). See $logs/$name.log"
+  fi
+  local dest=$WP0_DIR/stage/v042/$name
+  mkdir -p "$dest/results/wp0"
+  cp "$logs/$name.log" "$dest/"
+  cp "$art/$out" "$dest/$out" || die "step $name wrote no $out"
+  (cd "$art" && env "${envs[@]}" CUDA_VISIBLE_DEVICES= WP0_EMB_CACHE= "$TC" --mem 4G -- "$REPRO_PY" "$W/stamp_dir.py" "$dest" \
+      --step "$name" --command "${cmd[*]}") >> "$logs/$name.log" 2>&1 || die "stamp_dir.py failed for $name"
+  touch "$logs/$name.done"
+  say "$name: done, staged in $dest"
+}

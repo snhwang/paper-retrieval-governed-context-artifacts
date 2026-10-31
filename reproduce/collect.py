@@ -274,7 +274,8 @@ def ex_cross_backend(ctx, it, a, res):
 
 def ex_mand_only(ctx, it, a, res):
     srcs = [("BGE", pm.tb("tb_bge")), ("BM25", pm.tb("tb_bm25")), ("Hash", pm.tb("tb_hash")),
-            ("BGE-M3", pm.tb("tb_bgem3_mand")), ("Qwen3-0.6B", pm.tb("tb_qwen06_mand"))]
+            ("BGE-M3", pm.tb("tb_bgem3_mand")), ("Qwen3-0.6B", pm.tb("tb_qwen06_mand")),
+            ("Qwen3-4B", pm.tb("tb_qwen4b_mand"))]
     for b, rel in srcs:
         p, _ = ctx.find(rel, it["status"])
         if p is None:
@@ -422,9 +423,264 @@ def ex_semantic_stats(ctx, it, a, res):
                                   f"computed: beta.ppf(0.975, {k2}+1, {n}-{k2})"))
 
 
+# ---------------------------------------------------------------------------
+# Numbers that no eval script writes, computed here from the committed or
+# reproduced files (MANIFEST.md, "Closed by the kit").
+# ---------------------------------------------------------------------------
+
+def boot_paired(diff, n_boot: int = 10_000, seed: int = 42) -> tuple[float, float, float]:
+    """Paired bootstrap of mean(diff): 95% CI and two-sided p (share of resampled means on the far side of 0)."""
+    import numpy as np
+    diff = np.asarray(diff, float)
+    rng = np.random.default_rng(seed)
+    means = np.empty(n_boot)
+    for i in range(0, n_boot, 1000):
+        idx = rng.integers(0, len(diff), size=(min(1000, n_boot - i), len(diff)))
+        means[i:i + idx.shape[0]] = diff[idx].mean(axis=1)
+    lo, hi = np.percentile(means, [2.5, 97.5])
+    p = 2 * min((means <= 0).mean(), (means >= 0).mean())
+    return float(lo), float(hi), float(max(p, 1 / n_boot))
+
+
+def mcnemar_exact(a, b) -> dict:
+    import numpy as np
+    from scipy import stats
+    a, b = np.asarray(a) > 0, np.asarray(b) > 0
+    n10, n01 = int(np.sum(a & ~b)), int(np.sum(~a & b))
+    p = float(stats.binomtest(min(n10, n01), n10 + n01, 0.5).pvalue) if n10 + n01 else 1.0
+    return {"n10": n10, "n01": n01, "p": p}
+
+
+def e2e_sets(ctx, it, res):
+    """July scores (previous version), the monolithic and cap-128 runs, and your Table 10 reruns."""
+    july, jrel, own = july_scores(ctx)
+    tag = "" if own else " (committed, previous version)"
+    out = {"july": july, "july_src": jrel + tag, "mono": None, "cap128": None, "rerun": {}}
+    for key, rel in (("mono", "evals/results/toolbench_e2e_scores_partial.json"),
+                     ("cap128", "evals/results/toolbench_e2e_scores_cap128_superseded.json")):
+        p, where = ctx.find(rel, "a")
+        if p is None:
+            res["missing"].append(rel)
+            continue
+        sc = {x["condition"]: x for x in ctx.json(p)["scores"]}
+        out[key] = sc.get("Monolithic (all tools)")
+        out[key + "_src"] = rel + ("" if where == "your run" else " (committed, previous version)")
+    for cond, slug in E2E_ROWS.items():
+        p, _ = ctx.find(f"{pm.E2E}/{slug}.scores.json", "b")
+        if p is not None:
+            out["rerun"][cond] = ctx.json(p)
+    return out
+
+
+def ex_e2e_text(ctx, it, a, res):
+    import numpy as np
+    S = e2e_sets(ctx, it, res)
+    july, mono = S["july"], S["mono"]
+    if not july or mono is None:
+        res["missing"].append("July end-to-end per-query arrays")
+        return
+    msrc = S["mono_src"]
+    if a["part"] == "july":
+        for m in ("tool", "exact"):
+            res["numbers"].append(num(f"Monolithic {m} accuracy", float(np.mean(mono[f"_{m}_scores"])), msrc,
+                                      f"_{m}_scores (mean)"))
+        best = max((c for c in july if c.startswith("BEAR+") and "Hash" not in c),
+                   key=lambda c: np.mean(july[c]["_tool_scores"]))
+        for cond, sc in july.items():
+            if cond.startswith("Monolithic"):
+                continue
+            for m in ("tool", "exact"):
+                x, y = np.asarray(sc[f"_{m}_scores"], float), np.asarray(mono[f"_{m}_scores"], float)
+                st = paired(x, y)
+                lo, hi, pb = boot_paired(x - y)
+                res["numbers"].append(num(f"{cond} minus Monolithic, {m} accuracy", st["delta"],
+                                          f"{S['july_src']} and {msrc}", "computed: paired over queries",
+                                          (lo, hi), t=st["t"], p=st["p"], d=st["d"], bootstrap_p=pb,
+                                          ratio=float(x.mean() / y.mean()) if y.mean() else float("nan")))
+        res["notes"].append(f"best governed system by tool accuracy: {best}")
+        q06, q4 = july.get("BEAR+Qwen3-0.6B (gov)"), july.get("BEAR+Qwen3-4B (gov)")
+        if q06 and q4:
+            for m in ("tool", "exact"):
+                mc = mcnemar_exact(q06[f"_{m}_scores"], q4[f"_{m}_scores"])
+                st = paired(q06[f"_{m}_scores"], q4[f"_{m}_scores"])
+                res["numbers"].append(num(f"BEAR+Qwen3-0.6B vs BEAR+Qwen3-4B (gov), {m} accuracy, McNemar exact p",
+                                          mc["p"], S["july_src"], "computed: binomial test on discordant pairs",
+                                          None, n10=mc["n10"], n01=mc["n01"], t=st["t"], p=st["p"]))
+        cap = S.get("cap128")
+        if cap is not None:
+            r = np.asarray(cap["_recall_scores"], float)
+            present = r >= 1
+            res["numbers"].append(num("cap-128 monolithic: queries with the gold tool in the prompt", int(present.sum()),
+                                      S["cap128_src"], "count of _recall_scores == 1"))
+            res["numbers"].append(num("cap-128 monolithic: share of queries with the gold tool", float(present.mean()),
+                                      S["cap128_src"], "computed"))
+            for m in ("tool", "exact"):
+                v = np.asarray(cap[f"_{m}_scores"], float)[present]
+                res["numbers"].append(num(f"cap-128 monolithic: {m} accuracy on those queries",
+                                          float(v.mean()) if len(v) else float("nan"), S["cap128_src"], "computed"))
+        res["numbers"].append(num("chance rate, one of 3,225 tools", 1 / 3225, "evals/data (corpus size)", "computed"))
+        return
+    # part "table10": Table 10 as printed, the three rerun rows in place of July's
+    t10 = dict(july)
+    for cond in ("BEAR+BM25 (gov)", "BM25 (no gov)", "BEAR+BGE-M3 (gov)"):
+        if cond in S["rerun"]:
+            t10[cond] = S["rerun"][cond]
+        else:
+            res["missing"].append(f"{pm.E2E} rerun row {cond}")
+    src = f"{S['july_src']}, {pm.E2E}, {msrc}"
+    me = float(np.mean(mono["_exact_scores"]))
+    ungov = {c: float(np.mean(v["_exact_scores"])) for c, v in t10.items() if c.endswith("(no gov)")}
+    if ungov:
+        res["numbers"].append(num("ungoverned exact accuracy, lowest", min(ungov.values()), src, "computed",
+                                  None, which=min(ungov, key=ungov.get)))
+        res["numbers"].append(num("ungoverned exact accuracy, highest", max(ungov.values()), src, "computed",
+                                  None, which=max(ungov, key=ungov.get)))
+    for b in ("BGE", "BGE-M3", "Qwen3-0.6B", "Qwen3-4B", "BM25"):
+        g, u = t10.get(f"BEAR+{b} (gov)"), t10.get(f"{b} (no gov)")
+        if not (g and u):
+            continue
+        ge, ue = float(np.mean(g["_exact_scores"])), float(np.mean(u["_exact_scores"]))
+        res["numbers"].append(num(f"{b}: share of the monolithic-to-governed distance closed by ungoverned retrieval (exact)",
+                                  (ue - me) / (ge - me) if ge != me else float("nan"), src,
+                                  "computed: (ungov - mono) / (gov - mono)"))
+        for m in ("tool", "exact"):
+            st = paired(g[f"_{m}_scores"], u[f"_{m}_scores"])
+            res["numbers"].append(num(f"{b}: governed minus ungoverned, {m} accuracy (Table 10 rows)", st["delta"], src,
+                                      "computed: paired over queries", None, t=st["t"], p=st["p"], d=st["d"]))
+
+
+def ex_transfer_table(ctx, it, a, res):
+    for corpus, bench in (("toolbench", "ToolBench"), ("metatool", "MetaTool")):
+        rel = f"{pm.V}/transfer_{corpus}/backend_transfer_{corpus}_toolbench_ir_bert_based_uncased.json"
+        p, _ = ctx.find(rel, it["status"])
+        ref = {}
+        if p is None:
+            res["missing"].append(rel)
+        else:
+            d = ctx.json(p)
+            r = d["metrics"]["recall"]
+            pt = r.get("point_estimate", r.get("mean"))
+            ci = (r["ci_lower"], r["ci_upper"]) if "ci_lower" in r else None
+            res["numbers"].append(num(f"{bench}: ToolBench-IR (fine-tuned) Recall@5", pt, rel, "metrics/recall", ci))
+            ref = d.get("offshelf_reference_recall", {})
+        for b in ("BGE", "BGE-M3", "Qwen3-0.6B", "Qwen3-4B", "Nemotron", "BM25"):
+            _, uf = pm.row_files(bench, b)
+            row = tb_row(ctx, it, uf, bench, f"{b} (no gov)", res)
+            if row is None:
+                continue
+            c = row["cis"]["recall"]
+            extra = {}
+            if b in ref:
+                extra["hardcoded_in_eval_backend_transfer"] = ref[b]
+                if round(ref[b], 3) != round(c["point_estimate"], 3):
+                    res["notes"].append(f"{bench} {b}: the hardcoded off-the-shelf value {ref[b]} differs from the "
+                                        f"0.4.2 file ({c['point_estimate']:.4f}). Table 23 should print the file's value.")
+            res["numbers"].append(num(f"{bench}: {b} (no gov) Recall@5, off-the-shelf row", c["point_estimate"], uf,
+                                      f"{bench}/{b} (no gov)/cis/recall", (c["ci_lower"], c["ci_upper"]), **extra))
+
+
+def last_attempt(text: str) -> str:
+    i = text.rfind("### ================ attempt")
+    return text[i:] if i >= 0 else text
+
+
+def ex_retrieval_log(ctx, it, a, res):
+    p, _ = ctx.find(a["path"], it["status"])
+    if p is None:
+        res["missing"].append(a["path"])
+        return
+    cfg = None
+    found = 0
+    metric = re.compile(r"([A-Za-z0-9]+@\d+)=([\d.]+) \[([\d.]+), ([\d.]+)\]")
+    for ln in last_attempt(ctx.text(p)).splitlines():
+        h = re.match(r"^(\S.*\(\$\\alpha\s*=\s*[\d.]+\$\)):\s*$", ln)
+        if h:
+            cfg = h.group(1).replace("$\\alpha", "alpha").replace("$", "")
+            continue
+        m = re.match(r"^\s+(Strict|Relaxed):\s+(.*)$", ln)
+        if m and cfg:
+            for k, v, lo, hi in metric.findall(m.group(2)):
+                res["numbers"].append(num(f"{a['label']}: {cfg}, {m.group(1)} {k}", float(v), a["path"],
+                                          "log line (last attempt)", (float(lo), float(hi))))
+                found += 1
+    if not found:
+        res["notes"].append(f"{a['path']}: no metric lines found")
+
+
+def ex_tool_scaling_log(ctx, it, a, res):
+    p, _ = ctx.find(a["path"], it["status"])
+    if p is None:
+        res["missing"].append(a["path"])
+        return
+    t = last_attempt(ctx.text(p))
+    src = a["path"]
+    for size, pr, plo, phi, rc, rlo, rhi, leak, scen in re.findall(
+            r"Corpus size:\s*(\d+) tools \| Precision: ([\d.]+) \[([\d.]+), ([\d.]+)\] \| Recall: ([\d.]+) "
+            r"\[([\d.]+), ([\d.]+)\] \| No cross-domain leaks: (\w+) \| Scenarios: (\d+)", t):
+        res["numbers"].append(num(f"Table 26: {size} tools, precision", float(pr), src, "log line", (float(plo), float(phi))))
+        res["numbers"].append(num(f"Table 26: {size} tools, recall", float(rc), src, "log line", (float(rlo), float(rhi))))
+        res["numbers"].append(num(f"Table 26: {size} tools, scenarios", int(scen), src, "log line", None,
+                                  no_cross_domain_leaks=leak))
+    for name, k, tok, sav in re.findall(r"^\s+(\S[^.]*?)\.{2,}\s*(\d+) tools \|\s*(\d+) tokens \| savings: (\d+)%", t, re.M):
+        res["numbers"].append(num(f"Table 27: {name}, tools", int(k), src, "log line"))
+        res["numbers"].append(num(f"Table 27: {name}, tokens", int(tok), src, "log line"))
+        res["numbers"].append(num(f"Table 27: {name}, savings %", int(sav), src, "log line"))
+    m = re.search(r"All-tools baseline: (\d+) tools, (\d+) tokens", t)
+    if m:
+        res["numbers"].append(num("Table 27: all-tools baseline, tokens", int(m.group(2)), src, "log line",
+                                  None, tools=int(m.group(1))))
+    m = re.search(r"Average token savings: (\d+)%", t)
+    if m:
+        res["numbers"].append(num("Table 27: average savings %", int(m.group(1)), src, "log line"))
+
+
+def ex_novel_mcnemar(ctx, it, a, res):
+    """Novel-department recall, BEAR vs CPA. McNemar as evals/compute_petsim_stats.py computes it
+    (counts from the rates, maximum concordance, continuity-corrected chi-square), here from the CSV."""
+    from scipy import stats
+    p, _ = ctx.find(a["path"], it["status"])
+    if p is None:
+        res["missing"].append(a["path"])
+        return
+    with open(p, newline="", encoding="utf-8") as f:
+        rows = list(csv.DictReader(f))
+    for r in rows:
+        n = int(float(r["num_novel_queries"]))
+        br, cr = float(r["bear_novel_recall"]), float(r["cpa_novel_recall"])
+        bk, ck = round(br * n), round(cr * n)
+        ov = min(bk, ck)
+        b, c = bk - ov, ck - ov
+        if b + c:
+            chi2 = (abs(b - c) - 1) ** 2 / (b + c)
+            pv = float(1 - stats.chi2.cdf(chi2, df=1))
+        else:
+            chi2, pv = float("nan"), float("nan")
+        h = 2 * math.asin(math.sqrt(br)) - 2 * math.asin(math.sqrt(max(cr, 1e-9)))
+        res["numbers"].append(num(f"N={r['num_agents']}: novel recall BEAR {br:.3f} vs CPA {cr:.3f}, McNemar p", pv,
+                                  a["path"], "computed as evals/compute_petsim_stats.py (max concordance, continuity)",
+                                  None, n=n, b=b, c=c, chi2=chi2, cohens_h=h))
+
+
+def ex_latency(ctx, it, a, res):
+    """Machine-dependent timings, listed so the text can quote your machine's values."""
+    p, _ = ctx.find(a["path"], it["status"])
+    if p is None:
+        res["missing"].append(a["path"])
+        return
+    with open(p, newline="", encoding="utf-8") as f:
+        rows = list(csv.DictReader(f))
+    for r in rows:
+        for col in a["columns"]:
+            if col in r:
+                res["numbers"].append(num(f"N={r['num_agents']}: {col} (timing, machine-dependent)", float(r[col]),
+                                          a["path"], f"column {col}"))
+
+
 EXTRACTORS = {"flatten": ex_flatten, "text": ex_text, "csv": ex_csv, "toolbench_table": ex_toolbench_table,
               "cross_backend": ex_cross_backend, "mand_only": ex_mand_only, "e2e_rerun": ex_e2e_rerun,
-              "e2e_july": ex_e2e_july, "prompt_size": ex_prompt_size, "semantic_stats": ex_semantic_stats}
+              "e2e_july": ex_e2e_july, "prompt_size": ex_prompt_size, "semantic_stats": ex_semantic_stats,
+              "e2e_text": ex_e2e_text, "transfer_table": ex_transfer_table, "retrieval_log": ex_retrieval_log,
+              "tool_scaling_log": ex_tool_scaling_log, "novel_mcnemar": ex_novel_mcnemar, "latency": ex_latency}
 
 
 # ---------------------------------------------------------------------------
@@ -458,7 +714,9 @@ def to_md(out: dict) -> str:
             L += ["| Number | Value | 95% CI | Source | Where | Test |", "|---|---|---|---|---|---|"]
             for n in r["numbers"]:
                 ci = f"[{fmt(n['ci95'][0])}, {fmt(n['ci95'][1])}]" if "ci95" in n else ""
-                test = ", ".join(f"{k} {fmt(n[k])}" for k in ("t", "p", "d", "wilcoxon_p", "n", "queries_changed") if k in n)
+                test = ", ".join(f"{k} {fmt(n[k])}" for k in ("t", "p", "d", "wilcoxon_p", "bootstrap_p", "ratio", "n", "n10", "n01",
+                                                       "b", "c", "cohens_h", "queries_changed", "which",
+                                                       "hardcoded_in_eval_backend_transfer") if k in n)
                 L.append(f"| {n['name']} | {fmt(n['value'])} | {ci} | `{n['source']}` | {n['where']} | {test} |")
             L.append("")
         for t in r["text"]:

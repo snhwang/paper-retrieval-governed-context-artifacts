@@ -6,6 +6,8 @@ This folder reruns every result of the revised TIST paper, "Retrieval-Governed C
 - **needs Scott's run.** The paper attributes the number to BEAR 0.4.2 or to this revision. That covers every retrieval table, even where the value equals July's, and WP1, WP2, WP4, WP5, WP6, the Table 10 reruns and Hermes.
 - **Scott, previous version.** A July or August 2026 run that the revision keeps unchanged, with no claim that it ran on 0.4.2. Examples are the Table 10 rows whose lists did not change and the ReAct and scale tables. Their scripts are here (`55_`), but they need no rerun.
 
+`TEXT_FIXES.md` lists the numbers in the manuscript that no script can produce (stale text, prose estimates, no data), with a proposed change for each.
+
 BEAR is pinned at the public tag v0.4.2 (commit `0d0718a`). The scripts only wrap the evaluation code in `evals/` and `hermes/`. They never write into `results/` or anywhere else in this checkout. Every output goes to `$REPRO_OUT`, by default `~/tist-repro`.
 
 ## Prerequisites
@@ -42,16 +44,16 @@ All scripts take `--dry-run`. It prints every command the script would run and c
 
 | Script | Reproduces (MANIFEST ids) | Needs | Memory cap | GPU | Time | Outputs |
 |---|---|---|---|---|---|---|
-| `00_setup.sh` | nothing. Venv, BEAR clones, models, repo clones, `verify_env.py` | CPU, network once, 8360 `/health` | 4G | none | 15 min (models extra) | `setup/`, `wp0/`, `clones/` |
+| `00_setup.sh` | nothing. Venv, BEAR clones, models, repo clones, `verify_env.py`. `--update` brings existing clones up to `tist-r2` | CPU, network once, 8360 `/health` | 4G | none | 15 min (models extra), `--update` 1 min | `setup/`, `wp0/`, `clones/` |
 | `10_cpu_retrieval.sh` | Tables 6, 8, 9 (BGE, BGE-M3, Qwen3-0.6B, BM25, hash), Tables 7, 13 to 17, 23 to 28, mand-only rows, Table 10 lists, WP4 lists, mandatory tables (T06 to T09, T13 to T17, T23 to T28, X53, X54) | CPU only (8360 `/health` once) | 8G lexical, 20G dense, per step | none | 13 to 15 h (`--with-controls` adds 3 h) | `wp0/` |
 | `15_cpu_invariants_baselines.sh` | invariants, budget binding, BM25 checks, BGE-M3 leakage, WP5 BGE rows and CPA, the CPU embedding stores (T18, XBB, T19, T20) | CPU only | 8G to 24G per step | none | 4 to 6 h | `clones/artifacts-wp256/results/`, `emb-cache/` |
-| `20_gpu_local_embeddings.sh` | Qwen3-4B rows of Tables 6, 8, 9, its Table 10 and WP4 lists, the Qwen WP6 stores (T06, T08, T09, T20) | local GPU | 12G host | start at 67,000 MiB or less, stop above 80,000. Allocator 11.2 GiB (WP0), 6 or 12 GiB (WP6) | 2.5 h | `wp0/`, `emb-cache/` |
+| `20_gpu_local_embeddings.sh` | Qwen3-4B rows of Tables 6, 8, 9, its mand-only rows, its Table 10 and WP4 lists, the Qwen WP6 stores (T06, T08, T09, X54, T20) | local GPU | 12G host | start at 67,000 MiB or less, stop above 80,000. Allocator 11.2 GiB (WP0), 6 or 12 GiB (WP6) | 3 h | `wp0/`, `emb-cache/` |
 | `30_nemotron.sh` | Nemotron rows of Tables 6, 8, 9, its lists, the threshold diagnosis, the Nemotron WP2/WP6 stores, the Nemotron rows of Table 19 (T06, T08, T09, X42, T19, T20) | port 8360 | 4G to 16G per step | none locally | 2 to 3 h | `wp0/`, `emb-cache/`, `clones/artifacts-wp256/results/` |
 | `40_robustness_from_stores.sh` | tag noise, over-restriction, leakage, giveaways, mandatory coverage (T17b, T20) | CPU only, after 15, 20 and 30 | 8G to 16G per step | none | 1 h | `clones/artifacts-wp256/results/` |
 | `50_e2e_ollama.sh` | Table 10 rows rerun on 0.4.2 and the drift controls (T10a) | Ollama on 11434 | 4G client | start at 67,000 MiB or less, 81,000 before each row | 30 to 40 min | `e2e_rerun/` |
 | `55_e2e_previous_version.sh PART` | the previous-version runs: Table 10 July rows, monolithic row, Tables 11 and 12, Appendix A tags (T10b, T10c, T11, T12, AA). Optional | Ollama (Anthropic API for `tags-api`) | 16G client | as the Ollama model needs | 4 to 9 h per part | `previous/PART/` |
 | `60_hermes.sh STEP` | Hermes stage 1 and stage 2 (XH) | ports 8355 and 8360 | 16G grid, 4G to 8G otherwise | none locally | about 50 h of grids | `hermes/` |
-| `70_assemble.sh` | WP4 analysis, mandatory tables, prompt-size checks (T21, XE2E), then gathers everything | CPU only | 16G | none | 20 to 40 min | `assembled/` |
+| `70_assemble.sh` | WP4 analysis, mandatory tables, prompt-size checks, the derived numbers no eval script writes (`reproduce/derive/`, `evals/diag_gate_coverage.py`), then gathers everything (T21, XE2Eb, X33, X42s, XE2Ea, X53) | CPU only | 16G | none | 20 to 40 min | `derived/`, `assembled/` |
 | `80_figures.sh` | Figure 2 (fig:pipeline), drawn in TikZ (F2) | CPU, pdflatex, the paper repo | none | none | 1 min | `figures/` |
 | `90_verify.sh` | runs `verify.py` and `collect.py` | CPU only | 8G | none | a few minutes | `verify/`, `numbers/` |
 | `status.sh` | shows services, logs, the last run records and the card | nothing | none | reads the card | instant | none |
@@ -67,7 +69,7 @@ Run the windows in this order. Inside a window, run the scripts one after anothe
 | 1. CPU only | setup | `00_setup.sh --download-models` (once) | 15 min |
 | | WP0 retrieval | `10_cpu_retrieval.sh` | 13 to 15 h |
 | | WP1, WP5 CPU, BM25, BGE-M3, CPU stores | `15_cpu_invariants_baselines.sh` | 4 to 6 h |
-| 2. local GPU | Qwen3-4B lanes, Qwen stores | `20_gpu_local_embeddings.sh` | 2.5 h |
+| 2. local GPU | Qwen3-4B lanes, its mand-only rows, Qwen stores | `20_gpu_local_embeddings.sh` | 3 h |
 | 3. Nemotron (8360) | Nemotron rows, stores, WP5 | `30_nemotron.sh` | 2 to 3 h |
 | 4. CPU only | WP2, WP6 from the stores | `40_robustness_from_stores.sh` | 1 h |
 | 5. Ollama (11434) | Table 10 reruns | `50_e2e_ollama.sh` | 40 min |
@@ -79,6 +81,18 @@ Run the windows in this order. Inside a window, run the scripts one after anothe
 The total is about 80 hours of running, about 26 hours without Hermes. Windows 2, 3, 5 and 6 need the GPU or a server and wait for the model-server session's OK. `40_` needs the stores of 15, 20 and 30, so it comes after them although it uses only the CPU. `70_` and `90_` can run at any time. They assemble and check what exists so far, and list the rest as NOT RUN.
 
 `55_` is optional. Its parts rerun the previous-version results, which the revision keeps.
+
+### Before a later window: update the clones
+
+Every run happens in clones of this repo below `$REPRO_OUT`, made by `00_setup.sh`. When `tist-r2` gains commits between windows (a fix to the kit or to `evals/`), bring the clones up to date before the next window:
+
+```bash
+git -C /path/to/this/checkout log --oneline -3     # the commits the clones will get
+bash reproduce/00_setup.sh --update --dry-run      # what it would do
+bash reproduce/00_setup.sh --update
+```
+
+`--update` fast-forwards every existing clone to `tist-r2` of this checkout and does nothing else. Outputs of earlier runs stay where they are. It refuses while any kit script, WP0 lane or WP7 grid is running, and for a clone with local changes outside `results/`. It also refuses when a new commit touches a result file that a run of yours changed in that clone. The run record lists each clone's old and new commit.
 
 ## Before you run
 
@@ -196,7 +210,7 @@ Some paths are fixed, because the wrapped runners read them:
 ## Known gaps
 
 `MANIFEST.md` lists every gap: results with no script, numbers worked out by hand, logs without JSON, and scripts that hold personal paths or LAN addresses. In short:
-- A few in-text numbers have no script. Examples are the monolithic paired statistics in the end-to-end text, two latency figures and the "2,629" in Section 5.3.
+- A few numbers in the text have no possible script (stale text, prose estimates, no data). `TEXT_FIXES.md` lists them with a proposed change. Every other number is computed, by an eval script, by `reproduce/derive/`, or by `collect.py` from the per-query arrays.
 - `evals/wp0_v040/relaunch_042.sh` cannot be used. It names personal paths and copies scripts from a session folder. The kit runs the committed WP0 scripts, which are identical to those copies, with the same lane settings.
 - `evals/run_wp256.sh` labels its v042 modes with the candidate sha `9d085b4` in `BEAR_SOURCE_SHA`. The code is the same as v0.4.2. The result files also record `bear_export_sha` from `BEAR_GIT_SHA`, and the run record holds the real sha.
 

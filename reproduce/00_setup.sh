@@ -32,10 +32,13 @@
 #   $REPRO_OUT/runlog/.
 #
 # Usage:
-#   bash reproduce/00_setup.sh [--dry-run] [--download-models] [--update-clones]
-#                              [--configure-slice] [--skip-verify]
+#   bash reproduce/00_setup.sh [--dry-run] [--download-models] [--configure-slice] [--skip-verify]
+#   bash reproduce/00_setup.sh --update [--dry-run]
 #   --configure-slice  run: systemctl --user set-property tist.slice MemoryMax=40G MemorySwapMax=0
-#   --update-clones    fast-forward existing clones to this checkout's commit
+#   --update           only bring every existing clone up to tist-r2 of this checkout (a fast-forward
+#                      merge), before a later window. It refuses while any kit step, WP0 lane or WP7
+#                      grid runs, and for a clone with local changes outside results/. Commit first,
+#                      in this checkout, whatever the clones should get. Outputs of earlier runs stay.
 set -uo pipefail
 source "$(dirname "$0")/lib/common.sh"
 repro_parse_args "$@"
@@ -44,7 +47,7 @@ DOWNLOAD=0 UPDATE=0 CONFSLICE=0 SKIPVERIFY=0
 for a in "${ARGS_REST[@]}"; do
   case $a in
     --download-models) DOWNLOAD=1 ;;
-    --update-clones) UPDATE=1 ;;
+    --update|--update-clones) UPDATE=1 ;;
     --configure-slice) CONFSLICE=1 ;;
     --skip-verify) SKIPVERIFY=1 ;;
     *) die "unknown option $a (see --help)" ;;
@@ -62,6 +65,44 @@ REQUIRED_IN_CLONE="evals/wp0_v040/run_wp0_v040.sh evals/wp0_v040/run_e2e_rerun.s
 evals/wp0_v040/verify_env.py evals/wp0_v040/assemble_v040.py evals/run_wp256.sh evals/run_v042_rerun.sh
 evals/run_v042_wp5.sh evals/run_qwen_gpu.sh evals/gpu_guard.sh evals/tistr2_common.py
 evals/rerun_filter_baseline_bear_cached.py hermes/REPRODUCE.md hermes/scripts/env.sh reproduce/lib/common.sh"
+BR=${REPRO_BRANCH:-tist-r2}
+
+# ---------------------------------------------------------------------------
+# --update: fast-forward the clones, nothing else.
+update_clone() {
+  local d=$1 old new local_changes f missing=""
+  if [ ! -d "$d/.git" ]; then
+    say "no clone $d yet (a full 00_setup.sh run makes it)"
+    return 0
+  fi
+  local_changes=$(git -C "$d" status --porcelain --untracked-files=no | awk '{print $2}'                   | grep -vE '^(results|evals/results)/' || true)
+  [ -z "$local_changes" ] || die "$d has local changes outside results/, so it is not updated:
+$local_changes"
+  old=$(git -C "$d" rev-parse --short HEAD)
+  run_cmd "fetch-$(basename "$d")" -C "$d" -- git fetch -q "$ART" "$BR" || die "could not fetch $BR from $ART into $d"
+  run_cmd "merge-$(basename "$d")" -C "$d" -- git merge -q --ff-only FETCH_HEAD     || die "could not fast-forward $d. A new commit may touch a result file a run of yours changed (see git -C $d status)."
+  [ "$DRY_RUN" = 1 ] && return 0
+  new=$(git -C "$d" rev-parse --short HEAD)
+  for f in $REQUIRED_IN_CLONE; do [ -e "$d/$f" ] || missing+=" $f"; done
+  [ -z "$missing" ] || die "$d still lacks:$missing (commit them in $ART first)"
+  say "$d: $old -> $new"
+  record_note "clone $d updated from $old to $new"
+}
+if [ "$UPDATE" = 1 ]; then
+  say "update: every clone below $REPRO_OUT to $BR of $ART ($(git -C "$ART" rev-parse --short "$BR"))"
+  dirty=$(git -C "$ART" status --porcelain --untracked-files=no -- evals hermes reproduce requirements.txt)
+  [ -z "$dirty" ] || warn "this checkout has uncommitted changes under evals/, hermes/ or reproduce/. The clones get the committed state only:
+$dirty"
+  activity=$(kit_activity)
+  [ -z "$activity" ] || die "a step is running, so the clones stay as they are. Wait for it to end:
+$activity"
+  for c in artifacts artifacts-dense artifacts-nemo artifacts-gpu artifacts-attr artifacts-track; do
+    update_clone "$WP0_DIR/$c"
+  done
+  for d in "$WP256_CLONE" "$HERMES_CLONE" "$PREV_CLONE"; do update_clone "$d"; done
+  REPRO_OK_NOTE="clones updated to $BR $(git -C "$ART" rev-parse --short "$BR")"
+  exit 0
+fi
 
 # ---------------------------------------------------------------------------
 say "1. tools"
@@ -171,25 +212,19 @@ else
 fi
 
 # ---------------------------------------------------------------------------
-say "6. clones of this repo (branch $(git -C "$ART" rev-parse --abbrev-ref HEAD), commit $(git -C "$ART" rev-parse --short HEAD))"
+say "6. clones of this repo (branch $BR, commit $(git -C "$ART" rev-parse --short "$BR"))"
 dirty=$(git -C "$ART" status --porcelain --untracked-files=no -- evals hermes reproduce requirements.txt)
 [ -z "$dirty" ] || warn "this checkout has uncommitted changes under evals/, hermes/ or reproduce/. Clones get the committed state only:
 $dirty"
-BR=$(git -C "$ART" rev-parse --abbrev-ref HEAD)
 make_clone() {
   local d=$1
-  if [ -d "$d/.git" ]; then
-    if [ "$UPDATE" = 1 ]; then
-      [ -z "$(git -C "$d" status --porcelain --untracked-files=no)" ] || die "$d has tracked changes, so it is not updated"
-      run_cmd "update-$(basename "$d")" -- git -C "$d" pull -q --ff-only "$ART" "$BR" || die "could not fast-forward $d"
-    fi
-  else
+  if [ ! -d "$d/.git" ]; then
     run_cmd "clone-$(basename "$d")" -- git clone -q --branch "$BR" "$ART" "$d" || die "could not clone into $d"
   fi
   [ "$DRY_RUN" = 1 ] && return 0
   local f missing=""
   for f in $REQUIRED_IN_CLONE; do [ -e "$d/$f" ] || missing+=" $f"; done
-  [ -z "$missing" ] || die "$d lacks:$missing. Commit them in $ART, then rerun with --update-clones."
+  [ -z "$missing" ] || die "$d lacks:$missing. Commit them in $ART, then run 00_setup.sh --update."
   check_clone "$d"
 }
 for c in $WP0_CLONES; do make_clone "$WP0_DIR/$c"; done

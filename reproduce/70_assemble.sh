@@ -9,6 +9,13 @@
 #     Mistral-Nemo and Gemma 4 tokenizers) and the BM25 list diff (e2e_list_diff.py)
 #   with --with-controls (needs 10_ --with-controls): compare_042.py (every cell against
 #     the published 0.1.10 value, the Summary of Differences) and fallback_audit.py
+#   the numbers no eval script writes (part derived, reproduce/derive/ and one evals
+#     diagnostic), each a JSON with its sources. No model, no server:
+#       derive/metatool_split.py       Sec 4.2, 20,614 single-tool and 497 multi-tool queries
+#       derive/e2e_name_collisions.py  Table 10 monolithic row, 14 names over 22 endpoints
+#       derive/composer_tests.py       Sec 3.3, the eight emit_tool_summary tests in BEAR v0.4.2
+#       derive/tool_summary_tokens.py  Sec 3.3, tokens the tool summary adds per tool
+#       evals/diag_gate_coverage.py    Sec 5.3, none of the 2,629 gold APIs gated out
 # Then it gathers everything into $REPRO_OUT/assembled/, laid out like this repo, so
 # verify.py and collect.py can read it:
 #   results/v042/           evals/wp0_v040/assemble_v040.py (WP0 stage, lists, WP4,
@@ -16,6 +23,7 @@
 #   results/*               new result files of 15_ and 40_ (the artifacts-wp256 clone)
 #   hermes/results/         $REPRO_OUT/hermes/analysis (60_)
 #   (previous version)      $REPRO_OUT/previous/<part>/ (55_)
+#   results/derived/        $REPRO_OUT/derived (part derived)
 #   figures/                $REPRO_OUT/figures (80_)
 # Parts whose runs have not happened yet are skipped with a line saying so.
 # Prerequisites: the runs it gathers. 00_setup.sh for the venv and tokenizers.
@@ -25,16 +33,16 @@
 #   $REPRO_OUT/assembled/.
 #
 # Usage:
-#   bash reproduce/70_assemble.sh [--dry-run] [--with-controls] [--only "wp4 mandatory e2e-checks compare gather"]
+#   bash reproduce/70_assemble.sh [--dry-run] [--with-controls] [--only "wp4 mandatory e2e-checks derived compare gather"]
 set -uo pipefail
 source "$(dirname "$0")/lib/common.sh"
 repro_parse_args "$@"
 
-PARTS="wp4 mandatory e2e-checks gather"
+PARTS="wp4 mandatory e2e-checks derived gather"
 set -- "${ARGS_REST[@]}"
 while [ $# -gt 0 ]; do
   case $1 in
-    --with-controls) PARTS="wp4 mandatory e2e-checks compare gather" ;;
+    --with-controls) PARTS="wp4 mandatory e2e-checks derived compare gather" ;;
     --only) PARTS=$2; shift ;;
     *) die "unknown option $1 (see --help)" ;;
   esac
@@ -107,6 +115,16 @@ for part in $PARTS; do
         --a "$WP0_DIR/artifacts/results/wp0/lists_v0110/e2e" --b "$WP0_DIR/artifacts/results/wp0/lists_v042/e2e" \
         --out "$WP0_DIR/e2e_checks/e2e_list_diff_lex_v0110_v042.json"
       ;;
+    derived)
+      DV=$REPRO_OUT/derived
+      [ "$DRY_RUN" = 1 ] || [ -d "$A0/reproduce/derive" ] || die "$A0 has no reproduce/derive (run 00_setup.sh --update)"
+      [ "$DRY_RUN" = 1 ] || mkdir -p "$DV"
+      rstep derive-metatool-split -C "$A0" -- capped 4G -- "$REPRO_PY" reproduce/derive/metatool_split.py         --out "$DV/metatool_split.json"
+      rstep derive-e2e-name-collisions -C "$A0" -- capped 4G -- "$REPRO_PY" reproduce/derive/e2e_name_collisions.py         --out "$DV/e2e_name_collisions.json"
+      rstep derive-composer-tests -C "$A0" -- capped 2G -- "$REPRO_PY" reproduce/derive/composer_tests.py         --bear "$BEAR_SRC" --out "$DV/composer_tests.json"
+      rstep derive-tool-summary-tokens -C "$A0" -- capped 4G -- "$REPRO_PY" reproduce/derive/tool_summary_tokens.py         --out "$DV/tool_summary_tokens.json"
+      rstep derive-gate-coverage -C "$A0" -- capped 4G -- "$REPRO_PY" evals/diag_gate_coverage.py         --out "$DV/gate_coverage.json"
+      ;;
     compare)
       if [ "$DRY_RUN" = 0 ] && [ ! -d "$ST/v042L" ]; then
         warn "compare skipped: it needs the control lanes (10_ --with-controls)"; SKIPPED+=(compare); continue
@@ -141,13 +159,16 @@ for part in $PARTS; do
       else
         warn "no WP0 runs yet ($ST/v042)"; SKIPPED+=(wp0)
       fi
-      # New result files of the WP1/2/5/6 clone (untracked files under results/).
+      # Result files your runs wrote in the WP1/2/5/6 clone: new files, and files
+      # at a committed path whose committed copy was moved aside (git sees them as modified).
       if [ -d "$WP256_CLONE/.git" ]; then
         n=0
         while IFS= read -r rel; do
+          [ -f "$WP256_CLONE/$rel" ] || continue
           if [ "$DRY_RUN" = 0 ]; then mkdir -p "$ASSEMBLED/$(dirname "$rel")"; cp -p "$WP256_CLONE/$rel" "$ASSEMBLED/$rel"; fi
           n=$((n + 1))
-        done < <(git -C "$WP256_CLONE" ls-files --others --exclude-standard -- results)
+        done < <({ git -C "$WP256_CLONE" ls-files --others --exclude-standard -- results
+                   git -C "$WP256_CLONE" ls-files -m -- results; } | sort -u)
         say "copied $n new result file(s) of $WP256_CLONE"
       else
         warn "no clone $WP256_CLONE"; SKIPPED+=(wp256)
@@ -169,6 +190,12 @@ for part in $PARTS; do
           [ "$DRY_RUN" = 1 ] || cp -rp "$p". "$ASSEMBLED/"
           say "copied $p"
         done
+      fi
+      if [ -d "$REPRO_OUT/derived" ]; then
+        [ "$DRY_RUN" = 1 ] || { mkdir -p "$ASSEMBLED/results/derived"; cp -p "$REPRO_OUT"/derived/*.json "$ASSEMBLED/results/derived/" 2>/dev/null; }
+        say "copied $REPRO_OUT/derived"
+      else
+        SKIPPED+=(derived)
       fi
       if [ -d "$REPRO_OUT/figures" ]; then
         [ "$DRY_RUN" = 1 ] || { mkdir -p "$ASSEMBLED/figures"; cp -p "$REPRO_OUT"/figures/*.pdf "$ASSEMBLED/figures/" 2>/dev/null; }

@@ -8,12 +8,20 @@ APIs being gated out. This script quantifies that directly with set logic (no
 model, no retrieval), telling us whether the drop is a real over-gating effect
 or a construction artifact.
 
-Run: python evals/diag_gate_coverage.py
+Run: python evals/diag_gate_coverage.py [--out counts.json]
+--out also writes the counts as JSON (reproduce/ reads it for Section 5.3).
 """
+import argparse
+import json
+from pathlib import Path
+
 from eval_toolbench import load_toolbench_corpus_and_queries
 
 
 def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--out", type=Path, default=None, help="also write the counts as JSON")
+    args = ap.parse_args()
     corpus, queries, _category_map = load_toolbench_corpus_and_queries()
     # Authoritative gate tag per corpus item: its required_tags.
     id_req = {ic.id: set(ic.scope.required_tags or []) for ic in corpus}
@@ -58,6 +66,14 @@ def main():
     else:
         print("\nNo gold APIs are gated out. The 2.7pp drop is NOT gold "
               "exclusion -- look to retrieval internals / scoring.")
+    if args.out:
+        args.out.parent.mkdir(parents=True, exist_ok=True)
+        args.out.write_text(json.dumps({
+            "script": "evals/diag_gate_coverage.py", "queries": n_q, "total_gold_apis": tot_gold,
+            "queries_with_gold_gated_out": q_with_drop, "gold_gated_out": tot_drop,
+            "gold_not_in_corpus": not_in_corpus,
+            "examples": [{"context_tags": c, "gated_out": [list(x) for x in d]} for c, d in examples]},
+            indent=1), encoding="utf-8")
 
 
 if __name__ == "__main__":
