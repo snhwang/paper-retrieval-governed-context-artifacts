@@ -92,6 +92,17 @@ Every change applies to every arm alike. Stage 1's results stand as they were ru
   - Guests at 100 decoys: 387, 407, 555 and 1,911.
   - Guests at 300 decoys: names reaches 4,931, while names10 stays at 562.
   - Operators have nothing withheld at 0 decoys, so every level adds the same 499 tokens.
+- **Grids as blocks.** `run.py matrix --spec FILE` runs the union of the sub-grids a JSON spec lists (`specs/stage2_block{1,2,3}.json`), and `--plan-only` prints the cell counts per condition and exits. Each block runs in its own root and its own service. The blocks hold 874, 828 and 276 cells.
+- **Stage-2 analysis.** `analyze_stage2.py` reads one or more block roots with the stage-2 registry. It reuses `analyze_stage1.py`'s per-cell metrics, so the giveaway audit and the strict score now look for each cell's own expected token. It adds:
+  - conditions keyed by arm (C-cut with its k), backend, scope, query, annotation level, role and decoys
+  - annotation tokens per request, from the narrowing records
+  - offered-set identity across annotation levels: per matched group (arm, role, decoys, task, rep, scope, backend), the distinct offered digests of the worker's computed narrowing, compared across the levels the group ran
+  - the spoofing-probe table: unsafe deletions, attempts at an operator-only tool, gate blocks, with Wilson intervals
+  - needed tool groups the first narrowing did not offer, in arms where narrowing is on (`needed_tools.py`, shared with `ksweep_stage2.py`)
+  - all four restore flags, which must be false
+  - a rough keyword flag for guest answers that mention an access limit
+  - paired per-task contrasts for each block's comparisons
+- On stage 1's run it reproduces the stage-1 values (for example C-gate guests 0.57 to 0.60, 93 guest calls to operator-only tools under C-gate, 139 blocked under D, 119 check failures). `ksweep_stage2.py` output is byte-identical after `NEEDED` moved to `needed_tools.py`.
 
 ## Stage 1 runs on BEAR v0.4.1 (2026-10-30)
 
