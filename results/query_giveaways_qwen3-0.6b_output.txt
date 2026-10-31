@@ -1,0 +1,48 @@
+=== Query giveaways (WP6): identifiers that point to exactly one tool ===
+Common-word lexicon: 22501 whole words (BERT uncased vocabulary).
+
+toolbench: 1110 tools, 3561 unique identifiers ({'tool_name': 520, 'parameter': 443, 'term': 1926, 'endpoint': 672}), 1100 queries
+  giveaway queries, names only (tool, endpoint, parameter): 176 (0.160)
+  giveaway queries, names or terms: 266 (0.242); by kind {'endpoint': 34, 'tool_name': 133, 'parameter': 18, 'term': 144}; lenient tool names 362
+  queries naming only another tool: 68
+    e.g. "I'm planning a golf tournament and I need information about the players. Can you provide m" -> [('scorecards', 'Live Golf Data', 'endpoint')]
+    e.g. "I'm planning a family vacation in Italy. Please give me a list of Flixbus stations and sea" -> [('flixbus', 'Flixbus', 'tool_name')]
+    e.g. "I'm helping my friend with their language studies, and we need assistance with spelling ou" -> [('spellout', 'Spellout', 'tool_name')]
+    e.g. "I just completed editing a video on Magisto and I'm excited to download the final movie. C" -> [('magisto', 'Magisto', 'tool_name'), ('vsid', 'Magisto', 'parameter')]
+    e.g. "Hey there! I'm curious about a specific transaction on the Binance Smart Chain. Can you pr" -> [('testnet', 'Binance Smart Chain', 'term'), ('binance smart chain', 'Binance Smart Chain', 'tool_name')]
+    e.g. "I'm organizing a company event in Santa Monica, CA and I need to find rental properties fo" -> [('zestimate', 'Zillow_v2', 'term'), ('rent zestimate and comparable properties', 'Zillow_v2', 'endpoint')]
+  Qwen3-0.6B         giveaway (n=266): ungated 0.744 gate 0.801 published 0.790 | no giveaway (n=834): ungated 0.677 gate 0.768 published 0.766 | effect diff (gate) -0.034 [-0.059, -0.008]
+
+metatool_tags: 199 tools, 500 unique identifiers ({'tool_name': 125, 'term': 375}), 21111 queries
+  giveaway queries, names only (tool, endpoint, parameter): 460 (0.022)
+  giveaway queries, names or terms: 2225 (0.105); by kind {'term': 1939, 'tool_name': 460}; lenient tool names 2610
+  queries naming only another tool: 1298
+    e.g. 'I want to surprise my partner with some flowers. Are there any coupon codes available for ' -> [('coupon', 'Discount', 'term')]
+    e.g. "I'm planning to buy some books. Can you help me find any coupon codes for online bookstore" -> [('coupon', 'Discount', 'term')]
+    e.g. "I'm planning to buy a new laptop. Can you find any coupon codes for Best Buy?" -> [('coupon', 'Discount', 'term')]
+    e.g. 'I need to buy some clothes from H&M. Can you find any coupon codes for me?' -> [('coupon', 'Discount', 'term')]
+    e.g. "I'm in the mood for some online shopping. Do you have any coupon codes for clothing stores" -> [('coupon', 'Discount', 'term')]
+    e.g. 'Do you have any suggestions for popular and reliable websites that cater specifically to p' -> [('coupon', 'Discount', 'term')]
+  Qwen3-0.6B         giveaway (n=2225): ungated 0.993 gate 0.998 published 0.997 | no giveaway (n=18886): ungated 0.856 gate 0.974 published 0.974 | effect diff (gate) -0.114 [-0.119, -0.108]
+
+Wrote results/query_giveaways_qwen3-0.6b.json
+Elapsed 9s
+
+=== Reproducibility ===
+Timestamp (UTC): 2026-10-31T17:33:50Z
+Command line:    evals/eval_query_giveaways.py --tag-noise results/tag_noise_qwen3-0.6b.json --output results/query_giveaways_qwen3-0.6b.json --log-file results/query_giveaways_qwen3-0.6b_output.txt
+Python:          3.12.13 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
+numpy:           2.2.6
+scipy:           1.17.1
+bear:            0.4.2
+git commit:      5ac5229114282ef7f0ebf10efd0f7dc1f6fcb785
+git status:      unknown (git status failed or timed out)
+git branch:      tist-r2
+
+  eval: query_giveaways
+  bear_version: 0.4.2
+  bear_path: /home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/bear/__init__.py
+  bear_source_sha: 0d0718a39a0b0788ef5cca4689352462b830494c
+  bear_direct_url: file:///home/snhwang/tist-evals/bear-v0.4.2
+  bear_export_sha: 0d0718a39a0b0788ef5cca4689352462b830494c
+===
