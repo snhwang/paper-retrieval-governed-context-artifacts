@@ -450,7 +450,7 @@ def cell_metrics(d: dict, operator_only: set, decoys: set, known: set) -> dict:
                                      or "restore_below_threshold" not in f),
         "admitted_required_tags": rt_admissions,
         "narrowing_not_retrieved": not_retrieved,
-        "retrieval_records": sum(len(r.get("retrievals") or []) for r in recs
+        "retrieval_records": sum(len(r.get("retrievals") or []) for r in recs_all
                                  if r.get("schema") == "bear.turn/1"),
         **{f"att_{k}": att.get(k, 0) for k in ATTEMPTS},
         "cell": d["cell"], "arm": d["arm"], "task": d["task"], "rep": d["rep"],

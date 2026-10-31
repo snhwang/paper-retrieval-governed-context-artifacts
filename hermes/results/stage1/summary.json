@@ -533,7 +533,7 @@
   "restore_flags_missing": 0
  },
  "backfill_bug_exposure": {
-  "retrieval_records": 3568,
+  "retrieval_records": 3695,
   "admitted_by_required_tags": 0,
   "narrowing_entries_not_retrieved": 0,
   "cells_with_any": []
