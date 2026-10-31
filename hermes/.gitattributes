@@ -1,0 +1,3 @@
+# The WP7 scripts and cell materials run in WSL. Keep LF line endings in every checkout, so
+# bash can run the scripts and the material hashes match scripts/expected/.
+* text=auto eol=lf

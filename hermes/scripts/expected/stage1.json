@@ -1,0 +1,51 @@
+{
+ "schema": "wp7.expected_fingerprint/1",
+ "stage": "stage1",
+ "source": "reference fingerprint and provenance.json of the agent-run stage1 root, 2026-10-30T11:13:16.035+00:00",
+ "harness_commit": "9820f8a8baa2a4522688e0dd09bb805bcd1bf94d",
+ "fingerprint": {
+  "sglang_version": "0.5.21",
+  "model_path": "unsloth/Qwen3.8-27B-NVFP4",
+  "model_revision": "f0b7c9e722f5565102fff8481c99e4d86ae099c7",
+  "sglang_settings": {
+   "quantization": null,
+   "kv_cache_dtype": "fp8_e4m3",
+   "context_length": null,
+   "random_seed": 1,
+   "enable_cache_report": true,
+   "tool_call_parser": "qwen3_coder",
+   "reasoning_parser": "qwen3",
+   "dtype": "auto",
+   "tp_size": 1
+  },
+  "sglang_image_id": "sha256:b1259f3ea3275f66237c498ea388919729018bc9f01c3d638391e06e2cf3f469",
+  "embedder_model_id": "nvidia/llama-nemotron-embed-vl-1b-v2",
+  "embedder_dim": 2048,
+  "embedder_image_id": "sha256:6eec0ff4a774ecabdc929753ca6ba9c79a00bc69d07fef528ffe376fb0c341b8",
+  "bear_version": "0.4.1",
+  "bear_sha": "fa87fc554fd394ce52b09ffa8121d36fc3758f28",
+  "hermes_commit": "d923a5eb487a17c0a68801bba9ef0f56c81040a8",
+  "hermes_dirty": 0
+ },
+ "files_sha256": {
+  "harness/worker.py": "687051be1246dd1ca2f8c1ec741594cf4a661722c688c973f0123e3a9fb647f4",
+  "harness/tasks.py": "8cadd86c3907d98d9a3290154a90d2c418a47463bbdadb79e7dc5df188712cd4",
+  "harness/sandbox.py": "8f180b42fb758918ee79556228a62f9b105628eb7959fa2f05a25d96e9ffb05f",
+  "toolperf/ab_eval.py": "a585ce2613506316d12c7717af2b5ca0b72df219ffa46c5cc32c0daeba461d96",
+  "hermes/worker/worker_local.py": "e2b6c4f4ea691248b5949bdc11157985a6ef0f74f00456cd90dfca5ffa6b1893",
+  "hermes/worker/wp7_tasks.py": "079b6bf9ea3d4143df86e14825b5a225448802c52513d092624df3852ba6895f",
+  "hermes/arms.py": "b27e37f0dcc2a97d9acdfb96c6c2cb36ffe30bcd77f54d12acf27b1c91d956e0",
+  "hermes/run.py": "ca73f7be5e3ecddfc2209b668b29b0d2d8547a5ce9c77078a9e0f21d0291abbb",
+  "hermes/provenance.py": "2905d241ff898c2bca77af89df619c71b4e1452d9dce5a7b428595f457a5e319",
+  "hermes/checks.py": "47f161e654a8c163096265fa0a103624227fc22749b16bf090344190a3aba263",
+  "hermes/sandbox_bridge.py": "7703643a3bee8d79b3c256fdf93afd1d583cfb4019950ad3036491690a2ae7bf",
+  "hermes/sandbox_redteam.py": "56ce1b0014c2ddf83c9dc551483fe45a033865782a358a62f5e7ffdbf549696f",
+  "hermes/corpus/base/tools.yaml": "d0727ea85dbb4219d87de66fae4b6068594494904be1b3bf9dc30cefb9280554",
+  "hermes/corpus/decoys/decoys-100.yaml": "bd8106ea5fe2aee1ac4f934569316a6806a7acb65668c357df31cbdbcbdec36f",
+  "hermes/corpus/decoys/decoys-300.yaml": "890864ee1eff81185267e43c7ec5b10a4fc846f5f2646e149b34c14101ef5313",
+  "hermes/decoys/sample.json": "963a07d1e9e874aaf02765d7bddd2eb460092dc8b8e43086cc08b41d07da816f",
+  "hermes/decoys/wp7_decoys/__init__.py": "67904ec9e7f13c3d0289487238aba948104bb07c6c093c684a53b106b1c66799",
+  "hermes/decoys/wp7_decoys/plugin.yaml": "064d000c66293f6149e4721320a677d6a0febf5e29c55c0f17f6a9341c96951c",
+  "hermes/registry/harness_registry.json": "8ca6522ab7988fc6f778c847563c4dfab0e548a47031fcb8e02e069f0fc3962d"
+ }
+}

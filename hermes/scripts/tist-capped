@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+# Copy of ~/bin/tist-capped as used for every WP7 run (2026-10-30 onward). Install it with
+#   install -m 755 tist-capped ~/bin/tist-capped
+# and cap the slice once with
+#   systemctl --user set-property tist.slice MemoryMax=40G
+#
+# Run a TIST job inside tist.slice, under a kernel-enforced memory cap.
+#
+#   tist-capped [--mem 24G] -- cmd args...                  foreground scope
+#   tist-capped [--mem 24G] --service NAME -- cmd args...   detached user service
+#
+# The slice itself is capped (systemctl --user set-property tist.slice
+# MemoryMax=40G), so all TIST jobs together stay inside that budget. A job over
+# its cap is killed alone, never the VM. A service survives its wsl.exe exiting,
+# but only while the distro stays up (check the wsl-keepalive task first).
+# Service logs: journalctl --user -u NAME.  Stop: systemctl --user stop NAME.
+set -euo pipefail
+
+export XDG_RUNTIME_DIR="/run/user/$(id -u)"
+export DBUS_SESSION_BUS_ADDRESS="unix:path=$XDG_RUNTIME_DIR/bus"
+
+mem=24G
+unit=""
+while [ $# -gt 0 ]; do
+  case "$1" in
+    --mem) mem=$2; shift 2 ;;
+    --service) unit=$2; shift 2 ;;
+    --) shift; break ;;
+    *) break ;;
+  esac
+done
+[ $# -gt 0 ] || { echo "usage: tist-capped [--mem 24G] [--service NAME] -- cmd ..." >&2; exit 2; }
+
+caps=(--slice=tist.slice -p "MemoryMax=$mem" -p MemorySwapMax=0)
+
+if [ -z "$unit" ]; then
+  exec systemd-run --user --scope --quiet "${caps[@]}" -- "$@"
+fi
+
+# A service does not inherit the caller's environment. Forward the variables
+# the eval jobs rely on.
+envs=(-E "PATH=$PATH" -E "HOME=$HOME")
+while IFS='=' read -r name _; do
+  case "$name" in
+    WP7_*|WP0_*|TIST_*|BEAR_*|ABDEFER_*|NEMOTRON_*|CUDA_*|OMP_*|MKL_*|HF_*|TRANSFORMERS_*|PYTHON*|VIRTUAL_ENV|LANG|LC_*|TZ)
+      envs+=(-E "$name=${!name}") ;;
+  esac
+done < <(env)
+
+exec systemd-run --user --unit="$unit" --collect --quiet "${caps[@]}" \
+  --working-directory="$PWD" "${envs[@]}" -- "$@"
