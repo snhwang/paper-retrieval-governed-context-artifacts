@@ -1,0 +1,115 @@
+### ================ attempt 2026-10-30T09:44:41-04:00 ================
+### step:        fb_gov_ablation_itr
+### kind:        cpu (need 0 GiB)
+### bear:        v0110F (cdba2174d715494ec4f22c098386487002ec492f)
+### started:     2026-10-30T09:44:41-04:00
+### command:     /home/snhwang/.venvs/tist-evals/bin/python evals/eval_governance_ablation.py --backends hash --output results/wp0/governance_ablation_fb_itr.json
+### env:         HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 TOKENIZERS_PARALLELISM=false PYTHONUNBUFFERED=1 PYTHONPATH=/home/snhwang/tist-evals/wp0-v042/artifacts-attr/evals/wp0_v040/site:/home/snhwang/tist-evals/bear-v0110 BEAR_SOURCE_SHA=cdba2174d715494ec4f22c098386487002ec492f ANTHROPIC_API_KEY=wp0-dummy-key-no-paid-calls WP0_REPORT_VRAM=/home/snhwang/tist-evals/wp0-v042/logs/vram.jsonl WP0_STEP=fb_gov_ablation_itr WP0_NO_LOCAL_MODELS=1 CUDA_VISIBLE_DEVICES= CUDA_VISIBLE_DEVICES= OMP_NUM_THREADS=8 MKL_NUM_THREADS=8 WP0_EMB_CACHE=/home/snhwang/tist-evals/wp0-v042/embcache WP0_SHARE_MODELS=1
+### memory cap:  /home/snhwang/bin/tist-capped --mem 4G --
+[wp0-site] local model loads refused (WP0_NO_LOCAL_MODELS)
+Loaded corpus: 58 instructions
+Backends: hash
+WARNING:root:Could not load sentence transformer model BAAI/bge-base-en-v1.5: WP0_NO_LOCAL_MODELS is set: local model loads are on hold (BGE loads crashed WSL); run BM25, hash or the remote Nemotron backend. Using fallback embeddings.
+ITR loaded
+
+======================================================================
+  Full governance
+======================================================================
+
+  Standard (n=60):
+WARNING:bear.retriever:Hash embeddings selected. Similarity scores are based on character n-gram overlap and carry no semantic signal — retrieval ranking is effectively arbitrary. Use a sentence-transformers model (e.g. 'BAAI/bge-base-en-v1.5') for meaningful semantic retrieval.
+    Hash                 0.841 [0.806,0.873]
+    ITR                  0.211 [0.186,0.237]
+    Random-k             0.116 [0.114,0.119]
+
+  Paraphrase (n=60):
+WARNING:bear.retriever:Hash embeddings selected. Similarity scores are based on character n-gram overlap and carry no semantic signal — retrieval ranking is effectively arbitrary. Use a sentence-transformers model (e.g. 'BAAI/bge-base-en-v1.5') for meaningful semantic retrieval.
+    Hash                 0.886 [0.865,0.907]
+    ITR                  0.093 [0.065,0.122]
+    Random-k             0.102 [0.100,0.104]
+
+  No-tag (n=54):
+WARNING:bear.retriever:Hash embeddings selected. Similarity scores are based on character n-gram overlap and carry no semantic signal — retrieval ranking is effectively arbitrary. Use a sentence-transformers model (e.g. 'BAAI/bge-base-en-v1.5') for meaningful semantic retrieval.
+    Hash                 0.837 [0.813,0.862]
+    ITR                  0.177 [0.144,0.211]
+    Random-k             0.097 [0.095,0.098]
+
+  Complex (n=60):
+WARNING:bear.retriever:Hash embeddings selected. Similarity scores are based on character n-gram overlap and carry no semantic signal — retrieval ranking is effectively arbitrary. Use a sentence-transformers model (e.g. 'BAAI/bge-base-en-v1.5') for meaningful semantic retrieval.
+    Hash                 0.891 [0.860,0.921]
+    ITR                  0.196 [0.163,0.230]
+    Random-k             0.115 [0.111,0.118]
+
+======================================================================
+  Mandatory only
+======================================================================
+
+  Standard (n=60):
+WARNING:bear.retriever:Hash embeddings selected. Similarity scores are based on character n-gram overlap and carry no semantic signal — retrieval ranking is effectively arbitrary. Use a sentence-transformers model (e.g. 'BAAI/bge-base-en-v1.5') for meaningful semantic retrieval.
+    Hash                 0.431 [0.402,0.459]
+    ITR                  0.211 [0.186,0.237]
+    Random-k             0.116 [0.114,0.119]
+
+  Paraphrase (n=60):
+WARNING:bear.retriever:Hash embeddings selected. Similarity scores are based on character n-gram overlap and carry no semantic signal — retrieval ranking is effectively arbitrary. Use a sentence-transformers model (e.g. 'BAAI/bge-base-en-v1.5') for meaningful semantic retrieval.
+    Hash                 0.416 [0.388,0.444]
+    ITR                  0.093 [0.065,0.122]
+    Random-k             0.102 [0.100,0.104]
+
+  No-tag (n=54):
+WARNING:bear.retriever:Hash embeddings selected. Similarity scores are based on character n-gram overlap and carry no semantic signal — retrieval ranking is effectively arbitrary. Use a sentence-transformers model (e.g. 'BAAI/bge-base-en-v1.5') for meaningful semantic retrieval.
+    Hash                 0.447 [0.423,0.473]
+    ITR                  0.177 [0.144,0.211]
+    Random-k             0.097 [0.095,0.098]
+
+  Complex (n=60):
+WARNING:bear.retriever:Hash embeddings selected. Similarity scores are based on character n-gram overlap and carry no semantic signal — retrieval ranking is effectively arbitrary. Use a sentence-transformers model (e.g. 'BAAI/bge-base-en-v1.5') for meaningful semantic retrieval.
+    Hash                 0.405 [0.378,0.432]
+    ITR                  0.196 [0.163,0.230]
+    Random-k             0.115 [0.111,0.118]
+
+======================================================================
+  No governance
+======================================================================
+
+  Standard (n=60):
+WARNING:bear.retriever:Hash embeddings selected. Similarity scores are based on character n-gram overlap and carry no semantic signal — retrieval ranking is effectively arbitrary. Use a sentence-transformers model (e.g. 'BAAI/bge-base-en-v1.5') for meaningful semantic retrieval.
+    Hash                 0.304 [0.277,0.332]
+    ITR                  0.211 [0.186,0.237]
+    Random-k             0.116 [0.114,0.119]
+
+  Paraphrase (n=60):
+WARNING:bear.retriever:Hash embeddings selected. Similarity scores are based on character n-gram overlap and carry no semantic signal — retrieval ranking is effectively arbitrary. Use a sentence-transformers model (e.g. 'BAAI/bge-base-en-v1.5') for meaningful semantic retrieval.
+    Hash                 0.254 [0.225,0.284]
+    ITR                  0.093 [0.065,0.122]
+    Random-k             0.102 [0.100,0.104]
+
+  No-tag (n=54):
+WARNING:bear.retriever:Hash embeddings selected. Similarity scores are based on character n-gram overlap and carry no semantic signal — retrieval ranking is effectively arbitrary. Use a sentence-transformers model (e.g. 'BAAI/bge-base-en-v1.5') for meaningful semantic retrieval.
+    Hash                 0.289 [0.250,0.330]
+    ITR                  0.177 [0.144,0.211]
+    Random-k             0.097 [0.095,0.098]
+
+  Complex (n=60):
+WARNING:bear.retriever:Hash embeddings selected. Similarity scores are based on character n-gram overlap and carry no semantic signal — retrieval ranking is effectively arbitrary. Use a sentence-transformers model (e.g. 'BAAI/bge-base-en-v1.5') for meaningful semantic retrieval.
+    Hash                 0.318 [0.283,0.352]
+    ITR                  0.196 [0.163,0.230]
+    Random-k             0.115 [0.111,0.118]
+
+======================================================================
+  Token Efficiency
+======================================================================
+WARNING:bear.retriever:Hash embeddings selected. Similarity scores are based on character n-gram overlap and carry no semantic signal — retrieval ranking is effectively arbitrary. Use a sentence-transformers model (e.g. 'BAAI/bge-base-en-v1.5') for meaningful semantic retrieval.
+
+  Strategy                    Tokens  Instr  Savings
+  -------------------------------------------------
+  Monolithic                    5029   58.0     0.0%
+  Role prompting                  46    0.0    99.1%
+  BEAR + Hash                    631    7.0    87.5%
+  ITR                            816   10.0    83.8%
+  Random-k                       868   10.0    82.7%
+
+Results saved to results/wp0/governance_ablation_fb_itr.json
+[wp0-site] embedding cache: 0 hits, 0 misses (/home/snhwang/tist-evals/wp0-v042/embcache)
+### mem guard: peak session RSS 866 MiB
+### finished:    2026-10-30T09:45:13-04:00 rc=0

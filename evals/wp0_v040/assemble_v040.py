@@ -85,6 +85,26 @@ def sha256(p: Path) -> str:
     return h.hexdigest()
 
 
+GZIP_OVER = 5 * 1024 * 1024  # files above 5 MB are stored gzipped (lossless), to keep the repo small
+
+
+def store(src: Path, target: Path, repo: Path, rec: dict, files: list) -> None:
+    """Copy src to target, gzipped when large. The manifest keeps the sha256 of
+    the original content and, for a gzipped copy, of the stored file too."""
+    import gzip
+    target.parent.mkdir(parents=True, exist_ok=True)
+    raw = sha256(src)
+    if src.stat().st_size > GZIP_OVER:
+        gz = target.with_name(target.name + ".gz")
+        with src.open("rb") as fi, gzip.open(gz, "wb", compresslevel=9) as fo:
+            shutil.copyfileobj(fi, fo)
+        files.append({**rec, "path": gz.relative_to(repo).as_posix(), "sha256_original": raw,
+                      "sha256": sha256(gz), "gzipped": True, "original_bytes": src.stat().st_size})
+    else:
+        shutil.copy2(src, target)
+        files.append({**rec, "path": target.relative_to(repo).as_posix(), "sha256": raw})
+
+
 def patterns_for(step: str) -> list[str]:
     for key, pats in OUTPUTS.items():
         if fnmatch.fnmatch(step, key):
@@ -137,10 +157,7 @@ def main() -> None:
                     target = dest / ver / step / Path(rel).name
                 else:
                     continue
-                target.parent.mkdir(parents=True, exist_ok=True)
-                shutil.copy2(f, target)
-                manifest["files"].append({"path": target.relative_to(repo).as_posix(), "step": step,
-                                          "version": ver, "sha256": sha256(target)})
+                store(f, target, repo, {"step": step, "version": ver}, manifest["files"])
     sources = []
     if ver_main == "v040":
         sources = [("lists/e2e_v040", root / "artifacts/results/wp0/lists_v040/e2e"),
@@ -152,12 +169,14 @@ def main() -> None:
         for clone in sorted(root.glob("artifacts*")):
             w = clone / "results" / "wp0"
             sources += [(f"lists/e2e_{ver_main}", w / f"lists_{ver_main}" / "e2e"),
-                        ("lists/e2e_v0110", w / "lists_v0110" / "e2e"),
-                        ("lists/wp4_toolbench", w / f"wp4_lists_{ver_main}" / "toolbench"),
-                        ("lists/wp4_metatool-tags", w / f"wp4_lists_{ver_main}" / "metatool-tags")]
+                        ("lists/e2e_v0110", w / "lists_v0110" / "e2e")]
             # e2e lists under legacy switches (attribution of the BM25 prompt changes)
             for d in sorted(w.glob(f"lists_{ver_main}L_*")):
                 sources.append((f"lists/e2e_{d.name[6:]}", d / "e2e"))
+    if ver_main != "v040":
+        # the k=50 lists of every clone, merged with one meta.json (merge_wp4_lists.py)
+        sources += [("lists/wp4_toolbench", root / "wp4_lists_final" / "toolbench"),
+                    ("lists/wp4_metatool-tags", root / "wp4_lists_final" / "metatool-tags")]
     sources += [("wp4", root / "wp4"), ("compare", root / "compare")]
     sources += [(d, Path(sdir)) for d, sdir in (e.split("=", 1) for e in args.extra)]
     for sub, s in sources:
@@ -165,11 +184,7 @@ def main() -> None:
             continue
         for f in sorted(s.rglob("*")):
             if f.is_file() and not f.name.endswith(".tmp.npz") and not f.name.endswith(".tmp"):
-                target = dest / sub / f.relative_to(s)
-                target.parent.mkdir(parents=True, exist_ok=True)
-                shutil.copy2(f, target)
-                manifest["files"].append({"path": target.relative_to(repo).as_posix(), "step": sub,
-                                          "sha256": sha256(target)})
+                store(f, dest / sub / f.relative_to(s), repo, {"step": sub}, manifest["files"])
     for extra in ("logs/vram.jsonl",):
         s = root / extra
         if s.exists():

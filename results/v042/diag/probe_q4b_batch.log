@@ -1,0 +1,18 @@
+### gpu gate: Windows nvidia-smi shows 65844 MiB used (start limit 67000, stop limit 80000)
+### gpu gate: free 30757 MiB, allocator cap 11.2 GiB (need 11 GiB)
+[wp0-site] CUDA allocator capped at 11.2 GiB (0.1172 of 95.6 GiB)
+[wp0-site] loading Qwen/Qwen3-Embedding-4B with torch_dtype=bfloat16
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:00<00:00, 178.17it/s]
+ToolBench (eval_toolbench) passages 2 {'ok': True, 'peak_allocated_gib': 8.865, 'peak_reserved_gib': 9.193}
+ToolBench (eval_toolbench) passages 1 {'ok': True, 'peak_allocated_gib': 8.2, 'peak_reserved_gib': 8.359}
+ToolBench e2e passages 2 {'ok': True, 'peak_allocated_gib': 8.864, 'peak_reserved_gib': 9.213}
+ToolBench e2e passages 1 {'ok': True, 'peak_allocated_gib': 8.2, 'peak_reserved_gib': 8.359}
+MetaTool passages 2 {'ok': True, 'peak_allocated_gib': 8.268, 'peak_reserved_gib': 8.537}
+MetaTool passages 1 {'ok': True, 'peak_allocated_gib': 7.914, 'peak_reserved_gib': 8.035}
+ToolBench queries 2 {'ok': True, 'peak_allocated_gib': 7.643, 'peak_reserved_gib': 7.68}
+ToolBench queries 1 {'ok': True, 'peak_allocated_gib': 7.598, 'peak_reserved_gib': 7.621}
+ToolBench e2e queries 2 {'ok': True, 'peak_allocated_gib': 7.643, 'peak_reserved_gib': 7.68}
+ToolBench e2e queries 1 {'ok': True, 'peak_allocated_gib': 7.598, 'peak_reserved_gib': 7.621}
+### mem guard: card peak 74305 MiB (stop limit 80000)
+### mem guard: peak session RSS 2974 MiB

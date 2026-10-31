@@ -1,0 +1,98 @@
+### ================ attempt 2026-10-30T18:38:30-04:00 ================
+### step:        alpha_sweep_bge_Lunchecked_requires
+### kind:        cpu (need 0 GiB)
+### bear:        v042L (9d085b4)
+### started:     2026-10-30T18:38:30-04:00
+### command:     /home/snhwang/.venvs/tist-evals/bin/python evals/eval_alpha_sweep.py --backends bge
+### env:         HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 TOKENIZERS_PARALLELISM=false PYTHONUNBUFFERED=1 PYTHONPATH=/home/snhwang/tist-evals/wp0-v042/artifacts-nemo/evals/wp0_v040/site BEAR_SOURCE_SHA=9d085b4 ANTHROPIC_API_KEY=wp0-dummy-key-no-paid-calls WP0_REPORT_VRAM=/home/snhwang/tist-evals/wp0-v042/logs/vram.jsonl WP0_STEP=alpha_sweep_bge_Lunchecked_requires WP0_BEAR_LEGACY=unchecked_requires CUDA_VISIBLE_DEVICES= WP0_ENCODE_BATCH=4 CUDA_VISIBLE_DEVICES= OMP_NUM_THREADS=12 MKL_NUM_THREADS=12 WP0_EMB_CACHE=/home/snhwang/tist-evals/wp0-v042/embcache WP0_SHARE_MODELS=1
+### memory cap:  /home/snhwang/bin/tist-capped --mem 20G --
+[wp0-site] encode batch size capped at 4
+[wp0-site] BEAR legacy switches on: ['restore_unchecked_requires']
+
+######################################################################
+#  Backend 1/1: bge
+######################################################################
+
+=== Alpha sweep (bge) ===
+
+Corpus: 58 instructions, 60 standard queries
+Alpha grid: [0.0, 0.1, 0.2, 0.3, 0.5, 0.7, 0.9, 1.0]
+
+[1/8] alpha = 0.00 ...
+[2/8] alpha = 0.10 ...
+[wp0-site] reusing shared BAAI/bge-base-en-v1.5
+[3/8] alpha = 0.20 ...
+[wp0-site] reusing shared BAAI/bge-base-en-v1.5
+[4/8] alpha = 0.30 ...
+[wp0-site] reusing shared BAAI/bge-base-en-v1.5
+[5/8] alpha = 0.50 ...
+[wp0-site] reusing shared BAAI/bge-base-en-v1.5
+[6/8] alpha = 0.70 ...
+[wp0-site] reusing shared BAAI/bge-base-en-v1.5
+[7/8] alpha = 0.90 ...
+[wp0-site] reusing shared BAAI/bge-base-en-v1.5
+[8/8] alpha = 1.00 ...
+[wp0-site] reusing shared BAAI/bge-base-en-v1.5
+
+--- Results (backend = bge, paired vs. alpha = 0.3) ---
+
+ alpha  Strict F1 [95% CI]            Δ vs default   Cohen d  p (paired)
+------------------------------------------------------------------------
+  0.00  0.657 [0.641,0.671]         -0.011           +0.30         0.0274
+  0.10  0.665 [0.652,0.679]         -0.002           +0.13         0.6325
+  0.20  0.668 [0.655,0.680]         +0.000           +0.00         1.0000
+  0.30  0.668 [0.655,0.680]         +0.000           +0.00              —
+  0.50  0.659 [0.643,0.674]         -0.008           +0.27         0.0598
+  0.70  0.649 [0.629,0.667]         -0.019           +0.42         0.0024
+  0.90  0.649 [0.629,0.667]         -0.019           +0.42         0.0024
+  1.00  0.647 [0.628,0.665]         -0.021           +0.44         0.0009
+
+Max F1 = 0.668 at alpha = 0.20
+Curve shape: peaked at alpha=0.20
+
+Wrote results/alpha_sweep_bge.json
+
+--- LaTeX table (paste into manuscript) ---
+
+\begin{table}[t]
+  \caption{Effect of the priority-weighting coefficient $\alpha$ on strict F1 at $k=10$ on Pet Simulation (60 standard queries, backend = bge, full governance with all other mechanisms enabled). The composite score is $\operatorname{score}(q, d) = (1 - \alpha)\,\widetilde{\operatorname{sim}}(q, d) + \alpha\,p(d)/100$. 95\% bootstrap CIs and paired bootstrap $p$-values vs.\ the default $\alpha = 0.3$ are reported.}
+  \label{tab:alpha-sweep}
+  \centering
+  \small
+  \begin{tabular}{@{}c c c c c@{}}
+    \toprule
+    $\alpha$ & Strict F1 [95\% CI] & $\Delta$ vs. default & Cohen's $d$ & $p$ (paired) \\
+    \midrule
+    0.00 & 0.657 [0.641,0.671] & -0.011 & +0.30 & 0.0274 \\
+    0.10 & 0.665 [0.652,0.679] & -0.002 & +0.13 & 0.6325 \\
+    0.20 & 0.668 [0.655,0.680] & +0.000 & +0.00 & 1.0000 \\
+    0.30 & 0.668 [0.655,0.680] & --- & --- & --- \\
+    0.50 & 0.659 [0.643,0.674] & -0.008 & +0.27 & 0.0598 \\
+    0.70 & 0.649 [0.629,0.667] & -0.019 & +0.42 & 0.0024 \\
+    0.90 & 0.649 [0.629,0.667] & -0.019 & +0.42 & 0.0024 \\
+    1.00 & 0.647 [0.628,0.665] & -0.021 & +0.44 & 0.0009 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Elapsed: 0.8s
+Full log written to results/alpha_sweep_output.txt
+
+=== Reproducibility ===
+Timestamp (UTC): 2026-10-30T22:38:34Z
+Command line:    evals/eval_alpha_sweep.py --backends bge
+Python:          3.12.13 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
+numpy:           2.2.6
+scipy:           1.17.1
+bear:            0.4.2
+git commit:      634caf5ab715b2a7c20fac0b170228a49810bdc7
+git status:      DIRTY (24 files modified)
+git branch:      tist-r2
+
+  backends: ['bge']
+  alphas: [0.0, 0.1, 0.2, 0.3, 0.5, 0.7, 0.9, 1.0]
+  output_dir: results
+===
+[wp0-site] embedding cache: 496 hits, 0 misses (/home/snhwang/tist-evals/wp0-v042/embcache)
+### mem guard: peak session RSS 9 MiB
+### finished:    2026-10-30T18:38:35-04:00 rc=0

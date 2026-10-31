@@ -1,0 +1,193 @@
+### ================ attempt 2026-10-30T09:56:28-04:00 ================
+### step:        tb_bm25_Ldropped_rows
+### kind:        cpu (need 0 GiB)
+### bear:        v042L (9d085b4)
+### started:     2026-10-30T09:56:28-04:00
+### command:     /home/snhwang/.venvs/tist-evals/bin/python evals/wp0_v040/eval_toolbench_v040.py --top-k 5 --metatool-query-tags-file evals/data/external_benchmarks/metatool/query_tags_top5.json --output results/wp0/toolbench_eval_tb_bm25_Ldropped_rows.json --backends BEAR+BM25 (gov) BEAR+BM25 (mand-only) BM25 (no gov)
+### env:         HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 TOKENIZERS_PARALLELISM=false PYTHONUNBUFFERED=1 PYTHONPATH=/home/snhwang/tist-evals/wp0-v042/artifacts-track/evals/wp0_v040/site BEAR_SOURCE_SHA=9d085b4 ANTHROPIC_API_KEY=wp0-dummy-key-no-paid-calls WP0_REPORT_VRAM=/home/snhwang/tist-evals/wp0-v042/logs/vram.jsonl WP0_STEP=tb_bm25_Ldropped_rows WP0_BEAR_LEGACY=dropped_rows WP0_NO_LOCAL_MODELS=1 CUDA_VISIBLE_DEVICES= CUDA_VISIBLE_DEVICES= OMP_NUM_THREADS=8 MKL_NUM_THREADS=8 WP0_EMB_CACHE=/home/snhwang/tist-evals/wp0-v042/embcache WP0_SHARE_MODELS=1
+### memory cap:  /home/snhwang/bin/tist-capped --mem 8G --
+[wp0-site] local model loads refused (WP0_NO_LOCAL_MODELS)
+[wp0-site] BEAR legacy switches on: ['restore_dropped_rows']
+
+MetaTool (no tags) loaded: 199 tools, 21111 queries
+
+========================================================================
+  MetaTool
+  Corpus: 199 instructions, Queries: 21111, k=5
+  Experiments: 3
+========================================================================
+
+  BEAR+BM25 (gov)...
+        recall@5: 0.400 [0.393, 0.406]
+          ndcg@5: 0.337 [0.331, 0.343]
+            f1@5: 0.134 [0.132, 0.136]
+          time:   19.9s
+
+  BEAR+BM25 (mand-only)...
+        recall@5: 0.400 [0.393, 0.406]
+          ndcg@5: 0.337 [0.331, 0.343]
+            f1@5: 0.134 [0.132, 0.136]
+          time:   14.1s
+
+  BM25 (no gov)...
+        recall@5: 0.404 [0.397, 0.410]
+          ndcg@5: 0.341 [0.335, 0.347]
+            f1@5: 0.135 [0.133, 0.137]
+          time:   21.8s
+
+  --- Statistical Tests (paired t-test, Wilcoxon, Cohen's d) ---
+
+    BEAR+BM25 (gov)  vs  BM25 (no gov):
+          recall: paired-t=-6.450, p=0.0000 ***, d=-0.044; W=3596, p=0.0000
+            ndcg: paired-t=-12.065, p=0.0000 ***, d=-0.083; W=53563, p=0.0000
+              f1: paired-t=-6.464, p=0.0000 ***, d=-0.044; W=3596, p=0.0000
+
+MetaTool+Tags loaded: 199 tools, 21111 queries
+  Queries with context tags: 21111/21111
+
+========================================================================
+  MetaTool+Tags
+  Corpus: 199 instructions, Queries: 21111, k=5
+  Experiments: 3
+========================================================================
+
+  BEAR+BM25 (gov)...
+        recall@5: 0.911 [0.907, 0.915]
+          ndcg@5: 0.773 [0.769, 0.777]
+            f1@5: 0.373 [0.370, 0.376]
+          time:   28.3s
+
+  BEAR+BM25 (mand-only)...
+        recall@5: 0.000 [0.000, 0.000]
+          ndcg@5: 0.000 [0.000, 0.000]
+            f1@5: 0.000 [0.000, 0.000]
+          time:   17.4s
+
+  BM25 (no gov)...
+        recall@5: 0.402 [0.395, 0.409]
+          ndcg@5: 0.339 [0.333, 0.345]
+            f1@5: 0.135 [0.132, 0.137]
+          time:   15.3s
+
+  --- Statistical Tests (paired t-test, Wilcoxon, Cohen's d) ---
+
+    BEAR+BM25 (gov)  vs  BM25 (no gov):
+          recall: paired-t=148.826, p=0.0000 ***, d=1.024; W=0, p=0.0000
+            ndcg: paired-t=163.242, p=0.0000 ***, d=1.124; W=25470, p=0.0000
+              f1: paired-t=131.338, p=0.0000 ***, d=0.904; W=0, p=0.0000
+
+MetaTool+QueryTags-top5 loaded: 199 tools, 21111 queries
+  Source file: evals/data/external_benchmarks/metatool/query_tags_top5.json
+  Queries with context tags: 21111/21111
+
+========================================================================
+  MetaTool+QueryTags-top5
+  Corpus: 199 instructions, Queries: 21111, k=5
+  Experiments: 3
+========================================================================
+
+  BEAR+BM25 (gov)...
+        recall@5: 0.504 [0.497, 0.511]
+          ndcg@5: 0.412 [0.406, 0.418]
+            f1@5: 0.171 [0.168, 0.173]
+          time:   33.6s
+
+  BEAR+BM25 (mand-only)...
+        recall@5: 0.000 [0.000, 0.000]
+          ndcg@5: 0.000 [0.000, 0.000]
+            f1@5: 0.000 [0.000, 0.000]
+          time:   17.2s
+
+  BM25 (no gov)...
+        recall@5: 0.402 [0.396, 0.409]
+          ndcg@5: 0.339 [0.333, 0.345]
+            f1@5: 0.135 [0.132, 0.137]
+          time:   22.8s
+
+  --- Statistical Tests (paired t-test, Wilcoxon, Cohen's d) ---
+
+    BEAR+BM25 (gov)  vs  BM25 (no gov):
+          recall: paired-t=30.018, p=0.0000 ***, d=0.207; W=4625802, p=0.0000
+            ndcg: paired-t=28.301, p=0.0000 ***, d=0.195; W=9265613, p=0.0000
+              f1: paired-t=31.225, p=0.0000 ***, d=0.215; W=4670959, p=0.0000
+
+ToolBench loaded: 3225 APIs, 1100 queries
+  Categories: 47
+
+========================================================================
+  ToolBench
+  Corpus: 3225 instructions, Queries: 1100, k=5
+  Experiments: 3
+========================================================================
+
+  BEAR+BM25 (gov)...
+        recall@5: 0.612 [0.590, 0.634]
+          ndcg@5: 0.584 [0.563, 0.605]
+            f1@5: 0.377 [0.363, 0.390]
+          time:   137.8s
+
+  BEAR+BM25 (mand-only)...
+        recall@5: 0.000 [0.000, 0.000]
+          ndcg@5: 0.000 [0.000, 0.000]
+            f1@5: 0.000 [0.000, 0.000]
+          time:   106.3s
+
+  BM25 (no gov)...
+        recall@5: 0.468 [0.445, 0.491]
+          ndcg@5: 0.447 [0.425, 0.469]
+            f1@5: 0.286 [0.272, 0.300]
+          time:   89.2s
+
+  --- Statistical Tests (paired t-test, Wilcoxon, Cohen's d) ---
+
+    BEAR+BM25 (gov)  vs  BM25 (no gov):
+          recall: paired-t=19.211, p=0.0000 ***, d=0.579; W=198, p=0.0000
+            ndcg: paired-t=21.251, p=0.0000 ***, d=0.641; W=1673, p=0.0000
+              f1: paired-t=19.469, p=0.0000 ***, d=0.587; W=202, p=0.0000
+
+Results saved to results/wp0/toolbench_eval_tb_bm25_Ldropped_rows.json
+
+========================================================================
+  Summary
+========================================================================
+
+  MetaTool:
+    BEAR+BM25 (gov)                     R@5=0.400 [0.393, 0.406]  NDCG@5=0.337 [0.331, 0.343]
+    BEAR+BM25 (mand-only)               R@5=0.400 [0.393, 0.406]  NDCG@5=0.337 [0.331, 0.343]
+    BM25 (no gov)                       R@5=0.404 [0.397, 0.410]  NDCG@5=0.341 [0.335, 0.347]
+
+  MetaTool+Tags:
+    BEAR+BM25 (gov)                     R@5=0.911 [0.907, 0.915]  NDCG@5=0.773 [0.769, 0.777]
+    BEAR+BM25 (mand-only)               R@5=0.000 [0.000, 0.000]  NDCG@5=0.000 [0.000, 0.000]
+    BM25 (no gov)                       R@5=0.402 [0.395, 0.409]  NDCG@5=0.339 [0.333, 0.345]
+
+  MetaTool+QueryTags-top5:
+    BEAR+BM25 (gov)                     R@5=0.504 [0.497, 0.511]  NDCG@5=0.412 [0.406, 0.418]
+    BEAR+BM25 (mand-only)               R@5=0.000 [0.000, 0.000]  NDCG@5=0.000 [0.000, 0.000]
+    BM25 (no gov)                       R@5=0.402 [0.396, 0.409]  NDCG@5=0.339 [0.333, 0.345]
+
+  ToolBench:
+    BEAR+BM25 (gov)                     R@5=0.612 [0.590, 0.634]  NDCG@5=0.584 [0.563, 0.605]
+    BEAR+BM25 (mand-only)               R@5=0.000 [0.000, 0.000]  NDCG@5=0.000 [0.000, 0.000]
+    BM25 (no gov)                       R@5=0.468 [0.445, 0.491]  NDCG@5=0.447 [0.425, 0.469]
+Provenance stamped into results/wp0/toolbench_eval_tb_bm25_Ldropped_rows.json
+
+=== Reproducibility ===
+Timestamp (UTC): 2026-10-30T14:06:05Z
+Command line:    evals/wp0_v040/eval_toolbench_v040.py --top-k 5 --metatool-query-tags-file evals/data/external_benchmarks/metatool/query_tags_top5.json --output results/wp0/toolbench_eval_tb_bm25_Ldropped_rows.json --backends BEAR+BM25 (gov) BEAR+BM25 (mand-only) BM25 (no gov)
+Python:          3.12.13 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
+numpy:           2.2.6
+scipy:           1.17.1
+bear:            0.4.2
+git commit:      634caf5ab715b2a7c20fac0b170228a49810bdc7
+git status:      DIRTY (14 files modified)
+git branch:      tist-r2
+
+  bear_version: 0.4.2
+  bear_path: /home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/bear
+  bear_source_sha: 9d085b4
+  bear_pkg_sha256: 9cf19e48b49f4e57e3723050b942b296bb66f775fdd41e7f1770514576d0930a
+===
+[wp0-site] embedding cache: 0 hits, 0 misses (/home/snhwang/tist-evals/wp0-v042/embcache)
+### mem guard: peak session RSS 939 MiB
+### finished:    2026-10-30T10:06:09-04:00 rc=0

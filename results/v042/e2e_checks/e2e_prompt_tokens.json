@@ -1,0 +1,306 @@
+{
+ "tokenizer": "Mistral-Nemo-Instruct-2407 tekken.json via tiktoken, + 3 control tokens",
+ "windows_checked": [
+  2048,
+  4096,
+  8192,
+  32768,
+  131072,
+  262144
+ ],
+ "retrieval": {
+  "/home/snhwang/tist-evals/wp0-v042/artifacts/results/wp0/lists_v0110/e2e/bear_bm25_gov.json": {
+   "condition": "BEAR+BM25 (gov)",
+   "n": 1100,
+   "max": 511,
+   "p99": 430.06999999999994,
+   "median": 288.0,
+   "argmax_query": 422,
+   "over_window": {
+    "2048": 0,
+    "4096": 0,
+    "8192": 0,
+    "32768": 0,
+    "131072": 0,
+    "262144": 0
+   }
+  },
+  "/home/snhwang/tist-evals/wp0-v042/artifacts/results/wp0/lists_v0110/e2e/bear_hash_gov.json": {
+   "condition": "BEAR+Hash (gov)",
+   "n": 1100,
+   "max": 483,
+   "p99": 434.05999999999995,
+   "median": 282.0,
+   "argmax_query": 919,
+   "over_window": {
+    "2048": 0,
+    "4096": 0,
+    "8192": 0,
+    "32768": 0,
+    "131072": 0,
+    "262144": 0
+   }
+  },
+  "/home/snhwang/tist-evals/wp0-v042/artifacts/results/wp0/lists_v0110/e2e/bm25_no_gov.json": {
+   "condition": "BM25 (no gov)",
+   "n": 1100,
+   "max": 511,
+   "p99": 455.02,
+   "median": 315.0,
+   "argmax_query": 422,
+   "over_window": {
+    "2048": 0,
+    "4096": 0,
+    "8192": 0,
+    "32768": 0,
+    "131072": 0,
+    "262144": 0
+   }
+  },
+  "/home/snhwang/tist-evals/wp0-v042/artifacts/results/wp0/lists_v0110/e2e/hash_no_gov.json": {
+   "condition": "Hash (no gov)",
+   "n": 1100,
+   "max": 631,
+   "p99": 452.02,
+   "median": 309.0,
+   "argmax_query": 325,
+   "over_window": {
+    "2048": 0,
+    "4096": 0,
+    "8192": 0,
+    "32768": 0,
+    "131072": 0,
+    "262144": 0
+   }
+  },
+  "/home/snhwang/tist-evals/wp0-v042/artifacts/results/wp0/lists_v042/e2e/bear_bm25_gov.json": {
+   "condition": "BEAR+BM25 (gov)",
+   "n": 1100,
+   "max": 511,
+   "p99": 430.06999999999994,
+   "median": 288.0,
+   "argmax_query": 422,
+   "over_window": {
+    "2048": 0,
+    "4096": 0,
+    "8192": 0,
+    "32768": 0,
+    "131072": 0,
+    "262144": 0
+   }
+  },
+  "/home/snhwang/tist-evals/wp0-v042/artifacts/results/wp0/lists_v042/e2e/bear_hash_gov.json": {
+   "condition": "BEAR+Hash (gov)",
+   "n": 1100,
+   "max": 483,
+   "p99": 434.05999999999995,
+   "median": 282.0,
+   "argmax_query": 919,
+   "over_window": {
+    "2048": 0,
+    "4096": 0,
+    "8192": 0,
+    "32768": 0,
+    "131072": 0,
+    "262144": 0
+   }
+  },
+  "/home/snhwang/tist-evals/wp0-v042/artifacts/results/wp0/lists_v042/e2e/bm25_no_gov.json": {
+   "condition": "BM25 (no gov)",
+   "n": 1100,
+   "max": 511,
+   "p99": 455.02,
+   "median": 315.0,
+   "argmax_query": 422,
+   "over_window": {
+    "2048": 0,
+    "4096": 0,
+    "8192": 0,
+    "32768": 0,
+    "131072": 0,
+    "262144": 0
+   }
+  },
+  "/home/snhwang/tist-evals/wp0-v042/artifacts/results/wp0/lists_v042/e2e/hash_no_gov.json": {
+   "condition": "Hash (no gov)",
+   "n": 1100,
+   "max": 631,
+   "p99": 452.02,
+   "median": 309.0,
+   "argmax_query": 325,
+   "over_window": {
+    "2048": 0,
+    "4096": 0,
+    "8192": 0,
+    "32768": 0,
+    "131072": 0,
+    "262144": 0
+   }
+  },
+  "/home/snhwang/tist-evals/wp0-v042/artifacts-dense/results/wp0/lists_v0110/e2e/bear_bge_gov.json": {
+   "condition": "BEAR+BGE (gov)",
+   "n": 1100,
+   "max": 511,
+   "p99": 422.04999999999995,
+   "median": 240.0,
+   "argmax_query": 422,
+   "over_window": {
+    "2048": 0,
+    "4096": 0,
+    "8192": 0,
+    "32768": 0,
+    "131072": 0,
+    "262144": 0
+   }
+  },
+  "/home/snhwang/tist-evals/wp0-v042/artifacts-dense/results/wp0/lists_v0110/e2e/bge_no_gov.json": {
+   "condition": "BGE (no gov)",
+   "n": 1100,
+   "max": 507,
+   "p99": 427.03999999999996,
+   "median": 259.0,
+   "argmax_query": 422,
+   "over_window": {
+    "2048": 0,
+    "4096": 0,
+    "8192": 0,
+    "32768": 0,
+    "131072": 0,
+    "262144": 0
+   }
+  },
+  "/home/snhwang/tist-evals/wp0-v042/artifacts-dense/results/wp0/lists_v042/e2e/bear_bge_gov.json": {
+   "condition": "BEAR+BGE (gov)",
+   "n": 1100,
+   "max": 511,
+   "p99": 422.04999999999995,
+   "median": 240.0,
+   "argmax_query": 422,
+   "over_window": {
+    "2048": 0,
+    "4096": 0,
+    "8192": 0,
+    "32768": 0,
+    "131072": 0,
+    "262144": 0
+   }
+  },
+  "/home/snhwang/tist-evals/wp0-v042/artifacts-dense/results/wp0/lists_v042/e2e/bge_no_gov.json": {
+   "condition": "BGE (no gov)",
+   "n": 1100,
+   "max": 507,
+   "p99": 427.03999999999996,
+   "median": 259.0,
+   "argmax_query": 422,
+   "over_window": {
+    "2048": 0,
+    "4096": 0,
+    "8192": 0,
+    "32768": 0,
+    "131072": 0,
+    "262144": 0
+   }
+  },
+  "/home/snhwang/tist-evals/wp0-v042/artifacts-nemo/results/wp0/lists_v042/e2e/bear_nemotron_gov.json": {
+   "condition": "BEAR+Nemotron (gov)",
+   "n": 1100,
+   "max": 511,
+   "p99": 405.03,
+   "median": 243.5,
+   "argmax_query": 422,
+   "over_window": {
+    "2048": 0,
+    "4096": 0,
+    "8192": 0,
+    "32768": 0,
+    "131072": 0,
+    "262144": 0
+   }
+  },
+  "/home/snhwang/tist-evals/wp0-v042/artifacts-nemo/results/wp0/lists_v042/e2e/nemotron_no_gov.json": {
+   "condition": "Nemotron (no gov)",
+   "n": 1100,
+   "max": 511,
+   "p99": 430.03,
+   "median": 259.0,
+   "argmax_query": 422,
+   "over_window": {
+    "2048": 0,
+    "4096": 0,
+    "8192": 0,
+    "32768": 0,
+    "131072": 0,
+    "262144": 0
+   }
+  }
+ },
+ "notes": [
+  "ReAct tool names come from _derive_function_name and may differ slightly from the e2e names; the difference is a few tokens per tool at most."
+ ],
+ "retrieval_bound_any_5_tools": {
+  "tokens": 718,
+  "longest_tool_lines": [
+   101,
+   91,
+   87,
+   86,
+   86
+  ],
+  "longest_query": 203,
+  "note": "preamble + the 5 longest tool lines (+1 newline each) + blank line + longest query, +3 control tokens, +10 for merges across joins"
+ },
+ "monolithic": {
+  "single-turn (Table 7)": {
+   "n_tools": 3225,
+   "system_tokens": 88217,
+   "max": 88420,
+   "median": 88272.0,
+   "over_window": {
+    "2048": 1100,
+    "4096": 1100,
+    "8192": 1100,
+    "32768": 1100,
+    "131072": 0,
+    "262144": 0
+   }
+  },
+  "ReAct scaffold (Tables 8, 9)": {
+   "n_tools": 3225,
+   "system_tokens": 88291,
+   "max": 88494,
+   "median": 88346.0,
+   "over_window": {
+    "2048": 1100,
+    "4096": 1100,
+    "8192": 1100,
+    "32768": 1100,
+    "131072": 0,
+    "262144": 0
+   }
+  },
+  "ReAct reasoning prompt (Table 9)": {
+   "n_tools": 3225,
+   "system_tokens": 88255,
+   "max": 88458,
+   "median": 88310.0,
+   "over_window": {
+    "2048": 1100,
+    "4096": 1100,
+    "8192": 1100,
+    "32768": 1100,
+    "131072": 0,
+    "262144": 0
+   }
+  }
+ },
+ "gemma_monolithic": {
+  "tokenizer": "google/gemma-4-12B-it",
+  "snapshot": "/home/snhwang/.cache/huggingface/hub/models--google--gemma-4-12B-it/snapshots/5926caa4ec0cac5cbfadaf4077420520de1d5205/",
+  "ReAct scaffold (Tables 8, 9)": {
+   "max_over_5_longest_queries": 91855
+  },
+  "ReAct reasoning prompt (Table 9)": {
+   "max_over_5_longest_queries": 91817
+  }
+ }
+}

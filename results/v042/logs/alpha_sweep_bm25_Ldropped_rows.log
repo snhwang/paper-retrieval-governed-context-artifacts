@@ -1,0 +1,91 @@
+### ================ attempt 2026-10-30T07:56:36-04:00 ================
+### step:        alpha_sweep_bm25_Ldropped_rows
+### kind:        cpu (need 0 GiB)
+### bear:        v042L (9d085b4)
+### started:     2026-10-30T07:56:36-04:00
+### command:     /home/snhwang/.venvs/tist-evals/bin/python evals/eval_alpha_sweep.py --backends bm25
+### env:         HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 TOKENIZERS_PARALLELISM=false PYTHONUNBUFFERED=1 PYTHONPATH=/home/snhwang/tist-evals/wp0-v042/artifacts-attr/evals/wp0_v040/site BEAR_SOURCE_SHA=9d085b4 ANTHROPIC_API_KEY=wp0-dummy-key-no-paid-calls WP0_REPORT_VRAM=/home/snhwang/tist-evals/wp0-v042/logs/vram.jsonl WP0_STEP=alpha_sweep_bm25_Ldropped_rows WP0_BEAR_LEGACY=dropped_rows WP0_NO_LOCAL_MODELS=1 CUDA_VISIBLE_DEVICES= CUDA_VISIBLE_DEVICES= OMP_NUM_THREADS=8 MKL_NUM_THREADS=8 WP0_EMB_CACHE=/home/snhwang/tist-evals/wp0-v042/embcache WP0_SHARE_MODELS=1
+### memory cap:  /home/snhwang/bin/tist-capped --mem 8G --
+[wp0-site] local model loads refused (WP0_NO_LOCAL_MODELS)
+[wp0-site] BEAR legacy switches on: ['restore_dropped_rows']
+
+######################################################################
+#  Backend 1/1: bm25
+######################################################################
+
+=== Alpha sweep (bm25) ===
+
+Corpus: 58 instructions, 60 standard queries
+Alpha grid: [0.0, 0.1, 0.2, 0.3, 0.5, 0.7, 0.9, 1.0]
+
+[1/8] alpha = 0.00 ...
+[2/8] alpha = 0.10 ...
+[3/8] alpha = 0.20 ...
+[4/8] alpha = 0.30 ...
+[5/8] alpha = 0.50 ...
+[6/8] alpha = 0.70 ...
+[7/8] alpha = 0.90 ...
+[8/8] alpha = 1.00 ...
+
+--- Results (backend = bm25, paired vs. alpha = 0.3) ---
+
+ alpha  Strict F1 [95% CI]            Δ vs default   Cohen d  p (paired)
+------------------------------------------------------------------------
+  0.00  0.879 [0.847,0.910]         +0.004           -0.18         0.2776
+  0.10  0.875 [0.840,0.908]         +0.000           +0.00         1.0000
+  0.20  0.875 [0.840,0.908]         +0.000           +0.00         1.0000
+  0.30  0.875 [0.840,0.908]         +0.000           +0.00              —
+  0.50  0.865 [0.824,0.902]         -0.010           +0.30         0.0345
+  0.70  0.865 [0.824,0.902]         -0.010           +0.30         0.0345
+  0.90  0.865 [0.824,0.902]         -0.010           +0.30         0.0345
+  1.00  0.865 [0.824,0.902]         -0.010           +0.30         0.0345
+
+Max F1 = 0.879 at alpha = 0.00
+Curve shape: plateau-then-decline (plateau alpha <= 0.30, decline starts at 0.50)
+
+Wrote results/alpha_sweep_bm25.json
+
+--- LaTeX table (paste into manuscript) ---
+
+\begin{table}[t]
+  \caption{Effect of the priority-weighting coefficient $\alpha$ on strict F1 at $k=10$ on Pet Simulation (60 standard queries, backend = bm25, full governance with all other mechanisms enabled). The composite score is $\operatorname{score}(q, d) = (1 - \alpha)\,\widetilde{\operatorname{sim}}(q, d) + \alpha\,p(d)/100$. 95\% bootstrap CIs and paired bootstrap $p$-values vs.\ the default $\alpha = 0.3$ are reported.}
+  \label{tab:alpha-sweep}
+  \centering
+  \small
+  \begin{tabular}{@{}c c c c c@{}}
+    \toprule
+    $\alpha$ & Strict F1 [95\% CI] & $\Delta$ vs. default & Cohen's $d$ & $p$ (paired) \\
+    \midrule
+    0.00 & 0.879 [0.847,0.910] & +0.004 & -0.18 & 0.2776 \\
+    0.10 & 0.875 [0.840,0.908] & +0.000 & +0.00 & 1.0000 \\
+    0.20 & 0.875 [0.840,0.908] & +0.000 & +0.00 & 1.0000 \\
+    0.30 & 0.875 [0.840,0.908] & --- & --- & --- \\
+    0.50 & 0.865 [0.824,0.902] & -0.010 & +0.30 & 0.0345 \\
+    0.70 & 0.865 [0.824,0.902] & -0.010 & +0.30 & 0.0345 \\
+    0.90 & 0.865 [0.824,0.902] & -0.010 & +0.30 & 0.0345 \\
+    1.00 & 0.865 [0.824,0.902] & -0.010 & +0.30 & 0.0345 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Elapsed: 0.7s
+Full log written to results/alpha_sweep_output.txt
+
+=== Reproducibility ===
+Timestamp (UTC): 2026-10-30T11:56:39Z
+Command line:    evals/eval_alpha_sweep.py --backends bm25
+Python:          3.12.13 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
+numpy:           2.2.6
+scipy:           1.17.1
+bear:            0.4.2
+git commit:      634caf5ab715b2a7c20fac0b170228a49810bdc7
+git status:      DIRTY (18 files modified)
+git branch:      tist-r2
+
+  backends: ['bm25']
+  alphas: [0.0, 0.1, 0.2, 0.3, 0.5, 0.7, 0.9, 1.0]
+  output_dir: results
+===
+[wp0-site] embedding cache: 0 hits, 0 misses (/home/snhwang/tist-evals/wp0-v042/embcache)
+### mem guard: peak session RSS 9 MiB
+### finished:    2026-10-30T07:56:41-04:00 rc=0

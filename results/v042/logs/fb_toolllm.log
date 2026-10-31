@@ -1,0 +1,49 @@
+### ================ attempt 2026-10-30T09:43:23-04:00 ================
+### step:        fb_toolllm
+### kind:        cpu (need 0 GiB)
+### bear:        v0110F (cdba2174d715494ec4f22c098386487002ec492f)
+### started:     2026-10-30T09:43:23-04:00
+### command:     /home/snhwang/.venvs/tist-evals/bin/python evals/eval_toolbench_toolllm.py --model ToolBench/ToolBench_IR_bert_based_uncased --top-k 5 --mode both --output results/wp0/toolbench_toolllm_fixed.json
+### env:         HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 TOKENIZERS_PARALLELISM=false PYTHONUNBUFFERED=1 PYTHONPATH=/home/snhwang/tist-evals/wp0-v042/artifacts-attr/evals/wp0_v040/site:/home/snhwang/tist-evals/bear-v0110 BEAR_SOURCE_SHA=cdba2174d715494ec4f22c098386487002ec492f ANTHROPIC_API_KEY=wp0-dummy-key-no-paid-calls WP0_REPORT_VRAM=/home/snhwang/tist-evals/wp0-v042/logs/vram.jsonl WP0_STEP=fb_toolllm WP0_NO_LOCAL_MODELS=1 CUDA_VISIBLE_DEVICES= CUDA_VISIBLE_DEVICES= OMP_NUM_THREADS=8 MKL_NUM_THREADS=8 WP0_EMB_CACHE=/home/snhwang/tist-evals/wp0-v042/embcache WP0_SHARE_MODELS=1
+### memory cap:  /home/snhwang/bin/tist-capped --mem 4G --
+[wp0-site] local model loads refused (WP0_NO_LOCAL_MODELS)
+[1/2] Loading ToolBench corpus + queries ...
+      corpus: 3225 APIs   queries: 1100
+[2/2] Running ToolBench-IR conditions (both) ...
+
+  building [ToolBench-IR alone (no governance)] and indexing ...
+Could not load model ToolBench/ToolBench_IR_bert_based_uncased (WP0_NO_LOCAL_MODELS is set: local model loads are on hold (BGE loads crashed WSL); run BM25, hash or the remote Nemotron backend). Falling back to hash.
+=== ToolBench-IR alone (no governance)  (n=1100, k=5, 10s) ===
+  RECALL     0.016 [0.011, 0.022]
+  PRECISION  0.008 [0.005, 0.010]
+  F1         0.010 [0.007, 0.014]
+  NDCG       0.013 [0.009, 0.018]
+  building [BEAR governance + ToolBench-IR (oracle categories)] and indexing ...
+Could not load model ToolBench/ToolBench_IR_bert_based_uncased (WP0_NO_LOCAL_MODELS is set: local model loads are on hold (BGE loads crashed WSL); run BM25, hash or the remote Nemotron backend). Falling back to hash.
+=== BEAR governance + ToolBench-IR (oracle categories)  (n=1100, k=5, 28s) ===
+  RECALL     0.151 [0.134, 0.167]
+  PRECISION  0.067 [0.060, 0.075]
+  F1         0.091 [0.082, 0.101]
+  NDCG       0.118 [0.104, 0.131]
+
+Reference points (from the manuscript, same split/metric):
+  BEAR+BGE oracle categories   Recall@5 = 0.679
+  BEAR+BGE no governance       Recall@5 = 0.574
+  BEAR+BGE inferred (best)     Recall@5 = 0.502
+
+Saved to results/wp0/toolbench_toolllm_fixed.json
+
+=== Reproducibility ===
+Timestamp (UTC): 2026-10-30T13:44:09Z
+Command line:    evals/eval_toolbench_toolllm.py --model ToolBench/ToolBench_IR_bert_based_uncased --top-k 5 --mode both --output results/wp0/toolbench_toolllm_fixed.json
+Python:          3.12.13 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
+numpy:           2.2.6
+scipy:           1.17.1
+bear:            0.1.10
+git commit:      634caf5ab715b2a7c20fac0b170228a49810bdc7
+git status:      DIRTY (45 files modified)
+git branch:      tist-r2
+===
+[wp0-site] embedding cache: 0 hits, 0 misses (/home/snhwang/tist-evals/wp0-v042/embcache)
+### mem guard: peak session RSS 879 MiB
+### finished:    2026-10-30T09:44:15-04:00 rc=0

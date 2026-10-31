@@ -1,0 +1,118 @@
+### ================ attempt 2026-10-30T09:22:18-04:00 ================
+### step:        backends_bge_Lunchecked_requires
+### kind:        cpu (need 0 GiB)
+### bear:        v042L (9d085b4)
+### started:     2026-10-30T09:22:18-04:00
+### command:     /home/snhwang/.venvs/tist-evals/bin/python evals/eval_retrieval_backends.py --models bge --output results/wp0/backend_comparison_bge.json
+### env:         HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 TOKENIZERS_PARALLELISM=false PYTHONUNBUFFERED=1 PYTHONPATH=/home/snhwang/tist-evals/wp0-v042/artifacts-dense/evals/wp0_v040/site BEAR_SOURCE_SHA=9d085b4 ANTHROPIC_API_KEY=wp0-dummy-key-no-paid-calls WP0_REPORT_VRAM=/home/snhwang/tist-evals/wp0-v042/logs/vram.jsonl WP0_STEP=backends_bge_Lunchecked_requires WP0_BEAR_LEGACY=unchecked_requires CUDA_VISIBLE_DEVICES= WP0_ENCODE_BATCH=4 CUDA_VISIBLE_DEVICES= OMP_NUM_THREADS=12 MKL_NUM_THREADS=12 WP0_EMB_CACHE=/home/snhwang/tist-evals/wp0-v042/embcache WP0_SHARE_MODELS=1
+### memory cap:  /home/snhwang/bin/tist-capped --mem 20G --
+[wp0-site] encode batch size capped at 4
+[wp0-site] BEAR legacy switches on: ['restore_unchecked_requires']
+Hardware: CPU
+Loaded corpus with 58 instructions
+Backends to evaluate: bge
+
+============================================================
+  BEAR + BGE-base v1.5
+============================================================
+  Index build time: 0.082s
+  Standard queries (60):
+    Strict  F1@10 = 0.668  [0.655, 0.680] 95% CI
+    Relaxed F1@10 = 0.792  [0.764, 0.820] 95% CI
+    Latency: avg=0.1ms, p95=0.2ms
+  Paraphrase queries (60):
+    F1@10 = 0.637  [0.627, 0.648] 95% CI
+  No-tag queries (54):
+    F1@10 = 0.653  [0.642, 0.662] 95% CI
+  Complex queries (60):
+    F1@10 = 0.672  [0.656, 0.688] 95% CI
+
+============================================================
+  ITR standalone (no governance)
+============================================================
+[wp0-site] reusing shared BAAI/bge-base-en-v1.5
+/home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/itr/indexing/embedder.py:21: FutureWarning: The `get_sentence_embedding_dimension` method has been renamed to `get_embedding_dimension`.
+  self.embedding_dim = self.model.get_sentence_embedding_dimension()
+  Strict  F1@10 = 0.182  [0.162, 0.203]
+  Relaxed F1@10 = 0.320  [0.274, 0.369]
+  Para    F1@10 = 0.058  [0.039, 0.078]
+  No-tag  F1@10 = 0.153  [0.130, 0.178]
+  Complex F1@10 = 0.161  [0.132, 0.190]
+
+============================================================
+  Random-k baseline (k=10, 1000 trials)
+============================================================
+  Strict  F1@10 = 0.116  [0.114, 0.118]
+
+
+================================================================================
+  SUMMARY  (60 standard queries, 60 paraphrase queries, 10,000 bootstrap iterations)
+================================================================================
+
+  Standard Queries — Strict F1@10 (95% CI):
+    BGE-base             0.668 [0.655, 0.680]
+    ITR-standalone       0.182 [0.162, 0.203]
+    Random-k             0.116 [0.114, 0.118]
+
+  Standard Queries — Relaxed F1@10 (95% CI):
+    BGE-base             0.792 [0.764, 0.820]
+    ITR-standalone       0.320 [0.274, 0.369]
+    Random-k             0.140 [0.140, 0.134]
+
+  Paraphrase Queries (minimal tags, n=60) — F1@10 (95% CI):
+    BGE-base             0.637 [0.627, 0.648]
+    ITR-standalone       0.058 [0.039, 0.078]
+    Random-k             0.101 [0.101, 0.099]
+
+  No-Tag Queries (pure retrieval, n=54) — F1@10 (95% CI):
+    BGE-base             0.653 [0.642, 0.662]
+    ITR-standalone       0.153 [0.130, 0.178]
+    Random-k             0.097 [0.097, 0.095]
+
+  Complex Queries (multi-intent/temporal/indirect/adversarial, n=60) — F1@10 (95% CI):
+    BGE-base             0.672 [0.656, 0.688]
+    ITR-standalone       0.161 [0.132, 0.190]
+    Random-k             0.114 [0.114, 0.111]
+
+  Latency:
+    BGE-base             avg=0.1ms  p95=0.2ms
+    ITR-standalone       avg=0.0ms  p95=0.0ms
+    Random-k             avg=0.0ms  p95=0.0ms
+
+  Paired Bootstrap Tests (p-values, H0: no difference):
+  Pair                                         Strict    Relaxed     Paraph     No-tag    Complex
+  ------------------------------------------------------------------------------------------
+  BGE-base vs ITR-standalone                0.0000***  0.0000***  0.0000***  0.0000***  0.0000***
+  BGE-base vs Random-k                      0.0000***  0.0000***  0.0000***  0.0000***  0.0000***
+  ITR-standalone vs Random-k                0.0000***  0.0000***  0.0000***  0.0000***  0.0006***
+
+  Cohen's d Effect Sizes (positive = first backend higher):
+  Pair                                       Strict  Relaxed   Paraph   No-tag  Complex
+  --------------------------------------------------------------------------------
+  BGE-base vs ITR-standalone                  5.656    2.931    7.919    4.512    4.809
+  BGE-base vs Random-k                       12.170    6.972   15.803   17.033   10.183
+  ITR-standalone vs Random-k                  0.838    1.041   -0.579    0.610    0.431
+
+
+% === LaTeX Table: Retrieval Backend Comparison ===
+\begin{table}[t]
+\caption{Retrieval quality by backend on Pet Simulation corpus (37 queries, $k=10$, $\alpha=0.3$).}
+\label{tab:backend-comparison}
+\centering
+\begin{tabular}{@{}l ccc ccc r@{}}
+\toprule
+& \multicolumn{3}{c}{Strict} & \multicolumn{3}{c}{Relaxed} & \\
+\cmidrule(lr){2-4} \cmidrule(lr){5-7}
+Backend & P@10 & R@10 & F1 & P@10 & R@10 & F1 & ms/q \\
+\midrule
+BGE-base & 0.509 & 0.978 & 0.668 & 0.694 & 0.963 & 0.792 & 0.1 \\
+ITR-standalone & --- & --- & 0.182 & --- & --- & 0.320 & --- \\
+Random-k & --- & --- & 0.116 & --- & --- & 0.140 & --- \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Results saved to results/wp0/backend_comparison_bge.json
+[wp0-site] embedding cache: 762 hits, 0 misses (/home/snhwang/tist-evals/wp0-v042/embcache)
+### mem guard: peak session RSS 893 MiB
+### finished:    2026-10-30T09:22:30-04:00 rc=0

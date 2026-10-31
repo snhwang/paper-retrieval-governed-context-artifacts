@@ -1,0 +1,17 @@
+### ================ attempt 2026-10-30T09:22:34-04:00 ================
+### step:        e2e_bm25_Ltie_dropped
+### kind:        cpu (need 0 GiB)
+### bear:        v042L (9d085b4)
+### started:     2026-10-30T09:22:34-04:00
+### command:     /home/snhwang/.venvs/tist-evals/bin/python evals/wp0_v040/dump_toolbench_lists.py --mode e2e --backends bm25 --outdir results/wp0/lists_v042L_tie_dropped
+### env:         HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 TOKENIZERS_PARALLELISM=false PYTHONUNBUFFERED=1 PYTHONPATH=/home/snhwang/tist-evals/wp0-v042/artifacts-nemo/evals/wp0_v040/site BEAR_SOURCE_SHA=9d085b4 ANTHROPIC_API_KEY=wp0-dummy-key-no-paid-calls WP0_REPORT_VRAM=/home/snhwang/tist-evals/wp0-v042/logs/vram.jsonl WP0_STEP=e2e_bm25_Ltie_dropped WP0_BEAR_LEGACY=tie_order,dropped_rows WP0_NO_LOCAL_MODELS=1 CUDA_VISIBLE_DEVICES= CUDA_VISIBLE_DEVICES= OMP_NUM_THREADS=8 MKL_NUM_THREADS=8 WP0_EMB_CACHE=/home/snhwang/tist-evals/wp0-v042/embcache WP0_SHARE_MODELS=1
+### memory cap:  /home/snhwang/bin/tist-capped --mem 4G --
+[wp0-site] local model loads refused (WP0_NO_LOCAL_MODELS)
+[wp0-site] BEAR legacy switches on: ['restore_tie_order', 'restore_dropped_rows']
+BEAR: {"bear_version": "0.4.2", "bear_path": "/home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/bear", "bear_source_sha": "9d085b4", "bear_pkg_sha256": "9cf19e48b49f4e57e3723050b942b296bb66f775fdd41e7f1770514576d0930a"}
+e2e corpus 3225 APIs, 1100 queries, k=5
+  BEAR+BM25 (gov): recall@5=0.6127 (27s)
+  BM25 (no gov): recall@5=0.4681 (15s)
+[wp0-site] embedding cache: 0 hits, 0 misses (/home/snhwang/tist-evals/wp0-v042/embcache)
+### mem guard: peak session RSS 879 MiB
+### finished:    2026-10-30T09:23:20-04:00 rc=0

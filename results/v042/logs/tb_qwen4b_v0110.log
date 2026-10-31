@@ -1,0 +1,143 @@
+### ================ attempt 2026-10-31T12:12:32-04:00 ================
+### step:        tb_qwen4b_v0110
+### kind:        gpu (need 11 GiB)
+### bear:        v0110 (cdba2174d715494ec4f22c098386487002ec492f)
+### started:     2026-10-31T12:12:32-04:00
+### command:     /home/snhwang/.venvs/tist-evals/bin/python evals/wp0_v040/eval_toolbench_v040.py --top-k 5 --metatool-query-tags-file evals/data/external_benchmarks/metatool/query_tags_top5.json --output results/wp0/toolbench_eval_tb_qwen4b_v0110.json --backends BEAR+Qwen3-4B (gov) Qwen3-4B (no gov)
+### env:         HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 TOKENIZERS_PARALLELISM=false PYTHONUNBUFFERED=1 PYTHONPATH=/home/snhwang/tist-evals/wp0-v042/artifacts-gpu/evals/wp0_v040/site:/home/snhwang/tist-evals/bear-v0110 BEAR_SOURCE_SHA=cdba2174d715494ec4f22c098386487002ec492f ANTHROPIC_API_KEY=wp0-dummy-key-no-paid-calls WP0_REPORT_VRAM=/home/snhwang/tist-evals/wp0-v042/logs/vram.jsonl WP0_STEP=tb_qwen4b_v0110 WP0_ENCODE_BATCH=8 WP0_QWEN4B_DTYPE=bfloat16 WP0_SHARE_MODELS=1 WP0_EMB_CACHE=/home/snhwang/tist-evals/wp0-v042/embcache
+### memory cap:  /home/snhwang/bin/tist-capped --mem 12G --
+### gpu gate: Windows nvidia-smi shows 65810 MiB used (start limit 67000, stop limit 80000)
+### gpu gate: free 30791 MiB, allocator cap 11.2 GiB (need 11 GiB)
+[wp0-site] encode batch size capped at 8
+[wp0-site] CUDA allocator capped at 11.2 GiB (0.1172 of 95.6 GiB)
+
+MetaTool (no tags) loaded: 199 tools, 21111 queries
+
+========================================================================
+  MetaTool
+  Corpus: 199 instructions, Queries: 21111, k=5
+  Experiments: 2
+========================================================================
+
+  BEAR+Qwen3-4B (gov)...
+[wp0-site] loading Qwen/Qwen3-Embedding-4B with torch_dtype=bfloat16
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:00<00:00, 134.38it/s]
+        recall@5: 0.905 [0.901, 0.909]
+          ndcg@5: 0.821 [0.817, 0.825]
+            f1@5: 0.308 [0.307, 0.309]
+          time:   145.5s
+
+  Qwen3-4B (no gov)...
+[wp0-site] reusing shared Qwen/Qwen3-Embedding-4B
+Batches:   0%|          | 0/25 [00:00<?, ?it/s]Batches:   0%|          | 0/25 [00:00<?, ?it/s]
+    SKIPPED: CUDA out of memory. Tried to allocate 250.00 MiB. GPU 0 has a total capacity of 95.59 GiB of which 65.36 GiB is free. Process 1 has 17179869184.00 GiB memory in use. Process 1 has 17179869184.00 GiB memory in use. Process 83 has 17179869184.00 GiB memory in use. 11.20 GiB allowed; Of the allocated memory 10.16 GiB is allocated by PyTorch, and 975.43 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+
+  --- Statistical Tests (paired t-test, Wilcoxon, Cohen's d) ---
+
+MetaTool+Tags loaded: 199 tools, 21111 queries
+  Queries with context tags: 21111/21111
+
+========================================================================
+  MetaTool+Tags
+  Corpus: 199 instructions, Queries: 21111, k=5
+  Experiments: 2
+========================================================================
+
+  BEAR+Qwen3-4B (gov)...
+[wp0-site] reusing shared Qwen/Qwen3-Embedding-4B
+        recall@5: 0.987 [0.985, 0.988]
+          ndcg@5: 0.928 [0.925, 0.930]
+            f1@5: 0.399 [0.397, 0.402]
+          time:   142.2s
+
+  Qwen3-4B (no gov)...
+[wp0-site] reusing shared Qwen/Qwen3-Embedding-4B
+        recall@5: 0.902 [0.898, 0.906]
+          ndcg@5: 0.815 [0.811, 0.819]
+            f1@5: 0.305 [0.304, 0.306]
+          time:   144.1s
+
+  --- Statistical Tests (paired t-test, Wilcoxon, Cohen's d) ---
+
+    BEAR+Qwen3-4B (gov)  vs  Qwen3-4B (no gov):
+          recall: paired-t=44.699, p=0.0000 ***, d=0.308; W=5052, p=0.0000
+            ndcg: paired-t=66.167, p=0.0000 ***, d=0.455; W=341460, p=0.0000
+              f1: paired-t=67.659, p=0.0000 ***, d=0.466; W=14888, p=0.0000
+
+MetaTool+QueryTags-top5 loaded: 199 tools, 21111 queries
+  Source file: evals/data/external_benchmarks/metatool/query_tags_top5.json
+  Queries with context tags: 21111/21111
+
+========================================================================
+  MetaTool+QueryTags-top5
+  Corpus: 199 instructions, Queries: 21111, k=5
+  Experiments: 2
+========================================================================
+
+  BEAR+Qwen3-4B (gov)...
+[wp0-site] reusing shared Qwen/Qwen3-Embedding-4B
+        recall@5: 0.749 [0.743, 0.755]
+          ndcg@5: 0.699 [0.693, 0.705]
+            f1@5: 0.254 [0.252, 0.256]
+          time:   158.4s
+
+  Qwen3-4B (no gov)...
+[wp0-site] reusing shared Qwen/Qwen3-Embedding-4B
+        recall@5: 0.902 [0.898, 0.906]
+          ndcg@5: 0.815 [0.811, 0.820]
+            f1@5: 0.305 [0.304, 0.306]
+          time:   132.8s
+
+  --- Statistical Tests (paired t-test, Wilcoxon, Cohen's d) ---
+
+    BEAR+Qwen3-4B (gov)  vs  Qwen3-4B (no gov):
+          recall: paired-t=-50.697, p=0.0000 ***, d=-0.349; W=1557305, p=0.0000
+            ndcg: paired-t=-43.668, p=0.0000 ***, d=-0.301; W=4323738, p=0.0000
+              f1: paired-t=-49.541, p=0.0000 ***, d=-0.341; W=1647780, p=0.0000
+
+ToolBench loaded: 3225 APIs, 1100 queries
+  Categories: 47
+
+========================================================================
+  ToolBench
+  Corpus: 3225 instructions, Queries: 1100, k=5
+  Experiments: 2
+========================================================================
+
+  BEAR+Qwen3-4B (gov)...
+[wp0-site] reusing shared Qwen/Qwen3-Embedding-4B
+Batches:   0%|          | 0/404 [00:00<?, ?it/s]Batches:   0%|          | 0/404 [00:00<?, ?it/s]
+    SKIPPED: CUDA out of memory. Tried to allocate 456.00 MiB. GPU 0 has a total capacity of 95.59 GiB of which 65.22 GiB is free. Process 1 has 17179869184.00 GiB memory in use. Process 1 has 17179869184.00 GiB memory in use. Process 83 has 17179869184.00 GiB memory in use. 11.20 GiB allowed; Of the allocated memory 9.45 GiB is allocated by PyTorch, and 1.48 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+
+  Qwen3-4B (no gov)...
+[wp0-site] reusing shared Qwen/Qwen3-Embedding-4B
+Batches:   0%|          | 0/404 [00:00<?, ?it/s]Batches:   0%|          | 0/404 [00:00<?, ?it/s]
+    SKIPPED: CUDA out of memory. Tried to allocate 454.00 MiB. GPU 0 has a total capacity of 95.59 GiB of which 65.25 GiB is free. Process 1 has 17179869184.00 GiB memory in use. Process 1 has 17179869184.00 GiB memory in use. Process 83 has 17179869184.00 GiB memory in use. 11.20 GiB allowed; Of the allocated memory 9.72 GiB is allocated by PyTorch, and 1.21 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+
+  --- Statistical Tests (paired t-test, Wilcoxon, Cohen's d) ---
+
+Results saved to results/wp0/toolbench_eval_tb_qwen4b_v0110.json
+
+========================================================================
+  Summary
+========================================================================
+
+  MetaTool:
+    BEAR+Qwen3-4B (gov)                 R@5=0.905 [0.901, 0.909]  NDCG@5=0.821 [0.817, 0.825]
+
+  MetaTool+Tags:
+    BEAR+Qwen3-4B (gov)                 R@5=0.987 [0.985, 0.988]  NDCG@5=0.928 [0.925, 0.930]
+    Qwen3-4B (no gov)                   R@5=0.902 [0.898, 0.906]  NDCG@5=0.815 [0.811, 0.819]
+
+  MetaTool+QueryTags-top5:
+    BEAR+Qwen3-4B (gov)                 R@5=0.749 [0.743, 0.755]  NDCG@5=0.699 [0.693, 0.705]
+    Qwen3-4B (no gov)                   R@5=0.902 [0.898, 0.906]  NDCG@5=0.815 [0.811, 0.820]
+
+  ToolBench:
+Provenance stamped into results/wp0/toolbench_eval_tb_qwen4b_v0110.json
+MISSING EXPERIMENTS: [('MetaTool', 'Qwen3-4B (no gov)'), ('ToolBench', 'BEAR+Qwen3-4B (gov)'), ('ToolBench', 'Qwen3-4B (no gov)')]
+[wp0-site] embedding cache: 105568 hits, 0 misses (/home/snhwang/tist-evals/wp0-v042/embcache)
+### mem guard: card peak 77969 MiB (stop limit 80000)
+### mem guard: peak session RSS 4864 MiB
+### finished:    2026-10-31T12:24:57-04:00 rc=3

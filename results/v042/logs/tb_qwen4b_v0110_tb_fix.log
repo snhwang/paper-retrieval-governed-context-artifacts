@@ -1,0 +1,76 @@
+### ================ attempt 2026-10-31T12:49:16-04:00 ================
+### step:        tb_qwen4b_v0110_tb_fix
+### kind:        gpu (need 11 GiB)
+### bear:        v0110 (cdba2174d715494ec4f22c098386487002ec492f)
+### started:     2026-10-31T12:49:16-04:00
+### command:     /home/snhwang/.venvs/tist-evals/bin/python evals/wp0_v040/eval_toolbench_v040.py --top-k 5 --metatool-query-tags-file evals/data/external_benchmarks/metatool/query_tags_top5.json --toolbench-only --output results/wp0/toolbench_eval_tb_qwen4b_v0110_tb_fix.json --backends BEAR+Qwen3-4B (gov) Qwen3-4B (no gov)
+### env:         HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 TOKENIZERS_PARALLELISM=false PYTHONUNBUFFERED=1 PYTHONPATH=/home/snhwang/tist-evals/wp0-v042/artifacts-gpu/evals/wp0_v040/site:/home/snhwang/tist-evals/bear-v0110 BEAR_SOURCE_SHA=cdba2174d715494ec4f22c098386487002ec492f ANTHROPIC_API_KEY=wp0-dummy-key-no-paid-calls WP0_REPORT_VRAM=/home/snhwang/tist-evals/wp0-v042/logs/vram.jsonl WP0_STEP=tb_qwen4b_v0110_tb_fix WP0_ENCODE_BATCH=2 WP0_QWEN4B_DTYPE=bfloat16 WP0_SHARE_MODELS=1 WP0_EMB_CACHE=/home/snhwang/tist-evals/wp0-v042/embcache
+### memory cap:  /home/snhwang/bin/tist-capped --mem 12G --
+### gpu gate: Windows nvidia-smi shows 65909 MiB used (start limit 67000, stop limit 80000)
+### gpu gate: free 30692 MiB, allocator cap 11.2 GiB (need 11 GiB)
+[wp0-site] encode batch size capped at 2
+[wp0-site] CUDA allocator capped at 11.2 GiB (0.1172 of 95.6 GiB)
+
+ToolBench loaded: 3225 APIs, 1100 queries
+  Categories: 47
+
+========================================================================
+  ToolBench
+  Corpus: 3225 instructions, Queries: 1100, k=5
+  Experiments: 2
+========================================================================
+
+  BEAR+Qwen3-4B (gov)...
+[wp0-site] loading Qwen/Qwen3-Embedding-4B with torch_dtype=bfloat16
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:00<00:00, 154.34it/s]
+        recall@5: 0.754 [0.735, 0.772]
+          ndcg@5: 0.706 [0.688, 0.724]
+            f1@5: 0.464 [0.453, 0.476]
+          time:   33.9s
+
+  Qwen3-4B (no gov)...
+[wp0-site] reusing shared Qwen/Qwen3-Embedding-4B
+        recall@5: 0.681 [0.660, 0.703]
+          ndcg@5: 0.640 [0.620, 0.660]
+            f1@5: 0.419 [0.406, 0.432]
+          time:   14.8s
+
+  --- Statistical Tests (paired t-test, Wilcoxon, Cohen's d) ---
+
+    BEAR+Qwen3-4B (gov)  vs  Qwen3-4B (no gov):
+          recall: paired-t=10.829, p=0.0000 ***, d=0.327; W=2650, p=0.0000
+            ndcg: paired-t=11.378, p=0.0000 ***, d=0.343; W=25504, p=0.0000
+              f1: paired-t=11.029, p=0.0000 ***, d=0.333; W=2570, p=0.0000
+
+Results saved to results/wp0/toolbench_eval_tb_qwen4b_v0110_tb_fix.json
+
+========================================================================
+  Summary
+========================================================================
+
+  ToolBench:
+    BEAR+Qwen3-4B (gov)                 R@5=0.754 [0.735, 0.772]  NDCG@5=0.706 [0.688, 0.724]
+    Qwen3-4B (no gov)                   R@5=0.681 [0.660, 0.703]  NDCG@5=0.640 [0.620, 0.660]
+Provenance stamped into results/wp0/toolbench_eval_tb_qwen4b_v0110_tb_fix.json
+
+=== Reproducibility ===
+Timestamp (UTC): 2026-10-31T16:50:09Z
+Command line:    evals/wp0_v040/eval_toolbench_v040.py --top-k 5 --metatool-query-tags-file evals/data/external_benchmarks/metatool/query_tags_top5.json --toolbench-only --output results/wp0/toolbench_eval_tb_qwen4b_v0110_tb_fix.json --backends BEAR+Qwen3-4B (gov) Qwen3-4B (no gov)
+Python:          3.12.13 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
+numpy:           2.2.6
+scipy:           1.17.1
+bear:            0.1.10
+git commit:      332249f5a80ed32dc171b0eef6e015b567276c62
+git status:      DIRTY (26 files modified)
+git branch:      tist-r2
+
+  bear_version: 0.1.10
+  bear_path: /home/snhwang/tist-evals/bear-v0110/bear
+  bear_source_sha: cdba2174d715494ec4f22c098386487002ec492f
+  bear_pkg_sha256: 0108c923136caecb028106dc07acbd999a3a1bfcb0d15c3974c643d2da2d8e2b
+===
+[wp0-site] embedding cache: 4404 hits, 0 misses (/home/snhwang/tist-evals/wp0-v042/embcache)
+### mem guard: card peak 74183 MiB (stop limit 80000)
+### mem guard: peak session RSS 2709 MiB
+### finished:    2026-10-31T12:50:12-04:00 rc=0

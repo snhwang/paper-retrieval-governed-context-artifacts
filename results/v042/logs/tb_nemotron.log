@@ -1,0 +1,143 @@
+### ================ attempt 2026-10-30T07:44:16-04:00 ================
+### step:        tb_nemotron
+### kind:        remote (need 0 GiB)
+### bear:        v042 (9d085b4)
+### started:     2026-10-30T07:44:16-04:00
+### command:     /home/snhwang/.venvs/tist-evals/bin/python evals/wp0_v040/eval_toolbench_v040.py --top-k 5 --metatool-query-tags-file evals/data/external_benchmarks/metatool/query_tags_top5.json --output results/wp0/toolbench_eval_tb_nemotron.json --backends BEAR+Nemotron (gov) Nemotron (no gov)
+### env:         HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 TOKENIZERS_PARALLELISM=false PYTHONUNBUFFERED=1 PYTHONPATH=/home/snhwang/tist-evals/wp0-v042/artifacts-nemo/evals/wp0_v040/site BEAR_SOURCE_SHA=9d085b4 ANTHROPIC_API_KEY=wp0-dummy-key-no-paid-calls WP0_REPORT_VRAM=/home/snhwang/tist-evals/wp0-v042/logs/vram.jsonl WP0_STEP=tb_nemotron WP0_NO_LOCAL_MODELS=1 CUDA_VISIBLE_DEVICES= CUDA_VISIBLE_DEVICES= WP0_NEMO_CACHE=/home/snhwang/tist-evals/wp0-v042/nemocache/nemo.sqlite
+### memory cap:  /home/snhwang/bin/tist-capped --mem 8G --
+[wp0-site] local model loads refused (WP0_NO_LOCAL_MODELS)
+
+MetaTool (no tags) loaded: 199 tools, 21111 queries
+
+========================================================================
+  MetaTool
+  Corpus: 199 instructions, Queries: 21111, k=5
+  Experiments: 2
+========================================================================
+
+  BEAR+Nemotron (gov)...
+        recall@5: 0.745 [0.739, 0.751]
+          ndcg@5: 0.651 [0.645, 0.656]
+            f1@5: 0.312 [0.309, 0.316]
+          time:   945.9s
+
+  Nemotron (no gov)...
+        recall@5: 0.815 [0.809, 0.820]
+          ndcg@5: 0.699 [0.694, 0.704]
+            f1@5: 0.275 [0.274, 0.277]
+          time:   6.5s
+
+  --- Statistical Tests (paired t-test, Wilcoxon, Cohen's d) ---
+
+MetaTool+Tags loaded: 199 tools, 21111 queries
+  Queries with context tags: 21111/21111
+
+========================================================================
+  MetaTool+Tags
+  Corpus: 199 instructions, Queries: 21111, k=5
+  Experiments: 2
+========================================================================
+
+  BEAR+Nemotron (gov)...
+        recall@5: 0.986 [0.984, 0.987]
+          ndcg@5: 0.931 [0.929, 0.934]
+            f1@5: 0.399 [0.397, 0.402]
+          time:   1006.1s
+
+  Nemotron (no gov)...
+        recall@5: 0.804 [0.799, 0.809]
+          ndcg@5: 0.690 [0.684, 0.695]
+            f1@5: 0.272 [0.270, 0.273]
+          time:   10.7s
+
+  --- Statistical Tests (paired t-test, Wilcoxon, Cohen's d) ---
+
+MetaTool+QueryTags-top5 loaded: 199 tools, 21111 queries
+  Source file: evals/data/external_benchmarks/metatool/query_tags_top5.json
+  Queries with context tags: 21111/21111
+
+========================================================================
+  MetaTool+QueryTags-top5
+  Corpus: 199 instructions, Queries: 21111, k=5
+  Experiments: 2
+========================================================================
+
+  BEAR+Nemotron (gov)...
+        recall@5: 0.703 [0.697, 0.709]
+          ndcg@5: 0.612 [0.606, 0.618]
+            f1@5: 0.239 [0.236, 0.241]
+          time:   954.7s
+
+  Nemotron (no gov)...
+        recall@5: 0.804 [0.799, 0.809]
+          ndcg@5: 0.690 [0.684, 0.695]
+            f1@5: 0.272 [0.270, 0.273]
+          time:   7.0s
+
+  --- Statistical Tests (paired t-test, Wilcoxon, Cohen's d) ---
+
+ToolBench loaded: 3225 APIs, 1100 queries
+  Categories: 47
+
+========================================================================
+  ToolBench
+  Corpus: 3225 instructions, Queries: 1100, k=5
+  Experiments: 2
+========================================================================
+
+  BEAR+Nemotron (gov)...
+        recall@5: 0.762 [0.742, 0.781]
+          ndcg@5: 0.722 [0.703, 0.740]
+            f1@5: 0.470 [0.458, 0.482]
+          time:   144.2s
+
+  Nemotron (no gov)...
+        recall@5: 0.668 [0.647, 0.690]
+          ndcg@5: 0.631 [0.610, 0.651]
+            f1@5: 0.410 [0.397, 0.424]
+          time:   132.3s
+
+  --- Statistical Tests (paired t-test, Wilcoxon, Cohen's d) ---
+
+Results saved to results/wp0/toolbench_eval_tb_nemotron.json
+
+========================================================================
+  Summary
+========================================================================
+
+  MetaTool:
+    BEAR+Nemotron (gov)                 R@5=0.745 [0.739, 0.751]  NDCG@5=0.651 [0.645, 0.656]
+    Nemotron (no gov)                   R@5=0.815 [0.809, 0.820]  NDCG@5=0.699 [0.694, 0.704]
+
+  MetaTool+Tags:
+    BEAR+Nemotron (gov)                 R@5=0.986 [0.984, 0.987]  NDCG@5=0.931 [0.929, 0.934]
+    Nemotron (no gov)                   R@5=0.804 [0.799, 0.809]  NDCG@5=0.690 [0.684, 0.695]
+
+  MetaTool+QueryTags-top5:
+    BEAR+Nemotron (gov)                 R@5=0.703 [0.697, 0.709]  NDCG@5=0.612 [0.606, 0.618]
+    Nemotron (no gov)                   R@5=0.804 [0.799, 0.809]  NDCG@5=0.690 [0.684, 0.695]
+
+  ToolBench:
+    BEAR+Nemotron (gov)                 R@5=0.762 [0.742, 0.781]  NDCG@5=0.722 [0.703, 0.740]
+    Nemotron (no gov)                   R@5=0.668 [0.647, 0.690]  NDCG@5=0.631 [0.610, 0.651]
+Provenance stamped into results/wp0/toolbench_eval_tb_nemotron.json
+
+=== Reproducibility ===
+Timestamp (UTC): 2026-10-30T12:38:12Z
+Command line:    evals/wp0_v040/eval_toolbench_v040.py --top-k 5 --metatool-query-tags-file evals/data/external_benchmarks/metatool/query_tags_top5.json --output results/wp0/toolbench_eval_tb_nemotron.json --backends BEAR+Nemotron (gov) Nemotron (no gov)
+Python:          3.12.13 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
+numpy:           2.2.6
+scipy:           1.17.1
+bear:            0.4.2
+git commit:      634caf5ab715b2a7c20fac0b170228a49810bdc7
+git status:      DIRTY (14 files modified)
+git branch:      tist-r2
+
+  bear_version: 0.4.2
+  bear_path: /home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/bear
+  bear_source_sha: 9d085b4
+  bear_pkg_sha256: 9cf19e48b49f4e57e3723050b942b296bb66f775fdd41e7f1770514576d0930a
+===
+### mem guard: peak session RSS 1210 MiB
+### finished:    2026-10-30T08:38:20-04:00 rc=0

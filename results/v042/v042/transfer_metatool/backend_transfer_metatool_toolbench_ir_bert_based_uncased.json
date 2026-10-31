@@ -1,0 +1,76 @@
+{
+ "corpus": "metatool",
+ "model": "ToolBench/ToolBench_IR_bert_based_uncased",
+ "top_k": 5,
+ "in_domain": false,
+ "n_items": 199,
+ "n_queries": 21111,
+ "governance": false,
+ "metrics": {
+  "recall": {
+   "mean": 0.648169200890531,
+   "ci": [
+    0.6416554166074558,
+    0.6545402870541424
+   ]
+  },
+  "ndcg": {
+   "mean": 0.5527347398935444,
+   "ci": [
+    0.5466833305023665,
+    0.558600286271437
+   ]
+  },
+  "f1": {
+   "mean": 0.21894927266534492,
+   "ci": [
+    0.2167748251306586,
+    0.22110127647288375
+   ]
+  }
+ },
+ "offshelf_reference_recall": {
+  "BGE": 0.723,
+  "BGE-M3": 0.728,
+  "Qwen3-0.6B": 0.871,
+  "Qwen3-4B": 0.906
+ },
+ "_provenance": {
+  "written_utc": "2026-10-30T14:07:31Z",
+  "argv": [
+   "evals/wp0_v040/stamp_dir.py",
+   "/home/snhwang/tist-evals/wp0-v042/stage/v042/transfer_metatool",
+   "--step",
+   "transfer_metatool",
+   "--command",
+   "/home/snhwang/.venvs/tist-evals/bin/python evals/eval_backend_transfer.py --corpus metatool --output results/wp0/backend_transfer_metatool_toolbench_ir_bert_based_uncased.json"
+  ],
+  "bear_version": "0.4.2",
+  "bear_path": "/home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/bear",
+  "bear_source_sha": "9d085b4",
+  "bear_pkg_sha256": "9cf19e48b49f4e57e3723050b942b296bb66f775fdd41e7f1770514576d0930a",
+  "hooks": {
+   "WP0_CPU_THREADS": "12",
+   "WP0_SHARE_MODELS": "1",
+   "WP0_ART": "/home/snhwang/tist-evals/wp0-v042/artifacts-dense",
+   "WP0_ALLOW_LOCAL_MODELS": "1",
+   "WP0_EMB_CACHE": "",
+   "WP0_STEP": "transfer_metatool",
+   "WP0_STEP_MEM": "20G",
+   "WP0_ENCODE_BATCH": "4",
+   "WP0_REPORT_VRAM": "/home/snhwang/tist-evals/wp0-v042/logs/vram.jsonl"
+  },
+  "versions": {
+   "python": "3.12.13",
+   "platform": "Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+   "numpy": "2.2.6",
+   "scipy": "1.17.1",
+   "torch": "2.10.0+cu128",
+   "transformers": "4.57.6",
+   "sentence_transformers": "5.4.1"
+  },
+  "step": "transfer_metatool",
+  "command": "/home/snhwang/.venvs/tist-evals/bin/python evals/eval_backend_transfer.py --corpus metatool --output results/wp0/backend_transfer_metatool_toolbench_ir_bert_based_uncased.json",
+  "file": "results/wp0/backend_transfer_metatool_toolbench_ir_bert_based_uncased.json"
+ }
+}

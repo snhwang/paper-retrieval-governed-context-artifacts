@@ -1,0 +1,63 @@
+### ================ attempt 2026-10-31T12:37:32-04:00 ================
+### step:        tb_qwen4b_mt_fix
+### kind:        gpu (need 11 GiB)
+### bear:        v042 (0d0718a39a0b0788ef5cca4689352462b830494c)
+### started:     2026-10-31T12:37:32-04:00
+### command:     /home/snhwang/.venvs/tist-evals/bin/python evals/wp0_v040/eval_toolbench_v040.py --top-k 5 --metatool-query-tags-file evals/data/external_benchmarks/metatool/query_tags_top5.json --metatool-only --metatool-base-only --output results/wp0/toolbench_eval_tb_qwen4b_mt_fix.json --backends Qwen3-4B (no gov)
+### env:         HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 TOKENIZERS_PARALLELISM=false PYTHONUNBUFFERED=1 PYTHONPATH=/home/snhwang/tist-evals/wp0-v042/artifacts-gpu/evals/wp0_v040/site BEAR_SOURCE_SHA=0d0718a39a0b0788ef5cca4689352462b830494c ANTHROPIC_API_KEY=wp0-dummy-key-no-paid-calls WP0_REPORT_VRAM=/home/snhwang/tist-evals/wp0-v042/logs/vram.jsonl WP0_STEP=tb_qwen4b_mt_fix WP0_ENCODE_BATCH=2 WP0_QWEN4B_DTYPE=bfloat16 WP0_SHARE_MODELS=1 WP0_EMB_CACHE=/home/snhwang/tist-evals/wp0-v042/embcache
+### memory cap:  /home/snhwang/bin/tist-capped --mem 12G --
+### gpu gate: Windows nvidia-smi shows 65871 MiB used (start limit 67000, stop limit 80000)
+### gpu gate: free 30730 MiB, allocator cap 11.2 GiB (need 11 GiB)
+[wp0-site] encode batch size capped at 2
+[wp0-site] CUDA allocator capped at 11.2 GiB (0.1172 of 95.6 GiB)
+
+MetaTool (no tags) loaded: 199 tools, 21111 queries
+
+========================================================================
+  MetaTool
+  Corpus: 199 instructions, Queries: 21111, k=5
+  Experiments: 1
+========================================================================
+
+  Qwen3-4B (no gov)...
+[wp0-site] loading Qwen/Qwen3-Embedding-4B with torch_dtype=bfloat16
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:00<00:00, 160.08it/s]
+Batches:   0%|          | 0/100 [00:00<?, ?it/s]Batches:   1%|          | 1/100 [00:00<00:16,  6.17it/s]Batches:   2%|▏         | 2/100 [00:00<00:12,  7.96it/s]Batches:   4%|▍         | 4/100 [00:00<00:08, 10.99it/s]Batches:   7%|▋         | 7/100 [00:00<00:06, 15.15it/s]Batches:  10%|█         | 10/100 [00:00<00:05, 17.98it/s]Batches:  12%|█▏        | 12/100 [00:00<00:04, 17.66it/s]Batches:  15%|█▌        | 15/100 [00:00<00:04, 20.58it/s]Batches:  18%|█▊        | 18/100 [00:01<00:03, 21.36it/s]Batches:  21%|██        | 21/100 [00:01<00:03, 23.27it/s]Batches:  24%|██▍       | 24/100 [00:01<00:03, 24.32it/s]Batches:  28%|██▊       | 28/100 [00:01<00:02, 26.29it/s]Batches:  32%|███▏      | 32/100 [00:01<00:02, 28.77it/s]Batches:  35%|███▌      | 35/100 [00:01<00:02, 29.06it/s]Batches:  38%|███▊      | 38/100 [00:01<00:02, 29.30it/s]Batches:  42%|████▏     | 42/100 [00:01<00:01, 31.15it/s]Batches:  46%|████▌     | 46/100 [00:01<00:01, 32.08it/s]Batches:  50%|█████     | 50/100 [00:02<00:01, 30.89it/s]Batches:  54%|█████▍    | 54/100 [00:02<00:01, 31.52it/s]Batches:  58%|█████▊    | 58/100 [00:02<00:01, 31.43it/s]Batches:  62%|██████▏   | 62/100 [00:02<00:01, 31.17it/s]Batches:  66%|██████▌   | 66/100 [00:02<00:01, 31.47it/s]Batches:  70%|███████   | 70/100 [00:02<00:00, 32.00it/s]Batches:  74%|███████▍  | 74/100 [00:02<00:00, 32.00it/s]Batches:  79%|███████▉  | 79/100 [00:02<00:00, 34.47it/s]Batches:  83%|████████▎ | 83/100 [00:03<00:00, 34.91it/s]Batches:  87%|████████▋ | 87/100 [00:03<00:00, 34.30it/s]Batches:  91%|█████████ | 91/100 [00:03<00:00, 35.24it/s]Batches:  95%|█████████▌| 95/100 [00:03<00:00, 33.12it/s]Batches:  99%|█████████▉| 99/100 [00:03<00:00, 30.24it/s]Batches: 100%|██████████| 100/100 [00:03<00:00, 27.77it/s]
+        recall@5: 0.905 [0.901, 0.909]
+          ndcg@5: 0.821 [0.816, 0.825]
+            f1@5: 0.306 [0.305, 0.308]
+          time:   169.9s
+
+  --- Statistical Tests (paired t-test, Wilcoxon, Cohen's d) ---
+
+Results saved to results/wp0/toolbench_eval_tb_qwen4b_mt_fix.json
+
+========================================================================
+  Summary
+========================================================================
+
+  MetaTool:
+    Qwen3-4B (no gov)                   R@5=0.905 [0.901, 0.909]  NDCG@5=0.821 [0.816, 0.825]
+Provenance stamped into results/wp0/toolbench_eval_tb_qwen4b_mt_fix.json
+
+=== Reproducibility ===
+Timestamp (UTC): 2026-10-31T16:40:28Z
+Command line:    evals/wp0_v040/eval_toolbench_v040.py --top-k 5 --metatool-query-tags-file evals/data/external_benchmarks/metatool/query_tags_top5.json --metatool-only --metatool-base-only --output results/wp0/toolbench_eval_tb_qwen4b_mt_fix.json --backends Qwen3-4B (no gov)
+Python:          3.12.13 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
+numpy:           2.2.6
+scipy:           1.17.1
+bear:            0.4.2
+git commit:      332249f5a80ed32dc171b0eef6e015b567276c62
+git status:      DIRTY (26 files modified)
+git branch:      tist-r2
+
+  bear_version: 0.4.2
+  bear_path: /home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/bear
+  bear_source_sha: 0d0718a39a0b0788ef5cca4689352462b830494c
+  bear_pkg_sha256: 9cf19e48b49f4e57e3723050b942b296bb66f775fdd41e7f1770514576d0930a
+===
+[wp0-site] embedding cache: 21097 hits, 2 misses (/home/snhwang/tist-evals/wp0-v042/embcache)
+### mem guard: card peak 74284 MiB (stop limit 80000)
+### mem guard: peak session RSS 2309 MiB
+### finished:    2026-10-31T12:40:32-04:00 rc=0

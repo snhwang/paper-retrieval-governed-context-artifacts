@@ -1,0 +1,38 @@
+{
+  "written_utc": "2026-10-30T13:16:52Z",
+  "argv": [
+    "evals/wp0_v040/stamp_dir.py",
+    "/home/snhwang/tist-evals/wp0-v042/stage/v0110/backends_dense_v0110",
+    "--step",
+    "backends_dense_v0110",
+    "--command",
+    "/home/snhwang/.venvs/tist-evals/bin/python evals/eval_retrieval_backends.py --models bge bge-m3 qwen3 itr --output results/wp0/backend_comparison_dense.json"
+  ],
+  "bear_version": "0.1.10",
+  "bear_path": "/home/snhwang/tist-evals/bear-v0110/bear",
+  "bear_source_sha": "cdba2174d715494ec4f22c098386487002ec492f",
+  "bear_pkg_sha256": "0108c923136caecb028106dc07acbd999a3a1bfcb0d15c3974c643d2da2d8e2b",
+  "hooks": {
+    "WP0_CPU_THREADS": "12",
+    "WP0_SHARE_MODELS": "1",
+    "WP0_ART": "/home/snhwang/tist-evals/wp0-v042/artifacts-dense",
+    "WP0_ALLOW_LOCAL_MODELS": "1",
+    "WP0_EMB_CACHE": "",
+    "WP0_STEP": "backends_dense_v0110",
+    "WP0_STEP_MEM": "20G",
+    "WP0_ENCODE_BATCH": "4",
+    "WP0_REPORT_VRAM": "/home/snhwang/tist-evals/wp0-v042/logs/vram.jsonl"
+  },
+  "versions": {
+    "python": "3.12.13",
+    "platform": "Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "numpy": "2.2.6",
+    "scipy": "1.17.1",
+    "torch": "2.10.0+cu128",
+    "transformers": "4.57.6",
+    "sentence_transformers": "5.4.1"
+  },
+  "step": "backends_dense_v0110",
+  "command": "/home/snhwang/.venvs/tist-evals/bin/python evals/eval_retrieval_backends.py --models bge bge-m3 qwen3 itr --output results/wp0/backend_comparison_dense.json",
+  "file": "results/wp0/backend_comparison_dense.json"
+}

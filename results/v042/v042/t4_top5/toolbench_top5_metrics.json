@@ -1,0 +1,104 @@
+{
+ "model": "claude-sonnet-4-6",
+ "provider": "anthropic",
+ "top_k": 5,
+ "n_queries": 1100,
+ "classifier_setlevel_accuracy": 0.8481818181818181,
+ "mean_predicted_set_size": 4.999090909090909,
+ "n_oov_vocab_items": 98,
+ "n_empty_predicted_sets": 0,
+ "rows": [
+  {
+   "condition": "oracle",
+   "recall": {
+    "mean": 0.6884242424242424,
+    "ci_lo": 0.6676662878787879,
+    "ci_hi": 0.7089393939393939
+   },
+   "ndcg": {
+    "mean": 0.6510992667183895,
+    "ci_lo": 0.6310519926369983,
+    "ci_hi": 0.6701781006011116
+   },
+   "f1": {
+    "mean": 0.42198943985307624,
+    "ci_lo": 0.4092742834186016,
+    "ci_hi": 0.43446282467532465
+   }
+  },
+  {
+   "condition": "inferred_top5",
+   "recall": {
+    "mean": 0.5017424242424242,
+    "ci_lo": 0.47801477272727266,
+    "ci_hi": 0.5256212121212122
+   },
+   "ndcg": {
+    "mean": 0.4733076116128526,
+    "ci_lo": 0.45087522210274944,
+    "ci_hi": 0.4958940730576421
+   },
+   "f1": {
+    "mean": 0.30632264200446024,
+    "ci_lo": 0.2921244490358127,
+    "ci_hi": 0.3206211252131707
+   }
+  },
+  {
+   "condition": "no_governance",
+   "recall": {
+    "mean": 0.5741818181818181,
+    "ci_lo": 0.5520299242424243,
+    "ci_hi": 0.596334090909091
+   },
+   "ndcg": {
+    "mean": 0.5454350329443765,
+    "ci_lo": 0.524410661356427,
+    "ci_hi": 0.5664392379299578
+   },
+   "f1": {
+    "mean": 0.3512505575232848,
+    "ci_lo": 0.33770743801652897,
+    "ci_hi": 0.36496147350124625
+   }
+  }
+ ],
+ "_provenance": {
+  "written_utc": "2026-10-30T13:05:21Z",
+  "argv": [
+   "evals/wp0_v040/stamp_dir.py",
+   "/home/snhwang/tist-evals/wp0-v042/stage/v042/t4_top5",
+   "--step",
+   "t4_top5",
+   "--command",
+   "/home/snhwang/.venvs/tist-evals/bin/python evals/eval_toolbench_top5_categories.py"
+  ],
+  "bear_version": "0.4.2",
+  "bear_path": "/home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/bear",
+  "bear_source_sha": "9d085b4",
+  "bear_pkg_sha256": "9cf19e48b49f4e57e3723050b942b296bb66f775fdd41e7f1770514576d0930a",
+  "hooks": {
+   "WP0_CPU_THREADS": "12",
+   "WP0_SHARE_MODELS": "1",
+   "WP0_ART": "/home/snhwang/tist-evals/wp0-v042/artifacts-dense",
+   "WP0_ALLOW_LOCAL_MODELS": "1",
+   "WP0_EMB_CACHE": "",
+   "WP0_STEP": "t4_top5",
+   "WP0_STEP_MEM": "20G",
+   "WP0_ENCODE_BATCH": "4",
+   "WP0_REPORT_VRAM": "/home/snhwang/tist-evals/wp0-v042/logs/vram.jsonl"
+  },
+  "versions": {
+   "python": "3.12.13",
+   "platform": "Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+   "numpy": "2.2.6",
+   "scipy": "1.17.1",
+   "torch": "2.10.0+cu128",
+   "transformers": "4.57.6",
+   "sentence_transformers": "5.4.1"
+  },
+  "step": "t4_top5",
+  "command": "/home/snhwang/.venvs/tist-evals/bin/python evals/eval_toolbench_top5_categories.py",
+  "file": "results/toolbench_top5_metrics.json"
+ }
+}

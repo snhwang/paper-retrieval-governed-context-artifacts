@@ -1,0 +1,125 @@
+### ================ attempt 2026-10-31T12:25:17-04:00 ================
+### step:        e2e_q4b_v0110
+### kind:        gpu (need 11 GiB)
+### bear:        v0110 (cdba2174d715494ec4f22c098386487002ec492f)
+### started:     2026-10-31T12:25:17-04:00
+### command:     /home/snhwang/.venvs/tist-evals/bin/python evals/wp0_v040/dump_toolbench_lists.py --mode e2e --backends qwen3-4b --outdir results/wp0/lists_v0110
+### env:         HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 TOKENIZERS_PARALLELISM=false PYTHONUNBUFFERED=1 PYTHONPATH=/home/snhwang/tist-evals/wp0-v042/artifacts-gpu/evals/wp0_v040/site:/home/snhwang/tist-evals/bear-v0110 BEAR_SOURCE_SHA=cdba2174d715494ec4f22c098386487002ec492f ANTHROPIC_API_KEY=wp0-dummy-key-no-paid-calls WP0_REPORT_VRAM=/home/snhwang/tist-evals/wp0-v042/logs/vram.jsonl WP0_STEP=e2e_q4b_v0110 WP0_ENCODE_BATCH=8 WP0_QWEN4B_DTYPE=bfloat16 WP0_SHARE_MODELS=1 WP0_EMB_CACHE=/home/snhwang/tist-evals/wp0-v042/embcache
+### memory cap:  /home/snhwang/bin/tist-capped --mem 12G --
+### gpu gate: Windows nvidia-smi shows 65937 MiB used (start limit 67000, stop limit 80000)
+### gpu gate: free 30664 MiB, allocator cap 11.2 GiB (need 11 GiB)
+[wp0-site] encode batch size capped at 8
+[wp0-site] CUDA allocator capped at 11.2 GiB (0.1172 of 95.6 GiB)
+BEAR: {"bear_version": "0.1.10", "bear_path": "/home/snhwang/tist-evals/bear-v0110/bear", "bear_source_sha": "cdba2174d715494ec4f22c098386487002ec492f", "bear_pkg_sha256": "0108c923136caecb028106dc07acbd999a3a1bfcb0d15c3974c643d2da2d8e2b"}
+e2e corpus 3225 APIs, 1100 queries, k=5
+[wp0-site] loading Qwen/Qwen3-Embedding-4B with torch_dtype=bfloat16
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:00<00:00, 154.28it/s]
+Batches:   0%|          | 0/404 [00:00<?, ?it/s]Batches:   0%|          | 0/404 [00:00<?, ?it/s]
+Traceback (most recent call last):
+  File "/home/snhwang/tist-evals/wp0-v042/artifacts-gpu/evals/wp0_v040/dump_toolbench_lists.py", line 303, in <module>
+    main()
+  File "/home/snhwang/tist-evals/wp0-v042/artifacts-gpu/evals/wp0_v040/dump_toolbench_lists.py", line 297, in main
+    run_e2e(args)
+  File "/home/snhwang/tist-evals/wp0-v042/artifacts-gpu/evals/wp0_v040/dump_toolbench_lists.py", line 147, in run_e2e
+    r = build(corp, cond["backend"], cond["governance"])
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/snhwang/tist-evals/wp0-v042/artifacts-gpu/evals/wp0_v040/dump_toolbench_lists.py", line 76, in build
+    r = et.build_retriever(corpus, backend=backend, governance=governance, mandatory_tags=[])
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/snhwang/tist-evals/wp0-v042/artifacts-gpu/evals/eval_toolbench.py", line 615, in build_retriever
+    retriever.build_index()
+  File "/home/snhwang/tist-evals/bear-v0110/bear/retriever.py", line 414, in build_index
+    embeddings = self._embedder.embed(texts, is_query=False)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/snhwang/tist-evals/bear-v0110/bear/retriever.py", line 238, in embed
+    return self._model.encode(
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/snhwang/tist-evals/wp0-v042/artifacts-gpu/evals/wp0_v040/site/sitecustomize.py", line 231, in encode
+    return inner(self, sentences, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/snhwang/tist-evals/wp0-v042/artifacts-gpu/evals/wp0_v040/site/sitecustomize.py", line 344, in encode
+    out = orig_encode(self, sentences, *args, **kwargs)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/sentence_transformers/util/decorators.py", line 41, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/sentence_transformers/sentence_transformer/model.py", line 651, in encode
+    out_features = self.forward(features, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/sentence_transformers/base/model.py", line 486, in forward
+    input = module(input, **module_kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1776, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1787, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/sentence_transformers/base/modules/transformer.py", line 1046, in forward
+    model_output = model_method(**filtered_kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/transformers/utils/generic.py", line 1072, in wrapper
+    outputs = func(self, *args, **kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/transformers/models/qwen3/modeling_qwen3.py", line 410, in forward
+    hidden_states = decoder_layer(
+                    ^^^^^^^^^^^^^^
+  File "/home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/transformers/modeling_layers.py", line 94, in __call__
+    return super().__call__(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1776, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1787, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/transformers/utils/deprecation.py", line 172, in wrapped_func
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/transformers/models/qwen3/modeling_qwen3.py", line 275, in forward
+    hidden_states = self.mlp(hidden_states)
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1776, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1787, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/transformers/models/qwen3/modeling_qwen3.py", line 82, in forward
+    down_proj = self.down_proj(self.act_fn(self.gate_proj(x)) * self.up_proj(x))
+                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 456.00 MiB. GPU 0 has a total capacity of 95.59 GiB of which 65.19 GiB is free. Process 1 has 17179869184.00 GiB memory in use. Process 1 has 17179869184.00 GiB memory in use. Process 83 has 17179869184.00 GiB memory in use. 11.20 GiB allowed; Of the allocated memory 9.82 GiB is allocated by PyTorch, and 1.12 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+[wp0-site] embedding cache: 1 hits, 0 misses (/home/snhwang/tist-evals/wp0-v042/embcache)
+### mem guard: card peak 71256 MiB (stop limit 80000)
+### mem guard: peak session RSS 5395 MiB
+### finished:    2026-10-31T12:25:27-04:00 rc=1
+[wp0-site] encode batch size capped at 8
+stamp: 0 stamped, 0 already stamped, 0 sidecars in /home/snhwang/tist-evals/wp0-v042/stage/v0110/e2e_q4b_v0110
+### ================ attempt 2026-10-31T12:51:49-04:00 ================
+### step:        e2e_q4b_v0110
+### kind:        gpu (need 11 GiB)
+### bear:        v0110 (cdba2174d715494ec4f22c098386487002ec492f)
+### started:     2026-10-31T12:51:49-04:00
+### command:     /home/snhwang/.venvs/tist-evals/bin/python evals/wp0_v040/dump_toolbench_lists.py --mode e2e --backends qwen3-4b --outdir results/wp0/lists_v0110
+### env:         HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 TOKENIZERS_PARALLELISM=false PYTHONUNBUFFERED=1 PYTHONPATH=/home/snhwang/tist-evals/wp0-v042/artifacts-gpu/evals/wp0_v040/site:/home/snhwang/tist-evals/bear-v0110 BEAR_SOURCE_SHA=cdba2174d715494ec4f22c098386487002ec492f ANTHROPIC_API_KEY=wp0-dummy-key-no-paid-calls WP0_REPORT_VRAM=/home/snhwang/tist-evals/wp0-v042/logs/vram.jsonl WP0_STEP=e2e_q4b_v0110 WP0_ENCODE_BATCH=2 WP0_QWEN4B_DTYPE=bfloat16 WP0_SHARE_MODELS=1 WP0_EMB_CACHE=/home/snhwang/tist-evals/wp0-v042/embcache
+### memory cap:  /home/snhwang/bin/tist-capped --mem 12G --
+### gpu gate: Windows nvidia-smi shows 65949 MiB used (start limit 67000, stop limit 80000)
+### gpu gate: free 30652 MiB, allocator cap 11.2 GiB (need 11 GiB)
+[wp0-site] encode batch size capped at 2
+[wp0-site] CUDA allocator capped at 11.2 GiB (0.1172 of 95.6 GiB)
+BEAR: {"bear_version": "0.1.10", "bear_path": "/home/snhwang/tist-evals/bear-v0110/bear", "bear_source_sha": "cdba2174d715494ec4f22c098386487002ec492f", "bear_pkg_sha256": "0108c923136caecb028106dc07acbd999a3a1bfcb0d15c3974c643d2da2d8e2b"}
+e2e corpus 3225 APIs, 1100 queries, k=5
+[wp0-site] loading Qwen/Qwen3-Embedding-4B with torch_dtype=bfloat16
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:00<00:00, 149.93it/s]
+  BEAR+Qwen3-4B (gov): recall@5=0.7570 (20s)
+[wp0-site] reusing shared Qwen/Qwen3-Embedding-4B
+  Qwen3-4B (no gov): recall@5=0.6840 (8s)
+[wp0-site] embedding cache: 2204 hits, 0 misses (/home/snhwang/tist-evals/wp0-v042/embcache)
+### mem guard: card peak 74227 MiB (stop limit 80000)
+### mem guard: peak session RSS 1442 MiB
+### finished:    2026-10-31T12:52:25-04:00 rc=0

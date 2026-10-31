@@ -1,0 +1,81 @@
+{
+ "threshold=0.15": {
+  "recall@5": 0.7448486570981953,
+  "queries_fewer_than_5": 6670
+ },
+ "threshold=0.0": {
+  "recall@5": 0.8019752735540714,
+  "queries_fewer_than_5": 0
+ },
+ "top1_similarity_quantiles": {
+  "0.05": 0.1389203429222107,
+  "0.25": 0.19260527938604355,
+  "0.5": 0.23540189117193222,
+  "0.75": 0.2842169851064682,
+  "0.95": 0.36613094061613083
+ },
+ "_provenance": {
+  "written_utc": "2026-10-30T12:41:14Z",
+  "argv": [
+   "evals/wp0_v040/diag_nemotron_threshold.py",
+   "--out",
+   "results/wp0/diag_nemotron_threshold.json"
+  ],
+  "bear_version": "0.4.2",
+  "bear_path": "/home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/bear",
+  "bear_source_sha": "(unset)",
+  "bear_pkg_sha256": "9cf19e48b49f4e57e3723050b942b296bb66f775fdd41e7f1770514576d0930a",
+  "hooks": {
+   "WP0_NO_LOCAL_MODELS": "1",
+   "WP0_NEMO_CACHE": "/home/snhwang/tist-evals/wp0-v042/nemocache/nemo.sqlite"
+  },
+  "versions": {
+   "python": "3.12.13",
+   "platform": "Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+   "numpy": "2.2.6",
+   "scipy": "1.17.1",
+   "torch": "2.10.0+cu128",
+   "transformers": "4.57.6",
+   "sentence_transformers": "5.4.1"
+  },
+  "embedder_identities": [
+   {
+    "at_build": {
+     "endpoint": "http://localhost:8360/v1/embeddings",
+     "model_id": "nvidia/llama-nemotron-embed-vl-1b-v2",
+     "dim": 2048,
+     "served_model": "nemotron-embed-vl",
+     "source": "health"
+    },
+    "after_index": {
+     "endpoint": "http://localhost:8360/v1/embeddings",
+     "model_id": "nvidia/llama-nemotron-embed-vl-1b-v2",
+     "dim": 2048,
+     "served_model": "nemotron-embed-vl",
+     "source": "health"
+    },
+    "batch_size": 16,
+    "n_instructions": 199
+   },
+   {
+    "at_build": {
+     "endpoint": "http://localhost:8360/v1/embeddings",
+     "model_id": "nvidia/llama-nemotron-embed-vl-1b-v2",
+     "dim": 2048,
+     "served_model": "nemotron-embed-vl",
+     "source": "health"
+    },
+    "after_index": {
+     "endpoint": "http://localhost:8360/v1/embeddings",
+     "model_id": "nvidia/llama-nemotron-embed-vl-1b-v2",
+     "dim": 2048,
+     "served_model": "nemotron-embed-vl",
+     "source": "health"
+    },
+    "batch_size": 16,
+    "n_instructions": 199
+   }
+  ],
+  "script": "evals/wp0_v040/diag_nemotron_threshold.py"
+ }
+}

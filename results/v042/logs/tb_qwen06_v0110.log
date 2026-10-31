@@ -1,0 +1,171 @@
+### ================ attempt 2026-10-30T18:14:02-04:00 ================
+### step:        tb_qwen06_v0110
+### kind:        cpu (need 0 GiB)
+### bear:        v0110 (cdba2174d715494ec4f22c098386487002ec492f)
+### started:     2026-10-30T18:14:02-04:00
+### command:     /home/snhwang/.venvs/tist-evals/bin/python evals/wp0_v040/eval_toolbench_v040.py --top-k 5 --metatool-query-tags-file evals/data/external_benchmarks/metatool/query_tags_top5.json --output results/wp0/toolbench_eval_tb_qwen06_v0110.json --backends BEAR+Qwen3-0.6B (gov) Qwen3-0.6B (no gov)
+### env:         HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 TOKENIZERS_PARALLELISM=false PYTHONUNBUFFERED=1 PYTHONPATH=/home/snhwang/tist-evals/wp0-v042/artifacts-dense/evals/wp0_v040/site:/home/snhwang/tist-evals/bear-v0110 BEAR_SOURCE_SHA=cdba2174d715494ec4f22c098386487002ec492f ANTHROPIC_API_KEY=wp0-dummy-key-no-paid-calls WP0_REPORT_VRAM=/home/snhwang/tist-evals/wp0-v042/logs/vram.jsonl WP0_STEP=tb_qwen06_v0110 CUDA_VISIBLE_DEVICES= WP0_ENCODE_BATCH=4 CUDA_VISIBLE_DEVICES= OMP_NUM_THREADS=12 MKL_NUM_THREADS=12 WP0_EMB_CACHE=/home/snhwang/tist-evals/wp0-v042/embcache WP0_SHARE_MODELS=1
+### memory cap:  /home/snhwang/bin/tist-capped --mem 20G --
+[wp0-site] encode batch size capped at 4
+
+MetaTool (no tags) loaded: 199 tools, 21111 queries
+
+========================================================================
+  MetaTool
+  Corpus: 199 instructions, Queries: 21111, k=5
+  Experiments: 2
+========================================================================
+
+  BEAR+Qwen3-0.6B (gov)...
+        recall@5: 0.869 [0.865, 0.874]
+          ndcg@5: 0.775 [0.770, 0.780]
+            f1@5: 0.294 [0.293, 0.296]
+          time:   4.7s
+
+  Qwen3-0.6B (no gov)...
+[wp0-site] reusing shared Qwen/Qwen3-Embedding-0.6B
+        recall@5: 0.871 [0.866, 0.875]
+          ndcg@5: 0.774 [0.770, 0.779]
+            f1@5: 0.294 [0.293, 0.296]
+          time:   2.0s
+
+  --- Statistical Tests (paired t-test, Wilcoxon, Cohen's d) ---
+
+    BEAR+Qwen3-0.6B (gov)  vs  Qwen3-0.6B (no gov):
+          recall: paired-t=-2.559, p=0.0105 *, d=-0.018; W=3498, p=0.0050
+            ndcg: paired-t=1.290, p=0.1969 n.s., d=0.009; W=177746, p=0.3374
+              f1: paired-t=-0.704, p=0.4814 n.s., d=-0.005; W=5429, p=0.0666
+
+MetaTool+Tags loaded: 199 tools, 21111 queries
+  Queries with context tags: 21111/21111
+
+========================================================================
+  MetaTool+Tags
+  Corpus: 199 instructions, Queries: 21111, k=5
+  Experiments: 2
+========================================================================
+
+  BEAR+Qwen3-0.6B (gov)...
+[wp0-site] reusing shared Qwen/Qwen3-Embedding-0.6B
+        recall@5: 0.976 [0.974, 0.978]
+          ndcg@5: 0.914 [0.911, 0.917]
+            f1@5: 0.396 [0.393, 0.398]
+          time:   6.2s
+
+  Qwen3-0.6B (no gov)...
+[wp0-site] reusing shared Qwen/Qwen3-Embedding-0.6B
+        recall@5: 0.870 [0.865, 0.874]
+          ndcg@5: 0.772 [0.768, 0.777]
+            f1@5: 0.294 [0.292, 0.296]
+          time:   2.0s
+
+  --- Statistical Tests (paired t-test, Wilcoxon, Cohen's d) ---
+
+    BEAR+Qwen3-0.6B (gov)  vs  Qwen3-0.6B (no gov):
+          recall: paired-t=50.105, p=0.0000 ***, d=0.345; W=30586, p=0.0000
+            ndcg: paired-t=75.256, p=0.0000 ***, d=0.518; W=427602, p=0.0000
+              f1: paired-t=70.326, p=0.0000 ***, d=0.484; W=76891, p=0.0000
+
+MetaTool+QueryTags-top5 loaded: 199 tools, 21111 queries
+  Source file: evals/data/external_benchmarks/metatool/query_tags_top5.json
+  Queries with context tags: 21111/21111
+
+========================================================================
+  MetaTool+QueryTags-top5
+  Corpus: 199 instructions, Queries: 21111, k=5
+  Experiments: 2
+========================================================================
+
+  BEAR+Qwen3-0.6B (gov)...
+[wp0-site] reusing shared Qwen/Qwen3-Embedding-0.6B
+        recall@5: 0.735 [0.729, 0.741]
+          ndcg@5: 0.673 [0.668, 0.679]
+            f1@5: 0.250 [0.248, 0.252]
+          time:   5.8s
+
+  Qwen3-0.6B (no gov)...
+[wp0-site] reusing shared Qwen/Qwen3-Embedding-0.6B
+        recall@5: 0.870 [0.865, 0.874]
+          ndcg@5: 0.772 [0.768, 0.777]
+            f1@5: 0.294 [0.292, 0.296]
+          time:   1.9s
+
+  --- Statistical Tests (paired t-test, Wilcoxon, Cohen's d) ---
+
+    BEAR+Qwen3-0.6B (gov)  vs  Qwen3-0.6B (no gov):
+          recall: paired-t=-44.999, p=0.0000 ***, d=-0.310; W=1753411, p=0.0000
+            ndcg: paired-t=-38.082, p=0.0000 ***, d=-0.262; W=5439684, p=0.0000
+              f1: paired-t=-43.813, p=0.0000 ***, d=-0.302; W=1861527, p=0.0000
+
+ToolBench loaded: 3225 APIs, 1100 queries
+  Categories: 47
+
+========================================================================
+  ToolBench
+  Corpus: 3225 instructions, Queries: 1100, k=5
+  Experiments: 2
+========================================================================
+
+  BEAR+Qwen3-0.6B (gov)...
+[wp0-site] reusing shared Qwen/Qwen3-Embedding-0.6B
+        recall@5: 0.771 [0.753, 0.789]
+          ndcg@5: 0.738 [0.720, 0.755]
+            f1@5: 0.476 [0.465, 0.487]
+          time:   9.9s
+
+  Qwen3-0.6B (no gov)...
+[wp0-site] reusing shared Qwen/Qwen3-Embedding-0.6B
+        recall@5: 0.694 [0.673, 0.715]
+          ndcg@5: 0.662 [0.642, 0.682]
+            f1@5: 0.427 [0.414, 0.439]
+          time:   0.3s
+
+  --- Statistical Tests (paired t-test, Wilcoxon, Cohen's d) ---
+
+    BEAR+Qwen3-0.6B (gov)  vs  Qwen3-0.6B (no gov):
+          recall: paired-t=11.804, p=0.0000 ***, d=0.356; W=1646, p=0.0000
+            ndcg: paired-t=13.358, p=0.0000 ***, d=0.403; W=11774, p=0.0000
+              f1: paired-t=11.955, p=0.0000 ***, d=0.360; W=1552, p=0.0000
+
+Results saved to results/wp0/toolbench_eval_tb_qwen06_v0110.json
+
+========================================================================
+  Summary
+========================================================================
+
+  MetaTool:
+    BEAR+Qwen3-0.6B (gov)               R@5=0.869 [0.865, 0.874]  NDCG@5=0.775 [0.770, 0.780]
+    Qwen3-0.6B (no gov)                 R@5=0.871 [0.866, 0.875]  NDCG@5=0.774 [0.770, 0.779]
+
+  MetaTool+Tags:
+    BEAR+Qwen3-0.6B (gov)               R@5=0.976 [0.974, 0.978]  NDCG@5=0.914 [0.911, 0.917]
+    Qwen3-0.6B (no gov)                 R@5=0.870 [0.865, 0.874]  NDCG@5=0.772 [0.768, 0.777]
+
+  MetaTool+QueryTags-top5:
+    BEAR+Qwen3-0.6B (gov)               R@5=0.735 [0.729, 0.741]  NDCG@5=0.673 [0.668, 0.679]
+    Qwen3-0.6B (no gov)                 R@5=0.870 [0.865, 0.874]  NDCG@5=0.772 [0.768, 0.777]
+
+  ToolBench:
+    BEAR+Qwen3-0.6B (gov)               R@5=0.771 [0.753, 0.789]  NDCG@5=0.738 [0.720, 0.755]
+    Qwen3-0.6B (no gov)                 R@5=0.694 [0.673, 0.715]  NDCG@5=0.662 [0.642, 0.682]
+Provenance stamped into results/wp0/toolbench_eval_tb_qwen06_v0110.json
+
+=== Reproducibility ===
+Timestamp (UTC): 2026-10-30T22:14:56Z
+Command line:    evals/wp0_v040/eval_toolbench_v040.py --top-k 5 --metatool-query-tags-file evals/data/external_benchmarks/metatool/query_tags_top5.json --output results/wp0/toolbench_eval_tb_qwen06_v0110.json --backends BEAR+Qwen3-0.6B (gov) Qwen3-0.6B (no gov)
+Python:          3.12.13 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
+numpy:           2.2.6
+scipy:           1.17.1
+bear:            0.1.10
+git commit:      634caf5ab715b2a7c20fac0b170228a49810bdc7
+git status:      DIRTY (25 files modified)
+git branch:      tist-r2
+
+  bear_version: 0.1.10
+  bear_path: /home/snhwang/tist-evals/bear-v0110/bear
+  bear_source_sha: cdba2174d715494ec4f22c098386487002ec492f
+  bear_pkg_sha256: 0108c923136caecb028106dc07acbd999a3a1bfcb0d15c3974c643d2da2d8e2b
+===
+[wp0-site] embedding cache: 131082 hits, 0 misses (/home/snhwang/tist-evals/wp0-v042/embcache)
+### mem guard: peak session RSS 3320 MiB
+### finished:    2026-10-30T18:14:59-04:00 rc=0

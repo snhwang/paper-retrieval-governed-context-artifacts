@@ -1,0 +1,144 @@
+### ================ attempt 2026-10-31T13:30:06-04:00 ================
+### executor: mistral-nemo, model mistral-nemo-32k (digest d79a1e80980f), ctx 32768, url http://127.0.0.1:11434/v1
+### rows:     BEAR+BM25 (gov) BM25 (no gov) BEAR+BGE-M3 (gov) BEAR+BGE (gov) BGE (no gov)
+### card:     at most 67000 MiB before loading, 81000 MiB with the model resident
+### bear:     0.4.2 (0d0718a39a0b0788ef5cca4689352462b830494c), lists /home/snhwang/tist-evals/wp0-v042/artifacts/results/wp0/lists_v042/e2e /home/snhwang/tist-evals/wp0-v042/artifacts-dense/results/wp0/lists_v042/e2e
+[wp0-site] local model loads refused (WP0_NO_LOCAL_MODELS)
+### card check (before loading): Windows nvidia-smi shows 66295 MiB used, limit 67000
+mistral-nemo-32k is not in http://127.0.0.1:11434/api/tags
+[2026-10-31 13:30:10] mistral-nemo failed (rc 1), see /home/snhwang/tist-evals/wp0-v042/logs/e2e_rerun_mistral-nemo.log
+### ================ attempt 2026-10-31T13:31:20-04:00 ================
+### executor: mistral-nemo, model mistral-nemo-32k (digest d79a1e80980f), ctx 32768, url http://127.0.0.1:11434/v1
+### rows:     BEAR+BM25 (gov) BM25 (no gov) BEAR+BGE-M3 (gov) BEAR+BGE (gov) BGE (no gov)
+### card:     at most 67000 MiB before loading, 81000 MiB with the model resident
+### bear:     0.4.2 (0d0718a39a0b0788ef5cca4689352462b830494c), lists /home/snhwang/tist-evals/wp0-v042/artifacts/results/wp0/lists_v042/e2e /home/snhwang/tist-evals/wp0-v042/artifacts-dense/results/wp0/lists_v042/e2e
+[wp0-site] local model loads refused (WP0_NO_LOCAL_MODELS)
+### card check (before loading): Windows nvidia-smi shows 66276 MiB used, limit 67000
+[2026-10-31 13:31:23] server: Ollama 0.40.13, mistral-nemo-32k digest d79a1e80980f, Q4_0
+### loaded mistral-nemo-32k: context_length 32768, size_vram 12382225039, card now 78736 MiB
+### card check (after loading): Windows nvidia-smi shows 78736 MiB used, limit 81000
+### card check (before BEAR+BM25 (gov)): Windows nvidia-smi shows 78736 MiB used, limit 81000
+### live 0.4.2 retrieval vs /home/snhwang/tist-evals/wp0-v042/artifacts/results/wp0/lists_v042/e2e/bear_bm25_gov.json: 0 queries differ
+    [50/1100] exact_acc=0.820 tool_acc=0.880 recall=0.717 llm_errors=0
+    [100/1100] exact_acc=0.760 tool_acc=0.840 recall=0.688 llm_errors=0
+    [150/1100] exact_acc=0.747 tool_acc=0.840 recall=0.686 llm_errors=0
+    [200/1100] exact_acc=0.775 tool_acc=0.855 recall=0.721 llm_errors=0
+    [250/1100] exact_acc=0.744 tool_acc=0.816 recall=0.694 llm_errors=0
+    [300/1100] exact_acc=0.743 tool_acc=0.803 recall=0.678 llm_errors=0
+    [350/1100] exact_acc=0.734 tool_acc=0.794 recall=0.679 llm_errors=0
+    [400/1100] exact_acc=0.730 tool_acc=0.787 recall=0.675 llm_errors=0
+    [450/1100] exact_acc=0.718 tool_acc=0.776 recall=0.669 llm_errors=0
+    [500/1100] exact_acc=0.714 tool_acc=0.770 recall=0.665 llm_errors=0
+    [550/1100] exact_acc=0.711 tool_acc=0.769 recall=0.663 llm_errors=0
+    [600/1100] exact_acc=0.712 tool_acc=0.770 recall=0.669 llm_errors=0
+    [650/1100] exact_acc=0.715 tool_acc=0.772 recall=0.669 llm_errors=0
+    [700/1100] exact_acc=0.719 tool_acc=0.771 recall=0.667 llm_errors=0
+    [750/1100] exact_acc=0.720 tool_acc=0.773 recall=0.665 llm_errors=0
+    [800/1100] exact_acc=0.718 tool_acc=0.772 recall=0.665 llm_errors=0
+    [850/1100] exact_acc=0.718 tool_acc=0.772 recall=0.660 llm_errors=0
+    [900/1100] exact_acc=0.712 tool_acc=0.767 recall=0.646 llm_errors=0
+    [950/1100] exact_acc=0.707 tool_acc=0.762 recall=0.641 llm_errors=0
+    [1000/1100] exact_acc=0.697 tool_acc=0.750 recall=0.631 llm_errors=0
+    [1050/1100] exact_acc=0.687 tool_acc=0.750 recall=0.624 llm_errors=0
+    [1100/1100] exact_acc=0.675 tool_acc=0.753 recall=0.612 llm_errors=0
+[2026-10-31 13:35:05] BEAR+BM25 (gov): exact 0.675, tool 0.753, errors 0, 2.9 min
+### card check (before BM25 (no gov)): Windows nvidia-smi shows 78652 MiB used, limit 81000
+### live 0.4.2 retrieval vs /home/snhwang/tist-evals/wp0-v042/artifacts/results/wp0/lists_v042/e2e/bm25_no_gov.json: 0 queries differ
+    [50/1100] exact_acc=0.620 tool_acc=0.740 recall=0.555 llm_errors=0
+    [100/1100] exact_acc=0.610 tool_acc=0.680 recall=0.545 llm_errors=0
+    [150/1100] exact_acc=0.593 tool_acc=0.673 recall=0.546 llm_errors=0
+    [200/1100] exact_acc=0.645 tool_acc=0.715 recall=0.598 llm_errors=0
+    [250/1100] exact_acc=0.616 tool_acc=0.672 recall=0.571 llm_errors=0
+    [300/1100] exact_acc=0.597 tool_acc=0.650 recall=0.552 llm_errors=0
+    [350/1100] exact_acc=0.583 tool_acc=0.637 recall=0.543 llm_errors=0
+    [400/1100] exact_acc=0.580 tool_acc=0.630 recall=0.543 llm_errors=0
+    [450/1100] exact_acc=0.573 tool_acc=0.622 recall=0.540 llm_errors=0
+    [500/1100] exact_acc=0.574 tool_acc=0.622 recall=0.533 llm_errors=0
+    [550/1100] exact_acc=0.575 tool_acc=0.622 recall=0.531 llm_errors=0
+    [600/1100] exact_acc=0.573 tool_acc=0.623 recall=0.536 llm_errors=0
+    [650/1100] exact_acc=0.572 tool_acc=0.618 recall=0.528 llm_errors=0
+    [700/1100] exact_acc=0.570 tool_acc=0.613 recall=0.521 llm_errors=0
+    [750/1100] exact_acc=0.569 tool_acc=0.609 recall=0.519 llm_errors=0
+    [800/1100] exact_acc=0.565 tool_acc=0.604 recall=0.512 llm_errors=0
+    [850/1100] exact_acc=0.562 tool_acc=0.599 recall=0.508 llm_errors=0
+    [900/1100] exact_acc=0.551 tool_acc=0.587 recall=0.493 llm_errors=0
+    [950/1100] exact_acc=0.549 tool_acc=0.586 recall=0.488 llm_errors=0
+    [1000/1100] exact_acc=0.540 tool_acc=0.576 recall=0.480 llm_errors=0
+    [1050/1100] exact_acc=0.538 tool_acc=0.576 recall=0.476 llm_errors=0
+    [1100/1100] exact_acc=0.527 tool_acc=0.577 recall=0.468 llm_errors=0
+[2026-10-31 13:38:46] BM25 (no gov): exact 0.527, tool 0.577, errors 0, 3.4 min
+### card check (before BEAR+BGE-M3 (gov)): Windows nvidia-smi shows 78708 MiB used, limit 81000
+    [50/1100] exact_acc=0.840 tool_acc=0.880 recall=0.877 llm_errors=0
+    [100/1100] exact_acc=0.830 tool_acc=0.880 recall=0.838 llm_errors=0
+    [150/1100] exact_acc=0.793 tool_acc=0.853 recall=0.832 llm_errors=0
+    [200/1100] exact_acc=0.800 tool_acc=0.850 recall=0.849 llm_errors=0
+    [250/1100] exact_acc=0.788 tool_acc=0.840 recall=0.836 llm_errors=0
+    [300/1100] exact_acc=0.787 tool_acc=0.837 recall=0.832 llm_errors=0
+    [350/1100] exact_acc=0.789 tool_acc=0.837 recall=0.835 llm_errors=0
+    [400/1100] exact_acc=0.795 tool_acc=0.838 recall=0.834 llm_errors=0
+    [450/1100] exact_acc=0.784 tool_acc=0.829 recall=0.828 llm_errors=0
+    [500/1100] exact_acc=0.788 tool_acc=0.832 recall=0.828 llm_errors=0
+    [550/1100] exact_acc=0.782 tool_acc=0.829 recall=0.822 llm_errors=0
+    [600/1100] exact_acc=0.777 tool_acc=0.825 recall=0.818 llm_errors=0
+    [650/1100] exact_acc=0.778 tool_acc=0.826 recall=0.809 llm_errors=0
+    [700/1100] exact_acc=0.779 tool_acc=0.823 recall=0.803 llm_errors=0
+    [750/1100] exact_acc=0.777 tool_acc=0.823 recall=0.800 llm_errors=0
+    [800/1100] exact_acc=0.771 tool_acc=0.819 recall=0.791 llm_errors=0
+    [850/1100] exact_acc=0.766 tool_acc=0.815 recall=0.778 llm_errors=0
+    [900/1100] exact_acc=0.758 tool_acc=0.807 recall=0.762 llm_errors=0
+    [950/1100] exact_acc=0.751 tool_acc=0.800 recall=0.754 llm_errors=0
+    [1000/1100] exact_acc=0.742 tool_acc=0.790 recall=0.739 llm_errors=0
+    [1050/1100] exact_acc=0.730 tool_acc=0.790 recall=0.727 llm_errors=0
+    [1100/1100] exact_acc=0.715 tool_acc=0.784 recall=0.709 llm_errors=0
+[2026-10-31 13:41:23] BEAR+BGE-M3 (gov): exact 0.715, tool 0.784, errors 0, 2.6 min
+### card check (before BEAR+BGE (gov)): Windows nvidia-smi shows 78748 MiB used, limit 81000
+    [50/1100] exact_acc=0.900 tool_acc=0.900 recall=0.858 llm_errors=0
+    [100/1100] exact_acc=0.900 tool_acc=0.910 recall=0.867 llm_errors=0
+    [150/1100] exact_acc=0.860 tool_acc=0.893 recall=0.838 llm_errors=0
+    [200/1100] exact_acc=0.850 tool_acc=0.880 recall=0.846 llm_errors=0
+    [250/1100] exact_acc=0.820 tool_acc=0.856 recall=0.829 llm_errors=0
+    [300/1100] exact_acc=0.823 tool_acc=0.853 recall=0.822 llm_errors=0
+    [350/1100] exact_acc=0.826 tool_acc=0.857 recall=0.819 llm_errors=0
+    [400/1100] exact_acc=0.825 tool_acc=0.855 recall=0.822 llm_errors=0
+    [450/1100] exact_acc=0.800 tool_acc=0.833 recall=0.809 llm_errors=0
+    [500/1100] exact_acc=0.800 tool_acc=0.838 recall=0.811 llm_errors=0
+    [550/1100] exact_acc=0.796 tool_acc=0.836 recall=0.806 llm_errors=0
+    [600/1100] exact_acc=0.790 tool_acc=0.832 recall=0.807 llm_errors=0
+    [650/1100] exact_acc=0.786 tool_acc=0.828 recall=0.799 llm_errors=0
+    [700/1100] exact_acc=0.781 tool_acc=0.820 recall=0.791 llm_errors=0
+    [750/1100] exact_acc=0.783 tool_acc=0.820 recall=0.785 llm_errors=0
+    [800/1100] exact_acc=0.777 tool_acc=0.816 recall=0.775 llm_errors=0
+    [850/1100] exact_acc=0.769 tool_acc=0.809 recall=0.764 llm_errors=0
+    [900/1100] exact_acc=0.762 tool_acc=0.803 recall=0.747 llm_errors=0
+    [950/1100] exact_acc=0.756 tool_acc=0.798 recall=0.737 llm_errors=0
+    [1000/1100] exact_acc=0.745 tool_acc=0.786 recall=0.720 llm_errors=0
+    [1050/1100] exact_acc=0.741 tool_acc=0.792 recall=0.713 llm_errors=0
+    [1100/1100] exact_acc=0.725 tool_acc=0.793 recall=0.696 llm_errors=0
+[2026-10-31 13:44:00] BEAR+BGE (gov): exact 0.725, tool 0.793, errors 0, 2.6 min
+### card check (before BGE (no gov)): Windows nvidia-smi shows 78575 MiB used, limit 81000
+    [50/1100] exact_acc=0.780 tool_acc=0.780 recall=0.697 llm_errors=0
+    [100/1100] exact_acc=0.740 tool_acc=0.750 recall=0.698 llm_errors=0
+    [150/1100] exact_acc=0.713 tool_acc=0.753 recall=0.689 llm_errors=0
+    [200/1100] exact_acc=0.725 tool_acc=0.760 recall=0.712 llm_errors=0
+    [250/1100] exact_acc=0.708 tool_acc=0.748 recall=0.690 llm_errors=0
+    [300/1100] exact_acc=0.717 tool_acc=0.750 recall=0.697 llm_errors=0
+    [350/1100] exact_acc=0.717 tool_acc=0.751 recall=0.698 llm_errors=0
+    [400/1100] exact_acc=0.715 tool_acc=0.745 recall=0.693 llm_errors=0
+    [450/1100] exact_acc=0.691 tool_acc=0.722 recall=0.680 llm_errors=0
+    [500/1100] exact_acc=0.688 tool_acc=0.722 recall=0.679 llm_errors=0
+    [550/1100] exact_acc=0.680 tool_acc=0.718 recall=0.676 llm_errors=0
+    [600/1100] exact_acc=0.673 tool_acc=0.713 recall=0.680 llm_errors=0
+    [650/1100] exact_acc=0.669 tool_acc=0.709 recall=0.663 llm_errors=0
+    [700/1100] exact_acc=0.661 tool_acc=0.699 recall=0.656 llm_errors=0
+    [750/1100] exact_acc=0.668 tool_acc=0.703 recall=0.649 llm_errors=0
+    [800/1100] exact_acc=0.664 tool_acc=0.698 recall=0.640 llm_errors=0
+    [850/1100] exact_acc=0.661 tool_acc=0.694 recall=0.629 llm_errors=0
+    [900/1100] exact_acc=0.642 tool_acc=0.676 recall=0.610 llm_errors=0
+    [950/1100] exact_acc=0.641 tool_acc=0.675 recall=0.603 llm_errors=0
+    [1000/1100] exact_acc=0.629 tool_acc=0.663 recall=0.587 llm_errors=0
+    [1050/1100] exact_acc=0.631 tool_acc=0.673 recall=0.583 llm_errors=0
+    [1100/1100] exact_acc=0.620 tool_acc=0.678 recall=0.570 llm_errors=0
+[2026-10-31 13:46:41] BGE (no gov): exact 0.620, tool 0.678, errors 0, 2.7 min
+### 2026-10-31T17:46:42Z mistral-nemo-32k unloaded; /api/ps lists 0 models []; Windows nvidia-smi 66117 MiB
+[2026-10-31 13:46:42] {"BEAR+BM25 (gov) vs BM25 (no gov)": {"tool": {"delta": 0.17545454545454545, "d": 0.42748072685081345, "t": 14.177931760725532, "p": 4.993544934742068e-42}, "exact": {"delta": 0.14727272727272728, "d": 0.3503980086092753, "t": 11.621387218446873, "p": 1.5783287229826011e-29}}, "BEAR+BGE (gov) vs BGE (no gov)": {"tool": {"delta": 0.11454545454545455, "d": 0.2987445623336631, "t": 9.908236214197007, "p": 3.17025867056058e-22}, "exact": {"delta": 0.10454545454545454, "d": 0.2620071721699393, "t": 8.68979482469736, "p": 1.2976245179393136e-17}}}
+[2026-10-31 13:46:43] mistral-nemo done

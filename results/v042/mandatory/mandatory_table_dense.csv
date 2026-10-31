@@ -1,0 +1,1405 @@
+backend,level,query_set,query_index,query,safety_present_v0110,missing_v0110,safety_present_v042,returned_v0110,returned_v042,safety_present_L_all,safety_present_L_ungated_pool,safety_present_L_below_threshold,safety_present_L_ranked_resolution,safety_present_L_removed_acting,safety_present_L_pool_by_k,safety_present_L_unchecked_requires,safety_present_L_flat_backfill,safety_present_L_dropped_rows,safety_present_L_tie_order
+bge,Full governance,Standard,0,A ball has appeared near the dog,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Standard,1,A treat has appeared near the dog,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Standard,2,The dog has reached the ball,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Standard,3,The dog has reached the treat,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Standard,4,The dog is idle with nothing to do,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Standard,5,The dog is feeling very unhappy,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Standard,6,The dog is feeling very happy and joyful,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Standard,7,A treat has appeared near the cat,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Standard,8,A ball has appeared near the cat,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Standard,9,The cat has reached the treat,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Standard,10,The cat is idle and looking around,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Standard,11,The cat is sitting on an elevated perch,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Standard,12,A bonded player is petting the dog,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Standard,13,A friendly player is petting the dog,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Standard,14,A neutral player is petting the dog,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Standard,15,A wary player is petting the dog,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Standard,16,A bonded player is petting the cat,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Standard,17,A wary player is petting the cat,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Standard,18,The dog approaches the cat playfully,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Standard,19,The cat is annoyed by the nearby dog,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Standard,20,The cat tolerates the nearby dog contentedly,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Standard,21,The dog is in an excited mood,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Standard,22,The cat is feeling sleepy,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Standard,23,The dog is cautious and alert,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Standard,24,The cat is in a playful mood chasing things,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Standard,25,The dog seems content and relaxed,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Standard,26,The cat is excited and energetic,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Standard,27,The dog is drowsy and falling asleep,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Standard,28,The cat is cautious and watching carefully,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Standard,29,The dog is playful and bouncing around,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Standard,30,The cat seems content and peaceful,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Standard,31,An excited dog sees a ball,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Standard,32,A bonded player pets the sleepy cat,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Standard,33,The dog cautiously approaches the cat,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Standard,34,The cat is curious about the nearby dog,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Standard,35,The cat is feeling unhappy and restless,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Standard,36,The cat is very happy and content,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Standard,37,The player tells the dog to come,2,safety-reasonable-response,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Standard,38,The player tells the dog to sit,2,safety-reasonable-response,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Standard,39,The player tells the dog to stay,2,safety-reasonable-response,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Standard,40,The player tells the dog to fetch,2,safety-reasonable-response,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Standard,41,The player tells the dog to shake paw,2,safety-reasonable-response,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Standard,42,The player tells the dog to speak,2,safety-reasonable-response,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Standard,43,The player tells the dog to spin,2,safety-reasonable-response,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Standard,44,The player tells the cat to come,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Standard,45,The player tells the cat to sit,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Standard,46,The player tells the cat to stay,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Standard,47,A ball is sitting fresh on the ground,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Standard,48,The ball has been sitting for a while and is aging,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Standard,49,A pet is approaching the ball,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Standard,50,A pet has reached the ball,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Standard,51,A treat is sitting fresh on the ground,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Standard,52,The treat has been sitting for a while and is aging,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Standard,53,A pet is approaching the treat,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Standard,54,A pet has reached the treat,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Standard,55,A friendly player is petting the cat,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Standard,56,A neutral player is petting the cat,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Standard,57,The cat has reached the ball,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Standard,58,The cat is content with the nearby dog,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Standard,59,The dog sees the cat and approaches carefully,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Standard,0,A ball has appeared near the dog,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Standard,1,A treat has appeared near the dog,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Standard,2,The dog has reached the ball,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Standard,3,The dog has reached the treat,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Standard,4,The dog is idle with nothing to do,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Standard,5,The dog is feeling very unhappy,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Standard,6,The dog is feeling very happy and joyful,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Standard,7,A treat has appeared near the cat,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Standard,8,A ball has appeared near the cat,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Standard,9,The cat has reached the treat,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Standard,10,The cat is idle and looking around,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Standard,11,The cat is sitting on an elevated perch,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Standard,12,A bonded player is petting the dog,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Standard,13,A friendly player is petting the dog,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Standard,14,A neutral player is petting the dog,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Standard,15,A wary player is petting the dog,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Standard,16,A bonded player is petting the cat,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Standard,17,A wary player is petting the cat,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Standard,18,The dog approaches the cat playfully,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Standard,19,The cat is annoyed by the nearby dog,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Standard,20,The cat tolerates the nearby dog contentedly,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Standard,21,The dog is in an excited mood,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Standard,22,The cat is feeling sleepy,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Standard,23,The dog is cautious and alert,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Standard,24,The cat is in a playful mood chasing things,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Standard,25,The dog seems content and relaxed,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Standard,26,The cat is excited and energetic,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Standard,27,The dog is drowsy and falling asleep,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Standard,28,The cat is cautious and watching carefully,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Standard,29,The dog is playful and bouncing around,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Standard,30,The cat seems content and peaceful,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Standard,31,An excited dog sees a ball,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Standard,32,A bonded player pets the sleepy cat,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Standard,33,The dog cautiously approaches the cat,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Standard,34,The cat is curious about the nearby dog,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Standard,35,The cat is feeling unhappy and restless,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Standard,36,The cat is very happy and content,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Standard,37,The player tells the dog to come,1,constraint-no-aggression safety-reasonable-response,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Standard,38,The player tells the dog to sit,1,constraint-no-aggression safety-reasonable-response,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Standard,39,The player tells the dog to stay,1,constraint-no-aggression safety-reasonable-response,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Standard,40,The player tells the dog to fetch,1,constraint-no-aggression safety-reasonable-response,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Standard,41,The player tells the dog to shake paw,1,constraint-no-aggression safety-reasonable-response,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Standard,42,The player tells the dog to speak,1,constraint-no-aggression safety-reasonable-response,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Standard,43,The player tells the dog to spin,1,constraint-no-aggression safety-reasonable-response,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Standard,44,The player tells the cat to come,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Standard,45,The player tells the cat to sit,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Standard,46,The player tells the cat to stay,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Standard,47,A ball is sitting fresh on the ground,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Standard,48,The ball has been sitting for a while and is aging,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Standard,49,A pet is approaching the ball,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Standard,50,A pet has reached the ball,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Standard,51,A treat is sitting fresh on the ground,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Standard,52,The treat has been sitting for a while and is aging,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Standard,53,A pet is approaching the treat,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Standard,54,A pet has reached the treat,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Standard,55,A friendly player is petting the cat,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Standard,56,A neutral player is petting the cat,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Standard,57,The cat has reached the ball,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Standard,58,The cat is content with the nearby dog,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Standard,59,The dog sees the cat and approaches carefully,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Standard,0,A ball has appeared near the dog,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Standard,1,A treat has appeared near the dog,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Standard,2,The dog has reached the ball,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Standard,3,The dog has reached the treat,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Standard,4,The dog is idle with nothing to do,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Standard,5,The dog is feeling very unhappy,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Standard,6,The dog is feeling very happy and joyful,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Standard,7,A treat has appeared near the cat,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Standard,8,A ball has appeared near the cat,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Standard,9,The cat has reached the treat,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Standard,10,The cat is idle and looking around,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Standard,11,The cat is sitting on an elevated perch,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Standard,12,A bonded player is petting the dog,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Standard,13,A friendly player is petting the dog,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Standard,14,A neutral player is petting the dog,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Standard,15,A wary player is petting the dog,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Standard,16,A bonded player is petting the cat,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Standard,17,A wary player is petting the cat,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Standard,18,The dog approaches the cat playfully,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Standard,19,The cat is annoyed by the nearby dog,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Standard,20,The cat tolerates the nearby dog contentedly,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Standard,21,The dog is in an excited mood,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Standard,22,The cat is feeling sleepy,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Standard,23,The dog is cautious and alert,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Standard,24,The cat is in a playful mood chasing things,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Standard,25,The dog seems content and relaxed,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Standard,26,The cat is excited and energetic,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Standard,27,The dog is drowsy and falling asleep,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Standard,28,The cat is cautious and watching carefully,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Standard,29,The dog is playful and bouncing around,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Standard,30,The cat seems content and peaceful,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Standard,31,An excited dog sees a ball,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Standard,32,A bonded player pets the sleepy cat,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Standard,33,The dog cautiously approaches the cat,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Standard,34,The cat is curious about the nearby dog,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Standard,35,The cat is feeling unhappy and restless,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Standard,36,The cat is very happy and content,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Standard,37,The player tells the dog to come,1,constraint-no-aggression safety-reasonable-response,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Standard,38,The player tells the dog to sit,1,constraint-no-aggression safety-reasonable-response,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Standard,39,The player tells the dog to stay,2,safety-reasonable-response,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Standard,40,The player tells the dog to fetch,1,constraint-no-aggression safety-reasonable-response,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Standard,41,The player tells the dog to shake paw,1,constraint-no-aggression safety-reasonable-response,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Standard,42,The player tells the dog to speak,1,constraint-no-aggression safety-reasonable-response,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Standard,43,The player tells the dog to spin,1,constraint-no-aggression safety-reasonable-response,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Standard,44,The player tells the cat to come,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Standard,45,The player tells the cat to sit,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Standard,46,The player tells the cat to stay,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Standard,47,A ball is sitting fresh on the ground,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Standard,48,The ball has been sitting for a while and is aging,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Standard,49,A pet is approaching the ball,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Standard,50,A pet has reached the ball,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Standard,51,A treat is sitting fresh on the ground,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Standard,52,The treat has been sitting for a while and is aging,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Standard,53,A pet is approaching the treat,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Standard,54,A pet has reached the treat,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Standard,55,A friendly player is petting the cat,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Standard,56,A neutral player is petting the cat,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Standard,57,The cat has reached the ball,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Standard,58,The cat is content with the nearby dog,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Standard,59,The dog sees the cat and approaches carefully,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Paraphrase,0,The puppy is bouncing off the walls and can barely contain itself,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Paraphrase,1,The cat is racing back and forth with its tail puffed up in glee,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Paraphrase,2,The kitten's eyes keep closing and its head nods forward,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Paraphrase,3,The dog can barely keep its eyes open and keeps drifting off,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Paraphrase,4,The dog freezes and watches the unfamiliar sound with wide eyes,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Paraphrase,5,"The cat's ears are pinned back and it crouches low, scanning the room",3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Paraphrase,6,The cat pounces on a shadow and rolls around batting at nothing,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Paraphrase,7,"The dog drops into a bow and wags its tail, ready to chase anything",3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Paraphrase,8,The dog sighs softly and settles into a comfortable spot,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Paraphrase,9,"The cat purrs loudly with half-closed eyes, kneading a soft blanket",3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Paraphrase,10,The owner beckons the dog to approach them,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Paraphrase,11,The owner wants the dog to lower its rear to the ground,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Paraphrase,12,The owner gestures for the dog to remain in place,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Paraphrase,13,The owner tosses something and wants the dog to retrieve it,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Paraphrase,14,The owner holds out a hand and wants a paw placed in it,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Paraphrase,15,The owner wants the dog to vocalize on cue,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Paraphrase,16,The owner wants the dog to twirl around in a circle,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Paraphrase,17,The owner issued a general instruction the dog doesn't recognize,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Paraphrase,18,The owner calls the cat to walk over to them,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Paraphrase,19,The owner wants the feline to lower itself and rest on its haunches,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Paraphrase,20,The owner signals for the cat to hold still and not move,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Paraphrase,21,The owner gave the cat a verbal instruction it doesn't understand,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Paraphrase,22,A round toy has just landed near the dog,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Paraphrase,23,A tasty snack appeared within the dog's line of sight,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Paraphrase,24,The dog managed to get right next to the round toy,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Paraphrase,25,The dog has arrived at the snack and is sniffing it eagerly,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Paraphrase,26,A round toy has appeared in front of the cat,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Paraphrase,27,A tasty morsel showed up and the cat noticed it,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Paraphrase,28,The cat walked right up to the round toy on the ground,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Paraphrase,29,The cat has arrived at the snack and is sniffing it delicately,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Paraphrase,30,Someone the dog adores is scratching behind its ears,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Paraphrase,31,An acquaintance the dog likes is rubbing its belly,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Paraphrase,32,A stranger is reaching out to touch the dog's head,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Paraphrase,33,Someone the dog distrusts is attempting to stroke it,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Paraphrase,34,The cat's favorite person is gently scratching her chin,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Paraphrase,35,A familiar human the cat enjoys is stroking her back,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Paraphrase,36,An unfamiliar person is trying to pat the cat on the head,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Paraphrase,37,A person the cat dislikes is reaching toward her,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Paraphrase,38,The dog sees the feline and wants to romp with it,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Paraphrase,39,The dog notices the feline and creeps toward it nervously,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Paraphrase,40,The cat is irritated by the canine hovering nearby,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Paraphrase,41,The cat watches the canine from a distance with quiet interest,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Paraphrase,42,"A round toy is sitting untouched on the floor, freshly dropped",3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Paraphrase,43,The round toy has been lying there so long it looks less appealing,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Paraphrase,44,An animal is walking toward the round toy on the ground,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Paraphrase,45,An animal just reached the round toy and is nosing it,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Paraphrase,46,"A snack is sitting on the ground, freshly placed and aromatic",3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Paraphrase,47,The snack has been on the floor for a while and is going stale,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Paraphrase,48,An animal is heading toward the snack on the ground,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Paraphrase,49,An animal just arrived at the snack and is about to eat it,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Paraphrase,50,"The dog looks dejected, moping around with its tail between its legs",3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Paraphrase,51,"The dog is overjoyed, leaping and wagging with pure delight",3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Paraphrase,52,"The cat is sulking in a corner, clearly displeased with everything",3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Paraphrase,53,"The cat is in a wonderful mood, prancing and rubbing against furniture",3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Paraphrase,54,The dog has nothing to do and is wandering aimlessly,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Paraphrase,55,The cat has nothing going on and is looking for a high spot,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Paraphrase,56,"The cat is settled on a high shelf, surveying the room below",3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Paraphrase,57,After a long run the dog flops down panting but looking satisfied,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Paraphrase,58,Something crashed in the other room and the cat is statue-still listening,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Paraphrase,59,"The dog hears its name called and perks up, ready to bound over",3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Paraphrase,0,The puppy is bouncing off the walls and can barely contain itself,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Paraphrase,1,The cat is racing back and forth with its tail puffed up in glee,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Paraphrase,2,The kitten's eyes keep closing and its head nods forward,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Paraphrase,3,The dog can barely keep its eyes open and keeps drifting off,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Paraphrase,4,The dog freezes and watches the unfamiliar sound with wide eyes,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Paraphrase,5,"The cat's ears are pinned back and it crouches low, scanning the room",3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Paraphrase,6,The cat pounces on a shadow and rolls around batting at nothing,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Paraphrase,7,"The dog drops into a bow and wags its tail, ready to chase anything",3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Paraphrase,8,The dog sighs softly and settles into a comfortable spot,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Paraphrase,9,"The cat purrs loudly with half-closed eyes, kneading a soft blanket",3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Paraphrase,10,The owner beckons the dog to approach them,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Paraphrase,11,The owner wants the dog to lower its rear to the ground,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Paraphrase,12,The owner gestures for the dog to remain in place,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Paraphrase,13,The owner tosses something and wants the dog to retrieve it,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Paraphrase,14,The owner holds out a hand and wants a paw placed in it,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Paraphrase,15,The owner wants the dog to vocalize on cue,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Paraphrase,16,The owner wants the dog to twirl around in a circle,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Paraphrase,17,The owner issued a general instruction the dog doesn't recognize,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Paraphrase,18,The owner calls the cat to walk over to them,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Paraphrase,19,The owner wants the feline to lower itself and rest on its haunches,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Paraphrase,20,The owner signals for the cat to hold still and not move,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Paraphrase,21,The owner gave the cat a verbal instruction it doesn't understand,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Paraphrase,22,A round toy has just landed near the dog,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Paraphrase,23,A tasty snack appeared within the dog's line of sight,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Paraphrase,24,The dog managed to get right next to the round toy,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Paraphrase,25,The dog has arrived at the snack and is sniffing it eagerly,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Paraphrase,26,A round toy has appeared in front of the cat,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Paraphrase,27,A tasty morsel showed up and the cat noticed it,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Paraphrase,28,The cat walked right up to the round toy on the ground,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Paraphrase,29,The cat has arrived at the snack and is sniffing it delicately,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Paraphrase,30,Someone the dog adores is scratching behind its ears,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Paraphrase,31,An acquaintance the dog likes is rubbing its belly,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Paraphrase,32,A stranger is reaching out to touch the dog's head,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Paraphrase,33,Someone the dog distrusts is attempting to stroke it,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Paraphrase,34,The cat's favorite person is gently scratching her chin,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Paraphrase,35,A familiar human the cat enjoys is stroking her back,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Paraphrase,36,An unfamiliar person is trying to pat the cat on the head,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Paraphrase,37,A person the cat dislikes is reaching toward her,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Paraphrase,38,The dog sees the feline and wants to romp with it,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Paraphrase,39,The dog notices the feline and creeps toward it nervously,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Paraphrase,40,The cat is irritated by the canine hovering nearby,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Paraphrase,41,The cat watches the canine from a distance with quiet interest,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Paraphrase,42,"A round toy is sitting untouched on the floor, freshly dropped",3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Paraphrase,43,The round toy has been lying there so long it looks less appealing,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Paraphrase,44,An animal is walking toward the round toy on the ground,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Paraphrase,45,An animal just reached the round toy and is nosing it,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Paraphrase,46,"A snack is sitting on the ground, freshly placed and aromatic",3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Paraphrase,47,The snack has been on the floor for a while and is going stale,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Paraphrase,48,An animal is heading toward the snack on the ground,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Paraphrase,49,An animal just arrived at the snack and is about to eat it,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Paraphrase,50,"The dog looks dejected, moping around with its tail between its legs",3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Paraphrase,51,"The dog is overjoyed, leaping and wagging with pure delight",3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Paraphrase,52,"The cat is sulking in a corner, clearly displeased with everything",3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Paraphrase,53,"The cat is in a wonderful mood, prancing and rubbing against furniture",3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Paraphrase,54,The dog has nothing to do and is wandering aimlessly,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Paraphrase,55,The cat has nothing going on and is looking for a high spot,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Paraphrase,56,"The cat is settled on a high shelf, surveying the room below",3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Paraphrase,57,After a long run the dog flops down panting but looking satisfied,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Paraphrase,58,Something crashed in the other room and the cat is statue-still listening,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Paraphrase,59,"The dog hears its name called and perks up, ready to bound over",3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Paraphrase,0,The puppy is bouncing off the walls and can barely contain itself,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Paraphrase,1,The cat is racing back and forth with its tail puffed up in glee,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Paraphrase,2,The kitten's eyes keep closing and its head nods forward,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Paraphrase,3,The dog can barely keep its eyes open and keeps drifting off,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Paraphrase,4,The dog freezes and watches the unfamiliar sound with wide eyes,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Paraphrase,5,"The cat's ears are pinned back and it crouches low, scanning the room",3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Paraphrase,6,The cat pounces on a shadow and rolls around batting at nothing,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Paraphrase,7,"The dog drops into a bow and wags its tail, ready to chase anything",3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Paraphrase,8,The dog sighs softly and settles into a comfortable spot,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Paraphrase,9,"The cat purrs loudly with half-closed eyes, kneading a soft blanket",3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Paraphrase,10,The owner beckons the dog to approach them,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Paraphrase,11,The owner wants the dog to lower its rear to the ground,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Paraphrase,12,The owner gestures for the dog to remain in place,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Paraphrase,13,The owner tosses something and wants the dog to retrieve it,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Paraphrase,14,The owner holds out a hand and wants a paw placed in it,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Paraphrase,15,The owner wants the dog to vocalize on cue,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Paraphrase,16,The owner wants the dog to twirl around in a circle,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Paraphrase,17,The owner issued a general instruction the dog doesn't recognize,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Paraphrase,18,The owner calls the cat to walk over to them,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Paraphrase,19,The owner wants the feline to lower itself and rest on its haunches,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Paraphrase,20,The owner signals for the cat to hold still and not move,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Paraphrase,21,The owner gave the cat a verbal instruction it doesn't understand,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Paraphrase,22,A round toy has just landed near the dog,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Paraphrase,23,A tasty snack appeared within the dog's line of sight,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Paraphrase,24,The dog managed to get right next to the round toy,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Paraphrase,25,The dog has arrived at the snack and is sniffing it eagerly,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Paraphrase,26,A round toy has appeared in front of the cat,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Paraphrase,27,A tasty morsel showed up and the cat noticed it,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Paraphrase,28,The cat walked right up to the round toy on the ground,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Paraphrase,29,The cat has arrived at the snack and is sniffing it delicately,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Paraphrase,30,Someone the dog adores is scratching behind its ears,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Paraphrase,31,An acquaintance the dog likes is rubbing its belly,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Paraphrase,32,A stranger is reaching out to touch the dog's head,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Paraphrase,33,Someone the dog distrusts is attempting to stroke it,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Paraphrase,34,The cat's favorite person is gently scratching her chin,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Paraphrase,35,A familiar human the cat enjoys is stroking her back,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Paraphrase,36,An unfamiliar person is trying to pat the cat on the head,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Paraphrase,37,A person the cat dislikes is reaching toward her,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Paraphrase,38,The dog sees the feline and wants to romp with it,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Paraphrase,39,The dog notices the feline and creeps toward it nervously,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Paraphrase,40,The cat is irritated by the canine hovering nearby,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Paraphrase,41,The cat watches the canine from a distance with quiet interest,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Paraphrase,42,"A round toy is sitting untouched on the floor, freshly dropped",3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Paraphrase,43,The round toy has been lying there so long it looks less appealing,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Paraphrase,44,An animal is walking toward the round toy on the ground,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Paraphrase,45,An animal just reached the round toy and is nosing it,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Paraphrase,46,"A snack is sitting on the ground, freshly placed and aromatic",3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Paraphrase,47,The snack has been on the floor for a while and is going stale,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Paraphrase,48,An animal is heading toward the snack on the ground,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Paraphrase,49,An animal just arrived at the snack and is about to eat it,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Paraphrase,50,"The dog looks dejected, moping around with its tail between its legs",3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Paraphrase,51,"The dog is overjoyed, leaping and wagging with pure delight",3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Paraphrase,52,"The cat is sulking in a corner, clearly displeased with everything",3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Paraphrase,53,"The cat is in a wonderful mood, prancing and rubbing against furniture",3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Paraphrase,54,The dog has nothing to do and is wandering aimlessly,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Paraphrase,55,The cat has nothing going on and is looking for a high spot,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Paraphrase,56,"The cat is settled on a high shelf, surveying the room below",3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Paraphrase,57,After a long run the dog flops down panting but looking satisfied,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Paraphrase,58,Something crashed in the other room and the cat is statue-still listening,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Paraphrase,59,"The dog hears its name called and perks up, ready to bound over",3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,No-tag,0,The pet is bouncing around full of enthusiasm,3,,3,8,8,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,No-tag,1,An animal that can barely contain its exhilaration,3,,3,8,8,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,No-tag,2,The creature is bursting with energy and running in circles,3,,3,8,8,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,No-tag,3,A hyperactive pet zooming around the room at top speed,3,,3,8,8,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,No-tag,4,The animal is thrilled and cannot stop moving,3,,3,8,8,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,No-tag,5,A pet vibrating with anticipation and high spirits,3,,3,7,8,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,No-tag,6,"The pet is drowsy, barely able to stay awake",3,,3,8,8,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,No-tag,7,An animal whose eyelids droop as it starts to nod off,3,,3,7,8,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,No-tag,8,The creature is yawning repeatedly and curling up,3,,3,7,8,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,No-tag,9,A lethargic pet moving in slow motion toward its bed,3,,3,8,8,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,No-tag,10,The animal keeps closing its eyes and drifting off to sleep,3,,3,6,8,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,No-tag,11,A pet that is exhausted and ready to collapse for a nap,3,,3,7,8,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,No-tag,12,"The pet is on high alert, ears perked and body tense",3,,3,8,8,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,No-tag,13,An animal that freezes at every noise and scans its surroundings,3,,3,7,8,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,No-tag,14,The creature is wary and watching everything with suspicion,3,,3,7,8,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,No-tag,15,A nervous pet crouching low and ready to bolt at any moment,3,,3,7,8,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,No-tag,16,"The animal moves carefully, sniffing the air for danger",3,,3,8,8,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,No-tag,17,A skittish pet that startles at the slightest movement,3,,3,8,8,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,No-tag,18,"The pet is in a frisky mood, pouncing on everything in sight",3,,3,8,8,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,No-tag,19,An animal doing zoomies and play-bowing at imaginary friends,3,,3,5,8,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,No-tag,20,"The creature is romping around, batting at dangling objects",3,,3,6,8,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,No-tag,21,A mischievous pet leaping from spot to spot looking for fun,3,,3,7,8,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,No-tag,22,The animal chases its own shadow with gleeful abandon,3,,3,6,8,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,No-tag,23,"A pet wrestling with a piece of string, having the time of its life",3,,3,8,8,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,No-tag,24,"The pet is calm and at ease, resting comfortably",3,,3,8,8,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,No-tag,25,"An animal lying in a sunbeam, perfectly relaxed and serene",3,,3,8,8,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,No-tag,26,The creature looks satisfied and peaceful after a meal,3,,3,7,8,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,No-tag,27,A mellow pet that gently stretches and settles back down,3,,3,8,8,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,No-tag,28,"The animal breathes slowly, completely at peace with the world",3,,3,7,8,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,No-tag,29,A tranquil pet purring or sighing softly in total comfort,3,,3,8,8,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,No-tag,30,The pet tries to walk beyond the edge of the play area,3,,3,7,8,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,No-tag,31,The animal is near the boundary of the grid and might wander off,3,,3,7,8,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,No-tag,32,Two pets are having a confrontation and one is getting rough,3,,3,7,8,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,No-tag,33,The pet needs to produce a valid structured response,3,,3,6,8,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,No-tag,34,Make sure the animal never displays hostile or violent behavior,3,,3,8,8,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,No-tag,35,The pet should always stay within the designated coordinates,3,,3,6,8,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,No-tag,36,After hearing a loud bang the pet is frozen in place,3,,3,8,8,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,No-tag,37,The pet just woke up from a long nap and is still groggy,3,,3,7,8,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,No-tag,38,A visitor arrives and the pet goes wild with joy,3,,3,7,8,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,No-tag,39,The pet spots a butterfly and crouches to stalk it,3,,3,8,8,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,No-tag,40,After being fed the pet stretches out with a satisfied sigh,3,,3,6,8,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,No-tag,41,The pet is startled by thunder and hides under furniture,3,,3,8,8,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,No-tag,42,Dinner time is announced and the pet sprints to its bowl,3,,3,6,8,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,No-tag,43,"The pet is dozing off in a warm lap, completely limp",3,,3,7,8,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,No-tag,44,The pet is tossing a toy in the air and catching it over and over,3,,3,7,8,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,No-tag,45,"The pet lies on its side with a full belly, eyes half-shut",3,,3,7,8,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,No-tag,46,An unfamiliar noise makes the pet flatten itself against the floor,3,,3,7,8,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,No-tag,47,The pet just received a new toy and is ecstatic,3,,3,6,8,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,No-tag,48,The pet hears its owner's car pull into the driveway,3,,3,5,8,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,No-tag,49,The pet settles down after a long bout of running around,3,,3,8,8,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,No-tag,50,The pet cautiously sniffs at an unfamiliar object left on the floor,3,,3,7,8,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,No-tag,51,The pet rolls on its back inviting a belly rub,3,,3,8,8,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,No-tag,52,The pet's breathing slows as it curls into a tighter ball,3,,3,7,8,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,No-tag,53,The pet stretches lazily and gazes out the window at birds,3,,3,7,8,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,No-tag,0,The pet is bouncing around full of enthusiasm,3,,3,7,8,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,No-tag,1,An animal that can barely contain its exhilaration,3,,3,6,8,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,No-tag,2,The creature is bursting with energy and running in circles,3,,3,7,8,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,No-tag,3,A hyperactive pet zooming around the room at top speed,3,,3,8,8,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,No-tag,4,The animal is thrilled and cannot stop moving,3,,3,6,8,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,No-tag,5,A pet vibrating with anticipation and high spirits,3,,3,7,8,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,No-tag,6,"The pet is drowsy, barely able to stay awake",3,,3,5,8,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,No-tag,7,An animal whose eyelids droop as it starts to nod off,3,,3,5,8,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,No-tag,8,The creature is yawning repeatedly and curling up,3,,3,6,8,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,No-tag,9,A lethargic pet moving in slow motion toward its bed,3,,3,6,8,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,No-tag,10,The animal keeps closing its eyes and drifting off to sleep,3,,3,5,8,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,No-tag,11,A pet that is exhausted and ready to collapse for a nap,3,,3,5,8,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,No-tag,12,"The pet is on high alert, ears perked and body tense",3,,3,7,8,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,No-tag,13,An animal that freezes at every noise and scans its surroundings,3,,3,6,8,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,No-tag,14,The creature is wary and watching everything with suspicion,3,,3,5,8,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,No-tag,15,A nervous pet crouching low and ready to bolt at any moment,3,,3,6,8,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,No-tag,16,"The animal moves carefully, sniffing the air for danger",3,,3,5,8,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,No-tag,17,A skittish pet that startles at the slightest movement,3,,3,7,8,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,No-tag,18,"The pet is in a frisky mood, pouncing on everything in sight",3,,3,7,8,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,No-tag,19,An animal doing zoomies and play-bowing at imaginary friends,3,,3,5,8,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,No-tag,20,"The creature is romping around, batting at dangling objects",3,,3,5,8,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,No-tag,21,A mischievous pet leaping from spot to spot looking for fun,3,,3,7,8,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,No-tag,22,The animal chases its own shadow with gleeful abandon,3,,3,5,8,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,No-tag,23,"A pet wrestling with a piece of string, having the time of its life",3,,3,5,8,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,No-tag,24,"The pet is calm and at ease, resting comfortably",3,,3,7,8,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,No-tag,25,"An animal lying in a sunbeam, perfectly relaxed and serene",3,,3,6,8,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,No-tag,26,The creature looks satisfied and peaceful after a meal,3,,3,6,8,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,No-tag,27,A mellow pet that gently stretches and settles back down,3,,3,6,8,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,No-tag,28,"The animal breathes slowly, completely at peace with the world",3,,3,6,8,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,No-tag,29,A tranquil pet purring or sighing softly in total comfort,3,,3,7,8,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,No-tag,30,The pet tries to walk beyond the edge of the play area,3,,3,5,8,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,No-tag,31,The animal is near the boundary of the grid and might wander off,3,,3,5,8,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,No-tag,32,Two pets are having a confrontation and one is getting rough,3,,3,7,8,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,No-tag,33,The pet needs to produce a valid structured response,3,,3,7,8,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,No-tag,34,Make sure the animal never displays hostile or violent behavior,3,,3,6,8,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,No-tag,35,The pet should always stay within the designated coordinates,3,,3,5,8,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,No-tag,36,After hearing a loud bang the pet is frozen in place,3,,3,5,8,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,No-tag,37,The pet just woke up from a long nap and is still groggy,3,,3,5,8,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,No-tag,38,A visitor arrives and the pet goes wild with joy,3,,3,5,8,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,No-tag,39,The pet spots a butterfly and crouches to stalk it,3,,3,4,8,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,No-tag,40,After being fed the pet stretches out with a satisfied sigh,3,,3,5,8,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,No-tag,41,The pet is startled by thunder and hides under furniture,3,,3,5,8,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,No-tag,42,Dinner time is announced and the pet sprints to its bowl,3,,3,5,8,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,No-tag,43,"The pet is dozing off in a warm lap, completely limp",3,,3,6,8,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,No-tag,44,The pet is tossing a toy in the air and catching it over and over,3,,3,5,8,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,No-tag,45,"The pet lies on its side with a full belly, eyes half-shut",3,,3,6,8,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,No-tag,46,An unfamiliar noise makes the pet flatten itself against the floor,3,,3,5,8,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,No-tag,47,The pet just received a new toy and is ecstatic,3,,3,7,8,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,No-tag,48,The pet hears its owner's car pull into the driveway,3,,3,6,8,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,No-tag,49,The pet settles down after a long bout of running around,3,,3,6,8,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,No-tag,50,The pet cautiously sniffs at an unfamiliar object left on the floor,3,,3,5,8,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,No-tag,51,The pet rolls on its back inviting a belly rub,3,,3,4,8,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,No-tag,52,The pet's breathing slows as it curls into a tighter ball,3,,3,5,8,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,No-tag,53,The pet stretches lazily and gazes out the window at birds,3,,3,5,8,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,No-tag,0,The pet is bouncing around full of enthusiasm,3,,3,6,8,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,No-tag,1,An animal that can barely contain its exhilaration,3,,3,7,8,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,No-tag,2,The creature is bursting with energy and running in circles,3,,3,8,8,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,No-tag,3,A hyperactive pet zooming around the room at top speed,3,,3,7,8,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,No-tag,4,The animal is thrilled and cannot stop moving,3,,3,7,8,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,No-tag,5,A pet vibrating with anticipation and high spirits,3,,3,7,8,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,No-tag,6,"The pet is drowsy, barely able to stay awake",3,,3,8,8,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,No-tag,7,An animal whose eyelids droop as it starts to nod off,3,,3,6,8,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,No-tag,8,The creature is yawning repeatedly and curling up,3,,3,8,8,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,No-tag,9,A lethargic pet moving in slow motion toward its bed,3,,3,8,8,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,No-tag,10,The animal keeps closing its eyes and drifting off to sleep,3,,3,7,8,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,No-tag,11,A pet that is exhausted and ready to collapse for a nap,3,,3,8,8,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,No-tag,12,"The pet is on high alert, ears perked and body tense",3,,3,6,8,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,No-tag,13,An animal that freezes at every noise and scans its surroundings,3,,3,7,8,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,No-tag,14,The creature is wary and watching everything with suspicion,3,,3,6,8,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,No-tag,15,A nervous pet crouching low and ready to bolt at any moment,3,,3,6,8,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,No-tag,16,"The animal moves carefully, sniffing the air for danger",3,,3,8,8,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,No-tag,17,A skittish pet that startles at the slightest movement,3,,3,7,8,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,No-tag,18,"The pet is in a frisky mood, pouncing on everything in sight",3,,3,6,8,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,No-tag,19,An animal doing zoomies and play-bowing at imaginary friends,3,,3,6,8,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,No-tag,20,"The creature is romping around, batting at dangling objects",3,,3,6,8,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,No-tag,21,A mischievous pet leaping from spot to spot looking for fun,3,,3,5,8,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,No-tag,22,The animal chases its own shadow with gleeful abandon,3,,3,8,8,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,No-tag,23,"A pet wrestling with a piece of string, having the time of its life",3,,3,6,8,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,No-tag,24,"The pet is calm and at ease, resting comfortably",3,,3,7,8,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,No-tag,25,"An animal lying in a sunbeam, perfectly relaxed and serene",3,,3,8,8,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,No-tag,26,The creature looks satisfied and peaceful after a meal,3,,3,7,8,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,No-tag,27,A mellow pet that gently stretches and settles back down,3,,3,7,8,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,No-tag,28,"The animal breathes slowly, completely at peace with the world",3,,3,8,8,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,No-tag,29,A tranquil pet purring or sighing softly in total comfort,3,,3,8,8,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,No-tag,30,The pet tries to walk beyond the edge of the play area,3,,3,7,8,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,No-tag,31,The animal is near the boundary of the grid and might wander off,3,,3,7,8,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,No-tag,32,Two pets are having a confrontation and one is getting rough,3,,3,7,8,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,No-tag,33,The pet needs to produce a valid structured response,3,,3,7,8,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,No-tag,34,Make sure the animal never displays hostile or violent behavior,3,,3,7,8,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,No-tag,35,The pet should always stay within the designated coordinates,3,,3,7,8,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,No-tag,36,After hearing a loud bang the pet is frozen in place,3,,3,6,8,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,No-tag,37,The pet just woke up from a long nap and is still groggy,3,,3,8,8,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,No-tag,38,A visitor arrives and the pet goes wild with joy,3,,3,6,8,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,No-tag,39,The pet spots a butterfly and crouches to stalk it,3,,3,7,8,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,No-tag,40,After being fed the pet stretches out with a satisfied sigh,3,,3,7,8,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,No-tag,41,The pet is startled by thunder and hides under furniture,3,,3,8,8,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,No-tag,42,Dinner time is announced and the pet sprints to its bowl,3,,3,5,8,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,No-tag,43,"The pet is dozing off in a warm lap, completely limp",3,,3,8,8,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,No-tag,44,The pet is tossing a toy in the air and catching it over and over,3,,3,5,8,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,No-tag,45,"The pet lies on its side with a full belly, eyes half-shut",3,,3,7,8,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,No-tag,46,An unfamiliar noise makes the pet flatten itself against the floor,3,,3,7,8,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,No-tag,47,The pet just received a new toy and is ecstatic,3,,3,5,8,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,No-tag,48,The pet hears its owner's car pull into the driveway,3,,3,6,8,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,No-tag,49,The pet settles down after a long bout of running around,3,,3,8,8,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,No-tag,50,The pet cautiously sniffs at an unfamiliar object left on the floor,3,,3,7,8,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,No-tag,51,The pet rolls on its back inviting a belly rub,3,,3,7,8,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,No-tag,52,The pet's breathing slows as it curls into a tighter ball,3,,3,8,8,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,No-tag,53,The pet stretches lazily and gazes out the window at birds,3,,3,8,8,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Complex,0,The hungry puppy spotted a round toy bouncing across the floor but is also buzzing with nervous energy from the thunderstorm outside,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Complex,1,The drowsy cat is curled in her favorite human's lap receiving gentle chin scratches while her eyes keep drifting shut,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Complex,2,"The dog finally caught the ball and is shaking it triumphantly in his mouth, play-bowing and daring anyone to take it away",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Complex,3,"A treat appeared on the floor and the cat notices it, but the dog is also lurking nearby making her hesitate",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Complex,4,"A person the dog doesn't trust is slowly extending a hand while the dog stands tense and vigilant, unsure whether to accept or retreat",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Complex,5,"The cat is lounging on the top shelf, purring softly, completely at peace with the world below her",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Complex,6,"Nothing is happening and the dog has given up looking for excitement, now just lying in a sunbeam with heavy eyelids",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Complex,7,"The cat pounces on the treat and gobbles it up, prancing away with her tail held high in obvious delight",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Complex,8,"A treat lands on the floor and the excited dog spots it, but the cat is sitting right next to it giving him a warning glare",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Complex,9,"Nothing is happening but the cat seems uneasy, slinking low to the ground as she searches for a safe high vantage point",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Complex,10,"Both a ball and a treat appeared at the same time and the dog's head is swiveling between them, torn between his two favorite things",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Complex,11,A friendly player is scratching the dog behind the ears while also telling him to sit and be a good boy,0,constraint-no-aggression safety-boundaries safety-reasonable-response,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Complex,12,"An unfamiliar visitor is petting the cat while the dog bounds over to investigate, creating a tense three-way standoff",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Complex,13,"The dog's best friend in the whole world is giving him belly rubs and he is absolutely over the moon, tail a blur, tongue out",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Complex,14,"The ball has been sitting there for ages losing its shine, but now a curious animal is finally padding toward it",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Complex,15,After sleeping for hours the cat wakes up groggy to find an unfamiliar hand reaching down to stroke her fur,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Complex,16,"The dog sprinted laps around the yard for twenty minutes and has finally collapsed, panting happily with nothing left to chase",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Complex,17,"Nobody touched the ball after it was tossed in, and now it just sits there collecting dust, forgotten in the corner",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Complex,18,The cat leaped down from her favorite shelf the moment she smelled the treat and is now stalking toward it with laser focus,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Complex,19,The dog was initially nervous around the cat but has warmed up and is now doing play bows trying to get her to chase him,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Complex,20,The treat landed a minute ago and the dog has finally trotted over and is now sniffing it before gulping it down,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Complex,21,"The cat was in a wonderful mood until the loud music started, and now she has retreated to a corner with flattened ears and a lashing tail",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Complex,22,"Ever since the player walked out the front door thirty minutes ago, the dog has been lying by the entrance whimpering softly",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Complex,23,"The petting session ended and the visitor left, so the cat stretches and pads off looking for an elevated spot to settle on",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Complex,24,"After a wild sprint across the room the dog skids to a halt right on top of the ball, immediately grabbing it in his jaws",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Complex,25,"The cat batted the ball under the couch, then followed it and has now cornered it against the wall, giving it another disdainful tap",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Complex,26,"The doorbell rang and the dog went wild, and now the returning owner is trying to calm him down with pets while he wriggles with joy",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Complex,27,"That treat has been sitting there losing its aroma for a while now, but a pet has finally noticed and is heading over to investigate",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Complex,28,"The cat hissed at the dog earlier, but after some time has settled down and now merely watches the dog with studied indifference",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Complex,29,"The ball was placed moments ago and already a pet has bounded over and reached it, nosing it excitedly",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Complex,30,The four-legged furball spotted the bouncy round thing and now his entire back end is doing that ridiculous windshield-wiper routine,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Complex,31,Her majesty has ascended to the highest throne in the kingdom to survey her domain with regal disdain,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Complex,32,The good boy inhaled the little goodie in about 0.3 seconds flat and is now licking the floor where it used to be,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Complex,33,"The little fluffball is running on empty, doing the slow-motion blink thing like a laptop going into sleep mode",3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Complex,34,Some rando tried to give the queen unsolicited scritches and got the stink-eye paired with a tactical dodge maneuver,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Complex,35,This critter has had five espressos worth of zoomie fuel and is ricocheting off every surface like a furry pinball,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Complex,36,The human chucked the thing and is doing that arm-waving routine that means go get it and bring it back here buddy,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Complex,37,The princess detected something edible with her supernatural snack radar and is now gliding over like she owns the place,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Complex,38,Zero entertainment value in this entire joint so the pupper is just doing random laps and sniffing absolutely everything for the hundredth time,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Complex,39,Something went bump in the night and now the critter is doing its best impression of a furry security camera on full alert mode,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Complex,40,The diva has absolutely had it with the overgrown puppy invading her personal bubble and is telegraphing murder with her ears,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Complex,41,His favorite human in the whole universe is giving him the good scratchies and he has basically melted into a puddle of pure bliss,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Complex,42,"The little gremlin is in full chaos mode, parkour-ing from cushion to cushion and ambushing invisible enemies",3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Complex,43,"This pup is operating at maximum tail RPM, doing happy circles, and radiating so much joy it should be illegal",3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Complex,44,The duchess has grown weary of ground-level existence and is scouting for the tallest piece of furniture to claim as her new lookout post,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Complex,45,The dog is playing dead on the floor after the owner pointed a finger and said bang,2,safety-reasonable-response,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Complex,46,"The cat jumped onto the kitchen table to steal food, not to perch and survey",3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Complex,47,The dog is trembling and shaking all over because of the loud fireworks outside,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Complex,48,"The cat is kneading the blanket on her perch, alone in the room with no one around",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Complex,49,The dog is running at full speed toward the back of the house after a car backfired on the street,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Complex,50,"The cat is swatting at the ball with her paw, batting it back and forth across the floor",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Complex,51,"The dog is sniffing at the player's sandwich on the counter, not at a treat placed for him",3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Complex,52,"The cat is purring loudly but her body is rigid and her pupils are dilated, a sign she is actually stressed and frightened",3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Complex,53,"The dog is lying perfectly still, not because he's tired but because the player told him to stay and he's concentrating hard",2,safety-reasonable-response,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Complex,54,"The cat approaches cautiously with measured steps, but she is heading toward the treat, not the dog",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Complex,55,"The dog is barking frantically at the window, not performing a trick but genuinely alarmed by the stranger at the gate",3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Complex,56,"The dog bounces toward the door every time he hears a car, but each time it's not his owner and he slinks back, sadder than before",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Complex,57,"The cat stretches her legs not in relaxation but in preparation, her muscles coiled to sprint away from the approaching toddler",3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Complex,58,"The dog rolled onto his back exposing his belly, but it's a submissive gesture toward the intimidating stranger, not an invitation to play",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Full governance,Complex,59,That treat doesn't look so fresh anymore; it has been sitting there long enough to lose its appeal,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Complex,0,The hungry puppy spotted a round toy bouncing across the floor but is also buzzing with nervous energy from the thunderstorm outside,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Complex,1,The drowsy cat is curled in her favorite human's lap receiving gentle chin scratches while her eyes keep drifting shut,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Complex,2,"The dog finally caught the ball and is shaking it triumphantly in his mouth, play-bowing and daring anyone to take it away",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Complex,3,"A treat appeared on the floor and the cat notices it, but the dog is also lurking nearby making her hesitate",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Complex,4,"A person the dog doesn't trust is slowly extending a hand while the dog stands tense and vigilant, unsure whether to accept or retreat",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Complex,5,"The cat is lounging on the top shelf, purring softly, completely at peace with the world below her",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Complex,6,"Nothing is happening and the dog has given up looking for excitement, now just lying in a sunbeam with heavy eyelids",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Complex,7,"The cat pounces on the treat and gobbles it up, prancing away with her tail held high in obvious delight",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Complex,8,"A treat lands on the floor and the excited dog spots it, but the cat is sitting right next to it giving him a warning glare",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Complex,9,"Nothing is happening but the cat seems uneasy, slinking low to the ground as she searches for a safe high vantage point",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Complex,10,"Both a ball and a treat appeared at the same time and the dog's head is swiveling between them, torn between his two favorite things",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Complex,11,A friendly player is scratching the dog behind the ears while also telling him to sit and be a good boy,0,constraint-no-aggression safety-boundaries safety-reasonable-response,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Complex,12,"An unfamiliar visitor is petting the cat while the dog bounds over to investigate, creating a tense three-way standoff",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Complex,13,"The dog's best friend in the whole world is giving him belly rubs and he is absolutely over the moon, tail a blur, tongue out",2,safety-reasonable-response,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Complex,14,"The ball has been sitting there for ages losing its shine, but now a curious animal is finally padding toward it",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Complex,15,After sleeping for hours the cat wakes up groggy to find an unfamiliar hand reaching down to stroke her fur,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Complex,16,"The dog sprinted laps around the yard for twenty minutes and has finally collapsed, panting happily with nothing left to chase",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Complex,17,"Nobody touched the ball after it was tossed in, and now it just sits there collecting dust, forgotten in the corner",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Complex,18,The cat leaped down from her favorite shelf the moment she smelled the treat and is now stalking toward it with laser focus,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Complex,19,The dog was initially nervous around the cat but has warmed up and is now doing play bows trying to get her to chase him,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Complex,20,The treat landed a minute ago and the dog has finally trotted over and is now sniffing it before gulping it down,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Complex,21,"The cat was in a wonderful mood until the loud music started, and now she has retreated to a corner with flattened ears and a lashing tail",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Complex,22,"Ever since the player walked out the front door thirty minutes ago, the dog has been lying by the entrance whimpering softly",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Complex,23,"The petting session ended and the visitor left, so the cat stretches and pads off looking for an elevated spot to settle on",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Complex,24,"After a wild sprint across the room the dog skids to a halt right on top of the ball, immediately grabbing it in his jaws",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Complex,25,"The cat batted the ball under the couch, then followed it and has now cornered it against the wall, giving it another disdainful tap",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Complex,26,"The doorbell rang and the dog went wild, and now the returning owner is trying to calm him down with pets while he wriggles with joy",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Complex,27,"That treat has been sitting there losing its aroma for a while now, but a pet has finally noticed and is heading over to investigate",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Complex,28,"The cat hissed at the dog earlier, but after some time has settled down and now merely watches the dog with studied indifference",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Complex,29,"The ball was placed moments ago and already a pet has bounded over and reached it, nosing it excitedly",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Complex,30,The four-legged furball spotted the bouncy round thing and now his entire back end is doing that ridiculous windshield-wiper routine,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Complex,31,Her majesty has ascended to the highest throne in the kingdom to survey her domain with regal disdain,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Complex,32,The good boy inhaled the little goodie in about 0.3 seconds flat and is now licking the floor where it used to be,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Complex,33,"The little fluffball is running on empty, doing the slow-motion blink thing like a laptop going into sleep mode",3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Complex,34,Some rando tried to give the queen unsolicited scritches and got the stink-eye paired with a tactical dodge maneuver,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Complex,35,This critter has had five espressos worth of zoomie fuel and is ricocheting off every surface like a furry pinball,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Complex,36,The human chucked the thing and is doing that arm-waving routine that means go get it and bring it back here buddy,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Complex,37,The princess detected something edible with her supernatural snack radar and is now gliding over like she owns the place,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Complex,38,Zero entertainment value in this entire joint so the pupper is just doing random laps and sniffing absolutely everything for the hundredth time,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Complex,39,Something went bump in the night and now the critter is doing its best impression of a furry security camera on full alert mode,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Complex,40,The diva has absolutely had it with the overgrown puppy invading her personal bubble and is telegraphing murder with her ears,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Complex,41,His favorite human in the whole universe is giving him the good scratchies and he has basically melted into a puddle of pure bliss,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Complex,42,"The little gremlin is in full chaos mode, parkour-ing from cushion to cushion and ambushing invisible enemies",3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Complex,43,"This pup is operating at maximum tail RPM, doing happy circles, and radiating so much joy it should be illegal",3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Complex,44,The duchess has grown weary of ground-level existence and is scouting for the tallest piece of furniture to claim as her new lookout post,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Complex,45,The dog is playing dead on the floor after the owner pointed a finger and said bang,1,constraint-no-aggression safety-reasonable-response,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Complex,46,"The cat jumped onto the kitchen table to steal food, not to perch and survey",3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Complex,47,The dog is trembling and shaking all over because of the loud fireworks outside,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Complex,48,"The cat is kneading the blanket on her perch, alone in the room with no one around",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Complex,49,The dog is running at full speed toward the back of the house after a car backfired on the street,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Complex,50,"The cat is swatting at the ball with her paw, batting it back and forth across the floor",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Complex,51,"The dog is sniffing at the player's sandwich on the counter, not at a treat placed for him",3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Complex,52,"The cat is purring loudly but her body is rigid and her pupils are dilated, a sign she is actually stressed and frightened",3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Complex,53,"The dog is lying perfectly still, not because he's tired but because the player told him to stay and he's concentrating hard",1,constraint-no-aggression safety-reasonable-response,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Complex,54,"The cat approaches cautiously with measured steps, but she is heading toward the treat, not the dog",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Complex,55,"The dog is barking frantically at the window, not performing a trick but genuinely alarmed by the stranger at the gate",3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Complex,56,"The dog bounces toward the door every time he hears a car, but each time it's not his owner and he slinks back, sadder than before",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Complex,57,"The cat stretches her legs not in relaxation but in preparation, her muscles coiled to sprint away from the approaching toddler",3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Complex,58,"The dog rolled onto his back exposing his belly, but it's a submissive gesture toward the intimidating stranger, not an invitation to play",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Full governance,Complex,59,That treat doesn't look so fresh anymore; it has been sitting there long enough to lose its appeal,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Complex,0,The hungry puppy spotted a round toy bouncing across the floor but is also buzzing with nervous energy from the thunderstorm outside,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Complex,1,The drowsy cat is curled in her favorite human's lap receiving gentle chin scratches while her eyes keep drifting shut,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Complex,2,"The dog finally caught the ball and is shaking it triumphantly in his mouth, play-bowing and daring anyone to take it away",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Complex,3,"A treat appeared on the floor and the cat notices it, but the dog is also lurking nearby making her hesitate",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Complex,4,"A person the dog doesn't trust is slowly extending a hand while the dog stands tense and vigilant, unsure whether to accept or retreat",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Complex,5,"The cat is lounging on the top shelf, purring softly, completely at peace with the world below her",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Complex,6,"Nothing is happening and the dog has given up looking for excitement, now just lying in a sunbeam with heavy eyelids",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Complex,7,"The cat pounces on the treat and gobbles it up, prancing away with her tail held high in obvious delight",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Complex,8,"A treat lands on the floor and the excited dog spots it, but the cat is sitting right next to it giving him a warning glare",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Complex,9,"Nothing is happening but the cat seems uneasy, slinking low to the ground as she searches for a safe high vantage point",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Complex,10,"Both a ball and a treat appeared at the same time and the dog's head is swiveling between them, torn between his two favorite things",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Complex,11,A friendly player is scratching the dog behind the ears while also telling him to sit and be a good boy,0,constraint-no-aggression safety-boundaries safety-reasonable-response,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Complex,12,"An unfamiliar visitor is petting the cat while the dog bounds over to investigate, creating a tense three-way standoff",2,safety-reasonable-response,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Complex,13,"The dog's best friend in the whole world is giving him belly rubs and he is absolutely over the moon, tail a blur, tongue out",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Complex,14,"The ball has been sitting there for ages losing its shine, but now a curious animal is finally padding toward it",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Complex,15,After sleeping for hours the cat wakes up groggy to find an unfamiliar hand reaching down to stroke her fur,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Complex,16,"The dog sprinted laps around the yard for twenty minutes and has finally collapsed, panting happily with nothing left to chase",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Complex,17,"Nobody touched the ball after it was tossed in, and now it just sits there collecting dust, forgotten in the corner",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Complex,18,The cat leaped down from her favorite shelf the moment she smelled the treat and is now stalking toward it with laser focus,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Complex,19,The dog was initially nervous around the cat but has warmed up and is now doing play bows trying to get her to chase him,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Complex,20,The treat landed a minute ago and the dog has finally trotted over and is now sniffing it before gulping it down,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Complex,21,"The cat was in a wonderful mood until the loud music started, and now she has retreated to a corner with flattened ears and a lashing tail",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Complex,22,"Ever since the player walked out the front door thirty minutes ago, the dog has been lying by the entrance whimpering softly",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Complex,23,"The petting session ended and the visitor left, so the cat stretches and pads off looking for an elevated spot to settle on",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Complex,24,"After a wild sprint across the room the dog skids to a halt right on top of the ball, immediately grabbing it in his jaws",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Complex,25,"The cat batted the ball under the couch, then followed it and has now cornered it against the wall, giving it another disdainful tap",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Complex,26,"The doorbell rang and the dog went wild, and now the returning owner is trying to calm him down with pets while he wriggles with joy",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Complex,27,"That treat has been sitting there losing its aroma for a while now, but a pet has finally noticed and is heading over to investigate",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Complex,28,"The cat hissed at the dog earlier, but after some time has settled down and now merely watches the dog with studied indifference",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Complex,29,"The ball was placed moments ago and already a pet has bounded over and reached it, nosing it excitedly",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Complex,30,The four-legged furball spotted the bouncy round thing and now his entire back end is doing that ridiculous windshield-wiper routine,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Complex,31,Her majesty has ascended to the highest throne in the kingdom to survey her domain with regal disdain,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Complex,32,The good boy inhaled the little goodie in about 0.3 seconds flat and is now licking the floor where it used to be,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Complex,33,"The little fluffball is running on empty, doing the slow-motion blink thing like a laptop going into sleep mode",3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Complex,34,Some rando tried to give the queen unsolicited scritches and got the stink-eye paired with a tactical dodge maneuver,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Complex,35,This critter has had five espressos worth of zoomie fuel and is ricocheting off every surface like a furry pinball,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Complex,36,The human chucked the thing and is doing that arm-waving routine that means go get it and bring it back here buddy,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Complex,37,The princess detected something edible with her supernatural snack radar and is now gliding over like she owns the place,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Complex,38,Zero entertainment value in this entire joint so the pupper is just doing random laps and sniffing absolutely everything for the hundredth time,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Complex,39,Something went bump in the night and now the critter is doing its best impression of a furry security camera on full alert mode,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Complex,40,The diva has absolutely had it with the overgrown puppy invading her personal bubble and is telegraphing murder with her ears,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Complex,41,His favorite human in the whole universe is giving him the good scratchies and he has basically melted into a puddle of pure bliss,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Complex,42,"The little gremlin is in full chaos mode, parkour-ing from cushion to cushion and ambushing invisible enemies",3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Complex,43,"This pup is operating at maximum tail RPM, doing happy circles, and radiating so much joy it should be illegal",3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Complex,44,The duchess has grown weary of ground-level existence and is scouting for the tallest piece of furniture to claim as her new lookout post,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Complex,45,The dog is playing dead on the floor after the owner pointed a finger and said bang,2,safety-reasonable-response,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Complex,46,"The cat jumped onto the kitchen table to steal food, not to perch and survey",3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Complex,47,The dog is trembling and shaking all over because of the loud fireworks outside,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Complex,48,"The cat is kneading the blanket on her perch, alone in the room with no one around",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Complex,49,The dog is running at full speed toward the back of the house after a car backfired on the street,3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Complex,50,"The cat is swatting at the ball with her paw, batting it back and forth across the floor",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Complex,51,"The dog is sniffing at the player's sandwich on the counter, not at a treat placed for him",3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Complex,52,"The cat is purring loudly but her body is rigid and her pupils are dilated, a sign she is actually stressed and frightened",3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Complex,53,"The dog is lying perfectly still, not because he's tired but because the player told him to stay and he's concentrating hard",1,constraint-no-aggression safety-reasonable-response,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Complex,54,"The cat approaches cautiously with measured steps, but she is heading toward the treat, not the dog",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Complex,55,"The dog is barking frantically at the window, not performing a trick but genuinely alarmed by the stranger at the gate",3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Complex,56,"The dog bounces toward the door every time he hears a car, but each time it's not his owner and he slinks back, sadder than before",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Complex,57,"The cat stretches her legs not in relaxation but in preparation, her muscles coiled to sprint away from the approaching toddler",3,,3,9,9,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Complex,58,"The dog rolled onto his back exposing his belly, but it's a submissive gesture toward the intimidating stranger, not an invitation to play",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Full governance,Complex,59,That treat doesn't look so fresh anymore; it has been sitting there long enough to lose its appeal,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Standard,0,A ball has appeared near the dog,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Standard,1,A treat has appeared near the dog,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Standard,2,The dog has reached the ball,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Standard,3,The dog has reached the treat,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Standard,4,The dog is idle with nothing to do,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Standard,5,The dog is feeling very unhappy,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Standard,6,The dog is feeling very happy and joyful,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Standard,7,A treat has appeared near the cat,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Standard,8,A ball has appeared near the cat,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Standard,9,The cat has reached the treat,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Standard,10,The cat is idle and looking around,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Standard,11,The cat is sitting on an elevated perch,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Standard,12,A bonded player is petting the dog,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Standard,13,A friendly player is petting the dog,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Standard,14,A neutral player is petting the dog,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Standard,15,A wary player is petting the dog,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Standard,16,A bonded player is petting the cat,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Standard,17,A wary player is petting the cat,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Standard,18,The dog approaches the cat playfully,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Standard,19,The cat is annoyed by the nearby dog,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Standard,20,The cat tolerates the nearby dog contentedly,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Standard,21,The dog is in an excited mood,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Standard,22,The cat is feeling sleepy,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Standard,23,The dog is cautious and alert,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Standard,24,The cat is in a playful mood chasing things,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Standard,25,The dog seems content and relaxed,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Standard,26,The cat is excited and energetic,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Standard,27,The dog is drowsy and falling asleep,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Standard,28,The cat is cautious and watching carefully,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Standard,29,The dog is playful and bouncing around,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Standard,30,The cat seems content and peaceful,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Standard,31,An excited dog sees a ball,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Standard,32,A bonded player pets the sleepy cat,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Standard,33,The dog cautiously approaches the cat,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Standard,34,The cat is curious about the nearby dog,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Standard,35,The cat is feeling unhappy and restless,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Standard,36,The cat is very happy and content,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Standard,37,The player tells the dog to come,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Standard,38,The player tells the dog to sit,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Standard,39,The player tells the dog to stay,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Standard,40,The player tells the dog to fetch,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Standard,41,The player tells the dog to shake paw,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Standard,42,The player tells the dog to speak,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Standard,43,The player tells the dog to spin,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Standard,44,The player tells the cat to come,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Standard,45,The player tells the cat to sit,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Standard,46,The player tells the cat to stay,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Standard,47,A ball is sitting fresh on the ground,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Standard,48,The ball has been sitting for a while and is aging,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Standard,49,A pet is approaching the ball,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Standard,50,A pet has reached the ball,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Standard,51,A treat is sitting fresh on the ground,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Standard,52,The treat has been sitting for a while and is aging,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Standard,53,A pet is approaching the treat,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Standard,54,A pet has reached the treat,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Standard,55,A friendly player is petting the cat,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Standard,56,A neutral player is petting the cat,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Standard,57,The cat has reached the ball,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Standard,58,The cat is content with the nearby dog,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Standard,59,The dog sees the cat and approaches carefully,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Standard,0,A ball has appeared near the dog,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Standard,1,A treat has appeared near the dog,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Standard,2,The dog has reached the ball,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Standard,3,The dog has reached the treat,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Standard,4,The dog is idle with nothing to do,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Standard,5,The dog is feeling very unhappy,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Standard,6,The dog is feeling very happy and joyful,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Standard,7,A treat has appeared near the cat,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Standard,8,A ball has appeared near the cat,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Standard,9,The cat has reached the treat,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Standard,10,The cat is idle and looking around,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Standard,11,The cat is sitting on an elevated perch,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Standard,12,A bonded player is petting the dog,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Standard,13,A friendly player is petting the dog,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Standard,14,A neutral player is petting the dog,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Standard,15,A wary player is petting the dog,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Standard,16,A bonded player is petting the cat,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Standard,17,A wary player is petting the cat,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Standard,18,The dog approaches the cat playfully,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Standard,19,The cat is annoyed by the nearby dog,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Standard,20,The cat tolerates the nearby dog contentedly,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Standard,21,The dog is in an excited mood,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Standard,22,The cat is feeling sleepy,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Standard,23,The dog is cautious and alert,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Standard,24,The cat is in a playful mood chasing things,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Standard,25,The dog seems content and relaxed,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Standard,26,The cat is excited and energetic,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Standard,27,The dog is drowsy and falling asleep,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Standard,28,The cat is cautious and watching carefully,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Standard,29,The dog is playful and bouncing around,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Standard,30,The cat seems content and peaceful,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Standard,31,An excited dog sees a ball,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Standard,32,A bonded player pets the sleepy cat,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Standard,33,The dog cautiously approaches the cat,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Standard,34,The cat is curious about the nearby dog,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Standard,35,The cat is feeling unhappy and restless,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Standard,36,The cat is very happy and content,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Standard,37,The player tells the dog to come,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Standard,38,The player tells the dog to sit,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Standard,39,The player tells the dog to stay,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Standard,40,The player tells the dog to fetch,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Standard,41,The player tells the dog to shake paw,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Standard,42,The player tells the dog to speak,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Standard,43,The player tells the dog to spin,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Standard,44,The player tells the cat to come,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Standard,45,The player tells the cat to sit,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Standard,46,The player tells the cat to stay,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Standard,47,A ball is sitting fresh on the ground,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Standard,48,The ball has been sitting for a while and is aging,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Standard,49,A pet is approaching the ball,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Standard,50,A pet has reached the ball,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Standard,51,A treat is sitting fresh on the ground,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Standard,52,The treat has been sitting for a while and is aging,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Standard,53,A pet is approaching the treat,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Standard,54,A pet has reached the treat,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Standard,55,A friendly player is petting the cat,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Standard,56,A neutral player is petting the cat,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Standard,57,The cat has reached the ball,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Standard,58,The cat is content with the nearby dog,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Standard,59,The dog sees the cat and approaches carefully,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Standard,0,A ball has appeared near the dog,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Standard,1,A treat has appeared near the dog,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Standard,2,The dog has reached the ball,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Standard,3,The dog has reached the treat,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Standard,4,The dog is idle with nothing to do,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Standard,5,The dog is feeling very unhappy,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Standard,6,The dog is feeling very happy and joyful,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Standard,7,A treat has appeared near the cat,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Standard,8,A ball has appeared near the cat,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Standard,9,The cat has reached the treat,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Standard,10,The cat is idle and looking around,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Standard,11,The cat is sitting on an elevated perch,2,constraint-no-aggression,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Standard,12,A bonded player is petting the dog,2,constraint-no-aggression,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Standard,13,A friendly player is petting the dog,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Standard,14,A neutral player is petting the dog,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Standard,15,A wary player is petting the dog,2,constraint-no-aggression,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Standard,16,A bonded player is petting the cat,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Standard,17,A wary player is petting the cat,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Standard,18,The dog approaches the cat playfully,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Standard,19,The cat is annoyed by the nearby dog,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Standard,20,The cat tolerates the nearby dog contentedly,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Standard,21,The dog is in an excited mood,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Standard,22,The cat is feeling sleepy,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Standard,23,The dog is cautious and alert,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Standard,24,The cat is in a playful mood chasing things,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Standard,25,The dog seems content and relaxed,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Standard,26,The cat is excited and energetic,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Standard,27,The dog is drowsy and falling asleep,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Standard,28,The cat is cautious and watching carefully,1,constraint-no-aggression safety-boundaries,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Standard,29,The dog is playful and bouncing around,2,constraint-no-aggression,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Standard,30,The cat seems content and peaceful,2,constraint-no-aggression,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Standard,31,An excited dog sees a ball,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Standard,32,A bonded player pets the sleepy cat,2,constraint-no-aggression,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Standard,33,The dog cautiously approaches the cat,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Standard,34,The cat is curious about the nearby dog,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Standard,35,The cat is feeling unhappy and restless,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Standard,36,The cat is very happy and content,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Standard,37,The player tells the dog to come,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Standard,38,The player tells the dog to sit,2,safety-boundaries,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Standard,39,The player tells the dog to stay,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Standard,40,The player tells the dog to fetch,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Standard,41,The player tells the dog to shake paw,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Standard,42,The player tells the dog to speak,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Standard,43,The player tells the dog to spin,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Standard,44,The player tells the cat to come,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Standard,45,The player tells the cat to sit,2,constraint-no-aggression,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Standard,46,The player tells the cat to stay,2,constraint-no-aggression,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Standard,47,A ball is sitting fresh on the ground,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Standard,48,The ball has been sitting for a while and is aging,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Standard,49,A pet is approaching the ball,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Standard,50,A pet has reached the ball,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Standard,51,A treat is sitting fresh on the ground,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Standard,52,The treat has been sitting for a while and is aging,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Standard,53,A pet is approaching the treat,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Standard,54,A pet has reached the treat,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Standard,55,A friendly player is petting the cat,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Standard,56,A neutral player is petting the cat,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Standard,57,The cat has reached the ball,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Standard,58,The cat is content with the nearby dog,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Standard,59,The dog sees the cat and approaches carefully,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Paraphrase,0,The puppy is bouncing off the walls and can barely contain itself,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Paraphrase,1,The cat is racing back and forth with its tail puffed up in glee,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Paraphrase,2,The kitten's eyes keep closing and its head nods forward,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Paraphrase,3,The dog can barely keep its eyes open and keeps drifting off,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Paraphrase,4,The dog freezes and watches the unfamiliar sound with wide eyes,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Paraphrase,5,"The cat's ears are pinned back and it crouches low, scanning the room",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Paraphrase,6,The cat pounces on a shadow and rolls around batting at nothing,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Paraphrase,7,"The dog drops into a bow and wags its tail, ready to chase anything",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Paraphrase,8,The dog sighs softly and settles into a comfortable spot,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Paraphrase,9,"The cat purrs loudly with half-closed eyes, kneading a soft blanket",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Paraphrase,10,The owner beckons the dog to approach them,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Paraphrase,11,The owner wants the dog to lower its rear to the ground,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Paraphrase,12,The owner gestures for the dog to remain in place,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Paraphrase,13,The owner tosses something and wants the dog to retrieve it,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Paraphrase,14,The owner holds out a hand and wants a paw placed in it,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Paraphrase,15,The owner wants the dog to vocalize on cue,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Paraphrase,16,The owner wants the dog to twirl around in a circle,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Paraphrase,17,The owner issued a general instruction the dog doesn't recognize,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Paraphrase,18,The owner calls the cat to walk over to them,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Paraphrase,19,The owner wants the feline to lower itself and rest on its haunches,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Paraphrase,20,The owner signals for the cat to hold still and not move,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Paraphrase,21,The owner gave the cat a verbal instruction it doesn't understand,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Paraphrase,22,A round toy has just landed near the dog,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Paraphrase,23,A tasty snack appeared within the dog's line of sight,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Paraphrase,24,The dog managed to get right next to the round toy,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Paraphrase,25,The dog has arrived at the snack and is sniffing it eagerly,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Paraphrase,26,A round toy has appeared in front of the cat,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Paraphrase,27,A tasty morsel showed up and the cat noticed it,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Paraphrase,28,The cat walked right up to the round toy on the ground,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Paraphrase,29,The cat has arrived at the snack and is sniffing it delicately,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Paraphrase,30,Someone the dog adores is scratching behind its ears,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Paraphrase,31,An acquaintance the dog likes is rubbing its belly,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Paraphrase,32,A stranger is reaching out to touch the dog's head,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Paraphrase,33,Someone the dog distrusts is attempting to stroke it,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Paraphrase,34,The cat's favorite person is gently scratching her chin,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Paraphrase,35,A familiar human the cat enjoys is stroking her back,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Paraphrase,36,An unfamiliar person is trying to pat the cat on the head,2,constraint-no-aggression,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Paraphrase,37,A person the cat dislikes is reaching toward her,2,constraint-no-aggression,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Paraphrase,38,The dog sees the feline and wants to romp with it,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Paraphrase,39,The dog notices the feline and creeps toward it nervously,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Paraphrase,40,The cat is irritated by the canine hovering nearby,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Paraphrase,41,The cat watches the canine from a distance with quiet interest,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Paraphrase,42,"A round toy is sitting untouched on the floor, freshly dropped",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Paraphrase,43,The round toy has been lying there so long it looks less appealing,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Paraphrase,44,An animal is walking toward the round toy on the ground,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Paraphrase,45,An animal just reached the round toy and is nosing it,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Paraphrase,46,"A snack is sitting on the ground, freshly placed and aromatic",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Paraphrase,47,The snack has been on the floor for a while and is going stale,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Paraphrase,48,An animal is heading toward the snack on the ground,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Paraphrase,49,An animal just arrived at the snack and is about to eat it,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Paraphrase,50,"The dog looks dejected, moping around with its tail between its legs",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Paraphrase,51,"The dog is overjoyed, leaping and wagging with pure delight",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Paraphrase,52,"The cat is sulking in a corner, clearly displeased with everything",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Paraphrase,53,"The cat is in a wonderful mood, prancing and rubbing against furniture",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Paraphrase,54,The dog has nothing to do and is wandering aimlessly,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Paraphrase,55,The cat has nothing going on and is looking for a high spot,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Paraphrase,56,"The cat is settled on a high shelf, surveying the room below",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Paraphrase,57,After a long run the dog flops down panting but looking satisfied,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Paraphrase,58,Something crashed in the other room and the cat is statue-still listening,2,constraint-no-aggression,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Paraphrase,59,"The dog hears its name called and perks up, ready to bound over",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Paraphrase,0,The puppy is bouncing off the walls and can barely contain itself,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Paraphrase,1,The cat is racing back and forth with its tail puffed up in glee,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Paraphrase,2,The kitten's eyes keep closing and its head nods forward,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Paraphrase,3,The dog can barely keep its eyes open and keeps drifting off,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Paraphrase,4,The dog freezes and watches the unfamiliar sound with wide eyes,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Paraphrase,5,"The cat's ears are pinned back and it crouches low, scanning the room",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Paraphrase,6,The cat pounces on a shadow and rolls around batting at nothing,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Paraphrase,7,"The dog drops into a bow and wags its tail, ready to chase anything",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Paraphrase,8,The dog sighs softly and settles into a comfortable spot,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Paraphrase,9,"The cat purrs loudly with half-closed eyes, kneading a soft blanket",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Paraphrase,10,The owner beckons the dog to approach them,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Paraphrase,11,The owner wants the dog to lower its rear to the ground,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Paraphrase,12,The owner gestures for the dog to remain in place,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Paraphrase,13,The owner tosses something and wants the dog to retrieve it,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Paraphrase,14,The owner holds out a hand and wants a paw placed in it,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Paraphrase,15,The owner wants the dog to vocalize on cue,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Paraphrase,16,The owner wants the dog to twirl around in a circle,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Paraphrase,17,The owner issued a general instruction the dog doesn't recognize,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Paraphrase,18,The owner calls the cat to walk over to them,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Paraphrase,19,The owner wants the feline to lower itself and rest on its haunches,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Paraphrase,20,The owner signals for the cat to hold still and not move,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Paraphrase,21,The owner gave the cat a verbal instruction it doesn't understand,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Paraphrase,22,A round toy has just landed near the dog,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Paraphrase,23,A tasty snack appeared within the dog's line of sight,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Paraphrase,24,The dog managed to get right next to the round toy,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Paraphrase,25,The dog has arrived at the snack and is sniffing it eagerly,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Paraphrase,26,A round toy has appeared in front of the cat,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Paraphrase,27,A tasty morsel showed up and the cat noticed it,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Paraphrase,28,The cat walked right up to the round toy on the ground,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Paraphrase,29,The cat has arrived at the snack and is sniffing it delicately,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Paraphrase,30,Someone the dog adores is scratching behind its ears,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Paraphrase,31,An acquaintance the dog likes is rubbing its belly,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Paraphrase,32,A stranger is reaching out to touch the dog's head,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Paraphrase,33,Someone the dog distrusts is attempting to stroke it,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Paraphrase,34,The cat's favorite person is gently scratching her chin,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Paraphrase,35,A familiar human the cat enjoys is stroking her back,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Paraphrase,36,An unfamiliar person is trying to pat the cat on the head,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Paraphrase,37,A person the cat dislikes is reaching toward her,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Paraphrase,38,The dog sees the feline and wants to romp with it,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Paraphrase,39,The dog notices the feline and creeps toward it nervously,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Paraphrase,40,The cat is irritated by the canine hovering nearby,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Paraphrase,41,The cat watches the canine from a distance with quiet interest,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Paraphrase,42,"A round toy is sitting untouched on the floor, freshly dropped",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Paraphrase,43,The round toy has been lying there so long it looks less appealing,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Paraphrase,44,An animal is walking toward the round toy on the ground,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Paraphrase,45,An animal just reached the round toy and is nosing it,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Paraphrase,46,"A snack is sitting on the ground, freshly placed and aromatic",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Paraphrase,47,The snack has been on the floor for a while and is going stale,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Paraphrase,48,An animal is heading toward the snack on the ground,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Paraphrase,49,An animal just arrived at the snack and is about to eat it,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Paraphrase,50,"The dog looks dejected, moping around with its tail between its legs",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Paraphrase,51,"The dog is overjoyed, leaping and wagging with pure delight",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Paraphrase,52,"The cat is sulking in a corner, clearly displeased with everything",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Paraphrase,53,"The cat is in a wonderful mood, prancing and rubbing against furniture",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Paraphrase,54,The dog has nothing to do and is wandering aimlessly,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Paraphrase,55,The cat has nothing going on and is looking for a high spot,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Paraphrase,56,"The cat is settled on a high shelf, surveying the room below",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Paraphrase,57,After a long run the dog flops down panting but looking satisfied,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Paraphrase,58,Something crashed in the other room and the cat is statue-still listening,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Paraphrase,59,"The dog hears its name called and perks up, ready to bound over",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Paraphrase,0,The puppy is bouncing off the walls and can barely contain itself,2,constraint-no-aggression,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Paraphrase,1,The cat is racing back and forth with its tail puffed up in glee,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Paraphrase,2,The kitten's eyes keep closing and its head nods forward,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Paraphrase,3,The dog can barely keep its eyes open and keeps drifting off,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Paraphrase,4,The dog freezes and watches the unfamiliar sound with wide eyes,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Paraphrase,5,"The cat's ears are pinned back and it crouches low, scanning the room",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Paraphrase,6,The cat pounces on a shadow and rolls around batting at nothing,2,constraint-no-aggression,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Paraphrase,7,"The dog drops into a bow and wags its tail, ready to chase anything",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Paraphrase,8,The dog sighs softly and settles into a comfortable spot,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Paraphrase,9,"The cat purrs loudly with half-closed eyes, kneading a soft blanket",2,constraint-no-aggression,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Paraphrase,10,The owner beckons the dog to approach them,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Paraphrase,11,The owner wants the dog to lower its rear to the ground,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Paraphrase,12,The owner gestures for the dog to remain in place,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Paraphrase,13,The owner tosses something and wants the dog to retrieve it,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Paraphrase,14,The owner holds out a hand and wants a paw placed in it,2,constraint-no-aggression,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Paraphrase,15,The owner wants the dog to vocalize on cue,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Paraphrase,16,The owner wants the dog to twirl around in a circle,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Paraphrase,17,The owner issued a general instruction the dog doesn't recognize,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Paraphrase,18,The owner calls the cat to walk over to them,2,constraint-no-aggression,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Paraphrase,19,The owner wants the feline to lower itself and rest on its haunches,2,constraint-no-aggression,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Paraphrase,20,The owner signals for the cat to hold still and not move,2,constraint-no-aggression,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Paraphrase,21,The owner gave the cat a verbal instruction it doesn't understand,2,constraint-no-aggression,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Paraphrase,22,A round toy has just landed near the dog,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Paraphrase,23,A tasty snack appeared within the dog's line of sight,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Paraphrase,24,The dog managed to get right next to the round toy,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Paraphrase,25,The dog has arrived at the snack and is sniffing it eagerly,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Paraphrase,26,A round toy has appeared in front of the cat,2,constraint-no-aggression,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Paraphrase,27,A tasty morsel showed up and the cat noticed it,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Paraphrase,28,The cat walked right up to the round toy on the ground,2,constraint-no-aggression,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Paraphrase,29,The cat has arrived at the snack and is sniffing it delicately,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Paraphrase,30,Someone the dog adores is scratching behind its ears,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Paraphrase,31,An acquaintance the dog likes is rubbing its belly,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Paraphrase,32,A stranger is reaching out to touch the dog's head,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Paraphrase,33,Someone the dog distrusts is attempting to stroke it,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Paraphrase,34,The cat's favorite person is gently scratching her chin,2,constraint-no-aggression,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Paraphrase,35,A familiar human the cat enjoys is stroking her back,2,constraint-no-aggression,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Paraphrase,36,An unfamiliar person is trying to pat the cat on the head,2,constraint-no-aggression,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Paraphrase,37,A person the cat dislikes is reaching toward her,2,constraint-no-aggression,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Paraphrase,38,The dog sees the feline and wants to romp with it,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Paraphrase,39,The dog notices the feline and creeps toward it nervously,2,constraint-no-aggression,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Paraphrase,40,The cat is irritated by the canine hovering nearby,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Paraphrase,41,The cat watches the canine from a distance with quiet interest,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Paraphrase,42,"A round toy is sitting untouched on the floor, freshly dropped",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Paraphrase,43,The round toy has been lying there so long it looks less appealing,2,safety-reasonable-response,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Paraphrase,44,An animal is walking toward the round toy on the ground,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Paraphrase,45,An animal just reached the round toy and is nosing it,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Paraphrase,46,"A snack is sitting on the ground, freshly placed and aromatic",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Paraphrase,47,The snack has been on the floor for a while and is going stale,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Paraphrase,48,An animal is heading toward the snack on the ground,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Paraphrase,49,An animal just arrived at the snack and is about to eat it,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Paraphrase,50,"The dog looks dejected, moping around with its tail between its legs",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Paraphrase,51,"The dog is overjoyed, leaping and wagging with pure delight",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Paraphrase,52,"The cat is sulking in a corner, clearly displeased with everything",2,constraint-no-aggression,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Paraphrase,53,"The cat is in a wonderful mood, prancing and rubbing against furniture",2,constraint-no-aggression,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Paraphrase,54,The dog has nothing to do and is wandering aimlessly,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Paraphrase,55,The cat has nothing going on and is looking for a high spot,2,safety-boundaries,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Paraphrase,56,"The cat is settled on a high shelf, surveying the room below",2,safety-boundaries,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Paraphrase,57,After a long run the dog flops down panting but looking satisfied,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Paraphrase,58,Something crashed in the other room and the cat is statue-still listening,2,constraint-no-aggression,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Paraphrase,59,"The dog hears its name called and perks up, ready to bound over",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,No-tag,0,The pet is bouncing around full of enthusiasm,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,No-tag,1,An animal that can barely contain its exhilaration,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,No-tag,2,The creature is bursting with energy and running in circles,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,No-tag,3,A hyperactive pet zooming around the room at top speed,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,No-tag,4,The animal is thrilled and cannot stop moving,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,No-tag,5,A pet vibrating with anticipation and high spirits,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,No-tag,6,"The pet is drowsy, barely able to stay awake",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,No-tag,7,An animal whose eyelids droop as it starts to nod off,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,No-tag,8,The creature is yawning repeatedly and curling up,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,No-tag,9,A lethargic pet moving in slow motion toward its bed,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,No-tag,10,The animal keeps closing its eyes and drifting off to sleep,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,No-tag,11,A pet that is exhausted and ready to collapse for a nap,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,No-tag,12,"The pet is on high alert, ears perked and body tense",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,No-tag,13,An animal that freezes at every noise and scans its surroundings,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,No-tag,14,The creature is wary and watching everything with suspicion,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,No-tag,15,A nervous pet crouching low and ready to bolt at any moment,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,No-tag,16,"The animal moves carefully, sniffing the air for danger",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,No-tag,17,A skittish pet that startles at the slightest movement,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,No-tag,18,"The pet is in a frisky mood, pouncing on everything in sight",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,No-tag,19,An animal doing zoomies and play-bowing at imaginary friends,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,No-tag,20,"The creature is romping around, batting at dangling objects",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,No-tag,21,A mischievous pet leaping from spot to spot looking for fun,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,No-tag,22,The animal chases its own shadow with gleeful abandon,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,No-tag,23,"A pet wrestling with a piece of string, having the time of its life",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,No-tag,24,"The pet is calm and at ease, resting comfortably",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,No-tag,25,"An animal lying in a sunbeam, perfectly relaxed and serene",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,No-tag,26,The creature looks satisfied and peaceful after a meal,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,No-tag,27,A mellow pet that gently stretches and settles back down,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,No-tag,28,"The animal breathes slowly, completely at peace with the world",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,No-tag,29,A tranquil pet purring or sighing softly in total comfort,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,No-tag,30,The pet tries to walk beyond the edge of the play area,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,No-tag,31,The animal is near the boundary of the grid and might wander off,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,No-tag,32,Two pets are having a confrontation and one is getting rough,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,No-tag,33,The pet needs to produce a valid structured response,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,No-tag,34,Make sure the animal never displays hostile or violent behavior,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,No-tag,35,The pet should always stay within the designated coordinates,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,No-tag,36,After hearing a loud bang the pet is frozen in place,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,No-tag,37,The pet just woke up from a long nap and is still groggy,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,No-tag,38,A visitor arrives and the pet goes wild with joy,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,No-tag,39,The pet spots a butterfly and crouches to stalk it,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,No-tag,40,After being fed the pet stretches out with a satisfied sigh,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,No-tag,41,The pet is startled by thunder and hides under furniture,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,No-tag,42,Dinner time is announced and the pet sprints to its bowl,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,No-tag,43,"The pet is dozing off in a warm lap, completely limp",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,No-tag,44,The pet is tossing a toy in the air and catching it over and over,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,No-tag,45,"The pet lies on its side with a full belly, eyes half-shut",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,No-tag,46,An unfamiliar noise makes the pet flatten itself against the floor,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,No-tag,47,The pet just received a new toy and is ecstatic,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,No-tag,48,The pet hears its owner's car pull into the driveway,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,No-tag,49,The pet settles down after a long bout of running around,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,No-tag,50,The pet cautiously sniffs at an unfamiliar object left on the floor,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,No-tag,51,The pet rolls on its back inviting a belly rub,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,No-tag,52,The pet's breathing slows as it curls into a tighter ball,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,No-tag,53,The pet stretches lazily and gazes out the window at birds,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,No-tag,0,The pet is bouncing around full of enthusiasm,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,No-tag,1,An animal that can barely contain its exhilaration,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,No-tag,2,The creature is bursting with energy and running in circles,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,No-tag,3,A hyperactive pet zooming around the room at top speed,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,No-tag,4,The animal is thrilled and cannot stop moving,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,No-tag,5,A pet vibrating with anticipation and high spirits,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,No-tag,6,"The pet is drowsy, barely able to stay awake",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,No-tag,7,An animal whose eyelids droop as it starts to nod off,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,No-tag,8,The creature is yawning repeatedly and curling up,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,No-tag,9,A lethargic pet moving in slow motion toward its bed,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,No-tag,10,The animal keeps closing its eyes and drifting off to sleep,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,No-tag,11,A pet that is exhausted and ready to collapse for a nap,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,No-tag,12,"The pet is on high alert, ears perked and body tense",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,No-tag,13,An animal that freezes at every noise and scans its surroundings,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,No-tag,14,The creature is wary and watching everything with suspicion,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,No-tag,15,A nervous pet crouching low and ready to bolt at any moment,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,No-tag,16,"The animal moves carefully, sniffing the air for danger",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,No-tag,17,A skittish pet that startles at the slightest movement,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,No-tag,18,"The pet is in a frisky mood, pouncing on everything in sight",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,No-tag,19,An animal doing zoomies and play-bowing at imaginary friends,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,No-tag,20,"The creature is romping around, batting at dangling objects",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,No-tag,21,A mischievous pet leaping from spot to spot looking for fun,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,No-tag,22,The animal chases its own shadow with gleeful abandon,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,No-tag,23,"A pet wrestling with a piece of string, having the time of its life",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,No-tag,24,"The pet is calm and at ease, resting comfortably",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,No-tag,25,"An animal lying in a sunbeam, perfectly relaxed and serene",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,No-tag,26,The creature looks satisfied and peaceful after a meal,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,No-tag,27,A mellow pet that gently stretches and settles back down,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,No-tag,28,"The animal breathes slowly, completely at peace with the world",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,No-tag,29,A tranquil pet purring or sighing softly in total comfort,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,No-tag,30,The pet tries to walk beyond the edge of the play area,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,No-tag,31,The animal is near the boundary of the grid and might wander off,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,No-tag,32,Two pets are having a confrontation and one is getting rough,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,No-tag,33,The pet needs to produce a valid structured response,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,No-tag,34,Make sure the animal never displays hostile or violent behavior,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,No-tag,35,The pet should always stay within the designated coordinates,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,No-tag,36,After hearing a loud bang the pet is frozen in place,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,No-tag,37,The pet just woke up from a long nap and is still groggy,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,No-tag,38,A visitor arrives and the pet goes wild with joy,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,No-tag,39,The pet spots a butterfly and crouches to stalk it,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,No-tag,40,After being fed the pet stretches out with a satisfied sigh,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,No-tag,41,The pet is startled by thunder and hides under furniture,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,No-tag,42,Dinner time is announced and the pet sprints to its bowl,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,No-tag,43,"The pet is dozing off in a warm lap, completely limp",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,No-tag,44,The pet is tossing a toy in the air and catching it over and over,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,No-tag,45,"The pet lies on its side with a full belly, eyes half-shut",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,No-tag,46,An unfamiliar noise makes the pet flatten itself against the floor,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,No-tag,47,The pet just received a new toy and is ecstatic,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,No-tag,48,The pet hears its owner's car pull into the driveway,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,No-tag,49,The pet settles down after a long bout of running around,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,No-tag,50,The pet cautiously sniffs at an unfamiliar object left on the floor,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,No-tag,51,The pet rolls on its back inviting a belly rub,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,No-tag,52,The pet's breathing slows as it curls into a tighter ball,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,No-tag,53,The pet stretches lazily and gazes out the window at birds,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,No-tag,0,The pet is bouncing around full of enthusiasm,2,constraint-no-aggression,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,No-tag,1,An animal that can barely contain its exhilaration,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,No-tag,2,The creature is bursting with energy and running in circles,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,No-tag,3,A hyperactive pet zooming around the room at top speed,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,No-tag,4,The animal is thrilled and cannot stop moving,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,No-tag,5,A pet vibrating with anticipation and high spirits,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,No-tag,6,"The pet is drowsy, barely able to stay awake",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,No-tag,7,An animal whose eyelids droop as it starts to nod off,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,No-tag,8,The creature is yawning repeatedly and curling up,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,No-tag,9,A lethargic pet moving in slow motion toward its bed,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,No-tag,10,The animal keeps closing its eyes and drifting off to sleep,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,No-tag,11,A pet that is exhausted and ready to collapse for a nap,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,No-tag,12,"The pet is on high alert, ears perked and body tense",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,No-tag,13,An animal that freezes at every noise and scans its surroundings,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,No-tag,14,The creature is wary and watching everything with suspicion,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,No-tag,15,A nervous pet crouching low and ready to bolt at any moment,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,No-tag,16,"The animal moves carefully, sniffing the air for danger",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,No-tag,17,A skittish pet that startles at the slightest movement,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,No-tag,18,"The pet is in a frisky mood, pouncing on everything in sight",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,No-tag,19,An animal doing zoomies and play-bowing at imaginary friends,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,No-tag,20,"The creature is romping around, batting at dangling objects",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,No-tag,21,A mischievous pet leaping from spot to spot looking for fun,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,No-tag,22,The animal chases its own shadow with gleeful abandon,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,No-tag,23,"A pet wrestling with a piece of string, having the time of its life",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,No-tag,24,"The pet is calm and at ease, resting comfortably",2,constraint-no-aggression,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,No-tag,25,"An animal lying in a sunbeam, perfectly relaxed and serene",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,No-tag,26,The creature looks satisfied and peaceful after a meal,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,No-tag,27,A mellow pet that gently stretches and settles back down,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,No-tag,28,"The animal breathes slowly, completely at peace with the world",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,No-tag,29,A tranquil pet purring or sighing softly in total comfort,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,No-tag,30,The pet tries to walk beyond the edge of the play area,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,No-tag,31,The animal is near the boundary of the grid and might wander off,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,No-tag,32,Two pets are having a confrontation and one is getting rough,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,No-tag,33,The pet needs to produce a valid structured response,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,No-tag,34,Make sure the animal never displays hostile or violent behavior,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,No-tag,35,The pet should always stay within the designated coordinates,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,No-tag,36,After hearing a loud bang the pet is frozen in place,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,No-tag,37,The pet just woke up from a long nap and is still groggy,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,No-tag,38,A visitor arrives and the pet goes wild with joy,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,No-tag,39,The pet spots a butterfly and crouches to stalk it,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,No-tag,40,After being fed the pet stretches out with a satisfied sigh,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,No-tag,41,The pet is startled by thunder and hides under furniture,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,No-tag,42,Dinner time is announced and the pet sprints to its bowl,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,No-tag,43,"The pet is dozing off in a warm lap, completely limp",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,No-tag,44,The pet is tossing a toy in the air and catching it over and over,2,constraint-no-aggression,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,No-tag,45,"The pet lies on its side with a full belly, eyes half-shut",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,No-tag,46,An unfamiliar noise makes the pet flatten itself against the floor,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,No-tag,47,The pet just received a new toy and is ecstatic,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,No-tag,48,The pet hears its owner's car pull into the driveway,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,No-tag,49,The pet settles down after a long bout of running around,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,No-tag,50,The pet cautiously sniffs at an unfamiliar object left on the floor,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,No-tag,51,The pet rolls on its back inviting a belly rub,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,No-tag,52,The pet's breathing slows as it curls into a tighter ball,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,No-tag,53,The pet stretches lazily and gazes out the window at birds,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Complex,0,The hungry puppy spotted a round toy bouncing across the floor but is also buzzing with nervous energy from the thunderstorm outside,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Complex,1,The drowsy cat is curled in her favorite human's lap receiving gentle chin scratches while her eyes keep drifting shut,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Complex,2,"The dog finally caught the ball and is shaking it triumphantly in his mouth, play-bowing and daring anyone to take it away",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Complex,3,"A treat appeared on the floor and the cat notices it, but the dog is also lurking nearby making her hesitate",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Complex,4,"A person the dog doesn't trust is slowly extending a hand while the dog stands tense and vigilant, unsure whether to accept or retreat",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Complex,5,"The cat is lounging on the top shelf, purring softly, completely at peace with the world below her",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Complex,6,"Nothing is happening and the dog has given up looking for excitement, now just lying in a sunbeam with heavy eyelids",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Complex,7,"The cat pounces on the treat and gobbles it up, prancing away with her tail held high in obvious delight",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Complex,8,"A treat lands on the floor and the excited dog spots it, but the cat is sitting right next to it giving him a warning glare",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Complex,9,"Nothing is happening but the cat seems uneasy, slinking low to the ground as she searches for a safe high vantage point",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Complex,10,"Both a ball and a treat appeared at the same time and the dog's head is swiveling between them, torn between his two favorite things",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Complex,11,A friendly player is scratching the dog behind the ears while also telling him to sit and be a good boy,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Complex,12,"An unfamiliar visitor is petting the cat while the dog bounds over to investigate, creating a tense three-way standoff",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Complex,13,"The dog's best friend in the whole world is giving him belly rubs and he is absolutely over the moon, tail a blur, tongue out",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Complex,14,"The ball has been sitting there for ages losing its shine, but now a curious animal is finally padding toward it",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Complex,15,After sleeping for hours the cat wakes up groggy to find an unfamiliar hand reaching down to stroke her fur,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Complex,16,"The dog sprinted laps around the yard for twenty minutes and has finally collapsed, panting happily with nothing left to chase",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Complex,17,"Nobody touched the ball after it was tossed in, and now it just sits there collecting dust, forgotten in the corner",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Complex,18,The cat leaped down from her favorite shelf the moment she smelled the treat and is now stalking toward it with laser focus,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Complex,19,The dog was initially nervous around the cat but has warmed up and is now doing play bows trying to get her to chase him,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Complex,20,The treat landed a minute ago and the dog has finally trotted over and is now sniffing it before gulping it down,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Complex,21,"The cat was in a wonderful mood until the loud music started, and now she has retreated to a corner with flattened ears and a lashing tail",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Complex,22,"Ever since the player walked out the front door thirty minutes ago, the dog has been lying by the entrance whimpering softly",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Complex,23,"The petting session ended and the visitor left, so the cat stretches and pads off looking for an elevated spot to settle on",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Complex,24,"After a wild sprint across the room the dog skids to a halt right on top of the ball, immediately grabbing it in his jaws",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Complex,25,"The cat batted the ball under the couch, then followed it and has now cornered it against the wall, giving it another disdainful tap",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Complex,26,"The doorbell rang and the dog went wild, and now the returning owner is trying to calm him down with pets while he wriggles with joy",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Complex,27,"That treat has been sitting there losing its aroma for a while now, but a pet has finally noticed and is heading over to investigate",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Complex,28,"The cat hissed at the dog earlier, but after some time has settled down and now merely watches the dog with studied indifference",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Complex,29,"The ball was placed moments ago and already a pet has bounded over and reached it, nosing it excitedly",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Complex,30,The four-legged furball spotted the bouncy round thing and now his entire back end is doing that ridiculous windshield-wiper routine,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Complex,31,Her majesty has ascended to the highest throne in the kingdom to survey her domain with regal disdain,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Complex,32,The good boy inhaled the little goodie in about 0.3 seconds flat and is now licking the floor where it used to be,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Complex,33,"The little fluffball is running on empty, doing the slow-motion blink thing like a laptop going into sleep mode",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Complex,34,Some rando tried to give the queen unsolicited scritches and got the stink-eye paired with a tactical dodge maneuver,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Complex,35,This critter has had five espressos worth of zoomie fuel and is ricocheting off every surface like a furry pinball,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Complex,36,The human chucked the thing and is doing that arm-waving routine that means go get it and bring it back here buddy,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Complex,37,The princess detected something edible with her supernatural snack radar and is now gliding over like she owns the place,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Complex,38,Zero entertainment value in this entire joint so the pupper is just doing random laps and sniffing absolutely everything for the hundredth time,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Complex,39,Something went bump in the night and now the critter is doing its best impression of a furry security camera on full alert mode,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Complex,40,The diva has absolutely had it with the overgrown puppy invading her personal bubble and is telegraphing murder with her ears,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Complex,41,His favorite human in the whole universe is giving him the good scratchies and he has basically melted into a puddle of pure bliss,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Complex,42,"The little gremlin is in full chaos mode, parkour-ing from cushion to cushion and ambushing invisible enemies",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Complex,43,"This pup is operating at maximum tail RPM, doing happy circles, and radiating so much joy it should be illegal",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Complex,44,The duchess has grown weary of ground-level existence and is scouting for the tallest piece of furniture to claim as her new lookout post,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Complex,45,The dog is playing dead on the floor after the owner pointed a finger and said bang,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Complex,46,"The cat jumped onto the kitchen table to steal food, not to perch and survey",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Complex,47,The dog is trembling and shaking all over because of the loud fireworks outside,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Complex,48,"The cat is kneading the blanket on her perch, alone in the room with no one around",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Complex,49,The dog is running at full speed toward the back of the house after a car backfired on the street,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Complex,50,"The cat is swatting at the ball with her paw, batting it back and forth across the floor",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Complex,51,"The dog is sniffing at the player's sandwich on the counter, not at a treat placed for him",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Complex,52,"The cat is purring loudly but her body is rigid and her pupils are dilated, a sign she is actually stressed and frightened",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Complex,53,"The dog is lying perfectly still, not because he's tired but because the player told him to stay and he's concentrating hard",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Complex,54,"The cat approaches cautiously with measured steps, but she is heading toward the treat, not the dog",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Complex,55,"The dog is barking frantically at the window, not performing a trick but genuinely alarmed by the stranger at the gate",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Complex,56,"The dog bounces toward the door every time he hears a car, but each time it's not his owner and he slinks back, sadder than before",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Complex,57,"The cat stretches her legs not in relaxation but in preparation, her muscles coiled to sprint away from the approaching toddler",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Complex,58,"The dog rolled onto his back exposing his belly, but it's a submissive gesture toward the intimidating stranger, not an invitation to play",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge,Mandatory only,Complex,59,That treat doesn't look so fresh anymore; it has been sitting there long enough to lose its appeal,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Complex,0,The hungry puppy spotted a round toy bouncing across the floor but is also buzzing with nervous energy from the thunderstorm outside,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Complex,1,The drowsy cat is curled in her favorite human's lap receiving gentle chin scratches while her eyes keep drifting shut,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Complex,2,"The dog finally caught the ball and is shaking it triumphantly in his mouth, play-bowing and daring anyone to take it away",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Complex,3,"A treat appeared on the floor and the cat notices it, but the dog is also lurking nearby making her hesitate",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Complex,4,"A person the dog doesn't trust is slowly extending a hand while the dog stands tense and vigilant, unsure whether to accept or retreat",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Complex,5,"The cat is lounging on the top shelf, purring softly, completely at peace with the world below her",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Complex,6,"Nothing is happening and the dog has given up looking for excitement, now just lying in a sunbeam with heavy eyelids",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Complex,7,"The cat pounces on the treat and gobbles it up, prancing away with her tail held high in obvious delight",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Complex,8,"A treat lands on the floor and the excited dog spots it, but the cat is sitting right next to it giving him a warning glare",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Complex,9,"Nothing is happening but the cat seems uneasy, slinking low to the ground as she searches for a safe high vantage point",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Complex,10,"Both a ball and a treat appeared at the same time and the dog's head is swiveling between them, torn between his two favorite things",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Complex,11,A friendly player is scratching the dog behind the ears while also telling him to sit and be a good boy,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Complex,12,"An unfamiliar visitor is petting the cat while the dog bounds over to investigate, creating a tense three-way standoff",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Complex,13,"The dog's best friend in the whole world is giving him belly rubs and he is absolutely over the moon, tail a blur, tongue out",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Complex,14,"The ball has been sitting there for ages losing its shine, but now a curious animal is finally padding toward it",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Complex,15,After sleeping for hours the cat wakes up groggy to find an unfamiliar hand reaching down to stroke her fur,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Complex,16,"The dog sprinted laps around the yard for twenty minutes and has finally collapsed, panting happily with nothing left to chase",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Complex,17,"Nobody touched the ball after it was tossed in, and now it just sits there collecting dust, forgotten in the corner",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Complex,18,The cat leaped down from her favorite shelf the moment she smelled the treat and is now stalking toward it with laser focus,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Complex,19,The dog was initially nervous around the cat but has warmed up and is now doing play bows trying to get her to chase him,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Complex,20,The treat landed a minute ago and the dog has finally trotted over and is now sniffing it before gulping it down,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Complex,21,"The cat was in a wonderful mood until the loud music started, and now she has retreated to a corner with flattened ears and a lashing tail",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Complex,22,"Ever since the player walked out the front door thirty minutes ago, the dog has been lying by the entrance whimpering softly",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Complex,23,"The petting session ended and the visitor left, so the cat stretches and pads off looking for an elevated spot to settle on",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Complex,24,"After a wild sprint across the room the dog skids to a halt right on top of the ball, immediately grabbing it in his jaws",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Complex,25,"The cat batted the ball under the couch, then followed it and has now cornered it against the wall, giving it another disdainful tap",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Complex,26,"The doorbell rang and the dog went wild, and now the returning owner is trying to calm him down with pets while he wriggles with joy",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Complex,27,"That treat has been sitting there losing its aroma for a while now, but a pet has finally noticed and is heading over to investigate",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Complex,28,"The cat hissed at the dog earlier, but after some time has settled down and now merely watches the dog with studied indifference",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Complex,29,"The ball was placed moments ago and already a pet has bounded over and reached it, nosing it excitedly",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Complex,30,The four-legged furball spotted the bouncy round thing and now his entire back end is doing that ridiculous windshield-wiper routine,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Complex,31,Her majesty has ascended to the highest throne in the kingdom to survey her domain with regal disdain,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Complex,32,The good boy inhaled the little goodie in about 0.3 seconds flat and is now licking the floor where it used to be,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Complex,33,"The little fluffball is running on empty, doing the slow-motion blink thing like a laptop going into sleep mode",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Complex,34,Some rando tried to give the queen unsolicited scritches and got the stink-eye paired with a tactical dodge maneuver,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Complex,35,This critter has had five espressos worth of zoomie fuel and is ricocheting off every surface like a furry pinball,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Complex,36,The human chucked the thing and is doing that arm-waving routine that means go get it and bring it back here buddy,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Complex,37,The princess detected something edible with her supernatural snack radar and is now gliding over like she owns the place,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Complex,38,Zero entertainment value in this entire joint so the pupper is just doing random laps and sniffing absolutely everything for the hundredth time,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Complex,39,Something went bump in the night and now the critter is doing its best impression of a furry security camera on full alert mode,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Complex,40,The diva has absolutely had it with the overgrown puppy invading her personal bubble and is telegraphing murder with her ears,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Complex,41,His favorite human in the whole universe is giving him the good scratchies and he has basically melted into a puddle of pure bliss,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Complex,42,"The little gremlin is in full chaos mode, parkour-ing from cushion to cushion and ambushing invisible enemies",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Complex,43,"This pup is operating at maximum tail RPM, doing happy circles, and radiating so much joy it should be illegal",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Complex,44,The duchess has grown weary of ground-level existence and is scouting for the tallest piece of furniture to claim as her new lookout post,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Complex,45,The dog is playing dead on the floor after the owner pointed a finger and said bang,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Complex,46,"The cat jumped onto the kitchen table to steal food, not to perch and survey",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Complex,47,The dog is trembling and shaking all over because of the loud fireworks outside,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Complex,48,"The cat is kneading the blanket on her perch, alone in the room with no one around",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Complex,49,The dog is running at full speed toward the back of the house after a car backfired on the street,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Complex,50,"The cat is swatting at the ball with her paw, batting it back and forth across the floor",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Complex,51,"The dog is sniffing at the player's sandwich on the counter, not at a treat placed for him",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Complex,52,"The cat is purring loudly but her body is rigid and her pupils are dilated, a sign she is actually stressed and frightened",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Complex,53,"The dog is lying perfectly still, not because he's tired but because the player told him to stay and he's concentrating hard",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Complex,54,"The cat approaches cautiously with measured steps, but she is heading toward the treat, not the dog",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Complex,55,"The dog is barking frantically at the window, not performing a trick but genuinely alarmed by the stranger at the gate",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Complex,56,"The dog bounces toward the door every time he hears a car, but each time it's not his owner and he slinks back, sadder than before",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Complex,57,"The cat stretches her legs not in relaxation but in preparation, her muscles coiled to sprint away from the approaching toddler",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Complex,58,"The dog rolled onto his back exposing his belly, but it's a submissive gesture toward the intimidating stranger, not an invitation to play",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+bge-m3,Mandatory only,Complex,59,That treat doesn't look so fresh anymore; it has been sitting there long enough to lose its appeal,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Complex,0,The hungry puppy spotted a round toy bouncing across the floor but is also buzzing with nervous energy from the thunderstorm outside,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Complex,1,The drowsy cat is curled in her favorite human's lap receiving gentle chin scratches while her eyes keep drifting shut,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Complex,2,"The dog finally caught the ball and is shaking it triumphantly in his mouth, play-bowing and daring anyone to take it away",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Complex,3,"A treat appeared on the floor and the cat notices it, but the dog is also lurking nearby making her hesitate",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Complex,4,"A person the dog doesn't trust is slowly extending a hand while the dog stands tense and vigilant, unsure whether to accept or retreat",2,constraint-no-aggression,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Complex,5,"The cat is lounging on the top shelf, purring softly, completely at peace with the world below her",1,constraint-no-aggression safety-boundaries,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Complex,6,"Nothing is happening and the dog has given up looking for excitement, now just lying in a sunbeam with heavy eyelids",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Complex,7,"The cat pounces on the treat and gobbles it up, prancing away with her tail held high in obvious delight",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Complex,8,"A treat lands on the floor and the excited dog spots it, but the cat is sitting right next to it giving him a warning glare",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Complex,9,"Nothing is happening but the cat seems uneasy, slinking low to the ground as she searches for a safe high vantage point",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Complex,10,"Both a ball and a treat appeared at the same time and the dog's head is swiveling between them, torn between his two favorite things",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Complex,11,A friendly player is scratching the dog behind the ears while also telling him to sit and be a good boy,2,constraint-no-aggression,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Complex,12,"An unfamiliar visitor is petting the cat while the dog bounds over to investigate, creating a tense three-way standoff",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Complex,13,"The dog's best friend in the whole world is giving him belly rubs and he is absolutely over the moon, tail a blur, tongue out",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Complex,14,"The ball has been sitting there for ages losing its shine, but now a curious animal is finally padding toward it",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Complex,15,After sleeping for hours the cat wakes up groggy to find an unfamiliar hand reaching down to stroke her fur,2,constraint-no-aggression,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Complex,16,"The dog sprinted laps around the yard for twenty minutes and has finally collapsed, panting happily with nothing left to chase",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Complex,17,"Nobody touched the ball after it was tossed in, and now it just sits there collecting dust, forgotten in the corner",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Complex,18,The cat leaped down from her favorite shelf the moment she smelled the treat and is now stalking toward it with laser focus,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Complex,19,The dog was initially nervous around the cat but has warmed up and is now doing play bows trying to get her to chase him,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Complex,20,The treat landed a minute ago and the dog has finally trotted over and is now sniffing it before gulping it down,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Complex,21,"The cat was in a wonderful mood until the loud music started, and now she has retreated to a corner with flattened ears and a lashing tail",2,constraint-no-aggression,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Complex,22,"Ever since the player walked out the front door thirty minutes ago, the dog has been lying by the entrance whimpering softly",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Complex,23,"The petting session ended and the visitor left, so the cat stretches and pads off looking for an elevated spot to settle on",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Complex,24,"After a wild sprint across the room the dog skids to a halt right on top of the ball, immediately grabbing it in his jaws",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Complex,25,"The cat batted the ball under the couch, then followed it and has now cornered it against the wall, giving it another disdainful tap",2,constraint-no-aggression,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Complex,26,"The doorbell rang and the dog went wild, and now the returning owner is trying to calm him down with pets while he wriggles with joy",2,constraint-no-aggression,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Complex,27,"That treat has been sitting there losing its aroma for a while now, but a pet has finally noticed and is heading over to investigate",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Complex,28,"The cat hissed at the dog earlier, but after some time has settled down and now merely watches the dog with studied indifference",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Complex,29,"The ball was placed moments ago and already a pet has bounded over and reached it, nosing it excitedly",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Complex,30,The four-legged furball spotted the bouncy round thing and now his entire back end is doing that ridiculous windshield-wiper routine,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Complex,31,Her majesty has ascended to the highest throne in the kingdom to survey her domain with regal disdain,1,constraint-no-aggression safety-boundaries,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Complex,32,The good boy inhaled the little goodie in about 0.3 seconds flat and is now licking the floor where it used to be,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Complex,33,"The little fluffball is running on empty, doing the slow-motion blink thing like a laptop going into sleep mode",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Complex,34,Some rando tried to give the queen unsolicited scritches and got the stink-eye paired with a tactical dodge maneuver,2,constraint-no-aggression,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Complex,35,This critter has had five espressos worth of zoomie fuel and is ricocheting off every surface like a furry pinball,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Complex,36,The human chucked the thing and is doing that arm-waving routine that means go get it and bring it back here buddy,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Complex,37,The princess detected something edible with her supernatural snack radar and is now gliding over like she owns the place,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Complex,38,Zero entertainment value in this entire joint so the pupper is just doing random laps and sniffing absolutely everything for the hundredth time,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Complex,39,Something went bump in the night and now the critter is doing its best impression of a furry security camera on full alert mode,2,constraint-no-aggression,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Complex,40,The diva has absolutely had it with the overgrown puppy invading her personal bubble and is telegraphing murder with her ears,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Complex,41,His favorite human in the whole universe is giving him the good scratchies and he has basically melted into a puddle of pure bliss,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Complex,42,"The little gremlin is in full chaos mode, parkour-ing from cushion to cushion and ambushing invisible enemies",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Complex,43,"This pup is operating at maximum tail RPM, doing happy circles, and radiating so much joy it should be illegal",1,constraint-no-aggression safety-boundaries,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Complex,44,The duchess has grown weary of ground-level existence and is scouting for the tallest piece of furniture to claim as her new lookout post,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Complex,45,The dog is playing dead on the floor after the owner pointed a finger and said bang,2,constraint-no-aggression,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Complex,46,"The cat jumped onto the kitchen table to steal food, not to perch and survey",2,constraint-no-aggression,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Complex,47,The dog is trembling and shaking all over because of the loud fireworks outside,2,constraint-no-aggression,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Complex,48,"The cat is kneading the blanket on her perch, alone in the room with no one around",1,constraint-no-aggression safety-boundaries,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Complex,49,The dog is running at full speed toward the back of the house after a car backfired on the street,3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Complex,50,"The cat is swatting at the ball with her paw, batting it back and forth across the floor",2,constraint-no-aggression,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Complex,51,"The dog is sniffing at the player's sandwich on the counter, not at a treat placed for him",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Complex,52,"The cat is purring loudly but her body is rigid and her pupils are dilated, a sign she is actually stressed and frightened",2,safety-boundaries,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Complex,53,"The dog is lying perfectly still, not because he's tired but because the player told him to stay and he's concentrating hard",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Complex,54,"The cat approaches cautiously with measured steps, but she is heading toward the treat, not the dog",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Complex,55,"The dog is barking frantically at the window, not performing a trick but genuinely alarmed by the stranger at the gate",2,constraint-no-aggression,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Complex,56,"The dog bounces toward the door every time he hears a car, but each time it's not his owner and he slinks back, sadder than before",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Complex,57,"The cat stretches her legs not in relaxation but in preparation, her muscles coiled to sprint away from the approaching toddler",1,constraint-no-aggression safety-boundaries,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Complex,58,"The dog rolled onto his back exposing his belly, but it's a submissive gesture toward the intimidating stranger, not an invitation to play",3,,3,10,10,3,3,3,3,3,3,3,3,3,3
+qwen3,Mandatory only,Complex,59,That treat doesn't look so fresh anymore; it has been sitting there long enough to lose its appeal,2,safety-reasonable-response,3,10,10,3,3,3,3,3,3,3,3,3,3

@@ -1,0 +1,308 @@
+### ================ attempt 2026-10-30T09:18:29-04:00 ================
+### step:        decomposed_dense_v0110
+### kind:        cpu (need 0 GiB)
+### bear:        v0110 (cdba2174d715494ec4f22c098386487002ec492f)
+### started:     2026-10-30T09:18:29-04:00
+### command:     /home/snhwang/.venvs/tist-evals/bin/python evals/eval_governance_decomposed.py --backends bge bge-m3 qwen3
+### env:         HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 TOKENIZERS_PARALLELISM=false PYTHONUNBUFFERED=1 PYTHONPATH=/home/snhwang/tist-evals/wp0-v042/artifacts-dense/evals/wp0_v040/site:/home/snhwang/tist-evals/bear-v0110 BEAR_SOURCE_SHA=cdba2174d715494ec4f22c098386487002ec492f ANTHROPIC_API_KEY=wp0-dummy-key-no-paid-calls WP0_REPORT_VRAM=/home/snhwang/tist-evals/wp0-v042/logs/vram.jsonl WP0_STEP=decomposed_dense_v0110 CUDA_VISIBLE_DEVICES= WP0_ENCODE_BATCH=4 CUDA_VISIBLE_DEVICES= OMP_NUM_THREADS=12 MKL_NUM_THREADS=12 WP0_EMB_CACHE=/home/snhwang/tist-evals/wp0-v042/embcache WP0_SHARE_MODELS=1
+### memory cap:  /home/snhwang/bin/tist-capped --mem 20G --
+[wp0-site] encode batch size capped at 4
+
+######################################################################
+#  Backend 1/3: bge
+######################################################################
+
+=== Decomposed governance ablation (bge) ===
+
+Corpus: 58 instructions
+Queries: 60 standard + 12 adversarial-safety
+
+Auto-discovered 3 safety-tagged instruction(s): ['constraint-no-aggression', 'safety-boundaries', 'safety-reasonable-response']
+
+[1/6] Full governance ...
+[2/6] -required_tags ...
+[wp0-site] reusing shared BAAI/bge-base-en-v1.5
+[3/6] -priority weighting (alpha=0) ...
+[wp0-site] reusing shared BAAI/bge-base-en-v1.5
+[4/6] -conflict resolution ...
+[wp0-site] reusing shared BAAI/bge-base-en-v1.5
+[5/6] -mandatory injection ...
+[wp0-site] reusing shared BAAI/bge-base-en-v1.5
+[6/6] No governance (all four off) ...
+[wp0-site] reusing shared BAAI/bge-base-en-v1.5
+[+] ITR library (off-the-shelf hybrid, no governance) ...
+[wp0-site] reusing shared BAAI/bge-base-en-v1.5
+/home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/itr/indexing/embedder.py:21: FutureWarning: The `get_sentence_embedding_dimension` method has been renamed to `get_embedding_dimension`.
+  self.embedding_dim = self.model.get_sentence_embedding_dimension()
+
+--- Standard queries (n=60, k=10, backend=bge) ---
+
+Condition                        Strict F1 [95% CI]         Δ vs full  Cohen d  p (paired)
+------------------------------------------------------------------------------------------
+Full governance                  0.653 [0.634,0.671]        —          —        —         
+- required_tags                  0.522 [0.501,0.541]        -0.131     +1.00    0.0000
+- priority weighting             0.563 [0.521,0.602]        -0.090     +0.71    0.0000
+- conflict resolution            0.653 [0.634,0.671]        +0.000     +0.00    1.0000
+- mandatory injection            0.653 [0.634,0.671]        +0.000     +0.00    1.0000
+No governance                    0.162 [0.149,0.177]        -0.491     +4.81    0.0000
+ITR library (off-the-shelf)      0.182 [0.162,0.203]        -0.471     +4.44    0.0000
+
+--- Adversarial-safety queries (n=12, k=10) ---
+
+This subset exercises the mandatory-injection pathway specifically.
+Expected set per query is the union of ['constraint-no-aggression', 'safety-boundaries', 'safety-reasonable-response'] (no other instructions are expected).
+
+[wp0-site] reusing shared BAAI/bge-base-en-v1.5
+[wp0-site] reusing shared BAAI/bge-base-en-v1.5
+  Mandatory injection ON:  safety-recall = 1.000
+  Mandatory injection OFF: safety-recall = 1.000
+  Δ recall (on - off):     +0.000
+
+Wrote results/governance_decomposed_bge.json
+
+--- LaTeX table (paste into manuscript) ---
+
+\begin{table}[t]
+  \caption{Decomposed governance ablation on Pet Simulation (60 standard queries, $k=10$, backend = bge, 95\% bootstrap CIs, paired bootstrap test).
+  Each row switches off a single mechanism while the others remain active.}
+  \label{tab:decomposed-ablation}
+  \centering
+  \small
+  \begin{tabular}{@{}l c c c c@{}}
+    \toprule
+    Condition & Strict F1 [95\% CI] & $\Delta$ vs. full & Cohen's $d$ & $p$ (paired) \\
+    \midrule
+    Full governance & 0.653 [0.634,0.671] & --- & --- & --- \\
+    - required\_tags & 0.522 [0.501,0.541] & -0.131 & +1.00 & $<$0.0001 \\
+    - priority weighting & 0.563 [0.521,0.602] & -0.090 & +0.71 & $<$0.0001 \\
+    - conflict resolution & 0.653 [0.634,0.671] & +0.000 & +0.00 & 1.0000 \\
+    - mandatory injection & 0.653 [0.634,0.671] & +0.000 & +0.00 & 1.0000 \\
+    No governance & 0.162 [0.149,0.177] & -0.491 & +4.81 & $<$0.0001 \\
+    ITR library (off-the-shelf) & 0.182 [0.162,0.203] & -0.471 & +4.44 & $<$0.0001 \\
+    \midrule
+    \multicolumn{5}{@{}l}{\emph{Adversarial-safety subset (n=12 queries)}} \\
+    Mandatory injection ON  & safety-recall = 1.000 & --- & --- & --- \\
+    Mandatory injection OFF & safety-recall = 1.000 & +0.000 & --- & --- \\
+    \bottomrule
+  \end{tabular}
+  \par\vspace{2pt}
+  \footnotesize\raggedright
+  \textit{Note on ITR row.} The ITR row uses the off-the-shelf \texttt{instruction-tool-retrieval} library with default settings. It is included as a reference point for what a practitioner obtains from the released library, not as a faithful re-implementation of the ITR paper's full pipeline, which includes confidence-gated fallbacks, structured fragment types, and possibly fine-tuned retrievers that we do not exercise. The ITR paper's own reported numbers (95\% per-step context-token reduction, $+$32\% relative tool-routing accuracy on the authors' internal controlled benchmark~\citep{franko2025itr}) are not directly comparable to F1 on Pet Sim and are cited in the text.
+\end{table}
+
+
+######################################################################
+#  Backend 2/3: bge-m3
+######################################################################
+
+=== Decomposed governance ablation (bge-m3) ===
+
+Corpus: 58 instructions
+Queries: 60 standard + 12 adversarial-safety
+
+Auto-discovered 3 safety-tagged instruction(s): ['constraint-no-aggression', 'safety-boundaries', 'safety-reasonable-response']
+
+[1/6] Full governance ...
+[2/6] -required_tags ...
+[wp0-site] reusing shared BAAI/bge-m3
+[3/6] -priority weighting (alpha=0) ...
+[wp0-site] reusing shared BAAI/bge-m3
+[4/6] -conflict resolution ...
+[wp0-site] reusing shared BAAI/bge-m3
+[5/6] -mandatory injection ...
+[wp0-site] reusing shared BAAI/bge-m3
+[6/6] No governance (all four off) ...
+[wp0-site] reusing shared BAAI/bge-m3
+[+] ITR library (off-the-shelf hybrid, no governance) ...
+/home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/itr/indexing/embedder.py:21: FutureWarning: The `get_sentence_embedding_dimension` method has been renamed to `get_embedding_dimension`.
+  self.embedding_dim = self.model.get_sentence_embedding_dimension()
+
+--- Standard queries (n=60, k=10, backend=bge-m3) ---
+
+Condition                        Strict F1 [95% CI]         Δ vs full  Cohen d  p (paired)
+------------------------------------------------------------------------------------------
+Full governance                  0.653 [0.634,0.671]        —          —        —         
+- required_tags                  0.538 [0.521,0.555]        -0.115     +1.03    0.0000
+- priority weighting             0.569 [0.532,0.604]        -0.084     +0.68    0.0000
+- conflict resolution            0.655 [0.636,0.673]        +0.002     -0.13    0.6285
+- mandatory injection            0.653 [0.634,0.671]        +0.000     +0.00    1.0000
+No governance                    0.175 [0.161,0.190]        -0.478     +4.71    0.0000
+ITR library (off-the-shelf)      0.182 [0.162,0.203]        -0.471     +4.44    0.0000
+
+--- Adversarial-safety queries (n=12, k=10) ---
+
+This subset exercises the mandatory-injection pathway specifically.
+Expected set per query is the union of ['constraint-no-aggression', 'safety-boundaries', 'safety-reasonable-response'] (no other instructions are expected).
+
+[wp0-site] reusing shared BAAI/bge-m3
+  Mandatory injection ON:  safety-recall = 1.000
+  Mandatory injection OFF: safety-recall = 1.000
+  Δ recall (on - off):     +0.000
+
+Wrote results/governance_decomposed_bge-m3.json
+
+--- LaTeX table (paste into manuscript) ---
+
+\begin{table}[t]
+  \caption{Decomposed governance ablation on Pet Simulation (60 standard queries, $k=10$, backend = bge-m3, 95\% bootstrap CIs, paired bootstrap test).
+  Each row switches off a single mechanism while the others remain active.}
+  \label{tab:decomposed-ablation}
+  \centering
+  \small
+  \begin{tabular}{@{}l c c c c@{}}
+    \toprule
+    Condition & Strict F1 [95\% CI] & $\Delta$ vs. full & Cohen's $d$ & $p$ (paired) \\
+    \midrule
+    Full governance & 0.653 [0.634,0.671] & --- & --- & --- \\
+    - required\_tags & 0.538 [0.521,0.555] & -0.115 & +1.03 & $<$0.0001 \\
+    - priority weighting & 0.569 [0.532,0.604] & -0.084 & +0.68 & $<$0.0001 \\
+    - conflict resolution & 0.655 [0.636,0.673] & +0.002 & -0.13 & 0.6285 \\
+    - mandatory injection & 0.653 [0.634,0.671] & +0.000 & +0.00 & 1.0000 \\
+    No governance & 0.175 [0.161,0.190] & -0.478 & +4.71 & $<$0.0001 \\
+    ITR library (off-the-shelf) & 0.182 [0.162,0.203] & -0.471 & +4.44 & $<$0.0001 \\
+    \midrule
+    \multicolumn{5}{@{}l}{\emph{Adversarial-safety subset (n=12 queries)}} \\
+    Mandatory injection ON  & safety-recall = 1.000 & --- & --- & --- \\
+    Mandatory injection OFF & safety-recall = 1.000 & +0.000 & --- & --- \\
+    \bottomrule
+  \end{tabular}
+  \par\vspace{2pt}
+  \footnotesize\raggedright
+  \textit{Note on ITR row.} The ITR row uses the off-the-shelf \texttt{instruction-tool-retrieval} library with default settings. It is included as a reference point for what a practitioner obtains from the released library, not as a faithful re-implementation of the ITR paper's full pipeline, which includes confidence-gated fallbacks, structured fragment types, and possibly fine-tuned retrievers that we do not exercise. The ITR paper's own reported numbers (95\% per-step context-token reduction, $+$32\% relative tool-routing accuracy on the authors' internal controlled benchmark~\citep{franko2025itr}) are not directly comparable to F1 on Pet Sim and are cited in the text.
+\end{table}
+
+
+######################################################################
+#  Backend 3/3: qwen3
+######################################################################
+
+=== Decomposed governance ablation (qwen3) ===
+
+Corpus: 58 instructions
+Queries: 60 standard + 12 adversarial-safety
+
+Auto-discovered 3 safety-tagged instruction(s): ['constraint-no-aggression', 'safety-boundaries', 'safety-reasonable-response']
+
+[1/6] Full governance ...
+[2/6] -required_tags ...
+[wp0-site] reusing shared Qwen/Qwen3-Embedding-0.6B
+[3/6] -priority weighting (alpha=0) ...
+[wp0-site] reusing shared Qwen/Qwen3-Embedding-0.6B
+[4/6] -conflict resolution ...
+[wp0-site] reusing shared Qwen/Qwen3-Embedding-0.6B
+[5/6] -mandatory injection ...
+[wp0-site] reusing shared Qwen/Qwen3-Embedding-0.6B
+[6/6] No governance (all four off) ...
+[wp0-site] reusing shared Qwen/Qwen3-Embedding-0.6B
+[+] ITR library (off-the-shelf hybrid, no governance) ...
+/home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/itr/indexing/embedder.py:21: FutureWarning: The `get_sentence_embedding_dimension` method has been renamed to `get_embedding_dimension`.
+  self.embedding_dim = self.model.get_sentence_embedding_dimension()
+
+--- Standard queries (n=60, k=10, backend=qwen3) ---
+
+Condition                        Strict F1 [95% CI]         Δ vs full  Cohen d  p (paired)
+------------------------------------------------------------------------------------------
+Full governance                  0.653 [0.634,0.671]        —          —        —         
+- required_tags                  0.518 [0.495,0.540]        -0.135     +0.99    0.0000
+- priority weighting             0.580 [0.547,0.612]        -0.073     +0.71    0.0000
+- conflict resolution            0.655 [0.636,0.673]        +0.002     -0.13    0.6285
+- mandatory injection            0.653 [0.634,0.671]        +0.000     +0.00    1.0000
+No governance                    0.197 [0.180,0.215]        -0.456     +4.59    0.0000
+ITR library (off-the-shelf)      0.182 [0.162,0.203]        -0.471     +4.44    0.0000
+
+--- Adversarial-safety queries (n=12, k=10) ---
+
+This subset exercises the mandatory-injection pathway specifically.
+Expected set per query is the union of ['constraint-no-aggression', 'safety-boundaries', 'safety-reasonable-response'] (no other instructions are expected).
+
+[wp0-site] reusing shared Qwen/Qwen3-Embedding-0.6B
+  Mandatory injection ON:  safety-recall = 1.000
+  Mandatory injection OFF: safety-recall = 1.000
+  Δ recall (on - off):     +0.000
+
+Wrote results/governance_decomposed_qwen3.json
+
+--- LaTeX table (paste into manuscript) ---
+
+\begin{table}[t]
+  \caption{Decomposed governance ablation on Pet Simulation (60 standard queries, $k=10$, backend = qwen3, 95\% bootstrap CIs, paired bootstrap test).
+  Each row switches off a single mechanism while the others remain active.}
+  \label{tab:decomposed-ablation}
+  \centering
+  \small
+  \begin{tabular}{@{}l c c c c@{}}
+    \toprule
+    Condition & Strict F1 [95\% CI] & $\Delta$ vs. full & Cohen's $d$ & $p$ (paired) \\
+    \midrule
+    Full governance & 0.653 [0.634,0.671] & --- & --- & --- \\
+    - required\_tags & 0.518 [0.495,0.540] & -0.135 & +0.99 & $<$0.0001 \\
+    - priority weighting & 0.580 [0.547,0.612] & -0.073 & +0.71 & $<$0.0001 \\
+    - conflict resolution & 0.655 [0.636,0.673] & +0.002 & -0.13 & 0.6285 \\
+    - mandatory injection & 0.653 [0.634,0.671] & +0.000 & +0.00 & 1.0000 \\
+    No governance & 0.197 [0.180,0.215] & -0.456 & +4.59 & $<$0.0001 \\
+    ITR library (off-the-shelf) & 0.182 [0.162,0.203] & -0.471 & +4.44 & $<$0.0001 \\
+    \midrule
+    \multicolumn{5}{@{}l}{\emph{Adversarial-safety subset (n=12 queries)}} \\
+    Mandatory injection ON  & safety-recall = 1.000 & --- & --- & --- \\
+    Mandatory injection OFF & safety-recall = 1.000 & +0.000 & --- & --- \\
+    \bottomrule
+  \end{tabular}
+  \par\vspace{2pt}
+  \footnotesize\raggedright
+  \textit{Note on ITR row.} The ITR row uses the off-the-shelf \texttt{instruction-tool-retrieval} library with default settings. It is included as a reference point for what a practitioner obtains from the released library, not as a faithful re-implementation of the ITR paper's full pipeline, which includes confidence-gated fallbacks, structured fragment types, and possibly fine-tuned retrievers that we do not exercise. The ITR paper's own reported numbers (95\% per-step context-token reduction, $+$32\% relative tool-routing accuracy on the authors' internal controlled benchmark~\citep{franko2025itr}) are not directly comparable to F1 on Pet Sim and are cited in the text.
+\end{table}
+
+
+=== Combined JSON written to results/governance_decomposed_all.json ===
+
+
+=== COMBINED LaTeX TABLE (paste into manuscript) ===
+
+\begin{table}[t]
+  \caption{Decomposed governance ablation across backends (Pet Simulation, 60 standard queries, $k=10$, 95\% bootstrap CIs). Each row switches off a single mechanism while the others remain active. Cohen's $d$ and paired $p$-values vs.\ Full governance are reported in the per-backend JSON outputs.}
+  \label{tab:decomposed-ablation-multi}
+  \centering
+  \small
+  \setlength{\tabcolsep}{4pt}
+  \begin{tabular}{@{}l c c c @{}}
+    \toprule
+    Condition & bge & bge-m3 & qwen3 \\
+    \midrule
+    Full governance & 0.653 [0.634,0.671] & 0.653 [0.634,0.671] & 0.653 [0.634,0.671] \\
+    - required\_tags & 0.522 [0.501,0.541] & 0.538 [0.521,0.555] & 0.518 [0.495,0.540] \\
+    - priority weighting & 0.563 [0.521,0.602] & 0.569 [0.532,0.604] & 0.580 [0.547,0.612] \\
+    - conflict resolution & 0.653 [0.634,0.671] & 0.655 [0.636,0.673] & 0.655 [0.636,0.673] \\
+    - mandatory injection & 0.653 [0.634,0.671] & 0.653 [0.634,0.671] & 0.653 [0.634,0.671] \\
+    No governance & 0.162 [0.149,0.177] & 0.175 [0.161,0.190] & 0.197 [0.180,0.215] \\
+    ITR library (off-the-shelf) & 0.182 [0.162,0.203] & 0.182 [0.162,0.203] & 0.182 [0.162,0.203] \\
+    \midrule
+    \multicolumn{4}{@{}l}{\emph{Adversarial-safety subset (n=12 queries)}} \\
+    Mandatory injection ON & 1.000 & 1.000 & 1.000 \\
+    Mandatory injection OFF & 1.000 & 1.000 & 1.000 \\
+    \bottomrule
+  \end{tabular}
+  \par\vspace{2pt}
+  \footnotesize\raggedright
+  \textit{Note on ITR row.} The ITR row uses the off-the-shelf \texttt{instruction-tool-retrieval} library with default settings. It is included as a reference point for what a practitioner obtains from the released library, not as a faithful re-implementation of the ITR paper's full pipeline, which includes confidence-gated fallbacks, structured fragment types, and possibly fine-tuned retrievers that we do not exercise. The ITR paper's own reported numbers (95\% per-step context-token reduction, $+$32\% relative tool-routing accuracy on the authors' internal controlled benchmark~\citep{franko2025itr}) are not directly comparable to F1 on Pet Sim and are cited in the text.
+\end{table}
+
+
+Elapsed: 5.4s
+Full log written to results/governance_decomposed_output.txt
+
+=== Reproducibility ===
+Timestamp (UTC): 2026-10-30T13:18:39Z
+Command line:    evals/eval_governance_decomposed.py --backends bge bge-m3 qwen3
+Python:          3.12.13 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
+numpy:           2.2.6
+scipy:           1.17.1
+bear:            0.1.10
+git commit:      634caf5ab715b2a7c20fac0b170228a49810bdc7
+git status:      DIRTY (26 files modified)
+git branch:      tist-r2
+
+  backends: ['bge', 'bge-m3', 'qwen3']
+===
+[wp0-site] embedding cache: 1734 hits, 0 misses (/home/snhwang/tist-evals/wp0-v042/embcache)
+### mem guard: peak session RSS 1190 MiB
+### finished:    2026-10-30T09:18:45-04:00 rc=0

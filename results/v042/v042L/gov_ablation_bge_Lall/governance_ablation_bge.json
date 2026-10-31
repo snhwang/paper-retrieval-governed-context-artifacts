@@ -1,0 +1,261 @@
+{
+ "Full governance": {
+  "Standard": {
+   "BGE-base": {
+    "f1": 0.6675366300366298,
+    "ci": [
+     0.6548992673992673,
+     0.6798385989010988
+    ]
+   },
+   "Random-k": {
+    "f1": 0.11648960317460318,
+    "ci": [
+     0.11398347718253965,
+     0.11896936607142855
+    ]
+   }
+  },
+  "Paraphrase": {
+   "BGE-base": {
+    "f1": 0.6368131868131868,
+    "ci": [
+     0.6269230769230768,
+     0.6483516483516482
+    ]
+   },
+   "Random-k": {
+    "f1": 0.10190507936507938,
+    "ci": [
+     0.10013190476190478,
+     0.1038424246031746
+    ]
+   }
+  },
+  "No-tag": {
+   "BGE-base": {
+    "f1": 0.7013842124953233,
+    "ci": [
+     0.6843612046389822,
+     0.718481107369996
+    ]
+   },
+   "Random-k": {
+    "f1": 0.09650610500610501,
+    "ci": [
+     0.09470173992673993,
+     0.0981013838013838
+    ]
+   }
+  },
+  "Complex": {
+   "BGE-base": {
+    "f1": 0.6719558464411404,
+    "ci": [
+     0.6556995888098827,
+     0.6879744554873228
+    ]
+   },
+   "Random-k": {
+    "f1": 0.11465603174603174,
+    "ci": [
+     0.11101606667250234,
+     0.11816832924836601
+    ]
+   }
+  }
+ },
+ "Mandatory only": {
+  "Standard": {
+   "BGE-base": {
+    "f1": 0.5218650793650793,
+    "ci": [
+     0.5010505952380953,
+     0.5414290674603175
+    ]
+   },
+   "Random-k": {
+    "f1": 0.11648960317460318,
+    "ci": [
+     0.11398347718253965,
+     0.11896936607142855
+    ]
+   }
+  },
+  "Paraphrase": {
+   "BGE-base": {
+    "f1": 0.4458730158730157,
+    "ci": [
+     0.43285714285714266,
+     0.45999999999999985
+    ]
+   },
+   "Random-k": {
+    "f1": 0.10190507936507938,
+    "ci": [
+     0.10013190476190478,
+     0.1038424246031746
+    ]
+   }
+  },
+  "No-tag": {
+   "BGE-base": {
+    "f1": 0.4507529507529505,
+    "ci": [
+     0.4389499389499387,
+     0.4639855514855513
+    ]
+   },
+   "Random-k": {
+    "f1": 0.09650610500610501,
+    "ci": [
+     0.09470173992673993,
+     0.0981013838013838
+    ]
+   }
+  },
+  "Complex": {
+   "BGE-base": {
+    "f1": 0.5083251633986928,
+    "ci": [
+     0.48919990079365067,
+     0.5275645424836602
+    ]
+   },
+   "Random-k": {
+    "f1": 0.11465603174603174,
+    "ci": [
+     0.11101606667250234,
+     0.11816832924836601
+    ]
+   }
+  }
+ },
+ "No governance": {
+  "Standard": {
+   "BGE-base": {
+    "f1": 0.15529761904761902,
+    "ci": [
+     0.13358978174603175,
+     0.17771874999999998
+    ]
+   },
+   "Random-k": {
+    "f1": 0.11648960317460318,
+    "ci": [
+     0.11398347718253965,
+     0.11896936607142855
+    ]
+   }
+  },
+  "Paraphrase": {
+   "BGE-base": {
+    "f1": 0.07269841269841272,
+    "ci": [
+     0.04936507936507937,
+     0.09682936507936506
+    ]
+   },
+   "Random-k": {
+    "f1": 0.10190507936507938,
+    "ci": [
+     0.10013190476190478,
+     0.1038424246031746
+    ]
+   }
+  },
+  "No-tag": {
+   "BGE-base": {
+    "f1": 0.10500610500610502,
+    "ci": [
+     0.07509157509157509,
+     0.13654863654863655
+    ]
+   },
+   "Random-k": {
+    "f1": 0.09650610500610501,
+    "ci": [
+     0.09470173992673993,
+     0.0981013838013838
+    ]
+   }
+  },
+  "Complex": {
+   "BGE-base": {
+    "f1": 0.14449346405228755,
+    "ci": [
+     0.11898809523809525,
+     0.17073511904761904
+    ]
+   },
+   "Random-k": {
+    "f1": 0.11465603174603174,
+    "ci": [
+     0.11101606667250234,
+     0.11816832924836601
+    ]
+   }
+  }
+ },
+ "token_efficiency": {
+  "Monolithic": {
+   "tokens": 5029,
+   "instructions": 58,
+   "savings": 0.0
+  },
+  "Role prompting": {
+   "tokens": 46.0,
+   "instructions": 0,
+   "savings": 99.08530522966792
+  },
+  "BEAR + BGE-base": {
+   "tokens": 837.4666666666667,
+   "instructions": 9.8,
+   "savings": 83.34725260157751
+  },
+  "Random-k": {
+   "tokens": 867.616,
+   "instructions": 10.0,
+   "savings": 82.74774309007755
+  }
+ },
+ "_provenance": {
+  "written_utc": "2026-10-30T22:30:51Z",
+  "argv": [
+   "evals/wp0_v040/stamp_dir.py",
+   "/home/snhwang/tist-evals/wp0-v042/stage/v042L/gov_ablation_bge_Lall",
+   "--step",
+   "gov_ablation_bge_Lall",
+   "--command",
+   "/home/snhwang/.venvs/tist-evals/bin/python evals/eval_governance_ablation.py --backends bge --skip-itr --output results/wp0/governance_ablation_bge.json"
+  ],
+  "bear_version": "0.4.2",
+  "bear_path": "/home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/bear",
+  "bear_source_sha": "9d085b4",
+  "bear_pkg_sha256": "9cf19e48b49f4e57e3723050b942b296bb66f775fdd41e7f1770514576d0930a",
+  "hooks": {
+   "WP0_CPU_THREADS": "12",
+   "WP0_SHARE_MODELS": "1",
+   "WP0_ART": "/home/snhwang/tist-evals/wp0-v042/artifacts-nemo",
+   "WP0_ALLOW_LOCAL_MODELS": "1",
+   "WP0_BEAR_LEGACY": "all",
+   "WP0_EMB_CACHE": "",
+   "WP0_STEP": "gov_ablation_bge_Lall",
+   "WP0_STEP_MEM": "20G",
+   "WP0_ENCODE_BATCH": "4",
+   "WP0_REPORT_VRAM": "/home/snhwang/tist-evals/wp0-v042/logs/vram.jsonl"
+  },
+  "versions": {
+   "python": "3.12.13",
+   "platform": "Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+   "numpy": "2.2.6",
+   "scipy": "1.17.1",
+   "torch": "2.10.0+cu128",
+   "transformers": "4.57.6",
+   "sentence_transformers": "5.4.1"
+  },
+  "step": "gov_ablation_bge_Lall",
+  "command": "/home/snhwang/.venvs/tist-evals/bin/python evals/eval_governance_ablation.py --backends bge --skip-itr --output results/wp0/governance_ablation_bge.json",
+  "file": "results/wp0/governance_ablation_bge.json"
+ }
+}

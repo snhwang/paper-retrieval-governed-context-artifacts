@@ -1,0 +1,170 @@
+{
+ "backend": "bm25",
+ "n_standard_queries": 60,
+ "top_k": 10,
+ "bootstrap_iters": 10000,
+ "priority_weight_default": 0.3,
+ "threshold_default": 0.3,
+ "mandatory_tags_default": [
+  "safety"
+ ],
+ "rows": [
+  {
+   "condition": "full",
+   "label": "Full governance",
+   "n": 60,
+   "mean_f1": 0.8752214914714913,
+   "ci_lo": 0.8400328074703073,
+   "ci_hi": 0.907968765031265,
+   "delta_vs_full": 0.0,
+   "cohen_d_vs_full": 0.0,
+   "p_vs_full": null
+  },
+  {
+   "condition": "no_required_tags",
+   "label": "- required_tags",
+   "n": 60,
+   "mean_f1": 0.5495238095238094,
+   "ci_lo": 0.534999503968254,
+   "ci_hi": 0.564345734126984,
+   "delta_vs_full": -0.3256976819476819,
+   "cohen_d_vs_full": 2.4779089459106394,
+   "p_vs_full": 0.0,
+   "notes": ""
+  },
+  {
+   "condition": "no_priority",
+   "label": "- priority weighting",
+   "n": 60,
+   "mean_f1": 0.879388158138158,
+   "ci_lo": 0.8474347897472897,
+   "ci_hi": 0.9098652921152921,
+   "delta_vs_full": 0.004166666666666652,
+   "cohen_d_vs_full": -0.18414137497317518,
+   "p_vs_full": 0.2776,
+   "notes": ""
+  },
+  {
+   "condition": "no_conflicts",
+   "label": "- conflict resolution",
+   "n": 60,
+   "mean_f1": 0.8690027102527103,
+   "ci_lo": 0.8346595950345951,
+   "ci_hi": 0.9008871094183593,
+   "delta_vs_full": -0.006218781218781055,
+   "cohen_d_vs_full": 0.2354624122098351,
+   "p_vs_full": 0.0686,
+   "notes": ""
+  },
+  {
+   "condition": "no_mandatory",
+   "label": "- mandatory injection",
+   "n": 60,
+   "mean_f1": 0.8648048248048247,
+   "ci_lo": 0.823522866022866,
+   "ci_hi": 0.9024161532911531,
+   "delta_vs_full": -0.01041666666666663,
+   "cohen_d_vs_full": 0.29898819273332417,
+   "p_vs_full": 0.0345,
+   "notes": ""
+  },
+  {
+   "condition": "no_governance",
+   "label": "No governance",
+   "n": 60,
+   "mean_f1": 0.2043849206349206,
+   "ci_lo": 0.18557490079365074,
+   "ci_hi": 0.22444444444444445,
+   "delta_vs_full": -0.6708365708365707,
+   "cohen_d_vs_full": 3.979771657218522,
+   "p_vs_full": 0.0,
+   "notes": ""
+  },
+  {
+   "condition": "itr_offshelf",
+   "label": "ITR library (off-the-shelf)",
+   "n": 60,
+   "mean_f1": 0.21117063492063493,
+   "ci_lo": 0.18630853174603174,
+   "ci_hi": 0.23714285714285713,
+   "delta_vs_full": -0.6640508565508564,
+   "cohen_d_vs_full": 4.1610487247928996,
+   "p_vs_full": 0.0,
+   "notes": "Off-the-shelf `instruction-tool-retrieval` library. NOT a faithful re-implementation of the ITR paper's full pipeline."
+  }
+ ],
+ "adversarial_safety": {
+  "n_queries": 12,
+  "safety_ids": [
+   "constraint-no-aggression",
+   "safety-boundaries",
+   "safety-reasonable-response"
+  ],
+  "mandatory_on_recall": 1.0,
+  "mandatory_off_recall": 1.0,
+  "delta": 0.0,
+  "per_query_on": [
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0
+  ],
+  "per_query_off": [
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0
+  ]
+ },
+ "_provenance": {
+  "written_utc": "2026-10-30T12:05:26Z",
+  "argv": [
+   "evals/wp0_v040/stamp_dir.py",
+   "/home/snhwang/tist-evals/wp0-v042/stage/v042/decomposed_bm25",
+   "--step",
+   "decomposed_bm25",
+   "--command",
+   "/home/snhwang/.venvs/tist-evals/bin/python evals/eval_governance_decomposed.py --backends bm25"
+  ],
+  "bear_version": "0.4.2",
+  "bear_path": "/home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/bear",
+  "bear_source_sha": "9d085b4",
+  "bear_pkg_sha256": "9cf19e48b49f4e57e3723050b942b296bb66f775fdd41e7f1770514576d0930a",
+  "hooks": {
+   "WP0_SHARE_MODELS": "1",
+   "WP0_ART": "/home/snhwang/tist-evals/wp0-v042/artifacts",
+   "WP0_EMB_CACHE": "",
+   "WP0_STEP": "decomposed_bm25",
+   "WP0_REPORT_VRAM": "/home/snhwang/tist-evals/wp0-v042/logs/vram.jsonl",
+   "WP0_NO_LOCAL_MODELS": "1"
+  },
+  "versions": {
+   "python": "3.12.13",
+   "platform": "Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+   "numpy": "2.2.6",
+   "scipy": "1.17.1",
+   "torch": "2.10.0+cu128",
+   "transformers": "4.57.6",
+   "sentence_transformers": "5.4.1"
+  },
+  "step": "decomposed_bm25",
+  "command": "/home/snhwang/.venvs/tist-evals/bin/python evals/eval_governance_decomposed.py --backends bm25",
+  "file": "results/governance_decomposed_bm25.json"
+ }
+}

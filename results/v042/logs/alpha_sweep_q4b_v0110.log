@@ -1,0 +1,98 @@
+### ================ attempt 2026-10-30T09:19:20-04:00 ================
+### step:        alpha_sweep_q4b_v0110
+### kind:        cpu (need 0 GiB)
+### bear:        v0110 (cdba2174d715494ec4f22c098386487002ec492f)
+### started:     2026-10-30T09:19:20-04:00
+### command:     /home/snhwang/.venvs/tist-evals/bin/python evals/eval_alpha_sweep.py --backends qwen3-4b
+### env:         HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 TOKENIZERS_PARALLELISM=false PYTHONUNBUFFERED=1 PYTHONPATH=/home/snhwang/tist-evals/wp0-v042/artifacts-dense/evals/wp0_v040/site:/home/snhwang/tist-evals/bear-v0110 BEAR_SOURCE_SHA=cdba2174d715494ec4f22c098386487002ec492f ANTHROPIC_API_KEY=wp0-dummy-key-no-paid-calls WP0_REPORT_VRAM=/home/snhwang/tist-evals/wp0-v042/logs/vram.jsonl WP0_STEP=alpha_sweep_q4b_v0110 CUDA_VISIBLE_DEVICES= WP0_ENCODE_BATCH=4 CUDA_VISIBLE_DEVICES= OMP_NUM_THREADS=12 MKL_NUM_THREADS=12 WP0_EMB_CACHE=/home/snhwang/tist-evals/wp0-v042/embcache WP0_SHARE_MODELS=1
+### memory cap:  /home/snhwang/bin/tist-capped --mem 20G --
+[wp0-site] encode batch size capped at 4
+
+######################################################################
+#  Backend 1/1: qwen3-4b
+######################################################################
+
+=== Alpha sweep (qwen3-4b) ===
+
+Corpus: 58 instructions, 60 standard queries
+Alpha grid: [0.0, 0.1, 0.2, 0.3, 0.5, 0.7, 0.9, 1.0]
+
+[1/8] alpha = 0.00 ...
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:00<00:00,  1.17it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:01<00:00,  1.11it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:01<00:00,  1.12it/s]
+[2/8] alpha = 0.10 ...
+[wp0-site] reusing shared Qwen/Qwen3-Embedding-4B
+[3/8] alpha = 0.20 ...
+[wp0-site] reusing shared Qwen/Qwen3-Embedding-4B
+[4/8] alpha = 0.30 ...
+[wp0-site] reusing shared Qwen/Qwen3-Embedding-4B
+[5/8] alpha = 0.50 ...
+[wp0-site] reusing shared Qwen/Qwen3-Embedding-4B
+[6/8] alpha = 0.70 ...
+[wp0-site] reusing shared Qwen/Qwen3-Embedding-4B
+[7/8] alpha = 0.90 ...
+[wp0-site] reusing shared Qwen/Qwen3-Embedding-4B
+[8/8] alpha = 1.00 ...
+[wp0-site] reusing shared Qwen/Qwen3-Embedding-4B
+
+--- Results (backend = qwen3-4b, paired vs. alpha = 0.3) ---
+
+ alpha  Strict F1 [95% CI]            Δ vs default   Cohen d  p (paired)
+------------------------------------------------------------------------
+  0.00  0.599 [0.569,0.627]         -0.054           +0.74        <0.0001
+  0.10  0.614 [0.588,0.639]         -0.039           +0.65        <0.0001
+  0.20  0.653 [0.634,0.671]         +0.000           +0.00         1.0000
+  0.30  0.653 [0.634,0.671]         +0.000           +0.00              —
+  0.50  0.653 [0.634,0.671]         +0.000           +0.00         1.0000
+  0.70  0.649 [0.629,0.667]         -0.004           +0.18         0.2689
+  0.90  0.649 [0.629,0.667]         -0.004           +0.18         0.2689
+  1.00  0.649 [0.629,0.667]         -0.004           +0.18         0.2689
+
+Max F1 = 0.653 at alpha = 0.20
+Curve shape: mixed
+
+Wrote results/alpha_sweep_qwen3-4b.json
+
+--- LaTeX table (paste into manuscript) ---
+
+\begin{table}[t]
+  \caption{Effect of the priority-weighting coefficient $\alpha$ on strict F1 at $k=10$ on Pet Simulation (60 standard queries, backend = qwen3-4b, full governance with all other mechanisms enabled). The composite score is $\operatorname{score}(q, d) = (1 - \alpha)\,\widetilde{\operatorname{sim}}(q, d) + \alpha\,p(d)/100$. 95\% bootstrap CIs and paired bootstrap $p$-values vs.\ the default $\alpha = 0.3$ are reported.}
+  \label{tab:alpha-sweep}
+  \centering
+  \small
+  \begin{tabular}{@{}c c c c c@{}}
+    \toprule
+    $\alpha$ & Strict F1 [95\% CI] & $\Delta$ vs. default & Cohen's $d$ & $p$ (paired) \\
+    \midrule
+    0.00 & 0.599 [0.569,0.627] & -0.054 & +0.74 & $<$0.0001 \\
+    0.10 & 0.614 [0.588,0.639] & -0.039 & +0.65 & $<$0.0001 \\
+    0.20 & 0.653 [0.634,0.671] & +0.000 & +0.00 & 1.0000 \\
+    0.30 & 0.653 [0.634,0.671] & --- & --- & --- \\
+    0.50 & 0.653 [0.634,0.671] & +0.000 & +0.00 & 1.0000 \\
+    0.70 & 0.649 [0.629,0.667] & -0.004 & +0.18 & 0.2689 \\
+    0.90 & 0.649 [0.629,0.667] & -0.004 & +0.18 & 0.2689 \\
+    1.00 & 0.649 [0.629,0.667] & -0.004 & +0.18 & 0.2689 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Elapsed: 2.7s
+Full log written to results/alpha_sweep_output.txt
+
+=== Reproducibility ===
+Timestamp (UTC): 2026-10-30T13:19:25Z
+Command line:    evals/eval_alpha_sweep.py --backends qwen3-4b
+Python:          3.12.13 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
+numpy:           2.2.6
+scipy:           1.17.1
+bear:            0.1.10
+git commit:      634caf5ab715b2a7c20fac0b170228a49810bdc7
+git status:      DIRTY (23 files modified)
+git branch:      tist-r2
+
+  backends: ['qwen3-4b']
+  alphas: [0.0, 0.1, 0.2, 0.3, 0.5, 0.7, 0.9, 1.0]
+  output_dir: results
+===
+[wp0-site] embedding cache: 496 hits, 0 misses (/home/snhwang/tist-evals/wp0-v042/embcache)
+### mem guard: peak session RSS 16296 MiB
+### finished:    2026-10-30T09:19:30-04:00 rc=0

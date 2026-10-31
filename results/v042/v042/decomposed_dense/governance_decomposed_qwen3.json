@@ -1,0 +1,173 @@
+{
+ "backend": "qwen3",
+ "n_standard_queries": 60,
+ "top_k": 10,
+ "bootstrap_iters": 10000,
+ "priority_weight_default": 0.3,
+ "threshold_default": 0.3,
+ "mandatory_tags_default": [
+  "safety"
+ ],
+ "rows": [
+  {
+   "condition": "full",
+   "label": "Full governance",
+   "n": 60,
+   "mean_f1": 0.6654532967032964,
+   "ci_lo": 0.6517013888888887,
+   "ci_hi": 0.6787698412698412,
+   "delta_vs_full": 0.0,
+   "cohen_d_vs_full": 0.0,
+   "p_vs_full": null
+  },
+  {
+   "condition": "no_required_tags",
+   "label": "- required_tags",
+   "n": 60,
+   "mean_f1": 0.5399404761904764,
+   "ci_lo": 0.5195833333333334,
+   "ci_hi": 0.5594444444444444,
+   "delta_vs_full": -0.1255128205128201,
+   "cohen_d_vs_full": 1.2115592888697495,
+   "p_vs_full": 0.0,
+   "notes": ""
+  },
+  {
+   "condition": "no_priority",
+   "label": "- priority weighting",
+   "n": 60,
+   "mean_f1": 0.6654532967032964,
+   "ci_lo": 0.6532127594627594,
+   "ci_hi": 0.6776944062881564,
+   "delta_vs_full": 0.0,
+   "cohen_d_vs_full": -8.0400726751863e-17,
+   "p_vs_full": 1.0,
+   "notes": ""
+  },
+  {
+   "condition": "no_conflicts",
+   "label": "- conflict resolution",
+   "n": 60,
+   "mean_f1": 0.6675366300366298,
+   "ci_lo": 0.6535863095238094,
+   "ci_hi": 0.6810897435897435,
+   "delta_vs_full": 0.002083333333333326,
+   "cohen_d_vs_full": -0.12909944487358055,
+   "p_vs_full": 0.6285,
+   "notes": ""
+  },
+  {
+   "condition": "no_mandatory",
+   "label": "- mandatory injection",
+   "n": 60,
+   "mean_f1": 0.6529532967032965,
+   "ci_lo": 0.6342643467643468,
+   "ci_hi": 0.6709716498778998,
+   "delta_vs_full": -0.012499999999999956,
+   "cohen_d_vs_full": 0.3305438840143004,
+   "p_vs_full": 0.0182,
+   "notes": ""
+  },
+  {
+   "condition": "no_governance",
+   "label": "No governance",
+   "n": 60,
+   "mean_f1": 0.19710317460317453,
+   "ci_lo": 0.17990079365079364,
+   "ci_hi": 0.21496031746031746,
+   "delta_vs_full": -0.46835012210012195,
+   "cohen_d_vs_full": 6.016518891822692,
+   "p_vs_full": 0.0,
+   "notes": ""
+  },
+  {
+   "condition": "itr_offshelf",
+   "label": "ITR library (off-the-shelf)",
+   "n": 60,
+   "mean_f1": 0.18196428571428572,
+   "ci_lo": 0.16176537698412694,
+   "ci_hi": 0.2029970238095238,
+   "delta_vs_full": -0.48348901098901076,
+   "cohen_d_vs_full": 5.372406704227183,
+   "p_vs_full": 0.0,
+   "notes": "Off-the-shelf `instruction-tool-retrieval` library. NOT a faithful re-implementation of the ITR paper's full pipeline."
+  }
+ ],
+ "adversarial_safety": {
+  "n_queries": 12,
+  "safety_ids": [
+   "constraint-no-aggression",
+   "safety-boundaries",
+   "safety-reasonable-response"
+  ],
+  "mandatory_on_recall": 1.0,
+  "mandatory_off_recall": 1.0,
+  "delta": 0.0,
+  "per_query_on": [
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0
+  ],
+  "per_query_off": [
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0
+  ]
+ },
+ "_provenance": {
+  "written_utc": "2026-10-30T13:15:24Z",
+  "argv": [
+   "evals/wp0_v040/stamp_dir.py",
+   "/home/snhwang/tist-evals/wp0-v042/stage/v042/decomposed_dense",
+   "--step",
+   "decomposed_dense",
+   "--command",
+   "/home/snhwang/.venvs/tist-evals/bin/python evals/eval_governance_decomposed.py --backends bge bge-m3 qwen3"
+  ],
+  "bear_version": "0.4.2",
+  "bear_path": "/home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/bear",
+  "bear_source_sha": "9d085b4",
+  "bear_pkg_sha256": "9cf19e48b49f4e57e3723050b942b296bb66f775fdd41e7f1770514576d0930a",
+  "hooks": {
+   "WP0_CPU_THREADS": "12",
+   "WP0_SHARE_MODELS": "1",
+   "WP0_ART": "/home/snhwang/tist-evals/wp0-v042/artifacts-dense",
+   "WP0_ALLOW_LOCAL_MODELS": "1",
+   "WP0_EMB_CACHE": "",
+   "WP0_STEP": "decomposed_dense",
+   "WP0_STEP_MEM": "20G",
+   "WP0_ENCODE_BATCH": "4",
+   "WP0_REPORT_VRAM": "/home/snhwang/tist-evals/wp0-v042/logs/vram.jsonl"
+  },
+  "versions": {
+   "python": "3.12.13",
+   "platform": "Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+   "numpy": "2.2.6",
+   "scipy": "1.17.1",
+   "torch": "2.10.0+cu128",
+   "transformers": "4.57.6",
+   "sentence_transformers": "5.4.1"
+  },
+  "step": "decomposed_dense",
+  "command": "/home/snhwang/.venvs/tist-evals/bin/python evals/eval_governance_decomposed.py --backends bge bge-m3 qwen3",
+  "file": "results/governance_decomposed_qwen3.json"
+ }
+}

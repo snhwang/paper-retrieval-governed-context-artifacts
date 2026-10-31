@@ -1,0 +1,188 @@
+### ================ attempt 2026-10-30T09:26:43-04:00 ================
+### step:        scalability
+### kind:        cpu (need 0 GiB)
+### bear:        v042 (9d085b4)
+### started:     2026-10-30T09:26:43-04:00
+### command:     /home/snhwang/.venvs/tist-evals/bin/python evals/eval_scalability.py
+### env:         HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 TOKENIZERS_PARALLELISM=false PYTHONUNBUFFERED=1 PYTHONPATH=/home/snhwang/tist-evals/wp0-v042/artifacts-dense/evals/wp0_v040/site BEAR_SOURCE_SHA=9d085b4 ANTHROPIC_API_KEY=wp0-dummy-key-no-paid-calls WP0_REPORT_VRAM=/home/snhwang/tist-evals/wp0-v042/logs/vram.jsonl WP0_STEP=scalability CUDA_VISIBLE_DEVICES= WP0_ENCODE_BATCH=4 CUDA_VISIBLE_DEVICES= OMP_NUM_THREADS=12 MKL_NUM_THREADS=12 WP0_EMB_CACHE=/home/snhwang/tist-evals/wp0-v042/embcache WP0_SHARE_MODELS=1
+### memory cap:  /home/snhwang/bin/tist-capped --mem 20G --
+[wp0-site] encode batch size capped at 4
+Embedding model: BAAI/bge-base-en-v1.5
+
+============================================================
+  Scale point: 10 agents
+============================================================
+  Corpus: 28 instructions, 1 departments
+  Queries:           30
+  Persona recall:    1.000
+  Dept recall:       1.000
+  Safety recall:     1.000
+  Global recall:     1.000
+  Scope violations:  0
+  Cross-dept avg:    0.0
+  BEAR tokens/query: 952 [952, 952]
+  Static tokens:     1454
+  Token ratio:       0.6546
+  Build time:        238.5 ms
+  Retrieval:         0.36 [0.29, 0.43] ms (95% CI)
+
+============================================================
+  Scale point: 25 agents
+============================================================
+  Corpus: 51 instructions, 3 departments
+[wp0-site] reusing shared BAAI/bge-base-en-v1.5
+  Queries:           30
+  Persona recall:    1.000
+  Dept recall:       1.000
+  Safety recall:     1.000
+  Global recall:     1.000
+  Scope violations:  0
+  Cross-dept avg:    0.0
+  BEAR tokens/query: 996 [995, 997]
+  Static tokens:     2609
+  Token ratio:       0.3818
+  Build time:        4.2 ms
+  Retrieval:         0.23 [0.20, 0.26] ms (95% CI)
+
+============================================================
+  Scale point: 50 agents
+============================================================
+  Corpus: 84 instructions, 5 departments
+[wp0-site] reusing shared BAAI/bge-base-en-v1.5
+  Queries:           30
+  Persona recall:    1.000
+  Dept recall:       1.000
+  Safety recall:     1.000
+  Global recall:     1.000
+  Scope violations:  0
+  Cross-dept avg:    0.0
+  BEAR tokens/query: 985 [978, 991]
+  Static tokens:     4344
+  Token ratio:       0.2267
+  Build time:        4.9 ms
+  Retrieval:         0.26 [0.23, 0.30] ms (95% CI)
+
+============================================================
+  Scale point: 100 agents
+============================================================
+  Corpus: 155 instructions, 10 departments
+[wp0-site] reusing shared BAAI/bge-base-en-v1.5
+  Queries:           30
+  Persona recall:    1.000
+  Dept recall:       1.000
+  Safety recall:     1.000
+  Global recall:     1.000
+  Scope violations:  0
+  Cross-dept avg:    0.0
+  BEAR tokens/query: 995 [994, 997]
+  Static tokens:     8021
+  Token ratio:       0.1241
+  Build time:        4.0 ms
+  Retrieval:         0.77 [0.56, 1.09] ms (95% CI)
+
+============================================================
+  Scale point: 200 agents
+============================================================
+  Corpus: 285 instructions, 20 departments
+[wp0-site] reusing shared BAAI/bge-base-en-v1.5
+  Queries:           30
+  Persona recall:    1.000
+  Dept recall:       1.000
+  Safety recall:     1.000
+  Global recall:     1.000
+  Scope violations:  0
+  Cross-dept avg:    0.0
+  BEAR tokens/query: 967 [958, 976]
+  Static tokens:     14696
+  Token ratio:       0.0658
+  Build time:        7.1 ms
+  Retrieval:         0.60 [0.48, 0.74] ms (95% CI)
+
+============================================================
+  Scale point: 500 agents
+============================================================
+  Corpus: 675 instructions, 50 departments
+[wp0-site] reusing shared BAAI/bge-base-en-v1.5
+  Queries:           30
+  Persona recall:    1.000
+  Dept recall:       1.000
+  Safety recall:     1.000
+  Global recall:     1.000
+  Scope violations:  0
+  Cross-dept avg:    0.0
+  BEAR tokens/query: 953 [946, 961]
+  Static tokens:     34721
+  Token ratio:       0.0274
+  Build time:        10.1 ms
+  Retrieval:         1.46 [1.16, 1.83] ms (95% CI)
+
+========================================================================================================================
+  SUMMARY
+========================================================================================================================
+Agents |  Instr | Persona |  Dept | Safety | Global | Viol | XDept | BEAR Tok | Static Tok |  Ratio | Lat ms
+------------------------------------------------------------------------------------------------------------
+    10 |     28 |   1.000 | 1.000 |  1.000 |  1.000 |    0 |   0.0 |      952 |       1454 | 0.6546 |   0.36
+    25 |     51 |   1.000 | 1.000 |  1.000 |  1.000 |    0 |   0.0 |      996 |       2609 | 0.3818 |   0.23
+    50 |     84 |   1.000 | 1.000 |  1.000 |  1.000 |    0 |   0.0 |      985 |       4344 | 0.2267 |   0.26
+   100 |    155 |   1.000 | 1.000 |  1.000 |  1.000 |    0 |   0.0 |      995 |       8021 | 0.1241 |   0.77
+   200 |    285 |   1.000 | 1.000 |  1.000 |  1.000 |    0 |   0.0 |      967 |      14696 | 0.0658 |   0.60
+   500 |    675 |   1.000 | 1.000 |  1.000 |  1.000 |    0 |   0.0 |      953 |      34721 | 0.0274 |   1.46
+
+% === LaTeX Table 1: Behavioral Identity Recall ===
+\begin{table}[t]
+\caption{Behavioral identity recall as agent population scales. Each column measures the fraction of a specific instruction category correctly retrieved for each agent. ($\alpha=0.3$, $\theta=0.3$, $k=25$).}
+\label{tab:scalability-recall}
+\begin{tabular}{@{}rrcccc@{}}
+\toprule
+$N$ & Instructions & Persona & Dept & Safety & Global \\
+\midrule
+10 & 28 & 1.000 & 1.000 & 1.000 & 1.000 \\
+25 & 51 & 1.000 & 1.000 & 1.000 & 1.000 \\
+50 & 84 & 1.000 & 1.000 & 1.000 & 1.000 \\
+100 & 155 & 1.000 & 1.000 & 1.000 & 1.000 \\
+200 & 285 & 1.000 & 1.000 & 1.000 & 1.000 \\
+500 & 675 & 1.000 & 1.000 & 1.000 & 1.000 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% === LaTeX Table 2: Scope Isolation & Token Efficiency ===
+\begin{table}[t]
+\caption{Scope isolation and token efficiency. Scope violations (wrong-agent persona retrieved) remain zero at all scale points; composed prompt size stays constant while the static-prompt equivalent grows linearly.}
+\label{tab:scalability-efficiency}
+\begin{tabular}{@{}rrcccrc@{}}
+\toprule
+$N$ & Instructions & Persona Viol. & Cross-Dept & BEAR Tokens & Static Tokens & Ratio \\
+\midrule
+10 & 28 & 0 & 0.0 & 952 & 1454 & 0.6546 \\
+25 & 51 & 0 & 0.0 & 996 & 2609 & 0.3818 \\
+50 & 84 & 0 & 0.0 & 985 & 4344 & 0.2267 \\
+100 & 155 & 0 & 0.0 & 995 & 8021 & 0.1241 \\
+200 & 285 & 0 & 0.0 & 967 & 14696 & 0.0658 \\
+500 & 675 & 0 & 0.0 & 953 & 34721 & 0.0274 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% === LaTeX Table 3: Latency ===
+\begin{table}[t]
+\caption{Index build time and per-query retrieval latency as corpus scales.}
+\label{tab:scalability-latency}
+\begin{tabular}{@{}rrcc@{}}
+\toprule
+$N$ & Instructions & Build (ms) & Retrieval (ms) \\
+\midrule
+10 & 28 & 238.5 & 0.36 \\
+25 & 51 & 4.2 & 0.23 \\
+50 & 84 & 4.9 & 0.26 \\
+100 & 155 & 4.0 & 0.77 \\
+200 & 285 & 7.1 & 0.60 \\
+500 & 675 & 10.1 & 1.46 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+CSV written to /home/snhwang/tist-evals/wp0-v042/artifacts-dense/results/scalability_results.csv
+[wp0-site] embedding cache: 192 hits, 0 misses (/home/snhwang/tist-evals/wp0-v042/embcache)
+### mem guard: peak session RSS 765 MiB
+### finished:    2026-10-30T09:26:53-04:00 rc=0

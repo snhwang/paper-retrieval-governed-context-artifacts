@@ -1,0 +1,12 @@
+additivity: {'n_checked': 300, 'n_mismatch': 0, 'max_abs_diff': 0, 'note': 'prompt body counted with a trailing newline after the last tool line'}
+
+=== toolbench: 3225 items, 1100 queries ===
+  BGE        R@5 gov=0.688 ung=0.574  t=0.80: k 11/31  t=0.90: k 26/51  t=0.95: k 51/51  cons={'BEAR+BGE (gov)': True, 'BGE (no gov)': True} (2s)
+  BGE-M3     R@5 gov=0.711 ung=0.601  t=0.80: k 10/27  t=0.90: k 25/51  t=0.95: k 46/51  cons={'BEAR+BGE-M3 (gov)': True, 'BGE-M3 (no gov)': True} (2s)
+  Qwen3-0.6B R@5 gov=0.771 ung=0.694  t=0.80: k 6/11  t=0.90: k 15/38  t=0.95: k 29/51  cons={'BEAR+Qwen3-0.6B (gov)': True, 'Qwen3-0.6B (no gov)': True} (2s)
+  Qwen3-4B   R@5 gov=0.754 ung=0.682  t=0.80: k 7/13  t=0.90: k 15/40  t=0.95: k 27/51  cons={'BEAR+Qwen3-4B (gov)': True, 'Qwen3-4B (no gov)': True} (2s)
+  BM25       R@5 gov=0.612 ung=0.468  t=0.80: k 18/51  t=0.90: k 41/51  t=0.95: k 51/51  cons={'BEAR+BM25 (gov)': True, 'BM25 (no gov)': True} (2s)
+  Hash       R@5 gov=0.151 ung=0.016  t=0.80: k 51/51  t=0.90: k 51/51  t=0.95: k 51/51  cons={'BEAR+Hash (gov)': True, 'Hash (no gov)': True} (2s)
+  Nemotron   R@5 gov=0.762 ung=0.668  t=0.80: k 7/15  t=0.90: k 16/45  t=0.95: k 28/51  cons={'BEAR+Nemotron (gov)': True, 'Nemotron (no gov)': True} (2s)
+
+=== metatool-tags: 199 items, 21111 queries ===

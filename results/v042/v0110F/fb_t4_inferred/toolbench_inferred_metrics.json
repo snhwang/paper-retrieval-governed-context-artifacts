@@ -1,0 +1,100 @@
+{
+ "model": "claude-sonnet-4-6",
+ "provider": "anthropic",
+ "top_k": 5,
+ "n_queries": 1100,
+ "classifier_top1_accuracy": 0.46545454545454545,
+ "n_oov_classifications": 6,
+ "rows": [
+  {
+   "condition": "oracle",
+   "recall": {
+    "mean": 0.15056060606060606,
+    "ci_lo": 0.13406022727272726,
+    "ci_hi": 0.16713636363636364
+   },
+   "ndcg": {
+    "mean": 0.11767479568854691,
+    "ci_lo": 0.10438713845630408,
+    "ci_hi": 0.1309867370236521
+   },
+   "f1": {
+    "mean": 0.09139131575495213,
+    "ci_lo": 0.08161135051816873,
+    "ci_hi": 0.10117788764266038
+   }
+  },
+  {
+   "condition": "inferred",
+   "recall": {
+    "mean": 0.07883333333333334,
+    "ci_lo": 0.06668181818181818,
+    "ci_hi": 0.09187878787878788
+   },
+   "ndcg": {
+    "mean": 0.060824762309318055,
+    "ci_lo": 0.0512583547548937,
+    "ci_hi": 0.07119510685771929
+   },
+   "f1": {
+    "mean": 0.04835451921815558,
+    "ci_lo": 0.04105554407713499,
+    "ci_hi": 0.056071220320083964
+   }
+  },
+  {
+   "condition": "no_governance",
+   "recall": {
+    "mean": 0.016121212121212123,
+    "ci_lo": 0.01109090909090909,
+    "ci_hi": 0.021696969696969697
+   },
+   "ndcg": {
+    "mean": 0.013361499532504232,
+    "ci_lo": 0.008975857120875718,
+    "ci_hi": 0.01818997490437618
+   },
+   "f1": {
+    "mean": 0.010120621802439986,
+    "ci_lo": 0.0069473189689098795,
+    "ci_hi": 0.013581734553325463
+   }
+  }
+ ],
+ "_provenance": {
+  "written_utc": "2026-10-30T13:37:33Z",
+  "argv": [
+   "evals/wp0_v040/stamp_dir.py",
+   "/home/snhwang/tist-evals/wp0-v042/stage/v0110F/fb_t4_inferred",
+   "--step",
+   "fb_t4_inferred",
+   "--command",
+   "/home/snhwang/.venvs/tist-evals/bin/python evals/eval_toolbench_inferred_categories.py"
+  ],
+  "bear_version": "0.1.10",
+  "bear_path": "/home/snhwang/tist-evals/bear-v0110/bear",
+  "bear_source_sha": "cdba2174d715494ec4f22c098386487002ec492f",
+  "bear_pkg_sha256": "0108c923136caecb028106dc07acbd999a3a1bfcb0d15c3974c643d2da2d8e2b",
+  "hooks": {
+   "WP0_SHARE_MODELS": "1",
+   "WP0_ART": "/home/snhwang/tist-evals/wp0-v042/artifacts-attr",
+   "WP0_EMB_CACHE": "",
+   "WP0_STEP": "fb_t4_inferred",
+   "WP0_STEP_MEM": "4G",
+   "WP0_REPORT_VRAM": "/home/snhwang/tist-evals/wp0-v042/logs/vram.jsonl",
+   "WP0_NO_LOCAL_MODELS": "1"
+  },
+  "versions": {
+   "python": "3.12.13",
+   "platform": "Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+   "numpy": "2.2.6",
+   "scipy": "1.17.1",
+   "torch": "2.10.0+cu128",
+   "transformers": "4.57.6",
+   "sentence_transformers": "5.4.1"
+  },
+  "step": "fb_t4_inferred",
+  "command": "/home/snhwang/.venvs/tist-evals/bin/python evals/eval_toolbench_inferred_categories.py",
+  "file": "results/toolbench_inferred_metrics.json"
+ }
+}

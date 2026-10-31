@@ -1,0 +1,170 @@
+{
+ "backend": "bm25",
+ "n_standard_queries": 60,
+ "top_k": 10,
+ "bootstrap_iters": 10000,
+ "priority_weight_default": 0.3,
+ "threshold_default": 0.3,
+ "mandatory_tags_default": [
+  "safety"
+ ],
+ "rows": [
+  {
+   "condition": "full",
+   "label": "Full governance",
+   "n": 60,
+   "mean_f1": 0.8648048248048247,
+   "ci_lo": 0.823522866022866,
+   "ci_hi": 0.9024161532911531,
+   "delta_vs_full": 0.0,
+   "cohen_d_vs_full": 0.0,
+   "p_vs_full": null
+  },
+  {
+   "condition": "no_required_tags",
+   "label": "- required_tags",
+   "n": 60,
+   "mean_f1": 0.4779563492063492,
+   "ci_lo": 0.451031746031746,
+   "ci_hi": 0.5041269841269841,
+   "delta_vs_full": -0.38684847559847546,
+   "cohen_d_vs_full": 2.0293084451287995,
+   "p_vs_full": 0.0,
+   "notes": ""
+  },
+  {
+   "condition": "no_priority",
+   "label": "- priority weighting",
+   "n": 60,
+   "mean_f1": 0.8648048248048247,
+   "ci_lo": 0.823522866022866,
+   "ci_hi": 0.9024161532911531,
+   "delta_vs_full": 0.0,
+   "cohen_d_vs_full": 0.0,
+   "p_vs_full": 1.0,
+   "notes": ""
+  },
+  {
+   "condition": "no_conflicts",
+   "label": "- conflict resolution",
+   "n": 60,
+   "mean_f1": 0.8585860435860436,
+   "ci_lo": 0.8179103535353535,
+   "ci_hi": 0.8955759795759796,
+   "delta_vs_full": -0.006218781218781055,
+   "cohen_d_vs_full": 0.2354624122098351,
+   "p_vs_full": 0.0686,
+   "notes": ""
+  },
+  {
+   "condition": "no_mandatory",
+   "label": "- mandatory injection",
+   "n": 60,
+   "mean_f1": 0.8648048248048247,
+   "ci_lo": 0.823522866022866,
+   "ci_hi": 0.9024161532911531,
+   "delta_vs_full": 0.0,
+   "cohen_d_vs_full": 0.0,
+   "p_vs_full": 1.0,
+   "notes": ""
+  },
+  {
+   "condition": "no_governance",
+   "label": "No governance",
+   "n": 60,
+   "mean_f1": 0.2043849206349206,
+   "ci_lo": 0.18557490079365074,
+   "ci_hi": 0.22444444444444445,
+   "delta_vs_full": -0.660419904169904,
+   "cohen_d_vs_full": 3.485828303988686,
+   "p_vs_full": 0.0,
+   "notes": ""
+  },
+  {
+   "condition": "itr_offshelf",
+   "label": "ITR library (off-the-shelf)",
+   "n": 60,
+   "mean_f1": 0.21117063492063493,
+   "ci_lo": 0.18630853174603174,
+   "ci_hi": 0.23714285714285713,
+   "delta_vs_full": -0.6536341898841898,
+   "cohen_d_vs_full": 3.6382565723019904,
+   "p_vs_full": 0.0,
+   "notes": "Off-the-shelf `instruction-tool-retrieval` library. NOT a faithful re-implementation of the ITR paper's full pipeline."
+  }
+ ],
+ "adversarial_safety": {
+  "n_queries": 12,
+  "safety_ids": [
+   "constraint-no-aggression",
+   "safety-boundaries",
+   "safety-reasonable-response"
+  ],
+  "mandatory_on_recall": 1.0,
+  "mandatory_off_recall": 1.0,
+  "delta": 0.0,
+  "per_query_on": [
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0
+  ],
+  "per_query_off": [
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0
+  ]
+ },
+ "_provenance": {
+  "written_utc": "2026-10-30T12:07:15Z",
+  "argv": [
+   "evals/wp0_v040/stamp_dir.py",
+   "/home/snhwang/tist-evals/wp0-v042/stage/v0110/decomposed_bm25_v0110",
+   "--step",
+   "decomposed_bm25_v0110",
+   "--command",
+   "/home/snhwang/.venvs/tist-evals/bin/python evals/eval_governance_decomposed.py --backends bm25"
+  ],
+  "bear_version": "0.1.10",
+  "bear_path": "/home/snhwang/tist-evals/bear-v0110/bear",
+  "bear_source_sha": "cdba2174d715494ec4f22c098386487002ec492f",
+  "bear_pkg_sha256": "0108c923136caecb028106dc07acbd999a3a1bfcb0d15c3974c643d2da2d8e2b",
+  "hooks": {
+   "WP0_SHARE_MODELS": "1",
+   "WP0_ART": "/home/snhwang/tist-evals/wp0-v042/artifacts",
+   "WP0_EMB_CACHE": "",
+   "WP0_STEP": "decomposed_bm25_v0110",
+   "WP0_REPORT_VRAM": "/home/snhwang/tist-evals/wp0-v042/logs/vram.jsonl",
+   "WP0_NO_LOCAL_MODELS": "1"
+  },
+  "versions": {
+   "python": "3.12.13",
+   "platform": "Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+   "numpy": "2.2.6",
+   "scipy": "1.17.1",
+   "torch": "2.10.0+cu128",
+   "transformers": "4.57.6",
+   "sentence_transformers": "5.4.1"
+  },
+  "step": "decomposed_bm25_v0110",
+  "command": "/home/snhwang/.venvs/tist-evals/bin/python evals/eval_governance_decomposed.py --backends bm25",
+  "file": "results/governance_decomposed_bm25.json"
+ }
+}

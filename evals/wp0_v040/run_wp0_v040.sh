@@ -751,6 +751,16 @@ lane_gpuq4b042gov() {  # MetaTool base BEAR+Qwen3-4B (gov) again at encode batch
     fi
   done
 }
+lane_mandonly042() {  # the mand-only rows of BGE-M3 and Qwen3-0.6B (Tables 3, 5, 6), not run in
+  # dense042. CPU, launched like dense042, so the encode cache supplies the vectors.
+  [[ ${WP0_ALLOW_LOCAL_MODELS:-0} == 1 ]] || { log "mandonly042 needs WP0_ALLOW_LOCAL_MODELS=1"; return 1; }
+  local m lab
+  for m in bgem3 qwen06; do
+    case $m in bgem3) lab=BGE-M3 ;; qwen06) lab=Qwen3-0.6B ;; esac
+    tb tb_${m}_mand cpu v042 0 all "BEAR+$lab (mand-only)"
+    tb tb_${m}_mand_v0110 cpu v0110 0 all "BEAR+$lab (mand-only)"
+  done
+}
 lane_manddense042() {  # after dense042 (one dense lane at a time): redo the cap kills, then the
   # dense mandatory diagnostic. Launched like dense042 (20G, batch 4, 12 threads).
   [[ ${WP0_ALLOW_LOCAL_MODELS:-0} == 1 ]] || { log "manddense042 needs WP0_ALLOW_LOCAL_MODELS=1"; return 1; }
@@ -830,6 +840,7 @@ case $lane in
   gpuq4b042) lane_gpuq4b042 ;;
   gpuq4b042fix) lane_gpuq4b042fix ;;
   gpuq4b042gov) lane_gpuq4b042gov ;;
+  mandonly042) lane_mandonly042 ;;
   mand042) lane_mand042 ;;
   e2eattr042) lane_e2eattr042 ;;
   pair042) lane_pair042 ;;

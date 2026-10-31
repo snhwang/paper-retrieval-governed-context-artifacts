@@ -1,0 +1,47 @@
+### ================ attempt 2026-10-30T09:23:31-04:00 ================
+### step:        retrieval_semantic_Ltie_order
+### kind:        cpu (need 0 GiB)
+### bear:        v042L (9d085b4)
+### started:     2026-10-30T09:23:31-04:00
+### command:     /home/snhwang/.venvs/tist-evals/bin/python evals/eval_retrieval.py --semantic
+### env:         HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 TOKENIZERS_PARALLELISM=false PYTHONUNBUFFERED=1 PYTHONPATH=/home/snhwang/tist-evals/wp0-v042/artifacts-dense/evals/wp0_v040/site BEAR_SOURCE_SHA=9d085b4 ANTHROPIC_API_KEY=wp0-dummy-key-no-paid-calls WP0_REPORT_VRAM=/home/snhwang/tist-evals/wp0-v042/logs/vram.jsonl WP0_STEP=retrieval_semantic_Ltie_order WP0_BEAR_LEGACY=tie_order CUDA_VISIBLE_DEVICES= WP0_ENCODE_BATCH=4 CUDA_VISIBLE_DEVICES= OMP_NUM_THREADS=12 MKL_NUM_THREADS=12 WP0_EMB_CACHE=/home/snhwang/tist-evals/wp0-v042/embcache WP0_SHARE_MODELS=1
+### memory cap:  /home/snhwang/bin/tist-capped --mem 20G --
+[wp0-site] encode batch size capped at 4
+[wp0-site] BEAR legacy switches on: ['restore_tie_order']
+Embedding model: BAAI/bge-base-en-v1.5
+
+Loaded corpus with 58 instructions
+
+Full BEAR ($\alpha=0.3$):
+  Strict:  P@10=0.509 [0.496, 0.522], R@10=0.978 [0.964, 0.992], F1@10=0.668 [0.655, 0.680]
+  Relaxed: P@10=0.694 [0.651, 0.739], R@10=0.963 [0.944, 0.980], F1@10=0.792 [0.764, 0.820]
+
+[wp0-site] reusing shared BAAI/bge-base-en-v1.5
+Pure Similarity ($\alpha=0$):
+  Strict:  P@10=0.406 [0.394, 0.421], R@10=0.642 [0.618, 0.668], F1@10=0.496 [0.480, 0.513]
+  Relaxed: P@10=0.477 [0.452, 0.502], R@10=0.578 [0.533, 0.621], F1@10=0.514 [0.483, 0.544]
+
+[wp0-site] reusing shared BAAI/bge-base-en-v1.5
+Priority-Heavy ($\alpha=0.7$):
+  Strict:  P@10=0.494 [0.478, 0.510], R@10=0.953 [0.922, 0.981], F1@10=0.649 [0.629, 0.667]
+  Relaxed: P@10=0.691 [0.647, 0.735], R@10=0.958 [0.938, 0.977], F1@10=0.788 [0.759, 0.816]
+
+
+% === LaTeX Table ===
+\begin{table}[t]
+\caption{Retrieval quality on Pet Sim corpus (60 queries, $k=10$, BAAI/bge-base-en-v1.5).
+Values show mean with 95\% bootstrap CI (10,000 iterations). Each query has about five relevant instructions, so with $k{=}10$ precision is bounded near $0.5$ and F1 near $0.68$; recall is the less-capped measure of whether the relevant instructions are found.}
+\label{tab:retrieval}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+Configuration & Strict R@10 & Strict F1 & Relaxed R@10 & Relaxed F1 \\
+\midrule
+Full BEAR ($\alpha=0.3$) & $0.978\;[0.964,\;0.992]$ & $0.668\;[0.655,\;0.680]$ & $0.963\;[0.944,\;0.980]$ & $0.792\;[0.764,\;0.820]$ \\
+Pure Similarity ($\alpha=0$) & $0.642\;[0.618,\;0.668]$ & $0.496\;[0.480,\;0.513]$ & $0.578\;[0.533,\;0.621]$ & $0.514\;[0.483,\;0.544]$ \\
+Priority-Heavy ($\alpha=0.7$) & $0.953\;[0.922,\;0.981]$ & $0.649\;[0.629,\;0.667]$ & $0.958\;[0.938,\;0.977]$ & $0.788\;[0.759,\;0.816]$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+[wp0-site] embedding cache: 186 hits, 0 misses (/home/snhwang/tist-evals/wp0-v042/embcache)
+### mem guard: peak session RSS 855 MiB
+### finished:    2026-10-30T09:23:43-04:00 rc=0

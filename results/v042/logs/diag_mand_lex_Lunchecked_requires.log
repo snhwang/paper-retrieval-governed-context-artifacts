@@ -1,0 +1,37 @@
+### ================ attempt 2026-10-30T08:49:50-04:00 ================
+### step:        diag_mand_lex_Lunchecked_requires
+### kind:        cpu (need 0 GiB)
+### bear:        v042L (9d085b4)
+### started:     2026-10-30T08:49:50-04:00
+### command:     /home/snhwang/.venvs/tist-evals/bin/python evals/wp0_v040/diag_mandatory_petsim.py --out results/wp0/diag_mandatory_lex_v042_Lunchecked_requires.json
+### env:         HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 TOKENIZERS_PARALLELISM=false PYTHONUNBUFFERED=1 PYTHONPATH=/home/snhwang/tist-evals/wp0-v042/artifacts-nemo/evals/wp0_v040/site BEAR_SOURCE_SHA=9d085b4 ANTHROPIC_API_KEY=wp0-dummy-key-no-paid-calls WP0_REPORT_VRAM=/home/snhwang/tist-evals/wp0-v042/logs/vram.jsonl WP0_STEP=diag_mand_lex_Lunchecked_requires WP0_BEAR_LEGACY=unchecked_requires WP0_NO_LOCAL_MODELS=1 CUDA_VISIBLE_DEVICES= CUDA_VISIBLE_DEVICES= OMP_NUM_THREADS=8 MKL_NUM_THREADS=8 WP0_EMB_CACHE=/home/snhwang/tist-evals/wp0-v042/embcache WP0_SHARE_MODELS=1
+### memory cap:  /home/snhwang/bin/tist-capped --mem 4G --
+[wp0-site] local model loads refused (WP0_NO_LOCAL_MODELS)
+[wp0-site] BEAR legacy switches on: ['restore_unchecked_requires']
+Full governance / Standard / bm25             returned  6.48 (max 10) mandatory 3.00 F1 0.875
+Hash embeddings selected. Similarity scores are based on character n-gram overlap and carry no semantic signal — retrieval ranking is effectively arbitrary. Use a sentence-transformers model (e.g. 'BAAI/bge-base-en-v1.5') for meaningful semantic retrieval.
+Full governance / Standard / hash             returned  6.97 (max 10) mandatory 3.00 F1 0.845
+Full governance / Paraphrase / bm25           returned  5.02 (max 7) mandatory 3.00 F1 0.890
+Hash embeddings selected. Similarity scores are based on character n-gram overlap and carry no semantic signal — retrieval ranking is effectively arbitrary. Use a sentence-transformers model (e.g. 'BAAI/bge-base-en-v1.5') for meaningful semantic retrieval.
+Full governance / Paraphrase / hash           returned  4.93 (max 7) mandatory 3.00 F1 0.886
+Full governance / No-tag / bm25               returned  6.54 (max 8) mandatory 3.00 F1 0.718
+Hash embeddings selected. Similarity scores are based on character n-gram overlap and carry no semantic signal — retrieval ranking is effectively arbitrary. Use a sentence-transformers model (e.g. 'BAAI/bge-base-en-v1.5') for meaningful semantic retrieval.
+Full governance / No-tag / hash               returned  3.78 (max 6) mandatory 3.00 F1 0.837
+Full governance / Complex / bm25              returned  6.67 (max 10) mandatory 3.00 F1 0.866
+Hash embeddings selected. Similarity scores are based on character n-gram overlap and carry no semantic signal — retrieval ranking is effectively arbitrary. Use a sentence-transformers model (e.g. 'BAAI/bge-base-en-v1.5') for meaningful semantic retrieval.
+Full governance / Complex / hash              returned  6.27 (max 10) mandatory 3.00 F1 0.896
+Mandatory only / Standard / bm25              returned 10.00 (max 10) mandatory 3.00 F1 0.550
+Hash embeddings selected. Similarity scores are based on character n-gram overlap and carry no semantic signal — retrieval ranking is effectively arbitrary. Use a sentence-transformers model (e.g. 'BAAI/bge-base-en-v1.5') for meaningful semantic retrieval.
+Mandatory only / Standard / hash              returned 10.00 (max 10) mandatory 3.00 F1 0.518
+Mandatory only / Paraphrase / bm25            returned 10.00 (max 10) mandatory 3.00 F1 0.467
+Hash embeddings selected. Similarity scores are based on character n-gram overlap and carry no semantic signal — retrieval ranking is effectively arbitrary. Use a sentence-transformers model (e.g. 'BAAI/bge-base-en-v1.5') for meaningful semantic retrieval.
+Mandatory only / Paraphrase / hash            returned 10.00 (max 10) mandatory 3.00 F1 0.481
+Mandatory only / No-tag / bm25                returned  9.96 (max 10) mandatory 3.00 F1 0.479
+Hash embeddings selected. Similarity scores are based on character n-gram overlap and carry no semantic signal — retrieval ranking is effectively arbitrary. Use a sentence-transformers model (e.g. 'BAAI/bge-base-en-v1.5') for meaningful semantic retrieval.
+Mandatory only / No-tag / hash                returned  9.57 (max 10) mandatory 3.00 F1 0.469
+Mandatory only / Complex / bm25               returned 10.00 (max 10) mandatory 3.00 F1 0.557
+Hash embeddings selected. Similarity scores are based on character n-gram overlap and carry no semantic signal — retrieval ranking is effectively arbitrary. Use a sentence-transformers model (e.g. 'BAAI/bge-base-en-v1.5') for meaningful semantic retrieval.
+Mandatory only / Complex / hash               returned 10.00 (max 10) mandatory 3.00 F1 0.477
+[wp0-site] embedding cache: 0 hits, 0 misses (/home/snhwang/tist-evals/wp0-v042/embcache)
+### mem guard: peak session RSS 831 MiB
+### finished:    2026-10-30T08:50:01-04:00 rc=0

@@ -1,0 +1,289 @@
+### ================ attempt 2026-10-30T09:24:02-04:00 ================
+### step:        baseline_comparison
+### kind:        cpu (need 0 GiB)
+### bear:        v042 (9d085b4)
+### started:     2026-10-30T09:24:02-04:00
+### command:     /home/snhwang/.venvs/tist-evals/bin/python evals/eval_baseline_comparison.py
+### env:         HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 TOKENIZERS_PARALLELISM=false PYTHONUNBUFFERED=1 PYTHONPATH=/home/snhwang/tist-evals/wp0-v042/artifacts-dense/evals/wp0_v040/site BEAR_SOURCE_SHA=9d085b4 ANTHROPIC_API_KEY=wp0-dummy-key-no-paid-calls WP0_REPORT_VRAM=/home/snhwang/tist-evals/wp0-v042/logs/vram.jsonl WP0_STEP=baseline_comparison CUDA_VISIBLE_DEVICES= WP0_ENCODE_BATCH=4 CUDA_VISIBLE_DEVICES= OMP_NUM_THREADS=12 MKL_NUM_THREADS=12 WP0_EMB_CACHE=/home/snhwang/tist-evals/wp0-v042/embcache WP0_SHARE_MODELS=1
+### memory cap:  /home/snhwang/bin/tist-capped --mem 20G --
+[wp0-site] encode batch size capped at 4
+Embedding model: BAAI/bge-base-en-v1.5
+Comparison: BEAR retrieval pipeline vs Conditional Prompt Assembly (CPA)
+
+======================================================================
+  Scale point: 10 agents
+======================================================================
+  Corpus: 28 instructions, 1 departments
+[wp0-site] reusing shared BAAI/bge-base-en-v1.5
+  Novel query Fisher's exact test: p=0.0681 (BEAR-only=7, CPA-only=0, both=5, neither=7)
+[wp0-site] reusing shared BAAI/bge-base-en-v1.5
+  Standard queries: 30
+  BEAR  persona/dept/safety/global: 1.000 / 1.000 / 1.000 / 1.000
+  CPA   persona/dept/safety/global: 1.000 / 1.000 / 1.000 / 1.000
+  Tokens/query: BEAR=952 [952, 952]  CPA=952 [952, 952]  Static=1454
+  Novel recall: BEAR=0.944  CPA=0.888  (19 queries)  Fisher's p=0.0681
+  Unresolved conflicts: BEAR=0  CPA=0
+  Semantic recall: BEAR=1.000  CPA=0.000  (12 queries)
+  CPA wiring: 14 lines, 5 lookup tables
+
+======================================================================
+  Scale point: 25 agents
+======================================================================
+  Corpus: 51 instructions, 3 departments
+[wp0-site] reusing shared BAAI/bge-base-en-v1.5
+[wp0-site] reusing shared BAAI/bge-base-en-v1.5
+  Novel query Fisher's exact test: p=0.0099 (BEAR-only=7, CPA-only=0, both=10, neither=7)
+[wp0-site] reusing shared BAAI/bge-base-en-v1.5
+  Standard queries: 30
+  BEAR  persona/dept/safety/global: 1.000 / 1.000 / 1.000 / 1.000
+  CPA   persona/dept/safety/global: 1.000 / 1.000 / 1.000 / 1.000
+  Tokens/query: BEAR=996 [995, 997]  CPA=952 [952, 953]  Static=2609
+  Novel recall: BEAR=0.956  CPA=0.912  (24 queries)  Fisher's p=0.0099
+  Unresolved conflicts: BEAR=0  CPA=0
+  Semantic recall: BEAR=1.000  CPA=0.000  (12 queries)
+  CPA wiring: 33 lines, 5 lookup tables
+
+======================================================================
+  Scale point: 50 agents
+======================================================================
+  Corpus: 84 instructions, 5 departments
+[wp0-site] reusing shared BAAI/bge-base-en-v1.5
+[wp0-site] reusing shared BAAI/bge-base-en-v1.5
+  Novel query Fisher's exact test: p=0.0099 (BEAR-only=7, CPA-only=0, both=10, neither=7)
+[wp0-site] reusing shared BAAI/bge-base-en-v1.5
+  Standard queries: 30
+  BEAR  persona/dept/safety/global: 1.000 / 1.000 / 1.000 / 1.000
+  CPA   persona/dept/safety/global: 1.000 / 1.000 / 1.000 / 1.000
+  Tokens/query: BEAR=985 [978, 991]  CPA=950 [950, 951]  Static=4344
+  Novel recall: BEAR=0.956  CPA=0.912  (24 queries)  Fisher's p=0.0099
+  Unresolved conflicts: BEAR=0  CPA=0
+  Semantic recall: BEAR=1.000  CPA=0.000  (12 queries)
+  CPA wiring: 62 lines, 5 lookup tables
+
+======================================================================
+  Scale point: 100 agents
+======================================================================
+  Corpus: 155 instructions, 10 departments
+[wp0-site] reusing shared BAAI/bge-base-en-v1.5
+Batches:   0%|          | 0/39 [00:00<?, ?it/s]Batches:   3%|▎         | 1/39 [00:00<00:07,  5.16it/s]Batches:   8%|▊         | 3/39 [00:00<00:03,  9.22it/s]Batches:  13%|█▎        | 5/39 [00:00<00:03, 10.75it/s]Batches:  18%|█▊        | 7/39 [00:00<00:02, 11.40it/s]Batches:  23%|██▎       | 9/39 [00:00<00:02, 12.01it/s]Batches:  28%|██▊       | 11/39 [00:00<00:02, 12.49it/s]Batches:  33%|███▎      | 13/39 [00:01<00:02, 12.75it/s]Batches:  38%|███▊      | 15/39 [00:01<00:01, 12.87it/s]Batches:  44%|████▎     | 17/39 [00:01<00:01, 12.74it/s]Batches:  49%|████▊     | 19/39 [00:01<00:01, 12.99it/s]Batches:  54%|█████▍    | 21/39 [00:01<00:01, 13.08it/s]Batches:  59%|█████▉    | 23/39 [00:01<00:01, 13.26it/s]Batches:  64%|██████▍   | 25/39 [00:02<00:01, 13.41it/s]Batches:  69%|██████▉   | 27/39 [00:02<00:01, 11.26it/s]Batches:  74%|███████▍  | 29/39 [00:02<00:00, 12.51it/s]Batches:  79%|███████▉  | 31/39 [00:02<00:00, 13.54it/s]Batches:  85%|████████▍ | 33/39 [00:02<00:00, 14.64it/s]Batches:  90%|████████▉ | 35/39 [00:02<00:00, 15.19it/s]Batches:  95%|█████████▍| 37/39 [00:02<00:00, 14.95it/s]Batches: 100%|██████████| 39/39 [00:02<00:00, 16.14it/s]Batches: 100%|██████████| 39/39 [00:02<00:00, 13.12it/s]
+[wp0-site] reusing shared BAAI/bge-base-en-v1.5
+Batches:   0%|          | 0/40 [00:00<?, ?it/s]Batches:   5%|▌         | 2/40 [00:00<00:03, 11.69it/s]Batches:  10%|█         | 4/40 [00:00<00:03, 11.76it/s]Batches:  15%|█▌        | 6/40 [00:00<00:02, 11.69it/s]Batches:  20%|██        | 8/40 [00:00<00:02, 11.93it/s]Batches:  25%|██▌       | 10/40 [00:00<00:02, 12.28it/s]Batches:  30%|███       | 12/40 [00:00<00:02, 12.76it/s]Batches:  35%|███▌      | 14/40 [00:01<00:01, 13.28it/s]Batches:  40%|████      | 16/40 [00:01<00:01, 13.26it/s]Batches:  45%|████▌     | 18/40 [00:01<00:01, 13.59it/s]Batches:  50%|█████     | 20/40 [00:01<00:01, 13.80it/s]Batches:  55%|█████▌    | 22/40 [00:01<00:01, 13.19it/s]Batches:  60%|██████    | 24/40 [00:01<00:01, 13.20it/s]Batches:  65%|██████▌   | 26/40 [00:02<00:01, 12.68it/s]Batches:  70%|███████   | 28/40 [00:02<00:00, 13.39it/s]Batches:  75%|███████▌  | 30/40 [00:02<00:00, 14.34it/s]Batches:  80%|████████  | 32/40 [00:02<00:00, 15.47it/s]Batches:  85%|████████▌ | 34/40 [00:02<00:00, 16.51it/s]Batches:  90%|█████████ | 36/40 [00:02<00:00, 17.41it/s]Batches:  95%|█████████▌| 38/40 [00:02<00:00, 18.01it/s]Batches: 100%|██████████| 40/40 [00:02<00:00, 14.46it/s]
+  Novel query Fisher's test: DEGENERATE (no CPA-only or both-miss cases) — BEAR hits all 24 queries, CPA misses 14; test not applicable
+[wp0-site] reusing shared BAAI/bge-base-en-v1.5
+Batches:   0%|          | 0/42 [00:00<?, ?it/s]Batches:   5%|▍         | 2/42 [00:00<00:03, 11.32it/s]Batches:  10%|▉         | 4/42 [00:00<00:03, 11.45it/s]Batches:  14%|█▍        | 6/42 [00:00<00:02, 12.16it/s]Batches:  19%|█▉        | 8/42 [00:00<00:02, 12.40it/s]Batches:  24%|██▍       | 10/42 [00:00<00:02, 12.87it/s]Batches:  29%|██▊       | 12/42 [00:00<00:02, 12.79it/s]Batches:  33%|███▎      | 14/42 [00:01<00:02, 12.85it/s]Batches:  38%|███▊      | 16/42 [00:01<00:01, 13.09it/s]Batches:  43%|████▎     | 18/42 [00:01<00:01, 13.14it/s]Batches:  48%|████▊     | 20/42 [00:01<00:01, 13.29it/s]Batches:  52%|█████▏    | 22/42 [00:01<00:01, 13.53it/s]Batches:  57%|█████▋    | 24/42 [00:01<00:01, 13.74it/s]Batches:  62%|██████▏   | 26/42 [00:01<00:01, 13.76it/s]Batches:  67%|██████▋   | 28/42 [00:02<00:01, 13.97it/s]Batches:  71%|███████▏  | 30/42 [00:02<00:00, 14.24it/s]Batches:  76%|███████▌  | 32/42 [00:02<00:00, 15.00it/s]Batches:  81%|████████  | 34/42 [00:02<00:00, 15.77it/s]Batches:  86%|████████▌ | 36/42 [00:02<00:00, 16.74it/s]Batches:  90%|█████████ | 38/42 [00:02<00:00, 17.38it/s]Batches:  98%|█████████▊| 41/42 [00:02<00:00, 18.38it/s]Batches: 100%|██████████| 42/42 [00:02<00:00, 14.56it/s]
+  Standard queries: 30
+  BEAR  persona/dept/safety/global: 1.000 / 1.000 / 1.000 / 1.000
+  CPA   persona/dept/safety/global: 1.000 / 1.000 / 1.000 / 1.000
+  Tokens/query: BEAR=995 [994, 997]  CPA=952 [951, 952]  Static=8021
+  Novel recall: BEAR=1.000  CPA=0.912  (24 queries)  Fisher's p=None
+  Unresolved conflicts: BEAR=0  CPA=0
+  Semantic recall: BEAR=1.000  CPA=0.000  (12 queries)
+  CPA wiring: 123 lines, 5 lookup tables
+
+======================================================================
+  Scale point: 200 agents
+======================================================================
+  Corpus: 285 instructions, 20 departments
+[wp0-site] reusing shared BAAI/bge-base-en-v1.5
+Batches:   0%|          | 0/72 [00:00<?, ?it/s]Batches:   3%|▎         | 2/72 [00:00<00:05, 12.36it/s]Batches:   6%|▌         | 4/72 [00:00<00:05, 12.97it/s]Batches:   8%|▊         | 6/72 [00:00<00:04, 13.26it/s]Batches:  11%|█         | 8/72 [00:00<00:04, 13.43it/s]Batches:  14%|█▍        | 10/72 [00:00<00:04, 13.26it/s]Batches:  17%|█▋        | 12/72 [00:00<00:04, 13.56it/s]Batches:  19%|█▉        | 14/72 [00:01<00:04, 13.45it/s]Batches:  22%|██▏       | 16/72 [00:01<00:04, 13.31it/s]Batches:  25%|██▌       | 18/72 [00:01<00:04, 13.34it/s]Batches:  28%|██▊       | 20/72 [00:01<00:03, 13.38it/s]Batches:  31%|███       | 22/72 [00:01<00:03, 13.42it/s]Batches:  33%|███▎      | 24/72 [00:01<00:03, 13.41it/s]Batches:  36%|███▌      | 26/72 [00:01<00:03, 13.59it/s]Batches:  39%|███▉      | 28/72 [00:02<00:03, 13.61it/s]Batches:  42%|████▏     | 30/72 [00:02<00:03, 13.56it/s]Batches:  44%|████▍     | 32/72 [00:02<00:02, 13.47it/s]Batches:  47%|████▋     | 34/72 [00:02<00:02, 13.45it/s]Batches:  50%|█████     | 36/72 [00:02<00:02, 13.43it/s]Batches:  53%|█████▎    | 38/72 [00:02<00:02, 13.04it/s]Batches:  56%|█████▌    | 40/72 [00:02<00:02, 13.26it/s]Batches:  58%|█████▊    | 42/72 [00:03<00:02, 12.86it/s]Batches:  61%|██████    | 44/72 [00:03<00:02, 12.90it/s]Batches:  64%|██████▍   | 46/72 [00:03<00:01, 13.02it/s]Batches:  67%|██████▋   | 48/72 [00:03<00:01, 12.88it/s]Batches:  69%|██████▉   | 50/72 [00:03<00:01, 13.10it/s]Batches:  72%|███████▏  | 52/72 [00:03<00:01, 13.43it/s]Batches:  75%|███████▌  | 54/72 [00:04<00:01, 14.33it/s]Batches:  78%|███████▊  | 56/72 [00:04<00:01, 14.85it/s]Batches:  81%|████████  | 58/72 [00:04<00:01, 13.01it/s]Batches:  83%|████████▎ | 60/72 [00:04<00:00, 13.96it/s]Batches:  86%|████████▌ | 62/72 [00:04<00:00, 15.01it/s]Batches:  89%|████████▉ | 64/72 [00:04<00:00, 16.22it/s]Batches:  93%|█████████▎| 67/72 [00:04<00:00, 17.62it/s]Batches:  96%|█████████▌| 69/72 [00:04<00:00, 18.10it/s]Batches:  99%|█████████▊| 71/72 [00:05<00:00, 16.44it/s]Batches: 100%|██████████| 72/72 [00:05<00:00, 13.63it/s]
+[wp0-site] reusing shared BAAI/bge-base-en-v1.5
+Batches:   0%|          | 0/72 [00:00<?, ?it/s]Batches:   3%|▎         | 2/72 [00:00<00:07,  9.08it/s]Batches:   4%|▍         | 3/72 [00:00<00:07,  8.93it/s]Batches:   6%|▌         | 4/72 [00:00<00:07,  8.86it/s]Batches:   8%|▊         | 6/72 [00:00<00:06, 10.34it/s]Batches:  11%|█         | 8/72 [00:00<00:05, 11.47it/s]Batches:  14%|█▍        | 10/72 [00:00<00:05, 12.00it/s]Batches:  17%|█▋        | 12/72 [00:01<00:04, 12.34it/s]Batches:  19%|█▉        | 14/72 [00:01<00:04, 12.84it/s]Batches:  22%|██▏       | 16/72 [00:01<00:04, 12.96it/s]Batches:  25%|██▌       | 18/72 [00:01<00:04, 13.01it/s]Batches:  28%|██▊       | 20/72 [00:01<00:04, 12.97it/s]Batches:  31%|███       | 22/72 [00:01<00:03, 13.05it/s]Batches:  33%|███▎      | 24/72 [00:02<00:03, 12.38it/s]Batches:  36%|███▌      | 26/72 [00:02<00:03, 12.70it/s]Batches:  39%|███▉      | 28/72 [00:02<00:03, 12.84it/s]Batches:  42%|████▏     | 30/72 [00:02<00:03, 12.42it/s]Batches:  44%|████▍     | 32/72 [00:02<00:03, 12.09it/s]Batches:  47%|████▋     | 34/72 [00:02<00:03, 12.09it/s]Batches:  50%|█████     | 36/72 [00:02<00:02, 12.33it/s]Batches:  53%|█████▎    | 38/72 [00:03<00:02, 12.49it/s]Batches:  56%|█████▌    | 40/72 [00:03<00:02, 12.66it/s]Batches:  58%|█████▊    | 42/72 [00:03<00:02, 12.64it/s]Batches:  61%|██████    | 44/72 [00:03<00:02, 12.51it/s]Batches:  64%|██████▍   | 46/72 [00:03<00:02, 12.66it/s]Batches:  67%|██████▋   | 48/72 [00:03<00:01, 12.36it/s]Batches:  69%|██████▉   | 50/72 [00:04<00:01, 12.40it/s]Batches:  72%|███████▏  | 52/72 [00:04<00:01, 12.43it/s]Batches:  75%|███████▌  | 54/72 [00:04<00:01, 13.51it/s]Batches:  78%|███████▊  | 56/72 [00:04<00:01, 14.30it/s]Batches:  81%|████████  | 58/72 [00:06<00:04,  3.39it/s]Batches:  83%|████████▎ | 60/72 [00:06<00:02,  4.44it/s]Batches:  86%|████████▌ | 62/72 [00:06<00:01,  5.68it/s]Batches:  89%|████████▉ | 64/72 [00:06<00:01,  7.06it/s]Batches:  92%|█████████▏| 66/72 [00:06<00:00,  8.76it/s]Batches:  94%|█████████▍| 68/72 [00:06<00:00, 10.52it/s]Batches:  97%|█████████▋| 70/72 [00:06<00:00, 11.97it/s]Batches: 100%|██████████| 72/72 [00:06<00:00, 13.44it/s]Batches: 100%|██████████| 72/72 [00:06<00:00, 10.41it/s]
+  Novel query Fisher's test: DEGENERATE (no CPA-only or both-miss cases) — BEAR hits all 24 queries, CPA misses 14; test not applicable
+[wp0-site] reusing shared BAAI/bge-base-en-v1.5
+Batches:   0%|          | 0/75 [00:00<?, ?it/s]Batches:   1%|▏         | 1/75 [00:00<00:08,  9.01it/s]Batches:   4%|▍         | 3/75 [00:00<00:06, 10.78it/s]Batches:   7%|▋         | 5/75 [00:00<00:06, 11.62it/s]Batches:   9%|▉         | 7/75 [00:00<00:05, 11.92it/s]Batches:  12%|█▏        | 9/75 [00:00<00:05, 12.35it/s]Batches:  15%|█▍        | 11/75 [00:00<00:05, 12.44it/s]Batches:  17%|█▋        | 13/75 [00:01<00:05, 11.84it/s]Batches:  20%|██        | 15/75 [00:01<00:05, 11.92it/s]Batches:  23%|██▎       | 17/75 [00:01<00:05, 10.78it/s]Batches:  25%|██▌       | 19/75 [00:01<00:04, 11.39it/s]Batches:  28%|██▊       | 21/75 [00:01<00:04, 11.93it/s]Batches:  31%|███       | 23/75 [00:01<00:04, 12.33it/s]Batches:  33%|███▎      | 25/75 [00:02<00:04, 12.38it/s]Batches:  36%|███▌      | 27/75 [00:02<00:04, 11.83it/s]Batches:  39%|███▊      | 29/75 [00:02<00:03, 11.88it/s]Batches:  41%|████▏     | 31/75 [00:02<00:03, 12.32it/s]Batches:  44%|████▍     | 33/75 [00:02<00:03, 12.21it/s]Batches:  47%|████▋     | 35/75 [00:02<00:03, 12.35it/s]Batches:  49%|████▉     | 37/75 [00:03<00:03, 12.02it/s]Batches:  52%|█████▏    | 39/75 [00:03<00:02, 12.11it/s]Batches:  55%|█████▍    | 41/75 [00:03<00:02, 11.83it/s]Batches:  57%|█████▋    | 43/75 [00:03<00:03, 10.25it/s]Batches:  60%|██████    | 45/75 [00:03<00:02, 10.69it/s]Batches:  63%|██████▎   | 47/75 [00:04<00:02, 10.63it/s]Batches:  65%|██████▌   | 49/75 [00:04<00:02, 11.21it/s]Batches:  68%|██████▊   | 51/75 [00:04<00:02, 11.44it/s]Batches:  71%|███████   | 53/75 [00:04<00:01, 11.85it/s]Batches:  73%|███████▎  | 55/75 [00:04<00:01, 11.99it/s]Batches:  76%|███████▌  | 57/75 [00:04<00:01, 12.89it/s]Batches:  79%|███████▊  | 59/75 [00:04<00:01, 13.77it/s]Batches:  81%|████████▏ | 61/75 [00:05<00:01, 13.58it/s]Batches:  84%|████████▍ | 63/75 [00:05<00:00, 14.25it/s]Batches:  87%|████████▋ | 65/75 [00:05<00:00, 14.95it/s]Batches:  89%|████████▉ | 67/75 [00:05<00:00, 15.15it/s]Batches:  92%|█████████▏| 69/75 [00:05<00:00, 15.66it/s]Batches:  95%|█████████▍| 71/75 [00:05<00:00, 15.71it/s]Batches:  97%|█████████▋| 73/75 [00:05<00:00, 16.46it/s]Batches: 100%|██████████| 75/75 [00:05<00:00, 12.70it/s]
+  Standard queries: 30
+  BEAR  persona/dept/safety/global: 1.000 / 1.000 / 1.000 / 1.000
+  CPA   persona/dept/safety/global: 1.000 / 1.000 / 1.000 / 1.000
+  Tokens/query: BEAR=967 [958, 976]  CPA=946 [945, 948]  Static=14696
+  Novel recall: BEAR=1.000  CPA=0.912  (24 queries)  Fisher's p=None
+  Unresolved conflicts: BEAR=0  CPA=0
+  Semantic recall: BEAR=1.000  CPA=0.000  (12 queries)
+  CPA wiring: 233 lines, 5 lookup tables
+
+======================================================================
+  Scale point: 500 agents
+======================================================================
+  Corpus: 675 instructions, 50 departments
+[wp0-site] reusing shared BAAI/bge-base-en-v1.5
+Batches:   0%|          | 0/169 [00:00<?, ?it/s]Batches:   1%|          | 2/169 [00:00<00:13, 12.00it/s]Batches:   2%|▏         | 4/169 [00:00<00:14, 11.47it/s]Batches:   4%|▎         | 6/169 [00:00<00:14, 11.51it/s]Batches:   5%|▍         | 8/169 [00:00<00:13, 12.07it/s]Batches:   6%|▌         | 10/169 [00:00<00:12, 12.27it/s]Batches:   7%|▋         | 12/169 [00:00<00:12, 12.57it/s]Batches:   8%|▊         | 14/169 [00:01<00:12, 12.57it/s]Batches:   9%|▉         | 16/169 [00:01<00:12, 12.59it/s]Batches:  11%|█         | 18/169 [00:01<00:11, 12.70it/s]Batches:  12%|█▏        | 20/169 [00:01<00:12, 11.74it/s]Batches:  13%|█▎        | 22/169 [00:01<00:12, 11.40it/s]Batches:  14%|█▍        | 24/169 [00:02<00:12, 11.41it/s]Batches:  15%|█▌        | 26/169 [00:02<00:12, 11.83it/s]Batches:  17%|█▋        | 28/169 [00:02<00:11, 12.31it/s]Batches:  18%|█▊        | 30/169 [00:02<00:11, 12.42it/s]Batches:  19%|█▉        | 32/169 [00:02<00:10, 12.49it/s]Batches:  20%|██        | 34/169 [00:02<00:11, 11.69it/s]Batches:  21%|██▏       | 36/169 [00:02<00:11, 12.04it/s]Batches:  22%|██▏       | 38/169 [00:03<00:10, 12.27it/s]Batches:  24%|██▎       | 40/169 [00:03<00:10, 12.67it/s]Batches:  25%|██▍       | 42/169 [00:03<00:09, 12.84it/s]Batches:  26%|██▌       | 44/169 [00:03<00:09, 13.27it/s]Batches:  27%|██▋       | 46/169 [00:03<00:09, 12.79it/s]Batches:  28%|██▊       | 48/169 [00:03<00:09, 12.39it/s]Batches:  30%|██▉       | 50/169 [00:04<00:09, 12.42it/s]Batches:  31%|███       | 52/169 [00:04<00:09, 12.44it/s]Batches:  32%|███▏      | 54/169 [00:04<00:09, 12.29it/s]Batches:  33%|███▎      | 56/169 [00:04<00:09, 12.36it/s]Batches:  34%|███▍      | 58/169 [00:04<00:09, 11.90it/s]Batches:  36%|███▌      | 60/169 [00:04<00:08, 12.24it/s]Batches:  37%|███▋      | 62/169 [00:05<00:08, 12.32it/s]Batches:  38%|███▊      | 64/169 [00:05<00:08, 12.34it/s]Batches:  39%|███▉      | 66/169 [00:05<00:08, 12.45it/s]Batches:  40%|████      | 68/169 [00:05<00:08, 12.59it/s]Batches:  41%|████▏     | 70/169 [00:05<00:07, 12.78it/s]Batches:  43%|████▎     | 72/169 [00:05<00:07, 12.41it/s]Batches:  44%|████▍     | 74/169 [00:06<00:07, 12.01it/s]Batches:  45%|████▍     | 76/169 [00:06<00:07, 12.20it/s]Batches:  46%|████▌     | 78/169 [00:06<00:07, 12.63it/s]Batches:  47%|████▋     | 80/169 [00:06<00:06, 12.75it/s]Batches:  49%|████▊     | 82/169 [00:06<00:06, 12.84it/s]Batches:  50%|████▉     | 84/169 [00:06<00:06, 12.77it/s]Batches:  51%|█████     | 86/169 [00:06<00:06, 12.83it/s]Batches:  52%|█████▏    | 88/169 [00:07<00:06, 12.80it/s]Batches:  53%|█████▎    | 90/169 [00:07<00:06, 13.01it/s]Batches:  54%|█████▍    | 92/169 [00:07<00:05, 12.86it/s]Batches:  56%|█████▌    | 94/169 [00:07<00:05, 13.11it/s]Batches:  57%|█████▋    | 96/169 [00:07<00:05, 13.13it/s]Batches:  58%|█████▊    | 98/169 [00:07<00:05, 13.16it/s]Batches:  59%|█████▉    | 100/169 [00:08<00:05, 12.68it/s]Batches:  60%|██████    | 102/169 [00:08<00:05, 12.36it/s]Batches:  62%|██████▏   | 104/169 [00:08<00:05, 12.70it/s]Batches:  63%|██████▎   | 106/169 [00:08<00:04, 12.86it/s]Batches:  64%|██████▍   | 108/169 [00:08<00:04, 12.89it/s]Batches:  65%|██████▌   | 110/169 [00:08<00:04, 12.94it/s]Batches:  66%|██████▋   | 112/169 [00:09<00:04, 12.19it/s]Batches:  67%|██████▋   | 114/169 [00:09<00:04, 12.04it/s]Batches:  69%|██████▊   | 116/169 [00:09<00:04, 12.13it/s]Batches:  70%|██████▉   | 118/169 [00:09<00:04, 12.14it/s]Batches:  71%|███████   | 120/169 [00:09<00:04, 12.01it/s]Batches:  72%|███████▏  | 122/169 [00:09<00:03, 12.08it/s]Batches:  73%|███████▎  | 124/169 [00:09<00:03, 12.18it/s]Batches:  75%|███████▍  | 126/169 [00:10<00:03, 12.05it/s]Batches:  76%|███████▌  | 128/169 [00:10<00:03, 11.68it/s]Batches:  77%|███████▋  | 130/169 [00:10<00:03, 12.18it/s]Batches:  78%|███████▊  | 132/169 [00:10<00:02, 12.82it/s]Batches:  79%|███████▉  | 134/169 [00:10<00:02, 14.19it/s]Batches:  80%|████████  | 136/169 [00:10<00:02, 15.06it/s]Batches:  82%|████████▏ | 138/169 [00:10<00:02, 15.10it/s]Batches:  83%|████████▎ | 140/169 [00:11<00:01, 15.07it/s]Batches:  84%|████████▍ | 142/169 [00:11<00:01, 14.69it/s]Batches:  85%|████████▌ | 144/169 [00:11<00:01, 15.83it/s]Batches:  86%|████████▋ | 146/169 [00:11<00:01, 16.73it/s]Batches:  88%|████████▊ | 148/169 [00:11<00:01, 17.17it/s]Batches:  89%|████████▉ | 150/169 [00:11<00:01, 17.26it/s]Batches:  90%|████████▉ | 152/169 [00:11<00:00, 17.81it/s]Batches:  91%|█████████ | 154/169 [00:11<00:00, 18.04it/s]Batches:  92%|█████████▏| 156/169 [00:12<00:00, 18.07it/s]Batches:  93%|█████████▎| 158/169 [00:12<00:00, 17.72it/s]Batches:  95%|█████████▍| 160/169 [00:12<00:00, 16.04it/s]Batches:  96%|█████████▌| 162/169 [00:12<00:00, 15.09it/s]Batches:  97%|█████████▋| 164/169 [00:12<00:00, 15.14it/s]Batches:  98%|█████████▊| 166/169 [00:12<00:00, 15.97it/s]Batches:  99%|█████████▉| 168/169 [00:12<00:00, 16.95it/s]Batches: 100%|██████████| 169/169 [00:12<00:00, 13.18it/s]
+[wp0-site] reusing shared BAAI/bge-base-en-v1.5
+Batches:   0%|          | 0/170 [00:00<?, ?it/s]Batches:   1%|          | 1/170 [00:00<00:24,  6.92it/s]Batches:   2%|▏         | 3/170 [00:00<00:16, 10.22it/s]Batches:   3%|▎         | 5/170 [00:00<00:15, 10.76it/s]Batches:   4%|▍         | 7/170 [00:00<00:14, 11.23it/s]Batches:   5%|▌         | 9/170 [00:00<00:13, 11.69it/s]Batches:   6%|▋         | 11/170 [00:00<00:13, 12.17it/s]Batches:   8%|▊         | 13/170 [00:01<00:12, 12.40it/s]Batches:   9%|▉         | 15/170 [00:01<00:12, 12.61it/s]Batches:  10%|█         | 17/170 [00:01<00:12, 12.47it/s]Batches:  11%|█         | 19/170 [00:01<00:12, 12.09it/s]Batches:  12%|█▏        | 21/170 [00:01<00:12, 12.07it/s]Batches:  14%|█▎        | 23/170 [00:01<00:12, 12.23it/s]Batches:  15%|█▍        | 25/170 [00:02<00:12, 12.06it/s]Batches:  16%|█▌        | 27/170 [00:02<00:11, 12.05it/s]Batches:  17%|█▋        | 29/170 [00:02<00:11, 11.84it/s]Batches:  18%|█▊        | 31/170 [00:02<00:11, 12.03it/s]Batches:  19%|█▉        | 33/170 [00:02<00:11, 11.81it/s]Batches:  21%|██        | 35/170 [00:02<00:11, 12.16it/s]Batches:  22%|██▏       | 37/170 [00:03<00:10, 12.25it/s]Batches:  23%|██▎       | 39/170 [00:03<00:10, 12.49it/s]Batches:  24%|██▍       | 41/170 [00:03<00:10, 12.73it/s]Batches:  25%|██▌       | 43/170 [00:03<00:10, 12.65it/s]Batches:  26%|██▋       | 45/170 [00:03<00:09, 12.50it/s]Batches:  28%|██▊       | 47/170 [00:03<00:09, 12.61it/s]Batches:  29%|██▉       | 49/170 [00:04<00:09, 12.63it/s]Batches:  30%|███       | 51/170 [00:04<00:09, 12.48it/s]Batches:  31%|███       | 53/170 [00:04<00:09, 12.80it/s]Batches:  32%|███▏      | 55/170 [00:04<00:09, 12.35it/s]Batches:  34%|███▎      | 57/170 [00:04<00:09, 12.07it/s]Batches:  35%|███▍      | 59/170 [00:04<00:09, 12.05it/s]Batches:  36%|███▌      | 61/170 [00:05<00:08, 12.34it/s]Batches:  37%|███▋      | 63/170 [00:05<00:08, 12.77it/s]Batches:  38%|███▊      | 65/170 [00:05<00:08, 12.67it/s]Batches:  39%|███▉      | 67/170 [00:05<00:08, 12.80it/s]Batches:  41%|████      | 69/170 [00:05<00:07, 12.94it/s]Batches:  42%|████▏     | 71/170 [00:05<00:07, 13.27it/s]Batches:  43%|████▎     | 73/170 [00:05<00:07, 12.96it/s]Batches:  44%|████▍     | 75/170 [00:06<00:10,  9.37it/s]Batches:  45%|████▌     | 77/170 [00:06<00:09, 10.16it/s]Batches:  46%|████▋     | 79/170 [00:06<00:08, 10.81it/s]Batches:  48%|████▊     | 81/170 [00:06<00:07, 11.41it/s]Batches:  49%|████▉     | 83/170 [00:06<00:07, 11.66it/s]Batches:  50%|█████     | 85/170 [00:07<00:07, 11.94it/s]Batches:  51%|█████     | 87/170 [00:07<00:06, 12.54it/s]Batches:  52%|█████▏    | 89/170 [00:07<00:06, 12.71it/s]Batches:  54%|█████▎    | 91/170 [00:07<00:06, 12.65it/s]Batches:  55%|█████▍    | 93/170 [00:07<00:06, 12.78it/s]Batches:  56%|█████▌    | 95/170 [00:07<00:05, 12.84it/s]Batches:  57%|█████▋    | 97/170 [00:07<00:05, 12.82it/s]Batches:  58%|█████▊    | 99/170 [00:08<00:05, 12.78it/s]Batches:  59%|█████▉    | 101/170 [00:08<00:05, 12.75it/s]Batches:  61%|██████    | 103/170 [00:08<00:05, 12.62it/s]Batches:  62%|██████▏   | 105/170 [00:08<00:06, 10.22it/s]Batches:  63%|██████▎   | 107/170 [00:08<00:05, 10.87it/s]Batches:  64%|██████▍   | 109/170 [00:09<00:05, 11.10it/s]Batches:  65%|██████▌   | 111/170 [00:09<00:05, 11.68it/s]Batches:  66%|██████▋   | 113/170 [00:09<00:04, 12.05it/s]Batches:  68%|██████▊   | 115/170 [00:09<00:04, 12.05it/s]Batches:  69%|██████▉   | 117/170 [00:09<00:04, 12.18it/s]Batches:  70%|███████   | 119/170 [00:09<00:04, 12.36it/s]Batches:  71%|███████   | 121/170 [00:10<00:03, 12.43it/s]Batches:  72%|███████▏  | 123/170 [00:11<00:14,  3.33it/s]Batches:  74%|███████▎  | 125/170 [00:11<00:10,  4.28it/s]Batches:  75%|███████▍  | 127/170 [00:11<00:08,  5.32it/s]Batches:  76%|███████▌  | 129/170 [00:12<00:06,  6.56it/s]Batches:  77%|███████▋  | 131/170 [00:12<00:04,  8.01it/s]Batches:  78%|███████▊  | 133/170 [00:12<00:03,  9.53it/s]Batches:  79%|███████▉  | 135/170 [00:12<00:03, 10.85it/s]Batches:  81%|████████  | 137/170 [00:12<00:02, 12.30it/s]Batches:  82%|████████▏ | 139/170 [00:12<00:02, 13.31it/s]Batches:  83%|████████▎ | 141/170 [00:12<00:02, 14.12it/s]Batches:  84%|████████▍ | 143/170 [00:12<00:01, 15.45it/s]Batches:  85%|████████▌ | 145/170 [00:13<00:01, 16.49it/s]Batches:  86%|████████▋ | 147/170 [00:13<00:01, 16.60it/s]Batches:  88%|████████▊ | 149/170 [00:13<00:01, 17.29it/s]Batches:  89%|████████▉ | 151/170 [00:13<00:01, 17.73it/s]Batches:  90%|█████████ | 153/170 [00:13<00:00, 18.06it/s]Batches:  91%|█████████ | 155/170 [00:13<00:00, 18.17it/s]Batches:  92%|█████████▏| 157/170 [00:13<00:00, 18.42it/s]Batches:  94%|█████████▎| 159/170 [00:13<00:00, 18.02it/s]Batches:  95%|█████████▍| 161/170 [00:13<00:00, 18.15it/s]Batches:  96%|█████████▌| 163/170 [00:14<00:00, 18.43it/s]Batches:  97%|█████████▋| 165/170 [00:14<00:00, 18.55it/s]Batches:  99%|█████████▉| 168/170 [00:14<00:00, 19.53it/s]Batches: 100%|██████████| 170/170 [00:14<00:00, 11.85it/s]
+  Novel query Fisher's test: DEGENERATE (no CPA-only or both-miss cases) — BEAR hits all 24 queries, CPA misses 14; test not applicable
+[wp0-site] reusing shared BAAI/bge-base-en-v1.5
+Batches:   0%|          | 0/172 [00:00<?, ?it/s]Batches:   1%|          | 1/172 [00:00<00:27,  6.27it/s]Batches:   2%|▏         | 3/172 [00:00<00:17,  9.57it/s]Batches:   3%|▎         | 5/172 [00:00<00:15, 10.65it/s]Batches:   4%|▍         | 7/172 [00:00<00:14, 11.31it/s]Batches:   5%|▌         | 9/172 [00:00<00:14, 11.26it/s]Batches:   6%|▋         | 11/172 [00:01<00:14, 11.36it/s]Batches:   8%|▊         | 13/172 [00:01<00:14, 10.99it/s]Batches:   9%|▊         | 15/172 [00:01<00:13, 11.44it/s]Batches:  10%|▉         | 17/172 [00:01<00:12, 11.97it/s]Batches:  11%|█         | 19/172 [00:01<00:12, 12.17it/s]Batches:  12%|█▏        | 21/172 [00:01<00:12, 12.37it/s]Batches:  13%|█▎        | 23/172 [00:01<00:12, 12.36it/s]Batches:  15%|█▍        | 25/172 [00:02<00:11, 12.29it/s]Batches:  16%|█▌        | 27/172 [00:02<00:11, 12.51it/s]Batches:  17%|█▋        | 29/172 [00:02<00:11, 12.68it/s]Batches:  18%|█▊        | 31/172 [00:02<00:11, 12.53it/s]Batches:  19%|█▉        | 33/172 [00:02<00:11, 12.51it/s]Batches:  20%|██        | 35/172 [00:02<00:11, 12.27it/s]Batches:  22%|██▏       | 37/172 [00:03<00:11, 11.87it/s]Batches:  23%|██▎       | 39/172 [00:03<00:11, 11.85it/s]Batches:  24%|██▍       | 41/172 [00:03<00:10, 12.08it/s]Batches:  25%|██▌       | 43/172 [00:03<00:10, 12.05it/s]Batches:  26%|██▌       | 45/172 [00:03<00:10, 12.48it/s]Batches:  27%|██▋       | 47/172 [00:03<00:09, 12.59it/s]Batches:  28%|██▊       | 49/172 [00:04<00:09, 12.89it/s]Batches:  30%|██▉       | 51/172 [00:04<00:09, 12.91it/s]Batches:  31%|███       | 53/172 [00:04<00:09, 13.19it/s]Batches:  32%|███▏      | 55/172 [00:04<00:08, 13.24it/s]Batches:  33%|███▎      | 57/172 [00:04<00:08, 13.23it/s]Batches:  34%|███▍      | 59/172 [00:04<00:08, 13.30it/s]Batches:  35%|███▌      | 61/172 [00:05<00:09, 12.26it/s]Batches:  37%|███▋      | 63/172 [00:05<00:08, 12.47it/s]Batches:  38%|███▊      | 65/172 [00:05<00:08, 12.56it/s]Batches:  39%|███▉      | 67/172 [00:05<00:08, 12.68it/s]Batches:  40%|████      | 69/172 [00:05<00:07, 12.98it/s]Batches:  41%|████▏     | 71/172 [00:05<00:07, 13.27it/s]Batches:  42%|████▏     | 73/172 [00:05<00:07, 13.30it/s]Batches:  44%|████▎     | 75/172 [00:06<00:07, 13.44it/s]Batches:  45%|████▍     | 77/172 [00:06<00:07, 13.48it/s]Batches:  46%|████▌     | 79/172 [00:06<00:06, 13.45it/s]Batches:  47%|████▋     | 81/172 [00:06<00:06, 13.58it/s]Batches:  48%|████▊     | 83/172 [00:06<00:06, 13.15it/s]Batches:  49%|████▉     | 85/172 [00:06<00:06, 13.07it/s]Batches:  51%|█████     | 87/172 [00:06<00:06, 13.26it/s]Batches:  52%|█████▏    | 89/172 [00:07<00:06, 13.47it/s]Batches:  53%|█████▎    | 91/172 [00:07<00:05, 13.83it/s]Batches:  54%|█████▍    | 93/172 [00:07<00:05, 13.50it/s]Batches:  55%|█████▌    | 95/172 [00:07<00:05, 13.34it/s]Batches:  56%|█████▋    | 97/172 [00:07<00:05, 13.32it/s]Batches:  58%|█████▊    | 99/172 [00:07<00:05, 13.41it/s]Batches:  59%|█████▊    | 101/172 [00:08<00:05, 12.82it/s]Batches:  60%|█████▉    | 103/172 [00:08<00:05, 12.86it/s]Batches:  61%|██████    | 105/172 [00:08<00:05, 12.66it/s]Batches:  62%|██████▏   | 107/172 [00:08<00:05, 12.76it/s]Batches:  63%|██████▎   | 109/172 [00:08<00:04, 12.73it/s]Batches:  65%|██████▍   | 111/172 [00:08<00:04, 12.72it/s]Batches:  66%|██████▌   | 113/172 [00:09<00:04, 11.84it/s]Batches:  67%|██████▋   | 115/172 [00:09<00:04, 11.93it/s]Batches:  68%|██████▊   | 117/172 [00:09<00:04, 12.15it/s]Batches:  69%|██████▉   | 119/172 [00:09<00:06,  8.12it/s]Batches:  70%|██████▉   | 120/172 [00:09<00:06,  8.28it/s]Batches:  71%|███████   | 122/172 [00:10<00:06,  8.01it/s]Batches:  72%|███████▏  | 123/172 [00:10<00:06,  7.76it/s]Batches:  73%|███████▎  | 125/172 [00:10<00:05,  8.12it/s]Batches:  73%|███████▎  | 126/172 [00:10<00:05,  8.37it/s]Batches:  74%|███████▍  | 127/172 [00:10<00:05,  8.65it/s]Batches:  74%|███████▍  | 128/172 [00:10<00:05,  8.48it/s]Batches:  76%|███████▌  | 130/172 [00:11<00:04,  8.42it/s]Batches:  76%|███████▌  | 131/172 [00:11<00:04,  8.72it/s]Batches:  77%|███████▋  | 133/172 [00:11<00:03, 10.43it/s]Batches:  78%|███████▊  | 135/172 [00:11<00:04,  8.26it/s]Batches:  79%|███████▉  | 136/172 [00:11<00:05,  6.65it/s]Batches:  80%|███████▉  | 137/172 [00:12<00:05,  6.53it/s]Batches:  80%|████████  | 138/172 [00:12<00:04,  7.09it/s]Batches:  81%|████████▏ | 140/172 [00:12<00:05,  6.40it/s]Batches:  82%|████████▏ | 141/172 [00:12<00:05,  6.15it/s]Batches:  83%|████████▎ | 143/172 [00:12<00:03,  7.68it/s]Batches:  84%|████████▎ | 144/172 [00:13<00:03,  7.15it/s]Batches:  84%|████████▍ | 145/172 [00:13<00:04,  6.23it/s]Batches:  85%|████████▌ | 147/172 [00:13<00:03,  7.60it/s]Batches:  87%|████████▋ | 149/172 [00:13<00:02,  8.58it/s]Batches:  87%|████████▋ | 150/172 [00:13<00:02,  7.86it/s]Batches:  88%|████████▊ | 151/172 [00:14<00:03,  5.40it/s]Batches:  88%|████████▊ | 152/172 [00:15<00:07,  2.80it/s]Batches:  89%|████████▉ | 153/172 [00:15<00:05,  3.41it/s]Batches:  90%|████████▉ | 154/172 [00:15<00:06,  2.91it/s]Batches:  90%|█████████ | 155/172 [00:16<00:05,  2.88it/s]Batches:  91%|█████████ | 156/172 [00:16<00:05,  2.80it/s]Batches:  91%|█████████▏| 157/172 [00:16<00:05,  2.82it/s]Batches:  92%|█████████▏| 158/172 [00:17<00:04,  2.94it/s]Batches:  92%|█████████▏| 159/172 [00:17<00:03,  3.52it/s]Batches:  93%|█████████▎| 160/172 [00:17<00:03,  3.94it/s]Batches:  94%|█████████▎| 161/172 [00:17<00:02,  4.58it/s]Batches:  94%|█████████▍| 162/172 [00:17<00:02,  4.92it/s]Batches:  95%|█████████▍| 163/172 [00:17<00:01,  5.68it/s]Batches:  96%|█████████▌| 165/172 [00:17<00:00,  7.55it/s]Batches:  97%|█████████▋| 166/172 [00:18<00:00,  7.89it/s]Batches:  98%|█████████▊| 168/172 [00:18<00:00,  9.73it/s]Batches:  99%|█████████▉| 170/172 [00:18<00:00,  9.16it/s]Batches: 100%|██████████| 172/172 [00:18<00:00, 10.20it/s]Batches: 100%|██████████| 172/172 [00:18<00:00,  9.24it/s]
+  Standard queries: 30
+  BEAR  persona/dept/safety/global: 1.000 / 1.000 / 1.000 / 1.000
+  CPA   persona/dept/safety/global: 1.000 / 1.000 / 1.000 / 1.000
+  Tokens/query: BEAR=953 [946, 961]  CPA=944 [943, 946]  Static=34721
+  Novel recall: BEAR=1.000  CPA=0.912  (24 queries)  Fisher's p=None
+  Unresolved conflicts: BEAR=0  CPA=0
+  Semantic recall: BEAR=1.000  CPA=0.000  (12 queries)
+  CPA wiring: 563 lines, 5 lookup tables
+
+==========================================================================================
+  SUMMARY: BEAR vs Conditional Prompt Assembly
+==========================================================================================
+
+--- Standard Query Recall ---
+    N Instr   BEAR P   CPA P   BEAR D   CPA D   BEAR S   CPA S   BEAR G   CPA G
+-------------------------------------------------------------------------------
+   10    28    1.000   1.000    1.000   1.000    1.000   1.000    1.000   1.000
+   25    51    1.000   1.000    1.000   1.000    1.000   1.000    1.000   1.000
+   50    84    1.000   1.000    1.000   1.000    1.000   1.000    1.000   1.000
+  100   155    1.000   1.000    1.000   1.000    1.000   1.000    1.000   1.000
+  200   285    1.000   1.000    1.000   1.000    1.000   1.000    1.000   1.000
+  500   675    1.000   1.000    1.000   1.000    1.000   1.000    1.000   1.000
+
+--- Novel Context Recall ---
+    N     BEAR     CPA    Delta
+-------------------------------
+   10    0.944   0.888   +0.056
+   25    0.956   0.912   +0.044
+   50    0.956   0.912   +0.044
+  100    1.000   0.912   +0.088
+  200    1.000   0.912   +0.088
+  500    1.000   0.912   +0.088
+
+--- Semantic Retrieval Advantage ---
+    N     BEAR     CPA    Delta
+-------------------------------
+   10    1.000   0.000   +1.000
+   25    1.000   0.000   +1.000
+   50    1.000   0.000   +1.000
+  100    1.000   0.000   +1.000
+  200    1.000   0.000   +1.000
+  500    1.000   0.000   +1.000
+
+--- Token Efficiency ---
+    N    BEAR    CPA  Static     B/S    C/S   CPA Lines
+-------------------------------------------------------
+   10     952    952    1454   0.655  0.655          14
+   25     996    952    2609   0.382  0.365          33
+   50     985    950    4344   0.227  0.219          62
+  100     995    952    8021   0.124  0.119         123
+  200     967    946   14696   0.066  0.064         233
+  500     953    944   34721   0.027  0.027         563
+
+======================================================================
+  LaTeX Tables
+======================================================================
+
+\begin{table}[t]
+\caption{Behavioral identity recall: BEAR vs.\ Conditional Prompt Assembly (CPA).
+Both systems access identical instruction content; CPA uses deterministic lookup tables
+while BEAR uses semantic retrieval with scope filtering.
+CPA achieves perfect recall on anticipated contexts but cannot adapt to novel situations.}
+\label{tab:baseline-correctness}
+\begin{tabular}{@{}rr cccc cccc@{}}
+\toprule
+& & \multicolumn{4}{c}{BEAR} & \multicolumn{4}{c}{CPA} \\
+\cmidrule(lr){3-6}\cmidrule(lr){7-10}
+$N$ & Instr & Pers & Dept & Safe & Glob & Pers & Dept & Safe & Glob \\
+\midrule
+10 & 28 & 1.000 & 1.000 & 1.000 & 1.000 & 1.000 & 1.000 & 1.000 & 1.000 \\
+25 & 51 & 1.000 & 1.000 & 1.000 & 1.000 & 1.000 & 1.000 & 1.000 & 1.000 \\
+50 & 84 & 1.000 & 1.000 & 1.000 & 1.000 & 1.000 & 1.000 & 1.000 & 1.000 \\
+100 & 155 & 1.000 & 1.000 & 1.000 & 1.000 & 1.000 & 1.000 & 1.000 & 1.000 \\
+200 & 285 & 1.000 & 1.000 & 1.000 & 1.000 & 1.000 & 1.000 & 1.000 & 1.000 \\
+500 & 675 & 1.000 & 1.000 & 1.000 & 1.000 & 1.000 & 1.000 & 1.000 & 1.000 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[t]
+\caption{Adaptability: recall on novel context queries not anticipated by CPA wiring.
+BEAR's semantic retrieval adapts to new departments, cross-department queries,
+and unseen context modifiers, while CPA returns only base instructions.}
+\label{tab:baseline-adaptability}
+\begin{tabular}{@{}rr cc c r@{}}
+\toprule
+$N$ & Novel $Q$ & BEAR & CPA & $\Delta$ & CPA Lines \\
+\midrule
+10 & 19 & 0.944 & 0.888 & +0.056 & 14 \\
+25 & 24 & 0.956 & 0.912 & +0.044 & 33 \\
+50 & 24 & 0.956 & 0.912 & +0.044 & 62 \\
+100 & 24 & 1.000 & 0.912 & +0.088 & 123 \\
+200 & 24 & 1.000 & 0.912 & +0.088 & 233 \\
+500 & 24 & 1.000 & 0.912 & +0.088 & 563 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[t]
+\caption{Token efficiency: BEAR and CPA both achieve dramatic reduction
+over static prompting (all instructions). CPA is slightly more compact
+since it performs exact lookup with no semantic over-retrieval.}
+\label{tab:baseline-tokens}
+\begin{tabular}{@{}rr rrr cc@{}}
+\toprule
+$N$ & Instr & BEAR & CPA & Static & BEAR/S & CPA/S \\
+\midrule
+10 & 28 & 952 & 952 & 1,454 & 0.655 & 0.655 \\
+25 & 51 & 996 & 952 & 2,609 & 0.382 & 0.365 \\
+50 & 84 & 985 & 950 & 4,344 & 0.227 & 0.219 \\
+100 & 155 & 995 & 952 & 8,021 & 0.124 & 0.119 \\
+200 & 285 & 967 & 946 & 14,696 & 0.066 & 0.064 \\
+500 & 675 & 953 & 944 & 34,721 & 0.027 & 0.027 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[t]
+\caption{Novel context recall breakdown by query type at $N=500$.
+BEAR adapts to every novel scenario; CPA fails on unknown departments
+and cross-department queries.}
+\label{tab:baseline-novel-breakdown}
+\begin{tabular}{@{}l r ccc@{}}
+\toprule
+Query Type & Count & BEAR & CPA & $\Delta$ \\
+\midrule
+Unknown department & 7 & 1.000 & 0.833 & +0.167 \\
+Cross-department & 7 & 1.000 & 0.864 & +0.136 \\
+Unseen modifier & 5 & 1.000 & 1.000 & +0.000 \\
+Conflict resolution & 5 & 1.000 & 1.000 & +0.000 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[t]
+\caption{Semantic retrieval advantage: recall on instructions discoverable
+only through embedding similarity. These instructions have no explicit tags
+matching query contexts; CPA's lookup tables cannot reference them.
+BEAR finds them through vector similarity search ($\theta=0.3$).}
+\label{tab:semantic-advantage}
+\begin{tabular}{@{}rr cc c@{}}
+\toprule
+$N$ & Semantic $Q$ & BEAR & CPA & $\Delta$ \\
+\midrule
+10 & 12 & 1.000 & 0.000 & +1.000 \\
+25 & 12 & 1.000 & 0.000 & +1.000 \\
+50 & 12 & 1.000 & 0.000 & +1.000 \\
+100 & 12 & 1.000 & 0.000 & +1.000 \\
+200 & 12 & 1.000 & 0.000 & +1.000 \\
+500 & 12 & 1.000 & 0.000 & +1.000 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[t]
+\caption{Semantic recall breakdown by scenario type at $N=500$.
+BEAR's embedding-based retrieval discovers contextually relevant instructions
+across all categories; CPA achieves zero recall because its lookup tables
+have no entries for these instruction types.}
+\label{tab:semantic-breakdown}
+\begin{tabular}{@{}l r ccc@{}}
+\toprule
+Scenario Type & Count & BEAR & CPA & $\Delta$ \\
+\midrule
+Semantically scoped & 3 & 1.000 & 0.000 & +1.000 \\
+Paraphrased query & 3 & 1.000 & 0.000 & +1.000 \\
+Cross-cutting concern & 3 & 1.000 & 0.000 & +1.000 \\
+Compositional novelty & 3 & 1.000 & 0.000 & +1.000 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+CSV written to /home/snhwang/tist-evals/wp0-v042/artifacts-dense/results/baseline_comparison_results.csv
+[wp0-site] embedding cache: 221 hits, 206 misses (/home/snhwang/tist-evals/wp0-v042/embcache)
+### mem guard: peak session RSS 1284 MiB
+### finished:    2026-10-30T09:25:42-04:00 rc=0

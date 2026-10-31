@@ -1,0 +1,25 @@
+### ================ attempt 2026-10-30T08:41:15-04:00 ================
+### step:        wp4_mt_nemotron
+### kind:        remote (need 0 GiB)
+### bear:        v042 (9d085b4)
+### started:     2026-10-30T08:41:15-04:00
+### command:     /home/snhwang/.venvs/tist-evals/bin/python evals/wp0_v040/dump_toolbench_lists.py --mode metatool-tags --backends nemotron --outdir results/wp0/wp4_lists_v042 --share-query-embeddings --nest-check 200 --progress 5000
+### env:         HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 TOKENIZERS_PARALLELISM=false PYTHONUNBUFFERED=1 PYTHONPATH=/home/snhwang/tist-evals/wp0-v042/artifacts-nemo/evals/wp0_v040/site BEAR_SOURCE_SHA=9d085b4 ANTHROPIC_API_KEY=wp0-dummy-key-no-paid-calls WP0_REPORT_VRAM=/home/snhwang/tist-evals/wp0-v042/logs/vram.jsonl WP0_STEP=wp4_mt_nemotron WP0_NO_LOCAL_MODELS=1 CUDA_VISIBLE_DEVICES= CUDA_VISIBLE_DEVICES= WP0_NEMO_CACHE=/home/snhwang/tist-evals/wp0-v042/nemocache/nemo.sqlite
+### memory cap:  /home/snhwang/bin/tist-capped --mem 8G --
+[wp0-site] local model loads refused (WP0_NO_LOCAL_MODELS)
+BEAR: {"bear_version": "0.4.2", "bear_path": "/home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/bear", "bear_source_sha": "9d085b4", "bear_pkg_sha256": "9cf19e48b49f4e57e3723050b942b296bb66f775fdd41e7f1770514576d0930a"}
+metatool-tags: corpus 199, queries 21111, k=50
+    BEAR+Nemotron (gov): 5000/21111 (2s)
+    BEAR+Nemotron (gov): 10000/21111 (6s)
+    BEAR+Nemotron (gov): 15000/21111 (8s)
+    BEAR+Nemotron (gov): 20000/21111 (11s)
+    nesting check: 0 mismatches over 200 queries x 12 k
+  BEAR+Nemotron (gov): done (12s), query cache hits=2457 misses=21054
+    Nemotron (no gov): 5000/21111 (2s)
+    Nemotron (no gov): 10000/21111 (4s)
+    Nemotron (no gov): 15000/21111 (6s)
+    Nemotron (no gov): 20000/21111 (8s)
+    nesting check: 0 mismatches over 200 queries x 12 k
+  Nemotron (no gov): done (10s), query cache hits=4927 misses=42095
+### mem guard: peak session RSS 1211 MiB
+### finished:    2026-10-30T08:41:47-04:00 rc=0

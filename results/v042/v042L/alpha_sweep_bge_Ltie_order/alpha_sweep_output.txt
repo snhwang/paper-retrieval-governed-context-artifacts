@@ -1,0 +1,78 @@
+
+######################################################################
+#  Backend 1/1: bge
+######################################################################
+
+=== Alpha sweep (bge) ===
+
+Corpus: 58 instructions, 60 standard queries
+Alpha grid: [0.0, 0.1, 0.2, 0.3, 0.5, 0.7, 0.9, 1.0]
+
+[1/8] alpha = 0.00 ...
+[2/8] alpha = 0.10 ...
+[3/8] alpha = 0.20 ...
+[4/8] alpha = 0.30 ...
+[5/8] alpha = 0.50 ...
+[6/8] alpha = 0.70 ...
+[7/8] alpha = 0.90 ...
+[8/8] alpha = 1.00 ...
+
+--- Results (backend = bge, paired vs. alpha = 0.3) ---
+
+ alpha  Strict F1 [95% CI]            Δ vs default   Cohen d  p (paired)
+------------------------------------------------------------------------
+  0.00  0.657 [0.641,0.671]         -0.011           +0.30         0.0274
+  0.10  0.665 [0.652,0.679]         -0.002           +0.13         0.6325
+  0.20  0.668 [0.655,0.680]         +0.000           +0.00         1.0000
+  0.30  0.668 [0.655,0.680]         +0.000           +0.00              —
+  0.50  0.659 [0.643,0.674]         -0.008           +0.27         0.0598
+  0.70  0.649 [0.629,0.667]         -0.019           +0.42         0.0024
+  0.90  0.649 [0.629,0.667]         -0.019           +0.42         0.0024
+  1.00  0.649 [0.629,0.667]         -0.019           +0.42         0.0024
+
+Max F1 = 0.668 at alpha = 0.20
+Curve shape: peaked at alpha=0.20
+
+Wrote results/alpha_sweep_bge.json
+
+--- LaTeX table (paste into manuscript) ---
+
+\begin{table}[t]
+  \caption{Effect of the priority-weighting coefficient $\alpha$ on strict F1 at $k=10$ on Pet Simulation (60 standard queries, backend = bge, full governance with all other mechanisms enabled). The composite score is $\operatorname{score}(q, d) = (1 - \alpha)\,\widetilde{\operatorname{sim}}(q, d) + \alpha\,p(d)/100$. 95\% bootstrap CIs and paired bootstrap $p$-values vs.\ the default $\alpha = 0.3$ are reported.}
+  \label{tab:alpha-sweep}
+  \centering
+  \small
+  \begin{tabular}{@{}c c c c c@{}}
+    \toprule
+    $\alpha$ & Strict F1 [95\% CI] & $\Delta$ vs. default & Cohen's $d$ & $p$ (paired) \\
+    \midrule
+    0.00 & 0.657 [0.641,0.671] & -0.011 & +0.30 & 0.0274 \\
+    0.10 & 0.665 [0.652,0.679] & -0.002 & +0.13 & 0.6325 \\
+    0.20 & 0.668 [0.655,0.680] & +0.000 & +0.00 & 1.0000 \\
+    0.30 & 0.668 [0.655,0.680] & --- & --- & --- \\
+    0.50 & 0.659 [0.643,0.674] & -0.008 & +0.27 & 0.0598 \\
+    0.70 & 0.649 [0.629,0.667] & -0.019 & +0.42 & 0.0024 \\
+    0.90 & 0.649 [0.629,0.667] & -0.019 & +0.42 & 0.0024 \\
+    1.00 & 0.649 [0.629,0.667] & -0.019 & +0.42 & 0.0024 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Elapsed: 0.8s
+Full log written to results/alpha_sweep_output.txt
+
+=== Reproducibility ===
+Timestamp (UTC): 2026-10-30T22:42:34Z
+Command line:    evals/eval_alpha_sweep.py --backends bge
+Python:          3.12.13 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
+numpy:           2.2.6
+scipy:           1.17.1
+bear:            0.4.2
+git commit:      634caf5ab715b2a7c20fac0b170228a49810bdc7
+git status:      DIRTY (24 files modified)
+git branch:      tist-r2
+
+  backends: ['bge']
+  alphas: [0.0, 0.1, 0.2, 0.3, 0.5, 0.7, 0.9, 1.0]
+  output_dir: results
+===

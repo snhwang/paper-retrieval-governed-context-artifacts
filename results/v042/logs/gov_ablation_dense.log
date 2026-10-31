@@ -1,0 +1,130 @@
+### ================ attempt 2026-10-30T09:13:40-04:00 ================
+### step:        gov_ablation_dense
+### kind:        cpu (need 0 GiB)
+### bear:        v042 (9d085b4)
+### started:     2026-10-30T09:13:40-04:00
+### command:     /home/snhwang/.venvs/tist-evals/bin/python evals/eval_governance_ablation.py --backends bge bge-m3 qwen3 --output results/wp0/governance_ablation_dense.json
+### env:         HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 TOKENIZERS_PARALLELISM=false PYTHONUNBUFFERED=1 PYTHONPATH=/home/snhwang/tist-evals/wp0-v042/artifacts-dense/evals/wp0_v040/site BEAR_SOURCE_SHA=9d085b4 ANTHROPIC_API_KEY=wp0-dummy-key-no-paid-calls WP0_REPORT_VRAM=/home/snhwang/tist-evals/wp0-v042/logs/vram.jsonl WP0_STEP=gov_ablation_dense CUDA_VISIBLE_DEVICES= WP0_ENCODE_BATCH=4 CUDA_VISIBLE_DEVICES= OMP_NUM_THREADS=12 MKL_NUM_THREADS=12 WP0_EMB_CACHE=/home/snhwang/tist-evals/wp0-v042/embcache WP0_SHARE_MODELS=1
+### memory cap:  /home/snhwang/bin/tist-capped --mem 20G --
+[wp0-site] encode batch size capped at 4
+Loaded corpus: 58 instructions
+Backends: bge, bge-m3, qwen3
+/home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/itr/indexing/embedder.py:21: FutureWarning: The `get_sentence_embedding_dimension` method has been renamed to `get_embedding_dimension`.
+  self.embedding_dim = self.model.get_sentence_embedding_dimension()
+ITR loaded
+
+======================================================================
+  Full governance
+======================================================================
+
+  Standard (n=60):
+[wp0-site] reusing shared BAAI/bge-base-en-v1.5
+    BGE-base             0.668 [0.655,0.680]
+    BGE-M3               0.665 [0.652,0.679]
+    Qwen3-0.6B           0.665 [0.652,0.679]
+    ITR                  0.182 [0.162,0.203]
+    Random-k             0.116 [0.114,0.119]
+
+  Paraphrase (n=60):
+    BGE-base             0.637 [0.627,0.648]
+    BGE-M3               0.637 [0.627,0.648]
+    Qwen3-0.6B           0.637 [0.627,0.648]
+    ITR                  0.058 [0.039,0.078]
+    Random-k             0.102 [0.100,0.104]
+
+  No-tag (n=54):
+    BGE-base             0.653 [0.642,0.662]
+    BGE-M3               0.653 [0.642,0.662]
+    Qwen3-0.6B           0.653 [0.642,0.662]
+    ITR                  0.153 [0.130,0.178]
+    Random-k             0.097 [0.095,0.098]
+
+  Complex (n=60):
+    BGE-base             0.672 [0.656,0.688]
+    BGE-M3               0.670 [0.652,0.687]
+    Qwen3-0.6B           0.672 [0.656,0.688]
+    ITR                  0.161 [0.132,0.190]
+    Random-k             0.115 [0.111,0.118]
+
+======================================================================
+  Mandatory only
+======================================================================
+
+  Standard (n=60):
+    BGE-base             0.522 [0.501,0.541]
+    BGE-M3               0.538 [0.521,0.555]
+    Qwen3-0.6B           0.540 [0.520,0.559]
+    ITR                  0.182 [0.162,0.203]
+    Random-k             0.116 [0.114,0.119]
+
+  Paraphrase (n=60):
+    BGE-base             0.446 [0.433,0.460]
+    BGE-M3               0.462 [0.446,0.480]
+    Qwen3-0.6B           0.457 [0.443,0.473]
+    ITR                  0.058 [0.039,0.078]
+    Random-k             0.102 [0.100,0.104]
+
+  No-tag (n=54):
+    BGE-base             0.451 [0.439,0.464]
+    BGE-M3               0.432 [0.430,0.435]
+    Qwen3-0.6B           0.456 [0.443,0.470]
+    ITR                  0.153 [0.130,0.178]
+    Random-k             0.097 [0.095,0.098]
+
+  Complex (n=60):
+    BGE-base             0.508 [0.489,0.528]
+    BGE-M3               0.528 [0.510,0.546]
+    Qwen3-0.6B           0.539 [0.517,0.562]
+    ITR                  0.161 [0.132,0.190]
+    Random-k             0.115 [0.111,0.118]
+
+======================================================================
+  No governance
+======================================================================
+
+  Standard (n=60):
+    BGE-base             0.155 [0.134,0.178]
+    BGE-M3               0.160 [0.141,0.178]
+    Qwen3-0.6B           0.209 [0.189,0.229]
+    ITR                  0.182 [0.162,0.203]
+    Random-k             0.116 [0.114,0.119]
+
+  Paraphrase (n=60):
+    BGE-base             0.073 [0.049,0.097]
+    BGE-M3               0.082 [0.065,0.099]
+    Qwen3-0.6B           0.103 [0.080,0.127]
+    ITR                  0.058 [0.039,0.078]
+    Random-k             0.102 [0.100,0.104]
+
+  No-tag (n=54):
+    BGE-base             0.105 [0.075,0.137]
+    BGE-M3               0.025 [0.008,0.048]
+    Qwen3-0.6B           0.132 [0.096,0.170]
+    ITR                  0.153 [0.130,0.178]
+    Random-k             0.097 [0.095,0.098]
+
+  Complex (n=60):
+    BGE-base             0.144 [0.119,0.171]
+    BGE-M3               0.148 [0.127,0.170]
+    Qwen3-0.6B           0.226 [0.200,0.252]
+    ITR                  0.161 [0.132,0.190]
+    Random-k             0.115 [0.111,0.118]
+
+======================================================================
+  Token Efficiency
+======================================================================
+
+  Strategy                    Tokens  Instr  Savings
+  -------------------------------------------------
+  Monolithic                    5029   58.0     0.0%
+  Role prompting                  46    0.0    99.1%
+  BEAR + BGE-base                837    9.8    83.3%
+  BEAR + BGE-M3                  838    9.8    83.3%
+  BEAR + Qwen3-0.6B              837    9.8    83.4%
+  ITR                            846   10.0    83.2%
+  Random-k                       868   10.0    82.7%
+
+Results saved to results/wp0/governance_ablation_dense.json
+[wp0-site] embedding cache: 3946 hits, 0 misses (/home/snhwang/tist-evals/wp0-v042/embcache)
+### mem guard: peak session RSS 14108 MiB
+### finished:    2026-10-30T09:14:27-04:00 rc=0

@@ -1,0 +1,2890 @@
+{
+ "published_commit_list": "/mnt/c/Users/Scott/AppData/Local/Temp/claude/c--Users-Scott-Documents-Work-paper-retrieval-governed-context/b2a7ec29-e0cc-4cf9-a2d3-67d64780d674/scratchpad/published_files_main.txt",
+ "findings": [
+  {
+   "file": "results/toolbench_react_metrics_gemma4-31b-bear_partial.json",
+   "table": "Table 9 sources (Gemma 4)",
+   "cell": "bear_single",
+   "match": "accuracy 0.005 within the hash-retrieval bound 0.266",
+   "dense": 0.005,
+   "hash": 0.2109090909090909,
+   "comparator": "bound from Table 7 BEAR+Hash (gov)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/backend_comparison.json",
+   "table": "tab:governance-ablation (a)",
+   "cell": "ITR-hybrid / para_f1",
+   "match": "value and CI equal to hash",
+   "dense": 0.6368131868131868,
+   "hash": 0.6368131868131868,
+   "comparator": "fallback run (ITR-hybrid)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/alpha_sweep_qwen3-4b.json",
+   "table": "tab:alpha-sweep",
+   "cell": "alpha=0.7",
+   "match": "value and CI equal to the fallback run",
+   "dense": 0.8427016502016503,
+   "hash": 0.8427016502016503,
+   "comparator": "v0110F fb_alpha",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/alpha_sweep_qwen3-4b.json",
+   "table": "tab:alpha-sweep",
+   "cell": "alpha=0.9",
+   "match": "value and CI equal to the fallback run",
+   "dense": 0.8302016502016503,
+   "hash": 0.8302016502016503,
+   "comparator": "v0110F fb_alpha",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/alpha_sweep_qwen3-4b.json",
+   "table": "tab:alpha-sweep",
+   "cell": "alpha=1.0",
+   "match": "value and CI equal to the fallback run",
+   "dense": 0.8302016502016503,
+   "hash": 0.8302016502016503,
+   "comparator": "v0110F fb_alpha",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/governance_decomposed.json",
+   "table": "tab:decomposed-ablation",
+   "cell": "bge",
+   "match": "aggregate disagrees with the per-backend file",
+   "dense": null,
+   "hash": null,
+   "comparator": "governance_decomposed_bge.json",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/scalability_results.csv",
+   "table": "scalability (text)",
+   "cell": "N=10",
+   "match": "every BEAR column equal to the fallback run",
+   "dense": null,
+   "hash": null,
+   "comparator": "v0110F fb_scalability",
+   "replaced_by_042": null,
+   "columns": [
+    "persona_recall",
+    "dept_recall",
+    "safety_recall",
+    "global_recall",
+    "scope_violations",
+    "bear_tokens",
+    "token_ratio"
+   ]
+  },
+  {
+   "file": "results/scalability_results.csv",
+   "table": "scalability (text)",
+   "cell": "N=25",
+   "match": "every BEAR column equal to the fallback run",
+   "dense": null,
+   "hash": null,
+   "comparator": "v0110F fb_scalability",
+   "replaced_by_042": null,
+   "columns": [
+    "persona_recall",
+    "dept_recall",
+    "safety_recall",
+    "global_recall",
+    "scope_violations",
+    "bear_tokens",
+    "token_ratio"
+   ]
+  },
+  {
+   "file": "results/scalability_results.csv",
+   "table": "scalability (text)",
+   "cell": "N=50",
+   "match": "every BEAR column equal to the fallback run",
+   "dense": null,
+   "hash": null,
+   "comparator": "v0110F fb_scalability",
+   "replaced_by_042": null,
+   "columns": [
+    "persona_recall",
+    "dept_recall",
+    "safety_recall",
+    "global_recall",
+    "scope_violations",
+    "bear_tokens",
+    "token_ratio"
+   ]
+  },
+  {
+   "file": "results/scalability_results.csv",
+   "table": "scalability (text)",
+   "cell": "N=100",
+   "match": "every BEAR column equal to the fallback run",
+   "dense": null,
+   "hash": null,
+   "comparator": "v0110F fb_scalability",
+   "replaced_by_042": null,
+   "columns": [
+    "persona_recall",
+    "dept_recall",
+    "safety_recall",
+    "global_recall",
+    "scope_violations",
+    "bear_tokens",
+    "token_ratio"
+   ]
+  },
+  {
+   "file": "results/scalability_results.csv",
+   "table": "scalability (text)",
+   "cell": "N=200",
+   "match": "every BEAR column equal to the fallback run",
+   "dense": null,
+   "hash": null,
+   "comparator": "v0110F fb_scalability",
+   "replaced_by_042": null,
+   "columns": [
+    "persona_recall",
+    "dept_recall",
+    "safety_recall",
+    "global_recall",
+    "scope_violations",
+    "bear_tokens",
+    "token_ratio"
+   ]
+  },
+  {
+   "file": "results/scalability_results.csv",
+   "table": "scalability (text)",
+   "cell": "N=500",
+   "match": "every BEAR column equal to the fallback run",
+   "dense": null,
+   "hash": null,
+   "comparator": "v0110F fb_scalability",
+   "replaced_by_042": null,
+   "columns": [
+    "persona_recall",
+    "dept_recall",
+    "safety_recall",
+    "global_recall",
+    "scope_violations",
+    "bear_tokens",
+    "token_ratio"
+   ]
+  },
+  {
+   "file": "results/eval_tool_scaling_output.txt",
+   "table": "tab:tool-scaling",
+   "cell": "all cells",
+   "match": "every cell equal to the fallback run",
+   "dense": null,
+   "hash": null,
+   "comparator": "v0110F",
+   "replaced_by_042": null
+  }
+ ],
+ "constant_array_matches": [
+  {
+   "file": "results/toolbench_eval_v0110.json",
+   "table": "Table 3",
+   "cell": "ToolBench / BEAR+BGE (mand-only) / recall",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_v0110.json",
+   "table": "Table 3",
+   "cell": "ToolBench / BEAR+BGE (mand-only) / precision",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_v0110.json",
+   "table": "Table 3",
+   "cell": "ToolBench / BEAR+BGE (mand-only) / f1",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_v0110.json",
+   "table": "Table 3",
+   "cell": "ToolBench / BEAR+BGE (mand-only) / ndcg",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_v0110.json",
+   "table": "Table 3",
+   "cell": "ToolBench / BEAR+BGE-M3 (mand-only) / recall",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_v0110.json",
+   "table": "Table 3",
+   "cell": "ToolBench / BEAR+BGE-M3 (mand-only) / precision",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_v0110.json",
+   "table": "Table 3",
+   "cell": "ToolBench / BEAR+BGE-M3 (mand-only) / f1",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_v0110.json",
+   "table": "Table 3",
+   "cell": "ToolBench / BEAR+BGE-M3 (mand-only) / ndcg",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_v0110.json",
+   "table": "Table 3",
+   "cell": "ToolBench / BEAR+Qwen3-0.6B (mand-only) / recall",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_v0110.json",
+   "table": "Table 3",
+   "cell": "ToolBench / BEAR+Qwen3-0.6B (mand-only) / precision",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_v0110.json",
+   "table": "Table 3",
+   "cell": "ToolBench / BEAR+Qwen3-0.6B (mand-only) / f1",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_v0110.json",
+   "table": "Table 3",
+   "cell": "ToolBench / BEAR+Qwen3-0.6B (mand-only) / ndcg",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_v0110.json",
+   "table": "Table 3",
+   "cell": "ToolBench / BEAR+Qwen3-4B (mand-only) / recall",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_v0110.json",
+   "table": "Table 3",
+   "cell": "ToolBench / BEAR+Qwen3-4B (mand-only) / precision",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_v0110.json",
+   "table": "Table 3",
+   "cell": "ToolBench / BEAR+Qwen3-4B (mand-only) / f1",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_v0110.json",
+   "table": "Table 3",
+   "cell": "ToolBench / BEAR+Qwen3-4B (mand-only) / ndcg",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_metatool_v0110.json",
+   "table": "Tables 5, 6",
+   "cell": "MetaTool+Tags / BEAR+BGE (mand-only) / recall",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_metatool_v0110.json",
+   "table": "Tables 5, 6",
+   "cell": "MetaTool+Tags / BEAR+BGE (mand-only) / precision",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_metatool_v0110.json",
+   "table": "Tables 5, 6",
+   "cell": "MetaTool+Tags / BEAR+BGE (mand-only) / f1",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_metatool_v0110.json",
+   "table": "Tables 5, 6",
+   "cell": "MetaTool+Tags / BEAR+BGE (mand-only) / ndcg",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_metatool_v0110.json",
+   "table": "Tables 5, 6",
+   "cell": "MetaTool+Tags / BEAR+BGE-M3 (mand-only) / recall",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_metatool_v0110.json",
+   "table": "Tables 5, 6",
+   "cell": "MetaTool+Tags / BEAR+BGE-M3 (mand-only) / precision",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_metatool_v0110.json",
+   "table": "Tables 5, 6",
+   "cell": "MetaTool+Tags / BEAR+BGE-M3 (mand-only) / f1",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_metatool_v0110.json",
+   "table": "Tables 5, 6",
+   "cell": "MetaTool+Tags / BEAR+BGE-M3 (mand-only) / ndcg",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_metatool_v0110.json",
+   "table": "Tables 5, 6",
+   "cell": "MetaTool+Tags / BEAR+Qwen3-0.6B (mand-only) / recall",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_metatool_v0110.json",
+   "table": "Tables 5, 6",
+   "cell": "MetaTool+Tags / BEAR+Qwen3-0.6B (mand-only) / precision",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_metatool_v0110.json",
+   "table": "Tables 5, 6",
+   "cell": "MetaTool+Tags / BEAR+Qwen3-0.6B (mand-only) / f1",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_metatool_v0110.json",
+   "table": "Tables 5, 6",
+   "cell": "MetaTool+Tags / BEAR+Qwen3-0.6B (mand-only) / ndcg",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_metatool_v0110.json",
+   "table": "Tables 5, 6",
+   "cell": "MetaTool+Tags / BEAR+Qwen3-4B (mand-only) / recall",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_metatool_v0110.json",
+   "table": "Tables 5, 6",
+   "cell": "MetaTool+Tags / BEAR+Qwen3-4B (mand-only) / precision",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_metatool_v0110.json",
+   "table": "Tables 5, 6",
+   "cell": "MetaTool+Tags / BEAR+Qwen3-4B (mand-only) / f1",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_metatool_v0110.json",
+   "table": "Tables 5, 6",
+   "cell": "MetaTool+Tags / BEAR+Qwen3-4B (mand-only) / ndcg",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_metatool_v0110.json",
+   "table": "Tables 5, 6",
+   "cell": "MetaTool+QueryTags-top5 / BEAR+BGE (mand-only) / recall",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_metatool_v0110.json",
+   "table": "Tables 5, 6",
+   "cell": "MetaTool+QueryTags-top5 / BEAR+BGE (mand-only) / precision",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_metatool_v0110.json",
+   "table": "Tables 5, 6",
+   "cell": "MetaTool+QueryTags-top5 / BEAR+BGE (mand-only) / f1",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_metatool_v0110.json",
+   "table": "Tables 5, 6",
+   "cell": "MetaTool+QueryTags-top5 / BEAR+BGE (mand-only) / ndcg",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_metatool_v0110.json",
+   "table": "Tables 5, 6",
+   "cell": "MetaTool+QueryTags-top5 / BEAR+BGE-M3 (mand-only) / recall",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_metatool_v0110.json",
+   "table": "Tables 5, 6",
+   "cell": "MetaTool+QueryTags-top5 / BEAR+BGE-M3 (mand-only) / precision",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_metatool_v0110.json",
+   "table": "Tables 5, 6",
+   "cell": "MetaTool+QueryTags-top5 / BEAR+BGE-M3 (mand-only) / f1",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_metatool_v0110.json",
+   "table": "Tables 5, 6",
+   "cell": "MetaTool+QueryTags-top5 / BEAR+BGE-M3 (mand-only) / ndcg",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_metatool_v0110.json",
+   "table": "Tables 5, 6",
+   "cell": "MetaTool+QueryTags-top5 / BEAR+Qwen3-0.6B (mand-only) / recall",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_metatool_v0110.json",
+   "table": "Tables 5, 6",
+   "cell": "MetaTool+QueryTags-top5 / BEAR+Qwen3-0.6B (mand-only) / precision",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_metatool_v0110.json",
+   "table": "Tables 5, 6",
+   "cell": "MetaTool+QueryTags-top5 / BEAR+Qwen3-0.6B (mand-only) / f1",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_metatool_v0110.json",
+   "table": "Tables 5, 6",
+   "cell": "MetaTool+QueryTags-top5 / BEAR+Qwen3-0.6B (mand-only) / ndcg",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_metatool_v0110.json",
+   "table": "Tables 5, 6",
+   "cell": "MetaTool+QueryTags-top5 / BEAR+Qwen3-4B (mand-only) / recall",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_metatool_v0110.json",
+   "table": "Tables 5, 6",
+   "cell": "MetaTool+QueryTags-top5 / BEAR+Qwen3-4B (mand-only) / precision",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_metatool_v0110.json",
+   "table": "Tables 5, 6",
+   "cell": "MetaTool+QueryTags-top5 / BEAR+Qwen3-4B (mand-only) / f1",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_metatool_v0110.json",
+   "table": "Tables 5, 6",
+   "cell": "MetaTool+QueryTags-top5 / BEAR+Qwen3-4B (mand-only) / ndcg",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_qtags_top5_v0110.json",
+   "table": "Table 6 +QueryTags",
+   "cell": "ToolBench / BEAR+BGE (mand-only) / recall",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_qtags_top5_v0110.json",
+   "table": "Table 6 +QueryTags",
+   "cell": "ToolBench / BEAR+BGE (mand-only) / precision",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_qtags_top5_v0110.json",
+   "table": "Table 6 +QueryTags",
+   "cell": "ToolBench / BEAR+BGE (mand-only) / f1",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_qtags_top5_v0110.json",
+   "table": "Table 6 +QueryTags",
+   "cell": "ToolBench / BEAR+BGE (mand-only) / ndcg",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_qtags_top5_v0110.json",
+   "table": "Table 6 +QueryTags",
+   "cell": "ToolBench / BEAR+BGE-M3 (mand-only) / recall",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_qtags_top5_v0110.json",
+   "table": "Table 6 +QueryTags",
+   "cell": "ToolBench / BEAR+BGE-M3 (mand-only) / precision",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_qtags_top5_v0110.json",
+   "table": "Table 6 +QueryTags",
+   "cell": "ToolBench / BEAR+BGE-M3 (mand-only) / f1",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_qtags_top5_v0110.json",
+   "table": "Table 6 +QueryTags",
+   "cell": "ToolBench / BEAR+BGE-M3 (mand-only) / ndcg",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_qtags_top5_v0110.json",
+   "table": "Table 6 +QueryTags",
+   "cell": "ToolBench / BEAR+Qwen3-0.6B (mand-only) / recall",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_qtags_top5_v0110.json",
+   "table": "Table 6 +QueryTags",
+   "cell": "ToolBench / BEAR+Qwen3-0.6B (mand-only) / precision",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_qtags_top5_v0110.json",
+   "table": "Table 6 +QueryTags",
+   "cell": "ToolBench / BEAR+Qwen3-0.6B (mand-only) / f1",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_qtags_top5_v0110.json",
+   "table": "Table 6 +QueryTags",
+   "cell": "ToolBench / BEAR+Qwen3-0.6B (mand-only) / ndcg",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_qtags_top5_v0110.json",
+   "table": "Table 6 +QueryTags",
+   "cell": "ToolBench / BEAR+Qwen3-4B (mand-only) / recall",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_qtags_top5_v0110.json",
+   "table": "Table 6 +QueryTags",
+   "cell": "ToolBench / BEAR+Qwen3-4B (mand-only) / precision",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_qtags_top5_v0110.json",
+   "table": "Table 6 +QueryTags",
+   "cell": "ToolBench / BEAR+Qwen3-4B (mand-only) / f1",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_qtags_top5_v0110.json",
+   "table": "Table 6 +QueryTags",
+   "cell": "ToolBench / BEAR+Qwen3-4B (mand-only) / ndcg",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_qtags_top5_v0110_regen.json",
+   "table": "Table 6 +QueryTags (regen)",
+   "cell": "ToolBench / BEAR+BGE (mand-only) / recall",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_qtags_top5_v0110_regen.json",
+   "table": "Table 6 +QueryTags (regen)",
+   "cell": "ToolBench / BEAR+BGE (mand-only) / precision",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_qtags_top5_v0110_regen.json",
+   "table": "Table 6 +QueryTags (regen)",
+   "cell": "ToolBench / BEAR+BGE (mand-only) / f1",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_qtags_top5_v0110_regen.json",
+   "table": "Table 6 +QueryTags (regen)",
+   "cell": "ToolBench / BEAR+BGE (mand-only) / ndcg",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_qtags_top5_v0110_regen.json",
+   "table": "Table 6 +QueryTags (regen)",
+   "cell": "ToolBench / BEAR+BGE-M3 (mand-only) / recall",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_qtags_top5_v0110_regen.json",
+   "table": "Table 6 +QueryTags (regen)",
+   "cell": "ToolBench / BEAR+BGE-M3 (mand-only) / precision",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_qtags_top5_v0110_regen.json",
+   "table": "Table 6 +QueryTags (regen)",
+   "cell": "ToolBench / BEAR+BGE-M3 (mand-only) / f1",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_qtags_top5_v0110_regen.json",
+   "table": "Table 6 +QueryTags (regen)",
+   "cell": "ToolBench / BEAR+BGE-M3 (mand-only) / ndcg",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_qtags_top5_v0110_regen.json",
+   "table": "Table 6 +QueryTags (regen)",
+   "cell": "ToolBench / BEAR+Qwen3-0.6B (mand-only) / recall",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_qtags_top5_v0110_regen.json",
+   "table": "Table 6 +QueryTags (regen)",
+   "cell": "ToolBench / BEAR+Qwen3-0.6B (mand-only) / precision",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_qtags_top5_v0110_regen.json",
+   "table": "Table 6 +QueryTags (regen)",
+   "cell": "ToolBench / BEAR+Qwen3-0.6B (mand-only) / f1",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_qtags_top5_v0110_regen.json",
+   "table": "Table 6 +QueryTags (regen)",
+   "cell": "ToolBench / BEAR+Qwen3-0.6B (mand-only) / ndcg",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_qtags_top5_v0110_regen.json",
+   "table": "Table 6 +QueryTags (regen)",
+   "cell": "ToolBench / BEAR+Qwen3-4B (mand-only) / recall",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_qtags_top5_v0110_regen.json",
+   "table": "Table 6 +QueryTags (regen)",
+   "cell": "ToolBench / BEAR+Qwen3-4B (mand-only) / precision",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_qtags_top5_v0110_regen.json",
+   "table": "Table 6 +QueryTags (regen)",
+   "cell": "ToolBench / BEAR+Qwen3-4B (mand-only) / f1",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "results/toolbench_eval_qtags_top5_v0110_regen.json",
+   "table": "Table 6 +QueryTags (regen)",
+   "cell": "ToolBench / BEAR+Qwen3-4B (mand-only) / ndcg",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "evals/results/toolbench_eval.json",
+   "table": "older ToolBench run",
+   "cell": "MetaTool+Tags / BEAR+BGE (mand-only) / recall",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "evals/results/toolbench_eval.json",
+   "table": "older ToolBench run",
+   "cell": "MetaTool+Tags / BEAR+BGE (mand-only) / precision",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "evals/results/toolbench_eval.json",
+   "table": "older ToolBench run",
+   "cell": "MetaTool+Tags / BEAR+BGE (mand-only) / f1",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "evals/results/toolbench_eval.json",
+   "table": "older ToolBench run",
+   "cell": "MetaTool+Tags / BEAR+BGE (mand-only) / ndcg",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "evals/results/toolbench_eval.json",
+   "table": "older ToolBench run",
+   "cell": "MetaTool+Tags / BEAR+BGE-M3 (mand-only) / recall",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "evals/results/toolbench_eval.json",
+   "table": "older ToolBench run",
+   "cell": "MetaTool+Tags / BEAR+BGE-M3 (mand-only) / precision",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "evals/results/toolbench_eval.json",
+   "table": "older ToolBench run",
+   "cell": "MetaTool+Tags / BEAR+BGE-M3 (mand-only) / f1",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "evals/results/toolbench_eval.json",
+   "table": "older ToolBench run",
+   "cell": "MetaTool+Tags / BEAR+BGE-M3 (mand-only) / ndcg",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "evals/results/toolbench_eval.json",
+   "table": "older ToolBench run",
+   "cell": "MetaTool+Tags / BEAR+Qwen3-0.6B (mand-only) / recall",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "evals/results/toolbench_eval.json",
+   "table": "older ToolBench run",
+   "cell": "MetaTool+Tags / BEAR+Qwen3-0.6B (mand-only) / precision",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "evals/results/toolbench_eval.json",
+   "table": "older ToolBench run",
+   "cell": "MetaTool+Tags / BEAR+Qwen3-0.6B (mand-only) / f1",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "evals/results/toolbench_eval.json",
+   "table": "older ToolBench run",
+   "cell": "MetaTool+Tags / BEAR+Qwen3-0.6B (mand-only) / ndcg",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "evals/results/toolbench_eval.json",
+   "table": "older ToolBench run",
+   "cell": "MetaTool+Tags / BEAR+Qwen3-4B (mand-only) / recall",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "evals/results/toolbench_eval.json",
+   "table": "older ToolBench run",
+   "cell": "MetaTool+Tags / BEAR+Qwen3-4B (mand-only) / precision",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "evals/results/toolbench_eval.json",
+   "table": "older ToolBench run",
+   "cell": "MetaTool+Tags / BEAR+Qwen3-4B (mand-only) / f1",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "evals/results/toolbench_eval.json",
+   "table": "older ToolBench run",
+   "cell": "MetaTool+Tags / BEAR+Qwen3-4B (mand-only) / ndcg",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "evals/results/toolbench_eval.json",
+   "table": "older ToolBench run",
+   "cell": "MetaTool+QueryTags / BEAR+BGE (mand-only) / recall",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "evals/results/toolbench_eval.json",
+   "table": "older ToolBench run",
+   "cell": "MetaTool+QueryTags / BEAR+BGE (mand-only) / precision",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "evals/results/toolbench_eval.json",
+   "table": "older ToolBench run",
+   "cell": "MetaTool+QueryTags / BEAR+BGE (mand-only) / f1",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "evals/results/toolbench_eval.json",
+   "table": "older ToolBench run",
+   "cell": "MetaTool+QueryTags / BEAR+BGE (mand-only) / ndcg",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "evals/results/toolbench_eval.json",
+   "table": "older ToolBench run",
+   "cell": "MetaTool+QueryTags / BEAR+BGE-M3 (mand-only) / recall",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "evals/results/toolbench_eval.json",
+   "table": "older ToolBench run",
+   "cell": "MetaTool+QueryTags / BEAR+BGE-M3 (mand-only) / precision",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "evals/results/toolbench_eval.json",
+   "table": "older ToolBench run",
+   "cell": "MetaTool+QueryTags / BEAR+BGE-M3 (mand-only) / f1",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "evals/results/toolbench_eval.json",
+   "table": "older ToolBench run",
+   "cell": "MetaTool+QueryTags / BEAR+BGE-M3 (mand-only) / ndcg",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "evals/results/toolbench_eval.json",
+   "table": "older ToolBench run",
+   "cell": "MetaTool+QueryTags / BEAR+Qwen3-0.6B (mand-only) / recall",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "evals/results/toolbench_eval.json",
+   "table": "older ToolBench run",
+   "cell": "MetaTool+QueryTags / BEAR+Qwen3-0.6B (mand-only) / precision",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "evals/results/toolbench_eval.json",
+   "table": "older ToolBench run",
+   "cell": "MetaTool+QueryTags / BEAR+Qwen3-0.6B (mand-only) / f1",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "evals/results/toolbench_eval.json",
+   "table": "older ToolBench run",
+   "cell": "MetaTool+QueryTags / BEAR+Qwen3-0.6B (mand-only) / ndcg",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "evals/results/toolbench_eval.json",
+   "table": "older ToolBench run",
+   "cell": "MetaTool+QueryTags / BEAR+Qwen3-4B (mand-only) / recall",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "evals/results/toolbench_eval.json",
+   "table": "older ToolBench run",
+   "cell": "MetaTool+QueryTags / BEAR+Qwen3-4B (mand-only) / precision",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "evals/results/toolbench_eval.json",
+   "table": "older ToolBench run",
+   "cell": "MetaTool+QueryTags / BEAR+Qwen3-4B (mand-only) / f1",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  },
+  {
+   "file": "evals/results/toolbench_eval.json",
+   "table": "older ToolBench run",
+   "cell": "MetaTool+QueryTags / BEAR+Qwen3-4B (mand-only) / ndcg",
+   "match": "per-query array equal but constant (all 0): uninformative",
+   "dense": 0.0,
+   "hash": 0.0,
+   "comparator": "BEAR+Hash (mand-only)",
+   "replaced_by_042": null
+  }
+ ],
+ "files": {
+  "results/toolbench_eval_v0110.json": {
+   "table": "Table 3",
+   "cells_checked": 192,
+   "comparators": [
+    "the file's own hash rows (same benchmark and condition)"
+   ],
+   "flagged": 0,
+   "constant_array_matches": 16
+  },
+  "results/toolbench_eval_metatool_v0110.json": {
+   "table": "Tables 5, 6",
+   "cells_checked": 144,
+   "comparators": [
+    "the file's own hash rows (same benchmark and condition)"
+   ],
+   "flagged": 0,
+   "constant_array_matches": 32
+  },
+  "results/toolbench_eval_qtags_top5_v0110.json": {
+   "table": "Table 6 +QueryTags",
+   "cells_checked": 96,
+   "comparators": [
+    "the file's own hash rows (same benchmark and condition)"
+   ],
+   "flagged": 0,
+   "constant_array_matches": 16
+  },
+  "results/toolbench_eval_qtags_top5_v0110_regen.json": {
+   "table": "Table 6 +QueryTags (regen)",
+   "cells_checked": 96,
+   "comparators": [
+    "the file's own hash rows (same benchmark and condition)"
+   ],
+   "flagged": 0,
+   "constant_array_matches": 16
+  },
+  "evals/results/toolbench_eval.json": {
+   "table": "older ToolBench run",
+   "cells_checked": 144,
+   "comparators": [
+    "the file's own hash rows (same benchmark and condition)"
+   ],
+   "flagged": 0,
+   "constant_array_matches": 32
+  },
+  "evals/results/metatool_full_eval.json": {
+   "table": "older MetaTool run",
+   "cells_checked": 144,
+   "comparators": [
+    "the file's own hash rows (same benchmark and condition)"
+   ],
+   "flagged": 0,
+   "constant_array_matches": 0
+  },
+  "results/toolbench_inferred_metrics.json": {
+   "table": "Table 4",
+   "cells_checked": 9,
+   "comparators": [
+    "0.1.10 with model loads refused (fallback), same script"
+   ],
+   "flagged": 0,
+   "constant_array_matches": 0
+  },
+  "results/toolbench_multitag_metrics.json": {
+   "table": "Table 4",
+   "cells_checked": 9,
+   "comparators": [
+    "0.1.10 with model loads refused (fallback), same script"
+   ],
+   "flagged": 0,
+   "constant_array_matches": 0
+  },
+  "results/toolbench_top5_metrics.json": {
+   "table": "Table 4",
+   "cells_checked": 9,
+   "comparators": [
+    "0.1.10 with model loads refused (fallback), same script"
+   ],
+   "flagged": 0,
+   "constant_array_matches": 0
+  },
+  "evals/results/toolbench_e2e_scores.json": {
+   "table": "Table 7",
+   "cells_checked": 32,
+   "comparators": [
+    "BEAR+Hash (gov) in the file; regenerated 0.1.10 Hash (no gov) list"
+   ],
+   "flagged": 0,
+   "constant_array_matches": 0
+  },
+  "results/toolbench_react_metrics.json": {
+   "table": "Table 8",
+   "cells_checked": 2,
+   "comparators": [
+    "bound: hash retrieval puts at least one gold API in the prompt for 0.266 of queries (Table 7 BEAR+Hash (gov)), so exact accuracy under hash retrieval is at most 0.266; measured 0.211 with Mistral-Nemo"
+   ],
+   "bear_rows_accuracy": {
+    "bear_react": 0.6754545454545454,
+    "bear_single": 0.7190909090909091
+   },
+   "flagged": 0,
+   "constant_array_matches": 0
+  },
+  "results/toolbench_react_metrics_cap128_superseded.json": {
+   "table": "superseded (cap 128)",
+   "cells_checked": 2,
+   "comparators": [
+    "bound: hash retrieval puts at least one gold API in the prompt for 0.266 of queries (Table 7 BEAR+Hash (gov)), so exact accuracy under hash retrieval is at most 0.266; measured 0.211 with Mistral-Nemo"
+   ],
+   "bear_rows_accuracy": {
+    "bear_react": 0.6645454545454546,
+    "bear_single": 0.7209090909090909
+   },
+   "flagged": 0,
+   "constant_array_matches": 0
+  },
+  "results/toolbench_react_metrics_g4-12b-bear-full_partial.json": {
+   "table": "Table 9 sources (Gemma 4)",
+   "cells_checked": 2,
+   "comparators": [
+    "bound: hash retrieval puts at least one gold API in the prompt for 0.266 of queries (Table 7 BEAR+Hash (gov)), so exact accuracy under hash retrieval is at most 0.266; measured 0.211 with Mistral-Nemo"
+   ],
+   "bear_rows_accuracy": {
+    "bear_react": 0.7490909090909091,
+    "bear_single": 0.67
+   },
+   "flagged": 0,
+   "constant_array_matches": 0
+  },
+  "results/toolbench_react_metrics_g4-12b-bearsingle-nothink-full_partial.json": {
+   "table": "Table 9 sources (Gemma 4)",
+   "cells_checked": 1,
+   "comparators": [
+    "bound: hash retrieval puts at least one gold API in the prompt for 0.266 of queries (Table 7 BEAR+Hash (gov)), so exact accuracy under hash retrieval is at most 0.266; measured 0.211 with Mistral-Nemo"
+   ],
+   "bear_rows_accuracy": {
+    "bear_single": 0.7345454545454545
+   },
+   "flagged": 0,
+   "constant_array_matches": 0
+  },
+  "results/toolbench_react_metrics_g4-12b-mono-nothink-full_partial.json": {
+   "table": "Table 9 sources (Gemma 4)",
+   "cells_checked": 0,
+   "comparators": [
+    "bound: hash retrieval puts at least one gold API in the prompt for 0.266 of queries (Table 7 BEAR+Hash (gov)), so exact accuracy under hash retrieval is at most 0.266; measured 0.211 with Mistral-Nemo"
+   ],
+   "bear_rows_accuracy": {},
+   "flagged": 0,
+   "constant_array_matches": 0
+  },
+  "results/toolbench_react_metrics_g4-12b-mono-think-full_partial.json": {
+   "table": "Table 9 sources (Gemma 4)",
+   "cells_checked": 0,
+   "comparators": [
+    "bound: hash retrieval puts at least one gold API in the prompt for 0.266 of queries (Table 7 BEAR+Hash (gov)), so exact accuracy under hash retrieval is at most 0.266; measured 0.211 with Mistral-Nemo"
+   ],
+   "bear_rows_accuracy": {},
+   "flagged": 0,
+   "constant_array_matches": 0
+  },
+  "results/toolbench_react_metrics_g4-12b-scaffold-nothink-full.json": {
+   "table": "Table 9 sources (Gemma 4)",
+   "cells_checked": 2,
+   "comparators": [
+    "bound: hash retrieval puts at least one gold API in the prompt for 0.266 of queries (Table 7 BEAR+Hash (gov)), so exact accuracy under hash retrieval is at most 0.266; measured 0.211 with Mistral-Nemo"
+   ],
+   "bear_rows_accuracy": {
+    "bear_react": 0.7227272727272728,
+    "bear_single": 0.7345454545454545
+   },
+   "flagged": 0,
+   "constant_array_matches": 0
+  },
+  "results/toolbench_react_metrics_g4-12b-scaffold-thinking-full_partial.json": {
+   "table": "Table 9 sources (Gemma 4)",
+   "cells_checked": 1,
+   "comparators": [
+    "bound: hash retrieval puts at least one gold API in the prompt for 0.266 of queries (Table 7 BEAR+Hash (gov)), so exact accuracy under hash retrieval is at most 0.266; measured 0.211 with Mistral-Nemo"
+   ],
+   "bear_rows_accuracy": {
+    "bear_react": 0.7481818181818182
+   },
+   "flagged": 0,
+   "constant_array_matches": 0
+  },
+  "results/toolbench_react_metrics_g4-31b-scaffold-nothink-full.json": {
+   "table": "Table 9 sources (Gemma 4)",
+   "cells_checked": 2,
+   "comparators": [
+    "bound: hash retrieval puts at least one gold API in the prompt for 0.266 of queries (Table 7 BEAR+Hash (gov)), so exact accuracy under hash retrieval is at most 0.266; measured 0.211 with Mistral-Nemo"
+   ],
+   "bear_rows_accuracy": {
+    "bear_react": 0.7445454545454545,
+    "bear_single": 0.7681818181818182
+   },
+   "flagged": 0,
+   "constant_array_matches": 0
+  },
+  "results/toolbench_react_metrics_g4-31b-scaffold-thinking-full_partial.json": {
+   "table": "Table 9 sources (Gemma 4)",
+   "cells_checked": 1,
+   "comparators": [
+    "bound: hash retrieval puts at least one gold API in the prompt for 0.266 of queries (Table 7 BEAR+Hash (gov)), so exact accuracy under hash retrieval is at most 0.266; measured 0.211 with Mistral-Nemo"
+   ],
+   "bear_rows_accuracy": {
+    "bear_react": 0.7381818181818182
+   },
+   "flagged": 0,
+   "constant_array_matches": 0
+  },
+  "results/toolbench_react_metrics_g4-FULL1100_merged.json": {
+   "table": "Table 9 sources (Gemma 4)",
+   "cells_checked": 2,
+   "comparators": [
+    "bound: hash retrieval puts at least one gold API in the prompt for 0.266 of queries (Table 7 BEAR+Hash (gov)), so exact accuracy under hash retrieval is at most 0.266; measured 0.211 with Mistral-Nemo"
+   ],
+   "bear_rows_accuracy": {
+    "bear_single": 0.7663636363636364,
+    "bear_react": 0.7454545454545455
+   },
+   "flagged": 0,
+   "constant_array_matches": 0
+  },
+  "results/toolbench_react_metrics_g4-bear-compl_partial.json": {
+   "table": "Table 9 sources (Gemma 4)",
+   "cells_checked": 2,
+   "comparators": [
+    "bound: hash retrieval puts at least one gold API in the prompt for 0.266 of queries (Table 7 BEAR+Hash (gov)), so exact accuracy under hash retrieval is at most 0.266; measured 0.211 with Mistral-Nemo"
+   ],
+   "bear_rows_accuracy": {
+    "bear_react": 0.7506811989100818,
+    "bear_single": 0.7411444141689373
+   },
+   "flagged": 0,
+   "constant_array_matches": 0
+  },
+  "results/toolbench_react_metrics_g4-bear-s43_partial.json": {
+   "table": "Table 9 sources (Gemma 4)",
+   "cells_checked": 1,
+   "comparators": [
+    "bound: hash retrieval puts at least one gold API in the prompt for 0.266 of queries (Table 7 BEAR+Hash (gov)), so exact accuracy under hash retrieval is at most 0.266; measured 0.211 with Mistral-Nemo"
+   ],
+   "bear_rows_accuracy": {
+    "bear_react": 0.7373737373737373
+   },
+   "flagged": 0,
+   "constant_array_matches": 0
+  },
+  "results/toolbench_react_metrics_g4-bear-strat_partial.json": {
+   "table": "Table 9 sources (Gemma 4)",
+   "cells_checked": 2,
+   "comparators": [
+    "bound: hash retrieval puts at least one gold API in the prompt for 0.266 of queries (Table 7 BEAR+Hash (gov)), so exact accuracy under hash retrieval is at most 0.266; measured 0.211 with Mistral-Nemo"
+   ],
+   "bear_rows_accuracy": {
+    "bear_react": 0.7424242424242424,
+    "bear_single": 0.7222222222222222
+   },
+   "flagged": 0,
+   "constant_array_matches": 0
+  },
+  "results/toolbench_react_metrics_g4-bearsingle-nothink-compl_partial.json": {
+   "table": "Table 9 sources (Gemma 4)",
+   "cells_checked": 1,
+   "comparators": [
+    "bound: hash retrieval puts at least one gold API in the prompt for 0.266 of queries (Table 7 BEAR+Hash (gov)), so exact accuracy under hash retrieval is at most 0.266; measured 0.211 with Mistral-Nemo"
+   ],
+   "bear_rows_accuracy": {
+    "bear_single": 0.7724795640326976
+   },
+   "flagged": 0,
+   "constant_array_matches": 0
+  },
+  "results/toolbench_react_metrics_g4-bearsingle-nothink-s43_partial.json": {
+   "table": "Table 9 sources (Gemma 4)",
+   "cells_checked": 1,
+   "comparators": [
+    "bound: hash retrieval puts at least one gold API in the prompt for 0.266 of queries (Table 7 BEAR+Hash (gov)), so exact accuracy under hash retrieval is at most 0.266; measured 0.211 with Mistral-Nemo"
+   ],
+   "bear_rows_accuracy": {
+    "bear_single": 0.7575757575757576
+   },
+   "flagged": 0,
+   "constant_array_matches": 0
+  },
+  "results/toolbench_react_metrics_g4-bearsingle-nothink-strat_partial.json": {
+   "table": "Table 9 sources (Gemma 4)",
+   "cells_checked": 1,
+   "comparators": [
+    "bound: hash retrieval puts at least one gold API in the prompt for 0.266 of queries (Table 7 BEAR+Hash (gov)), so exact accuracy under hash retrieval is at most 0.266; measured 0.211 with Mistral-Nemo"
+   ],
+   "bear_rows_accuracy": {
+    "bear_single": 0.7676767676767676
+   },
+   "flagged": 0,
+   "constant_array_matches": 0
+  },
+  "results/toolbench_react_metrics_g4-mono-nothink-compl_partial.json": {
+   "table": "Table 9 sources (Gemma 4)",
+   "cells_checked": 0,
+   "comparators": [
+    "bound: hash retrieval puts at least one gold API in the prompt for 0.266 of queries (Table 7 BEAR+Hash (gov)), so exact accuracy under hash retrieval is at most 0.266; measured 0.211 with Mistral-Nemo"
+   ],
+   "bear_rows_accuracy": {},
+   "flagged": 0,
+   "constant_array_matches": 0
+  },
+  "results/toolbench_react_metrics_g4-mono-nothink-s43_partial.json": {
+   "table": "Table 9 sources (Gemma 4)",
+   "cells_checked": 0,
+   "comparators": [
+    "bound: hash retrieval puts at least one gold API in the prompt for 0.266 of queries (Table 7 BEAR+Hash (gov)), so exact accuracy under hash retrieval is at most 0.266; measured 0.211 with Mistral-Nemo"
+   ],
+   "bear_rows_accuracy": {},
+   "flagged": 0,
+   "constant_array_matches": 0
+  },
+  "results/toolbench_react_metrics_g4-mono-nothink-strat_partial.json": {
+   "table": "Table 9 sources (Gemma 4)",
+   "cells_checked": 0,
+   "comparators": [
+    "bound: hash retrieval puts at least one gold API in the prompt for 0.266 of queries (Table 7 BEAR+Hash (gov)), so exact accuracy under hash retrieval is at most 0.266; measured 0.211 with Mistral-Nemo"
+   ],
+   "bear_rows_accuracy": {},
+   "flagged": 0,
+   "constant_array_matches": 0
+  },
+  "results/toolbench_react_metrics_g4-mono-think-compl_partial.json": {
+   "table": "Table 9 sources (Gemma 4)",
+   "cells_checked": 0,
+   "comparators": [
+    "bound: hash retrieval puts at least one gold API in the prompt for 0.266 of queries (Table 7 BEAR+Hash (gov)), so exact accuracy under hash retrieval is at most 0.266; measured 0.211 with Mistral-Nemo"
+   ],
+   "bear_rows_accuracy": {},
+   "flagged": 0,
+   "constant_array_matches": 0
+  },
+  "results/toolbench_react_metrics_g4-mono-think-s43_partial.json": {
+   "table": "Table 9 sources (Gemma 4)",
+   "cells_checked": 0,
+   "comparators": [
+    "bound: hash retrieval puts at least one gold API in the prompt for 0.266 of queries (Table 7 BEAR+Hash (gov)), so exact accuracy under hash retrieval is at most 0.266; measured 0.211 with Mistral-Nemo"
+   ],
+   "bear_rows_accuracy": {},
+   "flagged": 0,
+   "constant_array_matches": 0
+  },
+  "results/toolbench_react_metrics_g4-mono-think-strat_partial.json": {
+   "table": "Table 9 sources (Gemma 4)",
+   "cells_checked": 0,
+   "comparators": [
+    "bound: hash retrieval puts at least one gold API in the prompt for 0.266 of queries (Table 7 BEAR+Hash (gov)), so exact accuracy under hash retrieval is at most 0.266; measured 0.211 with Mistral-Nemo"
+   ],
+   "bear_rows_accuracy": {},
+   "flagged": 0,
+   "constant_array_matches": 0
+  },
+  "results/toolbench_react_metrics_gemma4-31b-bear_partial.json": {
+   "table": "Table 9 sources (Gemma 4)",
+   "cells_checked": 2,
+   "comparators": [
+    "bound: hash retrieval puts at least one gold API in the prompt for 0.266 of queries (Table 7 BEAR+Hash (gov)), so exact accuracy under hash retrieval is at most 0.266; measured 0.211 with Mistral-Nemo"
+   ],
+   "bear_rows_accuracy": {
+    "bear_react": 0.82,
+    "bear_single": 0.005
+   },
+   "flagged": 1,
+   "constant_array_matches": 0
+  },
+  "results/toolbench_react_metrics_gemma4-31b-bearsingle_partial.json": {
+   "table": "Table 9 sources (Gemma 4)",
+   "cells_checked": 1,
+   "comparators": [
+    "bound: hash retrieval puts at least one gold API in the prompt for 0.266 of queries (Table 7 BEAR+Hash (gov)), so exact accuracy under hash retrieval is at most 0.266; measured 0.211 with Mistral-Nemo"
+   ],
+   "bear_rows_accuracy": {
+    "bear_single": 0.855
+   },
+   "flagged": 0,
+   "constant_array_matches": 0
+  },
+  "results/toolbench_react_metrics_gemma4-31b-mono-nothink_partial.json": {
+   "table": "Table 9 sources (Gemma 4)",
+   "cells_checked": 0,
+   "comparators": [
+    "bound: hash retrieval puts at least one gold API in the prompt for 0.266 of queries (Table 7 BEAR+Hash (gov)), so exact accuracy under hash retrieval is at most 0.266; measured 0.211 with Mistral-Nemo"
+   ],
+   "bear_rows_accuracy": {},
+   "flagged": 0,
+   "constant_array_matches": 0
+  },
+  "results/toolbench_react_metrics_gemma4-31b-reason_partial.json": {
+   "table": "Table 9 sources (Gemma 4)",
+   "cells_checked": 0,
+   "comparators": [
+    "bound: hash retrieval puts at least one gold API in the prompt for 0.266 of queries (Table 7 BEAR+Hash (gov)), so exact accuracy under hash retrieval is at most 0.266; measured 0.211 with Mistral-Nemo"
+   ],
+   "bear_rows_accuracy": {},
+   "flagged": 0,
+   "constant_array_matches": 0
+  },
+  "results/backend_comparison.json": {
+   "table": "tab:governance-ablation (a)",
+   "cells_checked": 60,
+   "comparators": [
+    "the Hash row; the 0.1.10 fallback run of each backend"
+   ],
+   "flagged": 1,
+   "constant_array_matches": 0
+  },
+  "results/governance_ablation.json": {
+   "table": "tab:governance-ablation, tab:token-compare",
+   "cells_checked": 125,
+   "comparators": [
+    "the Hash cells; the 0.1.10 fallback run"
+   ],
+   "flagged": 0,
+   "constant_array_matches": 0
+  },
+  "results/eval_retrieval_semantic_output.txt": {
+   "table": "tab:retrieval (BGE half)",
+   "cells_checked": 24,
+   "comparators": [
+    "eval_retrieval_output.txt (hash); the 0.1.10 fallback run"
+   ],
+   "flagged": 0,
+   "constant_array_matches": 0
+  },
+  "results/governance_decomposed_bge.json": {
+   "table": "tab:decomposed-ablation",
+   "cells_checked": 7,
+   "comparators": [
+    "0.1.10 with model loads refused (fallback), same script and backend"
+   ],
+   "flagged": 0,
+   "constant_array_matches": 0
+  },
+  "results/governance_decomposed_bge-m3.json": {
+   "table": "tab:decomposed-ablation",
+   "cells_checked": 7,
+   "comparators": [
+    "0.1.10 with model loads refused (fallback), same script and backend"
+   ],
+   "flagged": 0,
+   "constant_array_matches": 0
+  },
+  "results/governance_decomposed_qwen3.json": {
+   "table": "tab:decomposed-ablation",
+   "cells_checked": 7,
+   "comparators": [
+    "0.1.10 with model loads refused (fallback), same script and backend"
+   ],
+   "flagged": 0,
+   "constant_array_matches": 0
+  },
+  "results/governance_decomposed_qwen3-4b.json": {
+   "table": "tab:decomposed-ablation",
+   "cells_checked": 7,
+   "comparators": [
+    "0.1.10 with model loads refused (fallback), same script and backend"
+   ],
+   "flagged": 0,
+   "constant_array_matches": 0
+  },
+  "results/alpha_sweep_bge.json": {
+   "table": "tab:alpha-sweep",
+   "cells_checked": 8,
+   "comparators": [
+    "0.1.10 with model loads refused (fallback), same script and backend"
+   ],
+   "flagged": 0,
+   "constant_array_matches": 0
+  },
+  "results/alpha_sweep_bge-m3.json": {
+   "table": "tab:alpha-sweep",
+   "cells_checked": 8,
+   "comparators": [
+    "0.1.10 with model loads refused (fallback), same script and backend"
+   ],
+   "flagged": 0,
+   "constant_array_matches": 0
+  },
+  "results/alpha_sweep_qwen3.json": {
+   "table": "tab:alpha-sweep",
+   "cells_checked": 8,
+   "comparators": [
+    "0.1.10 with model loads refused (fallback), same script and backend"
+   ],
+   "flagged": 0,
+   "constant_array_matches": 0
+  },
+  "results/alpha_sweep_qwen3-4b.json": {
+   "table": "tab:alpha-sweep",
+   "cells_checked": 8,
+   "comparators": [
+    "0.1.10 with model loads refused (fallback), same script and backend"
+   ],
+   "flagged": 3,
+   "constant_array_matches": 0
+  },
+  "results/alpha_sweep_all.json": {
+   "table": "tab:alpha-sweep",
+   "cells_checked": 5,
+   "comparators": [
+    "the per-backend files (consistency only)"
+   ],
+   "flagged": 0,
+   "constant_array_matches": 0
+  },
+  "results/governance_decomposed_all.json": {
+   "table": "tab:decomposed-ablation",
+   "cells_checked": 5,
+   "comparators": [
+    "the per-backend files (consistency only)"
+   ],
+   "flagged": 0,
+   "constant_array_matches": 0
+  },
+  "results/governance_decomposed.json": {
+   "table": "tab:decomposed-ablation",
+   "cells_checked": 1,
+   "comparators": [
+    "the per-backend files (consistency only)"
+   ],
+   "flagged": 1,
+   "constant_array_matches": 0
+  },
+  "results/baseline_comparison_results.csv": {
+   "table": "tab:token-efficiency, tab:semantic-advantage, novel departments",
+   "cells_checked": 66,
+   "comparators": [
+    "0.1.10 with model loads refused (fallback), same script"
+   ],
+   "flagged": 0,
+   "constant_array_matches": 0
+  },
+  "results/scalability_results.csv": {
+   "table": "scalability (text)",
+   "cells_checked": 42,
+   "comparators": [
+    "0.1.10 with model loads refused (fallback), same script"
+   ],
+   "flagged": 6,
+   "constant_array_matches": 0
+  },
+  "results/eval_tool_scaling_output.txt": {
+   "table": "tab:tool-scaling, tab:token-savings",
+   "cells_checked": 38,
+   "comparators": [
+    "0.1.10 with model loads refused (fallback), same script"
+   ],
+   "cells_equal_to_fallback": 38,
+   "cells_total": 38,
+   "flagged": 1,
+   "constant_array_matches": 0
+  },
+  "results/backend_transfer_toolbench_toolbench_ir_bert_based_uncased.json": {
+   "table": "tab:transfer",
+   "cells_checked": 3,
+   "comparators": [
+    "0.1.10 with model loads refused (fallback), same script"
+   ],
+   "flagged": 0,
+   "constant_array_matches": 0
+  },
+  "results/backend_transfer_metatool_toolbench_ir_bert_based_uncased.json": {
+   "table": "tab:transfer",
+   "cells_checked": 3,
+   "comparators": [
+    "0.1.10 with model loads refused (fallback), same script"
+   ],
+   "flagged": 0,
+   "constant_array_matches": 0
+  },
+  "results/toolbench_toolllm_fixed.json": {
+   "table": "ToolBench-IR + governance (text)",
+   "cells_checked": 8,
+   "comparators": [
+    "0.1.10 with model loads refused (fallback), same script"
+   ],
+   "flagged": 0,
+   "constant_array_matches": 0
+  },
+  "results/reranker_composition_toolbench.json": {
+   "table": "tab:reranker",
+   "cells_checked": 2,
+   "comparators": [
+    "Table 3 hash per-query arrays (same first stage on ToolBench)"
+   ],
+   "first_stage_vs_table3": {
+    "bi": {
+     "equals_table3_dense": true,
+     "equals_table3_hash": false
+    },
+    "bear": {
+     "equals_table3_dense": true,
+     "equals_table3_hash": false
+    }
+   },
+   "flagged": 0,
+   "constant_array_matches": 0
+  },
+  "results/framework_baseline_toolbench.json": {
+   "table": "tab:reranker",
+   "cells_checked": 2,
+   "comparators": [
+    "Table 3 hash per-query arrays (same first stage on ToolBench)"
+   ],
+   "first_stage_vs_table3": {
+    "bear_nogov": {
+     "equals_table3_dense": true,
+     "equals_table3_hash": false
+    },
+    "bear_gov": {
+     "equals_table3_dense": true,
+     "equals_table3_hash": false
+    }
+   },
+   "flagged": 0,
+   "constant_array_matches": 0
+  },
+  "results/reranker_composition_petsim.json": {
+   "table": "tab:reranker",
+   "cells_checked": 1,
+   "comparators": [
+    "backend_comparison.json Hash (Full governance, k=10)"
+   ],
+   "flagged": 0,
+   "constant_array_matches": 0
+  },
+  "results/framework_baseline_petsim.json": {
+   "table": "tab:reranker",
+   "cells_checked": 1,
+   "comparators": [
+    "backend_comparison.json Hash (Full governance, k=10)"
+   ],
+   "flagged": 0,
+   "constant_array_matches": 0
+  }
+ },
+ "result_files_not_compared": [
+  "evals/results/toolbench_e2e_eval.json",
+  "evals/results/toolbench_e2e_results.json",
+  "evals/results/toolbench_e2e_results_cap128_superseded.json",
+  "evals/results/toolbench_e2e_results_partial.json",
+  "evals/results/toolbench_e2e_scores_cap128_superseded.json",
+  "evals/results/toolbench_e2e_scores_partial.json",
+  "results/alpha_sweep_bm25.json",
+  "results/composite_scale_audit.json",
+  "results/g4_complement_indices.json",
+  "results/g4_done_indices.json",
+  "results/governance_decomposed_bm25.json",
+  "results/mandatory_injection.json",
+  "results/petsim_fix_diagnosis.json",
+  "results/scope_excluded_safety.json",
+  "results/stb_react_4omini.json",
+  "results/stb_react_54mini.json",
+  "results/stb_react_54mini_k20.json",
+  "results/toolbench_inferred_categories.json",
+  "results/toolbench_multitag_categories.json",
+  "results/toolbench_react_debug.json",
+  "results/toolbench_toolllm.json",
+  "results/toolbench_toolllm_hardgate.json",
+  "results/toolbench_top5_categories.json"
+ ],
+ "logs": {
+  "published": {
+   "results/alpha_sweep_output.txt": {
+    "lines": 124,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [
+     {
+      "section": "=== Alpha sweep (qwen3-4b) ===",
+      "reached": "6/8"
+     }
+    ],
+    "last_line": "[6/8] alpha = 0.70 ..."
+   },
+   "results/baseline_comparison_v0110.log": {
+    "lines": 290,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "CSV written to /mnt/c/users/scott/documents/work/paper-retrieval-governed-context-artifacts/results/baseline_comparison_results.csv"
+   },
+   "results/composition_demo.txt": {
+    "lines": 122,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "==="
+   },
+   "results/e2e_gemma-4-12b.log": {
+    "lines": 123,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "Batches: 100%|\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588| 101/101 [00:08<00:00, 11.65it/s]"
+   },
+   "results/e2e_lmstudio.log": {
+    "lines": 1420,
+    "load_failures": [],
+    "hash_selected": 1,
+    "early_stops": [],
+    "last_line": "Raw scores saved to /mnt/c/users/scott/documents/work/paper-retrieval-governed-context-artifacts/evals/results/toolbench_e2e_scores.json"
+   },
+   "results/e2e_mono_alltools.log": {
+    "lines": 73,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "Raw scores saved to /mnt/c/users/scott/documents/work/paper-retrieval-governed-context-artifacts/evals/results/toolbench_e2e_scores_partial.json"
+   },
+   "results/e2e_small.log": {
+    "lines": 66,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "Raw scores saved to /mnt/c/users/scott/documents/work/paper-retrieval-governed-context-artifacts/evals/results/toolbench_e2e_scores.json"
+   },
+   "results/e2e_smoketest_gemma-4-e2b.log": {
+    "lines": 289,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "Batches: 100%|\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588| 101/101 [01:36<00:00,  1.04it/s]"
+   },
+   "results/e2e_v0110_guided.log": {
+    "lines": 1766,
+    "load_failures": [],
+    "hash_selected": 1,
+    "early_stops": [],
+    "last_line": "Raw scores saved to /home/snhwang/Work/paper-retrieval-governed-context-artifacts/evals/results/toolbench_e2e_scores.json"
+   },
+   "results/e2e_v0110_guided_gemma-4-e2b.log": {
+    "lines": 0,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": ""
+   },
+   "results/eval_ablation_output.txt": {
+    "lines": 174,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "\\end{table}"
+   },
+   "results/eval_ablation_semantic_output.txt": {
+    "lines": 174,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "\\end{table}"
+   },
+   "results/eval_baseline_output.txt": {
+    "lines": 251,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "CSV written to /mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts/results/baseline_comparison_results.csv"
+   },
+   "results/eval_governance_ablation_output.txt": {
+    "lines": 154,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "Results saved to /mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts/results/governance_ablation.json"
+   },
+   "results/eval_retrieval_backends_output.txt": {
+    "lines": 301,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "Results saved to /mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts/results/backend_comparison.json"
+   },
+   "results/eval_retrieval_output.txt": {
+    "lines": 32,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "\\end{table}"
+   },
+   "results/eval_retrieval_semantic_output.txt": {
+    "lines": 32,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "\\end{table}"
+   },
+   "results/eval_scalability_output.txt": {
+    "lines": 171,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "CSV written to /mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts/results/scalability_results.csv"
+   },
+   "results/eval_tool_composition_output.txt": {
+    "lines": 47,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "All tests passed: True"
+   },
+   "results/eval_tool_scaling_output.txt": {
+    "lines": 48,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "  All tests passed: True"
+   },
+   "results/framework_baseline_petsim.log": {
+    "lines": 54,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "==="
+   },
+   "results/framework_baseline_toolbench.log": {
+    "lines": 163,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "==="
+   },
+   "results/g4-12b_bear_full.log": {
+    "lines": 166,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "          results/toolbench_react_output_g4-12b-bear-full_partial.txt"
+   },
+   "results/g4-12b_bearsingle_full.log": {
+    "lines": 138,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "          results/toolbench_react_output_g4-12b-bearsingle-nothink-full_partial.txt"
+   },
+   "results/g4-12b_mono_nothink_full.log": {
+    "lines": 140,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "          results/toolbench_react_output_g4-12b-mono-nothink-full_partial.txt"
+   },
+   "results/g4-12b_mono_think_full.log": {
+    "lines": 140,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "          results/toolbench_react_output_g4-12b-mono-think-full_partial.txt"
+   },
+   "results/g4-12b_scaffold_nothink_full.log": {
+    "lines": 195,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "          results/toolbench_react_output_g4-12b-scaffold-nothink-full.txt"
+   },
+   "results/g4-31b_scaffold_nothink_full.log": {
+    "lines": 182,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "          results/toolbench_react_output_g4-31b-scaffold-nothink-full.txt"
+   },
+   "results/g4_bear.log": {
+    "lines": 130,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "          results/toolbench_react_output_gemma4-31b-bear_partial.txt"
+   },
+   "results/g4_bear_compl.log": {
+    "lines": 151,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "          results/toolbench_react_output_g4-bear-compl_partial.txt"
+   },
+   "results/g4_bear_s43.log": {
+    "lines": 120,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "          results/toolbench_react_output_g4-bear-s43_partial.txt"
+   },
+   "results/g4_bear_strat.log": {
+    "lines": 130,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "          results/toolbench_react_output_g4-bear-strat_partial.txt"
+   },
+   "results/g4_bearsingle_compl.log": {
+    "lines": 130,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "          results/toolbench_react_output_g4-bearsingle-nothink-compl_partial.txt"
+   },
+   "results/g4_bearsingle_nothink_strat.log": {
+    "lines": 121,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "          results/toolbench_react_output_g4-bearsingle-nothink-strat_partial.txt"
+   },
+   "results/g4_bearsingle_s43.log": {
+    "lines": 120,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "          results/toolbench_react_output_g4-bearsingle-nothink-s43_partial.txt"
+   },
+   "results/g4_mono_nothink.log": {
+    "lines": 123,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "          results/toolbench_react_output_gemma4-31b-mono-nothink_partial.txt"
+   },
+   "results/g4_mono_nothink_compl.log": {
+    "lines": 131,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "          results/toolbench_react_output_g4-mono-nothink-compl_partial.txt"
+   },
+   "results/g4_mono_nothink_s43.log": {
+    "lines": 121,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "          results/toolbench_react_output_g4-mono-nothink-s43_partial.txt"
+   },
+   "results/g4_mono_nothink_strat.log": {
+    "lines": 122,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "          results/toolbench_react_output_g4-mono-nothink-strat_partial.txt"
+   },
+   "results/g4_mono_think_compl.log": {
+    "lines": 131,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "          results/toolbench_react_output_g4-mono-think-compl_partial.txt"
+   },
+   "results/g4_mono_think_s43.log": {
+    "lines": 128,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "          results/toolbench_react_output_g4-mono-think-s43_partial.txt"
+   },
+   "results/g4_mono_think_strat.log": {
+    "lines": 121,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "          results/toolbench_react_output_g4-mono-think-strat_partial.txt"
+   },
+   "results/governance_decomposed_output.txt": {
+    "lines": 416,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "==="
+   },
+   "results/grid_g4-12b_author.txt": {
+    "lines": 10,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "  BEAR single vs +reasoning          0.735 -> 0.749 (+0.015)  p=1.21e-01  disc 39/55"
+   },
+   "results/grid_g4-31b_author.txt": {
+    "lines": 8,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "=== paired McNemar ==="
+   },
+   "results/logs/alpha_v0110.log": {
+    "lines": 244,
+    "load_failures": [
+     {
+      "line": 163,
+      "text": "Traceback (most recent call last):",
+      "section": "=== Alpha sweep (qwen3-4b) ==="
+     }
+    ],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "RuntimeError: CUDA error: CUBLAS_STATUS_INTERNAL_ERROR when calling `cublasSgemm( handle, opa, opb, m, n, k, &alpha, a, lda, b, ldb, &beta, c, ldc)`"
+   },
+   "results/logs/backends_v0110.log": {
+    "lines": 233,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "Results saved to results/backend_comparison.json"
+   },
+   "results/logs/composite_audit_v0110.log": {
+    "lines": 70,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "==="
+   },
+   "results/logs/decomposed_v0110.log": {
+    "lines": 470,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "==="
+   },
+   "results/logs/inferred_v0110.log": {
+    "lines": 125,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "          results/toolbench_inferred_categories.json"
+   },
+   "results/logs/multitag_v0110.log": {
+    "lines": 122,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "          results/toolbench_multitag_categories.json"
+   },
+   "results/logs/petsim_diag_v0110.log": {
+    "lines": 89,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "==="
+   },
+   "results/logs/qtags_top5_v0110.log": {
+    "lines": 1165,
+    "load_failures": [],
+    "hash_selected": 6,
+    "early_stops": [],
+    "last_line": "    BM25 (no gov)                       R@5=0.468 [0.445, 0.491]  NDCG@5=0.447 [0.425, 0.469]"
+   },
+   "results/logs/react_diff_v0110.log": {
+    "lines": 76,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "==="
+   },
+   "results/logs/retrieval_hash_v0110.log": {
+    "lines": 35,
+    "load_failures": [],
+    "hash_selected": 3,
+    "early_stops": [],
+    "last_line": "\\end{table}"
+   },
+   "results/logs/retrieval_semantic_v0110.log": {
+    "lines": 32,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "\\end{table}"
+   },
+   "results/logs/top5cats_v0110.log": {
+    "lines": 126,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "          results/toolbench_top5_categories.json"
+   },
+   "results/logs/transfer_metatool_v0110.log": {
+    "lines": 36,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "==="
+   },
+   "results/logs/transfer_toolbench_v0110.log": {
+    "lines": 54,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "==="
+   },
+   "results/metatool_full_eval_20260626_0453.log": {
+    "lines": 900,
+    "load_failures": [],
+    "hash_selected": 9,
+    "early_stops": [],
+    "last_line": "    BM25 (no gov)                       R@5=0.402 [0.396, 0.409]  NDCG@5=0.340 [0.334, 0.346]"
+   },
+   "results/metatool_query_tags_top5_generation_20260624_0306.log": {
+    "lines": 0,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": ""
+   },
+   "results/metatool_query_tags_top5_generation_20260624_0309.log": {
+    "lines": 282,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "  security: 638"
+   },
+   "results/metatool_query_tags_top5_generation_20260624_1429.log": {
+    "lines": 28,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "  security: 638"
+   },
+   "results/metatool_query_tags_top5_resume_20260624_1432.log": {
+    "lines": 39,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "  security: 645"
+   },
+   "results/metatool_querytags_top5_eval_20260624_1453.log": {
+    "lines": 130,
+    "load_failures": [],
+    "hash_selected": 1,
+    "early_stops": [],
+    "last_line": "Batches: 100%|\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588| 7/7 [00:19<00:00,  2.77s/it]"
+   },
+   "results/metatool_querytags_top5_eval_20260624_1614.log": {
+    "lines": 1237,
+    "load_failures": [],
+    "hash_selected": 6,
+    "early_stops": [],
+    "last_line": "    BM25 (no gov)                       R@5=0.468 [0.445, 0.491]  NDCG@5=0.447 [0.425, 0.469]"
+   },
+   "results/reranker_composition_petsim.log": {
+    "lines": 66,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "==="
+   },
+   "results/reranker_composition_toolbench.log": {
+    "lines": 120,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "==="
+   },
+   "results/tool_scaling_v0110.log": {
+    "lines": 48,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "  All tests passed: True"
+   },
+   "results/toolbench_e2e_eval_20260623_2142.log": {
+    "lines": 311,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "      tool_acc: paired-t=11.279, p=0.0000 ***, d=0.340; W=858, p=0.0000"
+   },
+   "results/toolbench_e2e_v0110.log": {
+    "lines": 40,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "  LLM call failed (#2) at http://localhost:8000/v1: HTTPError: HTTP Error 500: Internal Server Error"
+   },
+   "results/toolbench_inferred_full_20260624_0027.log": {
+    "lines": 189,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "          results/toolbench_inferred_categories.json"
+   },
+   "results/toolbench_inferred_output.txt": {
+    "lines": 76,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "          results/toolbench_inferred_categories.json"
+   },
+   "results/toolbench_multitag_full_20260624_0140.log": {
+    "lines": 170,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "          results/toolbench_multitag_categories.json"
+   },
+   "results/toolbench_multitag_output.txt": {
+    "lines": 78,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "          results/toolbench_multitag_categories.json"
+   },
+   "results/toolbench_multitag_smoke_20260624_0112.log": {
+    "lines": 80,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "          results/toolbench_multitag_categories.json"
+   },
+   "results/toolbench_react_full_20260624_0222.log": {
+    "lines": 18,
+    "load_failures": [
+     {
+      "line": 10,
+      "text": "Traceback (most recent call last):",
+      "section": "=== ToolBench end-to-end with ReAct-style prompting ==="
+     }
+    ],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "ValueError: Unknown backend: dense"
+   },
+   "results/toolbench_react_full_20260624_0224.log": {
+    "lines": 150,
+    "load_failures": [
+     {
+      "line": 144,
+      "text": "Traceback (most recent call last):",
+      "section": "--- Tool selection accuracy (1 if predicted tool matches any expected api_id) ---"
+     }
+    ],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "ValueError: too many values to unpack (expected 3)"
+   },
+   "results/toolbench_react_full_20260624_0230.log": {
+    "lines": 58,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "Batches: 100%|\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588| 101/101 [00:02<00:00, 39.01it/s]"
+   },
+   "results/toolbench_react_full_20260624_0235.log": {
+    "lines": 58,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "Batches: 100%|\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588| 101/101 [00:02<00:00, 38.41it/s]"
+   },
+   "results/toolbench_react_full_20260624_0239.log": {
+    "lines": 58,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "Batches: 100%|\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588| 101/101 [00:02<00:00, 38.42it/s]"
+   },
+   "results/toolbench_react_full_20260624_0243.log": {
+    "lines": 58,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "Batches: 100%|\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588| 101/101 [00:02<00:00, 39.16it/s]"
+   },
+   "results/toolbench_react_full_20260624_0249.log": {
+    "lines": 187,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "          results/toolbench_react_output.txt"
+   },
+   "results/toolbench_react_full_20260624_0756.log": {
+    "lines": 190,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "          results/toolbench_react_output.txt"
+   },
+   "results/toolbench_react_output.txt": {
+    "lines": 145,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "          results/toolbench_react_output.txt"
+   },
+   "results/toolbench_react_output_g4-bear-compl_partial.txt": {
+    "lines": 101,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "          results/toolbench_react_output_g4-bear-compl_partial.txt"
+   },
+   "results/toolbench_react_output_g4-bear-s43_partial.txt": {
+    "lines": 70,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "          results/toolbench_react_output_g4-bear-s43_partial.txt"
+   },
+   "results/toolbench_react_output_g4-bear-strat_partial.txt": {
+    "lines": 79,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "          results/toolbench_react_output_g4-bear-strat_partial.txt"
+   },
+   "results/toolbench_react_output_g4-bearsingle-nothink-compl_partial.txt": {
+    "lines": 81,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "          results/toolbench_react_output_g4-bearsingle-nothink-compl_partial.txt"
+   },
+   "results/toolbench_react_output_g4-bearsingle-nothink-s43_partial.txt": {
+    "lines": 70,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "          results/toolbench_react_output_g4-bearsingle-nothink-s43_partial.txt"
+   },
+   "results/toolbench_react_output_g4-bearsingle-nothink-strat_partial.txt": {
+    "lines": 70,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "          results/toolbench_react_output_g4-bearsingle-nothink-strat_partial.txt"
+   },
+   "results/toolbench_react_output_g4-mono-nothink-compl_partial.txt": {
+    "lines": 82,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "          results/toolbench_react_output_g4-mono-nothink-compl_partial.txt"
+   },
+   "results/toolbench_react_output_g4-mono-nothink-s43_partial.txt": {
+    "lines": 71,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "          results/toolbench_react_output_g4-mono-nothink-s43_partial.txt"
+   },
+   "results/toolbench_react_output_g4-mono-nothink-strat_partial.txt": {
+    "lines": 71,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "          results/toolbench_react_output_g4-mono-nothink-strat_partial.txt"
+   },
+   "results/toolbench_react_output_g4-mono-think-compl_partial.txt": {
+    "lines": 82,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "          results/toolbench_react_output_g4-mono-think-compl_partial.txt"
+   },
+   "results/toolbench_react_output_g4-mono-think-s43_partial.txt": {
+    "lines": 71,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "          results/toolbench_react_output_g4-mono-think-s43_partial.txt"
+   },
+   "results/toolbench_react_output_g4-mono-think-strat_partial.txt": {
+    "lines": 71,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "          results/toolbench_react_output_g4-mono-think-strat_partial.txt"
+   },
+   "results/toolbench_react_output_gemma4-31b-bear_partial.txt": {
+    "lines": 80,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "          results/toolbench_react_output_gemma4-31b-bear_partial.txt"
+   },
+   "results/toolbench_react_output_gemma4-31b-mono-nothink_partial.txt": {
+    "lines": 71,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "          results/toolbench_react_output_gemma4-31b-mono-nothink_partial.txt"
+   },
+   "results/toolbench_react_output_gemma4-31b-reason_partial.txt": {
+    "lines": 71,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "          results/toolbench_react_output_gemma4-31b-reason_partial.txt"
+   },
+   "results/toolbench_top5_full_20260624_0221.log": {
+    "lines": 189,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "          results/toolbench_top5_categories.json"
+   },
+   "results/toolbench_top5_output.txt": {
+    "lines": 78,
+    "load_failures": [],
+    "hash_selected": 0,
+    "early_stops": [],
+    "last_line": "          results/toolbench_top5_categories.json"
+   }
+  },
+  "own_v0110_controls": {
+   "alpha_sweep_bm25_v0110": {
+    "load_failures": [],
+    "hash_selected": 0
+   },
+   "alpha_sweep_dense_v0110": {
+    "load_failures": [],
+    "hash_selected": 0
+   },
+   "alpha_sweep_q4b_v0110": {
+    "load_failures": [],
+    "hash_selected": 0
+   },
+   "backends_dense_v0110": {
+    "load_failures": [],
+    "hash_selected": 0
+   },
+   "backends_lex_v0110": {
+    "load_failures": [],
+    "hash_selected": 1
+   },
+   "backends_q4b_v0110": {
+    "load_failures": [],
+    "hash_selected": 0
+   },
+   "baseline_comparison_v0110": {
+    "load_failures": [],
+    "hash_selected": 0
+   },
+   "decomposed_bm25_v0110": {
+    "load_failures": [],
+    "hash_selected": 0
+   },
+   "decomposed_dense_v0110": {
+    "load_failures": [],
+    "hash_selected": 0
+   },
+   "decomposed_q4b_v0110": {
+    "load_failures": [],
+    "hash_selected": 0
+   },
+   "diag_mand_dense_v0110": {
+    "load_failures": [],
+    "hash_selected": 0
+   },
+   "diag_mand_lex_v0110": {
+    "load_failures": [],
+    "hash_selected": 8
+   },
+   "diag_mand_q4b_v0110": {
+    "load_failures": [],
+    "hash_selected": 0
+   },
+   "e2e_bge_v0110": {
+    "load_failures": [],
+    "hash_selected": 0
+   },
+   "e2e_bgem3_v0110": {
+    "load_failures": [],
+    "hash_selected": 0
+   },
+   "e2e_lex_v0110": {
+    "load_failures": [],
+    "hash_selected": 2
+   },
+   "e2e_q4b_v0110": {
+    "load_failures": [
+     {
+      "line": 99,
+      "text": "torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 456.00 MiB. GPU 0 has a total capacity of 95.59 GiB of which 65.19 GiB is free. Process 1 has 17179869184.00 GiB memory in use. Process 1 ",
+      "section": "r = et.build_retriever(corpus, backend=backend, governance=governance, mandatory_tags=[])"
+     },
+     {
+      "line": 23,
+      "text": "Traceback (most recent call last):",
+      "section": ""
+     }
+    ],
+    "hash_selected": 0
+   },
+   "e2e_qwen06_v0110": {
+    "load_failures": [],
+    "hash_selected": 0
+   },
+   "gov_ablation_dense_v0110": {
+    "load_failures": [],
+    "hash_selected": 0
+   },
+   "gov_ablation_lex_v0110": {
+    "load_failures": [],
+    "hash_selected": 13
+   },
+   "gov_ablation_q4b_v0110": {
+    "load_failures": [],
+    "hash_selected": 0
+   },
+   "retrieval_hash_v0110": {
+    "load_failures": [],
+    "hash_selected": 3
+   },
+   "retrieval_semantic_v0110": {
+    "load_failures": [],
+    "hash_selected": 0
+   },
+   "tb_bge_v0110": {
+    "load_failures": [],
+    "hash_selected": 0
+   },
+   "tb_bgem3_mand_v0110": {
+    "load_failures": [],
+    "hash_selected": 0
+   },
+   "tb_bgem3_v0110": {
+    "load_failures": [],
+    "hash_selected": 0
+   },
+   "tb_bm25_v0110": {
+    "load_failures": [],
+    "hash_selected": 0
+   },
+   "tb_hash_v0110": {
+    "load_failures": [],
+    "hash_selected": 12
+   },
+   "tb_qwen06_mand_v0110": {
+    "load_failures": [],
+    "hash_selected": 0
+   },
+   "tb_qwen06_v0110": {
+    "load_failures": [],
+    "hash_selected": 0
+   },
+   "tb_qwen4b_v0110": {
+    "load_failures": [
+     {
+      "line": 38,
+      "text": "SKIPPED: CUDA out of memory. Tried to allocate 250.00 MiB. GPU 0 has a total capacity of 95.59 GiB of which 65.36 GiB is free. Process 1 has 17179869184.00 GiB memory in use. Process 1 has 17179869184",
+      "section": "========================================================================"
+     },
+     {
+      "line": 117,
+      "text": "SKIPPED: CUDA out of memory. Tried to allocate 456.00 MiB. GPU 0 has a total capacity of 95.59 GiB of which 65.22 GiB is free. Process 1 has 17179869184.00 GiB memory in use. Process 1 has 17179869184",
+      "section": "========================================================================"
+     },
+     {
+      "line": 124,
+      "text": "SKIPPED: CUDA out of memory. Tried to allocate 454.00 MiB. GPU 0 has a total capacity of 95.59 GiB of which 65.25 GiB is free. Process 1 has 17179869184.00 GiB memory in use. Process 1 has 17179869184",
+      "section": "========================================================================"
+     }
+    ],
+    "hash_selected": 0
+   },
+   "tb_qwen4b_v0110_mt_fix": {
+    "load_failures": [],
+    "hash_selected": 0
+   },
+   "tb_qwen4b_v0110_mt_gov_b2": {
+    "load_failures": [],
+    "hash_selected": 0
+   },
+   "tb_qwen4b_v0110_tb_fix": {
+    "load_failures": [],
+    "hash_selected": 0
+   },
+   "tool_scaling_v0110": {
+    "load_failures": [],
+    "hash_selected": 0
+   }
+  }
+ },
+ "errors": {}
+}

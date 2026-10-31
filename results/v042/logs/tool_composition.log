@@ -1,0 +1,60 @@
+### ================ attempt 2026-10-30T08:07:54-04:00 ================
+### step:        tool_composition
+### kind:        cpu (need 0 GiB)
+### bear:        v042 (9d085b4)
+### started:     2026-10-30T08:07:54-04:00
+### command:     /home/snhwang/.venvs/tist-evals/bin/python evals/eval_tool_composition.py
+### env:         HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 TOKENIZERS_PARALLELISM=false PYTHONUNBUFFERED=1 PYTHONPATH=/home/snhwang/tist-evals/wp0-v042/artifacts/evals/wp0_v040/site BEAR_SOURCE_SHA=9d085b4 ANTHROPIC_API_KEY=wp0-dummy-key-no-paid-calls WP0_REPORT_VRAM=/home/snhwang/tist-evals/wp0-v042/logs/vram.jsonl WP0_STEP=tool_composition WP0_NO_LOCAL_MODELS=1 CUDA_VISIBLE_DEVICES= CUDA_VISIBLE_DEVICES= OMP_NUM_THREADS=8 MKL_NUM_THREADS=8 WP0_EMB_CACHE=/home/snhwang/tist-evals/wp0-v042/embcache WP0_SHARE_MODELS=1
+### memory cap:  /home/snhwang/bin/tist-capped --mem 8G --
+[wp0-site] local model loads refused (WP0_NO_LOCAL_MODELS)
+Built corpus with 6 instructions (3 tools)
+
+Hash embeddings selected. Similarity scores are based on character n-gram overlap and carry no semantic signal — retrieval ranking is effectively arbitrary. Use a sentence-transformers model (e.g. 'BAAI/bge-base-en-v1.5') for meaningful semantic retrieval.
+============================================================
+Test 1: Tool/text separation in ComposedOutput
+============================================================
+  Retrieved: ['constraint-pii', 'directive-billing', 'persona-friendly', 'tool-lookup-order', 'tool-refund', 'tool-search-kb']
+  Tools in composed.tools: ['lookup_order', 'search_kb', 'process_refund']
+  Guidance length: 332 chars
+  Text instruction 'persona-friendly' in guidance — PASS
+  Text instruction 'constraint-pii' in guidance — PASS
+  Tool/text separation — PASS
+
+============================================================
+Test 2: Tool schema structure
+============================================================
+  lookup_order: type=True, name=True, desc=True, params=True — PASS
+  search_kb: type=True, name=True, desc=True, params=True — PASS
+  process_refund: type=True, name=True, desc=True, params=True — PASS
+  lookup_order required params: ['order_id']
+  search_kb required params: ['query']
+  process_refund required params: ['order_id', 'amount']
+  Schema structure — PASS
+
+============================================================
+Test 3: Scope filtering for tools
+============================================================
+  Billing context retrieved: ['constraint-pii', 'directive-billing', 'persona-friendly', 'tool-lookup-order', 'tool-refund', 'tool-search-kb']
+  Billing tools: ['lookup_order', 'search_kb', 'process_refund']
+  Support context retrieved: ['constraint-pii', 'persona-friendly', 'tool-lookup-order', 'tool-refund', 'tool-search-kb']
+  Support tools: ['lookup_order', 'search_kb', 'process_refund']
+  Refund tool in billing context: True
+  Scope filtering — PASS (scope mechanism operational)
+
+============================================================
+Test 4: ComposedOutput behavior
+============================================================
+  Empty compose is falsy — PASS
+  Tools-only: empty guidance — PASS
+  Tools-only: truthy (has tools) — PASS
+  str() conversion works — PASS
+  ComposedOutput behavior — PASS
+
+============================================================
+Summary
+============================================================
+
+All tests passed: True
+[wp0-site] embedding cache: 0 hits, 0 misses (/home/snhwang/tist-evals/wp0-v042/embcache)
+### mem guard: peak session RSS 813 MiB
+### finished:    2026-10-30T08:08:04-04:00 rc=0

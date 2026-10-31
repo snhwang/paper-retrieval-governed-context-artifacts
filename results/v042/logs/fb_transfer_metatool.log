@@ -1,0 +1,45 @@
+### ================ attempt 2026-10-30T09:42:34-04:00 ================
+### step:        fb_transfer_metatool
+### kind:        cpu (need 0 GiB)
+### bear:        v0110F (cdba2174d715494ec4f22c098386487002ec492f)
+### started:     2026-10-30T09:42:34-04:00
+### command:     /home/snhwang/.venvs/tist-evals/bin/python evals/eval_backend_transfer.py --corpus metatool --output results/wp0/backend_transfer_metatool_toolbench_ir_bert_based_uncased.json
+### env:         HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 TOKENIZERS_PARALLELISM=false PYTHONUNBUFFERED=1 PYTHONPATH=/home/snhwang/tist-evals/wp0-v042/artifacts-attr/evals/wp0_v040/site:/home/snhwang/tist-evals/bear-v0110 BEAR_SOURCE_SHA=cdba2174d715494ec4f22c098386487002ec492f ANTHROPIC_API_KEY=wp0-dummy-key-no-paid-calls WP0_REPORT_VRAM=/home/snhwang/tist-evals/wp0-v042/logs/vram.jsonl WP0_STEP=fb_transfer_metatool WP0_NO_LOCAL_MODELS=1 CUDA_VISIBLE_DEVICES= CUDA_VISIBLE_DEVICES= OMP_NUM_THREADS=8 MKL_NUM_THREADS=8 WP0_EMB_CACHE=/home/snhwang/tist-evals/wp0-v042/embcache WP0_SHARE_MODELS=1
+### memory cap:  /home/snhwang/bin/tist-capped --mem 4G --
+[wp0-site] local model loads refused (WP0_NO_LOCAL_MODELS)
+corpus=metatool  199 items  21111 queries
+model=ToolBench/ToolBench_IR_bert_based_uncased  (OUT-of-domain (ToolBench-IR was not trained on MetaTool))
+Could not load model ToolBench/ToolBench_IR_bert_based_uncased (WP0_NO_LOCAL_MODELS is set: local model loads are on hold (BGE loads crashed WSL); run BM25, hash or the remote Nemotron backend). Falling back to hash.
+indexed + evaluated in 21s
+
+=== ToolBench/ToolBench_IR_bert_based_uncased on metatool (no governance, k=5) ===
+  RECALL   0.078 [0.074, 0.081]
+  NDCG     0.050 [0.047, 0.052]
+  F1       0.026 [0.025, 0.027]
+
+Off-the-shelf no-governance references on metatool (Recall@5, BEAR 0.1.10):
+  BGE          0.723
+  BGE-M3       0.728
+  Qwen3-0.6B   0.871
+  Qwen3-4B     0.906
+
+Saved to results/wp0/backend_transfer_metatool_toolbench_ir_bert_based_uncased.json
+
+Read: on ToolBench the fine-tuned retriever should dominate (~0.847);
+on MetaTool, if it falls near or below the off-the-shelf encoders, that
+is the generalization gap -- fine-tuning is corpus-specific.
+
+=== Reproducibility ===
+Timestamp (UTC): 2026-10-30T13:43:05Z
+Command line:    evals/eval_backend_transfer.py --corpus metatool --output results/wp0/backend_transfer_metatool_toolbench_ir_bert_based_uncased.json
+Python:          3.12.13 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
+numpy:           2.2.6
+scipy:           1.17.1
+bear:            0.1.10
+git commit:      634caf5ab715b2a7c20fac0b170228a49810bdc7
+git status:      DIRTY (45 files modified)
+git branch:      tist-r2
+===
+[wp0-site] embedding cache: 0 hits, 0 misses (/home/snhwang/tist-evals/wp0-v042/embcache)
+### mem guard: peak session RSS 835 MiB
+### finished:    2026-10-30T09:43:11-04:00 rc=0

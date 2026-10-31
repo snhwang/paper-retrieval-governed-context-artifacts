@@ -1,0 +1,36 @@
+### ================ attempt 2026-10-30T18:27:58-04:00 ================
+### step:        diag_mand_dense_v0110
+### kind:        cpu (need 0 GiB)
+### bear:        v0110 (cdba2174d715494ec4f22c098386487002ec492f)
+### started:     2026-10-30T18:27:58-04:00
+### command:     /home/snhwang/.venvs/tist-evals/bin/python evals/wp0_v040/diag_mandatory_petsim.py --backends bge bge-m3 qwen3 --out results/wp0/diag_mandatory_dense_v0110.json
+### env:         HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 TOKENIZERS_PARALLELISM=false PYTHONUNBUFFERED=1 PYTHONPATH=/home/snhwang/tist-evals/wp0-v042/artifacts-nemo/evals/wp0_v040/site:/home/snhwang/tist-evals/bear-v0110 BEAR_SOURCE_SHA=cdba2174d715494ec4f22c098386487002ec492f ANTHROPIC_API_KEY=wp0-dummy-key-no-paid-calls WP0_REPORT_VRAM=/home/snhwang/tist-evals/wp0-v042/logs/vram.jsonl WP0_STEP=diag_mand_dense_v0110 CUDA_VISIBLE_DEVICES= WP0_ENCODE_BATCH=4 CUDA_VISIBLE_DEVICES= OMP_NUM_THREADS=12 MKL_NUM_THREADS=12 WP0_EMB_CACHE=/home/snhwang/tist-evals/wp0-v042/embcache WP0_SHARE_MODELS=1
+### memory cap:  /home/snhwang/bin/tist-capped --mem 20G --
+[wp0-site] encode batch size capped at 4
+Full governance / Standard / bge              returned  9.80 (max 10) mandatory 2.88 F1 0.653
+Full governance / Standard / bge-m3           returned  9.80 (max 10) mandatory 2.77 F1 0.653
+Full governance / Standard / qwen3            returned  9.80 (max 10) mandatory 2.78 F1 0.653
+Full governance / Paraphrase / bge            returned  9.00 (max 9) mandatory 3.00 F1 0.637
+Full governance / Paraphrase / bge-m3         returned  9.00 (max 9) mandatory 3.00 F1 0.637
+Full governance / Paraphrase / qwen3          returned  9.00 (max 9) mandatory 3.00 F1 0.637
+Full governance / No-tag / bge                returned  7.19 (max 8) mandatory 3.00 F1 0.701
+Full governance / No-tag / bge-m3             returned  5.74 (max 8) mandatory 3.00 F1 0.789
+Full governance / No-tag / qwen3              returned  6.93 (max 8) mandatory 3.00 F1 0.715
+Full governance / Complex / bge               returned  9.63 (max 10) mandatory 2.92 F1 0.664
+Full governance / Complex / bge-m3            returned  9.63 (max 10) mandatory 2.87 F1 0.662
+Full governance / Complex / qwen3             returned  9.63 (max 10) mandatory 2.88 F1 0.662
+Mandatory only / Standard / bge               returned 10.00 (max 10) mandatory 3.00 F1 0.522
+Mandatory only / Standard / bge-m3            returned 10.00 (max 10) mandatory 3.00 F1 0.538
+Mandatory only / Standard / qwen3             returned 10.00 (max 10) mandatory 2.82 F1 0.518
+Mandatory only / Paraphrase / bge             returned 10.00 (max 10) mandatory 2.95 F1 0.439
+Mandatory only / Paraphrase / bge-m3          returned 10.00 (max 10) mandatory 3.00 F1 0.462
+Mandatory only / Paraphrase / qwen3           returned 10.00 (max 10) mandatory 2.65 F1 0.418
+Mandatory only / No-tag / bge                 returned 10.00 (max 10) mandatory 3.00 F1 0.451
+Mandatory only / No-tag / bge-m3              returned 10.00 (max 10) mandatory 3.00 F1 0.432
+Mandatory only / No-tag / qwen3               returned 10.00 (max 10) mandatory 2.94 F1 0.451
+Mandatory only / Complex / bge                returned 10.00 (max 10) mandatory 3.00 F1 0.508
+Mandatory only / Complex / bge-m3             returned 10.00 (max 10) mandatory 3.00 F1 0.528
+Mandatory only / Complex / qwen3              returned 10.00 (max 10) mandatory 2.58 F1 0.490
+[wp0-site] embedding cache: 1452 hits, 0 misses (/home/snhwang/tist-evals/wp0-v042/embcache)
+### mem guard: peak session RSS 11265 MiB
+### finished:    2026-10-30T18:28:34-04:00 rc=0

@@ -1,0 +1,65 @@
+### ================ attempt 2026-10-30T09:27:30-04:00 ================
+### step:        tool_scaling_v0110
+### kind:        cpu (need 0 GiB)
+### bear:        v0110 (cdba2174d715494ec4f22c098386487002ec492f)
+### started:     2026-10-30T09:27:30-04:00
+### command:     /home/snhwang/.venvs/tist-evals/bin/python evals/eval_tool_scaling.py
+### env:         HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 TOKENIZERS_PARALLELISM=false PYTHONUNBUFFERED=1 PYTHONPATH=/home/snhwang/tist-evals/wp0-v042/artifacts-dense/evals/wp0_v040/site:/home/snhwang/tist-evals/bear-v0110 BEAR_SOURCE_SHA=cdba2174d715494ec4f22c098386487002ec492f ANTHROPIC_API_KEY=wp0-dummy-key-no-paid-calls WP0_REPORT_VRAM=/home/snhwang/tist-evals/wp0-v042/logs/vram.jsonl WP0_STEP=tool_scaling_v0110 CUDA_VISIBLE_DEVICES= WP0_ENCODE_BATCH=4 CUDA_VISIBLE_DEVICES= OMP_NUM_THREADS=12 MKL_NUM_THREADS=12 WP0_EMB_CACHE=/home/snhwang/tist-evals/wp0-v042/embcache WP0_SHARE_MODELS=1
+### memory cap:  /home/snhwang/bin/tist-capped --mem 20G --
+[wp0-site] encode batch size capped at 4
+
+Tool Scaling Evaluation — 50 tool definitions, 8 test scenarios
+
+======================================================================
+EVAL 1: Retrieval precision vs. corpus size
+======================================================================
+
+  Corpus size:  5 tools | Precision: 1.000 [1.000, 1.000] | Recall: 1.000 [1.000, 1.000] | No cross-domain leaks: True | Scenarios: 2 — PASS
+[wp0-site] reusing shared BAAI/bge-base-en-v1.5
+
+  Corpus size: 10 tools | Precision: 1.000 [1.000, 1.000] | Recall: 1.000 [1.000, 1.000] | No cross-domain leaks: True | Scenarios: 4 — PASS
+[wp0-site] reusing shared BAAI/bge-base-en-v1.5
+
+  Corpus size: 25 tools | Precision: 0.900 [0.700, 1.000] | Recall: 1.000 [1.000, 1.000] | No cross-domain leaks: True | Scenarios: 6 — PASS
+[wp0-site] reusing shared BAAI/bge-base-en-v1.5
+
+  Corpus size: 50 tools | Precision: 0.912 [0.738, 1.000] | Recall: 1.000 [1.000, 1.000] | No cross-domain leaks: True | Scenarios: 8 — PASS
+
+======================================================================
+EVAL 2: Prompt token savings (scoped vs. all tools)
+======================================================================
+[wp0-site] reusing shared BAAI/bge-base-en-v1.5
+  Predator attack...............  4 tools |  214 tokens | savings: 93%
+  Social encounter..............  7 tools |  450 tokens | savings: 85%
+  Hungry near food..............  3 tools |  172 tokens | savings: 94%
+  Building with materials.......  3 tools |  164 tokens | savings: 94%
+  Combat encounter..............  6 tools |  346 tokens | savings: 88%
+  Near water....................  3 tools |  155 tokens | savings: 95%
+  Item management...............  5 tools |  288 tokens | savings: 90%
+  Territory dispute............. 10 tools |  629 tokens | savings: 79%
+
+  All-tools baseline: 50 tools, 2928 tokens
+  Average token savings: 90%
+  Token savings — PASS
+
+======================================================================
+EVAL 3: End-to-end pipeline (retrieve → compose → LLM → dispatch)
+======================================================================
+[wp0-site] reusing shared BAAI/bge-base-en-v1.5
+  Retrieved 3 tools: ['eat', 'forage', 'harvest']
+  Using LLM: openai/gpt-5.4-2026-03-05
+  LLM call failed: Error code: 401 - {'error': {'message': 'Incorrect API key provided: not-needed. You can find your API key at https://platform.openai.com/account/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+  (Model may not support function calling)
+  SKIP (LLM error)
+
+======================================================================
+Summary
+======================================================================
+  Scaling precision: PASS
+  Token savings:     PASS
+  End-to-end:        PASS
+
+  All tests passed: True
+[wp0-site] embedding cache: 41 hits, 0 misses (/home/snhwang/tist-evals/wp0-v042/embcache)
+### mem guard: peak session RSS 868 MiB
+### finished:    2026-10-30T09:27:46-04:00 rc=0

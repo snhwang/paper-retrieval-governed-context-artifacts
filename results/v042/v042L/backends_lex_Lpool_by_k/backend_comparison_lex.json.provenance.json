@@ -1,0 +1,36 @@
+{
+  "written_utc": "2026-10-30T11:51:38Z",
+  "argv": [
+    "evals/wp0_v040/stamp_dir.py",
+    "/home/snhwang/tist-evals/wp0-v042/stage/v042L/backends_lex_Lpool_by_k",
+    "--step",
+    "backends_lex_Lpool_by_k",
+    "--command",
+    "/home/snhwang/.venvs/tist-evals/bin/python evals/eval_retrieval_backends.py --models hash bm25 --output results/wp0/backend_comparison_lex.json"
+  ],
+  "bear_version": "0.4.2",
+  "bear_path": "/home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/bear",
+  "bear_source_sha": "9d085b4",
+  "bear_pkg_sha256": "9cf19e48b49f4e57e3723050b942b296bb66f775fdd41e7f1770514576d0930a",
+  "hooks": {
+    "WP0_SHARE_MODELS": "1",
+    "WP0_ART": "/home/snhwang/tist-evals/wp0-v042/artifacts-attr",
+    "WP0_BEAR_LEGACY": "pool_by_k",
+    "WP0_EMB_CACHE": "",
+    "WP0_STEP": "backends_lex_Lpool_by_k",
+    "WP0_REPORT_VRAM": "/home/snhwang/tist-evals/wp0-v042/logs/vram.jsonl",
+    "WP0_NO_LOCAL_MODELS": "1"
+  },
+  "versions": {
+    "python": "3.12.13",
+    "platform": "Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "numpy": "2.2.6",
+    "scipy": "1.17.1",
+    "torch": "2.10.0+cu128",
+    "transformers": "4.57.6",
+    "sentence_transformers": "5.4.1"
+  },
+  "step": "backends_lex_Lpool_by_k",
+  "command": "/home/snhwang/.venvs/tist-evals/bin/python evals/eval_retrieval_backends.py --models hash bm25 --output results/wp0/backend_comparison_lex.json",
+  "file": "results/wp0/backend_comparison_lex.json"
+}

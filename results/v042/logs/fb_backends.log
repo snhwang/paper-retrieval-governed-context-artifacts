@@ -1,0 +1,244 @@
+### ================ attempt 2026-10-30T09:34:20-04:00 ================
+### step:        fb_backends
+### kind:        cpu (need 0 GiB)
+### bear:        v0110F (cdba2174d715494ec4f22c098386487002ec492f)
+### started:     2026-10-30T09:34:20-04:00
+### command:     /home/snhwang/.venvs/tist-evals/bin/python evals/eval_retrieval_backends.py --models bge bge-m3 qwen3 qwen3-4b itr --output results/wp0/backend_comparison_fb.json
+### env:         HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 TOKENIZERS_PARALLELISM=false PYTHONUNBUFFERED=1 PYTHONPATH=/home/snhwang/tist-evals/wp0-v042/artifacts-attr/evals/wp0_v040/site:/home/snhwang/tist-evals/bear-v0110 BEAR_SOURCE_SHA=cdba2174d715494ec4f22c098386487002ec492f ANTHROPIC_API_KEY=wp0-dummy-key-no-paid-calls WP0_REPORT_VRAM=/home/snhwang/tist-evals/wp0-v042/logs/vram.jsonl WP0_STEP=fb_backends WP0_NO_LOCAL_MODELS=1 CUDA_VISIBLE_DEVICES= CUDA_VISIBLE_DEVICES= OMP_NUM_THREADS=8 MKL_NUM_THREADS=8 WP0_EMB_CACHE=/home/snhwang/tist-evals/wp0-v042/embcache WP0_SHARE_MODELS=1
+### memory cap:  /home/snhwang/bin/tist-capped --mem 4G --
+[wp0-site] local model loads refused (WP0_NO_LOCAL_MODELS)
+Hardware: CPU
+Loaded corpus with 58 instructions
+Backends to evaluate: bge, bge-m3, qwen3, qwen3-4b, itr
+
+============================================================
+  BEAR + BGE-base v1.5
+============================================================
+Could not load model BAAI/bge-base-en-v1.5 (WP0_NO_LOCAL_MODELS is set: local model loads are on hold (BGE loads crashed WSL); run BM25, hash or the remote Nemotron backend). Falling back to hash.
+  Index build time: 0.132s
+  Standard queries (60):
+    Strict  F1@10 = 0.841  [0.806, 0.873] 95% CI
+    Relaxed F1@10 = 0.889  [0.871, 0.906] 95% CI
+    Latency: avg=0.7ms, p95=1.8ms
+  Paraphrase queries (60):
+    F1@10 = 0.886  [0.865, 0.907] 95% CI
+  No-tag queries (54):
+    F1@10 = 0.837  [0.813, 0.862] 95% CI
+  Complex queries (60):
+    F1@10 = 0.891  [0.860, 0.921] 95% CI
+
+============================================================
+  BEAR + BGE-M3
+============================================================
+Could not load model BAAI/bge-m3 (WP0_NO_LOCAL_MODELS is set: local model loads are on hold (BGE loads crashed WSL); run BM25, hash or the remote Nemotron backend). Falling back to hash.
+  Index build time: 0.117s
+  Standard queries (60):
+    Strict  F1@10 = 0.841  [0.806, 0.873] 95% CI
+    Relaxed F1@10 = 0.889  [0.871, 0.906] 95% CI
+    Latency: avg=0.5ms, p95=0.7ms
+  Paraphrase queries (60):
+    F1@10 = 0.886  [0.865, 0.907] 95% CI
+  No-tag queries (54):
+    F1@10 = 0.837  [0.813, 0.862] 95% CI
+  Complex queries (60):
+    F1@10 = 0.891  [0.860, 0.921] 95% CI
+
+============================================================
+  BEAR + Qwen3-Embedding-0.6B
+============================================================
+Could not load model Qwen/Qwen3-Embedding-0.6B (WP0_NO_LOCAL_MODELS is set: local model loads are on hold (BGE loads crashed WSL); run BM25, hash or the remote Nemotron backend). Falling back to hash.
+  Index build time: 0.136s
+  Standard queries (60):
+    Strict  F1@10 = 0.841  [0.806, 0.873] 95% CI
+    Relaxed F1@10 = 0.889  [0.871, 0.906] 95% CI
+    Latency: avg=0.9ms, p95=2.9ms
+  Paraphrase queries (60):
+    F1@10 = 0.886  [0.865, 0.907] 95% CI
+  No-tag queries (54):
+    F1@10 = 0.837  [0.813, 0.862] 95% CI
+  Complex queries (60):
+    F1@10 = 0.891  [0.860, 0.921] 95% CI
+
+============================================================
+  BEAR + Qwen3-Embedding-4B
+============================================================
+Could not load model Qwen/Qwen3-Embedding-4B (WP0_NO_LOCAL_MODELS is set: local model loads are on hold (BGE loads crashed WSL); run BM25, hash or the remote Nemotron backend). Falling back to hash.
+  Index build time: 0.125s
+  Standard queries (60):
+    Strict  F1@10 = 0.841  [0.806, 0.873] 95% CI
+    Relaxed F1@10 = 0.889  [0.871, 0.906] 95% CI
+    Latency: avg=0.6ms, p95=1.3ms
+  Paraphrase queries (60):
+    F1@10 = 0.886  [0.865, 0.907] 95% CI
+  No-tag queries (54):
+    F1@10 = 0.837  [0.813, 0.862] 95% CI
+  Complex queries (60):
+    F1@10 = 0.891  [0.860, 0.921] 95% CI
+
+============================================================
+  BEAR + ITR (hybrid)
+============================================================
+WARNING:root:Could not load sentence transformer model BAAI/bge-base-en-v1.5: WP0_NO_LOCAL_MODELS is set: local model loads are on hold (BGE loads crashed WSL); run BM25, hash or the remote Nemotron backend. Using fallback embeddings.
+  Index build time: 0.213s
+  Standard queries (60):
+    Strict  F1@10 = 0.651  [0.632, 0.669] 95% CI
+    Relaxed F1@10 = 0.783  [0.757, 0.809] 95% CI
+    Latency: avg=2.5ms, p95=9.1ms
+  Paraphrase queries (60):
+    F1@10 = 0.637  [0.627, 0.648] 95% CI
+  No-tag queries (54):
+    F1@10 = 0.681  [0.662, 0.704] 95% CI
+  Complex queries (60):
+    F1@10 = 0.672  [0.656, 0.688] 95% CI
+
+============================================================
+  ITR standalone (no governance)
+============================================================
+WARNING:root:Could not load sentence transformer model BAAI/bge-base-en-v1.5: WP0_NO_LOCAL_MODELS is set: local model loads are on hold (BGE loads crashed WSL); run BM25, hash or the remote Nemotron backend. Using fallback embeddings.
+  Strict  F1@10 = 0.211  [0.186, 0.237]
+  Relaxed F1@10 = 0.327  [0.285, 0.371]
+  Para    F1@10 = 0.093  [0.065, 0.122]
+  No-tag  F1@10 = 0.177  [0.144, 0.211]
+  Complex F1@10 = 0.196  [0.163, 0.230]
+
+============================================================
+  Random-k baseline (k=10, 1000 trials)
+============================================================
+  Strict  F1@10 = 0.116  [0.114, 0.118]
+
+
+================================================================================
+  SUMMARY  (60 standard queries, 60 paraphrase queries, 10,000 bootstrap iterations)
+================================================================================
+
+  Standard Queries — Strict F1@10 (95% CI):
+    BGE-base             0.841 [0.806, 0.873]
+    BGE-M3               0.841 [0.806, 0.873]
+    Qwen3-0.6B           0.841 [0.806, 0.873]
+    Qwen3-4B             0.841 [0.806, 0.873]
+    ITR-hybrid           0.651 [0.632, 0.669]
+    ITR-standalone       0.211 [0.186, 0.237]
+    Random-k             0.116 [0.114, 0.118]
+
+  Standard Queries — Relaxed F1@10 (95% CI):
+    BGE-base             0.889 [0.871, 0.906]
+    BGE-M3               0.889 [0.871, 0.906]
+    Qwen3-0.6B           0.889 [0.871, 0.906]
+    Qwen3-4B             0.889 [0.871, 0.906]
+    ITR-hybrid           0.783 [0.757, 0.809]
+    ITR-standalone       0.327 [0.285, 0.371]
+    Random-k             0.140 [0.140, 0.134]
+
+  Paraphrase Queries (minimal tags, n=60) — F1@10 (95% CI):
+    BGE-base             0.886 [0.865, 0.907]
+    BGE-M3               0.886 [0.865, 0.907]
+    Qwen3-0.6B           0.886 [0.865, 0.907]
+    Qwen3-4B             0.886 [0.865, 0.907]
+    ITR-hybrid           0.637 [0.627, 0.648]
+    ITR-standalone       0.093 [0.065, 0.122]
+    Random-k             0.101 [0.101, 0.099]
+
+  No-Tag Queries (pure retrieval, n=54) — F1@10 (95% CI):
+    BGE-base             0.837 [0.813, 0.862]
+    BGE-M3               0.837 [0.813, 0.862]
+    Qwen3-0.6B           0.837 [0.813, 0.862]
+    Qwen3-4B             0.837 [0.813, 0.862]
+    ITR-hybrid           0.681 [0.662, 0.704]
+    ITR-standalone       0.177 [0.144, 0.211]
+    Random-k             0.097 [0.097, 0.095]
+
+  Complex Queries (multi-intent/temporal/indirect/adversarial, n=60) — F1@10 (95% CI):
+    BGE-base             0.891 [0.860, 0.921]
+    BGE-M3               0.891 [0.860, 0.921]
+    Qwen3-0.6B           0.891 [0.860, 0.921]
+    Qwen3-4B             0.891 [0.860, 0.921]
+    ITR-hybrid           0.672 [0.656, 0.688]
+    ITR-standalone       0.196 [0.163, 0.230]
+    Random-k             0.114 [0.114, 0.111]
+
+  Latency:
+    BGE-base             avg=0.7ms  p95=1.8ms
+    BGE-M3               avg=0.5ms  p95=0.7ms
+    Qwen3-0.6B           avg=0.9ms  p95=2.9ms
+    Qwen3-4B             avg=0.6ms  p95=1.3ms
+    ITR-hybrid           avg=2.5ms  p95=9.1ms
+    ITR-standalone       avg=0.0ms  p95=0.0ms
+    Random-k             avg=0.0ms  p95=0.0ms
+
+  Paired Bootstrap Tests (p-values, H0: no difference):
+  Pair                                         Strict    Relaxed     Paraph     No-tag    Complex
+  ------------------------------------------------------------------------------------------
+  BGE-base vs BGE-M3                        1.0000     1.0000     1.0000     1.0000     1.0000   
+  BGE-base vs Qwen3-0.6B                    1.0000     1.0000     1.0000     1.0000     1.0000   
+  BGE-base vs Qwen3-4B                      1.0000     1.0000     1.0000     1.0000     1.0000   
+  BGE-base vs ITR-hybrid                    0.0000***  0.0000***  0.0000***  0.0000***  0.0000***
+  BGE-base vs ITR-standalone                0.0000***  0.0000***  0.0000***  0.0000***  0.0000***
+  BGE-base vs Random-k                      0.0000***  0.0000***  0.0000***  0.0000***  0.0000***
+  BGE-M3 vs Qwen3-0.6B                      1.0000     1.0000     1.0000     1.0000     1.0000   
+  BGE-M3 vs Qwen3-4B                        1.0000     1.0000     1.0000     1.0000     1.0000   
+  BGE-M3 vs ITR-hybrid                      0.0000***  0.0000***  0.0000***  0.0000***  0.0000***
+  BGE-M3 vs ITR-standalone                  0.0000***  0.0000***  0.0000***  0.0000***  0.0000***
+  BGE-M3 vs Random-k                        0.0000***  0.0000***  0.0000***  0.0000***  0.0000***
+  Qwen3-0.6B vs Qwen3-4B                    1.0000     1.0000     1.0000     1.0000     1.0000   
+  Qwen3-0.6B vs ITR-hybrid                  0.0000***  0.0000***  0.0000***  0.0000***  0.0000***
+  Qwen3-0.6B vs ITR-standalone              0.0000***  0.0000***  0.0000***  0.0000***  0.0000***
+  Qwen3-0.6B vs Random-k                    0.0000***  0.0000***  0.0000***  0.0000***  0.0000***
+  Qwen3-4B vs ITR-hybrid                    0.0000***  0.0000***  0.0000***  0.0000***  0.0000***
+  Qwen3-4B vs ITR-standalone                0.0000***  0.0000***  0.0000***  0.0000***  0.0000***
+  Qwen3-4B vs Random-k                      0.0000***  0.0000***  0.0000***  0.0000***  0.0000***
+  ITR-hybrid vs ITR-standalone              0.0000***  0.0000***  0.0000***  0.0000***  0.0000***
+  ITR-hybrid vs Random-k                    0.0000***  0.0000***  0.0000***  0.0000***  0.0000***
+  ITR-standalone vs Random-k                0.0000***  0.0000***  0.5530     0.0000***  0.0000***
+
+  Cohen's d Effect Sizes (positive = first backend higher):
+  Pair                                       Strict  Relaxed   Paraph   No-tag  Complex
+  --------------------------------------------------------------------------------
+  BGE-base vs BGE-M3                            inf      inf      inf      inf      inf
+  BGE-base vs Qwen3-0.6B                        inf      inf      inf      inf      inf
+  BGE-base vs Qwen3-4B                          inf      inf      inf      inf      inf
+  BGE-base vs ITR-hybrid                      1.635    0.897    2.370    1.287    1.585
+  BGE-base vs ITR-standalone                  3.647    3.166    4.870    4.369    3.633
+  BGE-base vs Random-k                        5.214   10.349    9.102    7.842    6.154
+  BGE-M3 vs Qwen3-0.6B                          inf      inf      inf      inf      inf
+  BGE-M3 vs Qwen3-4B                            inf      inf      inf      inf      inf
+  BGE-M3 vs ITR-hybrid                        1.635    0.897    2.370    1.287    1.585
+  BGE-M3 vs ITR-standalone                    3.647    3.166    4.870    4.369    3.633
+  BGE-M3 vs Random-k                          5.214   10.349    9.102    7.842    6.154
+  Qwen3-0.6B vs Qwen3-4B                        inf      inf      inf      inf      inf
+  Qwen3-0.6B vs ITR-hybrid                    1.635    0.897    2.370    1.287    1.585
+  Qwen3-0.6B vs ITR-standalone                3.647    3.166    4.870    4.369    3.633
+  Qwen3-0.6B vs Random-k                      5.214   10.349    9.102    7.842    6.154
+  Qwen3-4B vs ITR-hybrid                      1.635    0.897    2.370    1.287    1.585
+  Qwen3-4B vs ITR-standalone                  3.647    3.166    4.870    4.369    3.633
+  Qwen3-4B vs Random-k                        5.214   10.349    9.102    7.842    6.154
+  ITR-hybrid vs ITR-standalone                3.975    2.849    5.000    3.253    3.562
+  ITR-hybrid vs Random-k                      7.431    7.497   15.803    7.535   10.554
+  ITR-standalone vs Random-k                  0.965    1.181   -0.076    0.623    0.626
+
+
+% === LaTeX Table: Retrieval Backend Comparison ===
+\begin{table}[t]
+\caption{Retrieval quality by backend on Pet Simulation corpus (37 queries, $k=10$, $\alpha=0.3$).}
+\label{tab:backend-comparison}
+\centering
+\begin{tabular}{@{}l ccc ccc r@{}}
+\toprule
+& \multicolumn{3}{c}{Strict} & \multicolumn{3}{c}{Relaxed} & \\
+\cmidrule(lr){2-4} \cmidrule(lr){5-7}
+Backend & P@10 & R@10 & F1 & P@10 & R@10 & F1 & ms/q \\
+\midrule
+BGE-base & 0.754 & 0.972 & 0.841 & 0.907 & 0.890 & 0.889 & 0.7 \\
+BGE-M3 & 0.754 & 0.972 & 0.841 & 0.907 & 0.890 & 0.889 & 0.5 \\
+Qwen3-0.6B & 0.754 & 0.972 & 0.841 & 0.907 & 0.890 & 0.889 & 0.9 \\
+Qwen3-4B & 0.754 & 0.972 & 0.841 & 0.907 & 0.890 & 0.889 & 0.6 \\
+ITR-hybrid & 0.496 & 0.956 & 0.651 & 0.686 & 0.953 & 0.783 & 2.5 \\
+ITR-standalone & --- & --- & 0.211 & --- & --- & 0.327 & --- \\
+Random-k & --- & --- & 0.116 & --- & --- & 0.140 & --- \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Results saved to results/wp0/backend_comparison_fb.json
+[wp0-site] embedding cache: 0 hits, 0 misses (/home/snhwang/tist-evals/wp0-v042/embcache)
+### mem guard: peak session RSS 868 MiB
+### finished:    2026-10-30T09:34:52-04:00 rc=0

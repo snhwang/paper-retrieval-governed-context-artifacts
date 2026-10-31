@@ -1,0 +1,113 @@
+### ================ attempt 2026-10-30T18:35:39-04:00 ================
+### step:        decomposed_bge_Lremoved_acting
+### kind:        cpu (need 0 GiB)
+### bear:        v042L (9d085b4)
+### started:     2026-10-30T18:35:39-04:00
+### command:     /home/snhwang/.venvs/tist-evals/bin/python evals/eval_governance_decomposed.py --backends bge
+### env:         HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 TOKENIZERS_PARALLELISM=false PYTHONUNBUFFERED=1 PYTHONPATH=/home/snhwang/tist-evals/wp0-v042/artifacts-nemo/evals/wp0_v040/site BEAR_SOURCE_SHA=9d085b4 ANTHROPIC_API_KEY=wp0-dummy-key-no-paid-calls WP0_REPORT_VRAM=/home/snhwang/tist-evals/wp0-v042/logs/vram.jsonl WP0_STEP=decomposed_bge_Lremoved_acting WP0_BEAR_LEGACY=removed_acting CUDA_VISIBLE_DEVICES= WP0_ENCODE_BATCH=4 CUDA_VISIBLE_DEVICES= OMP_NUM_THREADS=12 MKL_NUM_THREADS=12 WP0_EMB_CACHE=/home/snhwang/tist-evals/wp0-v042/embcache WP0_SHARE_MODELS=1
+### memory cap:  /home/snhwang/bin/tist-capped --mem 20G --
+[wp0-site] encode batch size capped at 4
+[wp0-site] BEAR legacy switches on: ['restore_removed_acting']
+
+######################################################################
+#  Backend 1/1: bge
+######################################################################
+
+=== Decomposed governance ablation (bge) ===
+
+Corpus: 58 instructions
+Queries: 60 standard + 12 adversarial-safety
+
+Auto-discovered 3 safety-tagged instruction(s): ['constraint-no-aggression', 'safety-boundaries', 'safety-reasonable-response']
+
+[1/6] Full governance ...
+[2/6] -required_tags ...
+[wp0-site] reusing shared BAAI/bge-base-en-v1.5
+[3/6] -priority weighting (alpha=0) ...
+[wp0-site] reusing shared BAAI/bge-base-en-v1.5
+[4/6] -conflict resolution ...
+[wp0-site] reusing shared BAAI/bge-base-en-v1.5
+[5/6] -mandatory injection ...
+[wp0-site] reusing shared BAAI/bge-base-en-v1.5
+[6/6] No governance (all four off) ...
+[wp0-site] reusing shared BAAI/bge-base-en-v1.5
+[+] ITR library (off-the-shelf hybrid, no governance) ...
+[wp0-site] reusing shared BAAI/bge-base-en-v1.5
+/home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/itr/indexing/embedder.py:21: FutureWarning: The `get_sentence_embedding_dimension` method has been renamed to `get_embedding_dimension`.
+  self.embedding_dim = self.model.get_sentence_embedding_dimension()
+
+--- Standard queries (n=60, k=10, backend=bge) ---
+
+Condition                        Strict F1 [95% CI]         Δ vs full  Cohen d  p (paired)
+------------------------------------------------------------------------------------------
+Full governance                  0.668 [0.655,0.680]        —          —        —         
+- required_tags                  0.522 [0.501,0.541]        -0.146     +1.38    0.0000
+- priority weighting             0.657 [0.641,0.671]        -0.011     +0.30    0.0274
+- conflict resolution            0.668 [0.655,0.680]        +0.000     +0.00    1.0000
+- mandatory injection            0.653 [0.634,0.671]        -0.015     +0.36    0.0095
+No governance                    0.162 [0.149,0.177]        -0.506     +7.20    0.0000
+ITR library (off-the-shelf)      0.182 [0.162,0.203]        -0.486     +5.66    0.0000
+
+--- Adversarial-safety queries (n=12, k=10) ---
+
+This subset exercises the mandatory-injection pathway specifically.
+Expected set per query is the union of ['constraint-no-aggression', 'safety-boundaries', 'safety-reasonable-response'] (no other instructions are expected).
+
+[wp0-site] reusing shared BAAI/bge-base-en-v1.5
+[wp0-site] reusing shared BAAI/bge-base-en-v1.5
+  Mandatory injection ON:  safety-recall = 1.000
+  Mandatory injection OFF: safety-recall = 1.000
+  Δ recall (on - off):     +0.000
+
+Wrote results/governance_decomposed_bge.json
+
+--- LaTeX table (paste into manuscript) ---
+
+\begin{table}[t]
+  \caption{Decomposed governance ablation on Pet Simulation (60 standard queries, $k=10$, backend = bge, 95\% bootstrap CIs, paired bootstrap test).
+  Each row switches off a single mechanism while the others remain active.}
+  \label{tab:decomposed-ablation}
+  \centering
+  \small
+  \begin{tabular}{@{}l c c c c@{}}
+    \toprule
+    Condition & Strict F1 [95\% CI] & $\Delta$ vs. full & Cohen's $d$ & $p$ (paired) \\
+    \midrule
+    Full governance & 0.668 [0.655,0.680] & --- & --- & --- \\
+    - required\_tags & 0.522 [0.501,0.541] & -0.146 & +1.38 & $<$0.0001 \\
+    - priority weighting & 0.657 [0.641,0.671] & -0.011 & +0.30 & 0.0274 \\
+    - conflict resolution & 0.668 [0.655,0.680] & +0.000 & +0.00 & 1.0000 \\
+    - mandatory injection & 0.653 [0.634,0.671] & -0.015 & +0.36 & 0.0095 \\
+    No governance & 0.162 [0.149,0.177] & -0.506 & +7.20 & $<$0.0001 \\
+    ITR library (off-the-shelf) & 0.182 [0.162,0.203] & -0.486 & +5.66 & $<$0.0001 \\
+    \midrule
+    \multicolumn{5}{@{}l}{\emph{Adversarial-safety subset (n=12 queries)}} \\
+    Mandatory injection ON  & safety-recall = 1.000 & --- & --- & --- \\
+    Mandatory injection OFF & safety-recall = 1.000 & +0.000 & --- & --- \\
+    \bottomrule
+  \end{tabular}
+  \par\vspace{2pt}
+  \footnotesize\raggedright
+  \textit{Note on ITR row.} The ITR row uses the off-the-shelf \texttt{instruction-tool-retrieval} library with default settings. It is included as a reference point for what a practitioner obtains from the released library, not as a faithful re-implementation of the ITR paper's full pipeline, which includes confidence-gated fallbacks, structured fragment types, and possibly fine-tuned retrievers that we do not exercise. The ITR paper's own reported numbers (95\% per-step context-token reduction, $+$32\% relative tool-routing accuracy on the authors' internal controlled benchmark~\citep{franko2025itr}) are not directly comparable to F1 on Pet Sim and are cited in the text.
+\end{table}
+
+
+Elapsed: 0.9s
+Full log written to results/governance_decomposed_output.txt
+
+=== Reproducibility ===
+Timestamp (UTC): 2026-10-30T22:35:43Z
+Command line:    evals/eval_governance_decomposed.py --backends bge
+Python:          3.12.13 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
+numpy:           2.2.6
+scipy:           1.17.1
+bear:            0.4.2
+git commit:      634caf5ab715b2a7c20fac0b170228a49810bdc7
+git status:      DIRTY (24 files modified)
+git branch:      tist-r2
+
+  backends: ['bge']
+===
+[wp0-site] embedding cache: 578 hits, 0 misses (/home/snhwang/tist-evals/wp0-v042/embcache)
+### mem guard: peak session RSS 9 MiB
+### finished:    2026-10-30T18:35:45-04:00 rc=0

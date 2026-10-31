@@ -1,0 +1,169 @@
+### ================ attempt 2026-10-30T09:18:50-04:00 ================
+### step:        decomposed_q4b_v0110
+### kind:        cpu (need 0 GiB)
+### bear:        v0110 (cdba2174d715494ec4f22c098386487002ec492f)
+### started:     2026-10-30T09:18:50-04:00
+### command:     /home/snhwang/.venvs/tist-evals/bin/python evals/eval_governance_decomposed.py --backends qwen3-4b
+### env:         HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 TOKENIZERS_PARALLELISM=false PYTHONUNBUFFERED=1 PYTHONPATH=/home/snhwang/tist-evals/wp0-v042/artifacts-dense/evals/wp0_v040/site:/home/snhwang/tist-evals/bear-v0110 BEAR_SOURCE_SHA=cdba2174d715494ec4f22c098386487002ec492f ANTHROPIC_API_KEY=wp0-dummy-key-no-paid-calls WP0_REPORT_VRAM=/home/snhwang/tist-evals/wp0-v042/logs/vram.jsonl WP0_STEP=decomposed_q4b_v0110 CUDA_VISIBLE_DEVICES= WP0_ENCODE_BATCH=4 CUDA_VISIBLE_DEVICES= OMP_NUM_THREADS=12 MKL_NUM_THREADS=12 WP0_EMB_CACHE=/home/snhwang/tist-evals/wp0-v042/embcache WP0_SHARE_MODELS=1
+### memory cap:  /home/snhwang/bin/tist-capped --mem 20G --
+[wp0-site] encode batch size capped at 4
+
+######################################################################
+#  Backend 1/1: qwen3-4b
+######################################################################
+
+=== Decomposed governance ablation (qwen3-4b) ===
+
+Corpus: 58 instructions
+Queries: 60 standard + 12 adversarial-safety
+
+Auto-discovered 3 safety-tagged instruction(s): ['constraint-no-aggression', 'safety-boundaries', 'safety-reasonable-response']
+
+[1/6] Full governance ...
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:00<00:00,  1.13it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:01<00:00,  1.15it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:01<00:00,  1.14it/s]
+[2/6] -required_tags ...
+[wp0-site] reusing shared Qwen/Qwen3-Embedding-4B
+[3/6] -priority weighting (alpha=0) ...
+[wp0-site] reusing shared Qwen/Qwen3-Embedding-4B
+[4/6] -conflict resolution ...
+[wp0-site] reusing shared Qwen/Qwen3-Embedding-4B
+[5/6] -mandatory injection ...
+[wp0-site] reusing shared Qwen/Qwen3-Embedding-4B
+[6/6] No governance (all four off) ...
+[wp0-site] reusing shared Qwen/Qwen3-Embedding-4B
+[+] ITR library (off-the-shelf hybrid, no governance) ...
+/home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/itr/indexing/embedder.py:21: FutureWarning: The `get_sentence_embedding_dimension` method has been renamed to `get_embedding_dimension`.
+  self.embedding_dim = self.model.get_sentence_embedding_dimension()
+
+--- Standard queries (n=60, k=10, backend=qwen3-4b) ---
+
+Condition                        Strict F1 [95% CI]         Δ vs full  Cohen d  p (paired)
+------------------------------------------------------------------------------------------
+Full governance                  0.653 [0.634,0.671]        —          —        —         
+- required_tags                  0.540 [0.518,0.561]        -0.113     +0.90    0.0000
+- priority weighting             0.599 [0.569,0.627]        -0.054     +0.74    0.0000
+- conflict resolution            0.655 [0.636,0.673]        +0.002     -0.13    0.6285
+- mandatory injection            0.653 [0.634,0.671]        +0.000     +0.00    1.0000
+No governance                    0.221 [0.206,0.237]        -0.432     +4.95    0.0000
+ITR library (off-the-shelf)      0.182 [0.162,0.203]        -0.471     +4.44    0.0000
+
+--- Adversarial-safety queries (n=12, k=10) ---
+
+This subset exercises the mandatory-injection pathway specifically.
+Expected set per query is the union of ['constraint-no-aggression', 'safety-boundaries', 'safety-reasonable-response'] (no other instructions are expected).
+
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]### finished:    2026-10-30T09:18:57-04:00 rc=143
+[wp0-site] encode batch size capped at 4
+stamp: 0 stamped, 0 already stamped, 0 sidecars in /home/snhwang/tist-evals/wp0-v042/stage/v0110/decomposed_q4b_v0110
+### ================ attempt 2026-10-30T18:27:42-04:00 ================
+### step:        decomposed_q4b_v0110
+### kind:        cpu (need 0 GiB)
+### bear:        v0110 (cdba2174d715494ec4f22c098386487002ec492f)
+### started:     2026-10-30T18:27:42-04:00
+### command:     /home/snhwang/.venvs/tist-evals/bin/python evals/eval_governance_decomposed.py --backends qwen3-4b
+### env:         HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 TOKENIZERS_PARALLELISM=false PYTHONUNBUFFERED=1 PYTHONPATH=/home/snhwang/tist-evals/wp0-v042/artifacts-nemo/evals/wp0_v040/site:/home/snhwang/tist-evals/bear-v0110 BEAR_SOURCE_SHA=cdba2174d715494ec4f22c098386487002ec492f ANTHROPIC_API_KEY=wp0-dummy-key-no-paid-calls WP0_REPORT_VRAM=/home/snhwang/tist-evals/wp0-v042/logs/vram.jsonl WP0_STEP=decomposed_q4b_v0110 WP0_SHARE_KEEP=2 CUDA_VISIBLE_DEVICES= WP0_ENCODE_BATCH=4 CUDA_VISIBLE_DEVICES= OMP_NUM_THREADS=12 MKL_NUM_THREADS=12 WP0_EMB_CACHE=/home/snhwang/tist-evals/wp0-v042/embcache WP0_SHARE_MODELS=1
+### memory cap:  /home/snhwang/bin/tist-capped --mem 20G --
+[wp0-site] encode batch size capped at 4
+
+######################################################################
+#  Backend 1/1: qwen3-4b
+######################################################################
+
+=== Decomposed governance ablation (qwen3-4b) ===
+
+Corpus: 58 instructions
+Queries: 60 standard + 12 adversarial-safety
+
+Auto-discovered 3 safety-tagged instruction(s): ['constraint-no-aggression', 'safety-boundaries', 'safety-reasonable-response']
+
+[1/6] Full governance ...
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:00<00:00,  1.50it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:01<00:00,  1.90it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:01<00:00,  1.83it/s]
+[2/6] -required_tags ...
+[wp0-site] reusing shared Qwen/Qwen3-Embedding-4B
+[3/6] -priority weighting (alpha=0) ...
+[wp0-site] reusing shared Qwen/Qwen3-Embedding-4B
+[4/6] -conflict resolution ...
+[wp0-site] reusing shared Qwen/Qwen3-Embedding-4B
+[5/6] -mandatory injection ...
+[wp0-site] reusing shared Qwen/Qwen3-Embedding-4B
+[6/6] No governance (all four off) ...
+[wp0-site] reusing shared Qwen/Qwen3-Embedding-4B
+[+] ITR library (off-the-shelf hybrid, no governance) ...
+/home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/itr/indexing/embedder.py:21: FutureWarning: The `get_sentence_embedding_dimension` method has been renamed to `get_embedding_dimension`.
+  self.embedding_dim = self.model.get_sentence_embedding_dimension()
+
+--- Standard queries (n=60, k=10, backend=qwen3-4b) ---
+
+Condition                        Strict F1 [95% CI]         Δ vs full  Cohen d  p (paired)
+------------------------------------------------------------------------------------------
+Full governance                  0.653 [0.634,0.671]        —          —        —         
+- required_tags                  0.540 [0.518,0.561]        -0.113     +0.90    0.0000
+- priority weighting             0.599 [0.569,0.627]        -0.054     +0.74    0.0000
+- conflict resolution            0.655 [0.636,0.673]        +0.002     -0.13    0.6285
+- mandatory injection            0.653 [0.634,0.671]        +0.000     +0.00    1.0000
+No governance                    0.221 [0.206,0.237]        -0.432     +4.95    0.0000
+ITR library (off-the-shelf)      0.182 [0.162,0.203]        -0.471     +4.44    0.0000
+
+--- Adversarial-safety queries (n=12, k=10) ---
+
+This subset exercises the mandatory-injection pathway specifically.
+Expected set per query is the union of ['constraint-no-aggression', 'safety-boundaries', 'safety-reasonable-response'] (no other instructions are expected).
+
+[wp0-site] reusing shared Qwen/Qwen3-Embedding-4B
+[wp0-site] reusing shared Qwen/Qwen3-Embedding-4B
+  Mandatory injection ON:  safety-recall = 1.000
+  Mandatory injection OFF: safety-recall = 1.000
+  Δ recall (on - off):     +0.000
+
+Wrote results/governance_decomposed_qwen3-4b.json
+
+--- LaTeX table (paste into manuscript) ---
+
+\begin{table}[t]
+  \caption{Decomposed governance ablation on Pet Simulation (60 standard queries, $k=10$, backend = qwen3-4b, 95\% bootstrap CIs, paired bootstrap test).
+  Each row switches off a single mechanism while the others remain active.}
+  \label{tab:decomposed-ablation}
+  \centering
+  \small
+  \begin{tabular}{@{}l c c c c@{}}
+    \toprule
+    Condition & Strict F1 [95\% CI] & $\Delta$ vs. full & Cohen's $d$ & $p$ (paired) \\
+    \midrule
+    Full governance & 0.653 [0.634,0.671] & --- & --- & --- \\
+    - required\_tags & 0.540 [0.518,0.561] & -0.113 & +0.90 & $<$0.0001 \\
+    - priority weighting & 0.599 [0.569,0.627] & -0.054 & +0.74 & $<$0.0001 \\
+    - conflict resolution & 0.655 [0.636,0.673] & +0.002 & -0.13 & 0.6285 \\
+    - mandatory injection & 0.653 [0.634,0.671] & +0.000 & +0.00 & 1.0000 \\
+    No governance & 0.221 [0.206,0.237] & -0.432 & +4.95 & $<$0.0001 \\
+    ITR library (off-the-shelf) & 0.182 [0.162,0.203] & -0.471 & +4.44 & $<$0.0001 \\
+    \midrule
+    \multicolumn{5}{@{}l}{\emph{Adversarial-safety subset (n=12 queries)}} \\
+    Mandatory injection ON  & safety-recall = 1.000 & --- & --- & --- \\
+    Mandatory injection OFF & safety-recall = 1.000 & +0.000 & --- & --- \\
+    \bottomrule
+  \end{tabular}
+  \par\vspace{2pt}
+  \footnotesize\raggedright
+  \textit{Note on ITR row.} The ITR row uses the off-the-shelf \texttt{instruction-tool-retrieval} library with default settings. It is included as a reference point for what a practitioner obtains from the released library, not as a faithful re-implementation of the ITR paper's full pipeline, which includes confidence-gated fallbacks, structured fragment types, and possibly fine-tuned retrievers that we do not exercise. The ITR paper's own reported numbers (95\% per-step context-token reduction, $+$32\% relative tool-routing accuracy on the authors' internal controlled benchmark~\citep{franko2025itr}) are not directly comparable to F1 on Pet Sim and are cited in the text.
+\end{table}
+
+
+Elapsed: 2.1s
+Full log written to results/governance_decomposed_output.txt
+
+=== Reproducibility ===
+Timestamp (UTC): 2026-10-30T22:27:47Z
+Command line:    evals/eval_governance_decomposed.py --backends qwen3-4b
+Python:          3.12.13 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
+numpy:           2.2.6
+scipy:           1.17.1
+bear:            0.1.10
+git commit:      634caf5ab715b2a7c20fac0b170228a49810bdc7
+git status:      DIRTY (21 files modified)
+git branch:      tist-r2
+
+  backends: ['qwen3-4b']
+===
+[wp0-site] embedding cache: 578 hits, 0 misses (/home/snhwang/tist-evals/wp0-v042/embcache)
+### mem guard: peak session RSS 16320 MiB
+### finished:    2026-10-30T18:27:52-04:00 rc=0

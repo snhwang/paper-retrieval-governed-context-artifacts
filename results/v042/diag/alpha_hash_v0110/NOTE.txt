@@ -1,0 +1,1 @@
+eval_alpha_sweep.py --backends hash on public v0.1.10 (cdba217), CPU, 2026-10-30T09:24:45-04:00. Tests whether the published Qwen3-4B alpha=0.7/0.9/1.0 cells are hash-fallback values.

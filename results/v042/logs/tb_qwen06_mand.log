@@ -1,0 +1,119 @@
+### ================ attempt 2026-10-31T13:49:11-04:00 ================
+### step:        tb_qwen06_mand
+### kind:        cpu (need 0 GiB)
+### bear:        v042 (0d0718a39a0b0788ef5cca4689352462b830494c)
+### started:     2026-10-31T13:49:11-04:00
+### command:     /home/snhwang/.venvs/tist-evals/bin/python evals/wp0_v040/eval_toolbench_v040.py --top-k 5 --metatool-query-tags-file evals/data/external_benchmarks/metatool/query_tags_top5.json --output results/wp0/toolbench_eval_tb_qwen06_mand.json --backends BEAR+Qwen3-0.6B (mand-only)
+### env:         HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 TOKENIZERS_PARALLELISM=false PYTHONUNBUFFERED=1 PYTHONPATH=/home/snhwang/tist-evals/wp0-v042/artifacts-dense/evals/wp0_v040/site BEAR_SOURCE_SHA=0d0718a39a0b0788ef5cca4689352462b830494c ANTHROPIC_API_KEY=wp0-dummy-key-no-paid-calls WP0_REPORT_VRAM=/home/snhwang/tist-evals/wp0-v042/logs/vram.jsonl WP0_STEP=tb_qwen06_mand CUDA_VISIBLE_DEVICES= WP0_ENCODE_BATCH=4 CUDA_VISIBLE_DEVICES= OMP_NUM_THREADS=12 MKL_NUM_THREADS=12 WP0_EMB_CACHE=/home/snhwang/tist-evals/wp0-v042/embcache WP0_SHARE_MODELS=1
+### memory cap:  /home/snhwang/bin/tist-capped --mem 20G --
+[wp0-site] encode batch size capped at 4
+
+MetaTool (no tags) loaded: 199 tools, 21111 queries
+
+========================================================================
+  MetaTool
+  Corpus: 199 instructions, Queries: 21111, k=5
+  Experiments: 1
+========================================================================
+
+  BEAR+Qwen3-0.6B (mand-only)...
+        recall@5: 0.869 [0.865, 0.874]
+          ndcg@5: 0.775 [0.770, 0.780]
+            f1@5: 0.294 [0.293, 0.296]
+          time:   3.7s
+
+  --- Statistical Tests (paired t-test, Wilcoxon, Cohen's d) ---
+
+MetaTool+Tags loaded: 199 tools, 21111 queries
+  Queries with context tags: 21111/21111
+
+========================================================================
+  MetaTool+Tags
+  Corpus: 199 instructions, Queries: 21111, k=5
+  Experiments: 1
+========================================================================
+
+  BEAR+Qwen3-0.6B (mand-only)...
+[wp0-site] reusing shared Qwen/Qwen3-Embedding-0.6B
+        recall@5: 0.000 [0.000, 0.000]
+          ndcg@5: 0.000 [0.000, 0.000]
+            f1@5: 0.000 [0.000, 0.000]
+          time:   3.5s
+
+  --- Statistical Tests (paired t-test, Wilcoxon, Cohen's d) ---
+
+MetaTool+QueryTags-top5 loaded: 199 tools, 21111 queries
+  Source file: evals/data/external_benchmarks/metatool/query_tags_top5.json
+  Queries with context tags: 21111/21111
+
+========================================================================
+  MetaTool+QueryTags-top5
+  Corpus: 199 instructions, Queries: 21111, k=5
+  Experiments: 1
+========================================================================
+
+  BEAR+Qwen3-0.6B (mand-only)...
+[wp0-site] reusing shared Qwen/Qwen3-Embedding-0.6B
+        recall@5: 0.000 [0.000, 0.000]
+          ndcg@5: 0.000 [0.000, 0.000]
+            f1@5: 0.000 [0.000, 0.000]
+          time:   3.7s
+
+  --- Statistical Tests (paired t-test, Wilcoxon, Cohen's d) ---
+
+ToolBench loaded: 3225 APIs, 1100 queries
+  Categories: 47
+
+========================================================================
+  ToolBench
+  Corpus: 3225 instructions, Queries: 1100, k=5
+  Experiments: 1
+========================================================================
+
+  BEAR+Qwen3-0.6B (mand-only)...
+[wp0-site] reusing shared Qwen/Qwen3-Embedding-0.6B
+        recall@5: 0.000 [0.000, 0.000]
+          ndcg@5: 0.000 [0.000, 0.000]
+            f1@5: 0.000 [0.000, 0.000]
+          time:   5.3s
+
+  --- Statistical Tests (paired t-test, Wilcoxon, Cohen's d) ---
+
+Results saved to results/wp0/toolbench_eval_tb_qwen06_mand.json
+
+========================================================================
+  Summary
+========================================================================
+
+  MetaTool:
+    BEAR+Qwen3-0.6B (mand-only)         R@5=0.869 [0.865, 0.874]  NDCG@5=0.775 [0.770, 0.780]
+
+  MetaTool+Tags:
+    BEAR+Qwen3-0.6B (mand-only)         R@5=0.000 [0.000, 0.000]  NDCG@5=0.000 [0.000, 0.000]
+
+  MetaTool+QueryTags-top5:
+    BEAR+Qwen3-0.6B (mand-only)         R@5=0.000 [0.000, 0.000]  NDCG@5=0.000 [0.000, 0.000]
+
+  ToolBench:
+    BEAR+Qwen3-0.6B (mand-only)         R@5=0.000 [0.000, 0.000]  NDCG@5=0.000 [0.000, 0.000]
+Provenance stamped into results/wp0/toolbench_eval_tb_qwen06_mand.json
+
+=== Reproducibility ===
+Timestamp (UTC): 2026-10-31T17:49:39Z
+Command line:    evals/wp0_v040/eval_toolbench_v040.py --top-k 5 --metatool-query-tags-file evals/data/external_benchmarks/metatool/query_tags_top5.json --output results/wp0/toolbench_eval_tb_qwen06_mand.json --backends BEAR+Qwen3-0.6B (mand-only)
+Python:          3.12.13 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
+numpy:           2.2.6
+scipy:           1.17.1
+bear:            0.4.2
+git commit:      634caf5ab715b2a7c20fac0b170228a49810bdc7
+git status:      DIRTY (36 files modified)
+git branch:      tist-r2
+
+  bear_version: 0.4.2
+  bear_path: /home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/bear
+  bear_source_sha: 0d0718a39a0b0788ef5cca4689352462b830494c
+  bear_pkg_sha256: 9cf19e48b49f4e57e3723050b942b296bb66f775fdd41e7f1770514576d0930a
+===
+[wp0-site] embedding cache: 65503 hits, 0 misses (/home/snhwang/tist-evals/wp0-v042/embcache)
+### mem guard: peak session RSS 3307 MiB
+### finished:    2026-10-31T13:49:42-04:00 rc=0

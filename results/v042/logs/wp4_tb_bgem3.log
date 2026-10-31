@@ -1,0 +1,19 @@
+### ================ attempt 2026-10-30T14:16:51-04:00 ================
+### step:        wp4_tb_bgem3
+### kind:        cpu (need 0 GiB)
+### bear:        v042 (9d085b4)
+### started:     2026-10-30T14:16:51-04:00
+### command:     /home/snhwang/.venvs/tist-evals/bin/python evals/wp0_v040/dump_toolbench_lists.py --mode toolbench --backends bge-m3 --outdir results/wp0/wp4_lists_v042 --share-query-embeddings --nest-check 200 --progress 5000
+### env:         HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 TOKENIZERS_PARALLELISM=false PYTHONUNBUFFERED=1 PYTHONPATH=/home/snhwang/tist-evals/wp0-v042/artifacts-dense/evals/wp0_v040/site BEAR_SOURCE_SHA=9d085b4 ANTHROPIC_API_KEY=wp0-dummy-key-no-paid-calls WP0_REPORT_VRAM=/home/snhwang/tist-evals/wp0-v042/logs/vram.jsonl WP0_STEP=wp4_tb_bgem3 CUDA_VISIBLE_DEVICES= WP0_ENCODE_BATCH=4 CUDA_VISIBLE_DEVICES= OMP_NUM_THREADS=12 MKL_NUM_THREADS=12 WP0_EMB_CACHE=/home/snhwang/tist-evals/wp0-v042/embcache WP0_SHARE_MODELS=1
+### memory cap:  /home/snhwang/bin/tist-capped --mem 20G --
+[wp0-site] encode batch size capped at 4
+BEAR: {"bear_version": "0.4.2", "bear_path": "/home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/bear", "bear_source_sha": "9d085b4", "bear_pkg_sha256": "9cf19e48b49f4e57e3723050b942b296bb66f775fdd41e7f1770514576d0930a"}
+toolbench: corpus 3225, queries 1100, k=50
+    nesting check: 0 mismatches over 200 queries x 12 k
+  BEAR+BGE-M3 (gov): done (27s), query cache hits=2401 misses=1099
+[wp0-site] reusing shared BAAI/bge-m3
+    nesting check: 0 mismatches over 200 queries x 12 k
+  BGE-M3 (no gov): done (1s), query cache hits=4802 misses=2198
+[wp0-site] embedding cache: 2202 hits, 0 misses (/home/snhwang/tist-evals/wp0-v042/embcache)
+### mem guard: peak session RSS 1190 MiB
+### finished:    2026-10-30T14:17:27-04:00 rc=0

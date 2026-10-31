@@ -1,0 +1,199 @@
+{
+ "rows": {
+  "BEAR+BGE-M3 (gov)": {
+   "exact": 0.7154545454545455,
+   "exact_ci": {
+    "point_estimate": 0.7154545454545455,
+    "ci_lower": 0.6881818181818182,
+    "ci_upper": 0.7418181818181818,
+    "std": 0.4514029013748969,
+    "n": 1100
+   },
+   "tool": 0.7836363636363637,
+   "tool_ci": {
+    "point_estimate": 0.7836363636363637,
+    "ci_lower": 0.759090909090909,
+    "ci_upper": 0.8072727272727273,
+    "std": 0.411952291187031,
+    "n": 1100
+   },
+   "llm_errors": 0,
+   "published_exact": 0.7063636363636364,
+   "exact_queries_changed_vs_published": 22,
+   "exact_mcnemar_vs_published": {
+    "n01": 16,
+    "n10": 6,
+    "p": 0.052478790283203125
+   },
+   "published_tool": 0.7790909090909091,
+   "tool_queries_changed_vs_published": 7,
+   "tool_mcnemar_vs_published": {
+    "n01": 6,
+    "n10": 1,
+    "p": 0.125
+   }
+  },
+  "BEAR+BGE (gov)": {
+   "exact": 0.7245454545454545,
+   "exact_ci": {
+    "point_estimate": 0.7245454545454545,
+    "ci_lower": 0.6981818181818182,
+    "ci_upper": 0.75,
+    "std": 0.44694623803903466,
+    "n": 1100
+   },
+   "tool": 0.7927272727272727,
+   "tool_ci": {
+    "point_estimate": 0.7927272727272727,
+    "ci_lower": 0.769090909090909,
+    "ci_upper": 0.8163636363636364,
+    "std": 0.4055369935316302,
+    "n": 1100
+   },
+   "llm_errors": 0,
+   "published_exact": 0.7163636363636363,
+   "exact_queries_changed_vs_published": 21,
+   "exact_mcnemar_vs_published": {
+    "n01": 15,
+    "n10": 6,
+    "p": 0.0783538818359375
+   },
+   "published_tool": 0.7890909090909091,
+   "tool_queries_changed_vs_published": 12,
+   "tool_mcnemar_vs_published": {
+    "n01": 8,
+    "n10": 4,
+    "p": 0.3876953125
+   }
+  },
+  "BEAR+BM25 (gov)": {
+   "exact": 0.6745454545454546,
+   "exact_ci": {
+    "point_estimate": 0.6745454545454546,
+    "ci_lower": 0.6472727272727272,
+    "ci_upper": 0.7027272727272728,
+    "std": 0.4687575515701313,
+    "n": 1100
+   },
+   "tool": 0.7527272727272727,
+   "tool_ci": {
+    "point_estimate": 0.7527272727272727,
+    "ci_lower": 0.7272727272727273,
+    "ci_upper": 0.7781818181818182,
+    "std": 0.43162285354179475,
+    "n": 1100
+   },
+   "llm_errors": 0,
+   "published_exact": 0.6663636363636364,
+   "exact_queries_changed_vs_published": 27,
+   "exact_mcnemar_vs_published": {
+    "n01": 18,
+    "n10": 9,
+    "p": 0.12207812070846558
+   },
+   "published_tool": 0.7509090909090909,
+   "tool_queries_changed_vs_published": 10,
+   "tool_mcnemar_vs_published": {
+    "n01": 6,
+    "n10": 4,
+    "p": 0.75390625
+   }
+  },
+  "BGE (no gov)": {
+   "exact": 0.62,
+   "exact_ci": {
+    "point_estimate": 0.62,
+    "ci_lower": 0.5909090909090909,
+    "ci_upper": 0.6481818181818182,
+    "std": 0.48560722472600887,
+    "n": 1100
+   },
+   "tool": 0.6781818181818182,
+   "tool_ci": {
+    "point_estimate": 0.6781818181818182,
+    "ci_lower": 0.65,
+    "ci_upper": 0.7054545454545454,
+    "std": 0.46738616841360714,
+    "n": 1100
+   },
+   "llm_errors": 0,
+   "published_exact": 0.6145454545454545,
+   "exact_queries_changed_vs_published": 18,
+   "exact_mcnemar_vs_published": {
+    "n01": 12,
+    "n10": 6,
+    "p": 0.237884521484375
+   },
+   "published_tool": 0.6736363636363636,
+   "tool_queries_changed_vs_published": 13,
+   "tool_mcnemar_vs_published": {
+    "n01": 9,
+    "n10": 4,
+    "p": 0.266845703125
+   }
+  },
+  "BM25 (no gov)": {
+   "exact": 0.5272727272727272,
+   "exact_ci": {
+    "point_estimate": 0.5272727272727272,
+    "ci_lower": 0.49818181818181817,
+    "ci_upper": 0.5563636363636364,
+    "std": 0.49948273351073685,
+    "n": 1100
+   },
+   "tool": 0.5772727272727273,
+   "tool_ci": {
+    "point_estimate": 0.5772727272727273,
+    "ci_lower": 0.5472727272727272,
+    "ci_upper": 0.6063636363636363,
+    "std": 0.49421753505716315,
+    "n": 1100
+   },
+   "llm_errors": 0,
+   "published_exact": 0.5272727272727272,
+   "exact_queries_changed_vs_published": 14,
+   "exact_mcnemar_vs_published": {
+    "n01": 7,
+    "n10": 7,
+    "p": 1.0
+   },
+   "published_tool": 0.5790909090909091,
+   "tool_queries_changed_vs_published": 10,
+   "tool_mcnemar_vs_published": {
+    "n01": 4,
+    "n10": 6,
+    "p": 0.75390625
+   }
+  }
+ },
+ "pairs": {
+  "BEAR+BM25 (gov) vs BM25 (no gov)": {
+   "tool": {
+    "delta": 0.17545454545454545,
+    "d": 0.42748072685081345,
+    "t": 14.177931760725532,
+    "p": 4.993544934742068e-42
+   },
+   "exact": {
+    "delta": 0.14727272727272728,
+    "d": 0.3503980086092753,
+    "t": 11.621387218446873,
+    "p": 1.5783287229826011e-29
+   }
+  },
+  "BEAR+BGE (gov) vs BGE (no gov)": {
+   "tool": {
+    "delta": 0.11454545454545455,
+    "d": 0.2987445623336631,
+    "t": 9.908236214197007,
+    "p": 3.17025867056058e-22
+   },
+   "exact": {
+    "delta": 0.10454545454545454,
+    "d": 0.2620071721699393,
+    "t": 8.68979482469736,
+    "p": 1.2976245179393136e-17
+   }
+  }
+ }
+}

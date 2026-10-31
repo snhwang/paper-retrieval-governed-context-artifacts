@@ -1,0 +1,90 @@
+
+######################################################################
+#  Backend 1/1: bm25
+######################################################################
+
+=== Decomposed governance ablation (bm25) ===
+
+Corpus: 58 instructions
+Queries: 60 standard + 12 adversarial-safety
+
+Auto-discovered 3 safety-tagged instruction(s): ['constraint-no-aggression', 'safety-boundaries', 'safety-reasonable-response']
+
+[1/6] Full governance ...
+[2/6] -required_tags ...
+[3/6] -priority weighting (alpha=0) ...
+[4/6] -conflict resolution ...
+[5/6] -mandatory injection ...
+[6/6] No governance (all four off) ...
+[+] ITR library (off-the-shelf hybrid, no governance) ...
+
+--- Standard queries (n=60, k=10, backend=bm25) ---
+
+Condition                        Strict F1 [95% CI]         Δ vs full  Cohen d  p (paired)
+------------------------------------------------------------------------------------------
+Full governance                  0.875 [0.840,0.908]        —          —        —         
+- required_tags                  0.550 [0.535,0.564]        -0.326     +2.48    0.0000
+- priority weighting             0.879 [0.847,0.910]        +0.004     -0.18    0.2776
+- conflict resolution            0.869 [0.835,0.901]        -0.006     +0.24    0.0686
+- mandatory injection            0.865 [0.824,0.902]        -0.010     +0.30    0.0345
+No governance                    0.204 [0.186,0.224]        -0.671     +3.98    0.0000
+ITR library (off-the-shelf)      0.211 [0.186,0.237]        -0.664     +4.16    0.0000
+
+--- Adversarial-safety queries (n=12, k=10) ---
+
+This subset exercises the mandatory-injection pathway specifically.
+Expected set per query is the union of ['constraint-no-aggression', 'safety-boundaries', 'safety-reasonable-response'] (no other instructions are expected).
+
+  Mandatory injection ON:  safety-recall = 1.000
+  Mandatory injection OFF: safety-recall = 1.000
+  Δ recall (on - off):     +0.000
+
+Wrote results/governance_decomposed_bm25.json
+
+--- LaTeX table (paste into manuscript) ---
+
+\begin{table}[t]
+  \caption{Decomposed governance ablation on Pet Simulation (60 standard queries, $k=10$, backend = bm25, 95\% bootstrap CIs, paired bootstrap test).
+  Each row switches off a single mechanism while the others remain active.}
+  \label{tab:decomposed-ablation}
+  \centering
+  \small
+  \begin{tabular}{@{}l c c c c@{}}
+    \toprule
+    Condition & Strict F1 [95\% CI] & $\Delta$ vs. full & Cohen's $d$ & $p$ (paired) \\
+    \midrule
+    Full governance & 0.875 [0.840,0.908] & --- & --- & --- \\
+    - required\_tags & 0.550 [0.535,0.564] & -0.326 & +2.48 & $<$0.0001 \\
+    - priority weighting & 0.879 [0.847,0.910] & +0.004 & -0.18 & 0.2776 \\
+    - conflict resolution & 0.869 [0.835,0.901] & -0.006 & +0.24 & 0.0686 \\
+    - mandatory injection & 0.865 [0.824,0.902] & -0.010 & +0.30 & 0.0345 \\
+    No governance & 0.204 [0.186,0.224] & -0.671 & +3.98 & $<$0.0001 \\
+    ITR library (off-the-shelf) & 0.211 [0.186,0.237] & -0.664 & +4.16 & $<$0.0001 \\
+    \midrule
+    \multicolumn{5}{@{}l}{\emph{Adversarial-safety subset (n=12 queries)}} \\
+    Mandatory injection ON  & safety-recall = 1.000 & --- & --- & --- \\
+    Mandatory injection OFF & safety-recall = 1.000 & +0.000 & --- & --- \\
+    \bottomrule
+  \end{tabular}
+  \par\vspace{2pt}
+  \footnotesize\raggedright
+  \textit{Note on ITR row.} The ITR row uses the off-the-shelf \texttt{instruction-tool-retrieval} library with default settings. It is included as a reference point for what a practitioner obtains from the released library, not as a faithful re-implementation of the ITR paper's full pipeline, which includes confidence-gated fallbacks, structured fragment types, and possibly fine-tuned retrievers that we do not exercise. The ITR paper's own reported numbers (95\% per-step context-token reduction, $+$32\% relative tool-routing accuracy on the authors' internal controlled benchmark~\citep{franko2025itr}) are not directly comparable to F1 on Pet Sim and are cited in the text.
+\end{table}
+
+
+Elapsed: 0.8s
+Full log written to results/governance_decomposed_output.txt
+
+=== Reproducibility ===
+Timestamp (UTC): 2026-10-30T11:56:30Z
+Command line:    evals/eval_governance_decomposed.py --backends bm25
+Python:          3.12.13 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
+numpy:           2.2.6
+scipy:           1.17.1
+bear:            0.4.2
+git commit:      634caf5ab715b2a7c20fac0b170228a49810bdc7
+git status:      DIRTY (18 files modified)
+git branch:      tist-r2
+
+  backends: ['bm25']
+===

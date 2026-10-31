@@ -1,0 +1,48 @@
+### ================ attempt 2026-10-30T07:55:39-04:00 ================
+### step:        retrieval_hash_Ldropped_rows
+### kind:        cpu (need 0 GiB)
+### bear:        v042L (9d085b4)
+### started:     2026-10-30T07:55:39-04:00
+### command:     /home/snhwang/.venvs/tist-evals/bin/python evals/eval_retrieval.py
+### env:         HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 TOKENIZERS_PARALLELISM=false PYTHONUNBUFFERED=1 PYTHONPATH=/home/snhwang/tist-evals/wp0-v042/artifacts-attr/evals/wp0_v040/site BEAR_SOURCE_SHA=9d085b4 ANTHROPIC_API_KEY=wp0-dummy-key-no-paid-calls WP0_REPORT_VRAM=/home/snhwang/tist-evals/wp0-v042/logs/vram.jsonl WP0_STEP=retrieval_hash_Ldropped_rows WP0_BEAR_LEGACY=dropped_rows WP0_NO_LOCAL_MODELS=1 CUDA_VISIBLE_DEVICES= CUDA_VISIBLE_DEVICES= OMP_NUM_THREADS=8 MKL_NUM_THREADS=8 WP0_EMB_CACHE=/home/snhwang/tist-evals/wp0-v042/embcache WP0_SHARE_MODELS=1
+### memory cap:  /home/snhwang/bin/tist-capped --mem 8G --
+[wp0-site] local model loads refused (WP0_NO_LOCAL_MODELS)
+[wp0-site] BEAR legacy switches on: ['restore_dropped_rows']
+Embedding model: hash
+
+Loaded corpus with 58 instructions
+
+Hash embeddings selected. Similarity scores are based on character n-gram overlap and carry no semantic signal — retrieval ranking is effectively arbitrary. Use a sentence-transformers model (e.g. 'BAAI/bge-base-en-v1.5') for meaningful semantic retrieval.
+Full BEAR ($\alpha=0.3$):
+  Strict:  P@10=0.757 [0.713, 0.801], R@10=0.978 [0.958, 0.992], F1@10=0.845 [0.813, 0.875]
+  Relaxed: P@10=0.907 [0.878, 0.934], R@10=0.890 [0.861, 0.917], F1@10=0.889 [0.871, 0.906]
+
+Hash embeddings selected. Similarity scores are based on character n-gram overlap and carry no semantic signal — retrieval ranking is effectively arbitrary. Use a sentence-transformers model (e.g. 'BAAI/bge-base-en-v1.5') for meaningful semantic retrieval.
+Pure Similarity ($\alpha=0$):
+  Strict:  P@10=0.864 [0.823, 0.904], R@10=0.607 [0.587, 0.628], F1@10=0.707 [0.683, 0.729]
+  Relaxed: P@10=0.869 [0.827, 0.908], R@10=0.469 [0.435, 0.504], F1@10=0.594 [0.562, 0.625]
+
+Hash embeddings selected. Similarity scores are based on character n-gram overlap and carry no semantic signal — retrieval ranking is effectively arbitrary. Use a sentence-transformers model (e.g. 'BAAI/bge-base-en-v1.5') for meaningful semantic retrieval.
+Priority-Heavy ($\alpha=0.7$):
+  Strict:  P@10=0.755 [0.711, 0.800], R@10=0.975 [0.956, 0.992], F1@10=0.843 [0.810, 0.874]
+  Relaxed: P@10=0.907 [0.878, 0.934], R@10=0.890 [0.861, 0.917], F1@10=0.889 [0.871, 0.906]
+
+
+% === LaTeX Table ===
+\begin{table}[t]
+\caption{Retrieval quality on Pet Sim corpus (60 queries, $k=10$, BAAI/bge-base-en-v1.5).
+Values show mean with 95\% bootstrap CI (10,000 iterations). Each query has about five relevant instructions, so with $k{=}10$ precision is bounded near $0.5$ and F1 near $0.68$; recall is the less-capped measure of whether the relevant instructions are found.}
+\label{tab:retrieval}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+Configuration & Strict R@10 & Strict F1 & Relaxed R@10 & Relaxed F1 \\
+\midrule
+Full BEAR ($\alpha=0.3$) & $0.978\;[0.958,\;0.992]$ & $0.845\;[0.813,\;0.875]$ & $0.890\;[0.861,\;0.917]$ & $0.889\;[0.871,\;0.906]$ \\
+Pure Similarity ($\alpha=0$) & $0.607\;[0.587,\;0.628]$ & $0.707\;[0.683,\;0.729]$ & $0.469\;[0.435,\;0.504]$ & $0.594\;[0.562,\;0.625]$ \\
+Priority-Heavy ($\alpha=0.7$) & $0.975\;[0.956,\;0.992]$ & $0.843\;[0.810,\;0.874]$ & $0.890\;[0.861,\;0.917]$ & $0.889\;[0.871,\;0.906]$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+[wp0-site] embedding cache: 0 hits, 0 misses (/home/snhwang/tist-evals/wp0-v042/embcache)
+### mem guard: peak session RSS 9 MiB
+### finished:    2026-10-30T07:55:44-04:00 rc=0

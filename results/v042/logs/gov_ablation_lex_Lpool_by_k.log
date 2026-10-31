@@ -1,0 +1,114 @@
+### ================ attempt 2026-10-30T07:51:40-04:00 ================
+### step:        gov_ablation_lex_Lpool_by_k
+### kind:        cpu (need 0 GiB)
+### bear:        v042L (9d085b4)
+### started:     2026-10-30T07:51:40-04:00
+### command:     /home/snhwang/.venvs/tist-evals/bin/python evals/eval_governance_ablation.py --backends bm25 hash --skip-itr --output results/wp0/governance_ablation_lex.json
+### env:         HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 TOKENIZERS_PARALLELISM=false PYTHONUNBUFFERED=1 PYTHONPATH=/home/snhwang/tist-evals/wp0-v042/artifacts-attr/evals/wp0_v040/site BEAR_SOURCE_SHA=9d085b4 ANTHROPIC_API_KEY=wp0-dummy-key-no-paid-calls WP0_REPORT_VRAM=/home/snhwang/tist-evals/wp0-v042/logs/vram.jsonl WP0_STEP=gov_ablation_lex_Lpool_by_k WP0_BEAR_LEGACY=pool_by_k WP0_NO_LOCAL_MODELS=1 CUDA_VISIBLE_DEVICES= CUDA_VISIBLE_DEVICES= OMP_NUM_THREADS=8 MKL_NUM_THREADS=8 WP0_EMB_CACHE=/home/snhwang/tist-evals/wp0-v042/embcache WP0_SHARE_MODELS=1
+### memory cap:  /home/snhwang/bin/tist-capped --mem 8G --
+[wp0-site] local model loads refused (WP0_NO_LOCAL_MODELS)
+[wp0-site] BEAR legacy switches on: ['restore_pool_by_k']
+Loaded corpus: 58 instructions
+Backends: bm25, hash
+
+======================================================================
+  Full governance
+======================================================================
+
+  Standard (n=60):
+    BM25                 0.875 [0.840,0.908]
+Hash embeddings selected. Similarity scores are based on character n-gram overlap and carry no semantic signal — retrieval ranking is effectively arbitrary. Use a sentence-transformers model (e.g. 'BAAI/bge-base-en-v1.5') for meaningful semantic retrieval.
+    Hash                 0.845 [0.813,0.875]
+    Random-k             0.116 [0.114,0.119]
+
+  Paraphrase (n=60):
+    BM25                 0.890 [0.867,0.912]
+Hash embeddings selected. Similarity scores are based on character n-gram overlap and carry no semantic signal — retrieval ranking is effectively arbitrary. Use a sentence-transformers model (e.g. 'BAAI/bge-base-en-v1.5') for meaningful semantic retrieval.
+    Hash                 0.886 [0.865,0.907]
+    Random-k             0.102 [0.100,0.104]
+
+  No-tag (n=54):
+    BM25                 0.718 [0.692,0.745]
+Hash embeddings selected. Similarity scores are based on character n-gram overlap and carry no semantic signal — retrieval ranking is effectively arbitrary. Use a sentence-transformers model (e.g. 'BAAI/bge-base-en-v1.5') for meaningful semantic retrieval.
+    Hash                 0.837 [0.813,0.862]
+    Random-k             0.097 [0.095,0.098]
+
+  Complex (n=60):
+    BM25                 0.866 [0.836,0.895]
+Hash embeddings selected. Similarity scores are based on character n-gram overlap and carry no semantic signal — retrieval ranking is effectively arbitrary. Use a sentence-transformers model (e.g. 'BAAI/bge-base-en-v1.5') for meaningful semantic retrieval.
+    Hash                 0.896 [0.866,0.923]
+    Random-k             0.115 [0.111,0.118]
+
+======================================================================
+  Mandatory only
+======================================================================
+
+  Standard (n=60):
+    BM25                 0.550 [0.535,0.564]
+Hash embeddings selected. Similarity scores are based on character n-gram overlap and carry no semantic signal — retrieval ranking is effectively arbitrary. Use a sentence-transformers model (e.g. 'BAAI/bge-base-en-v1.5') for meaningful semantic retrieval.
+    Hash                 0.518 [0.499,0.537]
+    Random-k             0.116 [0.114,0.119]
+
+  Paraphrase (n=60):
+    BM25                 0.467 [0.451,0.485]
+Hash embeddings selected. Similarity scores are based on character n-gram overlap and carry no semantic signal — retrieval ranking is effectively arbitrary. Use a sentence-transformers model (e.g. 'BAAI/bge-base-en-v1.5') for meaningful semantic retrieval.
+    Hash                 0.481 [0.463,0.499]
+    Random-k             0.102 [0.100,0.104]
+
+  No-tag (n=54):
+    BM25                 0.479 [0.461,0.498]
+Hash embeddings selected. Similarity scores are based on character n-gram overlap and carry no semantic signal — retrieval ranking is effectively arbitrary. Use a sentence-transformers model (e.g. 'BAAI/bge-base-en-v1.5') for meaningful semantic retrieval.
+    Hash                 0.469 [0.452,0.489]
+    Random-k             0.097 [0.095,0.098]
+
+  Complex (n=60):
+    BM25                 0.557 [0.538,0.576]
+Hash embeddings selected. Similarity scores are based on character n-gram overlap and carry no semantic signal — retrieval ranking is effectively arbitrary. Use a sentence-transformers model (e.g. 'BAAI/bge-base-en-v1.5') for meaningful semantic retrieval.
+    Hash                 0.477 [0.457,0.499]
+    Random-k             0.115 [0.111,0.118]
+
+======================================================================
+  No governance
+======================================================================
+
+  Standard (n=60):
+    BM25                 0.249 [0.219,0.282]
+Hash embeddings selected. Similarity scores are based on character n-gram overlap and carry no semantic signal — retrieval ranking is effectively arbitrary. Use a sentence-transformers model (e.g. 'BAAI/bge-base-en-v1.5') for meaningful semantic retrieval.
+    Hash                 0.304 [0.277,0.332]
+    Random-k             0.116 [0.114,0.119]
+
+  Paraphrase (n=60):
+    BM25                 0.117 [0.088,0.146]
+Hash embeddings selected. Similarity scores are based on character n-gram overlap and carry no semantic signal — retrieval ranking is effectively arbitrary. Use a sentence-transformers model (e.g. 'BAAI/bge-base-en-v1.5') for meaningful semantic retrieval.
+    Hash                 0.254 [0.225,0.284]
+    Random-k             0.102 [0.100,0.104]
+
+  No-tag (n=54):
+    BM25                 0.201 [0.158,0.244]
+Hash embeddings selected. Similarity scores are based on character n-gram overlap and carry no semantic signal — retrieval ranking is effectively arbitrary. Use a sentence-transformers model (e.g. 'BAAI/bge-base-en-v1.5') for meaningful semantic retrieval.
+    Hash                 0.289 [0.250,0.330]
+    Random-k             0.097 [0.095,0.098]
+
+  Complex (n=60):
+    BM25                 0.232 [0.201,0.265]
+Hash embeddings selected. Similarity scores are based on character n-gram overlap and carry no semantic signal — retrieval ranking is effectively arbitrary. Use a sentence-transformers model (e.g. 'BAAI/bge-base-en-v1.5') for meaningful semantic retrieval.
+    Hash                 0.318 [0.283,0.352]
+    Random-k             0.115 [0.111,0.118]
+
+======================================================================
+  Token Efficiency
+======================================================================
+Hash embeddings selected. Similarity scores are based on character n-gram overlap and carry no semantic signal — retrieval ranking is effectively arbitrary. Use a sentence-transformers model (e.g. 'BAAI/bge-base-en-v1.5') for meaningful semantic retrieval.
+
+  Strategy                    Tokens  Instr  Savings
+  -------------------------------------------------
+  Monolithic                    5029   58.0     0.0%
+  Role prompting                  46    0.0    99.1%
+  BEAR + BM25                    594    6.5    88.2%
+  BEAR + Hash                    629    7.0    87.5%
+  Random-k                       868   10.0    82.7%
+
+Results saved to results/wp0/governance_ablation_lex.json
+[wp0-site] embedding cache: 0 hits, 0 misses (/home/snhwang/tist-evals/wp0-v042/embcache)
+### mem guard: peak session RSS 838 MiB
+### finished:    2026-10-30T07:52:02-04:00 rc=0

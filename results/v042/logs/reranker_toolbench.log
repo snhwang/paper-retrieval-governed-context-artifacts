@@ -1,0 +1,81 @@
+### ================ attempt 2026-10-30T10:21:29-04:00 ================
+### step:        reranker_toolbench
+### kind:        cpu (need 0 GiB)
+### bear:        v042 (9d085b4)
+### started:     2026-10-30T10:21:29-04:00
+### command:     /home/snhwang/.venvs/tist-evals/bin/python evals/eval_reranker_composition.py --corpus toolbench --device cpu --batch-size 4 --output results/wp0/reranker_composition_toolbench.json
+### env:         HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 TOKENIZERS_PARALLELISM=false PYTHONUNBUFFERED=1 PYTHONPATH=/home/snhwang/tist-evals/wp0-v042/artifacts-dense/evals/wp0_v040/site BEAR_SOURCE_SHA=9d085b4 ANTHROPIC_API_KEY=wp0-dummy-key-no-paid-calls WP0_REPORT_VRAM=/home/snhwang/tist-evals/wp0-v042/logs/vram.jsonl WP0_STEP=reranker_toolbench CUDA_VISIBLE_DEVICES= WP0_ENCODE_BATCH=4 CUDA_VISIBLE_DEVICES= OMP_NUM_THREADS=12 MKL_NUM_THREADS=12 WP0_EMB_CACHE=/home/snhwang/tist-evals/wp0-v042/embcache WP0_SHARE_MODELS=1
+### memory cap:  /home/snhwang/bin/tist-capped --mem 20G --
+[wp0-site] encode batch size capped at 4
+
+=== Reranker head-to-head and composition: toolbench ===
+
+corpus     3225 items
+queries    1100
+first stage BAAI/bge-base-en-v1.5  (k=5, over-fetch N=50)
+reranker   BAAI/bge-reranker-base
+ungoverned pure_similarity
+device     cpu
+
+Building retrievers (BAAI/bge-base-en-v1.5, 3225 items)...
+[wp0-site] reusing shared BAAI/bge-base-en-v1.5
+  indexed in 1s
+  100/1100 queries (0.2/s)
+  200/1100 queries (0.2/s)
+  300/1100 queries (0.2/s)
+  400/1100 queries (0.2/s)
+  500/1100 queries (0.2/s)
+  600/1100 queries (0.2/s)
+  700/1100 queries (0.2/s)
+  800/1100 queries (0.2/s)
+  900/1100 queries (0.2/s)
+  1000/1100 queries (0.2/s)
+  1100/1100 queries in 5042s
+
+--- Arms (Recall@5, n=1100) ---
+
+  Bi-encoder, no governance                  0.574 [0.552, 0.596]
+  Bi-encoder + cross-encoder reranker        0.647 [0.625, 0.669]
+  BEAR governed                              0.688 [0.668, 0.709]
+  BEAR governed + cross-encoder reranker     0.742 [0.722, 0.761]
+
+--- Candidate sets at N=50 (ceiling for the reranked arms) ---
+
+  bi    recall@N 0.841   mean candidates 50.0
+  bear  recall@N 0.948   mean candidates 46.0
+
+--- Contrasts (paired bootstrap, Recall@5) ---
+
+  bear     - bi       +0.114 [+0.099, +0.130] p=0.0001* d=+0.43   governance effect (published contrast)
+  bi_rr    - bi       +0.073 [+0.056, +0.090] p=0.0001* d=+0.25   reranker alone
+  bear     - bi_rr    +0.041 [+0.022, +0.060] p=0.0001* d=+0.13   head-to-head: governance vs reranking
+  bear_rr  - bear     +0.054 [+0.037, +0.069] p=0.0001* d=+0.19   reranker added on top of governance
+  bear_rr  - bi_rr    +0.095 [+0.081, +0.108] p=0.0001* d=+0.42   governance effect with reranker held fixed
+
+Saved to results/wp0/reranker_composition_toolbench.json
+
+Read: 'bear vs bi_rr' is the substitution comparison the reviewers asked
+for. 'bear_rr vs bear' and 'bear_rr vs bi_rr' test whether governance and
+reranking compose, which is the claim made in the response letter. A
+reranker cannot recover a document that is absent from the candidate set,
+so compare each reranked arm against its own recall@N ceiling above.
+
+=== Reproducibility ===
+Timestamp (UTC): 2026-10-30T15:45:38Z
+Command line:    evals/eval_reranker_composition.py --corpus toolbench --device cpu --batch-size 4 --output results/wp0/reranker_composition_toolbench.json
+Python:          3.12.13 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
+numpy:           2.2.6
+scipy:           1.17.1
+bear:            0.4.2
+git commit:      634caf5ab715b2a7c20fac0b170228a49810bdc7
+git status:      DIRTY (25 files modified)
+git branch:      tist-r2
+
+  corpus: toolbench
+  queries: 1100
+  overfetch: 50
+  reranker: BAAI/bge-reranker-base
+===
+[wp0-site] embedding cache: 2202 hits, 0 misses (/home/snhwang/tist-evals/wp0-v042/embcache)
+### mem guard: peak session RSS 2165 MiB
+### finished:    2026-10-30T11:45:39-04:00 rc=0

@@ -1,0 +1,114 @@
+{
+ "model": "Qwen/Qwen3-Embedding-4B",
+ "dtype": "bfloat16",
+ "max_seq_length": 40960,
+ "cap_gib": 11.2,
+ "weights_gib": 7.543890476226807,
+ "sets": {
+  "ToolBench (eval_toolbench) passages": {
+   "n": 3225,
+   "longest_tokens": [
+    3068,
+    2709,
+    2707,
+    2346
+   ],
+   "batches": {
+    "2": {
+     "ok": true,
+     "peak_allocated_gib": 8.865,
+     "peak_reserved_gib": 9.193
+    },
+    "1": {
+     "ok": true,
+     "peak_allocated_gib": 8.2,
+     "peak_reserved_gib": 8.359
+    }
+   }
+  },
+  "ToolBench e2e passages": {
+   "n": 3225,
+   "longest_tokens": [
+    3065,
+    2473,
+    2373,
+    2239
+   ],
+   "batches": {
+    "2": {
+     "ok": true,
+     "peak_allocated_gib": 8.864,
+     "peak_reserved_gib": 9.213
+    },
+    "1": {
+     "ok": true,
+     "peak_allocated_gib": 8.2,
+     "peak_reserved_gib": 8.359
+    }
+   }
+  },
+  "MetaTool passages": {
+   "n": 199,
+   "longest_tokens": [
+    1685,
+    1222,
+    1144,
+    962
+   ],
+   "batches": {
+    "2": {
+     "ok": true,
+     "peak_allocated_gib": 8.268,
+     "peak_reserved_gib": 8.537
+    },
+    "1": {
+     "ok": true,
+     "peak_allocated_gib": 7.914,
+     "peak_reserved_gib": 8.035
+    }
+   }
+  },
+  "ToolBench queries": {
+   "n": 1100,
+   "longest_tokens": [
+    216,
+    205,
+    191,
+    172
+   ],
+   "batches": {
+    "2": {
+     "ok": true,
+     "peak_allocated_gib": 7.643,
+     "peak_reserved_gib": 7.68
+    },
+    "1": {
+     "ok": true,
+     "peak_allocated_gib": 7.598,
+     "peak_reserved_gib": 7.621
+    }
+   }
+  },
+  "ToolBench e2e queries": {
+   "n": 1100,
+   "longest_tokens": [
+    216,
+    205,
+    191,
+    172
+   ],
+   "batches": {
+    "2": {
+     "ok": true,
+     "peak_allocated_gib": 7.643,
+     "peak_reserved_gib": 7.68
+    },
+    "1": {
+     "ok": true,
+     "peak_allocated_gib": 7.598,
+     "peak_reserved_gib": 7.621
+    }
+   }
+  }
+ }
+}

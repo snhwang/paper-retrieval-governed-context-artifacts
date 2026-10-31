@@ -1,0 +1,171 @@
+### ================ attempt 2026-10-30T14:08:13-04:00 ================
+### step:        tb_bgem3_v0110
+### kind:        cpu (need 0 GiB)
+### bear:        v0110 (cdba2174d715494ec4f22c098386487002ec492f)
+### started:     2026-10-30T14:08:13-04:00
+### command:     /home/snhwang/.venvs/tist-evals/bin/python evals/wp0_v040/eval_toolbench_v040.py --top-k 5 --metatool-query-tags-file evals/data/external_benchmarks/metatool/query_tags_top5.json --output results/wp0/toolbench_eval_tb_bgem3_v0110.json --backends BEAR+BGE-M3 (gov) BGE-M3 (no gov)
+### env:         HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 TOKENIZERS_PARALLELISM=false PYTHONUNBUFFERED=1 PYTHONPATH=/home/snhwang/tist-evals/wp0-v042/artifacts-dense/evals/wp0_v040/site:/home/snhwang/tist-evals/bear-v0110 BEAR_SOURCE_SHA=cdba2174d715494ec4f22c098386487002ec492f ANTHROPIC_API_KEY=wp0-dummy-key-no-paid-calls WP0_REPORT_VRAM=/home/snhwang/tist-evals/wp0-v042/logs/vram.jsonl WP0_STEP=tb_bgem3_v0110 CUDA_VISIBLE_DEVICES= WP0_ENCODE_BATCH=4 CUDA_VISIBLE_DEVICES= OMP_NUM_THREADS=12 MKL_NUM_THREADS=12 WP0_EMB_CACHE=/home/snhwang/tist-evals/wp0-v042/embcache WP0_SHARE_MODELS=1
+### memory cap:  /home/snhwang/bin/tist-capped --mem 20G --
+[wp0-site] encode batch size capped at 4
+
+MetaTool (no tags) loaded: 199 tools, 21111 queries
+
+========================================================================
+  MetaTool
+  Corpus: 199 instructions, Queries: 21111, k=5
+  Experiments: 2
+========================================================================
+
+  BEAR+BGE-M3 (gov)...
+        recall@5: 0.737 [0.731, 0.743]
+          ndcg@5: 0.622 [0.617, 0.628]
+            f1@5: 0.249 [0.247, 0.251]
+          time:   3.6s
+
+  BGE-M3 (no gov)...
+[wp0-site] reusing shared BAAI/bge-m3
+        recall@5: 0.728 [0.722, 0.734]
+          ndcg@5: 0.614 [0.608, 0.619]
+            f1@5: 0.246 [0.244, 0.248]
+          time:   2.0s
+
+  --- Statistical Tests (paired t-test, Wilcoxon, Cohen's d) ---
+
+    BEAR+BGE-M3 (gov)  vs  BGE-M3 (no gov):
+          recall: paired-t=9.265, p=0.0000 ***, d=0.064; W=34082, p=0.0000
+            ndcg: paired-t=13.988, p=0.0000 ***, d=0.096; W=814997, p=0.0000
+              f1: paired-t=9.434, p=0.0000 ***, d=0.065; W=34082, p=0.0000
+
+MetaTool+Tags loaded: 199 tools, 21111 queries
+  Queries with context tags: 21111/21111
+
+========================================================================
+  MetaTool+Tags
+  Corpus: 199 instructions, Queries: 21111, k=5
+  Experiments: 2
+========================================================================
+
+  BEAR+BGE-M3 (gov)...
+[wp0-site] reusing shared BAAI/bge-m3
+        recall@5: 0.972 [0.970, 0.975]
+          ndcg@5: 0.889 [0.886, 0.892]
+            f1@5: 0.395 [0.392, 0.397]
+          time:   5.5s
+
+  BGE-M3 (no gov)...
+[wp0-site] reusing shared BAAI/bge-m3
+        recall@5: 0.724 [0.718, 0.730]
+          ndcg@5: 0.613 [0.608, 0.619]
+            f1@5: 0.244 [0.242, 0.246]
+          time:   1.9s
+
+  --- Statistical Tests (paired t-test, Wilcoxon, Cohen's d) ---
+
+    BEAR+BGE-M3 (gov)  vs  BGE-M3 (no gov):
+          recall: paired-t=83.914, p=0.0000 ***, d=0.578; W=45392, p=0.0000
+            ndcg: paired-t=111.985, p=0.0000 ***, d=0.771; W=661676, p=0.0000
+              f1: paired-t=91.750, p=0.0000 ***, d=0.631; W=66168, p=0.0000
+
+MetaTool+QueryTags-top5 loaded: 199 tools, 21111 queries
+  Source file: evals/data/external_benchmarks/metatool/query_tags_top5.json
+  Queries with context tags: 21111/21111
+
+========================================================================
+  MetaTool+QueryTags-top5
+  Corpus: 199 instructions, Queries: 21111, k=5
+  Experiments: 2
+========================================================================
+
+  BEAR+BGE-M3 (gov)...
+[wp0-site] reusing shared BAAI/bge-m3
+        recall@5: 0.707 [0.701, 0.713]
+          ndcg@5: 0.624 [0.619, 0.630]
+            f1@5: 0.240 [0.238, 0.242]
+          time:   6.0s
+
+  BGE-M3 (no gov)...
+[wp0-site] reusing shared BAAI/bge-m3
+        recall@5: 0.724 [0.718, 0.730]
+          ndcg@5: 0.613 [0.608, 0.619]
+            f1@5: 0.244 [0.242, 0.246]
+          time:   2.1s
+
+  --- Statistical Tests (paired t-test, Wilcoxon, Cohen's d) ---
+
+    BEAR+BGE-M3 (gov)  vs  BGE-M3 (no gov):
+          recall: paired-t=-4.865, p=0.0000 ***, d=-0.033; W=7371261, p=0.0000
+            ndcg: paired-t=3.847, p=0.0001 ***, d=0.026; W=21147446, p=0.0230
+              f1: paired-t=-3.612, p=0.0003 ***, d=-0.025; W=7708156, p=0.0000
+
+ToolBench loaded: 3225 APIs, 1100 queries
+  Categories: 47
+
+========================================================================
+  ToolBench
+  Corpus: 3225 instructions, Queries: 1100, k=5
+  Experiments: 2
+========================================================================
+
+  BEAR+BGE-M3 (gov)...
+[wp0-site] reusing shared BAAI/bge-m3
+        recall@5: 0.711 [0.690, 0.732]
+          ndcg@5: 0.668 [0.648, 0.688]
+            f1@5: 0.436 [0.423, 0.449]
+          time:   13.0s
+
+  BGE-M3 (no gov)...
+[wp0-site] reusing shared BAAI/bge-m3
+        recall@5: 0.601 [0.578, 0.623]
+          ndcg@5: 0.570 [0.549, 0.591]
+            f1@5: 0.368 [0.354, 0.382]
+          time:   0.5s
+
+  --- Statistical Tests (paired t-test, Wilcoxon, Cohen's d) ---
+
+    BEAR+BGE-M3 (gov)  vs  BGE-M3 (no gov):
+          recall: paired-t=14.015, p=0.0000 ***, d=0.423; W=1860, p=0.0000
+            ndcg: paired-t=14.361, p=0.0000 ***, d=0.433; W=15608, p=0.0000
+              f1: paired-t=14.010, p=0.0000 ***, d=0.422; W=1882, p=0.0000
+
+Results saved to results/wp0/toolbench_eval_tb_bgem3_v0110.json
+
+========================================================================
+  Summary
+========================================================================
+
+  MetaTool:
+    BEAR+BGE-M3 (gov)                   R@5=0.737 [0.731, 0.743]  NDCG@5=0.622 [0.617, 0.628]
+    BGE-M3 (no gov)                     R@5=0.728 [0.722, 0.734]  NDCG@5=0.614 [0.608, 0.619]
+
+  MetaTool+Tags:
+    BEAR+BGE-M3 (gov)                   R@5=0.972 [0.970, 0.975]  NDCG@5=0.889 [0.886, 0.892]
+    BGE-M3 (no gov)                     R@5=0.724 [0.718, 0.730]  NDCG@5=0.613 [0.608, 0.619]
+
+  MetaTool+QueryTags-top5:
+    BEAR+BGE-M3 (gov)                   R@5=0.707 [0.701, 0.713]  NDCG@5=0.624 [0.619, 0.630]
+    BGE-M3 (no gov)                     R@5=0.724 [0.718, 0.730]  NDCG@5=0.613 [0.608, 0.619]
+
+  ToolBench:
+    BEAR+BGE-M3 (gov)                   R@5=0.711 [0.690, 0.732]  NDCG@5=0.668 [0.648, 0.688]
+    BGE-M3 (no gov)                     R@5=0.601 [0.578, 0.623]  NDCG@5=0.570 [0.549, 0.591]
+Provenance stamped into results/wp0/toolbench_eval_tb_bgem3_v0110.json
+
+=== Reproducibility ===
+Timestamp (UTC): 2026-10-30T18:09:10Z
+Command line:    evals/wp0_v040/eval_toolbench_v040.py --top-k 5 --metatool-query-tags-file evals/data/external_benchmarks/metatool/query_tags_top5.json --output results/wp0/toolbench_eval_tb_bgem3_v0110.json --backends BEAR+BGE-M3 (gov) BGE-M3 (no gov)
+Python:          3.12.13 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
+numpy:           2.2.6
+scipy:           1.17.1
+bear:            0.1.10
+git commit:      634caf5ab715b2a7c20fac0b170228a49810bdc7
+git status:      DIRTY (25 files modified)
+git branch:      tist-r2
+
+  bear_version: 0.1.10
+  bear_path: /home/snhwang/tist-evals/bear-v0110/bear
+  bear_source_sha: cdba2174d715494ec4f22c098386487002ec492f
+  bear_pkg_sha256: 0108c923136caecb028106dc07acbd999a3a1bfcb0d15c3974c643d2da2d8e2b
+===
+[wp0-site] embedding cache: 131082 hits, 0 misses (/home/snhwang/tist-evals/wp0-v042/embcache)
+### mem guard: peak session RSS 1246 MiB
+### finished:    2026-10-30T14:09:16-04:00 rc=0

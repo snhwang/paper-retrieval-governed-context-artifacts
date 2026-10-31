@@ -1,0 +1,41 @@
+{
+  "written_utc": "2026-10-31T14:45:27Z",
+  "argv": [
+    "evals/wp0_v040/verify_env.py",
+    "--export",
+    "/home/snhwang/tist-evals/bear-v0.4.2",
+    "--expect-sha",
+    "0d0718a",
+    "--expect-version",
+    "0.4.2",
+    "--out",
+    "/home/snhwang/tist-evals/wp0-v042/logs/verify_v042_public.json"
+  ],
+  "bear_version": "0.4.2",
+  "bear_path": "/home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/bear",
+  "bear_source_sha": "(unset)",
+  "bear_pkg_sha256": "9cf19e48b49f4e57e3723050b942b296bb66f775fdd41e7f1770514576d0930a",
+  "hooks": {},
+  "versions": {
+    "python": "3.12.13",
+    "platform": "Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "numpy": "2.2.6",
+    "scipy": "1.17.1",
+    "torch": "2.10.0+cu128",
+    "transformers": "4.57.6",
+    "sentence_transformers": "5.4.1"
+  },
+  "source_dir": "/home/snhwang/tist-evals/bear-v0.4.2",
+  "source_sha": "0d0718a39a0b0788ef5cca4689352462b830494c",
+  "source_pkg_sha256": "9cf19e48b49f4e57e3723050b942b296bb66f775fdd41e7f1770514576d0930a",
+  "installed_matches_source": true,
+  "source_sha_is_expected": true,
+  "version_is_expected": true,
+  "nemotron_identity": {
+    "endpoint": "http://localhost:8360/v1/embeddings",
+    "model_id": "nvidia/llama-nemotron-embed-vl-1b-v2",
+    "dim": 2048,
+    "served_model": "nemotron-embed-vl",
+    "source": "health"
+  }
+}
