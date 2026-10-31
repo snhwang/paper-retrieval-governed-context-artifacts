@@ -1,0 +1,130 @@
+# Manuscript to script map
+
+Every table, figure and in-text result of the revised manuscript (`sample-manuscript.tex` in the paper repo, TIST round 2), with the kit script and the output file that produce it. The ids match `lib/paper_map.py`, which `collect.py` and `verify.py` read. Table and figure numbers are the printed ones, from the current build. Line numbers refer to the `.tex` as of 2026-10-31.
+
+## Status
+
+Each item has one status.
+- **(b) needs Scott's run.** The manuscript attributes the number to BEAR 0.4.2 (public tag v0.4.2, commit `0d0718a`) or to this revision. That covers every retrieval table, even where the value equals July's, and WP1, WP2, WP4, WP5, WP6, the Table 10 reruns and Hermes. `collect.py` reads these from your runs only.
+- **(a) Scott, previous version.** A July or August 2026 run that Scott made and the revision keeps unchanged, with no claim that it ran on 0.4.2. `55_e2e_previous_version.sh` holds the scripts. They need no rerun.
+- **static.** No number to reproduce: a design table, a drawing, a configuration value.
+
+Where the text left the status open, the item is marked (b) and flagged.
+
+## Abbreviations
+
+- `V/` is `results/v042/v042/` and `VL/` is `results/v042/logs/`, inside `$REPRO_OUT/assembled/`, which has this repo's layout. `R/` is `results/`, `ER/` is `evals/results/`.
+- `lane/step` is a step of `evals/wp0_v040/run_wp0_v040.sh LANE`. Its exact command line is the `### command:` line of `wp0/logs/<step>.log`.
+- Resources: CPU, GPU (local CUDA), 8360 (Nemotron), 8355 (SGLang), 11434 (Ollama), API (Anthropic).
+
+## Items
+
+| Id | Item | Status | Kit script | Command (what the script runs) | Output files | Resources | Derived numbers, notes |
+|---|---|---|---|---|---|---|---|
+| A1 | Abstract, L173-182 | (b) | as T06, T08, T09, T17, T17b, T21 | as those items | as those items | as those items | "8 to 66 pp" is the Δ@5 range in `results/v042/wp4/summary.md`. "Up to -0.15" and "six of seven" are read across items. L182 "adds no F1" contradicts T17 (+0.010 to 0.015). Flag |
+| T01 | tab:capabilities, Table 1, L311-335 | static | none | none | `docs/capability-evidence.md` (sources) | none | |
+| F1 | fig:instructions, Figure 1, L356-394 | static | none | a verbatim block in the `.tex` | none | none | |
+| T02 | tab:schema-cheatsheet, Table 2, L416-468 | static | none | none | none | none | |
+| F2 | fig:pipeline, Figure 2, L559-575 | static (drawing) | `80_figures.sh` | `pdflatex Figure1.tex` (paper repo), saved as `Figure1-pipeline.pdf` | `figures/Figure1-pipeline.pdf` | CPU | TikZ, no data. No figure in the manuscript is drawn from data |
+| X31 | Sec 3.1.1, θ 0.3, α 0.3, pool 3 × k | static | none | BEAR 0.4.2 defaults | none | none | |
+| X33 | Sec 3.3, L645: "eight unit tests", "roughly twenty tokens per admitted tool" | (b), flag | none | none | none | none | GAP. The tests live in the BEAR repo. No script measures the 20 tokens |
+| T03 | tab:rq, Table 3, L656-676 | static | none | none | none | none | |
+| T04 | tab:model-roles, Table 4, L705-724 | static | none | none | none | none | |
+| T05 | tab:provenance, Table 5, L731-752 | static | none | none | none | none | |
+| X42s | Sec 4.2 setup, L764-783: dimensions, threshold 0.15, 3,225 APIs, 1,100 queries, 199 tools, 21,111 queries (20,614 + 497) | (b) | `10_` | lex042/tb_bm25 and dense042/tb_bge print the counts | `VL/tb_bge.log` | CPU | The 20,614 / 497 split is printed by no script. GAP (count it from `evals/data/external_benchmarks/metatool/`) |
+| T06 | tab:toolbench-results, Table 6, L809-875 | (b) | `10_` (lex042, dense042), `20_` (gpuq4b042fix), `30_` (nemo042) | `eval_toolbench_v040.py --top-k 5 --metatool-query-tags-file evals/data/external_benchmarks/metatool/query_tags_top5.json --backends <rows>` in steps tb_bge, tb_bgem3, tb_qwen06, tb_bm25, tb_hash, tb_nemotron, tb_qwen4b_tb_fix (`--toolbench-only`, encode batch 2) | `V/<step>/toolbench_eval_<step>.json`, key `ToolBench` | CPU, GPU, 8360 | `collect.py` computes Δ, paired t, p and d from the per-query arrays (the numbers pass used a session script). Bold marks by hand |
+| X42 | Sec 4.2 results text, L787-807 | (b) | as T06 and T08, plus `30_` (diag) | as T06, plus `diag_nemotron_threshold.py --out ...` (Nemotron response cache, no new request) | as T06, plus `results/v042/diag/diag_nemotron_threshold.json` | CPU, 8360 | `collect.py` computes the cross-backend d against BEAR+BGE, BM25 gov vs BGE ungated, and the percent gains. "26% gap" by hand |
+| T07 | tab:toolbench-inferred, Table 7, L878-923 | (b) | `10_` (dense042/t4_inferred, t4_multitag, t4_top5) | `eval_toolbench_inferred_categories.py`, `eval_toolbench_multitag_categories.py`, `eval_toolbench_top5_categories.py` (from the cached classifications) | `V/t4_*/toolbench_*_metrics.json`, `R/toolbench_*_output.txt` | CPU | The inferred categories are June API outputs (claude-sonnet-4-6), cached in `R/toolbench_*_categories.json`. They are inputs of status (a) |
+| T08 | tab:metatool-results, Table 8, L925-986 | (b) | `10_`, `20_` (gpuq4b042gov, gpuq4b042fix), `30_` | as T06. Qwen3-4B governed from tb_qwen4b_mt_gov_b2, ungated from tb_qwen4b_mt_fix (both `--metatool-only --metatool-base-only`, batch 2) | `V/<step>/...json`, key `MetaTool` | CPU, GPU, 8360 | `collect.py` computes the footer's \|d\| ≤ 0.07, the Nemotron -0.26 and the Wilcoxon p for NDCG (`wilcoxon_p`). The batch-8 MetaTool governed row in `V/tb_qwen4b` is superseded, not reported |
+| T09 | tab:metatool-tags-results, Table 9, L989-1035 | (b) | `10_`, `20_` (gpuq4b042, batch 8), `30_` | as T06. Tag inputs: `plugin_tags.json`, `query_tags_top5.json` | keys `MetaTool+Tags`, `MetaTool+QueryTags-top5` | CPU, GPU, 8360 | `collect.py` computes d per backend. "At most 0.011" (Table 9 vs Table 8 ungoverned) by hand |
+| T10a | tab:e2e, Table 10, rows rerun on 0.4.2: BEAR+BM25 (gov), BM25 (no gov), BEAR+BGE-M3 (gov), the BGE drift controls, and the caption | (b) | `50_e2e_ollama.sh` (lists from `10_`) | `run_e2e_rerun.sh mistral-nemo` (e2e_rerun.py `--verify-live`), then `e2e_rerun_report.py` | `results/v042/e2e_rerun/mistral-nemo/*.scores.json`, `rerun_summary.json` | 11434 (`mistral-nemo-32k`, digest d79a1e80980f), GPU through Ollama | `rerun_summary.json` holds the BM25 Δ and d. `collect.py` computes the BEAR+BGE-M3 rerun vs July ungated (+0.099, d 0.26) and the drift (≤ 0.009). The numbers pass had no script for them |
+| T10b | tab:e2e, Table 10, rows kept from July: BEAR+BGE, BEAR+Qwen3-0.6B, BEAR+Qwen3-4B (gov), BGE, BGE-M3, Qwen3-0.6B, Qwen3-4B (no gov) | (a) | `55_ table10-july` | `eval_toolbench_e2e.py --all --skip-monolithic --base-url http://127.0.0.1:11434/v1 --model mistral-nemo-32k` on BEAR 0.1.10. July's command line was not recorded. This is the inferred one | `ER/toolbench_e2e_scores.json`, `ER/toolbench_e2e_results.json`, log `R/e2e_v0110_guided.log` | 11434 | July served the tag `mistral-nemo` (same GGUF). `collect.py` computes governed vs ungated d. Retrieval for July ran on an ARM machine. Their lists equal 0.4.2's (WP0 report) |
+| T10c | tab:e2e, Table 10, monolithic row (0.251 / 0.186, recall 0.995) | (a) | `55_ table10-monolithic` | `eval_toolbench_e2e.py --backends none --monolithic-cap 0` with Ollama at a 131,072 window | `ER/toolbench_e2e_results_partial.json`, `ER/toolbench_e2e_scores_partial.json`, `R/e2e_mono_alltools.log` | 11434 (131k window) | |
+| XE2E | E2E text L1038-1050 and the Table 10 caption | (b) for the prompt size and the rerun numbers, (a) for the July statistics, flag | `70_` (e2e-checks, wp4), `50_` | `e2e_prompt_tokens.py --lists ... --gemma-tokenizer google/gemma-4-12B-it`, `wp4_token_efficiency.py` | `results/v042/e2e_checks/e2e_prompt_tokens.json`, `results/v042/wp4/wp4_token_efficiency.json` | CPU | These files hold 82,298 cl100k and 88.3k Mistral-Nemo tokens. GAP. No script produces the monolithic paired statistics (3.3× / 4.0×, paired bootstrap p < 0.0001, d 0.86 to 1.01), hash vs monolithic (Δ +0.024 [-0.007, +0.056], p 0.13, d 0.05), "d 0.60 to 1.01", McNemar p 0.48 or the "14 sanitized names across 22 endpoints". "2.2% (n = 24), 91%", "0.53 to 0.67", "80% (70 to 87%)", "factor of five" and "0.03%" are by hand |
+| T11 | tab:e2e-react, Table 11, L1083-1110 | (a) | `55_ table11-react` | `eval_toolbench_react.py --monolithic-cap 0 --base-url ... --model mistral-nemo` (July 15, commit 6e1c863) | `R/toolbench_react_metrics.json`, `R/toolbench_react_output.txt` | 11434 (131k window), BGE | McNemar p values are in `comparisons[]`. "0.003", "twentyfold" and "5.3-fold" by hand. `R/react_v0110_paired.log` is not committed |
+| T12 | tab:e2e-scale, Table 12, L1115-1151 | (a) | `55_ table12-g12-scaffold`, `table12-g12-native`, `table12-g31-scaffold`, `table12-g31-native` | `run_model_scaffold_nothink.sh` and `run_model_full1100.sh` with `MODEL=gemma4:12b` or `gemma4:31b`, then `grid_from_full1100.py` and `scaffold_vs_single.py`. Mistral cells reuse T10c and T11 | `R/toolbench_react_metrics_g4-*.json` (six files, see `paper_map.py`), `R/g4_complement_indices.json`, `R/grid_g4-12b_author.txt` | 11434 (`gemma4:12b`, `gemma4:31b`, 131k window), temperature 1.0 | The reported 31B native cells were a pilot plus a complement (`run_gemma_complement.sh`, `merge_gemma_full1100.py`). `table12-g31-native` runs the same 1,100 queries in one pass. Spreads, "2.5×" and "3.5×" by hand. Gemma quantization was not recorded |
+| T13 | tab:token-efficiency, Table 13, L1168-1194, novel contexts L1200, App D L2140-2149 | (b) | `10_` (dense042/scalability, baseline_comparison) | `eval_scalability.py`, `eval_baseline_comparison.py` | `V/scalability/scalability_results.csv`, `V/baseline_comparison/baseline_comparison_results.csv` | CPU | "~36×" by hand. GAP. "4.2-10.4 ms (p95)" matches no file (the CSV has p95 4.39 to 14.36), likely a previous-version timing, flag. GAP. Nothing writes the novel-context "McNemar p > 0.48" (`evals/compute_petsim_stats.py` hardcodes old inputs and prints only) |
+| T14 | tab:semantic-advantage, Table 14, L1202-1217 | (b) | `10_` (dense042/baseline_comparison) | `eval_baseline_comparison.py` | `V/baseline_comparison/baseline_comparison_results.csv` | CPU | `collect.py` computes McNemar exact p, Cohen's h = π and the CPA bound 0.265, which were worked out by hand |
+| T15 | tab:token-compare, Table 15, L1262-1295 | (b) | `10_` (lex042/gov_ablation_lex, dense042/gov_ablation_dense, gov_ablation_q4b) | `eval_governance_ablation.py --backends ... --output results/wp0/governance_ablation_<x>.json` | `V/gov_ablation_{lex,dense,q4b}/governance_ablation_*.json`, key `token_efficiency` | CPU | Cells formatted by a session script in October. `collect.py` lists the values |
+| T16 | tab:governance-ablation, Table 16, panels a to c, L1302-1476 | (b) | `10_` | as T15 | as T15, keys `Full governance`, `Mandatory only`, `No governance`, `ITR` | CPU | Bold marks and text ranges by hand |
+| T16lat | Table 16, ms/query column | (a) | none | none | none | none | GAP. "As measured for the previous version", and no committed file matches it |
+| T17 | tab:decomposed-ablation, Table 17, upper rows, L1489-1525 | (b) | `10_` (dense042/decomposed_dense, manddense042/decomposed_q4b, lex042/decomposed_bm25) | `eval_governance_decomposed.py --backends ...` | `V/decomposed_{dense,q4b,bm25}/governance_decomposed_*.json` (`rows[]`) | CPU | d, p from `rows[]`. The ITR row is 0.182 from the dense files. The BM25 file's ITR 0.2112 is ITR's own fallback (no dense model in that lane). Ignore it |
+| T17b | Table 17 bottom rows, the mandatory-coverage test (WP2), L1527-1529, Conclusion items 3 and 4 | (b) | `15_` (stores), `20_`, `30_` (stores), `40_` (v042-rerun, step mandatory) | `eval_mandatory_coverage.py --phase embed` (per backend), then `--phase run` | `R/mandatory_coverage_v042.json`, `_output.txt` | CPU, 8360, GPU | Ranges (95-98%, 0.02-0.05, 21-26%, 0.75-0.79) by hand over the output table |
+| T18 | tab:invariants, Table 18, L1537-1572, nesting rate | (b) | `15_` (wp256-v042) | `run_wp256.sh v042`: `eval_invariants.py` on 2,000 corpora, the pool-sensitivity run, `repro_bm25_admission_gap.py` | `R/invariants_v042.json`, `_output.txt`, `_pool_sensitivity.json` | CPU | 0.0018 is printed. "2.4%" is `ungated_above` 0.0237 |
+| XBB | Budget binding, L1575 | (b) | `15_` (wp256-v042, wp256-v042-bge) | `eval_budget_binding.py` (BM25, hash, then BGE) | `R/budget_binding_v042*.json`, `_output.txt` | CPU | |
+| T19 | tab:baselines, Table 19, L1580-1608, and maintained CPA, L1610 | (b) | `15_` (wp5-bge-cpa), `30_` (wp5) | `run_v042_wp5.sh bge_petsim bge_toolbench cpa`, then `eval_metadata_filter_baseline.py --encoders nemotron` live | `R/metadata_filter_baseline_{toolbench,petsim}_{bge,nemotron}_v042.json`, `R/cpa_maintained_v042.json` | CPU, 8360 | The committed Nemotron rows ran on BEAR 0.4.0. Your run replaces them. "Within 0.01" and "0.09 to 0.12" by hand |
+| T20 | tab:robustness, Table 20, L1615-1648 | (b) | `15_` (bm25 checks, BGE-M3 leakage, stores), `20_` (Qwen stores), `30_` (stores), `40_` | `run_v042_rerun.sh` (tagnoise, tagnoise_nemotron, gatecheck, leakage, giveaways), `run_qwen_gpu.sh embed` then `run`, `run_wp256.sh v042-bgem3`, `v042-bm25`, `eval_query_giveaways.py` on the Qwen sweep | `R/tag_noise_*_output.txt`, `R/tag_noise_overrestriction_v042.json`, `R/leakage_threat_{v042,bge-m3,qwen}*`, `R/query_giveaways_{v042,qwen3-0.6b}*`, `R/bm25_v042_check_default_output.txt` | CPU, GPU, 8360 | Crossovers are the "crossover" column of the outputs. Ranges by hand. Several committed rows ran on 0.4.0 (BM25 crossovers interpolated from 0.4.0 seed means). Your run is all 0.4.2 |
+| T21 | tab:tokens-recall, Table 21, L1653-1681 | (b) | `10_`, `20_`, `30_` (k = 50 lists), `70_` (wp4) | `merge_wp4_lists.py`, `wp4_token_efficiency.py --lists ... --main-runs <8 runs> --outdir ...`, `wp4_summary.py` | `results/v042/wp4/summary.md`, `wp4_token_efficiency.json`, `*.npz` | CPU | "280 to 390 times" by hand, and it mixes tokenizers (one tokenizer gives 277 to 369) |
+| XH | Sec 4.12 Hermes, L1683-1689 (design in the text, results pending) | (b) | `60_hermes.sh` (all steps) | `hermes/scripts/` per `hermes/REPRODUCE.md`: stage 1, `stage2_settings.sh`, blocks 1 to 3, `analyze_stage2.sh` | `hermes/results/stage1/`, `hermes/results/stage2/` (from `$REPRO_OUT/hermes/analysis`) | 8355, 8360 | The committed tables come from agent runs on an older harness. Your runs replace them |
+| XAUTH | Authorship ablation (WP6, planned) | (b), flag | none | none | none | 8355 | GAP. Not in the manuscript yet and no script exists |
+| X413 | Sec 4.13 Use of generative AI, L1700 | static | none | none | none | none | It cites `evals/verify_rerun.py`, which checks the July reruns only. The kit's `verify.py` covers this revision |
+| X52 | Sec 5.2, L1800-1803 (1.000, 0.944-1.000) | (b) | as T13, T14 | | | | repeats |
+| X53 | Sec 5.3, L1823-1829: ToolBench-IR 0.847, governed 0.842, "2,629" | (b) | `10_` (dense042/toolllm_both) | `eval_toolbench_toolllm.py --model ToolBench/ToolBench_IR_bert_based_uncased --top-k 5 --mode both` | `V/toolllm_both/toolbench_toolllm_fixed.json` | CPU | GAP. "None of the 2,629" comes from `evals/diag_gate_coverage.py`, which prints to the terminal only |
+| T23 | tab:transfer, Table 23, L1831-1847 | (b) | `10_` (dense042/transfer_toolbench, transfer_metatool) | `eval_backend_transfer.py --corpus toolbench` and `--corpus metatool` | `V/transfer_{toolbench,metatool}/backend_transfer_*.json` | CPU | GAP. The off-the-shelf rows are a hardcoded `REFERENCE` dict in `eval_backend_transfer.py` with 0.1.10 values. Its Qwen3-4B MetaTool 0.906 disagrees with Table 8 (0.905) |
+| T24 | tab:reranker, Table 24, L1851-1875 | (b) | `10_` (dense042/reranker_toolbench, reranker_petsim, framework_toolbench, framework_petsim) | `eval_reranker_composition.py --corpus <c> --device cpu`, `eval_framework_baseline.py --corpus <c>` | `V/reranker_*/reranker_composition_*.json`, `V/framework_*/framework_baseline_*.json` | CPU | Contrasts and diagnostics are in `contrasts[]` and `candidate_set_diagnostics`. "Within 0.016" by hand |
+| X54 | Sec 5.4, L1880-1884, mand-only Recall@5 = 0.000 | (b) | `10_` (mandonly042, lex042, dense042) | as T06, rows `BEAR+<b> (mand-only)` | `V/tb_{bge,bm25,hash}/...`, `V/tb_bgem3_mand/...`, `V/tb_qwen06_mand/...` | CPU | Five backends have mand-only rows. Nemotron and Qwen3-4B were never run, although the text implies six. Flag |
+| X55 | Sec 5.5, L1891: "199 tools in under three minutes" | (a) | none | none | none | API | GAP. No committed log holds the time |
+| X56 | Sec 5.6, L1906-1908 | (b) | as earlier items | | | | repeats |
+| X57 | Sec 5.7, L1916-1924 ("0.09 to 0.42", 0.496 / 0.707 vs 0.668 / 0.845) | (b) | as T16, T25 | | | | Ranges by hand over the T16 files |
+| X58 | Sec 5.8 Limitations, L1932 | static | none | | | | dataset sizes |
+| XC | Conclusion items 1 to 7, L1960-1965 | (b) | as T06 to T09, T14, T16, T17, T17b | | | | repeats. `collect.py` computes item 6's "six of seven" |
+| XDA | Data and Code Availability, L1991 | static | none | | | | It points to the README's table-to-script map, which uses the July numbering. This file is the current map |
+| AA | Appendix A, MetaTool tag generation, L2007-2033 | (a) | `55_ tags-api` | `metatool_generate_tags.py`, `metatool_generate_query_tags_top5.py` (claude-sonnet-4-6, temperature 0) | `evals/data/external_benchmarks/metatool/plugin_tags.json`, `query_tags_top5.json` | API | A rerun can differ from June's answers and replaces the inputs of T09. The prompt lists 20 tags, and `plugin_tags.json` uses 19 |
+| T25 | tab:retrieval, Table 25, App B, L2039-2078 | (b) | `10_` (lex042/retrieval_hash, dense042/retrieval_semantic) | `eval_retrieval.py`, `eval_retrieval.py --semantic` | `VL/retrieval_hash.log`, `VL/retrieval_semantic.log` | CPU | GAP. Logs only, with no JSON and no per-query arrays, so no paired tests (they were removed from the caption). "At most 0.019" by hand |
+| T26 | tab:tool-scaling, Table 26, and tab:token-savings, Table 27, App C, L2080-2133 | (b) | `10_` (dense042/tool_scaling) | `eval_tool_scaling.py` | `VL/tool_scaling.log` | CPU | GAP. Log only. Its LLM step fails with 401 and is unused. "~29,000" by hand |
+| AE | Appendix E, ITR, L2151-2156 | static | none | ITR settings in the eval scripts, `instruction-tool-retrieval==0.1.1` | | | values as T16, T17 |
+| T28 | tab:alpha-sweep, Table 28, App F, L2158-2187 | (b) | `10_` (dense042/alpha_sweep_dense, alpha_sweep_q4b, lex042/alpha_sweep_bm25) | `eval_alpha_sweep.py --backends ...` | `V/alpha_sweep_*/alpha_sweep_*.json` (`rows[]`, `p_vs_default`) | CPU | 0.021, 0.011 and 0.010 by hand. The published Qwen3-4B tail (0.843, 0.830) was BEAR 0.1.10's silent hash fallback. 0.4.2 gives 0.649 |
+
+## Supporting results, not printed as numbers
+
+- The 0.1.10 controls and the attribution of every moved cell (Summary of Differences, response letter) come from `10_ --with-controls`, then `70_ --with-controls` (compare_042.py, fallback_audit.py).
+- The per-query mandatory tables come from `10_` (lanes mand042, manddense042), then `70_` (table_mandatory.py).
+- The BM25 list diff behind the Table 10 rerun decision comes from `70_` (e2e_list_diff.py).
+
+## Gaps
+
+### Results with no script
+- Related work, L297, "NDCG@5 = 0.905" for MetaTool tags. No cell has it. Table 8 has a Recall@5 of 0.905. Likely stale text.
+- X33, "eight unit tests" and "roughly twenty tokens per admitted tool".
+- XE2E, the monolithic paired statistics, the hash vs monolithic test, "d 0.60 to 1.01", McNemar p 0.48 and the "14 sanitized names across 22 endpoints" note. They come from the July arrays (`ER/toolbench_e2e_scores.json`, `..._partial.json`), with no committed script.
+- T13, "4.2-10.4 ms (p95)" and the novel-context "McNemar p > 0.48".
+- T16lat, the ms/query column.
+- X53, "none of the 2,629" (`evals/diag_gate_coverage.py` prints it, writes nothing).
+- X55, "three minutes".
+- X42s, the 20,614 / 497 split.
+- T23, the off-the-shelf rows (a hardcoded dict of 0.1.10 values).
+- XAUTH, the authorship ablation (planned, nothing written).
+
+### Closed by the kit
+The October numbers pass computed these with session scripts (`np_extract.py`, `np_wilcoxon.py`, `tools/nemo_rows.py`) or by hand. `collect.py` now computes them from your files:
+- every governed minus ungated Δ, paired t, p, Wilcoxon p and d in Tables 6, 8 and 9, and the cross-backend d in Section 4.2
+- the Table 10 BEAR+BGE-M3 rerun against the July ungated row, and the executor drift
+- the Table 14 statistics
+
+### By hand, still
+- Bold marks and cell formatting of Tables 6 to 12, 15, 16, 17 and 28 (a session script, `np_tables.py`, formatted the Pet Sim tables).
+- Every min-max range and percentage in the text that spans several cells. `numbers.md` lists the cells.
+
+### Logs only, no JSON
+- T25 (tab:retrieval) and T26 (tool scaling). `collect.py` quotes the log lines.
+
+### Not committed
+- `R/tag_noise.json` and `R/tag_noise_nemotron.json` (0.4.0 raw sweeps, 345 MB and 114 MB). The `_v042` sweeps are committed gzipped.
+- The WP4 k = 50 MetaTool+Tags lists (77 MB). `MANIFEST.json` in `results/v042/` holds their sha256. Your run makes them in `wp0/wp4_lists_final/`.
+- `R/react_v0110_paired.log`.
+
+### Scripts on the path that hold personal paths or LAN addresses
+The kit itself holds none. It works around these:
+- `evals/wp0_v040/relaunch_042.sh` (and `relaunch_041.sh`) set `SP` to a session folder under `/mnt/c/Users/<user>/...` and `REPO` to `/mnt/c/Users/<user>/...`. Their `sync_clone` copies scripts from the session folder into each lane clone. The kit does not call them. It runs each lane in its clone with the same settings. The copied scripts are identical to the committed ones (checked 2026-10-31).
+- `evals/wp0_v040/e2e_rerun.py` L377 reads the GGUF manifest from `/mnt/c/Users/<user>/.ollama/...`. Elsewhere the layer check is skipped without a word. The tag digest check still runs.
+- `evals/run_model_full1100.sh`, `run_model_scaffold_nothink.sh`, `run_gemma_complement.sh`, `run_model_scaffold_thinking.sh`, `run_scaffold_thinking_ablation.sh` and `verify_empty_guard.sh` default `BASE_URL` to the LAN address `192.168.x.x`, which WSL in mirrored mode cannot reach. `55_` sets `BASE_URL` to 127.0.0.1. `evals/gpu_guard.sh` names that address in a comment.
+- `hermes/sandbox_redteam.py` sets `HOME = "/home/<user>"`, and `hermes/analyze_stage1.py` matches `/home/<user>` in its patterns (`hermes/REPRODUCE.md`, section 6, lists them for stripping).
+- `results/v042/MANIFEST.json` (`not_committed.kept_at`) and the committed result files' provenance (argv, `bear_path`, `WP0_*` paths) record `/home/<user>/...`.
+- `evals/run_wp256.sh` modes `v042`, `v042-bge`, `v042-bm25` and `v042-bgem3` hardcode `BEAR_SOURCE_SHA=9d085b4` (the 0.4.2 candidate). Its `bear/` equals v0.4.2 apart from line endings. The files also record `bear_export_sha` (`0d0718a`) from `BEAR_GIT_SHA`, and the kit's run record holds the real sha. Making it `${BEAR_SOURCE_SHA:-...}` would fix the label.
+- Fixed home-relative paths that the kit must keep: `~/tist-evals/bear-v0.4.2`, `~/tist-evals/bear-v0110`, `~/bin/tist-capped`, `~/tist-gpu.lock`.
+
+### Not verified
+Nothing was run to write this kit. Each script passed `bash -n` and `--dry-run`. `verify.py` and `collect.py` passed a self-test on the committed files compared with themselves. The real-run paths (service launch, lane checks, moving committed copies aside, assembly) have not run yet. Points to watch on the first real run:
+- WP2/WP6 stores are filled from empty in one sequence for the first time (the October stores grew over several runs and settings). The Qwen3-0.6B ToolBench store of October had unrecorded batch settings. Yours records them.
+- The WP5 Nemotron rows run live on 0.4.2 for the first time.
+- The batch-8 Qwen3-4B lane must run out of memory on the long ToolBench texts as it did in October. If it does not, `20_` clears the three list markers so the batch-2 lane remakes them, and notes it.

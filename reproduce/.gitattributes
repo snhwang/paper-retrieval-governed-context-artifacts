@@ -1,0 +1,3 @@
+# The kit runs in WSL from this checkout. Keep LF endings everywhere, also for
+# bin/tist-capped, which has no .sh suffix.
+* text=auto eol=lf
