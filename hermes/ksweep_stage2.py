@@ -154,7 +154,10 @@ def main() -> int:
             key = (backend, query)
             first = orders[(backend, query, comp[0]["narrowing_id"])]
             if role == "operator" and task in NEEDED and first is not None:
+                catalog = set(comp[0].get("tools_before") or [])
                 for group in NEEDED[task]:
+                    if not any(t in catalog for t in group):
+                        continue  # a tool this run did not expose (needed_tools.py)
                     ranks = [first.index(t) + 1 for t in group if t in first]
                     req[key].append((dz, min(ranks) if ranks else None))
             worst, complete = 0, True

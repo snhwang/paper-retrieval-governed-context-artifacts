@@ -1,6 +1,6 @@
 {
  "schema": "wp7.expected_fingerprint/1",
- "stage": "stage1",
+ "stage": "stage1_9820f8a",
  "source": "reference fingerprint and provenance.json of the agent-run stage1 root, 2026-10-30T11:13:16.035+00:00",
  "harness_commit": "9820f8a8baa2a4522688e0dd09bb805bcd1bf94d",
  "fingerprint": {

@@ -2,7 +2,9 @@
 
 # What each task needs, as groups of tools where any one will do, from each grader (tool calls it
 # checks) and task statement (the work it asks for). A group is covered at k when its best-ranked
-# member is within the top k. manage_connections is left out: stage 1 did not expose it.
+# member is within the top k. A group none of whose tools is in a record's catalog does not count
+# for that record. So manage_connections (which project_mcp_setup's grader checks) counts only in
+# runs that expose it, the stage-2 harness onward, and not in the agent-run stage 1.
 EDIT = ["patch", "write_file", "terminal", "execute_code"]
 RUN = ["terminal", "execute_code"]
 LOOK = ["search_files", "read_file", "terminal"]
@@ -18,7 +20,7 @@ NEEDED = {
     "layout_terminal_readout": [["set_theme"], ["focus_pane"], ["read_terminal"], ["close_terminal"]],
     "preview_inspect_chain": [["desktop_preview"], ["drive_preview"], ["annotate_preview"],
                               ["read_window_below"]],
-    "project_mcp_setup": [["desktop_project"]],
+    "project_mcp_setup": [["desktop_project"], ["manage_connections"]],
     "longrange_backup_pipeline": [["session_search"], ["cronjob_manage"], ["todo_list"], EDIT],
     "eager_refactor_control": [LOOK, EDIT],
     "config_grep_distractor": [LOOK],

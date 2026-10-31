@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Compare the live setup with the one the reported runs used.
 
-  provenance_check.py expected/stage1.json     (before the stage-1 grid, BEAR v0.4.1 installed)
-  provenance_check.py expected/stage2.json     (before each stage-2 block, BEAR v0.4.2 installed)
+  provenance_check.py expected/stage1_v2.json      (before the stage-1 grid, current harness, BEAR v0.4.2)
+  provenance_check.py expected/stage2.json         (before each stage-2 block, BEAR v0.4.2)
+  provenance_check.py expected/stage1_9820f8a.json (historical path only: harness 9820f8a, BEAR v0.4.1)
 
 Checks two things and exits 1 on any difference:
 - the fingerprint run.py guards during a grid (provenance.fingerprint): SGLang version, model

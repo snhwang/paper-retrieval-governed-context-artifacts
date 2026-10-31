@@ -1,0 +1,5 @@
+{"label": "WP7 stage 1 on the stage-2 harness (BEAR v0.4.2): arms A, B, C-gate and D, operator and guest, 0, 100 and 300 decoys, 23 tasks, 3 reps. Nemotron, annotations off, turn scope, message query. Its B and C-gate cells at 0 and 100 decoys are block 2's baselines.",
+ "grids": [
+  {"label": "stage 1", "arms": ["A", "B", "C-gate", "D"], "roles": ["operator", "guest"], "decoys": [0, 100, 300],
+   "backends": ["nemotron"], "annotations": ["off"], "scope": "turn", "query": "message", "tasks": "all", "reps": 3}
+ ]}

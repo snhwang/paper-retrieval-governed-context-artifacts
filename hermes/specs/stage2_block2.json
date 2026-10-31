@@ -1,13 +1,8 @@
-{"label": "WP7 stage 2, block 2: C-cut at k=15 on Nemotron and BM25 (first_plus_message), with same-harness C-gate and B. Turn scope, annotations off.",
+{"label": "WP7 stage 2, block 2: C-cut at k=15 on Nemotron and BM25 (first_plus_message). Turn scope, annotations off. Its C-gate and B baselines are the stage-1 grid's cells (specs/stage1_v2.json), which have identical settings (scripts/check_block2_baselines.py).",
  "grids": [
   {"label": "C-cut, operators", "arms": ["C-cut"], "k": [15], "backends": ["nemotron", "bm25"], "roles": ["operator"],
    "decoys": [0, 100], "annotations": ["off"], "scope": "turn", "query": "first_plus_message", "tasks": "all", "reps": 3},
   {"label": "C-cut, guests at 100 decoys", "arms": ["C-cut"], "k": [15], "backends": ["nemotron", "bm25"],
    "roles": ["guest"], "decoys": [100], "annotations": ["off"], "scope": "turn", "query": "first_plus_message",
-   "tasks": "all", "reps": 3},
-  {"label": "C-gate and B, operators", "arms": ["C-gate", "B"], "backends": ["nemotron"], "roles": ["operator"],
-   "decoys": [0, 100], "annotations": ["off"], "scope": "turn", "query": "message", "tasks": "all", "reps": 3},
-  {"label": "C-gate and B, guests at 100 decoys", "arms": ["C-gate", "B"], "backends": ["nemotron"],
-   "roles": ["guest"], "decoys": [100], "annotations": ["off"], "scope": "turn", "query": "message",
    "tasks": "all", "reps": 3}
  ]}

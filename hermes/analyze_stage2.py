@@ -3,10 +3,11 @@
 
 Usage:
   analyze_stage2.py --roots RUN [RUN ...] --out OUT_DIR [--boot 10000] [--seed 20261031]
-                    [--checks-dirs DIR ...]
+                    [--checks-dirs DIR ...] [--baseline STAGE1_RUN [--baseline-cells SPEC]]
 
 Each block runs in its own root. The script reads whatever roots it is given and reports the
-conditions it finds. Per-cell metrics come from analyze_stage1.cell_metrics (the worker's own
+conditions it finds. Block 2 runs only C-cut. Its C-gate and B baselines are the stage-1 grid's
+cells with identical settings (scripts/check_block2_baselines.py), read with --baseline. Per-cell metrics come from analyze_stage1.cell_metrics (the worker's own
 Hermes session, the giveaway audit with each cell's expected token, the strict score), with
 the stage-2 registry. Added here:
 
@@ -171,22 +172,35 @@ def main() -> int:
     ap.add_argument("--seed", type=int, default=20261031)
     ap.add_argument("--checks-dirs", nargs="*", default=[])
     ap.add_argument("--registry", default=os.path.join(HERE, "registry", "harness_registry.json"))
+    ap.add_argument("--baseline", help="a stage-1 root (specs/stage1_v2.json) that supplies block 2's "
+                                       "C-gate and B baselines. Only the cells --baseline-cells selects are read")
+    ap.add_argument("--baseline-cells", default="B,C-gate:operator:0,100;B,C-gate:guest:100",
+                    help="ARMS:ROLE:DECOYS groups separated by ';' (default: block 2's original baselines)")
     a = ap.parse_args()
     os.makedirs(a.out, exist_ok=True)
     rng = np.random.default_rng(a.seed)
     operator_only, decoys, known = a1.reference_sets(a.registry)
+    sel = []
+    for part in a.baseline_cells.split(";"):
+        arms_s, role_s, dec_s = part.split(":")
+        sel.append((set(arms_s.split(",")), role_s, {int(x) for x in dec_s.split(",")}))
+
+    def selected(arm: str, sw: dict) -> bool:
+        return any(arm in ar and sw["role"] == ro and int(sw["decoys"]) in de for ar, ro, de in sel)
 
     rows_all, done_n, planned_n = [], 0, 0
-    for root in a.roots:
+    sources = [(r, False) for r in a.roots] + ([(a.baseline, True)] if a.baseline else [])
+    for root, is_base in sources:
         root = os.path.abspath(os.path.expanduser(root))
         done = {}
         for r in a1.load_jsonl(os.path.join(root, "logs", "cells.jsonl")):
-            if r.get("event") == "cell_done":
+            if r.get("event") == "cell_done" and (not is_base or selected(r["arm"], r["switches"])):
                 done[r["cell"]] = r
         plan_path = os.path.join(root, "logs", "plan.json")
         if os.path.exists(plan_path):
             with open(plan_path, encoding="utf-8") as f:
-                planned_n += len(json.load(f)["cells"])
+                planned_n += sum(1 for c in json.load(f)["cells"]
+                                 if not is_base or selected(c["arm"], c["switches"]))
         done_n += len(done)
         for d in done.values():
             row = a1.cell_metrics(d, operator_only, decoys, known)
@@ -369,7 +383,8 @@ def main() -> int:
                       "verify_per_cell_sum": {f"{k}.{st}": v for (k, st), v in sorted(per_cell.items())},
                       "verify_combined": {f"{k}.{st}": v for (k, st), v in sorted(combined.items())}}
     summary = {
-        "roots": a.roots, "planned": planned_n, "done": done_n, "errors": errors,
+        "roots": a.roots, "baseline": a.baseline, "baseline_cells": a.baseline_cells if a.baseline else None,
+        "planned": planned_n, "done": done_n, "errors": errors,
         "analyzed_battery_cells": len(battery), "spoof_cells": sum(1 for r in rows_all if r["task"] == "spoof_access_block"),
         "bootstrap": {"resamples": a.boot, "seed": a.seed},
         "digest_match": digest_out["ALL"],

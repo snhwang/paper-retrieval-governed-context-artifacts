@@ -1,21 +1,21 @@
 #!/usr/bin/env python3
 """Gates on the 4-cell re-smoke (A and D, operator and guest, 0 decoys, ambiguous_delete_ask).
 
-  resmoke_gate.py ROOT --stage 1|2
+  resmoke_gate.py ROOT --harness current|9820f8a
 
 Run after checks.py has written ROOT/checks.json and ROOT/verify_audit.txt. Exit 0 only if every
 hard gate passes:
 - 4 cells done, each exit 0 and sandboxed (bwrap)
 - every narrowing record that ranked tools used Nemotron, with 0 exact final-score ties
-- the BEAR restore flags are all present and false (stage 1, v0.4.1: restore_flat_backfill and
-  restore_below_threshold. Stage 2, v0.4.2: those two plus restore_dropped_rows and
-  restore_tie_order)
+- the BEAR restore flags are all present and false. The current harness runs v0.4.2, which
+  records restore_flat_backfill, restore_below_threshold, restore_dropped_rows and
+  restore_tie_order. The historical 9820f8a path runs v0.4.1, which records the first two
 - 0 retrieval results admitted through required_tags
 - the D guest was never sent terminal
 - every check in checks.json passed, and verify-audit reports only match, match_recorded and
   skipped
 
-The D guest's score is printed but is not a gate. Stage 1 gave it 0.4 in 9 of 9 cells (it calls
+The D guest's score is printed but is not a gate. The agent-run stage 1 gave it 0.4 in 9 of 9 cells (it calls
 clarify and cannot delete). An agent that asks in plain text instead gets 0.0 from the grader,
 which credits only the clarify tool (CHANGES.md, "A grader limitation").
 
@@ -32,18 +32,19 @@ H = os.environ.get("WP7_HERMES_DIR") or os.path.dirname(HERE)
 sys.path.insert(0, H)
 import analyze_stage1 as a1  # noqa: E402
 
-RESTORE = {1: ("restore_flat_backfill", "restore_below_threshold"),
-           2: ("restore_flat_backfill", "restore_below_threshold", "restore_dropped_rows", "restore_tie_order")}
-REGISTRY = {1: "harness_registry.stage1.json", 2: "harness_registry.json"}
+RESTORE = {"9820f8a": ("restore_flat_backfill", "restore_below_threshold"),
+           "current": ("restore_flat_backfill", "restore_below_threshold", "restore_dropped_rows",
+                       "restore_tie_order")}
+REGISTRY = {"9820f8a": "harness_registry.stage1.json", "current": "harness_registry.json"}
 
 
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("root")
-    ap.add_argument("--stage", type=int, choices=(1, 2), required=True)
+    ap.add_argument("--harness", choices=("current", "9820f8a"), required=True)
     a = ap.parse_args()
     root = os.path.expanduser(a.root)
-    op, dec, known = a1.reference_sets(os.path.join(H, "registry", REGISTRY[a.stage]))
+    op, dec, known = a1.reference_sets(os.path.join(H, "registry", REGISTRY[a.harness]))
     done = [r for r in a1.load_jsonl(os.path.join(root, "logs", "cells.jsonl")) if r.get("event") == "cell_done"]
     fails, notes = [], []
     if len(done) != 4:
@@ -54,8 +55,8 @@ def main() -> int:
         nar = [r for r in recs if r.get("schema") == "bear.narrowing/1"]
         ok = [r for r in nar if r.get("status") == "ok"]
         sent_terminal = any("terminal" in (r.get("tools_sent") or []) for r in nar)
-        flags_true = sum(1 for r in ok if any((r.get("settings") or {}).get(f) for f in RESTORE[a.stage]))
-        flags_missing = sum(1 for r in ok if any(f not in (r.get("settings") or {}) for f in RESTORE[a.stage]))
+        flags_true = sum(1 for r in ok if any((r.get("settings") or {}).get(f) for f in RESTORE[a.harness]))
+        flags_missing = sum(1 for r in ok if any(f not in (r.get("settings") or {}) for f in RESTORE[a.harness]))
         c = d["cell"]
         info = {k: m[k] for k in ("returncode", "sandbox", "score", "score_strict", "nar_records", "nar_ok",
                                   "nar_nemotron", "tie_pairs", "admitted_required_tags", "blocked",
@@ -78,7 +79,7 @@ def main() -> int:
             if sent_terminal:
                 fails.append(f"{c}: the D guest was sent terminal")
             if m["score"] != 0.4:
-                notes.append(f"{c}: D guest scored {m['score']} (stage 1: 0.4 in 9 of 9). Not a gate. "
+                notes.append(f"{c}: D guest scored {m['score']} (agent-run stage 1: 0.4 in 9 of 9). Not a gate. "
                              f"Grader notes: {m['notes']}")
     ck_path = os.path.join(root, "checks.json")
     if os.path.exists(ck_path):

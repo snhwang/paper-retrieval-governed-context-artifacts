@@ -3,7 +3,7 @@
 #
 #   scripts/launch_block.sh N [--continue] [--print]
 #
-#   N           1, 2 or 3 (specs/stage2_blockN.json: 874, 828 and 276 cells)
+#   N           1, 2 or 3 (specs/stage2_blockN.json: 874, 414 and 276 cells)
 #   --continue  the root exists from a stopped launch, finish its planned cells (run.py --resume)
 #   --print     print the commands and checks, launch nothing
 #
@@ -12,7 +12,9 @@
 # contacts 8355 and 8360) that the servers, installs and materials match expected/stage2.json.
 # The service runs run.py under scripts/run_recorded.sh, so the record gets the exit code when
 # the block ends. It uses 8355 (one cache flush before each cell, so no other client should use
-# 8355 meanwhile) and 8360. Run blocks one at a time, in order, after scripts/pregrid2.sh.
+# 8355 meanwhile) and 8360. Run blocks one at a time, in order, after the stage-1 grid and
+# scripts/stage2_settings.sh (k is decided before block 2). Block 2 runs only C-cut. Its C-gate
+# and B baselines are the stage-1 grid's cells.
 set -u
 source "$(dirname "${BASH_SOURCE[0]}")/env.sh"
 N=${1:?usage: launch_block.sh N [--continue] [--print]}

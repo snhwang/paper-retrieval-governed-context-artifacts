@@ -6,7 +6,9 @@
 # Offline: contacts neither 8355 nor 8360. Reads $WP7_RUNS/stage2-bN and writes
 #   $WP7_RUNS/stage2-bN/checks/          checks.json, summary.json, verify_audit.txt
 #   $WP7_ANALYSIS/stage2-bN/             the block's tables.md, summary.json, cells.csv, ...
-# The combined analysis over all three blocks is scripts/analyze_stage2.sh.
+# Block 2 runs only C-cut. Its analysis also reads the C-gate and B baselines from the stage-1
+# root ($WP7_RUNS/stage1, operators at 0 and 100 decoys, guests at 100). The combined analysis
+# over all three blocks is scripts/analyze_stage2.sh.
 set -u
 source "$(dirname "${BASH_SOURCE[0]}")/env.sh"
 WP7_SCRIPT_ARGS=("$@")
@@ -23,5 +25,10 @@ wp7_step "checks" 8G "$WP7_PY" checks.py --root "$R" --out-dir "$R/checks" --job
   --registry "$WP7_HERMES_DIR/registry/harness_registry.json" > "$R/checks.console" 2>&1
 echo "checks exit $? (exit 1 means some checks failed, see the list below)"
 tail -30 "$R/checks.console" | cut -c1-200
-wp7_step "analysis" 8G "$WP7_PY_ANALYSIS" analyze_stage2.py --roots "$R" --out "$OUT" --checks-dirs "$R/checks" || exit 2
+BASE=()
+if [ "$N" = 2 ]; then
+  [ -f "$WP7_RUNS/stage1/logs/plan.json" ] || { echo "block 2's baselines need the stage-1 run at $WP7_RUNS/stage1"; exit 2; }
+  BASE=(--baseline "$WP7_RUNS/stage1")
+fi
+wp7_step "analysis" 8G "$WP7_PY_ANALYSIS" analyze_stage2.py --roots "$R" "${BASE[@]}" --out "$OUT"   --checks-dirs "$R/checks" || exit 2
 echo "== done $(date -u +%T). Tables: $OUT/tables.md"
