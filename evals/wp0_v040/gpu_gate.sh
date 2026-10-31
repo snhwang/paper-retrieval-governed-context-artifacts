@@ -32,7 +32,11 @@ if systemctl --user is-active -q wp0-e2erun 2>/dev/null; then
   echo "### gpu gate: the e2e rerun (wp0-e2erun) is active, not started"
   exit 75
 fi
-ollama_ps=$(curl -s -m 5 "${WP0_OLLAMA_ROOT:-http://192.168.1.175:11434}/api/ps" || true)
+# 127.0.0.1: WSL uses mirrored networking. A check that cannot reach Ollama refuses.
+if ! ollama_ps=$(curl -sf -m 5 "${WP0_OLLAMA_ROOT:-http://127.0.0.1:11434}/api/ps"); then
+  echo "### gpu gate: cannot reach Ollama /api/ps, not started"
+  exit 75
+fi
 if grep -q '"name":"mistral-nemo-32k' <<<"$ollama_ps"; then
   echo "### gpu gate: the e2e executor (mistral-nemo-32k) is still loaded in Ollama, not started"
   exit 75

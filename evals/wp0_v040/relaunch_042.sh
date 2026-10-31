@@ -64,7 +64,8 @@ if [ $# -gt 0 ]; then
                if systemctl --user is-active -q wp0-gpuq4b042; then echo "Qwen3-4B lane active, not started"; exit 75; fi
                sync_clone artifacts
                ( cd $R/artifacts && $TC --mem 4G --service wp0-e2erun -- env WP0_WIN_GPU_MAX_MIB=67000 \
-                   WP0_WIN_GPU_ROW_MAX_MIB=81000 bash evals/wp0_v040/run_e2e_rerun.sh mistral-nemo )
+                   WP0_WIN_GPU_ROW_MAX_MIB=81000 WP0_OLLAMA_URL=${WP0_OLLAMA_URL:-http://127.0.0.1:11434/v1} \
+                   bash evals/wp0_v040/run_e2e_rerun.sh mistral-nemo )
                echo "started service wp0-e2erun" ;;
       mand042) sync_clone artifacts-nemo
                start_lane mand042 artifacts-nemo WP0_STEP_MEM=4G ;;

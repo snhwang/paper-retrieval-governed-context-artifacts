@@ -57,6 +57,7 @@ import wp0_common  # noqa: E402
 ROWS = {  # condition name -> (backend, governance, list file)
     "BEAR+BM25 (gov)": ("bm25", True, "bear_bm25_gov.json"),
     "BM25 (no gov)": ("bm25", False, "bm25_no_gov.json"),
+    "BEAR+BGE-M3 (gov)": ("bge-m3", True, "bear_bge_m3_gov.json"),
     "BEAR+BGE (gov)": ("bge", True, "bear_bge_gov.json"),
     "BGE (no gov)": ("bge", False, "bge_no_gov.json"),
     "BEAR+Hash (gov)": ("hash", True, "bear_hash_gov.json"),
@@ -92,7 +93,7 @@ def ollama_root(base_url: str) -> str:
 def server_facts(base_url: str, model: str) -> dict:
     root = ollama_root(base_url)
     tags = http(f"{root}/api/tags")["models"]
-    m = next((x for x in tags if x["name"] == model or x["model"] == model), None)
+    m = next((x for x in tags if same_model(x["name"], model) or same_model(x["model"], model)), None)
     if m is None:
         raise SystemExit(f"{model} is not in {root}/api/tags")
     show = http(f"{root}/api/show", {"model": model})
@@ -102,6 +103,11 @@ def server_facts(base_url: str, model: str) -> dict:
             "parameters": show.get("parameters"), "template_sha256":
                 hashlib.sha256((show.get("template") or "").encode()).hexdigest(),
             "model_info_arch": (show.get("model_info") or {}).get("general.architecture")}
+
+
+def same_model(name: str, model: str) -> bool:
+    """Ollama lists "mistral-nemo-32k:latest" for a request naming "mistral-nemo-32k"."""
+    return name == model or (":" not in model and name == f"{model}:latest")
 
 
 def loaded(base_url: str) -> list[dict]:
@@ -123,8 +129,12 @@ def gate(limit: int, when: str) -> int:
 
 def warm_and_check(args) -> dict:
     """Load the model with a 1-token request, then check what Ollama loaded."""
-    names = [m["name"] for m in loaded(args.base_url)]
-    if args.model in names:
+    try:
+        names = [m["name"] for m in loaded(args.base_url)]
+    except Exception as exc:  # noqa: BLE001
+        print(f"### cannot reach Ollama /api/ps at {ollama_root(args.base_url)} ({exc!r}); not started", flush=True)
+        sys.exit(75)
+    if any(same_model(n, args.model) for n in names):
         print(f"### {args.model} is already loaded; the start limit assumes nothing of ours is resident",
               flush=True)
         sys.exit(75)
@@ -135,7 +145,7 @@ def warm_and_check(args) -> dict:
     http(f"{args.base_url.rstrip('/')}/chat/completions",
          {"model": args.model, "max_tokens": 1, "temperature": 0,
           "messages": [{"role": "user", "content": "hi"}]}, timeout=600)
-    ps = next((m for m in loaded(args.base_url) if m["name"] == args.model), None)
+    ps = next((m for m in loaded(args.base_url) if same_model(m["name"], args.model)), None)
     info = {"load_seconds": round(time.time() - t0, 1), "ps": ps, "win_used_mib_after_load": win_gpu_used_mib()}
     print(f"### loaded {args.model}: context_length {ps and ps.get('context_length')}, "
           f"size_vram {ps and ps.get('size_vram')}, card now {info['win_used_mib_after_load']} MiB", flush=True)
@@ -154,9 +164,12 @@ def unload(args) -> None:
         print(f"### unload request for {args.model} failed: {exc!r}", flush=True)
     for _ in range(60):
         try:
-            if all(m["name"] != args.model for m in loaded(args.base_url)):
+            ps = loaded(args.base_url)
+            if not any(same_model(m["name"], args.model) for m in ps):
                 used = win_gpu_used_mib()
-                msg = f"{time.strftime('%FT%T%z')} {args.model} unloaded (absent from /api/ps), card {used} MiB"
+                utc = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+                msg = (f"{utc} {args.model} unloaded; /api/ps lists {len(ps)} models "
+                       f"{[m['name'] for m in ps]}; Windows nvidia-smi {used} MiB")
                 print(f"### {msg}", flush=True)
                 (Path(args.out) / "UNLOADED").write_text(msg + "\n")
                 return
@@ -317,7 +330,9 @@ def main() -> None:
     ap.add_argument("--expect-model-layer", default="b559938ab7a0",
                     help="sha256 prefix of the GGUF layer, the same for both tags")
     ap.add_argument("--expect-ctx", type=int, default=32768)
-    ap.add_argument("--base-url", default="http://192.168.1.175:11434/v1")
+    # WSL runs with mirrored networking (2026-10-31): the LAN address does not
+    # reach the Windows Ollama from inside WSL, 127.0.0.1 does.
+    ap.add_argument("--base-url", default="http://127.0.0.1:11434/v1")
     ap.add_argument("--win-gpu-max-mib", type=int, required=True,
                     help="before loading, with nothing of ours resident: start only if Windows "
                          "nvidia-smi shows at most this (agreed: 67000)")

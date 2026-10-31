@@ -60,7 +60,8 @@ PY=${WP0_PY:-$HOME/.venvs/tist-evals/bin/python}
 OUT=${WP0_E2E_OUT:-$ART/results/v042/e2e_rerun}
 LOGS=$ROOT/logs
 LISTS=("$ROOT/artifacts/results/wp0/lists_v042/e2e" "$ROOT/artifacts-dense/results/wp0/lists_v042/e2e")
-BASE_URL=${WP0_OLLAMA_URL:-http://192.168.1.175:11434/v1}
+# WSL uses mirrored networking (2026-10-31): 127.0.0.1 reaches the Windows Ollama, the LAN address does not
+BASE_URL=${WP0_OLLAMA_URL:-http://127.0.0.1:11434/v1}
 # BEAR 0.4.2 public tag v0.4.2 (0d0718a), installed from ~/tist-evals/bear-v0.4.2 (2026-10-31)
 BEAR_SHA=$(cat "$HOME/tist-evals/bear-v0.4.2/BEAR_GIT_SHA" 2>/dev/null || echo unknown)
 mkdir -p "$OUT" "$LOGS"
@@ -73,7 +74,9 @@ run_executor() {
       model=${WP0_E2E_MODEL:-mistral-nemo-32k}
       digest=${WP0_E2E_DIGEST:-d79a1e80980f}
       ctx=32768
-      rows=${WP0_E2E_ROWS:-"BEAR+BM25 (gov);BM25 (no gov);BEAR+BGE (gov);BGE (no gov)"} ;;
+      # Every Table 7 row whose lists changed under 0.4.2 (BM25 both, BGE-M3 governed:
+      # query 216, an exact tie at 5th place), plus BGE both as executor-drift controls.
+      rows=${WP0_E2E_ROWS:-"BEAR+BM25 (gov);BM25 (no gov);BEAR+BGE-M3 (gov);BEAR+BGE (gov);BGE (no gov)"} ;;
     *) echo "unknown executor $ex"; return 2 ;;
   esac
   local IFS=';'; local -a R=($rows); unset IFS
