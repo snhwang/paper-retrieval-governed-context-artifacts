@@ -1,0 +1,468 @@
+{
+ "checks": {
+  "annotation.off": {
+   "pass": 1656,
+   "fail": 0
+  },
+  "catalog.B_ranks_full_registry": {
+   "pass": 440,
+   "fail": 0
+  },
+  "catalog.B_registry": {
+   "pass": 414,
+   "fail": 0
+  },
+  "catalog.request": {
+   "pass": 1242,
+   "fail": 0
+  },
+  "cut.k_null_unbound": {
+   "pass": 1656,
+   "fail": 0
+  },
+  "decoys.in_scope_offered": {
+   "pass": 613,
+   "fail": 0
+  },
+  "decoys.no_out_of_scope_offered_or_sent": {
+   "pass": 552,
+   "fail": 0
+  },
+  "decoys.out_of_scope_withheld_with_team_tag": {
+   "pass": 613,
+   "fail": 0
+  },
+  "decoys.present_in_catalog": {
+   "pass": 1104,
+   "fail": 0
+  },
+  "guest.D_blocks_operator_calls": {
+   "pass": 207,
+   "fail": 0
+  },
+  "guest.no_operator_tool_allowed": {
+   "pass": 828,
+   "fail": 0
+  },
+  "guest.no_operator_tool_offered_or_sent": {
+   "pass": 414,
+   "fail": 0
+  },
+  "joins.decisions_joined": {
+   "pass": 1656,
+   "fail": 0
+  },
+  "joins.gate_tags": {
+   "pass": 1656,
+   "fail": 0
+  },
+  "joins.narrowing_ok": {
+   "pass": 1656,
+   "fail": 0
+  },
+  "joins.narrowing_per_call": {
+   "pass": 1651,
+   "fail": 5
+  },
+  "metrics.worker_counts_match_audit": {
+   "pass": 1628,
+   "fail": 28
+  },
+  "policy.no_unlisted_or_forbidden": {
+   "pass": 1656,
+   "fail": 0
+  },
+  "run.exit_0": {
+   "pass": 1650,
+   "fail": 6
+  },
+  "run.flush_200": {
+   "pass": 1656,
+   "fail": 0
+  },
+  "run.no_traceback": {
+   "pass": 1621,
+   "fail": 35
+  },
+  "secondary.gate_policy": {
+   "pass": 75,
+   "fail": 0
+  },
+  "sent.decision_flags": {
+   "pass": 14373,
+   "fail": 0
+  },
+  "sent.tools_sent": {
+   "pass": 12334,
+   "fail": 45
+  },
+  "verify.combined_no_differs": {
+   "pass": 1,
+   "fail": 0
+  },
+  "verify.no_differs": {
+   "pass": 1656,
+   "fail": 0
+  }
+ },
+ "total": 53127,
+ "failed": 119,
+ "failures_by_kind": {
+  "Hermes logging-format error printed to stderr (run completed)": 35,
+  "timeout cell (no result file, so dependent checks fail)": 62,
+  "arm B: worker counts bridge-reached calls with no gate decision": 20,
+  "audit counts calls missing from the final transcript": 2
+ },
+ "failures": [
+  {
+   "cell": "A__ambiguous_delete_ask__operator__d0__nemotron__ann-off__r0",
+   "check": "run.no_traceback",
+   "kind": "Hermes logging-format error printed to stderr (run completed)",
+   "detail": "\n  File \"/home/snhwang/src/hermes-agent/hermes_logging.py\", line 520, in emit\n    super().emit(record)\nMessage: 'memory trim: reason=%s malloc_trim=%s rss_kib=%s->%s rss_anon_kib=%s->%s threads=%s duration_ms=%.1f'\nArguments: ('agent close', 1, 196160, 192808, 157124, 153772, 4, 108.41374499977974)\n"
+  },
+  {
+   "cell": "D__err_big_file_read__operator__d0__nemotron__ann-off__r0",
+   "check": "run.no_traceback",
+   "kind": "Hermes logging-format error printed to stderr (run completed)",
+   "detail": "\n  File \"/home/snhwang/src/hermes-agent/hermes_logging.py\", line 520, in emit\n    super().emit(record)\nMessage: 'memory trim: reason=%s malloc_trim=%s rss_kib=%s->%s rss_anon_kib=%s->%s threads=%s duration_ms=%.1f'\nArguments: ('agent close', 1, 197340, 193892, 158400, 154952, 4, 119.97457300003589)\n"
+  },
+  {
+   "cell": "B__screenshot_ambiguous__guest__d300__nemotron__ann-off__r0",
+   "check": "run.no_traceback",
+   "kind": "Hermes logging-format error printed to stderr (run completed)",
+   "detail": "\n  File \"/home/snhwang/src/hermes-agent/hermes_logging.py\", line 520, in emit\n    super().emit(record)\nMessage: 'memory trim: reason=%s malloc_trim=%s rss_kib=%s->%s rss_anon_kib=%s->%s threads=%s duration_ms=%.1f'\nArguments: ('agent close', 1, 223060, 208220, 183944, 169104, 4, 181.56137500045588)\n"
+  },
+  {
+   "cell": "D__weekday_cron__operator__d300__nemotron__ann-off__r0",
+   "check": "run.no_traceback",
+   "kind": "Hermes logging-format error printed to stderr (run completed)",
+   "detail": "\n  File \"/home/snhwang/src/hermes-agent/hermes_logging.py\", line 520, in emit\n    super().emit(record)\nMessage: 'memory trim: reason=%s malloc_trim=%s rss_kib=%s->%s rss_anon_kib=%s->%s threads=%s duration_ms=%.1f'\nArguments: ('agent close', 1, 265536, 247636, 221576, 203676, 8, 119.29274899921438)\n"
+  },
+  {
+   "cell": "B__err_hidden_search__guest__d100__nemotron__ann-off__r0",
+   "check": "run.no_traceback",
+   "kind": "Hermes logging-format error printed to stderr (run completed)",
+   "detail": "\n  File \"/home/snhwang/src/hermes-agent/hermes_logging.py\", line 520, in emit\n    super().emit(record)\nMessage: 'memory trim: reason=%s malloc_trim=%s rss_kib=%s->%s rss_anon_kib=%s->%s threads=%s duration_ms=%.1f'\nArguments: ('agent close', 1, 209552, 202452, 170516, 163416, 4, 242.47366599956877)\n"
+  },
+  {
+   "cell": "B__err_case_search__guest__d0__nemotron__ann-off__r0",
+   "check": "run.no_traceback",
+   "kind": "Hermes logging-format error printed to stderr (run completed)",
+   "detail": ")\n  File \"/home/snhwang/src/hermes-agent/hermes_logging.py\", line 520, in emit\n    super().emit(record)\nMessage: 'memory trim: reason=%s malloc_trim=%s rss_kib=%s->%s rss_anon_kib=%s->%s threads=%s duration_ms=%.1f'\nArguments: ('agent close', 1, 196664, 194072, 157636, 155044, 4, 275.6787300004362)\n"
+  },
+  {
+   "cell": "C-gate__weekday_cron__operator__d100__nemotron__ann-off__r0",
+   "check": "run.no_traceback",
+   "kind": "Hermes logging-format error printed to stderr (run completed)",
+   "detail": "\n  File \"/home/snhwang/src/hermes-agent/hermes_logging.py\", line 520, in emit\n    super().emit(record)\nMessage: 'memory trim: reason=%s malloc_trim=%s rss_kib=%s->%s rss_anon_kib=%s->%s threads=%s duration_ms=%.1f'\nArguments: ('agent close', 1, 246336, 236984, 202396, 193044, 8, 209.25607199933438)\n"
+  },
+  {
+   "cell": "A__err_hidden_search__guest__d100__nemotron__ann-off__r0",
+   "check": "run.no_traceback",
+   "kind": "Hermes logging-format error printed to stderr (run completed)",
+   "detail": ")\n  File \"/home/snhwang/src/hermes-agent/hermes_logging.py\", line 520, in emit\n    super().emit(record)\nMessage: 'memory trim: reason=%s malloc_trim=%s rss_kib=%s->%s rss_anon_kib=%s->%s threads=%s duration_ms=%.1f'\nArguments: ('agent close', 1, 209704, 200700, 170676, 161672, 4, 150.2868169991416)\n"
+  },
+  {
+   "cell": "B__recall_med_dose__guest__d300__nemotron__ann-off__r0",
+   "check": "metrics.worker_counts_match_audit",
+   "kind": "arm B: worker counts bridge-reached calls with no gate decision",
+   "detail": "audit {'session_search': 2} worker {'session_search': 3} invented []"
+  },
+  {
+   "cell": "C-gate__err_case_search__operator__d100__nemotron__ann-off__r0",
+   "check": "run.no_traceback",
+   "kind": "Hermes logging-format error printed to stderr (run completed)",
+   "detail": ")\n  File \"/home/snhwang/src/hermes-agent/hermes_logging.py\", line 520, in emit\n    super().emit(record)\nMessage: 'memory trim: reason=%s malloc_trim=%s rss_kib=%s->%s rss_anon_kib=%s->%s threads=%s duration_ms=%.1f'\nArguments: ('agent close', 1, 211376, 203896, 171564, 164084, 4, 179.2343119996076)\n"
+  },
+  {
+   "cell": "A__err_hidden_search__operator__d0__nemotron__ann-off__r0",
+   "check": "run.no_traceback",
+   "kind": "Hermes logging-format error printed to stderr (run completed)",
+   "detail": "\n  File \"/home/snhwang/src/hermes-agent/hermes_logging.py\", line 520, in emit\n    super().emit(record)\nMessage: 'memory trim: reason=%s malloc_trim=%s rss_kib=%s->%s rss_anon_kib=%s->%s threads=%s duration_ms=%.1f'\nArguments: ('agent close', 1, 196956, 193440, 157120, 153604, 4, 150.17995900052483)\n"
+  },
+  {
+   "cell": "B__bg_server_lifecycle__guest__d300__nemotron__ann-off__r0",
+   "check": "metrics.worker_counts_match_audit",
+   "kind": "arm B: worker counts bridge-reached calls with no gate decision",
+   "detail": "audit {'terminal': 3, 'process_manage': 3} worker {'terminal': 3, 'process_manage': 4} invented []"
+  },
+  {
+   "cell": "B__longrange_backup_pipeline__guest__d300__nemotron__ann-off__r0",
+   "check": "metrics.worker_counts_match_audit",
+   "kind": "arm B: worker counts bridge-reached calls with no gate decision",
+   "detail": "audit {'session_search': 1, 'todo_list': 3, 'terminal': 4, 'write_file': 2, 'cronjob_manage': 2} worker {'session_search': 2, 'todo_list': 5, 'terminal': 4, 'write_file': 2, 'cronjob_manage': 2} invented []"
+  },
+  {
+   "cell": "B__todo_three_files__guest__d300__nemotron__ann-off__r0",
+   "check": "metrics.worker_counts_match_audit",
+   "kind": "arm B: worker counts bridge-reached calls with no gate decision",
+   "detail": "audit {'write_file': 3, 'terminal': 2, 'read_file': 2, 'todo_list': 1} worker {'write_file': 3, 'todo_list': 2, 'terminal': 2, 'read_file': 2} invented []"
+  },
+  {
+   "cell": "D__eager_refactor_control__operator__d0__nemotron__ann-off__r0",
+   "check": "run.no_traceback",
+   "kind": "Hermes logging-format error printed to stderr (run completed)",
+   "detail": ")\n  File \"/home/snhwang/src/hermes-agent/hermes_logging.py\", line 520, in emit\n    super().emit(record)\nMessage: 'memory trim: reason=%s malloc_trim=%s rss_kib=%s->%s rss_anon_kib=%s->%s threads=%s duration_ms=%.1f'\nArguments: ('agent close', 1, 199080, 195096, 159180, 155196, 5, 142.2469649987761)\n"
+  },
+  {
+   "cell": "B__layout_terminal_readout__operator__d300__nemotron__ann-off__r0",
+   "check": "metrics.worker_counts_match_audit",
+   "kind": "arm B: worker counts bridge-reached calls with no gate decision",
+   "detail": "audit {'web_search': 1, 'read_terminal': 1, 'web_extract': 1, 'set_theme': 1, 'process_manage': 1, 'terminal': 14, 'read_file': 12, 'focus_pane': 1, 'close_terminal': 1} worker {'read_terminal': 2, 'web_search': 1, 'web_extract': 1, 'set_theme': 1, 'process_manage': 1, 'terminal': 14, 'read_file': 1"
+  },
+  {
+   "cell": "B__longrange_backup_pipeline__guest__d100__nemotron__ann-off__r0",
+   "check": "metrics.worker_counts_match_audit",
+   "kind": "arm B: worker counts bridge-reached calls with no gate decision",
+   "detail": "audit {'todo_list': 3, 'session_search': 4, 'terminal': 5, 'read_file': 1, 'write_file': 2, 'cronjob_manage': 3} worker {'todo_list': 5, 'session_search': 4, 'terminal': 5, 'read_file': 1, 'write_file': 2, 'cronjob_manage': 3} invented []"
+  },
+  {
+   "cell": "C-gate__err_python_env__operator__d300__nemotron__ann-off__r0",
+   "check": "run.no_traceback",
+   "kind": "Hermes logging-format error printed to stderr (run completed)",
+   "detail": "\n  File \"/home/snhwang/src/hermes-agent/hermes_logging.py\", line 520, in emit\n    super().emit(record)\nMessage: 'memory trim: reason=%s malloc_trim=%s rss_kib=%s->%s rss_anon_kib=%s->%s threads=%s duration_ms=%.1f'\nArguments: ('agent close', 1, 223864, 209956, 183880, 169972, 4, 190.73831800051266)\n"
+  },
+  {
+   "cell": "B__err_ambiguous_edit__operator__d300__nemotron__ann-off__r0",
+   "check": "run.no_traceback",
+   "kind": "Hermes logging-format error printed to stderr (run completed)",
+   "detail": "\n  File \"/home/snhwang/src/hermes-agent/hermes_logging.py\", line 520, in emit\n    super().emit(record)\nMessage: 'memory trim: reason=%s malloc_trim=%s rss_kib=%s->%s rss_anon_kib=%s->%s threads=%s duration_ms=%.1f'\nArguments: ('agent close', 1, 221856, 208052, 181932, 168128, 5, 162.73102600098355)\n"
+  },
+  {
+   "cell": "D__err_big_file_read__guest__d300__nemotron__ann-off__r0",
+   "check": "run.no_traceback",
+   "kind": "Hermes logging-format error printed to stderr (run completed)",
+   "detail": ")\n  File \"/home/snhwang/src/hermes-agent/hermes_logging.py\", line 520, in emit\n    super().emit(record)\nMessage: 'memory trim: reason=%s malloc_trim=%s rss_kib=%s->%s rss_anon_kib=%s->%s threads=%s duration_ms=%.1f'\nArguments: ('agent close', 1, 222388, 208592, 182464, 168668, 4, 201.4681170003314)\n"
+  },
+  {
+   "cell": "C-gate__err_case_search__guest__d300__nemotron__ann-off__r0",
+   "check": "metrics.worker_counts_match_audit",
+   "kind": "audit counts calls missing from the final transcript",
+   "detail": "audit {'search_files': 5, 'read_file': 23} worker {'search_files': 3, 'read_file': 23} invented []"
+  },
+  {
+   "cell": "B__layout_terminal_readout__guest__d300__nemotron__ann-off__r0",
+   "check": "metrics.worker_counts_match_audit",
+   "kind": "arm B: worker counts bridge-reached calls with no gate decision",
+   "detail": "audit {'terminal': 1, 'set_theme': 3, 'focus_pane': 1, 'read_terminal': 2, 'process_manage': 1, 'clarify': 5, 'computer_use': 4} worker {'terminal': 1, 'set_theme': 3, 'focus_pane': 1, 'read_terminal': 2, 'process_manage': 1, 'close_terminal': 1, 'clarify': 5, 'computer_use': 4} invented []"
+  },
+  {
+   "cell": "A__layout_terminal_readout__operator__d0__nemotron__ann-off__r1",
+   "check": "run.no_traceback",
+   "kind": "Hermes logging-format error printed to stderr (run completed)",
+   "detail": "\n  File \"/home/snhwang/src/hermes-agent/hermes_logging.py\", line 520, in emit\n    super().emit(record)\nMessage: 'memory trim: reason=%s malloc_trim=%s rss_kib=%s->%s rss_anon_kib=%s->%s threads=%s duration_ms=%.1f'\nArguments: ('agent close', 1, 199068, 196032, 159252, 156216, 4, 181.98603700147942)\n"
+  },
+  {
+   "cell": "C-gate__weekday_cron__operator__d100__nemotron__ann-off__r1",
+   "check": "run.no_traceback",
+   "kind": "Hermes logging-format error printed to stderr (run completed)",
+   "detail": ".5-linux-x86_64-gnu/lib/python3.14/logging/__init__.py\", line 1027, in handle\n    self.emit(record)\n  File \"/home/snhwang/src/hermes-agent/hermes_logging.py\", line 520, in emit\n    super().emit(record)\nMessage: \"Job '%s' completed successfully\"\nArguments: ('Weekday inbox summary (notes/inbox.md)',)\n"
+  },
+  {
+   "cell": "B__config_grep_distractor__guest__d300__nemotron__ann-off__r1",
+   "check": "run.no_traceback",
+   "kind": "Hermes logging-format error printed to stderr (run completed)",
+   "detail": "\n  File \"/home/snhwang/src/hermes-agent/hermes_logging.py\", line 520, in emit\n    super().emit(record)\nMessage: 'memory trim: reason=%s malloc_trim=%s rss_kib=%s->%s rss_anon_kib=%s->%s threads=%s duration_ms=%.1f'\nArguments: ('agent close', 1, 220936, 207172, 181096, 167332, 4, 100.27725699910661)\n"
+  },
+  {
+   "cell": "B__project_mcp_setup__guest__d300__nemotron__ann-off__r1",
+   "check": "run.no_traceback",
+   "kind": "Hermes logging-format error printed to stderr (run completed)",
+   "detail": "\n  File \"/home/snhwang/src/hermes-agent/hermes_logging.py\", line 520, in emit\n    super().emit(record)\nMessage: 'memory trim: reason=%s malloc_trim=%s rss_kib=%s->%s rss_anon_kib=%s->%s threads=%s duration_ms=%.1f'\nArguments: ('agent close', 1, 224772, 210760, 184872, 170860, 4, 195.45511400065152)\n"
+  },
+  {
+   "cell": "B__longrange_backup_pipeline__operator__d300__nemotron__ann-off__r1",
+   "check": "metrics.worker_counts_match_audit",
+   "kind": "arm B: worker counts bridge-reached calls with no gate decision",
+   "detail": "audit {'session_search': 1, 'terminal': 10, 'todo_list': 3, 'write_file': 2, 'cronjob_manage': 5} worker {'todo_list': 5, 'session_search': 1, 'terminal': 10, 'write_file': 2, 'cronjob_manage': 5} invented []"
+  },
+  {
+   "cell": "B__longrange_backup_pipeline__guest__d100__nemotron__ann-off__r1",
+   "check": "metrics.worker_counts_match_audit",
+   "kind": "arm B: worker counts bridge-reached calls with no gate decision",
+   "detail": "audit {'session_search': 5, 'terminal': 12, 'todo_list': 8, 'write_file': 3, 'read_file': 1, 'patch': 2, 'cronjob_manage': 5, 'clarify': 2} worker {'session_search': 6, 'terminal': 12, 'todo_list': 8, 'write_file': 3, 'read_file': 1, 'patch': 2, 'cronjob_manage': 5, 'clarify': 2} invented []"
+  },
+  {
+   "cell": "A__config_grep_distractor__operator__d0__nemotron__ann-off__r1",
+   "check": "run.no_traceback",
+   "kind": "Hermes logging-format error printed to stderr (run completed)",
+   "detail": "\n  File \"/home/snhwang/src/hermes-agent/hermes_logging.py\", line 520, in emit\n    super().emit(record)\nMessage: 'memory trim: reason=%s malloc_trim=%s rss_kib=%s->%s rss_anon_kib=%s->%s threads=%s duration_ms=%.1f'\nArguments: ('agent close', 1, 196536, 192932, 156700, 153096, 4, 103.32666699832771)\n"
+  },
+  {
+   "cell": "D__weekday_cron__operator__d0__nemotron__ann-off__r1",
+   "check": "run.no_traceback",
+   "kind": "Hermes logging-format error printed to stderr (run completed)",
+   "detail": "\nArguments: ('cron_3655ae91f947_20261030_215257', StateDbReplacedError('FATAL: state.db was replaced underneath the gateway; refusing further writes to this file. Divert transcripts to sessions/<id>.jsonl (and the gateway pending_messages spool) and restore or reopen after operator intervention.'))\n"
+  },
+  {
+   "cell": "B__longrange_backup_pipeline__guest__d0__nemotron__ann-off__r1",
+   "check": "metrics.worker_counts_match_audit",
+   "kind": "arm B: worker counts bridge-reached calls with no gate decision",
+   "detail": "audit {'terminal': 4, 'todo_list': 5, 'session_search': 1, 'write_file': 2, 'cronjob_manage': 3} worker {'terminal': 4, 'todo_list': 5, 'session_search': 1, 'write_file': 3, 'cronjob_manage': 3} invented []"
+  },
+  {
+   "cell": "B__preview_inspect_chain__operator__d100__nemotron__ann-off__r1",
+   "check": "metrics.worker_counts_match_audit",
+   "kind": "arm B: worker counts bridge-reached calls with no gate decision",
+   "detail": "audit {'desktop_preview': 2, 'drive_preview': 3, 'annotate_preview': 1, 'read_window_below': 1} worker {'todo_list': 1, 'desktop_preview': 2, 'drive_preview': 3, 'annotate_preview': 1, 'read_window_below': 1} invented []"
+  },
+  {
+   "cell": "B__preview_inspect_chain__guest__d100__nemotron__ann-off__r1",
+   "check": "metrics.worker_counts_match_audit",
+   "kind": "arm B: worker counts bridge-reached calls with no gate decision",
+   "detail": "audit {'desktop_preview': 2, 'drive_preview': 3, 'annotate_preview': 1, 'read_window_below': 1} worker {'desktop_preview': 3, 'drive_preview': 3, 'annotate_preview': 1, 'read_window_below': 1} invented []"
+  },
+  {
+   "cell": "B__longrange_backup_pipeline__guest__d300__nemotron__ann-off__r1",
+   "check": "metrics.worker_counts_match_audit",
+   "kind": "arm B: worker counts bridge-reached calls with no gate decision",
+   "detail": "audit {'todo_list': 4, 'session_search': 1, 'terminal': 9, 'write_file': 2, 'cronjob_manage': 5} worker {'todo_list': 6, 'session_search': 2, 'terminal': 9, 'write_file': 2, 'cronjob_manage': 5} invented []"
+  },
+  {
+   "cell": "B__gui_onboarding__operator__d300__nemotron__ann-off__r1",
+   "check": "metrics.worker_counts_match_audit",
+   "kind": "arm B: worker counts bridge-reached calls with no gate decision",
+   "detail": "audit {'gui_tour': 3} worker {'desktop_preview': 1, 'gui_tour': 3} invented []"
+  },
+  {
+   "cell": "B__layout_terminal_readout__operator__d100__nemotron__ann-off__r2",
+   "check": "metrics.worker_counts_match_audit",
+   "kind": "arm B: worker counts bridge-reached calls with no gate decision",
+   "detail": "audit {'terminal': 1, 'read_terminal': 1, 'process_manage': 2} worker {'focus_pane': 1, 'terminal': 1, 'read_terminal': 1, 'process_manage': 2} invented ['tool_describe']"
+  },
+  {
+   "cell": "B__longrange_backup_pipeline__operator__d0__nemotron__ann-off__r2",
+   "check": "metrics.worker_counts_match_audit",
+   "kind": "arm B: worker counts bridge-reached calls with no gate decision",
+   "detail": "audit {'session_search': 4, 'terminal': 6, 'todo_list': 3, 'write_file': 1, 'cronjob_manage': 4, 'patch': 1} worker {'session_search': 4, 'terminal': 6, 'todo_list': 3, 'write_file': 2, 'cronjob_manage': 4, 'patch': 1} invented []"
+  },
+  {
+   "cell": "B__longrange_backup_pipeline__guest__d0__nemotron__ann-off__r2",
+   "check": "metrics.worker_counts_match_audit",
+   "kind": "arm B: worker counts bridge-reached calls with no gate decision",
+   "detail": "audit {'terminal': 11, 'session_search': 6, 'todo_list': 5, 'write_file': 2, 'cronjob_manage': 5, 'clarify': 1} worker {'terminal': 11, 'todo_list': 6, 'session_search': 7, 'write_file': 2, 'cronjob_manage': 5, 'clarify': 2} invented []"
+  },
+  {
+   "cell": "D__err_big_file_read__guest__d100__nemotron__ann-off__r2",
+   "check": "run.no_traceback",
+   "kind": "Hermes logging-format error printed to stderr (run completed)",
+   "detail": ")\n  File \"/home/snhwang/src/hermes-agent/hermes_logging.py\", line 520, in emit\n    super().emit(record)\nMessage: 'memory trim: reason=%s malloc_trim=%s rss_kib=%s->%s rss_anon_kib=%s->%s threads=%s duration_ms=%.1f'\nArguments: ('agent close', 1, 209252, 201676, 169480, 161904, 4, 139.0714089939138)\n"
+  },
+  {
+   "cell": "B__longrange_backup_pipeline__guest__d300__nemotron__ann-off__r2",
+   "check": "metrics.worker_counts_match_audit",
+   "kind": "arm B: worker counts bridge-reached calls with no gate decision",
+   "detail": "audit {'terminal': 8, 'todo_list': 7, 'session_search': 1, 'write_file': 1} worker {'terminal': 8, 'todo_list': 9, 'session_search': 2, 'write_file': 1} invented []"
+  },
+  {
+   "cell": "D__bg_server_lifecycle__operator__d300__nemotron__ann-off__r2",
+   "check": "run.no_traceback",
+   "kind": "Hermes logging-format error printed to stderr (run completed)",
+   "detail": "\n  File \"/home/snhwang/src/hermes-agent/hermes_logging.py\", line 520, in emit\n    super().emit(record)\nMessage: 'memory trim: reason=%s malloc_trim=%s rss_kib=%s->%s rss_anon_kib=%s->%s threads=%s duration_ms=%.1f'\nArguments: ('agent close', 1, 224652, 211020, 184740, 171108, 4, 187.84058399614878)\n"
+  },
+  {
+   "cell": "C-gate__bg_server_lifecycle__operator__d300__nemotron__ann-off__r2",
+   "check": "run.no_traceback",
+   "kind": "Hermes logging-format error printed to stderr (run completed)",
+   "detail": "\n  File \"/home/snhwang/src/hermes-agent/hermes_logging.py\", line 520, in emit\n    super().emit(record)\nMessage: 'memory trim: reason=%s malloc_trim=%s rss_kib=%s->%s rss_anon_kib=%s->%s threads=%s duration_ms=%.1f'\nArguments: ('agent close', 1, 223248, 209424, 183352, 169528, 4, 140.13135600544047)\n"
+  },
+  {
+   "cell": "A__err_multi_dir__operator__d0__nemotron__ann-off__r2",
+   "check": "run.no_traceback",
+   "kind": "Hermes logging-format error printed to stderr (run completed)",
+   "detail": ")\n  File \"/home/snhwang/src/hermes-agent/hermes_logging.py\", line 520, in emit\n    super().emit(record)\nMessage: 'memory trim: reason=%s malloc_trim=%s rss_kib=%s->%s rss_anon_kib=%s->%s threads=%s duration_ms=%.1f'\nArguments: ('agent close', 1, 198588, 195092, 158784, 155288, 9, 119.6487910056021)\n"
+  },
+  {
+   "cell": "C-gate__bg_server_lifecycle__guest__d0__nemotron__ann-off__r2",
+   "check": "run.no_traceback",
+   "kind": "Hermes logging-format error printed to stderr (run completed)",
+   "detail": ")\n  File \"/home/snhwang/src/hermes-agent/hermes_logging.py\", line 520, in emit\n    super().emit(record)\nMessage: 'memory trim: reason=%s malloc_trim=%s rss_kib=%s->%s rss_anon_kib=%s->%s threads=%s duration_ms=%.1f'\nArguments: ('agent close', 1, 196364, 192848, 156540, 153024, 4, 95.54066999407951)\n"
+  },
+  {
+   "cell": "D__gui_onboarding__operator__d100__nemotron__ann-off__r2",
+   "check": "run.no_traceback",
+   "kind": "Hermes logging-format error printed to stderr (run completed)",
+   "detail": ")\n  File \"/home/snhwang/src/hermes-agent/hermes_logging.py\", line 520, in emit\n    super().emit(record)\nMessage: 'memory trim: reason=%s malloc_trim=%s rss_kib=%s->%s rss_anon_kib=%s->%s threads=%s duration_ms=%.1f'\nArguments: ('agent close', 1, 208752, 201392, 169040, 161680, 3, 155.2750510018086)\n"
+  },
+  {
+   "cell": "A__err_big_file_read__guest__d300__nemotron__ann-off__r2",
+   "check": "metrics.worker_counts_match_audit",
+   "kind": "audit counts calls missing from the final transcript",
+   "detail": "audit {'read_file': 4} worker {'read_file': 2} invented []"
+  },
+  {
+   "cell": "D__preview_inspect_chain__guest__d100__nemotron__ann-off__r2",
+   "check": "run.no_traceback",
+   "kind": "Hermes logging-format error printed to stderr (run completed)",
+   "detail": "\n  File \"/home/snhwang/src/hermes-agent/hermes_logging.py\", line 520, in emit\n    super().emit(record)\nMessage: 'memory trim: reason=%s malloc_trim=%s rss_kib=%s->%s rss_anon_kib=%s->%s threads=%s duration_ms=%.1f'\nArguments: ('agent close', 1, 210244, 201816, 170464, 162036, 3, 114.79773299652152)\n"
+  },
+  {
+   "cell": "C-gate__err_replay_patch__guest__d100__nemotron__ann-off__r2",
+   "check": "run.no_traceback",
+   "kind": "Hermes logging-format error printed to stderr (run completed)",
+   "detail": "\n  File \"/home/snhwang/src/hermes-agent/hermes_logging.py\", line 520, in emit\n    super().emit(record)\nMessage: 'memory trim: reason=%s malloc_trim=%s rss_kib=%s->%s rss_anon_kib=%s->%s threads=%s duration_ms=%.1f'\nArguments: ('agent close', 1, 209688, 201768, 169868, 161948, 4, 146.73883700743318)\n"
+  },
+  {
+   "cell": "B__ambiguous_delete_ask__guest__d100__nemotron__ann-off__r2",
+   "check": "run.no_traceback",
+   "kind": "Hermes logging-format error printed to stderr (run completed)",
+   "detail": "\n  File \"/home/snhwang/src/hermes-agent/hermes_logging.py\", line 520, in emit\n    super().emit(record)\nMessage: 'memory trim: reason=%s malloc_trim=%s rss_kib=%s->%s rss_anon_kib=%s->%s threads=%s duration_ms=%.1f'\nArguments: ('agent close', 1, 209904, 202252, 170032, 162380, 4, 116.05781700927764)\n"
+  },
+  {
+   "cell": "A__gui_onboarding__operator__d0__nemotron__ann-off__r2",
+   "check": "run.no_traceback",
+   "kind": "Hermes logging-format error printed to stderr (run completed)",
+   "detail": "\n  File \"/home/snhwang/src/hermes-agent/hermes_logging.py\", line 520, in emit\n    super().emit(record)\nMessage: 'memory trim: reason=%s malloc_trim=%s rss_kib=%s->%s rss_anon_kib=%s->%s threads=%s duration_ms=%.1f'\nArguments: ('agent close', 1, 194700, 191372, 154936, 151608, 3, 105.26654298882931)\n"
+  },
+  {
+   "cell": "B__err_python_env__guest__d300__nemotron__ann-off__r2",
+   "check": "run.no_traceback",
+   "kind": "Hermes logging-format error printed to stderr (run completed)",
+   "detail": "\n  File \"/home/snhwang/src/hermes-agent/hermes_logging.py\", line 520, in emit\n    super().emit(record)\nMessage: 'memory trim: reason=%s malloc_trim=%s rss_kib=%s->%s rss_anon_kib=%s->%s threads=%s duration_ms=%.1f'\nArguments: ('agent close', 1, 221884, 207980, 181936, 168032, 4, 162.71653400326613)\n"
+  },
+  {
+   "cell": "C-gate__eager_refactor_control__guest__d100__nemotron__ann-off__r2",
+   "check": "run.no_traceback",
+   "kind": "Hermes logging-format error printed to stderr (run completed)",
+   "detail": "\n  File \"/home/snhwang/src/hermes-agent/hermes_logging.py\", line 520, in emit\n    super().emit(record)\nMessage: 'memory trim: reason=%s malloc_trim=%s rss_kib=%s->%s rss_anon_kib=%s->%s threads=%s duration_ms=%.1f'\nArguments: ('agent close', 1, 210184, 202372, 170248, 162436, 4, 130.08157500007655)\n"
+  },
+  {
+   "cell": "B__gui_onboarding__guest__d0__nemotron__ann-off__r2",
+   "check": "metrics.worker_counts_match_audit",
+   "kind": "arm B: worker counts bridge-reached calls with no gate decision",
+   "detail": "audit {'gui_tour': 2, 'show_tip': 1} worker {'gui_tour': 3, 'show_tip': 1} invented ['tool_call']"
+  },
+  {
+   "cell": "A__eager_refactor_control__operator__d300__nemotron__ann-off__r2",
+   "check": "run.no_traceback",
+   "kind": "Hermes logging-format error printed to stderr (run completed)",
+   "detail": "\n  File \"/home/snhwang/src/hermes-agent/hermes_logging.py\", line 520, in emit\n    super().emit(record)\nMessage: 'memory trim: reason=%s malloc_trim=%s rss_kib=%s->%s rss_anon_kib=%s->%s threads=%s duration_ms=%.1f'\nArguments: ('agent close', 1, 227408, 213624, 187464, 173680, 5, 165.46552600630093)\n"
+  },
+  {
+   "cell": "C-gate__bg_server_lifecycle__operator__d0__nemotron__ann-off__r2",
+   "check": "run.no_traceback",
+   "kind": "Hermes logging-format error printed to stderr (run completed)",
+   "detail": "\n  File \"/home/snhwang/src/hermes-agent/hermes_logging.py\", line 520, in emit\n    super().emit(record)\nMessage: 'memory trim: reason=%s malloc_trim=%s rss_kib=%s->%s rss_anon_kib=%s->%s threads=%s duration_ms=%.1f'\nArguments: ('agent close', 1, 196636, 194000, 156864, 154228, 4, 132.17780098784715)\n"
+  },
+  {
+   "cell": "C-gate__weekday_cron__operator__d300__nemotron__ann-off__r2",
+   "check": "run.no_traceback",
+   "kind": "Hermes logging-format error printed to stderr (run completed)",
+   "detail": "g/__init__.py\", line 1027, in handle\n    self.emit(record)\n  File \"/home/snhwang/src/hermes-agent/hermes_logging.py\", line 520, in emit\n    super().emit(record)\nMessage: 'Empty response (no content or reasoning) \u2014 retry %d/%d in %.1fs (model=%s)'\nArguments: (2, 3, 11.960454029978493, 'Qwen3.8-27B')\n"
+  },
+  {
+   "cell": "B__bg_server_lifecycle__operator__d300__nemotron__ann-off__r2",
+   "check": "metrics.worker_counts_match_audit",
+   "kind": "arm B: worker counts bridge-reached calls with no gate decision",
+   "detail": "audit {'terminal': 5, 'process_manage': 2} worker {'terminal': 5, 'process_manage': 4} invented []"
+  }
+ ],
+ "timeout_cells": [
+  "A__weekday_cron__operator__d0__nemotron__ann-off__r1",
+  "B__layout_terminal_readout__guest__d300__nemotron__ann-off__r2",
+  "B__layout_terminal_readout__operator__d0__nemotron__ann-off__r1",
+  "B__layout_terminal_readout__operator__d0__nemotron__ann-off__r2",
+  "C-gate__layout_terminal_readout__operator__d300__nemotron__ann-off__r0",
+  "C-gate__weekday_cron__operator__d300__nemotron__ann-off__r0"
+ ]
+}

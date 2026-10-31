@@ -125,9 +125,16 @@ def main() -> int:
         role, ndecoys = sw["role"], sw["decoys"]
         flushes = [r for r in log if r.get("event") == "flush_cache" and r.get("cell") == cell]
         res = json.load(open(d["out"])) if os.path.exists(d["out"]) else {}
-        recs = load_jsonl(d["audit"])
-        for r in recs:  # streamed, so a large run is never held in memory at once
+        recs_all = load_jsonl(d["audit"])
+        for r in recs_all:  # streamed, so a large run is never held in memory at once
             all_f.write(json.dumps(r) + "\n")
+        # The worker's own Hermes session is the first in the log. An agent can start a second
+        # Hermes inside its cell (a gateway running its cron job), which writes to the same log.
+        # Per-cell checks read the worker's session. Secondary sessions are counted, and their
+        # decisions are held to the same gate policy below.
+        worker_sess = next((r.get("session_id") for r in recs_all if r.get("session_id")), None)
+        recs = [r for r in recs_all if r.get("session_id") in (worker_sess, None)]
+        secondary = [r for r in recs_all if r.get("session_id") not in (worker_sess, None)]
         nar = [r for r in recs if r.get("schema") == "bear.narrowing/1"]
         comp = [r for r in nar if not r.get("reused_from")]
         dec = [r for r in recs if r.get("schema") == "bear.decision/1"]
@@ -166,7 +173,20 @@ def main() -> int:
             "outcomes": [r.get("status") for r in outc],
             "model_call_tokens": [(r.get("input_tokens"), r.get("output_tokens"),
                                    r.get("cached_tokens"), r.get("finish_reason")) for r in mc],
+            "secondary_sessions": sorted({r.get("session_id") for r in secondary}),
+            "secondary_model_calls": sum(1 for r in secondary if r.get("schema") == "bear.model_call/1"),
+            "secondary_decisions": [(r.get("tool"), r.get("action"), r.get("reason")) for r in secondary
+                                    if r.get("schema") == "bear.decision/1"],
         }
+        # Secondary sessions run under the same config, so the same gate policy must hold.
+        sdec = [r for r in secondary if r.get("schema") == "bear.decision/1"]
+        if sdec:
+            bad = [r.get("tool") for r in sdec if r.get("reason") in ("unlisted", "forbidden")]
+            if role == "guest":
+                bad += [r.get("tool") for r in sdec if r.get("tool") in operator_only
+                        and r.get("action") != "block"]
+            ck.check(cell, "secondary.gate_policy", not bad,
+                     f"{len(sdec)} decisions in {len(row['secondary_sessions'])} secondary sessions, bad {bad}")
 
         # run
         ck.check(cell, "run.flush_200", bool(flushes) and flushes[-1]["http_status"] == 200,
