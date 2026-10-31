@@ -17,7 +17,7 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."   # repo root
 
-BASE_URL="${BASE_URL:-http://192.168.1.175:11434/v1}"
+BASE_URL="${BASE_URL:-http://127.0.0.1:11434/v1}"  # the Windows Ollama, reached from WSL (mirrored networking)
 MODEL="${MODEL:-gemma4:31b}"
 IDX="results/g4_complement_indices.json"
 

@@ -15,7 +15,7 @@ cd "$(dirname "$0")/.."   # repo root
 
 MODEL="${MODEL:?set MODEL, e.g. MODEL=gemma4:12b}"
 LABEL="${LABEL:?set LABEL, e.g. LABEL=g4-12b}"
-BASE_URL="${BASE_URL:-http://192.168.1.175:11434/v1}"
+BASE_URL="${BASE_URL:-http://127.0.0.1:11434/v1}"  # the Windows Ollama, reached from WSL (mirrored networking)
 
 COMMON="--temperature 1.0 --llm-top-p 0.95 --llm-top-k 64 --base-url $BASE_URL --model $MODEL"
 PY="python evals/eval_toolbench_react.py"

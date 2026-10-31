@@ -1,8 +1,11 @@
 #!/usr/bin/env bash
 # TIST round 2: WP2, WP5 and WP6 deterministic baselines and stress tests.
 #
-# Run from the repo root inside WSL with the evaluation venv active and BEAR
-# 0.4.0 (bear-dev 10730c8) installed:
+# Run from the repo root inside WSL with the evaluation venv active. The
+# embed and run modes first ran on BEAR 0.4.0 (bear-dev 10730c8), v041 on
+# 0.4.1 and the v042 modes on the 0.4.2 candidate 9d085b4 (equal to the public
+# v0.4.2 apart from line endings). Each mode records the installed BEAR's
+# source commit (evals/bear_sha.py) unless BEAR_SOURCE_SHA is set.
 #
 #   source ~/.venvs/tist-evals/bin/activate
 #   bash evals/run_wp256.sh embed      # store every vector the runs need
@@ -21,7 +24,8 @@
 # ~/.cache/tist-r2-embeddings) with the GPU hidden. Result files are never
 # overwritten: each script refuses an existing output.
 set -euo pipefail
-export BEAR_SOURCE_SHA=${BEAR_SOURCE_SHA:-10730c8ae682f972b731b89789f0f7b97a521523}
+# The installed BEAR's source commit (its export's BEAR_GIT_SHA), unless BEAR_SOURCE_SHA is set.
+export BEAR_SOURCE_SHA=${BEAR_SOURCE_SHA:-$(command python "$(dirname "$0")/bear_sha.py")}
 LOCK=${TIST_GPU_LOCK:-$HOME/tist-gpu.lock}
 WORKERS=${WORKERS:-8}
 LOCAL="hash bge qwen3-0.6b"
@@ -73,15 +77,15 @@ case "${1:-}" in
     done
     ;;
   v041)
-    # BEAR 0.4.1 (v0.4.1 = fa87fc5). No model is loaded.
-    export BEAR_SOURCE_SHA=fa87fc554fd394ce52b09ffa8121d36fc3758f28 CUDA_VISIBLE_DEVICES= OMP_NUM_THREADS=1
+    # BEAR 0.4.1 checks (first run on v0.4.1 = fa87fc5). No model is loaded.
+    export CUDA_VISIBLE_DEVICES= OMP_NUM_THREADS=1
     python evals/check_bm25_v041.py --workers "$WORKERS"
     python evals/eval_invariants.py --workers "$WORKERS"         --output results/invariants_v041.json         --counterexamples results/invariants_v041_counterexamples.json         --log-file results/invariants_v041_output.txt
     ;;
   v042)
-    # BEAR 0.4.2 candidate (bear-dev 9d085b4): WP1 invariants, the release
-    # acceptance run. No model is loaded.
-    export BEAR_SOURCE_SHA=9d085b49c004cb03e2bede9055fdc3810cf260c0 CUDA_VISIBLE_DEVICES= OMP_NUM_THREADS=1
+    # BEAR 0.4.2 (first run on the candidate 9d085b4): WP1 invariants, the
+    # release acceptance run. No model is loaded.
+    export CUDA_VISIBLE_DEVICES= OMP_NUM_THREADS=1
     python evals/eval_invariants.py --workers "$WORKERS" \
         --output results/invariants_v042.json \
         --counterexamples results/invariants_v042_counterexamples.json \
@@ -109,7 +113,7 @@ case "${1:-}" in
   v042-bge)
     # BGE-base budget binding on 0.4.2, CPU only (a local model load, cleared
     # for CPU inside tist.slice). About 20 minutes at 8 threads, 3 GB.
-    export BEAR_SOURCE_SHA=9d085b49c004cb03e2bede9055fdc3810cf260c0 CUDA_VISIBLE_DEVICES= \
+    export CUDA_VISIBLE_DEVICES= \
         OMP_NUM_THREADS=8 MKL_NUM_THREADS=8 HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1
     CAP="$HOME/bin/tist-capped --mem 8G --"
     python evals/eval_budget_binding.py --backends bge \
@@ -124,7 +128,7 @@ case "${1:-}" in
     # The committed BM25 results (tag noise, WP2, leakage, giveaways) on 0.4.2,
     # as released and with each restore switch, then the attribution. No model
     # is loaded. About 15 minutes per run at 8 workers, 2 GB.
-    export BEAR_SOURCE_SHA=9d085b49c004cb03e2bede9055fdc3810cf260c0 CUDA_VISIBLE_DEVICES= \
+    export CUDA_VISIBLE_DEVICES= \
         OMP_NUM_THREADS=1 MKL_NUM_THREADS=1
     CAP="$HOME/bin/tist-capped --mem 12G --"
     python evals/check_bm25_v042.py --workers "$WORKERS"
@@ -138,7 +142,7 @@ case "${1:-}" in
     # BGE-M3 leakage on the CPU (cleared for CPU in tist.slice), float32. The
     # store fill took 38 minutes at 8 threads (15,700 CPU-s, 3.5 GB), the run
     # about a minute. The Qwen backends run on the GPU: evals/run_qwen_gpu.sh.
-    export BEAR_SOURCE_SHA=9d085b49c004cb03e2bede9055fdc3810cf260c0 CUDA_VISIBLE_DEVICES= \
+    export CUDA_VISIBLE_DEVICES= \
         OMP_NUM_THREADS=8 MKL_NUM_THREADS=8 HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1
     CAP="$HOME/bin/tist-capped --mem 8G --"
     python evals/eval_leakage_threat.py --phase embed --backends bge-m3

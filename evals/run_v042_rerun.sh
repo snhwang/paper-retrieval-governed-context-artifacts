@@ -22,7 +22,7 @@
 set -uo pipefail
 cd "$(dirname "$0")/.."
 python -c "import bear,sys; sys.exit(0 if bear.__version__=='0.4.2' else 'BEAR 0.4.2 required')" || exit 1
-export BEAR_SOURCE_SHA=${BEAR_SOURCE_SHA:-0d0718a39a0b0788ef5cca4689352462b830494c}
+export BEAR_SOURCE_SHA=${BEAR_SOURCE_SHA:-$(python evals/bear_sha.py)}  # the installed BEAR's commit
 export CUDA_VISIBLE_DEVICES= OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1
 PY=$(command -v python)
 TC=${TIST_CAPPED:-$HOME/bin/tist-capped}
@@ -33,9 +33,12 @@ SLICE_MAX=$((25 * 1024 * 1024 * 1024))
 W=${WORKERS:-8}
 OUT=${V042_OUT:-results}
 mkdir -p "$OUT"
-# The Qwen3-0.6B sweep, for the gate check's trace comparison (committed gzipped).
-QWEN_TN=results/tag_noise_qwen3-0.6b.json
-[ -e "$QWEN_TN" ] || QWEN_TN=results/tag_noise_qwen3-0.6b.json.gz
+# The Qwen3-0.6B sweep, for the gate check's trace comparison: from QWEN_OUT
+# when run_qwen_gpu.sh wrote elsewhere, else the committed one (gzipped).
+QDIR=${QWEN_OUT:-results}
+QWEN_TN=$QDIR/tag_noise_qwen3-0.6b.json
+[ -e "$QWEN_TN" ] || QWEN_TN=$QDIR/tag_noise_qwen3-0.6b.json.gz
+[ -e "$QWEN_TN" ] || echo "### note: no Qwen3-0.6B sweep in $QDIR, the gate check compares without it"
 
 slice_wait() {  # memory the kernel cannot reclaim, not page cache (as run_qwen_gpu.sh)
   local cur file shmem used

@@ -29,7 +29,7 @@
 set -uo pipefail
 cd "$(dirname "$0")/.."
 python -c "import bear,sys; sys.exit(0 if bear.__version__=='0.4.2' else 'BEAR 0.4.2 required')" || exit 1
-export BEAR_SOURCE_SHA=${BEAR_SOURCE_SHA:-0d0718a39a0b0788ef5cca4689352462b830494c}
+export BEAR_SOURCE_SHA=${BEAR_SOURCE_SHA:-$(python evals/bear_sha.py)}  # the installed BEAR's commit
 export CUDA_VISIBLE_DEVICES= HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 TOKENIZERS_PARALLELISM=false
 PY=$(command -v python)
 TC=${TIST_CAPPED:-$HOME/bin/tist-capped}

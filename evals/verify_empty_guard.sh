@@ -18,7 +18,7 @@ set -uo pipefail
 cd "$(dirname "$0")/.."
 
 MODEL="${MODEL:-gemma4:31b}"
-BASE_URL="${BASE_URL:-http://192.168.1.175:11434/v1}"
+BASE_URL="${BASE_URL:-http://127.0.0.1:11434/v1}"  # the Windows Ollama, reached from WSL (mirrored networking)
 SAMPLING="--temperature 1.0 --llm-top-p 0.95 --llm-top-k 64"
 
 echo "############ TEST 1: BROKEN config -- expect FATAL abort ############"

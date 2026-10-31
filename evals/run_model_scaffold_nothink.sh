@@ -19,7 +19,7 @@ cd "$(dirname "$0")/.."
 
 MODEL="${MODEL:?set MODEL, e.g. MODEL=gemma4:31b}"
 LABEL="${LABEL:?set LABEL, e.g. LABEL=g4-31b}"
-BASE_URL="${BASE_URL:-http://192.168.1.175:11434/v1}"
+BASE_URL="${BASE_URL:-http://127.0.0.1:11434/v1}"  # the Windows Ollama, reached from WSL (mirrored networking)
 
 echo "[$(date)] scaffold (native-off) full-1100 for $MODEL (label $LABEL)"
 # No --reasoning-mode => constrained {thought,action}; --reasoning-effort none
