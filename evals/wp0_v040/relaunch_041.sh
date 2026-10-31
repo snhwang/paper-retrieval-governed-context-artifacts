@@ -4,10 +4,13 @@
 # BM25), tracklex (required_tags admissions on 0.4.0 and 0.4.1), nemo
 # (Nemotron through 8360, batches of 16). Run once, in WSL.
 set -u
-SP=/mnt/c/Users/Scott/AppData/Local/Temp/claude/c--Users-Scott-Documents-Work-paper-retrieval-governed-context/b2a7ec29-e0cc-4cf9-a2d3-67d64780d674/scratchpad
-REPO=/mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts
-R=$HOME/tist-evals/wp0-v041
-PY=$HOME/.venvs/tist-evals/bin/python
+# The artifacts repo is two levels above this script. Clones are made from it,
+# and the WP0 scripts are synced from its evals/wp0_v040/ (working tree).
+REPO=$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)
+SRC=$REPO/evals/wp0_v040
+R=${WP0_ROOT:-$HOME/tist-evals/wp0-v041}
+export WP0_ROOT=$R   # the runner's default root is the 0.4.2 one
+PY=${WP0_PY:-$HOME/.venvs/tist-evals/bin/python}
 mkdir -p $R/logs $R/stage
 CAP=(systemd-run --user --scope --quiet --slice=tist.slice -p MemoryMax=24G -p MemorySwapMax=0)
 
@@ -28,8 +31,8 @@ for c in artifacts artifacts-attr artifacts-track; do
   [ -d $R/$c ] || git clone -q --branch tist-r2 $REPO $R/$c
   git -C $R/$c log --oneline -1
   D=$R/$c/evals/wp0_v040; mkdir -p $D/site
-  for f in $SP/wp0_v040/*.py $SP/wp0_v040/*.sh; do cp $f $D/.t && sed -i 's/\r$//' $D/.t && mv $D/.t $D/$(basename $f); done
-  cp $SP/wp0_v040/site/sitecustomize.py $D/site/.t && sed -i 's/\r$//' $D/site/.t && mv $D/site/.t $D/site/sitecustomize.py
+  for f in $SRC/*.py $SRC/*.sh; do cp $f $D/.t && sed -i 's/\r$//' $D/.t && mv $D/.t $D/$(basename $f); done
+  cp $SRC/site/sitecustomize.py $D/site/.t && sed -i 's/\r$//' $D/site/.t && mv $D/site/.t $D/site/sitecustomize.py
   grep -q "for tool_id in sorted(expected_ids)" $R/$c/evals/eval_toolbench.py && echo "  tag fix present"
 done
 

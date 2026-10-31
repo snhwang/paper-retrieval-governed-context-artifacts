@@ -5,19 +5,22 @@
 # Lanes run as tist-capped services (survive wsl.exe exiting), and every step
 # inside them runs in its own capped scope (runner: WP0_STEP_MEM, default 8G).
 set -u
-SP=/mnt/c/Users/Scott/AppData/Local/Temp/claude/c--Users-Scott-Documents-Work-paper-retrieval-governed-context/b2a7ec29-e0cc-4cf9-a2d3-67d64780d674/scratchpad
-REPO=/mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts
-R=$HOME/tist-evals/wp0-v042
-PY=$HOME/.venvs/tist-evals/bin/python
-TC=$HOME/bin/tist-capped
+# The artifacts repo is two levels above this script. Clones are made from it,
+# and the WP0 scripts are synced from its evals/wp0_v040/ (working tree).
+REPO=$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)
+SRC=$REPO/evals/wp0_v040
+R=${WP0_ROOT:-$HOME/tist-evals/wp0-v042}
+export WP0_ROOT=$R
+PY=${WP0_PY:-$HOME/.venvs/tist-evals/bin/python}
+TC=${TIST_CAPPED:-$HOME/bin/tist-capped}
 mkdir -p $R/logs $R/stage
 
-sync_clone() {  # clone of tist-r2 plus this session's scripts
+sync_clone() {  # clone of tist-r2 plus the repo's working-tree WP0 scripts
   local c=$1
   [ -d $R/$c ] || git clone -q --branch tist-r2 $REPO $R/$c
   local D=$R/$c/evals/wp0_v040; mkdir -p $D/site
-  for f in $SP/wp0_v040/*.py $SP/wp0_v040/*.sh; do cp $f $D/.t && sed -i 's/\r$//' $D/.t && mv $D/.t $D/$(basename $f); done
-  cp $SP/wp0_v040/site/sitecustomize.py $D/site/.t && sed -i 's/\r$//' $D/site/.t && mv $D/site/.t $D/site/sitecustomize.py
+  for f in $SRC/*.py $SRC/*.sh; do cp $f $D/.t && sed -i 's/\r$//' $D/.t && mv $D/.t $D/$(basename $f); done
+  cp $SRC/site/sitecustomize.py $D/site/.t && sed -i 's/\r$//' $D/site/.t && mv $D/site/.t $D/site/sitecustomize.py
   echo "$c: $(git -C $R/$c log --oneline -1), tag fix: $(grep -c 'for tool_id in sorted(expected_ids)' $R/$c/evals/eval_toolbench.py)"
 }
 

@@ -39,6 +39,7 @@ import hashlib
 import json
 import math
 import os
+import re
 import subprocess
 import sys
 import time
@@ -103,6 +104,33 @@ def server_facts(base_url: str, model: str) -> dict:
             "parameters": show.get("parameters"), "template_sha256":
                 hashlib.sha256((show.get("template") or "").encode()).hexdigest(),
             "model_info_arch": (show.get("model_info") or {}).get("general.architecture")}
+
+
+def ollama_models_dir() -> Path:
+    """The directory holding Ollama's manifests/ and blobs/.
+
+    OLLAMA_MODELS wins when set (as for Ollama itself), as a Windows path
+    (C:\\...) or a WSL path. Otherwise the Windows profile's .ollama\\models,
+    found through %USERPROFILE% and wslpath, since the Windows Ollama keeps
+    its models under the Windows profile, not under WSL's $HOME. Outside WSL
+    the default is ~/.ollama/models.
+    """
+    def to_wsl(p: str) -> str:
+        if re.match(r"^[A-Za-z]:[\\/]", p):
+            return subprocess.run(["wslpath", "-u", p], capture_output=True, text=True,
+                                  check=True).stdout.strip()
+        return p
+    env = os.environ.get("OLLAMA_MODELS", "").strip()
+    if env:
+        return Path(to_wsl(env)).expanduser()
+    try:
+        prof = subprocess.run(["cmd.exe", "/c", "echo %USERPROFILE%"], capture_output=True, text=True,
+                              cwd="/mnt/c", timeout=30).stdout.strip().splitlines()[-1].strip()
+        if prof and "%" not in prof:
+            return Path(to_wsl(prof + "\\.ollama\\models"))
+    except (OSError, subprocess.SubprocessError, IndexError):
+        pass
+    return Path.home() / ".ollama" / "models"
 
 
 def same_model(name: str, model: str) -> bool:
@@ -374,13 +402,19 @@ def main() -> None:
             f"{facts['details'] and facts['details'].get('quantization_level')}")
         if not facts["digest"].startswith(args.expect_digest):
             raise SystemExit(f"digest {facts['digest'][:12]} is not the expected {args.expect_digest}")
-        manifest = Path("/mnt/c/Users/Scott/.ollama/models/manifests/registry.ollama.ai/library") / \
+        # The GGUF must be the July one, so a manifest that cannot be read fails
+        # the run (it used to skip the check silently).
+        models_dir = ollama_models_dir()
+        manifest = models_dir / "manifests/registry.ollama.ai/library" / \
             args.model.split(":")[0] / (args.model.split(":")[1] if ":" in args.model else "latest")
-        if manifest.exists():
-            layers = [x["digest"] for x in json.loads(manifest.read_text())["layers"]]
-            facts["manifest_layers"] = layers
-            if not any(x.startswith("sha256:" + args.expect_model_layer) for x in layers):
-                raise SystemExit(f"model layer {args.expect_model_layer} not in {manifest}")
+        if not manifest.is_file():
+            raise SystemExit(f"Ollama manifest {manifest} not found, so the model layer cannot be checked. "
+                             "Set OLLAMA_MODELS to the Ollama models directory (Windows or WSL path).")
+        layers = [x["digest"] for x in json.loads(manifest.read_text())["layers"]]
+        facts["manifest"] = str(manifest)
+        facts["manifest_layers"] = layers
+        if not any(x.startswith("sha256:" + args.expect_model_layer) for x in layers):
+            raise SystemExit(f"model layer {args.expect_model_layer} not in {manifest}")
         corpus, queries = e2e.load_toolbench_data()
         if args.max_queries:
             queries = queries[:args.max_queries]

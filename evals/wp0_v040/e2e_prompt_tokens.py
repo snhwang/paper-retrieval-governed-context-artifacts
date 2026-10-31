@@ -127,8 +127,9 @@ def main() -> None:
         import os
         import jinja2
         from tokenizers import Tokenizer
-        snap = sorted(glob.glob(os.path.expanduser(
-            f"~/.cache/huggingface/hub/models--{a.gemma_tokenizer.replace('/', '--')}/snapshots/*/")))[-1]
+        hub = os.environ.get("HF_HUB_CACHE") or os.path.join(
+            os.environ.get("HF_HOME", os.path.expanduser("~/.cache/huggingface")), "hub")
+        snap = sorted(glob.glob(f"{hub}/models--{a.gemma_tokenizer.replace('/', '--')}/snapshots/*/"))[-1]
         gt = Tokenizer.from_file(snap + "tokenizer.json")
         env = jinja2.Environment(trim_blocks=True, lstrip_blocks=True)
         env.globals["raise_exception"] = lambda m: (_ for _ in ()).throw(ValueError(m))

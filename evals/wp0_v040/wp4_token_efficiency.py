@@ -157,7 +157,9 @@ def mistral_tokenizer():
     import os
 
     import tiktoken
-    hub = os.path.expanduser("~/.cache/huggingface/hub")
+    # the HF hub cache: HF_HUB_CACHE, else HF_HOME/hub, else ~/.cache/huggingface/hub
+    hub = os.environ.get("HF_HUB_CACHE") or os.path.join(
+        os.environ.get("HF_HOME", os.path.expanduser("~/.cache/huggingface")), "hub")
     path = glob.glob(f"{hub}/models--mistralai--Mistral-Nemo-Instruct-2407/snapshots/*/tekken.json")[0]
     d = json.loads(Path(path).read_text())
     cfg = d["config"]
