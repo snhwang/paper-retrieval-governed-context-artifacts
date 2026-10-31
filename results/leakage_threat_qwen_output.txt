@@ -1,0 +1,43 @@
+=== Leakage under the threat model (WP6), ToolBench, BEAR 0.4.2 ===
+3225 APIs, 1100 queries, k=5. Attack seed 20261029, description prefix 300 characters.
+
+Qwen3-0.6B
+  natural           ungated: cross 0.292 (1607/5500) R@5 0.693 | gate_only: cross 0.000 (0/5500) R@5 0.776 | published: cross 0.000 (0/5500) R@5 0.771 |
+  inject_name       ungated: cross 0.351 (1930/5500) hit 146 R@5 0.633 | gate_only: cross 0.000 (0/5500) hit 0 R@5 0.743 | published: cross 0.000 (0/5500) hit 0 R@5 0.748 |
+  inject_name_desc  ungated: cross 0.404 (2222/5500) hit 291 R@5 0.585 | gate_only: cross 0.000 (0/5500) hit 0 R@5 0.721 | published: cross 0.000 (0/5500) hit 0 R@5 0.728 |
+
+Qwen3-4B
+  natural           ungated: cross 0.280 (1542/5500) R@5 0.683 | gate_only: cross 0.000 (0/5500) R@5 0.754 | published: cross 0.000 (0/5500) R@5 0.756 |
+  inject_name       ungated: cross 0.407 (2240/5500) hit 156 R@5 0.548 | gate_only: cross 0.000 (0/5500) hit 0 R@5 0.689 | published: cross 0.000 (0/5500) hit 0 R@5 0.683 |
+  inject_name_desc  ungated: cross 0.423 (2328/5500) hit 216 R@5 0.508 | gate_only: cross 0.000 (0/5500) hit 0 R@5 0.665 | published: cross 0.000 (0/5500) hit 0 R@5 0.669 |
+
+--- Summary: share of top-5 outside the query's categories; attack success ---
+
+Backend                     ungated cross  gate cross  pub cross   name: ungated / gate   name+desc: ungated / gate
+Qwen3-0.6B         0.292 [0.274,0.310]           0          0        0.133 / 0                0.265 / 0     
+Qwen3-4B           0.280 [0.262,0.299]           0          0        0.142 / 0                0.196 / 0     
+  embedding store toolbench__qwen3-0.6b: Qwen/Qwen3-Embedding-0.6B, run in float16, filled 2026-10-31T17:13:58Z
+  embedding store toolbench__qwen3-4b: Qwen/Qwen3-Embedding-4B, run in float16, filled 2026-10-31T17:18:49Z
+
+Wrote results/leakage_threat_qwen.json
+Elapsed 105s
+
+=== Reproducibility ===
+Timestamp (UTC): 2026-10-31T17:26:42Z
+Command line:    evals/eval_leakage_threat.py --phase run --backends qwen3-0.6b qwen3-4b --output results/leakage_threat_qwen.json --log-file results/leakage_threat_qwen_output.txt
+Python:          3.12.13 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
+numpy:           2.2.6
+scipy:           1.17.1
+bear:            0.4.2
+git commit:      817cf343b10e6b1786a0cdea33bf4d9dd7ef211f
+git status:      unknown (git status failed or timed out)
+git branch:      tist-r2
+
+  eval: leakage_threat
+  backends: ['qwen3-0.6b', 'qwen3-4b']
+  bear_version: 0.4.2
+  bear_path: /home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/bear/__init__.py
+  bear_source_sha: 0d0718a39a0b0788ef5cca4689352462b830494c
+  bear_direct_url: file:///home/snhwang/tist-evals/bear-v0.4.2
+  bear_export_sha: 0d0718a39a0b0788ef5cca4689352462b830494c
+===

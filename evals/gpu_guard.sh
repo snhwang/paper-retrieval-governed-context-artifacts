@@ -8,9 +8,11 @@
 #   1. Windows nvidia-smi shows at most TIST_WIN_GPU_MAX_MIB in use (67,000).
 #   2. WP0's Qwen3-4B lane (service wp0-gpuq4b042) and its e2e rerun
 #      (service wp0-e2erun) are not active.
-#   3. Ollama (TIST_OLLAMA_ROOT, WP0's default) has no model loaded. An
-#      Ollama that does not answer counts as a failure, since a loaded model
-#      cannot be ruled out.
+#   3. Ollama (TIST_OLLAMA_ROOT, default http://127.0.0.1:11434) has no
+#      model loaded. WSL runs with mirrored networking, so the Windows Ollama
+#      answers on 127.0.0.1. Its LAN address (192.168.1.175) does not reach it
+#      from WSL. An Ollama that does not answer counts as a failure, since a
+#      loaded model cannot be ruled out.
 #   4. Free VRAM (WSL nvidia-smi) exceeds CAP_GIB by 1 GiB, for the CUDA
 #      context outside the allocator cap. The step itself caps PyTorch's
 #      allocator at CAP_GIB (TIST_GPU_CAP_GIB, tistr2_common.cap_cuda_memory).
@@ -21,7 +23,7 @@ set -u
 cap=$1; shift
 start_max=${TIST_WIN_GPU_MAX_MIB:-67000}
 stop_max=${TIST_WIN_GPU_STOP_MIB:-80000}
-ollama=${TIST_OLLAMA_ROOT:-http://192.168.1.175:11434}
+ollama=${TIST_OLLAMA_ROOT:-http://127.0.0.1:11434}
 smi=/mnt/c/Windows/System32/nvidia-smi.exe
 win_used() { "$smi" --query-gpu=memory.used --format=csv,noheader,nounits 2>/dev/null | head -1 | tr -d ' \r'; }
 

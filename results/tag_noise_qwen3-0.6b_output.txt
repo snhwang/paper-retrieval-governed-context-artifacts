@@ -1,0 +1,81 @@
+=== Tag-noise sweep (WP6), BEAR 0.4.2, gate-only noise ===
+k=5, priority weight 0.3 (ungated 0), theta dense 0.15, BM25 0.0, sweep priority 0
+Benchmarks ['toolbench', 'metatool_tags'], backends ['qwen3-0.6b'], rates [0.1, 0.2, 0.3, 0.4, 0.5], seeds [0, 1, 2, 3, 4], workers 8
+toolbench: 3225 items, 1100 queries, vocabulary 47
+metatool_tags: 199 items, 21111 queries, vocabulary 19
+306 tasks
+  25/306 tasks, 25s
+  50/306 tasks, 47s
+  75/306 tasks, 68s
+  100/306 tasks, 97s
+  125/306 tasks, 117s
+  150/306 tasks, 137s
+  175/306 tasks, 161s
+  200/306 tasks, 191s
+  225/306 tasks, 221s
+  250/306 tasks, 273s
+  275/306 tasks, 309s
+  300/306 tasks, 336s
+  306/306 tasks, 341s
+
+=== ToolBench: Recall@5 against tag noise (mean over 5 seeds, 95% bootstrap CI over queries) ===
+
+Qwen3-0.6B: ungated 0.693  gate-only clean 0.776  published config 0.771
+  condition          0.1     0.2     0.3     0.4     0.5   crossover  sig<ungated
+  query_drop       0.701   0.626   0.539   0.462   0.388        0.11         0.2
+  query_swap       0.705   0.617   0.550   0.484   0.395        0.11         0.2
+  query_add        0.776   0.775   0.774   0.774   0.773        none        none
+  corpus_drop      0.754   0.739   0.731   0.722   0.718        none        none
+  corpus_swap      0.710   0.632   0.569   0.497   0.424        0.12         0.2
+  corpus_add       0.709   0.655   0.576   0.492   0.422        0.13         0.2
+  failure split at rate 0.3 (needed items gate-excluded / top-5 out-of-scope share):
+    query_drop     over-restriction 0.307   leakage@5 0.000   admitted out-of-scope 0.0   empty output 0.287
+    query_swap     over-restriction 0.296   leakage@5 0.278   admitted out-of-scope 21.9   empty output 0.000
+    query_add      over-restriction 0.000   leakage@5 0.009   admitted out-of-scope 21.0   empty output 0.000
+    corpus_drop    over-restriction 0.000   leakage@5 0.189   admitted out-of-scope 917.4   empty output 0.000
+    corpus_swap    over-restriction 0.302   leakage@5 0.041   admitted out-of-scope 21.9   empty output 0.000
+    corpus_add     over-restriction 0.300   leakage@5 0.000   admitted out-of-scope 0.0   empty output 0.000
+
+=== MetaTool+Tags: Recall@5 against tag noise (mean over 5 seeds, 95% bootstrap CI over queries) ===
+
+Qwen3-0.6B: ungated 0.870  gate-only clean 0.976  published config 0.976
+  condition          0.1     0.2     0.3     0.4     0.5   crossover  sig<ungated
+  query_drop       0.811   0.671   0.539   0.424   0.326        0.06         0.1
+  query_swap       0.812   0.670   0.541   0.426   0.323        0.06         0.1
+  query_add        0.975   0.973   0.972   0.971   0.969        none        none
+  corpus_drop      0.961   0.951   0.938   0.927   0.916        none        none
+  corpus_swap      0.819   0.653   0.535   0.470   0.311        0.07         0.1
+  corpus_add       0.822   0.694   0.556   0.451   0.308        0.07         0.1
+  failure split at rate 0.3 (needed items gate-excluded / top-5 out-of-scope share):
+    query_drop     over-restriction 0.449   leakage@5 0.000   admitted out-of-scope 0.0   empty output 0.185
+    query_swap     over-restriction 0.447   leakage@5 0.263   admitted out-of-scope 2.3   empty output 0.015
+    query_add      over-restriction 0.000   leakage@5 0.073   admitted out-of-scope 2.8   empty output 0.000
+    corpus_drop    over-restriction 0.000   leakage@5 0.397   admitted out-of-scope 32.6   empty output 0.000
+    corpus_swap    over-restriction 0.454   leakage@5 0.177   admitted out-of-scope 2.0   empty output 0.001
+    corpus_add     over-restriction 0.435   leakage@5 0.000   admitted out-of-scope 0.0   empty output 0.027
+  embedding store toolbench__qwen3-0.6b: Qwen/Qwen3-Embedding-0.6B, run in float16, filled 2026-10-31T17:13:58Z
+  embedding store metatool_tags__qwen3-0.6b: Qwen/Qwen3-Embedding-0.6B, run in float16, filled 2026-10-31T17:12:58Z
+
+Wrote results/tag_noise_qwen3-0.6b.json
+Elapsed 357s
+
+=== Reproducibility ===
+Timestamp (UTC): 2026-10-31T17:24:51Z
+Command line:    evals/eval_tag_noise.py --phase run --backends qwen3-0.6b --workers 8 --output results/tag_noise_qwen3-0.6b.json --log-file results/tag_noise_qwen3-0.6b_output.txt
+Python:          3.12.13 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
+numpy:           2.2.6
+scipy:           1.17.1
+bear:            0.4.2
+git commit:      817cf343b10e6b1786a0cdea33bf4d9dd7ef211f
+git status:      unknown (git status failed or timed out)
+git branch:      tist-r2
+
+  eval: tag_noise
+  backends: ['qwen3-0.6b']
+  benchmarks: ['toolbench', 'metatool_tags']
+  bear_version: 0.4.2
+  bear_path: /home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/bear/__init__.py
+  bear_source_sha: 0d0718a39a0b0788ef5cca4689352462b830494c
+  bear_direct_url: file:///home/snhwang/tist-evals/bear-v0.4.2
+  bear_export_sha: 0d0718a39a0b0788ef5cca4689352462b830494c
+===

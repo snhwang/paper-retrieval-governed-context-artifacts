@@ -1,0 +1,177 @@
+### run_qwen_gpu.sh all, BEAR_SOURCE_SHA 0d0718a39a0b0788ef5cca4689352462b830494c, start 2026-10-31T17:06:46Z, card 66138 MiB, 97887 MiB
+### tist.slice memory.current 26798 MiB 2026-10-31T17:06:46Z
+### tist.slice memory.current 26797 MiB 2026-10-31T17:07:46Z
+### relaunch 2026-10-31T17:08:41Z: slice_wait now ignores page cache
+### run_qwen_gpu.sh all, BEAR_SOURCE_SHA 0d0718a39a0b0788ef5cca4689352462b830494c, start 2026-10-31T17:08:42Z, card 66167 MiB, 97887 MiB
+### tist.slice memory.current 26798 MiB, without page cache 517 MiB 2026-10-31T17:08:42Z
+=== qwen06_tagnoise: try 1, cap 6 GiB, batch 8 (fixed 0) 2026-10-31T17:08:42Z
+### gpu guard: Ollama at http://192.168.1.175:11434 did not answer, not started
+### relaunch 2026-10-31T17:09:55Z: Ollama gate uses 127.0.0.1 (mirrored WSL networking)
+### run_qwen_gpu.sh all, BEAR_SOURCE_SHA 0d0718a39a0b0788ef5cca4689352462b830494c, start 2026-10-31T17:09:55Z, card 66132 MiB, 97887 MiB
+### tist.slice memory.current 26798 MiB, without page cache 518 MiB 2026-10-31T17:09:55Z
+=== qwen06_tagnoise: try 1, cap 6 GiB, batch 8 (fixed 0) 2026-10-31T17:09:55Z
+### gpu guard: card 66132 MiB (start 67000, stop 80000), free 30469 MiB, cap 6 GiB, 2026-10-31T17:09:55Z
+toolbench: recorded 2198 query and 6450 document texts in 10s
+  qwen3-0.6b: {'backend': 'qwen3-0.6b', 'family': 'toolbench', 'new_queries': 0, 'new_docs': 0, 'cached_queries': 2198, 'cached_docs': 6450}
+metatool_tags: recorded 42095 query and 398 document texts in 10s
+    CUDA allocator capped at 6.0 GiB (93.1 GiB free of 95.6)
+`torch_dtype` is deprecated! Use `dtype` instead!
+    [metatool_tags__qwen3-0.6b] probe, longest batch first: {'batch': 1, 'longest_chars': 8255, 'side': 'docs', 'cuda_max_reserved_gib': 1.39, 'cuda_max_allocated_gib': 1.35}; model cuda:0 torch.float16
+    [metatool_tags__qwen3-0.6b] queries 30616/42095
+  qwen3-0.6b: {'backend': 'qwen3-0.6b', 'family': 'toolbench', 'new_queries': 42095, 'new_docs': 398, 'cached_queries': 0, 'cached_docs': 0, 'seconds': 162.7, 'cuda_max_reserved_gib': 1.95, 'fill': {'utc_start': '2026-10-31T17:10:16Z', 'status': 'complete', 'max_batch': 8, 'fixed_batch': False, 'char_budget': 16000, 'new_queries': 42095, 'new_docs': 398, 'bear_source_sha': '0d0718a39a0b0788ef5cca4689352462b830494c', 'device': 'cuda:0', 'dtype': 'torch.float16', 'probe': {'batch': 1, 'longest_chars': 8255, 'side': 'docs', 'cuda_max_reserved_gib': 1.39, 'cuda_max_allocated_gib': 1.35}, 'seconds': 162.7, 'utc_end': '2026-10-31T17:12:58Z', 'cuda_max_reserved_gib': 1.95}}
+### gpu guard: card peak 68843 MiB (stop limit 80000), exit 0
+=== qwen06_tagnoise exit 0 2026-10-31T17:13:01Z, card 66208 MiB, 97887 MiB
+### tist.slice memory.current 28168 MiB, without page cache 525 MiB 2026-10-31T17:13:01Z
+=== qwen06_leakage: try 1, cap 6 GiB, batch 8 (fixed 0) 2026-10-31T17:13:01Z
+### gpu guard: card 66208 MiB (start 67000, stop 80000), free 30393 MiB, cap 6 GiB, 2026-10-31T17:13:01Z
+Recorded 6598 query and 6450 document texts.
+    CUDA allocator capped at 6.0 GiB (93.1 GiB free of 95.6)
+`torch_dtype` is deprecated! Use `dtype` instead!
+    [toolbench__qwen3-0.6b] probe, longest batch first: {'batch': 8, 'longest_chars': 1097, 'side': 'queries', 'cuda_max_reserved_gib': 1.42, 'cuda_max_allocated_gib': 1.38}; model cuda:0 torch.float16
+  qwen3-0.6b: {'backend': 'qwen3-0.6b', 'family': 'toolbench', 'new_queries': 4400, 'new_docs': 0, 'cached_queries': 2198, 'cached_docs': 6450, 'seconds': 20.7, 'cuda_max_reserved_gib': 1.49, 'fill': {'utc_start': '2026-10-31T17:13:39Z', 'status': 'complete', 'max_batch': 8, 'fixed_batch': False, 'char_budget': 16000, 'new_queries': 4400, 'new_docs': 0, 'bear_source_sha': '0d0718a39a0b0788ef5cca4689352462b830494c', 'device': 'cuda:0', 'dtype': 'torch.float16', 'probe': {'batch': 8, 'longest_chars': 1097, 'side': 'queries', 'cuda_max_reserved_gib': 1.42, 'cuda_max_allocated_gib': 1.38}, 'seconds': 20.7, 'utc_end': '2026-10-31T17:13:58Z', 'cuda_max_reserved_gib': 1.49}}
+### gpu guard: card peak 68337 MiB (stop limit 80000), exit 0
+=== qwen06_leakage exit 0 2026-10-31T17:14:02Z, card 66248 MiB, 97887 MiB
+### tist.slice memory.current 28189 MiB, without page cache 527 MiB 2026-10-31T17:14:02Z
+=== qwen4b_leakage: try 1, cap 12 GiB, batch 2 (fixed 1) 2026-10-31T17:14:02Z
+### gpu guard: card 66248 MiB (start 67000, stop 80000), free 30353 MiB, cap 12 GiB, 2026-10-31T17:14:02Z
+Recorded 6598 query and 6450 document texts.
+    CUDA allocator capped at 12.0 GiB (93.1 GiB free of 95.6)
+`torch_dtype` is deprecated! Use `dtype` instead!
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:00<00:00,  1.18it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:01<00:00,  1.38it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:01<00:00,  1.34it/s]
+    [toolbench__qwen3-4b] probe, longest batch first: {'batch': 2, 'longest_chars': 8632, 'side': 'docs', 'cuda_max_reserved_gib': 8.73, 'cuda_max_allocated_gib': 8.5}; model cuda:0 torch.float16
+    [toolbench__qwen3-4b] docs 5930/6450
+    [toolbench__qwen3-4b] queries 6016/6598
+  qwen3-4b: {'backend': 'qwen3-4b', 'family': 'toolbench', 'new_queries': 6598, 'new_docs': 6450, 'cached_queries': 0, 'cached_docs': 0, 'seconds': 250.6, 'cuda_max_reserved_gib': 9.61, 'fill': {'utc_start': '2026-10-31T17:14:40Z', 'status': 'complete', 'max_batch': 2, 'fixed_batch': True, 'char_budget': None, 'new_queries': 6598, 'new_docs': 6450, 'bear_source_sha': '0d0718a39a0b0788ef5cca4689352462b830494c', 'device': 'cuda:0', 'dtype': 'torch.float16', 'probe': {'batch': 2, 'longest_chars': 8632, 'side': 'docs', 'cuda_max_reserved_gib': 8.73, 'cuda_max_allocated_gib': 8.5}, 'seconds': 250.6, 'utc_end': '2026-10-31T17:18:49Z', 'cuda_max_reserved_gib': 9.61}}
+### gpu guard: card peak 76828 MiB (stop limit 80000), exit 0
+=== qwen4b_leakage exit 0 2026-10-31T17:18:53Z, card 66171 MiB, 97887 MiB
+### tist.slice memory.current 28325 MiB, without page cache 530 MiB 2026-10-31T17:18:54Z
+=== tagnoise_qwen06 start 2026-10-31T17:18:54Z
+=== Tag-noise sweep (WP6), BEAR 0.4.2, gate-only noise ===
+k=5, priority weight 0.3 (ungated 0), theta dense 0.15, BM25 0.0, sweep priority 0
+Benchmarks ['toolbench', 'metatool_tags'], backends ['qwen3-0.6b'], rates [0.1, 0.2, 0.3, 0.4, 0.5], seeds [0, 1, 2, 3, 4], workers 8
+toolbench: 3225 items, 1100 queries, vocabulary 47
+metatool_tags: 199 items, 21111 queries, vocabulary 19
+306 tasks
+  25/306 tasks, 25s
+  50/306 tasks, 47s
+  75/306 tasks, 68s
+  100/306 tasks, 97s
+  125/306 tasks, 117s
+  150/306 tasks, 137s
+  175/306 tasks, 161s
+  200/306 tasks, 191s
+  225/306 tasks, 221s
+  250/306 tasks, 273s
+  275/306 tasks, 309s
+  300/306 tasks, 336s
+  306/306 tasks, 341s
+
+=== ToolBench: Recall@5 against tag noise (mean over 5 seeds, 95% bootstrap CI over queries) ===
+
+Qwen3-0.6B: ungated 0.693  gate-only clean 0.776  published config 0.771
+  condition          0.1     0.2     0.3     0.4     0.5   crossover  sig<ungated
+  query_drop       0.701   0.626   0.539   0.462   0.388        0.11         0.2
+  query_swap       0.705   0.617   0.550   0.484   0.395        0.11         0.2
+  query_add        0.776   0.775   0.774   0.774   0.773        none        none
+  corpus_drop      0.754   0.739   0.731   0.722   0.718        none        none
+  corpus_swap      0.710   0.632   0.569   0.497   0.424        0.12         0.2
+  corpus_add       0.709   0.655   0.576   0.492   0.422        0.13         0.2
+  failure split at rate 0.3 (needed items gate-excluded / top-5 out-of-scope share):
+    query_drop     over-restriction 0.307   leakage@5 0.000   admitted out-of-scope 0.0   empty output 0.287
+    query_swap     over-restriction 0.296   leakage@5 0.278   admitted out-of-scope 21.9   empty output 0.000
+    query_add      over-restriction 0.000   leakage@5 0.009   admitted out-of-scope 21.0   empty output 0.000
+    corpus_drop    over-restriction 0.000   leakage@5 0.189   admitted out-of-scope 917.4   empty output 0.000
+    corpus_swap    over-restriction 0.302   leakage@5 0.041   admitted out-of-scope 21.9   empty output 0.000
+    corpus_add     over-restriction 0.300   leakage@5 0.000   admitted out-of-scope 0.0   empty output 0.000
+
+=== MetaTool+Tags: Recall@5 against tag noise (mean over 5 seeds, 95% bootstrap CI over queries) ===
+
+Qwen3-0.6B: ungated 0.870  gate-only clean 0.976  published config 0.976
+  condition          0.1     0.2     0.3     0.4     0.5   crossover  sig<ungated
+  query_drop       0.811   0.671   0.539   0.424   0.326        0.06         0.1
+  query_swap       0.812   0.670   0.541   0.426   0.323        0.06         0.1
+  query_add        0.975   0.973   0.972   0.971   0.969        none        none
+  corpus_drop      0.961   0.951   0.938   0.927   0.916        none        none
+  corpus_swap      0.819   0.653   0.535   0.470   0.311        0.07         0.1
+  corpus_add       0.822   0.694   0.556   0.451   0.308        0.07         0.1
+  failure split at rate 0.3 (needed items gate-excluded / top-5 out-of-scope share):
+    query_drop     over-restriction 0.449   leakage@5 0.000   admitted out-of-scope 0.0   empty output 0.185
+    query_swap     over-restriction 0.447   leakage@5 0.263   admitted out-of-scope 2.3   empty output 0.015
+    query_add      over-restriction 0.000   leakage@5 0.073   admitted out-of-scope 2.8   empty output 0.000
+    corpus_drop    over-restriction 0.000   leakage@5 0.397   admitted out-of-scope 32.6   empty output 0.000
+    corpus_swap    over-restriction 0.454   leakage@5 0.177   admitted out-of-scope 2.0   empty output 0.001
+    corpus_add     over-restriction 0.435   leakage@5 0.000   admitted out-of-scope 0.0   empty output 0.027
+  embedding store toolbench__qwen3-0.6b: Qwen/Qwen3-Embedding-0.6B, run in float16, filled 2026-10-31T17:13:58Z
+  embedding store metatool_tags__qwen3-0.6b: Qwen/Qwen3-Embedding-0.6B, run in float16, filled 2026-10-31T17:12:58Z
+
+Wrote results/tag_noise_qwen3-0.6b.json
+Elapsed 357s
+
+=== Reproducibility ===
+Timestamp (UTC): 2026-10-31T17:24:51Z
+Command line:    evals/eval_tag_noise.py --phase run --backends qwen3-0.6b --workers 8 --output results/tag_noise_qwen3-0.6b.json --log-file results/tag_noise_qwen3-0.6b_output.txt
+Python:          3.12.13 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
+numpy:           2.2.6
+scipy:           1.17.1
+bear:            0.4.2
+git commit:      817cf343b10e6b1786a0cdea33bf4d9dd7ef211f
+git status:      unknown (git status failed or timed out)
+git branch:      tist-r2
+
+  eval: tag_noise
+  backends: ['qwen3-0.6b']
+  benchmarks: ['toolbench', 'metatool_tags']
+  bear_version: 0.4.2
+  bear_path: /home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/bear/__init__.py
+  bear_source_sha: 0d0718a39a0b0788ef5cca4689352462b830494c
+  bear_direct_url: file:///home/snhwang/tist-evals/bear-v0.4.2
+  bear_export_sha: 0d0718a39a0b0788ef5cca4689352462b830494c
+===
+=== tagnoise_qwen06 exit 0 2026-10-31T17:24:56Z
+### tist.slice memory.current 28326 MiB, without page cache 531 MiB 2026-10-31T17:24:56Z
+=== leakage_qwen start 2026-10-31T17:24:56Z
+=== Leakage under the threat model (WP6), ToolBench, BEAR 0.4.2 ===
+3225 APIs, 1100 queries, k=5. Attack seed 20261029, description prefix 300 characters.
+
+Qwen3-0.6B
+  natural           ungated: cross 0.292 (1607/5500) R@5 0.693 | gate_only: cross 0.000 (0/5500) R@5 0.776 | published: cross 0.000 (0/5500) R@5 0.771 |
+  inject_name       ungated: cross 0.351 (1930/5500) hit 146 R@5 0.633 | gate_only: cross 0.000 (0/5500) hit 0 R@5 0.743 | published: cross 0.000 (0/5500) hit 0 R@5 0.748 |
+  inject_name_desc  ungated: cross 0.404 (2222/5500) hit 291 R@5 0.585 | gate_only: cross 0.000 (0/5500) hit 0 R@5 0.721 | published: cross 0.000 (0/5500) hit 0 R@5 0.728 |
+
+Qwen3-4B
+  natural           ungated: cross 0.280 (1542/5500) R@5 0.683 | gate_only: cross 0.000 (0/5500) R@5 0.754 | published: cross 0.000 (0/5500) R@5 0.756 |
+  inject_name       ungated: cross 0.407 (2240/5500) hit 156 R@5 0.548 | gate_only: cross 0.000 (0/5500) hit 0 R@5 0.689 | published: cross 0.000 (0/5500) hit 0 R@5 0.683 |
+  inject_name_desc  ungated: cross 0.423 (2328/5500) hit 216 R@5 0.508 | gate_only: cross 0.000 (0/5500) hit 0 R@5 0.665 | published: cross 0.000 (0/5500) hit 0 R@5 0.669 |
+
+--- Summary: share of top-5 outside the query's categories; attack success ---
+
+Backend                     ungated cross  gate cross  pub cross   name: ungated / gate   name+desc: ungated / gate
+Qwen3-0.6B         0.292 [0.274,0.310]           0          0        0.133 / 0                0.265 / 0     
+Qwen3-4B           0.280 [0.262,0.299]           0          0        0.142 / 0                0.196 / 0     
+  embedding store toolbench__qwen3-0.6b: Qwen/Qwen3-Embedding-0.6B, run in float16, filled 2026-10-31T17:13:58Z
+  embedding store toolbench__qwen3-4b: Qwen/Qwen3-Embedding-4B, run in float16, filled 2026-10-31T17:18:49Z
+
+Wrote results/leakage_threat_qwen.json
+Elapsed 105s
+
+=== Reproducibility ===
+Timestamp (UTC): 2026-10-31T17:26:42Z
+Command line:    evals/eval_leakage_threat.py --phase run --backends qwen3-0.6b qwen3-4b --output results/leakage_threat_qwen.json --log-file results/leakage_threat_qwen_output.txt
+Python:          3.12.13 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
+numpy:           2.2.6
+scipy:           1.17.1
+bear:            0.4.2
+git commit:      817cf343b10e6b1786a0cdea33bf4d9dd7ef211f
+git status:      unknown (git status failed or timed out)
+git branch:      tist-r2
+
+  eval: leakage_threat
+  backends: ['qwen3-0.6b', 'qwen3-4b']
+  bear_version: 0.4.2
+  bear_path: /home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/bear/__init__.py
+  bear_source_sha: 0d0718a39a0b0788ef5cca4689352462b830494c
+  bear_direct_url: file:///home/snhwang/tist-evals/bear-v0.4.2
+  bear_export_sha: 0d0718a39a0b0788ef5cca4689352462b830494c
+===
+=== leakage_qwen exit 0 2026-10-31T17:26:47Z
+### run_qwen_gpu.sh exit 0 2026-10-31T17:26:47Z, card 66248 MiB, 97887 MiB
