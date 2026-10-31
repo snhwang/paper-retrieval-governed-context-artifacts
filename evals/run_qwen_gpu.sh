@@ -36,7 +36,8 @@
 # queries and 6,450 docs (Qwen3-4B, new store).
 #
 # CPU run phases: CUDA hidden, under tist-capped --mem 12G, at most 8 workers,
-# each after tist.slice memory.current is at or below 25 GB. Any failed step
+# each after tist.slice holds at most 25 GB other than page cache (the
+# kernel reclaims cache inside the slice's cap first). Any failed step
 # stops the job with a non-zero exit.
 set -uo pipefail
 cd "$(dirname "$0")/.."
@@ -54,12 +55,15 @@ SMI=/mnt/c/Windows/System32/nvidia-smi.exe
 
 card() { "$SMI" --query-gpu=memory.used,memory.total --format=csv,noheader 2>/dev/null | head -1 | tr -d '\r'; }
 
-slice_wait() {
-  local cur
+slice_wait() {  # waits on memory the kernel cannot reclaim, not on page cache
+  local cur file shmem used
   while :; do
     cur=$(cat "$CG/memory.current")
-    echo "### tist.slice memory.current $((cur / 1024 / 1024)) MiB $(date -u +%FT%TZ)"
-    (( cur <= SLICE_MAX )) && return 0
+    file=$(awk '$1 == "file" {print $2}' "$CG/memory.stat")
+    shmem=$(awk '$1 == "shmem" {print $2}' "$CG/memory.stat")
+    used=$(( cur - file + shmem ))
+    echo "### tist.slice memory.current $((cur / 1024 / 1024)) MiB, without page cache $((used / 1024 / 1024)) MiB $(date -u +%FT%TZ)"
+    (( used <= SLICE_MAX )) && return 0
     sleep 60
   done
 }
