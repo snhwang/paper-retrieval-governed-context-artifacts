@@ -51,6 +51,17 @@ OUTPUTS = {
 }
 
 
+# 0.4.2 run: steps that exited 3 because some rows were skipped (OOM at encode
+# batch 8 inside the 11.2 GiB cap). Their completed rows are kept; the missing
+# rows come from the *_fix steps at encode batch 2 (2026-10-31).
+PARTIAL = {
+    "tb_qwen4b": "rows done at encode batch 8; MetaTool Qwen3-4B (no gov) and both ToolBench rows were "
+                 "skipped (OOM) and rerun at batch 2 in tb_qwen4b_mt_fix and tb_qwen4b_tb_fix",
+    "tb_qwen4b_v0110": "rows done at encode batch 8; MetaTool Qwen3-4B (no gov) and both ToolBench rows were "
+                       "skipped (OOM) and rerun at batch 2 in tb_qwen4b_v0110_mt_fix and tb_qwen4b_v0110_tb_fix",
+}
+
+
 # Steps finished before the MetaTool+Tags tag-order fix in eval_toolbench.py
 # (load_metatool_queries_tagged iterated a set). Their MetaTool+Tags governed
 # rows depend on the hash seed for the 497 two-tool queries, except BM25,
@@ -104,9 +115,12 @@ def main() -> None:
             manifest["steps"][step] = {"version": ver, "state": state}
             if step in PRE_TAG_FIX and ver_main == "v040":
                 manifest["steps"][step]["note"] = PRE_TAG_FIX[step]
+            if step in PARTIAL and ver_main != "v040" and state == "failed":
+                state = "partial"
+                manifest["steps"][step].update(state="partial", note=PARTIAL[step])
             # Result files only from finished steps. A killed or failed step
             # keeps its log, which says how far it got.
-            pats = patterns_for(step) if state == "done" else []
+            pats = patterns_for(step) if state in ("done", "partial") else []
             for f in sorted(step_dir.rglob("*")):
                 if not f.is_file():
                     continue

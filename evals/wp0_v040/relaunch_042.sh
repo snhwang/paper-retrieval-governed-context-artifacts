@@ -45,6 +45,13 @@ if [ $# -gt 0 ]; then
                  start_lane gpuq4b042 artifacts-gpu WP0_ALLOW_LOCAL_MODELS=1 WP0_STEP_MEM=12G \
                      WP0_ENCODE_BATCH=8 WP0_GPU_CAP_FIXED=11.2 WP0_WIN_GPU_MAX_MIB=67000 \
                      WP0_WIN_GPU_STOP_MIB=80000 WP0_GPU_MAXWAIT=${WP0_GPU_MAXWAIT:-7200} ;;
+      gpuq4b042fix)  # the rows gpuq4b042 lost to OOM, at a fixed encode batch of 2 (same cap and gates)
+                 if systemctl --user is-active -q wp0-e2erun; then echo "e2e rerun active, not started"; exit 75; fi
+                 if systemctl --user is-active -q wp0-gpuq4b042; then echo "gpuq4b042 still active, not started"; exit 75; fi
+                 sync_clone artifacts-gpu
+                 start_lane gpuq4b042fix artifacts-gpu WP0_ALLOW_LOCAL_MODELS=1 WP0_STEP_MEM=12G \
+                     WP0_ENCODE_BATCH=2 WP0_EMPTY_CACHE=1 WP0_GPU_CAP_FIXED=11.2 WP0_WIN_GPU_MAX_MIB=67000 \
+                     WP0_WIN_GPU_STOP_MIB=80000 WP0_GPU_MAXWAIT=${WP0_GPU_MAXWAIT:-7200} ;;
       e2erun)  # Table 7 executor rerun on Ollama (mistral-nemo-32k): 67,000 MiB before
                # loading, 81,000 before each later row. Never beside the Qwen3-4B lane.
                if systemctl --user is-active -q wp0-gpuq4b042; then echo "Qwen3-4B lane active, not started"; exit 75; fi

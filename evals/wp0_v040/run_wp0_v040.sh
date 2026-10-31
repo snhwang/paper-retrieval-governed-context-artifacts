@@ -183,6 +183,7 @@ tb() {
   local extra=()
   [[ $scope == toolbench ]] && extra=(--toolbench-only)
   [[ $scope == metatool ]] && extra=(--metatool-only)
+  [[ $scope == metatool-base ]] && extra=(--metatool-only --metatool-base-only)
   local wait=0; [[ $kind == gpu ]] && wait=${WP0_GPU_MAXWAIT:-0}
   step "$name" "$kind" "$ver" "$need" "$wait" -- "$PY" "$W/eval_toolbench_v040.py" --top-k 5 \
       --metatool-query-tags-file "$QT5" "${extra[@]}" \
@@ -698,6 +699,40 @@ lane_fallback0110() {  # the published 0.1.10 runs as they would have come out h
   step fb_gov_ablation_itr cpu $F 0 0 -- "$PY" evals/eval_governance_ablation.py --backends hash \
       --output results/wp0/governance_ablation_fb_itr.json
 }
+lane_gpuq4b042fix() {  # rerun only what gpuq4b042 lost (coordinator, 2026-10-31)
+  # gpuq4b042 ran at encode batch 8 and hit torch.OutOfMemoryError inside its own
+  # 11.2 GiB allocator cap on the long ToolBench documents (and on MetaTool no
+  # gov), so these rows were skipped: MetaTool Qwen3-4B (no gov), ToolBench
+  # BEAR+Qwen3-4B (gov) and Qwen3-4B (no gov), on 0.4.2 and on the 0.1.10
+  # control, plus the e2e lists and the WP4 ToolBench lists. Launched with
+  # WP0_ENCODE_BATCH=2 (fixed; probe_q4b_batch.py: the two longest ToolBench
+  # passages, 3,068 and 2,709 tokens, peak 9.19 GiB reserved under the 11.2 cap)
+  # and WP0_EMPTY_CACHE=1, the same gates (67,000 start, 80,000 stop) and the
+  # same cap. No truncation, max_seq_length as loaded. The 0.4.2 step runs
+  # first, so the 0.1.10 control reads the same vectors from the cache (the key
+  # holds the batch size). Any failed or blocked step stops the lane.
+  [[ ${WP0_ALLOW_LOCAL_MODELS:-0} == 1 ]] || { log "gpuq4b042fix needs WP0_ALLOW_LOCAL_MODELS=1"; return 1; }
+  [[ ${WP0_ENCODE_BATCH:-} == 2 ]] || { log "gpuq4b042fix expects WP0_ENCODE_BATCH=2"; return 1; }
+  rm -f "$LOGS/.card_stop"
+  local s name
+  for s in "tb tb_qwen4b_mt_fix gpu v042 11 metatool-base|Qwen3-4B (no gov)" \
+           "tb tb_qwen4b_tb_fix gpu v042 11 toolbench|BEAR+Qwen3-4B (gov)|Qwen3-4B (no gov)" \
+           "tb tb_qwen4b_v0110_mt_fix gpu v0110 11 metatool-base|Qwen3-4B (no gov)" \
+           "tb tb_qwen4b_v0110_tb_fix gpu v0110 11 toolbench|BEAR+Qwen3-4B (gov)|Qwen3-4B (no gov)" \
+           "lists e2e_q4b_v042 gpu v042 11 e2e qwen3-4b" "lists e2e_q4b_v0110 gpu v0110 11 e2e qwen3-4b" \
+           "lists wp4_tb_q4b gpu v042 11 toolbench qwen3-4b"; do
+    local cmd=${s%%|*} rest="" exps=()
+    [[ $s == *"|"* ]] && rest=${s#*|}
+    if [[ -n $rest ]]; then IFS='|' read -r -a exps <<<"$rest"; fi
+    name=$(awk '{print $2}' <<<"$cmd")
+    # shellcheck disable=SC2086
+    $cmd "${exps[@]}"
+    if [[ -f $LOGS/.card_stop || -f $LOGS/$name.failed || -f $LOGS/$name.blocked ]]; then
+      log "gpuq4b042fix stopped after $name ($(cat "$LOGS/$name.failed" "$LOGS/$name.blocked" 2>/dev/null | head -1))"
+      return 1
+    fi
+  done
+}
 lane_manddense042() {  # after dense042 (one dense lane at a time): redo the cap kills, then the
   # dense mandatory diagnostic. Launched like dense042 (20G, batch 4, 12 threads).
   [[ ${WP0_ALLOW_LOCAL_MODELS:-0} == 1 ]] || { log "manddense042 needs WP0_ALLOW_LOCAL_MODELS=1"; return 1; }
@@ -775,6 +810,7 @@ case $lane in
   nemo042) lane_nemo042 ;;
   dense042) lane_dense042 ;;
   gpuq4b042) lane_gpuq4b042 ;;
+  gpuq4b042fix) lane_gpuq4b042fix ;;
   mand042) lane_mand042 ;;
   e2eattr042) lane_e2eattr042 ;;
   pair042) lane_pair042 ;;

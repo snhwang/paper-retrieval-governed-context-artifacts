@@ -63,6 +63,8 @@ def provenance(extra: dict | None = None) -> dict:
         "argv": sys.argv,
         **bear_identity(),
         "hooks": {k: v for k, v in os.environ.items() if k.startswith("WP0_")},
+        # every SentenceTransformer.encode call of this process used at most this batch
+        "encode_batch_cap": int(os.environ["WP0_ENCODE_BATCH"]) if os.environ.get("WP0_ENCODE_BATCH") else None,
         "versions": _versions(),
     }
     if EMBEDDER_IDENTITIES:

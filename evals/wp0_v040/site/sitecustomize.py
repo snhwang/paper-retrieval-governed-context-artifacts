@@ -225,9 +225,15 @@ def _install_batch_cap() -> None:
     cls = st.SentenceTransformer
     inner = cls.encode
 
+    empty = os.environ.get("WP0_EMPTY_CACHE", "").strip() not in ("", "0")
+
     def encode(self, sentences, *args, **kwargs):
         b = kwargs.get("batch_size", 32)
         kwargs["batch_size"] = max(1, min(int(b), cap))
+        if empty:  # hand freed blocks back before each call (GPU under a cap); vectors unchanged
+            import torch
+            if torch.cuda.is_available():
+                torch.cuda.empty_cache()
         return inner(self, sentences, *args, **kwargs)
 
     cls.encode = encode
