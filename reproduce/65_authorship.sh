@@ -19,11 +19,10 @@
 #             evals/authorship/eval_tagged.py. Then Table 7 (ToolBench inferred
 #             categories, BGE) under both taggers: authorship_regenerate.py evaluate.
 #             --backends picks a subset.
-#   gpu       local GPU. The same two conditions for Qwen3-4B (bf16, encode batch
-#             AUTH_Q4B_BATCH, default 2, allocator cap 11.2 GiB, gates 67,000 and 80,000
-#             MiB): tb_auth_q4b with the new tags, and tb_auth_q4b_sonnet with the Sonnet
-#             tags at the same batch, so the pair differs only in the tags (the reported
-#             tb_qwen4b rows ran at batch 8). --no-sonnet-arm skips the second step.
+#   gpu       local GPU. The same two conditions for Qwen3-4B with the new tags
+#             (tb_auth_q4b), bf16, at the kit's fixed encode batch (REPRO_Q4B_BATCH, 2,
+#             AUTH_Q4B_BATCH overrides it here), allocator cap 11.2 GiB, gates 67,000
+#             and 80,000 MiB. Its Sonnet pair is 20_'s tb_qwen4b, at the same batch.
 #   nemotron  8360. The same two conditions for Nemotron (tb_auth_nemotron).
 #   analyze   CPU. evals/authorship/analyze.py: tagger agreement (Jaccard, exact sets,
 #             Cohen's kappa per tag, category agreement, the gate-pass ceiling) and, per
@@ -43,7 +42,7 @@
 #             About 3 to 5 hours. 8G host memory.
 #   cpu       BM25 and hash a few minutes each, BGE about 30 min, BGE-M3 about 1.5 h,
 #             Qwen3-0.6B about 2.5 h, Table 7 about 20 min. About 5 hours in all.
-#   gpu       about 30 to 40 minutes of card time for both steps.
+#   gpu       about 15 to 20 minutes of card time.
 #   nemotron  about 30 to 45 minutes.
 #   analyze   about 15 minutes.
 # Outputs: $REPRO_OUT/authorship/ (tags/ with the five files, calls.jsonl, manifest.json
@@ -52,7 +51,7 @@
 #
 # Usage:
 #   bash reproduce/65_authorship.sh --part tag|cpu|gpu|nemotron|analyze|test [--dry-run] [--wait]
-#                                   [--backends "bm25 hash bge bge-m3 qwen3-0.6b"] [--no-sonnet-arm]
+#                                   [--backends "bm25 hash bge bge-m3 qwen3-0.6b"]
 # Without --dry-run the parts tag, cpu, gpu and nemotron start the user service
 # tist-repro-65 and return. analyze and test run in the terminal.
 set -uo pipefail
@@ -66,14 +65,13 @@ AUTH_CLONE=$CLONES/artifacts-authorship
 AUTH_WORKERS=${AUTH_WORKERS:-4}
 AUTH_SEED=${AUTH_SEED:-20261104}            # -1 sends no seed, if the server rejects the field
 AUTH_MAX_MISSING=${AUTH_MAX_MISSING:-0.01}
-export KIT_Q4B_BATCH=${AUTH_Q4B_BATCH:-2}
-PART="" CPU_BACKENDS="bm25 hash bge bge-m3 qwen3-0.6b" SONNET_ARM=1
+export KIT_Q4B_BATCH=${AUTH_Q4B_BATCH:-$REPRO_Q4B_BATCH}
+PART="" CPU_BACKENDS="bm25 hash bge bge-m3 qwen3-0.6b"
 set -- "${ARGS_REST[@]}"
 while [ $# -gt 0 ]; do
   case $1 in
     --part) PART=$2; shift ;;
     --backends) CPU_BACKENDS=$2; shift ;;
-    --no-sonnet-arm) SONNET_ARM=0 ;;
     *) die "unknown option $1 (see --help)" ;;
   esac
   shift
@@ -186,12 +184,9 @@ case $PART in
     REPRO_OK_NOTE="CPU backends done: $CPU_BACKENDS, and Table 7 under both taggers"
     ;;
   gpu)
+    record_note "Qwen3-4B encode batch $KIT_Q4B_BATCH (20_ ran its rows at $REPRO_Q4B_BATCH)"
+    [ "$KIT_Q4B_BATCH" = "$REPRO_Q4B_BATCH" ] || warn "AUTH_Q4B_BATCH=$KIT_Q4B_BATCH differs from 20_'s batch $REPRO_Q4B_BATCH, so the Qwen3-4B pair mixes batch sizes"
     tagged_step gpu tb_auth_q4b Qwen3-4B "$TAGS/plugin_tags.json" "$TAGS/query_tags_top5.json"
-    if [ "$SONNET_ARM" = 1 ]; then
-      hr
-      tagged_step gpu tb_auth_q4b_sonnet Qwen3-4B "$AUTH_CLONE/evals/data/external_benchmarks/metatool/plugin_tags.json" \
-        "$AUTH_CLONE/evals/data/external_benchmarks/metatool/query_tags_top5.json"
-    fi
     [ "$DRY_RUN" = 1 ] || say "card after the run: $(card_mib) MiB"
     REPRO_OK_NOTE="Qwen3-4B done at encode batch $KIT_Q4B_BATCH. Tell the model-server session the GPU is free"
     ;;

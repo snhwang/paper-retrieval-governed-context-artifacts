@@ -2,7 +2,7 @@
 """Authorship ablation, step 4: agreement between the taggers, and the retrieval results under each.
 
     python evals/authorship/analyze.py --qwen-tags DIR --runs-root ROOT --out DIR
-        [--toolbench-eval DIR/evaluate_toolbench_bge.json] [--sonnet-q4b-step tb_auth_q4b_sonnet]
+        [--toolbench-eval DIR/evaluate_toolbench_bge.json] [--sonnet-q4b-step tb_qwen4b]
 
 Model-free, CPU only, no network. Writes authorship.json and authorship.md to --out.
 
@@ -206,20 +206,20 @@ def retrieval(runs_root: Path, qwen_tags: Path, q4b_sonnet_step: str | None) -> 
     for label, (s_step, q_step) in BACKENDS.items():
         notes = []
         if label == "Qwen3-4B":
-            s_step = q4b_sonnet_step
-            if s_step is None:
-                s_step = "tb_auth_q4b_sonnet" if find_run(runs_root, "tb_auth_q4b_sonnet") else "tb_qwen4b"
-            if s_step == "tb_qwen4b":
-                notes.append("Sonnet arm is the reported tb_qwen4b run (encode batch 8). The second "
-                             "tagger's run used the batch of 65_authorship.sh. A batch difference moves "
-                             "values at rounding level only.")
+            s_step = q4b_sonnet_step or "tb_qwen4b"   # 20_'s run, at the kit's fixed batch
         sp, qp = find_run(runs_root, s_step), find_run(runs_root, q_step)
         if sp is None or qp is None:
             out[label] = {"missing": [s for s, p in ((s_step, sp), (q_step, qp)) if p is None]}
             continue
         S, Q = load_json(sp), load_json(qp)
         gov, ung = f"BEAR+{label} (gov)", f"{label} (no gov)"
-        res = {"sonnet_run": str(sp), "second_run": str(qp), "notes": notes}
+        bs = (S.get("_provenance") or {}).get("encode_batch_cap")
+        bq = (Q.get("_provenance") or {}).get("encode_batch_cap")
+        if bs != bq:
+            notes.append(f"encode batch differs: Sonnet run {bs}, second tagger's run {bq}. A batch difference "
+                         "moves values at rounding level.")
+        res = {"sonnet_run": str(sp), "second_run": str(qp), "encode_batch": {"sonnet": bs, "second": bq},
+               "notes": notes}
         for cond in CONDITIONS:
             try:
                 sg, su = S[cond][gov]["metrics"], S[cond][ung]["metrics"]

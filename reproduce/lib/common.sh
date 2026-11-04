@@ -17,6 +17,9 @@ REPRO_NEMOTRON_URL=${REPRO_NEMOTRON_URL:-http://127.0.0.1:8360}
 REPRO_OLLAMA_ROOT=${REPRO_OLLAMA_ROOT:-http://127.0.0.1:11434}
 REPRO_SGLANG_URL=${REPRO_SGLANG_URL:-http://127.0.0.1:8355}
 REPRO_SLICE_MAX_GB=${REPRO_SLICE_MAX_GB:-25}        # slice memory other than page cache, before a step
+# Every Qwen3-4B encode on the GPU (20_ and 65_) uses this fixed batch, under the
+# 11.2 GiB allocator cap. The October rehearsal ran +Tags and +QueryTags at 8.
+export REPRO_Q4B_BATCH=${REPRO_Q4B_BATCH:-2}
 
 # Fixed paths. The wrapped runners (run_wp0_v040.sh, run_e2e_rerun.sh,
 # run_wp256.sh, run_v042_*.sh, run_qwen_gpu.sh) read these and cannot be
@@ -283,13 +286,16 @@ maybe_launch() {
   : >> "$log"
   local start_line
   start_line=$(($(wc -l < "$log") + 1))
+  # A service does not inherit this shell. Hand it every override the scripts read.
+  local passthru=() v
+  while IFS= read -r v; do passthru+=("$v=${!v}"); done < <(compgen -e | grep -E '^(REPRO|AUTH|KIT|WP0)_' || true)
   (cd "$ART" && "$TC" --mem 2G --service "$unit" -- env \
       REPRO_OUT="$REPRO_OUT" REPRO_VENV="$REPRO_VENV" REPRO_EMB_CACHE="$REPRO_EMB_CACHE" \
       REPRO_NEMOTRON_URL="$REPRO_NEMOTRON_URL" REPRO_OLLAMA_ROOT="$REPRO_OLLAMA_ROOT" \
       REPRO_SGLANG_URL="$REPRO_SGLANG_URL" REPRO_SLICE_MAX_GB="$REPRO_SLICE_MAX_GB" \
       REPRO_GPU_START_MIB="$GPU_START_MIB" REPRO_GPU_STOP_MIB="$GPU_STOP_MIB" \
       REPRO_OLLAMA_ROW_MIB="$OLLAMA_ROW_MIB" REPRO_SKIP_KEEPALIVE_CHECK="${REPRO_SKIP_KEEPALIVE_CHECK:-0}" \
-      ${OLLAMA_MODELS:+OLLAMA_MODELS="$OLLAMA_MODELS"}       REPRO_LOG="$log" REPRO_RECORD="$rec" REPRO_UNIT="$unit" \
+      ${OLLAMA_MODELS:+OLLAMA_MODELS="$OLLAMA_MODELS"} "${passthru[@]}"       REPRO_LOG="$log" REPRO_RECORD="$rec" REPRO_UNIT="$unit" \
       bash "$SCRIPT_PATH" --foreground "${ARGS_REST[@]}") \
     || die "could not start the service $unit"
   sleep 2

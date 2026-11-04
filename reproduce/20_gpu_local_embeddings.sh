@@ -4,19 +4,23 @@
 # Reproduces (full map in reproduce/MANIFEST.md):
 #   the Qwen3-4B rows of tab:toolbench-results, tab:metatool-results and
 #     tab:metatool-tags-results, the Qwen3-4B top-5 lists of Table 10 and its WP4
-#     lists (tab:tokens-recall). WP0 lanes of evals/wp0_v040/run_wp0_v040.sh, as run
-#     in October:
-#       gpuq4b042     encode batch 8. The ToolBench rows run out of memory inside the
-#                     11.2 GiB allocator cap and are skipped (exit 3), as they were
-#                     then. Its +Tags and +QueryTags rows and the MetaTool+Tags WP4
-#                     lists are the reported ones (batch 8).
-#       gpuq4b042fix  encode batch 2: the skipped rows, the e2e lists and the
-#                     ToolBench WP4 lists
-#       gpuq4b042gov  encode batch 2: base MetaTool governed, so the base pair
-#                     shares one batch size
+#     lists (tab:tokens-recall). WP0 lanes of evals/wp0_v040/run_wp0_v040.sh, every
+#     Qwen3-4B encode at the fixed batch REPRO_Q4B_BATCH (2) under the 11.2 GiB
+#     allocator cap, so every reported Qwen3-4B row, and both tagger arms of the
+#     authorship ablation (65_), share one batch size:
+#       gpuq4b042     all four benchmarks, governed and ungated (tb_qwen4b), the e2e
+#                     lists and both WP4 lists, and the 0.1.10 control
+#       gpuq4b042fix  the rows October had to redo after batch 8 ran out of memory
+#                     (tb_qwen4b_tb_fix, tb_qwen4b_mt_fix). At batch 2 they repeat
+#                     rows of tb_qwen4b from the embedding cache, in minutes, and
+#                     keep the step names the analysis reads
+#       gpuq4b042gov  base MetaTool governed (tb_qwen4b_mt_gov_b2), likewise
+#     The October rehearsal ran gpuq4b042 at batch 8, so its +Tags and +QueryTags
+#     rows were batch 8. REPRO_Q4B_BATCH=8 repeats that path (with its expected
+#     out-of-memory skips).
 #   the Qwen3-4B mand-only rows of the four benchmarks (Section 5.4), which no
 #     October lane ran: one step, tb_qwen4b_mand, made like a lane step with the
-#     settings of gpuq4b042fix (bf16, batch 2, 11.2 GiB cap, same gates)
+#     same settings
 #   the GPU embedding stores of WP6: Qwen3-0.6B (tag noise, leakage) and Qwen3-4B
 #     (leakage), fp16, by evals/run_qwen_gpu.sh embed (at most 8 texts per batch
 #     for Qwen3-0.6B, exactly 2 for Qwen3-4B). 40_ runs the CPU part.
@@ -27,8 +31,9 @@
 #   and 6 or 12 GiB (WP6). Each step starts only at 67,000 MiB or less and is
 #   stopped above 80,000 MiB (gpu_gate.sh and mem_guard.sh, gpu_guard.sh). Host
 #   memory 12G per step. One process at a time under ~/tist-gpu.lock.
-# Time: about 3 hours of card time (WP0 lanes about 2 h, mand-only rows about
-#   30 min, WP6 about 20 min).
+# Time: about 1.5 to 2 hours of card time (gpuq4b042 about 1 h at batch 2, the fix
+#   and gov lanes about 15 min from the cache, mand-only rows about 15 min, WP6
+#   about 20 min).
 # Outputs: $REPRO_OUT/wp0/ (stage/v042/tb_qwen4b*, lists in the artifacts-gpu clone),
 #   the stores in $REPRO_EMB_CACHE.
 #
@@ -79,16 +84,19 @@ for part in $PARTS; do
   hr
   case $part in
     wp0)
+      record_note "Qwen3-4B encode batch $REPRO_Q4B_BATCH for every WP0 GPU step (11.2 GiB allocator cap)"
       run_lane gpuq4b042
-      # The batch-8 lane must not have finished a step the reported run took at
-      # batch 2. If it did (no out-of-memory this time), clear its marker so
-      # gpuq4b042fix redoes it at batch 2, and say so in the run record.
-      for s in e2e_q4b_v042 e2e_q4b_v0110 wp4_tb_q4b; do
-        if [ "$DRY_RUN" = 0 ] && [ -f "$WP0_DIR/logs/$s.done" ] && ! step_done "lane_gpuq4b042fix"; then
-          record_note "step $s finished at encode batch 8 in gpuq4b042. The reported run made it at batch 2, so its marker is removed and gpuq4b042fix reruns it at batch 2."
-          rm -f "$WP0_DIR/logs/$s.done"
-        fi
-      done
+      if [ "$REPRO_Q4B_BATCH" = 8 ]; then
+        # The rehearsal path: the batch-8 lane must not have finished a step the
+        # rehearsal took at batch 2. If it did, clear its marker so gpuq4b042fix
+        # redoes it at batch 2, and say so in the run record.
+        for s in e2e_q4b_v042 e2e_q4b_v0110 wp4_tb_q4b; do
+          if [ "$DRY_RUN" = 0 ] && [ -f "$WP0_DIR/logs/$s.done" ] && ! step_done "lane_gpuq4b042fix"; then
+            record_note "step $s finished at encode batch 8 in gpuq4b042, so gpuq4b042fix reruns it at batch 2"
+            rm -f "$WP0_DIR/logs/$s.done"
+          fi
+        done
+      fi
       run_lane gpuq4b042fix
       run_lane gpuq4b042gov
       ;;
@@ -108,4 +116,4 @@ done
 if [ "$DRY_RUN" = 0 ]; then
   say "card after the run: $(card_mib) MiB"
 fi
-REPRO_OK_NOTE="parts finished: $PARTS. Tell the model-server session the GPU is free"
+REPRO_OK_NOTE="parts finished: $PARTS, Qwen3-4B at encode batch $REPRO_Q4B_BATCH. Tell the model-server session the GPU is free"

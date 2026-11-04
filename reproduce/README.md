@@ -47,12 +47,12 @@ All scripts take `--dry-run`. It prints every command the script would run and c
 | `00_setup.sh` | nothing. Venv, BEAR clones, models, repo clones, `verify_env.py`. `--update` brings existing clones up to `tist-r2` | CPU, network once, 8360 `/health` | 4G | none | 15 min (models extra), `--update` 1 min | `setup/`, `wp0/`, `clones/` |
 | `10_cpu_retrieval.sh` | Tables 6, 8, 9 (BGE, BGE-M3, Qwen3-0.6B, BM25, hash), Tables 7, 13 to 17, 23 to 28, mand-only rows, Table 10 lists, WP4 lists, mandatory tables (T06 to T09, T13 to T17, T23 to T28, X53, X54) | CPU only (8360 `/health` once) | 8G lexical, 20G dense, per step | none | 13 to 15 h (`--with-controls` adds 3 h) | `wp0/` |
 | `15_cpu_invariants_baselines.sh` | invariants, budget binding, BM25 checks, BGE-M3 leakage, WP5 BGE rows and CPA, the CPU embedding stores (T18, XBB, T19, T20) | CPU only | 8G to 24G per step | none | 4 to 6 h | `clones/artifacts-wp256/results/`, `emb-cache/` |
-| `20_gpu_local_embeddings.sh` | Qwen3-4B rows of Tables 6, 8, 9, its mand-only rows, its Table 10 and WP4 lists, the Qwen WP6 stores (T06, T08, T09, X54, T20) | local GPU | 12G host | start at 67,000 MiB or less, stop above 80,000. Allocator 11.2 GiB (WP0), 6 or 12 GiB (WP6) | 3 h | `wp0/`, `emb-cache/` |
+| `20_gpu_local_embeddings.sh` | Qwen3-4B rows of Tables 6, 8, 9, its mand-only rows, its Table 10 and WP4 lists, the Qwen WP6 stores (T06, T08, T09, X54, T20) | local GPU | 12G host | start at 67,000 MiB or less, stop above 80,000. Allocator 11.2 GiB (WP0, encode batch 2), 6 or 12 GiB (WP6) | 1.5 to 2 h | `wp0/`, `emb-cache/` |
 | `30_nemotron.sh` | Nemotron rows of Tables 6, 8, 9, its lists, the threshold diagnosis, the Nemotron WP2/WP6 stores, the Nemotron rows of Table 19 (T06, T08, T09, X42, T19, T20) | port 8360 | 4G to 16G per step | none locally | 2 to 3 h | `wp0/`, `emb-cache/`, `clones/artifacts-wp256/results/` |
 | `40_robustness_from_stores.sh` | tag noise, over-restriction, leakage, giveaways, mandatory coverage (T17b, T20) | CPU only, after 15, 20 and 30 | 8G to 16G per step | none | 1 h | `clones/artifacts-wp256/results/` |
 | `50_e2e_ollama.sh` | Table 10 rows rerun on 0.4.2 and the drift controls (T10a) | Ollama on 11434 | 4G client | start at 67,000 MiB or less, 81,000 before each row | 30 to 40 min | `e2e_rerun/` |
 | `55_e2e_previous_version.sh PART` | the previous-version runs: Table 10 July rows, monolithic row, Tables 11 and 12, Appendix A tags (T10b, T10c, T11, T12, AA). Optional | Ollama (Anthropic API for `tags-api`) | 16G client | as the Ollama model needs | 4 to 9 h per part | `previous/PART/` |
-| `65_authorship.sh --part P` | the authorship ablation: the tags again with Qwen3.8-27B, then MetaTool+Tags, MetaTool+QueryTags-top5 (seven backends) and Table 7 under both taggers (XAUTH). Parts tag, cpu, gpu, nemotron, analyze, test | tag 8355, cpu CPU, gpu local GPU, nemotron 8360 | 8G (tag), 8G or 20G (cpu), 12G (gpu), 8G (nemotron) | gpu part as 20_ | tag 3 to 5 h, cpu about 5 h, gpu 40 min, nemotron 45 min, analyze 15 min | `authorship/`, `wp0/stage/v042/tb_auth_*` |
+| `65_authorship.sh --part P` | the authorship ablation: the tags again with Qwen3.8-27B, then MetaTool+Tags, MetaTool+QueryTags-top5 (seven backends) and Table 7 under both taggers (XAUTH). Parts tag, cpu, gpu, nemotron, analyze, test | tag 8355, cpu CPU, gpu local GPU, nemotron 8360 | 8G (tag), 8G or 20G (cpu), 12G (gpu), 8G (nemotron) | gpu part as 20_ | tag 3 to 5 h, cpu about 5 h, gpu 20 min, nemotron 45 min, analyze 15 min | `authorship/`, `wp0/stage/v042/tb_auth_*` |
 | `60_hermes.sh STEP` | Hermes stage 1 and stage 2 (XH) | ports 8355 and 8360 | 16G grid, 4G to 8G otherwise | none locally | about 50 h of grids | `hermes/` |
 | `70_assemble.sh` | WP4 analysis, mandatory tables, prompt-size checks, the derived numbers no eval script writes (`reproduce/derive/`, `evals/diag_gate_coverage.py`), then gathers everything (T21, XE2Eb, X33, X42s, XE2Ea, X53) | CPU only | 16G | none | 20 to 40 min | `derived/`, `assembled/` |
 | `80_figures.sh` | Figure 2 (fig:pipeline), drawn in TikZ (F2) | CPU, pdflatex, the paper repo | none | none | 1 min | `figures/` |
@@ -70,17 +70,17 @@ Run the windows in this order. Inside a window, run the scripts one after anothe
 | 1. CPU only | setup | `00_setup.sh --download-models` (once) | 15 min |
 | | WP0 retrieval | `10_cpu_retrieval.sh` | 13 to 15 h |
 | | WP1, WP5 CPU, BM25, BGE-M3, CPU stores | `15_cpu_invariants_baselines.sh` | 4 to 6 h |
-| 2. local GPU | Qwen3-4B lanes, its mand-only rows, Qwen stores | `20_gpu_local_embeddings.sh` | 3 h |
+| 2. local GPU | Qwen3-4B lanes (batch 2), its mand-only rows, Qwen stores | `20_gpu_local_embeddings.sh` | 1.5 to 2 h |
 | 3. Nemotron (8360) | Nemotron rows, stores, WP5 | `30_nemotron.sh` | 2 to 3 h |
 | 4. CPU only | WP2, WP6 from the stores | `40_robustness_from_stores.sh` | 1 h |
 | 5. Ollama (11434) | Table 10 reruns | `50_e2e_ollama.sh` | 40 min |
 | 6. Hermes (8355, 8360) | stage 1, settings, blocks 1 to 3, analysis | `60_hermes.sh STEP`, one step at a time (see its `--help`) | about 51 h |
-| 6b. authorship (8355, then CPU, GPU, 8360) | the tags again, the reruns, the analysis | `65_authorship.sh --part tag`, then `--part cpu`, `--part gpu` (in a GPU window), `--part nemotron` (in a Nemotron window), `--part analyze` | about 11 h |
+| 6b. authorship (8355, then CPU, GPU, 8360) | the tags again, the reruns, the analysis | `65_authorship.sh --part tag`, then `--part cpu`, `--part gpu` (in a GPU window), `--part nemotron` (in a Nemotron window), `--part analyze` | about 10.5 h |
 | 7. CPU only | analysis and assembly | `70_assemble.sh` | 30 min |
 | | figure | `80_figures.sh` | 1 min |
 | | check and numbers | `90_verify.sh` | 5 min |
 
-The total is about 90 hours of running, about 37 hours without Hermes. The authorship ablation adds about 11 hours, and its parts can share the windows of 20_, 30_ and 60_. Windows 2, 3, 5 and 6 need the GPU or a server and wait for the model-server session's OK. `40_` needs the stores of 15, 20 and 30, so it comes after them although it uses only the CPU. `70_` and `90_` can run at any time. They assemble and check what exists so far, and list the rest as NOT RUN.
+The total is about 88 hours of running, about 35 hours without Hermes. The authorship ablation adds about 10.5 hours, and its parts can share the windows of 20_, 30_ and 60_. Windows 2, 3, 5 and 6 need the GPU or a server and wait for the model-server session's OK. `40_` needs the stores of 15, 20 and 30, so it comes after them although it uses only the CPU. `70_` and `90_` can run at any time. They assemble and check what exists so far, and list the rest as NOT RUN.
 
 `55_` is optional. Its parts rerun the previous-version results, which the revision keeps.
 
@@ -130,10 +130,11 @@ bash reproduce/00_setup.sh --update
   Dry runs write their records to `runlog/dryrun/`.
 - **Resuming.** Every script can be run again after a stop or a failure. Finished steps are skipped. The kit marks them in `$REPRO_OUT/state/`, and the WP0 lanes mark theirs in `wp0/logs/<step>.done`. To redo a step, remove its marker.
 - **Stopping.** `systemctl --user stop tist-repro-NN` stops a service. Each step runs in its own scope or service, with its own process group. Never use pattern kills (`pkill -f`, `killall`).
-- **Failing loudly.** A failed step stops the script with its reason. Three steps fail in a correct run, as they did in October, and the script notes them in the run record:
+- **Failing loudly.** A failed step stops the script with its reason. Two steps fail in a correct run, as they did in October, and the script notes them in the run record:
   - `ablation_lexical` in lane lex042. `eval_ablation.py` also loads BGE, which that lane refuses. The manuscript does not use it.
   - `decomposed_q4b` in lane dense042. Two Qwen3-4B copies pass the 20G cap. Lane manddense042 reruns it with two models kept.
-  - the ToolBench rows of `tb_qwen4b` and the batch-8 Qwen3-4B lists in lane gpuq4b042. They run out of memory inside the 11.2 GiB cap. Lane gpuq4b042fix reruns them at batch 2, as reported.
+
+  In October the ToolBench rows of `tb_qwen4b` and the Qwen3-4B lists ran out of memory at encode batch 8. The kit runs every Qwen3-4B encode at batch 2 (`REPRO_Q4B_BATCH`), so they should not fail now. `REPRO_Q4B_BATCH=8` repeats the October path, and then these failures are expected.
 
   Anything else that fails stops the script. No step falls back to hash embeddings. BEAR 0.4.2 raises when a model fails to load, the WP0 runner's `assert_not_hash` and `tistr2_common.check_real_model` stop any run whose embedder is in hash mode, and ITR's own fallback is caught by `fallback_audit.py` (`70_ --with-controls`).
 
@@ -199,6 +200,7 @@ Items that need your run are read from `assembled/` only. Items from the previou
 | `REPRO_SGLANG_URL` | `http://127.0.0.1:8355` | SGLang (Hermes) |
 | `REPRO_GPU_START_MIB`, `REPRO_GPU_STOP_MIB`, `REPRO_OLLAMA_ROW_MIB` | 67000, 80000, 81000 | card limits |
 | `REPRO_SLICE_MAX_GB` | 25 | slice memory other than page cache before a step starts |
+| `REPRO_Q4B_BATCH` | 2 | encode batch of every Qwen3-4B step on the GPU (20_ and 65_). 8 repeats the October rehearsal of the +Tags rows. `AUTH_Q4B_BATCH` overrides it for 65_ alone |
 | `REPRO_SKIP_KEEPALIVE_CHECK` | 0 | 1 skips the wsl-keepalive check |
 | `WP0_GPU_MAXWAIT` | 7200 | seconds a WP0 GPU step waits for the card |
 | `WP7_RUNS` | `$REPRO_OUT/hermes` | Hermes run roots |

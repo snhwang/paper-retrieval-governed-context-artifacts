@@ -74,7 +74,7 @@ They post Anthropic Messages requests with `urllib`. `evals/authorship_regenerat
   - Ungated queries carry no tags, so they hit the WP0 embedding cache.
 - **Table 7 (ToolBench inferred categories, BGE only, as the paper reports it).** This is `authorship_regenerate.py evaluate`. It builds the retrievers as the three category scripts do, and runs the oracle, Sonnet, second-tagger and ungoverned arms side by side.
 - **The Sonnet side** of each pair is the WP0 run of the kit (steps `tb_bge`, `tb_bm25` and so on), with the committed tag files.
-  - For Qwen3-4B, the reported +Tags and +QueryTags rows ran at encode batch 8. `65_` runs the second tagger at batch 2 and adds a Sonnet arm at batch 2 (`tb_auth_q4b_sonnet`), so the pair differs only in the tags. Please confirm batch 2. With `AUTH_Q4B_BATCH=8` both arms match the reported rows instead. Batch 8 is safe here, since MetaTool texts are short.
+  - For Qwen3-4B every step of the kit runs at encode batch 2 (`REPRO_Q4B_BATCH`), 20_'s reported rows included, so `tb_auth_q4b` pairs with 20_'s `tb_qwen4b` at one batch size. `AUTH_Q4B_BATCH` overrides it for 65_ alone, and `analyze.py` notes any batch difference it finds in the runs' provenance.
 
 ## The analysis
 
@@ -105,7 +105,7 @@ They post Anthropic Messages requests with `urllib`. `evals/authorship_regenerat
 | cpu | BGE-M3 | CPU, 20G | about 1.5 h |
 | cpu | Qwen3-0.6B | CPU, 20G | about 2.5 h |
 | cpu | Table 7 (BGE) | CPU, 20G | about 20 min |
-| gpu | Qwen3-4B, two arms | local GPU | about 30 to 40 min |
+| gpu | Qwen3-4B | local GPU | about 15 to 20 min |
 | nemotron | Nemotron | 8360 | about 30 to 45 min |
 | analyze | | CPU | about 15 min |
 

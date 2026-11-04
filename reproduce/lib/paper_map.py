@@ -26,9 +26,10 @@ def tb(step: str) -> str:
     return f"{V}/{step}/toolbench_eval_{step}.json"
 
 
-# The file and condition names of every Table 6, 8 and 9 row. Qwen3-4B pairs
-# come from different steps per benchmark (encode batch 2 for ToolBench and base
-# MetaTool, batch 8 for the tagged MetaTool variants), as reported.
+# The file and condition names of every Table 6, 8 and 9 row. Qwen3-4B rows come
+# from the steps October used, all at the kit's batch 2 now (the rehearsal ran the
+# tagged MetaTool variants in tb_qwen4b at batch 8). tb_qwen4b holds every row at
+# batch 2 too, from the same cached vectors.
 BACKENDS = ["BGE", "BGE-M3", "Qwen3-0.6B", "Qwen3-4B", "BM25", "Hash", "Nemotron"]
 STEP = {"BGE": "tb_bge", "BGE-M3": "tb_bgem3", "Qwen3-0.6B": "tb_qwen06", "BM25": "tb_bm25",
         "Hash": "tb_hash", "Nemotron": "tb_nemotron"}

@@ -58,6 +58,9 @@ TOLERANCE = {
     # file gives a 95% CI for must lie inside that CI. A float without a CI must
     # agree to 3 decimals (|diff| < 0.0005). Integers and per-query arrays are
     # reported but decide nothing.
+    # The kit runs every Qwen3-4B encode at batch 2. The committed rehearsal ran the
+    # +Tags and +QueryTags rows (tb_qwen4b, wp4 MetaTool+Tags lists) at batch 8, so
+    # those differ at rounding level, which this rule allows.
     "gpu": {"ci_slack": 1e-9, "abs_no_ci": 5e-4},
     # The Ollama executor (Table 10 rerun, the July runs if 55_ reran them): the
     # measured drift of the executor on identical lists is at most 0.0082 in

@@ -31,7 +31,7 @@ lane_env() {
   case $1 in
     dense042|mandonly042|manddense042)
       echo "WP0_ALLOW_LOCAL_MODELS=1 WP0_STEP_MEM=20G WP0_ENCODE_BATCH=4 WP0_CPU_THREADS=12" ;;
-    gpuq4b042) echo "$gpu WP0_ENCODE_BATCH=8" ;;
+    gpuq4b042) echo "$gpu WP0_ENCODE_BATCH=$REPRO_Q4B_BATCH WP0_EMPTY_CACHE=1" ;;   # October: 8
     gpuq4b042fix|gpuq4b042gov) echo "$gpu WP0_ENCODE_BATCH=2 WP0_EMPTY_CACHE=1" ;;
     mand042|fallback0110|pair042|e2eattr042) echo "WP0_STEP_MEM=4G" ;;
     *) echo "" ;;
@@ -44,7 +44,9 @@ lane_expected_failures() {
   case $1 in
     lex042) echo "ablation_lexical" ;;            # eval_ablation.py also loads BGE, refused in this lane. Not in the manuscript.
     dense042) echo "decomposed_q4b decomposed_q4b_v0110" ;;   # killed at the 20G cap (two Qwen3-4B copies); manddense042 reruns them
-    gpuq4b042) echo "tb_qwen4b tb_qwen4b_v0110 e2e_q4b_v042 e2e_q4b_v0110 wp4_tb_q4b" ;;  # OOM at batch 8 on long ToolBench texts; gpuq4b042fix reruns them at batch 2
+    # At batch 8 (the October rehearsal) the long ToolBench texts ran out of memory
+    # inside the 11.2 GiB cap. At the kit's batch 2 nothing should fail.
+    gpuq4b042) [ "$REPRO_Q4B_BATCH" = 8 ] && echo "tb_qwen4b tb_qwen4b_v0110 e2e_q4b_v042 e2e_q4b_v0110 wp4_tb_q4b" ;;
     *) echo "" ;;
   esac
 }
@@ -110,7 +112,7 @@ check_lane() {
 #   KIND gpu    local GPU as lane gpuq4b042fix: flock ~/tist-gpu.lock, gpu_gate.sh
 #               (start at GPU_START_MIB or less, allocator cap 11.2 GiB),
 #               tist-capped --mem 12G, mem_guard.sh (stop above GPU_STOP_MIB),
-#               bf16, encode batch KIT_Q4B_BATCH (default 2), empty cache
+#               bf16, encode batch KIT_Q4B_BATCH (default REPRO_Q4B_BATCH, 2), empty cache
 #   KIND remote the Nemotron service as lane nemo042: flock, 8G, CUDA hidden,
 #               the lanes' response cache
 # Exit 75 from a gate (card or memory busy) is retried every 5 minutes for
@@ -135,7 +137,7 @@ kit_tb_step() {
             envs+=(CUDA_VISIBLE_DEVICES= WP0_ALLOW_LOCAL_MODELS=1 WP0_ENCODE_BATCH=4 OMP_NUM_THREADS=12
                    MKL_NUM_THREADS=12 WP0_EMB_CACHE="$WP0_DIR/embcache" WP0_SHARE_MODELS=1) ;;
     gpu)    mem=12G
-            envs+=(WP0_ALLOW_LOCAL_MODELS=1 WP0_STEP_MEM=12G WP0_ENCODE_BATCH="${KIT_Q4B_BATCH:-2}" WP0_EMPTY_CACHE=1
+            envs+=(WP0_ALLOW_LOCAL_MODELS=1 WP0_STEP_MEM=12G WP0_ENCODE_BATCH="${KIT_Q4B_BATCH:-$REPRO_Q4B_BATCH}" WP0_EMPTY_CACHE=1
                    WP0_GPU_CAP_FIXED=11.2 WP0_WIN_GPU_MAX_MIB="$GPU_START_MIB" WP0_WIN_GPU_STOP_MIB="$GPU_STOP_MIB"
                    WP0_QWEN4B_DTYPE=bfloat16 WP0_SHARE_MODELS=1 WP0_EMB_CACHE="$WP0_DIR/embcache") ;;
     remote) mem=8G
@@ -149,7 +151,7 @@ kit_tb_step() {
     *)      chain=(env -u OPENAI_API_KEY "${envs[@]}" "$TC" --mem "$mem" -- bash "$W/mem_guard.sh") ;;
   esac
   local detail="$kind, memory cap $mem"
-  [ "$kind" = gpu ] && detail+=", bf16, encode batch ${KIT_Q4B_BATCH:-2}, allocator cap 11.2 GiB, gates $GPU_START_MIB and $GPU_STOP_MIB MiB"
+  [ "$kind" = gpu ] && detail+=", bf16, encode batch ${KIT_Q4B_BATCH:-$REPRO_Q4B_BATCH}, allocator cap 11.2 GiB, gates $GPU_START_MIB and $GPU_STOP_MIB MiB"
   say "step $name ($detail)"
   if [ "$DRY_RUN" = 1 ]; then
     echo "+ (cd $art) $(printf '%q ' "${chain[@]}" "$@")"
@@ -205,5 +207,5 @@ wp0_gpu_tb_step() {
     metatool) extra=(--metatool-only) ;;
     metatool-base) extra=(--metatool-only --metatool-base-only) ;;
   esac
-  KIT_Q4B_BATCH=2 kit_tb_step gpu "$name" "$WP0_DIR/artifacts-gpu" -- "$REPRO_PY" evals/wp0_v040/eval_toolbench_v040.py     --top-k 5 --metatool-query-tags-file evals/data/external_benchmarks/metatool/query_tags_top5.json     "${extra[@]}" --output "results/wp0/toolbench_eval_$name.json" --backends "$@"
+  KIT_Q4B_BATCH=$REPRO_Q4B_BATCH kit_tb_step gpu "$name" "$WP0_DIR/artifacts-gpu" -- "$REPRO_PY" evals/wp0_v040/eval_toolbench_v040.py     --top-k 5 --metatool-query-tags-file evals/data/external_benchmarks/metatool/query_tags_top5.json     "${extra[@]}" --output "results/wp0/toolbench_eval_$name.json" --backends "$@"
 }
