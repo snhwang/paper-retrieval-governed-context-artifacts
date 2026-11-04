@@ -299,7 +299,8 @@ class RecordingShim(ar.AnthropicToOpenAIShim):
 # ---------------------------------------------------------------------------
 
 def client_extras(thinking: bool, seed: int) -> dict:
-    extra: dict = {"seed": seed}
+    """Client-only request fields. A negative seed sends none (for a server that rejects the field)."""
+    extra: dict = {"seed": seed} if seed >= 0 else {}
     if not thinking:
         extra["chat_template_kwargs"] = {"enable_thinking": False}
     return extra
@@ -398,7 +399,7 @@ def main(argv=None) -> int:
     g.add_argument("--out-dir", default=None)
     g.add_argument("--workers", type=int, default=4, help="concurrent requests (MetaTool generators)")
     g.add_argument("--passes", type=int, default=3, help="passes over targets with missing items")
-    g.add_argument("--seed", type=int, default=SEED)
+    g.add_argument("--seed", type=int, default=SEED, help="fixed seed sent with every request. -1 sends none")
     g.add_argument("--thinking", action="store_true", help="leave Qwen3's thinking on (default off)")
     g.add_argument("--max-items", type=int, default=None, help="smoke runs only")
     g.add_argument("--resume", action="store_true")

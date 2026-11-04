@@ -64,7 +64,7 @@ AUTH=$REPRO_OUT/authorship
 TAGS=$AUTH/tags
 AUTH_CLONE=$CLONES/artifacts-authorship
 AUTH_WORKERS=${AUTH_WORKERS:-4}
-AUTH_SEED=${AUTH_SEED:-20261104}
+AUTH_SEED=${AUTH_SEED:-20261104}            # -1 sends no seed, if the server rejects the field
 AUTH_MAX_MISSING=${AUTH_MAX_MISSING:-0.01}
 export KIT_Q4B_BATCH=${AUTH_Q4B_BATCH:-2}
 PART="" CPU_BACKENDS="bm25 hash bge bge-m3 qwen3-0.6b" SONNET_ARM=1
