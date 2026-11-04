@@ -38,6 +38,7 @@ CLONES=$REPRO_OUT/clones
 WP256_CLONE=$CLONES/artifacts-wp256         # WP1, WP2, WP5, WP6 runs
 HERMES_CLONE=$CLONES/artifacts-hermes       # WP7
 PREV_CLONE=$CLONES/artifacts-previous       # July and August scripts (55)
+AUTH_CLONE=$CLONES/artifacts-authorship     # the authorship ablation (65)
 ASSEMBLED=$REPRO_OUT/assembled              # repo-shaped tree that verify.py and collect.py read
 
 SMI=/mnt/c/Windows/System32/nvidia-smi.exe
@@ -414,7 +415,7 @@ check_card_start() {
 # Only one GPU or server job of the kit (and no WP7 grid) at a time.
 check_no_gpu_jobs() {
   local mine=${REPRO_UNIT:-} u active=""
-  for u in tist-repro-20 tist-repro-30 tist-repro-50 tist-repro-55 tist-repro-60 wp0-gpuq4b042 wp0-gpuq4b042fix \
+  for u in tist-repro-20 tist-repro-30 tist-repro-50 tist-repro-55 tist-repro-60 tist-repro-65 wp0-gpuq4b042 wp0-gpuq4b042fix \
            wp0-gpuq4b042gov wp0-e2erun tist-qwen-gpu; do
     [ "$u" = "$mine" ] && continue
     systemctl --user is-active -q "$u" 2>/dev/null && active+=" $u"

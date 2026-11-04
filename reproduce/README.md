@@ -52,6 +52,7 @@ All scripts take `--dry-run`. It prints every command the script would run and c
 | `40_robustness_from_stores.sh` | tag noise, over-restriction, leakage, giveaways, mandatory coverage (T17b, T20) | CPU only, after 15, 20 and 30 | 8G to 16G per step | none | 1 h | `clones/artifacts-wp256/results/` |
 | `50_e2e_ollama.sh` | Table 10 rows rerun on 0.4.2 and the drift controls (T10a) | Ollama on 11434 | 4G client | start at 67,000 MiB or less, 81,000 before each row | 30 to 40 min | `e2e_rerun/` |
 | `55_e2e_previous_version.sh PART` | the previous-version runs: Table 10 July rows, monolithic row, Tables 11 and 12, Appendix A tags (T10b, T10c, T11, T12, AA). Optional | Ollama (Anthropic API for `tags-api`) | 16G client | as the Ollama model needs | 4 to 9 h per part | `previous/PART/` |
+| `65_authorship.sh --part P` | the authorship ablation: the tags again with Qwen3.8-27B, then MetaTool+Tags, MetaTool+QueryTags-top5 (seven backends) and Table 7 under both taggers (XAUTH). Parts tag, cpu, gpu, nemotron, analyze, test | tag 8355, cpu CPU, gpu local GPU, nemotron 8360 | 8G (tag), 8G or 20G (cpu), 12G (gpu), 8G (nemotron) | gpu part as 20_ | tag 3 to 5 h, cpu about 5 h, gpu 40 min, nemotron 45 min, analyze 15 min | `authorship/`, `wp0/stage/v042/tb_auth_*` |
 | `60_hermes.sh STEP` | Hermes stage 1 and stage 2 (XH) | ports 8355 and 8360 | 16G grid, 4G to 8G otherwise | none locally | about 50 h of grids | `hermes/` |
 | `70_assemble.sh` | WP4 analysis, mandatory tables, prompt-size checks, the derived numbers no eval script writes (`reproduce/derive/`, `evals/diag_gate_coverage.py`), then gathers everything (T21, XE2Eb, X33, X42s, XE2Ea, X53) | CPU only | 16G | none | 20 to 40 min | `derived/`, `assembled/` |
 | `80_figures.sh` | Figure 2 (fig:pipeline), drawn in TikZ (F2) | CPU, pdflatex, the paper repo | none | none | 1 min | `figures/` |
@@ -74,11 +75,12 @@ Run the windows in this order. Inside a window, run the scripts one after anothe
 | 4. CPU only | WP2, WP6 from the stores | `40_robustness_from_stores.sh` | 1 h |
 | 5. Ollama (11434) | Table 10 reruns | `50_e2e_ollama.sh` | 40 min |
 | 6. Hermes (8355, 8360) | stage 1, settings, blocks 1 to 3, analysis | `60_hermes.sh STEP`, one step at a time (see its `--help`) | about 51 h |
+| 6b. authorship (8355, then CPU, GPU, 8360) | the tags again, the reruns, the analysis | `65_authorship.sh --part tag`, then `--part cpu`, `--part gpu` (in a GPU window), `--part nemotron` (in a Nemotron window), `--part analyze` | about 11 h |
 | 7. CPU only | analysis and assembly | `70_assemble.sh` | 30 min |
 | | figure | `80_figures.sh` | 1 min |
 | | check and numbers | `90_verify.sh` | 5 min |
 
-The total is about 80 hours of running, about 26 hours without Hermes. Windows 2, 3, 5 and 6 need the GPU or a server and wait for the model-server session's OK. `40_` needs the stores of 15, 20 and 30, so it comes after them although it uses only the CPU. `70_` and `90_` can run at any time. They assemble and check what exists so far, and list the rest as NOT RUN.
+The total is about 90 hours of running, about 37 hours without Hermes. The authorship ablation adds about 11 hours, and its parts can share the windows of 20_, 30_ and 60_. Windows 2, 3, 5 and 6 need the GPU or a server and wait for the model-server session's OK. `40_` needs the stores of 15, 20 and 30, so it comes after them although it uses only the CPU. `70_` and `90_` can run at any time. They assemble and check what exists so far, and list the rest as NOT RUN.
 
 `55_` is optional. Its parts rerun the previous-version results, which the revision keeps.
 
@@ -104,7 +106,7 @@ bash reproduce/00_setup.sh --update
 
 ## How a script runs
 
-- **Long scripts run as user services.** `10_` to `55_` start the service `tist-repro-NN`, which runs the same script with `--foreground`, and return at once. They print the commands to follow it:
+- **Long scripts run as user services.** `10_` to `55_`, and the parts tag, cpu, gpu and nemotron of `65_`, start the service `tist-repro-NN`, which runs the same script with `--foreground`, and return at once. They print the commands to follow it:
 
   ```bash
   systemctl --user status tist-repro-10 --no-pager
@@ -164,7 +166,8 @@ $REPRO_OUT/                     default ~/tist-repro
 | exact | deterministic CPU results: BM25, hash, BGE, BGE-M3, Qwen3-0.6B and Qwen3-4B on the CPU, invariants, budget binding, WP5 with BGE, mandatory tables | every number equal, with a slack of 1e-9 for float printing. Strings equal |
 | gpu | Qwen3-4B in bf16 (WP0), the Qwen fp16 stores (WP6), anything embedded by the GPU-served Nemotron, WP4 | every point estimate that the committed file gives a 95% CI for lies inside that CI. A float without a CI agrees to 3 decimals. Precision and batch size move values at rounding level |
 | ollama | Table 10 reruns and July runs | tool and exact accuracy, and governed minus ungated deltas, within 0.01. The measured executor drift on identical lists is at most 0.0082. Retrieval metrics of the lists must be exact |
-| llm | Gemma 4 at temperature 1.0 (Table 12), Hermes grids | every point estimate with a committed CI lies inside it. The committed Hermes results are agent runs on an older harness, so read their FAILs rather than count them |
+| llm | Gemma 4 at temperature 1.0 (Table 12), Hermes grids, the authorship ablation's runs | every point estimate with a committed CI lies inside it. The committed Hermes results are agent runs on an older harness, so read their FAILs rather than count them |
+| tags | the tag files the authorship ablation writes | at least 99% of the committed items present, and at least 90% of the shared items with the identical tags. The retrieval runs with those tags (`tb_auth_*`) and the analysis use the llm rule |
 | info | GPU-made top-k lists, the 0.1.10 comparison | compared, for reading only |
 | skip | logs, manifests, provenance records, the hand-written report, PDFs | not compared |
 

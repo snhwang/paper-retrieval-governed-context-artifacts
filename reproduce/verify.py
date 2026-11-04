@@ -70,6 +70,11 @@ TOLERANCE = {
     # decide nothing. The committed Hermes results are agent runs on an older
     # harness, which your runs replace, so expect some FAILs there and read them.
     "llm": {"ci_slack": 1e-9},
+    # Tag files written by an LLM (the authorship ablation): a rerun at temperature 0
+    # with a fixed seed on the same server should repeat nearly every item, but
+    # server batching can move a few. Pass if at least 99% of the committed items
+    # are present and at least 90% of the shared items carry the identical tag set.
+    "tags": {"min_coverage": 0.99, "min_item_agreement": 0.90},
     # Compared for reading only.
     "info": {},
     # Not compared.
@@ -88,6 +93,11 @@ CLASS_RULES: list[tuple[str, str, str]] = [
     (r"\.provenance\.json$", "skip", "provenance record"),
     (r"^figures/", "skip", "PDF (80_figures.sh compares the text)"),
     (r"^results/v042/diag/(probe_q4b|verify_v042|wp4_final|alpha_hash)", "skip", "diagnostic record"),
+    (r"^results/authorship/tags/(plugin_tags|query_tags_top5|toolbench_\w+_categories)\.json$", "tags",
+     "LLM-written tags (authorship ablation)"),
+    (r"^results/authorship/tags/(calls\.jsonl|manifest\.json)$", "info", "call log and run manifest"),
+    (r"^results/authorship/", "llm", "authorship ablation (depends on sampled tags)"),
+    (r"^results/v042/(v042|v0110)/tb_auth_", "llm", "retrieval with LLM-written tags (authorship ablation)"),
     (r"^results/v042/e2e_rerun/", "ollama", "Ollama executor"),
     (r"^evals/results/toolbench_e2e", "ollama", "Ollama executor (July)"),
     (r"^results/toolbench_react_metrics", "llm", "sampled LLM (July and August)"),
@@ -328,10 +338,41 @@ def compare_npz(cp: Path, rp: Path, cls: str, d: Diff) -> None:
                 (d.bad if cls == "exact" else d.note)(f"array {k}: {n} entries differ")
 
 
+def compare_tags(cp: Path, rp: Path, d: Diff) -> None:
+    """Per-item agreement of two tag files (a dict per tool or query, or a list of query entries)."""
+    def items(x) -> dict:
+        if isinstance(x, dict):
+            return {k: frozenset(v) if isinstance(v, list) else str(v).strip() for k, v in x.items()}
+        out, seen = {}, {}
+        for e in x:
+            k = (str(e.get("query", "")).strip(), tuple(sorted(e.get("tools", []))))
+            n = seen.get(k, 0)
+            seen[k] = n + 1
+            out[k + (n,)] = frozenset(e.get("context_tags", []))
+        return out
+    with open_any(cp) as f:
+        a = items(json.load(f))
+    with open_any(rp) as f:
+        b = items(json.load(f))
+    common = a.keys() & b.keys()
+    t = TOLERANCE["tags"]
+    d.n += len(common)
+    cov = len(common) / max(len(a), 1)
+    agree = sum(a[k] == b[k] for k in common) / max(len(common), 1)
+    if cov < t["min_coverage"]:
+        d.bad(f"only {cov:.3f} of the committed items are in your file")
+    if agree < t["min_item_agreement"]:
+        d.bad(f"{agree:.3f} of the shared items carry the same tags (need {t['min_item_agreement']})")
+    elif agree < 1:
+        d.note(f"{agree:.3f} of the shared items carry the same tags")
+
+
 def compare_file(cp: Path, rp: Path, cls: str) -> Diff:
     d = Diff()
     name = strip_gz(cp.name)
-    if name.endswith(".json"):
+    if cls == "tags":
+        compare_tags(cp, rp, d)
+    elif name.endswith(".json"):
         with open_any(cp) as f:
             c = json.load(f)
         with open_any(rp) as f:

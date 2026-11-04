@@ -24,6 +24,7 @@
 #   hermes/results/         $REPRO_OUT/hermes/analysis (60_)
 #   (previous version)      $REPRO_OUT/previous/<part>/ (55_)
 #   results/derived/        $REPRO_OUT/derived (part derived)
+#   results/authorship/     $REPRO_OUT/authorship (65_)
 #   figures/                $REPRO_OUT/figures (80_)
 # Parts whose runs have not happened yet are skipped with a line saying so.
 # Prerequisites: the runs it gathers. 00_setup.sh for the venv and tokenizers.
@@ -190,6 +191,19 @@ for part in $PARTS; do
           [ "$DRY_RUN" = 1 ] || cp -rp "$p". "$ASSEMBLED/"
           say "copied $p"
         done
+      fi
+      # The authorship ablation (65_): tags, call log, validation, analysis.
+      if [ -d "$REPRO_OUT/authorship" ]; then
+        if [ "$DRY_RUN" = 0 ]; then
+          mkdir -p "$ASSEMBLED/results/authorship"
+          (cd "$REPRO_OUT/authorship" && find . -path ./toolbench_only -prune -o -type f -print) | while IFS= read -r f; do
+            mkdir -p "$ASSEMBLED/results/authorship/$(dirname "$f")"
+            cp -p "$REPRO_OUT/authorship/$f" "$ASSEMBLED/results/authorship/$f"
+          done
+        fi
+        say "copied $REPRO_OUT/authorship"
+      else
+        SKIPPED+=(authorship)
       fi
       if [ -d "$REPRO_OUT/derived" ]; then
         [ "$DRY_RUN" = 1 ] || { mkdir -p "$ASSEMBLED/results/derived"; cp -p "$REPRO_OUT"/derived/*.json "$ASSEMBLED/results/derived/" 2>/dev/null; }

@@ -58,7 +58,7 @@ Where the text left the status open, the item is marked (b) and flagged.
 | T20 | tab:robustness, Table 20, L1615-1648 | (b) | `15_` (bm25 checks, BGE-M3 leakage, stores), `20_` (Qwen stores), `30_` (stores), `40_` | `run_v042_rerun.sh` (tagnoise, tagnoise_nemotron, gatecheck, leakage, giveaways), `run_qwen_gpu.sh embed` then `run`, `run_wp256.sh v042-bgem3`, `v042-bm25`, `eval_query_giveaways.py` on the Qwen sweep | `R/tag_noise_*_output.txt`, `R/tag_noise_overrestriction_v042.json`, `R/leakage_threat_{v042,bge-m3,qwen}*`, `R/query_giveaways_{v042,qwen3-0.6b}*`, `R/bm25_v042_check_default_output.txt` | CPU, GPU, 8360 | Crossovers are the "crossover" column of the outputs. Ranges by hand. Several committed rows ran on 0.4.0 (BM25 crossovers interpolated from 0.4.0 seed means). Your run is all 0.4.2 |
 | T21 | tab:tokens-recall, Table 21, L1653-1681 | (b) | `10_`, `20_`, `30_` (k = 50 lists), `70_` (wp4) | `merge_wp4_lists.py`, `wp4_token_efficiency.py --lists ... --main-runs <8 runs> --outdir ...`, `wp4_summary.py` | `results/v042/wp4/summary.md`, `wp4_token_efficiency.json`, `*.npz` | CPU | "280 to 390 times" by hand, and it mixes tokenizers (one tokenizer gives 277 to 369) |
 | XH | Sec 4.12 Hermes, L1683-1689 (design in the text, results pending) | (b) | `60_hermes.sh` (all steps) | `hermes/scripts/` per `hermes/REPRODUCE.md`: stage 1, `stage2_settings.sh`, blocks 1 to 3, `analyze_stage2.sh` | `hermes/results/stage1/`, `hermes/results/stage2/` (from `$REPRO_OUT/hermes/analysis`) | 8355, 8360 | The committed tables come from agent runs on an older harness. Your runs replace them |
-| XAUTH | Authorship ablation (WP6) | (b) | none | not yet designed | none | 8355 | Not in the manuscript and no script. Left open |
+| XAUTH | Authorship ablation (WP6): Sonnet 4.6 against Qwen3.8-27B as the tagger of the MetaTool tool tags, the MetaTool top-5 query tags and the three ToolBench category sets. Not in the manuscript yet | (b) | `65_authorship.sh` (parts tag, cpu, gpu, nemotron, analyze) | `evals/authorship/tag.py generate` (the originals' generators behind the shim of `evals/authorship_regenerate.py`, temperature 0, seed 20261104, thinking off), `validate.py`, `eval_tagged.py` per backend, `authorship_regenerate.py evaluate --backend bge` (Table 7), `analyze.py` | `results/authorship/tags/` (five tag files, `calls.jsonl`, `manifest.json`, `validation.json`), `results/authorship/evaluate_toolbench_bge.json`, `results/authorship/analysis/authorship.{json,md}`, `V/tb_auth_*/` | 8355, CPU, GPU, 8360 | Design and the decisions to confirm (thinking off, Qwen3-4B batch, backends) are in `evals/authorship/README.md`. `evals/authorship_regenerate.py` (WP6, c9680cd) already held the shim and `compare` and `evaluate`. The first version of this file missed it |
 | X413 | Sec 4.13 Use of generative AI, L1700 | static | none | none | none | none | It cites `evals/verify_rerun.py`, which checks the July reruns only. The kit's `verify.py` covers this revision. TEXT_FIXES.md, 10 proposes new wording. |
 | X52 | Sec 5.2, L1800-1803 (1.000, 0.944-1.000) | (b) | as T13, T14 | | | | repeats |
 | X53 | Sec 5.3, L1823-1829: ToolBench-IR 0.847, governed 0.842, "none of the 2,629" | (b) | `10_` (dense042/toolllm_both), `70_` (part derived) | `eval_toolbench_toolllm.py --model ToolBench/ToolBench_IR_bert_based_uncased --top-k 5 --mode both`, `evals/diag_gate_coverage.py --out` (set logic, no model) | `V/toolllm_both/toolbench_toolllm_fixed.json`, `results/derived/gate_coverage.json` | CPU | `diag_gate_coverage.py` gained `--out` (JSON) for this |
@@ -91,7 +91,6 @@ The kit now computes every number it can from the files (next section). These re
 - T13, "4.2-10.4 ms (p95)" (no file, and timings depend on the machine)
 - T16lat, the ms/query column of Table 16 (no file)
 - X55, "three minutes" (no log)
-- XAUTH, the authorship ablation (not yet designed)
 
 ### Closed by the kit
 These had no script in October. Each is now computed from committed or reproduced files, with its sources recorded:
@@ -99,6 +98,7 @@ These had no script in October. Each is now computed from committed or reproduce
 - **`reproduce/derive/`, run by `70_assemble.sh` (part derived).** `metatool_split.py` (20,614 / 497), `e2e_name_collisions.py` (14 names over 22 endpoints), `composer_tests.py` (eight tests), `tool_summary_tokens.py` (tokens per tool). Each writes a JSON with its inputs' sha256.
 - **`evals/diag_gate_coverage.py --out`.** The "2,629" (the script used to print only).
 - **`20_gpu_local_embeddings.sh` (part mandonly).** The Qwen3-4B mand-only rows, so Section 5.4 rests on six backends.
+- **`65_authorship.sh`.** The authorship ablation, with every call recorded and validated (XAUTH).
 
 On the committed files, the computed values match the text except where `TEXT_FIXES.md` says otherwise (the 91% of the cap-128 run, p > 0.48, 280 to 390, and Table 23's 0.906).
 

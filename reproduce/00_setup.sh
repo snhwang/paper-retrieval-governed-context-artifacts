@@ -15,7 +15,7 @@
 #   5. the Hugging Face models and the tiktoken file, which every run reads
 #      offline (--download-models fetches what is missing, with network)
 #   6. clones of this repo below REPRO_OUT (the WP0 lane clones, and one each
-#      for WP1/2/5/6, Hermes and the previous-version scripts). Every run
+#      for WP1/2/5/6, Hermes, the previous-version scripts and the authorship ablation). Every run
 #      happens in a clone, never in this checkout.
 #   7. evals/wp0_v040/verify_env.py: the installed BEAR equals the v0.4.2 source
 #      (0d0718a, version 0.4.2), and the Nemotron server names itself
@@ -58,13 +58,14 @@ repro_begin
 # The clones every later script uses. WP0 clone names are the ones
 # run_wp0_v040.sh and run_e2e_rerun.sh expect below WP0_ROOT.
 WP0_CLONES="artifacts artifacts-dense artifacts-nemo artifacts-gpu artifacts-attr artifacts-track"
-OTHER_CLONES="$WP256_CLONE $HERMES_CLONE $PREV_CLONE"
+OTHER_CLONES="$WP256_CLONE $HERMES_CLONE $PREV_CLONE $AUTH_CLONE"
 # Files a clone must hold. Some were written late in the revision. A clone
 # made before they were committed lacks them.
 REQUIRED_IN_CLONE="evals/wp0_v040/run_wp0_v040.sh evals/wp0_v040/run_e2e_rerun.sh evals/wp0_v040/e2e_rerun.py
 evals/wp0_v040/verify_env.py evals/wp0_v040/assemble_v040.py evals/run_wp256.sh evals/run_v042_rerun.sh
 evals/run_v042_wp5.sh evals/run_qwen_gpu.sh evals/gpu_guard.sh evals/tistr2_common.py
-evals/rerun_filter_baseline_bear_cached.py hermes/REPRODUCE.md hermes/scripts/env.sh reproduce/lib/common.sh"
+evals/rerun_filter_baseline_bear_cached.py hermes/REPRODUCE.md hermes/scripts/env.sh reproduce/lib/common.sh
+evals/authorship_regenerate.py evals/authorship/tag.py"
 BR=${REPRO_BRANCH:-tist-r2}
 
 # ---------------------------------------------------------------------------
@@ -72,7 +73,7 @@ BR=${REPRO_BRANCH:-tist-r2}
 update_clone() {
   local d=$1 old new local_changes f missing=""
   if [ ! -d "$d/.git" ]; then
-    say "no clone $d yet (a full 00_setup.sh run makes it)"
+    say "no clone $d yet. A full run of 00_setup.sh makes it (and skips what exists)"
     return 0
   fi
   local_changes=$(git -C "$d" status --porcelain --untracked-files=no | awk '{print $2}'                   | grep -vE '^(results|evals/results)/' || true)
@@ -99,7 +100,7 @@ $activity"
   for c in artifacts artifacts-dense artifacts-nemo artifacts-gpu artifacts-attr artifacts-track; do
     update_clone "$WP0_DIR/$c"
   done
-  for d in "$WP256_CLONE" "$HERMES_CLONE" "$PREV_CLONE"; do update_clone "$d"; done
+  for d in "$WP256_CLONE" "$HERMES_CLONE" "$PREV_CLONE" "$AUTH_CLONE"; do update_clone "$d"; done
   REPRO_OK_NOTE="clones updated to $BR $(git -C "$ART" rev-parse --short "$BR")"
   exit 0
 fi
