@@ -54,6 +54,7 @@ All scripts take `--dry-run`. It prints every command the script would run and c
 | `55_e2e_previous_version.sh PART` | the previous-version runs: Table 10 July rows, monolithic row, Tables 11 and 12, Appendix A tags (T10b, T10c, T11, T12, AA). Optional | Ollama (Anthropic API for `tags-api`) | 16G client | as the Ollama model needs | 4 to 9 h per part | `previous/PART/` |
 | `65_authorship.sh --part P` | the authorship ablation: the tags again with Qwen3.8-27B, then MetaTool+Tags, MetaTool+QueryTags-top5 (seven backends) and Table 7 under both taggers (XAUTH). Parts tag, cpu, gpu, nemotron, analyze, test | tag 8355, cpu CPU, gpu local GPU, nemotron 8360 | 8G (tag), 8G or 20G (cpu), 12G (gpu), 8G (nemotron) | gpu part as 20_ | tag 3 to 5 h, cpu about 5 h, gpu 20 min, nemotron 45 min, analyze 15 min | `authorship/`, `wp0/stage/v042/tb_auth_*` |
 | `60_hermes.sh STEP` | Hermes stage 1 and stage 2 (XH) | ports 8355 and 8360 | 16G grid, 4G to 8G otherwise | none locally | about 50 h of grids | `hermes/` |
+| `61_hermes_chain.sh` | nothing by itself. Runs `60_` stage1, post-stage1, settings, block1 and post-block1 unattended, after a go file, around blocked windows (stopgap until a shared job queue) | as `60_` | 2G (the chain only waits) | none locally | as `60_` | `hermes-chain/`, `logs/hermes-chain/` |
 | `70_assemble.sh` | WP4 analysis, mandatory tables, prompt-size checks, the derived numbers no eval script writes (`reproduce/derive/`, `evals/diag_gate_coverage.py`), then gathers everything (T21, XE2Eb, X33, X42s, XE2Ea, X53) | CPU only | 16G | none | 20 to 40 min | `derived/`, `assembled/` |
 | `80_figures.sh` | Figure 2 (fig:pipeline), drawn in TikZ (F2) | CPU, pdflatex, the paper repo | none | none | 1 min | `figures/` |
 | `90_verify.sh` | runs `verify.py` and `collect.py` | CPU only | 8G | none | a few minutes | `verify/`, `numbers/` |
@@ -74,7 +75,7 @@ Run the windows in this order. Inside a window, run the scripts one after anothe
 | 3. Nemotron (8360) | Nemotron rows, stores, WP5 | `30_nemotron.sh` | 2 to 3 h |
 | 4. CPU only | WP2, WP6 from the stores | `40_robustness_from_stores.sh` | 1 h |
 | 5. Ollama (11434) | Table 10 reruns | `50_e2e_ollama.sh` | 40 min |
-| 6. Hermes (8355, 8360) | stage 1, settings, blocks 1 to 3, analysis | `60_hermes.sh STEP`, one step at a time (see its `--help`) | about 51 h |
+| 6. Hermes (8355, 8360) | stage 1, settings, blocks 1 to 3, analysis | `60_hermes.sh STEP`, one step at a time (see its `--help`), or `61_hermes_chain.sh` once for everything up to block 2 | about 51 h |
 | 6b. authorship (8355, then CPU, GPU, 8360) | the tags again, the reruns, the analysis | `65_authorship.sh --part tag`, then `--part cpu`, `--part gpu` (in a GPU window), `--part nemotron` (in a Nemotron window), `--part analyze` | about 10.5 h |
 | 7. CPU only | analysis and assembly | `70_assemble.sh` | 30 min |
 | | figure | `80_figures.sh` | 1 min |

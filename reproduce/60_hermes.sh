@@ -69,6 +69,7 @@ case $STEP in
 esac
 
 repro_begin
+[ -n "${REPRO_CHAIN:-}" ] && record_note "$REPRO_CHAIN"
 say "Hermes step $STEP from $HERMES_CLONE, WP7_RUNS=$WP7_RUNS"
 [ -d "$HERMES_CLONE/.git" ] || [ "$DRY_RUN" = 1 ] || die "missing clone $HERMES_CLONE (run 00_setup.sh)"
 [ "$DRY_RUN" = 1 ] || check_clone "$HERMES_CLONE"
