@@ -166,6 +166,8 @@ repro_begin() {
     echo "$$ $(date -u +%FT%TZ) ${REPRO_UNIT:-terminal}" > "$REPRO_RUNNING_MARK"
   fi
   say "run record: $REPRO_RECORD"
+  [ -n "${SLURM_JOB_ID:-}" ] && record_note "Slurm job $SLURM_JOB_ID (${SLURM_JOB_NAME:-}), submitted by ${SLURM_JOB_USER:-$(id -un)}"
+  return 0
 }
 
 record_note() {  # record_note TEXT: a line in the run record (also printed)
@@ -268,6 +270,15 @@ capped() {
 # log until the service ends and exit with its result.
 maybe_launch() {
   local unit=$1
+  # A Slurm job is already the long-running unit: run here, after the quick checks.
+  if [ -n "${SLURM_JOB_ID:-}" ] && [ "$DRY_RUN" = 0 ]; then
+    FOREGROUND=1
+    if declare -F preflight_launch >/dev/null; then
+      say "quick checks (Slurm job $SLURM_JOB_ID)"
+      preflight_launch
+    fi
+    return 0
+  fi
   [ "$FOREGROUND" = 1 ] || [ "$DRY_RUN" = 1 ] && return 0
   [ -x "$TC" ] || die "$TC is missing (run 00_setup.sh)"
   if systemctl --user is-active -q "$unit" 2>/dev/null; then

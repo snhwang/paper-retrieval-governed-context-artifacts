@@ -9,6 +9,7 @@
 # its cap is killed alone, never the VM. A service survives its wsl.exe exiting,
 # but only while the distro stays up (check the wsl-keepalive task first).
 # Service logs: journalctl --user -u NAME.  Stop: systemctl --user stop NAME.
+# Inside a Slurm job (SLURM_JOB_ID set) a scope runs the command in place under the job's cap.
 set -euo pipefail
 
 export XDG_RUNTIME_DIR="/run/user/$(id -u)"
@@ -25,6 +26,13 @@ while [ $# -gt 0 ]; do
   esac
 done
 [ $# -gt 0 ] || { echo "usage: tist-capped [--mem 24G] [--service NAME] -- cmd ..." >&2; exit 2; }
+
+# Inside a Slurm job the job's own cgroup holds the cap (sbatch --mem, swap 0), so a step runs
+# in place. A scope or service in tist.slice would leave Slurm's cgroup and its accounting.
+if [ -n "${SLURM_JOB_ID:-}" ]; then
+  [ -z "$unit" ] || { echo "tist-capped: no --service inside Slurm job $SLURM_JOB_ID. Run the step in the foreground." >&2; exit 2; }
+  exec "$@"
+fi
 
 caps=(--slice=tist.slice -p "MemoryMax=$mem" -p MemorySwapMax=0)
 
