@@ -166,7 +166,7 @@ repro_begin() {
     echo "$$ $(date -u +%FT%TZ) ${REPRO_UNIT:-terminal}" > "$REPRO_RUNNING_MARK"
   fi
   say "run record: $REPRO_RECORD"
-  [ -n "${SLURM_JOB_ID:-}" ] && record_note "Slurm job $SLURM_JOB_ID (${SLURM_JOB_NAME:-}), submitted by ${SLURM_JOB_USER:-$(id -un)}"
+  [ -n "${SLURM_JOB_ID:-}" ] && record_note "Slurm job $SLURM_JOB_ID (${SLURM_JOB_NAME:-}), submitted by ${SLURM_JOB_USER:-$(id -un)}, $(scontrol show job "$SLURM_JOB_ID" 2>/dev/null | grep -o 'Comment=.*' | head -1)"
   return 0
 }
 
@@ -368,7 +368,10 @@ check_slice() {
   local max swap
   max=$(systemctl --user show tist.slice -p MemoryMax --value 2>/dev/null)
   swap=$(systemctl --user show tist.slice -p MemorySwapMax --value 2>/dev/null)
-  [ "$max" = 42949672960 ] || die "tist.slice MemoryMax is '${max:-unset}', not 40G. Run: systemctl --user set-property tist.slice MemoryMax=40G MemorySwapMax=0"
+  # model-server sets the cap (40G, or 24G while Scott is at the desk). Any finite cap from
+  # 20G (a 16G grid plus a 4G check) to 40G is fine. Each job keeps its own cap inside it.
+  [[ $max =~ ^[0-9]+$ ]] && (( max >= 20 * 1024 ** 3 && max <= 40 * 1024 ** 3 )) \
+    || die "tist.slice MemoryMax is '${max:-unset}', not a cap from 20G to 40G. Run: systemctl --user set-property tist.slice MemoryMax=40G MemorySwapMax=0"
   [ "$swap" = 0 ] || die "tist.slice MemorySwapMax is '${swap:-unset}', not 0. Run: systemctl --user set-property tist.slice MemorySwapMax=0"
   local ctl=/sys/fs/cgroup/user.slice/user-$(id -u).slice/user@$(id -u).service/cgroup.subtree_control
   grep -qw memory "$ctl" 2>/dev/null || die "the memory controller is not delegated to the user manager ($ctl). See README, one-time setup."

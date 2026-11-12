@@ -42,6 +42,8 @@
 #   bash reproduce/slurm_submit.sh --dry-run      # print the sbatch lines, submit nothing
 #   bash reproduce/slurm_submit.sh                # submit
 #   bash reproduce/slurm_submit.sh --only "20 30" # submit some steps (no dependencies on the rest)
+# Submitted for Scott on his explicit word (he decided this on 2026-11-12), set both:
+#   RGC_VIA=work-pm RGC_REQUESTED="scott 2026-11-12T14:05Z: <his words>" bash reproduce/slurm_submit.sh
 set -uo pipefail
 ART=$(cd "$(dirname "$0")/.." && pwd)
 DRY=0 ONLY=""
@@ -80,7 +82,7 @@ sub() {  # sub STEP CPUS MEM TIME "LICENSES" "DEPENDENCY" "nofreeze|" CMD...  (p
   args+=(--licenses="$AFTER_HERMES${lic:+,$lic}")
   [ -n "$dp" ] && args+=("$dp" --kill-on-invalid-dep=yes)
   [ -n "${PURPOSE[$step]:-}" ] || { echo "no purpose for rgc-$step" >&2; exit 1; }
-  args+=(--comment="project=RGC; purpose=${PURPOSE[$step]}; plan=${PLAN[$step]:-$KIT_PLAN}${freeze:+; nofreeze}")
+  args+=(--comment="project=RGC; purpose=${PURPOSE[$step]}; plan=${PLAN[$step]:-$KIT_PLAN}${freeze:+; nofreeze}${RGC_VIA:+; via=$RGC_VIA}${RGC_REQUESTED:+; requested=$RGC_REQUESTED}")
   args+=(--wrap="$*")
   if [ "$DRY" = 1 ]; then
     ID[$step]="<rgc-$step>"
