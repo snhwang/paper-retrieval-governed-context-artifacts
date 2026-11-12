@@ -39,7 +39,7 @@
   "hermes/provenance.py": "2905d241ff898c2bca77af89df619c71b4e1452d9dce5a7b428595f457a5e319",
   "hermes/checks.py": "593324e5589fe0cef05636cc45b074fa083670e98167608d0bfccdc97e0e4b66",
   "hermes/sandbox_bridge.py": "7703643a3bee8d79b3c256fdf93afd1d583cfb4019950ad3036491690a2ae7bf",
-  "hermes/sandbox_redteam.py": "fcc8debd12c0853e3fd04f2cf271b83b483f9e951cc3ed76914461c15ba80820",
+  "hermes/sandbox_redteam.py": "794350183c54518c934dbc86ff628bb1b2807c1b3490a2f2c25dc6a0b4bad4d0",
   "hermes/corpus/base/tools.yaml": "d0727ea85dbb4219d87de66fae4b6068594494904be1b3bf9dc30cefb9280554",
   "hermes/corpus/decoys/decoys-100.yaml": "bd8106ea5fe2aee1ac4f934569316a6806a7acb65668c357df31cbdbcbdec36f",
   "hermes/corpus/decoys/decoys-300.yaml": "890864ee1eff81185267e43c7ec5b10a4fc846f5f2646e149b34c14101ef5313",

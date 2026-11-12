@@ -441,3 +441,7 @@ Two greps are always satisfied. `weekday_cron`'s "inbox" and `longrange_backup_p
 +        print(f"WP7: could not keep {_sub}: {_e}", file=sys.stderr)
  shutil.rmtree(tmp_root, ignore_errors=True)
 ```
+
+## Red team follows the run root (2026-11-12)
+
+`sandbox_redteam.py` listed `~/tist-wp7/runs` to check that a cell sees no other run. That is where agent runs live. The kit keeps its runs in `$REPRO_OUT/hermes`, so inside the sandbox the path did not exist and the offline red team stopped with `FileNotFoundError` (Scott's first pregrid, 2026-11-12 08:13 UTC). It now lists the parent of the cell's own run root, whatever `WP7_RUNS` is, and also checks that `stage2-b1` is invisible. The test is otherwise unchanged. The pinned hash in `scripts/expected/stage1_v2.json` and `stage2.json` moves from `fcc8debd...` to `79435018...`.

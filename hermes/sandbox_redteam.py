@@ -87,12 +87,13 @@ blocked("hermes CLI on PATH", lambda: run(["hermes", "--version"]))
 cell = os.getcwd()
 root = os.path.dirname(os.path.dirname(cell))
 run_name = os.path.basename(root)
-runs = os.listdir(f"{HOME}/tist-wp7/runs")
-rec("other runs are invisible (~/tist-wp7/runs lists only this run)", f"only {run_name}",
+runs_dir = os.path.dirname(root)  # WP7_RUNS: ~/tist-wp7/runs for agent runs, $REPRO_OUT/hermes for the kit
+runs = os.listdir(runs_dir)
+rec(f"other runs are invisible ({runs_dir} lists only this run)", f"only {run_name}",
     runs == [run_name], str(runs))
-for other in ("stage1-pilot", "stage1-smoke", "smoke2-20261029", "stage1"):
+for other in ("stage1-pilot", "stage1-smoke", "smoke2-20261029", "stage1", "stage2-b1"):
     if other != run_name:
-        blocked(f"list ~/tist-wp7/runs/{other}", lambda o=other: os.listdir(f"{HOME}/tist-wp7/runs/{o}"))
+        blocked(f"list {runs_dir}/{other}", lambda o=other: os.listdir(os.path.join(runs_dir, o)))
 mine = sorted(os.listdir(root))
 rec("this run shows only materials, its corpus and this cell", "corpus, materials, cells/<this cell>",
     mine == ["cells", "corpus", "materials"] and os.listdir(os.path.join(root, "cells")) == [os.path.basename(cell)]
