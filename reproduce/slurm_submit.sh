@@ -33,7 +33,9 @@
 # beside a grid. 15 is split so its 16G part can run while Scott is at the desk (24G cap in
 # all). Only the store fill, whose steps are capped at 24G each, needs 28G.
 # Times are the October estimates with room for Zoom freezes, which count against the limit.
-# Jobs with network timeouts or GPU memory carry --comment=nofreeze (throttled, never frozen).
+# Every job carries --comment="project=RGC; purpose=...; plan=..." (required by the queue). Jobs
+# with network timeouts or GPU memory add "; nofreeze" there (throttled, never frozen). The plan
+# names the kit commit, and for the authorship parts the approved plan's hash as well.
 # Hermes blocks 2 and 3 and analyze are not here. They stay on 60_hermes.sh.
 #
 # Usage:
@@ -69,15 +71,16 @@ dep() {  # dep KIND:STEP... -> --dependency=... from the ids submitted so far
   done
   [ ${#parts[@]} -gt 0 ] && (IFS=,; echo "--dependency=${parts[*]}")
 }
-sub() {  # sub STEP CPUS MEM TIME "LICENSES" "DEPENDENCY" "EXTRA" CMD...
-  local step=$1 cpus=$2 mem=$3 time=$4 lic=$5 dp=$6 extra=$7
+sub() {  # sub STEP CPUS MEM TIME "LICENSES" "DEPENDENCY" "nofreeze|" CMD...  (purpose and plan from PURPOSE, PLAN)
+  local step=$1 cpus=$2 mem=$3 time=$4 lic=$5 dp=$6 freeze=$7
   shift 7
   want "$step" || return 0
   local args=(--parsable --job-name="rgc-$step" --cpus-per-task="$cpus" --mem="$mem" --time="$time"
               --chdir="$ART" --output="$OUT/%x-%j.out")
   args+=(--licenses="$AFTER_HERMES${lic:+,$lic}")
   [ -n "$dp" ] && args+=("$dp" --kill-on-invalid-dep=yes)
-  [ -n "$extra" ] && args+=($extra)
+  [ -n "${PURPOSE[$step]:-}" ] || { echo "no purpose for rgc-$step" >&2; exit 1; }
+  args+=(--comment="project=RGC; purpose=${PURPOSE[$step]}; plan=${PLAN[$step]:-$KIT_PLAN}${freeze:+; nofreeze}")
   args+=(--wrap="$*")
   if [ "$DRY" = 1 ]; then
     ID[$step]="<rgc-$step>"
@@ -90,7 +93,28 @@ sub() {  # sub STEP CPUS MEM TIME "LICENSES" "DEPENDENCY" "EXTRA" CMD...
   echo "rgc-$step: job ${ID[$step]}"
 }
 
-NOFREEZE="--comment=nofreeze"
+NOFREEZE=nofreeze
+KIT_PLAN="TIST reproduction kit $(git -C "$ART" rev-parse --short HEAD)"
+AUTH_PLAN="authorship PLAN.md v2 sha256 834b15fb, $KIT_PLAN"
+declare -A PURPOSE PLAN
+PURPOSE=(
+  [10]="TIST paper revision: CPU retrieval rows of Tables 6 to 9 and 13 to 17 on BEAR 0.4.2"
+  [15]="TIST paper revision: invariant tests, budget binding, BM25 and BGE-M3 checks, WP5 BGE and CPA rows"
+  [15fill]="TIST paper revision: CPU embedding stores for the tag-noise, leakage and mandatory-coverage tests"
+  [20]="TIST paper revision: Qwen3-4B rows of Tables 6, 8 and 9 and the Qwen stores, on the local GPU"
+  [30]="TIST paper revision: Nemotron rows of Tables 6, 8 and 9, threshold diagnosis, Nemotron stores"
+  [40]="TIST paper revision: tag noise, over-restriction, leakage and coverage tests from the stores"
+  [50]="TIST paper revision: Table 10 end-to-end reruns on BEAR 0.4.2 with Mistral-Nemo in Ollama"
+  [65tag]="TIST authorship ablation: rewrite all tool and query tags with Qwen3.8-27B on 8355"
+  [65cpu]="TIST authorship ablation: retrieval reruns with the new tags, CPU backends"
+  [65gpu]="TIST authorship ablation: retrieval reruns with the new tags, Qwen3-4B on the local GPU"
+  [65nem]="TIST authorship ablation: retrieval reruns with the new tags, Nemotron on 8360"
+  [65an]="TIST authorship ablation: compare the two taggers by the approved plan's rules"
+  [70]="TIST paper revision: assemble all kit outputs and derived numbers in the repo layout"
+  [80]="TIST paper revision: draw Figure 2, the pipeline diagram"
+  [90]="TIST paper revision: check outputs against the committed results and write the numbers file"
+)
+for s in 65tag 65cpu 65gpu 65nem 65an; do PLAN[$s]=$AUTH_PLAN; done
 sub 10     12 24G 1-00:00:00 ""            ""                                         ""          bash reproduce/10_cpu_retrieval.sh
 sub 15     12 16G 10:00:00   ""            "$(dep afterany:10)"                        ""          bash reproduce/15_cpu_invariants_baselines.sh --only "'wp256-v042 wp256-v042-bge wp256-v042-bm25 wp256-v042-bgem3 wp5-bge-cpa'"
 sub 15fill 12 28G 06:00:00   ""            "$(dep afterany:15)"                        ""          bash reproduce/15_cpu_invariants_baselines.sh --only fill-cpu-stores
