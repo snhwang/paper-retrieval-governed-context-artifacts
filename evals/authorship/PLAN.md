@@ -1,6 +1,6 @@
 # Authorship ablation: analysis plan
 
-Status: draft for Scott's approval, 2026-11-12. Under "Specs yes, gates no" (9 Nov 2026), this plan is written and hashed before any run. Its sha256 is recorded in the paper repo's `revision-plan.md` when Scott approves it. A later change gets a new version of this file and a dated entry under "Changes" saying what changed and why.
+Status: version 2, 2026-11-12. Version 1 approved by Scott. Version 2 adds one rule (see Changes) and awaits his approval. Under "Specs yes, gates no" (9 Nov 2026), this plan is written and hashed before any run. Its sha256 is recorded in the paper repo's `revision-plan.md` when Scott approves it. A later change gets a new version of this file and a dated entry under "Changes" saying what changed and why.
 
 ## Question
 
@@ -57,6 +57,7 @@ Tagger agreement, with no test attached:
 
 These rules are fixed now, before any run.
 
+- **Cannot tell** applies first. Where Sonnet's own effect has a 95% CI that includes zero, there is no effect to hold, and the cell reads "cannot tell". The report still gives both effects and their difference with CIs.
 - **The effect holds** on a backend and condition when the second tagger's effect has the same sign as Sonnet's and its 95% CI excludes zero. This applies in both directions. MetaTool+Tags helps every backend under Sonnet. MetaTool+QueryTags hurts the dense backends and helps the lexical ones.
 - **The effect is comparable** when the CI of the difference of effects lies within ±0.02 Recall@5. If the CI includes zero but reaches past ±0.02, the text says the data cannot tell, and gives the interval.
 - **The effect differs** when the CI of the difference of effects excludes zero. The text gives the size, both as a difference and as a fraction of Sonnet's effect.
@@ -90,4 +91,4 @@ The cpu, gpu and nemotron parts need the Sonnet-side runs of steps 10, 20 and 30
 
 ## Changes
 
-None yet.
+- **2026-11-12, version 2.** Version 1 (sha256 1f7b1168209af75256773f483d1def11ef545da6614bea879ef7c7530af746a1) was approved by Scott with thinking off, all seven backends and the ±0.02 margin. Added the "cannot tell" rule for cells where Sonnet's own effect CI includes zero. Version 1 would have read such a cell as "does not hold", although there was no effect to hold. Suggested by Work PM, approved by Scott before any run.
