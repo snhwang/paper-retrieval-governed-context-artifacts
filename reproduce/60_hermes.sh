@@ -19,11 +19,11 @@
 #   stage1         scripts/launch_stage1.sh, 1,656 cells (8355 exclusive)         about 27 h
 #   post-stage1    scripts/post_stage1.sh                                         15 min
 #   settings       scripts/stage2_settings.sh (k sweep, annotation cost)          1 min
-#   block1         scripts/launch_block.sh 1, 874 cells                           about 11.5 h
+#   block1         scripts/launch_block.sh 1, 874 cells                           about 14 h
 #   post-block1    scripts/post_block.sh 1                                        5 min
-#   block2         scripts/launch_block.sh 2, 414 cells                           about 7 h
+#   block2         scripts/launch_block.sh 2, 414 cells                           about 8.5 h
 #   post-block2    scripts/post_block.sh 2                                        5 min
-#   block3         scripts/launch_block.sh 3, 276 cells                           about 4.5 h
+#   block3         scripts/launch_block.sh 3, 276 cells                           about 5.5 h
 #   post-block3    scripts/post_block.sh 3                                        5 min
 #   analyze        scripts/analyze_stage2.sh                                      a few min
 #   status ROOT    python3 scripts/status.py $WP7_RUNS/ROOT (stage1, stage2-b1, ...)

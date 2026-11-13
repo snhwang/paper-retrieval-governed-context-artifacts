@@ -2,9 +2,9 @@
 # slurm_submit_hermes.sh: submit the rest of Hermes (WP7 stage 2) to the workstation's Slurm queue.
 #
 # After the chain (61_hermes_chain.sh) has run stage 1 to block 1, this queues, in order:
-#   rgc-h-b2     block 2 (C-cut at k, operators and 100-decoy guests), 414 cells   8355 and 8360 exclusive, 16G, 10 h limit
+#   rgc-h-b2     block 2 (C-cut at k, operators and 100-decoy guests), 414 cells   8355 and 8360 exclusive, 16G, 12 h limit
 #   rgc-h-pb2    post-block2 checks (offline)                                    4G, 30 min
-#   rgc-h-b3     block 3 (gate with reason at 100 decoys), 276 cells         8355 and 8360 exclusive, 16G,  7 h limit
+#   rgc-h-b3     block 3 (gate with reason at 100 decoys), 276 cells         8355 and 8360 exclusive, 16G,  8 h limit
 #   rgc-h-pb3    post-block3 checks (offline)                                    4G, 30 min
 #   rgc-h-an     analyze stage 2 (offline)                                       8G, 30 min
 # each as `bash reproduce/60_hermes.sh STEP` with its kit run record. A block runs inside its job.
@@ -66,9 +66,9 @@ sub() {  # sub NAME CPUS MEM TIME LICENSES AFTEROK NOFREEZE PURPOSE CMD
 }
 
 GRID="chat8355:8,embed8360:8"
-sub rgc-h-b2  4 16G 10:00:00 "$GRID" ""         nofreeze "TIST Hermes stage 2 block 2: C-cut narrowing at k=$K against stage-1 baselines" "reproduce/60_hermes.sh block2$CONT"
+sub rgc-h-b2  4 16G 12:00:00 "$GRID" ""         nofreeze "TIST Hermes stage 2 block 2: C-cut narrowing at k=$K against stage-1 baselines" "reproduce/60_hermes.sh block2$CONT"
 sub rgc-h-pb2 2 4G  00:30:00 ""      rgc-h-b2   ""       "TIST Hermes stage 2: offline checks and tables after block 2" "reproduce/60_hermes.sh post-block2"
-sub rgc-h-b3  4 16G 07:00:00 "$GRID" rgc-h-pb2  nofreeze "TIST Hermes stage 2 block 3: gate with reason at 100 decoys, guests" "reproduce/60_hermes.sh block3"
+sub rgc-h-b3  4 16G 08:00:00 "$GRID" rgc-h-pb2  nofreeze "TIST Hermes stage 2 block 3: gate with reason at 100 decoys, guests" "reproduce/60_hermes.sh block3"
 sub rgc-h-pb3 2 4G  00:30:00 ""      rgc-h-b3   ""       "TIST Hermes stage 2: offline checks and tables after block 3" "reproduce/60_hermes.sh post-block3"
 sub rgc-h-an  2 8G  00:30:00 ""      rgc-h-pb3  ""       "TIST Hermes stage 2: analysis of blocks 1 to 3 for the paper's Hermes section" "reproduce/60_hermes.sh analyze"
 [ "$DRY" = 1 ] && echo "(dry run: nothing submitted)"
