@@ -96,6 +96,21 @@ case $STEP in
     python3 "$REPRO_DIR/lib/run_record.py" endpoint "$REPRO_RECORD" --name sglang --url "$REPRO_SGLANG_URL" >/dev/null 2>&1
     python3 "$REPRO_DIR/lib/run_record.py" endpoint "$REPRO_RECORD" --name nemotron --url "$REPRO_NEMOTRON_URL/health" >/dev/null 2>&1 ;;
 esac
+if [ -n "${SLURM_JOB_ID:-}" ] && [[ $STEP == block[123] ]]; then
+  # A block runs inside this Slurm job. sbatch --signal=B:USR1@<s> (with --wrap "exec bash ...")
+  # reaches this shell before the time limit or a booked window, and we write the block's STOP
+  # file: the grid ends after its current cell. Rerun the step with --continue later.
+  ROOT=$WP7_RUNS/stage2-b${STEP#block}
+  trap 'touch "$ROOT/STOP"; record_note "USR1 from Slurm at $(date -u +%FT%TZ): STOP written for $ROOT"' USR1
+  run_cmd "hermes-$STEP" -C "$HERMES_CLONE/hermes" -- "${CMD[@]}" &
+  pid=$!
+  while :; do wait "$pid"; rc=$?; kill -0 "$pid" 2>/dev/null || break; done
+  case $rc in
+    0|1) REPRO_OK_NOTE="block ${STEP#block} finished in Slurm job $SLURM_JOB_ID (run.py exit $rc). Next: post-$STEP"; exit 0 ;;
+    3) die "block ${STEP#block} paused by its STOP file. Continue with: 60_hermes.sh $STEP --continue" ;;
+    *) die "block ${STEP#block} ended with exit $rc (2 means the runner stopped itself: read $ROOT/logs/cells.jsonl)" ;;
+  esac
+fi
 run_cmd "hermes-$STEP" -C "$HERMES_CLONE/hermes" -- "${CMD[@]}" || die "hermes step $STEP failed (see its output above)"
 case $STEP in
   stage1|block[123]) REPRO_OK_NOTE="the grid service is started (its status commands are printed above). When it ends, run the next step: post-${STEP/stage1/stage1}" ;;

@@ -68,6 +68,14 @@ if [ -n "$(git status --porcelain -- .)" ]; then
 fi
 "$TIST_CAPPED" --mem 4G -- "$WP7_PY" "$WP7_SCRIPTS/provenance_check.py" "$WP7_SCRIPTS/expected/stage2.json" \
   > "$WP7_RUNS/provenance-block$N.json" || { cat "$WP7_RUNS/provenance-block$N.json"; echo "provenance check failed"; exit 1; }
+if [ -n "${SLURM_JOB_ID:-}" ]; then
+  # Inside a Slurm job the block runs here, under the job's cap (tist-capped runs in place),
+  # and its exit code is run.py's: 0 or 1 done, 2 stopped itself, 3 paused by STOP.
+  echo "run block $N in Slurm job $SLURM_JOB_ID at $(date -u +%FT%TZ), harness $(git rev-parse --short HEAD), MemAvailable $(wp7_mem_gb) GB"
+  "$TIST_CAPPED" --mem 16G -- /bin/bash "$WP7_SCRIPTS/run_recorded.sh" --record "$REC" --root "$R" \
+    --unit "slurm-$SLURM_JOB_ID" "stage2-block$N" -- "${CMD[@]}"
+  exit $?
+fi
 echo "launch $U at $(date -u +%FT%TZ), harness $(git rev-parse --short HEAD), MemAvailable $(wp7_mem_gb) GB"
 "${FULL[@]}" || { echo "the service did not start"; exit 1; }
 sleep 20
