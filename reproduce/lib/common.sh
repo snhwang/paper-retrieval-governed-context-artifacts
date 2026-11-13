@@ -366,6 +366,19 @@ check_tc() {
 
 check_slice() {
   local max swap
+  if [ -n "${SLURM_JOB_ID:-}" ]; then
+    # Inside a Slurm job the job's own cgroup is the cap (sbatch --mem), and tist.slice is not
+    # used (model-server keeps it small once Slurm holds the share). Check that cap instead.
+    local cg
+    cg=$(awk -F: '$1 == "0" { print $3 }' /proc/self/cgroup 2>/dev/null)
+    max=$(cat "/sys/fs/cgroup$cg/memory.max" 2>/dev/null)
+    while [ "$max" = max ] && [ "$cg" != / ] && [ -n "$cg" ]; do
+      cg=$(dirname "$cg"); max=$(cat "/sys/fs/cgroup$cg/memory.max" 2>/dev/null)
+    done
+    [[ $max =~ ^[0-9]+$ ]] || die "Slurm job $SLURM_JOB_ID has no finite memory cap in its cgroup ('${max:-unreadable}')"
+    say "memory cap from Slurm job $SLURM_JOB_ID's cgroup: $(( max / 1024 ** 2 )) MiB"
+    return 0
+  fi
   max=$(systemctl --user show tist.slice -p MemoryMax --value 2>/dev/null)
   swap=$(systemctl --user show tist.slice -p MemorySwapMax --value 2>/dev/null)
   # model-server sets the cap (40G, or 24G while Scott is at the desk). Any finite cap from
