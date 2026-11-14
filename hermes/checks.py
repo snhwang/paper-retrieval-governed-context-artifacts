@@ -246,7 +246,12 @@ def main() -> int:
                             or wh[n].get("missing_tags") != [tag_of[n]]]
                     ck.check(cell, "decoys.out_of_scope_withheld_with_team_tag", not miss,
                              f"{len(present_out)} present, {len(miss)} wrong: {miss[:3]}")
+                    # An in-scope decoy passes the gate, so it is offered or, under a bound k
+                    # (C-cut), ranked out by score. Before 14 Nov this check read only `offered`
+                    # and failed every C-cut cell whose ranked list exceeded k.
                     off = set(names(r.get("offered")))
+                    if r.get("bound"):
+                        off |= set(names(r.get("ranked_out")))
                     ck.check(cell, "decoys.in_scope_offered", present_in <= off,
                              f"missing {sorted(present_in - off)}")
             ck.check(cell, "decoys.present_in_catalog", len(present_out | present_in) == ndecoys,
