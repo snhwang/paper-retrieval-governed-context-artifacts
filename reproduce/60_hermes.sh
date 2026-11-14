@@ -101,10 +101,17 @@ if [ -n "${SLURM_JOB_ID:-}" ] && [[ $STEP == block[123] ]]; then
   # reaches this shell before the time limit or a booked window, and we write the block's STOP
   # file: the grid ends after its current cell. Rerun the step with --continue later.
   ROOT=$WP7_RUNS/stage2-b${STEP#block}
+  # run.py exits 1 for "batch_end with some failed cells", but launch_block.sh also exits 1 when a
+  # check fails before run.py starts. So "done" means a new batch_end line in the block's log.
+  ends_before=$(grep -c '"event": "batch_end"' "$ROOT/logs/cells.jsonl" 2>/dev/null); ends_before=${ends_before:-0}
   trap 'touch "$ROOT/STOP"; record_note "USR1 from Slurm at $(date -u +%FT%TZ): STOP written for $ROOT"' USR1
   run_cmd "hermes-$STEP" -C "$HERMES_CLONE/hermes" -- "${CMD[@]}" &
   pid=$!
   while :; do wait "$pid"; rc=$?; kill -0 "$pid" 2>/dev/null || break; done
+  ends_after=$(grep -c '"event": "batch_end"' "$ROOT/logs/cells.jsonl" 2>/dev/null); ends_after=${ends_after:-0}
+  if [[ $rc == [01] ]] && (( ends_after <= ends_before )); then
+    die "block ${STEP#block} did not reach batch_end (exit $rc). A check before the grid failed, or the grid never ran: see the output above"
+  fi
   case $rc in
     0|1) REPRO_OK_NOTE="block ${STEP#block} finished in Slurm job $SLURM_JOB_ID (run.py exit $rc). Next: post-$STEP"; exit 0 ;;
     3) die "block ${STEP#block} paused by its STOP file. Continue with: 60_hermes.sh $STEP --continue" ;;
