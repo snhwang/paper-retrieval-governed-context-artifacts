@@ -82,7 +82,7 @@ sub() {  # sub STEP CPUS MEM TIME "LICENSES" "DEPENDENCY" "nofreeze|" CMD...  (p
   args+=(--licenses="$AFTER_HERMES${lic:+,$lic}")
   [ -n "$dp" ] && args+=("$dp" --kill-on-invalid-dep=yes)
   [ -n "${PURPOSE[$step]:-}" ] || { echo "no purpose for rgc-$step" >&2; exit 1; }
-  args+=(--comment="project=RGC; purpose=${PURPOSE[$step]}; plan=${PLAN[$step]:-$KIT_PLAN}${freeze:+; nofreeze}${RGC_VIA:+; via=$RGC_VIA}${RGC_REQUESTED:+; requested=$RGC_REQUESTED}")
+  args+=(--comment="project=RGC; purpose=${PURPOSE[$step]}; plan=${PLAN[$step]:-$KIT_PLAN}${freeze:+; nofreeze}${RGC_VIA:+; via=$RGC_VIA}${RGC_REQUESTED:+; requested=$RGC_REQUESTED}${SLURM_JOB_ID:+; parent=$SLURM_JOB_ID}")
   args+=(--wrap="$*")
   if [ "$DRY" = 1 ]; then
     ID[$step]="<rgc-$step>"
