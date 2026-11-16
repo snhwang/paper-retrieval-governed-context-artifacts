@@ -86,6 +86,8 @@ CAP=("$HOME/bin/tist-capped" --mem "${WP0_STEP_MEM:-8G}" --)
 step() {
   local name=$1 kind=$2 ver=$3 need=$4 maxwait=$5; shift 6
   if [[ -f $LOGS/$name.done ]]; then log "skip $name (done)"; return 0; fi
+  # WP0_SKIP_STEPS (comma list): steps another lane runs instead. The kit sets it under Slurm.
+  if [[ ,${WP0_SKIP_STEPS:-}, == *",$name,"* ]]; then log "skip $name (WP0_SKIP_STEPS, run by a later lane)"; return 0; fi
   rm -f "$LOGS/$name.failed" "$LOGS/$name.blocked"
   local marker=$LOGS/.$name.start
   touch "$marker"; sleep 1

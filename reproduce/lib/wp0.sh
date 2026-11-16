@@ -26,6 +26,21 @@ lane_clone() {
 }
 
 lane_env() {
+  local e m
+  e=$(lane_env_base "$1")
+  if [ -n "${SLURM_JOB_ID:-}" ]; then
+    # Inside a Slurm job tist-capped runs each step in place, so WP0_STEP_MEM no longer caps a
+    # step on its own, and a step past the job's --mem takes the whole job down (job 85, 16 Nov).
+    # mem_guard.sh then stops a step at the same size instead (exit 76). The two dense042 steps
+    # that fail at 20G by design (two Qwen3-4B copies) are skipped. manddense042 runs them.
+    m=$(sed -n 's/.*WP0_STEP_MEM=\([0-9][0-9]*\)G.*/\1/p' <<<"$e")
+    [ -n "$m" ] && e+=" WP0_RSS_MAX_GIB=$m"
+    [ "$1" = dense042 ] && e+=" WP0_SKIP_STEPS=decomposed_q4b,decomposed_q4b_v0110"
+  fi
+  echo "$e"
+}
+
+lane_env_base() {
   local gpu="WP0_ALLOW_LOCAL_MODELS=1 WP0_STEP_MEM=12G WP0_GPU_CAP_FIXED=11.2 WP0_WIN_GPU_MAX_MIB=$GPU_START_MIB"
   gpu+=" WP0_WIN_GPU_STOP_MIB=$GPU_STOP_MIB WP0_GPU_MAXWAIT=${WP0_GPU_MAXWAIT:-7200}"
   case $1 in

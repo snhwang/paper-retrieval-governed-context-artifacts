@@ -42,16 +42,21 @@
 #   bash reproduce/slurm_submit.sh --dry-run      # print the sbatch lines, submit nothing
 #   bash reproduce/slurm_submit.sh                # submit
 #   bash reproduce/slurm_submit.sh --only "20 30" # submit some steps (no dependencies on the rest)
+#   bash reproduce/slurm_submit.sh --replace      # resubmit the kit over an earlier submission:
+#     cancels this user's pending rgc-<step> kit jobs, and a step whose earlier job is still
+#     running gets a new job that starts after it ends (afterany). Finished steps are skipped,
+#     so a step that already completed ends at once.
 # Only Scott runs this (the paper says no AI agent queued an experiment). sbatch stamps origin=
 # (terminal, job page or job <id>) by itself, and inside a Slurm job each kit job also gets
 # parent=<id>. There is no via= or requested= here, by design (Scott, 16 Nov).
 set -uo pipefail
 ART=$(cd "$(dirname "$0")/.." && pwd)
-DRY=0 ONLY=""
+DRY=0 ONLY="" REPLACE=0
 while [ $# -gt 0 ]; do
   case $1 in
     -n|--dry-run) DRY=1 ;;
     --only) ONLY=" $2 "; shift ;;
+    --replace) REPLACE=1 ;;
     -h|--help) awk 'NR == 1 { next } /^#/ { sub(/^# ?/, ""); print; next } { exit }' "$0"; exit 0 ;;
     *) echo "unknown option $1" >&2; exit 2 ;;
   esac
@@ -63,7 +68,7 @@ OUT=${REPRO_OUT:-$HOME/tist-repro}/logs/slurm
 command -v sbatch >/dev/null || [ "$DRY" = 1 ] || { echo "sbatch not found" >&2; exit 1; }
 [ -z "$(git -C "$ART" status --porcelain --untracked-files=no)" ] || echo "WARNING: $ART has uncommitted changes. The jobs run what is on disk when they start."
 
-declare -A ID
+declare -A ID PREV
 want() { [ -z "$ONLY" ] || [[ $ONLY == *" $1 "* ]]; }
 dep() {  # dep KIND:STEP... -> --dependency=... from the ids submitted so far
   local parts=() k s ids
@@ -81,6 +86,9 @@ sub() {  # sub STEP CPUS MEM TIME "LICENSES" "DEPENDENCY" "nofreeze|" CMD...  (p
   local args=(--parsable --job-name="rgc-$step" --cpus-per-task="$cpus" --mem="$mem" --time="$time"
               --chdir="$ART" --output="$OUT/%x-%j.out")
   args+=(--licenses="$AFTER_HERMES${lic:+,$lic}")
+  if [ -n "${PREV[$step]:-}" ]; then
+    if [ -n "$dp" ]; then dp+=",afterany:${PREV[$step]}"; else dp="--dependency=afterany:${PREV[$step]}"; fi
+  fi
   [ -n "$dp" ] && args+=("$dp" --kill-on-invalid-dep=yes)
   [ -n "${PURPOSE[$step]:-}" ] || { echo "no purpose for rgc-$step" >&2; exit 1; }
   args+=(--comment="project=RGC; purpose=${PURPOSE[$step]}; plan=${PLAN[$step]:-$KIT_PLAN}${freeze:+; nofreeze}${SLURM_JOB_ID:+; parent=$SLURM_JOB_ID}")
@@ -95,6 +103,19 @@ sub() {  # sub STEP CPUS MEM TIME "LICENSES" "DEPENDENCY" "nofreeze|" CMD...  (p
   ID[$step]=${id%%;*}
   echo "rgc-$step: job ${ID[$step]}"
 }
+
+KIT_STEPS="10 15 15fill 20 30 40 50 65tag 65cpu 65gpu 65nem 65an 70 80 90"
+if [ "$REPLACE" = 1 ]; then
+  while read -r jid jname jstate; do
+    s=${jname#rgc-}
+    [[ " $KIT_STEPS " == *" $s "* ]] || continue
+    want "$s" || continue
+    case $jstate in
+      PENDING) echo "replace: cancel pending $jname (job $jid)"; [ "$DRY" = 1 ] || scancel "$jid" ;;
+      *) PREV[$s]=$jid; echo "replace: $jname (job $jid) is $jstate, the new $jname starts after it" ;;
+    esac
+  done < <(squeue -h -u "$(id -un)" -o "%i %j %T" 2>/dev/null)
+fi
 
 NOFREEZE=nofreeze
 KIT_PLAN="TIST reproduction kit $(git -C "$ART" rev-parse --short HEAD)"

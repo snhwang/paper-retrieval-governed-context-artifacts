@@ -238,6 +238,9 @@ rstep() {
 # does. Raw memory.current never drops while the slice keeps old page cache.
 slice_wait() {
   [ "$DRY_RUN" = 1 ] && { echo "+ (wait until tist.slice holds <= ${REPRO_SLICE_MAX_GB} GB other than page cache)"; return 0; }
+  # Inside a Slurm job, Slurm's memory limits decide when jobs start, and this job's own cgroup
+  # caps it. tist.slice is not used there, so there is nothing to wait for.
+  [ -n "${SLURM_JOB_ID:-}" ] && return 0
   local cg cur file shmem used max=$((REPRO_SLICE_MAX_GB * 1024 * 1024 * 1024))
   cg=/sys/fs/cgroup$(systemctl --user show tist.slice -p ControlGroup --value 2>/dev/null)
   [ -r "$cg/memory.current" ] || die "cannot read $cg/memory.current (is tist.slice set up? see 00_setup.sh)"
