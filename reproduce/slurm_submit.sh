@@ -42,8 +42,9 @@
 #   bash reproduce/slurm_submit.sh --dry-run      # print the sbatch lines, submit nothing
 #   bash reproduce/slurm_submit.sh                # submit
 #   bash reproduce/slurm_submit.sh --only "20 30" # submit some steps (no dependencies on the rest)
-# Submitted for Scott on his explicit word (he decided this on 2026-11-12), set both:
-#   RGC_VIA=work-pm RGC_REQUESTED="scott 2026-11-12T14:05Z: <his words>" bash reproduce/slurm_submit.sh
+# Only Scott runs this (the paper says no AI agent queued an experiment). sbatch stamps origin=
+# (terminal, job page or job <id>) by itself, and inside a Slurm job each kit job also gets
+# parent=<id>. There is no via= or requested= here, by design (Scott, 16 Nov).
 set -uo pipefail
 ART=$(cd "$(dirname "$0")/.." && pwd)
 DRY=0 ONLY=""
@@ -82,7 +83,7 @@ sub() {  # sub STEP CPUS MEM TIME "LICENSES" "DEPENDENCY" "nofreeze|" CMD...  (p
   args+=(--licenses="$AFTER_HERMES${lic:+,$lic}")
   [ -n "$dp" ] && args+=("$dp" --kill-on-invalid-dep=yes)
   [ -n "${PURPOSE[$step]:-}" ] || { echo "no purpose for rgc-$step" >&2; exit 1; }
-  args+=(--comment="project=RGC; purpose=${PURPOSE[$step]}; plan=${PLAN[$step]:-$KIT_PLAN}${freeze:+; nofreeze}${RGC_VIA:+; via=$RGC_VIA}${RGC_REQUESTED:+; requested=$RGC_REQUESTED}${SLURM_JOB_ID:+; parent=$SLURM_JOB_ID}")
+  args+=(--comment="project=RGC; purpose=${PURPOSE[$step]}; plan=${PLAN[$step]:-$KIT_PLAN}${freeze:+; nofreeze}${SLURM_JOB_ID:+; parent=$SLURM_JOB_ID}")
   args+=(--wrap="$*")
   if [ "$DRY" = 1 ]; then
     ID[$step]="<rgc-$step>"

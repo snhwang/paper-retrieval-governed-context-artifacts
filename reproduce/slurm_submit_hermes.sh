@@ -55,7 +55,7 @@ sub() {  # sub NAME CPUS MEM TIME LICENSES AFTEROK NOFREEZE PURPOSE CMD
               --chdir="$ART" --output="$OUT/%x-%j.out")
   [ -n "$lic" ] && args+=(--licenses="$lic" --signal=B:USR1@1200)
   [ -n "$after" ] && args+=(--dependency="afterok:${ID[$after]}" --kill-on-invalid-dep=yes)
-  args+=(--comment="project=RGC; purpose=$purpose; plan=$KIT, k=$K${nf:+; nofreeze}${RGC_VIA:+; via=$RGC_VIA}${RGC_REQUESTED:+; requested=$RGC_REQUESTED}")
+  args+=(--comment="project=RGC; purpose=$purpose; plan=$KIT, k=$K${nf:+; nofreeze}")
   args+=(--wrap="exec bash $cmd")
   if [ "$DRY" = 1 ]; then
     ID[$name]="<$name>"; printf 'sbatch'; printf " %q" "${args[@]}"; echo; return 0
