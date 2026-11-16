@@ -14,14 +14,14 @@
 #
 # Steps, with what they hold (cores are --cpus-per-task, 2 per physical core):
 #   rgc-10      CPU retrieval              12 CPUs, 24G, 24 h
-#   rgc-15      invariants and baselines   12 CPUs, 16G, 10 h   after rgc-10 ends
-#   rgc-15fill  the CPU embedding stores   12 CPUs, 28G,  6 h   after rgc-15 ends (28G: night only)
+#   rgc-15      invariants and baselines   12 CPUs, 16G, 14 h   after rgc-10 ends
+#   rgc-15fill  the CPU embedding stores   12 CPUs, 28G, 10 h   after rgc-15 ends (28G: night only)
 #   rgc-20      Qwen3-4B on the GPU         4 CPUs, 16G,  6 h   gpumem:14
 #   rgc-30      Nemotron                    4 CPUs, 16G,  4 h   embed8360:1
-#   rgc-40      robustness from stores      8 CPUs, 16G,  3 h   after 15, 15fill, 20 and 30 succeed
+#   rgc-40      robustness from stores      8 CPUs, 16G, 6.5 h  after 15, 15fill, 20 and 30 succeed
 #   rgc-50      Table 10 reruns (Ollama)    2 CPUs,  6G, 90 min gpumem:16, after rgc-10 and rgc-20 succeed
 #   rgc-65tag   authorship tags             2 CPUs,  8G,  7 h   chat8355:4
-#   rgc-65cpu   authorship, CPU part       12 CPUs, 24G,  8 h   after the tags, after rgc-15fill ends
+#   rgc-65cpu   authorship, CPU part       12 CPUs, 24G, 12 h   after the tags, after rgc-15fill ends
 #   rgc-65gpu   authorship, GPU part        4 CPUs, 16G,  2 h   gpumem:14, after the tags and rgc-20
 #   rgc-65nem   authorship, Nemotron part   2 CPUs,  8G, 90 min embed8360:1, after the tags and rgc-30
 #   rgc-65an    authorship analysis         2 CPUs,  8G, 45 min after 10, 20, 30 and the three parts
@@ -158,16 +158,21 @@ PURPOSE=(
   [90]="TIST paper revision: check outputs against the committed results and write the numbers file"
 )
 for s in 65tag 65cpu 65gpu 65nem 65an; do PLAN[$s]=$AUTH_PLAN; done
+# Card gates for GPU steps under Slurm (model-server, 16 Nov). The card has 97,887 MiB. Windows' desktop
+# takes about 6 GB beside the containers' 67.5 GB, so the 30 Oct start limit (67,000) cannot be met with
+# Scott's windows open. Start at 97,887 - gpumem*1024 - 2,048 or less, and stop above 94,000. The Ollama
+# row limit (model resident) is the same stop limit.
+gate() { echo "env REPRO_GPU_START_MIB=$((97887 - $1 * 1024 - 2048)) REPRO_GPU_STOP_MIB=94000${2:+ REPRO_OLLAMA_ROW_MIB=94000}"; }
 sub 10     12 24G 1-00:00:00 ""            ""                                         ""          bash reproduce/10_cpu_retrieval.sh
-sub 15     12 16G 10:00:00   ""            "$(dep afterany:10)"                        ""          bash reproduce/15_cpu_invariants_baselines.sh --only "'wp256-v042 wp256-v042-bge wp256-v042-bm25 wp256-v042-bgem3 wp5-bge-cpa'"
-sub 15fill 12 28G 06:00:00   ""            "$(dep afterany:15)"                        ""          bash reproduce/15_cpu_invariants_baselines.sh --only fill-cpu-stores
-sub 20      4 16G 06:00:00   "gpumem:14"   ""                                         "$NOFREEZE" bash reproduce/20_gpu_local_embeddings.sh
+sub 15     12 16G 14:00:00   ""            "$(dep afterany:10)"                        ""          bash reproduce/15_cpu_invariants_baselines.sh --only "'wp256-v042 wp256-v042-bge wp256-v042-bm25 wp256-v042-bgem3 wp5-bge-cpa'"
+sub 15fill 12 28G 10:00:00   ""            "$(dep afterany:15)"                        ""          bash reproduce/15_cpu_invariants_baselines.sh --only fill-cpu-stores
+sub 20      4 16G 06:00:00   "gpumem:14"   ""                                         "$NOFREEZE" $(gate 14) bash reproduce/20_gpu_local_embeddings.sh
 sub 30      4 16G 04:00:00   "embed8360:1" ""                                         "$NOFREEZE" bash reproduce/30_nemotron.sh
-sub 40      8 16G 03:00:00   ""            "$(dep 'afterok:15 15fill 20 30')"          ""          bash reproduce/40_robustness_from_stores.sh
-sub 50      2 6G  01:30:00   "gpumem:16"   "$(dep 'afterok:10 20')"                   "$NOFREEZE" bash reproduce/50_e2e_ollama.sh
+sub 40      8 16G 06:30:00   ""            "$(dep 'afterok:15 15fill 20 30')"          ""          bash reproduce/40_robustness_from_stores.sh
+sub 50      2 6G  01:30:00   "gpumem:16"   "$(dep 'afterok:10 20')"                   "$NOFREEZE" $(gate 16 row) bash reproduce/50_e2e_ollama.sh
 sub 65tag   2 8G  07:00:00   "chat8355:4"  ""                                         "$NOFREEZE" bash reproduce/65_authorship.sh --part tag
-sub 65cpu  12 24G 08:00:00   ""            "$(dep afterok:65tag afterany:15fill)"      ""          bash reproduce/65_authorship.sh --part cpu
-sub 65gpu   4 16G 02:00:00   "gpumem:14"   "$(dep 'afterok:65tag 20')"                 "$NOFREEZE" bash reproduce/65_authorship.sh --part gpu
+sub 65cpu  12 24G 12:00:00   ""            "$(dep afterok:65tag afterany:15fill)"      ""          bash reproduce/65_authorship.sh --part cpu
+sub 65gpu   4 16G 02:00:00   "gpumem:14"   "$(dep 'afterok:65tag 20')"                 "$NOFREEZE" $(gate 14) bash reproduce/65_authorship.sh --part gpu
 sub 65nem   2 8G  01:30:00   "embed8360:1" "$(dep 'afterok:65tag 30')"                 "$NOFREEZE" bash reproduce/65_authorship.sh --part nemotron
 sub 65an    2 8G  00:45:00   ""            "$(dep 'afterok:10 20 30 65cpu 65gpu 65nem')" ""        bash reproduce/65_authorship.sh --part analyze
 sub 70      4 16G 01:30:00   ""            "$(dep 'afterany:10 15 15fill 20 30 40 50 65an')" ""    bash reproduce/70_assemble.sh
