@@ -69,7 +69,10 @@ def main(argv=None) -> int:
     def run_benchmark(name, *args, **kw):
         if name == "MetaTool":
             print("  base MetaTool skipped: it does not depend on the tagger")
-            return None
+            # An empty result, not None. eval_toolbench.main's closing summary iterates every
+            # benchmark's results, and None stopped it after the results were saved (job 168,
+            # 17 Nov 2026). The empty entry is dropped below with the other "MetaTool" key.
+            return {}
         return orig_run(name, *args, **kw)
 
     et.load_metatool_corpus_tagged = corpus_tagged

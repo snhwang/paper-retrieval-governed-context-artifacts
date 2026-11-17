@@ -281,6 +281,30 @@ class EvalTaggedTests(unittest.TestCase):
             eval_tagged.main(["--tool-tags", str(tmp / "plugin_tags.json"), "--query-tags", str(tmp / "qt.json"),
                               "--backends", "BM25 (no gov)", "--output", str(tmp / "o.json")])
 
+    def test_bm25_smoke_runs_to_the_end(self):
+        # eval_toolbench.main runs to its closing summary with base MetaTool skipped (job 168
+        # stopped there on None). BM25 needs no model. The committed tag files stand in.
+        import eval_tagged  # puts evals/wp0_v040 on the path
+        try:
+            import eval_toolbench_v040  # noqa: F401  BEAR and the WP0 patches
+        except Exception as e:  # noqa: BLE001
+            self.skipTest(f"eval_toolbench_v040 not importable here: {e}")
+        meta = EVALS / "data" / "external_benchmarks" / "metatool"
+        tmp = Path(tempfile.mkdtemp())
+        qt = tmp / "query_tags_top5.json"
+        qt.write_text((meta / "query_tags_top5.json").read_text(encoding="utf-8"), encoding="utf-8")
+        out = tmp / "o.json"
+        rc = eval_tagged.main(["--tool-tags", str(meta / "plugin_tags.json"), "--query-tags", str(qt),
+                               "--backends", "BEAR+BM25 (gov)", "BM25 (no gov)", "--output", str(out),
+                               "--max-queries", "30"])
+        self.assertEqual(rc, 0)
+        data = json.loads(out.read_text(encoding="utf-8"))
+        self.assertNotIn("MetaTool", data)
+        for cond in ("MetaTool+Tags", "MetaTool+QueryTags-top5"):
+            self.assertIn("BEAR+BM25 (gov)", data[cond])
+            self.assertIn("BM25 (no gov)", data[cond])
+        self.assertIn("tool_tags", data["_provenance"])
+
 
 if __name__ == "__main__":
     unittest.main()
