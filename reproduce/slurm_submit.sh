@@ -22,7 +22,9 @@
 #   rgc-50      Table 10 reruns (Ollama)    2 CPUs,  6G, 90 min gpumem:16, after rgc-10 and rgc-20 succeed
 #   rgc-65tag   authorship tags             2 CPUs,  8G,  7 h   chat8355:4
 #   rgc-65cpu   authorship, CPU part       12 CPUs, 24G, 12 h   after the tags, after rgc-15fill ends
-#   rgc-65gpu   authorship, GPU part        4 CPUs, 16G,  2 h   gpumem:14, after the tags and rgc-20
+#   rgc-65gpu   authorship, GPU part        4 CPUs, 16G,  6 h   gpumem:14, after the tags and rgc-20
+#               (2 h was too short. Job 169 embedded 2.8 queries a second on a busy card and hit
+#               the limit 90% through the first of two conditions, 17 Nov. The cache keeps them.)
 #   rgc-65nem   authorship, Nemotron part   2 CPUs,  8G, 90 min embed8360:1, after the tags and rgc-30
 #   rgc-65an    authorship analysis         2 CPUs,  8G, 45 min after 10, 20, 30 and the three parts
 #   rgc-70      assemble                    4 CPUs, 16G, 90 min after everything above ends
@@ -187,7 +189,7 @@ sub 40      8 16G 06:30:00   ""            "$(dep 'afterok:15 15fill 20 30')"   
 sub 50      2 6G  01:30:00   "gpumem:16"   "$(dep 'afterok:10 20')"                   "$NOFREEZE" $(gate 16 row) bash reproduce/50_e2e_ollama.sh
 sub 65tag   2 8G  07:00:00   "chat8355:4"  ""                                         "$NOFREEZE" bash reproduce/65_authorship.sh --part tag
 sub 65cpu  12 24G 12:00:00   ""            "$(dep afterok:65tag afterany:15fill)"      ""          bash reproduce/65_authorship.sh --part cpu
-sub 65gpu   4 16G 02:00:00   "gpumem:14"   "$(dep 'afterok:65tag 20')"                 "$NOFREEZE" $(gate 14) bash reproduce/65_authorship.sh --part gpu
+sub 65gpu   4 16G 06:00:00   "gpumem:14"   "$(dep 'afterok:65tag 20')"                 "$NOFREEZE" $(gate 14) bash reproduce/65_authorship.sh --part gpu
 sub 65nem   2 8G  01:30:00   "embed8360:1" "$(dep 'afterok:65tag 30')"                 "$NOFREEZE" bash reproduce/65_authorship.sh --part nemotron
 sub 65an    2 8G  00:45:00   ""            "$(dep 'afterok:10 20 30 65cpu 65gpu 65nem')" ""        bash reproduce/65_authorship.sh --part analyze
 sub 70      4 16G 01:30:00   ""            "$(dep 'afterany:10 15 15fill 20 30 40 50 65an')" ""    bash reproduce/70_assemble.sh
