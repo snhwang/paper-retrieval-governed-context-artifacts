@@ -565,16 +565,26 @@ def run_metatool(target: str, out_path: Path, model: str, workers: int, resume: 
         orig_load = gen.load_tools
         if max_items:
             gen.load_tools = lambda: orig_load()[:max_items]
-        n_items = len(gen.load_tools())
+        # The generator keys its output by tool name, so count distinct names.
+        n_rows = len(gen.load_tools())
+        n_items = len({t["name"] for t in gen.load_tools()})
     else:
+        import random
         import metatool_generate_query_tags_top5 as gen
         argv = ["metatool_generate_query_tags_top5.py", "--model", model, "--output",
                 str(out_path), "--workers", str(workers)]
         if max_items:
             argv += ["--max-queries", str(max_items)]
         orig_load = gen.load_queries
-        n_all = len(gen.load_queries())
-        n_items = min(n_all, max_items) if max_items else n_all
+        # The generator keys its output by query text, so a repeated query is tagged once.
+        # MetaTool repeats 70 of its 21,111 queries (job 155, 17 Nov 2026), so count distinct
+        # texts. With --max-queries, take the generator's own sample (seed 42 shuffle, first N).
+        qs = gen.load_queries()
+        if max_items:
+            random.Random(42).shuffle(qs)
+            qs = qs[:max_items]
+        n_rows = len(qs)
+        n_items = len({q["query"] for q in qs})
     if resume:
         argv.append("--resume")
     t0 = time.time()
@@ -586,8 +596,8 @@ def run_metatool(target: str, out_path: Path, model: str, workers: int, resume: 
             gen.load_tools = orig_load
     written = json.loads(out_path.read_text(encoding="utf-8")) if out_path.exists() else {}
     n_written = len(written)
-    return {"n_items": n_items, "n_written": n_written, "n_missing": n_items - n_written,
-            "elapsed_s": round(time.time() - t0, 1)}
+    return {"n_items": n_items, "n_input_rows": n_rows, "n_written": n_written,
+            "n_missing": n_items - n_written, "elapsed_s": round(time.time() - t0, 1)}
 
 
 def run_toolbench(target: str, out_path: Path, model: str, resume: bool,

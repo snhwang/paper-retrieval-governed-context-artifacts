@@ -41,7 +41,8 @@
 # Usage:
 #   bash reproduce/slurm_submit.sh --dry-run      # print the sbatch lines, submit nothing
 #   bash reproduce/slurm_submit.sh                # submit
-#   bash reproduce/slurm_submit.sh --only "20 30" # submit some steps (no dependencies on the rest)
+#   bash reproduce/slurm_submit.sh --only "20 30" # submit some steps. They wait for the other
+#     steps' kit jobs still queued or running, and not for steps that have no job in the queue.
 #   bash reproduce/slurm_submit.sh --replace      # resubmit the kit over an earlier submission:
 #     cancels this user's pending rgc-<step> kit jobs, and a step whose earlier job is still
 #     running gets a new job that starts after it ends (afterany). Finished steps are skipped,
@@ -133,6 +134,20 @@ if [ "$REPLACE" = 1 ]; then
       PENDING) echo "replace: cancel pending $jname (job $jid)"; [ "$DRY" = 1 ] || scancel "$jid" ;;
       *) PREV[$s]=$jid; echo "replace: $jname (job $jid) is $jstate, the new $jname starts after it" ;;
     esac
+  done < <(squeue -h -u "$(id -un)" -o "%i %j %T" 2>/dev/null)
+fi
+# With --only, a step submitted now still waits for the kit jobs of the other steps that are
+# already queued or running (pending or running rgc-<step> jobs). Without this, --only dropped
+# them, and a resubmitted rgc-70 could assemble before rgc-40 and rgc-50 ran (17 Nov).
+# Steps with no job in the queue are finished or were never submitted, and no dependency is added.
+if [ -n "$ONLY" ]; then
+  while read -r jid jname jstate; do
+    s=${jname#rgc-}
+    [[ " $KIT_STEPS " == *" $s "* ]] || continue
+    want "$s" && continue
+    [ "$jid" = "${SLURM_JOB_ID:-}" ] && continue
+    ID[$s]=$jid
+    echo "only: rgc-$s is job $jid ($jstate). Steps submitted now that need it wait for it."
   done < <(squeue -h -u "$(id -un)" -o "%i %j %T" 2>/dev/null)
 fi
 

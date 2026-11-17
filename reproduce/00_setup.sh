@@ -39,15 +39,20 @@
 #                      merge), before a later window. It refuses while any kit step, WP0 lane or WP7
 #                      grid runs, and for a clone with local changes outside results/. Commit first,
 #                      in this checkout, whatever the clones should get. Outputs of earlier runs stay.
+#   --update-clone=artifacts-authorship
+#                      the same for that one clone, which only 65_authorship.sh uses. It refuses
+#                      only while a 65_authorship step runs, so other steps can keep running
+#                      (added 17 Nov for the tagger's count fix while rgc-20 ran).
 set -uo pipefail
 source "$(dirname "$0")/lib/common.sh"
 repro_parse_args "$@"
 
-DOWNLOAD=0 UPDATE=0 CONFSLICE=0 SKIPVERIFY=0
+DOWNLOAD=0 UPDATE=0 CONFSLICE=0 SKIPVERIFY=0 ONE_CLONE=""
 for a in "${ARGS_REST[@]}"; do
   case $a in
     --download-models) DOWNLOAD=1 ;;
     --update|--update-clones) UPDATE=1 ;;
+    --update-clone=*) UPDATE=1; ONE_CLONE=${a#*=} ;;
     --configure-slice) CONFSLICE=1 ;;
     --skip-verify) SKIPVERIFY=1 ;;
     *) die "unknown option $a (see --help)" ;;
@@ -90,10 +95,23 @@ $local_changes"
   record_note "clone $d updated from $old to $new"
 }
 if [ "$UPDATE" = 1 ]; then
-  say "update: every clone below $REPRO_OUT to $BR of $ART ($(git -C "$ART" rev-parse --short "$BR"))"
   dirty=$(git -C "$ART" status --porcelain --untracked-files=no -- evals hermes reproduce requirements.txt)
   [ -z "$dirty" ] || warn "this checkout has uncommitted changes under evals/, hermes/ or reproduce/. The clones get the committed state only:
 $dirty"
+  if [ -n "$ONE_CLONE" ]; then
+    case $ONE_CLONE in
+      artifacts-authorship) d=$AUTH_CLONE users='65_authorship|tist-repro-65' ;;
+      *) die "--update-clone takes artifacts-authorship only. Use --update for every clone." ;;
+    esac
+    say "update: $d only, to $BR of $ART ($(git -C "$ART" rev-parse --short "$BR"))"
+    activity=$(kit_activity | grep -E "$users" || true)
+    [ -z "$activity" ] || die "a step that uses $d is running, so it stays as it is. Wait for it to end:
+$activity"
+    update_clone "$d"
+    REPRO_OK_NOTE="clone $d updated to $BR $(git -C "$ART" rev-parse --short "$BR")"
+    exit 0
+  fi
+  say "update: every clone below $REPRO_OUT to $BR of $ART ($(git -C "$ART" rev-parse --short "$BR"))"
   activity=$(kit_activity)
   [ -z "$activity" ] || die "a step is running, so the clones stay as they are. Wait for it to end:
 $activity"

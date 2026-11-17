@@ -255,6 +255,23 @@ def test_failed_tool_is_left_out_not_emptied(tmp_path, monkeypatch):
     assert res["n_missing"] == 1
 
 
+def test_repeated_query_counts_once(tmp_path, monkeypatch):
+    # MetaTool repeats some query texts. The generator keys by text, so a repeat
+    # is tagged once and is not missing (job 155 reported 70 missing for this).
+    import metatool_generate_query_tags_top5 as gen
+    qs = gen.load_queries()[:3]
+    rows = qs + [dict(qs[0])]
+    monkeypatch.setattr(gen, "load_queries", lambda: [dict(q) for q in rows])
+    server = FakeServer()
+    out = tmp_path / "query_tags_top5.json"
+    with ar.AnthropicToOpenAIShim(FAKE_BASE, transport=server), ar._dummy_key():
+        res = ar.run_metatool("query_tags_top5", out, FAKE_MODEL, workers=2, resume=False,
+                              max_items=None)
+    assert res["n_input_rows"] == 4
+    assert res["n_items"] == res["n_written"] == 3
+    assert res["n_missing"] == 0
+
+
 # ---------------------------------------------------------------------------
 # End to end: generate, compare, evaluate
 # ---------------------------------------------------------------------------
