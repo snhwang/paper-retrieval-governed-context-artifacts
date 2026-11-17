@@ -63,7 +63,18 @@ for s in $STEPS; do
   case $s in
     wp256-v042)       wp256_step "$s" -- $R v042 ;;
     wp256-v042-bge)   wp256_step "$s" -- $R v042-bge ;;
-    wp256-v042-bm25)  wp256_step "$s" -- $R v042-bm25 ;;
+    wp256-v042-bm25)
+      # check_bm25_v042.py compares with results/tag_noise.json, the BEAR 0.4.0 sweep (345 MB),
+      # which is not committed (MANIFEST.md, "Not committed"). A fresh clone lacks it (job 109,
+      # 16 Nov). Link the checkout's local copy, or REPRO_TAG_NOISE_040, and record its sha256.
+      ref=$WP256_CLONE/results/tag_noise.json
+      if ! step_done "$s" && [ ! -e "$ref" ] && [ "$DRY_RUN" != 1 ]; then
+        src=${REPRO_TAG_NOISE_040:-$ART/results/tag_noise.json}
+        [ -f "$src" ] || die "the BEAR 0.4.0 reference $src is missing (not committed). Set REPRO_TAG_NOISE_040 to a copy."
+        ln -s "$src" "$ref"
+        record_note "wp256-v042-bm25: reference results/tag_noise.json (BEAR 0.4.0 sweep, not committed) linked from $src, sha256 $(sha256sum "$src" | cut -c1-64)"
+      fi
+      wp256_step "$s" -- $R v042-bm25 ;;
     wp256-v042-bgem3) wp256_step "$s" -- $R v042-bgem3 ;;
     fill-cpu-stores)
       # run_wp256.sh embed, CPU part: same scripts and backends, minus Qwen3-0.6B

@@ -155,9 +155,14 @@ case $PART in
       (cd "$AUTH_CLONE" && "$REPRO_PY" evals/authorship/tag.py generate --dry-run --workers "$AUTH_WORKERS" \
          --seed "$AUTH_SEED" 2>&1 | tail -n 25) || die "tag.py --dry-run failed"
     fi
+    # Under Slurm the chat8355 licences decide who uses 8355 (model-server, 15 Nov: shared is
+    # fine, one licence per stream). The server reports no queue (/get_load is 404, /metrics is
+    # off), so tag.py's idle check cannot pass (job 115, 16 Nov). The plan sets no exclusivity.
+    share=()
+    [ -n "${SLURM_JOB_ID:-}" ] && share=(--share-server --load-unknown-ok)
     rstep auth-tag -C "$AUTH_CLONE" -- capped 8G -- "$REPRO_PY" evals/authorship/tag.py generate \
       --base-url "$REPRO_SGLANG_URL/v1" --out-dir "$TAGS" --workers "$AUTH_WORKERS" --passes 3 \
-      --seed "$AUTH_SEED" "${resume[@]}"
+      --seed "$AUTH_SEED" "${resume[@]}" "${share[@]}"
     rstep auth-validate -C "$AUTH_CLONE" -- capped 8G -- "$REPRO_PY" evals/authorship/validate.py \
       --tags-dir "$TAGS" --max-missing-frac "$AUTH_MAX_MISSING"
     REPRO_OK_NOTE="tags written and validated in $TAGS. Tell the model-server session 8355 is free"

@@ -9,6 +9,15 @@
 REPRO_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
 ART=$(cd "$REPRO_DIR/.." && pwd)                  # the artifacts checkout that holds this kit
 
+# A job entered on the job page inherits a systemd service's PATH, which lacks WSL's GPU tools
+# (/usr/lib/wsl/lib/nvidia-smi) and the user's bin folders. Job 111 (rgc-20, 16 Nov) read no free
+# card memory for that reason. Append them, so what a terminal finds first is unchanged.
+for _d in /usr/lib/wsl/lib "$HOME/bin" "$HOME/.local/bin"; do
+  [ -d "$_d" ] && [[ ":$PATH:" != *":$_d:"* ]] && PATH="$PATH:$_d"
+done
+unset _d
+export PATH
+
 REPRO_OUT=${REPRO_OUT:-$HOME/tist-repro}            # every output of the kit goes below this
 REPRO_VENV=${REPRO_VENV:-$HOME/.venvs/tist-repro}   # made by 00_setup.sh
 REPRO_PY=$REPRO_VENV/bin/python
