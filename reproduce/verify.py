@@ -52,6 +52,15 @@ TOLERANCE = {
     # compare with a relative and absolute slack of 1e-9, which only absorbs JSON
     # float printing. Strings equal.
     "exact": {"rel": 1e-9, "abs": 1e-9},
+    # Hash-backend results inside the exact class (a file or JSON key named for hash).
+    # BEAR 0.4.2's _hash_embed sums shingle vectors in float32 in the order of a Python
+    # set, which follows PYTHONHASHSEED, so each process rounds the vectors differently in
+    # the last bit (about 3e-8 in similarity). Decisions and counts must still be equal:
+    # integers compare exactly, and floats agree within 1e-6. That absorbs the rounding,
+    # while one changed decision moves a rate or mean over these sets (at most about 10^5
+    # items) by 1e-5 or more. Strings compare exactly. Rule from the revision plan,
+    # 17 Nov 2026.
+    "hash": {"abs": 1e-6},
     # Local GPU results (Qwen3-4B bf16 in WP0, Qwen3 fp16 in WP6) and results that
     # embed through the GPU-served Nemotron model: precision, batch size and server
     # batching move values at rounding level. Every point estimate the committed
@@ -124,6 +133,20 @@ SKIP_KEY = re.compile(r"^_|(^|_)(provenance|elapsed|seconds|s|latency|ms|time|ti
                       r"versions|hooks|environment|server|load|request|file)(_|$)", re.I)
 MASK_LINE = re.compile(r"(\d{4}-\d\d-\d\d[T ]\d\d:\d\d|elapsed|seconds|\bms\b|took|wall|/home/|/mnt/|"
                        r"[A-Z]:\\\\|provenance|bear_source_sha|python \d|written)", re.I)
+# Text lines that state facts of the run, not results: the checkout's commit and status.
+RUN_FACT_LINE = re.compile(r"^\s*git (commit|status):", re.I)
+# Durations inside result lines ("25/314 tasks, 41s", "[toolbench: 68.1s]", "Ran in 610.9s.").
+DURATION = re.compile(r"\b\d+(\.\d+)?\s?(s|min)\b")
+# BEAR 0.4.2 under its two names: the candidate sha 9d085b4 that evals/run_wp256.sh puts in
+# BEAR_SOURCE_SHA, and the v0.4.2 tag 0d0718a that the kit installs. The code is the same
+# (README.md, Known gaps). A string compares with both read as one label.
+BEAR_042 = re.compile(r"\b(9d085b4[0-9a-f]{0,33}|0d0718a[0-9a-f]{0,33})\b")
+# Hash-backend scope for TOLERANCE["hash"]: a file named for hash, or a JSON path through a
+# key named for it (backends/hash, hash:flat_backfill, bear_hash_gov.json).
+HASH_NAME = re.compile(r"(^|[/_:\-\[.])hash([/_:\-\].]|$)", re.I)
+# A key that is an absolute path to a result file. It compares from the folder that holds
+# results/ on, since the committed run and yours ran in different folders.
+PATH_KEY = re.compile(r"^(?:[A-Za-z]:)?[/\\].*?([^/\\]+[/\\]results[/\\].+)$")
 
 
 def classify(rel: str) -> tuple[str, str]:
@@ -166,7 +189,7 @@ def is_ci_node(o) -> tuple[float, float, float] | None:
                        ("pt", "lo", "hi"), ("value", "lo", "hi"), ("mean", "lo", "hi")):
         if pt in o and lo in o and hi in o and all(is_num(o[k]) for k in (pt, lo, hi)):
             return float(o[pt]), float(o[lo]), float(o[hi])
-    for pt in ("mean", "value", "point", "estimate"):
+    for pt in ("mean", "value", "point", "estimate", "delta"):
         if pt in o and is_num(o[pt]):
             for ck in ("ci", "ci95", "ci_95"):
                 c = o.get(ck)
@@ -180,6 +203,7 @@ class Diff:
         self.fail: list[str] = []
         self.info: list[str] = []
         self.n = 0
+        self.hash_file = False  # the file holds hash-backend results only (TOLERANCE["hash"])
 
     def bad(self, msg: str):
         if len(self.fail) < 200:
@@ -196,11 +220,78 @@ def close(a: float, b: float, rel: float, ab: float) -> bool:
     return abs(a - b) <= max(ab, rel * max(abs(a), abs(b)))
 
 
+def same_num(c, r, hashy: bool) -> bool:
+    """The exact rule, or TOLERANCE["hash"] for a float in hash scope."""
+    if hashy and (isinstance(c, float) or isinstance(r, float)):
+        return close(float(c), float(r), 0, TOLERANCE["hash"]["abs"])
+    t = TOLERANCE["exact"]
+    return close(float(c), float(r), t["rel"], t["abs"])
+
+
+def canon(s: str) -> str:
+    """s with BEAR 0.4.2's two shas read as one label."""
+    return BEAR_042.sub("<BEAR 0.4.2>", s)
+
+
+def by_spec(x) -> list | None:
+    """x sorted by spec, if x is a list of task records that each carry a distinct "spec".
+    Such lists are written in the order parallel workers finish (tag_noise per_task), so
+    position means nothing."""
+    if not (isinstance(x, list) and x and all(isinstance(e, dict) and "spec" in e for e in x)):
+        return None
+    keys = [json.dumps(e["spec"], sort_keys=True) for e in x]
+    if len(set(keys)) != len(keys):
+        return None
+    return [e for _, e in sorted(zip(keys, x), key=lambda t: t[0])]
+
+
+def path_keys(o: dict) -> dict:
+    """o with absolute-path keys cut to <folder>/results/..., if every key stays distinct."""
+    out = {}
+    for k, v in o.items():
+        m = PATH_KEY.match(k) if isinstance(k, str) else None
+        out[m.group(1).replace("\\", "/") if m else k] = v
+    return out if len(out) == len(o) else o
+
+
+def sibling_cis(c: dict, r: dict, path: str, cls: str, d: Diff) -> set:
+    """The CI rule for a value x (or x_mean) written beside its CI x_ci, as WP4 does.
+    The leakage files write an integer count x beside the CI of its rate. The rate itself
+    is not in the file, and integers decide nothing in this class, so that CI is noted
+    only and the count goes on to the integer rule. Returns the keys handled here."""
+    done: set = set()
+    s = TOLERANCE[cls]["ci_slack"]
+    for k, ci in c.items():
+        if not (isinstance(k, str) and k.endswith("_ci") and isinstance(ci, list) and len(ci) == 2
+                and all(is_num(x) for x in ci)):
+            continue
+        pt = next((p for p in (k[:-3], k[:-3] + "_mean") if is_num(c.get(p))), None)
+        if pt is None:
+            continue
+        done.add(k)
+        if isinstance(c[pt], int):
+            if r.get(k) != ci:
+                d.note(f"{path}/{k}: {ci} -> {r.get(k)} (the CI of a count's rate)")
+            continue
+        done.add(pt)
+        d.n += 1
+        if not is_num(r.get(pt)):
+            d.bad(f"{path}/{pt}: no value in your file")
+            continue
+        lo, hi, v = float(ci[0]), float(ci[1]), float(r[pt])
+        if not (lo - s <= v <= hi + s):
+            d.bad(f"{path}/{pt}: {v:.6g} outside the committed CI [{lo:.6g}, {hi:.6g}] (committed {c[pt]:.6g})")
+        elif v != c[pt]:
+            d.note(f"{path}/{pt}: {c[pt]:.6g} -> {v:.6g}, inside the CI")
+    return done
+
+
 def walk(c, r, path: str, cls: str, d: Diff) -> None:
     """Compare committed c with reproduced r under class cls."""
     key = path.rsplit("/", 1)[-1]
     if path and SKIP_KEY.search(key):
         return
+    hashy = cls == "exact" and (d.hash_file or bool(HASH_NAME.search(path)))
     if cls in ("gpu", "llm"):
         ci = is_ci_node(c)
         if ci is not None:
@@ -217,8 +308,10 @@ def walk(c, r, path: str, cls: str, d: Diff) -> None:
                 d.note(f"{path}: {pt:.6g} -> {rc[0]:.6g}, inside the CI")
             return
     if isinstance(c, dict) and isinstance(r, dict):
+        c, r = path_keys(c), path_keys(r)
+        done = sibling_cis(c, r, path, cls, d) if cls in ("gpu", "llm") else set()
         for k in sorted(set(c) | set(r), key=str):
-            if SKIP_KEY.search(str(k)):
+            if k in done or SKIP_KEY.search(str(k)):
                 continue
             if k not in r:
                 d.bad(f"{path}/{k}: missing in your file") if cls == "exact" else d.note(f"{path}/{k}: missing in yours")
@@ -228,12 +321,15 @@ def walk(c, r, path: str, cls: str, d: Diff) -> None:
                 walk(c[k], r[k], f"{path}/{k}", cls, d)
         return
     if isinstance(c, list) and isinstance(r, list):
+        sc, sr = by_spec(c), by_spec(r)
+        if sc is not None and sr is not None:
+            c, r = sc, sr
         perq = len(c) > 20
         if len(c) != len(r):
             (d.bad if cls == "exact" else d.note)(f"{path}: length {len(c)} -> {len(r)}")
             return
         if perq and all(is_num(x) for x in c) and all(is_num(x) for x in r):
-            changed = [i for i, (x, y) in enumerate(zip(c, r)) if not close(float(x), float(y), 1e-9, 1e-9)]
+            changed = [i for i, (x, y) in enumerate(zip(c, r)) if not same_num(x, y, hashy)]
             if changed:
                 if cls == "exact":
                     d.bad(f"{path}: {len(changed)} of {len(c)} per-query values differ (first at {changed[0]})")
@@ -253,9 +349,9 @@ def walk(c, r, path: str, cls: str, d: Diff) -> None:
     d.n += 1
     if is_num(c) and is_num(r):
         if cls == "exact":
-            t = TOLERANCE["exact"]
-            if not close(float(c), float(r), t["rel"], t["abs"]):
-                d.bad(f"{path}: {c} -> {r}")
+            if not same_num(c, r, hashy):
+                d.bad(f"{path}: {c} -> {r}"
+                      + (" (hash: more than 1e-6 apart)" if hashy and isinstance(c, float) else ""))
         elif cls == "gpu":
             if isinstance(c, int) and isinstance(r, int):
                 if c != r:
@@ -279,6 +375,8 @@ def walk(c, r, path: str, cls: str, d: Diff) -> None:
                 d.note(f"{path}: {c} -> {r}")
         return
     if c != r:
+        if isinstance(c, str) and isinstance(r, str) and canon(c) == canon(r):
+            return
         if cls == "exact" and not (isinstance(c, str) and ("/" in c or "\\" in c)):
             d.bad(f"{path}: {str(c)[:60]!r} -> {str(r)[:60]!r}")
         else:
@@ -288,13 +386,14 @@ def walk(c, r, path: str, cls: str, d: Diff) -> None:
 def compare_text(cp: Path, rp: Path, cls: str, d: Diff) -> None:
     def lines(p):
         with open_any(p) as f:
-            return [ln.rstrip() for ln in f if ln.strip() and not MASK_LINE.search(ln)]
+            return [DURATION.sub("<time>", canon(ln.rstrip())) for ln in f
+                    if ln.strip() and not MASK_LINE.search(ln) and not RUN_FACT_LINE.search(ln)]
     a, b = lines(cp), lines(rp)
     d.n += max(len(a), len(b))
     if a == b:
         return
     diff = [i for i, (x, y) in enumerate(zip(a, b)) if x != y]
-    msg = f"{len(diff) + abs(len(a) - len(b))} line(s) differ after masking times and paths"
+    msg = f"{len(diff) + abs(len(a) - len(b))} line(s) differ after masking run facts, times and paths"
     if diff:
         i = diff[0]
         msg += f". First: {a[i][:80]!r} -> {b[i][:80]!r}"
@@ -337,8 +436,16 @@ def compare_npz(cp: Path, rp: Path, cls: str, d: Diff) -> None:
             if x.shape != y.shape:
                 d.bad(f"array {k}: shape {x.shape} -> {y.shape}")
             elif not np.array_equal(x, y, equal_nan=x.dtype.kind == "f"):
-                n = int(np.sum(x != y)) if x.dtype.kind != "f" else int(np.sum(~np.isclose(x, y, rtol=1e-9, atol=1e-9)))
-                (d.bad if cls == "exact" else d.note)(f"array {k}: {n} entries differ")
+                if x.dtype.kind != "f":
+                    n = int(np.sum(x != y))
+                elif cls == "exact" and d.hash_file:
+                    n = int(np.sum(~np.isclose(x, y, rtol=0, atol=TOLERANCE["hash"]["abs"], equal_nan=True)))
+                    if n == 0:
+                        continue
+                else:
+                    n = int(np.sum(~np.isclose(x, y, rtol=1e-9, atol=1e-9)))
+                (d.bad if cls == "exact" else d.note)(f"array {k}: {n} entries differ"
+                                                       + (" (hash: more than 1e-6 apart)" if d.hash_file and x.dtype.kind == "f" else ""))
 
 
 def compare_tags(cp: Path, rp: Path, d: Diff) -> None:
@@ -373,6 +480,7 @@ def compare_tags(cp: Path, rp: Path, d: Diff) -> None:
 def compare_file(cp: Path, rp: Path, cls: str) -> Diff:
     d = Diff()
     name = strip_gz(cp.name)
+    d.hash_file = bool(HASH_NAME.search(name))
     if cls == "tags":
         compare_tags(cp, rp, d)
     elif name.endswith(".json"):

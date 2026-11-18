@@ -165,7 +165,7 @@ $REPRO_OUT/                     default ~/tist-repro
 
 | Class | Which files | Rule |
 |---|---|---|
-| exact | deterministic CPU results: BM25, hash, BGE, BGE-M3, Qwen3-0.6B and Qwen3-4B on the CPU, invariants, budget binding, WP5 with BGE, mandatory tables | every number equal, with a slack of 1e-9 for float printing. Strings equal |
+| exact | deterministic CPU results: BM25, hash, BGE, BGE-M3, Qwen3-0.6B and Qwen3-4B on the CPU, invariants, budget binding, WP5 with BGE, mandatory tables | every number equal, with a slack of 1e-9 for float printing. Strings equal. Hash-backend values (a file or JSON key named for hash) follow the hash rule below |
 | gpu | Qwen3-4B in bf16 (WP0), the Qwen fp16 stores (WP6), anything embedded by the GPU-served Nemotron, WP4 | every point estimate that the committed file gives a 95% CI for lies inside that CI. A float without a CI agrees to 3 decimals. Precision and batch size move values at rounding level |
 | ollama | Table 10 reruns and July runs | tool and exact accuracy, and governed minus ungated deltas, within 0.01. The measured executor drift on identical lists is at most 0.0082. Retrieval metrics of the lists must be exact |
 | llm | Gemma 4 at temperature 1.0 (Table 12), Hermes grids, the authorship ablation's runs | every point estimate with a committed CI lies inside it. The committed Hermes results are agent runs on an older harness, so read their FAILs rather than count them |
@@ -174,6 +174,14 @@ $REPRO_OUT/                     default ~/tist-repro
 | skip | logs, manifests, provenance records, the hand-written report, PDFs | not compared |
 
 Keys that hold run facts are never compared: provenance, times, latencies, paths, hosts and users.
+
+Some rules settle details the table leaves open (added 18 Nov 2026, after the kit's first full step 90, job 183):
+- **Hash rule.** BEAR 0.4.2's hash embedder sums shingle vectors in float32 in the order of a Python set, which follows `PYTHONHASHSEED`. So each process rounds the vectors differently in the last bit (about 3e-8 in similarity). For hash-backend values, integers must be equal and floats agree within 1e-6. That absorbs the rounding, and a changed decision still fails. Near-ties can still flip a decision, so a few hash files can FAIL on one query.
+- **Labels.** BEAR 0.4.2 has two names in the files, the candidate sha `9d085b4` and the tag's `0d0718a` (see Known gaps below). A string compares with both read as one label.
+- **Text files.** Besides times and paths, `git commit:` and `git status:` lines are masked, and durations inside a line ("41s", "68.1s") read as one token. A changed command line still fails.
+- **Task lists.** A list whose entries each carry a distinct `spec` is paired by spec, not by position. The tag-noise sweep writes its tasks in the order parallel workers finish.
+- **Values with a CI.** Besides `{mean, ci}` and similar layouts, `{delta, ci}` and a value `x` (or `x_mean`) beside `x_ci` count as a value with a CI. An integer count beside the CI of its rate decides nothing in the gpu class, as other integers there do.
+- **Path keys.** A JSON key that is an absolute path to a result file compares from the folder that holds `results/` on (`artifacts-dense/results/...`), since your run and the committed one ran in different folders.
 
 The table prints one line per file: PASS, FAIL, INFO, NEW (no committed file of that name), SKIP, or NOT RUN (the manuscript needs the file and you have not produced it yet). `--strict` counts NOT RUN as a failure. Use it for the final check.
 
