@@ -8,18 +8,20 @@ Marks follow one rule per row. A mark is Partial when the capability exists but 
 
 | Feature | Vector-store metadata filters (LlamaIndex `MetadataFilters`, Chroma `where`) | LangChain tool retrieval | LlamaIndex tool retrieval | ITR (Franko) | Hermes Agent tool search | NeMo Guardrails | BEAR |
 |---|---|---|---|---|---|---|---|
-| A. Hard gate declared on each item (all required tags in context) | No | No | No | No | Partial | No | Yes |
+| A. Hard gate declared on each item (all required tags in context) | Partial | No | No | No | Partial | No | Yes |
 | B. Soft path beside the gate | Partial | Partial | Partial | Partial | Partial | No | Yes |
 | C. One schema for instructions and tools | Partial | No | No | Partial | No | No | Yes |
 | D. Mandatory items exempt from budget or top-k | No | Partial | Yes | Partial | Yes | No | Yes |
 | E. Declared conflicts or supersedes, resolved deterministically | No | No | No | No | Partial† | No | Yes |
 | F. Declared dependencies with closure | No | No | No | No | Partial† | No | Yes |
 | G. Stated formal properties of selection, with tests | No | No | No | Partial | Partial | No | Yes |
-| H. Same rules enforced at execution (allow, approve, block) | No | No | Partial | No | Partial | Partial | Yes |
+| H. Same rules enforced at execution (allow, approve, block) | No | Partial‡ | Partial | No | Partial | Partial | Yes |
 | I. Selection decision and reason given to the agent | No | Partial | No | Partial | Partial | No | Yes |
-| J. Decision records that can be replayed or verified | No | Partial | No | No | ND | Partial | Yes |
+| J. Decision records that can be replayed or verified | No | Partial | No | No | Partial | Partial | Yes |
 
 † Comes from Hermes skills, a separate mechanism for instruction documents. Tool search alone has neither feature and would be No. See section 4, item 1.
+
+‡ Through LangChain's agent middleware (`HumanInTheLoopMiddleware`), not the tool retriever. See section 5.
 
 BEAR column (from the project description, not researched here). These are the BEAR features behind each row.
 - A. `required_tags`
@@ -158,10 +160,10 @@ Confirmed mechanism. Tool search defers MCP and non-core plugin tools, plus buil
 ### 2.6 NVIDIA NeMo Guardrails
 
 Sources read for this column. The docs default to "Latest". The newest release index listed is v0.24.1, and the Tool Calling page is the same in both.
-- [N1] Guardrail types. https://docs.nvidia.com/nemo/guardrails/about-nemo-guardrails-library/rail-types
-- [N2] Guardrails configuration and configuration reference. https://docs.nvidia.com/nemo/guardrails/configure-guardrails/yaml-schema/guardrails-configuration and https://docs.nvidia.com/nemo/guardrails/configure-guardrails/configuration-reference
+- [N1] Guardrail types. https://docs.nvidia.com/nemo/guardrails/v0.24.1/about-nemo-guardrails-library/rail-types
+- [N2] Guardrails configuration and configuration reference. https://docs.nvidia.com/nemo/guardrails/v0.24.1/configure-guardrails/yaml-schema/guardrails-configuration and https://docs.nvidia.com/nemo/guardrails/v0.24.1/configure-guardrails/configuration-reference
 - [N3] Tool Calling (IORails tool rails), v0.24.1. https://docs.nvidia.com/nemo/guardrails/v0.24.1/configure-guardrails/guardrail-catalog/tool-calling
-- [N4] Logging. https://docs.nvidia.com/nemo/guardrails/observability/logging
+- [N4] Logging. https://docs.nvidia.com/nemo/guardrails/v0.24.1/observability/logging
 - [N5] README. https://github.com/NVIDIA-NeMo/Guardrails
 
 | Row | Mark | Evidence |
@@ -204,7 +206,6 @@ Sources read for this column. The docs default to "Latest". The newest release i
 ```
 
 - History of tool search, from the commit log of the docs page. It was introduced on 2026-05-29 ("feat(tools): progressive tool disclosure for MCP and plugin tools"). Bridge dispatch was scoped to the session's toolsets the same day. Multi-query search, batched describe and Snowball stemming came on 2026-08-25. The v0.22.0 notes say rarely used built-ins such as `computer_use`, `session_search` and `image_generate` "sit behind `tool_search` by default". Earlier single-call signatures (`tool_search(query, limit?)`, `tool_describe(name)`, `tool_call(name, arguments)`) still appear on third-party mirrors such as hermesagent.org.cn and neura.market. Those mirrors also give some different defaults. Cite the official page only.
-- The TODO at `sample-manuscript.tex` line 1553 can now be resolved with the URL above.
 
 **NeMo Guardrails**
 - Traian Rebedea, Razvan Dinu, Makesh Narsimhan Sreedhar, Christopher Parisien, Jonathan Cohen. "NeMo Guardrails: A Toolkit for Controllable and Safe LLM Applications with Programmable Rails". Proceedings of the 2023 Conference on Empirical Methods in Natural Language Processing: System Demonstrations, Singapore, December 2023, pages 431 to 445. Association for Computational Linguistics.
@@ -234,3 +235,17 @@ Sources read for this column. The docs default to "Latest". The newest release i
 8. **ITR, paper versus library.** The paper describes an always-on overlay, confidence-gated fallback and a discovery request. Library 0.1.1 implements less (no overlay text, placeholder confidence, fallback only from the CLI). Marks for B, D and I describe both. If the paper should cite only the paper's design, D and I stay Partial. If only the library, I would drop to No and D to Partial at best (token reservation only).
 9. **Hermes, row J.** ND. The docs say nothing about records of tool-search decisions. Session transcripts exist, but I found no documented replay or verification.
 10. **Chroma emulation note.** Chroma does not document how `$not_contains` treats a record that lacks the key. This affects only the emulation note in 2.1, not the marks.
+
+## 5. Changes after the check of 19 Nov 2026
+
+A reviewer agent re-read every cell against the public sources on 19 Nov 2026, and the paper session re-checked the points below before changing the manuscript's Table 1. The record is in the paper repo, `checks/error-check-2026-11-19.md` (findings T1 to T10).
+
+- **Row A, vector-store filters: No to Partial.** The paper's own baseline (Sec 4.6) writes BEAR's gate as a LlamaIndex containment filter over a per-item `required` metadata field. So a store can express the gate when each item stores its required tags and the caller builds the filter for each query. The store still has no notion of a gate that an item declares. Elasticsearch `terms_set` with `minimum_should_match_field` and PostgreSQL array containment (`<@`) allow the same pattern.
+- **Row H, LangChain: No to Partial‡.** `langgraph-bigtool` does not re-check a call against the selected set. LangChain's `HumanInTheLoopMiddleware` can approve, edit or reject a call (https://docs.langchain.com/oss/python/langchain/human-in-the-loop, "Skip executing this tool call entirely and return rejection feedback to the agent"). That is agent middleware, not the tool retriever, and the mark carries a footnote saying so. The Hermes column already counted the same kind of hook.
+- **Row J, Hermes: ND to Partial.** Hermes v0.22.2 documents session storage of every message with its `tool_calls` (https://github.com/NousResearch/hermes-agent/blob/v0.22.2/website/docs/developer-guide/session-storage.md). No replay or verification of a selection is documented, which is why the mark is Partial, as for LangChain.
+- **Rows E and F, NeMo Guardrails.** This file always said No. The manuscript's table said ND by mistake and now says No. Colang 2 has flow priorities and override flows, which act on dialog flows, not on context items.
+- **Row I, NeMo Guardrails, and versions.** The marks are for v0.24.1, and the NeMo links above are now pinned to it. v0.25.0 (released 2026-11-19) adds a hooks server whose deny carries a reason for the agent's model ("with the reason prefixed with `NeMo Guardrails: `", https://docs.nvidia.com/nemo/guardrails/latest/run-guardrailed-inference/using-hooks-server/results-and-errors.md). Row I would be Partial at v0.25.0. The table's caption says so.
+- **Section 4, item 2 is settled.** The Hermes docs do say it: a skill "is hidden when ANY listed toolset is not available" (`creating-skills.md` at v0.22.2).
+- **ITR, rows D and I.** Still Partial, crediting the paper's design. The released library 0.1.1 implements less, and the table's caption now says so.
+- Not changed: LangChain row D (Partial. `always_include` exists only in the LLM-based selector) and LlamaIndex row J (No. It keeps no selection list).
+- Later versions seen on 19 Nov: Hermes Agent v0.23.2 (no cell changes), langchain 1.5.2, llama-index-core 0.14.26 (the cited file is unchanged).
