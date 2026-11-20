@@ -1,6 +1,6 @@
 # End-to-end reruns: plan
 
-Status: version 2, 2026-11-20 (see Changes). Version 1, same day. Scott read the three decisions below and answered on 20 Nov 2026: "It doesn't really matter how we do it. We just need to rerun and document." The session takes that as approval with the planned choices: Ollama, a fixed seed, and all four parts. Under "Specs yes, gates no" (9 Nov 2026) and "Re-run anything questionable" (12 Nov 2026), this file is fixed before the runs. Its sha256 is recorded in the paper repo's `revision-plan.md`.
+Status: version 3, 2026-11-20 (see Changes). Versions 1 and 2, same day. Scott read the three decisions below and answered on 20 Nov 2026: "It doesn't really matter how we do it. We just need to rerun and document." The session takes that as approval with the planned choices: Ollama, a fixed seed, and all four parts. Under "Specs yes, gates no" (9 Nov 2026) and "Re-run anything questionable" (12 Nov 2026), this file is fixed before the runs. Its sha256 is recorded in the paper repo's `revision-plan.md`.
 
 ## Why
 
@@ -41,6 +41,18 @@ Four parts. Each uses all 1,100 ToolBench test queries.
 - The 31B run with native reasoning is one pass over the 1,100 queries. July merged a pilot of 366 queries with a later run of 734.
 - A fixed seed, 20261120, goes with every sampled request, which means the Gemma runs. July sent none.
 - Every run is a job in Scott's queue with a stated purpose, and it writes a run record.
+- The server software is newer. Ollama is 0.40.16 on 20 Nov 2026, and July's version was not recorded. The GPU driver is 621.24 since 20 Nov 2026, and July's was older.
+
+## What each run records
+
+Scott, 20 Nov 2026: "We just need to rerun and document", and in the model-server session, "Make sure we documenet the model and serving method."
+
+- **From the run itself.** The Ollama version, the tag and its digest, the tag's parameters (`num_ctx`), the request settings (temperature, top-p, top-k, seed, output limit, response format), the card before and after the load, and the server's own prompt token counts.
+- **From the queue.** Since 20 Nov 2026 15:45 EST, model-server writes `run-<job>.json` for every job that holds the GPU licence. It records what Ollama and the servers on ports 8355 and 8360 served at the start and at the end of the job, the image digests and the GPU driver.
+- **Server settings.** On 20 Nov 2026, from `model-server/machines/serving-record.md`: the key-value cache is f16 (`OLLAMA_KV_CACHE_TYPE` is unset), flash attention is on automatic, and Ollama serves one request at a time.
+- **The Qwen3.8 server.** Whether the server on port 8355 was up or down during the run.
+
+The results' README in the repository gets one table with these facts per run.
 
 ## What is reported
 
@@ -91,3 +103,4 @@ All three take the planned choice (see Status).
   - **The prompt's size.** The ReAct and Gemma scripts list each tool as its name and the first 400 characters of its description. That prompt is 82,540 cl100k tokens with the longest query (`count_prompts.py`). Ollama cuts a prompt that is longer than the window without failing, so each model's own count is read from the server before a run is booked, and the Ollama log is searched for "truncating input prompt" after every run.
   - **Measured loads first.** `reproduce/56_e2e_long_context.sh` makes each tag and measures one guarded load of it. The 12B model fits beside the Qwen3.8 server. Mistral-Nemo at this window and the 31B model need that server stopped, in nights booked through the model-server session.
   - If a model's own count leaves less than 8,704 tokens of the window free, that model's tag gets a larger window, and this file says so before the run.
+- **2026-11-20, version 3.** Version 2 had sha256 bddc45e1c4c08f2770e85fb4c02cb13f20b4af81791d5fb3cac15a60c8bf03dc. Version 3 adds the section "What each run records" and names the newer Ollama and GPU driver as differences from July. No run setting changes.

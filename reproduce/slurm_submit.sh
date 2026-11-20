@@ -181,7 +181,7 @@ PURPOSE=(
   [90]="TIST paper revision: check outputs against the committed results and write the numbers file"
 )
 for s in 65tag 65cpu 65gpu 65nem 65an; do PLAN[$s]=$AUTH_PLAN; done
-for s in 50all 56tag-g12 56meas-g12; do PLAN[$s]="end-to-end rerun PLAN.md v2 sha256 bddc45e1, $KIT_PLAN"; done
+for s in 50all 56tag-g12 56meas-g12; do PLAN[$s]="end-to-end rerun PLAN.md v3 sha256 114cf0d7, $KIT_PLAN"; done
 # Card gates for GPU steps under Slurm (model-server, 16 Nov). The card has 97,887 MiB. Windows' desktop
 # takes about 6 GB beside the containers' 67.5 GB, so the 30 Oct start limit (67,000) cannot be met with
 # Scott's windows open. Start at 97,887 - gpumem*1024 - 2,048 or less, and stop above 94,000. The Ollama
