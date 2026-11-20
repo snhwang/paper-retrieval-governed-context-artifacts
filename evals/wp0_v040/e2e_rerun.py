@@ -62,6 +62,12 @@ ROWS = {  # condition name -> (backend, governance, list file)
     "BEAR+BGE (gov)": ("bge", True, "bear_bge_gov.json"),
     "BGE (no gov)": ("bge", False, "bge_no_gov.json"),
     "BEAR+Hash (gov)": ("hash", True, "bear_hash_gov.json"),
+    # The rows the November rerun left to the July run (plan evals/e2e_rerun/PLAN.md, part 1).
+    "BGE-M3 (no gov)": ("bge-m3", False, "bge_m3_no_gov.json"),
+    "BEAR+Qwen3-0.6B (gov)": ("qwen3-0.6b", True, "bear_qwen3_0_6b_gov.json"),
+    "Qwen3-0.6B (no gov)": ("qwen3-0.6b", False, "qwen3_0_6b_no_gov.json"),
+    "BEAR+Qwen3-4B (gov)": ("qwen3-4b", True, "bear_qwen3_4b_gov.json"),
+    "Qwen3-4B (no gov)": ("qwen3-4b", False, "qwen3_4b_no_gov.json"),
 }
 NVSMI = "/mnt/c/Windows/System32/nvidia-smi.exe"
 
@@ -334,7 +340,9 @@ def summarize(outdir: Path, pub_path: Path) -> dict:
                 r[f"{m}_queries_changed_vs_published"] = int(np.sum(a != b))
                 r[f"{m}_mcnemar_vs_published"] = mcnemar(a, b)
         out["rows"][name] = r
-    for g, u in (("BEAR+BM25 (gov)", "BM25 (no gov)"), ("BEAR+BGE (gov)", "BGE (no gov)")):
+    for g, u in (("BEAR+BM25 (gov)", "BM25 (no gov)"), ("BEAR+BGE (gov)", "BGE (no gov)"),
+                 ("BEAR+BGE-M3 (gov)", "BGE-M3 (no gov)"), ("BEAR+Qwen3-0.6B (gov)", "Qwen3-0.6B (no gov)"),
+                 ("BEAR+Qwen3-4B (gov)", "Qwen3-4B (no gov)")):
         if g in rows and u in rows:
             pr = {}
             for m in ("tool", "exact"):

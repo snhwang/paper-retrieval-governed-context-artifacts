@@ -59,7 +59,9 @@ ART=${WP0_ART:-$ROOT/artifacts}
 PY=${WP0_PY:-$HOME/.venvs/tist-evals/bin/python}
 OUT=${WP0_E2E_OUT:-$ART/results/v042/e2e_rerun}
 LOGS=$ROOT/logs
-LISTS=("$ROOT/artifacts/results/wp0/lists_v042/e2e" "$ROOT/artifacts-dense/results/wp0/lists_v042/e2e")
+# The GPU lane holds the Qwen3-4B lists, which only a run of all ten rows reads.
+LISTS=("$ROOT/artifacts/results/wp0/lists_v042/e2e" "$ROOT/artifacts-dense/results/wp0/lists_v042/e2e"
+       "$ROOT/artifacts-gpu/results/wp0/lists_v042/e2e")
 # WSL uses mirrored networking (2026-10-31): 127.0.0.1 reaches the Windows Ollama, the LAN address does not
 BASE_URL=${WP0_OLLAMA_URL:-http://127.0.0.1:11434/v1}
 # BEAR 0.4.2 public tag v0.4.2 (0d0718a), installed from ~/tist-evals/bear-v0.4.2 (2026-10-31)

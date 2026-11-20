@@ -20,6 +20,7 @@
 #   rgc-30      Nemotron                    4 CPUs, 16G,  4 h   embed8360:1
 #   rgc-40      robustness from stores      8 CPUs, 16G, 6.5 h  after 15, 15fill, 20 and 30 succeed
 #   rgc-50      Table 10 reruns (Ollama)    2 CPUs,  6G, 90 min gpumem:16, after rgc-10 and rgc-20 succeed
+#   rgc-50all   all ten Table 10 rows       2 CPUs,  6G, 90 min gpumem:16. Opt-in: only with --only "50all"
 #   rgc-65tag   authorship tags             2 CPUs,  8G,  7 h   chat8355:4
 #   rgc-65cpu   authorship, CPU part       12 CPUs, 24G, 12 h   after the tags, after rgc-15fill ends
 #   rgc-65gpu   authorship, GPU part        4 CPUs, 16G,  6 h   gpumem:14, after the tags and rgc-20
@@ -165,6 +166,7 @@ PURPOSE=(
   [30]="TIST paper revision: Nemotron rows of Tables 6, 8 and 9, threshold diagnosis, Nemotron stores"
   [40]="TIST paper revision: tag noise, over-restriction, leakage and coverage tests from the stores"
   [50]="TIST paper revision: Table 10 end-to-end reruns on BEAR 0.4.2 with Mistral-Nemo in Ollama"
+  [50all]="TIST paper revision: all ten retrieval rows of Table 10 rerun in one session on BEAR 0.4.2 with Mistral-Nemo in Ollama"
   [65tag]="TIST authorship ablation: rewrite all tool and query tags with Qwen3.8-27B on 8355"
   [65cpu]="TIST authorship ablation: retrieval reruns with the new tags, CPU backends"
   [65gpu]="TIST authorship ablation: retrieval reruns with the new tags, Qwen3-4B on the local GPU"
@@ -175,6 +177,7 @@ PURPOSE=(
   [90]="TIST paper revision: check outputs against the committed results and write the numbers file"
 )
 for s in 65tag 65cpu 65gpu 65nem 65an; do PLAN[$s]=$AUTH_PLAN; done
+PLAN[50all]="end-to-end rerun PLAN.md v1 sha256 b2e21ceb, $KIT_PLAN"
 # Card gates for GPU steps under Slurm (model-server, 16 Nov). The card has 97,887 MiB. Windows' desktop
 # takes about 6 GB beside the containers' 67.5 GB, so the 30 Oct start limit (67,000) cannot be met with
 # Scott's windows open. Start at 97,887 - gpumem*1024 - 2,048 or less, and stop above 94,000. The Ollama
@@ -187,6 +190,8 @@ sub 20      4 16G 06:00:00   "gpumem:14"   ""                                   
 sub 30      4 16G 04:00:00   "embed8360:1" ""                                         "$NOFREEZE" bash reproduce/30_nemotron.sh
 sub 40      8 16G 06:30:00   ""            "$(dep 'afterok:15 15fill 20 30')"          ""          bash reproduce/40_robustness_from_stores.sh
 sub 50      2 6G  01:30:00   "gpumem:16"   "$(dep 'afterok:10 20')"                   "$NOFREEZE" $(gate 16 row) bash reproduce/50_e2e_ollama.sh
+# Opt-in steps. They are submitted only when --only names them, so a plain run of the kit stays as it was.
+[[ $ONLY == *" 50all "* ]] && sub 50all 2 6G 01:30:00 "gpumem:16" "" "$NOFREEZE" $(gate 16 row) bash reproduce/50_e2e_ollama.sh --all-rows
 sub 65tag   2 8G  07:00:00   "chat8355:4"  ""                                         "$NOFREEZE" bash reproduce/65_authorship.sh --part tag
 sub 65cpu  12 24G 12:00:00   ""            "$(dep afterok:65tag afterany:15fill)"      ""          bash reproduce/65_authorship.sh --part cpu
 sub 65gpu   4 16G 06:00:00   "gpumem:14"   "$(dep 'afterok:65tag 20')"                 "$NOFREEZE" $(gate 14) bash reproduce/65_authorship.sh --part gpu

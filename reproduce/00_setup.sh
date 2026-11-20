@@ -86,6 +86,22 @@ update_clone() {
 $local_changes"
   old=$(git -C "$d" rev-parse --short HEAD)
   run_cmd "fetch-$(basename "$d")" -C "$d" -- git fetch -q "$ART" "$BR" || die "could not fetch $BR from $ART into $d"
+  # A result file that a run of yours changed, and that the new commits change too, stops the
+  # fast-forward. When your copy already equals the new committed one, or the kit moved the committed
+  # copy aside, the committed copy is restored first. The merge then brings in the same content.
+  if [ "$DRY_RUN" = 0 ]; then
+    local both g
+    both=$(comm -12 <(git -C "$d" status --porcelain --untracked-files=no | awk '{print $2}' | sort) \
+                    <(git -C "$d" diff --name-only HEAD FETCH_HEAD | sort))
+    for g in $both; do
+      if [ ! -e "$d/$g" ] || [ "$(git -C "$d" hash-object "$d/$g")" = "$(git -C "$d" rev-parse "FETCH_HEAD:$g" 2>/dev/null)" ]; then
+        git -C "$d" checkout -q -- "$g" || die "could not restore $g in $d"
+        say "$d: $g restored before the update (your copy equals the new committed one, or was moved aside)"
+      else
+        die "$d: your $g differs from the new committed copy, so $d is not updated"
+      fi
+    done
+  fi
   run_cmd "merge-$(basename "$d")" -C "$d" -- git merge -q --ff-only FETCH_HEAD     || die "could not fast-forward $d. A new commit may touch a result file a run of yours changed (see git -C $d status)."
   [ "$DRY_RUN" = 1 ] && return 0
   new=$(git -C "$d" rev-parse --short HEAD)
