@@ -28,6 +28,18 @@
 #                                           Opt-in: only with --only "56g12n", or both names
 #               (Supplement Table S1 on BEAR 0.4.2, on the fixed-window tag, beside the Qwen3.8 server.
 #               In July each Gemma part took 4 to 9 h.)
+#   Night steps, for the parts that need the Qwen3.8 server stopped. Opt-in, and each call needs
+#   RGC_RES, the name of the night's reservation (the model-server session books it and stops and
+#   starts the server). Each job carries --reservation, --begin at the window's start and --deadline
+#   at 06:55 the next morning, takes gpumem:24, and runs through 57_e2e_night.sh, which waits until
+#   the server is down and the card is at or below 40,000 MiB.
+#   rgc-56tag-nemo, rgc-56tag-g31          the fixed-window tags. CPU only, no reservation, any time
+#   rgc-56meas-nemo, rgc-56meas-g31        one measured load each, 25 min limit, after its tag
+#   rgc-56react   ReAct batch, Mistral-Nemo 4 CPUs, 16G, 9 h 45  after rgc-56meas-nemo succeeds
+#   rgc-56mono    Table 10 monolithic row   4 CPUs, 16G, 10 h 30
+#   rgc-56g31s    Gemma 4 31B, scaffold     4 CPUs, 16G, 10 h 45
+#   rgc-56g31n    Gemma 4 31B, native       4 CPUs, 16G, 10 h 45
+#               (In July the ReAct batch took about 8 h and the monolithic row about 6 h.)
 #   rgc-65tag   authorship tags             2 CPUs,  8G,  7 h   chat8355:4
 #   rgc-65cpu   authorship, CPU part       12 CPUs, 24G, 12 h   after the tags, after rgc-15fill ends
 #   rgc-65gpu   authorship, GPU part        4 CPUs, 16G,  6 h   gpumem:14, after the tags and rgc-20
@@ -57,6 +69,10 @@
 #     cancels this user's pending rgc-<step> kit jobs, and a step whose earlier job is still
 #     running gets a new job that starts after it ends (afterany). Finished steps are skipped,
 #     so a step that already completed ends at once.
+#   RGC_RES=rgc-mon23 bash reproduce/slurm_submit.sh --only "56tag-nemo 56meas-nemo 56react"
+#     # night steps in the booked window rgc-mon23
+#   bash reproduce/slurm_submit.sh --test-only --only "..."  # ask Slurm whether it would accept each
+#     job and when it could start. Submits nothing. Dependencies are left out of the test.
 #   bash reproduce/slurm_submit.sh --cancel-all   # cancel every kit job, running ones too, wait
 #     until none is left, and submit nothing. Then 00_setup.sh --update can move the clones.
 # Only Scott runs this (the paper says no AI agent queued an experiment). sbatch stamps origin=
@@ -64,12 +80,14 @@
 # parent=<id>. There is no via= or requested= here, by design (Scott, 16 Nov).
 set -uo pipefail
 ART=$(cd "$(dirname "$0")/.." && pwd)
-DRY=0 ONLY="" REPLACE=0 CANCEL_ALL=0
+DRY=0 ONLY="" REPLACE=0 CANCEL_ALL=0 TEST=0
+EXTRA=()   # more sbatch options for the steps submitted while it is set (the night steps)
 while [ $# -gt 0 ]; do
   case $1 in
     -n|--dry-run) DRY=1 ;;
     --only) ONLY=" $2 "; shift ;;
     --replace) REPLACE=1 ;;
+    --test-only) TEST=1 ;;
     --cancel-all) CANCEL_ALL=1 ;;
     -h|--help) awk 'NR == 1 { next } /^#/ { sub(/^# ?/, ""); print; next } { exit }' "$0"; exit 0 ;;
     *) echo "unknown option $1" >&2; exit 2 ;;
@@ -99,7 +117,7 @@ sub() {  # sub STEP CPUS MEM TIME "LICENSES" "DEPENDENCY" "nofreeze|" CMD...  (p
   want "$step" || return 0
   local args=(--parsable --job-name="rgc-$step" --cpus-per-task="$cpus" --mem="$mem" --time="$time"
               --chdir="$ART" --output="$OUT/%x-%j.out")
-  args+=(--licenses="$AFTER_HERMES${lic:+,$lic}")
+  args+=(--licenses="$AFTER_HERMES${lic:+,$lic}" "${EXTRA[@]}")
   if [ -n "${PREV[$step]:-}" ]; then
     if [ -n "$dp" ]; then dp+=",afterany:${PREV[$step]}"; else dp="--dependency=afterany:${PREV[$step]}"; fi
   fi
@@ -107,6 +125,13 @@ sub() {  # sub STEP CPUS MEM TIME "LICENSES" "DEPENDENCY" "nofreeze|" CMD...  (p
   [ -n "${PURPOSE[$step]:-}" ] || { echo "no purpose for rgc-$step" >&2; exit 1; }
   args+=(--comment="project=RGC; purpose=${PURPOSE[$step]}; plan=${PLAN[$step]:-$KIT_PLAN}${freeze:+; nofreeze}${SLURM_JOB_ID:+; parent=$SLURM_JOB_ID}")
   args+=(--wrap="$*")
+  if [ "$TEST" = 1 ]; then  # Slurm's own check of the line. Nothing is submitted, and no dependency is tested.
+    local targs=() a
+    for a in "${args[@]}"; do case $a in --parsable|--dependency=*|--kill-on-invalid-dep=*) ;; *) targs+=("$a") ;; esac; done
+    ID[$step]=""
+    printf 'rgc-%s: ' "$step"; sbatch --test-only "${targs[@]}" 2>&1 | tail -1
+    return 0
+  fi
   if [ "$DRY" = 1 ]; then
     ID[$step]="<rgc-$step>"
     printf 'sbatch'; printf " %q" "${args[@]}"; echo
@@ -178,6 +203,14 @@ PURPOSE=(
   [56meas-g12]="TIST paper revision: one guarded load of gemma4-12b-131k to measure its card use and count the monolithic prompt, then unload"
   [56g12s]="TIST paper revision: Supplement Table S1 rerun on BEAR 0.4.2, Gemma 4 12B under the one-step scaffold with native reasoning off, three conditions on 1100 queries, Ollama tag gemma4-12b-131k, seed 20261120"
   [56g12n]="TIST paper revision: Supplement Table S1 rerun on BEAR 0.4.2, Gemma 4 12B with native reasoning off and on, four runs on 1100 queries, Ollama tag gemma4-12b-131k, seed 20261120"
+  [56tag-nemo]="TIST paper revision: make the Ollama tag mistral-nemo-131k, which only adds a 131072-token window to mistral-nemo"
+  [56tag-g31]="TIST paper revision: make the Ollama tag gemma4-31b-131k, which only adds a 131072-token window to gemma4:31b"
+  [56meas-nemo]="TIST paper revision: one guarded load of mistral-nemo-131k with the Qwen3.8 server down, to measure its card use and count the monolithic prompt, then unload"
+  [56meas-g31]="TIST paper revision: one guarded load of gemma4-31b-131k with the Qwen3.8 server down, to measure its card use and count the monolithic prompt, then unload"
+  [56react]="TIST paper revision: the one-step ReAct scaffold on Mistral-Nemo rerun on BEAR 0.4.2, three conditions on 1100 queries, Ollama tag mistral-nemo-131k, temperature 0, with the Qwen3.8 server down"
+  [56mono]="TIST paper revision: Table 10 monolithic row rerun, all 3225 tools in the prompt, 1100 queries, Ollama tag mistral-nemo-131k, temperature 0, with the Qwen3.8 server down"
+  [56g31s]="TIST paper revision: Supplement Table S1 rerun on BEAR 0.4.2, Gemma 4 31B under the one-step scaffold with native reasoning off, three conditions on 1100 queries, Ollama tag gemma4-31b-131k, seed 20261120, with the Qwen3.8 server down"
+  [56g31n]="TIST paper revision: Supplement Table S1 rerun on BEAR 0.4.2, Gemma 4 31B with native reasoning off and on, four runs on 1100 queries, Ollama tag gemma4-31b-131k, seed 20261120, with the Qwen3.8 server down"
   [65tag]="TIST authorship ablation: rewrite all tool and query tags with Qwen3.8-27B on 8355"
   [65cpu]="TIST authorship ablation: retrieval reruns with the new tags, CPU backends"
   [65gpu]="TIST authorship ablation: retrieval reruns with the new tags, Qwen3-4B on the local GPU"
@@ -188,7 +221,7 @@ PURPOSE=(
   [90]="TIST paper revision: check outputs against the committed results and write the numbers file"
 )
 for s in 65tag 65cpu 65gpu 65nem 65an; do PLAN[$s]=$AUTH_PLAN; done
-for s in 50all 56tag-g12 56meas-g12 56g12s 56g12n; do PLAN[$s]="end-to-end rerun PLAN.md v3 sha256 114cf0d7, $KIT_PLAN"; done
+for s in 50all 56tag-g12 56meas-g12 56g12s 56g12n 56tag-nemo 56tag-g31 56meas-nemo 56meas-g31 56react 56mono 56g31s 56g31n; do PLAN[$s]="end-to-end rerun PLAN.md v3 sha256 114cf0d7, $KIT_PLAN"; done
 # Card gates for GPU steps under Slurm (model-server, 16 Nov). The card has 97,887 MiB. Windows' desktop
 # takes about 6 GB beside the containers' 67.5 GB, so the 30 Oct start limit (67,000) cannot be met with
 # Scott's windows open. Start at 97,887 - gpumem*1024 - 2,048 or less, and stop above 94,000. The Ollama
@@ -207,6 +240,24 @@ sub 50      2 6G  01:30:00   "gpumem:16"   "$(dep 'afterok:10 20')"             
 [[ $ONLY == *" 56meas-g12 "* ]] && sub 56meas-g12 2 8G 01:00:00 "gpumem:16" "$(dep afterok:56tag-g12)" "$NOFREEZE" $(gate 16) bash reproduce/56_e2e_long_context.sh measure-g12
 [[ $ONLY == *" 56g12s "* ]] && sub 56g12s 4 16G 12:00:00 "gpumem:16" "" "$NOFREEZE" $(gate 16) bash reproduce/56_e2e_long_context.sh g12-scaffold
 [[ $ONLY == *" 56g12n "* ]] && sub 56g12n 4 16G 18:00:00 "gpumem:16" "$(dep afterany:56g12s)" "$NOFREEZE" $(gate 16) bash reproduce/56_e2e_long_context.sh g12-native
+# The night steps (see the header). The tags need no night. The others run in the reservation RGC_RES.
+[[ $ONLY == *" 56tag-nemo "* ]] && sub 56tag-nemo 1 2G 00:20:00 "" "" "" bash reproduce/56_e2e_long_context.sh tag-nemo
+[[ $ONLY == *" 56tag-g31 "* ]] && sub 56tag-g31 1 2G 00:20:00 "" "" "" bash reproduce/56_e2e_long_context.sh tag-g31
+if [[ $ONLY =~ " 56"(meas-nemo|meas-g31|react|mono|g31s|g31n)" " ]]; then
+  [ -n "${RGC_RES:-}" ] || { echo "the night steps need RGC_RES=<reservation>, a night the model-server session booked" >&2; exit 1; }
+  RES_START=$(scontrol show res "$RGC_RES" 2>/dev/null | grep -o 'StartTime=[^ ]*' | head -1 | cut -d= -f2)
+  [ -n "$RES_START" ] || { echo "Slurm has no reservation named $RGC_RES" >&2; exit 1; }
+  # Off the card by 06:55, before the model-server session starts the Qwen3.8 server again at 07:00.
+  EXTRA=(--reservation="$RGC_RES" --begin="$RES_START" --deadline="$(date -d "${RES_START%T*} +1 day" +%F)T06:55:00")
+  NIGHT="env REPRO_GPU_START_MIB=40000 REPRO_GPU_STOP_MIB=94000 bash reproduce/57_e2e_night.sh"
+  [[ $ONLY == *" 56meas-nemo "* ]] && sub 56meas-nemo 2 8G 00:25:00 "gpumem:24" "$(dep afterok:56tag-nemo)" "$NOFREEZE" $NIGHT measure-nemo
+  [[ $ONLY == *" 56meas-g31 "* ]] && sub 56meas-g31 2 8G 00:25:00 "gpumem:24" "$(dep afterok:56tag-g31 afterany:56meas-nemo)" "$NOFREEZE" $NIGHT measure-g31
+  [[ $ONLY == *" 56react "* ]] && sub 56react 4 16G 09:45:00 "gpumem:24" "$(dep afterok:56meas-nemo afterany:56meas-g31)" "$NOFREEZE" $NIGHT react
+  [[ $ONLY == *" 56mono "* ]] && sub 56mono 4 16G 10:30:00 "gpumem:24" "$(dep afterany:56react)" "$NOFREEZE" $NIGHT monolithic
+  [[ $ONLY == *" 56g31s "* ]] && sub 56g31s 4 16G 10:45:00 "gpumem:24" "" "$NOFREEZE" $NIGHT g31-scaffold
+  [[ $ONLY == *" 56g31n "* ]] && sub 56g31n 4 16G 10:45:00 "gpumem:24" "$(dep afterany:56g31s)" "$NOFREEZE" $NIGHT g31-native
+  EXTRA=()
+fi
 sub 65tag   2 8G  07:00:00   "chat8355:4"  ""                                         "$NOFREEZE" bash reproduce/65_authorship.sh --part tag
 sub 65cpu  12 24G 12:00:00   ""            "$(dep afterok:65tag afterany:15fill)"      ""          bash reproduce/65_authorship.sh --part cpu
 sub 65gpu   4 16G 06:00:00   "gpumem:14"   "$(dep 'afterok:65tag 20')"                 "$NOFREEZE" $(gate 14) bash reproduce/65_authorship.sh --part gpu
@@ -216,4 +267,5 @@ sub 70      4 16G 01:30:00   ""            "$(dep 'afterany:10 15 15fill 20 30 4
 sub 80      1 2G  00:15:00   ""            ""                                         ""          bash reproduce/80_figures.sh
 sub 90      2 8G  00:30:00   ""            "$(dep 'afterany:70 80')"                   ""          bash reproduce/90_verify.sh
 [ "$DRY" = 1 ] && echo "(dry run: nothing submitted. <rgc-NN> stands for that step's job id)"
+[ "$TEST" = 1 ] && { echo "(test only: nothing submitted. The job ids above are Slurm's placeholders)"; exit 0; }
 [ "$DRY" = 1 ] || echo "submitted. Follow with: squeue -u $(id -un)   and   sacct -X -u $(id -un) -S today"

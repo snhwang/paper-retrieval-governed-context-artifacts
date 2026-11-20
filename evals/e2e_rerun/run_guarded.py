@@ -26,6 +26,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import signal
 import subprocess
 import sys
 import time
@@ -96,6 +97,12 @@ def main() -> int:
     log_start = log.stat().st_size if log else None
     card = {"before": rr.gate(args.win_gpu_max_mib, "before loading")}
     code, ran = 0, False
+
+    def on_term(signum, _frame):  # the queue's time limit, or a cancel: still unload and write the record
+        print(f"### signal {signum}: stopping the command and unloading", flush=True)
+        raise SystemExit(128 + signum)
+
+    signal.signal(signal.SIGTERM, on_term)
     try:
         info = rr.warm_and_check(args)  # exits 75 if anything is loaded, raises if the window is not expect_ctx
         res["load"] = info
@@ -116,6 +123,7 @@ def main() -> int:
         if not isinstance(exc.code, int):
             print(f"### {exc.code}", flush=True)
     finally:
+        signal.signal(signal.SIGTERM, signal.SIG_IGN)  # a second signal must not interrupt the unload
         # Unload our tag only, and only if Ollama lists it. A request for a tag that is not loaded could load it.
         try:
             ours = any(rr.same_model(m["name"], args.model) for m in rr.loaded(args.base_url))
