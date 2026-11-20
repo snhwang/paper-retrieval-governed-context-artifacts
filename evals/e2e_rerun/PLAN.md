@@ -1,6 +1,6 @@
 # End-to-end reruns: plan
 
-Status: version 1, 2026-11-20. It awaits Scott's approval. Under "Specs yes, gates no" (9 Nov 2026) and "Re-run anything questionable" (12 Nov 2026), this file is fixed before the runs. Its sha256 at approval is recorded in the paper repo's `revision-plan.md`.
+Status: version 1, 2026-11-20. Scott read the three decisions below and answered on 20 Nov 2026: "It doesn't really matter how we do it. We just need to rerun and document." The session takes that as approval with the planned choices: Ollama, a fixed seed, and all four parts. Under "Specs yes, gates no" (9 Nov 2026) and "Re-run anything questionable" (12 Nov 2026), this file is fixed before the runs. Its sha256 is recorded in the paper repo's `revision-plan.md`.
 
 ## Why
 
@@ -76,6 +76,8 @@ That is about 30 to 50 hours in all. The times of parts 2 to 4 are those of the 
 - Each script gets a dry run before a job is handed over.
 
 ## Decisions for Scott
+
+All three take the planned choice (see Status).
 
 1. **Server.** Ollama with the builds above. His own serving scripts use vLLM. Ollama is planned because the July runs used it, the paper describes it, and the kit already drives it.
 2. **Seed.** A fixed seed for the Gemma runs, as above, or none as in July.
