@@ -33,7 +33,10 @@
 #   starts the server). Each job carries --reservation, --begin at the window's start and --deadline
 #   at 06:55 the next morning, takes gpumem:24, and runs through 57_e2e_night.sh, which waits until
 #   the server is down and the card is at or below 40,000 MiB.
-#   rgc-56tag-nemo, rgc-56tag-g31          the fixed-window tags. CPU only, no reservation, any time
+#   rgc-00update  moves the kit clones to this checkout (00_setup.sh --update). It starts when no
+#                 other rgc- job of this user is queued or running, because a clone must not move
+#                 under a running step. The steps below wait for it when it is in the same call.
+#   rgc-56tag-nemo, rgc-56tag-g31          the fixed-window tags. CPU only, no reservation
 #   rgc-56meas-nemo, rgc-56meas-g31        one measured load each, 2G, 25 min limit, after its tag
 #   rgc-56react   ReAct batch, Mistral-Nemo 4 CPUs, 6G, 9 h 45   after rgc-56meas-nemo succeeds
 #   rgc-56mono    Table 10 monolithic row   4 CPUs, 6G, 10 h 30
@@ -205,6 +208,7 @@ PURPOSE=(
   [56meas-g12]="TIST paper revision: one guarded load of gemma4-12b-131k to measure its card use and count the monolithic prompt, then unload"
   [56g12s]="TIST paper revision: Supplement Table S1 rerun on BEAR 0.4.2, Gemma 4 12B under the one-step scaffold with native reasoning off, three conditions on 1100 queries, Ollama tag gemma4-12b-131k, seed 20261120"
   [56g12n]="TIST paper revision: Supplement Table S1 rerun on BEAR 0.4.2, Gemma 4 12B with native reasoning off and on, four runs on 1100 queries, Ollama tag gemma4-12b-131k, seed 20261120"
+  [00update]="TIST paper revision: move the kit clones to the checkout commit once the kit jobs now in the queue have ended, so that the night runs use the committed scripts"
   [56tag-nemo]="TIST paper revision: make the Ollama tag mistral-nemo-131k, which only adds a 131072-token window to mistral-nemo"
   [56tag-g31]="TIST paper revision: make the Ollama tag gemma4-31b-131k, which only adds a 131072-token window to gemma4:31b"
   [56meas-nemo]="TIST paper revision: one guarded load of mistral-nemo-131k with the Qwen3.8 server down, to measure its card use and count the monolithic prompt, then unload"
@@ -243,8 +247,12 @@ sub 50      2 6G  01:30:00   "gpumem:16"   "$(dep 'afterok:10 20')"             
 [[ $ONLY == *" 56g12s "* ]] && sub 56g12s 4 16G 12:00:00 "gpumem:16" "" "$NOFREEZE" $(gate 16) bash reproduce/56_e2e_long_context.sh g12-scaffold
 [[ $ONLY == *" 56g12n "* ]] && sub 56g12n 4 16G 18:00:00 "gpumem:16" "$(dep afterany:56g12s)" "$NOFREEZE" $(gate 16) bash reproduce/56_e2e_long_context.sh g12-native
 # The night steps (see the header). The tags need no night. The others run in the reservation RGC_RES.
-[[ $ONLY == *" 56tag-nemo "* ]] && sub 56tag-nemo 1 2G 00:20:00 "" "" "" bash reproduce/56_e2e_long_context.sh tag-nemo
-[[ $ONLY == *" 56tag-g31 "* ]] && sub 56tag-g31 1 2G 00:20:00 "" "" "" bash reproduce/56_e2e_long_context.sh tag-g31
+if [[ $ONLY == *" 00update "* ]]; then
+  BUSY=$(squeue -h -u "$(id -un)" -o "%i %j" 2>/dev/null | awk -v me="${SLURM_JOB_ID:-}" '$2 ~ /^rgc-/ && $1 != me { printf ":%s", $1 }')
+  sub 00update 1 2G 00:20:00 "" "${BUSY:+--dependency=afterany$BUSY}" "" bash reproduce/00_setup.sh --update
+fi
+[[ $ONLY == *" 56tag-nemo "* ]] && sub 56tag-nemo 1 2G 00:20:00 "" "$(dep afterok:00update)" "" bash reproduce/56_e2e_long_context.sh tag-nemo
+[[ $ONLY == *" 56tag-g31 "* ]] && sub 56tag-g31 1 2G 00:20:00 "" "$(dep afterok:00update)" "" bash reproduce/56_e2e_long_context.sh tag-g31
 if [[ $ONLY =~ " 56"(meas-nemo|meas-g31|react|mono|g31s|g31n)" " ]]; then
   [ -n "${RGC_RES:-}" ] || { echo "the night steps need RGC_RES=<reservation>, a night the model-server session booked" >&2; exit 1; }
   RES_START=$(scontrol show res "$RGC_RES" 2>/dev/null | grep -o 'StartTime=[^ ]*' | head -1 | cut -d= -f2)
@@ -252,12 +260,12 @@ if [[ $ONLY =~ " 56"(meas-nemo|meas-g31|react|mono|g31s|g31n)" " ]]; then
   # Off the card by 06:55, before the model-server session starts the Qwen3.8 server again at 07:00.
   EXTRA=(--reservation="$RGC_RES" --begin="$RES_START" --deadline="$(date -d "${RES_START%T*} +1 day" +%F)T06:55:00")
   NIGHT="env REPRO_GPU_START_MIB=40000 REPRO_GPU_STOP_MIB=94000 bash reproduce/57_e2e_night.sh"
-  [[ $ONLY == *" 56meas-nemo "* ]] && sub 56meas-nemo 2 2G 00:25:00 "gpumem:24" "$(dep afterok:56tag-nemo)" "$NOFREEZE" $NIGHT measure-nemo
-  [[ $ONLY == *" 56meas-g31 "* ]] && sub 56meas-g31 2 2G 00:25:00 "gpumem:24" "$(dep afterok:56tag-g31 afterany:56meas-nemo)" "$NOFREEZE" $NIGHT measure-g31
-  [[ $ONLY == *" 56react "* ]] && sub 56react 4 6G 09:45:00 "gpumem:24" "$(dep afterok:56meas-nemo afterany:56meas-g31)" "$NOFREEZE" $NIGHT react
-  [[ $ONLY == *" 56mono "* ]] && sub 56mono 4 6G 10:30:00 "gpumem:24" "$(dep afterany:56react)" "$NOFREEZE" $NIGHT monolithic
-  [[ $ONLY == *" 56g31s "* ]] && sub 56g31s 4 6G 10:45:00 "gpumem:24" "" "$NOFREEZE" $NIGHT g31-scaffold
-  [[ $ONLY == *" 56g31n "* ]] && sub 56g31n 4 6G 10:45:00 "gpumem:24" "$(dep afterany:56g31s)" "$NOFREEZE" $NIGHT g31-native
+  [[ $ONLY == *" 56meas-nemo "* ]] && sub 56meas-nemo 2 2G 00:25:00 "gpumem:24" "$(dep 'afterok:00update 56tag-nemo')" "$NOFREEZE" $NIGHT measure-nemo
+  [[ $ONLY == *" 56meas-g31 "* ]] && sub 56meas-g31 2 2G 00:25:00 "gpumem:24" "$(dep 'afterok:00update 56tag-g31' afterany:56meas-nemo)" "$NOFREEZE" $NIGHT measure-g31
+  [[ $ONLY == *" 56react "* ]] && sub 56react 4 6G 09:45:00 "gpumem:24" "$(dep 'afterok:00update 56meas-nemo' afterany:56meas-g31)" "$NOFREEZE" $NIGHT react
+  [[ $ONLY == *" 56mono "* ]] && sub 56mono 4 6G 10:30:00 "gpumem:24" "$(dep afterok:00update afterany:56react)" "$NOFREEZE" $NIGHT monolithic
+  [[ $ONLY == *" 56g31s "* ]] && sub 56g31s 4 6G 10:45:00 "gpumem:24" "$(dep afterok:00update)" "$NOFREEZE" $NIGHT g31-scaffold
+  [[ $ONLY == *" 56g31n "* ]] && sub 56g31n 4 6G 10:45:00 "gpumem:24" "$(dep afterok:00update afterany:56g31s)" "$NOFREEZE" $NIGHT g31-native
   EXTRA=()
 fi
 sub 65tag   2 8G  07:00:00   "chat8355:4"  ""                                         "$NOFREEZE" bash reproduce/65_authorship.sh --part tag
