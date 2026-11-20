@@ -60,6 +60,17 @@ TOLERANCE = {
     # while one changed decision moves a rate or mean over these sets (at most about 10^5
     # items) by 1e-5 or more. Strings compare exactly. Rule from the revision plan,
     # 17 Nov 2026.
+    # The evals save hash vectors in the embedding store, so one store keeps the rounding
+    # of the process that built it. The committed runs shared one store and your run
+    # builds another, so your hash similarities differ from the committed ones (by up to
+    # 3e-7 in the kit's first run), and they are the same on every rerun over your store.
+    # One exception to "integers compare exactly" (Scott, 19 Nov 2026): the bm25 check
+    # (bm25_v042_check_*) counts the hash pairs whose similarity moved by more than 1e-9
+    # against an earlier run, hashes the pairs with their similarities into a digest and
+    # lists example pairs. All three follow the similarity values, so they read as
+    # similarity values: a different count or digest is noted, and each example must show
+    # the same decision on both sides and similarities within 1e-6. The presence counts
+    # beside them stay exact, and so do the BM25 rows (sim_record, mask_sim).
     "hash": {"abs": 1e-6},
     # Local GPU results (Qwen3-4B bf16 in WP0, Qwen3 fp16 in WP6) and results that
     # embed through the GPU-served Nemotron model: precision, batch size and server
@@ -144,6 +155,14 @@ BEAR_042 = re.compile(r"\b(9d085b4[0-9a-f]{0,33}|0d0718a[0-9a-f]{0,33})\b")
 # Hash-backend scope for TOLERANCE["hash"]: a file named for hash, or a JSON path through a
 # key named for it (backends/hash, hash:flat_backfill, bear_hash_gov.json).
 HASH_NAME = re.compile(r"(^|[/_:\-\[.])hash([/_:\-\].]|$)", re.I)
+# The bm25 check's files, whose hash rows count similarity changes (TOLERANCE["hash"]).
+SIM_COUNT_FILE = re.compile(r"(^|[/\\])bm25_v\d+_check")
+# Their text lines for the hash backend ("  hash: A_on 136/738 (0), ..." and
+# "  hash/A_on  present 0.4.0 738/738  default: 136 (0) | ..."), and on those lines the count
+# of pairs that differ: the integer before "/738 (0)" or before " (0)". The number in
+# parentheses is the count of presence changes, which stays compared.
+SIM_COUNT_LINE = re.compile(r"^\s*hash[:/]")
+SIM_COUNT = re.compile(r"(?<![/\d.])\b\d+(?=(/\d+)? \(\d+\))")
 # A key that is an absolute path to a result file. It compares from the folder that holds
 # results/ on, since the committed run and yours ran in different folders.
 PATH_KEY = re.compile(r"^(?:[A-Za-z]:)?[/\\].*?([^/\\]+[/\\]results[/\\].+)$")
@@ -204,6 +223,7 @@ class Diff:
         self.info: list[str] = []
         self.n = 0
         self.hash_file = False  # the file holds hash-backend results only (TOLERANCE["hash"])
+        self.sim_counts = False  # a bm25 check file: hash similarity counts read as similarities
 
     def bad(self, msg: str):
         if len(self.fail) < 200:
@@ -286,6 +306,44 @@ def sibling_cis(c: dict, r: dict, path: str, cls: str, d: Diff) -> set:
     return done
 
 
+def sim_record(c: dict, r: dict, path: str, d: Diff) -> set:
+    """A hash record of the bm25 check: pairs_differing, digest and examples follow the
+    similarity values (TOLERANCE["hash"]). A different count or digest is noted. Each example
+    of your file must show the same decision on both sides and similarities within the hash
+    tolerance. Returns the keys handled here. The other keys of the record (pairs, the
+    presence counts) go on to the exact rule."""
+    tol = TOLERANCE["hash"]["abs"]
+    d.n += 1
+    for k in ("pairs_differing", "digest"):
+        if k in c and k not in r:
+            d.bad(f"{path}/{k}: missing in your file")
+        elif c.get(k) != r.get(k):
+            d.note(f"{path}/{k}: {c.get(k)!r} -> {r.get(k)!r} (follows hash similarities, which may move by {tol:g})")
+    ex = r.get("examples") or []
+    if not isinstance(ex, list):
+        d.bad(f"{path}/examples: not a list")
+        ex = []
+    for i, e in enumerate(ex):
+        new, old = (e.get("new"), e.get("old")) if isinstance(e, dict) else (None, None)
+        if not (isinstance(new, dict) and isinstance(old, dict)):
+            d.bad(f"{path}/examples[{i}]: not a new and old pair")
+            continue
+        moved = [k for k in sorted(set(new) | set(old)) if k != "similarity" and new.get(k) != old.get(k)]
+        if moved:
+            d.bad(f"{path}/examples[{i}]: {', '.join(moved)} changed, not only the similarity")
+            continue
+        a, b = new.get("similarity"), old.get("similarity")
+        if (a is None) != (b is None) or (a is not None and not (is_num(a) and is_num(b)
+                                                                 and close(float(a), float(b), 0, tol))):
+            d.bad(f"{path}/examples[{i}]/similarity: {b} -> {a} (hash: more than {tol:g} apart)")
+    return {"pairs_differing", "digest", "examples"}
+
+
+def mask_sim(line: str) -> str:
+    """A hash line of the bm25 check's text output with its counts of differing pairs masked."""
+    return SIM_COUNT.sub("<sim>", line) if SIM_COUNT_LINE.search(line) else line
+
+
 def walk(c, r, path: str, cls: str, d: Diff) -> None:
     """Compare committed c with reproduced r under class cls."""
     key = path.rsplit("/", 1)[-1]
@@ -310,6 +368,8 @@ def walk(c, r, path: str, cls: str, d: Diff) -> None:
     if isinstance(c, dict) and isinstance(r, dict):
         c, r = path_keys(c), path_keys(r)
         done = sibling_cis(c, r, path, cls, d) if cls in ("gpu", "llm") else set()
+        if hashy and d.sim_counts and "pairs_differing" in c and "presence_differing" in c:
+            done |= sim_record(c, r, path, d)
         for k in sorted(set(c) | set(r), key=str):
             if k in done or SKIP_KEY.search(str(k)):
                 continue
@@ -392,6 +452,13 @@ def compare_text(cp: Path, rp: Path, cls: str, d: Diff) -> None:
     d.n += max(len(a), len(b))
     if a == b:
         return
+    if cls == "exact" and d.sim_counts:
+        ma, mb = [mask_sim(x) for x in a], [mask_sim(x) for x in b]
+        if ma == mb:
+            n = sum(x != y for x, y in zip(a, b))
+            d.note(f"{n} line(s) differ only in counts of hash similarities that moved (read as similarity values)")
+            return
+        a, b = ma, mb
     diff = [i for i, (x, y) in enumerate(zip(a, b)) if x != y]
     msg = f"{len(diff) + abs(len(a) - len(b))} line(s) differ after masking run facts, times and paths"
     if diff:
@@ -481,6 +548,7 @@ def compare_file(cp: Path, rp: Path, cls: str) -> Diff:
     d = Diff()
     name = strip_gz(cp.name)
     d.hash_file = bool(HASH_NAME.search(name))
+    d.sim_counts = bool(SIM_COUNT_FILE.search(name))
     if cls == "tags":
         compare_tags(cp, rp, d)
     elif name.endswith(".json"):

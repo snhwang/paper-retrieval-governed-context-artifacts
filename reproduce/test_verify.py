@@ -1,4 +1,4 @@
-"""Checks of verify.py's rules of 18 Nov 2026 on small synthetic files.
+"""Checks of verify.py's rules of 18 and 19 Nov 2026 on small synthetic files.
 
     python reproduce/test_verify.py      # exit 0 when every case behaves
 
@@ -73,5 +73,45 @@ pr = {"retrieval": {"/home/u/tist-repro/wp0/artifacts-dense/results/wp0/e2e/bge.
 case("path keys from the folder on pass", "exact", pc, pr, False)
 pr2 = {"retrieval": {"/home/u/tist-repro/wp0/artifacts-nemo/results/wp0/e2e/bge.json": {"t": 5}}}
 case("path keys in another folder fail", "exact", pc, pr2, True)
+# the bm25 check: hash similarity counts read as similarity values (19 Nov 2026)
+BJ, BT = "bm25_v042_check_default.json", "bm25_v042_check_default_output.txt"
+def rec(differing=0, presence=0, present=157, digest="9b5bcfb91b49fa68", examples=()):
+    return {"pairs": 738, "pairs_differing": differing, "presence_differing": presence,
+            "present_new": present, "present_old": 157, "digest": digest, "examples": list(examples)}
+def ex(sim_new=0.2143001, sim_old=0.2143, **new):
+    old = {"q": 3, "rule": "safety-1", "present": False, "admitted_by": None, "excluded_reason": "below_threshold",
+           "similarity": sim_old}
+    return {"new": dict(old, similarity=sim_new, **new), "old": old}
+def mc(backend, r):
+    return {"mandatory_coverage": {backend: {"A_off": r, "theta_b_new": 0.665, "theta_b_old": 0.665}}}
+moved = rec(682, digest="10cbce6b80fe4fbd", examples=[ex(), ex(0.31, 0.31 + 2e-7), ex(None, None)])
+case("bm25 check: hash count, digest and examples pass", "exact", mc("hash", rec()), mc("hash", moved), False, BJ)
+case("bm25 check: hash presence change fails", "exact", mc("hash", rec()),
+     mc("hash", rec(682, presence=1, present=158, digest="10cb")), True, BJ)
+case("bm25 check: example with a changed decision fails", "exact", mc("hash", rec()),
+     mc("hash", rec(682, digest="10cb", examples=[ex(present=True)])), True, BJ)
+case("bm25 check: example similarity 1e-5 apart fails", "exact", mc("hash", rec()),
+     mc("hash", rec(682, digest="10cb", examples=[ex(0.21431, 0.2143)])), True, BJ)
+case("bm25 check: example similarity gone fails", "exact", mc("hash", rec()),
+     mc("hash", rec(682, digest="10cb", examples=[ex(None, 0.2143)])), True, BJ)
+case("bm25 check: BM25 count stays exact", "exact", mc("bm25", rec(7)), mc("bm25", rec(8)), True, BJ)
+case("bm25 check: attribution layout passes", "exact",
+     {"mandatory_coverage": {"hash/A_on": {"default": rec(), "tie_order": rec()}}},
+     {"mandatory_coverage": {"hash/A_on": {"default": rec(136, digest="10cb"), "tie_order": rec(136, digest="10cb")}}},
+     False, "bm25_v042_check_attribution.json")
+case("another file: hash count stays exact", "exact", mc("hash", rec()), mc("hash", rec(682)), True)
+tc = "  bm25: A_on 0/738 (0), A_off 7/738 (7); theta_b 0.33 -> 0.33\n  hash: A_on 0/738 (0), A_off 0/738 (0), D_on 0/738 (0); theta_b 0.665 -> 0.665\n"
+tr = tc.replace("hash: A_on 0/738 (0), A_off 0/738 (0), D_on 0/738 (0)", "hash: A_on 136/738 (0), A_off 682/738 (0), D_on 501/738 (0)")
+case("bm25 check text: hash counts pass", "exact", tc, tr, False, BT)
+case("bm25 check text: hash presence change fails", "exact", tc, tr.replace("682/738 (0)", "682/738 (1)"), True, BT)
+case("bm25 check text: hash pair total change fails", "exact", tc, tr.replace("682/738", "682/737"), True, BT)
+case("bm25 check text: hash theta change fails", "exact", tc, tr.replace("-> 0.665", "-> 0.664"), True, BT)
+case("bm25 check text: BM25 count stays exact", "exact", tc, tr.replace("A_off 7/738 (7)", "A_off 8/738 (7)"), True, BT)
+ta = "  hash/A_on                       present 0.4.0 738/738  default: 0 (0) | flat_backfill: 0 (0)\n"
+case("bm25 check text: attribution line passes", "exact", ta, ta.replace(": 0 (0)", ": 136 (0)"), False,
+     "bm25_v042_check_attribution_output.txt")
+case("bm25 check text: attribution present count fails", "exact", ta, ta.replace("738/738", "737/738"), True,
+     "bm25_v042_check_attribution_output.txt")
+case("another text file: hash counts stay exact", "exact", tc, tr, True, "x_output.txt")
 print("FAILED CASES:", fails)
 sys.exit(1 if fails else 0)
