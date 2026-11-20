@@ -18,7 +18,7 @@
 #     The October rehearsal ran gpuq4b042 at batch 8, so its +Tags and +QueryTags
 #     rows were batch 8. REPRO_Q4B_BATCH=8 repeats that path (with its expected
 #     out-of-memory skips).
-#   the Qwen3-4B mand-only rows of the four benchmarks (Section 5.4), which no
+#   the Qwen3-4B mand-only rows of the four benchmarks (item X54), which no
 #     October lane ran: one step, tb_qwen4b_mand, made like a lane step with the
 #     same settings
 #   the GPU embedding stores of WP6: Qwen3-0.6B (tag noise, leakage) and Qwen3-4B
@@ -101,7 +101,7 @@ for part in $PARTS; do
       run_lane gpuq4b042gov
       ;;
     mandonly)
-      # Section 5.4 says the mand-only condition retrieves nothing on six
+      # Item X54 says the mand-only condition retrieves nothing on six
       # backends. October ran five. This adds Qwen3-4B on the GPU.
       wp0_gpu_tb_step tb_qwen4b_mand all "BEAR+Qwen3-4B (mand-only)"
       ;;

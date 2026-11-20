@@ -25,7 +25,7 @@ Computed numbers (the gap the numbers pass closed by hand):
   - cross-backend d against BEAR+BGE on ToolBench (Section 4.2 text)
   - Table 10: the BEAR+BGE-M3 rerun against the July ungated row, the drift of the
     BGE controls, and governed vs ungated for the July rows
-  - Table 14: McNemar exact p, Cohen's h and the Clopper-Pearson bound for CPA
+  - tab:semantic-advantage (T14, removed from the manuscript): McNemar exact p, Cohen's h and the Clopper-Pearson bound for CPA
 
 Exit code 0 if every "needs Scott's run" item was found complete, 1 otherwise
 (the files are still written). Needs numpy and scipy (the kit's venv has them).
@@ -574,7 +574,7 @@ def ex_transfer_table(ctx, it, a, res):
                 extra["hardcoded_in_eval_backend_transfer"] = ref[b]
                 if round(ref[b], 3) != round(c["point_estimate"], 3):
                     res["notes"].append(f"{bench} {b}: the hardcoded off-the-shelf value {ref[b]} differs from the "
-                                        f"0.4.2 file ({c['point_estimate']:.4f}). Table 23 should print the file's value.")
+                                        f"0.4.2 file ({c['point_estimate']:.4f}). tab:transfer should print the file's value.")
             res["numbers"].append(num(f"{bench}: {b} (no gov) Recall@5, off-the-shelf row", c["point_estimate"], uf,
                                       f"{bench}/{b} (no gov)/cis/recall", (c["ci_lower"], c["ci_upper"]), **extra))
 
@@ -617,21 +617,21 @@ def ex_tool_scaling_log(ctx, it, a, res):
     for size, pr, plo, phi, rc, rlo, rhi, leak, scen in re.findall(
             r"Corpus size:\s*(\d+) tools \| Precision: ([\d.]+) \[([\d.]+), ([\d.]+)\] \| Recall: ([\d.]+) "
             r"\[([\d.]+), ([\d.]+)\] \| No cross-domain leaks: (\w+) \| Scenarios: (\d+)", t):
-        res["numbers"].append(num(f"Table 26: {size} tools, precision", float(pr), src, "log line", (float(plo), float(phi))))
-        res["numbers"].append(num(f"Table 26: {size} tools, recall", float(rc), src, "log line", (float(rlo), float(rhi))))
-        res["numbers"].append(num(f"Table 26: {size} tools, scenarios", int(scen), src, "log line", None,
+        res["numbers"].append(num(f"tool scaling: {size} tools, precision", float(pr), src, "log line", (float(plo), float(phi))))
+        res["numbers"].append(num(f"tool scaling: {size} tools, recall", float(rc), src, "log line", (float(rlo), float(rhi))))
+        res["numbers"].append(num(f"tool scaling: {size} tools, scenarios", int(scen), src, "log line", None,
                                   no_cross_domain_leaks=leak))
     for name, k, tok, sav in re.findall(r"^\s+(\S[^.]*?)\.{2,}\s*(\d+) tools \|\s*(\d+) tokens \| savings: (\d+)%", t, re.M):
-        res["numbers"].append(num(f"Table 27: {name}, tools", int(k), src, "log line"))
-        res["numbers"].append(num(f"Table 27: {name}, tokens", int(tok), src, "log line"))
-        res["numbers"].append(num(f"Table 27: {name}, savings %", int(sav), src, "log line"))
+        res["numbers"].append(num(f"token savings: {name}, tools", int(k), src, "log line"))
+        res["numbers"].append(num(f"token savings: {name}, tokens", int(tok), src, "log line"))
+        res["numbers"].append(num(f"token savings: {name}, savings %", int(sav), src, "log line"))
     m = re.search(r"All-tools baseline: (\d+) tools, (\d+) tokens", t)
     if m:
-        res["numbers"].append(num("Table 27: all-tools baseline, tokens", int(m.group(2)), src, "log line",
+        res["numbers"].append(num("token savings: all-tools baseline, tokens", int(m.group(2)), src, "log line",
                                   None, tools=int(m.group(1))))
     m = re.search(r"Average token savings: (\d+)%", t)
     if m:
-        res["numbers"].append(num("Table 27: average savings %", int(m.group(1)), src, "log line"))
+        res["numbers"].append(num("token savings: average savings %", int(m.group(1)), src, "log line"))
 
 
 def ex_novel_mcnemar(ctx, it, a, res):

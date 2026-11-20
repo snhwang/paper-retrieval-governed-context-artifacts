@@ -4,9 +4,11 @@ This folder reruns every result of the revised TIST paper, "Retrieval-Governed C
 
 `MANIFEST.md` maps every table, figure and in-text result of the manuscript to the script and file that produce it. It also gives each item its status:
 - **needs Scott's run.** The paper attributes the number to BEAR 0.4.2 or to this revision. That covers every retrieval table, even where the value equals July's, and WP1, WP2, WP4, WP5, WP6, the Table 10 reruns and Hermes.
-- **Scott, previous version.** A July or August 2026 run that the revision keeps unchanged, with no claim that it ran on 0.4.2. Examples are the Table 10 rows whose lists did not change and the ReAct and scale tables. Their scripts are here (`55_`), but they need no rerun.
+- **Scott, previous version.** A July or August 2026 run that the revision keeps unchanged, with no claim that it ran on 0.4.2. Examples are the Table 10 rows whose lists did not change and the ReAct and scale results (Supplement Table S1). Their scripts are here (`55_`), but they need no rerun.
 
 `TEXT_FIXES.md` lists the numbers in the manuscript that no script can produce (stale text, prose estimates, no data), with a proposed change for each.
+
+Table and section numbers follow the manuscript as built on 20 Nov 2026 (Tables 1 to 19, Supplement Tables S1 to S4). The paper prints Nemotron-Embed, Qwen3-Emb-0.6B and Qwen3-Emb-4B where the kit's keys say `Nemotron`, `Qwen3-0.6B` and `Qwen3-4B`.
 
 BEAR is pinned at the public tag v0.4.2 (commit `0d0718a`). The scripts only wrap the evaluation code in `evals/` and `hermes/`. They never write into `results/` or anywhere else in this checkout. Every output goes to `$REPRO_OUT`, by default `~/tist-repro`.
 
@@ -45,13 +47,13 @@ All scripts take `--dry-run`. It prints every command the script would run and c
 | Script | Reproduces (MANIFEST ids) | Needs | Memory cap | GPU | Time | Outputs |
 |---|---|---|---|---|---|---|
 | `00_setup.sh` | nothing. Venv, BEAR clones, models, repo clones, `verify_env.py`. `--update` brings existing clones up to `tist-r2` | CPU, network once, 8360 `/health` | 4G | none | 15 min (models extra), `--update` 1 min | `setup/`, `wp0/`, `clones/` |
-| `10_cpu_retrieval.sh` | Tables 6, 8, 9 (BGE, BGE-M3, Qwen3-0.6B, BM25, hash), Tables 7, 13 to 17, 23 to 28, mand-only rows, Table 10 lists, WP4 lists, mandatory tables (T06 to T09, T13 to T17, T23 to T28, X53, X54) | CPU only (8360 `/health` once) | 8G lexical, 20G dense, per step | none | 13 to 15 h (`--with-controls` adds 3 h) | `wp0/` |
+| `10_cpu_retrieval.sh` | Tables 6, 8, 9 (BGE, BGE-M3, Qwen3-0.6B, BM25, hash), Table 7, Tables 11 and 18, Supplement Tables S2 to S4, the text results of Sec 4.3 and Appendix B, mand-only rows, Table 10 lists, WP4 lists, mandatory tables (T06 to T09, T13 to T17, T23 to T28, X53, X54) | CPU only (8360 `/health` once) | 8G lexical, 20G dense, per step | none | 13 to 15 h (`--with-controls` adds 3 h) | `wp0/` |
 | `15_cpu_invariants_baselines.sh` | invariants, budget binding, BM25 checks, BGE-M3 leakage, WP5 BGE rows and CPA, the CPU embedding stores (T18, XBB, T19, T20) | CPU only | 8G to 24G per step | none | 4 to 6 h | `clones/artifacts-wp256/results/`, `emb-cache/` |
 | `20_gpu_local_embeddings.sh` | Qwen3-4B rows of Tables 6, 8, 9, its mand-only rows, its Table 10 and WP4 lists, the Qwen WP6 stores (T06, T08, T09, X54, T20) | local GPU | 12G host | start at 67,000 MiB or less, stop above 80,000. Allocator 11.2 GiB (WP0, encode batch 2), 6 or 12 GiB (WP6) | 1.5 to 2 h | `wp0/`, `emb-cache/` |
-| `30_nemotron.sh` | Nemotron rows of Tables 6, 8, 9, its lists, the threshold diagnosis, the Nemotron WP2/WP6 stores, the Nemotron rows of Table 19 (T06, T08, T09, X42, T19, T20) | port 8360 | 4G to 16G per step | none locally | 2 to 3 h | `wp0/`, `emb-cache/`, `clones/artifacts-wp256/results/` |
+| `30_nemotron.sh` | Nemotron rows of Tables 6, 8, 9, its lists, the threshold diagnosis, the Nemotron WP2/WP6 stores, the Nemotron rows of Table 13 (T06, T08, T09, X42, T19, T20) | port 8360 | 4G to 16G per step | none locally | 2 to 3 h | `wp0/`, `emb-cache/`, `clones/artifacts-wp256/results/` |
 | `40_robustness_from_stores.sh` | tag noise, over-restriction, leakage, giveaways, mandatory coverage (T17b, T20) | CPU only, after 15, 20 and 30 | 8G to 16G per step | none | 1 h | `clones/artifacts-wp256/results/` |
 | `50_e2e_ollama.sh` | Table 10 rows rerun on 0.4.2 and the drift controls (T10a) | Ollama on 11434 | 4G client | start at 67,000 MiB or less, 81,000 before each row | 30 to 40 min | `e2e_rerun/` |
-| `55_e2e_previous_version.sh PART` | the previous-version runs: Table 10 July rows, monolithic row, Tables 11 and 12, Appendix A tags (T10b, T10c, T11, T12, AA). Optional | Ollama (Anthropic API for `tags-api`) | 16G client | as the Ollama model needs | 4 to 9 h per part | `previous/PART/` |
+| `55_e2e_previous_version.sh PART` | the previous-version runs: Table 10 July rows, monolithic row, the ReAct and scale runs of Supplement Table S1, Appendix A tags (T10b, T10c, T11, T12, AA). Optional | Ollama (Anthropic API for `tags-api`) | 16G client | as the Ollama model needs | 4 to 9 h per part | `previous/PART/` |
 | `65_authorship.sh --part P` | the authorship ablation: the tags again with Qwen3.8-27B, then MetaTool+Tags, MetaTool+QueryTags-top5 (seven backends) and Table 7 under both taggers (XAUTH). Parts tag, cpu, gpu, nemotron, analyze, test | tag 8355, cpu CPU, gpu local GPU, nemotron 8360 | 8G (tag), 8G or 20G (cpu), 12G (gpu), 8G (nemotron) | gpu part as 20_ | tag 3 to 5 h, cpu about 5 h, gpu 20 min, nemotron 45 min, analyze 15 min | `authorship/`, `wp0/stage/v042/tb_auth_*` |
 | `60_hermes.sh STEP` | Hermes stage 1 and stage 2 (XH) | ports 8355 and 8360 | 16G grid, 4G to 8G otherwise | none locally | about 50 h of grids | `hermes/` |
 | `61_hermes_chain.sh` | nothing by itself. Runs `60_` stage1, post-stage1, settings, block1 and post-block1 unattended, after a go file, around blocked windows (stopgap until a shared job queue) | as `60_` | 2G (the chain only waits) | none locally | as `60_` | `hermes-chain/`, `logs/hermes-chain/` |
@@ -168,7 +170,7 @@ $REPRO_OUT/                     default ~/tist-repro
 | exact | deterministic CPU results: BM25, hash, BGE, BGE-M3, Qwen3-0.6B and Qwen3-4B on the CPU, invariants, budget binding, WP5 with BGE, mandatory tables | every number equal, with a slack of 1e-9 for float printing. Strings equal. Hash-backend values (a file or JSON key named for hash) follow the hash rule below |
 | gpu | Qwen3-4B in bf16 (WP0), the Qwen fp16 stores (WP6), anything embedded by the GPU-served Nemotron, WP4 | every point estimate that the committed file gives a 95% CI for lies inside that CI. A float without a CI agrees to 3 decimals. Precision and batch size move values at rounding level |
 | ollama | Table 10 reruns and July runs | tool and exact accuracy, and governed minus ungated deltas, within 0.01. The measured executor drift on identical lists is at most 0.0082. Retrieval metrics of the lists must be exact |
-| llm | Gemma 4 at temperature 1.0 (Table 12), Hermes grids, the authorship ablation's runs | every point estimate with a committed CI lies inside it. The committed Hermes results are agent runs on an older harness, so read their FAILs rather than count them |
+| llm | Gemma 4 at temperature 1.0 (Supplement Table S1), Hermes grids, the authorship ablation's runs | every point estimate with a committed CI lies inside it. The committed Hermes results are agent runs on an older harness, so read their FAILs rather than count them |
 | tags | the tag files the authorship ablation writes | at least 99% of the committed items present, and at least 90% of the shared items with the identical tags. The retrieval runs with those tags (`tb_auth_*`) and the analysis use the llm rule |
 | info | GPU-made top-k lists, the 0.1.10 comparison | compared, for reading only |
 | skip | logs, manifests, provenance records, the hand-written report, PDFs | not compared |
@@ -194,7 +196,7 @@ Some committed files are older than your runs. Several WP2, WP5 and WP6 rows wer
 - governed minus ungated per backend for Tables 6, 8 and 9, with paired t, p, Wilcoxon p and d = mean(diff) / sd(diff)
 - the cross-backend d against BEAR+BGE in the Section 4.2 text
 - for Table 10, the BEAR+BGE-M3 rerun against the July ungated row, and the drift of the BGE controls
-- for Table 14, McNemar exact p, Cohen's h and the Clopper-Pearson bound for CPA
+- for the former semantic-advantage table (T14, removed from the manuscript), McNemar exact p, Cohen's h and the Clopper-Pearson bound for CPA
 
 Items that need your run are read from `assembled/` only. Items from the previous version are read from `assembled/` when `55_` reran them, else from the committed file of that run. `collect.py` exits 1 while an item that needs your run is incomplete.
 

@@ -12,10 +12,10 @@
 #   the numbers no eval script writes (part derived, reproduce/derive/ and one evals
 #     diagnostic), each a JSON with its sources. No model, no server:
 #       derive/metatool_split.py       Sec 4.2, 20,614 single-tool and 497 multi-tool queries
-#       derive/e2e_name_collisions.py  Table 10 monolithic row, 14 names over 22 endpoints
+#       derive/e2e_name_collisions.py  Table 10 monolithic row, the 14 colliding names
 #       derive/composer_tests.py       Sec 3.3, the eight emit_tool_summary tests in BEAR v0.4.2
 #       derive/tool_summary_tokens.py  Sec 3.3, tokens the tool summary adds per tool
-#       evals/diag_gate_coverage.py    Sec 5.3, none of the 2,629 gold APIs gated out
+#       evals/diag_gate_coverage.py    Sec 4.6 and Supplement Sec S2, no gold API gated out
 # Then it gathers everything into $REPRO_OUT/assembled/, laid out like this repo, so
 # verify.py and collect.py can read it:
 #   results/v042/           evals/wp0_v040/assemble_v040.py (WP0 stage, lists, WP4,

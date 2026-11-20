@@ -88,7 +88,7 @@ TOLERANCE = {
     # agree within 0.01. Retrieval metrics of the lists, which do not depend on the
     # executor, must be exact. Per-query outcomes are reported but decide nothing.
     "ollama": {"abs_acc": 0.01, "acc_keys": ("tool_accuracy", "exact_accuracy", "tool", "exact", "delta")},
-    # Sampled LLM runs (Gemma 4 at temperature 1.0 in Table 12, the Hermes grids):
+    # Sampled LLM runs (Gemma 4 at temperature 1.0 in Supplement Table S1, the Hermes grids):
     # every point estimate with a committed CI must lie inside it. Other numbers
     # decide nothing. The committed Hermes results are agent runs on an older
     # harness, which your runs replace, so expect some FAILs there and read them.

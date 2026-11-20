@@ -246,7 +246,7 @@ the script's header. Serving `bf16` needs ~24GB of weights against `Q4_0`'s
 
 This map follows the revised manuscript (TIST round 2) as built on 20 Nov 2026. The article has Tables 1 to 19, and its online Supplement has Tables S1 to S4. Every retrieval result of the revision runs on BEAR v0.4.2. The end-to-end rows kept from July 2026 (part of Table 10, and Table S1) ran on v0.1.10. `reproduce/` reruns all of them by hand and records each run. `reproduce/MANIFEST.md` is the full map. It covers every table, figure and in-text number, the exact command, the output file, and whether a number comes from this revision or is kept from the July and August 2026 runs. Static tables and the figures have no backing script.
 
-The kit files (`reproduce/MANIFEST.md`, `reproduce/README.md`, `reproduce/lib/paper_map.py`) and `run_evals.sh` still print the table numbers of earlier builds. Match their entries to this map by label or by kit id, which do not change. T14 and T15 belong to tables that the revision later removed. Their scripts and committed outputs remain. The kit's other ids are in-text numbers, listed in the MANIFEST.
+The kit files (`reproduce/MANIFEST.md`, `reproduce/README.md`, `reproduce/lib/paper_map.py`) follow the same numbering. `run_evals.sh` still prints the table numbers of the first submission in its progress lines. Labels and kit ids do not change. T14 and T15 belong to tables that the revision later removed. Their scripts and committed outputs remain. The kit's other ids are in-text numbers, listed in the MANIFEST.
 
 The paper prints three backend labels differently from the scripts and the result files. Nemotron-Embed, Qwen3-Emb-0.6B and Qwen3-Emb-4B in the paper are `Nemotron`, `Qwen3-0.6B` and `Qwen3-4B` in the result keys (for example `BEAR+Qwen3-4B (gov)`), and `nemotron`, `qwen3-0.6b` and `qwen3-4b` in the backend options. The models are the same. The paper's labels say that they are embedding models. Appendix D of the paper (Table 19) lists every model with its identifier, precision or quantization, server and settings.
 
@@ -274,7 +274,7 @@ The paper prints three backend labels differently from the scripts and the resul
 | Table 17 (Appendix A) | `tab:second-tagger` | `authorship/tag.py`, `validate.py`, `eval_tagged.py`, `analyze.py` (see `evals/authorship/README.md`) | `65_` | XAUTH | yes (tagging) |
 | Appendix B, text | none (earlier `tab:retrieval`) | `eval_retrieval.py` | `10_` | T25 | no |
 | Table 18 (Appendix B) | `tab:governance-ablation` | `eval_governance_ablation.py` | `10_` | T16 | no |
-| Table 19 (Appendix D) | `tab:models` | *(static, every model with its identifier and settings)* | none | none | n/a |
+| Table 19 (Appendix D) | `tab:models` | *(static, every model with its identifier and settings)* | none | TM | n/a |
 | Supplement Table S1, and the ReAct numbers of Section 4.2 | `tab:e2e-scale` | `eval_toolbench_react.py`, alone for the Mistral-Nemo cells and via `run_model_full1100.sh` and `run_model_scaffold_nothink.sh` for the Gemma 4 cells, then `grid_from_full1100.py` and `scaffold_vs_single.py` (July) | `55_` | T11, T12 | yes |
 | Supplement Table S2 | `tab:transfer` | `eval_backend_transfer.py` (off-the-shelf rows: the ungated rows of Tables 6 and 8) | `10_` | T23 | no |
 | Supplement Table S3 | `tab:reranker` | `eval_reranker_composition.py`, `eval_framework_baseline.py` | `10_` | T24 | no |

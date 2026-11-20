@@ -158,7 +158,7 @@ KIT_PLAN="TIST reproduction kit $(git -C "$ART" rev-parse --short HEAD)"
 AUTH_PLAN="authorship PLAN.md v2 sha256 834b15fb, $KIT_PLAN"
 declare -A PURPOSE PLAN
 PURPOSE=(
-  [10]="TIST paper revision: CPU retrieval rows of Tables 6 to 9 and 13 to 17 on BEAR 0.4.2"
+  [10]="TIST paper revision: CPU retrieval rows of Tables 6 to 9, 11 and 18 and Supplement Tables S2 to S4 on BEAR 0.4.2"
   [15]="TIST paper revision: invariant tests, budget binding, BM25 and BGE-M3 checks, WP5 BGE and CPA rows"
   [15fill]="TIST paper revision: CPU embedding stores for the tag-noise, leakage and mandatory-coverage tests"
   [20]="TIST paper revision: Qwen3-4B rows of Tables 6, 8 and 9 and the Qwen stores, on the local GPU"

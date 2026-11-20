@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Section 3.3: the textual tool summary "adds roughly twenty tokens per admitted tool".
+"""Section 3.3: the textual tool summary "adds roughly 13 to 17 tokens (cl100k) per admitted tool".
 
     python reproduce/derive/tool_summary_tokens.py --out DIR/tool_summary_tokens.json
 
