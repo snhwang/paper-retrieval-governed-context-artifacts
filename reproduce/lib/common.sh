@@ -460,7 +460,7 @@ check_card_start() {
 # Only one GPU or server job of the kit (and no WP7 grid) at a time.
 check_no_gpu_jobs() {
   local mine=${REPRO_UNIT:-} u active=""
-  for u in tist-repro-20 tist-repro-30 tist-repro-50 tist-repro-55 tist-repro-60 tist-repro-65 wp0-gpuq4b042 wp0-gpuq4b042fix \
+  for u in tist-repro-20 tist-repro-30 tist-repro-50 tist-repro-55 tist-repro-56 tist-repro-60 tist-repro-65 wp0-gpuq4b042 wp0-gpuq4b042fix \
            wp0-gpuq4b042gov wp0-e2erun tist-qwen-gpu; do
     [ "$u" = "$mine" ] && continue
     systemctl --user is-active -q "$u" 2>/dev/null && active+=" $u"

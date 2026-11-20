@@ -1,6 +1,6 @@
 # End-to-end reruns: plan
 
-Status: version 1, 2026-11-20. Scott read the three decisions below and answered on 20 Nov 2026: "It doesn't really matter how we do it. We just need to rerun and document." The session takes that as approval with the planned choices: Ollama, a fixed seed, and all four parts. Under "Specs yes, gates no" (9 Nov 2026) and "Re-run anything questionable" (12 Nov 2026), this file is fixed before the runs. Its sha256 is recorded in the paper repo's `revision-plan.md`.
+Status: version 2, 2026-11-20 (see Changes). Version 1, same day. Scott read the three decisions below and answered on 20 Nov 2026: "It doesn't really matter how we do it. We just need to rerun and document." The session takes that as approval with the planned choices: Ollama, a fixed seed, and all four parts. Under "Specs yes, gates no" (9 Nov 2026) and "Re-run anything questionable" (12 Nov 2026), this file is fixed before the runs. Its sha256 is recorded in the paper repo's `revision-plan.md`.
 
 ## Why
 
@@ -85,4 +85,9 @@ All three take the planned choice (see Status).
 
 ## Changes
 
-None yet.
+- **2026-11-20, version 2.** Version 1 (sha256 b2e21cebff8336222cb5d13de39787eef69629de61117fd3c146d3f9e395ade7) said that a prompt with all 3,225 tools needs a window of at least 131,072 tokens. Version 2 fixes how that window is set. Nothing else changes.
+  - **Fixed-window tags.** Parts 2 to 4 run on tags that only add `num_ctx 131072` to the July builds: `mistral-nemo-131k` (from `mistral-nemo`), `gemma4-12b-131k` (from `gemma4:12b`) and `gemma4-31b-131k` (from `gemma4:31b`). The Modelfiles are `evals/e2e_rerun/Modelfile.<tag>`. A tag adds no weights. The run record of the step that makes a tag holds its digest.
+  - **Why.** The Ollama server defaults to a window of 262,144 tokens. The model-server session worked out that with it the larger models do not fit on the card (its note is `model-server/machines/ollama-long-context-room.md`). The July runs used that default.
+  - **The prompt's size.** The ReAct and Gemma scripts list each tool as its name and the first 400 characters of its description. That prompt is 82,540 cl100k tokens with the longest query (`count_prompts.py`). Ollama cuts a prompt that is longer than the window without failing, so each model's own count is read from the server before a run is booked, and the Ollama log is searched for "truncating input prompt" after every run.
+  - **Measured loads first.** `reproduce/56_e2e_long_context.sh` makes each tag and measures one guarded load of it. The 12B model fits beside the Qwen3.8 server. Mistral-Nemo at this window and the 31B model need that server stopped, in nights booked through the model-server session.
+  - If a model's own count leaves less than 8,704 tokens of the window free, that model's tag gets a larger window, and this file says so before the run.
