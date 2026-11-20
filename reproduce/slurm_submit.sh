@@ -34,11 +34,13 @@
 #   at 06:55 the next morning, takes gpumem:24, and runs through 57_e2e_night.sh, which waits until
 #   the server is down and the card is at or below 40,000 MiB.
 #   rgc-56tag-nemo, rgc-56tag-g31          the fixed-window tags. CPU only, no reservation, any time
-#   rgc-56meas-nemo, rgc-56meas-g31        one measured load each, 25 min limit, after its tag
-#   rgc-56react   ReAct batch, Mistral-Nemo 4 CPUs, 16G, 9 h 45  after rgc-56meas-nemo succeeds
-#   rgc-56mono    Table 10 monolithic row   4 CPUs, 16G, 10 h 30
-#   rgc-56g31s    Gemma 4 31B, scaffold     4 CPUs, 16G, 10 h 45
-#   rgc-56g31n    Gemma 4 31B, native       4 CPUs, 16G, 10 h 45
+#   rgc-56meas-nemo, rgc-56meas-g31        one measured load each, 2G, 25 min limit, after its tag
+#   rgc-56react   ReAct batch, Mistral-Nemo 4 CPUs, 6G, 9 h 45   after rgc-56meas-nemo succeeds
+#   rgc-56mono    Table 10 monolithic row   4 CPUs, 6G, 10 h 30
+#   rgc-56g31s    Gemma 4 31B, scaffold     4 CPUs, 6G, 10 h 45
+#   rgc-56g31n    Gemma 4 31B, native       4 CPUs, 6G, 10 h 45
+#               (Memory: the model is in Ollama on Windows, outside the job. The client with its BGE
+#               embedder on the CPU peaked at 2.0 GB in a check on 20 Nov. A measured load used 0.54 GB.)
 #               (In July the ReAct batch took about 8 h and the monolithic row about 6 h.)
 #   rgc-65tag   authorship tags             2 CPUs,  8G,  7 h   chat8355:4
 #   rgc-65cpu   authorship, CPU part       12 CPUs, 24G, 12 h   after the tags, after rgc-15fill ends
@@ -250,12 +252,12 @@ if [[ $ONLY =~ " 56"(meas-nemo|meas-g31|react|mono|g31s|g31n)" " ]]; then
   # Off the card by 06:55, before the model-server session starts the Qwen3.8 server again at 07:00.
   EXTRA=(--reservation="$RGC_RES" --begin="$RES_START" --deadline="$(date -d "${RES_START%T*} +1 day" +%F)T06:55:00")
   NIGHT="env REPRO_GPU_START_MIB=40000 REPRO_GPU_STOP_MIB=94000 bash reproduce/57_e2e_night.sh"
-  [[ $ONLY == *" 56meas-nemo "* ]] && sub 56meas-nemo 2 8G 00:25:00 "gpumem:24" "$(dep afterok:56tag-nemo)" "$NOFREEZE" $NIGHT measure-nemo
-  [[ $ONLY == *" 56meas-g31 "* ]] && sub 56meas-g31 2 8G 00:25:00 "gpumem:24" "$(dep afterok:56tag-g31 afterany:56meas-nemo)" "$NOFREEZE" $NIGHT measure-g31
-  [[ $ONLY == *" 56react "* ]] && sub 56react 4 16G 09:45:00 "gpumem:24" "$(dep afterok:56meas-nemo afterany:56meas-g31)" "$NOFREEZE" $NIGHT react
-  [[ $ONLY == *" 56mono "* ]] && sub 56mono 4 16G 10:30:00 "gpumem:24" "$(dep afterany:56react)" "$NOFREEZE" $NIGHT monolithic
-  [[ $ONLY == *" 56g31s "* ]] && sub 56g31s 4 16G 10:45:00 "gpumem:24" "" "$NOFREEZE" $NIGHT g31-scaffold
-  [[ $ONLY == *" 56g31n "* ]] && sub 56g31n 4 16G 10:45:00 "gpumem:24" "$(dep afterany:56g31s)" "$NOFREEZE" $NIGHT g31-native
+  [[ $ONLY == *" 56meas-nemo "* ]] && sub 56meas-nemo 2 2G 00:25:00 "gpumem:24" "$(dep afterok:56tag-nemo)" "$NOFREEZE" $NIGHT measure-nemo
+  [[ $ONLY == *" 56meas-g31 "* ]] && sub 56meas-g31 2 2G 00:25:00 "gpumem:24" "$(dep afterok:56tag-g31 afterany:56meas-nemo)" "$NOFREEZE" $NIGHT measure-g31
+  [[ $ONLY == *" 56react "* ]] && sub 56react 4 6G 09:45:00 "gpumem:24" "$(dep afterok:56meas-nemo afterany:56meas-g31)" "$NOFREEZE" $NIGHT react
+  [[ $ONLY == *" 56mono "* ]] && sub 56mono 4 6G 10:30:00 "gpumem:24" "$(dep afterany:56react)" "$NOFREEZE" $NIGHT monolithic
+  [[ $ONLY == *" 56g31s "* ]] && sub 56g31s 4 6G 10:45:00 "gpumem:24" "" "$NOFREEZE" $NIGHT g31-scaffold
+  [[ $ONLY == *" 56g31n "* ]] && sub 56g31n 4 6G 10:45:00 "gpumem:24" "$(dep afterany:56g31s)" "$NOFREEZE" $NIGHT g31-native
   EXTRA=()
 fi
 sub 65tag   2 8G  07:00:00   "chat8355:4"  ""                                         "$NOFREEZE" bash reproduce/65_authorship.sh --part tag
