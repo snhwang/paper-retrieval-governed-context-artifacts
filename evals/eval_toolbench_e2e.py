@@ -101,6 +101,21 @@ from eval_toolbench import (
 # ---------------------------------------------------------------------------
 
 
+# A caller sets LLM_SEED to send a seed with every request, so that a sampled run can be repeated
+# on the same server build (evals/e2e_rerun/PLAN.md). None, the default, sends no seed, as the
+# published runs did.
+LLM_SEED: int | None = None
+# The server's own count of the longest prompt it was sent in this process (usage.prompt_tokens).
+PROMPT_TOKENS = {"max": 0, "calls": 0}
+
+
+def note_usage(data: dict | None) -> None:
+    n = ((data or {}).get("usage") or {}).get("prompt_tokens")
+    if isinstance(n, int):
+        PROMPT_TOKENS["calls"] += 1
+        PROMPT_TOKENS["max"] = max(PROMPT_TOKENS["max"], n)
+
+
 def server_context_length(base_url: str, model: str | None = None) -> int | None:
     """Best-effort: the loaded model's context window, or None if unknown.
 
@@ -312,6 +327,8 @@ def call_llm_with_tools(
         body["top_k"] = top_k  # Ollama honors this via its OpenAI-compatible endpoint
     if reasoning_effort is not None:
         body["reasoning_effort"] = reasoning_effort
+    if LLM_SEED is not None:
+        body["seed"] = LLM_SEED
     payload = json.dumps(body, ensure_ascii=False).encode("utf-8")
 
     req = urllib.request.Request(
@@ -350,6 +367,7 @@ def call_llm_with_tools(
         return None
 
     call_llm_with_tools._success_count = getattr(call_llm_with_tools, "_success_count", 0) + 1
+    note_usage(data)
 
     content = (data["choices"][0]["message"].get("content") or "").strip()
     if not content:
@@ -1097,6 +1115,7 @@ def main():
             "model": args.model,
             "top_k": args.top_k,
             "n_queries": len(queries),
+            "max_prompt_tokens": PROMPT_TOKENS["max"] or None,
             "results": json_results,
         }, f, indent=2, default=lambda o: float(o) if hasattr(o, 'item') else o)
     print(f"\nResults saved to {output_path}")

@@ -92,6 +92,7 @@ from eval_toolbench_e2e import (  # noqa: E402
     DEFAULT_TOP_K,
     BOOTSTRAP_ITERS,
 )
+import eval_toolbench_e2e as _e2e  # noqa: E402  (the optional seed and the prompt-token count live there)
 
 # Default to Ollama's port, matching the paper's end-to-end deployment
 # (Mistral-Nemo-Instruct-2407 at Q4_0). Override with --base-url.
@@ -293,6 +294,8 @@ def call_llm_react(
         if reasoning_effort is not None:
             body["reasoning_effort"] = reasoning_effort
 
+    if _e2e.LLM_SEED is not None:
+        body["seed"] = _e2e.LLM_SEED
     payload = json.dumps(body, ensure_ascii=False).encode("utf-8")
 
     req = urllib.request.Request(
@@ -325,6 +328,7 @@ def call_llm_react(
         return None, f"<error: {e!r}>"
 
     call_llm_react._success_count = getattr(call_llm_react, "_success_count", 0) + 1
+    _e2e.note_usage(data)
     msg = data["choices"][0]["message"]
     raw_content = msg.get("content", "") or ""
 
@@ -792,6 +796,9 @@ def parse_args() -> argparse.Namespace:
                    "thinking models. Use 'none' to DISABLE a thinking model's "
                    "reasoning (Gemma 4 thinks by default), enabling a clean "
                    "thinking-on vs thinking-off ablation on the same model.")
+    p.add_argument("--seed", type=int, default=None,
+                   help="Seed sent with every request, so that a sampled run can be repeated on "
+                   "the same server build. Default: none, as in the published runs.")
     p.add_argument("--max-empty-rate", type=float, default=0.10,
                    help="Abort a condition if more than this fraction of the first "
                    f"25 responses are empty (default 0.10). Empty responses score 0 "
@@ -802,6 +809,7 @@ def parse_args() -> argparse.Namespace:
 
 def main() -> None:
     args = parse_args()
+    _e2e.LLM_SEED = args.seed
 
     # Namespace the output files so different models/runs do not clobber each
     # other. --run-label gives an explicit tag (e.g. a model name); a partial
@@ -1100,6 +1108,8 @@ def main() -> None:
             json.dump({"model": args.model, "top_k": args.top_k,
                        "monolithic_cap": args.monolithic_cap, "rows": rows,
                        "sample_seed": args.sample_seed if args.sample_queries else None,
+                       "llm_seed": args.seed,
+                       "max_prompt_tokens": _e2e.PROMPT_TOKENS["max"] or None,
                        "query_indices_file": args.query_indices_file,
                        "sample_indices": sample_indices,
                        "comparisons": comparisons,

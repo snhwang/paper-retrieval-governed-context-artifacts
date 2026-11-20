@@ -23,6 +23,11 @@
 #   rgc-50all   all ten Table 10 rows       2 CPUs,  6G, 90 min gpumem:16. Opt-in: only with --only "50all"
 #   rgc-56tag-g12, rgc-56meas-g12           a fixed-window tag of gemma4:12b and one measured load of it
 #                                           (gpumem:16). Opt-in: only with --only "56tag-g12 56meas-g12"
+#   rgc-56g12s  Gemma 4 12B, scaffold runs  4 CPUs, 16G, 12 h   gpumem:16. Opt-in: only with --only "56g12s"
+#   rgc-56g12n  Gemma 4 12B, native runs    4 CPUs, 16G, 18 h   gpumem:16, after rgc-56g12s ends.
+#                                           Opt-in: only with --only "56g12n", or both names
+#               (Supplement Table S1 on BEAR 0.4.2, on the fixed-window tag, beside the Qwen3.8 server.
+#               In July each Gemma part took 4 to 9 h.)
 #   rgc-65tag   authorship tags             2 CPUs,  8G,  7 h   chat8355:4
 #   rgc-65cpu   authorship, CPU part       12 CPUs, 24G, 12 h   after the tags, after rgc-15fill ends
 #   rgc-65gpu   authorship, GPU part        4 CPUs, 16G,  6 h   gpumem:14, after the tags and rgc-20
@@ -171,6 +176,8 @@ PURPOSE=(
   [50all]="TIST paper revision: all ten retrieval rows of Table 10 rerun in one session on BEAR 0.4.2 with Mistral-Nemo in Ollama"
   [56tag-g12]="TIST paper revision: make the Ollama tag gemma4-12b-131k, which only adds a 131072-token window to gemma4:12b"
   [56meas-g12]="TIST paper revision: one guarded load of gemma4-12b-131k to measure its card use and count the monolithic prompt, then unload"
+  [56g12s]="TIST paper revision: Supplement Table S1 rerun on BEAR 0.4.2, Gemma 4 12B under the one-step scaffold with native reasoning off, three conditions on 1100 queries, Ollama tag gemma4-12b-131k, seed 20261120"
+  [56g12n]="TIST paper revision: Supplement Table S1 rerun on BEAR 0.4.2, Gemma 4 12B with native reasoning off and on, four runs on 1100 queries, Ollama tag gemma4-12b-131k, seed 20261120"
   [65tag]="TIST authorship ablation: rewrite all tool and query tags with Qwen3.8-27B on 8355"
   [65cpu]="TIST authorship ablation: retrieval reruns with the new tags, CPU backends"
   [65gpu]="TIST authorship ablation: retrieval reruns with the new tags, Qwen3-4B on the local GPU"
@@ -181,7 +188,7 @@ PURPOSE=(
   [90]="TIST paper revision: check outputs against the committed results and write the numbers file"
 )
 for s in 65tag 65cpu 65gpu 65nem 65an; do PLAN[$s]=$AUTH_PLAN; done
-for s in 50all 56tag-g12 56meas-g12; do PLAN[$s]="end-to-end rerun PLAN.md v3 sha256 114cf0d7, $KIT_PLAN"; done
+for s in 50all 56tag-g12 56meas-g12 56g12s 56g12n; do PLAN[$s]="end-to-end rerun PLAN.md v3 sha256 114cf0d7, $KIT_PLAN"; done
 # Card gates for GPU steps under Slurm (model-server, 16 Nov). The card has 97,887 MiB. Windows' desktop
 # takes about 6 GB beside the containers' 67.5 GB, so the 30 Oct start limit (67,000) cannot be met with
 # Scott's windows open. Start at 97,887 - gpumem*1024 - 2,048 or less, and stop above 94,000. The Ollama
@@ -198,6 +205,8 @@ sub 50      2 6G  01:30:00   "gpumem:16"   "$(dep 'afterok:10 20')"             
 [[ $ONLY == *" 50all "* ]] && sub 50all 2 6G 01:30:00 "gpumem:16" "" "$NOFREEZE" $(gate 16 row) bash reproduce/50_e2e_ollama.sh --all-rows
 [[ $ONLY == *" 56tag-g12 "* ]] && sub 56tag-g12 1 2G 00:20:00 "" "" "" bash reproduce/56_e2e_long_context.sh tag-g12
 [[ $ONLY == *" 56meas-g12 "* ]] && sub 56meas-g12 2 8G 01:00:00 "gpumem:16" "$(dep afterok:56tag-g12)" "$NOFREEZE" $(gate 16) bash reproduce/56_e2e_long_context.sh measure-g12
+[[ $ONLY == *" 56g12s "* ]] && sub 56g12s 4 16G 12:00:00 "gpumem:16" "" "$NOFREEZE" $(gate 16) bash reproduce/56_e2e_long_context.sh g12-scaffold
+[[ $ONLY == *" 56g12n "* ]] && sub 56g12n 4 16G 18:00:00 "gpumem:16" "$(dep afterany:56g12s)" "$NOFREEZE" $(gate 16) bash reproduce/56_e2e_long_context.sh g12-native
 sub 65tag   2 8G  07:00:00   "chat8355:4"  ""                                         "$NOFREEZE" bash reproduce/65_authorship.sh --part tag
 sub 65cpu  12 24G 12:00:00   ""            "$(dep afterok:65tag afterany:15fill)"      ""          bash reproduce/65_authorship.sh --part cpu
 sub 65gpu   4 16G 06:00:00   "gpumem:14"   "$(dep 'afterok:65tag 20')"                 "$NOFREEZE" $(gate 14) bash reproduce/65_authorship.sh --part gpu

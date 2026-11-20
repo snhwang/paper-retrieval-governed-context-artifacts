@@ -26,7 +26,7 @@ echo "[$(date)] scaffold (native-off) full-1100 for $MODEL (label $LABEL)"
 # => native thinking disabled (so the 768-token constrained budget is not starved).
 python evals/eval_toolbench_react.py --reasoning-effort none \
     --temperature 1.0 --llm-top-p 0.95 --llm-top-k 64 \
-    --base-url "$BASE_URL" --model "$MODEL" \
+    --base-url "$BASE_URL" --model "$MODEL" ${LLM_SEED:+--seed $LLM_SEED} \
     --run-label ${LABEL}-scaffold-nothink-full 2>&1 | tee results/${LABEL}_scaffold_nothink_full.log
 
 echo "[$(date)] DONE. Next: python evals/scaffold_vs_single.py ${LABEL}"
