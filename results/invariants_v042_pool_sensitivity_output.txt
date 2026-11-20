@@ -5,7 +5,7 @@ Corpora: 20-60 instructions, 5 contexts each, k = 1..30, default_top_k = 10 (poo
 Configurations: ['main']
 Workers: 8
 
-Ran in 200.1s. Corpus sizes: mean 39.6, range 20-60
+Ran in 157.8s. Corpus sizes: mean 39.6, range 20-60
 
 --- main (Main defaults (stub)) ---
 cases=10000 (ungated 3540), outputs=300000, mean |output|=12.24, P(|output|>k)=0.269, P(top-k cut removes >=1)=0.520
@@ -127,21 +127,21 @@ I16             0/2000
 Wrote results/invariants_v042_pool_sensitivity.json
 Wrote results/invariants_v042_pool_sensitivity_counterexamples.json
 
-Elapsed: 201.6s
+Elapsed: 158.8s
 
 === Reproducibility ===
-Timestamp (UTC): 2026-10-30T12:02:54Z
-Command line:    evals/eval_invariants.py --configs main --sensitivity-configs main main_bm25 legacy_tie_order legacy_dropped_rows legacy_tie_order_bm25 --skip-cross-process --workers 8 --output results/invariants_v042_pool_sensitivity.json --counterexamples results/invariants_v042_pool_sensitivity_counterexamples.json --log-file results/invariants_v042_pool_sensitivity_output.txt --overwrite
+Timestamp (UTC): 2026-11-17T00:06:00Z
+Command line:    evals/eval_invariants.py --configs main --skip-cross-process --workers 8 --sensitivity-configs main main_bm25 legacy_tie_order legacy_dropped_rows legacy_tie_order_bm25 --output results/invariants_v042_pool_sensitivity.json --counterexamples results/invariants_v042_pool_sensitivity_counterexamples.json --log-file results/invariants_v042_pool_sensitivity_output.txt
 Python:          3.12.13 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
 numpy:           2.2.6
 scipy:           1.17.1
 bear:            0.4.2
-git commit:      634caf5ab715b2a7c20fac0b170228a49810bdc7
-git status:      unknown (git status failed or timed out)
+git commit:      0e07e77a0f24ad143b8f679fc584d6b90259e29f
+git status:      DIRTY (15 files modified)
 git branch:      tist-r2
 
   n_corpora: 2000
   configs: ['main']
-  bear_path: /home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/bear/__init__.py
-  bear_source_sha: 9d085b49c004cb03e2bede9055fdc3810cf260c0
+  bear_path: /home/snhwang/.venvs/tist-repro/lib/python3.12/site-packages/bear/__init__.py
+  bear_source_sha: 0d0718a39a0b0788ef5cca4689352462b830494c
 ===

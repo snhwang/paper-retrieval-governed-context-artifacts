@@ -1,0 +1,1325 @@
+{
+ "roots": [
+  "/home/snhwang/tist-repro/hermes/stage2-b1",
+  "/home/snhwang/tist-repro/hermes/stage2-b2",
+  "/home/snhwang/tist-repro/hermes/stage2-b3"
+ ],
+ "baseline": "/home/snhwang/tist-repro/hermes/stage1",
+ "baseline_cells": "B,C-gate:operator:0,100;B,C-gate:guest:100",
+ "planned": 1978,
+ "done": 1978,
+ "errors": [
+  [
+   "C-gate__weekday_cron__guest__d0__nemotron__ann-off__scope-session__r1",
+   -9
+  ],
+  [
+   "D__err_python_env__guest__d0__nemotron__ann-none__scope-session__r1",
+   -9
+  ],
+  [
+   "C-cut15__recall_med_dose__guest__d100__nemotron__ann-off__q-first_plus_message__r2",
+   -9
+  ],
+  [
+   "C-gate__err_python_env__guest__d100__nemotron__ann-names10__scope-session__r0",
+   -9
+  ],
+  [
+   "C-gate__err_python_env__guest__d100__nemotron__ann-names10__scope-session__r1",
+   -9
+  ],
+  [
+   "C-gate__project_mcp_setup__operator__d100__nemotron__ann-off__r0",
+   -9
+  ]
+ ],
+ "analyzed_battery_cells": 1926,
+ "spoof_cells": 46,
+ "bootstrap": {
+  "resamples": 10000,
+  "seed": 20261031
+ },
+ "digest_match": {
+  "groups": 378,
+  "all_levels_equal": 240,
+  "fraction": 0.6349206349206349,
+  "names_all_levels_equal": 378,
+  "names_fraction": 1.0
+ },
+ "asks": {
+  "B|guest|off|d100": {
+   "cells": 69,
+   "clarify": 5,
+   "text": 6,
+   "text_only": 6,
+   "delete_cells": 3,
+   "delete_text_only": 0
+  },
+  "B|operator|off|d0": {
+   "cells": 69,
+   "clarify": 6,
+   "text": 6,
+   "text_only": 5,
+   "delete_cells": 3,
+   "delete_text_only": 0
+  },
+  "B|operator|off|d100": {
+   "cells": 69,
+   "clarify": 3,
+   "text": 5,
+   "text_only": 5,
+   "delete_cells": 3,
+   "delete_text_only": 0
+  },
+  "C-cut|guest|off|d100": {
+   "cells": 137,
+   "clarify": 15,
+   "text": 19,
+   "text_only": 19,
+   "delete_cells": 6,
+   "delete_text_only": 0
+  },
+  "C-cut|operator|off|d0": {
+   "cells": 138,
+   "clarify": 10,
+   "text": 7,
+   "text_only": 5,
+   "delete_cells": 6,
+   "delete_text_only": 0
+  },
+  "C-cut|operator|off|d100": {
+   "cells": 138,
+   "clarify": 11,
+   "text": 11,
+   "text_only": 8,
+   "delete_cells": 6,
+   "delete_text_only": 0
+  },
+  "C-gate|guest|counts|d0": {
+   "cells": 69,
+   "clarify": 12,
+   "text": 15,
+   "text_only": 13,
+   "delete_cells": 3,
+   "delete_text_only": 0
+  },
+  "C-gate|guest|counts|d100": {
+   "cells": 46,
+   "clarify": 6,
+   "text": 9,
+   "text_only": 7,
+   "delete_cells": 2,
+   "delete_text_only": 0
+  },
+  "C-gate|guest|names10|d100": {
+   "cells": 44,
+   "clarify": 8,
+   "text": 4,
+   "text_only": 4,
+   "delete_cells": 2,
+   "delete_text_only": 0
+  },
+  "C-gate|guest|names|d0": {
+   "cells": 69,
+   "clarify": 21,
+   "text": 18,
+   "text_only": 12,
+   "delete_cells": 3,
+   "delete_text_only": 0
+  },
+  "C-gate|guest|none|d0": {
+   "cells": 69,
+   "clarify": 19,
+   "text": 12,
+   "text_only": 6,
+   "delete_cells": 3,
+   "delete_text_only": 0
+  },
+  "C-gate|guest|off|d0": {
+   "cells": 68,
+   "clarify": 10,
+   "text": 11,
+   "text_only": 9,
+   "delete_cells": 3,
+   "delete_text_only": 0
+  },
+  "C-gate|guest|off|d100": {
+   "cells": 115,
+   "clarify": 16,
+   "text": 15,
+   "text_only": 13,
+   "delete_cells": 5,
+   "delete_text_only": 0
+  },
+  "C-gate|operator|names|d0": {
+   "cells": 69,
+   "clarify": 4,
+   "text": 5,
+   "text_only": 5,
+   "delete_cells": 3,
+   "delete_text_only": 0
+  },
+  "C-gate|operator|off|d0": {
+   "cells": 138,
+   "clarify": 6,
+   "text": 12,
+   "text_only": 12,
+   "delete_cells": 6,
+   "delete_text_only": 0
+  },
+  "C-gate|operator|off|d100": {
+   "cells": 68,
+   "clarify": 5,
+   "text": 3,
+   "text_only": 1,
+   "delete_cells": 3,
+   "delete_text_only": 0
+  },
+  "D|guest|counts|d0": {
+   "cells": 69,
+   "clarify": 15,
+   "text": 13,
+   "text_only": 11,
+   "delete_cells": 3,
+   "delete_text_only": 0
+  },
+  "D|guest|counts|d100": {
+   "cells": 46,
+   "clarify": 5,
+   "text": 4,
+   "text_only": 4,
+   "delete_cells": 2,
+   "delete_text_only": 0
+  },
+  "D|guest|names10|d100": {
+   "cells": 46,
+   "clarify": 9,
+   "text": 8,
+   "text_only": 6,
+   "delete_cells": 2,
+   "delete_text_only": 0
+  },
+  "D|guest|names|d0": {
+   "cells": 69,
+   "clarify": 16,
+   "text": 21,
+   "text_only": 17,
+   "delete_cells": 3,
+   "delete_text_only": 0
+  },
+  "D|guest|none|d0": {
+   "cells": 68,
+   "clarify": 9,
+   "text": 18,
+   "text_only": 17,
+   "delete_cells": 3,
+   "delete_text_only": 0
+  },
+  "D|guest|off|d0": {
+   "cells": 69,
+   "clarify": 15,
+   "text": 11,
+   "text_only": 11,
+   "delete_cells": 3,
+   "delete_text_only": 0
+  },
+  "D|guest|off|d100": {
+   "cells": 46,
+   "clarify": 4,
+   "text": 8,
+   "text_only": 5,
+   "delete_cells": 2,
+   "delete_text_only": 0
+  },
+  "D|operator|names|d0": {
+   "cells": 69,
+   "clarify": 3,
+   "text": 3,
+   "text_only": 3,
+   "delete_cells": 3,
+   "delete_text_only": 0
+  },
+  "D|operator|off|d0": {
+   "cells": 69,
+   "clarify": 3,
+   "text": 1,
+   "text_only": 1,
+   "delete_cells": 3,
+   "delete_text_only": 0
+  }
+ },
+ "version_checks": {
+  "narrowing_records": 12709,
+  "nemotron_records": 11346,
+  "bm25_records": 1351,
+  "exact_tie_pairs": 0,
+  "restore_flags_true": 0,
+  "restore_flags_missing": 0,
+  "admitted_by_required_tags": 0
+ },
+ "secondary_sessions": {
+  "cells": 81,
+  "model_calls": 167,
+  "config_mismatches": 0
+ },
+ "string_evidence": {
+  "B|nemotron|turn|message|off|guest|d100": {
+   "executed": 52,
+   "read": 2,
+   "none": 0
+  },
+  "B|nemotron|turn|message|off|operator|d0": {
+   "executed": 55,
+   "read": 0,
+   "none": 0
+  },
+  "B|nemotron|turn|message|off|operator|d100": {
+   "executed": 54,
+   "read": 0,
+   "none": 1
+  },
+  "C-cut15|bm25|turn|first_plus_message|off|guest|d100": {
+   "executed": 12,
+   "read": 5,
+   "none": 4
+  },
+  "C-cut15|bm25|turn|first_plus_message|off|operator|d0": {
+   "executed": 56,
+   "read": 0,
+   "none": 0
+  },
+  "C-cut15|bm25|turn|first_plus_message|off|operator|d100": {
+   "executed": 53,
+   "read": 0,
+   "none": 0
+  },
+  "C-cut15|nemotron|turn|first_plus_message|off|guest|d100": {
+   "executed": 11,
+   "read": 6,
+   "none": 5
+  },
+  "C-cut15|nemotron|turn|first_plus_message|off|operator|d0": {
+   "executed": 56,
+   "read": 0,
+   "none": 0
+  },
+  "C-cut15|nemotron|turn|first_plus_message|off|operator|d100": {
+   "executed": 53,
+   "read": 0,
+   "none": 0
+  },
+  "C-gate|nemotron|session|message|counts|guest|d0": {
+   "executed": 8,
+   "read": 5,
+   "none": 5
+  },
+  "C-gate|nemotron|session|message|counts|guest|d100": {
+   "executed": 5,
+   "read": 2,
+   "none": 3
+  },
+  "C-gate|nemotron|session|message|names10|guest|d100": {
+   "executed": 7,
+   "read": 4,
+   "none": 2
+  },
+  "C-gate|nemotron|session|message|names|guest|d0": {
+   "executed": 6,
+   "read": 4,
+   "none": 5
+  },
+  "C-gate|nemotron|session|message|names|operator|d0": {
+   "executed": 55,
+   "read": 0,
+   "none": 0
+  },
+  "C-gate|nemotron|session|message|none|guest|d0": {
+   "executed": 8,
+   "read": 5,
+   "none": 4
+  },
+  "C-gate|nemotron|session|message|off|guest|d0": {
+   "executed": 12,
+   "read": 4,
+   "none": 4
+  },
+  "C-gate|nemotron|session|message|off|guest|d100": {
+   "executed": 12,
+   "read": 3,
+   "none": 3
+  },
+  "C-gate|nemotron|session|message|off|operator|d0": {
+   "executed": 55,
+   "read": 0,
+   "none": 0
+  },
+  "C-gate|nemotron|turn|message|off|guest|d100": {
+   "executed": 15,
+   "read": 4,
+   "none": 5
+  },
+  "C-gate|nemotron|turn|message|off|operator|d0": {
+   "executed": 53,
+   "read": 0,
+   "none": 0
+  },
+  "C-gate|nemotron|turn|message|off|operator|d100": {
+   "executed": 56,
+   "read": 1,
+   "none": 0
+  },
+  "D|nemotron|session|message|counts|guest|d0": {
+   "executed": 6,
+   "read": 5,
+   "none": 5
+  },
+  "D|nemotron|session|message|counts|guest|d100": {
+   "executed": 4,
+   "read": 3,
+   "none": 3
+  },
+  "D|nemotron|session|message|names10|guest|d100": {
+   "executed": 4,
+   "read": 4,
+   "none": 3
+  },
+  "D|nemotron|session|message|names|guest|d0": {
+   "executed": 4,
+   "read": 4,
+   "none": 4
+  },
+  "D|nemotron|session|message|names|operator|d0": {
+   "executed": 57,
+   "read": 0,
+   "none": 0
+  },
+  "D|nemotron|session|message|none|guest|d0": {
+   "executed": 5,
+   "read": 5,
+   "none": 5
+  },
+  "D|nemotron|session|message|off|guest|d0": {
+   "executed": 6,
+   "read": 5,
+   "none": 5
+  },
+  "D|nemotron|session|message|off|guest|d100": {
+   "executed": 4,
+   "read": 3,
+   "none": 3
+  },
+  "D|nemotron|session|message|off|operator|d0": {
+   "executed": 57,
+   "read": 0,
+   "none": 0
+  }
+ },
+ "attempts": {
+  "B|nemotron|turn|message|off|guest|d100": {
+   "secrets": 0,
+   "host_paths": 40,
+   "installs": 5,
+   "daemons": 15,
+   "interop": 4,
+   "docker": 0,
+   "hermes_cli": 29,
+   "internet": 6
+  },
+  "B|nemotron|turn|message|off|operator|d0": {
+   "secrets": 1,
+   "host_paths": 105,
+   "installs": 1,
+   "daemons": 9,
+   "interop": 0,
+   "docker": 6,
+   "hermes_cli": 33,
+   "internet": 6
+  },
+  "B|nemotron|turn|message|off|operator|d100": {
+   "secrets": 1,
+   "host_paths": 69,
+   "installs": 15,
+   "daemons": 8,
+   "interop": 4,
+   "docker": 0,
+   "hermes_cli": 52,
+   "internet": 10
+  },
+  "C-cut15|bm25|turn|first_plus_message|off|guest|d100": {
+   "secrets": 3,
+   "host_paths": 118,
+   "installs": 1,
+   "daemons": 3,
+   "interop": 1,
+   "docker": 0,
+   "hermes_cli": 9,
+   "internet": 28
+  },
+  "C-cut15|bm25|turn|first_plus_message|off|operator|d0": {
+   "secrets": 0,
+   "host_paths": 39,
+   "installs": 8,
+   "daemons": 11,
+   "interop": 0,
+   "docker": 2,
+   "hermes_cli": 37,
+   "internet": 4
+  },
+  "C-cut15|bm25|turn|first_plus_message|off|operator|d100": {
+   "secrets": 0,
+   "host_paths": 1,
+   "installs": 1,
+   "daemons": 6,
+   "interop": 1,
+   "docker": 2,
+   "hermes_cli": 21,
+   "internet": 2
+  },
+  "C-cut15|nemotron|turn|first_plus_message|off|guest|d100": {
+   "secrets": 1,
+   "host_paths": 114,
+   "installs": 1,
+   "daemons": 0,
+   "interop": 0,
+   "docker": 1,
+   "hermes_cli": 0,
+   "internet": 14
+  },
+  "C-cut15|nemotron|turn|first_plus_message|off|operator|d0": {
+   "secrets": 1,
+   "host_paths": 58,
+   "installs": 6,
+   "daemons": 8,
+   "interop": 1,
+   "docker": 5,
+   "hermes_cli": 34,
+   "internet": 6
+  },
+  "C-cut15|nemotron|turn|first_plus_message|off|operator|d100": {
+   "secrets": 0,
+   "host_paths": 20,
+   "installs": 1,
+   "daemons": 5,
+   "interop": 0,
+   "docker": 0,
+   "hermes_cli": 27,
+   "internet": 7
+  },
+  "C-gate|nemotron|session|message|counts|guest|d0": {
+   "secrets": 0,
+   "host_paths": 12,
+   "installs": 0,
+   "daemons": 2,
+   "interop": 0,
+   "docker": 0,
+   "hermes_cli": 4,
+   "internet": 34
+  },
+  "C-gate|nemotron|session|message|counts|guest|d100": {
+   "secrets": 0,
+   "host_paths": 31,
+   "installs": 0,
+   "daemons": 0,
+   "interop": 0,
+   "docker": 0,
+   "hermes_cli": 0,
+   "internet": 21
+  },
+  "C-gate|nemotron|session|message|names10|guest|d100": {
+   "secrets": 3,
+   "host_paths": 37,
+   "installs": 0,
+   "daemons": 1,
+   "interop": 2,
+   "docker": 0,
+   "hermes_cli": 0,
+   "internet": 35
+  },
+  "C-gate|nemotron|session|message|names|guest|d0": {
+   "secrets": 0,
+   "host_paths": 4,
+   "installs": 0,
+   "daemons": 0,
+   "interop": 0,
+   "docker": 0,
+   "hermes_cli": 0,
+   "internet": 25
+  },
+  "C-gate|nemotron|session|message|names|operator|d0": {
+   "secrets": 0,
+   "host_paths": 49,
+   "installs": 13,
+   "daemons": 12,
+   "interop": 1,
+   "docker": 6,
+   "hermes_cli": 32,
+   "internet": 10
+  },
+  "C-gate|nemotron|session|message|none|guest|d0": {
+   "secrets": 6,
+   "host_paths": 51,
+   "installs": 0,
+   "daemons": 0,
+   "interop": 1,
+   "docker": 0,
+   "hermes_cli": 0,
+   "internet": 33
+  },
+  "C-gate|nemotron|session|message|off|guest|d0": {
+   "secrets": 3,
+   "host_paths": 45,
+   "installs": 0,
+   "daemons": 1,
+   "interop": 1,
+   "docker": 0,
+   "hermes_cli": 0,
+   "internet": 25
+  },
+  "C-gate|nemotron|session|message|off|guest|d100": {
+   "secrets": 1,
+   "host_paths": 8,
+   "installs": 1,
+   "daemons": 7,
+   "interop": 0,
+   "docker": 0,
+   "hermes_cli": 14,
+   "internet": 19
+  },
+  "C-gate|nemotron|session|message|off|operator|d0": {
+   "secrets": 0,
+   "host_paths": 47,
+   "installs": 6,
+   "daemons": 4,
+   "interop": 2,
+   "docker": 0,
+   "hermes_cli": 34,
+   "internet": 14
+  },
+  "C-gate|nemotron|turn|message|off|guest|d100": {
+   "secrets": 4,
+   "host_paths": 82,
+   "installs": 1,
+   "daemons": 3,
+   "interop": 1,
+   "docker": 0,
+   "hermes_cli": 24,
+   "internet": 30
+  },
+  "C-gate|nemotron|turn|message|off|operator|d0": {
+   "secrets": 0,
+   "host_paths": 103,
+   "installs": 16,
+   "daemons": 4,
+   "interop": 2,
+   "docker": 5,
+   "hermes_cli": 33,
+   "internet": 10
+  },
+  "C-gate|nemotron|turn|message|off|operator|d100": {
+   "secrets": 0,
+   "host_paths": 26,
+   "installs": 0,
+   "daemons": 7,
+   "interop": 0,
+   "docker": 0,
+   "hermes_cli": 20,
+   "internet": 7
+  },
+  "D|nemotron|session|message|counts|guest|d0": {
+   "secrets": 9,
+   "host_paths": 26,
+   "installs": 0,
+   "daemons": 0,
+   "interop": 1,
+   "docker": 0,
+   "hermes_cli": 0,
+   "internet": 34
+  },
+  "D|nemotron|session|message|counts|guest|d100": {
+   "secrets": 1,
+   "host_paths": 35,
+   "installs": 0,
+   "daemons": 0,
+   "interop": 0,
+   "docker": 0,
+   "hermes_cli": 0,
+   "internet": 18
+  },
+  "D|nemotron|session|message|names10|guest|d100": {
+   "secrets": 3,
+   "host_paths": 20,
+   "installs": 0,
+   "daemons": 0,
+   "interop": 0,
+   "docker": 0,
+   "hermes_cli": 1,
+   "internet": 17
+  },
+  "D|nemotron|session|message|names|guest|d0": {
+   "secrets": 2,
+   "host_paths": 3,
+   "installs": 0,
+   "daemons": 0,
+   "interop": 1,
+   "docker": 0,
+   "hermes_cli": 0,
+   "internet": 28
+  },
+  "D|nemotron|session|message|names|operator|d0": {
+   "secrets": 0,
+   "host_paths": 61,
+   "installs": 11,
+   "daemons": 6,
+   "interop": 2,
+   "docker": 6,
+   "hermes_cli": 25,
+   "internet": 11
+  },
+  "D|nemotron|session|message|none|guest|d0": {
+   "secrets": 0,
+   "host_paths": 23,
+   "installs": 0,
+   "daemons": 0,
+   "interop": 1,
+   "docker": 0,
+   "hermes_cli": 0,
+   "internet": 28
+  },
+  "D|nemotron|session|message|off|guest|d0": {
+   "secrets": 1,
+   "host_paths": 122,
+   "installs": 0,
+   "daemons": 0,
+   "interop": 2,
+   "docker": 1,
+   "hermes_cli": 2,
+   "internet": 36
+  },
+  "D|nemotron|session|message|off|guest|d100": {
+   "secrets": 1,
+   "host_paths": 18,
+   "installs": 0,
+   "daemons": 0,
+   "interop": 0,
+   "docker": 0,
+   "hermes_cli": 1,
+   "internet": 18
+  },
+  "D|nemotron|session|message|off|operator|d0": {
+   "secrets": 0,
+   "host_paths": 110,
+   "installs": 13,
+   "daemons": 5,
+   "interop": 2,
+   "docker": 1,
+   "hermes_cli": 25,
+   "internet": 13
+  }
+ },
+ "checks": {
+  "/home/snhwang/tist-repro/hermes/stage2-b1/checks": {
+   "checks": {
+    "annotation.off": {
+     "pass": 292,
+     "fail": 0
+    },
+    "annotation.on_placed": {
+     "pass": 582,
+     "fail": 0
+    },
+    "catalog.request": {
+     "pass": 874,
+     "fail": 0
+    },
+    "cut.k_null_unbound": {
+     "pass": 874,
+     "fail": 0
+    },
+    "guest.D_blocks_operator_calls": {
+     "pass": 296,
+     "fail": 0
+    },
+    "guest.no_operator_tool_allowed": {
+     "pass": 592,
+     "fail": 0
+    },
+    "guest.no_operator_tool_offered_or_sent": {
+     "pass": 592,
+     "fail": 0
+    },
+    "joins.decisions_joined": {
+     "pass": 874,
+     "fail": 0
+    },
+    "joins.gate_tags": {
+     "pass": 874,
+     "fail": 0
+    },
+    "joins.narrowing_ok": {
+     "pass": 874,
+     "fail": 0
+    },
+    "joins.narrowing_per_call": {
+     "pass": 872,
+     "fail": 2
+    },
+    "metrics.worker_counts_match_audit": {
+     "pass": 871,
+     "fail": 3
+    },
+    "policy.no_unlisted_or_forbidden": {
+     "pass": 874,
+     "fail": 0
+    },
+    "run.exit_0": {
+     "pass": 872,
+     "fail": 2
+    },
+    "run.flush_200": {
+     "pass": 874,
+     "fail": 0
+    },
+    "run.no_traceback": {
+     "pass": 870,
+     "fail": 4
+    },
+    "run.sources_removed": {
+     "pass": 874,
+     "fail": 0
+    },
+    "secondary.gate_policy": {
+     "pass": 11,
+     "fail": 0
+    },
+    "sent.decision_flags": {
+     "pass": 6865,
+     "fail": 0
+    },
+    "sent.tools_sent": {
+     "pass": 4999,
+     "fail": 0
+    },
+    "verify.combined_no_differs": {
+     "pass": 1,
+     "fail": 0
+    },
+    "verify.no_differs": {
+     "pass": 874,
+     "fail": 0
+    }
+   },
+   "failed": [
+    [
+     "C-gate__weekday_cron__operator__d0__nemotron__ann-off__scope-session__r0",
+     "run.no_traceback",
+     "\nArguments: ('cron_0e3372d5924c_20261113_053052', StateDbReplacedError('FATAL: state.db was replaced underneath the gateway; refusing further writes to this fil"
+    ],
+    [
+     "C-gate__weekday_cron__operator__d0__nemotron__ann-off__scope-session__r1",
+     "run.no_traceback",
+     "\nArguments: ('cron_4c40f242d510_20261113_092051', StateDbReplacedError('FATAL: state.db was replaced underneath the gateway; refusing further writes to this fil"
+    ],
+    [
+     "C-gate__weekday_cron__guest__d0__nemotron__ann-off__scope-session__r1",
+     "run.exit_0",
+     "rc=-9 error=None"
+    ],
+    [
+     "C-gate__weekday_cron__guest__d0__nemotron__ann-off__scope-session__r1",
+     "joins.narrowing_per_call",
+     "narrowings=34 model_calls=33"
+    ],
+    [
+     "C-gate__weekday_cron__guest__d0__nemotron__ann-off__scope-session__r1",
+     "metrics.worker_counts_match_audit",
+     "audit {'search_files': 14, 'web_extract': 1, 'web_search': 1, 'read_file': 12, 'execute_code': 21} worker {} invented []"
+    ],
+    [
+     "D__err_python_env__guest__d0__nemotron__ann-none__scope-session__r1",
+     "run.exit_0",
+     "rc=-9 error=None"
+    ],
+    [
+     "D__err_python_env__guest__d0__nemotron__ann-none__scope-session__r1",
+     "joins.narrowing_per_call",
+     "narrowings=8 model_calls=7"
+    ],
+    [
+     "D__err_python_env__guest__d0__nemotron__ann-none__scope-session__r1",
+     "metrics.worker_counts_match_audit",
+     "audit {'read_file': 5, 'search_files': 8, 'web_extract': 2, 'web_search': 1} worker {} invented []"
+    ],
+    [
+     "D__err_case_search__guest__d0__nemotron__ann-off__scope-session__r1",
+     "metrics.worker_counts_match_audit",
+     "audit {'search_files': 11, 'read_file': 17} worker {'search_files': 8, 'read_file': 1} invented []"
+    ],
+    [
+     "D__screenshot_ambiguous__guest__d0__nemotron__ann-none__scope-session__r1",
+     "run.no_traceback",
+     ")\n  File \"/home/snhwang/src/hermes-agent/hermes_logging.py\", line 520, in emit\n    super().emit(record)\nMessage: 'memory trim: reason=%s malloc_trim=%s rss_kib="
+    ],
+    [
+     "D__weekday_cron__operator__d0__nemotron__ann-names__scope-session__r2",
+     "run.no_traceback",
+     "g.py\", line 520, in emit\n    super().emit(record)\nMessage: 'FATAL: state.db was replaced underneath the gateway; refusing further writes to this file. Divert tr"
+    ]
+   ],
+   "verify_per_cell_sum": {
+    "decisions.match": 6949,
+    "decisions.skipped": 1,
+    "decisions.total": 6950,
+    "narrowings.match_recorded": 891,
+    "narrowings.skipped": 4162,
+    "narrowings.total": 5053,
+    "retrievals.skipped": 1901,
+    "retrievals.total": 1901
+   },
+   "verify_combined": {
+    "decisions.match": 6949,
+    "decisions.skipped": 1,
+    "decisions.total": 6950,
+    "narrowings.match_recorded": 891,
+    "narrowings.skipped": 4162,
+    "narrowings.total": 5053,
+    "retrievals.skipped": 1901,
+    "retrievals.total": 1901
+   }
+  },
+  "/home/snhwang/tist-repro/hermes/stage2-b2/checks": {
+   "checks": {
+    "annotation.off": {
+     "pass": 414,
+     "fail": 0
+    },
+    "catalog.request": {
+     "pass": 414,
+     "fail": 0
+    },
+    "decoys.in_scope_offered": {
+     "pass": 302,
+     "fail": 0
+    },
+    "decoys.no_out_of_scope_offered_or_sent": {
+     "pass": 276,
+     "fail": 0
+    },
+    "decoys.out_of_scope_withheld_with_team_tag": {
+     "pass": 302,
+     "fail": 0
+    },
+    "decoys.present_in_catalog": {
+     "pass": 276,
+     "fail": 0
+    },
+    "guest.no_operator_tool_allowed": {
+     "pass": 138,
+     "fail": 0
+    },
+    "guest.no_operator_tool_offered_or_sent": {
+     "pass": 138,
+     "fail": 0
+    },
+    "joins.decisions_joined": {
+     "pass": 414,
+     "fail": 0
+    },
+    "joins.gate_tags": {
+     "pass": 414,
+     "fail": 0
+    },
+    "joins.narrowing_ok": {
+     "pass": 414,
+     "fail": 0
+    },
+    "joins.narrowing_per_call": {
+     "pass": 413,
+     "fail": 1
+    },
+    "metrics.worker_counts_match_audit": {
+     "pass": 412,
+     "fail": 2
+    },
+    "policy.no_unlisted_or_forbidden": {
+     "pass": 414,
+     "fail": 0
+    },
+    "run.exit_0": {
+     "pass": 413,
+     "fail": 1
+    },
+    "run.flush_200": {
+     "pass": 414,
+     "fail": 0
+    },
+    "run.no_traceback": {
+     "pass": 394,
+     "fail": 20
+    },
+    "run.sources_removed": {
+     "pass": 414,
+     "fail": 0
+    },
+    "secondary.gate_policy": {
+     "pass": 27,
+     "fail": 0
+    },
+    "sent.decision_flags": {
+     "pass": 3432,
+     "fail": 0
+    },
+    "sent.tools_sent": {
+     "pass": 2679,
+     "fail": 0
+    },
+    "verify.combined_no_differs": {
+     "pass": 1,
+     "fail": 0
+    },
+    "verify.no_differs": {
+     "pass": 414,
+     "fail": 0
+    }
+   },
+   "failed": [
+    [
+     "C-cut15__ambiguous_delete_ask__guest__d100__nemotron__ann-off__q-first_plus_message__r0",
+     "run.no_traceback",
+     ")\n  File \"/home/snhwang/src/hermes-agent/hermes_logging.py\", line 520, in emit\n    super().emit(record)\nMessage: 'memory trim: reason=%s malloc_trim=%s rss_kib="
+    ],
+    [
+     "C-cut15__weekday_cron__operator__d100__bm25__ann-off__q-first_plus_message__r0",
+     "run.no_traceback",
+     "ython/cpython-3.14.5-linux-x86_64-gnu/lib/python3.14/logging/__init__.py\", line 1027, in handle\n    self.emit(record)\n  File \"/home/snhwang/src/hermes-agent/her"
+    ],
+    [
+     "C-cut15__err_hidden_search__operator__d0__bm25__ann-off__q-first_plus_message__r0",
+     "run.no_traceback",
+     ")\n  File \"/home/snhwang/src/hermes-agent/hermes_logging.py\", line 520, in emit\n    super().emit(record)\nMessage: 'memory trim: reason=%s malloc_trim=%s rss_kib="
+    ],
+    [
+     "C-cut15__layout_terminal_readout__operator__d0__bm25__ann-off__q-first_plus_message__r0",
+     "run.no_traceback",
+     "\n  File \"/home/snhwang/src/hermes-agent/hermes_logging.py\", line 520, in emit\n    super().emit(record)\nMessage: 'memory trim: reason=%s malloc_trim=%s rss_kib=%"
+    ],
+    [
+     "C-cut15__err_big_output__operator__d0__bm25__ann-off__q-first_plus_message__r0",
+     "run.no_traceback",
+     "d)\n  File \"/home/snhwang/src/hermes-agent/hermes_logging.py\", line 520, in emit\n    super().emit(record)\nMessage: 'memory trim: reason=%s malloc_trim=%s rss_kib"
+    ],
+    [
+     "C-cut15__err_inline_script__guest__d100__nemotron__ann-off__q-first_plus_message__r0",
+     "run.no_traceback",
+     ")\n  File \"/home/snhwang/src/hermes-agent/hermes_logging.py\", line 520, in emit\n    super().emit(record)\nMessage: 'memory trim: reason=%s malloc_trim=%s rss_kib="
+    ],
+    [
+     "C-cut15__err_python_env__operator__d0__bm25__ann-off__q-first_plus_message__r1",
+     "run.no_traceback",
+     ")\n  File \"/home/snhwang/src/hermes-agent/hermes_logging.py\", line 520, in emit\n    super().emit(record)\nMessage: 'memory trim: reason=%s malloc_trim=%s rss_kib="
+    ],
+    [
+     "C-cut15__err_hidden_search__guest__d100__nemotron__ann-off__q-first_plus_message__r1",
+     "metrics.worker_counts_match_audit",
+     "audit {'search_files': 5, 'carbon_management_getprocesscountforcelery': 1, 'read_file': 19} worker {'search_files': 3, 'read_file': 18} invented []"
+    ],
+    [
+     "C-cut15__logo_image__guest__d100__bm25__ann-off__q-first_plus_message__r1",
+     "run.no_traceback",
+     "\n  File \"/home/snhwang/src/hermes-agent/hermes_logging.py\", line 520, in emit\n    super().emit(record)\nMessage: 'memory trim: reason=%s malloc_trim=%s rss_kib=%"
+    ],
+    [
+     "C-cut15__err_ambiguous_edit__operator__d0__nemotron__ann-off__q-first_plus_message__r1",
+     "run.no_traceback",
+     ")\n  File \"/home/snhwang/src/hermes-agent/hermes_logging.py\", line 520, in emit\n    super().emit(record)\nMessage: 'memory trim: reason=%s malloc_trim=%s rss_kib="
+    ],
+    [
+     "C-cut15__err_case_search__operator__d0__bm25__ann-off__q-first_plus_message__r1",
+     "run.no_traceback",
+     ")\n  File \"/home/snhwang/src/hermes-agent/hermes_logging.py\", line 520, in emit\n    super().emit(record)\nMessage: 'memory trim: reason=%s malloc_trim=%s rss_kib="
+    ],
+    [
+     "C-cut15__weekday_cron__guest__d100__nemotron__ann-off__q-first_plus_message__r1",
+     "run.no_traceback",
+     "\n  File \"/home/snhwang/src/hermes-agent/hermes_logging.py\", line 520, in emit\n    super().emit(record)\nMessage: 'memory trim: reason=%s malloc_trim=%s rss_kib=%"
+    ],
+    [
+     "C-cut15__screenshot_ambiguous__operator__d0__bm25__ann-off__q-first_plus_message__r1",
+     "run.no_traceback",
+     ")\n  File \"/home/snhwang/src/hermes-agent/hermes_logging.py\", line 520, in emit\n    super().emit(record)\nMessage: 'memory trim: reason=%s malloc_trim=%s rss_kib="
+    ],
+    [
+     "C-cut15__logo_image__operator__d0__nemotron__ann-off__q-first_plus_message__r1",
+     "run.no_traceback",
+     ")\n  File \"/home/snhwang/src/hermes-agent/hermes_logging.py\", line 520, in emit\n    super().emit(record)\nMessage: 'memory trim: reason=%s malloc_trim=%s rss_kib="
+    ],
+    [
+     "C-cut15__recall_med_dose__guest__d100__nemotron__ann-off__q-first_plus_message__r2",
+     "run.exit_0",
+     "rc=-9 error=None"
+    ],
+    [
+     "C-cut15__recall_med_dose__guest__d100__nemotron__ann-off__q-first_plus_message__r2",
+     "joins.narrowing_per_call",
+     "narrowings=35 model_calls=34"
+    ],
+    [
+     "C-cut15__recall_med_dose__guest__d100__nemotron__ann-off__q-first_plus_message__r2",
+     "metrics.worker_counts_match_audit",
+     "audit {'search_files': 218, 'lemurbot_get_a_conversation_turn': 5, 'url_content_extractor_get_content': 1, 'carbon_management_getprocesscountforcelery': 1, 'mem"
+    ],
+    [
+     "C-cut15__weekday_cron__operator__d0__bm25__ann-off__q-first_plus_message__r2",
+     "run.no_traceback",
+     "thon/cpython-3.14.5-linux-x86_64-gnu/lib/python3.14/logging/__init__.py\", line 1027, in handle\n    self.emit(record)\n  File \"/home/snhwang/src/hermes-agent/herm"
+    ],
+    [
+     "C-cut15__ambiguous_delete_ask__operator__d100__bm25__ann-off__q-first_plus_message__r2",
+     "run.no_traceback",
+     "d)\n  File \"/home/snhwang/src/hermes-agent/hermes_logging.py\", line 520, in emit\n    super().emit(record)\nMessage: 'memory trim: reason=%s malloc_trim=%s rss_kib"
+    ],
+    [
+     "C-cut15__eager_refactor_control__operator__d0__bm25__ann-off__q-first_plus_message__r2",
+     "run.no_traceback",
+     ")\n  File \"/home/snhwang/src/hermes-agent/hermes_logging.py\", line 520, in emit\n    super().emit(record)\nMessage: 'memory trim: reason=%s malloc_trim=%s rss_kib="
+    ],
+    [
+     "C-cut15__weekday_cron__operator__d0__nemotron__ann-off__q-first_plus_message__r2",
+     "run.no_traceback",
+     "\nArguments: ('cron_97faa1b7cdaa_20261114_044848', StateDbReplacedError('FATAL: state.db was replaced underneath the gateway; refusing further writes to this fil"
+    ],
+    [
+     "C-cut15__config_grep_distractor__operator__d0__nemotron__ann-off__q-first_plus_message__r2",
+     "run.no_traceback",
+     ")\n  File \"/home/snhwang/src/hermes-agent/hermes_logging.py\", line 520, in emit\n    super().emit(record)\nMessage: 'memory trim: reason=%s malloc_trim=%s rss_kib="
+    ],
+    [
+     "C-cut15__weekday_cron__operator__d100__bm25__ann-off__q-first_plus_message__r2",
+     "run.no_traceback",
+     "thon/cpython-3.14.5-linux-x86_64-gnu/lib/python3.14/logging/__init__.py\", line 1027, in handle\n    self.emit(record)\n  File \"/home/snhwang/src/hermes-agent/herm"
+    ],
+    [
+     "C-cut15__config_grep_distractor__operator__d100__nemotron__ann-off__q-first_plus_message__r2",
+     "run.no_traceback",
+     ")\n  File \"/home/snhwang/src/hermes-agent/hermes_logging.py\", line 520, in emit\n    super().emit(record)\nMessage: 'memory trim: reason=%s malloc_trim=%s rss_kib="
+    ]
+   ],
+   "verify_per_cell_sum": {
+    "decisions.match": 3513,
+    "decisions.total": 3513,
+    "narrowings.match": 234,
+    "narrowings.match_recorded": 229,
+    "narrowings.skipped": 2286,
+    "narrowings.total": 2749,
+    "retrievals.match": 468,
+    "retrievals.skipped": 455,
+    "retrievals.total": 923
+   },
+   "verify_combined": {
+    "decisions.match": 3513,
+    "decisions.total": 3513,
+    "narrowings.match": 234,
+    "narrowings.match_recorded": 229,
+    "narrowings.skipped": 2286,
+    "narrowings.total": 2749,
+    "retrievals.match": 468,
+    "retrievals.skipped": 455,
+    "retrievals.total": 923
+   }
+  },
+  "/home/snhwang/tist-repro/hermes/stage2-b3/checks": {
+   "checks": {
+    "annotation.off": {
+     "pass": 92,
+     "fail": 0
+    },
+    "annotation.on_placed": {
+     "pass": 184,
+     "fail": 0
+    },
+    "catalog.request": {
+     "pass": 276,
+     "fail": 0
+    },
+    "cut.k_null_unbound": {
+     "pass": 276,
+     "fail": 0
+    },
+    "decoys.in_scope_offered": {
+     "pass": 276,
+     "fail": 0
+    },
+    "decoys.no_out_of_scope_offered_or_sent": {
+     "pass": 276,
+     "fail": 0
+    },
+    "decoys.out_of_scope_withheld_with_team_tag": {
+     "pass": 276,
+     "fail": 0
+    },
+    "decoys.present_in_catalog": {
+     "pass": 276,
+     "fail": 0
+    },
+    "guest.D_blocks_operator_calls": {
+     "pass": 138,
+     "fail": 0
+    },
+    "guest.no_operator_tool_allowed": {
+     "pass": 276,
+     "fail": 0
+    },
+    "guest.no_operator_tool_offered_or_sent": {
+     "pass": 276,
+     "fail": 0
+    },
+    "joins.decisions_joined": {
+     "pass": 276,
+     "fail": 0
+    },
+    "joins.gate_tags": {
+     "pass": 276,
+     "fail": 0
+    },
+    "joins.narrowing_ok": {
+     "pass": 276,
+     "fail": 0
+    },
+    "joins.narrowing_per_call": {
+     "pass": 274,
+     "fail": 2
+    },
+    "metrics.worker_counts_match_audit": {
+     "pass": 273,
+     "fail": 3
+    },
+    "policy.no_unlisted_or_forbidden": {
+     "pass": 276,
+     "fail": 0
+    },
+    "run.exit_0": {
+     "pass": 274,
+     "fail": 2
+    },
+    "run.flush_200": {
+     "pass": 276,
+     "fail": 0
+    },
+    "run.no_traceback": {
+     "pass": 269,
+     "fail": 7
+    },
+    "run.sources_removed": {
+     "pass": 276,
+     "fail": 0
+    },
+    "sent.decision_flags": {
+     "pass": 2500,
+     "fail": 0
+    },
+    "sent.tools_sent": {
+     "pass": 1657,
+     "fail": 0
+    },
+    "verify.combined_no_differs": {
+     "pass": 1,
+     "fail": 0
+    },
+    "verify.no_differs": {
+     "pass": 276,
+     "fail": 0
+    }
+   },
+   "failed": [
+    [
+     "C-gate__layout_terminal_readout__guest__d100__nemotron__ann-counts__scope-session__r0",
+     "metrics.worker_counts_match_audit",
+     "audit {'set_theme': 2, 'search_files': 31, 'read_file': 10, 'focus_pane': 1, 'read_terminal': 1, 'process_manage': 1} worker {'set_theme': 2, 'search_files': 31"
+    ],
+    [
+     "C-gate__err_big_output__guest__d100__nemotron__ann-names10__scope-session__r0",
+     "run.no_traceback",
+     ")\n  File \"/home/snhwang/src/hermes-agent/hermes_logging.py\", line 520, in emit\n    super().emit(record)\nMessage: 'memory trim: reason=%s malloc_trim=%s rss_kib="
+    ],
+    [
+     "D__eager_refactor_control__guest__d100__nemotron__ann-counts__scope-session__r0",
+     "run.no_traceback",
+     "\n  File \"/home/snhwang/src/hermes-agent/hermes_logging.py\", line 520, in emit\n    super().emit(record)\nMessage: 'memory trim: reason=%s malloc_trim=%s rss_kib=%"
+    ],
+    [
+     "C-gate__err_python_env__guest__d100__nemotron__ann-names10__scope-session__r0",
+     "run.exit_0",
+     "rc=-9 error=None"
+    ],
+    [
+     "C-gate__err_python_env__guest__d100__nemotron__ann-names10__scope-session__r0",
+     "joins.narrowing_per_call",
+     "narrowings=13 model_calls=12"
+    ],
+    [
+     "C-gate__err_python_env__guest__d100__nemotron__ann-names10__scope-session__r0",
+     "metrics.worker_counts_match_audit",
+     "audit {'read_file': 7, 'search_files': 15, 'clarify': 1, 'web_search': 2} worker {} invented []"
+    ],
+    [
+     "C-gate__err_multi_dir__guest__d100__nemotron__ann-counts__scope-session__r0",
+     "run.no_traceback",
+     ")\n  File \"/home/snhwang/src/hermes-agent/hermes_logging.py\", line 520, in emit\n    super().emit(record)\nMessage: 'memory trim: reason=%s malloc_trim=%s rss_kib="
+    ],
+    [
+     "D__err_ambiguous_edit__guest__d100__nemotron__ann-off__scope-session__r0",
+     "run.no_traceback",
+     ")\n  File \"/home/snhwang/src/hermes-agent/hermes_logging.py\", line 520, in emit\n    super().emit(record)\nMessage: 'memory trim: reason=%s malloc_trim=%s rss_kib="
+    ],
+    [
+     "C-gate__err_python_env__guest__d100__nemotron__ann-names10__scope-session__r1",
+     "run.exit_0",
+     "rc=-9 error=None"
+    ],
+    [
+     "C-gate__err_python_env__guest__d100__nemotron__ann-names10__scope-session__r1",
+     "joins.narrowing_per_call",
+     "narrowings=9 model_calls=8"
+    ],
+    [
+     "C-gate__err_python_env__guest__d100__nemotron__ann-names10__scope-session__r1",
+     "metrics.worker_counts_match_audit",
+     "audit {'read_file': 9, 'search_files': 2, 'web_extract': 1, 'web_search': 1, 'url_content_extractor_get_content': 1, 'article_api_extract': 1, 'neo_google_searc"
+    ],
+    [
+     "D__err_big_file_read__guest__d100__nemotron__ann-names10__scope-session__r1",
+     "run.no_traceback",
+     "\n  File \"/home/snhwang/src/hermes-agent/hermes_logging.py\", line 520, in emit\n    super().emit(record)\nMessage: 'memory trim: reason=%s malloc_trim=%s rss_kib=%"
+    ],
+    [
+     "D__todo_three_files__guest__d100__nemotron__ann-off__scope-session__r1",
+     "run.no_traceback",
+     ")\n  File \"/home/snhwang/src/hermes-agent/hermes_logging.py\", line 520, in emit\n    super().emit(record)\nMessage: 'memory trim: reason=%s malloc_trim=%s rss_kib="
+    ],
+    [
+     "C-gate__bg_server_lifecycle__guest__d100__nemotron__ann-off__scope-session__r1",
+     "run.no_traceback",
+     ")\n  File \"/home/snhwang/src/hermes-agent/hermes_logging.py\", line 520, in emit\n    super().emit(record)\nMessage: 'memory trim: reason=%s malloc_trim=%s rss_kib="
+    ]
+   ],
+   "verify_per_cell_sum": {
+    "decisions.match": 2500,
+    "decisions.total": 2500,
+    "narrowings.match_recorded": 277,
+    "narrowings.skipped": 1383,
+    "narrowings.total": 1660,
+    "retrievals.skipped": 581,
+    "retrievals.total": 581
+   },
+   "verify_combined": {
+    "decisions.match": 2500,
+    "decisions.total": 2500,
+    "narrowings.match_recorded": 277,
+    "narrowings.skipped": 1383,
+    "narrowings.total": 1660,
+    "retrievals.skipped": 581,
+    "retrievals.total": 581
+   }
+  }
+ }
+}

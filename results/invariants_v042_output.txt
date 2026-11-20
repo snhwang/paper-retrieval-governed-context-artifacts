@@ -5,7 +5,7 @@ Corpora: 20-60 instructions, 5 contexts each, k = 1..30, default_top_k = 10 (poo
 Configurations: ['main', 'main_hash', 'main_bm25', 'main_bm25_gatectx', 'legacy_pool_by_k', 'legacy_unchecked_requires', 'legacy_below_threshold', 'legacy_ranked_resolution', 'legacy_ungated_pool', 'legacy_removed_acting', 'legacy_flat_backfill', 'legacy_dropped_rows', 'legacy_tie_order', 'legacy_tie_order_bm25', 'no_mandatory', 'no_priority', 'no_threshold']
 Workers: 8
 
-Ran in 610.9s. Corpus sizes: mean 39.6, range 20-60
+Ran in 677.6s. Corpus sizes: mean 39.6, range 20-60
 
 --- main (Main defaults (stub)) ---
 cases=10000 (ungated 3540), outputs=300000, mean |output|=12.24, P(|output|>k)=0.269, P(top-k cut removes >=1)=0.520
@@ -61,7 +61,7 @@ I14   Backfill admission (gate, soft or theta<=0) 0/2000 = 0.0000 [0.0000, 0.001
 I15   Admission completeness (gate, soft or sim>=theta) 0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       299970
 I16   Canonical tie order (equal score, priority: by id) 0/2000 = 0.0000 [0.0000, 0.0018]   0/300000       0
 
---- main_bm25 (Main defaults (BM25, drops rows)) ---
+--- main_bm25 (Main defaults (BM25)) ---
 cases=10000 (ungated 3540), outputs=300000, mean |output|=12.08, P(|output|>k)=0.264, P(top-k cut removes >=1)=0.509
 threshold removals/output=4.678, requires admissions/output=0.841, P(missing-prereq record)=0.2836, P(loser of a winner cut by top-k)=0.2553, P(loser of a winner removed in resolution)=0.2808, mandatory displaced by mandatory=90210, I7 strict-prefix share=0.7129
 backfill admissions/output=0.000 (P(any)=0.000), backfilled rows in output/output=0.000, backfill rejections (threshold at similarity 0)/output=1.686
@@ -495,10 +495,10 @@ I16             0/2000            0/2000            0/2000            0/2000    
 --- Pool growth sensitivity (main defaults, stub embedder) ---
 
 (a) retrieval_pool = 10, k = 1..30, nesting of consecutive k:
-    ungated_within   pairs=31860   non-nested=0     rate=0.0000 [0.0000, 0.0001]
-    ungated_above    pairs=70800   non-nested=1680  rate=0.0237 [0.0226, 0.0249]  dropped items by trace reason: {'conflict': 1060, 'superseded': 742, 'none': 100, 'prerequisite': 301, 'unrequired': 80, 'top_k': 3, 'threshold': 17}
-    gated_within     pairs=58140   non-nested=0     rate=0.0000 [0.0000, 0.0001]
-    gated_above      pairs=129200  non-nested=0     rate=0.0000 [0.0000, 0.0000]
+    ungated_within   pairs=31860   non-nested=0     rate=0.0000 [0.0000, 0.0001] conflict/supersede pairs=0 (0.0000)
+    ungated_above    pairs=70800   non-nested=1680  rate=0.0237 [0.0226, 0.0249] conflict/supersede pairs=1679 (0.0237)  dropped items by trace reason: {'conflict': 1060, 'superseded': 742, 'none': 100, 'prerequisite': 301, 'unrequired': 80, 'top_k': 3, 'threshold': 17}
+    gated_within     pairs=58140   non-nested=0     rate=0.0000 [0.0000, 0.0001] conflict/supersede pairs=0 (0.0000)
+    gated_above      pairs=129200  non-nested=0     rate=0.0000 [0.0000, 0.0000] conflict/supersede pairs=0 (0.0000)
     example ungated_above_conflict: corpus 4 case 0 k 10->11: i36 dropped, trace {'id': 'i36', 'reason': 'conflict', 'similarity': 0.0, 'by': 'i41'}
     example ungated_above_none: corpus 4 case 0 k 24->25: i21 dropped, trace {}
     example ungated_above_prerequisite: corpus 15 case 0 k 19->20: i50 dropped, trace {'id': 'i50', 'reason': 'prerequisite', 'similarity': 0.8625435829162598, 'by': 'i22'}
@@ -769,21 +769,21 @@ Cross-process determinism (main, 200 corpora, PYTHONHASHSEED (random) vs 12345):
 Wrote results/invariants_v042.json
 Wrote results/invariants_v042_counterexamples.json
 
-Elapsed: 631.3s
+Elapsed: 698.6s
 
 === Reproducibility ===
-Timestamp (UTC): 2026-10-30T11:37:13Z
+Timestamp (UTC): 2026-11-17T00:03:21Z
 Command line:    evals/eval_invariants.py --workers 8 --output results/invariants_v042.json --counterexamples results/invariants_v042_counterexamples.json --log-file results/invariants_v042_output.txt
 Python:          3.12.13 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
 numpy:           2.2.6
 scipy:           1.17.1
 bear:            0.4.2
-git commit:      9820f8a8baa2a4522688e0dd09bb805bcd1bf94d
-git status:      unknown (git status failed or timed out)
+git commit:      0e07e77a0f24ad143b8f679fc584d6b90259e29f
+git status:      DIRTY (16 files modified)
 git branch:      tist-r2
 
   n_corpora: 2000
   configs: ['main', 'main_hash', 'main_bm25', 'main_bm25_gatectx', 'legacy_pool_by_k', 'legacy_unchecked_requires', 'legacy_below_threshold', 'legacy_ranked_resolution', 'legacy_ungated_pool', 'legacy_removed_acting', 'legacy_flat_backfill', 'legacy_dropped_rows', 'legacy_tie_order', 'legacy_tie_order_bm25', 'no_mandatory', 'no_priority', 'no_threshold']
-  bear_path: /home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/bear/__init__.py
-  bear_source_sha: 9d085b49c004cb03e2bede9055fdc3810cf260c0
+  bear_path: /home/snhwang/.venvs/tist-repro/lib/python3.12/site-packages/bear/__init__.py
+  bear_source_sha: 0d0718a39a0b0788ef5cca4689352462b830494c
 ===

@@ -1,7 +1,7 @@
 {
  "bear_version": "0.4.2",
- "bear_path": "/home/snhwang/.venvs/tist-evals/lib/python3.12/site-packages/bear/__init__.py",
- "bear_source_sha": "9d085b49c004cb03e2bede9055fdc3810cf260c0",
+ "bear_path": "/home/snhwang/.venvs/tist-repro/lib/python3.12/site-packages/bear/__init__.py",
+ "bear_source_sha": "0d0718a39a0b0788ef5cca4689352462b830494c",
  "backends": [
   "bm25",
   "bm25:dropped_rows",
@@ -8897,7 +8897,7 @@
      "metadata_mismatch_examples": []
     }
    },
-   "elapsed_s": 47.493998289108276
+   "elapsed_s": 20.902467727661133
   },
   {
    "key": "toolbench_nogov",
@@ -40020,7 +40020,7 @@
      "metadata_mismatch_examples": []
     }
    },
-   "elapsed_s": 362.9632022380829
+   "elapsed_s": 243.74344658851624
   },
   {
    "key": "toolbench_mandonly",
@@ -48909,7 +48909,7 @@
      "metadata_mismatch_examples": []
     }
    },
-   "elapsed_s": 31.325148820877075
+   "elapsed_s": 14.808996438980103
   },
   {
    "key": "metatool_base",
@@ -429100,7 +429100,7 @@
      "whole_pool_summary": {
       "n": 21111,
       "k": 5,
-      "mean": 70.28501728956468,
+      "mean": 70.28506465823504,
       "median": 66.0,
       "min": 0.0,
       "max": 194.0,
@@ -445757,7 +445757,7 @@
       19,
       24,
       28,
-      47,
+      48,
       57,
       61,
       37,
@@ -534706,7 +534706,7 @@
      "whole_pool_summary": {
       "n": 21111,
       "k": 5,
-      "mean": 70.28501728956468,
+      "mean": 70.28506465823504,
       "median": 66.0,
       "min": 0.0,
       "max": 194.0,
@@ -551363,7 +551363,7 @@
       19,
       24,
       28,
-      47,
+      48,
       57,
       61,
       37,
@@ -640308,7 +640308,7 @@
      ]
     }
    },
-   "elapsed_s": 129.32311725616455
+   "elapsed_s": 133.31408071517944
   },
   {
    "key": "metatool_tags",
@@ -809285,7 +809285,7 @@
      "metadata_mismatch_examples": []
     }
    },
-   "elapsed_s": 23.11815047264099
+   "elapsed_s": 25.898732662200928
   },
   {
    "key": "metatool_querytags_query_tags",
@@ -978262,7 +978262,7 @@
      "metadata_mismatch_examples": []
     }
    },
-   "elapsed_s": 25.740166187286377
+   "elapsed_s": 26.604909420013428
   },
   {
    "key": "metatool_querytags_query_tags_top5",
@@ -1147239,7 +1147239,7 @@
      "metadata_mismatch_examples": []
     }
    },
-   "elapsed_s": 28.878719568252563
+   "elapsed_s": 30.162810564041138
   },
   {
    "key": "petsim_standard",
@@ -1149212,7 +1149212,7 @@
      ]
     }
    },
-   "elapsed_s": 0.5200932025909424
+   "elapsed_s": 0.564990758895874
   },
   {
    "key": "petsim_paraphrase",
@@ -1151185,7 +1151185,7 @@
      ]
     }
    },
-   "elapsed_s": 0.4307994842529297
+   "elapsed_s": 0.5410077571868896
   },
   {
    "key": "petsim_notag",
@@ -1152990,7 +1152990,7 @@
      ]
     }
    },
-   "elapsed_s": 0.39165425300598145
+   "elapsed_s": 0.49651288986206055
   },
   {
    "key": "petsim_complex",
@@ -1154963,7 +1154963,7 @@
      ]
     }
    },
-   "elapsed_s": 0.47838544845581055
+   "elapsed_s": 0.580843448638916
   },
   {
    "key": "cs_pooled",
@@ -1155531,7 +1155531,7 @@
      "metadata_mismatch_examples": []
     }
    },
-   "elapsed_s": 0.06549715995788574
+   "elapsed_s": 0.07373332977294922
   },
   {
    "key": "cs_25",
@@ -1155863,7 +1155863,7 @@
      "metadata_mismatch_examples": []
     }
    },
-   "elapsed_s": 0.10329246520996094
+   "elapsed_s": 0.15238165855407715
   },
   {
    "key": "cs_50",
@@ -1156195,7 +1156195,7 @@
      "metadata_mismatch_examples": []
     }
    },
-   "elapsed_s": 0.14187979698181152
+   "elapsed_s": 0.18215107917785645
   },
   {
    "key": "cs_100",
@@ -1156527,7 +1156527,7 @@
      "metadata_mismatch_examples": []
     }
    },
-   "elapsed_s": 0.24233174324035645
+   "elapsed_s": 0.2869842052459717
   },
   {
    "key": "cs_200",
@@ -1156859,7 +1156859,7 @@
      "metadata_mismatch_examples": []
     }
    },
-   "elapsed_s": 0.4084198474884033
+   "elapsed_s": 0.5849087238311768
   },
   {
    "key": "cs_500",
@@ -1157191,7 +1157191,7 @@
      "metadata_mismatch_examples": []
     }
    },
-   "elapsed_s": 1.357771873474121
+   "elapsed_s": 1.1281461715698242
   }
  ]
 }

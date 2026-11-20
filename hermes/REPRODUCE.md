@@ -4,7 +4,7 @@ This document runs WP7 stage 1 and stage 2 from a WSL terminal, with no agent in
 
 Both stages run on the current harness with BEAR v0.4.2, the version the paper reports. That harness hides the graders' answers from the agent, derives the toolperf tokens at run time, greps only the cron store and exposes `manage_connections` (CHANGES.md, "Stage 2 changes").
 
-Runs launched by agents are not reported results. That covers the agent-run stage 1 in `~/tist-wp7/runs/stage1` (BEAR v0.4.1, older harness), its pilot and smokes, the stage-2 smoke, and the stage-2 block-1 rehearsal (63 cells, stopped 2026-10-31 19:39:49 UTC). The files in `hermes/results/stage1/` and `hermes/results/stage2/` were computed from those agent runs. They are kept for comparison until the runs below replace them.
+Runs launched by agents are not reported results. That covers the agent-run stage 1 in `~/tist-wp7/runs/stage1` (BEAR v0.4.1, older harness), its pilot and smokes, the stage-2 smoke, and the stage-2 block-1 rehearsal (63 cells, stopped 2026-10-31 19:39:49 UTC). The files in `hermes/results/stage1/` and `hermes/results/stage2/` are the author's runs of the steps below, made in November 2026. They replaced the agent-run tables on 20 Nov 2026. `hermes/results/stage2/smoke/` still holds the agent's smoke run.
 
 ## 1. Prerequisites
 
@@ -157,7 +157,7 @@ python3 scripts/watch.py ~/wp7-runs/stage1 $(wc -l < ~/wp7-runs/stage1/logs/cell
 bash scripts/post_stage1.sh
 ```
 
-This runs `checks.py` (with verify-audit, the stage-2 registry and `--expect-sources-removed`) into `~/wp7-runs/stage1/checks/`. It then runs `analyze_stage1.py` with 10,000 bootstrap resamples and seed 20261030 into `~/wp7-runs/analysis/stage1/`. It adds `checks_summary.json`, `run_info.json` and `sandbox_redteam.json`. The agent-run stage 1 in `hermes/results/stage1/` used the older harness, so expect differences, above all in the guest scores the giveaways inflated and in `project_mcp_setup`.
+This runs `checks.py` (with verify-audit, the stage-2 registry and `--expect-sources-removed`) into `~/wp7-runs/stage1/checks/`. It then runs `analyze_stage1.py` with 10,000 bootstrap resamples and seed 20261030 into `~/wp7-runs/analysis/stage1/`. It adds `checks_summary.json`, `run_info.json` and `sandbox_redteam.json`. `hermes/results/stage1/` holds the author's run of this step, for comparison with yours.
 
 ### Step 5. k sweep and annotation cost, then decide k
 

@@ -4,9 +4,9 @@ Tokens BEAR's annotation adds to each request at session scope, by level. 4 char
 
 | Role | Decoys | none | counts | names10 | names |
 | --- | --- | --- | --- | --- | --- |
-| operator | 0 | 499 | 499 | 499 | 499 |
-| operator | 100 | 716 | 736 | 885 | 2078 |
-| operator | 300 | 716 | 736 | 891 | 5098 |
-| guest | 0 | 170 | 189 | 292 | 340 |
-| guest | 100 | 387 | 407 | 555 | 1911 |
-| guest | 300 | 387 | 407 | 562 | 4931 |
+| operator | 0 | 522 | 522 | 522 | 522 |
+| operator | 100 | 739 | 759 | 909 | 2101 |
+| operator | 300 | 739 | 759 | 914 | 5121 |
+| guest | 0 | 170 | 189 | 295 | 351 |
+| guest | 100 | 387 | 407 | 555 | 1923 |
+| guest | 300 | 387 | 407 | 562 | 4943 |

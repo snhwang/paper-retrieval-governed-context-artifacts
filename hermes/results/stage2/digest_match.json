@@ -1,0 +1,105 @@
+{
+ "C-gate|guest|d0|session": {
+  "groups": 74,
+  "all_levels_equal": 74,
+  "fraction": 1.0,
+  "names_all_levels_equal": 74,
+  "names_fraction": 1.0,
+  "rep_conditions": 96,
+  "rep_digest_equal": 96,
+  "rep_names_equal": 96,
+  "pairs": {
+   "names vs off: equal": 73,
+   "names vs off: n": 73,
+   "counts vs off: equal": 73,
+   "counts vs off: n": 73,
+   "none vs off: equal": 73,
+   "none vs off: n": 73
+  }
+ },
+ "C-gate|guest|d100|session": {
+  "groups": 46,
+  "all_levels_equal": 46,
+  "fraction": 1.0,
+  "names_all_levels_equal": 46,
+  "names_fraction": 1.0,
+  "rep_conditions": 68,
+  "rep_digest_equal": 68,
+  "rep_names_equal": 68,
+  "pairs": {
+   "names10 vs off: equal": 44,
+   "names10 vs off: n": 44,
+   "counts vs off: equal": 46,
+   "counts vs off: n": 46
+  }
+ },
+ "C-gate|operator|d0|session": {
+  "groups": 69,
+  "all_levels_equal": 0,
+  "fraction": 0.0,
+  "names_all_levels_equal": 69,
+  "names_fraction": 1.0,
+  "rep_conditions": 47,
+  "rep_digest_equal": 0,
+  "rep_names_equal": 47,
+  "pairs": {
+   "names vs off: equal": 0,
+   "names vs off: n": 69
+  }
+ },
+ "D|guest|d0|session": {
+  "groups": 74,
+  "all_levels_equal": 74,
+  "fraction": 1.0,
+  "names_all_levels_equal": 74,
+  "names_fraction": 1.0,
+  "rep_conditions": 96,
+  "rep_digest_equal": 96,
+  "rep_names_equal": 96,
+  "pairs": {
+   "counts vs off: equal": 74,
+   "counts vs off: n": 74,
+   "names vs off: equal": 74,
+   "names vs off: n": 74,
+   "none vs off: equal": 73,
+   "none vs off: n": 73
+  }
+ },
+ "D|guest|d100|session": {
+  "groups": 46,
+  "all_levels_equal": 46,
+  "fraction": 1.0,
+  "names_all_levels_equal": 46,
+  "names_fraction": 1.0,
+  "rep_conditions": 69,
+  "rep_digest_equal": 69,
+  "rep_names_equal": 69,
+  "pairs": {
+   "counts vs off: equal": 46,
+   "counts vs off: n": 46,
+   "names10 vs off: equal": 46,
+   "names10 vs off: n": 46
+  }
+ },
+ "D|operator|d0|session": {
+  "groups": 69,
+  "all_levels_equal": 0,
+  "fraction": 0.0,
+  "names_all_levels_equal": 69,
+  "names_fraction": 1.0,
+  "rep_conditions": 47,
+  "rep_digest_equal": 0,
+  "rep_names_equal": 47,
+  "pairs": {
+   "names vs off: equal": 0,
+   "names vs off: n": 69
+  }
+ },
+ "ALL": {
+  "groups": 378,
+  "all_levels_equal": 240,
+  "fraction": 0.6349206349206349,
+  "names_all_levels_equal": 378,
+  "names_fraction": 1.0
+ }
+}

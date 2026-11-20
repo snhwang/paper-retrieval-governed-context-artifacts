@@ -1,0 +1,54 @@
+{
+ "done": 1656,
+ "planned": 1656,
+ "errors": 3,
+ "error_cells": [
+  "D__err_python_env__guest__d300__nemotron__ann-off__r0",
+  "C-gate__weekday_cron__guest__d0__nemotron__ann-off__r0",
+  "C-gate__project_mcp_setup__operator__d100__nemotron__ann-off__r0"
+ ],
+ "mean_cell_s": 46.4,
+ "eta_h": 0.0,
+ "returncodes": {
+  "0": 1653,
+  "-9": 3
+ },
+ "cell_timeouts_rc_minus9": 3,
+ "model_call_errors": {},
+ "narrowing_latency_ms": {
+  "p50": 1.74,
+  "p95": 883.35,
+  "max": 2698.78,
+  "n": 11777
+ },
+ "flush_refusals": 4,
+ "mem_available_gb": 90.5,
+ "narrowing_records": 11785,
+ "not_ok": {
+  "skipped:no tools": 8
+ },
+ "nemotron": 11777,
+ "bm25": 0,
+ "computed": 1882,
+ "exact_tie_pairs": 0,
+ "records_with_ties": 0,
+ "tie_pairs_by_arm": {
+  "C-gate": 0,
+  "B": 0,
+  "A": 0,
+  "D": 0
+ },
+ "restore_flags_true": 0,
+ "restore_flags_missing_v041": 0,
+ "restore_flags_missing_v042 (expected for v0.4.1 runs)": 0,
+ "admitted_by_required_tags": 0,
+ "not_retrieved": 0,
+ "last_event": {
+  "event": "batch_end",
+  "utc": "2026-11-13T08:59:24.911+00:00",
+  "cells": 1656,
+  "done": 1656,
+  "errors": 3,
+  "nonzero_this_session": 3
+ }
+}

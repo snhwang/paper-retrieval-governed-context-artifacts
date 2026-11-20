@@ -7,7 +7,7 @@
  ],
  "new_bear": [
   "0.4.2",
-  "9d085b49c004cb03e2bede9055fdc3810cf260c0"
+  "0d0718a39a0b0788ef5cca4689352462b830494c"
  ],
  "rows": [
   {
@@ -630,26 +630,26 @@
    "old": "hash",
    "n": 21111,
    "mean_old": 70.28501728956468,
-   "mean_new": 70.28501728956468,
-   "queries_changed": 0,
+   "mean_new": 70.28506465823504,
+   "queries_changed": 1,
    "above_k_old": 20750,
    "above_k_new": 20750,
    "size": {
-    "delta": 0.0,
+    "delta": 4.736867036142295e-05,
     "ci": [
      0.0,
-     0.0
+     0.00014210601108426886
     ],
-    "p_bootstrap": 1.0,
-    "cohens_d_paired": null,
+    "p_bootstrap": 0.7418,
+    "cohens_d_paired": 0.00688249012795681,
     "wilcoxon": {
      "W": null,
      "p": null,
-     "n_nonzero": 0
+     "n_nonzero": 1
     },
     "paired_t": {
-     "t": null,
-     "p": 1.0
+     "t": 1.0,
+     "p": 0.3173219701016114
     },
     "n": 21111
    },
@@ -676,26 +676,26 @@
    "old": "hash",
    "n": 21111,
    "mean_old": 70.28501728956468,
-   "mean_new": 70.28501728956468,
-   "queries_changed": 0,
+   "mean_new": 70.28506465823504,
+   "queries_changed": 1,
    "above_k_old": 20750,
    "above_k_new": 20750,
    "size": {
-    "delta": 0.0,
+    "delta": 4.736867036142295e-05,
     "ci": [
      0.0,
-     0.0
+     0.00014210601108426886
     ],
-    "p_bootstrap": 1.0,
-    "cohens_d_paired": null,
+    "p_bootstrap": 0.7418,
+    "cohens_d_paired": 0.00688249012795681,
     "wilcoxon": {
      "W": null,
      "p": null,
-     "n_nonzero": 0
+     "n_nonzero": 1
     },
     "paired_t": {
-     "t": null,
-     "p": 1.0
+     "t": 1.0,
+     "p": 0.3173219701016114
     },
     "n": 21111
    },

@@ -1,5 +1,5 @@
 old: budget_binding.json  BEAR 0.4.0 10730c8ae682f972b731b89789f0f7b97a521523  backends ['bm25', 'hash', 'bge']
-new: budget_binding_v042.json  BEAR 0.4.2 9d085b49c004cb03e2bede9055fdc3810cf260c0  backends ['bm25', 'bm25:dropped_rows', 'bm25:flat_backfill', 'hash', 'hash:flat_backfill']
+new: budget_binding_v042.json  BEAR 0.4.2 0d0718a39a0b0788ef5cca4689352462b830494c  backends ['bm25', 'bm25:dropped_rows', 'bm25:flat_backfill', 'hash', 'hash:flat_backfill']
 
 Admissible-set size (trace, whole pool; metadata rows backend-free), new minus old.
 Delta: paired bootstrap 95% CI, paired Cohen's d. Changed: queries whose size differs.
@@ -19,8 +19,8 @@ metatool_base              metadata             metadata   21111      0.00      
 metatool_base              bm25                 bm25       21111    161.99    199.00    20810    +37.01 [+36.64, +37.40]      +1.32     0.0e+00   21110/21111           1
 metatool_base              bm25:dropped_rows    bm25       21111    161.99    161.99        0     +0.00 [+0.00, +0.00]          n/a         n/a   21110/21110           1
 metatool_base              bm25:flat_backfill   bm25       21111    161.99    161.99        0     +0.00 [+0.00, +0.00]          n/a         n/a   21110/21110           1
-metatool_base              hash                 hash       21111     70.29     70.29        0     +0.00 [+0.00, +0.00]          n/a         n/a   20750/20750           1
-metatool_base              hash:flat_backfill   hash       21111     70.29     70.29        0     +0.00 [+0.00, +0.00]          n/a         n/a   20750/20750           1
+metatool_base              hash                 hash       21111     70.29     70.29        1     +0.00 [+0.00, +0.00]        +0.01         n/a   20750/20750           1
+metatool_base              hash:flat_backfill   hash       21111     70.29     70.29        1     +0.00 [+0.00, +0.00]        +0.01         n/a   20750/20750           1
 metatool_tags              metadata             metadata   21111     11.59     11.59        0     +0.00 [+0.00, +0.00]          n/a         n/a   16752/16752           1
 metatool_tags              hash                 hash       21111     11.59     11.59        0     +0.00 [+0.00, +0.00]          n/a         n/a   16752/16752           1
 metatool_querytags_query_tags metadata             metadata   21111      9.97      9.97        0     +0.00 [+0.00, +0.00]          n/a         n/a   15010/15010           1
