@@ -7,7 +7,7 @@ Licensed under the [Open Core Ventures Source Available License (OCVSAL) v1.0](L
 
 Evaluation scripts, frozen corpus, and result files for:
 
-> "Retrieval-Governed Context: Scope-Gated Selection of Instructions and Tools for LLMs and Intelligent Agents"
+> "Retrieval-Governed Context for Instructions and Tools in LLMs and Intelligent Agents: Declared Rules, Guarantees, and Enforcement"
 
 Uses the BEAR library at [snhwang/bear](https://github.com/snhwang/bear), pinned to `v0.1.10`.
 
