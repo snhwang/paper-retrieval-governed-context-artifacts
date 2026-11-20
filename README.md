@@ -9,7 +9,14 @@ Evaluation scripts, frozen corpus, and result files for:
 
 > "Retrieval-Governed Context for Instructions and Tools in LLMs and Intelligent Agents: Declared Rules, Guarantees, and Enforcement"
 
-Uses the BEAR library at [snhwang/bear](https://github.com/snhwang/bear), pinned to `v0.1.10`.
+Uses the BEAR library at [snhwang/bear](https://github.com/snhwang/bear), pinned to `v0.4.2`.
+
+The revised manuscript (TIST round 2) adds three things to this repository:
+- `reproduce/` is the kit that reruns every result of the revised paper, one script per step. Start with `reproduce/README.md`.
+- `hermes/` is the execution-level experiment in Hermes Agent (`hermes/REPRODUCE.md`).
+- `docs/capability-evidence.md` holds the sources behind Table 1.
+
+The revised paper's numbers come from the kit in `reproduce/`. `run_evals.sh`, described below, is the earlier one-command runner. It runs the same deterministic scripts as before. It does not cover the results added in the revision, such as the Nemotron backend, the mandatory-coverage rows of Table 11 and Tables 12 to 17.
 
 ## Quick Start
 
@@ -55,10 +62,10 @@ and run:
 ```bash
 source .venv/bin/activate
 
-# Reproduce all deterministic paper tables
+# Run the deterministic evaluations (no LLM)
 ./run_evals.sh
 
-# Add end-to-end LLM experiments (Tables 7, 8, 9).
+# Add the end-to-end LLM experiments (Table 10, and the Mistral-Nemo cells of Supplement Table S1).
 # Paper-exact reproduction: Mistral-Nemo-Instruct-2407 (12B, Q4_0) served by Ollama.
 ollama pull mistral-nemo                            # ~7GB, one time
 OLLAMA_CONTEXT_LENGTH=131072 ollama serve           # in one shell (fits the ~82k monolithic prompt)
@@ -68,8 +75,8 @@ OLLAMA_CONTEXT_LENGTH=131072 ollama serve           # in one shell (fits the ~82
 ```
 
 Any OpenAI-compatible endpoint works (Ollama, vLLM, LM Studio). See
-[Serving the model](#serving-the-model) for the exact deployment behind Tables 7
-and 8, and for alternatives.
+[Serving the model](#serving-the-model) for the exact deployment behind Table 10,
+and for alternatives.
 
 ## Environment Setup
 
@@ -105,10 +112,15 @@ selected with `--base-url` / `--model`.
 
 ## Serving the model
 
-Tables 7 and 8 were produced with **Mistral-Nemo-Instruct-2407 (12B) at `Q4_0`
-quantization, served by [Ollama](https://ollama.com)**. This is the only
-deployment the published numbers come from, and the only one needed to
-reproduce them:
+Table 10 and the Mistral-Nemo cells of Supplement Table S1 were produced with
+**Mistral-Nemo-Instruct-2407 (12B) at `Q4_0` quantization, served by
+[Ollama](https://ollama.com)**. The rows of Table 10 rerun for the revision use
+the tag `mistral-nemo-32k` (`reproduce/README.md`). The Gemma 4 cells of Table S1
+came from Ollama too (`gemma4:12b`, `gemma4:31b`). The Hermes experiment
+(Table 16) and the second tagger (Table 17) use a different server, described in
+`hermes/REPRODUCE.md` and `evals/authorship/README.md`.
+
+Serve Mistral-Nemo as follows.
 
 ```bash
 ollama pull mistral-nemo                                    # Q4_0 by default; ~7GB
@@ -232,41 +244,38 @@ the script's header. Serving `bf16` needs ~24GB of weights against `Q4_0`'s
 
 ## Table-to-Script Mapping
 
-This map follows the revised manuscript (TIST round 2), with the numbering of its current build. Every result runs on BEAR v0.4.2. `reproduce/` reruns all of them by hand and records each run. `reproduce/MANIFEST.md` is the full map. It covers every table, figure and in-text number, the exact command, the output file, and whether a number comes from this revision or is kept from the July and August 2026 runs. Static tables and the figures have no backing script.
+This map follows the revised manuscript (TIST round 2) as built on 20 Nov 2026. The article has Tables 1 to 18, and its online Supplement has Tables S1 to S4. Every retrieval result of the revision runs on BEAR v0.4.2. The end-to-end rows kept from July 2026 (part of Table 10, and Table S1) ran on v0.1.10. `reproduce/` reruns all of them by hand and records each run. `reproduce/MANIFEST.md` is the full map. It covers every table, figure and in-text number, the exact command, the output file, and whether a number comes from this revision or is kept from the July and August 2026 runs. Static tables and the figures have no backing script.
 
-| Paper | Label | Backing script(s) in `evals/` | Kit script | LLM required |
-|:--|:--|:--|:--|:--:|
-| Table 1 | `tab:capabilities` | *(static, evidence in `docs/capability-evidence.md`)* | — | — |
-| Figure 1 | `fig:instructions` | *(YAML example in the text)* | — | — |
-| Table 2 | `tab:schema-cheatsheet` | *(static)* | — | — |
-| Figure 2 | `fig:pipeline` | *(TikZ drawing, `Figure1.tex` in the paper repo)* | `80_figures.sh` | — |
-| Table 3 | `tab:rq` | *(static)* | — | — |
-| Table 4 | `tab:model-roles` | *(static)* | — | — |
-| Table 5 | `tab:provenance` | *(static)* | — | — |
-| Table 6 | `tab:toolbench-results` | `wp0_v040/eval_toolbench_v040.py` (all seven backends) | `10_`, `20_`, `30_` | no |
-| Table 7 | `tab:toolbench-inferred` | `eval_toolbench_inferred_categories.py`, `eval_toolbench_multitag_categories.py`, `eval_toolbench_top5_categories.py` (categories cached from the Anthropic API) | `10_` | no (post-generation) |
-| Table 8 | `tab:metatool-results` | `wp0_v040/eval_toolbench_v040.py` | `10_`, `20_`, `30_` | no |
-| Table 9 | `tab:metatool-tags-results` | `wp0_v040/eval_toolbench_v040.py` with the tags of `metatool_generate_tags.py` and `metatool_generate_query_tags_top5.py` | `10_`, `20_`, `30_` | no (post-generation) |
-| Table 10 | `tab:e2e` | rows rerun on 0.4.2: `wp0_v040/run_e2e_rerun.sh` (`e2e_rerun.py`). Rows kept from July: `eval_toolbench_e2e.py` | `50_`, `55_` | yes |
-| Table 11 | `tab:e2e-react` | `eval_toolbench_react.py` (July) | `55_` | yes |
-| Table 12 | `tab:e2e-scale` | `eval_toolbench_react.py` via `run_model_full1100.sh` and `run_model_scaffold_nothink.sh`, then `grid_from_full1100.py` and `scaffold_vs_single.py` (July) | `55_` | yes |
-| Table 13 | `tab:token-efficiency` | `eval_scalability.py`, `eval_baseline_comparison.py` | `10_` | no |
-| Table 14 | `tab:semantic-advantage` | `eval_baseline_comparison.py` (statistics: `reproduce/collect.py`) | `10_`, `90_` | no |
-| Table 15 | `tab:token-compare` | `eval_governance_ablation.py` | `10_` | no |
-| Table 16 | `tab:governance-ablation` | `eval_governance_ablation.py` | `10_` | no |
-| Table 17 | `tab:decomposed-ablation` | `eval_governance_decomposed.py`. Bottom rows: `eval_mandatory_coverage.py` | `10_`, `15_` to `40_` | no |
-| Table 18 | `tab:invariants` | `eval_invariants.py` (via `run_wp256.sh v042`) | `15_` | no |
-| Table 19 | `tab:baselines` | `eval_metadata_filter_baseline.py`, `eval_cpa_maintained.py` | `15_`, `30_` | no |
-| Table 20 | `tab:robustness` | `eval_tag_noise.py`, `eval_leakage_threat.py`, `eval_query_giveaways.py`, `check_bm25_v042.py` | `15_` to `40_` | no |
-| Table 21 | `tab:tokens-recall` | `wp0_v040/dump_toolbench_lists.py`, `merge_wp4_lists.py`, `wp4_token_efficiency.py`, `wp4_summary.py` | `10_` to `30_`, `70_` | no |
-| Section 4.12 | Hermes (WP7) | `hermes/run.py`, `analyze_stage1.py`, `analyze_stage2.py` (see `hermes/REPRODUCE.md`) | `60_` | yes |
-| Table 22 | `tab:summary` | *(narrative summary)* | — | — |
-| Table 23 | `tab:transfer` | `eval_backend_transfer.py` (off-the-shelf rows: the ungated rows of Tables 6 and 8) | `10_` | no |
-| Table 24 | `tab:reranker` | `eval_reranker_composition.py`, `eval_framework_baseline.py` | `10_` | no |
-| Table 25 | `tab:retrieval` | `eval_retrieval.py` | `10_` | no |
-| Table 26 | `tab:tool-scaling` | `eval_tool_scaling.py` | `10_` | no |
-| Table 27 | `tab:token-savings` | `eval_tool_scaling.py` (same run) | `10_` | no |
-| Table 28 | `tab:alpha-sweep` | `eval_alpha_sweep.py` | `10_` | no |
+The kit files (`reproduce/MANIFEST.md`, `reproduce/README.md`, `reproduce/lib/paper_map.py`) and `run_evals.sh` still print the table numbers of earlier builds. Match their entries to this map by label or by kit id, which do not change. T14 and T15 belong to tables that the revision later removed. Their scripts and committed outputs remain. The kit's other ids are in-text numbers, listed in the MANIFEST.
+
+| Paper | Label | Backing script(s) in `evals/` | Kit script | Kit id | LLM required |
+|:--|:--|:--|:--|:--|:--:|
+| Table 1 | `tab:capabilities` | *(static, evidence in `docs/capability-evidence.md`)* | none | T01 | n/a |
+| Figure 1 | `fig:instructions` | *(YAML example in the text)* | none | F1 | n/a |
+| Table 2 | `tab:schema-cheatsheet` | *(static)* | none | T02 | n/a |
+| Figure 2 | `fig:pipeline` | *(TikZ drawing, `Figure1.tex` in the paper repo)* | `80_figures.sh` | F2 | n/a |
+| Table 3 | `tab:rq` | *(static)* | none | T03 | n/a |
+| Table 4 | `tab:model-roles` | *(static)* | none | T04 | n/a |
+| Table 5 | `tab:provenance` | *(static)* | none | T05 | n/a |
+| Table 6 | `tab:toolbench-results` | `wp0_v040/eval_toolbench_v040.py` (all seven backends) | `10_`, `20_`, `30_` | T06 | no |
+| Table 7 | `tab:toolbench-inferred` | `eval_toolbench_inferred_categories.py`, `eval_toolbench_multitag_categories.py`, `eval_toolbench_top5_categories.py` (categories cached from the Anthropic API) | `10_` | T07 | no (post-generation) |
+| Table 8 | `tab:metatool-results` | `wp0_v040/eval_toolbench_v040.py` | `10_`, `20_`, `30_` | T08 | no |
+| Table 9 | `tab:metatool-tags-results` | `wp0_v040/eval_toolbench_v040.py` with the tags of `metatool_generate_tags.py` and `metatool_generate_query_tags_top5.py` | `10_`, `20_`, `30_` | T09 | no (post-generation) |
+| Table 10 | `tab:e2e` | rows rerun on 0.4.2: `wp0_v040/run_e2e_rerun.sh` (`e2e_rerun.py`). Rows kept from July: `eval_toolbench_e2e.py` | `50_`, `55_` | T10a, T10b, T10c | yes |
+| Section 4.3, text | none (earlier `tab:token-efficiency`, `tab:tool-scaling`, `tab:token-savings`) | `eval_scalability.py`, `eval_baseline_comparison.py`, `eval_tool_scaling.py` | `10_` | T13, T26 | no |
+| Table 11 | `tab:decomposed-ablation` | `eval_governance_decomposed.py`. Bottom rows: `eval_mandatory_coverage.py` | `10_`, `15_` to `40_` | T17, T17b | no |
+| Table 12 | `tab:invariants` | `eval_invariants.py` (via `run_wp256.sh v042`) | `15_` | T18 | no |
+| Table 13, and the CPA text of Section 4.6 | `tab:baselines` | `eval_metadata_filter_baseline.py`, `eval_cpa_maintained.py` | `15_`, `30_` | T19 | no |
+| Table 14 | `tab:robustness` | `eval_tag_noise.py`, `eval_leakage_threat.py`, `eval_query_giveaways.py`, `check_bm25_v042.py` | `15_` to `40_` | T20 | no |
+| Table 15 | `tab:tokens-recall` | `wp0_v040/dump_toolbench_lists.py`, `merge_wp4_lists.py`, `wp4_token_efficiency.py`, `wp4_summary.py` | `10_` to `30_`, `70_` | T21 | no |
+| Table 16 | `tab:hermes` | `hermes/run.py`, `analyze_stage1.py`, `analyze_stage2.py` (see `hermes/REPRODUCE.md`) | `60_` | XH | yes |
+| Table 17 (Appendix A) | `tab:second-tagger` | `authorship/tag.py`, `validate.py`, `eval_tagged.py`, `analyze.py` (see `evals/authorship/README.md`) | `65_` | XAUTH | yes (tagging) |
+| Appendix B, text | none (earlier `tab:retrieval`) | `eval_retrieval.py` | `10_` | T25 | no |
+| Table 18 (Appendix B) | `tab:governance-ablation` | `eval_governance_ablation.py` | `10_` | T16 | no |
+| Supplement Table S1, and the ReAct numbers of Section 4.2 | `tab:e2e-scale` | `eval_toolbench_react.py`, alone for the Mistral-Nemo cells and via `run_model_full1100.sh` and `run_model_scaffold_nothink.sh` for the Gemma 4 cells, then `grid_from_full1100.py` and `scaffold_vs_single.py` (July) | `55_` | T11, T12 | yes |
+| Supplement Table S2 | `tab:transfer` | `eval_backend_transfer.py` (off-the-shelf rows: the ungated rows of Tables 6 and 8) | `10_` | T23 | no |
+| Supplement Table S3 | `tab:reranker` | `eval_reranker_composition.py`, `eval_framework_baseline.py` | `10_` | T24 | no |
+| Supplement Table S4 | `tab:alpha-sweep` | `eval_alpha_sweep.py` | `10_` | T28 | no |
 
 Each script writes its result files with a provenance record (Python, numpy, scipy, BEAR version and source sha). The kit writes every output below `$REPRO_OUT` and never into `results/`. `reproduce/verify.py` compares those outputs with the committed files in `results/`, and `reproduce/collect.py` lists every manuscript number with its source file.
 
@@ -274,34 +283,48 @@ Each script writes its result files with a provenance record (Python, numpy, sci
 
 ```
 evals/                                # evaluation scripts
-  # Pet Simulation (deterministic, no LLM)
-  eval_retrieval.py                   # Table 10: F1 by query type, alpha ablation
+  # Pet Simulation and the customer-support corpus (deterministic, no LLM)
+  eval_retrieval.py                   # Appendix B (text): retrieval by query type
   eval_retrieval_backends.py          # Backend comparison across embeddings
-  eval_governance_ablation.py         # Table 16: F1@10 governance ablation
-  eval_governance_decomposed.py       # Table 17: decomposed governance × 5 backends + ITR row
-  eval_scope_excluded_safety.py       # Table 17 safety panel: mandatory ON/OFF on scope-excluded variant
-  eval_baseline_comparison.py         # Tables 13, 14: CPA vs BEAR (semantic recall + tokens)
-  eval_scalability.py                 # Table 13: token efficiency at 10-500 agents
-  eval_tool_scaling.py                # Tables 10, 11: tool scaling + token savings
+  eval_governance_ablation.py         # Table 18: F1@10 governance ablation
+  eval_governance_decomposed.py       # Table 11: decomposed governance by backend + ITR row
+  eval_mandatory_coverage.py          # Table 11, bottom rows: mandatory-coverage test
+  eval_scope_excluded_safety.py       # Earlier safety panel (not in the revised paper)
+  eval_baseline_comparison.py         # Section 4.3 (text): CPA vs BEAR
+  eval_scalability.py                 # Section 4.3 (text): token use at 10-500 agents
+  eval_tool_scaling.py                # Section 4.3 (text): tool scaling + token savings
   eval_tool_composition.py            # Composer output validation
   eval_ablation.py                    # Parameter sensitivity (alpha, theta, K)
-  eval_alpha_sweep.py                 # Table 18: alpha weight sweep
+  eval_alpha_sweep.py                 # Supplement Table S4: alpha weight sweep
   compute_petsim_stats.py             # Pet Sim corpus descriptive statistics
 
   # ToolBench + MetaTool retrieval (deterministic, no LLM)
-  eval_toolbench.py                   # Tables 3, 5, 6: ToolBench + MetaTool retrieval
-  eval_toolbench_inferred_categories.py  # Table 4: LLM-inferred categories (top-1)
-  eval_toolbench_multitag_categories.py  # Table 4: LLM-inferred categories (multi-tag)
-  eval_toolbench_top5_categories.py      # Table 4: LLM-inferred categories (top-5)
+  eval_toolbench.py                   # Tables 6, 8, 9: ToolBench + MetaTool retrieval
+  wp0_v040/                           # the revision's runs of Tables 6, 8, 9 (with Nemotron), the Table 10 reruns, Table 15
+  eval_toolbench_inferred_categories.py  # Table 7: LLM-inferred categories (top-1)
+  eval_toolbench_multitag_categories.py  # Table 7: LLM-inferred categories (multi-tag)
+  eval_toolbench_top5_categories.py      # Table 7: LLM-inferred categories (top-5)
+
+  # Guarantees, baselines and robustness (deterministic, no LLM)
+  eval_invariants.py                  # Table 12: invariants on 2,000 random corpora
+  eval_metadata_filter_baseline.py    # Table 13: metadata filters in LlamaIndex
+  eval_cpa_maintained.py              # Section 4.6 (text): maintained vs stale CPA
+  eval_tag_noise.py                   # Table 14: tag noise
+  eval_leakage_threat.py              # Table 14: leakage
+  eval_query_giveaways.py             # Table 14: query giveaways
+  eval_backend_transfer.py            # Supplement Table S2: fine-tuned retriever in and out of domain
+  eval_reranker_composition.py        # Supplement Table S3: reranker substitution and composition
+  eval_framework_baseline.py          # Supplement Table S3: LlamaIndex retrieval path
 
   # Anthropic-API metadata generation (produces JSON consumed by the retrieval evals)
   metatool_generate_tags.py           # MetaTool tool-tag generation
   metatool_generate_query_tags.py     # MetaTool per-query top-1 tag generation
   metatool_generate_query_tags_top5.py# MetaTool per-query top-5 tag generation
+  authorship/                         # Table 17: the same tags written again by a second model
 
   # End-to-end tool selection (requires OpenAI-compatible LLM endpoint)
-  eval_toolbench_e2e.py               # Table 7: single-turn end-to-end
-  eval_toolbench_react.py             # Table 8: ReAct end-to-end
+  eval_toolbench_e2e.py               # Table 10: single-turn end-to-end
+  eval_toolbench_react.py             # Supplement Table S1: ReAct end-to-end
 
   # Shared utilities
   toolbench_setup.py                  # Download ToolBench and MetaTool data
@@ -311,9 +334,12 @@ evals/                                # evaluation scripts
 pet_sim/instructions/                 # frozen Pet Simulation corpus (8 YAML files)
                                       # DO NOT MODIFY — these are exactly what the
                                       # paper measured against
+hermes/                               # Table 16: the Hermes Agent experiment (hermes/REPRODUCE.md)
+reproduce/                            # the kit that reruns the revised paper (reproduce/README.md)
+docs/capability-evidence.md           # sources behind Table 1
 results/                              # pre-computed result files referenced in the paper
-run_evals.sh                          # runner reproducing all paper tables
-serve_mistral_nemo.sh                 # optional vLLM server (bf16); Tables 7, 8 used Ollama
+run_evals.sh                          # one-command runner of the deterministic evals (predates the revision)
+serve_mistral_nemo.sh                 # optional vLLM server (bf16). Table 10 used Ollama
 requirements.txt                      # pinned dependency set
 ```
 
@@ -322,13 +348,13 @@ requirements.txt                      # pinned dependency set
 `evals/composition.py` packages the paper's composition claim as reusable
 code: BEAR governs candidate-set construction, and external systems attach as
 post-stages over the governed candidate set, through BEAR's public API, with
-no changes to BEAR core (pinned at v0.1.10).
+no changes to BEAR core (pinned at v0.4.2).
 
 - `ComposedRetriever` — drop-in wrapper: governed over-fetch, post-stage,
   top-k cut. A post-stage sees only the governed candidate set, so gate
   exclusions and mandatory injections are preserved by construction.
 - `CrossEncoderReranker` — the released `BAAI/bge-reranker-base` as a
-  post-stage. This is the measured composition (paper Table 21):
+  post-stage. This is the measured composition (Supplement Table S3):
   `eval_reranker_composition.py` runs its arms through this layer, and the
   refactor was verified to reproduce the committed per-query results exactly
   on both corpora.
@@ -345,33 +371,33 @@ composability, not an evaluation; quantitative claims live in
 
 ## Running Individual Evals
 
-`./run_evals.sh` invokes every deterministic script; passing `--all` adds the LLM-required experiments. To reproduce a single table, run its script directly:
+`./run_evals.sh` runs the deterministic scripts listed below. Passing `--all` adds the two end-to-end experiments. The scripts added in the revision run through `reproduce/`. Each script can also be run directly.
 
 ```bash
 # Pet Simulation (deterministic, no LLM)
-python evals/eval_retrieval.py                   # Table 10 (lexical)
-python evals/eval_retrieval.py --semantic        # Table 10 (semantic)
+python evals/eval_retrieval.py                   # Appendix B text (lexical)
+python evals/eval_retrieval.py --semantic        # Appendix B text (semantic)
 python evals/eval_retrieval_backends.py --all    # Backend comparison
-python evals/eval_governance_ablation.py         # Table 16
-python evals/eval_governance_decomposed.py       # Table 17
-python evals/eval_scope_excluded_safety.py       # Table 17 safety panel (scope-excluded variant)
-python evals/eval_baseline_comparison.py         # Tables 13, 14
-python evals/eval_baseline_comparison.py --semantic  # Table 14 semantic
-python evals/eval_scalability.py                 # Table 13
-python evals/eval_tool_scaling.py                # Tables 10, 11
+python evals/eval_governance_ablation.py         # Table 18
+python evals/eval_governance_decomposed.py       # Table 11
+python evals/eval_scope_excluded_safety.py       # earlier safety panel (not in the revised paper)
+python evals/eval_baseline_comparison.py         # Section 4.3 text (CPA vs BEAR)
+python evals/eval_baseline_comparison.py --semantic  # the same, semantic
+python evals/eval_scalability.py                 # Section 4.3 text
+python evals/eval_tool_scaling.py                # Section 4.3 text
 python evals/eval_tool_composition.py            # Composer validation
 python evals/eval_ablation.py                    # Parameter sensitivity (lexical)
 python evals/eval_ablation.py --semantic         # Parameter sensitivity (semantic)
-python evals/eval_alpha_sweep.py                 # Table 18
+python evals/eval_alpha_sweep.py                 # Supplement Table S4
 
 # ToolBench + MetaTool retrieval (deterministic; requires toolbench_setup.py first)
-python evals/eval_toolbench.py --latex           # Tables 3, 5, 6
-python evals/eval_toolbench_inferred_categories.py   # Table 4 (top-1)
-python evals/eval_toolbench_multitag_categories.py   # Table 4 (multi-tag)
-python evals/eval_toolbench_top5_categories.py       # Table 4 (top-5)
+python evals/eval_toolbench.py --latex           # Tables 6, 8, 9
+python evals/eval_toolbench_inferred_categories.py   # Table 7 (top-1)
+python evals/eval_toolbench_multitag_categories.py   # Table 7 (multi-tag)
+python evals/eval_toolbench_top5_categories.py       # Table 7 (top-5)
 
-# Table 9 (monolithic configurations vs governance, full 1,100 queries, LLM required).
-# Mistral cells reuse the Table 7/8 runs. Gemma models (~4-9 h each per driver):
+# Supplement Table S1 (monolithic configurations vs governance, full 1,100 queries, LLM required).
+# Mistral cells reuse the Table 10 and ReAct runs. Gemma models (~4-9 h each per driver):
 MODEL=gemma4:31b LABEL=g4-31b bash evals/run_model_scaffold_nothink.sh   # scaffold, native off
 MODEL=gemma4:31b LABEL=g4-31b bash evals/run_model_full1100.sh           # native-reasoning conditions
 python evals/grid_from_full1100.py g4-31b                                # per-model grid + McNemar
@@ -383,10 +409,10 @@ bash evals/verify_empty_guard.sh
 
 # End-to-end LLM experiments (requires an OpenAI-compatible endpoint with
 # structured-output support; see "Serving the model")
-python evals/eval_toolbench_e2e.py --all \       # Table 7
+python evals/eval_toolbench_e2e.py --all \       # Table 10
     --model mistral-nemo \
     --base-url http://127.0.0.1:11434/v1
-python evals/eval_toolbench_react.py \           # Table 8
+python evals/eval_toolbench_react.py \           # Supplement Table S1 (Mistral-Nemo cells)
     --model mistral-nemo \
     --base-url http://127.0.0.1:11434/v1
 ```
@@ -422,14 +448,14 @@ against themselves and trivially "match."
 
 ## Regenerating LLM-Generated Metadata
 
-Table 4 (LLM-inferred ToolBench categories) and Table 6 (MetaTool tag variants) use tag JSON that was generated once via the Anthropic Messages API and then committed. The retrieval evals that consume this JSON are deterministic; only the generation step needs an API key.
+Table 7 (LLM-inferred ToolBench categories) and Table 9 (MetaTool tag variants) use tag JSON that was generated once via the Anthropic Messages API and then committed. The retrieval evals that consume this JSON are deterministic. Only the generation step needs an API key. Table 17 repeats the tagging with a second, locally served model (`evals/authorship/README.md`).
 
 To regenerate:
 
 ```bash
 # ANTHROPIC_API_KEY may live in .env instead of being exported
-python evals/metatool_generate_tags.py            # tool-level tags for Table 6
-python evals/metatool_generate_query_tags_top5.py # per-query tags (up to 5) for Table 6
+python evals/metatool_generate_tags.py            # tool-level tags for Table 9
+python evals/metatool_generate_query_tags_top5.py # per-query tags (up to 5) for Table 9
 # ToolBench inferred-category variants are generated inline by their eval scripts.
 ```
 
@@ -447,6 +473,8 @@ The following models download automatically on first use via HuggingFace:
 - `BAAI/bge-m3` (1024-dim)
 - `Qwen/Qwen3-Embedding-0.6B` (1024-dim)
 - `Qwen/Qwen3-Embedding-4B` (2560-dim)
+
+The revision adds a seventh backend, `nvidia/llama-nemotron-embed-vl-1b-v2` (2048-dim). It is served on port 8360 and is not downloaded by the scripts (`reproduce/README.md`). BM25 and the hash embedder need no model.
 
 ## Corpus Integrity
 
