@@ -8,7 +8,7 @@ This folder reruns every result of the revised TIST paper, "Retrieval-Governed C
 
 `TEXT_FIXES.md` lists the numbers in the manuscript that no script can produce (stale text, prose estimates, no data), with a proposed change for each.
 
-Table and section numbers follow the manuscript as built on 20 Nov 2026 (Tables 1 to 19, Supplement Tables S1 to S4). The paper prints Nemotron-Embed, Qwen3-Emb-0.6B and Qwen3-Emb-4B where the kit's keys say `Nemotron`, `Qwen3-0.6B` and `Qwen3-4B`.
+The run records of the author's runs are in `runlog/`. Table and section numbers follow the manuscript as built on 20 Nov 2026 (Tables 1 to 19, Supplement Tables S1 to S4). The paper prints Nemotron-Embed, Qwen3-Emb-0.6B and Qwen3-Emb-4B where the kit's keys say `Nemotron`, `Qwen3-0.6B` and `Qwen3-4B`.
 
 BEAR is pinned at the public tag v0.4.2 (commit `0d0718a`). The scripts only wrap the evaluation code in `evals/` and `hermes/`. They never write into `results/` or anywhere else in this checkout. Every output goes to `$REPRO_OUT`, by default `~/tist-repro`.
 

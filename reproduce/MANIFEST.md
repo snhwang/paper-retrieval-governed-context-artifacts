@@ -125,7 +125,7 @@ The kit itself holds none. It works around these:
 - Fixed home-relative paths that the kit must keep: `~/tist-evals/bear-v0.4.2`, `~/tist-evals/bear-v0110`, `~/bin/tist-capped`, `~/tist-gpu.lock`.
 
 ### State of the runs
-The author ran every step of the kit in November 2026, as jobs in a Slurm queue. `collect.py` reports every item that needs the author's run as complete. `verify.py --strict` passes 338 files and fails 16, in four groups:
+The author ran every step of the kit in November 2026, as jobs in a Slurm queue. The run records are in `reproduce/runlog/`. `collect.py` reports every item that needs the author's run as complete. `verify.py --strict` passes 338 files and fails 16, in four groups:
 - 8 files that hold decisions of the hash backend: the three budget-binding files and five WP4 hash arrays. The hash embedder's rounding depends on the embedding store, and a tie can fall the other way.
 - 3 invariants files, whose code changed after the committed run.
 - `tag_noise_v042.json`.

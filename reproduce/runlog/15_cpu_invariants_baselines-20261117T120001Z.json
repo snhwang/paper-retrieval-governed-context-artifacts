@@ -1,0 +1,273 @@
+{
+ "schema": "tist-repro.run_record/1",
+ "script": "15_cpu_invariants_baselines",
+ "dry_run": false,
+ "user": "snhwang",
+ "host": "Shwang171663",
+ "kernel": "6.6.114.1-microsoft-standard-WSL2",
+ "wsl_distro": null,
+ "systemd_unit": null,
+ "start_utc": "2026-11-17T12:00:01+00:00",
+ "end_utc": "2026-11-17T13:11:48+00:00",
+ "duration_s": 4307,
+ "exit_code": 0,
+ "status": "OK",
+ "argv": [
+  "/mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts/reproduce/15_cpu_invariants_baselines.sh",
+  "--only",
+  "wp256-v042 wp256-v042-bge wp256-v042-bm25 wp256-v042-bgem3 wp5-bge-cpa"
+ ],
+ "command_line": "bash /mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts/reproduce/15_cpu_invariants_baselines.sh --only 'wp256-v042 wp256-v042-bge wp256-v042-bm25 wp256-v042-bgem3 wp5-bge-cpa'",
+ "cwd": "/mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts",
+ "artifacts": {
+  "path": "/mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts",
+  "branch": "tist-r2",
+  "commit": "5cf0bb19323c09209542c9182d23a072557641a9",
+  "dirty_tracked": []
+ },
+ "clones": {
+  "clones/artifacts-authorship": {
+   "commit": "5cf0bb19323c09209542c9182d23a072557641a9",
+   "branch": "tist-r2",
+   "dirty_tracked": []
+  },
+  "clones/artifacts-hermes": {
+   "commit": "5cf0bb19323c09209542c9182d23a072557641a9",
+   "branch": "tist-r2",
+   "dirty_tracked": []
+  },
+  "clones/artifacts-previous": {
+   "commit": "5cf0bb19323c09209542c9182d23a072557641a9",
+   "branch": "tist-r2",
+   "dirty_tracked": []
+  },
+  "clones/artifacts-wp256": {
+   "commit": "5cf0bb19323c09209542c9182d23a072557641a9",
+   "branch": "tist-r2",
+   "dirty_tracked": [
+    "D results/bm25_v042_check_attribution.json",
+    " D results/bm25_v042_check_attribution_output.txt",
+    " D results/bm25_v042_check_default.json",
+    " D results/bm25_v042_check_default_output.txt",
+    " D results/bm25_v042_check_default_recall.npz",
+    " D results/bm25_v042_check_dropped_rows.json",
+    " D results/bm25_v042_check_dropped_rows_output.txt",
+    " D results/bm25_v042_check_dropped_rows_recall.npz",
+    " D results/bm25_v042_check_flat_backfill+tie_order.json",
+    " D results/bm25_v042_check_flat_backfill+tie_order_output.txt",
+    " D results/bm25_v042_check_flat_backfill+tie_order_recall.npz",
+    " D results/bm25_v042_check_flat_backfill.json",
+    " D results/bm25_v042_check_flat_backfill_output.txt",
+    " D results/bm25_v042_check_flat_backfill_recall.npz",
+    " D results/bm25_v042_check_tie_order.json",
+    " D results/bm25_v042_check_tie_order_output.txt",
+    " D results/bm25_v042_check_tie_order_recall.npz",
+    " M results/budget_binding_v042.json",
+    " M results/budget_binding_v042_bge.json",
+    " M results/budget_binding_v042_bge_output.txt",
+    " M results/budget_binding_v042_bge_vs_v040.json",
+    " M results/budget_binding_v042_bge_vs_v040_output.txt",
+    " M results/budget_binding_v042_output.txt",
+    " M results/budget_binding_v042_vs_v040.json",
+    " M results/budget_binding_v042_vs_v040_output.txt",
+    " M results/invariants_v042.json",
+    " M results/invariants_v042_output.txt",
+    " M results/invariants_v042_pool_sensitivity.json",
+    " M results/invariants_v042_pool_sensitivity_output.txt",
+    " D results/metadata_filter_baseline_petsim_nemotron_v042_missing.json",
+    " M results/metadata_filter_baseline_petsim_nemotron_v042_output.txt",
+    " D results/metadata_filter_baseline_toolbench_nemotron_v042_missing.json",
+    " M results/metadata_filter_baseline_toolbench_nemotron_v042_output.txt"
+   ]
+  },
+  "wp0/artifacts": {
+   "commit": "5cf0bb19323c09209542c9182d23a072557641a9",
+   "branch": "tist-r2",
+   "dirty_tracked": [
+    "M results/alpha_sweep_output.txt",
+    " M results/governance_decomposed_output.txt"
+   ]
+  },
+  "wp0/artifacts-attr": {
+   "commit": "5cf0bb19323c09209542c9182d23a072557641a9",
+   "branch": "tist-r2",
+   "dirty_tracked": []
+  },
+  "wp0/artifacts-dense": {
+   "commit": "5cf0bb19323c09209542c9182d23a072557641a9",
+   "branch": "tist-r2",
+   "dirty_tracked": [
+    "M results/alpha_sweep_all.json",
+    " M results/alpha_sweep_output.txt",
+    " M results/alpha_sweep_qwen3-4b.json",
+    " M results/baseline_comparison_results.csv",
+    " M results/governance_decomposed_all.json",
+    " M results/governance_decomposed_output.txt",
+    " M results/scalability_results.csv",
+    " M results/toolbench_inferred_output.txt",
+    " M results/toolbench_multitag_output.txt",
+    " M results/toolbench_top5_output.txt"
+   ]
+  },
+  "wp0/artifacts-gpu": {
+   "commit": "5cf0bb19323c09209542c9182d23a072557641a9",
+   "branch": "tist-r2",
+   "dirty_tracked": []
+  },
+  "wp0/artifacts-nemo": {
+   "commit": "5cf0bb19323c09209542c9182d23a072557641a9",
+   "branch": "tist-r2",
+   "dirty_tracked": [
+    "M results/alpha_sweep_bge.json",
+    " M results/alpha_sweep_output.txt",
+    " M results/governance_decomposed_bge.json",
+    " M results/governance_decomposed_output.txt"
+   ]
+  },
+  "wp0/artifacts-track": {
+   "commit": "5cf0bb19323c09209542c9182d23a072557641a9",
+   "branch": "tist-r2",
+   "dirty_tracked": []
+  }
+ },
+ "venv": {
+  "python": "3.12.13",
+  "executable": "/home/snhwang/.venvs/tist-repro/bin/python",
+  "bear": "0.4.2",
+  "torch": "2.10.0",
+  "transformers": "4.57.6",
+  "sentence-transformers": "5.4.1",
+  "numpy": "2.2.6",
+  "scipy": "1.17.1",
+  "llama-index-core": "0.14.23",
+  "instruction-tool-retrieval": "0.1.1",
+  "tiktoken": "0.13.0",
+  "bear_direct_url": "file:///home/snhwang/tist-evals/bear-v0.4.2",
+  "bear_git_sha": "0d0718a39a0b0788ef5cca4689352462b830494c"
+ },
+ "bear_sources": {
+  "v0.4.2": {
+   "path": "/home/snhwang/tist-evals/bear-v0.4.2",
+   "BEAR_GIT_SHA": "0d0718a39a0b0788ef5cca4689352462b830494c",
+   "git_head": "0d0718a39a0b0788ef5cca4689352462b830494c",
+   "bear_tree_sha256": "9cf19e48b49f4e57e3723050b942b296bb66f775fdd41e7f1770514576d0930a"
+  },
+  "v0.1.10": {
+   "path": "/home/snhwang/tist-evals/bear-v0110",
+   "git_head": "cdba2174d715494ec4f22c098386487002ec492f"
+  }
+ },
+ "hf_model_snapshots": {
+  "BAAI/bge-base-en-v1.5": "a5beb1e3e68b9ab74eb54cfd186867f64f240e1a",
+  "BAAI/bge-m3": "5617a9f61b028005a4858fdac845db406aefb181",
+  "BAAI/bge-reranker-base": "2cfc18c9415c912f9d8155881c133215df768a70",
+  "Qwen/Qwen2.5-VL-7B-Instruct": "cc594898137f460bfe9f0759e9844b3ce807cfb5",
+  "Qwen/Qwen3-Embedding-0.6B": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+  "Qwen/Qwen3-Embedding-4B": "5cf2132abc99cad020ac570b19d031efec650f2b",
+  "ToolBench/ToolBench_IR_bert_based_uncased": "cf4a904c33cde549643aa6d9091146e68ed4932f",
+  "cross-encoder/nli-deberta-v3-xsmall": "a150876415327c80daeff35ca6f68f5ed8cf5c24",
+  "google/gemma-4-12B-it": "5926caa4ec0cac5cbfadaf4077420520de1d5205",
+  "google/gemma-4-E2B-it": "3e22461f65e89153144f8adb70e3b8c2cc9845a7",
+  "google/gemma-4-E4B-it": "fee6332c1abaafb77f6f9624236c63aa2f1d0187",
+  "google/medsiglip-448": "9cea28a1a1195f665105faa6e8544c112fd960a4",
+  "incoai/Qwen3.8-27B-DFlash2": "015e795645c74b1a0eeef3b570031fb62e769bc5",
+  "jinaai/jina-clip-implementation": "39e6a55ae971b59bea6e44675d237c99762e7ee2",
+  "jinaai/jina-clip-v2": "344d954da76eb8ad47a7aaff42d012e30c15b8fe",
+  "jinaai/jina-embeddings-v3": "f1944de8402dcd5f2b03f822a4bc22a7f2de2eb9",
+  "jinaai/jina-embeddings-v4": "737fa5c46f0262ceba4a462ffa1c5bcf01da416f",
+  "jinaai/xlm-roberta-flash-implementation": "cd915ad563445b5b8b51f4ac641e8c15e1fcbff3",
+  "mistralai/Mistral-Nemo-Instruct-2407": "04d8a90549d23fc6bd7f642064003592df51e9b3",
+  "mlx-community/Qwen3-Embedding-0.6B-8bit": "b8d7100604f51da6d14eab4dd1805f596fa1ce3f",
+  "mlx-community/Qwen3-Embedding-4B-mxfp8": "c738b4ebab1e09812a7fe6800cf216c7b1ab2bfd",
+  "mlx-community/bge-m3-mlx-fp16": "a37eddded9a6a1273a87fb8b0da0d1cdbd98aeec",
+  "naver/splade-cocondenser-ensembledistil": "49cf4c7b0db5b870a401ddf5e2669993ef3699c7",
+  "nomic-ai/nomic-bert-2048": "7710840340a098cfb869c4f65e87cf2b1b70caca",
+  "nomic-ai/nomic-embed-text-v1.5": "e5cf08aadaa33385f5990def41f7a23405aec398",
+  "nomic-ai/nomic-embed-vision-v1.5": "e3a725bce72db07ca4adb1d83da08903f3ee02f8",
+  "nvidia/Gemma-4-31B-IT-NVFP4": "4135a98a9b728a548947683219633b25682223ac",
+  "nvidia/NVIDIA-Nemotron-Nano-12B-v2-VL-NVFP4-QAD": "b8d3c170d9ee3a078917ef9bfd508eff988d6de7",
+  "nvidia/Nemotron-Cascade-14B-Thinking": "8aa18a07ea16c52261675f766ed2ea3ec80ea841",
+  "nvidia/Qwen3-30B-A3B-NVFP4": "2538ded2a4edb247b4d2b4a8ba24e44bd4c017c3",
+  "nvidia/Qwen3.8-27B-NVFP4": "dbb8f445b3145f8a4c18ddc769f032d57d32867c",
+  "nvidia/llama-embed-nemotron-8b": "b840573b940e213c5cd622468ed8bfcc15c7c431",
+  "nvidia/llama-nemotron-embed-vl-1b-v2": "582e3bf72aee355e3c59ed89de53543c5b0657ee",
+  "openai/clip-vit-base-patch32": "3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268",
+  "ornith-ai/Ornith-1.5-35B-A3B-NVFP4": "0f0b1b59b879ccde1353e6ebd0fb10c204d4c544",
+  "sentence-transformers/all-MiniLM-L6-v2": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+  "stepfun-ai/Step3-VL-10B": "5026053b0c2f5dfaa08fc2d149384162c3c8bca1",
+  "timm/ViT-L-16-SigLIP2-384": "31b4df0bbf802888308ad91850c388b2870ef922",
+  "unsloth/Qwen3.8-27B-NVFP4": "f0b7c9e722f5565102fff8481c99e4d86ae099c7",
+  "z-lab/Qwen3.8-27B-DFlash2": "50307d4c4cde6860d4eee73e2547cd786fe8e8a4"
+ },
+ "settings": {
+  "BEAR_SOURCE_SHA": "0d0718a39a0b0788ef5cca4689352462b830494c",
+  "HF_HUB_OFFLINE": "1",
+  "NEMOTRON_URL": "http://127.0.0.1:8360",
+  "REPRO_Q4B_BATCH": "2",
+  "TIST_CAPPED": "/home/snhwang/bin/tist-capped",
+  "TIST_EMB_CACHE": "/home/snhwang/tist-repro/emb-cache",
+  "TIST_NEMOTRON_URL": "http://127.0.0.1:8360",
+  "TRANSFORMERS_OFFLINE": "1"
+ },
+ "endpoints": {},
+ "commands": [
+  {
+   "label": "wp256-v042-bm25",
+   "start_utc": "2026-11-17T12:00:08Z",
+   "end_utc": "2026-11-17T12:38:25+00:00",
+   "exit_code": 0,
+   "cwd": "/home/snhwang/tist-repro/clones/artifacts-wp256",
+   "argv": [
+    "bash",
+    "evals/run_wp256.sh",
+    "v042-bm25"
+   ],
+   "command_line": "bash evals/run_wp256.sh v042-bm25"
+  },
+  {
+   "label": "wp256-v042-bgem3",
+   "start_utc": "2026-11-17T12:38:26Z",
+   "end_utc": "2026-11-17T13:00:28+00:00",
+   "exit_code": 0,
+   "cwd": "/home/snhwang/tist-repro/clones/artifacts-wp256",
+   "argv": [
+    "bash",
+    "evals/run_wp256.sh",
+    "v042-bgem3"
+   ],
+   "command_line": "bash evals/run_wp256.sh v042-bgem3"
+  },
+  {
+   "label": "wp5-bge-cpa",
+   "start_utc": "2026-11-17T13:00:28Z",
+   "end_utc": "2026-11-17T13:11:48+00:00",
+   "exit_code": 0,
+   "cwd": "/home/snhwang/tist-repro/clones/artifacts-wp256",
+   "argv": [
+    "bash",
+    "evals/run_v042_wp5.sh",
+    "bge_petsim",
+    "bge_toolbench",
+    "cpa"
+   ],
+   "command_line": "bash evals/run_v042_wp5.sh bge_petsim bge_toolbench cpa"
+  }
+ ],
+ "notes": [
+  {
+   "utc": "2026-11-17T12:00:03+00:00",
+   "text": "Slurm job 149 (rgc-15), submitted by snhwang, Comment=project=RGC; purpose=TIST paper revision: invariant tests, budget binding, BM25 and BGE-M3 checks, WP5 BGE and CPA rows; plan=TIST reproduction kit 5cf0bb1; parent=147; origin=job 147 on workstation "
+  },
+  {
+   "utc": "2026-11-17T12:00:07+00:00",
+   "text": "wp256-v042-bm25: reference results/tag_noise.json (BEAR 0.4.0 sweep, not committed) linked from /mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts/results/tag_noise.json, sha256 1a20fa8969f786df3d4c926480cfb0588dadbc51bed1389beb8dc65893c74789"
+  },
+  {
+   "utc": "2026-11-17T13:11:48+00:00",
+   "text": "steps finished: wp256-v042 wp256-v042-bge wp256-v042-bm25 wp256-v042-bgem3 wp5-bge-cpa"
+  }
+ ],
+ "memtotal_gb_at_start": 94.3,
+ "memavailable_gb_at_start": 91.9,
+ "cpus": 28
+}

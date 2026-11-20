@@ -1,0 +1,585 @@
+{
+ "schema": "tist-repro.run_record/1",
+ "script": "00_setup",
+ "dry_run": false,
+ "user": "snhwang",
+ "host": "Shwang171663",
+ "kernel": "6.6.114.1-microsoft-standard-WSL2",
+ "wsl_distro": null,
+ "systemd_unit": null,
+ "start_utc": "2026-11-19T22:20:45+00:00",
+ "end_utc": "2026-11-19T22:20:54+00:00",
+ "duration_s": 9,
+ "exit_code": 0,
+ "status": "OK",
+ "argv": [
+  "/mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts/reproduce/00_setup.sh",
+  "--update"
+ ],
+ "command_line": "bash /mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts/reproduce/00_setup.sh --update",
+ "cwd": "/mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts",
+ "artifacts": {
+  "path": "/mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts",
+  "branch": "tist-r2",
+  "commit": "995a145f6a594b19e3cf2d9fc5d7db4d70e1c205",
+  "dirty_tracked": []
+ },
+ "clones": {
+  "clones/artifacts-authorship": {
+   "commit": "615edf6f3fd5bd44e018ee44a3b62e1787dbb154",
+   "branch": "tist-r2",
+   "dirty_tracked": []
+  },
+  "clones/artifacts-hermes": {
+   "commit": "5cf0bb19323c09209542c9182d23a072557641a9",
+   "branch": "tist-r2",
+   "dirty_tracked": []
+  },
+  "clones/artifacts-previous": {
+   "commit": "5cf0bb19323c09209542c9182d23a072557641a9",
+   "branch": "tist-r2",
+   "dirty_tracked": []
+  },
+  "clones/artifacts-wp256": {
+   "commit": "5cf0bb19323c09209542c9182d23a072557641a9",
+   "branch": "tist-r2",
+   "dirty_tracked": [
+    "M results/bm25_v042_check_attribution.json",
+    " M results/bm25_v042_check_attribution_output.txt",
+    " M results/bm25_v042_check_default.json",
+    " M results/bm25_v042_check_default_output.txt",
+    " M results/bm25_v042_check_dropped_rows.json",
+    " M results/bm25_v042_check_dropped_rows_output.txt",
+    " M results/bm25_v042_check_flat_backfill+tie_order.json",
+    " M results/bm25_v042_check_flat_backfill+tie_order_output.txt",
+    " M results/bm25_v042_check_flat_backfill.json",
+    " M results/bm25_v042_check_flat_backfill_output.txt",
+    " M results/bm25_v042_check_tie_order.json",
+    " M results/bm25_v042_check_tie_order_output.txt",
+    " M results/budget_binding_v042.json",
+    " M results/budget_binding_v042_bge.json",
+    " M results/budget_binding_v042_bge_output.txt",
+    " M results/budget_binding_v042_bge_vs_v040.json",
+    " M results/budget_binding_v042_bge_vs_v040_output.txt",
+    " M results/budget_binding_v042_output.txt",
+    " M results/budget_binding_v042_vs_v040.json",
+    " M results/budget_binding_v042_vs_v040_output.txt",
+    " M results/cpa_maintained_v042.json",
+    " M results/cpa_maintained_v042_output.txt",
+    " M results/invariants_v042.json",
+    " M results/invariants_v042_output.txt",
+    " M results/invariants_v042_pool_sensitivity.json",
+    " M results/invariants_v042_pool_sensitivity_output.txt",
+    " M results/leakage_threat_bge-m3.json",
+    " M results/leakage_threat_bge-m3_output.txt",
+    " M results/leakage_threat_qwen.json",
+    " M results/leakage_threat_qwen_output.txt",
+    " M results/leakage_threat_v042.json",
+    " M results/leakage_threat_v042_output.txt",
+    " M results/mandatory_coverage_v042.json",
+    " M results/mandatory_coverage_v042_output.txt",
+    " M results/metadata_filter_baseline_petsim_bge_v042.json",
+    " M results/metadata_filter_baseline_petsim_bge_v042_output.txt",
+    " D results/metadata_filter_baseline_petsim_nemotron_v042_missing.json",
+    " M results/metadata_filter_baseline_petsim_nemotron_v042_output.txt",
+    " M results/metadata_filter_baseline_toolbench_bge_v042.json",
+    " M results/metadata_filter_baseline_toolbench_bge_v042_output.txt",
+    " D results/metadata_filter_baseline_toolbench_nemotron_v042_missing.json",
+    " M results/metadata_filter_baseline_toolbench_nemotron_v042_output.txt",
+    " M results/query_giveaways_qwen3-0.6b.json",
+    " M results/query_giveaways_qwen3-0.6b_output.txt",
+    " M results/query_giveaways_v042.json",
+    " M results/query_giveaways_v042_output.txt",
+    " D results/tag_noise_nemotron_v042.json.gz",
+    " M results/tag_noise_nemotron_v042_output.txt",
+    " M results/tag_noise_overrestriction_v042.json",
+    " D results/tag_noise_qwen3-0.6b.json.gz",
+    " M results/tag_noise_qwen3-0.6b_output.txt",
+    " D results/tag_noise_v042.json.gz",
+    " M results/tag_noise_v042_output.txt"
+   ]
+  },
+  "wp0/artifacts": {
+   "commit": "5cf0bb19323c09209542c9182d23a072557641a9",
+   "branch": "tist-r2",
+   "dirty_tracked": [
+    "M results/alpha_sweep_output.txt",
+    " M results/governance_decomposed_output.txt"
+   ]
+  },
+  "wp0/artifacts-attr": {
+   "commit": "5cf0bb19323c09209542c9182d23a072557641a9",
+   "branch": "tist-r2",
+   "dirty_tracked": []
+  },
+  "wp0/artifacts-dense": {
+   "commit": "5cf0bb19323c09209542c9182d23a072557641a9",
+   "branch": "tist-r2",
+   "dirty_tracked": [
+    "M results/alpha_sweep_all.json",
+    " M results/alpha_sweep_output.txt",
+    " M results/alpha_sweep_qwen3-4b.json",
+    " M results/baseline_comparison_results.csv",
+    " M results/governance_decomposed_all.json",
+    " M results/governance_decomposed_output.txt",
+    " M results/scalability_results.csv",
+    " M results/toolbench_inferred_output.txt",
+    " M results/toolbench_multitag_output.txt",
+    " M results/toolbench_top5_output.txt"
+   ]
+  },
+  "wp0/artifacts-gpu": {
+   "commit": "5cf0bb19323c09209542c9182d23a072557641a9",
+   "branch": "tist-r2",
+   "dirty_tracked": []
+  },
+  "wp0/artifacts-nemo": {
+   "commit": "5cf0bb19323c09209542c9182d23a072557641a9",
+   "branch": "tist-r2",
+   "dirty_tracked": [
+    "M results/alpha_sweep_bge.json",
+    " M results/alpha_sweep_output.txt",
+    " M results/governance_decomposed_bge.json",
+    " M results/governance_decomposed_output.txt"
+   ]
+  },
+  "wp0/artifacts-track": {
+   "commit": "5cf0bb19323c09209542c9182d23a072557641a9",
+   "branch": "tist-r2",
+   "dirty_tracked": []
+  }
+ },
+ "venv": {
+  "python": "3.12.13",
+  "executable": "/home/snhwang/.venvs/tist-repro/bin/python",
+  "bear": "0.4.2",
+  "torch": "2.10.0",
+  "transformers": "4.57.6",
+  "sentence-transformers": "5.4.1",
+  "numpy": "2.2.6",
+  "scipy": "1.17.1",
+  "llama-index-core": "0.14.23",
+  "instruction-tool-retrieval": "0.1.1",
+  "tiktoken": "0.13.0",
+  "bear_direct_url": "file:///home/snhwang/tist-evals/bear-v0.4.2",
+  "bear_git_sha": "0d0718a39a0b0788ef5cca4689352462b830494c"
+ },
+ "bear_sources": {
+  "v0.4.2": {
+   "path": "/home/snhwang/tist-evals/bear-v0.4.2",
+   "BEAR_GIT_SHA": "0d0718a39a0b0788ef5cca4689352462b830494c",
+   "git_head": "0d0718a39a0b0788ef5cca4689352462b830494c",
+   "bear_tree_sha256": "9cf19e48b49f4e57e3723050b942b296bb66f775fdd41e7f1770514576d0930a"
+  },
+  "v0.1.10": {
+   "path": "/home/snhwang/tist-evals/bear-v0110",
+   "git_head": "cdba2174d715494ec4f22c098386487002ec492f"
+  }
+ },
+ "hf_model_snapshots": {
+  "BAAI/bge-base-en-v1.5": "a5beb1e3e68b9ab74eb54cfd186867f64f240e1a",
+  "BAAI/bge-m3": "5617a9f61b028005a4858fdac845db406aefb181",
+  "BAAI/bge-reranker-base": "2cfc18c9415c912f9d8155881c133215df768a70",
+  "Qwen/Qwen2.5-VL-7B-Instruct": "cc594898137f460bfe9f0759e9844b3ce807cfb5",
+  "Qwen/Qwen3-Embedding-0.6B": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+  "Qwen/Qwen3-Embedding-4B": "5cf2132abc99cad020ac570b19d031efec650f2b",
+  "ToolBench/ToolBench_IR_bert_based_uncased": "cf4a904c33cde549643aa6d9091146e68ed4932f",
+  "cross-encoder/nli-deberta-v3-xsmall": "a150876415327c80daeff35ca6f68f5ed8cf5c24",
+  "google/gemma-4-12B-it": "5926caa4ec0cac5cbfadaf4077420520de1d5205",
+  "google/gemma-4-E2B-it": "3e22461f65e89153144f8adb70e3b8c2cc9845a7",
+  "google/gemma-4-E4B-it": "fee6332c1abaafb77f6f9624236c63aa2f1d0187",
+  "google/medsiglip-448": "9cea28a1a1195f665105faa6e8544c112fd960a4",
+  "incoai/Qwen3.8-27B-DFlash2": "015e795645c74b1a0eeef3b570031fb62e769bc5",
+  "jinaai/jina-clip-implementation": "39e6a55ae971b59bea6e44675d237c99762e7ee2",
+  "jinaai/jina-clip-v2": "344d954da76eb8ad47a7aaff42d012e30c15b8fe",
+  "jinaai/jina-embeddings-v3": "f1944de8402dcd5f2b03f822a4bc22a7f2de2eb9",
+  "jinaai/jina-embeddings-v4": "737fa5c46f0262ceba4a462ffa1c5bcf01da416f",
+  "jinaai/xlm-roberta-flash-implementation": "cd915ad563445b5b8b51f4ac641e8c15e1fcbff3",
+  "mistralai/Mistral-Nemo-Instruct-2407": "04d8a90549d23fc6bd7f642064003592df51e9b3",
+  "mlx-community/Qwen3-Embedding-0.6B-8bit": "b8d7100604f51da6d14eab4dd1805f596fa1ce3f",
+  "mlx-community/Qwen3-Embedding-4B-mxfp8": "c738b4ebab1e09812a7fe6800cf216c7b1ab2bfd",
+  "mlx-community/bge-m3-mlx-fp16": "a37eddded9a6a1273a87fb8b0da0d1cdbd98aeec",
+  "naver/splade-cocondenser-ensembledistil": "49cf4c7b0db5b870a401ddf5e2669993ef3699c7",
+  "nomic-ai/nomic-bert-2048": "7710840340a098cfb869c4f65e87cf2b1b70caca",
+  "nomic-ai/nomic-embed-text-v1.5": "e5cf08aadaa33385f5990def41f7a23405aec398",
+  "nomic-ai/nomic-embed-vision-v1.5": "e3a725bce72db07ca4adb1d83da08903f3ee02f8",
+  "nvidia/Gemma-4-31B-IT-NVFP4": "4135a98a9b728a548947683219633b25682223ac",
+  "nvidia/NVIDIA-Nemotron-Nano-12B-v2-VL-NVFP4-QAD": "b8d3c170d9ee3a078917ef9bfd508eff988d6de7",
+  "nvidia/Nemotron-Cascade-14B-Thinking": "8aa18a07ea16c52261675f766ed2ea3ec80ea841",
+  "nvidia/Qwen3-30B-A3B-NVFP4": "2538ded2a4edb247b4d2b4a8ba24e44bd4c017c3",
+  "nvidia/Qwen3.8-27B-NVFP4": "dbb8f445b3145f8a4c18ddc769f032d57d32867c",
+  "nvidia/llama-embed-nemotron-8b": "b840573b940e213c5cd622468ed8bfcc15c7c431",
+  "nvidia/llama-nemotron-embed-vl-1b-v2": "582e3bf72aee355e3c59ed89de53543c5b0657ee",
+  "openai/clip-vit-base-patch32": "3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268",
+  "ornith-ai/Ornith-1.5-35B-A3B-NVFP4": "0f0b1b59b879ccde1353e6ebd0fb10c204d4c544",
+  "sentence-transformers/all-MiniLM-L6-v2": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+  "stepfun-ai/Step3-VL-10B": "5026053b0c2f5dfaa08fc2d149384162c3c8bca1",
+  "timm/ViT-L-16-SigLIP2-384": "31b4df0bbf802888308ad91850c388b2870ef922",
+  "unsloth/Qwen3.8-27B-NVFP4": "f0b7c9e722f5565102fff8481c99e4d86ae099c7",
+  "z-lab/Qwen3.8-27B-DFlash2": "50307d4c4cde6860d4eee73e2547cd786fe8e8a4"
+ },
+ "settings": {
+  "HF_HUB_OFFLINE": "1",
+  "NEMOTRON_URL": "http://127.0.0.1:8360",
+  "REPRO_Q4B_BATCH": "2",
+  "TIST_EMB_CACHE": "/home/snhwang/tist-repro/emb-cache",
+  "TIST_NEMOTRON_URL": "http://127.0.0.1:8360",
+  "TRANSFORMERS_OFFLINE": "1"
+ },
+ "endpoints": {},
+ "commands": [
+  {
+   "label": "fetch-artifacts",
+   "start_utc": "2026-11-19T22:20:47Z",
+   "end_utc": "2026-11-19T22:20:48+00:00",
+   "exit_code": 0,
+   "cwd": "/home/snhwang/tist-repro/wp0/artifacts",
+   "argv": [
+    "git",
+    "fetch",
+    "-q",
+    "/mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts",
+    "tist-r2"
+   ],
+   "command_line": "git fetch -q /mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts tist-r2"
+  },
+  {
+   "label": "merge-artifacts",
+   "start_utc": "2026-11-19T22:20:48Z",
+   "end_utc": "2026-11-19T22:20:48+00:00",
+   "exit_code": 0,
+   "cwd": "/home/snhwang/tist-repro/wp0/artifacts",
+   "argv": [
+    "git",
+    "merge",
+    "-q",
+    "--ff-only",
+    "FETCH_HEAD"
+   ],
+   "command_line": "git merge -q --ff-only FETCH_HEAD"
+  },
+  {
+   "label": "fetch-artifacts-dense",
+   "start_utc": "2026-11-19T22:20:48Z",
+   "end_utc": "2026-11-19T22:20:49+00:00",
+   "exit_code": 0,
+   "cwd": "/home/snhwang/tist-repro/wp0/artifacts-dense",
+   "argv": [
+    "git",
+    "fetch",
+    "-q",
+    "/mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts",
+    "tist-r2"
+   ],
+   "command_line": "git fetch -q /mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts tist-r2"
+  },
+  {
+   "label": "merge-artifacts-dense",
+   "start_utc": "2026-11-19T22:20:49Z",
+   "end_utc": "2026-11-19T22:20:49+00:00",
+   "exit_code": 0,
+   "cwd": "/home/snhwang/tist-repro/wp0/artifacts-dense",
+   "argv": [
+    "git",
+    "merge",
+    "-q",
+    "--ff-only",
+    "FETCH_HEAD"
+   ],
+   "command_line": "git merge -q --ff-only FETCH_HEAD"
+  },
+  {
+   "label": "fetch-artifacts-nemo",
+   "start_utc": "2026-11-19T22:20:49Z",
+   "end_utc": "2026-11-19T22:20:49+00:00",
+   "exit_code": 0,
+   "cwd": "/home/snhwang/tist-repro/wp0/artifacts-nemo",
+   "argv": [
+    "git",
+    "fetch",
+    "-q",
+    "/mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts",
+    "tist-r2"
+   ],
+   "command_line": "git fetch -q /mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts tist-r2"
+  },
+  {
+   "label": "merge-artifacts-nemo",
+   "start_utc": "2026-11-19T22:20:49Z",
+   "end_utc": "2026-11-19T22:20:50+00:00",
+   "exit_code": 0,
+   "cwd": "/home/snhwang/tist-repro/wp0/artifacts-nemo",
+   "argv": [
+    "git",
+    "merge",
+    "-q",
+    "--ff-only",
+    "FETCH_HEAD"
+   ],
+   "command_line": "git merge -q --ff-only FETCH_HEAD"
+  },
+  {
+   "label": "fetch-artifacts-gpu",
+   "start_utc": "2026-11-19T22:20:50Z",
+   "end_utc": "2026-11-19T22:20:50+00:00",
+   "exit_code": 0,
+   "cwd": "/home/snhwang/tist-repro/wp0/artifacts-gpu",
+   "argv": [
+    "git",
+    "fetch",
+    "-q",
+    "/mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts",
+    "tist-r2"
+   ],
+   "command_line": "git fetch -q /mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts tist-r2"
+  },
+  {
+   "label": "merge-artifacts-gpu",
+   "start_utc": "2026-11-19T22:20:50Z",
+   "end_utc": "2026-11-19T22:20:50+00:00",
+   "exit_code": 0,
+   "cwd": "/home/snhwang/tist-repro/wp0/artifacts-gpu",
+   "argv": [
+    "git",
+    "merge",
+    "-q",
+    "--ff-only",
+    "FETCH_HEAD"
+   ],
+   "command_line": "git merge -q --ff-only FETCH_HEAD"
+  },
+  {
+   "label": "fetch-artifacts-attr",
+   "start_utc": "2026-11-19T22:20:50Z",
+   "end_utc": "2026-11-19T22:20:51+00:00",
+   "exit_code": 0,
+   "cwd": "/home/snhwang/tist-repro/wp0/artifacts-attr",
+   "argv": [
+    "git",
+    "fetch",
+    "-q",
+    "/mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts",
+    "tist-r2"
+   ],
+   "command_line": "git fetch -q /mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts tist-r2"
+  },
+  {
+   "label": "merge-artifacts-attr",
+   "start_utc": "2026-11-19T22:20:51Z",
+   "end_utc": "2026-11-19T22:20:51+00:00",
+   "exit_code": 0,
+   "cwd": "/home/snhwang/tist-repro/wp0/artifacts-attr",
+   "argv": [
+    "git",
+    "merge",
+    "-q",
+    "--ff-only",
+    "FETCH_HEAD"
+   ],
+   "command_line": "git merge -q --ff-only FETCH_HEAD"
+  },
+  {
+   "label": "fetch-artifacts-track",
+   "start_utc": "2026-11-19T22:20:51Z",
+   "end_utc": "2026-11-19T22:20:52+00:00",
+   "exit_code": 0,
+   "cwd": "/home/snhwang/tist-repro/wp0/artifacts-track",
+   "argv": [
+    "git",
+    "fetch",
+    "-q",
+    "/mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts",
+    "tist-r2"
+   ],
+   "command_line": "git fetch -q /mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts tist-r2"
+  },
+  {
+   "label": "merge-artifacts-track",
+   "start_utc": "2026-11-19T22:20:52Z",
+   "end_utc": "2026-11-19T22:20:52+00:00",
+   "exit_code": 0,
+   "cwd": "/home/snhwang/tist-repro/wp0/artifacts-track",
+   "argv": [
+    "git",
+    "merge",
+    "-q",
+    "--ff-only",
+    "FETCH_HEAD"
+   ],
+   "command_line": "git merge -q --ff-only FETCH_HEAD"
+  },
+  {
+   "label": "fetch-artifacts-wp256",
+   "start_utc": "2026-11-19T22:20:52Z",
+   "end_utc": "2026-11-19T22:20:53+00:00",
+   "exit_code": 0,
+   "cwd": "/home/snhwang/tist-repro/clones/artifacts-wp256",
+   "argv": [
+    "git",
+    "fetch",
+    "-q",
+    "/mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts",
+    "tist-r2"
+   ],
+   "command_line": "git fetch -q /mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts tist-r2"
+  },
+  {
+   "label": "merge-artifacts-wp256",
+   "start_utc": "2026-11-19T22:20:53Z",
+   "end_utc": "2026-11-19T22:20:53+00:00",
+   "exit_code": 0,
+   "cwd": "/home/snhwang/tist-repro/clones/artifacts-wp256",
+   "argv": [
+    "git",
+    "merge",
+    "-q",
+    "--ff-only",
+    "FETCH_HEAD"
+   ],
+   "command_line": "git merge -q --ff-only FETCH_HEAD"
+  },
+  {
+   "label": "fetch-artifacts-hermes",
+   "start_utc": "2026-11-19T22:20:53Z",
+   "end_utc": "2026-11-19T22:20:53+00:00",
+   "exit_code": 0,
+   "cwd": "/home/snhwang/tist-repro/clones/artifacts-hermes",
+   "argv": [
+    "git",
+    "fetch",
+    "-q",
+    "/mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts",
+    "tist-r2"
+   ],
+   "command_line": "git fetch -q /mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts tist-r2"
+  },
+  {
+   "label": "merge-artifacts-hermes",
+   "start_utc": "2026-11-19T22:20:53Z",
+   "end_utc": "2026-11-19T22:20:53+00:00",
+   "exit_code": 0,
+   "cwd": "/home/snhwang/tist-repro/clones/artifacts-hermes",
+   "argv": [
+    "git",
+    "merge",
+    "-q",
+    "--ff-only",
+    "FETCH_HEAD"
+   ],
+   "command_line": "git merge -q --ff-only FETCH_HEAD"
+  },
+  {
+   "label": "fetch-artifacts-previous",
+   "start_utc": "2026-11-19T22:20:54Z",
+   "end_utc": "2026-11-19T22:20:54+00:00",
+   "exit_code": 0,
+   "cwd": "/home/snhwang/tist-repro/clones/artifacts-previous",
+   "argv": [
+    "git",
+    "fetch",
+    "-q",
+    "/mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts",
+    "tist-r2"
+   ],
+   "command_line": "git fetch -q /mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts tist-r2"
+  },
+  {
+   "label": "merge-artifacts-previous",
+   "start_utc": "2026-11-19T22:20:54Z",
+   "end_utc": "2026-11-19T22:20:54+00:00",
+   "exit_code": 0,
+   "cwd": "/home/snhwang/tist-repro/clones/artifacts-previous",
+   "argv": [
+    "git",
+    "merge",
+    "-q",
+    "--ff-only",
+    "FETCH_HEAD"
+   ],
+   "command_line": "git merge -q --ff-only FETCH_HEAD"
+  },
+  {
+   "label": "fetch-artifacts-authorship",
+   "start_utc": "2026-11-19T22:20:54Z",
+   "end_utc": "2026-11-19T22:20:55+00:00",
+   "exit_code": 0,
+   "cwd": "/home/snhwang/tist-repro/clones/artifacts-authorship",
+   "argv": [
+    "git",
+    "fetch",
+    "-q",
+    "/mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts",
+    "tist-r2"
+   ],
+   "command_line": "git fetch -q /mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts tist-r2"
+  },
+  {
+   "label": "merge-artifacts-authorship",
+   "start_utc": "2026-11-19T22:20:55Z",
+   "end_utc": "2026-11-19T22:20:55+00:00",
+   "exit_code": 0,
+   "cwd": "/home/snhwang/tist-repro/clones/artifacts-authorship",
+   "argv": [
+    "git",
+    "merge",
+    "-q",
+    "--ff-only",
+    "FETCH_HEAD"
+   ],
+   "command_line": "git merge -q --ff-only FETCH_HEAD"
+  }
+ ],
+ "notes": [
+  {
+   "utc": "2026-11-19T22:20:47+00:00",
+   "text": "Slurm job 265 (rgc-hermes-names), submitted by snhwang, Comment=project=RGC; purpose=TIST revision. Update the kit clones to the analysis change approved on 19 Nov, rerun the Hermes stage 2 analysis so its identity table also compares tool names and repetitions, then assemble and run the final strict check. The check is expected to end FAILED on the known files listed in the paper repo revision-plan.md. This replaces the rgc-90 block, which was never entered; plan=TIST reproduction kit 995a145; prepared=paper-RGC; entered=web scott; origin=job page on workstation "
+  },
+  {
+   "utc": "2026-11-19T22:20:48+00:00",
+   "text": "clone /home/snhwang/tist-repro/wp0/artifacts updated from 5cf0bb1 to 995a145"
+  },
+  {
+   "utc": "2026-11-19T22:20:49+00:00",
+   "text": "clone /home/snhwang/tist-repro/wp0/artifacts-dense updated from 5cf0bb1 to 995a145"
+  },
+  {
+   "utc": "2026-11-19T22:20:50+00:00",
+   "text": "clone /home/snhwang/tist-repro/wp0/artifacts-nemo updated from 5cf0bb1 to 995a145"
+  },
+  {
+   "utc": "2026-11-19T22:20:50+00:00",
+   "text": "clone /home/snhwang/tist-repro/wp0/artifacts-gpu updated from 5cf0bb1 to 995a145"
+  },
+  {
+   "utc": "2026-11-19T22:20:51+00:00",
+   "text": "clone /home/snhwang/tist-repro/wp0/artifacts-attr updated from 5cf0bb1 to 995a145"
+  },
+  {
+   "utc": "2026-11-19T22:20:52+00:00",
+   "text": "clone /home/snhwang/tist-repro/wp0/artifacts-track updated from 5cf0bb1 to 995a145"
+  },
+  {
+   "utc": "2026-11-19T22:20:53+00:00",
+   "text": "clone /home/snhwang/tist-repro/clones/artifacts-wp256 updated from 5cf0bb1 to 995a145"
+  },
+  {
+   "utc": "2026-11-19T22:20:53+00:00",
+   "text": "clone /home/snhwang/tist-repro/clones/artifacts-hermes updated from 5cf0bb1 to 995a145"
+  },
+  {
+   "utc": "2026-11-19T22:20:54+00:00",
+   "text": "clone /home/snhwang/tist-repro/clones/artifacts-previous updated from 5cf0bb1 to 995a145"
+  },
+  {
+   "utc": "2026-11-19T22:20:54+00:00",
+   "text": "clone /home/snhwang/tist-repro/clones/artifacts-authorship updated from 615edf6 to 995a145"
+  },
+  {
+   "utc": "2026-11-19T22:20:54+00:00",
+   "text": "clones updated to tist-r2 995a145"
+  }
+ ],
+ "memtotal_gb_at_start": 94.3,
+ "memavailable_gb_at_start": 91.6,
+ "cpus": 28
+}
