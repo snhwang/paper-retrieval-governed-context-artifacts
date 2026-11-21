@@ -229,9 +229,10 @@ PURPOSE=(
   [90]="TIST paper revision: check outputs against the committed results and write the numbers file"
 )
 for s in 65tag 65cpu 65gpu 65nem 65an; do PLAN[$s]=$AUTH_PLAN; done
-# The end-to-end rerun plan, by the version and hash of the file in this checkout.
+# The end-to-end rerun plan, by the version and hash of the file in this checkout. The hash is that
+# of the file as committed, with LF line ends, whatever line ends the checkout has on this machine.
 E2E_PLAN_FILE=$ART/evals/e2e_rerun/PLAN.md
-E2E_PLAN="end-to-end rerun PLAN.md v$(grep -o 'version [0-9]*' "$E2E_PLAN_FILE" | head -1 | cut -d' ' -f2) sha256 $(sha256sum "$E2E_PLAN_FILE" | cut -c1-8), $KIT_PLAN"
+E2E_PLAN="end-to-end rerun PLAN.md v$(grep -o 'version [0-9]*' "$E2E_PLAN_FILE" | head -1 | cut -d' ' -f2) sha256 $(tr -d '\r' < "$E2E_PLAN_FILE" | sha256sum | cut -c1-8), $KIT_PLAN"
 for s in 50all 56tag-g12 56meas-g12 56g12s 56g12n 56tag-nemo 56tag-g31 56night; do PLAN[$s]=$E2E_PLAN; done
 # Card gates for GPU steps under Slurm (model-server, 16 Nov). The card has 97,887 MiB. Windows' desktop
 # takes about 6 GB beside the containers' 67.5 GB, so the 30 Oct start limit (67,000) cannot be met with
