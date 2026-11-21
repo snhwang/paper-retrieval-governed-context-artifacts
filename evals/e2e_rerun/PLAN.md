@@ -1,6 +1,6 @@
 # End-to-end reruns: plan
 
-Status: version 3, 2026-11-20 (see Changes). Versions 1 and 2, same day. Scott read the three decisions below and answered on 20 Nov 2026: "It doesn't really matter how we do it. We just need to rerun and document." The session takes that as approval with the planned choices: Ollama, a fixed seed, and all four parts. Under "Specs yes, gates no" (9 Nov 2026) and "Re-run anything questionable" (12 Nov 2026), this file is fixed before the runs. Its sha256 is recorded in the paper repo's `revision-plan.md`.
+Status: version 4, 2026-11-21 (see Changes). Versions 1 to 3, 2026-11-20. Scott read the three decisions below and answered on 20 Nov 2026: "It doesn't really matter how we do it. We just need to rerun and document." The session took that as approval of versions 1 to 3 with the planned choices: Ollama, a fixed seed, and all four parts. Version 4 changes how part 4 is run, after job 350 stopped at its third run. Scott approves version 4 by queueing a job whose plan line names this file's sha256. Under "Specs yes, gates no" (9 Nov 2026) and "Re-run anything questionable" (12 Nov 2026), this file is fixed before the runs it describes. Its sha256 is recorded in the paper repo's `revision-plan.md`.
 
 ## Why
 
@@ -18,7 +18,7 @@ Four parts. Each uses all 1,100 ToolBench test queries.
 1. **Table 10, the ten retrieval rows.** BGE, BGE-M3, Qwen3-Embedding-0.6B, Qwen3-Embedding-4B and BM25, each governed and ungoverned, with single-turn selection by Mistral-Nemo. All ten run in one session, including the three that were already rerun in November.
 2. **Table 10, the monolithic row.** All 3,225 tools in the prompt, single-turn selection by Mistral-Nemo.
 3. **The ReAct scaffold on Mistral-Nemo.** One batch with three conditions: the scaffold on the monolithic prompt, the scaffold on the governed top 5, and governed single-turn selection.
-4. **Gemma 4 12B and 31B.** The two scripts behind the Gemma columns of Supplement Table S1, `run_model_scaffold_nothink.sh` and `run_model_full1100.sh`, for each model. Then `grid_from_full1100.py` and `scaffold_vs_single.py`.
+4. **Gemma 4 12B and 31B.** The two scripts behind the Gemma columns of Supplement Table S1, `run_model_scaffold_nothink.sh` and `run_model_full1100.sh`, for each model. Then `grid_from_full1100.py` and `scaffold_vs_single.py`. Since version 4 the four runs of `run_model_full1100.sh` are made one at a time (see Changes).
 
 ## Fixed before the runs
 
@@ -42,6 +42,7 @@ Four parts. Each uses all 1,100 ToolBench test queries.
 - A fixed seed, 20261120, goes with every sampled request, which means the Gemma runs. July sent none.
 - Every run is a job in Scott's queue with a stated purpose, and it writes a run record.
 - The server software is newer. Ollama is 0.40.16 on 20 Nov 2026, and July's version was not recorded. The GPU driver is 621.24 since 20 Nov 2026, and July's was older.
+- Since version 4, the third run of `run_model_full1100.sh` is made with the script's check for empty answers lifted. In July the script had no such check.
 
 ## What each run records
 
@@ -77,7 +78,7 @@ One job at a time, each queued by Scott.
 | 3. ReAct | about 8 hours |
 | 4. Gemma, four runs | 4 to 9 hours each |
 
-That is about 30 to 50 hours in all. The times of parts 2 to 4 are those of the July runs.
+That is about 30 to 50 hours in all. The times of parts 2 to 4 are those of the July runs. Version 4 (see Changes) gives the times measured on 20 Nov 2026.
 
 ## Changes to the kit before the runs
 
@@ -104,3 +105,12 @@ All three take the planned choice (see Status).
   - **Measured loads first.** `reproduce/56_e2e_long_context.sh` makes each tag and measures one guarded load of it. The 12B model fits beside the Qwen3.8 server. Mistral-Nemo at this window and the 31B model need that server stopped, in nights booked through the model-server session.
   - If a model's own count leaves less than 8,704 tokens of the window free, that model's tag gets a larger window, and this file says so before the run.
 - **2026-11-20, version 3.** Version 2 had sha256 bddc45e1c4c08f2770e85fb4c02cb13f20b4af81791d5fb3cac15a60c8bf03dc. Version 3 adds the section "What each run records" and names the newer Ollama and GPU driver as differences from July. No run setting changes.
+- **2026-11-21, version 4.** Version 3 had sha256 114cf0d71765d3a65f83939c8b0612d9a9cbcbfadfc3f81188211b6bfaaa3252. Version 4 changes how the native-reasoning script of part 4 is run. No model, prompt, seed or decoding setting changes.
+  - **What happened.** Job 349 ran the scaffold script on Gemma 4 12B on 20 Nov and finished in 1 h 05. Job 350 then ran `run_model_full1100.sh` on the same model. Its first two runs finished (governed single-turn, and governed with native reasoning). Its third run is the monolithic prompt in free-form mode with the reasoning channel off. The script's check for empty answers stopped that run, because 15 of the first 25 answers were empty. The check was added to the script after July. In July the same run completed and scored 0.145, a value that is not in the paper. The fourth run did not start. It is the monolithic prompt with native reasoning, a cell of Table S1.
+  - **One run per load.** The four runs of the script are made one at a time. Each has its own guarded load and its own serving record. Each is one pass over the 1,100 queries. A run that finished is not made again.
+  - **Why.** On the 12B model the four runs need about 12.5 hours. The first two took 5 minutes and 5 h 06 on 20 Nov, and in July the last two took 40 minutes and 6 h 28. The 31B model was about 1.5 times slower in July's scaffold runs, so its four runs need about 18 hours. No booked night is longer than 10 h 50. Made one at a time, the runs spread over several nights, and no run is put together from pieces.
+  - **The finished runs of job 350 stand.** They are the 12B values for their two conditions, and they are not made again. So each condition has one value. The serving record of job 350 shows no cut prompt, and the model was unloaded at its end. There is evidence that a repeat would give the same answers. The governed single-turn condition ran in job 349 and in job 350 with the same seed, and all 1,100 answers agree.
+  - **The third run.** For both models it is made with the check for empty answers lifted (`--max-empty-rate 1.0`). It then completes, and its count of empty answers is on record. No condition of the script is dropped. Its value is not in the paper, as in July. Table S1's monolithic cells come from the scaffold script and from the fourth run.
+  - **A run that is stopped.** A run that the end of a night stops keeps no result. It is made again in a later night, and what the stopped attempt left is kept apart in the output folder.
+  - **Nights.** One queue job per booked night runs that night's parts in order and skips the parts already done. Until 21 Nov each part was its own queue job, chained to the others. On 21 Nov two tag jobs started in the same second and shared one run record. One of them failed, and the queue cancelled the measured load of Mistral-Nemo and the ReAct job, which depended on it. No run had started, so no result was affected. The kit now gives each run its own record. The tag `gemma4-31b-131k` is made again, so that a complete run record holds its digest.
+  - **Times measured on 20 Nov 2026.** Part 1 took 27 minutes (job 327). The 12B scaffold batch took 1 h 05 (monolithic prompt 40 minutes, about 2.2 s per query). The table above said 4 to 9 hours for each Gemma run.

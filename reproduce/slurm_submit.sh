@@ -24,26 +24,34 @@
 #   rgc-56tag-g12, rgc-56meas-g12           a fixed-window tag of gemma4:12b and one measured load of it
 #                                           (gpumem:16). Opt-in: only with --only "56tag-g12 56meas-g12"
 #   rgc-56g12s  Gemma 4 12B, scaffold runs  4 CPUs, 16G, 12 h   gpumem:16. Opt-in: only with --only "56g12s"
-#   rgc-56g12n  Gemma 4 12B, native runs    4 CPUs, 16G, 18 h   gpumem:16, after rgc-56g12s ends.
+#   rgc-56g12n  Gemma 4 12B, native runs    4 CPUs,  6G, 14 h   gpumem:16, after rgc-56g12s ends.
 #                                           Opt-in: only with --only "56g12n", or both names
 #               (Supplement Table S1 on BEAR 0.4.2, on the fixed-window tag, beside the Qwen3.8 server.
-#               In July each Gemma part took 4 to 9 h.)
-#   Night steps, for the parts that need the Qwen3.8 server stopped. Opt-in, and each call needs
-#   RGC_RES, the name of the night's reservation (the model-server session books it and stops and
-#   starts the server). Each job carries --reservation, --begin at the window's start and --deadline
-#   at 06:55 the next morning, takes gpumem:24, and runs through 57_e2e_night.sh, which waits until
-#   the server is down and the card is at or below 40,000 MiB.
-#   rgc-00update  moves the kit clones to this checkout (00_setup.sh --update). It starts when no
-#                 other rgc- job of this user is queued or running, because a clone must not move
-#                 under a running step. The steps below wait for it when it is in the same call.
+#               On 20 Nov the scaffold part took 1 h 05 and peaked at 1.3 GB. The native part makes
+#               four runs, one load each, and a run that finished is not made again. Its first two
+#               runs took 5 h 12 and peaked at 2.4 GB. In July its last run took 6 h 28.)
+#   rgc-00update  moves the kit clones to this checkout (00_setup.sh --update). It waits for this
+#                 user's rgc- jobs that are running, or queued without a reservation, because a
+#                 clone must not move under a running step. A job queued for a booked night does
+#                 not hold it up. The 56 steps of the same call wait for it.
 #   rgc-56tag-nemo, rgc-56tag-g31          the fixed-window tags. CPU only, no reservation
-#   rgc-56meas-nemo, rgc-56meas-g31        one measured load each, 2G, 25 min limit, after its tag
-#   rgc-56react   ReAct batch, Mistral-Nemo 4 CPUs, 6G, 9 h 45   after rgc-56meas-nemo succeeds
-#   rgc-56mono    Table 10 monolithic row   4 CPUs, 6G, 10 h 30
-#   rgc-56g31s    Gemma 4 31B, scaffold     4 CPUs, 6G, 10 h 45
-#   rgc-56g31n    Gemma 4 31B, native       4 CPUs, 6G, 10 h 45
+#   rgc-56night   The parts that need the Qwen3.8 server stopped, one queue job per booked night.
+#                 Opt-in, and each call takes two settings:
+#                   RGC_RES    the night's reservation (the model-server session books it, and stops
+#                              and starts the server). Required.
+#                   RGC_PARTS  the parts of 57_e2e_night.sh to run in that night, in order. Without
+#                              it, every night part in the plan's order
+#                 4 CPUs, 6G, gpumem:24. The job carries --reservation and --begin at the window's
+#                 start. It runs 57_e2e_night.sh, which waits until the server is down and the card
+#                 is at or below 40,000 MiB, runs the parts in order, skips the ones already done,
+#                 and stops by the night's end. RGC_NIGHT_END (default 06:40) is that end. The job's
+#                 --deadline is 15 minutes later, before the server starts again at 07:00. Its time
+#                 limit leaves it 25 minutes to start late.
+#                 A new rgc-56night for a reservation cancels this user's pending rgc- jobs in the
+#                 same reservation first. Until 21 Nov each night part was its own chained job. One
+#                 job that failed then made the queue cancel the jobs after it.
 #               (Memory: the model is in Ollama on Windows, outside the job. The client with its BGE
-#               embedder on the CPU peaked at 2.0 GB in a check on 20 Nov. A measured load used 0.54 GB.)
+#               embedder on the CPU peaked at 2.4 GB on 20 Nov. A measured load used 0.54 GB.)
 #               (In July the ReAct batch took about 8 h and the monolithic row about 6 h.)
 #   rgc-65tag   authorship tags             2 CPUs,  8G,  7 h   chat8355:4
 #   rgc-65cpu   authorship, CPU part       12 CPUs, 24G, 12 h   after the tags, after rgc-15fill ends
@@ -74,8 +82,8 @@
 #     cancels this user's pending rgc-<step> kit jobs, and a step whose earlier job is still
 #     running gets a new job that starts after it ends (afterany). Finished steps are skipped,
 #     so a step that already completed ends at once.
-#   RGC_RES=rgc-mon23 bash reproduce/slurm_submit.sh --only "56tag-nemo 56meas-nemo 56react"
-#     # night steps in the booked window rgc-mon23
+#   RGC_RES=rgc-mon23 RGC_PARTS="measure-nemo react" bash reproduce/slurm_submit.sh --only "00update 56tag-nemo 56night"
+#     # the clone update, a tag, and one job for the booked night rgc-mon23
 #   bash reproduce/slurm_submit.sh --test-only --only "..."  # ask Slurm whether it would accept each
 #     job and when it could start. Submits nothing. Dependencies are left out of the test.
 #   bash reproduce/slurm_submit.sh --cancel-all   # cancel every kit job, running ones too, wait
@@ -207,16 +215,10 @@ PURPOSE=(
   [56tag-g12]="TIST paper revision: make the Ollama tag gemma4-12b-131k, which only adds a 131072-token window to gemma4:12b"
   [56meas-g12]="TIST paper revision: one guarded load of gemma4-12b-131k to measure its card use and count the monolithic prompt, then unload"
   [56g12s]="TIST paper revision: Supplement Table S1 rerun on BEAR 0.4.2, Gemma 4 12B under the one-step scaffold with native reasoning off, three conditions on 1100 queries, Ollama tag gemma4-12b-131k, seed 20261120"
-  [56g12n]="TIST paper revision: Supplement Table S1 rerun on BEAR 0.4.2, Gemma 4 12B with native reasoning off and on, four runs on 1100 queries, Ollama tag gemma4-12b-131k, seed 20261120"
-  [00update]="TIST paper revision: move the kit clones to the checkout commit once the kit jobs now in the queue have ended, so that the night runs use the committed scripts"
+  [56g12n]="TIST paper revision: Supplement Table S1 rerun on BEAR 0.4.2, Gemma 4 12B with native reasoning off and on, four runs on 1100 queries with one load each, Ollama tag gemma4-12b-131k, seed 20261120. A run that an earlier job finished is kept and not made again"
+  [00update]="TIST paper revision: move the kit clones to the checkout commit once this user's running kit jobs have ended, so that the next runs use the committed scripts"
   [56tag-nemo]="TIST paper revision: make the Ollama tag mistral-nemo-131k, which only adds a 131072-token window to mistral-nemo"
   [56tag-g31]="TIST paper revision: make the Ollama tag gemma4-31b-131k, which only adds a 131072-token window to gemma4:31b"
-  [56meas-nemo]="TIST paper revision: one guarded load of mistral-nemo-131k with the Qwen3.8 server down, to measure its card use and count the monolithic prompt, then unload"
-  [56meas-g31]="TIST paper revision: one guarded load of gemma4-31b-131k with the Qwen3.8 server down, to measure its card use and count the monolithic prompt, then unload"
-  [56react]="TIST paper revision: the one-step ReAct scaffold on Mistral-Nemo rerun on BEAR 0.4.2, three conditions on 1100 queries, Ollama tag mistral-nemo-131k, temperature 0, with the Qwen3.8 server down"
-  [56mono]="TIST paper revision: Table 10 monolithic row rerun, all 3225 tools in the prompt, 1100 queries, Ollama tag mistral-nemo-131k, temperature 0, with the Qwen3.8 server down"
-  [56g31s]="TIST paper revision: Supplement Table S1 rerun on BEAR 0.4.2, Gemma 4 31B under the one-step scaffold with native reasoning off, three conditions on 1100 queries, Ollama tag gemma4-31b-131k, seed 20261120, with the Qwen3.8 server down"
-  [56g31n]="TIST paper revision: Supplement Table S1 rerun on BEAR 0.4.2, Gemma 4 31B with native reasoning off and on, four runs on 1100 queries, Ollama tag gemma4-31b-131k, seed 20261120, with the Qwen3.8 server down"
   [65tag]="TIST authorship ablation: rewrite all tool and query tags with Qwen3.8-27B on 8355"
   [65cpu]="TIST authorship ablation: retrieval reruns with the new tags, CPU backends"
   [65gpu]="TIST authorship ablation: retrieval reruns with the new tags, Qwen3-4B on the local GPU"
@@ -227,7 +229,10 @@ PURPOSE=(
   [90]="TIST paper revision: check outputs against the committed results and write the numbers file"
 )
 for s in 65tag 65cpu 65gpu 65nem 65an; do PLAN[$s]=$AUTH_PLAN; done
-for s in 50all 56tag-g12 56meas-g12 56g12s 56g12n 56tag-nemo 56tag-g31 56meas-nemo 56meas-g31 56react 56mono 56g31s 56g31n; do PLAN[$s]="end-to-end rerun PLAN.md v3 sha256 114cf0d7, $KIT_PLAN"; done
+# The end-to-end rerun plan, by the version and hash of the file in this checkout.
+E2E_PLAN_FILE=$ART/evals/e2e_rerun/PLAN.md
+E2E_PLAN="end-to-end rerun PLAN.md v$(grep -o 'version [0-9]*' "$E2E_PLAN_FILE" | head -1 | cut -d' ' -f2) sha256 $(sha256sum "$E2E_PLAN_FILE" | cut -c1-8), $KIT_PLAN"
+for s in 50all 56tag-g12 56meas-g12 56g12s 56g12n 56tag-nemo 56tag-g31 56night; do PLAN[$s]=$E2E_PLAN; done
 # Card gates for GPU steps under Slurm (model-server, 16 Nov). The card has 97,887 MiB. Windows' desktop
 # takes about 6 GB beside the containers' 67.5 GB, so the 30 Oct start limit (67,000) cannot be met with
 # Scott's windows open. Start at 97,887 - gpumem*1024 - 2,048 or less, and stop above 94,000. The Ollama
@@ -242,30 +247,49 @@ sub 40      8 16G 06:30:00   ""            "$(dep 'afterok:15 15fill 20 30')"   
 sub 50      2 6G  01:30:00   "gpumem:16"   "$(dep 'afterok:10 20')"                   "$NOFREEZE" $(gate 16 row) bash reproduce/50_e2e_ollama.sh
 # Opt-in steps. They are submitted only when --only names them, so a plain run of the kit stays as it was.
 [[ $ONLY == *" 50all "* ]] && sub 50all 2 6G 01:30:00 "gpumem:16" "" "$NOFREEZE" $(gate 16 row) bash reproduce/50_e2e_ollama.sh --all-rows
-[[ $ONLY == *" 56tag-g12 "* ]] && sub 56tag-g12 1 2G 00:20:00 "" "" "" bash reproduce/56_e2e_long_context.sh tag-g12
-[[ $ONLY == *" 56meas-g12 "* ]] && sub 56meas-g12 2 8G 01:00:00 "gpumem:16" "$(dep afterok:56tag-g12)" "$NOFREEZE" $(gate 16) bash reproduce/56_e2e_long_context.sh measure-g12
-[[ $ONLY == *" 56g12s "* ]] && sub 56g12s 4 16G 12:00:00 "gpumem:16" "" "$NOFREEZE" $(gate 16) bash reproduce/56_e2e_long_context.sh g12-scaffold
-[[ $ONLY == *" 56g12n "* ]] && sub 56g12n 4 16G 18:00:00 "gpumem:16" "$(dep afterany:56g12s)" "$NOFREEZE" $(gate 16) bash reproduce/56_e2e_long_context.sh g12-native
-# The night steps (see the header). The tags need no night. The others run in the reservation RGC_RES.
+# The clone update comes first, so that the 56 steps of the same call can wait for it. It waits for
+# this user's rgc- jobs that are running, or queued without a reservation. A job queued for a booked
+# night starts only at that night, and reads the clones then.
 if [[ $ONLY == *" 00update "* ]]; then
-  BUSY=$(squeue -h -u "$(id -un)" -o "%i %j" 2>/dev/null | awk -v me="${SLURM_JOB_ID:-}" '$2 ~ /^rgc-/ && $1 != me { printf ":%s", $1 }')
+  BUSY=$(squeue -h -u "$(id -un)" -o "%i %j %T %v" 2>/dev/null | awk -v me="${SLURM_JOB_ID:-}" \
+    '$2 ~ /^rgc-/ && $1 != me && ($3 != "PENDING" || $4 == "(null)" || $4 == "") { printf ":%s", $1 }')
   sub 00update 1 2G 00:20:00 "" "${BUSY:+--dependency=afterany$BUSY}" "" bash reproduce/00_setup.sh --update
 fi
+# The tags need no night and no GPU. One after the other, and before the 12B runs of the same call,
+# so that no two of these jobs start in the same second.
+[[ $ONLY == *" 56tag-g12 "* ]] && sub 56tag-g12 1 2G 00:20:00 "" "" "" bash reproduce/56_e2e_long_context.sh tag-g12
 [[ $ONLY == *" 56tag-nemo "* ]] && sub 56tag-nemo 1 2G 00:20:00 "" "$(dep afterok:00update)" "" bash reproduce/56_e2e_long_context.sh tag-nemo
-[[ $ONLY == *" 56tag-g31 "* ]] && sub 56tag-g31 1 2G 00:20:00 "" "$(dep afterok:00update)" "" bash reproduce/56_e2e_long_context.sh tag-g31
-if [[ $ONLY =~ " 56"(meas-nemo|meas-g31|react|mono|g31s|g31n)" " ]]; then
-  [ -n "${RGC_RES:-}" ] || { echo "the night steps need RGC_RES=<reservation>, a night the model-server session booked" >&2; exit 1; }
+[[ $ONLY == *" 56tag-g31 "* ]] && sub 56tag-g31 1 2G 00:20:00 "" "$(dep afterok:00update afterany:56tag-nemo)" "" bash reproduce/56_e2e_long_context.sh tag-g31
+[[ $ONLY == *" 56meas-g12 "* ]] && sub 56meas-g12 2 8G 01:00:00 "gpumem:16" "$(dep afterok:56tag-g12)" "$NOFREEZE" $(gate 16) bash reproduce/56_e2e_long_context.sh measure-g12
+[[ $ONLY == *" 56g12s "* ]] && sub 56g12s 4 16G 12:00:00 "gpumem:16" "" "$NOFREEZE" $(gate 16) bash reproduce/56_e2e_long_context.sh g12-scaffold
+[[ $ONLY == *" 56g12n "* ]] && sub 56g12n 4 6G 14:00:00 "gpumem:16" "$(dep afterok:00update 'afterany:56g12s 56tag-nemo 56tag-g31')" "$NOFREEZE" $(gate 16) bash reproduce/56_e2e_long_context.sh g12-native
+# One job for a booked night (see the header). It does not wait for the tags. A part whose tag is
+# missing fails its own checks, and the other parts still run. Without RGC_PARTS the job gets every
+# night part in the plan's order, with the short runs of the 31B native part before the long ones.
+if [[ $ONLY == *" 56night "* ]]; then
+  [ -n "${RGC_RES:-}" ] || { echo "56night needs RGC_RES=<reservation>, a night the model-server session booked" >&2; exit 1; }
+  RGC_PARTS=${RGC_PARTS:-measure-nemo measure-g31 react monolithic g31-scaffold g31-native-s1 g31-native-s3 g31-native-s2 g31-native-s4}
+  for p in $RGC_PARTS; do
+    [[ " $(sed -n 's/^PARTS="\(.*\)"$/\1/p' "$ART/reproduce/57_e2e_night.sh") " == *" $p "* ]] || { echo "56night: $p is not a part of 57_e2e_night.sh" >&2; exit 1; }
+  done
   RES_START=$(scontrol show res "$RGC_RES" 2>/dev/null | grep -o 'StartTime=[^ ]*' | head -1 | cut -d= -f2)
   [ -n "$RES_START" ] || { echo "Slurm has no reservation named $RGC_RES" >&2; exit 1; }
-  # Off the card by 06:55, before the model-server session starts the Qwen3.8 server again at 07:00.
-  EXTRA=(--reservation="$RGC_RES" --begin="$RES_START" --deadline="$(date -d "${RES_START%T*} +1 day" +%F)T06:55:00")
-  NIGHT="env REPRO_GPU_START_MIB=40000 REPRO_GPU_STOP_MIB=94000 bash reproduce/57_e2e_night.sh"
-  [[ $ONLY == *" 56meas-nemo "* ]] && sub 56meas-nemo 2 2G 00:25:00 "gpumem:24" "$(dep 'afterok:00update 56tag-nemo')" "$NOFREEZE" $NIGHT measure-nemo
-  [[ $ONLY == *" 56meas-g31 "* ]] && sub 56meas-g31 2 2G 00:25:00 "gpumem:24" "$(dep 'afterok:00update 56tag-g31' afterany:56meas-nemo)" "$NOFREEZE" $NIGHT measure-g31
-  [[ $ONLY == *" 56react "* ]] && sub 56react 4 6G 09:45:00 "gpumem:24" "$(dep 'afterok:00update 56meas-nemo' afterany:56meas-g31)" "$NOFREEZE" $NIGHT react
-  [[ $ONLY == *" 56mono "* ]] && sub 56mono 4 6G 10:30:00 "gpumem:24" "$(dep afterok:00update afterany:56react)" "$NOFREEZE" $NIGHT monolithic
-  [[ $ONLY == *" 56g31s "* ]] && sub 56g31s 4 6G 10:45:00 "gpumem:24" "$(dep afterok:00update)" "$NOFREEZE" $NIGHT g31-scaffold
-  [[ $ONLY == *" 56g31n "* ]] && sub 56g31n 4 6G 10:45:00 "gpumem:24" "$(dep afterok:00update afterany:56g31s)" "$NOFREEZE" $NIGHT g31-native
+  # The night ends at RGC_NIGHT_END (06:40) of the next morning. The model-server session starts the
+  # Qwen3.8 server again at 07:00. It can move that for one night, and then RGC_NIGHT_END moves with it.
+  NIGHT_END="$(date -d "${RES_START%T*} +1 day" +%F)T${RGC_NIGHT_END:-06:40}:00"
+  NIGHT_END_S=$(date -d "$NIGHT_END" +%s) || { echo "56night: RGC_NIGHT_END takes HH:MM, not '${RGC_NIGHT_END:-}'" >&2; exit 1; }
+  NIGHT_MIN=$(( ( NIGHT_END_S - $(date -d "$RES_START" +%s) ) / 60 - 25 ))
+  (( NIGHT_MIN >= 60 )) || { echo "56night: the night from $RES_START to $NIGHT_END is too short" >&2; exit 1; }
+  # A new night job replaces this user's pending rgc- jobs in the same reservation.
+  while read -r jid jname jstate jres; do
+    [[ $jname == rgc-* && $jstate == PENDING && $jres == "$RGC_RES" && $jid != "${SLURM_JOB_ID:-}" ]] || continue
+    echo "56night: cancel pending $jname (job $jid) in $RGC_RES. The new night job replaces it."
+    [ "$DRY" = 1 ] || [ "$TEST" = 1 ] || scancel "$jid"
+  done < <(squeue -h -u "$(id -un)" -o "%i %j %T %v" 2>/dev/null)
+  PURPOSE[56night]="TIST paper revision: long-context end-to-end reruns on BEAR 0.4.2 in the booked night $RGC_RES, with the Qwen3.8 server down. One job runs these parts of 56_e2e_long_context.sh in order, skips the ones already done, and stops by ${RGC_NIGHT_END:-06:40}. Parts: $RGC_PARTS"
+  EXTRA=(--reservation="$RGC_RES" --begin="$RES_START" --deadline="$(date -d "@$((NIGHT_END_S + 900))" +%FT%T)")
+  sub 56night 4 6G "$(printf '%d:%02d:00' $((NIGHT_MIN / 60)) $((NIGHT_MIN % 60)))" "gpumem:24" "$(dep afterok:00update)" "$NOFREEZE" \
+    env REPRO_GPU_START_MIB=40000 REPRO_GPU_STOP_MIB=94000 REPRO_NIGHT_END="$NIGHT_END" bash reproduce/57_e2e_night.sh $RGC_PARTS
   EXTRA=()
 fi
 sub 65tag   2 8G  07:00:00   "chat8355:4"  ""                                         "$NOFREEZE" bash reproduce/65_authorship.sh --part tag

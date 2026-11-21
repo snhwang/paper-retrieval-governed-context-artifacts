@@ -110,6 +110,9 @@ repro_parse_args() {
   done
   # From here on, any exit prints the final OK or FAILED line.
   trap repro_finish EXIT
+  # A stop from outside (the queue's time limit, a cancel, the end of a booked night) also closes
+  # the run record. Without this trap bash dies at once and the record stays "running".
+  trap 'REPRO_FAIL_REASON="stopped by SIGTERM (the queue or the end of a booked night ended the run)"; exit 143' TERM
 }
 
 # The EXIT trap: close the run record and print the final line.
@@ -161,11 +164,22 @@ repro_begin() {
   [ "$DRY_RUN" = 1 ] && sub=/dryrun
   if [ -z "$REPRO_RECORD" ]; then
     REPRO_RECORD=$REPRO_OUT/runlog$sub/$SCRIPT_NAME-$stamp.json
+    mkdir -p "$(dirname "$REPRO_RECORD")"
+    # Two runs of one script can start in the same second. Two queue jobs released together did
+    # on 21 Nov 2026, shared one record, and one of them failed. The first run to claim the name
+    # keeps it. Any other adds its queue job number, then its process number.
+    local base=${REPRO_RECORD%.json} uniq
+    for uniq in "" "${SLURM_JOB_ID:+-j$SLURM_JOB_ID}" "-p$$" "${SLURM_JOB_ID:+-j$SLURM_JOB_ID}-p$$"; do
+      if ( set -o noclobber; : > "$base$uniq.json" ) 2>/dev/null; then
+        REPRO_RECORD=$base$uniq.json
+        break
+      fi
+    done
   fi
   mkdir -p "$(dirname "$REPRO_RECORD")"
   python3 "$REPRO_DIR/lib/run_record.py" start "$REPRO_RECORD" --script "$SCRIPT_NAME" \
     --dry-run "$DRY_RUN" --unit "${REPRO_UNIT:-}" -- "$SCRIPT_PATH" "${ARGS_REST[@]}" \
-    || { REPRO_RECORD=""; die "could not write the run record"; }
+    || { [ -s "$REPRO_RECORD" ] || rm -f "$REPRO_RECORD"; REPRO_RECORD=""; die "could not write the run record"; }
   export REPRO_RECORD
   # A marker while a real run is in progress. 00_setup.sh --update refuses to
   # move the clones while one exists for a live process.

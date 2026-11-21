@@ -165,7 +165,7 @@ def load(path: str) -> dict:
 
 
 def save(path: str, rec: dict) -> None:
-    tmp = path + ".tmp"
+    tmp = f"{path}.{os.getpid()}.tmp"  # one per process, so that two writers never share it
     with open(tmp, "w", encoding="utf-8") as f:
         json.dump(rec, f, indent=1)
         f.write("\n")

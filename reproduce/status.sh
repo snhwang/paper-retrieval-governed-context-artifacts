@@ -21,7 +21,7 @@ for f in "$REPRO_OUT"/logs/*.log; do
   tail -n "$N" "$f" | sed 's/^/    /'
 done
 echo "== latest run record per script ($REPRO_OUT/runlog)"
-for s in $(ls "$REPRO_OUT"/runlog/*.json 2>/dev/null | sed -E 's#.*/##; s#-[0-9]{8}T[0-9]{6}Z\.json$##' | sort -u); do
+for s in $(ls "$REPRO_OUT"/runlog/*.json 2>/dev/null | sed -E 's#.*/##; s#-[0-9]{8}T[0-9]{6}Z(-[jp][0-9]+)*\.json$##' | sort -u); do
   f=$(ls -t "$REPRO_OUT"/runlog/"$s"-*.json | head -1)
   python3 - "$f" <<'PY'
 import json, sys
