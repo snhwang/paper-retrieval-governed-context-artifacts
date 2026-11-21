@@ -4,9 +4,11 @@ Each script of the kit writes a run record when it starts and completes it when 
 
 - One JSON file per start of a script, named by script and UTC start time.
 - `records.jsonl` is the index that the kit keeps, one line per record.
-- The records cover 12 to 20 November 2026.
+- The records cover 12 to 21 November 2026.
 
 Nothing was removed. Failed and repeated attempts are included, since they are part of the record. A run with a non-zero exit code is not an error in the log. Several steps stop on purpose, for example the final check (`90_verify`), which ends with a non-zero code while any file still differs.
+
+One record is damaged, `56_e2e_long_context-20261121T070026Z.json`. Two queue jobs started in the same second on 21 November (jobs 418 and 419, which make the tags `mistral-nemo-131k` and `gemma4-31b-131k`) and wrote the same file. It is not valid JSON, and `records.jsonl` has no line for it. Job 418 failed on the shared file and made no tag. Job 419 made its tag. Since then each run gets its own record, and both tags are made again under complete records.
 
 ## What a record holds
 

@@ -1,0 +1,608 @@
+{
+ "schema": "tist-repro.run_record/1",
+ "script": "56_e2e_long_context",
+ "dry_run": false,
+ "user": "snhwang",
+ "host": "Shwang171663",
+ "kernel": "6.6.114.1-microsoft-standard-WSL2",
+ "wsl_distro": null,
+ "systemd_unit": null,
+ "start_utc": "2026-11-21T00:09:55+00:00",
+ "end_utc": "2026-11-21T01:14:43+00:00",
+ "duration_s": 3888,
+ "exit_code": 0,
+ "status": "OK",
+ "argv": [
+  "/mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts/reproduce/56_e2e_long_context.sh",
+  "g12-scaffold"
+ ],
+ "command_line": "bash /mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts/reproduce/56_e2e_long_context.sh g12-scaffold",
+ "cwd": "/mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts",
+ "artifacts": {
+  "path": "/mnt/c/Users/Scott/Documents/Work/paper-retrieval-governed-context-artifacts",
+  "branch": "tist-r2",
+  "commit": "295c5712121c828cdd29cacacceb51c9a8f30db3",
+  "dirty_tracked": []
+ },
+ "clones": {
+  "clones/artifacts-authorship": {
+   "commit": "7472902a4e311769a7b8770988a157dfdb44d7e8",
+   "branch": "tist-r2",
+   "dirty_tracked": []
+  },
+  "clones/artifacts-hermes": {
+   "commit": "7472902a4e311769a7b8770988a157dfdb44d7e8",
+   "branch": "tist-r2",
+   "dirty_tracked": []
+  },
+  "clones/artifacts-previous": {
+   "commit": "7472902a4e311769a7b8770988a157dfdb44d7e8",
+   "branch": "tist-r2",
+   "dirty_tracked": []
+  },
+  "clones/artifacts-wp256": {
+   "commit": "7472902a4e311769a7b8770988a157dfdb44d7e8",
+   "branch": "tist-r2",
+   "dirty_tracked": [
+    "M results/bm25_v042_check_attribution.json",
+    " M results/bm25_v042_check_attribution_output.txt",
+    " M results/bm25_v042_check_default.json",
+    " M results/bm25_v042_check_default_output.txt",
+    " M results/bm25_v042_check_dropped_rows.json",
+    " M results/bm25_v042_check_dropped_rows_output.txt",
+    " M results/bm25_v042_check_flat_backfill+tie_order.json",
+    " M results/bm25_v042_check_flat_backfill+tie_order_output.txt",
+    " M results/bm25_v042_check_flat_backfill.json",
+    " M results/bm25_v042_check_flat_backfill_output.txt",
+    " M results/bm25_v042_check_tie_order.json",
+    " M results/bm25_v042_check_tie_order_output.txt",
+    " M results/budget_binding_v042_bge.json",
+    " M results/budget_binding_v042_bge_output.txt",
+    " M results/budget_binding_v042_bge_vs_v040.json",
+    " M results/budget_binding_v042_bge_vs_v040_output.txt",
+    " M results/budget_binding_v042_output.txt",
+    " M results/cpa_maintained_v042.json",
+    " M results/cpa_maintained_v042_output.txt",
+    " M results/invariants_v042_pool_sensitivity.json",
+    " M results/leakage_threat_bge-m3.json",
+    " M results/leakage_threat_bge-m3_output.txt",
+    " M results/leakage_threat_qwen.json",
+    " M results/leakage_threat_qwen_output.txt",
+    " M results/leakage_threat_v042.json",
+    " M results/leakage_threat_v042_output.txt",
+    " M results/mandatory_coverage_v042_output.txt",
+    " M results/metadata_filter_baseline_petsim_bge_v042.json",
+    " M results/metadata_filter_baseline_petsim_bge_v042_output.txt",
+    " D results/metadata_filter_baseline_petsim_nemotron_v042_missing.json",
+    " M results/metadata_filter_baseline_petsim_nemotron_v042_output.txt",
+    " M results/metadata_filter_baseline_toolbench_bge_v042.json",
+    " M results/metadata_filter_baseline_toolbench_bge_v042_output.txt",
+    " D results/metadata_filter_baseline_toolbench_nemotron_v042_missing.json",
+    " M results/metadata_filter_baseline_toolbench_nemotron_v042_output.txt",
+    " M results/query_giveaways_qwen3-0.6b.json",
+    " M results/query_giveaways_qwen3-0.6b_output.txt",
+    " M results/query_giveaways_v042.json",
+    " M results/query_giveaways_v042_output.txt",
+    " M results/tag_noise_nemotron_v042_output.txt",
+    " M results/tag_noise_overrestriction_v042.json",
+    " M results/tag_noise_qwen3-0.6b_output.txt",
+    " M results/tag_noise_v042_output.txt"
+   ]
+  },
+  "wp0/artifacts": {
+   "commit": "7472902a4e311769a7b8770988a157dfdb44d7e8",
+   "branch": "tist-r2",
+   "dirty_tracked": [
+    "M results/alpha_sweep_output.txt",
+    " M results/governance_decomposed_output.txt"
+   ]
+  },
+  "wp0/artifacts-attr": {
+   "commit": "7472902a4e311769a7b8770988a157dfdb44d7e8",
+   "branch": "tist-r2",
+   "dirty_tracked": []
+  },
+  "wp0/artifacts-dense": {
+   "commit": "7472902a4e311769a7b8770988a157dfdb44d7e8",
+   "branch": "tist-r2",
+   "dirty_tracked": [
+    "M results/alpha_sweep_all.json",
+    " M results/alpha_sweep_output.txt",
+    " M results/alpha_sweep_qwen3-4b.json",
+    " M results/baseline_comparison_results.csv",
+    " M results/governance_decomposed_all.json",
+    " M results/governance_decomposed_output.txt",
+    " M results/scalability_results.csv",
+    " M results/toolbench_inferred_output.txt",
+    " M results/toolbench_multitag_output.txt",
+    " M results/toolbench_top5_output.txt"
+   ]
+  },
+  "wp0/artifacts-gpu": {
+   "commit": "7472902a4e311769a7b8770988a157dfdb44d7e8",
+   "branch": "tist-r2",
+   "dirty_tracked": []
+  },
+  "wp0/artifacts-nemo": {
+   "commit": "7472902a4e311769a7b8770988a157dfdb44d7e8",
+   "branch": "tist-r2",
+   "dirty_tracked": [
+    "M results/alpha_sweep_bge.json",
+    " M results/alpha_sweep_output.txt",
+    " M results/governance_decomposed_bge.json",
+    " M results/governance_decomposed_output.txt"
+   ]
+  },
+  "wp0/artifacts-track": {
+   "commit": "7472902a4e311769a7b8770988a157dfdb44d7e8",
+   "branch": "tist-r2",
+   "dirty_tracked": []
+  }
+ },
+ "venv": {
+  "python": "3.12.13",
+  "executable": "/home/snhwang/.venvs/tist-repro/bin/python",
+  "bear": "0.4.2",
+  "torch": "2.10.0",
+  "transformers": "4.57.6",
+  "sentence-transformers": "5.4.1",
+  "numpy": "2.2.6",
+  "scipy": "1.17.1",
+  "llama-index-core": "0.14.23",
+  "instruction-tool-retrieval": "0.1.1",
+  "tiktoken": "0.13.0",
+  "bear_direct_url": "file:///home/snhwang/tist-evals/bear-v0.4.2",
+  "bear_git_sha": "0d0718a39a0b0788ef5cca4689352462b830494c"
+ },
+ "bear_sources": {
+  "v0.4.2": {
+   "path": "/home/snhwang/tist-evals/bear-v0.4.2",
+   "BEAR_GIT_SHA": "0d0718a39a0b0788ef5cca4689352462b830494c",
+   "git_head": "0d0718a39a0b0788ef5cca4689352462b830494c",
+   "bear_tree_sha256": "9cf19e48b49f4e57e3723050b942b296bb66f775fdd41e7f1770514576d0930a"
+  },
+  "v0.1.10": {
+   "path": "/home/snhwang/tist-evals/bear-v0110",
+   "git_head": "cdba2174d715494ec4f22c098386487002ec492f"
+  }
+ },
+ "hf_model_snapshots": {
+  "BAAI/bge-base-en-v1.5": "a5beb1e3e68b9ab74eb54cfd186867f64f240e1a",
+  "BAAI/bge-m3": "5617a9f61b028005a4858fdac845db406aefb181",
+  "BAAI/bge-reranker-base": "2cfc18c9415c912f9d8155881c133215df768a70",
+  "Qwen/Qwen2.5-VL-7B-Instruct": "cc594898137f460bfe9f0759e9844b3ce807cfb5",
+  "Qwen/Qwen3-Embedding-0.6B": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+  "Qwen/Qwen3-Embedding-4B": "5cf2132abc99cad020ac570b19d031efec650f2b",
+  "ToolBench/ToolBench_IR_bert_based_uncased": "cf4a904c33cde549643aa6d9091146e68ed4932f",
+  "cross-encoder/nli-deberta-v3-xsmall": "a150876415327c80daeff35ca6f68f5ed8cf5c24",
+  "google/gemma-4-12B-it": "5926caa4ec0cac5cbfadaf4077420520de1d5205",
+  "google/gemma-4-E2B-it": "3e22461f65e89153144f8adb70e3b8c2cc9845a7",
+  "google/gemma-4-E4B-it": "fee6332c1abaafb77f6f9624236c63aa2f1d0187",
+  "google/medsiglip-448": "9cea28a1a1195f665105faa6e8544c112fd960a4",
+  "incoai/Qwen3.8-27B-DFlash2": "015e795645c74b1a0eeef3b570031fb62e769bc5",
+  "jinaai/jina-clip-implementation": "39e6a55ae971b59bea6e44675d237c99762e7ee2",
+  "jinaai/jina-clip-v2": "344d954da76eb8ad47a7aaff42d012e30c15b8fe",
+  "jinaai/jina-embeddings-v3": "f1944de8402dcd5f2b03f822a4bc22a7f2de2eb9",
+  "jinaai/jina-embeddings-v4": "737fa5c46f0262ceba4a462ffa1c5bcf01da416f",
+  "jinaai/xlm-roberta-flash-implementation": "cd915ad563445b5b8b51f4ac641e8c15e1fcbff3",
+  "mistralai/Mistral-Nemo-Instruct-2407": "04d8a90549d23fc6bd7f642064003592df51e9b3",
+  "mlx-community/Qwen3-Embedding-0.6B-8bit": "b8d7100604f51da6d14eab4dd1805f596fa1ce3f",
+  "mlx-community/Qwen3-Embedding-4B-mxfp8": "c738b4ebab1e09812a7fe6800cf216c7b1ab2bfd",
+  "mlx-community/bge-m3-mlx-fp16": "a37eddded9a6a1273a87fb8b0da0d1cdbd98aeec",
+  "naver/splade-cocondenser-ensembledistil": "49cf4c7b0db5b870a401ddf5e2669993ef3699c7",
+  "nomic-ai/nomic-bert-2048": "7710840340a098cfb869c4f65e87cf2b1b70caca",
+  "nomic-ai/nomic-embed-text-v1.5": "e5cf08aadaa33385f5990def41f7a23405aec398",
+  "nomic-ai/nomic-embed-vision-v1.5": "e3a725bce72db07ca4adb1d83da08903f3ee02f8",
+  "nvidia/Gemma-4-31B-IT-NVFP4": "4135a98a9b728a548947683219633b25682223ac",
+  "nvidia/NVIDIA-Nemotron-Nano-12B-v2-VL-NVFP4-QAD": "b8d3c170d9ee3a078917ef9bfd508eff988d6de7",
+  "nvidia/Nemotron-Cascade-14B-Thinking": "8aa18a07ea16c52261675f766ed2ea3ec80ea841",
+  "nvidia/Qwen3-30B-A3B-NVFP4": "2538ded2a4edb247b4d2b4a8ba24e44bd4c017c3",
+  "nvidia/Qwen3.8-27B-NVFP4": "dbb8f445b3145f8a4c18ddc769f032d57d32867c",
+  "nvidia/llama-embed-nemotron-8b": "b840573b940e213c5cd622468ed8bfcc15c7c431",
+  "nvidia/llama-nemotron-embed-vl-1b-v2": "582e3bf72aee355e3c59ed89de53543c5b0657ee",
+  "openai/clip-vit-base-patch32": "3d74acf9a28c67741b2f4f2ea7635f0aaf6f0268",
+  "ornith-ai/Ornith-1.5-35B-A3B-NVFP4": "0f0b1b59b879ccde1353e6ebd0fb10c204d4c544",
+  "sentence-transformers/all-MiniLM-L6-v2": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+  "stepfun-ai/Step3-VL-10B": "5026053b0c2f5dfaa08fc2d149384162c3c8bca1",
+  "timm/ViT-L-16-SigLIP2-384": "31b4df0bbf802888308ad91850c388b2870ef922",
+  "unsloth/Qwen3.8-27B-NVFP4": "f0b7c9e722f5565102fff8481c99e4d86ae099c7",
+  "z-lab/Qwen3.8-27B-DFlash2": "50307d4c4cde6860d4eee73e2547cd786fe8e8a4"
+ },
+ "settings": {
+  "BEAR_SOURCE_SHA": "0d0718a39a0b0788ef5cca4689352462b830494c",
+  "HF_HUB_OFFLINE": "1",
+  "NEMOTRON_URL": "http://127.0.0.1:8360",
+  "REPRO_GPU_START_MIB": "79455",
+  "REPRO_GPU_STOP_MIB": "94000",
+  "REPRO_Q4B_BATCH": "2",
+  "TIST_EMB_CACHE": "/home/snhwang/tist-repro/emb-cache",
+  "TIST_NEMOTRON_URL": "http://127.0.0.1:8360",
+  "TRANSFORMERS_OFFLINE": "1"
+ },
+ "endpoints": {
+  "ollama": {
+   "url": "http://127.0.0.1:11434",
+   "checked_utc": "2026-11-21T00:09:58+00:00",
+   "version": {
+    "version": "0.40.16"
+   },
+   "models": [
+    {
+     "name": "gemma4-12b-131k:latest",
+     "digest": "e8408c45bfbcff1db2d690dc1c297acbbe5cb3ce062b499c1b9c453b9de93a84",
+     "size": 7556508041,
+     "modified_at": "2026-11-20T16:10:09.1412789-05:00",
+     "details": {
+      "parent_model": "gemma4:12b",
+      "format": "gguf",
+      "family": "gemma4",
+      "families": [
+       "gemma4"
+      ],
+      "parameter_size": "11.9B",
+      "quantization_level": "Q4_K_M",
+      "context_length": 262144,
+      "embedding_length": 3840,
+      "runner": "llamacpp"
+     }
+    },
+    {
+     "name": "gemma4:e2b",
+     "digest": "2cf98652fdc60fbb161f69c1c5cd5cca671992211d1214edb11dabeb56434a0d",
+     "size": 7163585787,
+     "modified_at": "2026-10-12T05:11:19.1532212-04:00",
+     "details": {
+      "parent_model": "",
+      "format": "gguf",
+      "family": "gemma4",
+      "families": [
+       "gemma4",
+       "clip"
+      ],
+      "parameter_size": "5.1B",
+      "quantization_level": "Q4_K_M",
+      "context_length": 131072,
+      "embedding_length": 1536,
+      "runner": "llamacpp"
+     }
+    },
+    {
+     "name": "gpt-oss:120b",
+     "digest": "a951a23b46a1f6093dafee2ea481d634b4e31ac720a8a16f3f91e04f5a40ecd9",
+     "size": 65369818941,
+     "modified_at": "2026-09-17T20:27:13.8622364-04:00",
+     "details": {
+      "parent_model": "",
+      "format": "gguf",
+      "family": "gptoss",
+      "families": [
+       "gptoss"
+      ],
+      "parameter_size": "116.8B",
+      "quantization_level": "MXFP4",
+      "context_length": 131072,
+      "embedding_length": 2880,
+      "runner": "ggml"
+     }
+    },
+    {
+     "name": "gpt-oss:20b",
+     "digest": "17052f91a42e97930aa6e28a6c6c06a983e6a58dbb00434885a0cf5313e376f7",
+     "size": 13793441244,
+     "modified_at": "2026-09-17T19:15:14.2864116-04:00",
+     "details": {
+      "parent_model": "",
+      "format": "gguf",
+      "family": "gptoss",
+      "families": [
+       "gptoss"
+      ],
+      "parameter_size": "20.9B",
+      "quantization_level": "MXFP4",
+      "context_length": 131072,
+      "embedding_length": 2880,
+      "runner": "ggml"
+     }
+    },
+    {
+     "name": "qwen3.8:27b",
+     "digest": "22130167c4c20e20c7b71454612966ca8e8171e9b3cc8ab6ce8aa6cbfec79643",
+     "size": 17741872154,
+     "modified_at": "2026-08-19T03:03:53.8158661-04:00",
+     "details": {
+      "parent_model": "qwen3.8:27b-q4_K_M",
+      "format": "gguf",
+      "family": "qwen35",
+      "families": [
+       "qwen35"
+      ],
+      "parameter_size": "27.3B",
+      "quantization_level": "Q4_K_M",
+      "context_length": 262144,
+      "embedding_length": 5120,
+      "runner": "ggml"
+     }
+    },
+    {
+     "name": "muse-glimmer:latest",
+     "digest": "de878ce33ad81d060001db1469a02eebe4d86f0ad58cfe52dc062fdcbe4464c1",
+     "size": 18157010252,
+     "modified_at": "2026-08-12T12:32:07.6460337-04:00",
+     "details": {
+      "parent_model": "muse-glimmer:30b-q4_K_M",
+      "format": "gguf",
+      "family": "muse-glimmer",
+      "families": [
+       "muse-glimmer"
+      ],
+      "parameter_size": "27.9B",
+      "quantization_level": "Q4_K_M",
+      "context_length": 131072,
+      "embedding_length": 6656,
+      "runner": "ggml"
+     }
+    },
+    {
+     "name": "gemma4:31b",
+     "digest": "6316f0629137b426c9d9b853ffc4c8209589f30ee39aebede6285096c0ff47e7",
+     "size": 19868981791,
+     "modified_at": "2026-07-17T08:10:29.169014-04:00",
+     "details": {
+      "parent_model": "",
+      "format": "gguf",
+      "family": "gemma4",
+      "families": [
+       "gemma4"
+      ],
+      "parameter_size": "31.3B",
+      "quantization_level": "Q4_K_M",
+      "context_length": 262144,
+      "embedding_length": 5376,
+      "runner": "ggml"
+     }
+    },
+    {
+     "name": "llama3.3:latest",
+     "digest": "a6eb4748fd2990ad2952b2335a95a7f952d1a06119a0aa6a2df6cd052a93a3fa",
+     "size": 42520413916,
+     "modified_at": "2026-07-16T00:53:15.3127481-04:00",
+     "details": {
+      "parent_model": "",
+      "format": "gguf",
+      "family": "llama",
+      "families": [
+       "llama"
+      ],
+      "parameter_size": "70.6B",
+      "quantization_level": "Q4_K_M",
+      "context_length": 131072,
+      "embedding_length": 8192,
+      "runner": "ggml"
+     }
+    },
+    {
+     "name": "mistral-nemo:latest",
+     "digest": "e7e06d107c6c86ed0cf45445f1790720b5092149c4c95f4d965844e9afbfdc89",
+     "size": 7071713227,
+     "modified_at": "2026-07-15T08:27:16.7687501-04:00",
+     "details": {
+      "parent_model": "",
+      "format": "gguf",
+      "family": "llama",
+      "families": [
+       "llama"
+      ],
+      "parameter_size": "12.2B",
+      "quantization_level": "Q4_0",
+      "context_length": 1024000,
+      "embedding_length": 5120,
+      "runner": "ggml"
+     }
+    },
+    {
+     "name": "gemma4:12b",
+     "digest": "4eb23ef187e2c5462566d6a1d3bbbc2f1346d0b4327cbb66d58fffbcc9b2b05c",
+     "size": 7556508396,
+     "modified_at": "2026-07-10T04:15:56.2279796-04:00",
+     "details": {
+      "parent_model": "",
+      "format": "gguf",
+      "family": "gemma4",
+      "families": [
+       "gemma4"
+      ],
+      "parameter_size": "11.9B",
+      "quantization_level": "Q4_K_M",
+      "context_length": 262144,
+      "embedding_length": 3840,
+      "runner": "ggml"
+     }
+    },
+    {
+     "name": "mistral-nemo-32k:latest",
+     "digest": "d79a1e80980fbf93248420d6915eb59fb426215e896ec8d7bb6883319acba03b",
+     "size": 7071713243,
+     "modified_at": "2026-07-09T16:26:41.8585053-04:00",
+     "details": {
+      "parent_model": "mistral-nemo:latest",
+      "format": "gguf",
+      "family": "llama",
+      "families": [
+       "llama"
+      ],
+      "parameter_size": "12.2B",
+      "quantization_level": "Q4_0",
+      "context_length": 1024000,
+      "embedding_length": 5120,
+      "runner": "ggml"
+     }
+    },
+    {
+     "name": "gemma4:e4b",
+     "digest": "c6eb396dbd5992bbe3f5cdb947e8bbc0ee413d7c17e2beaae69f5d569cf982eb",
+     "size": 9608350718,
+     "modified_at": "2026-04-07T12:01:00.219489-04:00",
+     "details": {
+      "parent_model": "",
+      "format": "gguf",
+      "family": "gemma4",
+      "families": [
+       "gemma4"
+      ],
+      "parameter_size": "8.0B",
+      "quantization_level": "Q4_K_M",
+      "context_length": 131072,
+      "embedding_length": 2560,
+      "runner": "ggml"
+     }
+    },
+    {
+     "name": "gemma4:26b",
+     "digest": "5571076f3d70050487b26b341705799e0ab29b808164f90d20d4cf84f699d251",
+     "size": 17987581215,
+     "modified_at": "2026-04-07T06:37:03.4405003-04:00",
+     "details": {
+      "parent_model": "",
+      "format": "gguf",
+      "family": "gemma4",
+      "families": [
+       "gemma4"
+      ],
+      "parameter_size": "25.8B",
+      "quantization_level": "Q4_K_M",
+      "context_length": 262144,
+      "embedding_length": 2816,
+      "runner": "ggml"
+     }
+    },
+    {
+     "name": "qwen3:1.7b",
+     "digest": "8f68893c685c3ddff2aa3fffce2aa60a30bb2da65ca488b61fff134a4d1730e7",
+     "size": 1359293444,
+     "modified_at": "2026-02-24T03:09:55.1049649-05:00",
+     "details": {
+      "parent_model": "",
+      "format": "gguf",
+      "family": "qwen3",
+      "families": [
+       "qwen3"
+      ],
+      "parameter_size": "2.0B",
+      "quantization_level": "Q4_K_M",
+      "context_length": 40960,
+      "embedding_length": 2048,
+      "runner": "ggml"
+     }
+    },
+    {
+     "name": "qwen2.5:3b",
+     "digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+     "size": 1929912432,
+     "modified_at": "2026-02-22T14:30:56.0532266-05:00",
+     "details": {
+      "parent_model": "",
+      "format": "gguf",
+      "family": "qwen2",
+      "families": [
+       "qwen2"
+      ],
+      "parameter_size": "3.1B",
+      "quantization_level": "Q4_K_M",
+      "context_length": 32768,
+      "embedding_length": 2048,
+      "runner": "ggml"
+     }
+    }
+   ]
+  }
+ },
+ "commands": [
+  {
+   "label": "g12-scaffold",
+   "start_utc": "2026-11-21T00:09:58Z",
+   "end_utc": "2026-11-21T01:14:41+00:00",
+   "exit_code": 0,
+   "cwd": "/home/snhwang/tist-repro/clones/artifacts-previous",
+   "argv": [
+    "flock",
+    "/home/snhwang/tist-gpu.lock",
+    "/home/snhwang/bin/tist-capped",
+    "--mem",
+    "16G",
+    "--",
+    "env",
+    "CUDA_VISIBLE_DEVICES=",
+    "HF_HUB_OFFLINE=1",
+    "TRANSFORMERS_OFFLINE=1",
+    "PYTHONUNBUFFERED=1",
+    "BASE_URL=http://127.0.0.1:11434/v1",
+    "LLM_SEED=20261120",
+    "/home/snhwang/.venvs/tist-repro/bin/python",
+    "evals/e2e_rerun/run_guarded.py",
+    "--model",
+    "gemma4-12b-131k",
+    "--base",
+    "gemma4:12b",
+    "--expect-base-digest",
+    "4eb23ef187e2",
+    "--expect-ctx",
+    "131072",
+    "--base-url",
+    "http://127.0.0.1:11434/v1",
+    "--win-gpu-max-mib",
+    "79455",
+    "--win-gpu-stop-mib",
+    "94000",
+    "--seed",
+    "20261120",
+    "--out",
+    "/home/snhwang/tist-repro/e2e_long/g12-scaffold",
+    "--",
+    "env",
+    "MODEL=gemma4-12b-131k",
+    "LABEL=g4-12b-v042",
+    "bash",
+    "evals/run_model_scaffold_nothink.sh"
+   ],
+   "command_line": "flock /home/snhwang/tist-gpu.lock /home/snhwang/bin/tist-capped --mem 16G -- env CUDA_VISIBLE_DEVICES= HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 PYTHONUNBUFFERED=1 BASE_URL=http://127.0.0.1:11434/v1 LLM_SEED=20261120 /home/snhwang/.venvs/tist-repro/bin/python evals/e2e_rerun/run_guarded.py --model gemma4-12b-131k --base gemma4:12b --expect-base-digest 4eb23ef187e2 --expect-ctx 131072 --base-url http://127.0.0.1:11434/v1 --win-gpu-max-mib 79455 --win-gpu-stop-mib 94000 --seed 20261120 --out /home/snhwang/tist-repro/e2e_long/g12-scaffold -- env MODEL=gemma4-12b-131k LABEL=g4-12b-v042 bash evals/run_model_scaffold_nothink.sh"
+  },
+  {
+   "label": "g12-scaffold-analysis",
+   "start_utc": "2026-11-21T01:14:41Z",
+   "end_utc": "2026-11-21T01:14:43+00:00",
+   "exit_code": 0,
+   "cwd": "/home/snhwang/tist-repro/clones/artifacts-previous",
+   "argv": [
+    "/home/snhwang/bin/tist-capped",
+    "--mem",
+    "4G",
+    "--",
+    "python",
+    "evals/scaffold_vs_single.py",
+    "g4-12b-v042"
+   ],
+   "command_line": "/home/snhwang/bin/tist-capped --mem 4G -- python evals/scaffold_vs_single.py g4-12b-v042"
+  }
+ ],
+ "notes": [
+  {
+   "utc": "2026-11-21T00:09:57+00:00",
+   "text": "Slurm job 349 (rgc-56g12s), submitted by snhwang, Comment=project=RGC; purpose=TIST paper revision: Supplement Table S1 rerun on BEAR 0.4.2, Gemma 4 12B under the one-step scaffold with native reasoning off, three conditions on 1100 queries, Ollama tag gemma4-12b-131k, seed 20261120; plan=end-to-end rerun PLAN.md v3 sha256 114cf0d7, TIST reproduction kit 7472902; nofreeze; parent=344; origin=job 344 on workstation "
+  },
+  {
+   "utc": "2026-11-21T00:09:58+00:00",
+   "text": "run part g12-scaffold: gemma4-12b-131k (digest e8408c45bfbc) from gemma4:12b (4eb23ef187e2), window 131072, seed 20261120, label g4-12b-v042, BEAR 0.4.2 (0d0718a39a0b0788ef5cca4689352462b830494c), clone /home/snhwang/tist-repro/clones/artifacts-previous at 7472902"
+  },
+  {
+   "utc": "2026-11-21T01:14:43+00:00",
+   "text": "outputs of g12-scaffold copied to /home/snhwang/tist-repro/e2e_long/g12-scaffold (3 files). Serving: Ollama 0.40.16, gemma4-12b-131k e8408c45bfbc from gemma4:12b 4eb23ef187e2, window 131072, seed 20261120, card 67599 to 79521 MiB, 8355 up at the start and up at the end, cut prompts 0, unloaded True, exit 0"
+  },
+  {
+   "utc": "2026-11-21T01:14:43+00:00",
+   "text": "part g12-scaffold done, model unloaded. Results in /home/snhwang/tist-repro/e2e_long/g12-scaffold"
+  }
+ ],
+ "memtotal_gb_at_start": 94.3,
+ "memavailable_gb_at_start": 90.9,
+ "cpus": 28
+}
