@@ -1,6 +1,6 @@
 # End-to-end reruns: plan
 
-Status: version 4, 2026-11-21 (see Changes). Versions 1 to 3, 2026-11-20. Scott read the three decisions below and answered on 20 Nov 2026: "It doesn't really matter how we do it. We just need to rerun and document." The session took that as approval of versions 1 to 3 with the planned choices: Ollama, a fixed seed, and all four parts. Version 4 changes how part 4 is run, after job 350 stopped at its third run. Scott approves version 4 by queueing a job whose plan line names this file's sha256. Under "Specs yes, gates no" (9 Nov 2026) and "Re-run anything questionable" (12 Nov 2026), this file is fixed before the runs it describes. Its sha256 is recorded in the paper repo's `revision-plan.md`.
+Status: version 4, 2026-11-21 (see Changes). Versions 1 to 3, 2026-11-20. Scott read the three decisions below and answered on 20 Nov 2026: "It doesn't really matter how we do it. We just need to rerun and document." The session took that as approval of versions 1 to 3 with the planned choices: Ollama, a fixed seed, and all four parts. Version 4 changes how part 4 is run, after job 350 stopped at its third run. It needs Scott's approval in his own words, by this file's sha256, before any job runs under it. A queued job alone is not that approval. Under "Specs yes, gates no" (9 Nov 2026) and "Re-run anything questionable" (12 Nov 2026), this file is fixed before the runs it describes. Its sha256 and Scott's approval, with his words and the date, are recorded in the paper repo's `revision-plan.md`.
 
 ## Why
 
