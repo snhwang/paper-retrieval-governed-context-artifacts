@@ -3,8 +3,8 @@
 This folder reruns every result of the revised TIST paper, "Retrieval-Governed Context". A person runs each script by hand from a WSL terminal. No agent and no session folder is involved. Each script writes a run record, the evidence for the statement that the author ran every script. `verify.py` then checks your outputs against the committed ones. `collect.py` writes every manuscript number with its source file, so the final numbers pass reads your outputs only.
 
 `MANIFEST.md` maps every table, figure and in-text result of the manuscript to the script and file that produce it. It also gives each item its status:
-- **needs Scott's run.** The paper attributes the number to BEAR 0.4.2 or to this revision. That covers every retrieval table, even where the value equals July's, and WP1, WP2, WP4, WP5, WP6, the Table 10 reruns and Hermes.
-- **Scott, previous version.** A July or August 2026 run that the revision keeps unchanged, with no claim that it ran on 0.4.2. Examples are the Table 10 rows whose lists did not change and the ReAct and scale results (Supplement Table S1). Their scripts are here (`55_`), but they need no rerun.
+- **needs Scott's run.** The paper attributes the number to BEAR 0.4.2 or to this revision. That covers every retrieval table, even where the value equals July's, and WP1, WP2, WP4, WP5, WP6, every end-to-end result (Table 10, the Section 4.2 text and Supplement Table S1) and Hermes.
+- **Scott, previous version.** A July or August 2026 run that the revision keeps unchanged, with no claim that it ran on 0.4.2. Since the end-to-end reruns of November 2026 (`evals/e2e_rerun/PLAN.md`) the only such item with a script is the MetaTool tag generation of Appendix A (`55_ tags-api`). It needs no rerun.
 
 `TEXT_FIXES.md` lists the numbers in the manuscript that no script can produce (stale text, prose estimates, no data), with a proposed change for each.
 
@@ -52,9 +52,9 @@ All scripts take `--dry-run`. It prints every command the script would run and c
 | `20_gpu_local_embeddings.sh` | Qwen3-4B rows of Tables 6, 8, 9, its mand-only rows, its Table 10 and WP4 lists, the Qwen WP6 stores (T06, T08, T09, X54, T20) | local GPU | 12G host | start at 67,000 MiB or less, stop above 80,000. Allocator 11.2 GiB (WP0, encode batch 2), 6 or 12 GiB (WP6) | 1.5 to 2 h | `wp0/`, `emb-cache/` |
 | `30_nemotron.sh` | Nemotron rows of Tables 6, 8, 9, its lists, the threshold diagnosis, the Nemotron WP2/WP6 stores, the Nemotron rows of Table 13 (T06, T08, T09, X42, T19, T20) | port 8360 | 4G to 16G per step | none locally | 2 to 3 h | `wp0/`, `emb-cache/`, `clones/artifacts-wp256/results/` |
 | `40_robustness_from_stores.sh` | tag noise, over-restriction, leakage, giveaways, mandatory coverage (T17b, T20) | CPU only, after 15, 20 and 30 | 8G to 16G per step | none | 1 h | `clones/artifacts-wp256/results/` |
-| `50_e2e_ollama.sh` | Table 10 rows rerun on 0.4.2 and the drift controls (T10a). With `--all-rows`, all ten retrieval rows in one session, into `e2e_rerun_all/` (part 1 of `evals/e2e_rerun/PLAN.md`) | Ollama on 11434 | 4G client | start at 67,000 MiB or less, 81,000 before each row | 30 to 40 min | `e2e_rerun/` |
-| `56_e2e_long_context.sh PART` | the long-context end-to-end reruns of `evals/e2e_rerun/PLAN.md` on BEAR 0.4.2: the Table 10 monolithic row, the ReAct scaffold on Mistral-Nemo and the Gemma 4 runs of Supplement Table S1. Also the fixed-window Ollama tags (`tag-*`) and one measured load of each (`measure-*`). `57_e2e_night.sh PART...` runs parts in order in a booked night | Ollama on 11434, `ollama.exe` for the tag parts | 6G client | 12B beside the Qwen3.8 server. 31B and Mistral-Nemo at 131k need that server stopped | tags and loads take minutes, a run part 1 to 10 h (see the script) | `e2e_long/PART/` |
-| `55_e2e_previous_version.sh PART` | the previous-version runs: Table 10 July rows, monolithic row, the ReAct and scale runs of Supplement Table S1, Appendix A tags (T10b, T10c, T11, T12, AA). Optional | Ollama (Anthropic API for `tags-api`) | 16G client | as the Ollama model needs | 4 to 9 h per part | `previous/PART/` |
+| `50_e2e_ollama.sh` | Table 10 rows rerun on 0.4.2 and the drift controls (T10a). With `--all-rows`, all ten retrieval rows in one session, into `e2e_rerun_all/` (part 1 of `evals/e2e_rerun/PLAN.md`). With `--hash-row`, the hash row of Section 4.2, into `e2e_rerun_hash/` (part 5, T10b) | Ollama on 11434 | 4G client | start at 67,000 MiB or less, 81,000 before each row | 30 to 40 min | `e2e_rerun/` |
+| `56_e2e_long_context.sh PART` | the long-context end-to-end reruns of `evals/e2e_rerun/PLAN.md` on BEAR 0.4.2: the Table 10 monolithic row, the ReAct scaffold on Mistral-Nemo, the Gemma 4 runs of Supplement Table S1 and the run with the first 128 schemas of Section 4.2 (`monolithic-cap128`). Also the fixed-window Ollama tags (`tag-*`) and one measured load of each (`measure-*`). `57_e2e_night.sh PART...` runs parts in order in a booked night | Ollama on 11434, `ollama.exe` for the tag parts | 6G client | 12B beside the Qwen3.8 server. 31B and Mistral-Nemo at 131k need that server stopped | tags and loads take minutes, a run part 1 to 10 h (see the script) | `e2e_long/PART/` |
+| `55_e2e_previous_version.sh PART` | the runs as they were made in July and August 2026: Table 10 July rows, monolithic row, the ReAct and scale runs of Supplement Table S1, Appendix A tags (AA). Optional. The paper reads the reruns of `50_` and `56_` for all of these but the tags | Ollama (Anthropic API for `tags-api`) | 16G client | as the Ollama model needs | 4 to 9 h per part | `previous/PART/` |
 | `65_authorship.sh --part P` | the authorship ablation: the tags again with Qwen3.8-27B, then MetaTool+Tags, MetaTool+QueryTags-top5 (seven backends) and Table 7 under both taggers (XAUTH). Parts tag, cpu, gpu, nemotron, analyze, test | tag 8355, cpu CPU, gpu local GPU, nemotron 8360 | 8G (tag), 8G or 20G (cpu), 12G (gpu), 8G (nemotron) | gpu part as 20_ | tag 3 to 5 h, cpu about 5 h, gpu 20 min, nemotron 45 min, analyze 15 min | `authorship/`, `wp0/stage/v042/tb_auth_*` |
 | `60_hermes.sh STEP` | Hermes stage 1 and stage 2 (XH) | ports 8355 and 8360 | 16G grid, 4G to 8G otherwise | none locally | about 50 h of grids | `hermes/` |
 | `61_hermes_chain.sh` | nothing by itself. Runs `60_` stage1, post-stage1, settings, block1 and post-block1 unattended, after a go file, around blocked windows (stopgap until a shared job queue) | as `60_` | 2G (the chain only waits) | none locally | as `60_` | `hermes-chain/`, `logs/hermes-chain/` |
@@ -86,7 +86,7 @@ Run the windows in this order. Inside a window, run the scripts one after anothe
 
 The total is about 88 hours of running, about 35 hours without Hermes. The authorship ablation adds about 10.5 hours, and its parts can share the windows of 20_, 30_ and 60_. Windows 2, 3, 5 and 6 need the GPU or a server and wait for the model-server session's OK. `40_` needs the stores of 15, 20 and 30, so it comes after them although it uses only the CPU. `70_` and `90_` can run at any time. They assemble and check what exists so far, and list the rest as NOT RUN.
 
-`55_` is optional. Its parts rerun the previous-version results, which the revision keeps.
+`55_` is optional. Its parts rerun the July and August 2026 results. Of those, the revision keeps only the Appendix A tags. The end-to-end results were rerun with `50_` and `56_` in November 2026 (`results/v042/README_E2E_RERUNS.md`).
 
 ### Before a later window: update the clones
 
@@ -153,7 +153,10 @@ $REPRO_OUT/                     default ~/tist-repro
   wp0/                          WP0_ROOT: lane clones, stage/<version>/<step>/, logs/, wp4/, diag/, ...
   clones/                       artifacts-wp256, artifacts-hermes, artifacts-previous
   emb-cache/                    WP2/WP6 embedding stores
-  e2e_rerun/                    Table 10 reruns
+  e2e_rerun/                    Table 10 reruns of 50_ without a flag
+  e2e_rerun_all/                Table 10, all ten retrieval rows in one session (50_ --all-rows)
+  e2e_rerun_hash/               the hash row of Section 4.2 (50_ --hash-row)
+  e2e_long/                     56_ outputs per part, each with its serving record
   hermes/                       WP7 run roots, analysis/, records/
   previous/                     55_ outputs per part
   figures/                      Figure1-pipeline.pdf
@@ -170,7 +173,7 @@ $REPRO_OUT/                     default ~/tist-repro
 |---|---|---|
 | exact | deterministic CPU results: BM25, hash, BGE, BGE-M3, Qwen3-0.6B and Qwen3-4B on the CPU, invariants, budget binding, WP5 with BGE, mandatory tables | every number equal, with a slack of 1e-9 for float printing. Strings equal. Hash-backend values (a file or JSON key named for hash) follow the hash rule below |
 | gpu | Qwen3-4B in bf16 (WP0), the Qwen fp16 stores (WP6), anything embedded by the GPU-served Nemotron, WP4 | every point estimate that the committed file gives a 95% CI for lies inside that CI. A float without a CI agrees to 3 decimals. Precision and batch size move values at rounding level |
-| ollama | Table 10 reruns and July runs | tool and exact accuracy, and governed minus ungated deltas, within 0.01. The measured executor drift on identical lists is at most 0.0082. Retrieval metrics of the lists must be exact |
+| ollama | Table 10 reruns, the hash row, the monolithic row and the 128-schema run, and the July files of `evals/results/` | tool and exact accuracy, and governed minus ungated deltas, within 0.01. The measured executor drift on identical lists is at most 0.0082. Retrieval metrics of the lists must be exact |
 | llm | Gemma 4 at temperature 1.0 (Supplement Table S1), Hermes grids, the authorship ablation's runs | every point estimate with a committed CI lies inside it. The committed Hermes results are the author's runs |
 | tags | the tag files the authorship ablation writes | at least 99% of the committed items present, and at least 90% of the shared items with the identical tags. The retrieval runs with those tags (`tb_auth_*`) and the analysis use the llm rule |
 | info | GPU-made top-k lists, the 0.1.10 comparison | compared, for reading only |
@@ -196,7 +199,8 @@ Some committed files are older than your runs. Several WP2, WP5 and WP6 rows wer
 `collect.py` reads `assembled/` and writes `numbers/numbers.md` and `numbers.json`. For each MANIFEST item it lists the source files with their sha256, every number with its 95% CI, source file and JSON path, and the output tables the numbers are printed in. It also computes what the October numbers pass computed by hand:
 - governed minus ungated per backend for Tables 6, 8 and 9, with paired t, p, Wilcoxon p and d = mean(diff) / sd(diff)
 - the cross-backend d against BEAR+BGE in the Section 4.2 text
-- for Table 10, the BEAR+BGE-M3 rerun against the July ungated row, and the drift of the BGE controls
+- for Table 10, governed minus ungated for the five backends (difference, t, p, d)
+- for the end-to-end text of Section 4.2, the statistics over the reruns: each row against the monolithic row, the hash row against the monolithic row, and the run with the first 128 schemas
 - for the former semantic-advantage table (T14, removed from the manuscript), McNemar exact p, Cohen's h and the Clopper-Pearson bound for CPA
 
 Items that need your run are read from `assembled/` only. Items from the previous version are read from `assembled/` when `55_` reran them, else from the committed file of that run. `collect.py` exits 1 while an item that needs your run is incomplete.

@@ -114,9 +114,12 @@ selected with `--base-url` / `--model`.
 
 Table 10 and the Mistral-Nemo cells of Supplement Table S1 were produced with
 **Mistral-Nemo-Instruct-2407 (12B) at `Q4_0` quantization, served by
-[Ollama](https://ollama.com)**. The rows of Table 10 rerun for the revision use
-the tag `mistral-nemo-32k` (`reproduce/README.md`). The Gemma 4 cells of Table S1
-came from Ollama too (`gemma4:12b`, `gemma4:31b`). The Hermes experiment
+[Ollama](https://ollama.com)**. The Gemma 4 cells of Table S1 came from Ollama
+too (`gemma4:12b`, `gemma4:31b`). The revision reran every end-to-end result in
+November 2026 on tags that add only a fixed window to these builds
+(`mistral-nemo-32k`, `mistral-nemo-131k`, `gemma4-12b-131k`, `gemma4-31b-131k`).
+`results/v042/README_E2E_RERUNS.md` lists each run with its tag, digest, window
+and seed. The Hermes experiment
 (Table 16) and the second tagger (Table 17) use a different server, described in
 `hermes/REPRODUCE.md` and `evals/authorship/README.md`.
 
@@ -244,7 +247,7 @@ the script's header. Serving `bf16` needs ~24GB of weights against `Q4_0`'s
 
 ## Table-to-Script Mapping
 
-This map follows the revised manuscript (TIST round 2) as built on 20 Nov 2026. The article has Tables 1 to 19, and its online Supplement has Tables S1 to S4. Every retrieval result of the revision runs on BEAR v0.4.2. The end-to-end rows kept from July 2026 (part of Table 10, and Table S1) ran on v0.1.10. `reproduce/` reruns all of them by hand and records each run. `reproduce/MANIFEST.md` is the full map. It covers every table, figure and in-text number, the exact command, the output file, and whether a number comes from this revision or is kept from the July and August 2026 runs. Static tables and the figures have no backing script.
+This map follows the revised manuscript (TIST round 2) as built on 20 Nov 2026. The article has Tables 1 to 19, and its online Supplement has Tables S1 to S4. Every retrieval result and every end-to-end result of the revision runs on BEAR v0.4.2. The end-to-end results (Table 10, the end-to-end text of Section 4.2 and Supplement Table S1) were rerun in November 2026 under `evals/e2e_rerun/PLAN.md`, and `results/v042/README_E2E_RERUNS.md` lists those runs. `reproduce/` reruns all of them by hand and records each run. `reproduce/MANIFEST.md` is the full map. It covers every table, figure and in-text number, the exact command, the output file, and whether a number comes from this revision or is kept from the July and August 2026 runs. Static tables and the figures have no backing script.
 
 The kit files (`reproduce/MANIFEST.md`, `reproduce/README.md`, `reproduce/lib/paper_map.py`) follow the same numbering. `run_evals.sh` still prints the table numbers of the first submission in its progress lines. Labels and kit ids do not change. T14 and T15 belong to tables that the revision later removed. Their scripts and committed outputs remain. The kit's other ids are in-text numbers, listed in the MANIFEST.
 
@@ -263,7 +266,7 @@ The paper prints three backend labels differently from the scripts and the resul
 | Table 7 | `tab:toolbench-inferred` | `eval_toolbench_inferred_categories.py`, `eval_toolbench_multitag_categories.py`, `eval_toolbench_top5_categories.py` (categories cached from the Anthropic API) | `10_` | T07 | no (post-generation) |
 | Table 8 | `tab:metatool-results` | `wp0_v040/eval_toolbench_v040.py` | `10_`, `20_`, `30_` | T08 | no |
 | Table 9 | `tab:metatool-tags-results` | `wp0_v040/eval_toolbench_v040.py` with the tags of `metatool_generate_tags.py` and `metatool_generate_query_tags_top5.py` | `10_`, `20_`, `30_` | T09 | no (post-generation) |
-| Table 10 | `tab:e2e` | rows rerun on 0.4.2: `wp0_v040/run_e2e_rerun.sh` (`e2e_rerun.py`). Rows kept from July: `eval_toolbench_e2e.py` | `50_`, `55_` | T10a, T10b, T10c | yes |
+| Table 10, and the hash row and the 128-schema run of Section 4.2 | `tab:e2e` | `wp0_v040/run_e2e_rerun.sh` (`e2e_rerun.py`) for the retrieval rows and the hash row. `eval_toolbench_e2e.py` for the monolithic row and the 128-schema run | `50_`, `56_` | T10a, T10b, T10c, XE2Ea | yes |
 | Section 4.3, text | none (earlier `tab:token-efficiency`, `tab:tool-scaling`, `tab:token-savings`) | `eval_scalability.py`, `eval_baseline_comparison.py`, `eval_tool_scaling.py` | `10_` | T13, T26 | no |
 | Table 11 | `tab:decomposed-ablation` | `eval_governance_decomposed.py`. Bottom rows: `eval_mandatory_coverage.py` | `10_`, `15_` to `40_` | T17, T17b | no |
 | Table 12 | `tab:invariants` | `eval_invariants.py` (via `run_wp256.sh v042`) | `15_` | T18 | no |
@@ -275,7 +278,7 @@ The paper prints three backend labels differently from the scripts and the resul
 | Appendix B, text | none (earlier `tab:retrieval`) | `eval_retrieval.py` | `10_` | T25 | no |
 | Table 18 (Appendix B) | `tab:governance-ablation` | `eval_governance_ablation.py` | `10_` | T16 | no |
 | Table 19 (Appendix D) | `tab:models` | *(static, every model with its identifier and settings)* | none | TM | n/a |
-| Supplement Table S1, and the ReAct numbers of Section 4.2 | `tab:e2e-scale` | `eval_toolbench_react.py`, alone for the Mistral-Nemo cells and via `run_model_full1100.sh` and `run_model_scaffold_nothink.sh` for the Gemma 4 cells, then `grid_from_full1100.py` and `scaffold_vs_single.py` (July) | `55_` | T11, T12 | yes |
+| Supplement Table S1, and the ReAct numbers of Section 4.2 | `tab:e2e-scale` | `eval_toolbench_react.py`, alone for the Mistral-Nemo cells and via `run_model_full1100.sh` and `run_model_scaffold_nothink.sh` for the Gemma 4 cells, then `grid_from_full1100.py` and `scaffold_vs_single.py` | `56_` | T11, T12 | yes |
 | Supplement Table S2 | `tab:transfer` | `eval_backend_transfer.py` (off-the-shelf rows: the ungated rows of Tables 6 and 8) | `10_` | T23 | no |
 | Supplement Table S3 | `tab:reranker` | `eval_reranker_composition.py`, `eval_framework_baseline.py` | `10_` | T24 | no |
 | Supplement Table S4 | `tab:alpha-sweep` | `eval_alpha_sweep.py` | `10_` | T28 | no |
@@ -485,4 +488,4 @@ The `pet_sim/instructions/` directory is a frozen snapshot of the corpus used to
 
 ## BEAR Version
 
-Pinned to bear `v0.4.2` (commit `0d0718a`, see `requirements.txt`). Every retrieval result of the revision runs on it. The results kept from the July and August 2026 runs used `v0.1.10` (see `reproduce/MANIFEST.md`). Bumping the version can change numerical results. Update the pin and rerun the suite (`reproduce/`) before comparing to published numbers.
+Pinned to bear `v0.4.2` (commit `0d0718a`, see `requirements.txt`). Every retrieval result and every end-to-end result of the revision runs on it. The July and August 2026 runs used `v0.1.10`, and the revision reran every result that depends on BEAR (see `reproduce/MANIFEST.md`). Bumping the version can change numerical results. Update the pin and rerun the suite (`reproduce/`) before comparing to published numbers.
