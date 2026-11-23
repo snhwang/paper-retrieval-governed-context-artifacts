@@ -53,8 +53,26 @@ def row_files(bench: str, backend: str) -> tuple[str, str]:
     return tb(STEP[backend]), tb(STEP[backend])
 
 
-E2E = "results/v042/e2e_rerun/mistral-nemo"
-JULY_E2E = ["evals/results/toolbench_e2e_scores.json", "evals/results/toolbench_e2e_results.json"]
+# The end-to-end reruns on BEAR 0.4.2 (evals/e2e_rerun/PLAN.md), as 70_assemble.sh lays them out.
+E2E = "results/v042/e2e_rerun_all/mistral-nemo"        # part 1: the ten retrieval rows, one session
+E2E_HASH = "results/v042/e2e_rerun_hash/mistral-nemo"  # part 5: the hash row of the Sec 4.2 text
+E2E_LONG = "results/v042/e2e_long"                     # parts 2 to 5: one folder per part of 56_
+MONO = f"{E2E_LONG}/monolithic/evals/results"
+CAP128 = f"{E2E_LONG}/monolithic-cap128/evals/results"
+REACT = f"{E2E_LONG}/react/results/toolbench_react_metrics_nemo-v042.json"
+E2E_SLUGS = ["bear_qwen3-0.6b_gov", "bear_qwen3-4b_gov", "bear_bge_gov", "bear_bge-m3_gov", "bear_bm25_gov",
+             "qwen3-0.6b_no_gov", "qwen3-4b_no_gov", "bge-m3_no_gov", "bge_no_gov", "bm25_no_gov"]
+
+
+def s1_file(model: str, run: str) -> str:
+    """A Gemma result file of Supplement Table S1. model is 12b or 31b, run is scaffold or a native run's name."""
+    if run == "scaffold":
+        return f"{E2E_LONG}/g{model[:2]}-scaffold/results/toolbench_react_metrics_g4-{model}-v042-scaffold-nothink-full.json"
+    return f"{E2E_LONG}/g{model[:2]}-native/results/toolbench_react_metrics_g4-{model}-v042-{run}_partial.json"
+
+
+S1_NATIVE = ["bearsingle-nothink-full", "bear-full", "mono-nothink-full", "mono-think-full"]  # runs 1 to 4
+S1_FILES = [s1_file(m, r) for m in ("12b", "31b") for r in ["scaffold"] + S1_NATIVE]
 
 ITEMS: list[dict] = [
     # ------------------------------------------------------------- front matter
@@ -118,59 +136,51 @@ ITEMS: list[dict] = [
      "extract": [("toolbench_table", {"bench": "MetaTool+Tags"}),
                  ("toolbench_table", {"bench": "MetaTool+QueryTags-top5"})]},
     # --------------------------------------------------------------- end to end
-    {"id": "T10a", "label": "tab:e2e (Table 10), rows rerun on 0.4.2", "status": "b",
-     "what": "BEAR+BM25 (gov), BM25 (no gov), BEAR+BGE-M3 (gov), the BGE drift controls, and the "
-             "governed vs ungated tests",
-     "script": "50_e2e_ollama.sh (lists from 10_)",
-     "sources": [f"{E2E}/{r}.scores.json" for r in ("bear_bm25_gov", "bm25_no_gov", "bear_bge-m3_gov",
-                                                     "bear_bge_gov", "bge_no_gov")] + [f"{E2E}/rerun_summary.json"],
+    # Every end-to-end number was rerun on 0.4.2 in November 2026 (evals/e2e_rerun/PLAN.md, parts 1 to 5).
+    {"id": "T10a", "label": "tab:e2e (Table 10), the ten retrieval rows", "status": "b",
+     "what": "BGE, BGE-M3, Qwen3-0.6B, Qwen3-4B and BM25, governed and ungoverned, made in one session, "
+             "and the governed vs ungated tests",
+     "script": "50_e2e_ollama.sh --all-rows (lists from 10_ and 20_)",
+     "sources": [f"{E2E}/{r}.scores.json" for r in E2E_SLUGS] + [f"{E2E}/rerun_summary.json"],
      "extract": [("e2e_rerun", {})]},
-    {"id": "T10b", "label": "tab:e2e (Table 10), rows kept from July", "status": "a",
-     "what": "BEAR+BGE, BEAR+Qwen3-0.6B, BEAR+Qwen3-4B (gov), BGE, BGE-M3, Qwen3-0.6B, Qwen3-4B (no gov)",
-     "script": "55_e2e_previous_version.sh table10-july", "sources": JULY_E2E,
-     "extract": [("e2e_july", {})]},
-    {"id": "T10c", "label": "tab:e2e (Table 10), monolithic row", "status": "a",
-     "what": "all 3,225 tools in the prompt: 0.251 / 0.186, recall 0.995",
-     "script": "55_ table10-monolithic",
-     "sources": ["evals/results/toolbench_e2e_results_partial.json", "evals/results/toolbench_e2e_scores_partial.json"],
-     "extract": [("flatten", {"path": "evals/results/toolbench_e2e_results_partial.json"})]},
-    {"id": "XE2Ea", "label": "Sec 4.2 end-to-end text, statistics of the July runs", "status": "a",
-     "what": "monolithic 3.3x and 4.0x (paired bootstrap p, d 0.86 to 1.01), every system vs monolithic (d 0.60 to "
-             "1.01), hash vs monolithic (+0.024, p 0.13, d 0.05), McNemar 0.48 (Qwen3-0.6B vs Qwen3-4B), the cap-128 "
-             "run (2.2%, n = 24), the chance rate, and the 14 colliding names over 22 endpoints",
-     "script": "collect.py (from the July per-query arrays), 70_ (part derived: derive/e2e_name_collisions.py)",
-     "sources": ["evals/results/toolbench_e2e_scores.json",
-                 "evals/results/toolbench_e2e_scores_partial.json",
-                 "evals/results/toolbench_e2e_scores_cap128_superseded.json", f"{D}/e2e_name_collisions.json"],
-     "extract": [("e2e_text", {"part": "july"}), ("flatten", {"path": f"{D}/e2e_name_collisions.json"})]},
+    {"id": "T10b", "label": "Sec 4.2 end-to-end text, the hash row BEAR+Hash (gov), not tabulated", "status": "b",
+     "what": "tool and exact accuracy of the hash backend's governed top 5",
+     "script": "50_e2e_ollama.sh --hash-row (list from 10_)",
+     "sources": [f"{E2E_HASH}/bear_hash_gov.scores.json"],
+     "extract": [("e2e_rerun", {"rows": "hash"})]},
+    {"id": "T10c", "label": "tab:e2e (Table 10), monolithic row", "status": "b",
+     "what": "all 3,225 tools in the prompt: tool and exact accuracy, recall 0.995",
+     "script": "56_e2e_long_context.sh monolithic (through 57_e2e_night.sh)",
+     "sources": [f"{MONO}/toolbench_e2e_results_partial.json", f"{MONO}/toolbench_e2e_scores_partial.json"],
+     "extract": [("flatten", {"path": f"{MONO}/toolbench_e2e_results_partial.json"})]},
+    {"id": "XE2Ea", "label": "Sec 4.2 end-to-end text, statistics over the reruns", "status": "b",
+     "what": "the best governed system against the monolithic row (ratios, paired bootstrap p, d), every row "
+             "against monolithic (d), hash against monolithic, McNemar for Qwen3-0.6B vs Qwen3-4B, the run with "
+             "the first 128 schemas, the chance rate, and the 14 colliding names over 22 endpoints",
+     "script": "collect.py (from the per-query arrays of 50_ and 56_), 70_ (part derived: derive/e2e_name_collisions.py)",
+     "sources": [f"{E2E}/{r}.scores.json" for r in E2E_SLUGS]
+                + [f"{E2E_HASH}/bear_hash_gov.scores.json", f"{MONO}/toolbench_e2e_scores_partial.json",
+                   f"{CAP128}/toolbench_e2e_scores_partial.json", f"{D}/e2e_name_collisions.json"],
+     "extract": [("e2e_text", {"part": "stats"}), ("flatten", {"path": f"{D}/e2e_name_collisions.json"})]},
     {"id": "XE2Eb", "label": "Sec 4.2 end-to-end text and the Table 10 caption, numbers over Table 10 as printed",
      "status": "b",
-     "what": "prompt size (82,298 cl100k, 88.3k Mistral-Nemo), ungoverned exact 0.53 to 0.67, 80% (70 to 87%) of the "
-             "distance closed, the gate increment 0.07 to 0.15, drift at most 0.009",
-     "script": "70_ (e2e-checks, wp4), 50_, collect.py",
-     "sources": ["results/v042/e2e_checks/e2e_prompt_tokens.json", "results/v042/wp4/wp4_token_efficiency.json"]
-                + [f"{E2E}/{r}.scores.json" for r in ("bear_bm25_gov", "bm25_no_gov", "bear_bge-m3_gov")],
+     "what": "prompt size (82,298 cl100k, 88.3k Mistral-Nemo), the range of ungoverned exact accuracy, the share of "
+             "the monolithic-to-governed distance that ungoverned retrieval closes, and the gate's increment",
+     "script": "70_ (e2e-checks, wp4), 50_ --all-rows, 56_ monolithic, collect.py",
+     "sources": ["results/v042/e2e_checks/e2e_prompt_tokens.json", "results/v042/wp4/wp4_token_efficiency.json",
+                 f"{MONO}/toolbench_e2e_scores_partial.json"] + [f"{E2E}/{r}.scores.json" for r in E2E_SLUGS],
      "extract": [("prompt_size", {}), ("e2e_text", {"part": "table10"})]},
-    {"id": "T11", "label": "tab:e2e-react (table removed), ReAct numbers of Sec 4.2, Supplement Sec S1 and Supplement Table S1", "status": "a",
-     "what": "ReAct vs single-turn, Mistral-Nemo", "script": "55_ table11-react",
-     "sources": ["results/toolbench_react_metrics.json"],
-     "extract": [("flatten", {"path": "results/toolbench_react_metrics.json"})]},
-    {"id": "T12", "label": "tab:e2e-scale (Supplement Table S1)", "status": "a",
-     "what": "monolithic configurations vs governance, Mistral-Nemo and Gemma 4 12B and 31B",
-     "script": "55_ table12-*",
-     "sources": ["results/toolbench_react_metrics_g4-12b-scaffold-nothink-full.json",
-                 "results/toolbench_react_metrics_g4-12b-mono-think-full_partial.json",
-                 "results/toolbench_react_metrics_g4-12b-bearsingle-nothink-full_partial.json",
-                 "results/toolbench_react_metrics_g4-12b-bear-full_partial.json",
-                 "results/toolbench_react_metrics_g4-31b-scaffold-nothink-full.json",
-                 "results/toolbench_react_metrics_g4-FULL1100_merged.json"],
-     "extract": [("flatten", {"path": p}) for p in [
-         "results/toolbench_react_metrics_g4-12b-scaffold-nothink-full.json",
-         "results/toolbench_react_metrics_g4-12b-mono-think-full_partial.json",
-         "results/toolbench_react_metrics_g4-12b-bearsingle-nothink-full_partial.json",
-         "results/toolbench_react_metrics_g4-12b-bear-full_partial.json",
-         "results/toolbench_react_metrics_g4-31b-scaffold-nothink-full.json",
-         "results/toolbench_react_metrics_g4-FULL1100_merged.json"]]},
+    {"id": "T11", "label": "tab:e2e-react (table removed), ReAct numbers of Sec 4.2, Supplement Sec S1 and Supplement Table S1", "status": "b",
+     "what": "the one-step scaffold vs single-turn selection, Mistral-Nemo",
+     "script": "56_e2e_long_context.sh react (through 57_e2e_night.sh)",
+     "sources": [REACT],
+     "extract": [("flatten", {"path": REACT})]},
+    {"id": "T12", "label": "tab:e2e-scale (Supplement Table S1)", "status": "b",
+     "what": "monolithic configurations vs governance, Gemma 4 12B and 31B: the scaffold batch and the four "
+             "native runs of each model, with the paired tests of Supplement Sec S1 and the empty answers",
+     "script": "56_e2e_long_context.sh g12-scaffold, g12-native-s1 to -s4, g31-scaffold, g31-native-s1 to -s4",
+     "sources": S1_FILES,
+     "extract": [("flatten", {"path": p}) for p in S1_FILES] + [("s1_grid", {})]},
     # ---------------------------------------------------------- customer support
     {"id": "T13", "label": "tab:token-efficiency (table removed), customer-support text of Sec 4.3", "status": "b",
      "what": "tokens vs N, novel-department recall", "script": "10_ (dense042: scalability, baseline_comparison)",

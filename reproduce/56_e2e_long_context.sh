@@ -25,6 +25,12 @@
 #   monolithic
 #       tab:e2e, the monolithic row: evals/eval_toolbench_e2e.py --backends none
 #       --monolithic-cap 0 on mistral-nemo-131k. Temperature 0, no seed.
+#   monolithic-cap128
+#       The monolithic prompt with only the first 128 schemas of the corpus (part 5 of the plan):
+#       evals/eval_toolbench_e2e.py --backends none --monolithic-cap 128. Section 4.2 sets it
+#       against the full monolithic row. The prompt is short, so this part runs on
+#       mistral-nemo-32k (digest d79a1e80980f, window 32,768), the tag of the Table 10 rows
+#       (50_e2e_ollama.sh), and fits beside the Qwen3.8 server. Temperature 0, no seed.
 #   react
 #       The one-step ReAct scaffold on Mistral-Nemo: evals/eval_toolbench_react.py
 #       --monolithic-cap 0 on mistral-nemo-131k, run label nemo-v042. Temperature 0, no seed.
@@ -79,6 +85,7 @@ repro_parse_args "$@"
 
 PARTS="tag-g12 tag-g31 tag-nemo measure-g12 measure-g31 measure-nemo monolithic react g12-scaffold g12-native g31-scaffold g31-native"
 PARTS+=" g12-native-s1 g12-native-s2 g12-native-s3 g12-native-s4 g31-native-s1 g31-native-s2 g31-native-s3 g31-native-s4"
+PARTS+=" monolithic-cap128"
 PART=""
 for a in "${ARGS_REST[@]}"; do
   case $a in
@@ -91,8 +98,10 @@ done
 [[ " $PARTS " == *" $PART "* ]] || die "unknown part $PART. Parts: $PARTS"
 
 CTX=131072
+TAG_DIGEST=""   # set where the plan names the tag's own digest
 # M is the model's short name in the part names. SEED is sent by the sampled (Gemma) parts only.
 case $PART in
+  monolithic-cap128) M=nemo BASE=mistral-nemo BASE_DIGEST=e7e06d107c6c TAG=mistral-nemo-32k LABEL=nemo-v042 SEED="" CTX=32768 TAG_DIGEST=d79a1e80980f ;;
   *g12*) M=g12  BASE=gemma4:12b   BASE_DIGEST=4eb23ef187e2 TAG=gemma4-12b-131k   LABEL=g4-12b-v042 SEED=20261120 ;;
   *g31*) M=g31  BASE=gemma4:31b   BASE_DIGEST=6316f0629137 TAG=gemma4-31b-131k   LABEL=g4-31b-v042 SEED=20261120 ;;
   *)     M=nemo BASE=mistral-nemo BASE_DIGEST=e7e06d107c6c TAG=mistral-nemo-131k LABEL=nemo-v042   SEED="" ;;
@@ -106,6 +115,7 @@ case $PART in
   *)               STAGES=""           PART_DIR=$PART ;;
 esac
 MODELFILE=evals/e2e_rerun/Modelfile.$TAG
+[ "$TAG" = mistral-nemo-32k ] && MODELFILE=Modelfile   # the tag of 50_e2e_ollama.sh, made from the repo's Modelfile
 OUT=$REPRO_OUT/e2e_long/$PART_DIR
 ART0=$WP0_DIR/artifacts
 RUN_CLONE=$PREV_CLONE   # the run parts write here. It holds no change of its own.
@@ -140,7 +150,11 @@ preflight_launch() {
   if [ "$KIND" != tag ]; then
     check_slice
     check_keepalive
-    [ -n "$(tag_digest "$TAG")" ] || die "Ollama has no tag $TAG. Run: bash reproduce/56_e2e_long_context.sh tag-$M"
+    if [ -n "$TAG_DIGEST" ]; then
+      [ "$(tag_digest "$TAG")" = "$TAG_DIGEST" ] || die "Ollama lists $TAG with digest $(tag_digest "$TAG"), and the plan names $TAG_DIGEST. In PowerShell, in this repo: ollama create $TAG -f $MODELFILE"
+    else
+      [ -n "$(tag_digest "$TAG")" ] || die "Ollama has no tag $TAG. Run: bash reproduce/56_e2e_long_context.sh tag-$M"
+    fi
     check_no_gpu_jobs
     check_card_start
     check_ollama_idle
@@ -358,6 +372,9 @@ elif [ "$KIND" = run ]; then
     monolithic)
       rstep "$PART" -C "$RUN_CLONE" -- "${GUARD[@]}" python evals/eval_toolbench_e2e.py --backends none \
         --monolithic-cap 0 --base-url "$BASE_URL" --model "$TAG" ;;
+    monolithic-cap128)
+      rstep "$PART" -C "$RUN_CLONE" -- "${GUARD[@]}" python evals/eval_toolbench_e2e.py --backends none \
+        --monolithic-cap 128 --base-url "$BASE_URL" --model "$TAG" ;;
     react)
       rstep "$PART" -C "$RUN_CLONE" -- "${GUARD[@]}" python evals/eval_toolbench_react.py \
         --monolithic-cap 0 --base-url "$BASE_URL" --model "$TAG" --run-label "$LABEL" ;;

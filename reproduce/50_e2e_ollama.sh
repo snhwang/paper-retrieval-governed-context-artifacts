@@ -11,6 +11,8 @@
 #   Qwen3-0.6B, Qwen3-4B and BM25, governed and ungoverned), 10 x 1,100 calls, into a
 #   folder of its own. This is part 1 of evals/e2e_rerun/PLAN.md. It also needs the
 #   Qwen3-4B lists of 20_gpu_local_embeddings.sh.
+#   With --hash-row: the one row BEAR+Hash (gov), 1,100 calls, into a folder of its own. The row
+#   is not in Table 10. Section 4.2 sets it against the monolithic row (part 5 of the plan).
 # How: evals/wp0_v040/run_wp0_v040.sh's companion evals/wp0_v040/run_e2e_rerun.sh
 #   mistral-nemo, which runs e2e_rerun.py with --verify-live (BM25 and hash lists are
 #   rebuilt and must match), then evals/wp0_v040/e2e_rerun_report.py.
@@ -31,18 +33,20 @@
 #   $REPRO_OUT/wp0/logs/e2e_rerun_mistral-nemo.log.
 #
 # Usage:
-#   bash reproduce/50_e2e_ollama.sh [--all-rows] [--dry-run] [--wait]
+#   bash reproduce/50_e2e_ollama.sh [--all-rows | --hash-row] [--dry-run] [--wait]
 # Without --dry-run it starts the user service tist-repro-50 and returns.
 set -uo pipefail
 source "$(dirname "$0")/lib/common.sh"
 repro_parse_args "$@"
-ALL_ROWS=0
+ALL_ROWS=0 HASH_ROW=0
 for a in "${ARGS_REST[@]}"; do
   case $a in
     --all-rows) ALL_ROWS=1 ;;
+    --hash-row) HASH_ROW=1 ;;
     *) die "unknown option $a (see --help)" ;;
   esac
 done
+[ "$ALL_ROWS" = 1 ] && [ "$HASH_ROW" = 1 ] && die "--all-rows and --hash-row are separate runs. Give one."
 
 MODEL=mistral-nemo-32k
 DIGEST=d79a1e80980f
@@ -60,6 +64,13 @@ if [ "$ALL_ROWS" = 1 ]; then
   ROW_SLUGS="bear_bm25_gov bm25_no_gov bear_bge-m3_gov bge-m3_no_gov bear_bge_gov bge_no_gov bear_qwen3-0.6b_gov qwen3-0.6b_no_gov bear_qwen3-4b_gov qwen3-4b_no_gov"
   STEP_RUN=e2e-rerun-all STEP_REPORT=e2e-report-all
   ROWS_ENV=(WP0_E2E_ROWS="BEAR+BM25 (gov);BM25 (no gov);BEAR+BGE-M3 (gov);BGE-M3 (no gov);BEAR+BGE (gov);BGE (no gov);BEAR+Qwen3-0.6B (gov);Qwen3-0.6B (no gov);BEAR+Qwen3-4B (gov);Qwen3-4B (no gov)")
+fi
+if [ "$HASH_ROW" = 1 ]; then
+  # The hash backend's governed row, on the same tag as the ten rows. Its list comes from lane lex042.
+  OUT=$REPRO_OUT/e2e_rerun_hash
+  ROW_SLUGS="bear_hash_gov"
+  STEP_RUN=e2e-rerun-hash STEP_REPORT=e2e-report-hash
+  ROWS_ENV=(WP0_E2E_ROWS="BEAR+Hash (gov)")
 fi
 N_ROWS=$(echo $ROW_SLUGS | wc -w)
 
@@ -91,6 +102,9 @@ preflight_launch() {
              "$LISTS_GPU/bear_qwen3_4b_gov.json" "$LISTS_GPU/qwen3_4b_no_gov.json"; do
       [ -s "$f" ] || die "missing list $f. Run 10_cpu_retrieval.sh and 20_gpu_local_embeddings.sh first."
     done
+  fi
+  if [ "$HASH_ROW" = 1 ]; then
+    [ -s "$LISTS_LEX/bear_hash_gov.json" ] || die "missing list $LISTS_LEX/bear_hash_gov.json. Run 10_cpu_retrieval.sh (lane lex042) first."
   fi
   check_no_gpu_jobs
   check_card_start

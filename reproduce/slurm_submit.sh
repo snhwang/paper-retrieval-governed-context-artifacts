@@ -53,6 +53,13 @@
 #               (Memory: the model is in Ollama on Windows, outside the job. The client with its BGE
 #               embedder on the CPU peaked at 2.4 GB on 20 Nov. A measured load used 0.54 GB.)
 #               (In July the ReAct batch took about 8 h and the monolithic row about 6 h.)
+#   rgc-50hash    The row BEAR+Hash (gov) on the Table 10 tag (50_e2e_ollama.sh --hash-row).
+#                 2 CPUs, 6G, 45 min, gpumem:16. Opt-in: only with --only "50hash"
+#   rgc-56cap128  The monolithic prompt with the first 128 schemas, on the same tag
+#                 (56_e2e_long_context.sh monolithic-cap128). 4 CPUs, 6G, 1 h, gpumem:16, after
+#                 rgc-50hash ends. Opt-in: only with --only "56cap128"
+#               (Part 5 of the end-to-end rerun plan. Both fit beside the Qwen3.8 server and take
+#               a few minutes of model time each.)
 #   rgc-65tag   authorship tags             2 CPUs,  8G,  7 h   chat8355:4
 #   rgc-65cpu   authorship, CPU part       12 CPUs, 24G, 12 h   after the tags, after rgc-15fill ends
 #   rgc-65gpu   authorship, GPU part        4 CPUs, 16G,  6 h   gpumem:14, after the tags and rgc-20
@@ -219,6 +226,8 @@ PURPOSE=(
   [00update]="TIST paper revision: move the kit clones to the checkout commit once this user's running kit jobs have ended, so that the next runs use the committed scripts"
   [56tag-nemo]="TIST paper revision: make the Ollama tag mistral-nemo-131k, which only adds a 131072-token window to mistral-nemo"
   [56tag-g31]="TIST paper revision: make the Ollama tag gemma4-31b-131k, which only adds a 131072-token window to gemma4:31b"
+  [50hash]="TIST paper revision: the hash-backend row BEAR+Hash (gov) rerun on BEAR 0.4.2 with Mistral-Nemo in Ollama, 1100 queries, tag mistral-nemo-32k. Section 4.2 sets it against the monolithic row"
+  [56cap128]="TIST paper revision: the monolithic prompt with the first 128 schemas rerun with Mistral-Nemo in Ollama, 1100 queries, tag mistral-nemo-32k. Section 4.2 sets it against the full monolithic row"
   [65tag]="TIST authorship ablation: rewrite all tool and query tags with Qwen3.8-27B on 8355"
   [65cpu]="TIST authorship ablation: retrieval reruns with the new tags, CPU backends"
   [65gpu]="TIST authorship ablation: retrieval reruns with the new tags, Qwen3-4B on the local GPU"
@@ -233,7 +242,7 @@ for s in 65tag 65cpu 65gpu 65nem 65an; do PLAN[$s]=$AUTH_PLAN; done
 # of the file as committed, with LF line ends, whatever line ends the checkout has on this machine.
 E2E_PLAN_FILE=$ART/evals/e2e_rerun/PLAN.md
 E2E_PLAN="end-to-end rerun PLAN.md v$(grep -o 'version [0-9]*' "$E2E_PLAN_FILE" | head -1 | cut -d' ' -f2) sha256 $(tr -d '\r' < "$E2E_PLAN_FILE" | sha256sum | cut -c1-8), $KIT_PLAN"
-for s in 50all 56tag-g12 56meas-g12 56g12s 56g12n 56tag-nemo 56tag-g31 56night; do PLAN[$s]=$E2E_PLAN; done
+for s in 50all 50hash 56cap128 56tag-g12 56meas-g12 56g12s 56g12n 56tag-nemo 56tag-g31 56night; do PLAN[$s]=$E2E_PLAN; done
 # Card gates for GPU steps under Slurm (model-server, 16 Nov). The card has 97,887 MiB. Windows' desktop
 # takes about 6 GB beside the containers' 67.5 GB, so the 30 Oct start limit (67,000) cannot be met with
 # Scott's windows open. Start at 97,887 - gpumem*1024 - 2,048 or less, and stop above 94,000. The Ollama
@@ -256,6 +265,9 @@ if [[ $ONLY == *" 00update "* ]]; then
     '$2 ~ /^rgc-/ && $1 != me && ($3 != "PENDING" || $4 == "(null)" || $4 == "") { printf ":%s", $1 }')
   sub 00update 1 2G 00:20:00 "" "${BUSY:+--dependency=afterany$BUSY}" "" bash reproduce/00_setup.sh --update
 fi
+# Part 5 of the end-to-end rerun plan: two short runs on the Table 10 tag, one after the other.
+[[ $ONLY == *" 50hash "* ]] && sub 50hash 2 6G 00:45:00 "gpumem:16" "$(dep afterok:00update)" "$NOFREEZE" $(gate 16 row) bash reproduce/50_e2e_ollama.sh --hash-row
+[[ $ONLY == *" 56cap128 "* ]] && sub 56cap128 4 6G 01:00:00 "gpumem:16" "$(dep afterok:00update afterany:50hash)" "$NOFREEZE" $(gate 16) bash reproduce/56_e2e_long_context.sh monolithic-cap128
 # The tags need no night and no GPU. One after the other, and before the 12B runs of the same call,
 # so that no two of these jobs start in the same second.
 [[ $ONLY == *" 56tag-g12 "* ]] && sub 56tag-g12 1 2G 00:20:00 "" "" "" bash reproduce/56_e2e_long_context.sh tag-g12
@@ -298,7 +310,7 @@ sub 65cpu  12 24G 12:00:00   ""            "$(dep afterok:65tag afterany:15fill)
 sub 65gpu   4 16G 06:00:00   "gpumem:14"   "$(dep 'afterok:65tag 20')"                 "$NOFREEZE" $(gate 14) bash reproduce/65_authorship.sh --part gpu
 sub 65nem   2 8G  01:30:00   "embed8360:1" "$(dep 'afterok:65tag 30')"                 "$NOFREEZE" bash reproduce/65_authorship.sh --part nemotron
 sub 65an    2 8G  00:45:00   ""            "$(dep 'afterok:10 20 30 65cpu 65gpu 65nem')" ""        bash reproduce/65_authorship.sh --part analyze
-sub 70      4 16G 01:30:00   ""            "$(dep 'afterany:10 15 15fill 20 30 40 50 65an')" ""    bash reproduce/70_assemble.sh
+sub 70      4 16G 01:30:00   ""            "$(dep afterok:00update 'afterany:10 15 15fill 20 30 40 50 50hash 56cap128 65an')" ""    bash reproduce/70_assemble.sh
 sub 80      1 2G  00:15:00   ""            ""                                         ""          bash reproduce/80_figures.sh
 sub 90      2 8G  00:30:00   ""            "$(dep 'afterany:70 80')"                   ""          bash reproduce/90_verify.sh
 [ "$DRY" = 1 ] && echo "(dry run: nothing submitted. <rgc-NN> stands for that step's job id)"

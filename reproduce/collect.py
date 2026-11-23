@@ -23,8 +23,9 @@ Computed numbers (the gap the numbers pass closed by hand):
     Cohen's d = mean(diff) / sd(diff, ddof=1), from the per-query arrays, as
     eval_toolbench.py and the numbers pass computed them
   - cross-backend d against BEAR+BGE on ToolBench (Section 4.2 text)
-  - Table 10: the BEAR+BGE-M3 rerun against the July ungated row, the drift of the
-    BGE controls, and governed vs ungated for the July rows
+  - Table 10 and the Section 4.2 text: governed vs ungated for the five backends, every row and
+    the hash row against the monolithic row, and the run with the first 128 schemas
+  - Supplement Table S1: the Gemma cells from the per-query scores, with McNemar exact tests
   - tab:semantic-advantage (T14, removed from the manuscript): McNemar exact p, Cohen's h and the Clopper-Pearson bound for CPA
 
 Exit code 0 if every "needs Scott's run" item was found complete, 1 otherwise
@@ -290,20 +291,34 @@ def ex_mand_only(ctx, it, a, res):
                                           f"{bench}/BEAR+{b} (mand-only)/cis/recall", (c["ci_lower"], c["ci_upper"])))
 
 
-E2E_ROWS = {"BEAR+BM25 (gov)": "bear_bm25_gov", "BM25 (no gov)": "bm25_no_gov",
-            "BEAR+BGE-M3 (gov)": "bear_bge-m3_gov", "BEAR+BGE (gov)": "bear_bge_gov", "BGE (no gov)": "bge_no_gov"}
+E2E_ROWS = {"BEAR+Qwen3-0.6B (gov)": "bear_qwen3-0.6b_gov", "BEAR+Qwen3-4B (gov)": "bear_qwen3-4b_gov",
+            "BEAR+BGE (gov)": "bear_bge_gov", "BEAR+BGE-M3 (gov)": "bear_bge-m3_gov",
+            "BEAR+BM25 (gov)": "bear_bm25_gov", "Qwen3-0.6B (no gov)": "qwen3-0.6b_no_gov",
+            "Qwen3-4B (no gov)": "qwen3-4b_no_gov", "BGE-M3 (no gov)": "bge-m3_no_gov",
+            "BGE (no gov)": "bge_no_gov", "BM25 (no gov)": "bm25_no_gov"}
+E2E_BACKENDS = ("BGE", "BGE-M3", "Qwen3-0.6B", "Qwen3-4B", "BM25")
+HASH_ROW = "BEAR+Hash (gov)"
 
 
-def july_scores(ctx) -> dict:
-    """The July per-query arrays (previous version): your 55_ rerun if present, else the committed file."""
-    for base in (ctx.root, ctx.committed):
-        p = base / pm.JULY_E2E[0]
-        if p.exists():
-            return {s["condition"]: s for s in ctx.json(p)["scores"]}, str(p.relative_to(base)), base == ctx.root
-    return {}, "", False
+def e2e_row_numbers(cond, r, rel, res):
+    for m in ("tool", "exact"):
+        c = r[f"{m}_ci"]
+        res["numbers"].append(num(f"{cond} {m} accuracy (rerun on 0.4.2)", r[f"{m}_accuracy"], rel,
+                                  f"{m}_accuracy", (c["ci_lower"], c["ci_upper"])))
+    for m in ("recall", "ndcg"):
+        res["numbers"].append(num(f"{cond} retrieval {m}@5 of its list", r[m], rel, m))
+    res["numbers"].append(num(f"{cond} LLM errors", r.get("llm_errors"), rel, "llm_errors"))
 
 
 def ex_e2e_rerun(ctx, it, a, res):
+    if a.get("rows") == "hash":
+        rel = f"{pm.E2E_HASH}/bear_hash_gov.scores.json"
+        p, _ = ctx.find(rel, "b")
+        if p is None:
+            res["missing"].append(rel)
+        else:
+            e2e_row_numbers(HASH_ROW, ctx.json(p), rel, res)
+        return
     rows = {}
     for cond, slug in E2E_ROWS.items():
         rel = f"{pm.E2E}/{slug}.scores.json"
@@ -311,62 +326,14 @@ def ex_e2e_rerun(ctx, it, a, res):
         if p is None:
             res["missing"].append(rel)
             continue
-        r = ctx.json(p)
-        rows[cond] = r
-        for m in ("tool", "exact"):
-            c = r[f"{m}_ci"]
-            res["numbers"].append(num(f"{cond} {m} accuracy (rerun on 0.4.2)", r[f"{m}_accuracy"], rel,
-                                      f"{m}_accuracy", (c["ci_lower"], c["ci_upper"])))
-        for m in ("recall", "ndcg"):
-            res["numbers"].append(num(f"{cond} retrieval {m}@5 of its list", r[m], rel, m))
-    for g, u in (("BEAR+BM25 (gov)", "BM25 (no gov)"), ("BEAR+BGE (gov)", "BGE (no gov)")):
+        rows[cond] = ctx.json(p)
+        e2e_row_numbers(cond, rows[cond], rel, res)
+    for b in E2E_BACKENDS:
+        g, u = f"BEAR+{b} (gov)", f"{b} (no gov)"
         if g in rows and u in rows:
             for m in ("tool", "exact"):
                 s = paired(rows[g][f"_{m}_scores"], rows[u][f"_{m}_scores"])
                 res["numbers"].append(num(f"{g} minus {u}, {m} accuracy", s["delta"], f"{pm.E2E}/*.scores.json",
-                                          "computed: paired over queries", None, t=s["t"], p=s["p"], d=s["d"]))
-    july, jrel, own = july_scores(ctx)
-    src = jrel + ("" if own else " (committed, previous version)")
-    if "BEAR+BGE-M3 (gov)" in rows and "BGE-M3 (no gov)" in july:
-        for m in ("tool", "exact"):
-            s = paired(rows["BEAR+BGE-M3 (gov)"][f"_{m}_scores"], july["BGE-M3 (no gov)"][f"_{m}_scores"])
-            res["numbers"].append(num(f"BEAR+BGE-M3 (gov, rerun) minus BGE-M3 (no gov, July), {m} accuracy", s["delta"],
-                                      f"{pm.E2E}/bear_bge-m3_gov.scores.json and {src}",
-                                      "computed: paired over queries", None, t=s["t"], p=s["p"], d=s["d"]))
-    drift = []
-    for cond in ("BEAR+BGE (gov)", "BGE (no gov)"):
-        if cond in rows and cond in july:
-            import numpy as np
-            for m in ("tool", "exact"):
-                now = rows[cond][f"{m}_accuracy"]
-                then = float(np.mean(july[cond][f"_{m}_scores"]))
-                changed = int(np.sum(np.asarray(rows[cond][f"_{m}_scores"]) != np.asarray(july[cond][f"_{m}_scores"])))
-                res["numbers"].append(num(f"{cond} {m} accuracy, rerun minus July (executor drift)", now - then,
-                                          f"{pm.E2E} and {src}", "computed", None, queries_changed=changed))
-                drift.append(abs(now - then))
-    if drift:
-        res["numbers"].append(num("largest executor drift on the BGE controls", max(drift), f"{pm.E2E} and {src}",
-                                  "computed: max |rerun - July| over tool and exact accuracy"))
-
-
-def ex_e2e_july(ctx, it, a, res):
-    import numpy as np
-    july, jrel, own = july_scores(ctx)
-    if not july:
-        res["missing"].append(pm.JULY_E2E[0])
-        return
-    src = jrel + ("" if own else " (committed, previous version)")
-    for cond, s in july.items():
-        for m in ("tool", "exact"):
-            if f"_{m}_scores" in s:
-                res["numbers"].append(num(f"{cond} {m} accuracy (July)", float(np.mean(s[f"_{m}_scores"])), src,
-                                          f"scores[{cond}]/_{m}_scores (mean)"))
-    for b in ("BGE", "BGE-M3", "Qwen3-0.6B", "Qwen3-4B", "BM25"):
-        g, u = july.get(f"BEAR+{b} (gov)"), july.get(f"{b} (no gov)")
-        if g and u:
-            for m in ("tool", "exact"):
-                s = paired(g[f"_{m}_scores"], u[f"_{m}_scores"])
-                res["numbers"].append(num(f"July BEAR+{b} (gov) minus {b} (no gov), {m} accuracy", s["delta"], src,
                                           "computed: paired over queries", None, t=s["t"], p=s["p"], d=s["d"]))
 
 
@@ -451,62 +418,70 @@ def mcnemar_exact(a, b) -> dict:
     return {"n10": n10, "n01": n01, "p": p}
 
 
-def e2e_sets(ctx, it, res):
-    """July scores (previous version), the monolithic and cap-128 runs, and your Table 10 reruns."""
-    july, jrel, own = july_scores(ctx)
-    tag = "" if own else " (committed, previous version)"
-    out = {"july": july, "july_src": jrel + tag, "mono": None, "cap128": None, "rerun": {}}
-    for key, rel in (("mono", "evals/results/toolbench_e2e_scores_partial.json"),
-                     ("cap128", "evals/results/toolbench_e2e_scores_cap128_superseded.json")):
-        p, where = ctx.find(rel, "a")
+def e2e_sets(ctx, it, res, extras=True):
+    """Your end-to-end reruns: the ten Table 10 rows, the hash row, the monolithic row and the run with 128 schemas."""
+    out = {"rows": {}, "hash": None, "mono": None, "cap128": None}
+    for cond, slug in E2E_ROWS.items():
+        rel = f"{pm.E2E}/{slug}.scores.json"
+        p, _ = ctx.find(rel, "b")
+        if p is None:
+            res["missing"].append(rel)
+        else:
+            out["rows"][cond] = ctx.json(p)
+    rel = f"{pm.E2E_HASH}/bear_hash_gov.scores.json"
+    p, _ = ctx.find(rel, "b") if extras else (None, "")
+    if p is not None:
+        out["hash"] = ctx.json(p)
+    elif extras:
+        res["missing"].append(rel)
+    for key, rel in (("mono", f"{pm.MONO}/toolbench_e2e_scores_partial.json"),
+                     ("cap128", f"{pm.CAP128}/toolbench_e2e_scores_partial.json"))[:2 if extras else 1]:
+        p, _ = ctx.find(rel, "b")
         if p is None:
             res["missing"].append(rel)
             continue
         sc = {x["condition"]: x for x in ctx.json(p)["scores"]}
         out[key] = sc.get("Monolithic (all tools)")
-        out[key + "_src"] = rel + ("" if where == "your run" else " (committed, previous version)")
-    for cond, slug in E2E_ROWS.items():
-        p, _ = ctx.find(f"{pm.E2E}/{slug}.scores.json", "b")
-        if p is not None:
-            out["rerun"][cond] = ctx.json(p)
+        out[key + "_src"] = rel
     return out
 
 
 def ex_e2e_text(ctx, it, a, res):
     import numpy as np
-    S = e2e_sets(ctx, it, res)
-    july, mono = S["july"], S["mono"]
-    if not july or mono is None:
-        res["missing"].append("July end-to-end per-query arrays")
+    S = e2e_sets(ctx, it, res, extras=a["part"] == "stats")  # the hash row and the 128-schema run are text only
+    rows, mono = S["rows"], S["mono"]
+    if mono is None:
         return
     msrc = S["mono_src"]
-    if a["part"] == "july":
+    if a["part"] == "stats":
         for m in ("tool", "exact"):
             res["numbers"].append(num(f"Monolithic {m} accuracy", float(np.mean(mono[f"_{m}_scores"])), msrc,
                                       f"_{m}_scores (mean)"))
-        best = max((c for c in july if c.startswith("BEAR+") and "Hash" not in c),
-                   key=lambda c: np.mean(july[c]["_tool_scores"]))
-        for cond, sc in july.items():
-            if cond.startswith("Monolithic"):
-                continue
+        governed = [c for c in rows if c.startswith("BEAR+")]
+        if governed:
+            best = max(governed, key=lambda c: np.mean(rows[c]["_tool_scores"]))
+            res["notes"].append(f"best governed system by tool accuracy: {best}")
+        against = dict(rows)
+        if S["hash"] is not None:
+            against[HASH_ROW] = S["hash"]
+        for cond, sc in against.items():
+            src = f"{pm.E2E_HASH if cond == HASH_ROW else pm.E2E} and {msrc}"
             for m in ("tool", "exact"):
                 x, y = np.asarray(sc[f"_{m}_scores"], float), np.asarray(mono[f"_{m}_scores"], float)
                 st = paired(x, y)
                 lo, hi, pb = boot_paired(x - y)
-                res["numbers"].append(num(f"{cond} minus Monolithic, {m} accuracy", st["delta"],
-                                          f"{S['july_src']} and {msrc}", "computed: paired over queries",
-                                          (lo, hi), t=st["t"], p=st["p"], d=st["d"], bootstrap_p=pb,
-                                          ratio=float(x.mean() / y.mean()) if y.mean() else float("nan")))
-        res["notes"].append(f"best governed system by tool accuracy: {best}")
-        q06, q4 = july.get("BEAR+Qwen3-0.6B (gov)"), july.get("BEAR+Qwen3-4B (gov)")
+                res["numbers"].append(num(f"{cond} minus Monolithic, {m} accuracy", st["delta"], src,
+                                          "computed: paired over queries", (lo, hi), t=st["t"], p=st["p"], d=st["d"],
+                                          bootstrap_p=pb, ratio=float(x.mean() / y.mean()) if y.mean() else float("nan")))
+        q06, q4 = rows.get("BEAR+Qwen3-0.6B (gov)"), rows.get("BEAR+Qwen3-4B (gov)")
         if q06 and q4:
             for m in ("tool", "exact"):
                 mc = mcnemar_exact(q06[f"_{m}_scores"], q4[f"_{m}_scores"])
                 st = paired(q06[f"_{m}_scores"], q4[f"_{m}_scores"])
                 res["numbers"].append(num(f"BEAR+Qwen3-0.6B vs BEAR+Qwen3-4B (gov), {m} accuracy, McNemar exact p",
-                                          mc["p"], S["july_src"], "computed: binomial test on discordant pairs",
+                                          mc["p"], pm.E2E, "computed: binomial test on discordant pairs",
                                           None, n10=mc["n10"], n01=mc["n01"], t=st["t"], p=st["p"]))
-        cap = S.get("cap128")
+        cap = S["cap128"]
         if cap is not None:
             r = np.asarray(cap["_recall_scores"], float)
             present = r >= 1
@@ -520,23 +495,17 @@ def ex_e2e_text(ctx, it, a, res):
                                           float(v.mean()) if len(v) else float("nan"), S["cap128_src"], "computed"))
         res["numbers"].append(num("chance rate, one of 3,225 tools", 1 / 3225, "evals/data (corpus size)", "computed"))
         return
-    # part "table10": Table 10 as printed, the three rerun rows in place of July's
-    t10 = dict(july)
-    for cond in ("BEAR+BM25 (gov)", "BM25 (no gov)", "BEAR+BGE-M3 (gov)"):
-        if cond in S["rerun"]:
-            t10[cond] = S["rerun"][cond]
-        else:
-            res["missing"].append(f"{pm.E2E} rerun row {cond}")
-    src = f"{S['july_src']}, {pm.E2E}, {msrc}"
+    # part "table10": numbers over Table 10 as printed
+    src = f"{pm.E2E}, {msrc}"
     me = float(np.mean(mono["_exact_scores"]))
-    ungov = {c: float(np.mean(v["_exact_scores"])) for c, v in t10.items() if c.endswith("(no gov)")}
+    ungov = {c: float(np.mean(v["_exact_scores"])) for c, v in rows.items() if c.endswith("(no gov)")}
     if ungov:
         res["numbers"].append(num("ungoverned exact accuracy, lowest", min(ungov.values()), src, "computed",
                                   None, which=min(ungov, key=ungov.get)))
         res["numbers"].append(num("ungoverned exact accuracy, highest", max(ungov.values()), src, "computed",
                                   None, which=max(ungov, key=ungov.get)))
-    for b in ("BGE", "BGE-M3", "Qwen3-0.6B", "Qwen3-4B", "BM25"):
-        g, u = t10.get(f"BEAR+{b} (gov)"), t10.get(f"{b} (no gov)")
+    for b in E2E_BACKENDS:
+        g, u = rows.get(f"BEAR+{b} (gov)"), rows.get(f"{b} (no gov)")
         if not (g and u):
             continue
         ge, ue = float(np.mean(g["_exact_scores"])), float(np.mean(u["_exact_scores"]))
@@ -547,6 +516,54 @@ def ex_e2e_text(ctx, it, a, res):
             st = paired(g[f"_{m}_scores"], u[f"_{m}_scores"])
             res["numbers"].append(num(f"{b}: governed minus ungoverned, {m} accuracy (Table 10 rows)", st["delta"], src,
                                       "computed: paired over queries", None, t=st["t"], p=st["p"], d=st["d"]))
+
+
+S1_CELLS = {  # cell -> (run of pm.s1_file, key of per_query_correct, key of response_health)
+    "monolithic under the scaffold": ("scaffold", "mono_react", "Monolithic + ReAct"),
+    "governed under the scaffold": ("scaffold", "bear_react", "BEAR retrieval + ReAct"),
+    "governed single-turn (scaffold batch)": ("scaffold", "bear_single", "BEAR retrieval + single-turn (reference)"),
+    "monolithic, reasoning channel off": ("mono-nothink-full", "mono_react", "Monolithic + ReAct"),
+    "monolithic with native reasoning": ("mono-think-full", "mono_react", "Monolithic + ReAct"),
+    "governed single-turn": ("bearsingle-nothink-full", "bear_single", "BEAR retrieval + single-turn (reference)"),
+    "governed with native reasoning": ("bear-full", "bear_react", "BEAR retrieval + ReAct"),
+}
+S1_TESTS = [  # (first cell, second cell): the second minus the first
+    ("governed single-turn (scaffold batch)", "governed under the scaffold"),
+    ("monolithic under the scaffold", "governed under the scaffold"),
+    ("monolithic, reasoning channel off", "monolithic with native reasoning"),
+    ("governed single-turn", "governed with native reasoning"),
+    ("monolithic with native reasoning", "governed with native reasoning"),
+]
+
+
+def ex_s1_grid(ctx, it, a, res):
+    """Supplement Table S1, the Gemma columns: each cell from the per-query scores, its empty answers,
+    and McNemar's exact test for the paired conditions the text compares."""
+    import numpy as np
+    for model in ("12b", "31b"):
+        cells = {}
+        for cell, (run, key, health) in S1_CELLS.items():
+            rel = pm.s1_file(model, run)
+            p, _ = ctx.find(rel, it["status"])
+            if p is None:
+                continue  # the flatten entry of the same file already reports it as missing
+            d = ctx.json(p)
+            v = (d.get("per_query_correct") or {}).get(key)
+            if v is None:
+                res["missing"].append(f"{rel} (per_query_correct/{key})")
+                continue
+            cells[cell] = np.asarray(v, float)
+            h = (d.get("response_health") or {}).get(health) or {}
+            res["numbers"].append(num(f"Gemma 4 {model.upper()}, {cell}: accuracy", float(cells[cell].mean()), rel,
+                                      f"per_query_correct/{key} (mean)", None, n=int(len(cells[cell])),
+                                      n_empty=h.get("n_empty"), n_unparsed=h.get("n_unparsed"),
+                                      accuracy_when_answered=h.get("accuracy_when_answered")))
+        for x, y in S1_TESTS:
+            if x in cells and y in cells:
+                mc = mcnemar_exact(cells[x], cells[y])
+                res["numbers"].append(num(f"Gemma 4 {model.upper()}: {y} minus {x}", float(cells[y].mean() - cells[x].mean()),
+                                          f"{pm.E2E_LONG}/g{model[:2]}-*", "computed: McNemar exact on the per-query scores",
+                                          None, p=mc["p"], n10=mc["n10"], n01=mc["n01"]))
 
 
 def ex_transfer_table(ctx, it, a, res):
@@ -678,7 +695,7 @@ def ex_latency(ctx, it, a, res):
 
 EXTRACTORS = {"flatten": ex_flatten, "text": ex_text, "csv": ex_csv, "toolbench_table": ex_toolbench_table,
               "cross_backend": ex_cross_backend, "mand_only": ex_mand_only, "e2e_rerun": ex_e2e_rerun,
-              "e2e_july": ex_e2e_july, "prompt_size": ex_prompt_size, "semantic_stats": ex_semantic_stats,
+              "s1_grid": ex_s1_grid, "prompt_size": ex_prompt_size, "semantic_stats": ex_semantic_stats,
               "e2e_text": ex_e2e_text, "transfer_table": ex_transfer_table, "retrieval_log": ex_retrieval_log,
               "tool_scaling_log": ex_tool_scaling_log, "novel_mcnemar": ex_novel_mcnemar, "latency": ex_latency}
 
@@ -715,7 +732,8 @@ def to_md(out: dict) -> str:
             for n in r["numbers"]:
                 ci = f"[{fmt(n['ci95'][0])}, {fmt(n['ci95'][1])}]" if "ci95" in n else ""
                 test = ", ".join(f"{k} {fmt(n[k])}" for k in ("t", "p", "d", "wilcoxon_p", "bootstrap_p", "ratio", "n", "n10", "n01",
-                                                       "b", "c", "cohens_h", "queries_changed", "which",
+                                                       "b", "c", "cohens_h", "queries_changed", "which", "n_empty", "n_unparsed",
+                                                       "accuracy_when_answered",
                                                        "hardcoded_in_eval_backend_transfer") if k in n)
                 L.append(f"| {n['name']} | {fmt(n['value'])} | {ci} | `{n['source']}` | {n['where']} | {test} |")
             L.append("")

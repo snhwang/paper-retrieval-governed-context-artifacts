@@ -102,7 +102,23 @@ $local_changes"
       fi
     done
   fi
-  run_cmd "merge-$(basename "$d")" -C "$d" -- git merge -q --ff-only FETCH_HEAD     || die "could not fast-forward $d. A new commit may touch a result file a run of yours changed (see git -C $d status)."
+  # A clone only follows this checkout, so its head is an ancestor of the new commit. One exception:
+  # on 22 Nov 2026 nineteen commits of this repository got new hashes (lib/rewritten_commits.txt,
+  # runlog/README.md). A clone still at one of the old hashes is moved to the new commit, if the new
+  # form of its head is an ancestor of that commit. reset --keep changes the files a fast-forward
+  # would change, and stops if one of them carries a local change.
+  if [ "$DRY_RUN" = 0 ] && ! git -C "$d" merge-base --is-ancestor HEAD FETCH_HEAD; then
+    local head now
+    head=$(git -C "$d" rev-parse HEAD)
+    now=$(awk -v h="$head" '$1 == h { print $2 }' "$REPRO_DIR/lib/rewritten_commits.txt" 2>/dev/null)
+    { [ -n "$now" ] && git -C "$d" merge-base --is-ancestor "$now" FETCH_HEAD; } \
+      || die "$d is at $old, which is not part of $BR of $ART, and lib/rewritten_commits.txt does not link it. Not updated."
+    run_cmd "move-$(basename "$d")" -C "$d" -- git reset -q --keep FETCH_HEAD \
+      || die "could not move $d from $old (now ${now:0:7}) to the new commit (see git -C $d status)."
+    record_note "clone $d was at $old, a commit whose hash changed on 22 Nov 2026 (now ${now:0:7})"
+  else
+    run_cmd "merge-$(basename "$d")" -C "$d" -- git merge -q --ff-only FETCH_HEAD     || die "could not fast-forward $d. A new commit may touch a result file a run of yours changed (see git -C $d status)."
+  fi
   [ "$DRY_RUN" = 1 ] && return 0
   new=$(git -C "$d" rev-parse --short HEAD)
   for f in $REQUIRED_IN_CLONE; do [ -e "$d/$f" ] || missing+=" $f"; done

@@ -19,7 +19,9 @@
 # Then it gathers everything into $REPRO_OUT/assembled/, laid out like this repo, so
 # verify.py and collect.py can read it:
 #   results/v042/           evals/wp0_v040/assemble_v040.py (WP0 stage, lists, WP4,
-#                           e2e rerun, mandatory tables, checks, diag), with MANIFEST.json
+#                           e2e reruns, mandatory tables, checks, diag), with MANIFEST.json.
+#                           The end-to-end reruns are e2e_rerun_all/ (50_ --all-rows),
+#                           e2e_rerun_hash/ (50_ --hash-row) and e2e_long/<part>/ (56_ and 57_)
 #   results/*               new result files of 15_ and 40_ (the artifacts-wp256 clone)
 #   hermes/results/         $REPRO_OUT/hermes/analysis (60_)
 #   (previous version)      $REPRO_OUT/previous/<part>/ (55_)
@@ -151,8 +153,11 @@ for part in $PARTS; do
       echo "+ rm -rf $ASSEMBLED"
       if [ -d "$ST/v042" ] || [ "$DRY_RUN" = 1 ]; then
         extra=()
-        for kv in "e2e_rerun=$REPRO_OUT/e2e_rerun" "mandatory=$WP0_DIR/mandatory" "e2e_checks=$WP0_DIR/e2e_checks" \
-                  "diag=$WP0_DIR/diag"; do
+        # e2e_rerun is the five-row rerun of early November, which the paper no longer cites.
+        # e2e_rerun_all, e2e_rerun_hash and e2e_long are parts 1 to 5 of evals/e2e_rerun/PLAN.md.
+        for kv in "e2e_rerun=$REPRO_OUT/e2e_rerun" "e2e_rerun_all=$REPRO_OUT/e2e_rerun_all" \
+                  "e2e_rerun_hash=$REPRO_OUT/e2e_rerun_hash" "e2e_long=$REPRO_OUT/e2e_long" \
+                  "mandatory=$WP0_DIR/mandatory" "e2e_checks=$WP0_DIR/e2e_checks" "diag=$WP0_DIR/diag"; do
           { [ -d "${kv#*=}" ] || [ "$DRY_RUN" = 1 ]; } && extra+=("$kv")
         done
         run_cmd assemble-wp0 -C "$A0" -- capped 8G -- "$REPRO_PY" evals/wp0_v040/assemble_v040.py --root "$WP0_DIR" \
