@@ -10,6 +10,8 @@ Nothing was removed. Failed and repeated attempts are included, since they are p
 
 One record is damaged, `56_e2e_long_context-20261121T070026Z.json`. Two queue jobs started in the same second on 21 November (jobs 418 and 419, which make the tags `mistral-nemo-131k` and `gemma4-31b-131k`) and wrote the same file. It is not valid JSON, and `records.jsonl` has no line for it. Job 418 failed on the shared file and made no tag. Job 419 made its tag. Since then each run gets its own record. Both tag steps ran once more under complete records on 21 November (jobs 453 and 454). The step for `gemma4-31b-131k` found the tag that job 419 made and recorded its digest.
 
+On 23 November the final assembly and check ran three times. The first check (job 578, `90_verify-20261123T190115Z.json`) stopped because the assembly before it had left out seven of the author's result files that equal the committed copies. The kit was changed to gather them (`70_assemble.sh`, `lib/outputs_equal_committed.txt`). The author then entered the last block twice, so the clone update, the assembly and the check each ran twice more (jobs 601 to 603 and 619 to 621). Both checks ended with exit code 0 and the same totals.
+
 ## What a record holds
 
 - The script, its arguments, its start and end times, its exit code and its status.
