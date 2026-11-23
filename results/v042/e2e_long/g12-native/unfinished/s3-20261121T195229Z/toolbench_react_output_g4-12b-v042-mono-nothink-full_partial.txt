@@ -1,0 +1,13 @@
+=== ToolBench end-to-end with ReAct-style prompting ===
+
+Model: gemma4-12b-131k
+Base URL: http://127.0.0.1:11434/v1
+BEAR top-k: 5
+Monolithic cap: 0
+
+Loading ToolBench data ...
+Corpus: 3225 APIs, evaluating 1100 queries
+Corpus schema coverage: 3225/3225 (100.0%) instructions have an OpenAI function schema.
+  Context check: monolithic (3225 tools) prompt ~113,942 tokens, server window 131,072.
+
+[Monolithic + ReAct] running 1100 queries ...

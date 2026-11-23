@@ -1,0 +1,84 @@
+{
+ "utc_start": "2026-11-21T21:00:27Z",
+ "model": "gemma4-12b-131k",
+ "base": "gemma4:12b",
+ "expect_ctx": 131072,
+ "seed": 20261120,
+ "command": [
+  "env",
+  "MODEL=gemma4-12b-131k",
+  "LABEL=g4-12b-v042",
+  "STAGES=4",
+  "bash",
+  "evals/run_model_full1100.sh"
+ ],
+ "chat_server_at_start": {
+  "up": true,
+  "models": [
+   "Qwen3.8-27B"
+  ]
+ },
+ "ollama_version": "0.40.16",
+ "base_digest": "4eb23ef187e2c5462566d6a1d3bbbc2f1346d0b4327cbb66d58fffbcc9b2b05c",
+ "tag_digest": "e8408c45bfbcff1db2d690dc1c297acbbe5cb3ce062b499c1b9c453b9de93a84",
+ "tag_parameters": "num_ctx                        131072\ntemperature                    1\ntop_k                          64\ntop_p                          0.95",
+ "details": {
+  "parent_model": "gemma4:12b",
+  "format": "gguf",
+  "family": "gemma4",
+  "families": [
+   "gemma4"
+  ],
+  "parameter_size": "11.9B",
+  "quantization_level": "Q4_K_M",
+  "context_length": 262144,
+  "embedding_length": 3840,
+  "runner": "llamacpp"
+ },
+ "template_sha256": "b507b9c2f6ca642bffcd06665ea7c91f235fd32daeefdf875a0f938db05fb315",
+ "load": {
+  "load_seconds": 4.6,
+  "ps": {
+   "name": "gemma4-12b-131k:latest",
+   "model": "gemma4-12b-131k:latest",
+   "size": 9486561442,
+   "digest": "e8408c45bfbcff1db2d690dc1c297acbbe5cb3ce062b499c1b9c453b9de93a84",
+   "details": {
+    "parent_model": "",
+    "format": "gguf",
+    "family": "gemma4",
+    "families": [
+     "gemma4"
+    ],
+    "parameter_size": "11.9B",
+    "quantization_level": "Q4_K_M"
+   },
+   "expires_at": "2026-11-21T16:05:32.3774176-05:00",
+   "size_vram": 9486561442,
+   "context_length": 131072,
+   "runner": "llamacpp"
+  },
+  "win_used_mib_after_load": 79784
+ },
+ "utc_command_start": "2026-11-21T21:00:32Z",
+ "utc_command_end": "2026-11-22T04:06:18Z",
+ "card_mib": {
+  "before": 67848,
+  "after_load": 79784,
+  "after_command": 80143,
+  "after_unload": 68162
+ },
+ "loaded_after": [],
+ "chat_server_at_end": {
+  "up": true,
+  "models": [
+   "Qwen3.8-27B"
+  ]
+ },
+ "command_ran": true,
+ "command_exit_code": 0,
+ "ollama_log": "/mnt/c/Users/Scott/AppData/Local/Ollama/server.log",
+ "cut_lines_since_start": 0,
+ "exit_code": 0,
+ "utc_end": "2026-11-22T04:06:19Z"
+}

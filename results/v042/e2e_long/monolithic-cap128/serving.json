@@ -1,0 +1,88 @@
+{
+ "utc_start": "2026-11-23T18:58:33Z",
+ "model": "mistral-nemo-32k",
+ "base": "mistral-nemo",
+ "expect_ctx": 32768,
+ "seed": null,
+ "command": [
+  "python",
+  "evals/eval_toolbench_e2e.py",
+  "--backends",
+  "none",
+  "--monolithic-cap",
+  "128",
+  "--base-url",
+  "http://127.0.0.1:11434/v1",
+  "--model",
+  "mistral-nemo-32k"
+ ],
+ "chat_server_at_start": {
+  "up": true,
+  "models": [
+   "Qwen3.8-27B"
+  ]
+ },
+ "ollama_version": "0.40.16",
+ "base_digest": "e7e06d107c6c86ed0cf45445f1790720b5092149c4c95f4d965844e9afbfdc89",
+ "tag_digest": "d79a1e80980fbf93248420d6915eb59fb426215e896ec8d7bb6883319acba03b",
+ "tag_parameters": "num_ctx                        32768\nstop                           \"[INST]\"\nstop                           \"[/INST]\"",
+ "details": {
+  "parent_model": "mistral-nemo:latest",
+  "format": "gguf",
+  "family": "llama",
+  "families": [
+   "llama"
+  ],
+  "parameter_size": "12.2B",
+  "quantization_level": "Q4_0",
+  "context_length": 1024000,
+  "embedding_length": 5120,
+  "runner": "ggml"
+ },
+ "template_sha256": "438402ddac7513a63010a594fbd69a11d74b7843ee686e9dc4589c01241c075a",
+ "load": {
+  "load_seconds": 2.5,
+  "ps": {
+   "name": "mistral-nemo-32k:latest",
+   "model": "mistral-nemo-32k:latest",
+   "size": 12382225039,
+   "digest": "d79a1e80980fbf93248420d6915eb59fb426215e896ec8d7bb6883319acba03b",
+   "details": {
+    "parent_model": "",
+    "format": "gguf",
+    "family": "llama",
+    "families": [
+     "llama"
+    ],
+    "parameter_size": "12.2B",
+    "quantization_level": "Q4_0"
+   },
+   "expires_at": "2026-11-23T14:03:36.3269147-05:00",
+   "size_vram": 12382225039,
+   "context_length": 32768,
+   "runner": "llamacpp"
+  },
+  "win_used_mib_after_load": 78667
+ },
+ "utc_command_start": "2026-11-23T18:58:36Z",
+ "utc_command_end": "2026-11-23T19:00:53Z",
+ "card_mib": {
+  "before": 66306,
+  "after_load": 78667,
+  "after_command": 78747,
+  "after_unload": 66360
+ },
+ "loaded_after": [],
+ "chat_server_at_end": {
+  "up": true,
+  "models": [
+   "Qwen3.8-27B"
+  ]
+ },
+ "command_ran": true,
+ "command_exit_code": 0,
+ "ollama_log": "/mnt/c/Users/Scott/AppData/Local/Ollama/server.log",
+ "cut_lines_since_start": 0,
+ "exit_code": 0,
+ "utc_end": "2026-11-23T19:00:53Z"
+}

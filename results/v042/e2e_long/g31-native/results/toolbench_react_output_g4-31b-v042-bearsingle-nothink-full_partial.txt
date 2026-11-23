@@ -1,0 +1,88 @@
+=== ToolBench end-to-end with ReAct-style prompting ===
+
+Model: gemma4-31b-131k
+Base URL: http://127.0.0.1:11434/v1
+BEAR top-k: 5
+Monolithic cap: 0
+
+Loading ToolBench data ...
+Corpus: 3225 APIs, evaluating 1100 queries
+Corpus schema coverage: 3225/3225 (100.0%) instructions have an OpenAI function schema.
+
+[BEAR retrieval + single-turn (reference)] running 1100 queries ...
+  50/1100 done; acc-so-far = 0.860; ETA 12.4 min
+  100/1100 done; acc-so-far = 0.890; ETA 10.6 min
+  150/1100 done; acc-so-far = 0.847; ETA 9.9 min
+  200/1100 done; acc-so-far = 0.860; ETA 9.2 min
+  250/1100 done; acc-so-far = 0.832; ETA 8.4 min
+  300/1100 done; acc-so-far = 0.833; ETA 7.8 min
+  350/1100 done; acc-so-far = 0.837; ETA 7.2 min
+  400/1100 done; acc-so-far = 0.843; ETA 6.7 min
+  450/1100 done; acc-so-far = 0.829; ETA 6.2 min
+  500/1100 done; acc-so-far = 0.826; ETA 5.7 min
+  550/1100 done; acc-so-far = 0.815; ETA 5.2 min
+  600/1100 done; acc-so-far = 0.815; ETA 4.8 min
+  650/1100 done; acc-so-far = 0.811; ETA 4.3 min
+  700/1100 done; acc-so-far = 0.809; ETA 3.8 min
+  750/1100 done; acc-so-far = 0.807; ETA 3.4 min
+  800/1100 done; acc-so-far = 0.806; ETA 2.9 min
+  850/1100 done; acc-so-far = 0.804; ETA 2.4 min
+  900/1100 done; acc-so-far = 0.797; ETA 1.9 min
+  950/1100 done; acc-so-far = 0.798; ETA 1.4 min
+  1000/1100 done; acc-so-far = 0.787; ETA 1.0 min
+  1050/1100 done; acc-so-far = 0.785; ETA 0.5 min
+  1100/1100 done; acc-so-far = 0.769; ETA 0.0 min
+[BEAR retrieval + single-turn (reference)] done; tool-acc = 0.769; empty = 0/1100 (0.0%), unparsed = 0; elapsed 10.7 min
+
+--- Tool selection accuracy (1 if predicted tool matches any expected api_id) ---
+
+Condition                                 Tool Acc [95% CI]              n
+--------------------------------------------------------------------------
+BEAR retrieval + single-turn              0.769 [0.744,0.794]     1100
+
+--- Paired comparisons (same queries; McNemar + paired bootstrap) ---
+
+
+--- LaTeX table (paste into manuscript as tab:e2e-react) ---
+
+\begin{table}[t]
+  \caption{End-to-end ToolBench tool-selection accuracy under single-turn vs.\ ReAct prompting (gemma4-31b-131k, $k=5$, 95\% bootstrap CIs). Tool accuracy is exact match between the LLM's selected tool and any expected \texttt{api\_id} in the ground-truth set. The monolithic baseline injects 0 tool schemas directly into the prompt; BEAR retrieval injects the top-5 under full governance.}
+  \label{tab:toolbench-react}
+  \centering
+  \small
+  \begin{tabular}{@{}l c c@{}}
+    \toprule
+    Condition & Tool accuracy [95\% CI] & $n$ \\
+    \midrule
+    BEAR retrieval + single-turn & 0.769 [0.744,0.794] & 1100 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Wrote /home/snhwang/tist-repro/clones/artifacts-previous/results/toolbench_react_metrics_g4-31b-v042-bearsingle-nothink-full_partial.json
+Wrote /home/snhwang/tist-repro/clones/artifacts-previous/results/toolbench_react_output_g4-31b-v042-bearsingle-nothink-full_partial.txt
+
+Elapsed: 17.9 min
+
+=== Reproducibility ===
+Timestamp (UTC): 2026-11-22T12:59:45Z
+Command line:    evals/eval_toolbench_react.py --skip mono-react bear-react --reasoning-effort none --temperature 1.0 --llm-top-p 0.95 --llm-top-k 64 --base-url http://127.0.0.1:11434/v1 --model gemma4-31b-131k --seed 20261120 --run-label g4-31b-v042-bearsingle-nothink-full
+Python:          3.12.13 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
+numpy:           2.2.6
+scipy:           1.17.1
+bear:            0.4.2
+git commit:      e98cc49e5acd1d3bd9c07f60042cb214914c7de6
+git status:      DIRTY (23 files modified)
+git branch:      tist-r2
+
+  model: gemma4-31b-131k
+  base_url: http://127.0.0.1:11434/v1
+  top_k: 5
+  monolithic_cap: 0
+  max_queries: None
+  conditions_run: ['bear_single']
+===
+
+To commit these results to the artifacts repo:
+  git add results/toolbench_react_metrics_g4-31b-v042-bearsingle-nothink-full_partial.json \
+          results/toolbench_react_output_g4-31b-v042-bearsingle-nothink-full_partial.txt

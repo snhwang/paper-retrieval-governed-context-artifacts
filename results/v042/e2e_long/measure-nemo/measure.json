@@ -1,0 +1,66 @@
+{
+ "utc_start": "2026-11-22T07:42:32Z",
+ "model": "mistral-nemo-131k",
+ "base": "mistral-nemo",
+ "expect_ctx": 131072,
+ "prompt": {
+  "format": "native",
+  "n_tools": 3225,
+  "chars": 343125,
+  "cl100k": 82540,
+  "prompt_tokens": 88458,
+  "seconds": 23.1
+ },
+ "ollama_version": "0.40.16",
+ "base_digest": "e7e06d107c6c86ed0cf45445f1790720b5092149c4c95f4d965844e9afbfdc89",
+ "tag_digest": "70fa1233bae23c1e4067937839b2a74e74466f672874aaa552a0c185c77c0243",
+ "tag_parameters": "num_ctx                        131072\nstop                           \"[INST]\"\nstop                           \"[/INST]\"",
+ "details": {
+  "parent_model": "mistral-nemo:latest",
+  "format": "gguf",
+  "family": "llama",
+  "families": [
+   "llama"
+  ],
+  "parameter_size": "12.2B",
+  "quantization_level": "Q4_0",
+  "context_length": 1024000,
+  "embedding_length": 5120,
+  "runner": "llamacpp"
+ },
+ "load": {
+  "load_seconds": 4.2,
+  "ps": {
+   "name": "mistral-nemo-131k:latest",
+   "model": "mistral-nemo-131k:latest",
+   "size": 29218182266,
+   "digest": "70fa1233bae23c1e4067937839b2a74e74466f672874aaa552a0c185c77c0243",
+   "details": {
+    "parent_model": "",
+    "format": "gguf",
+    "family": "llama",
+    "families": [
+     "llama"
+    ],
+    "parameter_size": "12.2B",
+    "quantization_level": "Q4_0"
+   },
+   "expires_at": "2026-11-22T02:47:38.3910036-05:00",
+   "size_vram": 29218182266,
+   "context_length": 131072,
+   "runner": "llamacpp"
+  },
+  "win_used_mib_after_load": 39760
+ },
+ "card_mib": {
+  "before": 12038,
+  "after_load": 39760,
+  "after_prompt": 39790,
+  "after_unload": 11333
+ },
+ "ollama_log": "/mnt/c/Users/Scott/AppData/Local/Ollama/server.log",
+ "cut_lines_since_start": 0,
+ "window_left_after_prompt": 42614,
+ "fits": true,
+ "exit_code": 0
+}

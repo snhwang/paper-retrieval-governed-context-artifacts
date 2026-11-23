@@ -1,0 +1,90 @@
+=== ToolBench end-to-end with ReAct-style prompting ===
+
+Model: gemma4-12b-131k
+Base URL: http://127.0.0.1:11434/v1
+BEAR top-k: 5
+Monolithic cap: 0
+
+Loading ToolBench data ...
+Corpus: 3225 APIs, evaluating 1100 queries
+Corpus schema coverage: 3225/3225 (100.0%) instructions have an OpenAI function schema.
+  Context check: monolithic (3225 tools) prompt ~113,942 tokens, server window 131,072.
+
+[Monolithic + ReAct] running 1100 queries ...
+  50/1100 done; acc-so-far = 0.240; ETA 29.8 min
+  100/1100 done; acc-so-far = 0.150; ETA 49.8 min
+  150/1100 done; acc-so-far = 0.140; ETA 37.6 min
+  200/1100 done; acc-so-far = 0.135; ETA 31.0 min
+  250/1100 done; acc-so-far = 0.140; ETA 31.9 min
+  300/1100 done; acc-so-far = 0.140; ETA 31.4 min
+  350/1100 done; acc-so-far = 0.140; ETA 33.2 min
+  400/1100 done; acc-so-far = 0.142; ETA 29.6 min
+  450/1100 done; acc-so-far = 0.149; ETA 29.6 min
+  500/1100 done; acc-so-far = 0.152; ETA 30.3 min
+  550/1100 done; acc-so-far = 0.144; ETA 28.7 min
+  600/1100 done; acc-so-far = 0.137; ETA 25.9 min
+  650/1100 done; acc-so-far = 0.131; ETA 22.6 min
+  700/1100 done; acc-so-far = 0.127; ETA 20.2 min
+  750/1100 done; acc-so-far = 0.124; ETA 17.7 min
+  800/1100 done; acc-so-far = 0.120; ETA 15.7 min
+  850/1100 done; acc-so-far = 0.122; ETA 13.1 min
+  900/1100 done; acc-so-far = 0.121; ETA 10.4 min
+  950/1100 done; acc-so-far = 0.118; ETA 8.0 min
+  1000/1100 done; acc-so-far = 0.118; ETA 5.5 min
+  1050/1100 done; acc-so-far = 0.120; ETA 2.7 min
+  1100/1100 done; acc-so-far = 0.118; ETA 0.0 min
+[Monolithic + ReAct] done; tool-acc = 0.118; empty = 665/1100 (60.5%), unparsed = 201; elapsed 61.2 min
+  NOTE: accuracy among queries that produced any output = 130/435 = 0.299. A large gap vs tool-acc means the score reflects silence, not selection.
+
+--- Tool selection accuracy (1 if predicted tool matches any expected api_id) ---
+
+Condition                                 Tool Acc [95% CI]              n
+--------------------------------------------------------------------------
+Monolithic + ReAct                        0.118 [0.099,0.138]     1100
+
+--- Paired comparisons (same queries; McNemar + paired bootstrap) ---
+
+
+--- LaTeX table (paste into manuscript as tab:e2e-react) ---
+
+\begin{table}[t]
+  \caption{End-to-end ToolBench tool-selection accuracy under single-turn vs.\ ReAct prompting (gemma4-12b-131k, $k=5$, 95\% bootstrap CIs). Tool accuracy is exact match between the LLM's selected tool and any expected \texttt{api\_id} in the ground-truth set. The monolithic baseline injects 0 tool schemas directly into the prompt; BEAR retrieval injects the top-5 under full governance.}
+  \label{tab:toolbench-react}
+  \centering
+  \small
+  \begin{tabular}{@{}l c c@{}}
+    \toprule
+    Condition & Tool accuracy [95\% CI] & $n$ \\
+    \midrule
+    Monolithic + ReAct & 0.118 [0.099,0.138] & 1100 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Wrote /home/snhwang/tist-repro/clones/artifacts-previous/results/toolbench_react_metrics_g4-12b-v042-mono-nothink-full_partial.json
+Wrote /home/snhwang/tist-repro/clones/artifacts-previous/results/toolbench_react_output_g4-12b-v042-mono-nothink-full_partial.txt
+
+Elapsed: 67.8 min
+
+=== Reproducibility ===
+Timestamp (UTC): 2026-11-21T21:00:24Z
+Command line:    evals/eval_toolbench_react.py --skip bear-react bear-single --reasoning-mode --reasoning-effort none --max-empty-rate 1.0 --temperature 1.0 --llm-top-p 0.95 --llm-top-k 64 --base-url http://127.0.0.1:11434/v1 --model gemma4-12b-131k --seed 20261120 --run-label g4-12b-v042-mono-nothink-full
+Python:          3.12.13 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
+numpy:           2.2.6
+scipy:           1.17.1
+bear:            0.4.2
+git commit:      e98cc49e5acd1d3bd9c07f60042cb214914c7de6
+git status:      DIRTY (12 files modified)
+git branch:      tist-r2
+
+  model: gemma4-12b-131k
+  base_url: http://127.0.0.1:11434/v1
+  top_k: 5
+  monolithic_cap: 0
+  max_queries: None
+  conditions_run: ['mono_react']
+===
+
+To commit these results to the artifacts repo:
+  git add results/toolbench_react_metrics_g4-12b-v042-mono-nothink-full_partial.json \
+          results/toolbench_react_output_g4-12b-v042-mono-nothink-full_partial.txt

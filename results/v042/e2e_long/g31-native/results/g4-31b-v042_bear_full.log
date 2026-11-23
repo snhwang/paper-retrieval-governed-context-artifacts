@@ -1,0 +1,121 @@
+NOTE: writing to results/toolbench_react_*_g4-31b-v042-bear-full_partial.* (run-label and/or partial-run suffix), leaving the canonical full-run results untouched.
+
+=== ToolBench end-to-end with ReAct-style prompting ===
+
+Model: gemma4-31b-131k
+Base URL: http://127.0.0.1:11434/v1
+BEAR top-k: 5
+Monolithic cap: 0
+
+Loading ToolBench data ...
+Corpus: 3225 APIs, evaluating 1100 queries
+Batches:   0%|          | 0/101 [00:00<?, ?it/s]Batches:   1%|          | 1/101 [00:11<18:48, 11.29s/it]Batches:   2%|▏         | 2/101 [00:22<18:32, 11.24s/it]Batches:   3%|▎         | 3/101 [00:33<18:13, 11.16s/it]Batches:   4%|▍         | 4/101 [00:41<15:53,  9.83s/it]Batches:   5%|▍         | 5/101 [00:48<13:57,  8.72s/it]Batches:   6%|▌         | 6/101 [00:55<12:58,  8.20s/it]Batches:   7%|▋         | 7/101 [01:00<11:13,  7.16s/it]Batches:   8%|▊         | 8/101 [01:05<10:10,  6.56s/it]Batches:   9%|▉         | 9/101 [01:10<09:15,  6.04s/it]Batches:  10%|▉         | 10/101 [01:14<08:11,  5.40s/it]Batches:  11%|█         | 11/101 [01:18<07:20,  4.90s/it]Batches:  12%|█▏        | 12/101 [01:21<06:44,  4.55s/it]Batches:  13%|█▎        | 13/101 [01:25<06:20,  4.33s/it]Batches:  14%|█▍        | 14/101 [01:29<05:52,  4.06s/it]Batches:  15%|█▍        | 15/101 [01:32<05:38,  3.93s/it]Batches:  16%|█▌        | 16/101 [01:36<05:21,  3.78s/it]Batches:  17%|█▋        | 17/101 [01:41<05:46,  4.13s/it]Batches:  18%|█▊        | 18/101 [01:43<05:07,  3.71s/it]Batches:  19%|█▉        | 19/101 [01:47<04:48,  3.52s/it]Batches:  20%|█▉        | 20/101 [01:50<04:31,  3.36s/it]Batches:  21%|██        | 21/101 [01:52<04:16,  3.20s/it]Batches:  22%|██▏       | 22/101 [01:55<04:09,  3.15s/it]Batches:  23%|██▎       | 23/101 [01:58<03:56,  3.03s/it]Batches:  24%|██▍       | 24/101 [02:01<03:58,  3.10s/it]Batches:  25%|██▍       | 25/101 [02:04<03:36,  2.85s/it]Batches:  26%|██▌       | 26/101 [02:06<03:20,  2.67s/it]Batches:  27%|██▋       | 27/101 [02:08<03:05,  2.50s/it]Batches:  28%|██▊       | 28/101 [02:10<02:50,  2.34s/it]Batches:  29%|██▊       | 29/101 [02:12<02:42,  2.25s/it]Batches:  30%|██▉       | 30/101 [02:14<02:34,  2.17s/it]Batches:  31%|███       | 31/101 [02:16<02:25,  2.07s/it]Batches:  32%|███▏      | 32/101 [02:18<02:18,  2.01s/it]Batches:  33%|███▎      | 33/101 [02:19<02:11,  1.94s/it]Batches:  34%|███▎      | 34/101 [02:21<02:09,  1.94s/it]Batches:  35%|███▍      | 35/101 [02:23<02:08,  1.95s/it]Batches:  36%|███▌      | 36/101 [02:25<02:05,  1.93s/it]Batches:  37%|███▋      | 37/101 [02:27<02:04,  1.95s/it]Batches:  38%|███▊      | 38/101 [02:29<01:58,  1.88s/it]Batches:  39%|███▊      | 39/101 [02:31<01:52,  1.81s/it]Batches:  40%|███▉      | 40/101 [02:32<01:48,  1.77s/it]Batches:  41%|████      | 41/101 [02:34<01:43,  1.72s/it]Batches:  42%|████▏     | 42/101 [02:36<01:46,  1.81s/it]Batches:  43%|████▎     | 43/101 [02:38<01:44,  1.80s/it]Batches:  44%|████▎     | 44/101 [02:39<01:38,  1.73s/it]Batches:  45%|████▍     | 45/101 [02:41<01:31,  1.63s/it]Batches:  46%|████▌     | 46/101 [02:42<01:29,  1.62s/it]Batches:  47%|████▋     | 47/101 [02:44<01:24,  1.56s/it]Batches:  48%|████▊     | 48/101 [02:45<01:19,  1.51s/it]Batches:  49%|████▊     | 49/101 [02:46<01:15,  1.45s/it]Batches:  50%|████▉     | 50/101 [02:48<01:12,  1.41s/it]Batches:  50%|█████     | 51/101 [02:49<01:15,  1.51s/it]Batches:  51%|█████▏    | 52/101 [02:51<01:12,  1.48s/it]Batches:  52%|█████▏    | 53/101 [02:52<01:11,  1.48s/it]Batches:  53%|█████▎    | 54/101 [02:54<01:10,  1.50s/it]Batches:  54%|█████▍    | 55/101 [02:55<01:06,  1.45s/it]Batches:  55%|█████▌    | 56/101 [02:57<01:03,  1.40s/it]Batches:  56%|█████▋    | 57/101 [02:58<01:01,  1.41s/it]Batches:  57%|█████▋    | 58/101 [02:59<00:57,  1.34s/it]Batches:  58%|█████▊    | 59/101 [03:01<00:57,  1.37s/it]Batches:  59%|█████▉    | 60/101 [03:02<00:56,  1.37s/it]Batches:  60%|██████    | 61/101 [03:03<00:51,  1.30s/it]Batches:  61%|██████▏   | 62/101 [03:05<00:52,  1.35s/it]Batches:  62%|██████▏   | 63/101 [03:06<00:58,  1.53s/it]Batches:  63%|██████▎   | 64/101 [03:08<00:53,  1.44s/it]Batches:  64%|██████▍   | 65/101 [03:09<00:49,  1.37s/it]Batches:  65%|██████▌   | 66/101 [03:10<00:45,  1.30s/it]Batches:  66%|██████▋   | 67/101 [03:11<00:43,  1.28s/it]Batches:  67%|██████▋   | 68/101 [03:12<00:41,  1.24s/it]Batches:  68%|██████▊   | 69/101 [03:14<00:41,  1.29s/it]Batches:  69%|██████▉   | 70/101 [03:15<00:38,  1.24s/it]Batches:  70%|███████   | 71/101 [03:16<00:36,  1.22s/it]Batches:  71%|███████▏  | 72/101 [03:17<00:34,  1.20s/it]Batches:  72%|███████▏  | 73/101 [03:18<00:32,  1.16s/it]Batches:  73%|███████▎  | 74/101 [03:19<00:30,  1.14s/it]Batches:  74%|███████▍  | 75/101 [03:21<00:28,  1.11s/it]Batches:  75%|███████▌  | 76/101 [03:22<00:27,  1.11s/it]Batches:  76%|███████▌  | 77/101 [03:23<00:25,  1.07s/it]Batches:  77%|███████▋  | 78/101 [03:24<00:25,  1.10s/it]Batches:  78%|███████▊  | 79/101 [03:25<00:23,  1.07s/it]Batches:  79%|███████▉  | 80/101 [03:26<00:23,  1.11s/it]Batches:  80%|████████  | 81/101 [03:27<00:20,  1.05s/it]Batches:  81%|████████  | 82/101 [03:28<00:18,  1.01it/s]Batches:  82%|████████▏ | 83/101 [03:29<00:17,  1.00it/s]Batches:  83%|████████▎ | 84/101 [03:30<00:16,  1.00it/s]Batches:  84%|████████▍ | 85/101 [03:31<00:16,  1.00s/it]Batches:  85%|████████▌ | 86/101 [03:32<00:14,  1.04it/s]Batches:  86%|████████▌ | 87/101 [03:33<00:13,  1.05it/s]Batches:  87%|████████▋ | 88/101 [03:33<00:12,  1.07it/s]Batches:  88%|████████▊ | 89/101 [03:34<00:10,  1.10it/s]Batches:  89%|████████▉ | 90/101 [03:35<00:10,  1.07it/s]Batches:  90%|█████████ | 91/101 [03:36<00:09,  1.06it/s]Batches:  91%|█████████ | 92/101 [03:37<00:08,  1.05it/s]Batches:  92%|█████████▏| 93/101 [03:38<00:07,  1.09it/s]Batches:  93%|█████████▎| 94/101 [03:39<00:06,  1.10it/s]Batches:  94%|█████████▍| 95/101 [03:40<00:05,  1.12it/s]Batches:  95%|█████████▌| 96/101 [03:41<00:04,  1.11it/s]Batches:  96%|█████████▌| 97/101 [03:42<00:03,  1.12it/s]Batches:  97%|█████████▋| 98/101 [03:42<00:02,  1.17it/s]Batches:  98%|█████████▊| 99/101 [03:43<00:01,  1.21it/s]Batches:  99%|█████████▉| 100/101 [03:44<00:00,  1.23it/s]Batches: 100%|██████████| 101/101 [03:44<00:00,  1.38it/s]Batches: 100%|██████████| 101/101 [03:44<00:00,  2.23s/it]
+Batches:   0%|          | 0/101 [00:00<?, ?it/s]Batches:   1%|          | 1/101 [00:10<18:01, 10.82s/it]Batches:   2%|▏         | 2/101 [00:21<18:00, 10.92s/it]Batches:   3%|▎         | 3/101 [00:32<17:53, 10.96s/it]Batches:   4%|▍         | 4/101 [00:40<15:33,  9.62s/it]Batches:   5%|▍         | 5/101 [00:47<13:44,  8.59s/it]Batches:   6%|▌         | 6/101 [00:53<12:39,  8.00s/it]Batches:   7%|▋         | 7/101 [00:58<10:55,  6.98s/it]Batches:   8%|▊         | 8/101 [01:03<09:52,  6.37s/it]Batches:   9%|▉         | 9/101 [01:08<08:57,  5.85s/it]Batches:  10%|▉         | 10/101 [01:12<08:01,  5.29s/it]Batches:  11%|█         | 11/101 [01:16<07:12,  4.81s/it]Batches:  12%|█▏        | 12/101 [01:20<06:42,  4.53s/it]Batches:  13%|█▎        | 13/101 [01:23<06:15,  4.26s/it]Batches:  14%|█▍        | 14/101 [01:27<05:46,  3.99s/it]Batches:  15%|█▍        | 15/101 [01:30<05:29,  3.83s/it]Batches:  16%|█▌        | 16/101 [01:34<05:12,  3.68s/it]Batches:  17%|█▋        | 17/101 [01:38<05:39,  4.04s/it]Batches:  18%|█▊        | 18/101 [01:41<04:58,  3.60s/it]Batches:  19%|█▉        | 19/101 [01:44<04:41,  3.43s/it]Batches:  20%|█▉        | 20/101 [01:47<04:28,  3.31s/it]Batches:  21%|██        | 21/101 [01:50<04:11,  3.15s/it]Batches:  22%|██▏       | 22/101 [01:53<04:04,  3.09s/it]Batches:  23%|██▎       | 23/101 [01:56<03:51,  2.97s/it]Batches:  24%|██▍       | 24/101 [01:59<03:53,  3.03s/it]Batches:  25%|██▍       | 25/101 [02:01<03:32,  2.79s/it]Batches:  26%|██▌       | 26/101 [02:03<03:20,  2.67s/it]Batches:  27%|██▋       | 27/101 [02:05<03:05,  2.51s/it]Batches:  28%|██▊       | 28/101 [02:07<02:51,  2.35s/it]Batches:  29%|██▊       | 29/101 [02:09<02:42,  2.26s/it]Batches:  30%|██▉       | 30/101 [02:11<02:34,  2.18s/it]Batches:  31%|███       | 31/101 [02:13<02:25,  2.07s/it]Batches:  32%|███▏      | 32/101 [02:15<02:18,  2.00s/it]Batches:  33%|███▎      | 33/101 [02:17<02:10,  1.92s/it]Batches:  34%|███▎      | 34/101 [02:19<02:03,  1.84s/it]Batches:  35%|███▍      | 35/101 [02:20<02:04,  1.88s/it]Batches:  36%|███▌      | 36/101 [02:22<02:00,  1.85s/it]Batches:  37%|███▋      | 37/101 [02:24<02:00,  1.88s/it]Batches:  38%|███▊      | 38/101 [02:26<01:57,  1.86s/it]Batches:  39%|███▊      | 39/101 [02:28<01:50,  1.79s/it]Batches:  40%|███▉      | 40/101 [02:29<01:46,  1.74s/it]Batches:  41%|████      | 41/101 [02:31<01:40,  1.68s/it]Batches:  42%|████▏     | 42/101 [02:33<01:45,  1.78s/it]Batches:  43%|████▎     | 43/101 [02:35<01:42,  1.76s/it]Batches:  44%|████▎     | 44/101 [02:36<01:37,  1.71s/it]Batches:  45%|████▍     | 45/101 [02:37<01:29,  1.60s/it]Batches:  46%|████▌     | 46/101 [02:39<01:28,  1.60s/it]Batches:  47%|████▋     | 47/101 [02:41<01:23,  1.55s/it]Batches:  48%|████▊     | 48/101 [02:42<01:20,  1.51s/it]Batches:  49%|████▊     | 49/101 [02:43<01:17,  1.50s/it]Batches:  50%|████▉     | 50/101 [02:45<01:13,  1.43s/it]Batches:  50%|█████     | 51/101 [02:46<01:16,  1.52s/it]Batches:  51%|█████▏    | 52/101 [02:48<01:12,  1.49s/it]Batches:  52%|█████▏    | 53/101 [02:49<01:11,  1.48s/it]Batches:  53%|█████▎    | 54/101 [02:51<01:08,  1.46s/it]Batches:  54%|█████▍    | 55/101 [02:52<01:05,  1.41s/it]Batches:  55%|█████▌    | 56/101 [02:53<01:01,  1.37s/it]Batches:  56%|█████▋    | 57/101 [02:55<01:00,  1.39s/it]Batches:  57%|█████▋    | 58/101 [02:56<00:57,  1.35s/it]Batches:  58%|█████▊    | 59/101 [02:57<00:58,  1.39s/it]Batches:  59%|█████▉    | 60/101 [02:59<00:56,  1.38s/it]Batches:  60%|██████    | 61/101 [03:00<00:53,  1.33s/it]Batches:  61%|██████▏   | 62/101 [03:02<00:53,  1.38s/it]Batches:  62%|██████▏   | 63/101 [03:03<00:57,  1.53s/it]Batches:  63%|██████▎   | 64/101 [03:05<00:52,  1.42s/it]Batches:  64%|██████▍   | 65/101 [03:06<00:48,  1.36s/it]Batches:  65%|██████▌   | 66/101 [03:07<00:44,  1.28s/it]Batches:  66%|██████▋   | 67/101 [03:08<00:43,  1.28s/it]Batches:  67%|██████▋   | 68/101 [03:09<00:40,  1.22s/it]Batches:  68%|██████▊   | 69/101 [03:11<00:41,  1.28s/it]Batches:  69%|██████▉   | 70/101 [03:12<00:38,  1.23s/it]Batches:  70%|███████   | 71/101 [03:13<00:36,  1.22s/it]Batches:  71%|███████▏  | 72/101 [03:14<00:34,  1.21s/it]Batches:  72%|███████▏  | 73/101 [03:15<00:32,  1.18s/it]Batches:  73%|███████▎  | 74/101 [03:16<00:30,  1.14s/it]Batches:  74%|███████▍  | 75/101 [03:17<00:29,  1.12s/it]Batches:  75%|███████▌  | 76/101 [03:18<00:27,  1.10s/it]Batches:  76%|███████▌  | 77/101 [03:19<00:25,  1.06s/it]Batches:  77%|███████▋  | 78/101 [03:21<00:25,  1.09s/it]Batches:  78%|███████▊  | 79/101 [03:22<00:23,  1.07s/it]Batches:  79%|███████▉  | 80/101 [03:23<00:22,  1.09s/it]Batches:  80%|████████  | 81/101 [03:24<00:20,  1.04s/it]Batches:  81%|████████  | 82/101 [03:24<00:18,  1.01it/s]Batches:  82%|████████▏ | 83/101 [03:25<00:17,  1.01it/s]Batches:  83%|████████▎ | 84/101 [03:26<00:16,  1.02it/s]Batches:  84%|████████▍ | 85/101 [03:27<00:15,  1.02it/s]Batches:  85%|████████▌ | 86/101 [03:28<00:14,  1.03it/s]Batches:  86%|████████▌ | 87/101 [03:29<00:13,  1.06it/s]Batches:  87%|████████▋ | 88/101 [03:30<00:12,  1.06it/s]Batches:  88%|████████▊ | 89/101 [03:31<00:10,  1.10it/s]Batches:  89%|████████▉ | 90/101 [03:32<00:10,  1.07it/s]Batches:  90%|█████████ | 91/101 [03:33<00:09,  1.05it/s]Batches:  91%|█████████ | 92/101 [03:34<00:08,  1.05it/s]Batches:  92%|█████████▏| 93/101 [03:35<00:07,  1.09it/s]Batches:  93%|█████████▎| 94/101 [03:36<00:06,  1.10it/s]Batches:  94%|█████████▍| 95/101 [03:37<00:05,  1.13it/s]Batches:  95%|█████████▌| 96/101 [03:37<00:04,  1.11it/s]Batches:  96%|█████████▌| 97/101 [03:38<00:03,  1.14it/s]Batches:  97%|█████████▋| 98/101 [03:39<00:02,  1.18it/s]Batches:  98%|█████████▊| 99/101 [03:40<00:01,  1.24it/s]Batches:  99%|█████████▉| 100/101 [03:40<00:00,  1.29it/s]Batches: 100%|██████████| 101/101 [03:41<00:00,  1.42it/s]Batches: 100%|██████████| 101/101 [03:41<00:00,  2.19s/it]
+Corpus schema coverage: 3225/3225 (100.0%) instructions have an OpenAI function schema.
+
+[BEAR retrieval + ReAct] running 1100 queries ...
+  50/1100 done; acc-so-far = 0.800; ETA 216.5 min
+  100/1100 done; acc-so-far = 0.840; ETA 212.1 min
+  150/1100 done; acc-so-far = 0.807; ETA 213.3 min
+  200/1100 done; acc-so-far = 0.825; ETA 200.1 min
+  250/1100 done; acc-so-far = 0.804; ETA 188.4 min
+  300/1100 done; acc-so-far = 0.810; ETA 181.8 min
+  350/1100 done; acc-so-far = 0.809; ETA 169.7 min
+  400/1100 done; acc-so-far = 0.815; ETA 155.3 min
+  450/1100 done; acc-so-far = 0.800; ETA 146.3 min
+  500/1100 done; acc-so-far = 0.800; ETA 139.4 min
+  550/1100 done; acc-so-far = 0.791; ETA 129.6 min
+  600/1100 done; acc-so-far = 0.788; ETA 118.6 min
+  650/1100 done; acc-so-far = 0.786; ETA 110.0 min
+  700/1100 done; acc-so-far = 0.777; ETA 100.7 min
+  750/1100 done; acc-so-far = 0.775; ETA 88.3 min
+  800/1100 done; acc-so-far = 0.772; ETA 76.5 min
+  850/1100 done; acc-so-far = 0.768; ETA 64.3 min
+  900/1100 done; acc-so-far = 0.761; ETA 51.2 min
+  950/1100 done; acc-so-far = 0.761; ETA 38.5 min
+  1000/1100 done; acc-so-far = 0.751; ETA 25.7 min
+  1050/1100 done; acc-so-far = 0.747; ETA 12.8 min
+  1100/1100 done; acc-so-far = 0.731; ETA 0.0 min
+[BEAR retrieval + ReAct] done; tool-acc = 0.731; empty = 0/1100 (0.0%), unparsed = 0; elapsed 284.6 min
+
+[BEAR retrieval + single-turn (reference)] running 1100 queries ...
+  50/1100 done; acc-so-far = 0.860; ETA 188.0 min
+  100/1100 done; acc-so-far = 0.870; ETA 179.3 min
+  150/1100 done; acc-so-far = 0.813; ETA 182.9 min
+  200/1100 done; acc-so-far = 0.830; ETA 170.6 min
+  250/1100 done; acc-so-far = 0.808; ETA 163.6 min
+  300/1100 done; acc-so-far = 0.810; ETA 156.4 min
+  350/1100 done; acc-so-far = 0.809; ETA 149.1 min
+  400/1100 done; acc-so-far = 0.812; ETA 135.0 min
+  450/1100 done; acc-so-far = 0.800; ETA 126.2 min
+  500/1100 done; acc-so-far = 0.798; ETA 119.4 min
+  550/1100 done; acc-so-far = 0.789; ETA 109.5 min
+  600/1100 done; acc-so-far = 0.783; ETA 99.9 min
+  650/1100 done; acc-so-far = 0.777; ETA 91.8 min
+  700/1100 done; acc-so-far = 0.770; ETA 83.8 min
+  750/1100 done; acc-so-far = 0.769; ETA 73.8 min
+  800/1100 done; acc-so-far = 0.766; ETA 64.0 min
+  850/1100 done; acc-so-far = 0.764; ETA 53.7 min
+  900/1100 done; acc-so-far = 0.753; ETA 43.0 min
+  950/1100 done; acc-so-far = 0.755; ETA 32.2 min
+  1000/1100 done; acc-so-far = 0.747; ETA 21.4 min
+  1050/1100 done; acc-so-far = 0.744; ETA 10.7 min
+  1100/1100 done; acc-so-far = 0.727; ETA 0.0 min
+[BEAR retrieval + single-turn (reference)] done; tool-acc = 0.727; empty = 58/1100 (5.3%), unparsed = 0; elapsed 236.8 min
+  NOTE: accuracy among queries that produced any output = 800/1042 = 0.768. A large gap vs tool-acc means the score reflects silence, not selection.
+
+--- Tool selection accuracy (1 if predicted tool matches any expected api_id) ---
+
+Condition                                 Tool Acc [95% CI]              n
+--------------------------------------------------------------------------
+BEAR retrieval + ReAct                    0.731 [0.705,0.756]     1100
+BEAR retrieval + single-turn              0.727 [0.701,0.754]     1100
+
+--- Paired comparisons (same queries; McNemar + paired bootstrap) ---
+
+  bear_single vs bear_react: Δ=-0.004 [-0.017, +0.010], McNemar p=7.04e-01 (discordant 29/33)
+
+--- LaTeX table (paste into manuscript as tab:e2e-react) ---
+
+\begin{table}[t]
+  \caption{End-to-end ToolBench tool-selection accuracy under single-turn vs.\ ReAct prompting (gemma4-31b-131k, $k=5$, 95\% bootstrap CIs). Tool accuracy is exact match between the LLM's selected tool and any expected \texttt{api\_id} in the ground-truth set. The monolithic baseline injects 0 tool schemas directly into the prompt; BEAR retrieval injects the top-5 under full governance.}
+  \label{tab:toolbench-react}
+  \centering
+  \small
+  \begin{tabular}{@{}l c c@{}}
+    \toprule
+    Condition & Tool accuracy [95\% CI] & $n$ \\
+    \midrule
+    BEAR retrieval + ReAct & 0.731 [0.705,0.756] & 1100 \\
+    BEAR retrieval + single-turn & 0.727 [0.701,0.754] & 1100 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Wrote /home/snhwang/tist-repro/clones/artifacts-previous/results/toolbench_react_metrics_g4-31b-v042-bear-full_partial.json
+Wrote /home/snhwang/tist-repro/clones/artifacts-previous/results/toolbench_react_output_g4-31b-v042-bear-full_partial.txt
+
+Elapsed: 528.9 min
+
+=== Reproducibility ===
+Timestamp (UTC): 2026-11-22T22:41:35Z
+Command line:    evals/eval_toolbench_react.py --skip mono-react --reasoning-mode --temperature 1.0 --llm-top-p 0.95 --llm-top-k 64 --base-url http://127.0.0.1:11434/v1 --model gemma4-31b-131k --seed 20261120 --run-label g4-31b-v042-bear-full
+Python:          3.12.13 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
+numpy:           2.2.6
+scipy:           1.17.1
+bear:            0.4.2
+git commit:      e98cc49e5acd1d3bd9c07f60042cb214914c7de6
+git status:      DIRTY (29 files modified)
+git branch:      tist-r2
+
+  model: gemma4-31b-131k
+  base_url: http://127.0.0.1:11434/v1
+  top_k: 5
+  monolithic_cap: 0
+  max_queries: None
+  conditions_run: ['bear_react', 'bear_single']
+===
+
+To commit these results to the artifacts repo:
+  git add results/toolbench_react_metrics_g4-31b-v042-bear-full_partial.json \
+          results/toolbench_react_output_g4-31b-v042-bear-full_partial.txt

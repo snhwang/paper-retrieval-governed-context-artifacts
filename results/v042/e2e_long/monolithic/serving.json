@@ -1,0 +1,84 @@
+{
+ "utc_start": "2026-11-22T10:09:59Z",
+ "model": "mistral-nemo-131k",
+ "base": "mistral-nemo",
+ "expect_ctx": 131072,
+ "seed": null,
+ "command": [
+  "python",
+  "evals/eval_toolbench_e2e.py",
+  "--backends",
+  "none",
+  "--monolithic-cap",
+  "0",
+  "--base-url",
+  "http://127.0.0.1:11434/v1",
+  "--model",
+  "mistral-nemo-131k"
+ ],
+ "chat_server_at_start": {
+  "up": false,
+  "error": "URLError"
+ },
+ "ollama_version": "0.40.16",
+ "base_digest": "e7e06d107c6c86ed0cf45445f1790720b5092149c4c95f4d965844e9afbfdc89",
+ "tag_digest": "70fa1233bae23c1e4067937839b2a74e74466f672874aaa552a0c185c77c0243",
+ "tag_parameters": "num_ctx                        131072\nstop                           \"[INST]\"\nstop                           \"[/INST]\"",
+ "details": {
+  "parent_model": "mistral-nemo:latest",
+  "format": "gguf",
+  "family": "llama",
+  "families": [
+   "llama"
+  ],
+  "parameter_size": "12.2B",
+  "quantization_level": "Q4_0",
+  "context_length": 1024000,
+  "embedding_length": 5120,
+  "runner": "llamacpp"
+ },
+ "template_sha256": "438402ddac7513a63010a594fbd69a11d74b7843ee686e9dc4589c01241c075a",
+ "load": {
+  "load_seconds": 4.3,
+  "ps": {
+   "name": "mistral-nemo-131k:latest",
+   "model": "mistral-nemo-131k:latest",
+   "size": 29218182266,
+   "digest": "70fa1233bae23c1e4067937839b2a74e74466f672874aaa552a0c185c77c0243",
+   "details": {
+    "parent_model": "",
+    "format": "gguf",
+    "family": "llama",
+    "families": [
+     "llama"
+    ],
+    "parameter_size": "12.2B",
+    "quantization_level": "Q4_0"
+   },
+   "expires_at": "2026-11-22T05:15:08.9478514-05:00",
+   "size_vram": 29218182266,
+   "context_length": 131072,
+   "runner": "llamacpp"
+  },
+  "win_used_mib_after_load": 39569
+ },
+ "utc_command_start": "2026-11-22T10:10:09Z",
+ "utc_command_end": "2026-11-22T10:41:38Z",
+ "card_mib": {
+  "before": 11151,
+  "after_load": 39569,
+  "after_command": 39609,
+  "after_unload": 11149
+ },
+ "loaded_after": [],
+ "chat_server_at_end": {
+  "up": false,
+  "error": "URLError"
+ },
+ "command_ran": true,
+ "command_exit_code": 0,
+ "ollama_log": "/mnt/c/Users/Scott/AppData/Local/Ollama/server.log",
+ "cut_lines_since_start": 0,
+ "exit_code": 0,
+ "utc_end": "2026-11-22T10:41:43Z"
+}

@@ -1,0 +1,10 @@
+=== g4-12b-v042  full-1100 grid ===
+
+  mono_off     0.118 [0.099, 0.138]  n=1100
+  mono_on      0.497 [0.467, 0.527]  n=1100
+  bear_single  0.737 [0.713, 0.763]  n=1100
+  bear_react   0.759 [0.734, 0.784]  n=1100
+
+=== paired McNemar ===
+  monolithic reasoning OFF vs ON     0.118 -> 0.497 (+0.379)  p=1.01e-99  disc 25/442
+  BEAR single vs +reasoning          0.737 -> 0.759 (+0.022)  p=1.60e-02  disc 34/58

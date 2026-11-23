@@ -1,0 +1,38 @@
+{
+ "rows": {
+  "BEAR+Hash (gov)": {
+   "exact": 0.21272727272727274,
+   "exact_ci": {
+    "point_estimate": 0.21272727272727274,
+    "ci_lower": 0.1890909090909091,
+    "ci_upper": 0.23727272727272727,
+    "std": 0.4094224812297467,
+    "n": 1100
+   },
+   "tool": 0.29,
+   "tool_ci": {
+    "point_estimate": 0.29,
+    "ci_lower": 0.26272727272727275,
+    "ci_upper": 0.31636363636363635,
+    "std": 0.4539684483951583,
+    "n": 1100
+   },
+   "llm_errors": 0,
+   "published_exact": 0.2109090909090909,
+   "exact_queries_changed_vs_published": 6,
+   "exact_mcnemar_vs_published": {
+    "n01": 4,
+    "n10": 2,
+    "p": 0.6875
+   },
+   "published_tool": 0.28909090909090907,
+   "tool_queries_changed_vs_published": 3,
+   "tool_mcnemar_vs_published": {
+    "n01": 2,
+    "n10": 1,
+    "p": 1.0
+   }
+  }
+ },
+ "pairs": {}
+}

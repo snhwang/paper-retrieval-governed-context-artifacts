@@ -1,0 +1,66 @@
+{
+ "utc_start": "2026-11-20T21:10:23Z",
+ "model": "gemma4-12b-131k",
+ "base": "gemma4:12b",
+ "expect_ctx": 131072,
+ "prompt": {
+  "format": "native",
+  "n_tools": 3225,
+  "chars": 343125,
+  "cl100k": 82540,
+  "prompt_tokens": 91815,
+  "seconds": 20.5
+ },
+ "ollama_version": "0.40.16",
+ "base_digest": "4eb23ef187e2c5462566d6a1d3bbbc2f1346d0b4327cbb66d58fffbcc9b2b05c",
+ "tag_digest": "e8408c45bfbcff1db2d690dc1c297acbbe5cb3ce062b499c1b9c453b9de93a84",
+ "tag_parameters": "num_ctx                        131072\ntemperature                    1\ntop_k                          64\ntop_p                          0.95",
+ "details": {
+  "parent_model": "gemma4:12b",
+  "format": "gguf",
+  "family": "gemma4",
+  "families": [
+   "gemma4"
+  ],
+  "parameter_size": "11.9B",
+  "quantization_level": "Q4_K_M",
+  "context_length": 262144,
+  "embedding_length": 3840,
+  "runner": "llamacpp"
+ },
+ "load": {
+  "load_seconds": 55.0,
+  "ps": {
+   "name": "gemma4-12b-131k:latest",
+   "model": "gemma4-12b-131k:latest",
+   "size": 9486561442,
+   "digest": "e8408c45bfbcff1db2d690dc1c297acbbe5cb3ce062b499c1b9c453b9de93a84",
+   "details": {
+    "parent_model": "",
+    "format": "gguf",
+    "family": "gemma4",
+    "families": [
+     "gemma4"
+    ],
+    "parameter_size": "11.9B",
+    "quantization_level": "Q4_K_M"
+   },
+   "expires_at": "2026-11-20T16:16:18.8411164-05:00",
+   "size_vram": 9486561442,
+   "context_length": 131072,
+   "runner": "llamacpp"
+  },
+  "win_used_mib_after_load": 78824
+ },
+ "card_mib": {
+  "before": 66905,
+  "after_load": 78824,
+  "after_prompt": 78909,
+  "after_unload": 66899
+ },
+ "ollama_log": "/mnt/c/Users/Scott/AppData/Local/Ollama/server.log",
+ "cut_lines_since_start": 0,
+ "window_left_after_prompt": 39257,
+ "fits": true,
+ "exit_code": 0
+}

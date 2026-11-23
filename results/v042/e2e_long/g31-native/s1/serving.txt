@@ -1,0 +1,1 @@
+Ollama 0.40.16, gemma4-31b-131k d0e8710a4e62 from gemma4:31b 6316f0629137, window 131072, seed 20261120, card 11003 to 44505 MiB, 8355 down at the start and down at the end, cut prompts 0, unloaded True, exit 0

@@ -1,0 +1,1 @@
+Ollama 0.40.16, mistral-nemo-32k d79a1e80980f from mistral-nemo e7e06d107c6c, window 32768, seed None, card 66306 to 78667 MiB, 8355 up at the start and up at the end, cut prompts 0, unloaded True, exit 0

@@ -1,0 +1,145 @@
+=== ToolBench end-to-end with ReAct-style prompting ===
+
+Model: mistral-nemo-131k
+Base URL: http://127.0.0.1:11434/v1
+BEAR top-k: 5
+Monolithic cap: 0
+
+Loading ToolBench data ...
+Corpus: 3225 APIs, evaluating 1100 queries
+Corpus schema coverage: 3225/3225 (100.0%) instructions have an OpenAI function schema.
+  Context check: monolithic (3225 tools) prompt ~113,942 tokens, server window 131,072.
+
+[Monolithic + ReAct] running 1100 queries ...
+  50/1100 done; acc-so-far = 0.020; ETA 111.0 min
+  100/1100 done; acc-so-far = 0.030; ETA 113.6 min
+  150/1100 done; acc-so-far = 0.020; ETA 104.8 min
+  200/1100 done; acc-so-far = 0.020; ETA 112.0 min
+  250/1100 done; acc-so-far = 0.020; ETA 91.1 min
+  300/1100 done; acc-so-far = 0.027; ETA 76.6 min
+  350/1100 done; acc-so-far = 0.026; ETA 74.6 min
+  400/1100 done; acc-so-far = 0.022; ETA 71.5 min
+  450/1100 done; acc-so-far = 0.020; ETA 61.5 min
+  500/1100 done; acc-so-far = 0.020; ETA 58.3 min
+  550/1100 done; acc-so-far = 0.020; ETA 52.6 min
+  600/1100 done; acc-so-far = 0.023; ETA 47.2 min
+  650/1100 done; acc-so-far = 0.025; ETA 41.0 min
+  700/1100 done; acc-so-far = 0.029; ETA 37.5 min
+  750/1100 done; acc-so-far = 0.031; ETA 31.5 min
+  800/1100 done; acc-so-far = 0.030; ETA 27.7 min
+  850/1100 done; acc-so-far = 0.033; ETA 24.3 min
+  900/1100 done; acc-so-far = 0.034; ETA 20.3 min
+  950/1100 done; acc-so-far = 0.035; ETA 15.5 min
+  1000/1100 done; acc-so-far = 0.036; ETA 10.5 min
+  1050/1100 done; acc-so-far = 0.041; ETA 5.2 min
+  1100/1100 done; acc-so-far = 0.041; ETA 0.0 min
+[Monolithic + ReAct] done; tool-acc = 0.041; empty = 0/1100 (0.0%), unparsed = 49; elapsed 123.7 min
+
+[BEAR retrieval + ReAct] running 1100 queries ...
+  50/1100 done; acc-so-far = 0.840; ETA 10.1 min
+  100/1100 done; acc-so-far = 0.850; ETA 9.8 min
+  150/1100 done; acc-so-far = 0.820; ETA 9.4 min
+  200/1100 done; acc-so-far = 0.805; ETA 8.8 min
+  250/1100 done; acc-so-far = 0.772; ETA 8.1 min
+  300/1100 done; acc-so-far = 0.760; ETA 7.7 min
+  350/1100 done; acc-so-far = 0.769; ETA 7.2 min
+  400/1100 done; acc-so-far = 0.762; ETA 6.7 min
+  450/1100 done; acc-so-far = 0.742; ETA 6.2 min
+  500/1100 done; acc-so-far = 0.744; ETA 5.8 min
+  550/1100 done; acc-so-far = 0.740; ETA 5.3 min
+  600/1100 done; acc-so-far = 0.737; ETA 4.9 min
+  650/1100 done; acc-so-far = 0.735; ETA 4.4 min
+  700/1100 done; acc-so-far = 0.733; ETA 3.9 min
+  750/1100 done; acc-so-far = 0.731; ETA 3.5 min
+  800/1100 done; acc-so-far = 0.728; ETA 3.0 min
+  850/1100 done; acc-so-far = 0.726; ETA 2.5 min
+  900/1100 done; acc-so-far = 0.720; ETA 2.0 min
+  950/1100 done; acc-so-far = 0.716; ETA 1.5 min
+  1000/1100 done; acc-so-far = 0.704; ETA 1.0 min
+  1050/1100 done; acc-so-far = 0.699; ETA 0.5 min
+  1100/1100 done; acc-so-far = 0.680; ETA 0.0 min
+[BEAR retrieval + ReAct] done; tool-acc = 0.680; empty = 0/1100 (0.0%), unparsed = 0; elapsed 10.9 min
+
+[BEAR retrieval + single-turn (reference)] running 1100 queries ...
+  50/1100 done; acc-so-far = 0.900; ETA 4.3 min
+  100/1100 done; acc-so-far = 0.900; ETA 4.1 min
+  150/1100 done; acc-so-far = 0.860; ETA 3.7 min
+  200/1100 done; acc-so-far = 0.850; ETA 3.6 min
+  250/1100 done; acc-so-far = 0.816; ETA 3.2 min
+  300/1100 done; acc-so-far = 0.820; ETA 3.1 min
+  350/1100 done; acc-so-far = 0.820; ETA 2.9 min
+  400/1100 done; acc-so-far = 0.820; ETA 2.7 min
+  450/1100 done; acc-so-far = 0.796; ETA 2.5 min
+  500/1100 done; acc-so-far = 0.796; ETA 2.4 min
+  550/1100 done; acc-so-far = 0.793; ETA 2.2 min
+  600/1100 done; acc-so-far = 0.787; ETA 2.0 min
+  650/1100 done; acc-so-far = 0.782; ETA 1.8 min
+  700/1100 done; acc-so-far = 0.777; ETA 1.6 min
+  750/1100 done; acc-so-far = 0.779; ETA 1.4 min
+  800/1100 done; acc-so-far = 0.772; ETA 1.2 min
+  850/1100 done; acc-so-far = 0.766; ETA 1.0 min
+  900/1100 done; acc-so-far = 0.760; ETA 0.8 min
+  950/1100 done; acc-so-far = 0.754; ETA 0.6 min
+  1000/1100 done; acc-so-far = 0.742; ETA 0.4 min
+  1050/1100 done; acc-so-far = 0.739; ETA 0.2 min
+  1100/1100 done; acc-so-far = 0.724; ETA 0.0 min
+[BEAR retrieval + single-turn (reference)] done; tool-acc = 0.724; empty = 0/1100 (0.0%), unparsed = 0; elapsed 4.4 min
+
+--- Tool selection accuracy (1 if predicted tool matches any expected api_id) ---
+
+Condition                                 Tool Acc [95% CI]              n
+--------------------------------------------------------------------------
+Monolithic + ReAct                        0.041 [0.030,0.054]     1100
+BEAR retrieval + ReAct                    0.680 [0.652,0.707]     1100
+BEAR retrieval + single-turn              0.724 [0.697,0.749]     1100
+
+--- Paired comparisons (same queries; McNemar + paired bootstrap) ---
+
+  bear_single vs bear_react: Δ=+0.044 [+0.025, +0.063], McNemar p=1.16e-05 (discordant 83/35)
+  bear_react vs mono_react: Δ=+0.639 [+0.610, +0.668], McNemar p=2.53e-197 (discordant 712/9)
+
+--- LaTeX table (paste into manuscript as tab:e2e-react) ---
+
+\begin{table}[t]
+  \caption{End-to-end ToolBench tool-selection accuracy under single-turn vs.\ ReAct prompting (mistral-nemo-131k, $k=5$, 95\% bootstrap CIs). Tool accuracy is exact match between the LLM's selected tool and any expected \texttt{api\_id} in the ground-truth set. The monolithic baseline injects 0 tool schemas directly into the prompt; BEAR retrieval injects the top-5 under full governance.}
+  \label{tab:toolbench-react}
+  \centering
+  \small
+  \begin{tabular}{@{}l c c@{}}
+    \toprule
+    Condition & Tool accuracy [95\% CI] & $n$ \\
+    \midrule
+    Monolithic + ReAct & 0.041 [0.030,0.054] & 1100 \\
+    BEAR retrieval + ReAct & 0.680 [0.652,0.707] & 1100 \\
+    BEAR retrieval + single-turn & 0.724 [0.697,0.749] & 1100 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+Wrote /home/snhwang/tist-repro/clones/artifacts-previous/results/toolbench_react_metrics_nemo-v042.json
+Wrote /home/snhwang/tist-repro/clones/artifacts-previous/results/toolbench_react_output_nemo-v042.txt
+
+Elapsed: 145.5 min
+
+=== Reproducibility ===
+Timestamp (UTC): 2026-11-22T10:09:46Z
+Command line:    evals/eval_toolbench_react.py --monolithic-cap 0 --base-url http://127.0.0.1:11434/v1 --model mistral-nemo-131k --run-label nemo-v042
+Python:          3.12.13 (Linux-6.6.114.1-microsoft-standard-WSL2-x86_64-with-glibc2.39)
+numpy:           2.2.6
+scipy:           1.17.1
+bear:            0.4.2
+git commit:      e98cc49e5acd1d3bd9c07f60042cb214914c7de6
+git status:      DIRTY (17 files modified)
+git branch:      tist-r2
+
+  model: mistral-nemo-131k
+  base_url: http://127.0.0.1:11434/v1
+  top_k: 5
+  monolithic_cap: 0
+  max_queries: None
+  conditions_run: ['mono_react', 'bear_react', 'bear_single']
+===
+
+To commit these results to the artifacts repo:
+  git add results/toolbench_react_metrics_nemo-v042.json \
+          results/toolbench_react_output_nemo-v042.txt
