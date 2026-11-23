@@ -175,7 +175,22 @@ for part in $PARTS; do
           n=$((n + 1))
         done < <({ git -C "$WP256_CLONE" ls-files --others --exclude-standard -- results
                    git -C "$WP256_CLONE" ls-files -m -- results; } | sort -u)
-        say "copied $n new result file(s) of $WP256_CLONE"
+        # A file of yours that equals the committed copy is neither new nor modified for git. That is
+        # the case once your output has become the committed copy and the clone was updated. Such
+        # files are listed with their git blob hash, by 00_setup.sh --update in the clone and for the
+        # update of 20 Nov 2026 in lib/outputs_equal_committed.txt. A listed file is copied while the
+        # clone's file still has that hash. A modified file was copied by the loop above.
+        neq=0
+        while read -r blob rel; do
+          case $blob in ''|'#'*) continue ;; esac
+          [ -n "$rel" ] && [ -f "$WP256_CLONE/$rel" ] || continue
+          git -C "$WP256_CLONE" diff --quiet -- "$rel" || continue
+          [ "$(git -C "$WP256_CLONE" hash-object "$WP256_CLONE/$rel")" = "$blob" ] || continue
+          if [ "$DRY_RUN" = 0 ]; then mkdir -p "$ASSEMBLED/$(dirname "$rel")"; cp -p "$WP256_CLONE/$rel" "$ASSEMBLED/$rel"; fi
+          neq=$((neq + 1))
+        done < <(cat "$WP256_CLONE/.repro_aside/outputs_equal_committed.txt" "$REPRO_DIR/lib/outputs_equal_committed.txt" 2>/dev/null \
+                   | tr -d '\r' | sort -u)
+        say "copied $n new result file(s) of $WP256_CLONE, and $neq of yours that equal the committed copy"
       else
         warn "no clone $WP256_CLONE"; SKIPPED+=(wp256)
       fi

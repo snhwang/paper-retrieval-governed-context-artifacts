@@ -94,9 +94,16 @@ $local_changes"
     both=$(comm -12 <(git -C "$d" status --porcelain --untracked-files=no | awk '{print $2}' | sort) \
                     <(git -C "$d" diff --name-only HEAD FETCH_HEAD | sort))
     for g in $both; do
-      if [ ! -e "$d/$g" ] || [ "$(git -C "$d" hash-object "$d/$g")" = "$(git -C "$d" rev-parse "FETCH_HEAD:$g" 2>/dev/null)" ]; then
+      if [ ! -e "$d/$g" ]; then
         git -C "$d" checkout -q -- "$g" || die "could not restore $g in $d"
-        say "$d: $g restored before the update (your copy equals the new committed one, or was moved aside)"
+        say "$d: $g restored before the update (it was absent, moved aside by the kit)"
+      elif [ "$(git -C "$d" hash-object "$d/$g")" = "$(git -C "$d" rev-parse "FETCH_HEAD:$g" 2>/dev/null)" ]; then
+        # Your output equals the new committed copy. After the update git no longer sees it as
+        # changed, so its blob hash and path are noted for 70_assemble.sh, which gathers your outputs.
+        mkdir -p "$d/.repro_aside"
+        echo "$(git -C "$d" rev-parse "FETCH_HEAD:$g") $g" >> "$d/.repro_aside/outputs_equal_committed.txt"
+        git -C "$d" checkout -q -- "$g" || die "could not restore $g in $d"
+        say "$d: $g restored before the update (your copy equals the new committed one, noted in .repro_aside/outputs_equal_committed.txt)"
       else
         die "$d: your $g differs from the new committed copy, so $d is not updated"
       fi

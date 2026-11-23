@@ -1,0 +1,20 @@
+# Result files of the author's kit runs that equal the committed copies.
+# Each line: the git blob hash, then the path in the WP1/2/5/6 clone. 70_assemble.sh reads this file.
+#
+# 70_assemble.sh gathers the result files that git sees as new or changed in the clone. A file of
+# yours that equals the committed copy is neither, so it would be left out of the assembled tree.
+# That happened to these seven files. Commit 55175c8 (20 Nov 2026) made the author's outputs the
+# committed copies. The clone update of the same day found each of them equal to the new committed
+# copy (run record 00_setup-20261120T203857Z.json lists each as modified in the clone before that
+# update, and the three .json.gz files of the same update as absent). The assembly of 23 Nov 2026
+# (job 577) then left them out, and the check (job 578) reported three required files as not run.
+#
+# A listed file is copied only while the clone's file still has the hash given here.
+# 00_setup.sh --update now notes such files itself, in <clone>/.repro_aside/outputs_equal_committed.txt.
+497a269ce1c34cc35be245b65041c071d2b6e99e results/budget_binding_v042.json
+b515533e6d7607a500df214a8a55b30ccacf19be results/budget_binding_v042_vs_v040.json
+612b733d225a5b7cbb84c00c8563f9948aeeaf5f results/budget_binding_v042_vs_v040_output.txt
+b36f65ba2ecbd99bca49c71ca1766ab251af06a5 results/invariants_v042.json
+36487555bb2cc82502fbd9b1013a20845249f824 results/invariants_v042_output.txt
+a1e79874198adcedde130f47547e302dc3d3a132 results/invariants_v042_pool_sensitivity_output.txt
+734b5a06c80ccb6544e58e782e6abaa40af19676 results/mandatory_coverage_v042.json
