@@ -1,6 +1,6 @@
 # End-to-end reruns: plan
 
-Status: version 4, 2026-11-21 (see Changes). Versions 1 to 3, 2026-11-20. Scott read the three decisions below and answered on 20 Nov 2026: "It doesn't really matter how we do it. We just need to rerun and document." The session took that as approval of versions 1 to 3 with the planned choices: Ollama, a fixed seed, and all four parts. Version 4 changes how part 4 is run, after job 350 stopped at its third run. It needs Scott's approval in his own words, by this file's sha256, before any job runs under it. A queued job alone is not that approval. Under "Specs yes, gates no" (9 Nov 2026) and "Re-run anything questionable" (12 Nov 2026), this file is fixed before the runs it describes. Its sha256 and Scott's approval, with his words and the date, are recorded in the paper repo's `revision-plan.md`.
+Status: version 5, 2026-11-23 (see Changes). Version 4, 2026-11-21. Versions 1 to 3, 2026-11-20. Scott read the three decisions below and answered on 20 Nov 2026: "It doesn't really matter how we do it. We just need to rerun and document." The session took that as approval of versions 1 to 3 with the planned choices: Ollama, a fixed seed, and all four parts. Version 4 changes how part 4 is run, after job 350 stopped at its third run. Scott approved it on 21 Nov 2026 ("yes"). Version 5 adds part 5 and records how parts 2 to 4 were scheduled. Each version needs Scott's approval in his own words, by this file's sha256, before any job runs under it. A queued job alone is not that approval. Under "Specs yes, gates no" (9 Nov 2026) and "Re-run anything questionable" (12 Nov 2026), this file is fixed before the runs it describes. Its sha256 and Scott's approval, with his words and the date, are recorded in the paper repo's `revision-plan.md`.
 
 ## Why
 
@@ -13,19 +13,20 @@ Scott, 20 Nov 2026: "Let's rerun all the questionable items".
 
 ## What is rerun
 
-Four parts. Each uses all 1,100 ToolBench test queries.
+Five parts. Each uses all 1,100 ToolBench test queries.
 
 1. **Table 10, the ten retrieval rows.** BGE, BGE-M3, Qwen3-Embedding-0.6B, Qwen3-Embedding-4B and BM25, each governed and ungoverned, with single-turn selection by Mistral-Nemo. All ten run in one session, including the three that were already rerun in November.
 2. **Table 10, the monolithic row.** All 3,225 tools in the prompt, single-turn selection by Mistral-Nemo.
 3. **The ReAct scaffold on Mistral-Nemo.** One batch with three conditions: the scaffold on the monolithic prompt, the scaffold on the governed top 5, and governed single-turn selection.
 4. **Gemma 4 12B and 31B.** The two scripts behind the Gemma columns of Supplement Table S1, `run_model_scaffold_nothink.sh` and `run_model_full1100.sh`, for each model. Then `grid_from_full1100.py` and `scaffold_vs_single.py`. Since version 4 the four runs of `run_model_full1100.sh` are made one at a time (see Changes).
+5. **The two other end-to-end values in the text of Section 4.2** (since version 5, see Changes). The hash backend's governed row, BEAR+Hash (gov), with single-turn selection by Mistral-Nemo. And the monolithic prompt with only the first 128 schemas of the corpus, also with Mistral-Nemo. Neither is in a table.
 
 ## Fixed before the runs
 
 - **BEAR.** v0.4.2 (commit `0d0718a`).
-- **Tool lists.** Part 1 reads the top-5 lists of the author's kit run on 0.4.2 (`results/v042/lists/e2e_v042/`). Parts 3 and 4 retrieve the governed top 5 with BGE inside the script, on 0.4.2.
+- **Tool lists.** Part 1 reads the top-5 lists of the author's kit run on 0.4.2 (`results/v042/lists/e2e_v042/`). Parts 3 and 4 retrieve the governed top 5 with BGE inside the script, on 0.4.2. The hash row of part 5 reads the hash list of the same kit run.
 - **Server and builds.** Ollama as installed on the workstation. Each run records the Ollama version and the model digest. It stops if the digest is not the one given here.
-  - `mistral-nemo`, digest `e7e06d107c6c`, Q4_0. Part 1 uses the tag `mistral-nemo-32k` (digest `d79a1e80980f`), which is the same weights with a window of 32,768 tokens.
+  - `mistral-nemo`, digest `e7e06d107c6c`, Q4_0. Part 1 uses the tag `mistral-nemo-32k` (digest `d79a1e80980f`), which is the same weights with a window of 32,768 tokens. Part 5 uses that tag too.
   - `gemma4:12b`, digest `4eb23ef187e2`, Q4_K_M.
   - `gemma4:31b`, digest `6316f0629137`, Q4_K_M.
 - **Decoding.** As the paper describes it.
@@ -64,6 +65,7 @@ The results' README in the repository gets one table with these facts per run.
   2. Every governed configuration beats the monolithic prompt.
   3. The one-step scaffold lowers Mistral-Nemo's accuracy, and lowers it most on the monolithic prompt.
   4. No monolithic configuration of the Gemma models reaches governed accuracy, and governance narrows the spread between models.
+- Since version 5, two more statements are at stake in the same way. The hash backend, which carries no semantic signal, is not distinguishable from the monolithic prompt. And shown only the first 128 schemas, the model selects well on the few queries whose gold tool is among them.
 - The Summary of Differences and the response letter say that the end-to-end results were rerun, and why.
 - After the runs, the author's outputs replace the committed copies in `results/` and `evals/results/`, as was done for the other results on 20 Nov 2026. The July files remain in the repository's history.
 
@@ -77,6 +79,7 @@ One job at a time, each queued by Scott.
 | 2. Monolithic row | about 6 hours |
 | 3. ReAct | about 8 hours |
 | 4. Gemma, four runs | 4 to 9 hours each |
+| 5. Hash row, 128-schema run | a few minutes each |
 
 That is about 30 to 50 hours in all. The times of parts 2 to 4 are those of the July runs. Version 4 (see Changes) gives the times measured on 20 Nov 2026.
 
@@ -114,3 +117,13 @@ All three take the planned choice (see Status).
   - **A run that is stopped.** A run that the end of a night stops keeps no result. It is made again in a later night, and what the stopped attempt left is kept apart in the output folder.
   - **Nights.** One queue job per booked night runs that night's parts in order and skips the parts already done. Until 21 Nov each part was its own queue job, chained to the others. On 21 Nov two tag jobs started in the same second and shared one run record. One of them failed, and the queue cancelled the measured load of Mistral-Nemo and the ReAct job, which depended on it. No run had started, so no result was affected. The kit now gives each run its own record. Job 419 made the tag `gemma4-31b-131k` before its record was damaged. The tag step runs once more, so that a complete run record holds the tag's digest.
   - **Times measured on 20 Nov 2026.** Part 1 took 27 minutes (job 327). The 12B scaffold batch took 1 h 05 (monolithic prompt 40 minutes, about 2.2 s per query). The table above said 4 to 9 hours for each Gemma run.
+- **2026-11-23, version 5.** Version 4 had sha256 ff97c70ba894e4e265df81e9818d29c554cb8ecc0e8c6099a44b95b718db2106. Version 5 adds part 5 and records how parts 2 to 4 were scheduled. No setting of parts 1 to 4 changes. Their runs were finished on 23 Nov 2026.
+  - **Why part 5.** On 23 Nov the text of Section 4.2 was checked against the reruns. Two end-to-end values of July are in that text and in none of the four parts. The text sets the hash backend's governed row (exact accuracy 0.211, not tabulated) against the monolithic row. It also reports a monolithic run with the first 128 schemas of the corpus (the gold tool is present for 24 queries). "What is reported" says that no earlier end-to-end value stays in the paper, so both are rerun.
+  - **How.** Both runs use the tag of part 1, `mistral-nemo-32k` (digest `d79a1e80980f`), at temperature 0, with the JSON schema, no seed, and all 1,100 queries.
+    - The hash row uses the script of part 1 (`e2e_rerun.py`, row "BEAR+Hash (gov)") and the hash list of the author's kit run on 0.4.2. The script rebuilds that list and stops if it differs. The kit step is `50_e2e_ollama.sh --hash-row`.
+    - The 128-schema run uses the script of part 2 with `--monolithic-cap 128`. The kit step is `56_e2e_long_context.sh monolithic-cap128`. It goes through the same guard as parts 2 to 4 and writes a serving record.
+  - **What differs from parts 1 and 2.**
+    - The hash row is made in a session of its own, some days after the ten rows of part 1, on the same tag. Its run record holds the Ollama version, so a change of version would show.
+    - The full monolithic row of part 2 ran on `mistral-nemo-131k`. The 128-schema prompt is short, so that run uses the 32k tag. Both tags are the same weights (`mistral-nemo`, digest `e7e06d107c6c`) and differ only in the window. With the 32k tag both runs of part 5 fit beside the Qwen3.8 server, and it does not have to stop.
+  - **How parts 2 to 4 were scheduled.** Version 4 speaks of booked nights. On 22 Nov 2026 Scott saw the workstation idle with the night jobs waiting and had them run back to back, with the Qwen3.8 server stopped throughout (his choices "Start night 1 now" and "Back to back", as the model-server session reported them). Jobs 456 to 459 ran from 22 Nov 02:42 to 23 Nov 03:39 EST, outside any reservation. The model-server session raised their time limits before they started (12 h for job 457, 20 h for jobs 458 and 459). No run setting changed. Each run is still one pass with its own guarded load and serving record.
+  - **Times measured, 20 to 23 Nov 2026 (each script's own elapsed time).** The ReAct batch took 145.5 minutes and the monolithic row about 32. The 31B scaffold batch took 119.3 minutes. The four native runs took 11.5, 313.1, 67.8 and 425.7 minutes on the 12B model, and 17.9, 528.9, 51.8 and 596.2 minutes on the 31B model.
