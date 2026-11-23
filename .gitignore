@@ -6,3 +6,7 @@ venv/
 .DS_Store
 pet_sim/instructions/.cache/
 .claude/
+# What the job queue writes into the folder a job was entered from: each job's output and its
+# end-of-job summary. They are not part of the repository and may name who entered the job.
+/rgc-*.out
+/run-*.json

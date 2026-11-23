@@ -189,7 +189,9 @@ repro_begin() {
     echo "$$ $(date -u +%FT%TZ) ${REPRO_UNIT:-terminal}" > "$REPRO_RUNNING_MARK"
   fi
   say "run record: $REPRO_RECORD"
-  [ -n "${SLURM_JOB_ID:-}" ] && record_note "Slurm job $SLURM_JOB_ID (${SLURM_JOB_NAME:-}), submitted by ${SLURM_JOB_USER:-$(id -un)}, $(scontrol show job "$SLURM_JOB_ID" 2>/dev/null | grep -o 'Comment=.*' | head -1)"
+  # The queue's comment may say who entered the job. An e-mail address there is not copied into
+  # the record, since the records of the author's runs are published in reproduce/runlog.
+  [ -n "${SLURM_JOB_ID:-}" ] && record_note "Slurm job $SLURM_JOB_ID (${SLURM_JOB_NAME:-}), submitted by ${SLURM_JOB_USER:-$(id -un)}, $(scontrol show job "$SLURM_JOB_ID" 2>/dev/null | grep -o 'Comment=.*' | head -1 | sed -E 's/(entered=web )[^;[:space:]]*@[^;[:space:]]*/\1[address withheld]/g')"
   return 0
 }
 
