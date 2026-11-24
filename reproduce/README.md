@@ -6,9 +6,9 @@ This folder reruns every result of the revised TIST paper, "Retrieval-Governed C
 - **needs Scott's run.** The paper attributes the number to BEAR 0.4.2 or to this revision. That covers every retrieval table, even where the value equals July's, and WP1, WP2, WP4, WP5, WP6, every end-to-end result (Table 10, the Section 4.2 text and Supplement Table S1) and Hermes.
 - **Scott, previous version.** A July or August 2026 run that the revision keeps unchanged, with no claim that it ran on 0.4.2. Since the end-to-end reruns of November 2026 (`evals/e2e_rerun/PLAN.md`) the only such item with a script is the MetaTool tag generation of Appendix A (`55_ tags-api`). It needs no rerun.
 
-`TEXT_FIXES.md` lists the numbers in the manuscript that no script can produce (stale text, prose estimates, no data), with a proposed change for each.
+`TEXT_FIXES.md` lists the numbers in the text of 31 Oct 2026 that no script could produce (stale text, prose estimates, no data), with a proposed change for each. Every entry is settled in the revised manuscript, and the note at the top of that file gives the outcome of each.
 
-The run records of the author's runs are in `runlog/`. Table and section numbers follow the manuscript as built on 20 Nov 2026 (Tables 1 to 19, Supplement Tables S1 to S4). The paper prints Nemotron-Embed, Qwen3-Emb-0.6B and Qwen3-Emb-4B where the kit's keys say `Nemotron`, `Qwen3-0.6B` and `Qwen3-4B`.
+The run records of the author's runs are in `runlog/`. Table and section numbers follow the manuscript as built on 23 Nov 2026 (Tables 1 to 19, Supplement Tables S1 to S4). The paper prints Nemotron-Embed, Qwen3-Emb-0.6B and Qwen3-Emb-4B where the kit's keys say `Nemotron`, `Qwen3-0.6B` and `Qwen3-4B`.
 
 BEAR is pinned at the public tag v0.4.2 (commit `0d0718a`). The scripts only wrap the evaluation code in `evals/` and `hermes/`. They never write into `results/` or anywhere else in this checkout. Every output goes to `$REPRO_OUT`, by default `~/tist-repro`.
 
@@ -192,7 +192,7 @@ Some rules settle details the table leaves open (added 18 Nov 2026, after the ki
 
 The table prints one line per file: PASS, FAIL, INFO, NEW (no committed file of that name), SKIP, or NOT RUN (the manuscript needs the file and you have not produced it yet). `--strict` counts NOT RUN as a failure. Use it for the final check.
 
-Some committed files are older than your runs. Several WP2, WP5 and WP6 rows were committed from BEAR 0.4.0, and the committed Hermes tables come from agent runs. Your 0.4.2 runs replace them, so a FAIL there can be a real 0.4.0 to 0.4.2 change. The detail column names the value.
+Some committed files are older than your runs. Several WP2, WP5 and WP6 rows were committed from BEAR 0.4.0. Your 0.4.2 runs replace them, so a FAIL there can be a real 0.4.0 to 0.4.2 change. The detail column names the value. Since 20 Nov 2026 the committed files that differed from the author's outputs, and the Hermes tables, are the author's outputs (`MANIFEST.md`, "State of the runs").
 
 ## The numbers file
 

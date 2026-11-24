@@ -156,7 +156,7 @@ ITEMS: list[dict] = [
     {"id": "XE2Ea", "label": "Sec 4.2 end-to-end text, statistics over the reruns", "status": "b",
      "what": "the best governed system against the monolithic row (ratios, paired bootstrap p, d), every row "
              "against monolithic (d), hash against monolithic, McNemar for Qwen3-0.6B vs Qwen3-4B, the run with "
-             "the first 128 schemas, the chance rate, and the 14 colliding names over 22 endpoints",
+             "the first 128 schemas, the chance rate, and the 14 colliding names over 36 endpoints",
      "script": "collect.py (from the per-query arrays of 50_ and 56_), 70_ (part derived: derive/e2e_name_collisions.py)",
      "sources": [f"{E2E}/{r}.scores.json" for r in E2E_SLUGS]
                 + [f"{E2E_HASH}/bear_hash_gov.scores.json", f"{MONO}/toolbench_e2e_scores_partial.json",

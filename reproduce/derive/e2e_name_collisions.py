@@ -7,7 +7,7 @@ The end-to-end prompt names each ToolBench API by a sanitized function name
 (evals/eval_toolbench_e2e.py make_tool_schema). When two endpoints sanitize to
 the same name, the monolithic prompt cannot tell them apart, which is why its
 retrieval recall is 0.995 and not 1.000 (text of Section 4.2, "14 sanitized
-function names that collide across 22 endpoints"). This counts those names,
+function names that collide across 36 endpoints"). This counts those names,
 with the same loader and schema code the end-to-end runs used. No model, no server.
 """
 from __future__ import annotations

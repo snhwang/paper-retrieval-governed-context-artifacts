@@ -4,6 +4,32 @@ Numbers in `sample-manuscript.tex` that no script produces, because the text is 
 
 The checks below were made on the committed files with `collect.py`. Your runs give the final values, and `numbers/numbers.md` lists them.
 
+## What became of each entry (23 Nov 2026)
+
+This file records the text of 31 Oct 2026. Every entry is settled in the revised manuscript as built on 23 Nov 2026. The entries below keep their old wording, section numbers and line numbers.
+
+1. Changed as proposed. Related Work says "NDCG@5 of 0.89 to 0.93 on the dense backends".
+2. The abstract no longer has the sentence. It reports the mandatory-coverage test instead (recall 1.000 against 0.000 without injection).
+3. The latency sentence was removed.
+4. The ms/query column and its caption sentence were removed.
+5. Changed as proposed ("in a single offline pass").
+6. Changed, with the values of the November rerun of that run. The text says 96% for the right tool, 83% with the right endpoint, and "about fivefold".
+7. The text no longer quotes this p value. It gives the recalls with their intervals.
+8. Changed as proposed ("about 280 to 370 times", with Mistral-Nemo's tokenizer for both prompts).
+9. Changed to 0.905 (now Supplement Table S2).
+10. The sentence was replaced. The section "Use of Generative AI" names the kit.
+11. Changed as proposed.
+12. The sentence was removed.
+
+The values under "Checked and matching" were computed on the files of the July and August 2026 runs. The reruns of November 2026 replaced the end-to-end values among them. The text now gives 3.3× and 4.1×, d = 0.89 to 1.04, and for the hash row against the monolithic row a difference of +0.032 with p = 0.048 and d = 0.06. McNemar's p for BEAR+Qwen3-0.6B against BEAR+Qwen3-4B is 0.36. The numbers file of the author's run lists the current values (items XE2Ea and XE2Eb).
+
+The five values that waited for the author's run of `70_assemble.sh` are now checked:
+- 14 sanitized names collide across 36 endpoints, which hold 21 of the 2,629 gold query-API pairs. The text said 22 endpoints and was changed to 36.
+- BEAR v0.4.2 has eight tests in `TestEmitToolSummary`.
+- The tool summary adds 13.0 to 17.0 tokens per admitted tool. The text said "roughly twenty" and was changed to "roughly 13 to 17".
+- The MetaTool split is 20,614 single-target and 497 multi-target queries.
+- No gold API of the 2,629 is gated out.
+
 ## Stale or unsupported
 
 1. **Related Work, L297.** "yielding NDCG@5~=~0.905 without fine-tuning or outcome data."
