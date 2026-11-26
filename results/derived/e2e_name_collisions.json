@@ -1,0 +1,42 @@
+{
+ "endpoints": 3225,
+ "endpoints_with_a_schema": 3225,
+ "endpoints_without_a_schema": 0,
+ "distinct_names": 3203,
+ "colliding_names": 14,
+ "endpoints_in_colliding_names": 36,
+ "gold_apis_in_colliding_names": 21,
+ "gold_apis": 2629,
+ "colliding": {
+  "Currency_Converter_v2_Convert": 2,
+  "Demo_Project_Get_Categories": 3,
+  "Demo_Project_Get_Order": 4,
+  "Demo_Project_Get_Product": 3,
+  "Demo_Project_Get_Products": 2,
+  "Demo_Project_Get_Products_in_Category": 3,
+  "Demo_Project_Get_User_Orders": 3,
+  "Demo_Project_Me": 2,
+  "Fast_Food_Restaurants_USA_-_TOP_50_Chains_GET_all_Restaurants_by": 3,
+  "Konviere_DrugsAPI_Get_Adverse_Event_Info_by_Reaction_Sex_Age_Gro": 2,
+  "Premium-Anime-Mobile-Wallpapers-Illustrations_Anime_wallpapers_r": 3,
+  "Temu_com_Shopping_API_Realtime_api_scrapper_from_temu_com_produc": 2,
+  "Weee_grocery_API_sayweee_com_-_browsing_searching_details_produc": 2,
+  "eGFR_Calculator_Glomerular_filtration_rate_calculator_eGFR_Calcu": 2
+ },
+ "_provenance": {
+  "script": "reproduce/derive/e2e_name_collisions.py",
+  "written_utc": "2026-11-16T11:55:50+00:00",
+  "artifacts_commit": "334e2903e36045143ef9045b7c4337b5ddcb5116",
+  "inputs": [
+   {
+    "path": "evals/data/external_benchmarks/toolbench/benchmark_data.json",
+    "sha256": "e1d4d4eb4a2dd68a8f1562b3fe7e173a9e87813cec1b73d8010c6c5a5da66a6c"
+   },
+   {
+    "path": "evals/eval_toolbench_e2e.py",
+    "sha256": "4e187b4383fe49fdf6a1023077a064d7ac74b96a3ac5ad947f91249a71b04753"
+   }
+  ],
+  "bear_version": "0.4.2"
+ }
+}

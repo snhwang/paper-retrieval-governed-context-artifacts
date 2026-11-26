@@ -1,0 +1,71 @@
+{
+ "tokenizer": "cl100k_base",
+ "all_tools": {
+  "tools": 50,
+  "extra_tokens": 652,
+  "per_tool": 13.04,
+  "same_tools_array": true
+ },
+ "first_n_tools": {
+  "3": {
+   "tools": 3,
+   "extra_tokens": 51,
+   "per_tool": 17.0,
+   "same_tools_array": true
+  },
+  "4": {
+   "tools": 4,
+   "extra_tokens": 66,
+   "per_tool": 16.5,
+   "same_tools_array": true
+  },
+  "5": {
+   "tools": 5,
+   "extra_tokens": 80,
+   "per_tool": 16.0,
+   "same_tools_array": true
+  },
+  "6": {
+   "tools": 6,
+   "extra_tokens": 94,
+   "per_tool": 15.666666666666666,
+   "same_tools_array": true
+  },
+  "7": {
+   "tools": 7,
+   "extra_tokens": 105,
+   "per_tool": 15.0,
+   "same_tools_array": true
+  },
+  "10": {
+   "tools": 10,
+   "extra_tokens": 142,
+   "per_tool": 14.2,
+   "same_tools_array": true
+  },
+  "25": {
+   "tools": 25,
+   "extra_tokens": 333,
+   "per_tool": 13.32,
+   "same_tools_array": true
+  },
+  "50": {
+   "tools": 50,
+   "extra_tokens": 652,
+   "per_tool": 13.04,
+   "same_tools_array": true
+  }
+ },
+ "_provenance": {
+  "script": "reproduce/derive/tool_summary_tokens.py",
+  "written_utc": "2026-11-16T11:55:51+00:00",
+  "artifacts_commit": "334e2903e36045143ef9045b7c4337b5ddcb5116",
+  "inputs": [
+   {
+    "path": "evals/eval_tool_scaling.py",
+    "sha256": "e0118e78da0becf31e8e5ec9392fbde6d99abd2b0b21480b0dbe8104331fbf5b"
+   }
+  ],
+  "bear_version": "0.4.2"
+ }
+}

@@ -1,0 +1,37 @@
+{
+ "file": "tests/test_composer.py",
+ "bear_git_sha": "0d0718a39a0b0788ef5cca4689352462b830494c",
+ "emit_tool_summary_tests": 8,
+ "emit_tool_summary_test_names": [
+  "test_default_off_no_summary_in_guidance",
+  "test_enabled_appends_tool_summary",
+  "test_summary_uses_first_line_of_content_when_no_description",
+  "test_summary_truncates_long_descriptions",
+  "test_summary_priority_order",
+  "test_summary_skips_tools_without_function_name",
+  "test_summary_no_block_when_no_tools",
+  "test_summary_mirrors_structured_tools"
+ ],
+ "tests_per_class": {
+  "TestComposer": 7,
+  "TestComposedOutput": 5,
+  "TestToolEmission": 8,
+  "TestEmitToolSummary": 8,
+  "TestMandatoryKept": 7,
+  "TestQuotas": 8,
+  "TestWhatItKept": 5
+ },
+ "module_level_tests": 1,
+ "_provenance": {
+  "script": "reproduce/derive/composer_tests.py",
+  "written_utc": "2026-11-16T11:55:50+00:00",
+  "artifacts_commit": "334e2903e36045143ef9045b7c4337b5ddcb5116",
+  "inputs": [
+   {
+    "path": "/home/snhwang/tist-evals/bear-v0.4.2/tests/test_composer.py",
+    "sha256": "cf045b8717bc923a85ec18315495bd0bbc2aa1c72815d9a7c0222f314d7ac9dc"
+   }
+  ],
+  "bear_version": "0.4.2"
+ }
+}

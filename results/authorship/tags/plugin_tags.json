@@ -1,0 +1,777 @@
+{
+  "airqualityforeast": [
+    "weather"
+  ],
+  "tira": [
+    "shopping"
+  ],
+  "timeport": [
+    "entertainment",
+    "education"
+  ],
+  "copilot": [
+    "shopping",
+    "travel"
+  ],
+  "copywriter": [
+    "business",
+    "productivity"
+  ],
+  "total_query_meta_search_engine": [
+    "knowledge",
+    "data"
+  ],
+  "Now": [
+    "news",
+    "data"
+  ],
+  "calculator": [
+    "productivity",
+    "knowledge"
+  ],
+  "search": [
+    "education",
+    "knowledge"
+  ],
+  "stellarexplorer": [
+    "science",
+    "image",
+    "data"
+  ],
+  "SummarizeAnything_pr": [
+    "knowledge",
+    "productivity"
+  ],
+  "ChatOCR": [
+    "image",
+    "productivity",
+    "data"
+  ],
+  "Broadway": [
+    "entertainment"
+  ],
+  "MyWritingCompanion": [
+    "business",
+    "productivity"
+  ],
+  "diceroller": [
+    "entertainment"
+  ],
+  "ad4mat": [
+    "business",
+    "shopping"
+  ],
+  "hackit_web_scanner": [
+    "security",
+    "developer"
+  ],
+  "MixerBox_Translate_AI_language_tutor": [
+    "communication",
+    "education"
+  ],
+  "shimmer_daily": [
+    "shopping",
+    "entertainment"
+  ],
+  "CribbageScorer": [
+    "entertainment"
+  ],
+  "magi_codex": [
+    "entertainment",
+    "knowledge"
+  ],
+  "talkfpl": [
+    "entertainment",
+    "communication"
+  ],
+  "WebRewind": [
+    "knowledge",
+    "data"
+  ],
+  "video_highlight": [
+    "entertainment"
+  ],
+  "exportchat": [
+    "productivity",
+    "communication"
+  ],
+  "mini_habits": [
+    "health",
+    "productivity"
+  ],
+  "mbti": [
+    "health",
+    "education"
+  ],
+  "socialsearch": [
+    "communication",
+    "news"
+  ],
+  "Talkface_IELTS_Prep": [
+    "education",
+    "communication"
+  ],
+  "Checkers": [
+    "entertainment"
+  ],
+  "heygen": [
+    "image",
+    "entertainment"
+  ],
+  "Figlet": [
+    "developer",
+    "image"
+  ],
+  "TalentOrg": [
+    "business",
+    "finance"
+  ],
+  "ph_ai_news_query": [
+    "finance",
+    "news"
+  ],
+  "social_media_muse": [
+    "communication",
+    "entertainment",
+    "image"
+  ],
+  "ApexMap": [
+    "entertainment",
+    "location"
+  ],
+  "QuiverQuantitative": [
+    "finance",
+    "data"
+  ],
+  "ai_council": [
+    "knowledge",
+    "developer"
+  ],
+  "GifApi": [
+    "image",
+    "entertainment"
+  ],
+  "create_qr_code": [
+    "developer",
+    "image",
+    "communication"
+  ],
+  "Google_Ads_Shopping_Microsoft_Ads_pay_per_click": [
+    "business",
+    "shopping"
+  ],
+  "wpinteract": [
+    "news",
+    "knowledge"
+  ],
+  "aiAgents": [
+    "developer",
+    "productivity"
+  ],
+  "lsongai": [
+    "entertainment",
+    "news",
+    "image"
+  ],
+  "Man_of_Many": [
+    "news",
+    "shopping",
+    "entertainment"
+  ],
+  "WordCloud": [
+    "image",
+    "data"
+  ],
+  "rephrase": [
+    "communication",
+    "productivity"
+  ],
+  "brandfetch": [
+    "business",
+    "image"
+  ],
+  "SuperchargeMyEV": [
+    "travel",
+    "location"
+  ],
+  "timemachine": [
+    "developer",
+    "productivity"
+  ],
+  "clinq": [
+    "communication",
+    "productivity"
+  ],
+  "smarttsicketsai": [
+    "entertainment",
+    "travel"
+  ],
+  "word_counter": [
+    "productivity",
+    "knowledge"
+  ],
+  "web_scraper": [
+    "developer",
+    "data"
+  ],
+  "storybird_stories": [
+    "entertainment",
+    "education"
+  ],
+  "MixerBox_WebSearchG_web_search": [
+    "knowledge",
+    "news"
+  ],
+  "Substack_IQ": [
+    "news",
+    "knowledge"
+  ],
+  "placid": [
+    "image",
+    "productivity"
+  ],
+  "universal": [
+    "knowledge",
+    "productivity",
+    "image"
+  ],
+  "clinical_trial_radar": [
+    "health",
+    "science"
+  ],
+  "qreator": [
+    "image",
+    "developer"
+  ],
+  "what_to_watch": [
+    "entertainment"
+  ],
+  "champdex": [
+    "entertainment",
+    "communication"
+  ],
+  "hadith": [
+    "knowledge",
+    "education"
+  ],
+  "hdbcarpark": [
+    "location",
+    "travel"
+  ],
+  "chat_with_workspace": [
+    "productivity",
+    "communication"
+  ],
+  "CarYardBard": [
+    "business",
+    "shopping"
+  ],
+  "reflect_notes": [
+    "productivity",
+    "communication"
+  ],
+  "sakenowa": [
+    "food",
+    "knowledge"
+  ],
+  "ArtCollection": [
+    "image",
+    "knowledge"
+  ],
+  "dover_outreach": [
+    "communication",
+    "business"
+  ],
+  "PDF_Exporter": [
+    "productivity",
+    "communication"
+  ],
+  "AusSurfReport": [
+    "weather",
+    "travel"
+  ],
+  "Puzzle_Constructor": [
+    "entertainment",
+    "education"
+  ],
+  "Planfit": [
+    "health",
+    "education"
+  ],
+  "AusPetrolPrices": [
+    "travel",
+    "finance",
+    "location"
+  ],
+  "ImageSearch": [
+    "image"
+  ],
+  "SASpeedCameras": [
+    "travel",
+    "location"
+  ],
+  "ndricks_sports_api": [
+    "entertainment",
+    "news"
+  ],
+  "webhooks": [
+    "developer"
+  ],
+  "LarkBaseImporter": [
+    "data",
+    "productivity"
+  ],
+  "AbleStyle": [
+    "shopping",
+    "entertainment"
+  ],
+  "website_performance_insights": [
+    "developer",
+    "data"
+  ],
+  "fundsdbsearch": [
+    "finance"
+  ],
+  "hacktrack": [
+    "security"
+  ],
+  "tailor_erp": [
+    "business",
+    "developer"
+  ],
+  "locator": [
+    "science",
+    "location"
+  ],
+  "dart": [
+    "productivity",
+    "business"
+  ],
+  "Agones": [
+    "entertainment",
+    "data"
+  ],
+  "CTCP": [
+    "health",
+    "science"
+  ],
+  "web_requests": [
+    "knowledge",
+    "developer",
+    "news"
+  ],
+  "chatspot": [
+    "business",
+    "data"
+  ],
+  "korea_subway": [
+    "travel",
+    "location"
+  ],
+  "assetOvi": [
+    "image",
+    "entertainment",
+    "developer"
+  ],
+  "RoboAd": [
+    "business",
+    "productivity"
+  ],
+  "keywordexplorer": [
+    "business",
+    "data"
+  ],
+  "uk_politics": [
+    "news",
+    "knowledge"
+  ],
+  "abc_to_audio": [
+    "entertainment"
+  ],
+  "TicTacToe": [
+    "entertainment"
+  ],
+  "deployscript": [
+    "developer"
+  ],
+  "jini": [
+    "knowledge",
+    "news",
+    "data"
+  ],
+  "CranePumpsManuals": [
+    "knowledge",
+    "business"
+  ],
+  "Horoscopes_by_Inner_Self": [
+    "entertainment",
+    "knowledge"
+  ],
+  "CreditYelp": [
+    "finance"
+  ],
+  "themeparkhipster": [
+    "travel",
+    "entertainment"
+  ],
+  "find_agency": [
+    "business",
+    "location"
+  ],
+  "EmailByNylas": [
+    "communication",
+    "productivity"
+  ],
+  "photorealistic": [
+    "image"
+  ],
+  "noteable": [
+    "developer",
+    "data"
+  ],
+  "bramework": [
+    "business",
+    "data"
+  ],
+  "Sudoku": [
+    "entertainment",
+    "education"
+  ],
+  "cloudflare_radar": [
+    "data",
+    "developer"
+  ],
+  "dev": [
+    "developer",
+    "knowledge"
+  ],
+  "metaphor_search_api": [
+    "knowledge",
+    "data"
+  ],
+  "Dr_Thoths_Tarot": [
+    "entertainment",
+    "knowledge"
+  ],
+  "decision_journal": [
+    "productivity",
+    "knowledge"
+  ],
+  "Visla": [
+    "image",
+    "entertainment"
+  ],
+  "form": [
+    "productivity",
+    "business"
+  ],
+  "AutoInfra1": [
+    "developer",
+    "data"
+  ],
+  "Glowing": [
+    "communication",
+    "productivity"
+  ],
+  "SSH": [
+    "developer",
+    "security"
+  ],
+  "hubbubworld_hubbub_1": [
+    "health",
+    "location"
+  ],
+  "ABCmouse": [
+    "education",
+    "entertainment"
+  ],
+  "C3_Glide": [
+    "travel",
+    "weather"
+  ],
+  "Chess": [
+    "entertainment"
+  ],
+  "clearbit_integration": [
+    "business",
+    "data"
+  ],
+  "keyplays_football": [
+    "entertainment"
+  ],
+  "blockatlas": [
+    "data",
+    "knowledge"
+  ],
+  "IndoorPlants": [
+    "science",
+    "knowledge"
+  ],
+  "internetSearch": [
+    "knowledge",
+    "news"
+  ],
+  "uberchord": [
+    "entertainment",
+    "education"
+  ],
+  "portfoliopilot": [
+    "finance"
+  ],
+  "buildbetter": [
+    "business",
+    "communication"
+  ],
+  "word_sneak": [
+    "entertainment"
+  ],
+  "crafty_clues": [
+    "entertainment",
+    "education"
+  ],
+  "Bohita": [
+    "image",
+    "shopping"
+  ],
+  "competitorppcads": [
+    "business",
+    "data"
+  ],
+  "seoanalysis": [
+    "business",
+    "data"
+  ],
+  "kraftful": [
+    "productivity",
+    "business"
+  ],
+  "Algorithma": [
+    "entertainment"
+  ],
+  "KalendarAI": [
+    "business",
+    "communication",
+    "productivity"
+  ],
+  "AppyPieAIAppBuilder": [
+    "developer",
+    "productivity"
+  ],
+  "Creaticode_Extension_of_MIT_Scratch": [
+    "developer",
+    "education",
+    "image"
+  ],
+  "recipe_retrieval": [
+    "food"
+  ],
+  "Tax_Calculator": [
+    "finance"
+  ],
+  "speechki_tts_plugin": [
+    "communication",
+    "developer"
+  ],
+  "Magnetis": [
+    "finance",
+    "data"
+  ],
+  "AI2sql": [
+    "developer",
+    "data"
+  ],
+  "haulingbuddies": [
+    "travel",
+    "business"
+  ],
+  "SceneXplain": [
+    "image",
+    "knowledge"
+  ],
+  "speak": [
+    "education",
+    "communication"
+  ],
+  "FinanceTool": [
+    "finance"
+  ],
+  "ExchangeTool": [
+    "finance"
+  ],
+  "Zapier": [
+    "productivity",
+    "developer"
+  ],
+  "NewsTool": [
+    "news"
+  ],
+  "CharityTool": [
+    "business",
+    "data"
+  ],
+  "MapTool": [
+    "location",
+    "image"
+  ],
+  "PolishTool": [
+    "productivity",
+    "communication"
+  ],
+  "NotesTool": [
+    "productivity"
+  ],
+  "CourseTool": [
+    "education",
+    "knowledge"
+  ],
+  "StrologyTool": [
+    "knowledge"
+  ],
+  "DataRetrievalTool": [
+    "data",
+    "knowledge",
+    "communication"
+  ],
+  "LawTool": [
+    "business",
+    "knowledge"
+  ],
+  "ChartTool": [
+    "data",
+    "developer"
+  ],
+  "MemoryTool": [
+    "education",
+    "productivity"
+  ],
+  "EarthquakeTool": [
+    "weather",
+    "news"
+  ],
+  "NASATool": [
+    "science",
+    "image"
+  ],
+  "ResumeTool": [
+    "business",
+    "productivity"
+  ],
+  "CompanyInfoTool": [
+    "business",
+    "knowledge"
+  ],
+  "MemeTool": [
+    "image",
+    "entertainment"
+  ],
+  "VideoSummarizeTool": [
+    "entertainment",
+    "knowledge"
+  ],
+  "GiftTool": [
+    "shopping",
+    "knowledge"
+  ],
+  "PDF&URLTool": [
+    "productivity",
+    "knowledge"
+  ],
+  "MediaModifyTool": [
+    "image"
+  ],
+  "URLTool": [
+    "developer",
+    "business"
+  ],
+  "DietTool": [
+    "food",
+    "health"
+  ],
+  "WebsiteTool": [
+    "developer",
+    "productivity"
+  ],
+  "TripTool": [
+    "travel",
+    "shopping"
+  ],
+  "TripAdviceTool": [
+    "travel"
+  ],
+  "MediaTool": [
+    "entertainment",
+    "news"
+  ],
+  "PodcastTool": [
+    "entertainment",
+    "knowledge"
+  ],
+  "BookTool": [
+    "entertainment",
+    "education",
+    "knowledge"
+  ],
+  "WeatherTool": [
+    "weather"
+  ],
+  "MusicTool": [
+    "entertainment"
+  ],
+  "GameTool": [
+    "entertainment"
+  ],
+  "RestaurantBookingTool": [
+    "food"
+  ],
+  "HouseRentingTool": [
+    "business",
+    "location"
+  ],
+  "local": [
+    "location",
+    "food",
+    "shopping"
+  ],
+  "HousePurchasingTool": [
+    "business",
+    "finance"
+  ],
+  "JobTool": [
+    "business",
+    "productivity"
+  ],
+  "RepoTool": [
+    "developer",
+    "knowledge"
+  ],
+  "ResearchFinder": [
+    "science",
+    "knowledge"
+  ],
+  "ResearchHelper": [
+    "science",
+    "knowledge",
+    "education"
+  ],
+  "SEOTool": [
+    "business",
+    "data"
+  ],
+  "ProductSearch": [
+    "shopping"
+  ],
+  "Discount": [
+    "shopping",
+    "finance"
+  ],
+  "Review": [
+    "shopping",
+    "data"
+  ],
+  "ProductComparison": [
+    "shopping"
+  ],
+  "ShoppingAssistant": [
+    "shopping"
+  ]
+}

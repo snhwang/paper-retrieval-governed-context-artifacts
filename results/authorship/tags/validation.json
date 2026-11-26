@@ -1,0 +1,172 @@
+{
+ "tags_dir": "/home/snhwang/tist-repro/authorship/tags",
+ "n_call_records": 24627,
+ "targets": {
+  "tool_tags": {
+   "calls": 199,
+   "items_called": 199,
+   "items_retried": 0,
+   "call_outcomes": {
+    "valid": 199
+   },
+   "final_call_outcome_per_item": {
+    "valid": 199
+   },
+   "shim_outcomes": {
+    "tool_call": 199
+   },
+   "served_models": {
+    "Qwen3.8-27B": 199
+   },
+   "items_expected": 199,
+   "items_in_output": 199,
+   "items_absent": [],
+   "items_with_no_tag": [],
+   "out_of_vocabulary_tags": 0,
+   "sonnet": {
+    "items": 199,
+    "absent": 0,
+    "out_of_vocabulary_tags": 0
+   },
+   "fallback": "an absent tool carries no required tags at evaluation (eval_toolbench.load_metatool_corpus_tagged)",
+   "lost_fraction": 0.0
+  },
+  "query_tags_top5": {
+   "calls": 21111,
+   "items_called": 21041,
+   "items_retried": 55,
+   "call_outcomes": {
+    "valid": 21111
+   },
+   "final_call_outcome_per_item": {
+    "valid": 21041
+   },
+   "shim_outcomes": {
+    "tool_call": 21111
+   },
+   "served_models": {
+    "Qwen3.8-27B": 21111
+   },
+   "items_expected": 21111,
+   "items_in_output": 21041,
+   "items_absent": 70,
+   "items_with_no_domain_tag": 0,
+   "out_of_vocabulary_tags": 0,
+   "sonnet": {
+    "items": 21111,
+    "absent": 0
+   },
+   "fallback": "an absent query is left out of the MetaTool+QueryTags-top5 set (load_metatool_queries_from_query_tags)",
+   "lost_fraction": 0.003315806925299607
+  },
+  "toolbench_top1": {
+   "calls": 1119,
+   "items_called": 1099,
+   "items_retried": 10,
+   "call_outcomes": {
+    "valid": 1105,
+    "out_of_vocabulary": 12,
+    "empty_reply": 2
+   },
+   "final_call_outcome_per_item": {
+    "valid": 1089,
+    "out_of_vocabulary": 10
+   },
+   "shim_outcomes": {
+    "text": 1117,
+    "empty_text": 2
+   },
+   "served_models": {
+    "Qwen3.8-27B": 1119
+   },
+   "items_expected": 1099,
+   "items_in_output": 1099,
+   "final_normalized": {
+    "valid": 1089,
+    "oov_labels": 10,
+    "out_of_vocabulary": 10
+   },
+   "sonnet_final_normalized": {
+    "valid": 1093,
+    "oov_labels": 6,
+    "out_of_vocabulary": 6
+   },
+   "fallback": "out of vocabulary becomes the empty tag, so the query is not gated",
+   "lost_fraction": 0.0
+  },
+  "toolbench_multi": {
+   "calls": 1099,
+   "items_called": 1099,
+   "items_retried": 0,
+   "call_outcomes": {
+    "valid": 1081,
+    "empty_set": 9,
+    "partly_out_of_vocabulary": 9
+   },
+   "final_call_outcome_per_item": {
+    "valid": 1081,
+    "empty_set": 9,
+    "partly_out_of_vocabulary": 9
+   },
+   "shim_outcomes": {
+    "text": 1099
+   },
+   "served_models": {
+    "Qwen3.8-27B": 1099
+   },
+   "items_expected": 1099,
+   "items_in_output": 1099,
+   "final_normalized": {
+    "valid": 1081,
+    "oov_labels": 216,
+    "empty_set": 9,
+    "partly_out_of_vocabulary": 9
+   },
+   "sonnet_final_normalized": {
+    "valid": 1034,
+    "oov_labels": 140,
+    "partly_out_of_vocabulary": 65
+   },
+   "fallback": "out-of-vocabulary labels are dropped from the set, an empty set leaves the query ungated",
+   "lost_fraction": 0.0
+  },
+  "toolbench_top5": {
+   "calls": 1099,
+   "items_called": 1099,
+   "items_retried": 0,
+   "call_outcomes": {
+    "valid": 1046,
+    "partly_out_of_vocabulary": 46,
+    "empty_set": 7
+   },
+   "final_call_outcome_per_item": {
+    "valid": 1046,
+    "partly_out_of_vocabulary": 46,
+    "empty_set": 7
+   },
+   "shim_outcomes": {
+    "text": 1099
+   },
+   "served_models": {
+    "Qwen3.8-27B": 1099
+   },
+   "items_expected": 1099,
+   "items_in_output": 1099,
+   "final_normalized": {
+    "valid": 1046,
+    "oov_labels": 261,
+    "partly_out_of_vocabulary": 46,
+    "empty_set": 7
+   },
+   "sonnet_final_normalized": {
+    "valid": 1065,
+    "oov_labels": 98,
+    "partly_out_of_vocabulary": 34
+   },
+   "fallback": "out-of-vocabulary labels are dropped from the set, an empty set leaves the query ungated",
+   "lost_fraction": 0.0
+  }
+ },
+ "max_missing_frac": 0.01,
+ "over_the_limit": []
+}

@@ -1,0 +1,35 @@
+{
+ "queries": 21111,
+ "single_tool_queries": 20614,
+ "multi_tool_queries": 497,
+ "tools_in_corpus": 199,
+ "queries_whose_tools_are_all_in_the_corpus": 21111,
+ "source_rows": {
+  "all_clean_data.csv": 20614,
+  "multi_tool_query_golden.json": 497
+ },
+ "_provenance": {
+  "script": "reproduce/derive/metatool_split.py",
+  "written_utc": "2026-11-16T11:55:50+00:00",
+  "artifacts_commit": "334e2903e36045143ef9045b7c4337b5ddcb5116",
+  "inputs": [
+   {
+    "path": "evals/data/external_benchmarks/metatool/all_clean_data.csv",
+    "sha256": "cf2eb0474396677530931def51012da4e88f9f34f655332f04177b2054101baf"
+   },
+   {
+    "path": "evals/data/external_benchmarks/metatool/multi_tool_query_golden.json",
+    "sha256": "ef37d10a8cb5b41435d6ea3ae29819afdb8d6db0852268830e5ee77259507f51"
+   },
+   {
+    "path": "evals/data/external_benchmarks/metatool/plugin_info.json",
+    "sha256": "864bf25bd5494feca861acb98f69d260f212d9c098a2dc68b4b2ee357d6fb2f5"
+   },
+   {
+    "path": "evals/data/external_benchmarks/metatool/plugin_des.json",
+    "sha256": "c446ade5acfb8e16c477124250665021e63b11bf6cb232db04fc9ba6bed0389a"
+   }
+  ],
+  "bear_version": "0.4.2"
+ }
+}

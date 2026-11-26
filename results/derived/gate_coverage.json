@@ -1,0 +1,9 @@
+{
+ "script": "evals/diag_gate_coverage.py",
+ "queries": 1100,
+ "total_gold_apis": 2629,
+ "queries_with_gold_gated_out": 0,
+ "gold_gated_out": 0,
+ "gold_not_in_corpus": 0,
+ "examples": []
+}
