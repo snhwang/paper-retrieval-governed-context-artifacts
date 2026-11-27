@@ -149,6 +149,8 @@ On 26 Nov 2026 the 24 outputs of the author's run that this map names and that h
 
 Every file that `collect.py` reads for an item (the `sources` in `lib/paper_map.py`) is now in the repository, except the drawing of Figure 2, which is built from the paper's source. Compared with the author's outputs, `verify.py` counts these 24 as PASS where the final check counted them as NEW (PASS 441 and NEW 38, the other totals as before). `collect.py` gives the same 8,536 numbers. The 38 files still counted as NEW are listed under "Not committed".
 
+Every PASS total above counts `results/tag_noise.json`, the BEAR 0.4.0 sweep that is not committed. Step `wp256-v042-bm25` links the author's local copy into its clone, `70_assemble.sh` copies it into `assembled/`, and `verify.py` then compares it with that same local copy. Against a fresh clone it has no committed counterpart, so `verify.py` counts it as NEW. For the files of 26 Nov that gives PASS 440 and NEW 39.
+
 The numbers in the manuscript come from the author's run in every case (`numbers.json`).
 
 The paper prints three backend labels differently from the kit. Nemotron-Embed, Qwen3-Emb-0.6B and Qwen3-Emb-4B in the paper are `Nemotron`, `Qwen3-0.6B` and `Qwen3-4B` in the kit's keys and file names.
